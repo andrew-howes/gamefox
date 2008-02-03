@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://gamefox/skin/options.css" type="text/css"?>
+<page id="gamefox-tags-page" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" onload="GameFOXTags.populate(2);">
+  <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
+  <tree id="gamefox-tags-tree" flex="1" hidecolumnpicker="true" contextmenu="gamefox-tags-contextmenu" seltype="multiple" ondblclick="if (event.button == 0) GameFOXTags.doAction(1, true);" onclick="if (event.button == 1) GameFOXTags.doAction(0);">
+    <treecols>
+      <treecol label="Topic Title" flex="1" primary="true"/>
+      <treecol label="Tag ID" id="gamefox-tags-tagid" hidden="true"/>
+    </treecols>
+    <treechildren id="gamefox-tags-rows"/>
+  </tree>
+  <toolbox>
+    <toolbar id="gamefox-tags-toolbar">
+      <toolbarbutton label="refresh" oncommand="GameFOXTags.populate(2);"/>
+        <toolbaritem>
+          <deck selectedIndex="0">
+            <toolbarbutton label="delete purged" oncommand="GameFOXTags.removePurged();"/>
+            <progressmeter id="gamefox-purge-meter" mode="undetermined" hidden="true"/>
+          </deck>
+        </toolbaritem>
+      <toolbarbutton label="delete all" oncommand="GameFOXTags.removeAll();"/>
+    </toolbar>
+  </toolbox>
+
+  <popup id="gamefox-tags-contextmenu">
+    <menuitem accesskey="T" label="Open in New Tab" oncommand="GameFOXTags.doAction(1);"/>
+    <menuitem accesskey="F" label="Open in Focused Tab" oncommand="GameFOXTags.doAction(2);"/>
+    <menuitem accesskey="W" label="Open in New Window" oncommand="GameFOXTags.doAction(3);"/>
+    <menuitem accesskey="D" label="Delete Tag" oncommand="GameFOXTags.doAction(4);"/>
+    <menuitem accesskey="S" label="Delete Selected" oncommand="GameFOXTags.removeSelected();"/>
+  </popup>
+</page>

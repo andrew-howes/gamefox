@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet href="chrome://gamefox/skin/sidebar.css" type="text/css" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>GameFOX Sidebar</title>
+  <base href="about:blank" target="_main"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
+</head>
+<body onload="gfox_processSidebar()">
+  <div id="gamefox-sidebar-container">
+    <h1 id="title"><a id="title-link" href="http://whitefyre.com/gamefox/">GameFOX</a></h1>
+    <div class="left">
+      <a href="http://www.gamefaqs.com/">Home</a><br/>
+      <a href="http://www.gamefaqs.com/new/">What's New</a><br/>
+      <a href="http://www.gamefaqs.com/systems.html">Systems</a><br/>
+      <a href="http://www.gamefaqs.com/features/">Features</a><br/>
+      <a href="http://www.gamefaqs.com/features/feedback/">Feedback</a><br/>
+      <a href="http://www.gamefaqs.com/contribute/">Contribute</a><br/>
+      <a href="http://boards.gamefaqs.com/gfaqs/">Boards</a><br/>
+      <a href="http://www.gamefaqs.com/features/help/">Help</a><br/>
+      <a href="http://www.gamefaqs.com/console/gamecube/">GameCube</a>
+    </div>
+    <div>
+      <a href="http://www.gamefaqs.com/portable/ds/">DS</a><br/>
+      <a href="http://www.gamefaqs.com/portable/psp/">PSP</a><br/>
+      <a href="http://www.gamefaqs.com/portable/gbadvance/">GBA</a><br/>
+      <a href="http://www.gamefaqs.com/console/wii/">Wii</a><br/>
+      <a href="http://www.gamefaqs.com/computer/doswin/">PC</a><br/>
+      <a href="http://www.gamefaqs.com/console/ps2/">PS2</a><br/>
+      <a href="http://www.gamefaqs.com/console/ps3/">PS3</a><br/>
+      <a href="http://www.gamefaqs.com/console/xbox/">Xbox</a><br/>
+      <a href="http://www.gamefaqs.com/console/xbox360/">Xbox 360</a>
+    </div>
+    <br/>
+    <div class="search-head"><a href="http://boards.gamefaqs.com/gfaqs/user.php">Profile</a> / <a href="http://www.gamefaqs.com/user/manage.html">Manage</a></div>
+    <div class="search-head"><a href="http://boards.gamefaqs.com/gfaqs/myposts.php">Posts</a> / <a href="http://boards.gamefaqs.com/gfaqs/tracked.php">Tracked</a> / <a href="http://boards.gamefaqs.com/gfaqs/modhist.php">Mods</a></div>
+    <div class="search-head"><a href="http://www.gamefaqs.com/search/">Search GameFAQs</a></div>
+    <form method="get" action="http://www.gamefaqs.com/search/index.html">
+      <input type="hidden" name="platform" value="0"/>
+      <input type="hidden" name="submit" value="Search GameFAQs"/>
+      <input type="text" name="game" size="10"/>
+    </form>
+    <div class="search-head">Go to board ID</div>
+    <form method="get" action="http://boards.gamefaqs.com/gfaqs/gentopic.php">
+      <input type="text" name="board" size="10"/>
+    </form>
+    <div class="search-head">Login (Email/Pass)</div>
+    <form method="post" action="http://www.gamefaqs.com/user/login.html" onsubmit="gfox_redirectLogin(this)">
+      <input type="hidden" name="path" id="gamefaqs-login-path" value="http://boards.gamefaqs.com/gfaqs/"/>
+      <input type="text" name="EMAILADDR" maxlength="90"/>
+      <input type="password" name="PASSWORD" maxlength="20"/><br/>
+      <input type="submit" value="Login" onmousedown="if (event.button == 1) gfox_newTabLogin(this.parentNode)"/>
+    </form>
+    <div class="search-head"><a href="http://www.gamefaqs.com/user/logout.html?r=boards.gamefaqs.com%2Fgfaqs%2F">Logout</a> / <a href="http://www.gamefaqs.com/user/forgot.html">Password</a></div>
+    <div class="search-head"><a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a></div>
+    <iframe src="chrome://gamefox/content/tags.xul" style="width: 100%; height: 300px;"/>
+  </div>
+</body>
+</html>

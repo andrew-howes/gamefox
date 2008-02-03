@@ -1,0 +1,629 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://gamefox/skin/options.css" type="text/css"?>
+
+<!-- locale -->
+<!DOCTYPE overlay [
+    <!ENTITY gamefox.pref.general.MsgsPerPage.help  "This setting is needed to properly use page jumping and message numbering features.">
+    <!ENTITY gamefox.pref.general.gfaqs9            "Use /gfaqs9 for Pages context menu, Tags, Sidebar, and About dialog">
+    <!ENTITY gamefox.pref.general.gfaqs9.help       "Other page links will follow your current /gfaqs path.">
+    <!ENTITY gamefox.pref.general.gfaqs9.note       "This setting is only needed for these four mentioned items. For anything else, GameFOX detects /gfaqs9 automatically based on the page URL. If you use a non-gfaqs9 account with this option enabled, the site will simply redirect you to the normal page.">
+    <!ENTITY gamefox.pref.general.gfaqs9.credit     "Wouldn't be possible without Therum's help. Say thank you to Therum you people >:)">
+]>
+
+<prefwindow
+    title="GameFOX Options"
+    id="gamefox-prefwindow"
+    buttons="accept,cancel,extra1,extra2"
+    buttonlabelextra1="Apply"
+    buttonaccesskeyextra1="A"
+    ondialogextra1="gamefoxSavePreferences();"
+    buttonlabelextra2="About..."
+    ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul', 'gamefox-about-dialog', 'centerscreen,chrome,modal');"
+    onload="gamefoxSelectedPrefTabFix();"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
+
+<!-- P A G E -->
+
+  <prefpane id="gamefox-page-pane" label="Page">
+    <preferences>
+      <preference id="gamefox-pref-gfaqs9" name="gamefox.gfaqs9" type="bool"/>
+      <preference id="gamefox-pref-quickpost-form" name="gamefox.elements.quickpost.form" type="bool"/>
+      <preference id="gamefox-pref-quickpost-button" name="gamefox.elements.quickpost.button" type="bool"/>
+      <preference id="gamefox-pref-quickpost-link" name="gamefox.elements.quickpost.link" type="bool"/>
+      <preference id="gamefox-pref-tag-link" name="gamefox.elements.tag.link" type="bool"/>
+      <preference id="gamefox-pref-titlechange" name="gamefox.elements.titlechange" type="bool"/>
+      <preference id="gamefox-pref-msgnum" name="gamefox.elements.msgnum" type="bool"/>
+      <preference id="gamefox-pref-msgnum-style" name="gamefox.elements.msgnum.style" type="int"/>
+      <preference id="gamefox-pref-highlight-msgs" name="gamefox.highlight.msgs" type="bool"/>
+      <preference id="gamefox-pref-highlight-topics" name="gamefox.highlight.topics" type="bool"/>
+      <preference id="gamefox-pref-highlight-ignore" name="gamefox.highlight.ignore" type="bool"/>
+      <preference id="gamefox-pref-highlight-groups-1" name="gamefox.highlight.groups.1" type="string"/>
+      <preference id="gamefox-pref-highlight-groups-2" name="gamefox.highlight.groups.2" type="string"/>
+      <preference id="gamefox-pref-highlight-colors-1" name="gamefox.highlight.colors.1" type="string"/>
+      <preference id="gamefox-pref-highlight-colors-2" name="gamefox.highlight.colors.2" type="string"/>
+      <preference id="gamefoxMsgsPerPage" name="gamefox.msgsPerPage" type="int"/>
+      <preference id="gamefoxTpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
+      <preference id="gamefoxMsgSortOrder" name="gamefox.msgSortOrder" type="int"/>
+      <preference id="gamefoxTpcSortOrder" name="gamefox.tpcSortOrder" type="int"/>
+      <preference id="gamefoxMsgDisplay" name="gamefox.msgDisplay" type="int"/>
+      <preference id="gamefoxTimeZone" name="gamefox.timeZone" type="int"/>
+      <preference id="gamefox-pref-myposts-topiclink" name="gamefox.elements.myposts.topiclink" type="bool"/>
+      <preference id="gamefox-pref-tracked-topiclink" name="gamefox.elements.tracked.topiclink" type="bool"/>
+      <preference id="gamefox-pref-paging-auto"       name="gamefox.paging.auto"      type="bool"/>
+      <preference id="gamefox-pref-paging-location"   name="gamefox.paging.location"  type="int"/>
+      <preference id="gamefox-pref-paging-prefix"     name="gamefox.paging.prefix"    type="string"/>
+      <preference id="gamefox-pref-paging-separator"  name="gamefox.paging.separator" type="string"/>
+      <preference id="gamefox-pref-paging-suffix"     name="gamefox.paging.suffix"    type="string"/>
+    </preferences>
+
+
+    <tabbox id="gamefox-page-tabpane" flex="1">
+
+      <tabs tabGroup="page">
+        <tab id="gamefox-tab-general" label="Message Board"/>
+        <tab id="gamefox-tab-elements" label="Elements"/>
+        <tab id="gamefox-tab-highlight" label="User Highlighting"/>
+      </tabs>
+
+      <tabpanels flex="1">
+
+
+<!-- GENERAL -->
+
+        <tabpanel orient="vertical" flex="1">
+          <vbox>
+
+            <groupbox>
+              <caption label="Behavior"/>
+              <hbox align="baseline">
+                <label flex="1" value="Your GameFAQs messages per page setting" tooltiptext="&gamefox.pref.general.MsgsPerPage.help;"/>
+                <menulist preference="gamefoxMsgsPerPage" tooltiptext="&gamefox.pref.general.MsgsPerPage.help;">
+                  <menupopup>
+                    <menuitem value="10" label="10"/>
+                    <menuitem value="20" label="20"/>
+                    <menuitem value="30" label="30"/>
+                    <menuitem value="40" label="40"/>
+                    <menuitem value="50" label="50"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+              <checkbox preference="gamefox-pref-gfaqs9"
+                label="&gamefox.pref.general.gfaqs9; *"
+                tooltiptext="&gamefox.pref.general.gfaqs9.help;"/>
+            </groupbox>
+
+            <groupbox flex="1">
+              <caption label="Board Settings"/>
+              <grid>
+                <columns>
+                  <column/>
+                  <column flex="1"/>
+                </columns>
+                <rows>
+                  <row>
+                    <label value="Topics Per Page"/>
+                    <menulist preference="gamefoxTpcsPerPage" id="topicpage" flex="1">
+                      <menupopup>
+                        <menuitem value="10" label="10"/>
+                        <menuitem value="20" label="20"/>
+                        <menuitem value="30" label="30"/>
+                        <menuitem value="40" label="40"/>
+                        <menuitem value="50" label="50"/>
+                      </menupopup>
+                    </menulist>
+                  </row>
+                  <row>
+                    <label value="Topic Sort Order"/>
+                    <menulist preference="gamefoxTpcSortOrder" id="topicsort" flex="1">
+                      <menupopup>
+                        <menuitem value="1" label="By First Post, Oldest First"/>
+                        <menuitem value="2" label="By First Post, Newest First"/>
+                        <menuitem value="3" label="By Last Post, Oldest First"/>
+                        <menuitem value="4" label="By Last Post, Newest First"/>
+                      </menupopup>
+                    </menulist>
+                  </row>
+                  <row>
+                    <label value="Messages Per Page"/>
+                    <menulist preference="gamefoxMsgsPerPage" id="messagepage" flex="1">
+                      <menupopup>
+                        <menuitem value="10" label="10"/>
+                        <menuitem value="20" label="20"/>
+                        <menuitem value="30" label="30"/>
+                        <menuitem value="40" label="40"/>
+                        <menuitem value="50" label="50"/>
+                      </menupopup>
+                    </menulist>
+                  </row>
+                  <row>
+                    <label value="Message Sort Order"/>
+                    <menulist preference="gamefoxMsgSortOrder" id="messagesort" flex="1">
+                      <menupopup>
+                        <menuitem value="1" label="Oldest First"/>
+                        <menuitem value="2" label="Newest First"/>
+                      </menupopup>
+                    </menulist>
+                  </row>
+                  <row>
+                    <label value="Message Data Display"/>
+                    <menulist preference="gamefoxMsgDisplay" id="securitylevel" flex="1">
+                      <menupopup>
+                        <menuitem value="0" label="Horizontal"/>
+                        <menuitem value="1" label="Vertical"/>
+                      </menupopup>
+                    </menulist>
+                  </row>
+                  <row>
+                    <label value="Time Zone"/>
+                    <menulist preference="gamefoxTimeZone" id="timezone" flex="1">
+                      <menupopup>
+                        <menuitem value="0" label="GMT +0"/>
+                        <menuitem value="60" label="GMT +1"/>
+                        <menuitem value="120" label="GMT +2"/>
+                        <menuitem value="180" label="GMT +3"/>
+                        <menuitem value="240" label="GMT +4"/>
+                        <menuitem value="300" label="GMT +5"/>
+                        <menuitem value="360" label="GMT +6"/>
+                        <menuitem value="420" label="GMT +7"/>
+                        <menuitem value="480" label="GMT +8"/>
+                        <menuitem value="540" label="GMT +9"/>
+                        <menuitem value="600" label="GMT +10"/>
+                        <menuitem value="720" label="GMT +12"/>
+                        <menuitem value="-720" label="GMT -12"/>
+                        <menuitem value="-660" label="GMT -11"/>
+                        <menuitem value="-600" label="GMT -10"/>
+                        <menuitem value="-540" label="GMT -9"/>
+                        <menuitem value="-480" label="GMT -8"/>
+                        <menuitem value="-420" label="GMT -7"/>
+                        <menuitem value="-360" label="GMT -6"/>
+                        <menuitem value="-300" label="GMT -5"/>
+                        <menuitem value="-240" label="GMT -4"/>
+                        <menuitem value="-180" label="GMT -3"/>
+                        <menuitem value="-120" label="GMT -2"/>
+                        <menuitem value="-60" label="GMT -1"/>
+                        <menuitem value="660" label="GMT +11"/>
+                        <menuitem value="-210" label="GMT -3:30"/>
+                        <menuitem value="330" label="GMT +5:30"/>
+                        <menuitem value="390" label="GMT +6:30"/>
+                        <menuitem value="570" label="GMT +9:30"/>
+                      </menupopup>
+                    </menulist>
+                  </row>
+                </rows>
+              </grid>
+              <hbox pack="end">
+                <button id="gamefox-css-apply-bs" label="Apply Board Settings" oncommand="gamefoxChangeBoardSettings();"/>
+              </hbox>
+            </groupbox>
+
+          </vbox>
+
+          <spacer flex="1"/>
+          <description style="margin-top: 10px;"
+            tooltiptext="&gamefox.pref.general.gfaqs9.credit;">
+            * &gamefox.pref.general.gfaqs9.note;
+          </description>
+        </tabpanel>
+
+
+<!-- ELEMENTS -->
+
+        <tabpanel orient="vertical" flex="1">
+          <vbox>
+
+            <groupbox>
+              <caption label="General"/>
+              <vbox>
+                <checkbox preference="gamefox-pref-titlechange" label="Descriptive window titles"/>
+                <checkbox preference="gamefox-pref-quickpost-button" label="Enable &quot;Post Message&quot; button"/>
+              </vbox>
+            </groupbox>
+
+            <grid>
+              <columns>
+                <column flex="1"/>
+                <column flex="1"/>
+              </columns>
+              <rows>
+                <row>
+
+                  <groupbox>
+                    <caption label="Topics"/>
+                    <vbox>
+                      <checkbox preference="gamefox-pref-quickpost-link" label="Enable QuickPost link"/>
+                      <checkbox preference="gamefox-pref-myposts-topiclink" label="Topic link in Active Message List"/>
+                      <checkbox preference="gamefox-pref-tracked-topiclink" label="Topic link in Tracked Topics"/>
+                    </vbox>
+                  </groupbox>
+
+                  <groupbox>
+                    <caption label="Messages"/>
+                    <vbox>
+                      <checkbox preference="gamefox-pref-quickpost-form" label="Enable QuickPost form"/>
+                      <checkbox preference="gamefox-pref-tag-link" label="Enable &quot;Tag Topic&quot; link"/>
+                      <checkbox flex="1" preference="gamefox-pref-msgnum" label="Enable message numbering, style:" tooltiptext="Choose your message numbering style using the combo box below."/>
+                      <hbox class="indent" align="baseline">
+                        <menulist preference="gamefox-pref-msgnum-style" tooltiptext="Customize your message numbering style.">
+                          <menupopup>
+                            <menuitem value="0" label="message detail (link), #001"/>
+                            <menuitem value="1" label="#001, message detail (link)"/>
+                            <menuitem value="2" label="#001 (link)"/>
+                            <menuitem value="3" label="message #001 (link)"/>
+                          </menupopup>
+                        </menulist>
+                      </hbox>
+                    </vbox>
+                  </groupbox>
+
+                </row>
+              </rows>
+            </grid>
+
+            <groupbox>
+              <caption label="Topic Pagination"/>
+              <checkbox preference="gamefox-pref-paging-auto" label="Automatically show links to topic pages"/>
+              <label value="Show links to pages in:"/>
+              <radiogroup class="indent" preference="gamefox-pref-paging-location">
+                <radio value="1" label="next to the topic title"/>
+                <radio value="2" label="below the topic title"/>
+                <radio value="0" label="a new row"/>
+              </radiogroup>
+              <spacer height="1px"/>
+              <groupbox>
+                <caption label="Page List Format"/>
+                <hbox align="center">
+                  <spacer width="8px"/>
+                  <label value="Prefix:"/>
+                  <textbox preference="gamefox-pref-paging-prefix" size="5" flex="30"/>
+                  <spacer flex="1"/>
+                  <label value="Separator:"/>
+                  <textbox preference="gamefox-pref-paging-separator" size="1" flex="2"/>
+                  <spacer flex="1"/>
+                  <label value="Suffix:"/>
+                  <textbox preference="gamefox-pref-paging-suffix" size="4" flex="24"/>
+                  <spacer width="8px"/>
+                </hbox>
+                <spacer height="6px"/>
+              </groupbox>
+              <spacer height="1px"/>
+            </groupbox>
+
+          </vbox>
+        </tabpanel>
+
+
+<!-- USER HIGHLIGHTING -->
+
+        <tabpanel orient="vertical" flex="1">
+          <vbox>
+
+            <groupbox>
+              <caption label="Post Highlighting"/>
+              <label value="Enter user names separated by comma:"/>
+              <hbox align="center">
+                <label value="Group 1:"/>
+                <textbox preference="gamefox-pref-highlight-groups-1" size="2" flex="15"/>
+                <colorpicker preference="gamefox-pref-highlight-colors-1" type="button" flex="1"/>
+                <textbox preference="gamefox-pref-highlight-colors-1" size="1" flex="2"/>
+              </hbox>
+              <hbox align="center">
+                <label value="Group 2:"/>
+                <textbox preference="gamefox-pref-highlight-groups-2" size="2" flex="15"/>
+                <colorpicker preference="gamefox-pref-highlight-colors-2" type="button" flex="1"/>
+                <textbox preference="gamefox-pref-highlight-colors-2" size="1" flex="2"/>
+              </hbox>
+              <separator class="thin"/>
+              <hbox pack="end">
+                <checkbox preference="gamefox-pref-highlight-ignore" label="Hide posts from Group 2"/>
+                <checkbox preference="gamefox-pref-highlight-msgs" label="Highlight messages"/>
+                <checkbox preference="gamefox-pref-highlight-topics" label="Highlight topics"/>
+              </hbox>
+            </groupbox>
+
+          </vbox>
+        </tabpanel>
+
+      </tabpanels>
+    </tabbox>
+  </prefpane>
+
+
+<!-- T H E M E -->
+
+  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.initSystem(); GameFOXCSS.load();">
+    <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
+    <preferences>
+      <preference id="gamefox-pref-style" name="gamefox.gf.style" type="int"/>
+      <preference id="gamefox-pref-expire" name="gamefox.gf.expire" type="int"/>
+      <preference id="gamefox-pref-disableMainStyles" name="gamefox.disableMainStyles" type="bool"/>
+    </preferences>
+
+    <description>
+      Styles included with GameFOX that have an asterisk (*) at the end of
+      them are known to work with the new GameFAQs layout.
+    </description>
+    <description>
+      Styles included with GameFOX that have two asterisks (**) at
+      the end of them only work if the &quot;Disable Main Stylesheets on
+      GameFAQs&quot; checkbox is checked.
+    </description>
+    <groupbox>
+      <caption label="Import CSS"/>
+      <hbox>
+        <textbox flex="1" id="gamefox-css-remote-file" value=""/>
+        <button id="gamefox-css-brwose" label="Browse" oncommand="GameFOXCSS.browse();"/>
+      </hbox>
+      <hbox align="center">
+        <label value="Save as:"/>
+        <textbox id="gamefox-css-filename" value="filename-theme.css" flex="1"/>
+        <label value="Title:"/>
+        <textbox id="gamefox-css-title" value="Example Theme" flex="2"/>
+        <button id="gamefox-css-add" label="Add CSS" oncommand="GameFOXCSS.add();"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Disabled CSS"/>
+      <hbox>
+        <menulist id="gamefox-css-list" flex="1" label="Disabled sheets...">
+          <menupopup/>
+        </menulist>
+        <button id="gamefox-css-discard" label="Discard" oncommand="GameFOXCSS.discard();"/>
+        <button id="gamefox-css-enable" label="Enable" oncommand="GameFOXCSS.enable();"/>
+      </hbox>
+    </groupbox>
+    <groupbox>
+      <caption label="Applied CSS"/>
+      <hbox>
+        <menulist id="gamefox-css-applied" flex="1" label="Enabled sheets...">
+          <menupopup/>
+        </menulist>
+        <button id="gamefox-css-disable" label="Disable" oncommand="GameFOXCSS.disable();"/>
+      </hbox>
+    </groupbox>
+
+    <hbox align="left" valign="middle">
+      <spacer width="8px"/>
+      <label value="Edit CSS Manually" style="text-decoration: underline; color: #0000ff; cursor: pointer;" onclick="gamefoxOpenCSS();"/>
+      <button id="gamefox-css-reload" label="Reload CSS" oncommand="GameFOXCSS.reRegisterSheets();"/>
+    </hbox>
+
+    <checkbox preference="gamefox-pref-disableMainStyles" label="Disable Main Stylesheets on GameFAQs"/>
+
+    <groupbox style="margin-bottom: 30px;">
+      <caption label="Site Settings"/>
+      <grid>
+        <columns>
+          <column/>
+          <column flex="1"/>
+        </columns>
+        <rows>
+          <row>
+            <label value="Display Style"/>
+            <menulist preference="gamefox-pref-style" flex="1">
+              <menupopup>
+                <menuitem value="1" label="Default - The default GameFAQs skin"/>
+                <menuitem value="2" label="V9 - A revival of version 9 of GameFAQs (2003-2005)"/>
+                <menuitem value="3" label="Default 2 - The default GameFAQs skin with a cleaned-up logo"/>
+                <menuitem value="4" label="NeoClassic - A modern take on classic GameFAQs (2001-2003)"/>
+                <menuitem value="5" label="Default Blue - Default skin with boards in blue"/>
+                <menuitem value="6" label="V9 Blue - V9 skin with boards in blue"/>
+                <menuitem value="7" label="NeoClassic Blue - NeoClassic skin with boards in blue"/>
+              </menupopup>
+            </menulist>
+          </row>
+          <row>
+            <label value="Login Expiration"/>
+            <menulist preference="gamefox-pref-expire" flex="1">
+              <menupopup>
+                <menuitem value="0" label="Logout when I close browser"/>
+                <menuitem value="1" label="1 day"/>
+                <menuitem value="14" label="14 days"/>
+                <menuitem value="30" label="30 days"/>
+                <menuitem value="45" label="45 days"/>
+                <menuitem value="60" label="60 days"/>
+              </menupopup>
+            </menulist>
+          </row>
+        </rows>
+      </grid>
+      <hbox pack="end">
+        <button id="gamefox-css-apply-ss" label="Apply Site Settings" oncommand="gamefoxChangeSiteSettings();"/>
+      </hbox>
+    </groupbox>
+  </prefpane>
+
+
+<!-- Q U O T I N G -->
+
+  <prefpane id="gamefox-quote-pane" label="Quoting">
+    <preferences>
+      <preference id="gamefoxIncName" name="gamefox.incName" type="bool"/>
+      <preference id="gamefoxIncDate" name="gamefox.incDate" type="bool"/>
+      <preference id="gamefoxIncNum" name="gamefox.incNum" type="bool"/>
+      <preference id="gamefoxBoldHeader" name="gamefox.boldHeader" type="bool"/>
+      <preference id="gamefoxItalicHeader" name="gamefox.italicHeader" type="bool"/>
+      <preference id="gamefoxItalicMsg" name="gamefox.italicMsg" type="bool"/>
+      <preference id="gamefoxBoldMsg" name="gamefox.boldMsg" type="bool"/>
+      <preference id="gamefoxRemoveSigs" name="gamefox.removeSigs" type="bool"/>
+      <preference id="gamefoxGFQuote" name="gamefox.GFCode.quote" type="int"/>
+    </preferences>
+
+    <groupbox align="start" orient="horizontal">
+      <caption label="Quote Header"/>
+      <checkbox preference="gamefoxIncName" label="Include Poster Name" flex="1"/>
+      <checkbox preference="gamefoxIncDate" label="Include Post Date" flex="1"/>
+      <checkbox preference="gamefoxIncNum"  label="Include Post Number" flex="1"/>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Quote Body"/>
+      <checkbox preference="gamefoxRemoveSigs" label="Remove signatures"/>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Quote Style"/>
+      <label value="Tags to use for quoting:"/>
+      <radiogroup class="indent" preference="gamefoxGFQuote">
+        <radio value="0" label="Use regular tags"/>
+        <hbox class="indent" orient="horizontal">
+          <vbox>
+            <checkbox preference="gamefoxBoldHeader" label="Bold Quote Header"/>
+            <checkbox preference="gamefoxItalicHeader" label="Italicize Quote Header"/>
+          </vbox>
+          <vbox>
+            <checkbox preference="gamefoxBoldMsg" label="Bold Quoted Message"/>
+            <checkbox preference="gamefoxItalicMsg" label="Italicize Quoted Message"/>
+          </vbox>
+        </hbox>
+        <radio value="1" label="Use GFCode quote tags only for the quoted message body"/>
+        <hbox class="indent" orient="horizontal">
+          <vbox>
+            <checkbox preference="gamefoxBoldHeader" label="Bold Quote Header"/>
+            <checkbox preference="gamefoxItalicHeader" label="Italicize Quote Header"/>
+          </vbox>
+        </hbox>
+        <radio value="2" label="Use full GFCode quote tags for quoting"/>
+      </radiogroup>
+    </groupbox>
+
+  </prefpane>
+
+
+<!-- S I G N A T U R E -->
+
+  <prefpane id="gamefox-sig-pane" label="Signature">
+    <preferences>
+      <preference id="gamefoxUnivSig" name="gamefox.univSig" type="bool"/>
+      <preference id="gamefoxSigSep" name="gamefox.sigSep" type="unichar"/>
+      <preference id="gamefoxSig" name="gamefox.sig" type="unichar"/>
+      <preference id="gamefoxSigAdd" name="gamefox.sigAdd" type="int"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="Body"/>
+      <grid>
+        <columns>
+          <column/>
+          <column flex="1"/>
+        </columns>
+        <rows>
+          <row>
+            <label value="Signature Separator"/>
+            <textbox preference="gamefoxSigSep" size="8"/>
+          </row>
+          <row>
+            <label value="Signature"/>
+            <textbox preference="gamefoxSig" rows="4" multiline="true"/>
+          </row>
+        </rows>
+      </grid>
+      <hbox pack="end">
+        <checkbox preference="gamefoxUnivSig" label="Use instead of real GameFAQs signature"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Addition Method"/>
+      <menulist preference="gamefoxSigAdd">
+        <menupopup>
+          <menuitem value="1" label="Append signature automatically after hitting the preview/post button"/>
+          <menuitem value="2" label="Let the signature be there without hitting any goddamn button"/>
+        </menupopup>
+      </menulist>
+    </groupbox>
+
+  </prefpane>
+
+
+<!-- M O U S E -->
+
+  <prefpane id="gamefox-mouse-pane" label="Mouse">
+    <preferences>
+      <preference id="gamefox-pref-topic-dblclick"   name="gamefox.topic.dblclick"   type="int"/>
+      <preference id="gamefox-pref-message-dblclick" name="gamefox.message.dblclick" type="bool"/>
+      <preference id="gamefox-pref-message-header-dblclick" name="gamefox.message.header.dblclick" type="int"/>
+      <preference id="gamefox-pref-myposts-dblclick" name="gamefox.myposts.dblclick" type="int"/>
+      <preference id="gamefox-pref-context-pagelist" name="gamefox.context.pagelist" type="bool"/>
+      <preference id="gamefox-pref-context-quote"    name="gamefox.context.quote"    type="bool"/>
+      <preference id="gamefox-pref-context-sidebar"  name="gamefox.context.sidebar"  type="bool"/>
+      <preference id="gamefox-pref-context-tag"      name="gamefox.context.tag"      type="bool"/>
+      <preference id="gamefox-pref-context-taglist"  name="gamefox.context.taglist"  type="bool"/>
+      <preference id="gamefox-pref-context-tag-myposts" name="gamefox.context.tag.myposts" type="bool"/>
+      <preference id="gamefox-pref-context-tag-tracked" name="gamefox.context.tag.tracked" type="bool"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="Topics"/>
+      <label value="Double-clicking on topic row functionality"/>
+      <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-topic-dblclick">
+        <vbox>
+          <radio value="0" label="Do nothing"/>
+          <radio value="1" label="Show links to topic pages"/>
+        </vbox>
+        <vbox>
+          <radio value="2" label="Go to last page"/>
+          <radio value="3" label="Tag topic"/>
+        </vbox>
+      </radiogroup>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Active Message List"/>
+      <label value="Double-clicking on row functionality"/>
+      <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-myposts-dblclick">
+        <vbox>
+          <radio value="0" label="Do nothing"/>
+          <radio value="1" label="Show links to topic pages"/>
+        </vbox>
+        <vbox>
+          <radio value="2" label="Go to last page"/>
+          <radio value="3" label="Tag topic"/>
+        </vbox>
+      </radiogroup>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Messages"/>
+      <label value="Double-clicking on message header functionality"/>
+      <radiogroup class="indent" preference="gamefox-pref-message-header-dblclick">
+        <radio value="0" label="Do nothing"/>
+        <radio value="1" label="QuickWhois: display quick info about poster"/>
+        <radio value="2" label="Quote message"/>
+      </radiogroup>
+      <checkbox preference="gamefox-pref-message-dblclick" label="Enable quoting by double-clicking on message"/>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Main Context Menu"/>
+      <hbox>
+        <vbox>
+          <checkbox preference="gamefox-pref-context-sidebar"     label="GameFOX Sidebar"/>
+          <checkbox preference="gamefox-pref-context-taglist"     label="GameFAQs Tags"/>
+        </vbox>
+        <vbox>
+          <checkbox preference="gamefox-pref-context-pagelist"    label="Pages"/>
+          <checkbox preference="gamefox-pref-context-tag"         label="Tag Topic"/>
+        </vbox>
+        <vbox>
+          <checkbox preference="gamefox-pref-context-quote"       label="Quote"/>
+        </vbox>
+        <vbox>
+          <checkbox preference="gamefox-pref-context-tag-myposts" label="GFTags: Active Messages"/>
+          <checkbox preference="gamefox-pref-context-tag-tracked" label="GFTags: Tracked Topics"/>
+        </vbox>
+      </hbox>
+    </groupbox>
+
+  </prefpane>
+
+
+<!-- T A G S -->
+
+  <prefpane id="gamefox-tags-pane" label="Tags" flex="1">
+    <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul" flex="1" orient="vertical"/>
+  </prefpane>
+
+</prefwindow>

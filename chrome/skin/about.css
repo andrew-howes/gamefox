@@ -1,0 +1,44 @@
+#title
+{
+    font-weight: bold;
+    font-size: x-large;
+    color: #296794;
+}
+
+#version
+{
+    font-size: small;
+    color: #4D98CE;
+    font-family: georgia, serif;
+}
+
+groupbox
+{
+    background-color: #ffffff;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.description
+{
+    font-size: x-small;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.url-label
+{
+    text-decoration: underline;
+    color: #0000ff;
+    cursor: pointer;
+}
+
+.url-label.internal-link
+{
+    text-decoration: none;
+}

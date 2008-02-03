@@ -1,0 +1,80 @@
+#gamefox-prefwindow
+{
+    max-width: 500px;
+}
+
+#gamefox-tags-rows::-moz-tree-row(container)
+{
+    border-top: 1px solid #3585BF;
+    border-bottom: 1px solid #3585BF;
+    background-color: #3079AF;
+}
+
+#gamefox-tags-rows::-moz-tree-image(container, closed)
+{
+    list-style-image: url('folders.png');
+    -moz-image-region: rect(0px, 16px,  16px, 0px);
+}
+
+#gamefox-tags-rows::-moz-tree-image(container, open)
+{
+    list-style-image: url('folders.png');
+    -moz-image-region: rect(0px, 32px,  16px, 16px);
+}
+
+#gamefox-tags-rows::-moz-tree-row(leaf)
+{
+    background-color:  #FFFFFF;
+}
+
+#gamefox-tags-rows::-moz-tree-row(selected, leaf)
+{
+    background-color: #5BA1D4;
+}
+
+#gamefox-tags-rows::-moz-tree-cell-text
+{
+    color: #000000;
+}
+
+#gamefox-tags-rows::-moz-tree-cell-text(container)
+{
+    padding-left: 4px;
+    font-weight: bold;
+    color: #DDDDDD;
+}
+
+#gamefox-prefwindow radio[pane]
+{
+    list-style-image: url('options.png');
+}
+
+radio[pane=gamefox-page-pane]
+{
+    -moz-image-region: rect(0px, 32px,  32px, 0px);
+}
+
+radio[pane=gamefox-theme-pane]
+{
+    -moz-image-region: rect(0px, 64px,  32px, 32px);
+}
+
+radio[pane=gamefox-quote-pane]
+{
+    -moz-image-region: rect(0px, 96px,  32px, 64px);
+}
+
+radio[pane=gamefox-sig-pane]
+{
+    -moz-image-region: rect(0px, 128px,  32px, 96px);
+}
+
+radio[pane=gamefox-mouse-pane]
+{
+    -moz-image-region: rect(0px, 192px,  32px, 160px);
+}
+
+radio[pane=gamefox-tags-pane]
+{
+    -moz-image-region: rect(0px, 160px,  32px, 128px);
+}

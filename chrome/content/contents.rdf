@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
+
+  <!-- list all the packages being supplied -->
+  <rdf:Seq rdf:about="urn:mozilla:package:root">
+    <rdf:li rdf:resource="urn:mozilla:package:gamefox"/>
+  </rdf:Seq>
+
+  <!-- package information -->
+  <rdf:Description rdf:about="urn:mozilla:package:gamefox"
+    chrome:name="gamefox"
+    chrome:displayName="GameFOX TK+"
+    chrome:description="Improves browsing of the GameFAQs message boards!"
+    chrome:author="Abdullah A"
+    chrome:authorURL="http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885"
+    chrome:extension="true"
+    chrome:settingsURL="chrome://gamefox/content/options.xul"
+    chrome:iconURL="chrome://gamefox/skin/logo-small.png"
+    chrome:xpcNativeWrappers="yes">
+  </rdf:Description>
+
+  <!-- overlay parentnodes -->
+  <rdf:Seq rdf:about="urn:mozilla:overlays">
+    <rdf:li rdf:resource="chrome://navigator/content/navigator.xul"/>
+  </rdf:Seq>
+
+  <!-- overlay children -->
+  <rdf:Seq rdf:about="chrome://navigator/content/navigator.xul">
+    <rdf:li>chrome://gamefox/content/overlay.xul</rdf:li>
+  </rdf:Seq>
+</rdf:RDF>

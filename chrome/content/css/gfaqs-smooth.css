@@ -1,0 +1,124 @@
+/*
+CSS copyright 2005 headbanger.
+headbanger1547@gmail.com
+*/
+@-moz-document domain(boards.gamefaqs.com), domain(www.gamefaqs.com)
+{
+.adbox, .footer, #aboutcnet, #gnenav {
+display: none !important;
+}
+
+#page {
+background: #E5E5E5 !important;
+float: left !important;
+background-color: #E5E5E5 !important;
+}
+
+.columnleftcolor1, .columnmiddlecolor1, .columnrightcolor1, .whitebox, .columncolor1 {
+background-color: #BBB !important;
+border: 0 !important;
+padding: 2px 3px !important;
+}
+
+.columnleftcolor2, .columnmiddlecolor2, .columnrightcolor2, .graybox, .columncolor2 {
+background-color: #CCC !important;
+border: 0 !important;
+padding: 2px 3px !important;
+}
+
+.genrebox {
+width: 100% !important;
+padding: 0 !important;
+margin: 0 !important;
+border: 0 !important;
+}
+
+#headerbottomleft, #headertop, #logo {
+width: 450px !important;
+}
+
+#loginbox {
+width: 250px !important;
+}
+
+#headerbottomright {
+width: 235px !important;
+margin: 0 !important;
+padding: 0 !important;
+}
+
+#headerbottom {
+background-color: #D3D3D3 !important;
+border-bottom: 1px #AAA solid !important;
+color: #000 !important;
+}
+
+.header, .content2, #headertop, #headerbottom, #page , #page #page {
+width: 100% !important;
+min-width: 720px !important;
+}
+
+.content {
+padding: 0 !important;
+width: 99% !important;
+margin: 10px auto !important;
+}
+
+.box a {
+color: #00A !important;
+}
+
+.box, .boxbox {
+width: 100% !important;
+margin: 0 !important;
+padding: 0 !important;
+}
+
+.genrebox table {
+padding: 0 !important;
+border: 1px #888 solid !important;
+margin: 5px auto !important;
+overflow: visible !important;
+width: 99% !important;
+}
+
+.genrebox table a {
+font-weight: normal !important;
+color: #008 !important;
+text-decoration: none !important;
+}
+
+.genrebox table a:visited {
+color: #00E !important;
+}
+
+.genrebox table a:hover {
+text-decoration: underline !important;
+}
+
+.head1b {
+text-align: center !important;
+font-weight: bold !important;
+margin: 0 0 10px 0 !important;
+color: #000 !important;
+border-bottom: 1px #00F dashed !important;
+font-size: 23px !important;
+}
+
+.boardnav, .boardnavright, .boardnavlow {
+text-align: center !important;
+display: block !important;
+width: 100% !important;
+margin: 2px auto !important;
+font-size: 12px !important;
+padding: 0 !important;
+}
+
+#copyright {
+text-align: center !important;
+width: 100% !important;
+margin-top: 15px !important;
+border-top: 1px #00F dashed !important;
+padding-top: 5px !important;
+}
+}

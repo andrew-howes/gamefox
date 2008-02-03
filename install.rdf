@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="rdf:#$0tKoE"
+                   em:id="{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}"
+                   em:minVersion="2.0a1pre"
+                   em:maxVersion="2.0.*" />
+  <RDF:Description RDF:about="rdf:#$5tKoE"
+                   em:id="{a463f10c-3994-11da-9945-000d60ca027b}"
+                   em:minVersion="0.5"
+                   em:maxVersion="1.0.*" />
+  <RDF:Description RDF:about="rdf:#$XsKoE"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="1.5"
+                   em:maxVersion="3.0.*" />
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}"
+                   em:version="0.5.5.6"
+                   em:name="GameFOX TK+"
+                   em:description="Improves browsing of the GameFAQs message boards!"
+                   em:creator="Abdullah A"
+                   em:homepageURL="http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885"
+		           em:updateURL="http://beyondboredom.net/gfox/update.rdf"
+                   em:optionsURL="chrome://gamefox/content/options.xul"
+                   em:aboutURL="chrome://gamefox/content/about.xul"
+                   em:iconURL="chrome://gamefox/skin/logo-small.png"
+                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHm0PO+/NnblC4Bm1sPDFsGkuMZ0IHmY6c3h202KzugcFUduk9SC0tZ2QoPKkuz7aOvonfGFnxgHzZxlJ3K/5np/p2R8ExGTYHV7vppxzfXxpjqvlA0UrJVXc2+4O9eVo56B7R7AQhWhpg5pYUvM7f1XXK6S00P0Upng8LUYAISwIDAQAB">
+    <em:targetApplication RDF:resource="rdf:#$XsKoE"/>
+    <em:targetApplication RDF:resource="rdf:#$0tKoE"/>
+    <em:targetApplication RDF:resource="rdf:#$5tKoE"/>
+    <em:developer>Toad King</em:developer>
+    <em:developer>zero_ant</em:developer>
+    <em:developer>Brian Marshall</em:developer>
+  </RDF:Description>
+</RDF:RDF>

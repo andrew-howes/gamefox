@@ -1,0 +1,64 @@
+html
+{
+    background-color: #5BA1D4;
+    color: #ffffff;
+    font-family: Trebuchet, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Arial, Verdana, sans-serif;
+    width: 100%;
+    font-size: 13px;
+    margin: 0;
+}
+
+body
+{
+    margin: 0;
+    margin-left: 2px;
+}
+
+a 
+{
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #D6DF60;
+    text-decoration: underline;
+}
+
+#title, a#title-link
+{
+    font-weight: bold;
+    font-size: 1.7em;
+    color:  #296794;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.search-head
+{
+    border-top: 2px solid #296794;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.left
+{
+    float: left;
+    margin-right: 25px; 
+}
+
+input
+{
+    width: 100%;
+    border: 0 solid #000000;
+}
+
+input[type="text"]
+{
+    border-bottom: 1px dashed #296794;
+}

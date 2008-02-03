@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<overlay id="gamefox-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/gfaqs9.js"/>
+
+  <!-- common context menu -->
+  <popup id="contentAreaContextMenu">
+    <menuseparator id="gamefox-context-separator"/>
+    <menuitem id="gamefox-context-quote" label="Quote" accesskey="Q" oncommand="GameFOX.quote(gContextMenu);"/>
+    <menu label="Pages" id="gamefox-context-pages">
+      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
+    </menu>
+    <menuitem id="gamefox-context-tag" label="Tag Topic" accesskey="T" oncommand="GameFOXTags.add(gContextMenu);"/>
+    <menuitem id="gamefox-toggle-sidebar" label="Toggle GameFOX Sidebar" observes="viewGamefoxSidebar"/>
+    <menu label="GameFAQs Tags" id="gamefox-tags">
+      <menupopup id="gamefox-tags-menu" onpopupshowing="GameFOXTags.populate(1);"/>
+    </menu>
+  </popup>
+
+  <!-- FireFox tools menu -->
+  <menupopup id="menu_ToolsPopup">
+    <menuitem insertbefore="prefSep" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+  </menupopup>
+
+  <!-- SeaMonkey tools menu (needs xSidebar?) -->
+  <menupopup id="taskPopup">
+    <menuitem insertafter="downloadmgr" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+  </menupopup>
+
+  <!-- Firefox commands -->
+  <commandset id="mainCommandSet">
+    <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
+  </commandset>
+
+  <!-- SeaMonkey commands -->
+  <commandset id="commands">
+    <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
+  </commandset>
+
+  <!-- Firefox keys -->
+  <keyset id="mainKeyset">
+    <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
+  </keyset>
+
+  <!-- SeaMonkey keys -->
+  <keyset id="navKeys">
+    <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
+  </keyset>
+
+  <!-- Firefox broadcasters -->
+  <broadcasterset id="mainBroadcasterSet">
+    <broadcaster id="viewGamefoxSidebar"
+      autoCheck="false"
+      label="GameFOX Sidebar"
+      type="checkbox"
+      group="sidebar"
+      sidebartitle="GameFOX Sidebar"
+      sidebarurl="chrome://gamefox/content/sidebar.xhtml"
+      command="cmd_gamefoxSidebar"
+    />
+  </broadcasterset>
+
+  <!-- SeaMonkey broadcasters -->
+  <broadcasterset id="navBroadcasters">
+    <broadcaster id="viewGamefoxSidebar"
+      autoCheck="false"
+      label="GameFOX Sidebar"
+      type="checkbox"
+      group="sidebar"
+      sidebartitle="GameFOX Sidebar"
+      sidebarurl="chrome://gamefox/content/sidebar.xhtml"
+      command="cmd_gamefoxSidebar"
+    />
+  </broadcasterset>
+
+  <!-- Firefox view sidebar menu -->
+  <menupopup id="viewSidebarMenu">
+    <menuitem key="key_gamefoxSidebar" observes="viewGamefoxSidebar"/>
+  </menupopup>
+
+  <!-- Pending removal... (should be removed on GameFOX with version number higher than 0.5.5.2)
+  <window id="main-window">
+    --><!--<checkbox id="gamefox-sidebar-toggler" hidden="true" checked="false"/>--><!--
+    <menuitem observes="viewGamefoxSidebar" hidden="true"/>
+  </window>
+  -->
+</overlay>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://gamefox/skin/about.css" type="text/css"?>
+<dialog
+    buttons="accept"
+    title="GameFOX - About"
+    onload="gfox_processAboutDialog();"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
+  <groupbox>
+    <hbox>
+      <label id="title" value="GameFOX TK+"/>
+      <label id="version" value="0.5.5.6"/>
+      <spacer flex="1"/>
+      <image src="chrome://gamefox/skin/logo-small.png"/>
+    </hbox>
+    <separator class="thin"/>
+    <label class="bold" value="Developers:" tooltiptext="and creator(s)"/>
+    <hbox>
+      <label value="Abdullah A" tooltiptext="ultimategamer00 @ GameFAQs"/>
+      <label class="description" value="(GameFOX creator)" tooltiptext="GameFOX 0.x"/>
+      <spacer flex="1"/>
+      <label class="url-label" value="http://whitefyre.com/gamefox/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+    </hbox>
+    <hbox>
+      <label value="Toad King" tooltiptext="Calvinjpwalker @ GameFAQs"/>
+      <label class="description" value="(GameFOX TK)" tooltiptext="GameFOX TK 0.5.x is based on GameFOX 0.5"/>
+      <spacer flex="1"/>
+      <label class="url-label" value="http://www.toadking.com/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+    </hbox>
+    <hbox>
+      <label value="zero_ant" tooltiptext="ZeroAnt @ GameFAQs"/>
+      <label class="description" value="(current?)" tooltiptext="GameFOX TK+ 0.5.x is based on GameFOX TK 0.5.4.1"/>
+    </hbox>
+    <hbox>
+      <label value="Brian Marshall" tooltiptext="Karamthulhu @ GameFAQs"/>
+      <label class="description" value="(current)"/>
+      <spacer flex="1"/>
+      <label class="url-label" value="http://beyondboredom.net/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+    </hbox>  
+    <separator class="thin"/>
+    <label class="bold" value="Contributors:"/>
+    <hbox>
+      <label value="Jero (Classic Theme)"/>
+      <spacer flex="1"/>
+      <label class="url-label" value="http://jero.net/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+    </hbox>
+    <hbox>
+      <label value="Ricapar (Classic Theme for new GameFAQs layout)"/>
+      <spacer flex="1"/>
+      <label class="url-label" value="http://ricapar.ath.cx:89/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+    </hbox>
+    <hbox>
+      <label value="Pardus (Icons)"/>
+      <spacer flex="1"/>
+      <label class="url-label" value="http://www.uludag.org.tr/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+    </hbox>
+    <hbox>
+      <label value="Therum (gfaqs9)" tooltiptext="Therum @ GameFAQs"/>
+    </hbox>
+    <hbox>
+      <label value="BenoitRen (SeaMonkey port)" tooltiptext="BenoitRen @ MozillaZine Forum"/>
+    </hbox>
+    <hbox>
+      <label class="url-label internal-link" value="Changelog" tooltiptext="See changes since GameFOX TK 0.5.4.1" onclick="gfox_addTab('chrome://gamefox/content/CHANGELOG', event.button);"/>
+    </hbox>
+    <separator class="thin"/>
+    <label class="bold" value="Help board:"/>
+    <hbox>
+      <label class="url-label" value="http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885" tooltiptext="GameFAQs: Blood Money Message Board" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+    </hbox>
+    <separator class="thin"/>
+  </groupbox>
+</dialog>

@@ -1,0 +1,13 @@
+/* 0.5.0 */
+
+@-moz-document domain(boards.gamefaqs.com), domain(www.gamefaqs.com)
+{
+    td#leftnav
+        {
+        display: none;
+    }
+    .boxhead
+        {
+        text-indent: 0px !important;
+    }
+}
