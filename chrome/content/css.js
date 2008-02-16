@@ -1,6 +1,6 @@
 var GameFOXCSS =
 {
-  cssVersion: '0.5.5.5',
+  cssVersion: '0.5.5.7',
 
   load: function()
   {

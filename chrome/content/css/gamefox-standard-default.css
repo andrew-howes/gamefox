@@ -1,18 +1,23 @@
-/* 0.5.0 */
-
 @-moz-document domain(boards.gamefaqs.com), domain(www.gamefaqs.com)
 {
     #gamefox-quickpost-title, #gamefox-quickpost-form
        {
-        text-align: center;
         width: 100%;
         clear: both;
     }
+    #gamefox-quickpost-normal #gamefox-quickpost-title,
+    #gamefox-quickpost-normal #gamefox-quickpost-form
+       {
+         text-indent: 1em;
+    }
     #gamefox-quickpost-title
        {
-        background-color: #6564FF;
-        color: #ffffff;
-        font: bold 16px verdana, sans-serif;
+        font-size: 1.8em;
+        border-bottom: #aaa 1px solid;
+    }
+    #gamefox-quickpost-normal #gamefox-quickpost-btn
+       {
+         margin-left: 1em;
     }
     #gamefox-quickpost-afloat
        {
@@ -38,6 +43,7 @@
         width: 70%;
         border-left: 2px solid #6564FF;
         border-right: 2px solid #6564FF;
+        margin-top: 5px;
     }
     tr[style] > td /* to make highlighting work by changing the bgcolor of the tr only */
        {
