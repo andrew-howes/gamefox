@@ -132,9 +132,9 @@ function gamefoxChangeBoardSettings()
         }
       }
       var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
-      sig = sig[1];
+      sig = gamefoxSpecialCharsDecode(sig[1]);
       var quote = request.responseText.match(/<textarea\b[^>]+?\bname="quote"[^>]*>([^<]*)<\/textarea>/i);
-      quote = quote[1];
+      quote = gamefoxSpecialCharsDecode(quote[1]);
       var publicEmail = request.responseText.match(/<input\b[^>]+?\bname="publicemail"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
       if (!publicEmail)
       {
@@ -182,4 +182,9 @@ function gamefoxURLEncode(str)
   );
 
   return str;
+}
+
+function gamefoxSpecialCharsDecode(str)
+{
+  return str.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 }
