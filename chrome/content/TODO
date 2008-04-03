@@ -7,7 +7,7 @@ Development issues: (let me know if you can fix this)
 To do:
 - Linux: fix reveal css dir (http://developer.mozilla.org/en/docs/nsILocalFile)
 X Linux: Help with adding CSSes. It always says something about errors and access denied and I (abc123xyzlaw) can't add them. Do I have to manually install it or is there another way?
-  > Solution: ??? (fixed -- bmarshall)
+  > Solution: ???
 - Not detected as topic list (no quickpost link, etc): topic list with zero topics
 - Use nsIStyleSheetService(last) for user highlighting (so it takes precedence over the other css)
   or/and use a super descriptive css (e.g. #content > #board_wrap > .board > .message > tbody > td.author > ...).
@@ -53,7 +53,7 @@ X Linux: Help with adding CSSes. It always says something about errors and acces
 - auto dating (topic age count)
 - Is there a way to ignore a user *entirely*?
 ^-Make the Filter option filter out topics from the blacklisted users
-- "CSS addition not working in Kubuntu 6.10, and possibly other Linux distro's running with KDE.
+X "CSS addition not working in Kubuntu 6.10, and possibly other Linux distro's running with KDE.
    However, userContent.css is good enough for me."
 - Repeat top menu to bottom page
 - css (aquatakat for g10)X2

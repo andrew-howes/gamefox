@@ -4,8 +4,12 @@ Development issues: (let me know if you can fix this)
 - GameFOX Options sometimes breaks in Mac platform
 - GameFOX is not fully functional in SeaMonkey
 
+Version 0.5.5.7 (git)
+======================================================================
+- Made the quick post form pretty
+
 Version 0.5.5.6                              Brian Marshall 2008-02-03
-=====================================================================
+======================================================================
 - Fixed user highlighting, since I apparently broke it last release.
   Whoops!
 
