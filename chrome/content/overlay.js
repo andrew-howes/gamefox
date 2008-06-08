@@ -197,7 +197,10 @@ var GameFOX =
 
     if (doc.location.pathname.match(/^\/gfaqs9?\/myposts\.php$/i))
     {
-      doc.evaluate('//div[@class="board"]/table', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener('dblclick', GameFOX.topicDblclick, false);
+      if (doc.location.pathname.match(/^\/gfaqs9\/myposts\.php$/i))
+        doc.evaluate('//div[@class="genrebox"]/table', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener('dblclick', GameFOX.topicDblclick, false);
+      else
+        doc.evaluate('//div[@class="board"]/table', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener('dblclick', GameFOX.topicDblclick, false);
  
       if (prefs.getBoolPref('elements.myposts.topiclink'))
       {
