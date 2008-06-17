@@ -4,7 +4,7 @@ Development issues: (let me know if you can fix this)
 - GameFOX Options sometimes breaks in Mac platform
 - GameFOX is not fully functional in SeaMonkey
 
-Version 0.5.5.7
+Version 0.5.5.7                              Brian Marshall 2008-06-17
 ======================================================================
 - Made the quick post form pretty
 - Decode HTML entities when handling signatures and quotes
