@@ -3,7 +3,7 @@
     background-image: none !important;
     background-color: #fff !important;
   }
-  #container, #full_col_wrap #main_col_wrap #main_col, #content #full_col_wrap #board_wrap .board, #content #board_wrap .board_nav .body, #main_col .today, #main_col .topten, #main_col .topten, #full_col_wrap #main_col .pod, #full_col_wrap #main_col .features .body {
+  #container, #full_col_wrap #main_col_wrap #main_col, #content #full_col_wrap #board_wrap .board, #content #board_wrap .board_nav, #content #board_wrap .board_nav .body, #main_col .today, #main_col .topten, #main_col .topten, #full_col_wrap #main_col .pod, #full_col_wrap #main_col .features .body {
     width: 100% !important;
   }
   #content .pod .head, #board_wrap .head {
