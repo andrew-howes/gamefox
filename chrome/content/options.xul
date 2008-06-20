@@ -7,9 +7,8 @@
 <!-- locale -->
 <!DOCTYPE overlay [
     <!ENTITY gamefox.pref.general.MsgsPerPage.help  "This setting is needed to properly use page jumping and message numbering features.">
-    <!ENTITY gamefox.pref.general.gfaqs9            "Use /gfaqs9 for Pages context menu, Tags, Sidebar, and About dialog">
-    <!ENTITY gamefox.pref.general.gfaqs9.help       "Other page links will follow your current /gfaqs path.">
-    <!ENTITY gamefox.pref.general.gfaqs9.note       "This setting is only needed for these four mentioned items. For anything else, GameFOX detects /gfaqs9 automatically based on the page URL. If you use a non-gfaqs9 account with this option enabled, the site will simply redirect you to the normal page.">
+    <!ENTITY gamefox.pref.general.gfaqs9            "Use gfaqs9 for URIs when possible">
+    <!ENTITY gamefox.pref.general.gfaqs9.note       "This causes URIs from tags, topic pagination, the sidebar and about window to point towards gfaqs9. Everything else will use gfaqs9 when appropriate. This setting does not affect accounts without access to gfaqs9.">
     <!ENTITY gamefox.pref.general.gfaqs9.credit     "Wouldn't be possible without Therum's help. Say thank you to Therum you people >:)">
 ]>
 
@@ -79,21 +78,11 @@
 
             <groupbox>
               <caption label="Behavior"/>
-              <hbox align="baseline">
-                <label flex="1" value="Your GameFAQs messages per page setting" tooltiptext="&gamefox.pref.general.MsgsPerPage.help;"/>
-                <menulist preference="gamefoxMsgsPerPage" tooltiptext="&gamefox.pref.general.MsgsPerPage.help;">
-                  <menupopup>
-                    <menuitem value="10" label="10"/>
-                    <menuitem value="20" label="20"/>
-                    <menuitem value="30" label="30"/>
-                    <menuitem value="40" label="40"/>
-                    <menuitem value="50" label="50"/>
-                  </menupopup>
-                </menulist>
-              </hbox>
               <checkbox preference="gamefox-pref-gfaqs9"
-                label="&gamefox.pref.general.gfaqs9; *"
-                tooltiptext="&gamefox.pref.general.gfaqs9.help;"/>
+                label="&gamefox.pref.general.gfaqs9;"/>
+              <description style="margin-left: 30px;" tooltiptext="&gamefox.pref.general.gfaqs9.credit;">
+                &gamefox.pref.general.gfaqs9.note;
+              </description>
             </groupbox>
 
             <groupbox flex="1">
@@ -117,7 +106,7 @@
                     </menulist>
                   </row>
                   <row>
-                    <label value="Topic Sort Order"/>
+                    <label value="Topic Sort"/>
                     <menulist preference="gamefoxTpcSortOrder" id="topicsort" flex="1">
                       <menupopup>
                         <menuitem value="1" label="By First Post, Oldest First"/>
@@ -129,7 +118,7 @@
                   </row>
                   <row>
                     <label value="Messages Per Page"/>
-                    <menulist preference="gamefoxMsgsPerPage" id="messagepage" flex="1">
+                    <menulist preference="gamefoxMsgsPerPage" id="messagepage" tooltiptext="&gamefox.pref.general.MsgsPerPage.help;" flex="1">
                       <menupopup>
                         <menuitem value="10" label="10"/>
                         <menuitem value="20" label="20"/>
@@ -140,20 +129,11 @@
                     </menulist>
                   </row>
                   <row>
-                    <label value="Message Sort Order"/>
+                    <label value="Message Sort"/>
                     <menulist preference="gamefoxMsgSortOrder" id="messagesort" flex="1">
                       <menupopup>
                         <menuitem value="1" label="Oldest First"/>
                         <menuitem value="2" label="Newest First"/>
-                      </menupopup>
-                    </menulist>
-                  </row>
-                  <row>
-                    <label value="Message Data Display"/>
-                    <menulist preference="gamefoxMsgDisplay" id="securitylevel" flex="1">
-                      <menupopup>
-                        <menuitem value="0" label="Horizontal"/>
-                        <menuitem value="1" label="Vertical"/>
                       </menupopup>
                     </menulist>
                   </row>
@@ -193,6 +173,15 @@
                       </menupopup>
                     </menulist>
                   </row>
+                  <row>
+                    <label value="Message Poster Display"/>
+                    <menulist preference="gamefoxMsgDisplay" id="securitylevel" flex="1">
+                      <menupopup>
+                        <menuitem value="0" label="Left of Message"/>
+                        <menuitem value="1" label="Above Message"/>
+                      </menupopup>
+                    </menulist>
+                  </row>
                 </rows>
               </grid>
               <hbox pack="end">
@@ -201,12 +190,6 @@
             </groupbox>
 
           </vbox>
-
-          <spacer flex="1"/>
-          <description style="margin-top: 10px;"
-            tooltiptext="&gamefox.pref.general.gfaqs9.credit;">
-            * &gamefox.pref.general.gfaqs9.note;
-          </description>
         </tabpanel>
 
 
