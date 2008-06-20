@@ -10,7 +10,7 @@
   <groupbox>
     <hbox>
       <label id="title" value="GameFOX TK+"/>
-      <label id="version" value="0.5.5.6"/>
+      <label id="version" value="0.5.5.8"/>
       <spacer flex="1"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
@@ -30,7 +30,7 @@
     </hbox>
     <hbox>
       <label value="zero_ant" tooltiptext="ZeroAnt @ GameFAQs"/>
-      <label class="description" value="(current?)" tooltiptext="GameFOX TK+ 0.5.x is based on GameFOX TK 0.5.4.1"/>
+      <label class="description" value="(GameFOX TK+)" tooltiptext="GameFOX TK+ 0.5.x is based on GameFOX TK 0.5.4.1"/>
     </hbox>
     <hbox>
       <label value="Brian Marshall" tooltiptext="Karamthulhu @ GameFAQs"/>

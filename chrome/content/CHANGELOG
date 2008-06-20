@@ -9,19 +9,19 @@ Version 0.5.5.8
 - (chrome/content/css/wide-layout.css): Allow board user navigation to
   be properly aligned to the right
 
-Version 0.5.5.7                              Brian Marshall 2008-06-17
+Version 0.5.5.7                                             2008-06-17
 ======================================================================
 - Made the quick post form pretty
 - Decode HTML entities when handling signatures and quotes
 - Update the double click action on the active messages list for the
   new layout
 
-Version 0.5.5.6                              Brian Marshall 2008-02-03
+Version 0.5.5.6                                             2008-02-03
 ======================================================================
 - Fixed user highlighting, since I apparently broke it last release.
   Whoops!
 
-Version 0.5.5.5                              Brian Marshall 2008-01-30
+Version 0.5.5.5                                             2008-01-30
 ======================================================================
 - Firefox 3: This extension now provides secure updates.
 - Linux: There are no longer any permission errors when adding CSS

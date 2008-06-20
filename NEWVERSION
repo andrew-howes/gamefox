@@ -1,0 +1,7 @@
+Preparing for a new version of GameFOX requires the following things to be
+done:
+
+        * Update the version number in the following files:
+                - install.rdf
+                - install.js
+                - chrome/content/about.xul

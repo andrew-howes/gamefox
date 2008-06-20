@@ -21,11 +21,15 @@
                    em:description="Improves browsing of the GameFAQs message boards!"
                    em:creator="Abdullah A"
                    em:homepageURL="http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885"
-		   em:updateURL="http://beyondboredom.net/gfox/update.rdf"
+                   em:updateURL="http://beyondboredom.net/gfox/update.rdf"
                    em:optionsURL="chrome://gamefox/content/options.xul"
                    em:aboutURL="chrome://gamefox/content/about.xul"
                    em:iconURL="chrome://gamefox/skin/logo-small.png"
-                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHm0PO+/NnblC4Bm1sPDFsGkuMZ0IHmY6c3h202KzugcFUduk9SC0tZ2QoPKkuz7aOvonfGFnxgHzZxlJ3K/5np/p2R8ExGTYHV7vppxzfXxpjqvlA0UrJVXc2+4O9eVo56B7R7AQhWhpg5pYUvM7f1XXK6S00P0Upng8LUYAISwIDAQAB">
+                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHm0PO+/
+                                 NnblC4Bm1sPDFsGkuMZ0IHmY6c3h202KzugcFUduk9SC0t
+                                 Z2QoPKkuz7aOvonfGFnxgHzZxlJ3K/5np/p2R8ExGTYHV7
+                                 vppxzfXxpjqvlA0UrJVXc2+4O9eVo56B7R7AQhWhpg5pYU
+                                 vM7f1XXK6S00P0Upng8LUYAISwIDAQAB">
     <em:targetApplication RDF:resource="rdf:#$XsKoE"/>
     <em:targetApplication RDF:resource="rdf:#$0tKoE"/>
     <em:targetApplication RDF:resource="rdf:#$5tKoE"/>
