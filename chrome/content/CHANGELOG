@@ -8,6 +8,8 @@ Version 0.5.5.8
 ======================================================================
 - (chrome/content/css/wide-layout.css): Allow board user navigation to
   be properly aligned to the right
+- Update GameFOX board settings for use with new GameFAQs settings
+  page
 
 Version 0.5.5.7                                             2008-06-17
 ======================================================================

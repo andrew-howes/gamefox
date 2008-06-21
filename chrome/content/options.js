@@ -1,3 +1,5 @@
+/* vim : set et sw=2 : */
+
 function gamefoxOpenCSS()
 {
   // Borrowed from MR Tech Local Install
@@ -103,63 +105,52 @@ function gamefoxChangeBoardSettings()
   document.getElementById('gamefox-css-apply-bs').setAttribute('disabled', 'true');
 
   var request = new XMLHttpRequest();
-  request.open('GET', 'http://www.gamefaqs.com/user/boards.html');
+  request.open('GET', 'http://boards.gamefaqs.com/gfaqs/settings.php');
   request.onreadystatechange = function()
   {
     if (request.readyState == 4)
     {
-      if (!request.responseText.match(/Warning: The below information will be displayed publicly\./))
+      if (!request.responseText.match(/Board Display Settings/))
       {
-        alert('Error changing your board settings. The problem might be that you are not logged in to GameFAQs.');
+        alert('Something broke. Are you logged in to boards.gamefaqs.com?');
         document.getElementById('gamefox-css-apply-bs').removeAttribute('disabled');
       }
+
+      var action = request.responseText.match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
+      action = action[1];
+
       var request2 = new XMLHttpRequest();
-      request2.open('POST', 'http://www.gamefaqs.com/user/boards.html');
+      request2.open('POST', 'http://boards.gamefaqs.com' + action);
       request2.onreadystatechange = function()
       {
         if (request2.readyState == 4)
         {
-          if (!request2.responseText.match(/Your boards profile has been updated/))
+          if (!request2.responseText.match(/Display settings updated/))
           {
-            alert('Error changing your board settings');
+            alert("The settings update was unsuccessful. This shouldn't happen.");
           }
           else
           {
-            alert('Your board settings has been updated');
+            alert("Your board display settings have been updated.");
           }
 
           document.getElementById('gamefox-css-apply-bs').removeAttribute('disabled');
         }
       }
-      var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
-      sig = gamefoxSpecialCharsDecode(sig[1]);
-      var quote = request.responseText.match(/<textarea\b[^>]+?\bname="quote"[^>]*>([^<]*)<\/textarea>/i);
-      quote = gamefoxSpecialCharsDecode(quote[1]);
-      var publicEmail = request.responseText.match(/<input\b[^>]+?\bname="publicemail"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
-      if (!publicEmail)
-      {
-        publicEmail = '';
-      } else {
-        publicEmail = publicEmail[1];
-      }
-      var imClient = request.responseText.match(/<option\b[^>]+?\bvalue="([^"]*)"[^>]+?\bselected\b[^>]*>/i);
-      if (!imClient)
-      {
-        imClient = 'None';
-      } else {
-        imClient = imClient[1];
-      }
-      var imName = request.responseText.match(/<input\b[^>]+?\bname="imname"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
-      if (!imName)
-      {
-        imName = '';
-      } else {
-        imName = imName[1];
-      }
-      var rid = request.responseText.match(/<input\b[^>]+?\bname="rid"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
-      rid = rid[1];
+      var key = request.responseText.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
+      key = key[1];
+      
       request2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      request2.send('topicpage=' + document.getElementById('topicpage').value + '&topicsort=' + document.getElementById('topicsort').value + '&messagepage=' + document.getElementById('messagepage').value + '&messagesort=' + document.getElementById('messagesort').value + '&securitylevel=' + document.getElementById('securitylevel').value + '&timezone=' + document.getElementById('timezone').value + '&sig=' + gamefoxURLEncode(sig) + '&quote=' + gamefoxURLEncode(quote) + '&publicemail=' + gamefoxURLEncode(publicEmail) + '&imcli=' + imClient + '&imname=' + gamefoxURLEncode(imName) + '&rid=' + rid);
+      request2.send(
+                      'topicpage=' + document.getElementById('topicpage').value + '&' +
+                      'topicsort=' + document.getElementById('topicsort').value + '&' +
+                      'messagepage=' + document.getElementById('messagepage').value + '&' +
+                      'messagesort=' + document.getElementById('messagesort').value + '&' +
+                      'timezone=' + document.getElementById('timezone').value + '&' +
+                      'userdisplay=' + document.getElementById('userdisplay').value + '&' +
+                      'key=' + key + '&' +
+                      'submit=Change+Settings'
+                   );
     }
   };
 

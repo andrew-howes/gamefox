@@ -175,7 +175,7 @@
                   </row>
                   <row>
                     <label value="Message Poster Display"/>
-                    <menulist preference="gamefoxMsgDisplay" id="securitylevel" flex="1">
+                    <menulist preference="gamefoxMsgDisplay" id="userdisplay" flex="1">
                       <menupopup>
                         <menuitem value="0" label="Left of Message"/>
                         <menuitem value="1" label="Above Message"/>
