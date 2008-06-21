@@ -1,3 +1,5 @@
+/* vim: set et sw=2 ts=2 sts=2: */
+
 function gamefox_log(msg) {
   var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
                                  .getService(Components.interfaces.nsIConsoleService);
@@ -270,10 +272,16 @@ var GameFOX =
 
       if (doc.location.pathname.match(/^\/gfaqs\/(post|preview)\.php$/ig))
       {
-        if (prefs.getBoolPref('univSig') && prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
-        && !doc.documentElement.innerHTML.match(/\b(Error|Preview)\s*<\/h1>\s*<\/div>/ig))
+        if (prefs.getBoolPref('univSig') && (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
+              || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != '') &&
+            !doc.documentElement.innerHTML.match(/\b(Error|Preview)\s*<\/h1>\s*<\/div>/ig))
         {
-          doc.getElementsByName('message')[0].value = "\n" + prefs.getComplexValue('sigSep', Components.interfaces.nsISupportsString).data + "\n" + prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data;
+          doc.getElementsByName('message')[0].value = "\n" +
+            (prefs.getBoolPref('sigNewline') ? "\n" : "") +
+            (prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != '' ?
+             prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data : "") +
+            (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != '' ? "\n---\n" +
+             prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data : "");
         }
       }
 
@@ -769,6 +777,8 @@ var GameFOX =
   appendQuickPost: function(doc, divID, forNewTopic)
   {
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var sig = prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data;
+    var sigPre = prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data;
 
     doc.getElementById(divID).innerHTML
     += '<div id="gamefox-quickpost-title">QuickPost</div>'
@@ -781,9 +791,15 @@ var GameFOX =
     + '<input type="reset" value="Reset"/> '
     + (forNewTopic ? '<input type="button" id="gamefox-quickpost-hide" value="Hide"/> ' : '')
     + '</form>';
-
+    
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click', GameFOX.quickPost, false);
-    doc.getElementById('gamefox-message').value = (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != '' && prefs.getIntPref('sigAdd') == 2) ? "\n" + prefs.getComplexValue('sigSep', Components.interfaces.nsISupportsString).data + "\n" + prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data : '';
+    if ((sig != '' || sigPre != '') && prefs.getIntPref('sigAdd') == 2)
+    {
+      doc.getElementById('gamefox-message').value = "\n" +
+        (prefs.getBoolPref('sigNewline') ? "\n" : "") +
+        (sigPre != '' ? sigPre : "") +
+        (sig != '' ? "\n---\n" + sig : "");
+    }
     doc.getElementById('gamefox-quickpost-form').addEventListener('submit', GameFOX.autoAppendSignature, false);
 
     if (!prefs.getBoolPref('elements.quickpost.button'))
@@ -799,11 +815,16 @@ var GameFOX =
   autoAppendSignature: function(event)
   {
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var sig = prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data;
+    var sigPre = prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data;
 
-    if (prefs.getIntPref('sigAdd') == 1 &&
-        prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != '')
+    if ((sig != '' || sigPre != '') && prefs.getIntPref('sigAdd') == 1)
     {
-      event.target.ownerDocument.getElementById('gamefox-message').value += "\n" + prefs.getComplexValue('sigSep', Components.interfaces.nsISupportsString).data + "\n" + prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data;
+      event.target.ownerDocument.getElementById('gamefox-message').value +=
+        "\n" +
+        (prefs.getBoolPref('sigNewline') ? "\n" : "") +
+        (sigPre != "" ? sigPre : "") +
+        (sig != "" ? "\n---\n" + sig : "");
     }
   },
 

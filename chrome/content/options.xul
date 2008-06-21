@@ -482,31 +482,26 @@
   <prefpane id="gamefox-sig-pane" label="Signature">
     <preferences>
       <preference id="gamefoxUnivSig" name="gamefox.univSig" type="bool"/>
-      <preference id="gamefoxSigSep" name="gamefox.sigSep" type="unichar"/>
+      <preference id="gamefoxSigPre" name="gamefox.sigPre" type="unichar"/>
       <preference id="gamefoxSig" name="gamefox.sig" type="unichar"/>
       <preference id="gamefoxSigAdd" name="gamefox.sigAdd" type="int"/>
+      <preference id="gamefoxSigNewline" name="gamefox.sigNewline" type="bool"/>
     </preferences>
 
     <groupbox>
-      <caption label="Body"/>
-      <grid>
-        <columns>
-          <column/>
-          <column flex="1"/>
-        </columns>
-        <rows>
-          <row>
-            <label value="Signature Separator"/>
-            <textbox preference="gamefoxSigSep" size="8"/>
-          </row>
-          <row>
-            <label value="Signature"/>
-            <textbox preference="gamefoxSig" rows="4" multiline="true"/>
-          </row>
-        </rows>
-      </grid>
-      <hbox pack="end">
+      <caption label="Content"/>
+      
+      <label value="Pre-signature:"/>
+      <textbox preference="gamefoxSigPre" size="8" style="margin-left: 1em"/>
+      
+      <label value="Signature:"/>
+      <textbox preference="gamefoxSig" rows="2" multiline="true" style="margin-left: 1em"/>
+      
+      <hbox>
         <checkbox preference="gamefoxUnivSig" label="Also use on standard GameFAQs post page"/>
+      </hbox>
+      <hbox>
+        <checkbox preference="gamefoxSigNewline" label="Prepend a newline before signature"/>
       </hbox>
     </groupbox>
 

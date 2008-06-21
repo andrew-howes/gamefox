@@ -10,6 +10,8 @@ Version 0.5.5.8
   be properly aligned to the right
 - Update GameFOX board settings for use with new GameFAQs settings
   page
+- Remove custom signature separator option
+- Add pre-signature field, option to add newline before signature
 
 Version 0.5.5.7                                             2008-06-17
 ======================================================================
