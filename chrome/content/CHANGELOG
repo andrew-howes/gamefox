@@ -12,6 +12,7 @@ Version 0.5.5.8
   page
 - Remove custom signature separator option
 - Add pre-signature field, option to add newline before signature
+- Truncate signatures at 2 lines. No other restrictions.
 
 Version 0.5.5.7                                             2008-06-17
 ======================================================================

@@ -490,6 +490,13 @@
 
     <groupbox>
       <caption label="Content"/>
+
+      <description style="margin-bottom: 1em">
+        Presignatures are appended before the signature separator and are
+        restricted to 1 line. Signatures are restricted to 2 lines. GameFAQs
+        imposes a 160-character limit for signatures, but GameFOX does not
+        enforce this.
+      </description>
       
       <label value="Pre-signature:"/>
       <textbox preference="gamefoxSigPre" size="8" style="margin-left: 1em"/>
