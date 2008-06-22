@@ -1273,16 +1273,42 @@ var GameFOX =
     {
       if (request.readyState == 4)
       {
-        div.innerHTML = '<b>User ID   :</b> ' + GameFOXFindInfo('User ID', request.responseText) + '<br/>'
-                      + '<b>User Level:</b> ' + GameFOXFindInfo('Board User Level', request.responseText).split(/\<br\>/gi)[0].replace(/<\/?b>/ig, '') + '<br/>'
-                      + '<b>Created At:</b> ' + GameFOXFindInfo('Account Created', request.responseText) + '<br/>'
-                      + '<b>Last Visit:</b> ' + GameFOXFindInfo('Last Visit', request.responseText) + '<br/>'
-                      + '<b>Email     :</b> ' + GameFOXFindInfo('Public E-Mail Address', request.responseText) + '<br/>'
-                      + '<b>IM        :</b> ' + GameFOXFindInfo('IM', request.responseText) + '<br/>'
-                      + '<b>Quote     :</b> ' + GameFOXFindInfo('Quote', request.responseText).replace(/<br\s*\/?>/gi, '<br/>            ') + '<br/>'
-                      + '<b>Karma     :</b> ' + GameFOXFindInfo('Karma', request.responseText)
-                      + GameFOXFindInfo('Contributor Page', request.responseText).replace(/^</, '<br/><');
-
+        var i;
+        var profileFieldsHTML = '';
+        var profileFields = new Array(
+          'User ID', 'User ID',
+          'Board User Level', 'User Level',
+          'Account Created', 'Created At',
+          'Last Visit', 'Last Visit',
+          'E-Mail', 'Email',
+          'Website', 'Website',
+          'AIM', 'AIM',
+          'Yahoo IM', 'Yahoo IM',
+          'Windows Live \\(MSN\\)', 'MSN',
+          'Google Talk', 'Google Talk',
+          'ICQ', 'ICQ',
+          'Xbox Live', 'Xbox Live',
+          'PlayStation Network', 'PSN',
+          'DS Friend Code', 'DS Friend Code',
+          'Wii Number', 'Wii Number',
+          'Wii Friend Code', 'Wii Friend Code',
+          'Skype', 'Skype',
+          'Steam', 'Steam',
+          'xfire', 'xfire',
+          'Quote', 'Quote',
+          'Karma', 'Karma'
+        );
+        for (i = 0; i < profileFields.length; i += 2) {
+          if ((profileField = GameFOXFindInfo(profileFields[i], request.responseText)) != '') {
+            if (profileFields[i] == 'Board User Level') {
+              profileField = profileField.split(/<br\s*\/?>/gi)[0].replace(/<\/?b>/ig, '');
+            }
+            profileFieldsHTML += '<b>' + profileFields[i+1] + ':</b> ' + profileField.replace(/<br\s*\/?>/gi, '<br/>') + '<br/>';
+          }
+        }
+        div.innerHTML = profileFieldsHTML.replace(/<br\/>$/, '')
+          + GameFOXFindInfo('Contributor Page', request.responseText).replace(/^</, '<br/><')
+          + GameFOXFindInfo('My Games', request.responseText).replace(/^</, '<br/><');
       }
     };
     request.send(null);
@@ -1510,7 +1536,6 @@ var GameFOX =
               var allCapsM   = request.responseText.match(/Messages cannot be in all uppercase.  Turn off your CAPS LOCK./i);
               var noTopics   = request.responseText.match(/You are not authorized to create topics on this board./i);
               var noPosts    = request.responseText.match(/You are not authorized to post messages on this board./i);
-              var expired    = request.responseText.match(/Your online session has expired./i);
               var bigWordT   = request.responseText.match(/Your topic title contains a single word over 25 characters in length.  This can cause problems for certain browsers, and is not allowed./i);
               var bigWordM   = request.responseText.match(/Your message contains a single word over 80 characters in length.  This can cause problems for certain browsers, and is not allowed./i);
               var badHTML    = request.responseText.match(/Your HTML is not well-formed - please check for unmatched quotes and tags./i);
@@ -1525,7 +1550,7 @@ var GameFOX =
               }
               else if (tTitle)
               {
-                alert('You know, the 80 character limit on topic titles is there for a reason.');
+                alert('You know, the 5 to 80 character limit on topic titles is there for a reason.');
               }
               else if (allCapsT)
               {
@@ -1542,10 +1567,6 @@ var GameFOX =
               else if (noPosts)
               {
                 alert('You are not allowed to post messages here.');
-              }
-              else if (expired)
-              {
-                alert('It took you so long to make your post, your online session expired! Funny, huh?');
               }
               else if (bigWordT)
               {
