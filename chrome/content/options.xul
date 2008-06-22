@@ -502,10 +502,10 @@
       </description>
       
       <label value="Pre-signature:"/>
-      <textbox preference="gamefoxSigPre" size="8" style="margin-left: 1em"/>
+      <textbox preference="gamefoxSigPre" size="8" class="indent"/>
       
       <label value="Signature:"/>
-      <textbox preference="gamefoxSig" rows="2" multiline="true" style="margin-left: 1em"/>
+      <textbox preference="gamefoxSig" rows="3" multiline="true" class="indent"/>
       
       <hbox>
         <checkbox preference="gamefoxUnivSig" label="Also use on standard GameFAQs post page"/>
