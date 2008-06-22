@@ -84,7 +84,7 @@ var GameFOXCSS =
     }
     catch (e)
     {
-      alert('There was an error checking filename for existance: ' + e);
+      alert('There was an error checking filename for existence: ' + e);
       return;
     }
 
@@ -341,52 +341,80 @@ function gamefoxChangeSiteSettings()
   document.getElementById('gamefox-css-apply-ss').setAttribute('disabled', 'true');
 
   var request = new XMLHttpRequest();
-  request.open('POST', 'http://www.gamefaqs.com/user/site.html');
+  request.open('GET', 'http://www.gamefaqs.com/user/site.html');
   request.onreadystatechange = function()
   {
     if (request.readyState == 4)
     {
-      if (!request.responseText.match(/Your site settings have been updated/i))
+      if (!request.responseText.match(/You may update your GameFAQs settings below/))
       {
-        alert('Error changing your display style');
+        alert('Error changing your site settings. The problem might be that you are not logged in to GameFAQs.');
+        document.getElementById('gamefox-css-apply-ss').removeAttribute('disabled');
       }
-      else
+      var key = request.responseText.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
+      key = key[1];
+
+      var request2 = new XMLHttpRequest();
+      request2.open('POST', 'http://www.gamefaqs.com/user/site.html');
+      request2.onreadystatechange = function()
       {
-        try
+        if (request2.readyState == 4)
         {
-          var cookie   = request.getResponseHeader('Set-Cookie');
-          var protocol = cookie.match(/;\s*secure\s*(;|$)/ig) ? 'https://' : 'http://';
-          var host     = cookie.match(/;\s*(?:domain|host)\s*=\s*(.*?)\s*(;|$)/i)[1];
-          var path     = cookie.match(/;\s*path\s*=\s*(.*?)\s*(;|$)/i)[1];
-          var uri      = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService)
-                         .newURI(protocol + host + path, null, null);
-
-          cookie.replace(/;\s*host\s*=.*?(;|$)/ig, ';');
-
-          var expires  = cookie.match(/;\s*expires\s*=\s*(.*?)\s*(;|$)/i);
-              expires  = expires ? new Date(expires[1]) : null;
-          var expires2 = new Date();
-
-          if (!expires || expires > expires2)
+          if (!request2.responseText.match(/Your settings have been updated/i))
           {
-            expires2.setFullYear(expires2.getFullYear() + 1);
-            expires2.setMonth(11);
-            expires2.setDate(31);
-            cookie.replace(/;\s*expires\s*=.*?(?=;|$)/ig, '');
-            cookie += '; expires=' + expires2.toUTCString() + ';';
+            alert('Error changing your display style');
+          }
+          else
+          {
+            try
+            {
+              var cookie   = request2.getResponseHeader('Set-Cookie');
+              var protocol = cookie.match(/;\s*secure\s*(;|$)/ig) ? 'https://' : 'http://';
+              var host     = cookie.match(/;\s*(?:domain|host)\s*=\s*(.*?)\s*(;|$)/i)[1];
+              var path     = cookie.match(/;\s*path\s*=\s*(.*?)\s*(;|$)/i)[1];
+              var uri      = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService)
+                             .newURI(protocol + host + path, null, null);
+
+              cookie.replace(/;\s*host\s*=.*?(;|$)/ig, ';');
+
+              var expires  = cookie.match(/;\s*expires\s*=\s*(.*?)\s*(;|$)/i);
+                  expires  = expires ? new Date(expires[1]) : null;
+              var expires2 = new Date();
+
+              if (!expires || expires > expires2)
+              {
+                expires2.setFullYear(expires2.getFullYear() + 1);
+                expires2.setMonth(11);
+                expires2.setDate(31);
+                cookie.replace(/;\s*expires\s*=.*?(?=;|$)/ig, '');
+                cookie += '; expires=' + expires2.toUTCString() + ';';
+              }
+
+              Components.classes["@mozilla.org/cookieService;1"].getService().QueryInterface(Components.interfaces.nsICookieService)
+              .setCookieString(uri, null, cookie, null);
+            }
+            catch (e){;}
+            alert('Your display style has been updated');
           }
 
-          Components.classes["@mozilla.org/cookieService;1"].getService().QueryInterface(Components.interfaces.nsICookieService)
-          .setCookieString(uri, null, cookie, null);
+          document.getElementById('gamefox-css-apply-ss').removeAttribute('disabled');
         }
-        catch (e){;}
-        alert('Your display style has been updated');
+      };
+
+      var style = document.getElementById('gamefox-pref-style').value;
+      if (style == null) { // FIXME - there must be a proper way to set a default value
+        style = '';
       }
-
-      document.getElementById('gamefox-css-apply-ss').removeAttribute('disabled');
+      request2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      request2.send(
+                     'key=' + key + '&' +
+                     'update=1' + '&' +
+                     'skin_filename=' + style + '&' +
+                     'file_split=0' + '&' +
+                     'cookie_expire_days=' + document.getElementById('gamefox-pref-expire').value
+                   );
+      // FIXME - support for FAQ display - currently just gets reset, but not many people use it anyways
     }
-  };
-
-  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  request.send('skin=' + document.getElementById('gamefox-pref-style').value  + '&expiration=' + document.getElementById('gamefox-pref-expire').value);
+  }
+  request.send(null);
 }

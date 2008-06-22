@@ -141,18 +141,6 @@
                     <label value="Time Zone"/>
                     <menulist preference="gamefoxTimeZone" id="timezone" flex="1">
                       <menupopup>
-                        <menuitem value="0" label="GMT +0"/>
-                        <menuitem value="60" label="GMT +1"/>
-                        <menuitem value="120" label="GMT +2"/>
-                        <menuitem value="180" label="GMT +3"/>
-                        <menuitem value="240" label="GMT +4"/>
-                        <menuitem value="300" label="GMT +5"/>
-                        <menuitem value="360" label="GMT +6"/>
-                        <menuitem value="420" label="GMT +7"/>
-                        <menuitem value="480" label="GMT +8"/>
-                        <menuitem value="540" label="GMT +9"/>
-                        <menuitem value="600" label="GMT +10"/>
-                        <menuitem value="720" label="GMT +12"/>
                         <menuitem value="-720" label="GMT -12"/>
                         <menuitem value="-660" label="GMT -11"/>
                         <menuitem value="-600" label="GMT -10"/>
@@ -162,14 +150,27 @@
                         <menuitem value="-360" label="GMT -6"/>
                         <menuitem value="-300" label="GMT -5"/>
                         <menuitem value="-240" label="GMT -4"/>
+                        <menuitem value="-210" label="GMT -3:30"/>
                         <menuitem value="-180" label="GMT -3"/>
                         <menuitem value="-120" label="GMT -2"/>
                         <menuitem value="-60" label="GMT -1"/>
-                        <menuitem value="660" label="GMT +11"/>
-                        <menuitem value="-210" label="GMT -3:30"/>
+                        <menuitem value="0" label="GMT +0"/>
+                        <menuitem value="60" label="GMT +1"/>
+                        <menuitem value="120" label="GMT +2"/>
+                        <menuitem value="180" label="GMT +3"/>
+                        <menuitem value="240" label="GMT +4"/>
+                        <menuitem value="300" label="GMT +5"/>
                         <menuitem value="330" label="GMT +5:30"/>
+                        <menuitem value="360" label="GMT +6"/>
                         <menuitem value="390" label="GMT +6:30"/>
+                        <menuitem value="420" label="GMT +7"/>
+                        <menuitem value="480" label="GMT +8"/>
+                        <menuitem value="540" label="GMT +9"/>
                         <menuitem value="570" label="GMT +9:30"/>
+                        <menuitem value="600" label="GMT +10"/>
+                        <menuitem value="660" label="GMT +11"/>
+                        <menuitem value="720" label="GMT +12"/>
+                        <menuitem value="780" label="GMT +13"/>
                       </menupopup>
                     </menulist>
                   </row>
@@ -320,7 +321,7 @@
   <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.initSystem(); GameFOXCSS.load();">
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
-      <preference id="gamefox-pref-style" name="gamefox.gf.style" type="int"/>
+      <preference id="gamefox-pref-style" name="gamefox.gf.style" type="string"/>
       <preference id="gamefox-pref-expire" name="gamefox.gf.expire" type="int"/>
       <preference id="gamefox-pref-disableMainStyles" name="gamefox.disableMainStyles" type="bool"/>
     </preferences>
@@ -389,13 +390,13 @@
             <label value="Display Style"/>
             <menulist preference="gamefox-pref-style" flex="1">
               <menupopup>
-                <menuitem value="1" label="Default - The default GameFAQs skin"/>
-                <menuitem value="2" label="V9 - A revival of version 9 of GameFAQs (2003-2005)"/>
-                <menuitem value="3" label="Default 2 - The default GameFAQs skin with a cleaned-up logo"/>
-                <menuitem value="4" label="NeoClassic - A modern take on classic GameFAQs (2001-2003)"/>
-                <menuitem value="5" label="Default Blue - Default skin with boards in blue"/>
-                <menuitem value="6" label="V9 Blue - V9 skin with boards in blue"/>
-                <menuitem value="7" label="NeoClassic Blue - NeoClassic skin with boards in blue"/>
+                <menuitem value="" label="Default - The default GameFAQs skin"/>
+                <menuitem value="v9.css" label="V9 - A revival of version 9 of GameFAQs (2003-2005)"/>
+                <menuitem value="nogs.css" label="Default 2 - The default GameFAQs skin with a cleaned-up logo"/>
+                <menuitem value="classic.css" label="NeoClassic - A modern take on classic GameFAQs (2001-2003)"/>
+                <menuitem value="blue.css" label="Default Blue - Default skin with boards in blue"/>
+                <menuitem value="v9_blue.css" label="V9 Blue - V9 skin with boards in blue"/>
+                <menuitem value="classic_blue.css" label="NeoClassic Blue - NeoClassic skin with boards in blue"/>
               </menupopup>
             </menulist>
           </row>
@@ -405,10 +406,12 @@
               <menupopup>
                 <menuitem value="0" label="Logout when I close browser"/>
                 <menuitem value="1" label="1 day"/>
+                <menuitem value="5" label="5 days"/>
+                <menuitem value="10" label="10 days"/>
                 <menuitem value="14" label="14 days"/>
+                <menuitem value="15" label="15 days"/>
+                <menuitem value="20" label="20 days"/>
                 <menuitem value="30" label="30 days"/>
-                <menuitem value="45" label="45 days"/>
-                <menuitem value="60" label="60 days"/>
               </menupopup>
             </menulist>
           </row>
