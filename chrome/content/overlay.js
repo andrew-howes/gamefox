@@ -1268,7 +1268,7 @@ var GameFOX =
     node.appendChild(div);
 
     var request = new XMLHttpRequest();
-    request.open('GET', node.getElementsByTagName('a')[0].href);
+    request.open('GET', node.getElementsByTagName('a')[0].href.replace(/gfaqs9/, 'gfaqs'));
     request.onreadystatechange = function ()
     {
       if (request.readyState == 4)
@@ -1309,6 +1309,7 @@ var GameFOX =
         div.innerHTML = profileFieldsHTML.replace(/<br\/>$/, '')
           + GameFOXFindInfo('Contributor Page', request.responseText).replace(/^</, '<br/><')
           + GameFOXFindInfo('My Games', request.responseText).replace(/^</, '<br/><');
+        // FIXME - user's own profile has links on field names, so a lot of stuff is left out
       }
     };
     request.send(null);
