@@ -309,9 +309,16 @@ var GameFOX =
 
       if (doc.location.pathname.match(/^\/gfaqs9\/post\.php$/i))
       {
-        if (prefs.getBoolPref('univSig') && prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != '')
+        if (prefs.getBoolPref('univSig')
+            && (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
+              || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != ''))
         {
-          doc.getElementsByName('message')[0].value = "\n" + prefs.getComplexValue('sigSep', Components.interfaces.nsISupportsString).data + "\n" + prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data;
+          doc.getElementsByName('message')[0].value = "\n" +
+            format_sig(
+                prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
+                prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
+                prefs.getBoolPref('sigNewline')
+                );
         }
       }
     }
