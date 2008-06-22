@@ -515,7 +515,7 @@
       </hbox>
     </groupbox>
 
-    <groupbox style="margin-bottom: 30px;">
+    <groupbox style="margin-bottom: 4em;">
       <caption label="Addition Method"/>
       <radiogroup preference="gamefoxSigAdd">
         <radio value="1" label="Append signature after submitting or previewing the post"/>
