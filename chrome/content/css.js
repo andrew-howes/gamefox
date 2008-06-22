@@ -401,15 +401,11 @@ function gamefoxChangeSiteSettings()
         }
       };
 
-      var style = document.getElementById('gamefox-pref-style').value;
-      if (style == null) { // FIXME - there must be a proper way to set a default value
-        style = '';
-      }
       request2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       request2.send(
                      'key=' + key + '&' +
                      'update=1' + '&' +
-                     'skin_filename=' + style + '&' +
+                     'skin_filename=' + document.getElementById('gamefox-pref-style').value + '&' +
                      'file_split=0' + '&' +
                      'cookie_expire_days=' + document.getElementById('gamefox-pref-expire').value
                    );

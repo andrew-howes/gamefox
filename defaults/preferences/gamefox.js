@@ -36,7 +36,7 @@ pref("gamefox.sigPre", "");
 pref("gamefox.sigNewline", false);
 pref("gamefox.univSig", false);
 pref("gamefox.sigAdd", 1);
-pref("gamefox.gf.style", 1);
+pref("gamefox.gf.style", "");
 pref("gamefox.gf.expire", 0);
 pref("gamefox.disableMainStyles", false);
 pref("gamefox.css.disabled", "({})");
