@@ -10,7 +10,7 @@
   <groupbox>
     <hbox>
       <label id="title" value="GameFOX TK+"/>
-      <label id="version" value="0.5.5.8"/>
+      <label id="version" value="0.5.5.9"/>
       <spacer flex="1"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
