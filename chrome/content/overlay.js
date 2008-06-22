@@ -18,8 +18,8 @@ function format_sig(sig, sigPre, sigNewline) {
   sigPre = sigPre[0];
 
   var str = (sigNewline ? "\n" : "") +
-    (sigPre != "" ? sigPre : "") +
-    (sig != "" ? "\n---\n" + sig : "");
+    (sigPre != "" ? sigPre + (sig != "" ? "\n" : "") : "") +
+    (sig != "" ? "---\n" + sig : "");
   return str;
 }
 
