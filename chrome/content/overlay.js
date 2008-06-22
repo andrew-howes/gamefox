@@ -843,7 +843,7 @@ var GameFOX =
   autoAppendSignature: function(event)
   {
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
-
+    
     if (
         (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
          || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != ''
@@ -1480,7 +1480,7 @@ var GameFOX =
         path     = path ? path[1] : ('/gfaqs' + (GameFOXNine.getNine() ? '9/' : '/'));
     var postFile = path.match(/9/) ? 'preview.php' : 'post.php';
     var psearch  = doc.location.search.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/ig, '');
-
+    
     event.target.setAttribute('disabled', 'disabled');
     event.target.blur();
     // NOTE TO uG: The 'click' event still fires even if the button is disabled
@@ -1595,20 +1595,20 @@ var GameFOX =
               return;
             }
           };
-
-	  // This was a new field added to the post form. If it isn't provided, the request is ignored, so
-	  // we have to extract it
-	  if ( !path.match(/9/) ) // This only exists in gfaqs10
-	  	var uid = request.responseText.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/i);
-
+          
+          // This was a new field added to the post form. If it isn't provided, the request is ignored, so
+          // we have to extract it
+          if ( !path.match(/9/) ) // This only exists in gfaqs10
+            var uid = request.responseText.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/i);
+          
           request2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           request2.send((path.match(/9/) ? 'PostId=' : 'post_id=') + 
-			  postId[1] + '&post=Post+Message'+
-			  (path.match(/9/) ? '' : '&uid=' + uid[1]));
+              postId[1] + '&post=Post+Message'+
+              (path.match(/9/) ? '' : '&uid=' + uid[1]));
         }
       }
     };
-
+    
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     var postBody = '';
@@ -1627,10 +1627,22 @@ var GameFOX =
     }
 
     var message = doc.getElementsByName('message')[0].value;
-
-    if (!doc.location.pathname.match(/^\/gfaqs9?\/(post|preview).php$/ig) && prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != '' && prefs.getIntPref('sigAdd') == 1)
+    
+    if (
+        !doc.location.pathname.match(/^\/gfaqs9?\/(post|preview).php$/ig)
+        && (
+          prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
+          || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != ''
+          )
+        && prefs.getIntPref('sigAdd') == 1
+      )
     {
-      message += "\n" + prefs.getComplexValue('sigSep', Components.interfaces.nsISupportsString).data + "\n" + prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data;
+      message += "\n" +
+        format_sig(
+            prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
+            prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
+            prefs.getBoolPref('sigNewline')
+            );
     }
 
     request.send(postBody + 'message=' + GameFOX.URLEncode(message) + '&post=Preview+Message');
