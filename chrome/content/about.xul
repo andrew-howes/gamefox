@@ -3,10 +3,10 @@
 <?xml-stylesheet href="chrome://gamefox/skin/about.css" type="text/css"?>
 <!-- vim: set et sw=2 sts=2 ts=2: -->
 <dialog
-    buttons="accept"
-    title="GameFOX - About"
-    onload="gfox_processAboutDialog();"
-    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  buttons="accept"
+  title="About GameFOX"
+  onload="gfox_processAboutDialog();"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <groupbox>
     <hbox>
@@ -85,7 +85,7 @@
       <label class="contrib description" value="gfaqs9"/>
     </hbox>
     <hbox>
-      <label value="BenoitRen (MozillaZine)"/>
+      <label value="BenoitRen"/>
       <label class="contrib description" value="SeaMonkey port"/>
     </hbox>
     <separator class="thin"/>
