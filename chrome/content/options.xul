@@ -339,7 +339,7 @@
       <caption label="Import CSS"/>
       <hbox>
         <textbox flex="1" id="gamefox-css-remote-file" value=""/>
-        <button id="gamefox-css-brwose" label="Browse" oncommand="GameFOXCSS.browse();"/>
+        <button id="gamefox-css-browse" label="Browse" oncommand="GameFOXCSS.browse();"/>
       </hbox>
       <hbox align="center">
         <label value="Save as:"/>

@@ -1499,8 +1499,8 @@ var GameFOX =
   {
     var doc     = event.target.ownerDocument;
     var prefs   = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    var request = new XMLHttpRequest();
-    var request2;
+    var previewRequest = new XMLHttpRequest();
+    var postRequest;
 
     //[za] 'path' is to retain current page gfaqs or gfaqs9 path
     var path     = doc.location.pathname.match(/^(\/gfaqs9?\/)/i);
@@ -1512,34 +1512,36 @@ var GameFOX =
     event.target.blur();
     // NOTE TO uG: The 'click' event still fires even if the button is disabled
     event.target.removeEventListener('click', GameFOX.quickPost, false);
-    request.open('POST', 'http://boards.gamefaqs.com' + path + postFile + psearch);
-    request.onreadystatechange = function()
+    previewRequest.open('POST', 'http://boards.gamefaqs.com' + path + postFile + psearch);
+    previewRequest.onreadystatechange = function()
     {
-      if (request.readyState == 4)
+      if (previewRequest.readyState == 4)
       {
-        var postId = request.responseText.match(/\bname="post_?id"[^>]+?\bvalue="([^"]*)"/i);
+        var postId = previewRequest.responseText.match(/\bname="post_?id"[^>]+?\bvalue="([^"]*)"/i);
 
         if (!postId || postId[1].match(/^\s*0?\s*$/))
         {
           try
           {
-            if (request.responseText.replace(/^\s+|\s+$/g, '').length == 0)
+            if (previewRequest.responseText.replace(/^\s+|\s+$/g, '').length == 0)
             {
-              alert('Request timed out. Please check your computer\'s network connection and try again.');
+              alert('Preview message request timed out. Please check your network connection and try again.');
             }
             else
             {
               // Thanks to KSOT's Secondary FAQ for all of these errors
-              var badWord    = request.responseText.match(/<p>Banned word found: <b>(.+?)<\/b>/i);
-              var tooBig     = request.responseText.match(/The maximum allowed size for a message is 4096 characters. Your message is ([0-9]+) characters long./i);
-              var tTitle     = request.responseText.match(/Topic titles must be between 5 and 80 characters./i);
-              var allCapsT   = request.responseText.match(/Topic titles cannot be in all uppercase.  Turn off your CAPS LOCK./i);
-              var allCapsM   = request.responseText.match(/Messages cannot be in all uppercase.  Turn off your CAPS LOCK./i);
-              var noTopics   = request.responseText.match(/You are not authorized to create topics on this board./i);
-              var noPosts    = request.responseText.match(/You are not authorized to post messages on this board./i);
-              var bigWordT   = request.responseText.match(/Your topic title contains a single word over 25 characters in length.  This can cause problems for certain browsers, and is not allowed./i);
-              var bigWordM   = request.responseText.match(/Your message contains a single word over 80 characters in length.  This can cause problems for certain browsers, and is not allowed./i);
-              var badHTML    = request.responseText.match(/Your HTML is not well-formed - please check for unmatched quotes and tags./i);
+              var badWord    = previewRequest.responseText.match(/<p>Banned word found: <b>(.+?)<\/b>/i);
+              var tooBig     = previewRequest.responseText.match(/The maximum allowed size for a message is 4096 characters\. Your message is ([0-9]+) characters long\./i);
+              var tTitle     = previewRequest.responseText.match(/Topic titles must be between 5 and 80 characters\./i);
+              var allCapsT   = previewRequest.responseText.match(/Topic titles cannot be in all uppercase\.  Turn off your CAPS LOCK\./i);
+              var allCapsM   = previewRequest.responseText.match(/Messages cannot be in all uppercase\.  Turn off your CAPS LOCK\./i);
+              var noTopics   = previewRequest.responseText.match(/You are not authorized to create topics on this board\./i);
+              var noPosts    = previewRequest.responseText.match(/You are not authorized to post messages on this board\./i);
+              var bigWordT   = previewRequest.responseText.match(/Your topic title contains a single word over 25 characters in length\.  This can cause problems for certain browsers, and is not allowed\./i);
+              var bigWordM   = previewRequest.responseText.match(/Your message contains a single word over 80 characters in length\.  This can cause problems for certain browsers, and is not allowed\./i);
+              var badHTML    = previewRequest.responseText.match(/Your HTML is not well-formed - please check for unmatched quotes and tags\./i);
+              var closedT    = previewRequest.responseText.match(/(This topic is closed|This topic has been closed\.)/i);
+              var deletedT   = previewRequest.responseText.match(/(This topic is no longer available for viewing|This topic has been deleted\.)/i);
 
               if (badWord)
               {
@@ -1571,17 +1573,25 @@ var GameFOX =
               }
               else if (bigWordT)
               {
-                alert('Your topic title contains a word word over 25 characters in length. This makes CJayC unhappy because it stretches his 640x480 screen resolution, so he doesn\'t allow it.');
+                alert('Your topic title contains a word over 25 characters in length. This makes CJayC unhappy because it stretches his 640x480 screen resolution, so he doesn\'t allow it.');
               }
               else if (bigWordM)
               {
-                alert('Your message contains a word word over 80 characters in length. This makes CJayC unhappy because it stretches his 640x480 screen resolution, so he doesn\'t allow it.');
+                alert('Your message contains a word over 80 characters in length. This makes CJayC unhappy because it stretches his 640x480 screen resolution, so he doesn\'t allow it.');
               }
               else if (badHTML)
               {
                 alert('Your HTML is not well-formed. Please make it well-formed and try again.');
               }
-              else if (!request.responseText.match(/<body/i) && request.responseText.match(/maintenance/i))
+              else if (closedT)
+              {
+                alert('The topic was closed while you were typing your message. Type faster next time.');
+              }
+              else if (deletedT)
+              {
+                alert('The topic is gone! Damn moderators...');
+              }
+              else if (!previewRequest.responseText.match(/<body/i) && previewRequest.responseText.match(/maintenance/i))
               {
                 alert('The site is temporarily down for maintenance... please check back later.');
               }
@@ -1593,7 +1603,7 @@ var GameFOX =
           }
           catch (e)
           {
-            alert('Your post encountered a new or rare error. Try posting again without QuickPost to try and find the problem.');
+            alert('Your post encountered a new or rare error while being previewed. Try posting again without QuickPost to try and find the problem.');
           }
           event.target.removeAttribute('disabled');
           event.target.addEventListener('click', GameFOX.quickPost, false);
@@ -1601,18 +1611,58 @@ var GameFOX =
         }
         else
         {
-          if (request.responseText.match(/<div class="error"><b>Post Warning<\/b><\/div>|<div class="head"><h1>Post Warning<\/h1><\/div>/i) && !confirm('Your message contains some content that makes GameFAQs suspect it might break the ToS. If you post this message, it will automatically be flagged for a moderator to look at. Are you sure you want to post this message?'))
+          if (previewRequest.responseText.match(/<div class="error"><b>Post Warning<\/b><\/div>|<div class="head"><h1>Post Warning<\/h1><\/div>/i) && !confirm('Your message contains some content that makes GameFAQs suspect it might break the ToS. If you post this message, it will automatically be flagged for a moderator to look at. Are you sure you want to post this message?'))
           {
             event.target.removeAttribute('disabled');
             event.target.addEventListener('click', GameFOX.quickPost, false);
             return;
           }
-          request2 = new XMLHttpRequest();
-          request2.open('POST', 'http://boards.gamefaqs.com' + path + postFile + psearch);
-          request2.onreadystatechange = function()
+          postRequest = new XMLHttpRequest();
+          postRequest.open('POST', 'http://boards.gamefaqs.com' + path + postFile + psearch);
+          postRequest.onreadystatechange = function()
           {
-            if (request2.readyState == 2)
+            if (postRequest.readyState == 4)
             {
+              if (!postRequest.responseText.match(/You should be returned to the Message List automatically in five seconds./i)) // won't work if the user has this in their sig haha
+              {
+                try
+                {
+                  if (postRequest.responseText.replace(/^\s+|\s+$/g, '').length == 0)
+                  {
+                    alert('Post message request timed out. Please check your network connection and try again.');
+                  }
+                  else
+                  {
+                    var flooding   = postRequest.responseText.match(/To prevent flooding,/i);
+                    var closedT    = postRequest.responseText.match(/(This topic is closed|This topic has been closed\.)/i);
+                    var deletedT   = postRequest.responseText.match(/(This topic is no longer available for viewing|This topic has been deleted\.)/i);
+
+                    if (flooding)
+                    {
+                      alert('You are posting too quickly and have hit one of the flooding limits.');
+                    }
+                    else if (closedT)
+                    {
+                      alert('The topic was closed while you were typing your message. Type faster next time!');
+                    }
+                    else if (deletedT)
+                    {
+                      alert('The topic is gone! Damn moderators...');
+                    }
+                    else
+                    {
+                      throw Components.results.NS_ERROR_FAILURE;
+                    }
+                  }
+                }
+                catch (e)
+                {
+                  alert('Your post encountered a new or rare error while being posted. Try posting again without QuickPost to try and find the problem.');
+                }
+                event.target.removeAttribute('disabled');
+                event.target.addEventListener('click', GameFOX.quickPost, false);
+                return;
+              }
               doc.location = 'http://boards.gamefaqs.com' + path + ((doc.getElementsByName('topictitle')[0]) ? 'gentopic.php' : 'genmessage.php') + psearch;
               return;
             }
@@ -1621,17 +1671,17 @@ var GameFOX =
           // This was a new field added to the post form. If it isn't provided, the request is ignored, so
           // we have to extract it
           if ( !path.match(/9/) ) // This only exists in gfaqs10
-            var uid = request.responseText.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/i);
+            var uid = previewRequest.responseText.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/i);
           
-          request2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          request2.send((path.match(/9/) ? 'PostId=' : 'post_id=') + 
+          postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          postRequest.send((path.match(/9/) ? 'PostId=' : 'post_id=') + 
               postId[1] + '&post=Post+Message'+
               (path.match(/9/) ? '' : '&uid=' + uid[1]));
         }
       }
     };
     
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     var postBody = '';
     var topicTitle = doc.getElementsByName('topictitle');
@@ -1667,7 +1717,7 @@ var GameFOX =
             );
     }
 
-    request.send(postBody + 'message=' + GameFOX.URLEncode(message) + '&post=Preview+Message');
+    previewRequest.send(postBody + 'message=' + GameFOX.URLEncode(message) + '&post=Preview+Message');
   },
 
   URLEncode: function(str)
