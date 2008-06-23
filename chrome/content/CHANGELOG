@@ -13,6 +13,8 @@ Version 0.5.5.10
 - Prevent long profile fields from stretching QuickWhois
 - QuickPost now catches short topic titles before sending the post
   to the server
+- Add old GameFOX Standard Default stylesheet with the old QuickPost
+  look
 
 Version 0.5.5.9                                             2008-06-22
 ======================================================================
