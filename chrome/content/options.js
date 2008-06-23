@@ -114,9 +114,16 @@ function gamefoxChangeBoardSettings()
       {
         alert('Something broke. Are you logged in to boards.gamefaqs.com?');
         document.getElementById('gamefox-css-apply-bs').removeAttribute('disabled');
+        return;
       }
 
       var action = request.responseText.match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
+      if (!action)
+      {
+        alert('Couldn\'t get your user ID. This shouldn\'t happen.');
+        document.getElementById('gamefox-css-apply-bs').removeAttribute('disabled');
+        return;
+      }
       action = action[1];
 
       var request2 = new XMLHttpRequest();
@@ -151,6 +158,38 @@ function gamefoxChangeBoardSettings()
                       'key=' + key + '&' +
                       'submit=Change+Settings'
                    );
+    }
+  };
+
+  request.send(null);
+}
+
+function gamefoxGrabSignature()
+{
+  document.getElementById('gamefox-sig-grab-sig').setAttribute('disabled', 'true');
+
+  var request = new XMLHttpRequest();
+  request.open('GET', 'http://boards.gamefaqs.com/gfaqs/sigquote.php');
+  request.onreadystatechange = function()
+  {
+    if (request.readyState == 4)
+    {
+      if (!request.responseText.match(/Board Signature and Quote/))
+      {
+        alert('Something broke. Are you logged in to boards.gamefaqs.com?');
+        document.getElementById('gamefox-sig-grab-sig').removeAttribute('disabled');
+        return;
+      }
+
+      var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
+      if (!sig)
+      {
+        alert('Couldn\'t get your signature. This usually shouldn\'t happen. Maybe you have one of those really old signatures that displays bold/italics on the profile page?');
+        document.getElementById('gamefox-sig-grab-sig').removeAttribute('disabled');
+        return;
+      }
+      document.getElementById('gamefoxSig').value = gamefoxSpecialCharsDecode(sig[1]);
+      document.getElementById('gamefox-sig-grab-sig').removeAttribute('disabled');
     }
   };
 

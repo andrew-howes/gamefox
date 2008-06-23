@@ -1,3 +1,4 @@
+/* vim: set et sw=2 sts=2 ts=2: */
 var GameFOXCSS =
 {
   cssVersion: '0.5.5.10',
@@ -319,6 +320,8 @@ var GameFOXCSS =
       {
         this.add('chrome://gamefox/content/css/gamefox-classic-default.css', 'gamefox-classic-default.css', 'GameFOX Default for Classic View', true);
         this.add('chrome://gamefox/content/css/gamefox-standard-default.css', 'gamefox-standard-default.css', 'GameFOX Default for Standard View*', true);
+        this.add('chrome://gamefox/content/css/gamefox-standard-default-old.css', 'gamefox-standard-default-old.css',
+            'GameFOX Default for Standard View (Old)*', true);
         this.add('chrome://gamefox/content/css/gamefox-no-sidebar.css', 'gamefox-no-sidebar.css', 'Sidebar Remover for Classic View', true);
         this.add('chrome://gamefox/content/css/classic-theme-by-jero.net.css', 'classic-theme-by-jero.net.css', 'Classic Theme By http://jero.net', true);
         this.add('chrome://gamefox/content/css/gamefox_sidebar.css', 'gamefox_sidebar.css', 'Michael J Buck\'s Sidebar*', true);
@@ -327,7 +330,6 @@ var GameFOXCSS =
         this.add('chrome://gamefox/content/css/midnight-shade.css', 'midnight-shade.css', 'Midnight Shade By http://jero.net', true);
         this.add('chrome://gamefox/content/css/gamefox.0.4.x.css', 'gamefox.0.4.x.css', 'GameFOX 0.4.x By Toad King/Calvinjpwalker', true);
         this.add('chrome://gamefox/content/css/ricapar.css', 'ricapar.css', 'Ricapar\'s Classic Theme**', true);
-        this.add('chrome://gamefox/content/css/visited-colors.css', 'visited-colors.css', 'Visited Link Colors*', true);
         this.add('chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css', 'Wide Default Layout*', true);
         this.reRegisterSheets();
       }

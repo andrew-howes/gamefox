@@ -6,11 +6,15 @@ Development issues: (let me know if you can fix this)
 
 Version 0.5.5.10
 =====================================================================
-- QuickPost now checks for errors after posting the message
 - Update GameFOX site settings for use with new GameFAQs settings
   page
 - Update QuickWhois for new profiles
+- QuickPost now checks for errors after posting the message
 - Prevent long profile fields from stretching QuickWhois
+- QuickPost now catches short topic titles before sending the post
+  to the server
+- Add GameFOX Standard Default stylesheet with the old QuickPost look
+- Add "Grab From GameFAQs" button to retrieve signature from GameFAQs
 
 Version 0.5.5.9                                             2008-06-22
 ======================================================================
