@@ -5,3 +5,4 @@ done:
                 - install.rdf
                 - install.js
                 - chrome/content/about.xul
+                - Only if the styles in chrome/content/css/ are changed: chrome/content/css.js

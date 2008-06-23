@@ -74,7 +74,7 @@
         background-color: #ffffff !important;
         font-family: monospace;
         font-size: 13px;
-        white-space: pre;
+        max-width: 80%;
         -moz-border-radius: 10px;
         -moz-opacity: 0.90;
     }

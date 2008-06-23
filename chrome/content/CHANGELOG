@@ -10,6 +10,7 @@ Version 0.5.5.10
 - Update GameFOX site settings for use with new GameFAQs settings
   page
 - Update QuickWhois for new profiles
+- Prevent long profile fields from stretching QuickWhois
 
 Version 0.5.5.9                                             2008-06-22
 ======================================================================

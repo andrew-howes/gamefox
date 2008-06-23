@@ -1245,12 +1245,12 @@ var GameFOX =
 
     function GameFOXFindInfo(what, where)
     {
-      var pattern = new RegExp('<td\\b[^>]*>\\s*' + what + '\\s*</td>\\s*<td\\b[^>]*>([^\\0]*?)</td>', 'gi');
+      var pattern = new RegExp('<td\\b[^>]*>(\\s*<a\\b[^>]*>)?\\s*' + what + '(\\s*</a>)?\\s*</td>\\s*<td\\b[^>]*>([^\\0]*?)</td>', 'gi');
       var matches = pattern.exec(where);
-
+      
       if (matches)
       {
-        return matches[1].replace(/^\s+|\s+$/g, '');
+        return matches[3].replace(/^\s+|\s+$/g, '');
       }
 
       return '';
@@ -1271,7 +1271,6 @@ var GameFOX =
     {
       if (request.readyState == 4)
       {
-        var i;
         var profileFieldsHTML = '';
         var profileFields = new Array(
           'User ID', 'User ID',
@@ -1296,7 +1295,7 @@ var GameFOX =
           'Quote', 'Quote',
           'Karma', 'Karma'
         );
-        for (i = 0; i < profileFields.length; i += 2) {
+        for (var i = 0; i < profileFields.length; i += 2) {
           if ((profileField = GameFOXFindInfo(profileFields[i], request.responseText)) != '') {
             if (profileFields[i] == 'Board User Level') {
               profileField = profileField.split(/<br\s*\/?>/gi)[0].replace(/<\/?b>/ig, '');
@@ -1307,7 +1306,6 @@ var GameFOX =
         div.innerHTML = profileFieldsHTML.replace(/<br\/>$/, '')
           + GameFOXFindInfo('Contributor Page', request.responseText).replace(/^</, '<br/><')
           + GameFOXFindInfo('My Games', request.responseText).replace(/^</, '<br/><');
-        // FIXME - user's own profile has links on field names, so a lot of stuff is left out
       }
     };
     request.send(null);

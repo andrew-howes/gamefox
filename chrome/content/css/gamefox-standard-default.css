@@ -94,8 +94,8 @@
         background-color: #ffffff !important;
         font-family: monospace;
         font-size: larger;
-        white-space: pre;
         text-align: left;
+        max-width: 80%;
         -moz-border-radius: 10px;
         -moz-opacity: 0.90;
     }
