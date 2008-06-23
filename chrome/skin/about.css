@@ -1,15 +1,17 @@
+/* vim: set et sw=4 sts=4 ts=4: */
 #title
 {
     font-weight: bold;
     font-size: x-large;
     color: #296794;
+    text-align: center;
 }
 
 #version
 {
-    font-size: small;
+    font-size: medium;
     color: #4D98CE;
-    font-family: georgia, serif;
+    text-align: center;
 }
 
 groupbox
@@ -17,18 +19,32 @@ groupbox
     background-color: #ffffff;
 }
 
-.bold
+.subtitle
+{
+    font-size: medium;
+    text-align: center;
+    border-bottom: #ccc 1px solid;
+}
+
+.description, .username
+{
+    margin-left: 1em;
+    padding-left: 1em;
+}
+
+.username
+{
+    font-style: italic;
+}
+
+.name
 {
     font-weight: bold;
 }
 
-.description
+.contrib
 {
     font-size: x-small;
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
 }
 
 .url-label
@@ -41,4 +57,9 @@ groupbox
 .url-label.internal-link
 {
     text-decoration: none;
+}
+
+.important
+{
+    font-size: 1.5em;
 }

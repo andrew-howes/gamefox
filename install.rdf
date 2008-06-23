@@ -12,7 +12,7 @@
                    em:maxVersion="3.0.*" />
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}"
-                   em:version="0.5.5.8"
+                   em:version="0.5.5.10"
                    em:name="GameFOX TK+"
                    em:description="Improves browsing of the GameFAQs message boards!"
                    em:creator="Abdullah A"
