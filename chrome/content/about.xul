@@ -10,11 +10,11 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <groupbox>
     <hbox>
-      <label id="title" value="GameFOX TK+"/>
+      <label id="title" value="GameFOX TNG"/>
       <spacer flex="1"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
-    <label id="version" value="0.5.5.10"/>
+    <label id="version" value="0.6.0"/>
 
     <hbox>
       <label class="url-label important" value="Changes" onclick="gfox_addTab('chrome://gamefox/content/CHANGELOG', event.button);"/>

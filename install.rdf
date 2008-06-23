@@ -1,35 +1,50 @@
 <?xml version="1.0"?>
-<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
-         xmlns:NC="http://home.netscape.com/NC-rdf#"
-         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$5tKoE"
-                   em:id="{a463f10c-3994-11da-9945-000d60ca027b}"
-                   em:minVersion="0.5"
-                   em:maxVersion="1.0.*" />
-  <RDF:Description RDF:about="rdf:#$XsKoE"
-                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-                   em:minVersion="2.0"
-                   em:maxVersion="3.0.*" />
-  <RDF:Description RDF:about="urn:mozilla:install-manifest"
-                   em:id="{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}"
-                   em:version="0.5.5.10"
-                   em:name="GameFOX TK+"
-                   em:description="Improves browsing of the GameFAQs message boards!"
-                   em:creator="Abdullah A"
-                   em:homepageURL="http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885"
-                   em:updateURL="http://beyondboredom.net/gfox/update.rdf"
-                   em:optionsURL="chrome://gamefox/content/options.xul"
-                   em:aboutURL="chrome://gamefox/content/about.xul"
-                   em:iconURL="chrome://gamefox/skin/logo-small.png"
-                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHm0PO+/
-                                 NnblC4Bm1sPDFsGkuMZ0IHmY6c3h202KzugcFUduk9SC0t
-                                 Z2QoPKkuz7aOvonfGFnxgHzZxlJ3K/5np/p2R8ExGTYHV7
-                                 vppxzfXxpjqvlA0UrJVXc2+4O9eVo56B7R7AQhWhpg5pYU
-                                 vM7f1XXK6S00P0Upng8LUYAISwIDAQAB">
-    <em:targetApplication RDF:resource="rdf:#$XsKoE"/>
-    <em:targetApplication RDF:resource="rdf:#$5tKoE"/>
-    <em:developer>Toad King</em:developer>
-    <em:developer>zero_ant</em:developer>
-    <em:developer>Brian Marshall</em:developer>
-  </RDF:Description>
-</RDF:RDF>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+        <Description about="urn:mozilla:install-manifest">
+                <em:id>{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}</em:id>
+                <em:name>GameFOX TNG</em:name>
+                <em:version>0.6.0</em:version>
+                <em:description>Improves browsing of the GameFAQs message boards.</em:description>
+                <em:creator>Abdullah A</em:creator>
+                <em:extension>true</em:extension>
+                <em:homepageURL>http://beyondboredom.net/projects/gamefox/</em:homepageURL>
+                <em:optionsURL>chrome://gamefox/content/options.xul</em:optionsURL>
+                <em:iconURL>chrome://gamefox/skin/logo-small.png</em:iconURL>
+                <em:aboutURL>chrome://gamefox/content/about.xul</em:aboutURL>
+
+                <em:developer>Toad King</em:developer>
+                <em:developer>zero_ant</em:developer>
+                <em:developer>Brian Marshall</em:developer>
+                <em:developer>Michael Ryan</em:developer>
+
+                <em:contributor>Jero (classic theme)</em:contributor>
+                <em:contributor>Ricapar (classic theme for new GameFAQs layout)</em:contributor>
+                <em:contributor>Pardus (icons)</em:contributor>
+                <em:contributor>BenoitRen (SeaMonkey port)</em:contributor>
+
+                <em:file>
+                        <Description about="urn:mozilla:extension:file:gamefox.jar">
+                                <em:package>content/</em:package>
+                                <em:skin>skin/</em:skin>
+                        </Description>
+                </em:file>
+
+                <!-- Firefox -->
+                <em:targetApplication>
+                        <Description>
+                                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                                <em:minVersion>2.0</em:minVersion>
+                                <em:maxVersion>3.0</em:maxVersion>
+                        </Description>
+                </em:targetApplication>
+
+                <!-- Flock -->
+                <em:targetApplication>
+                        <Description>
+                                <em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
+                                <em:minVersion>0.5</em:minVersion>
+                                <em:maxVersion>1.0</em:maxVersion>
+                        </Description>
+                </em:targetApplication>
+        </Description>
+</RDF>
