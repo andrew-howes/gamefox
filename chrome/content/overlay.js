@@ -470,7 +470,7 @@ var GameFOX =
 
     /* highlighting */
           if (enableHighlight)
-	  {
+          {
             try {
               posterIndex = highlightNames.indexOf(rows[i].getElementsByTagName('td')[2+fix].textContent.replace(/^\s+|\s+$/g, ''));
 
@@ -627,8 +627,8 @@ var GameFOX =
             }
           }
           
-	  if (messHead)
-	  {
+          if (messHead)
+          {
             if (numberMsgs)
             {
               switch (numberMsgsStyle) {
@@ -653,19 +653,19 @@ var GameFOX =
               }
             }
             
-	    posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
+            posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
             
-	    if (posterIndex != -1)
+            if (posterIndex != -1)
             {
               if (highlightMsgs)
               {
-		      //divs[i].setAttribute('class', 'gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
-                	divs[i].setAttribute('class', 
-				(divs[i].getAttribute('class') ? divs[i].getAttribute('class') : '')
-				+ ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
+                //divs[i].setAttribute('class', 'gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
+                divs[i].setAttribute('class', 
+                (divs[i].getAttribute('class') ? divs[i].getAttribute('class') : '')
+                + ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
 
 
-		      divs[i].style.setProperty('background-color', (posterIndex < switchColorAt ? highlightColor1 : highlightColor2), 'important');
+                divs[i].style.setProperty('background-color', (posterIndex < switchColorAt ? highlightColor1 : highlightColor2), 'important');
               }
 
               if (posterIndex >= switchColorAt && highlightIgnore)
@@ -720,12 +720,12 @@ var GameFOX =
             if (posterIndex != -1)
             {
               if (highlightMsgs) /* Message highlighting */
-	      {
-		      // Use a class as a means for CSS developers to not completely break highlighting
-		      divs[i].setAttribute('class', 
-				(divs[i].getAttribute('class') ? divs[i].getAttribute('class') : '')
-				+ ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
-		      //divs[i].setAttribute('class', 'gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
+              {
+                // Use a class as a means for CSS developers to not completely break highlighting
+                divs[i].setAttribute('class', 
+                (divs[i].getAttribute('class') ? divs[i].getAttribute('class') : '')
+                + ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
+                //divs[i].setAttribute('class', 'gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
                 divs[i].style.setProperty('background-color', (posterIndex < switchColorAt ? highlightColor1 : highlightColor2), 'important');
               }
 
@@ -1549,7 +1549,7 @@ var GameFOX =
               }
               else if (tTitle)
               {
-                alert('You know, the 5 to 80 character limit on topic titles is there for a reason.');
+                alert('You know, the 80 character limit on topic titles is there for a reason.');
               }
               else if (allCapsT)
               {
@@ -1684,11 +1684,11 @@ var GameFOX =
 
     if (topicTitle[0])
     {
-      if (topicTitle[0].length < 5)
+      if (topicTitle[0].value.length < 5)
       {
         event.target.removeAttribute('disabled');
         event.target.addEventListener('click', GameFOX.quickPost, false);
-        alert('Topic titles must be at least 5 characters long');
+        alert('Topic titles must be at least 5 characters long.');
         return;
       }
       postBody = 'topictitle=' + GameFOX.URLEncode(topicTitle[0].value) + '&';
