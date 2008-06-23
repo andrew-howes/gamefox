@@ -1,17 +1,16 @@
+/* vim: set et sw=4 sts=4 ts=4: */
 html
 {
     background-color: #5BA1D4;
     color: #ffffff;
     font-family: Trebuchet, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Arial, Verdana, sans-serif;
-    width: 98%;
-    font-size: 13px;
-    margin: 0;
+    font-size: .9em;
 }
 
 body
 {
     margin: 0;
-    margin-left: 2px;
+    padding: 0 6px 0 2px;
 }
 
 a 
@@ -54,7 +53,7 @@ a:hover
 
 input
 {
-    width: 100%;
+    width: 101%;
     border: 0 solid #000000;
 }
 
