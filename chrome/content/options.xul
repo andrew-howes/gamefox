@@ -513,6 +513,10 @@
       <hbox>
         <checkbox preference="gamefoxSigNewline" label="Prepend a newline before signature"/>
       </hbox>
+
+      <hbox pack="end">
+        <button id="gamefox-sig-grab-sig" label="Grab From GameFAQs" oncommand="gamefoxGrabSignature();"/>
+      </hbox>
     </groupbox>
 
     <groupbox style="margin-bottom: 4em;">
