@@ -477,16 +477,14 @@ var GameFOX =
               if (posterIndex != -1)
               {
                 currentHiglightColor = (posterIndex < switchColorAt ? highlightColor1 : highlightColor2);
-
-                // Let's do something sane: use a class instead of inline styles
-		        rows[i].setAttribute('class', 
-				  (rows[i].getAttribute('class') ? rows[i].getAttribute('class') : '')
-				  + ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
+                
+                rows[i].setAttribute('class', 
+                    (rows[i].getAttribute('class') ? rows[i].getAttribute('class') : '')
+                    + ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
                 rows[i].style.setProperty('background-color', currentHiglightColor, 'important');
-
+                
                 for (cellIndex = 0; cellIndex < rows[i].cells.length; cellIndex++)
                 {
-                  //rows[i].cells[cellIndex].setAttribute('style', 'background-color: transparent !important;');
                   rows[i].cells[cellIndex].style.setProperty('background-color', currentHiglightColor, 'important');
                   rows[i].cells[cellIndex].setAttribute('class',
                       (rows[i].cells[cellIndex].getAttribute('class') ? rows[i].cells[cellIndex].getAttribute('class') : '')
@@ -530,7 +528,7 @@ var GameFOX =
               {
                 link = doc.createElement('a');
                 link.setAttribute('href', topicLink + (j ? '&page=' + j : ''));
-                link.innerHTML = (j < 9 ? '&nbsp;' : '') + (j+1);
+                link.innerHTML = j+1;
 
                 td.appendChild(link);
 
