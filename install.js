@@ -5,8 +5,8 @@
 // deathburger: Refactored to move all changable items to the top of the file.
 
 // Editable Items Begin
-var displayName         = "GameFOX TK+"; // The name displayed to the user (don't include the version)
-var version             = "0.5.5.10";
+var displayName         = "GameFOX TNG"; // The name displayed to the user (don't include the version)
+var version             = "0.6.0";
 var name                = "gamefox"; // The leafname of the JAR file (without the .jar part)
 
 // The following three sets of variables tell this installer script how your
@@ -16,13 +16,13 @@ var name                = "gamefox"; // The leafname of the JAR file (without th
 // independent of each other just in case an extension layout is wacky.
 var packageDir          = "/"
 //var packageDir        = "/" + name + "/"
-var skinDir             = "" // Edit: empty string if skin is directly in skin/ folder
+var skinDir             = "classic" // Edit: empty string if skin is directly in skin/ folder
 //var skinDir           = "/" + name + "/"
 var localeDir           = "/"
 //var localeDir         = "/" + name + "/"
 
-var locales             = new Array(  );
-var skins               = new Array( "" ); // Extension has 1 skin in skin/ root folder
+var locales             = new Array( "en-US" );
+var skins               = new Array( "classic" );
 var prefs               = new Array( "gamefox.js" );
 var components          = new Array(  );
 var searchPlugins       = new Array(  );

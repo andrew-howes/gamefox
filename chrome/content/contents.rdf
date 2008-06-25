@@ -11,8 +11,8 @@
   <!-- package information -->
   <rdf:Description rdf:about="urn:mozilla:package:gamefox"
     chrome:name="gamefox"
-    chrome:displayName="GameFOX TK+"
-    chrome:description="Improves browsing of the GameFAQs message boards!"
+    chrome:displayName="GameFOX TNG"
+    chrome:description="Improves browsing of the GameFAQs message boards."
     chrome:author="Abdullah A"
     chrome:authorURL="http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885"
     chrome:extension="true"

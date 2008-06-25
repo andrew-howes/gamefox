@@ -11,13 +11,14 @@
   onload="gfox_processAboutDialog();"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/about.js"/>
   <groupbox>
     <hbox>
       <label id="title" value="&caption.title;"/>
       <spacer flex="1"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
-    <label id="version" value="&version.title; 0.6.0"/>
+    <label id="version" value="&version.title; "/>
 
     <hbox>
       <label class="url-label important" value="&changelog.label;" onclick="gfox_addTab('chrome://gamefox/content/CHANGELOG', event.button);"/>
