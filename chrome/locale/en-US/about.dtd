@@ -3,7 +3,7 @@
 <!ENTITY caption.title                  "GameFOX TNG">
 <!ENTITY version.title                  "Version">
 
-<!ENTITY changelog.label                "Change Log">
+<!ENTITY news.label                     "News">
 <!ENTITY support.label                  "Support">
 <!ENTITY support.tooltip                "Complain here!">
 
