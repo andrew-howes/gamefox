@@ -4,5 +4,4 @@ done:
         * Update the version number in the following files:
                 - install.rdf
                 - install.js
-                - chrome/content/about.xul
                 - Only if the styles in chrome/content/css/ are changed: chrome/content/css.js

@@ -16,7 +16,7 @@ var name                = "gamefox"; // The leafname of the JAR file (without th
 // independent of each other just in case an extension layout is wacky.
 var packageDir          = "/"
 //var packageDir        = "/" + name + "/"
-var skinDir             = "classic" // Edit: empty string if skin is directly in skin/ folder
+var skinDir             = "/"
 //var skinDir           = "/" + name + "/"
 var localeDir           = "/"
 //var localeDir         = "/" + name + "/"
