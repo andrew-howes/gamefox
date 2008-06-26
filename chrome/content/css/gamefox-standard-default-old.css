@@ -1,5 +1,3 @@
-/* 0.5.0 */
-
 @-moz-document domain(boards.gamefaqs.com), domain(www.gamefaqs.com)
 {
     #gamefox-quickpost-title, #gamefox-quickpost-form
@@ -88,16 +86,15 @@
         background-color: #ffffff !important;
         font-family: monospace;
         font-size: larger;
-        white-space: pre;
+        max-width: 80%;
         text-align: left;
         -moz-border-radius: 10px;
         -moz-opacity: 0.90;
     }
 
     /* annoyances */
-    /* Latest note: #footer, .ad, #mpu_wrap, #todayoncnet were added */
-    .ad, .adbox, #gne_nav, #gnenav, #mpu_wrap
-    , #footer, #sitenav, #broadnav, #todayoncnet, #cnetfooter, #networkfooter, #aboutcnet
+    .ad, .adbox, #gne_nav, #gnenav, #mpu_wrap, #footer, #sitenav, #broadnav,
+    #todayoncnet, #cnetfooter, #networkfooter, #aboutcnet, .rubics_netxp1_main
     , #copyright
         {
        display: none !important;
