@@ -156,8 +156,50 @@ function gamefoxChangeBoardSettings()
                       'timezone=' + document.getElementById('timezone').value + '&' +
                       'userdisplay=' + document.getElementById('userdisplay').value + '&' +
                       'key=' + key + '&' +
-                      'submit=Change+Settings'
+                      'submit=1'
                    );
+    }
+  };
+
+  request.send(null);
+}
+
+function gamefoxGrabBoardSettings()
+{
+  document.getElementById('gamefox-css-grab-bs').setAttribute('disabled', 'true');
+
+  var request = new XMLHttpRequest();
+  request.open('GET', 'http://boards.gamefaqs.com/gfaqs/settings.php');
+  request.onreadystatechange = function()
+  {
+    if (request.readyState == 4)
+    {
+      if (!request.responseText.match(/Board Display Settings/))
+      {
+        alert('Something broke. Are you logged in to boards.gamefaqs.com?');
+        document.getElementById('gamefox-css-grab-bs').removeAttribute('disabled');
+        return;
+      }
+
+      var topicpage = gamefoxParseHTMLSelect(request.responseText, 'topicpage');
+      var topicsort = gamefoxParseHTMLSelect(request.responseText, 'topicsort');
+      var messagepage = gamefoxParseHTMLSelect(request.responseText, 'messagepage');
+      var messagesort = gamefoxParseHTMLSelect(request.responseText, 'messagesort');
+      var timezone = gamefoxParseHTMLSelect(request.responseText, 'timezone');
+      var userdisplay = gamefoxParseHTMLSelect(request.responseText, 'userdisplay');
+      if (topicpage == null || topicsort == null || messagepage == null || messagesort == null || timezone == null || userdisplay == null) {
+        alert('Unable to fetch all board settings. This shouldn\'t happen.');
+        document.getElementById('gamefox-css-grab-bs').removeAttribute('disabled');
+        return;
+      }
+      // if GameFAQs gives us bad values, bad things happen
+      document.getElementById('gamefoxTpcsPerPage').value = topicpage;
+      document.getElementById('gamefoxTpcSortOrder').value = topicsort;
+      document.getElementById('gamefoxMsgsPerPage').value = messagepage;
+      document.getElementById('gamefoxMsgSortOrder').value = messagesort;
+      document.getElementById('gamefoxTimeZone').value = timezone;
+      document.getElementById('gamefoxMsgDisplay').value = userdisplay;
+      document.getElementById('gamefox-css-grab-bs').removeAttribute('disabled');
     }
   };
 
@@ -166,7 +208,7 @@ function gamefoxChangeBoardSettings()
 
 function gamefoxGrabSignature()
 {
-  document.getElementById('gamefox-sig-grab-sig').setAttribute('disabled', 'true');
+  document.getElementById('gamefox-css-grab-sig').setAttribute('disabled', 'true');
 
   var request = new XMLHttpRequest();
   request.open('GET', 'http://boards.gamefaqs.com/gfaqs/sigquote.php');
@@ -177,7 +219,7 @@ function gamefoxGrabSignature()
       if (!request.responseText.match(/Board Signature and Quote/))
       {
         alert('Something broke. Are you logged in to boards.gamefaqs.com?');
-        document.getElementById('gamefox-sig-grab-sig').removeAttribute('disabled');
+        document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
         return;
       }
 
@@ -185,11 +227,11 @@ function gamefoxGrabSignature()
       if (!sig)
       {
         alert('Couldn\'t get your signature. This usually shouldn\'t happen. Maybe you have one of those really old signatures that displays bold/italics on the profile page?');
-        document.getElementById('gamefox-sig-grab-sig').removeAttribute('disabled');
+        document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
         return;
       }
       document.getElementById('gamefoxSig').value = gamefoxSpecialCharsDecode(sig[1]);
-      document.getElementById('gamefox-sig-grab-sig').removeAttribute('disabled');
+      document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
     }
   };
 
@@ -217,4 +259,21 @@ function gamefoxURLEncode(str)
 function gamefoxSpecialCharsDecode(str)
 {
   return str.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+}
+
+function gamefoxParseHTMLSelect(str, name)
+{
+  var selectStart = str.search(new RegExp('<select\\b[^>]+?\\bname="' + name + '"[^>]*>', 'i'));
+  if (selectStart != -1) {
+    selectSubstring = str.substring(selectStart+1);
+    var selectEnd = selectSubstring.search(/<\/?select\b/i);
+    if (selectEnd != -1) {
+      selectSubstring = selectSubstring.substring(0, selectEnd);
+    }
+    var option = selectSubstring.match(/<option\b[^>]+?\bvalue="([^"]*)"[^>]+?\bselected="selected"[^>]*>/i);
+    if (option) {
+      return option[1];
+    }
+  }
+  return null;
 }

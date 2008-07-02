@@ -186,7 +186,8 @@
                 </rows>
               </grid>
               <hbox pack="end">
-                <button id="gamefox-css-apply-bs" label="Apply Board Settings" oncommand="gamefoxChangeBoardSettings();"/>
+                <button id="gamefox-css-grab-bs" label="Grab From GameFAQs" oncommand="gamefoxGrabBoardSettings();"/>
+                <button id="gamefox-css-apply-bs" label="Save To GameFAQs" oncommand="gamefoxChangeBoardSettings();"/>
               </hbox>
             </groupbox>
 
@@ -321,8 +322,6 @@
   <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.initSystem(); GameFOXCSS.load();">
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
-      <preference id="gamefox-pref-style" name="gamefox.gf.style" type="string"/>
-      <preference id="gamefox-pref-expire" name="gamefox.gf.expire" type="int"/>
       <preference id="gamefox-pref-disableMainStyles" name="gamefox.disableMainStyles" type="bool"/>
     </preferences>
 
@@ -376,51 +375,8 @@
       <button id="gamefox-css-reload" label="Reload CSS" oncommand="GameFOXCSS.reRegisterSheets();"/>
     </hbox>
 
-    <checkbox preference="gamefox-pref-disableMainStyles" label="Disable Main Stylesheets on GameFAQs"/>
+    <checkbox preference="gamefox-pref-disableMainStyles" label="Disable Main Stylesheets on GameFAQs" style="margin-bottom: 4em"/>
 
-    <groupbox style="margin-bottom: 30px;">
-      <caption label="Site Settings"/>
-      <grid>
-        <columns>
-          <column/>
-          <column flex="1"/>
-        </columns>
-        <rows>
-          <row>
-            <label value="Display Style"/>
-            <menulist preference="gamefox-pref-style" flex="1">
-              <menupopup>
-                <menuitem value="" label="Default - The default GameFAQs skin"/>
-                <menuitem value="v9.css" label="V9 - A revival of version 9 of GameFAQs (2003-2005)"/>
-                <menuitem value="nogs.css" label="Default 2 - The default GameFAQs skin with a cleaned-up logo"/>
-                <menuitem value="classic.css" label="NeoClassic - A modern take on classic GameFAQs (2001-2003)"/>
-                <menuitem value="blue.css" label="Default Blue - Default skin with boards in blue"/>
-                <menuitem value="v9_blue.css" label="V9 Blue - V9 skin with boards in blue"/>
-                <menuitem value="classic_blue.css" label="NeoClassic Blue - NeoClassic skin with boards in blue"/>
-              </menupopup>
-            </menulist>
-          </row>
-          <row>
-            <label value="Login Expiration"/>
-            <menulist preference="gamefox-pref-expire" flex="1">
-              <menupopup>
-                <menuitem value="0" label="Logout when I close browser"/>
-                <menuitem value="1" label="1 day"/>
-                <menuitem value="5" label="5 days"/>
-                <menuitem value="10" label="10 days"/>
-                <menuitem value="14" label="14 days"/>
-                <menuitem value="15" label="15 days"/>
-                <menuitem value="20" label="20 days"/>
-                <menuitem value="30" label="30 days"/>
-              </menupopup>
-            </menulist>
-          </row>
-        </rows>
-      </grid>
-      <hbox pack="end">
-        <button id="gamefox-css-apply-ss" label="Apply Site Settings" oncommand="gamefoxChangeSiteSettings();"/>
-      </hbox>
-    </groupbox>
   </prefpane>
 
 
@@ -508,7 +464,7 @@
       <textbox preference="gamefoxSig" rows="3" multiline="true" class="indent"/>
       
       <hbox pack="end">
-        <button id="gamefox-sig-grab-sig" label="Grab From GameFAQs" oncommand="gamefoxGrabSignature();"/>
+        <button id="gamefox-css-grab-sig" label="Grab From GameFAQs" oncommand="gamefoxGrabSignature();"/>
       </hbox>
 
       <hbox>

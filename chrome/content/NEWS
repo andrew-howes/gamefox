@@ -1,7 +1,5 @@
 Version 0.6.0
 =====================================================================
-- Update GameFOX site settings for use with new GameFAQs settings
-  page
 - Update QuickWhois for new profiles
 - QuickPost now checks for errors after posting the message
 - Prevent long profile fields from stretching QuickWhois
@@ -9,3 +7,5 @@ Version 0.6.0
   to the server
 - Add GameFOX Standard Default stylesheet with the old QuickPost look
 - Add "Grab From GameFAQs" button to retrieve signature from GameFAQs
+- Remove site settings functionality
+- Add grab button to retrieve board settings from GameFAQs
