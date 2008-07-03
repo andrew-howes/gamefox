@@ -1,7 +1,7 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 var GameFOXCSS =
 {
-  cssVersion: '0.5.5.10',
+  cssVersion: '0.6.0',
 
   load: function()
   {
