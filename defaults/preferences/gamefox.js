@@ -44,7 +44,7 @@ pref("gamefox.topic.dblclick", 0);
 pref("gamefox.message.dblclick", false);
 pref("gamefox.message.header.dblclick", 0);
 pref("gamefox.myposts.dblclick", 0);
-pref("gamefox.paging.auto", false);
+pref("gamefox.paging.auto", true);
 pref("gamefox.paging.location", 2);
 pref("gamefox.paging.prefix", "[Pages: ");
 pref("gamefox.paging.separator", ", ");
