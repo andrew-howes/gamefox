@@ -1,16 +1,9 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://gamefox/skin/options.css" type="text/css"?>
+<!-- vim: set et sw=2 ts=2 sts=2: -->
 
-<!-- vim: set et sw=2 ts=2 sts=2 : -->
-
-<!-- locale -->
-<!DOCTYPE overlay [
-    <!ENTITY gamefox.pref.general.MsgsPerPage.help  "This setting is needed to properly use page jumping and message numbering features.">
-    <!ENTITY gamefox.pref.general.gfaqs9            "Use gfaqs9 for URIs when possible">
-    <!ENTITY gamefox.pref.general.gfaqs9.note       "This causes URIs from tags, topic pagination, the sidebar and about window to point towards gfaqs9. Everything else will use gfaqs9 when appropriate. This setting does not affect accounts without access to gfaqs9.">
-    <!ENTITY gamefox.pref.general.gfaqs9.credit     "Wouldn't be possible without Therum's help. Say thank you to Therum you people >:)">
-]>
+<!DOCTYPE dialog SYSTEM "chrome://gamefox/locale/options.dtd">
 
 <prefwindow
     title="GameFOX Options"
@@ -77,12 +70,8 @@
           <vbox>
 
             <groupbox>
-              <caption label="Behavior"/>
-              <checkbox preference="gamefox-pref-gfaqs9"
-                label="&gamefox.pref.general.gfaqs9;"/>
-              <description style="margin-left: 30px;" tooltiptext="&gamefox.pref.general.gfaqs9.credit;">
-                &gamefox.pref.general.gfaqs9.note;
-              </description>
+              <caption label="General"/>
+              <checkbox preference="gamefox-pref-gfaqs9" label="&gfaqs9.label;" tooltiptext="&gfaqs9.desc;"/>
             </groupbox>
 
             <groupbox flex="1">
@@ -118,7 +107,7 @@
                   </row>
                   <row>
                     <label value="Messages Per Page"/>
-                    <menulist preference="gamefoxMsgsPerPage" id="messagepage" tooltiptext="&gamefox.pref.general.MsgsPerPage.help;" flex="1">
+                    <menulist preference="gamefoxMsgsPerPage" id="messagepage" flex="1">
                       <menupopup>
                         <menuitem value="10" label="10"/>
                         <menuitem value="20" label="20"/>
@@ -287,7 +276,7 @@
           <vbox>
 
             <groupbox>
-              <caption label="Post Highlighting"/>
+              <caption label="User Highlighting"/>
               <label value="Enter user names separated by comma:"/>
               <hbox align="center">
                 <label value="Group 1:"/>
