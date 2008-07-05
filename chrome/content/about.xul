@@ -39,7 +39,7 @@
       <label class="name" value="Michael Ryan"/>
       <label class="username" value="RockMFR 5"/>
     </hbox>
-    
+
     <separator class="thin"/>
     <label class="subtitle" value="&previousdevs.label;"/>
     <hbox>
@@ -84,10 +84,6 @@
     <hbox>
       <label value="Therum"/>
       <label class="contrib description" value="gfaqs9 support"/>
-    </hbox>
-    <hbox>
-      <label value="BenoitRen"/>
-      <label class="contrib description" value="SeaMonkey port"/>
     </hbox>
     <separator class="thin"/>
   </groupbox>

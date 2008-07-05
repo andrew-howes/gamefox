@@ -20,14 +20,6 @@
                 <em:contributor>Jero (classic theme)</em:contributor>
                 <em:contributor>Ricapar (classic theme for new GameFAQs layout)</em:contributor>
                 <em:contributor>Pardus (icons)</em:contributor>
-                <em:contributor>BenoitRen (SeaMonkey port)</em:contributor>
-
-                <em:file>
-                        <Description about="urn:mozilla:extension:file:gamefox.jar">
-                                <em:package>content/</em:package>
-                                <em:skin>skin/</em:skin>
-                        </Description>
-                </em:file>
 
                 <!-- Firefox -->
                 <em:targetApplication>

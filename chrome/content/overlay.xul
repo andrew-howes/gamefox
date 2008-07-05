@@ -23,7 +23,7 @@
     <menuitem insertbefore="prefSep" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
   </menupopup>
 
-  <!-- SeaMonkey tools menu (needs xSidebar?) -->
+  <!-- SeaMonkey tools menu -->
   <menupopup id="taskPopup">
     <menuitem insertafter="downloadmgr" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
   </menupopup>
@@ -79,10 +79,4 @@
     <menuitem key="key_gamefoxSidebar" observes="viewGamefoxSidebar"/>
   </menupopup>
 
-  <!-- Pending removal... (should be removed on GameFOX with version number higher than 0.5.5.2)
-  <window id="main-window">
-    --><!--<checkbox id="gamefox-sidebar-toggler" hidden="true" checked="false"/>--><!--
-    <menuitem observes="viewGamefoxSidebar" hidden="true"/>
-  </window>
-  -->
 </overlay>

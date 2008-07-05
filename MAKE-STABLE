@@ -1,0 +1,25 @@
+#!/bin/sh
+PRODUCT_NAME=gamefox
+PRODUCT_VERSION=`grep -i em:version install.rdf | sed -e 's/<[^>]*>//g' | sed -e 's/ //g'`
+JAR_NAME=$PRODUCT_NAME.jar
+XPI_NAME=$PRODUCT_NAME-$PRODUCT_VERSION.xpi
+JAR_CLEANUP="*.jar"
+XPI_CLEANUP="*.xpi"
+OUTPUT_PATH=.
+TEMP_PATH=chrome
+
+CHROME_TO_JAR_SCRIPT="s/ chrome\// jar:chrome\/$JAR_NAME!\//"
+sed -e "$CHROME_TO_JAR_SCRIPT" chrome.manifest > $TEMP_PATH/chrome.manifest
+touch -r chrome.manifest $TEMP_PATH/chrome.manifest
+
+cd chrome
+rm -f $JAR_CLEANUP
+zip -r0oq $JAR_NAME content locale skin
+cd ..
+
+rm -fv $OUTPUT_PATH/$XPI_CLEANUP
+zip -mj9o $OUTPUT_PATH/$XPI_NAME $TEMP_PATH/chrome.manifest
+zip -r9o  $OUTPUT_PATH/$XPI_NAME install.rdf COPYING chrome/$JAR_NAME defaults
+rm -f chrome/$JAR_CLEANUP
+
+echo Done.
