@@ -1,6 +1,4 @@
-Preparing for a new version of GameFOX requires the following things to be
-done:
-
-        * Update the version number in the following files:
-                - install.rdf
-                - Only if the styles in chrome/content/css/ are changed: chrome/content/css.js
+Update version number in these files:
+        * install.rdf
+        * Makefile
+        * If stylesheets in jar have changed: chrome/content/css.js

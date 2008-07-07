@@ -1,3 +1,0 @@
-#!/bin/sh
-rm -f gamefox.xpi
-zip -r9o gamefox.xpi install.rdf chrome.manifest COPYING chrome defaults
