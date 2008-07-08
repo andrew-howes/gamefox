@@ -373,52 +373,65 @@
 
   <prefpane id="gamefox-quote-pane" label="Quoting">
     <preferences>
-      <preference id="gamefoxIncName" name="gamefox.incName" type="bool"/>
-      <preference id="gamefoxIncDate" name="gamefox.incDate" type="bool"/>
-      <preference id="gamefoxIncNum" name="gamefox.incNum" type="bool"/>
-      <preference id="gamefoxBoldHeader" name="gamefox.boldHeader" type="bool"/>
-      <preference id="gamefoxItalicHeader" name="gamefox.italicHeader" type="bool"/>
-      <preference id="gamefoxItalicMsg" name="gamefox.italicMsg" type="bool"/>
-      <preference id="gamefoxBoldMsg" name="gamefox.boldMsg" type="bool"/>
-      <preference id="gamefoxRemoveSigs" name="gamefox.removeSigs" type="bool"/>
-      <preference id="gamefoxGFQuote" name="gamefox.GFCode.quote" type="int"/>
+      <preference id="header_italic"     name="gamefox.quote.header.italic"     type="bool"/>
+      <preference id="header_bold"       name="gamefox.quote.header.bold"       type="bool"/>
+      <preference id="header_date"       name="gamefox.quote.header.date"       type="bool"/>
+      <preference id="header_username"   name="gamefox.quote.header.username"   type="bool"/>
+      <preference id="header_messagenum" name="gamefox.quote.header.messagenum" type="bool"/>
+      <preference id="message_italic"    name="gamefox.quote.message.italic"    type="bool"/>
+      <preference id="message_bold"      name="gamefox.quote.message.bold"      type="bool"/>
+      <preference id="removesignature"   name="gamefox.quote.removesignature"   type="bool"/>
+      <preference id="style"             name="gamefox.quote.style"             type="string"/>
+      <preference id="style_custom"      name="gamefox.quote.style.custom"      type="string"/>
     </preferences>
 
     <groupbox align="start" orient="horizontal">
       <caption label="Quote Header"/>
-      <checkbox preference="gamefoxIncName" label="Include Poster Name" flex="1"/>
-      <checkbox preference="gamefoxIncDate" label="Include Post Date" flex="1"/>
-      <checkbox preference="gamefoxIncNum"  label="Include Post Number" flex="1"/>
+      <checkbox preference="header_username"   label="Poster username" flex="1"/>
+      <checkbox preference="header_date"       label="Post date" flex="1"/>
+      <checkbox preference="header_messagenum" label="Post number" flex="1"/>
     </groupbox>
 
     <groupbox>
       <caption label="Quote Body"/>
-      <checkbox preference="gamefoxRemoveSigs" label="Remove signatures"/>
+      <checkbox preference="removesignature" label="Remove signature"/>
     </groupbox>
 
     <groupbox>
       <caption label="Quote Style"/>
       <label value="Tags to use for quoting:"/>
-      <radiogroup class="indent" preference="gamefoxGFQuote">
-        <radio value="0" label="Use regular tags"/>
+      <radiogroup class="indent" preference="style">
+        <radio value="normal" label="Use regular tags"/>
         <hbox class="indent" orient="horizontal">
           <vbox>
-            <checkbox preference="gamefoxBoldHeader" label="Bold Quote Header"/>
-            <checkbox preference="gamefoxItalicHeader" label="Italicize Quote Header"/>
+            <checkbox preference="header_bold"   label="Bold header"/>
+            <checkbox preference="header_italic" label="Italicize header"/>
           </vbox>
           <vbox>
-            <checkbox preference="gamefoxBoldMsg" label="Bold Quoted Message"/>
-            <checkbox preference="gamefoxItalicMsg" label="Italicize Quoted Message"/>
+            <checkbox preference="message_bold"   label="Bold message"/>
+            <checkbox preference="message_italic" label="Italicize message"/>
           </vbox>
         </hbox>
-        <radio value="1" label="Use GFCode quote tags only for the quoted message body"/>
+        <radio value="gfcode_body" label="Use GFCode for message body"/>
         <hbox class="indent" orient="horizontal">
           <vbox>
-            <checkbox preference="gamefoxBoldHeader" label="Bold Quote Header"/>
-            <checkbox preference="gamefoxItalicHeader" label="Italicize Quote Header"/>
+            <checkbox preference="header_bold"   label="Bold header"/>
+            <checkbox preference="header_italic" label="Italicize header"/>
           </vbox>
         </hbox>
-        <radio value="2" label="Use full GFCode quote tags for quoting"/>
+        <radio value="gfcode_full" label="Use GFCode for full quote"/>
+        <radio value="custom" label="Use a custom template"/>
+        <textbox preference="style_custom" rows="3" multiline="true" class="indent"/>
+        <hbox class="indent" orient="horizontal">
+          <vbox>
+            <description>%u - username of poster</description>
+            <description>%d - date of post</description>
+          </vbox>
+          <vbox>
+            <description>%n - post number</description>
+            <description>%m - message</description>
+          </vbox>
+        </hbox>
       </radiogroup>
     </groupbox>
 

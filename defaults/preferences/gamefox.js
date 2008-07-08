@@ -22,15 +22,18 @@ pref("gamefox.msgSortOrder", 1);
 pref("gamefox.tpcSortOrder", 4);
 pref("gamefox.msgDisplay", 0);
 pref("gamefox.timeZone", 0);
-pref("gamefox.boldHeader", false);
-pref("gamefox.boldMsg", false);
-pref("gamefox.incDate", false);
-pref("gamefox.incName", true);
-pref("gamefox.incNum", false);
-pref("gamefox.italicHeader", true);
-pref("gamefox.italicMsg", true);
-pref("gamefox.removeSigs", true);
-pref("gamefox.GFCode.quote", 0);
+
+pref("gamefox.quote.header.italic", true);
+pref("gamefox.quote.header.bold", true);
+pref("gamefox.quote.header.date", false);
+pref("gamefox.quote.header.username", true);
+pref("gamefox.quote.header.messagenum", true);
+pref("gamefox.quote.message.italic", true);
+pref("gamefox.quote.message.bold", false);
+pref("gamefox.quote.removesignature", true);
+pref("gamefox.quote.style", "normal");
+pref("gamefox.quote.style.custom", "<i><b>Posted by %u</b>\n%m</i>");
+
 pref("gamefox.sig", "");
 pref("gamefox.sigPre", "");
 pref("gamefox.sigNewline", false);

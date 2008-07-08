@@ -1049,152 +1049,88 @@ var GameFOX =
 
   quoteProcessing: function(event, quoteHead, quoteMsg)
   {
-    // Begin quote text processing
-    var prefs   = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    var GFQuote = prefs.getIntPref('GFCode.quote');
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).
+      getBranch('gamefox.');
 
+    /* Parse message header */
+    var head = quoteHead.replace(/\|/g, '').split("\n");
+    for (var i = 0; i < head.length; i++)
+      head[i] = head[i].replace(/^\s+|\s+$/g, '');
+    var username = head[1];
+    var postdate = head[2].replace('Posted ', '');
+    var postnum  = head[4];
 
-  /* Quote Header */
+    /* Parse message body */
+    var body = quoteMsg.replace(/<br>/g, "\n");
+    // Get rid of signature
+    if (prefs.getBoolPref('quote.removesignature'))
+      body = body.replace(/---\n[\s\S]*$/, ''); // Only a simple regexp is needed because extraneous
+                                                // signatures are no longer allowed
+    body = body.replace(/^\s+|\s+$/g, '');
 
-    // code translate: quoteHead = add 'From ', remove double spaces, substitute line breaks with spaces(2), remove message detail, clean message number and remove anything after message number (only if message numbering is on), remove message hiding [], <horizontal> remove QuickWhois (User ID   :*), remove beginning spaces
-    quoteHead = (quoteHead.match(/^\s*From:/) ? '' : 'From ') + quoteHead.replace(/ {2,}/g, ' ').replace(/[\n\r\t]/g, '  ').replace(/( \| +| {2,})message detail\b/i, '  ').replace(/( \| +| {2,})(?:message )?(#\d+).*$/i, '$1$2').replace(/( \| *| {2,})\[.*$/i, '  ').replace(/ {2,}(User ID *:|Loading Quick ?Whois).*$/i, '  ').replace(/^\s+/, '');
+    /* Prepare quote header */
+    var qhead = "";
+    if (prefs.getBoolPref('quote.header.username')) qhead += username;
+    if (prefs.getBoolPref('quote.header.date')) qhead += "; posted " + postdate;
+    if (prefs.getBoolPref('quote.header.messagenum')) qhead += " (" + postnum + ")";
 
-    if (!prefs.getBoolPref('incNum'))
+    if (prefs.getBoolPref('quote.header.italic')) qhead = "<i>" + qhead + "</i>";
+    if (prefs.getBoolPref('quote.header.bold')) qhead = "<b>" + qhead + "</b>";
+
+    switch (prefs.getCharPref('quote.style'))
     {
-      quoteHead = quoteHead.replace(/( \| +| {2,})(message )?#[0-9]{3}\b/i, '  ');
-    }
-    if (!prefs.getBoolPref('incDate'))
-    {
-      quoteHead = quoteHead.replace(/( \| +| {2,})Posted:?.+? (A|P)M/i, '  ');
-    }
-    if (!prefs.getBoolPref('incName'))
-    {
-      quoteHead = quoteHead.replace(/^From.+?( {2,}\|?|\|)/i, '');
-    }
+      case 'normal':
+        var qbody = "";
+        qbody = body;
+        if (prefs.getBoolPref('quote.message.italic')) qbody = "<i>" + qbody + "</i>";
+        if (prefs.getBoolPref('quote.message.bold')) qbody = "<b>" + qbody + "</b>";
 
-    quoteHead = quoteHead.replace(/^\s+|\s+$/g, '').replace(/ {2,}/g, ' ');
-
-
-  /* Quote Message Body */
-
-    // old: code translate: quoteMsg = delete beginning spaces, delete ending spaces, delete ending </b></b></b></b></i></i></i></i>, substitute <br( /)> tags with line breaks, delete <(/)tagName(/)> tags (but not what's within), substitute &lt; and &gt; with < and >, substitute <img src="imgPath"(/)> with imgPath
-    // old: quoteMsg  = quoteMsg.replace(/^\s/, '').replace(/\s$/, '').replace(/(\<\/b\>){4}(\<\/i\>){4}$/i, '').replace(/\<br ?[\/]?\>/ig, '\n').replace(/\<[\/]?(img|span|a|table|tbody|tr|td|wbr).*?[\/]?\>/gi, '').replace(/&(gt|GT);/g, '>').replace(/&(lt|LT);/g, '<').replace(/\<img.*?src="(.*?)".*?\>/ig, '$1');
-
-    quoteMsg  = '\n' + quoteMsg.replace(/<br\s*\/?>/ig, '\n').replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/ig, '$1').replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr)\b[^<>]*\/?>/gi, '').replace(/&(amp|AMP);/g, '&').replace(/^\s+|\s+$/g, '');
-
-    if (prefs.getBoolPref('removeSigs'))
-    {
-      var i, quotePart, currLength, lastLength;
-
-      for (i = 3; i > 0; i--)
-      {
-        quotePart = quoteMsg.match(new RegExp('(\\n.*){' + i + '}$', 'g'));
-
-        if (quotePart)
-        {
-          quotePart = quotePart[0].replace(/^\n/, '');
-        }
-        else
-        {
-          continue;
-        }
-
-        currLength = quotePart.length;
-        lastLength = 0;
-
-        while (currLength != lastLength)
-        {
-          lastLength = currLength;
-          quotePart  = quotePart.replace(/<([^<>]+)>([^<>]*)<\/\1>/ig, '$2');
-          currLength = quotePart.length;
-        }
-
-        if (quotePart.match(/<\/?[^<>]+>/)) continue;
-
-        quotePart = quotePart.replace(/\n.*/g, '').replace(/&(gt|GT);/g, '>').replace(/&(lt|LT);/g, '<').replace(/^\s+|\s+$/g, '').replace(/ {2,}/g, ' ');
-
-        //old: if (quotePart.match(/^[—=+_*%^?`~ ><;-]{3,5}$/i)) break;
-
-        // Whitelist: smileys, four or more stars, some repeating characters [o0?.]
-        if (quotePart.match(/^(?:(?:>(?:_+|[o0.])<|([^_])(?:_+|[o0.])\1);*|[o0?.]+)$|^\*{4,}/i)) continue;
-
-        // Blacklist
-        if (quotePart.match(/^(?:[\u2014—-]+|{K|\W\._+|_{3,}|- ?- ?-)$/i)) break;
-        if (quotePart.match(/^(([^a-z0-9'"])\2{0,4})(?:\d{3}|Kye|Sno)\1$/i)) break;
-        if (quotePart.match(/^(?:{M\.C\.X\.}|\(>\^\.\^\)> *KIRBY!* *<\(\^\.\^<\)|\x4D\x8F?\xC5\x54\x74\xD0\xD8\x74\x7A\xA3\xDF)$/i)) break;
-
-        // Generic 3-5 same characters sig
-        if (quotePart.match(/^(?:([^a-z0-9?.*])( ?\1)\2{1,3}|\*{3})$/i)) break;
-
-        // Generic 3 characters symmetric sig
-        if (quotePart.match(/^(?:([^a-z0-9]).\1|o\Wo|0\W0)$/i)) break;
-
-        // Generic 4-5 characters symmetric sig
-        if (quotePart.match(/^(?:([^a-np-z1-9?.])\1.?([^a-np-z1-9?.])\2|([^a-np-z1-9'"])([^a-np-z1-9'"]).?\4\3|([^a-np-z1-9])([^a-np-z1-9])\5\6\5)$/i)) break;
-
-        // Single line sig
-        if (quotePart.match(/^(([-])\2+)( ?).+\3\1$/i)) break;
-
-        // Generic 3 characters enclosed sig
-        //unescaped: if (quotePart.match(/^(?:<.>|>.<|«.»|».«|‹.›|›.‹|`.´|´.`|‘.’|’.‘|“.”|”.“|”.„|{.}|}.{|\(.\)|\).\(|\[.\]|\].\[|\/.\\|\\.\/)$/i)) break;
-        if (quotePart.match(/^(?:<.>|>.<|\xAB.\xBB|\xBB.\xAB|\x8B.\x9B|\x9B.\x8B|\x60.\xB4|\xB4.\x60|\x91.\x92|\x92.\x91|\x93.\x94|\x94.\x93|\x94.\x84|\x7B.\x7D|\x7D.\x7B|\x28.\x29|\x29.\x28|\x5B.\x5D|\x5D.\x5B|\/.\\|\\.\/)$/i)) break;
-
-        // Others: upperscore
-        if (quotePart.length == 3 && quotePart.match(/[\xAF]/)) break;
-      }
-
-      quoteMsg = quoteMsg.replace(new RegExp('(\\n.*){' + i + '}$'), '');
-    }
-
-    quoteMsg = quoteMsg.replace(/&(gt|GT);/g, '>').replace(/&(lt|LT);/g, '<').replace(/^\s+|\s+$/g, '');
-
-
-  /* Quote Styling */
-
-    // Header styling
-    if (quoteHead != '')
-    {
-      if (GFQuote != 2)
-      {
-        if (prefs.getBoolPref('boldHeader'))
-        {
-          quoteHead = '<b>' + quoteHead + '</b>';
-        }
-        if (prefs.getBoolPref('italicHeader'))
-        {
-          quoteHead = '<i>' + quoteHead + '</i>';
-        }
-      }
-      else // if (GFQuote == 2)
-      {
-        quoteHead = '<strong>' + quoteHead + '</strong>';
-      }
-      if (GFQuote != 1)
-      {
-        quoteHead = quoteHead + '\n';
-      }
-    }
-
-    // Overall styling
-    switch (GFQuote)
-    {
-      case 0:
-        if (prefs.getBoolPref('boldMsg'))   quoteMsg = '<b>' + quoteMsg + '</b>';
-        if (prefs.getBoolPref('italicMsg')) quoteMsg = '<i>' + quoteMsg + '</i>';
-        quoteMsg += '\n'; // final result: double line breaks
+        var quote = qhead + "\n" + qbody;
         break;
-      case 1:
-        quoteMsg = '<i><p>' + quoteMsg + '</p></i>';
+      case 'gfcode_body':
+        var qbody = "<i><p>" + body + "</p></i>";
+
+        var quote = qhead + "\n" + qbody;
         break;
-      case 2:
-        quoteHead = '<i><p>' + quoteHead;
-        quoteMsg += '</p></i>';
+      case 'gfcode_full':
+        var qhead = "<i><p><strong>" + qhead + "</strong>";
+
+        var quote = qhead + "\n" + body + "</p></i>";
+        break;
+      case 'custom':
+        var quoteTemplate = prefs.getComplexValue('quote.style.custom', Components.interfaces.nsISupportsString).data;
+        var quote = quoteTemplate.
+          replace(/\%u/g, username).
+          replace(/\%d/g, postdate).
+          replace(/\%n/g, postnum).
+          replace(/\%m/g, body);
         break;
     }
 
-    var textarea = event.target.ownerDocument.getElementById('gamefox-message');
-    textarea.value = quoteHead + quoteMsg + '\n' + textarea.value;
-    textarea.focus();
+    var quickpost = event.target.ownerDocument.getElementById('gamefox-message');
+    if (prefs.getIntPref('sigAdd') == 1)
+      quickpost.value += quote + "\n";
+    else
+    {
+      // Temporarily remove the signature to allow for new quotes to be added at
+      // the end of the message
+      quickpost.value = quickpost.value.replace("\n" + GameFOX.formatSig(
+            prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
+            prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
+            prefs.getBoolPref('sigNewline')
+            ), '');
+      quickpost.value += quote + "\n";
+      var length = quickpost.value.length;
+      // Add the signature back
+      quickpost.value += "\n" + GameFOX.formatSig(
+          prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
+          prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
+          prefs.getBoolPref('sigNewline')
+          );
+    }
+    quickpost.focus();
+    // Move the caret to the end of the last quote
+    quickpost.setSelectionRange(length, length);
   },
 
   quickWhois: function(event)
