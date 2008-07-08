@@ -614,7 +614,8 @@ var GameFOX =
           {
             if (numberMsgs)
             {
-              switch (numberMsgsStyle) {
+              switch (numberMsgsStyle)
+              {
                 case 1:
                   // Reversed message numbering: #001 | message detail
                   divs[i].insertBefore(doc.createTextNode('#' + '000'.substr(0, 3 - j.toString().length) + j++), divs[i].getElementsByTagName('a')[1]);
@@ -635,6 +636,8 @@ var GameFOX =
                   break;
               }
             }
+            
+            divs[i].id = 'p' + '000'.substr(0, 3 - j.toString().length) + (numberMsgs ? j - 1 : j++);
             
             posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
             
@@ -697,6 +700,8 @@ var GameFOX =
                   break;
               }
             }
+
+            divs[i].id = 'p' + '000'.substr(0, 3 - j.toString().length) + (numberMsgs ? j - 1 : j++);
 
             posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
 
@@ -1040,14 +1045,17 @@ var GameFOX =
         node = node.parentNode.cells[0];
       }
 
+      // post number
+      var msgNum = '#' + node.id.substr(1);
+
       quoteHead = node.textContent;
     }
 
-    GameFOX.quoteProcessing(event, quoteHead, quoteMsg);
+    GameFOX.quoteProcessing(event, quoteHead, quoteMsg, msgNum);
   },
 
 
-  quoteProcessing: function(event, quoteHead, quoteMsg)
+  quoteProcessing: function(event, quoteHead, quoteMsg, msgNum)
   {
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).
       getBranch('gamefox.');
@@ -1058,7 +1066,7 @@ var GameFOX =
       head[i] = head[i].replace(/^\s+|\s+$/g, '');
     var username = head[1];
     var postdate = head[2].replace('Posted ', '');
-    var postnum  = head[4];
+    var postnum  = msgNum;
 
     /* Parse message body */
     var body = quoteMsg.replace(/<br>/g, "\n");
