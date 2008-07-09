@@ -1072,8 +1072,8 @@ var GameFOX =
     var body = quoteMsg.replace(/<br>/g, "\n");
     // Get rid of signature
     if (prefs.getBoolPref('quote.removesignature'))
-      body = body.replace(/---\n[\s\S]*$/, ''); // Only a simple regexp is needed because extraneous
-                                                // signatures are no longer allowed
+      body = body.replace(/---\n(.*)?(\n.*)?$/, ''); // Only a simple regexp is needed because extraneous
+                                                     // signatures are no longer allowed
     body = body.replace(/^\s+|\s+$/g, '');
 
     /* Prepare quote header */
