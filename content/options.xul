@@ -8,12 +8,9 @@
 <prefwindow
     title="GameFOX Options"
     id="gamefox-prefwindow"
-    buttons="accept,cancel,extra1,extra2"
-    buttonlabelextra1="Apply"
-    buttonaccesskeyextra1="A"
-    ondialogextra1="gamefoxSavePreferences();"
-    buttonlabelextra2="About..."
-    ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul', 'gamefox-about-dialog', 'centerscreen,chrome,modal');"
+    buttons="cancel,extra1"
+    buttonlabelextra1="About"
+    ondialogextra1="window.openDialog('chrome://gamefox/content/about.xul', 'gamefox-about-dialog', 'centerscreen,chrome');"
     onload="gamefoxSelectedPrefTabFix();"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
@@ -175,8 +172,8 @@
                 </rows>
               </grid>
               <hbox pack="end">
-                <button id="gamefox-css-grab-bs" label="Grab From GameFAQs" oncommand="gamefoxGrabBoardSettings();"/>
-                <button id="gamefox-css-apply-bs" label="Save To GameFAQs" oncommand="gamefoxChangeBoardSettings();"/>
+                <button id="gamefox-css-grab-bs" label="Grab From GameFAQs" icon="refresh" oncommand="gamefoxGrabBoardSettings();"/>
+                <button id="gamefox-css-apply-bs" label="Save to GameFAQs" icon="save" oncommand="gamefoxChangeBoardSettings();"/>
               </hbox>
             </groupbox>
 
@@ -308,6 +305,7 @@
 
 <!-- T H E M E -->
 
+  <!-- XXX: kill this with fire -->
   <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.initSystem(); GameFOXCSS.load();">
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
@@ -461,12 +459,12 @@
       
       <label value="Pre-signature:"/>
       <textbox preference="gamefoxSigPre" size="8" class="indent"/>
-      
-      <label value="Signature:"/>
+
+      <label value="Signature:" flex="1"/>
       <textbox preference="gamefoxSig" rows="3" multiline="true" class="indent"/>
-      
+
       <hbox pack="end">
-        <button id="gamefox-css-grab-sig" label="Grab From GameFAQs" oncommand="gamefoxGrabSignature();"/>
+        <button id="gamefox-css-grab-sig" label="Grab From GameFAQs" icon="refresh" oncommand="gamefoxGrabSignature();"/>
       </hbox>
 
       <hbox>
