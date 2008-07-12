@@ -6,29 +6,33 @@ TOP           = $(shell pwd)
 OS            = $(shell uname -s)
 BUILD_DATE    = $(shell date "+%Y/%m/%d %H:%M:%S")
 
-JAR_TXT_FILES = ${shell find -L content skin locale     \
+JAR_TXT_FILES = $(shell find -L content skin locale     \
                         -type f                         \
                         -a \(                           \
                                 -path '*.js'            \
                              -o -path '*.css'           \
                              -o -path '*.xul'           \
-                             -o -path '*.html'          \
-			     -o -path '*.dtd'           \
+                             -o -path '*.*html'         \
+                             -o -path '*.dtd'           \
+                             -o -path '*/NEWS'          \
                         \)                              \
-                }
-JAR_DIRS      = $(foreach f,${JAR_FILES},$(dir $f))
+                )
 JAR_BIN_FILES = $(shell find content skin               \
                         -type f                         \
-                        -a -path '*.png'                \
+                        -a \(                           \
+                                -path '*.png'           \
+                             -o -path '*.bz2'           \
+                        \)                              \
                 )
 JAR_FILES     = ${JAR_BIN_FILES} ${JAR_TXT_FILES}
+JAR_DIRS      = $(foreach f,${JAR_FILES},$(dir $f))
 JAR           = chrome/${NAME}.jar
 
 XPI_TXT_FILES = install.rdf chrome.manifest COPYING defaults/preferences/gamefox.js
-XPI_DIRS      = $(foreach f,${XPI_FILES},$(dir $f))
 XPI_BIN_FILES = ${JAR}
 XPI_FILES     = ${XPI_BIN_FILES} ${XPI_TXT_FILES}
-XPI_NAME      = ${NAME}_${VERSION}.xpi
+XPI_DIRS      = $(foreach f,${XPI_FILES},$(dir $f))
+XPI_NAME      = ${NAME}-${VERSION}.xpi
 XPI           = ${XPI_NAME}
 
 BUILD_DIR     = build.${VERSION}.${OS}
@@ -49,7 +53,6 @@ all: help
 
 help:
 	@echo "${NAME} ${VERSION} build"
-	@echo
 	@echo "  make help      - display this help"
 	@echo "  make info      - show some info about the system"
 	@echo "  make jar       - build a JAR (${JAR})"
@@ -94,9 +97,9 @@ ${XPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
 		( echo "modified: $$f" ; \
 		  diff -u $$f ${BUILD_XPI_DIR}/$$f | grep '^[-+][^-+]' ) ; \
 	    done
-	${Q}${PERL} -pe 's,\s(skin|content|locale)/, jar:chrome/${NAME}.jar!/\1/,' \
+	${Q}${PERL} -pe 's,\s(skin|content|locale)/, jar:${JAR}!/\1/,' \
 	           < chrome.manifest > ${BUILD_XPI_DIR}/chrome.manifest
-	${Q}( cd ${BUILD_XPI_DIR} && ${ZIP} -r ${TOP}/${XPI} ${XPI_FILES} )
+	${Q}( cd ${BUILD_XPI_DIR} && ${ZIP} -r9 ${TOP}/${XPI} ${XPI_FILES} )
 	@echo "SUCCESS: $@"
 
 #### jar
@@ -118,5 +121,5 @@ ${JAR}: ${BUILD_JAR_SUBDIRS} ${JAR_FILES}
 		( echo "modified: $$f" ; \
 		  diff -u $$f ${BUILD_JAR_DIR}/$$f | grep '^[-+][^-+]' ) ; \
 	    done
-	${Q}( cd ${BUILD_JAR_DIR} && ${ZIP} -r ${TOP}/${JAR} ${JAR_FILES} )
+	${Q}( cd ${BUILD_JAR_DIR} && ${ZIP} -r0 ${TOP}/${JAR} ${JAR_FILES} )
 	@echo "SUCCESS: $@"
