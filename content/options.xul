@@ -8,7 +8,7 @@
 <prefwindow
     title="GameFOX Options"
     id="gamefox-prefwindow"
-    buttons="cancel,extra1"
+    buttons="accept,cancel,extra1"
     buttonlabelextra1="About"
     ondialogextra1="window.openDialog('chrome://gamefox/content/about.xul', 'gamefox-about-dialog', 'centerscreen,chrome');"
     onload="gamefoxSelectedPrefTabFix();"
