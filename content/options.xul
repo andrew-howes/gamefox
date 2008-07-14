@@ -448,38 +448,33 @@
     </preferences>
 
     <groupbox>
-      <caption label="Content"/>
+      <caption label="&signature.content;"/>
 
-      <description style="margin-bottom: 1em">
-        Pre-signatures are appended before the signature separator and are
-        restricted to 1 line. Signatures are restricted to 2 lines. GameFAQs
-        imposes a 160-character limit for signatures, but GameFOX does not
-        enforce this.
-      </description>
+      <description style="margin-bottom: 1em">&signature.desc;</description>
       
-      <label value="Pre-signature:"/>
+      <label value="&signature.presig.label;:"/>
       <textbox preference="gamefoxSigPre" size="8" class="indent"/>
 
-      <label value="Signature:" flex="1"/>
+      <label value="&signature.sig.label;:" flex="1"/>
       <textbox preference="gamefoxSig" rows="3" multiline="true" class="indent"/>
 
       <hbox pack="end">
-        <button id="gamefox-css-grab-sig" label="Grab From GameFAQs" icon="refresh" oncommand="gamefoxGrabSignature();"/>
+        <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh" oncommand="gamefoxGrabSignature();"/>
       </hbox>
 
       <hbox>
-        <checkbox preference="gamefoxUnivSig" label="Also use on standard GameFAQs post page"/>
+        <checkbox preference="gamefoxUnivSig" label="&signature.applyeverywhere.label;"/>
       </hbox>
       <hbox>
-        <checkbox preference="gamefoxSigNewline" label="Prepend a newline before signature"/>
+        <checkbox preference="gamefoxSigNewline" label="&signature.newline.label;"/>
       </hbox>
     </groupbox>
 
     <groupbox style="margin-bottom: 4em;">
-      <caption label="Addition Method"/>
+      <caption label="&signature.addition;"/>
       <radiogroup preference="gamefoxSigAdd">
-        <radio value="1" label="Append signature after submitting or previewing the post"/>
-        <radio value="2" label="Let the signature be there without hitting any goddamn button"/>
+        <radio value="1" label="&signature.addafter;"/>
+        <radio value="2" label="&signature.addbefore;"/>
       </radiogroup>
     </groupbox>
 
