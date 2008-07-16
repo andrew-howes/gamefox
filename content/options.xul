@@ -11,6 +11,7 @@
     buttons="accept,cancel,extra1"
     buttonlabelextra1="About"
     ondialogextra1="window.openDialog('chrome://gamefox/content/about.xul', 'gamefox-about-dialog', 'centerscreen,chrome');"
+    defaultButton=""
     onload="gamefoxSelectedPrefTabFix();"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
@@ -305,13 +306,13 @@
 
 <!-- T H E M E -->
 
-  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.populatea(document.getElementById('css-tree'));">
+  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.populate(document.getElementById('css-tree'));">
+    <script type="application/x-javascript" src="chrome://gamefox/content/treeview.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
       <preference id="theme-disable_gamefaqs_css" name="gamefox.theme.disablegamefaqscss" type="bool"/>
     </preferences>
 
-    <button label="click me" onclick="GameFOXCSS.populate(document.getElementById('css-tree'));"/>
     <groupbox>
       <caption label="General"/>
       <checkbox preference="theme-disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
