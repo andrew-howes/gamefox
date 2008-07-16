@@ -30,10 +30,7 @@ var GameFOXCSS =
 
   userimport: function(uri)
   {
-    if (navigator.appVersion.indexOf("Win") != -1)
-      var filename = uri.split('\\');
-    else
-      var filename = uri.split('/');
+    var filename = uri.split('/');
     filename = filename[filename.length - 1];
     
     this.add('user', uri, filename, filename, '', '', true);

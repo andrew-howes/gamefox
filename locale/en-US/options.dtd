@@ -31,3 +31,5 @@
 <!ENTITY theme.import.uri "URI">
 <!ENTITY theme.import.browse "Browse">
 <!ENTITY theme.import.submit "Import">
+<!ENTITY theme.reload "Reload Stylesheets">
+<!ENTITY theme.edit "Edit Stylesheets Contents">
