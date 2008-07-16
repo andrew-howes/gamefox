@@ -41,7 +41,7 @@ pref("gamefox.signature.applyeverywhere", true);
 pref("gamefox.signature.addition", 2);
 
 pref("gamefox.theme.disablegamefaqscss", false);
-pref("gamefox.theme.css.serialized", "");
+pref("gamefox.theme.css.serialized", "({gamefox:{}, bundled:{}, user:{}})");
 
 pref("gamefox.tags", "");
 pref("gamefox.topic.dblclick", 0);

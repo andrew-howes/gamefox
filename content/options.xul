@@ -305,12 +305,13 @@
 
 <!-- T H E M E -->
 
-  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.populate(document.getElementById('css-tree'));">
+  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.populatea(document.getElementById('css-tree'));">
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
       <preference id="theme-disable_gamefaqs_css" name="gamefox.theme.disablegamefaqscss" type="bool"/>
     </preferences>
 
+    <button label="click me" onclick="GameFOXCSS.populate(document.getElementById('css-tree'));"/>
     <groupbox>
       <caption label="General"/>
       <checkbox preference="theme-disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
@@ -320,35 +321,35 @@
       <caption label="Stylesheets"/>
       <tree id="css-tree" rows="10" hidecolumnpicker="true" editable="true">
         <treecols>
-          <treecol label="Name" primary="true" flex="1"/>
-          <treecol label="Author"/>
-          <treecol label="Compat"/>
-          <treecol label="Enabled" type="checkbox" editable="true"/>
+          <treecol id="tree_name" label="Name" primary="true" flex="1"/>
+          <treecol id="tree_author" label="Author"/>
+          <treecol id="tree_compat" label="Compat"/>
+          <treecol id="tree_enabled" label="Enabled" type="checkbox" editable="true"/>
         </treecols>
 
         <treechildren>
-          <treeitem container="true" open="true" id="gamefox-css">
+          <treeitem container="true" open="true">
             <treerow>
               <treecell label="GameFOX" editable="false"/>
             </treerow>
 
-            <treechildren/>
+            <treechildren id="gamefox-css"/>
           </treeitem>
 
-          <treeitem container="true" open="true" id="bundled-css">
+          <treeitem container="true" open="true">
             <treerow>
               <treecell label="Bundled" editable="false"/>
             </treerow>
 
-            <treechildren/>
+            <treechildren id="bundled-css"/>
           </treeitem>
 
-          <treeitem container="true" open="true" id="user-css">
+          <treeitem container="true" open="true">
             <treerow>
               <treecell label="User" editable="false"/>
             </treerow>
 
-            <treechildren/>
+            <treechildren id="user-css"/>
           </treeitem>
         </treechildren>
       </tree>

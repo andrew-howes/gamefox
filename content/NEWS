@@ -12,3 +12,4 @@
     * Rewrite quoting backend, allow for user-defined quote templates. Quotes
       are now added in order at the bottom of the post, even with your
       signature in the textarea
+    * New, more flexible theme options pane and CSS backend
