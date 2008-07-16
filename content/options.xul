@@ -305,45 +305,71 @@
 
 <!-- T H E M E -->
 
-  <!-- XXX: kill this with fire -->
-  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.initSystem(); GameFOXCSS.load();">
+  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.populate(document.getElementById('css-tree'));">
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
       <preference id="theme-disable_gamefaqs_css" name="gamefox.theme.disablegamefaqscss" type="bool"/>
     </preferences>
 
-    <checkbox preference="theme-disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
+    <groupbox>
+      <caption label="General"/>
+      <checkbox preference="theme-disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
+    </groupbox>
 
-    <caption label="GameFOX Stylesheets"/>
-    <hbox>
-      <listbox id="css-gamefox-disabled">
-        <listitem label="Disabled" disabled="true"/>
-        <listitem label="stylesheet 1"/>
-        <listitem label="stylesheet 2"/>
-        <listitem label="stylesheet 3"/>
-      </listbox>
+    <groupbox>
+      <caption label="Stylesheets"/>
+      <tree id="css-tree" rows="10" hidecolumnpicker="true" editable="true">
+        <treecols>
+          <treecol label="Name" primary="true" flex="1"/>
+          <treecol label="Author"/>
+          <treecol label="Compat"/>
+          <treecol label="Enabled" type="checkbox" editable="true"/>
+        </treecols>
 
-      <listbox id="css-gamefox-enabled">
-        <listitem label="Enabled" disabled="true"/>
-        <listitem label="stylesheet 4"/>
-      </listbox>
-    </hbox>
+        <treechildren>
+          <treeitem container="true" open="true" id="gamefox-css">
+            <treerow>
+              <treecell label="GameFOX" editable="false"/>
+            </treerow>
 
-    <caption label="User Stylesheets"/>
-    <hbox>
-      <listbox id="css-user-disabled">
-        <listitem label="Disabled" disabled="true"/>
-        <listitem label="stylesheet 1"/>
-        <listitem label="stylesheet 2"/>
-        <listitem label="stylesheet 3"/>
-      </listbox>
+            <treechildren/>
+          </treeitem>
 
-      <listbox id="css-user-enabled">
-        <listitem label="Enabled" disabled="true"/>
-        <listitem label="stylesheet 4"/>
-      </listbox>
-    </hbox>
-  </prefpane>
+          <treeitem container="true" open="true" id="bundled-css">
+            <treerow>
+              <treecell label="Bundled" editable="false"/>
+            </treerow>
+
+            <treechildren/>
+          </treeitem>
+
+          <treeitem container="true" open="true" id="user-css">
+            <treerow>
+              <treecell label="User" editable="false"/>
+            </treerow>
+
+            <treechildren/>
+          </treeitem>
+        </treechildren>
+      </tree>
+    </groupbox>
+        
+    <groupbox>
+      <caption label="Import a Stylesheet"/>
+      <hbox>
+        <label value="URI" style="margin-top: 7px"/>
+        <textbox flex="1" id="css-import-file"/>
+        <button label="Browse..."/>
+      </hbox>
+      <hbox>
+        <label value="Title" style="margin-top: 7px"/>
+        <textbox id="css-import-title"/>
+      </hbox>
+      <hbox pack="end">
+        <button icon="add" label="Import"/>
+      </hbox>
+    </groupbox>
+ </prefpane>
 
 
 <!-- Q U O T I N G -->
