@@ -15,3 +15,5 @@
 <!ENTITY signature.addition "Addition Method">
 <!ENTITY signature.addafter "Append signature after submitting or previewing the post">
 <!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
+
+<!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">

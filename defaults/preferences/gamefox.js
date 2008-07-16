@@ -40,9 +40,9 @@ pref("gamefox.signature.newline", false);
 pref("gamefox.signature.applyeverywhere", true);
 pref("gamefox.signature.addition", 2);
 
-pref("gamefox.disableMainStyles", false);
-pref("gamefox.css.disabled", "({})");
-pref("gamefox.css.enabled", "({})");
+pref("gamefox.theme.disablegamefaqscss", false);
+pref("gamefox.theme.css.serialized", "");
+
 pref("gamefox.tags", "");
 pref("gamefox.topic.dblclick", 0);
 pref("gamefox.message.dblclick", false);

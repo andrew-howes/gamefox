@@ -309,10 +309,10 @@
   <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.initSystem(); GameFOXCSS.load();">
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
-      <preference id="gamefox-pref-disableMainStyles" name="gamefox.disableMainStyles" type="bool"/>
+      <preference id="theme-disable_gamefaqs_css" name="gamefox.theme.disablegamefaqscss" type="bool"/>
     </preferences>
 
-    <checkbox preference="disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
+    <checkbox preference="theme-disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
 
     <caption label="GameFOX Stylesheets"/>
     <hbox>
