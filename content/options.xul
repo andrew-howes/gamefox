@@ -312,58 +312,37 @@
       <preference id="gamefox-pref-disableMainStyles" name="gamefox.disableMainStyles" type="bool"/>
     </preferences>
 
-    <description>
-      Styles included with GameFOX that have an asterisk (*) at the end of
-      them are known to work with the new GameFAQs layout.
-    </description>
-    <description>
-      Styles included with GameFOX that have two asterisks (**) at
-      the end of them only work if the &quot;Disable Main Stylesheets on
-      GameFAQs&quot; checkbox is checked.
-    </description>
-    <groupbox>
-      <caption label="Import CSS"/>
-      <hbox>
-        <textbox flex="1" id="gamefox-css-remote-file" value=""/>
-        <button id="gamefox-css-browse" label="Browse" oncommand="GameFOXCSS.browse();"/>
-      </hbox>
-      <hbox align="center">
-        <label value="Save as:"/>
-        <textbox id="gamefox-css-filename" value="filename-theme.css" flex="1"/>
-        <label value="Title:"/>
-        <textbox id="gamefox-css-title" value="Example Theme" flex="2"/>
-        <button id="gamefox-css-add" label="Add CSS" oncommand="GameFOXCSS.add();"/>
-      </hbox>
-    </groupbox>
+    <checkbox preference="disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
 
-    <groupbox>
-      <caption label="Disabled CSS"/>
-      <hbox>
-        <menulist id="gamefox-css-list" flex="1" label="Disabled sheets...">
-          <menupopup/>
-        </menulist>
-        <button id="gamefox-css-discard" label="Discard" oncommand="GameFOXCSS.discard();"/>
-        <button id="gamefox-css-enable" label="Enable" oncommand="GameFOXCSS.enable();"/>
-      </hbox>
-    </groupbox>
-    <groupbox>
-      <caption label="Applied CSS"/>
-      <hbox>
-        <menulist id="gamefox-css-applied" flex="1" label="Enabled sheets...">
-          <menupopup/>
-        </menulist>
-        <button id="gamefox-css-disable" label="Disable" oncommand="GameFOXCSS.disable();"/>
-      </hbox>
-    </groupbox>
+    <caption label="GameFOX Stylesheets"/>
+    <hbox>
+      <listbox id="css-gamefox-disabled">
+        <listitem label="Disabled" disabled="true"/>
+        <listitem label="stylesheet 1"/>
+        <listitem label="stylesheet 2"/>
+        <listitem label="stylesheet 3"/>
+      </listbox>
 
-    <hbox align="left" valign="middle">
-      <spacer width="8px"/>
-      <label value="Edit CSS Manually" style="text-decoration: underline; color: #0000ff; cursor: pointer;" onclick="gamefoxOpenCSS();"/>
-      <button id="gamefox-css-reload" label="Reload CSS" oncommand="GameFOXCSS.reRegisterSheets();"/>
+      <listbox id="css-gamefox-enabled">
+        <listitem label="Enabled" disabled="true"/>
+        <listitem label="stylesheet 4"/>
+      </listbox>
     </hbox>
 
-    <checkbox preference="gamefox-pref-disableMainStyles" label="Disable Main Stylesheets on GameFAQs" style="margin-bottom: 4em"/>
+    <caption label="User Stylesheets"/>
+    <hbox>
+      <listbox id="css-user-disabled">
+        <listitem label="Disabled" disabled="true"/>
+        <listitem label="stylesheet 1"/>
+        <listitem label="stylesheet 2"/>
+        <listitem label="stylesheet 3"/>
+      </listbox>
 
+      <listbox id="css-user-enabled">
+        <listitem label="Enabled" disabled="true"/>
+        <listitem label="stylesheet 4"/>
+      </listbox>
+    </hbox>
   </prefpane>
 
 
