@@ -440,11 +440,11 @@
 
   <prefpane id="gamefox-sig-pane" label="Signature">
     <preferences>
-      <preference id="gamefoxUnivSig" name="gamefox.univSig" type="bool"/>
-      <preference id="gamefoxSigPre" name="gamefox.sigPre" type="unichar"/>
-      <preference id="gamefoxSig" name="gamefox.sig" type="unichar"/>
-      <preference id="gamefoxSigAdd" name="gamefox.sigAdd" type="int"/>
-      <preference id="gamefoxSigNewline" name="gamefox.sigNewline" type="bool"/>
+      <preference id="sig-body"            name="gamefox.signature.body"            type="unichar"/>
+      <preference id="sig-presig"          name="gamefox.signature.presig"          type="unichar"/>
+      <preference id="sig-newline"         name="gamefox.signature.newline"         type="bool"/>
+      <preference id="sig-applyeverywhere" name="gamefox.signature.applyeverywhere" type="bool"/>
+      <preference id="sig-addition"        name="gamefox.signature.addition"        type="int"/>
     </preferences>
 
     <groupbox>
@@ -453,26 +453,26 @@
       <description style="margin-bottom: 1em">&signature.desc;</description>
       
       <label value="&signature.presig.label;:"/>
-      <textbox preference="gamefoxSigPre" size="8" class="indent"/>
+      <textbox preference="sig-presig" size="8" class="indent"/>
 
       <label value="&signature.sig.label;:" flex="1"/>
-      <textbox preference="gamefoxSig" rows="3" multiline="true" class="indent"/>
+      <textbox preference="sig-body" rows="3" multiline="true" class="indent"/>
 
       <hbox pack="end">
         <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh" oncommand="gamefoxGrabSignature();"/>
       </hbox>
 
       <hbox>
-        <checkbox preference="gamefoxUnivSig" label="&signature.applyeverywhere.label;"/>
+        <checkbox preference="sig-applyeverywhere" label="&signature.applyeverywhere.label;"/>
       </hbox>
       <hbox>
-        <checkbox preference="gamefoxSigNewline" label="&signature.newline.label;"/>
+        <checkbox preference="sig-newline" label="&signature.newline.label;"/>
       </hbox>
     </groupbox>
 
     <groupbox style="margin-bottom: 4em;">
       <caption label="&signature.addition;"/>
-      <radiogroup preference="gamefoxSigAdd">
+      <radiogroup preference="sig-addition">
         <radio value="1" label="&signature.addafter;"/>
         <radio value="2" label="&signature.addbefore;"/>
       </radiogroup>

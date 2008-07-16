@@ -272,16 +272,16 @@ var GameFOX =
 
       if (doc.location.pathname.match(/^\/gfaqs\/(post|preview)\.php$/ig))
       {
-        if (prefs.getBoolPref('univSig')
-            && (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
-             || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != '')
+        if (prefs.getBoolPref('signature.applyeverywhere')
+            && (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
+             || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != '')
             && !doc.documentElement.innerHTML.match(/\b(Error|Preview)\s*<\/h1>\s*<\/div>/ig))
         {
           doc.getElementsByName('message')[0].value = "\n" +
             GameFOX.formatSig(
-                prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
-                prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
-                prefs.getBoolPref('sigNewline')
+                prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+                prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+                prefs.getBoolPref('signature.newline')
                 );
         }
       }
@@ -292,15 +292,15 @@ var GameFOX =
 
       if (doc.location.pathname.match(/^\/gfaqs9\/post\.php$/i))
       {
-        if (prefs.getBoolPref('univSig')
-            && (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
-              || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != ''))
+        if (prefs.getBoolPref('signature.applyeverywhere')
+            && (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
+              || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != ''))
         {
           doc.getElementsByName('message')[0].value = "\n" +
             GameFOX.formatSig(
-                prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
-                prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
-                prefs.getBoolPref('sigNewline')
+                prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+                prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+                prefs.getBoolPref('signature.newline')
                 );
         }
       }
@@ -803,15 +803,15 @@ var GameFOX =
     
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click', GameFOX.quickPost, false);
     if (
-        (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
-         || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != '')
-        && prefs.getIntPref('sigAdd') == 2)
+        (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
+         || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != '')
+        && prefs.getIntPref('signature.addition') == 2)
     {
       doc.getElementById('gamefox-message').value = "\n" +
         GameFOX.formatSig(
-            prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
-            prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
-            prefs.getBoolPref('sigNewline')
+            prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+            prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+            prefs.getBoolPref('signature.newline')
             );
     }
     doc.getElementById('gamefox-quickpost-form').addEventListener('submit', GameFOX.autoAppendSignature, false);
@@ -831,16 +831,16 @@ var GameFOX =
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
     
     if (
-        (prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
-         || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != ''
-        ) && prefs.getIntPref('sigAdd') == 1
+        (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
+         || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != ''
+        ) && prefs.getIntPref('signature.addition') == 1
        )
     {
       event.target.ownerDocument.getElementById('gamefox-message').value += "\n" +
         GameFOX.formatSig(
-            prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
-            prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
-            prefs.getBoolPref('sigNewline')
+            prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+            prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+            prefs.getBoolPref('signature.newline')
             );
     }
   },
@@ -1123,17 +1123,17 @@ var GameFOX =
       // Temporarily remove the signature to allow for new quotes to be added at
       // the end of the message
       quickpost.value = quickpost.value.replace("\n" + GameFOX.formatSig(
-            prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
-            prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
-            prefs.getBoolPref('sigNewline')
+            prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+            prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+            prefs.getBoolPref('signature.newline')
             ), '');
       quickpost.value += quote + "\n";
       var length = quickpost.value.length;
       // Add the signature back
       quickpost.value += "\n" + GameFOX.formatSig(
-          prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
-          prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
-          prefs.getBoolPref('sigNewline')
+          prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+          prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+          prefs.getBoolPref('signature.newline')
           );
     }
     quickpost.focus();
@@ -1626,17 +1626,17 @@ var GameFOX =
     if (
         !doc.location.pathname.match(/^\/gfaqs9?\/(post|preview).php$/ig)
         && (
-          prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data != ''
-          || prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data != ''
+          prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
+          || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != ''
           )
-        && prefs.getIntPref('sigAdd') == 1
+        && prefs.getIntPref('signature.addition') == 1
       )
     {
       message += "\n" +
         GameFOX.formatSig(
-            prefs.getComplexValue('sig', Components.interfaces.nsISupportsString).data,
-            prefs.getComplexValue('sigPre', Components.interfaces.nsISupportsString).data,
-            prefs.getBoolPref('sigNewline')
+            prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+            prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+            prefs.getBoolPref('signature.newline')
             );
     }
 

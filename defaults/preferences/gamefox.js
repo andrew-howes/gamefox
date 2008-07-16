@@ -34,11 +34,12 @@ pref("gamefox.quote.removesignature", true);
 pref("gamefox.quote.style", "normal");
 pref("gamefox.quote.style.custom", "<i><b>Posted by %u</b>\n%m</i>");
 
-pref("gamefox.sig", "");
-pref("gamefox.sigPre", "");
-pref("gamefox.sigNewline", false);
-pref("gamefox.univSig", false);
-pref("gamefox.sigAdd", 1);
+pref("gamefox.signature.body", "");
+pref("gamefox.signature.presig", "");
+pref("gamefox.signature.newline", false);
+pref("gamefox.signature.applyeverywhere", true);
+pref("gamefox.signature.addition", 2);
+
 pref("gamefox.disableMainStyles", false);
 pref("gamefox.css.disabled", "({})");
 pref("gamefox.css.enabled", "({})");

@@ -230,7 +230,7 @@ function gamefoxGrabSignature()
         document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
         return;
       }
-      document.getElementById('gamefoxSig').value = gamefoxSpecialCharsDecode(sig[1]);
+      document.getElementById('sig-body').value = gamefoxSpecialCharsDecode(sig[1]);
       document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
     }
   };
