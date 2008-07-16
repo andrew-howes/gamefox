@@ -314,24 +314,24 @@
     </preferences>
 
     <groupbox>
-      <caption label="General"/>
+      <caption label="&general.label;"/>
       <checkbox preference="theme-disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
     </groupbox>
 
     <groupbox>
-      <caption label="Stylesheets"/>
+      <caption label="&theme.stylesheets.label;"/>
       <tree id="css-tree" rows="10" hidecolumnpicker="true" editable="true">
         <treecols>
-          <treecol id="tree_name" label="Name" primary="true" flex="1"/>
-          <treecol id="tree_author" label="Author"/>
-          <treecol id="tree_compat" label="Compat"/>
-          <treecol id="tree_enabled" label="Enabled" type="checkbox" editable="true"/>
+          <treecol label="&theme.tree.name;" primary="true" flex="1"/>
+          <treecol label="&theme.tree.author;"/>
+          <treecol label="&theme.tree.compat;"/>
+          <treecol label="&theme.tree.enabled;" type="checkbox" editable="true"/>
         </treecols>
 
         <treechildren>
           <treeitem container="true" open="true">
             <treerow>
-              <treecell label="GameFOX" editable="false"/>
+              <treecell label="&theme.tree.container.gamefox;" editable="false"/>
             </treerow>
 
             <treechildren id="gamefox-css"/>
@@ -339,7 +339,7 @@
 
           <treeitem container="true" open="true">
             <treerow>
-              <treecell label="Bundled" editable="false"/>
+              <treecell label="&theme.tree.container.bundled;" editable="false"/>
             </treerow>
 
             <treechildren id="bundled-css"/>
@@ -347,7 +347,7 @@
 
           <treeitem container="true" open="true">
             <treerow>
-              <treecell label="User" editable="false"/>
+              <treecell label="&theme.tree.container.user;" editable="false"/>
             </treerow>
 
             <treechildren id="user-css"/>
@@ -357,18 +357,14 @@
     </groupbox>
         
     <groupbox>
-      <caption label="Import a Stylesheet"/>
+      <caption label="&theme.import.label;"/>
       <hbox>
-        <label value="URI" style="margin-top: 7px"/>
-        <textbox flex="1" id="css-import-file"/>
-        <button label="Browse..."/>
-      </hbox>
-      <hbox>
-        <label value="Title" style="margin-top: 7px"/>
-        <textbox id="css-import-title"/>
+        <label value="&theme.import.uri;" style="margin-top: 7px"/>
+        <textbox flex="1" id="css-import-file" value=""/>
+        <button onclick="GameFOXCSS.filepicker();" label="&theme.import.browse;..."/>
       </hbox>
       <hbox pack="end">
-        <button icon="add" label="Import"/>
+        <button icon="add" onclick="GameFOXCSS.userimport(document.getElementById('css-import-file').value);" label="&theme.import.submit;"/>
       </hbox>
     </groupbox>
  </prefpane>

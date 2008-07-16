@@ -1,3 +1,5 @@
+<!ENTITY general.label "General">
+
 <!ENTITY gfaqs9.label "Assume GameFAQs 9">
 <!ENTITY gfaqs9.desc "When unable to be determined, use /gfaqs9/ URIs when linking to GameFAQs pages.">
 
@@ -17,3 +19,15 @@
 <!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
 
 <!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">
+<!ENTITY theme.stylesheets.label "Stylesheets">
+<!ENTITY theme.tree.name "Name">
+<!ENTITY theme.tree.author "Author">
+<!ENTITY theme.tree.compat "Compatibility">
+<!ENTITY theme.tree.enabled "Enabled">
+<!ENTITY theme.tree.container.gamefox "GameFOX">
+<!ENTITY theme.tree.container.bundled "Bundled">
+<!ENTITY theme.tree.container.user "User">
+<!ENTITY theme.import.label "Import a Stylesheet">
+<!ENTITY theme.import.uri "URI">
+<!ENTITY theme.import.browse "Browse">
+<!ENTITY theme.import.submit "Import">
