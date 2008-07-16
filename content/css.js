@@ -28,6 +28,12 @@ var GameFOXCSS =
         'Classic Theme', 'Ricapar', 'gfaqs9', false);
   },
 
+  userimport: function(uri)
+  {
+    this.add('user', uri, filename, filename, '', '', true);
+    this.populate(document.getElementById('css-tree'));
+  },
+
   add: function(cat, uri, filename, title, author, compat, enabled)
   {
     var file = Components.classes['@mozilla.org/file/local;1'].getService(
@@ -117,29 +123,63 @@ var GameFOXCSS =
 
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
+    cssTreeView = treeView; // we don't want to mess with treeView directly as it's supposed
+                            // to be a generic class
+    cssTreeView.childData = {};
+    cssTreeView.visibleData = [];
     for (var category in {"GameFOX":"", "Bundled":"", "User":""})
     {
-      treeView.visibleData.push([[category], true, false]);
+      cssTreeView.visibleData.push([[category], true, false]);
       for (var sheet in css[category.toLowerCase()])
       {
         var cat = category.toLowerCase();
-        if (!treeView.childData[category])
-          treeView.childData[category] = [[
+        if (!cssTreeView.childData[category])
+          cssTreeView.childData[category] = [[
             css[cat][sheet]["title"],
             css[cat][sheet]["author"],
             css[cat][sheet]["compat"],
-            css[cat][sheet]["enabled"]
+            css[cat][sheet]["enabled"],
+            sheet, // filename, stored in an invisible column. used to uniquely
+                   // identify what stylesheet a particular row belongs to
+            cat
           ]];
         else
-          treeView.childData[category].push([
+          cssTreeView.childData[category].push([
               css[cat][sheet]["title"],
               css[cat][sheet]["author"],
               css[cat][sheet]["compat"],
-              css[cat][sheet]["enabled"]
+              css[cat][sheet]["enabled"],
+              sheet,
+              cat
           ]);
       }
     }
 
-    element.view = treeView;
+    cssTreeView.isEditable = function(idx, column)
+    {
+      if (column.index == 3) return true;
+      if (this.visibleData[idx][0][5] == "user") return true;
+    }
+    cssTreeView.setCellText = function(idx, column, value)
+    {
+      this.visibleData[idx][0][column.index] = value;
+    }
+    cssTreeView.setCellValue = function(idx, column, value)
+    {
+      this.visibleData[idx][0][column.index] = value;
+
+      var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+          Components.interfaces.nsIPrefService).getBranch('gamefox.');
+      var filename = this.visibleData[idx][0][4];
+      var category = this.visibleData[idx][0][5];
+      // Map column to associative array in pref
+      var map = new Array('title', 'author', 'compat', 'enabled');
+
+      var css = eval(prefs.getCharPref('theme.css.serialized'));
+      css[category][filename][map[column.index]] = value;
+      prefs.setCharPref('theme.css.serialized', css.toSource());
+    }
+
+    element.view = cssTreeView;
   }
 }
