@@ -33,7 +33,7 @@ var GameFOXCSS =
     var filename = uri.split('/');
     filename = filename[filename.length - 1];
     
-    this.add('user', uri, filename, filename, '', '', true);
+    this.add('user', uri, filename, filename, '', '', false);
     this.populate(document.getElementById('css-tree'));
     this.treeView.toggleOpenState(2);
   },
@@ -135,6 +135,34 @@ var GameFOXCSS =
     }
   },
 
+  reload: function()
+  {
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].getService(
+        Components.interfaces.nsIStyleSheetService);
+    var file = Components.classes['@mozilla.org/file/local;1'].getService(
+        Components.interfaces.nsILocalFile);
+    var css = eval(prefs.getCharPref('theme.css.serialized'));
+
+    for (var category in css)
+    {
+      for (var filename in css[category])
+      {
+        file.initWithPath(this.getDirectory());
+        file.append(filename);
+        var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
+            Components.interfaces.nsIIOService).newFileURI(file, null, null);
+
+        if (sss.sheetRegistered(uri, sss.USER_SHEET))
+          sss.unregisterSheet(uri, sss.USER_SHEET);
+
+        if (css[category][filename]['enabled'].toString() == "true")
+          sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
+      }
+    }
+  },
+
   populate: function(element)
   {
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
@@ -176,40 +204,31 @@ var GameFOXCSS =
 
     this.treeView.isEditable = function(idx, column)
     {
+      if (this.isContainer(idx)) return false;
       if (column.index == 3) return true;
       if (this.visibleData[idx][0][5] == "user") return true;
     }
-    this.treeView.setCellText = function(idx, column, value)
-    {
-      this.visibleData[idx][0][column.index] = value;
-      
-      var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-          Components.interfaces.nsIPrefService).getBranch('gamefox.');
-      var filename = this.visibleData[idx][0][4];
-      var category = this.visibleData[idx][0][5];
-      // Map column to associative array in pref
-      var map = new Array('title', 'author', 'compat', 'enabled');
-
-      var css = eval(prefs.getCharPref('theme.css.serialized'));
-      css[category][filename][map[column.index]] = value;
-      prefs.setCharPref('theme.css.serialized', css.toSource());
-    }
-    this.treeView.setCellValue = function(idx, column, value)
-    {
-      this.visibleData[idx][0][column.index] = value;
-
-      var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-          Components.interfaces.nsIPrefService).getBranch('gamefox.');
-      var filename = this.visibleData[idx][0][4];
-      var category = this.visibleData[idx][0][5];
-      // Map column to associative array in pref
-      var map = new Array('title', 'author', 'compat', 'enabled');
-
-      var css = eval(prefs.getCharPref('theme.css.serialized'));
-      css[category][filename][map[column.index]] = value;
-      prefs.setCharPref('theme.css.serialized', css.toSource());
-    }
-
+    this.treeView.setCellText = this.setCell;
+    this.treeView.setCellValue = this.setCell;
+    
     element.view = this.treeView;
+  },
+
+  setCell: function(idx, column, value)
+  {
+    this.visibleData[idx][0][column.index] = value;
+
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var filename = this.visibleData[idx][0][4];
+    var category = this.visibleData[idx][0][5];
+    // Map column to associative array in pref
+    var map = new Array('title', 'author', 'compat', 'enabled');
+
+    var css = eval(prefs.getCharPref('theme.css.serialized'));
+    css[category][filename][map[column.index]] = value;
+    prefs.setCharPref('theme.css.serialized', css.toSource());
+
+    GameFOXCSS.reload();
   }
 }

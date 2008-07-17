@@ -369,7 +369,7 @@
     </groupbox>
 
     <hbox pack="center">
-      <button onclick="return false;" icon="refresh" label="&theme.reload;"/>
+      <button onclick="GameFOXCSS.reload();" icon="refresh" label="&theme.reload;"/>
       <button onclick="gamefoxOpenCSS();" icon="open" label="&theme.edit;"/>
     </hbox>
  </prefpane>
