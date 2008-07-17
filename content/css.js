@@ -4,28 +4,28 @@ var GameFOXCSS =
   init: function()
   {
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default.css', 'gamefox-standard-default.css',
-        'Standard Default', 'GameFOX devs', 'gfaqs10,9', true);
+        'Standard Default', 'GameFOX devs', 'gfaqs10,9', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default-old.css', 'gamefox-standard-default-old.css',
-        'Standard Default (old quickpost)', 'GameFOX devs', 'gfaqs10,9', false);
+        'Standard Default (old quickpost)', 'GameFOX devs', 'gfaqs10,9', false, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-classic-default.css', 'gamefox-classic-default.css',
-        'Classic Default', 'GameFOX devs', 'gfaqs9', false);
+        'Classic Default', 'GameFOX devs', 'gfaqs9', false, true);
     
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
-        'Wide Default Layout', '', 'gfaqs10', false);
+        'Wide Default Layout', '', 'gfaqs10', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/gamefox-no-sidebar.css', 'gamefox-no-sidebar.css',
-        'Sidebar Remover for Classic', '', 'gfaqs9', false);
+        'Sidebar Remover for Classic', '', 'gfaqs9', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/classic-theme-by-jero.net.css', 'classic-theme-by-jero.net.css',
-        'Classic Theme', 'Jero', 'gfaqs9', false);
+        'Classic Theme', 'Jero', 'gfaqs9', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/gamefox_sidebar.css', 'gamefox_sidebar.css',
-        'Classic GameFOX Sidebar', 'Michael J Buck', 'gfaqs10,9', false);
+        'Classic GameFOX Sidebar', 'Michael J Buck', 'gfaqs10,9', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/aquatakat.css', 'aquatakat.css',
-        'GameFAQs Alternate', 'Aquatakat', 'gfaqs9', false);
+        'GameFAQs Alternate', 'Aquatakat', 'gfaqs9', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/gfaqs-smooth.css', 'gfaqs-smooth.css',
-        'GameFAQs Smooth', 'headbanger', 'gfaqs9', false);
+        'GameFAQs Smooth', 'headbanger', 'gfaqs9', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/midnight-shade.css', 'midnight-shade.css',
-        'Midnight Shade', 'Jero', 'gfaqs9', false);
+        'Midnight Shade', 'Jero', 'gfaqs9', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
-        'Classic Theme', 'Ricapar', 'gfaqs9', false);
+        'Classic Theme', 'Ricapar', 'gfaqs9', false, true);
   },
 
   userimport: function(uri)
@@ -52,8 +52,9 @@ var GameFOXCSS =
     }
   },
 
-  add: function(cat, uri, filename, title, author, compat, enabled)
+  add: function(cat, uri, filename, title, author, compat, enabled, overwrite)
   {
+    overwrite = (overwrite == null ? false : overwrite);
     var file = Components.classes['@mozilla.org/file/local;1'].getService(
         Components.interfaces.nsILocalFile);
     var foStream = Components.classes['@mozilla.org/network/file-output-stream;1'].getService(
@@ -65,7 +66,7 @@ var GameFOXCSS =
 
     file.initWithPath(this.getDirectory());
     file.append(filename);
-    if (file.exists()) {
+    if (overwrite == false && file.exists()) {
       var d = new Date();
       filename = filename.replace(/\.(css|txt)$/, d.getTime() + ".$1");
       file.initWithPath(this.getDirectory());

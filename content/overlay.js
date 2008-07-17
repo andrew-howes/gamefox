@@ -143,7 +143,7 @@ var GameFOX =
     var parentDoc = inFrame ? doc.defaultView.parent.document : doc;
     var titleChange = prefs.getBoolPref('elements.titlechange');
 
-    if (prefs.getBoolPref('disableMainStyles') && (doc.location.host.match(/(^|\.)gamefaqs\.com$/gi)))
+    if (prefs.getBoolPref('theme.disablegamefaqscss') && (doc.location.host.match(/(^|\.)gamefaqs\.com$/gi)))
     {
       var stylesheets = doc.getElementsByTagName('link');
       for (i = 0; i < stylesheets.length; i++)
@@ -1752,39 +1752,56 @@ var GameFOX =
 function GameFOXLoader()
 {
   window.removeEventListener('load', GameFOXLoader, false);
-  document.getElementById('appcontent').addEventListener('DOMContentLoaded', GameFOX.processPage, false);
-  document.getElementById('contentAreaContextMenu').addEventListener('popupshowing', GameFOX.contextMenuDisplay, false);
+  document.getElementById('appcontent').addEventListener(
+      'DOMContentLoaded', GameFOX.processPage, false);
+  document.getElementById('contentAreaContextMenu').addEventListener(
+      'popupshowing', GameFOX.contextMenuDisplay, false);
 
-  var prefs  = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
-  var cssDir = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties).get('ProfD', Components.interfaces.nsIFile);
-  cssDir.append('gamefox');
-  cssDir.append('css');
+  var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+      Components.interfaces.nsIPrefService).getBranch('gamefox.'); 
 
-  if (!cssDir.exists())
+  try
   {
-    prefs.setCharPref('css.enabled', '({})');
-    prefs.setCharPref('css.disabled', '({})');
-    return;
+    var lastversion = prefs.getCharPref('version');
+  }
+  catch (e if e.name == "NS_ERROR_UNEXPECTED") // the pref isn't set, we can assume this is a first run
+  {
+    GameFOXCSS.init();
+    window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
+        'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
   }
 
-  var sss        = Components.classes['@mozilla.org/content/style-sheet-service;1'].getService(Components.interfaces.nsIStyleSheetService);
-  var file       = Components.classes['@mozilla.org/file/local;1'].getService(Components.interfaces.nsILocalFile);
-  var cssApplied = eval(prefs.getCharPref('css.enabled'));
-  var cssURI;
+  var version = Components.classes['@mozilla.org/extensions/manager;1'].getService(
+      Components.interfaces.nsIExtensionManager).getItemForID(
+        '{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
+  var compareVersions = Components.classes['@mozilla.org/xpcom/version-comparator;1'].getService(
+      Components.interfaces.nsIVersionComparator).compare(lastversion, version);
+  if (compareVersions == -1)
+    GameFOXCSS.init();
 
-  for (var fileName in cssApplied)
+  prefs.setCharPref('version', version);
+
+  var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].getService(
+      Components.interfaces.nsIStyleSheetService);
+  var file = Components.classes['@mozilla.org/file/local;1'].getService(
+      Components.interfaces.nsILocalFile);
+  var css = eval(prefs.getCharPref('theme.css.serialized'));
+
+  for (var category in css)
   {
-    file.initWithPath(cssDir.path);
-    file.append(fileName);
-    cssURI = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService).newFileURI(file, null, null);
-
-    if (!sss.sheetRegistered(cssURI, sss.USER_SHEET))
+    for (var filename in css[category])
     {
-      sss.loadAndRegisterSheet(cssURI, sss.USER_SHEET);
+      if (css[category][filename]["enabled"].toString() == "false") continue;
+
+      file.initWithPath(GameFOXCSS.getDirectory());
+      file.append(filename);
+      var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
+          Components.interfaces.nsIIOService).newFileURI(file, null, null);
+
+      if (!sss.sheetRegistered(uri, sss.USER_SHEET))
+        sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
     }
   }
-
-  cssDir = sss = file = cssURI = null;
 }
 
 window.addEventListener('load', GameFOXLoader, false);

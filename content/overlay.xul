@@ -3,6 +3,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/gfaqs9.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
