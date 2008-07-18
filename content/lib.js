@@ -1,3 +1,5 @@
+/* vim: set et sw=2 sts=2 ts=2: */
+
 function gfox_addTab(aUrl, focusType)
 {
   var browserWindow = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow('navigator:browser');

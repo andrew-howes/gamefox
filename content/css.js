@@ -1,5 +1,4 @@
 /* vim: set et sw=2 sts=2 ts=2: */
-const Cc = Components.classes, Ci = Components.interfaces;
 
 var GameFOXCSS =
 {
