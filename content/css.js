@@ -246,15 +246,16 @@ var GameFOXCSS =
 
   removeWithTree: function()
   {
-    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService).
-      getBranch('gamefox.');
-    var file = Cc['@mozilla.org/file/local;1'].getService(Ci.nsILocalFile);
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].
+      getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var file = Components.classes['@mozilla.org/file/local;1'].
+      getService(Components.interfaces.nsILocalFile);
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
-    var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
-        Ci.nsIStyleSheetService);
-    var file = Cc['@mozilla.org/file/local;1'].getService(
-        Ci.nsILocalFile);
+    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].
+      getService(Components.interfaces.nsIStyleSheetService);
+    var file = Components.classes['@mozilla.org/file/local;1'].getService(
+        Components.interfaces.nsILocalFile);
 
     var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
     var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][5];
@@ -271,8 +272,8 @@ var GameFOXCSS =
 
     file.initWithPath(this.getDirectory());
     file.append(filename);
-    var uri = Cc['@mozilla.org/network/io-service;1'].getService(
-        Ci.nsIIOService).newFileURI(file, null, null);
+    var uri = Components.interfaces['@mozilla.org/network/io-service;1'].getService(
+        Components.interfaces.nsIIOService).newFileURI(file, null, null);
     sss.unregisterSheet(uri, sss.USER_SHEET);
 
     this.populate(document.getElementById('css-tree'));

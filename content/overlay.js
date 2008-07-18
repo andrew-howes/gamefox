@@ -1757,8 +1757,8 @@ function GameFOXLoader()
   document.getElementById('contentAreaContextMenu').addEventListener(
       'popupshowing', GameFOX.contextMenuDisplay, false);
 
-  var prefs = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService).
-    getBranch('gamefox.'); 
+  var prefs = Components.classes['@mozilla.org/preferences-service;1'].
+    getService(Components.interfaces.nsIPrefService).getBranch('gamefox.'); 
 
   try
   {
@@ -1771,10 +1771,11 @@ function GameFOXLoader()
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
   }
 
-  var version = Cc['@mozilla.org/extensions/manager;1'].getService(Ci.nsIExtensionManager).
+  var version = Components.classes['@mozilla.org/extensions/manager;1'].
+    getService(Components.interfaces.nsIExtensionManager).
     getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
-  var compareVersions = Cc['@mozilla.org/xpcom/version-comparator;1'].
-    getService(Ci.nsIVersionComparator).compare(lastversion, version);
+  var compareVersions = Components.classes['@mozilla.org/xpcom/version-comparator;1'].
+    getService(Components.interfaces.nsIVersionComparator).compare(lastversion, version);
   if (compareVersions != 0)
     GameFOXCSS.init();
 
