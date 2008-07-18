@@ -320,7 +320,7 @@
 
     <groupbox>
       <caption label="&theme.stylesheets.label;"/>
-      <tree id="css-tree" rows="10" hidecolumnpicker="true" editable="true">
+      <tree id="css-tree" rows="10" hidecolumnpicker="true" editable="true" seltype="single">
         <treecols>
           <treecol label="&theme.tree.name;" primary="true" flex="1"/>
           <treecol label="&theme.tree.author;"/>
@@ -328,32 +328,11 @@
           <treecol label="&theme.tree.enabled;" type="checkbox" editable="true"/>
         </treecols>
 
-        <treechildren>
-          <treeitem container="true" open="true">
-            <treerow>
-              <treecell label="&theme.tree.container.gamefox;" editable="false"/>
-            </treerow>
-
-            <treechildren id="gamefox-css"/>
-          </treeitem>
-
-          <treeitem container="true" open="true">
-            <treerow>
-              <treecell label="&theme.tree.container.bundled;" editable="false"/>
-            </treerow>
-
-            <treechildren id="bundled-css"/>
-          </treeitem>
-
-          <treeitem container="true" open="true">
-            <treerow>
-              <treecell label="&theme.tree.container.user;" editable="false"/>
-            </treerow>
-
-            <treechildren id="user-css"/>
-          </treeitem>
-        </treechildren>
+        <treechildren/>
       </tree>
+      <hbox pack="end">
+        <button id="css-remove" disabled="true" icon="remove" onclick="GameFOXCSS.removeWithTree();" label="Delete"/>
+      </hbox>
     </groupbox>
         
     <groupbox>

@@ -1,4 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
+const Cc = Components.classes, Ci = Components.interfaces;
+
 var GameFOXCSS =
 {
   init: function()
@@ -36,6 +38,8 @@ var GameFOXCSS =
     this.add('user', uri, filename, filename, '', '', false);
     this.populate(document.getElementById('css-tree'));
     this.treeView.toggleOpenState(2);
+
+    document.getElementById('css-import-file').value = '';
   },
 
   filepicker: function()
@@ -210,6 +214,15 @@ var GameFOXCSS =
     }
     this.treeView.setCellText = this.setCell;
     this.treeView.setCellValue = this.setCell;
+
+    // treeView.selectionChanged doesn't seem to be called?
+    element.addEventListener('click', function() {
+      var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
+      if (category == 'user')
+        document.getElementById('css-remove').setAttribute('disabled', 'false');
+      else
+        document.getElementById('css-remove').setAttribute('disabled', 'true');
+    }, true);
     
     element.view = this.treeView;
   },
@@ -230,5 +243,39 @@ var GameFOXCSS =
     prefs.setCharPref('theme.css.serialized', css.toSource());
 
     GameFOXCSS.reload();
+  },
+
+  removeWithTree: function()
+  {
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService).
+      getBranch('gamefox.');
+    var file = Cc['@mozilla.org/file/local;1'].getService(Ci.nsILocalFile);
+    var css = eval(prefs.getCharPref('theme.css.serialized'));
+
+    var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
+        Ci.nsIStyleSheetService);
+    var file = Cc['@mozilla.org/file/local;1'].getService(
+        Ci.nsILocalFile);
+
+    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
+    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][5];
+
+    if (category != 'user')
+      return false;
+
+    file.initWithPath(this.getDirectory());
+    file.append(filename);
+    file.remove(false);
+
+    delete css[category][filename];
+    prefs.setCharPref('theme.css.serialized', css.toSource());
+
+    file.initWithPath(this.getDirectory());
+    file.append(filename);
+    var uri = Cc['@mozilla.org/network/io-service;1'].getService(
+        Ci.nsIIOService).newFileURI(file, null, null);
+    sss.unregisterSheet(uri, sss.USER_SHEET);
+
+    this.populate(document.getElementById('css-tree'));
   }
 }

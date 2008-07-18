@@ -56,10 +56,12 @@ var treeView = {
 
       var label = this.visibleData[idx][0];
       var toinsert = this.childData[label];
-      for (var i = 0; i < toinsert.length; i++) {
-        this.visibleData.splice(idx + i + 1, 0, [toinsert[i], false]);
+      if (toinsert) {
+        for (var i = 0; i < toinsert.length; i++) {
+            this.visibleData.splice(idx + i + 1, 0, [toinsert[i], false]);
+        }
+        this.treeBox.rowCountChanged(idx + 1, toinsert.length);
       }
-      this.treeBox.rowCountChanged(idx + 1, toinsert.length);
     }
   },
 

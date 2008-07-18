@@ -24,9 +24,6 @@
 <!ENTITY theme.tree.author "Author">
 <!ENTITY theme.tree.compat "Compatibility">
 <!ENTITY theme.tree.enabled "Enabled">
-<!ENTITY theme.tree.container.gamefox "GameFOX">
-<!ENTITY theme.tree.container.bundled "Bundled">
-<!ENTITY theme.tree.container.user "User">
 <!ENTITY theme.import.label "Import a Stylesheet">
 <!ENTITY theme.import.uri "URI">
 <!ENTITY theme.import.browse "Browse">
