@@ -14,6 +14,7 @@
     defaultButton=""
     onload="gamefoxSelectedPrefTabFix();"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
 <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
 
 <!-- P A G E -->
@@ -173,8 +174,10 @@
                 </rows>
               </grid>
               <hbox pack="end">
-                <button id="gamefox-css-grab-bs" label="Grab From GameFAQs" icon="refresh" oncommand="gamefoxGrabBoardSettings();"/>
-                <button id="gamefox-css-apply-bs" label="Save to GameFAQs" icon="save" oncommand="gamefoxChangeBoardSettings();"/>
+                <button id="gamefox-css-grab-bs" label="Grab From GameFAQs" icon="refresh"
+                  oncommand="GameFOXOptions.importBoardSettings();"/>
+                <button id="gamefox-css-apply-bs" label="Save to GameFAQs" icon="save"
+                  oncommand="GameFOXOptions.exportBoardSettings();"/>
               </hbox>
             </groupbox>
 
@@ -349,7 +352,7 @@
 
     <hbox pack="center">
       <button onclick="GameFOXCSS.reload();" icon="refresh" label="&theme.reload;"/>
-      <button onclick="gamefoxOpenCSS();" icon="open" label="&theme.edit;"/>
+      <button onclick="GameFOXOptions.openCSSDirectory();" icon="open" label="&theme.edit;"/>
     </hbox>
  </prefpane>
 
@@ -446,7 +449,8 @@
       <textbox preference="sig-body" rows="3" multiline="true" class="indent"/>
 
       <hbox pack="end">
-        <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh" oncommand="gamefoxGrabSignature();"/>
+        <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
+          oncommand="GameFOXOptions.importSignature();"/>
       </hbox>
 
       <hbox>

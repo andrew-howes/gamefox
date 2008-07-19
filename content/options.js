@@ -1,22 +1,49 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-function gamefoxOpenCSS()
+var GameFOXOptions =
 {
-  // Borrowed from MR Tech Local Install
-  var directoryService=Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
-  var extDir = directoryService.get('ProfD', Components.interfaces.nsILocalFile);
+  importBoardSettings: function()
+  {
+    GameFOXUtils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'), true);
+  },
 
-  extDir.append("gamefox");
-  extDir.append("css");
+  exportBoardSettings: function()
+  {
+    GameFOXUtils.exportBoardSettings(
+        document.getElementById('topicpage').value,
+        document.getElementById('topicsort').value,
+        document.getElementById('messagepage').value,
+        document.getElementById('messagesort').value,
+        document.getElementById('timezone').value,
+        document.getElementById('userdisplay').value,
+        true, document.getElementById('gamefox-css-apply-bs')
+        )
+  },
 
-  if(extDir.exists()) {
-    try {
-      extDir.reveal();
-    } catch(ex) {
-      alert("Error!\n" + ex + "\nYou are probably getting this because you are not running on a Windows operating system. Sorry, but that's  the only way this works right now. :(");
+  importSignature: function()
+  {
+    GameFOXUtils.importSignature(true, document.getElementById('gamefox-css-grab-bs'), true);
+  },
+
+  openCSSDirectory: function()
+  {
+    var directoryService = Components.classes['@mozilla.org/file/directory_service;1'].
+      getService(Components.interfaces.nsIProperties);
+
+    var directory = directoryService.get('ProfD', Components.interfaces.nsILocalFile);
+    directory.append("gamefox");
+    directory.append("css");
+
+    try
+    {
+      directory.reveal();
+    }
+    catch (e)
+    {
+      alert("That isn't supported here. You're probably using Firefox 2 and not using Windows.");
     }
   }
-}
+};
 
 function gamefoxSelectedPrefTabFix()
 {
@@ -89,155 +116,6 @@ function gamefoxRestoreSelectedTabs()
   }
 }
 
-function gamefoxSavePreferences()
-{
-  var prefWindow = document.getElementById('gamefox-prefwindow');
-  var panes      = prefWindow.preferencePanes;
-
-  for (var i = 0; i < panes.length; i++)
-  {
-    panes[i].writePreferences();
-  }
-}
-
-function gamefoxChangeBoardSettings()
-{
-  document.getElementById('gamefox-css-apply-bs').setAttribute('disabled', 'true');
-
-  var request = new XMLHttpRequest();
-  request.open('GET', 'http://boards.gamefaqs.com/gfaqs/settings.php');
-  request.onreadystatechange = function()
-  {
-    if (request.readyState == 4)
-    {
-      if (!request.responseText.match(/Board Display Settings/))
-      {
-        alert('Something broke. Are you logged in to boards.gamefaqs.com?');
-        document.getElementById('gamefox-css-apply-bs').removeAttribute('disabled');
-        return;
-      }
-
-      var action = request.responseText.match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
-      if (!action)
-      {
-        alert('Couldn\'t get your user ID. This shouldn\'t happen.');
-        document.getElementById('gamefox-css-apply-bs').removeAttribute('disabled');
-        return;
-      }
-      action = action[1];
-
-      var request2 = new XMLHttpRequest();
-      request2.open('POST', 'http://boards.gamefaqs.com' + action);
-      request2.onreadystatechange = function()
-      {
-        if (request2.readyState == 4)
-        {
-          if (!request2.responseText.match(/Display settings updated/))
-          {
-            alert("The settings update was unsuccessful. This shouldn't happen.");
-          }
-          else
-          {
-            alert("Your board display settings have been updated.");
-          }
-
-          document.getElementById('gamefox-css-apply-bs').removeAttribute('disabled');
-        }
-      }
-      var key = request.responseText.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
-      key = key[1];
-      
-      request2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      request2.send(
-                      'topicpage=' + document.getElementById('topicpage').value + '&' +
-                      'topicsort=' + document.getElementById('topicsort').value + '&' +
-                      'messagepage=' + document.getElementById('messagepage').value + '&' +
-                      'messagesort=' + document.getElementById('messagesort').value + '&' +
-                      'timezone=' + document.getElementById('timezone').value + '&' +
-                      'userdisplay=' + document.getElementById('userdisplay').value + '&' +
-                      'key=' + key + '&' +
-                      'submit=1'
-                   );
-    }
-  };
-
-  request.send(null);
-}
-
-function gamefoxGrabBoardSettings()
-{
-  document.getElementById('gamefox-css-grab-bs').setAttribute('disabled', 'true');
-
-  var request = new XMLHttpRequest();
-  request.open('GET', 'http://boards.gamefaqs.com/gfaqs/settings.php');
-  request.onreadystatechange = function()
-  {
-    if (request.readyState == 4)
-    {
-      if (!request.responseText.match(/Board Display Settings/))
-      {
-        alert('Something broke. Are you logged in to boards.gamefaqs.com?');
-        document.getElementById('gamefox-css-grab-bs').removeAttribute('disabled');
-        return;
-      }
-
-      var topicpage = gamefoxParseHTMLSelect(request.responseText, 'topicpage');
-      var topicsort = gamefoxParseHTMLSelect(request.responseText, 'topicsort');
-      var messagepage = gamefoxParseHTMLSelect(request.responseText, 'messagepage');
-      var messagesort = gamefoxParseHTMLSelect(request.responseText, 'messagesort');
-      var timezone = gamefoxParseHTMLSelect(request.responseText, 'timezone');
-      var userdisplay = gamefoxParseHTMLSelect(request.responseText, 'userdisplay');
-      if (topicpage == null || topicsort == null || messagepage == null || messagesort == null || timezone == null || userdisplay == null) {
-        alert('Unable to fetch all board settings. This shouldn\'t happen.');
-        document.getElementById('gamefox-css-grab-bs').removeAttribute('disabled');
-        return;
-      }
-      // if GameFAQs gives us bad values, bad things happen
-      document.getElementById('gamefoxTpcsPerPage').value = topicpage;
-      document.getElementById('gamefoxTpcSortOrder').value = topicsort;
-      document.getElementById('gamefoxMsgsPerPage').value = messagepage;
-      document.getElementById('gamefoxMsgSortOrder').value = messagesort;
-      document.getElementById('gamefoxTimeZone').value = timezone;
-      document.getElementById('gamefoxMsgDisplay').value = userdisplay;
-      document.getElementById('gamefox-css-grab-bs').removeAttribute('disabled');
-    }
-  };
-
-  request.send(null);
-}
-
-function gamefoxGrabSignature()
-{
-  document.getElementById('gamefox-css-grab-sig').setAttribute('disabled', 'true');
-
-  var request = new XMLHttpRequest();
-  request.open('GET', 'http://boards.gamefaqs.com/gfaqs/sigquote.php');
-  request.onreadystatechange = function()
-  {
-    if (request.readyState == 4)
-    {
-      if (!request.responseText.match(/Board Signature and Quote/))
-      {
-        alert('Something broke. Are you logged in to boards.gamefaqs.com?');
-        document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
-        return;
-      }
-
-      var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
-      if (!sig)
-      {
-        alert('Couldn\'t get your signature. This usually shouldn\'t happen. Maybe you have one of those really old signatures that displays bold/italics on the profile page?');
-        document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
-        return;
-      }
-      document.getElementById('sig-body').value = gamefoxSpecialCharsDecode(sig[1]);
-      document.getElementById('gamefox-css-grab-sig').removeAttribute('disabled');
-    }
-  };
-
-  request.send(null);
-}
-
 function gamefoxURLEncode(str)
 {
   str = escape(str).replace(/\+/g, '%2B').replace(/%20/g, '+').replace(/\//g, '%2F').replace(/@/g, '%40');
@@ -254,26 +132,4 @@ function gamefoxURLEncode(str)
   );
 
   return str;
-}
-
-function gamefoxSpecialCharsDecode(str)
-{
-  return str.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
-}
-
-function gamefoxParseHTMLSelect(str, name)
-{
-  var selectStart = str.search(new RegExp('<select\\b[^>]+?\\bname="' + name + '"[^>]*>', 'i'));
-  if (selectStart != -1) {
-    selectSubstring = str.substring(selectStart+1);
-    var selectEnd = selectSubstring.search(/<\/?select\b/i);
-    if (selectEnd != -1) {
-      selectSubstring = selectSubstring.substring(0, selectEnd);
-    }
-    var option = selectSubstring.match(/<option\b[^>]+?\bvalue="([^"]*)"[^>]+?\bselected="selected"[^>]*>/i);
-    if (option) {
-      return option[1];
-    }
-  }
-  return null;
 }
