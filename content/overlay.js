@@ -1767,6 +1767,8 @@ function GameFOXLoader()
   catch (e if e.name == "NS_ERROR_UNEXPECTED") // the pref isn't set, we can assume this is a first run
   {
     GameFOXCSS.init();
+    GameFOXUtils.importBoardSettings();
+    GameFOXUtils.importSignature();
     window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
   }

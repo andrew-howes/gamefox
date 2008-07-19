@@ -22,7 +22,7 @@ var GameFOXOptions =
 
   importSignature: function()
   {
-    GameFOXUtils.importSignature(true, document.getElementById('gamefox-css-grab-bs'), true);
+    GameFOXUtils.importSignature(true, document.getElementById('gamefox-css-grab-sig'), true);
   },
 
   openCSSDirectory: function()

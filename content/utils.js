@@ -21,7 +21,7 @@ var GameFOXUtils =
       {
         if (!request.responseText.match(/Board Display Settings/))
         {
-          this.log('importBoardSettings: Bad things!');
+          GameFOXUtils.log('importBoardSettings: Bad things!');
           if (noisy)
             alert('Something went wrong. Are you logged in to boards.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
@@ -73,9 +73,9 @@ var GameFOXUtils =
     request.send(null);
   },
 
-  exportBoardSettings: function(topicpage, topicsort, messagepage, messagesort, timezone, userdisplay, noisy, element)
+  exportBoardSettings: function(topicpage, topicsort, messagepage, messagesort, timezone, userdisplay, noisy, button)
   {
-    if (element) element.setAttribute('disabled', true);
+    if (button) button.setAttribute('disabled', true);
     var request = new XMLHttpRequest();
     request.open('GET', 'http://boards.gamefaqs.com/gfaqs/settings.php', true);
     request.onreadystatechange = function()
@@ -87,7 +87,7 @@ var GameFOXUtils =
           GameFOXUtils.log('exportBoardSettings: Bad things!');
           if (noisy)
             alert('Something went wrong. Are you logged in to boards.gamefaqs.com?');
-          if (element) element.setAttribute('disabled', false);
+          if (button) button.setAttribute('disabled', false);
           return;
         }
 
@@ -97,7 +97,7 @@ var GameFOXUtils =
           GameFOXUtils.log("exportBoardSettings: Couldn't get user id.");
           if (noisy)
             alert("Couldn't get your user ID. This shouldn't happen.");
-          if (element) element.setAttribute('disabled', false);
+          if (button) button.setAttribute('disabled', false);
           return;
         }
         action = action[1];
@@ -119,7 +119,7 @@ var GameFOXUtils =
               if (noisy)
                 alert("Your board display settings have been updated.");
             }
-            if (element) element.setAttribute('disabled', false);
+            if (button) button.setAttribute('disabled', false);
           }
         }
         var key = request.responseText.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
