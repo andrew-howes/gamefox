@@ -13,3 +13,9 @@
       are now added in order at the bottom of the post, even with your
       signature in the textarea
     * New, more flexible theme options pane and CSS backend
+    * Some efforts towards making GameFOX better for new users:
+        - Enable the standard GameFOX stylesheet by default. This immediately
+          cleans up GameFAQs a bit and styles QuickPost without the user
+          having to figure out what to do
+        - Display the options window automatically after installation
+        - Import the user's board settings and signature on first run
