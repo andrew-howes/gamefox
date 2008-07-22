@@ -935,7 +935,7 @@ var GameFOX =
       return;
     }
 
-    if (dblclickMsg && ((vertmess && node.parentNode.className == 'even') || !nodeClass.match(/author/)))//nodeClass != 'author'))
+    if (dblclickMsg)
     {
       GameFOX.quote(event);
     }
@@ -994,19 +994,14 @@ var GameFOX =
     }
 
 
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].
+      getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
 
     if (!doc.getElementById('gamefox-message'))
-    {
-      if (!prefs.getBoolPref('elements.quickpost.form')) {
-        //alert('QuickPost form is disabled. Please enable it to enable quoting.');
-      }
       return;
-    }
-
 
     var vertmess = (doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1) ? true : false;
-    var quoteHead, quoteMsg;
+    var quoteHead, quoteMsg, msgNum;
 
     /* Test for selection quoting */
     //var focusedWindow = new XPCNativeWrapper(document.commandDispatcher.focusedWindow, 'document', 'getSelection()');
@@ -1015,10 +1010,11 @@ var GameFOX =
     //if (gContextMenu) alert(focusedWindow.getSelection());
 
     // in message header
-    if ((vertmess && node.parentNode.className != 'even') || nodeClass == 'author')
+    if ((vertmess && node.parentNode.className != 'even') || nodeClass.match('author'))
     {
       quoteHead = node.textContent;
-
+      msgNum = '#' + node.id.substr(1);
+     
       if (vertmess)
       {
         node = tableNode.rows[node.parentNode.rowIndex + 1].cells[0];
@@ -1032,7 +1028,7 @@ var GameFOX =
     }
     else
     // in message body
-    if ((vertmess && node.parentNode.className == 'even') || nodeClass != 'author')
+    if ((vertmess && node.parentNode.className == 'even') || !nodeClass.match('author'))
     {
       quoteMsg = node.innerHTML;
 
@@ -1045,10 +1041,13 @@ var GameFOX =
         node = node.parentNode.cells[0];
       }
 
-      // post number
-      var msgNum = '#' + node.id.substr(1);
-
       quoteHead = node.textContent;
+      msgNum = '#' + node.id.substr(1);
+    }
+    else
+    {
+      GameFOXUtils.log('GameFOX.quote: nothing to do');
+      return;
     }
 
     GameFOX.quoteProcessing(event, quoteHead, quoteMsg, msgNum);
@@ -1116,7 +1115,7 @@ var GameFOX =
     }
 
     var quickpost = event.target.ownerDocument.getElementById('gamefox-message');
-    if (prefs.getIntPref('sigAdd') == 1)
+    if (prefs.getIntPref('signature.addition') == 1)
       quickpost.value += quote + "\n";
     else
     {
