@@ -19,3 +19,4 @@
           having to figure out what to do
         - Display the options window automatically after installation
         - Import the user's board settings and signature on first run
+    * Fixes for quoting when the message data is displayed left of the post
