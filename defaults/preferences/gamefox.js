@@ -1,4 +1,5 @@
 pref("gamefox.gfaqs9", false);
+
 pref("gamefox.elements.quickpost.form", true);
 pref("gamefox.elements.quickpost.button", true);
 pref("gamefox.elements.quickpost.link", true);
@@ -7,8 +8,9 @@ pref("gamefox.elements.tag.link", true);
 pref("gamefox.elements.titlechange", true);
 pref("gamefox.elements.msgnum", true);
 pref("gamefox.elements.msgnum.style", 0);
-pref("gamefox.elements.myposts.topiclink", true);
-pref("gamefox.elements.tracked.topiclink", true);
+pref("gamefox.elements.myposts.boardlink", true);
+pref("gamefox.elements.tracked.boardlink", true);
+
 pref("gamefox.highlight.groups.1", "");
 pref("gamefox.highlight.groups.2", "");
 pref("gamefox.highlight.colors.1", "#CCFFFF");

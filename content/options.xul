@@ -42,8 +42,8 @@
       <preference id="gamefoxTpcSortOrder" name="gamefox.tpcSortOrder" type="int"/>
       <preference id="gamefoxMsgDisplay" name="gamefox.msgDisplay" type="int"/>
       <preference id="gamefoxTimeZone" name="gamefox.timeZone" type="int"/>
-      <preference id="gamefox-pref-myposts-topiclink" name="gamefox.elements.myposts.topiclink" type="bool"/>
-      <preference id="gamefox-pref-tracked-topiclink" name="gamefox.elements.tracked.topiclink" type="bool"/>
+      <preference id="gamefox-pref-myposts-boardlink" name="gamefox.elements.myposts.boardlink" type="bool"/>
+      <preference id="gamefox-pref-tracked-boardlink" name="gamefox.elements.tracked.boardlink" type="bool"/>
       <preference id="gamefox-pref-paging-auto"       name="gamefox.paging.auto"      type="bool"/>
       <preference id="gamefox-pref-paging-location"   name="gamefox.paging.location"  type="int"/>
       <preference id="gamefox-pref-paging-prefix"     name="gamefox.paging.prefix"    type="string"/>
@@ -207,16 +207,17 @@
                 <row>
 
                   <groupbox>
-                    <caption label="Topics"/>
+                    <caption label="Topic Lists"/>
                     <vbox>
                       <checkbox preference="gamefox-pref-quickpost-link" label="Enable QuickPost link"/>
-                      <checkbox preference="gamefox-pref-myposts-topiclink" label="Topic link in Active Message List"/>
-                      <checkbox preference="gamefox-pref-tracked-topiclink" label="Topic link in Tracked Topics"/>
+                      <checkbox preference="gamefox-pref-myposts-boardlink"
+                        label="Board link in Active Message List (gfaqs9)"/>
+                      <checkbox preference="gamefox-pref-tracked-boardlink" label="Board link in Tracked Topics"/>
                     </vbox>
                   </groupbox>
 
                   <groupbox>
-                    <caption label="Messages"/>
+                    <caption label="Message Lists"/>
                     <vbox>
                       <checkbox preference="gamefox-pref-quickpost-form" label="Enable QuickPost form"/>
                       <checkbox preference="gamefox-pref-tag-link" label="Enable &quot;Tag Topic&quot; link"/>

@@ -195,32 +195,45 @@ var GameFOX =
     }
 
 
-  /* Active Message List */
-
+  /* Active Messages List (myposts.php) */
     if (doc.location.pathname.match(/^\/gfaqs9?\/myposts\.php$/i))
     {
-      if (doc.location.pathname.match(/^\/gfaqs9\/myposts\.php$/i))
-        doc.evaluate('//div[@class="genrebox"]/table', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener('dblclick', GameFOX.topicDblclick, false);
-      else
-        doc.evaluate('//div[@class="board"]/table', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener('dblclick', GameFOX.topicDblclick, false);
- 
-      if (prefs.getBoolPref('elements.myposts.topiclink'))
+      if (GameFOXNine.getNine()) // gfaqs9
       {
-        try {
-          var rows = doc.getElementsByTagName('table');
-              rows = (rows[2] ? rows[2] : rows[0]).getElementsByTagName('tr');
-
-          for (i = 1; i < rows.length; i++)
-          {
-            rows[i].cells[0].innerHTML = '<a href="' + rows[i].cells[1].getElementsByTagName('a')[0].getAttribute('href').replace(/message(?=\.)/i, 'topic').replace(/(&topic=[0-9-]+|\btopic=[0-9-]+&)/i, '') + '">' + rows[i].cells[0].textContent.replace(/^\s+|\s+$/g, '') + '</a>';
+        doc.evaluate('//div[@class="genrebox"]/table', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+          addEventListener('dblclick', GameFOX.topicDblclick, false);
+        
+        if (prefs.getBoolPref('elements.myposts.boardlink'))
+        {
+          try {
+            var rows = doc.getElementsByTagName('table');
+            rows = (rows[2] ? rows[2] : rows[0]).getElementsByTagName('tr');
+            
+            for (i = 1; i < rows.length; i++)
+            {
+              // Convert board names to links
+              rows[i].cells[0].innerHTML = 
+                '<a href="' + 
+                rows[i].cells[1].getElementsByTagName('a')[0].getAttribute('href').
+                replace(/message(?=\.)/i, 'topic').
+                replace(/(&topic=[0-9-]+|\btopic=[0-9-]+&)/i, '') + 
+                '">' + 
+                rows[i].cells[0].textContent.replace(/^\s+|\s+$/g, '') + '</a>';
+            }
+          }
+          catch(e) {
+            GameFOXUtils.log('elements.myposts.boardlink, gfaqs9');
           }
         }
-        catch(e) {
-          gamefox_log('Error when processing elements.myposts.topiclink');
-        }
+      }
+      else // gfaqs10
+      {
+        doc.evaluate('//div[@class="board"]/table', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+          addEventListener('dblclick', GameFOX.topicDblclick, false);
       }
     }
-
     else
 
   /* Posting & Preview */
@@ -400,7 +413,7 @@ var GameFOX =
 
 
       var onTrackedList   = doc.location.pathname.match(/\btrack(ed|s)?\.php$/i);
-      var enableTopicLink = onTrackedList && prefs.getBoolPref('elements.tracked.topiclink');
+      var enableTopicLink = onTrackedList && prefs.getBoolPref('elements.tracked.boardlink');
 
       var enableHighlight = !onTrackedList && highlightNames.length > 0 && prefs.getBoolPref('highlight.topics');
       var enablePaging    = prefs.getBoolPref('paging.auto');
