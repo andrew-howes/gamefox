@@ -1,5 +1,8 @@
 /* vim: set et sw=2 ts=2 sts=2: */
 
+// TODO: this thing is huge. try to split it into multiple smaller files, it's
+// is nearly impossible to follow
+
 function gamefox_log(msg) {
   var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
                                  .getService(Components.interfaces.nsIConsoleService);
@@ -198,7 +201,7 @@ var GameFOX =
   /* Active Messages List (myposts.php) */
     if (doc.location.pathname.match(/^\/gfaqs9?\/myposts\.php$/i))
     {
-      if (GameFOXNine.getNine()) // gfaqs9
+      if (gfaqs9) // gfaqs9
       {
         doc.evaluate('//div[@class="genrebox"]/table', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
