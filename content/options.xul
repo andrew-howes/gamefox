@@ -327,7 +327,7 @@
       <tree id="css-tree" rows="10" hidecolumnpicker="true" editable="true" seltype="single">
         <treecols>
           <treecol label="&theme.tree.name;" primary="true" flex="1"/>
-          <treecol label="&theme.tree.author;"/>
+          <treecol label="&theme.tree.author;" width="100"/>
           <treecol label="&theme.tree.compat;"/>
           <treecol label="&theme.tree.enabled;" type="checkbox" editable="true"/>
         </treecols>

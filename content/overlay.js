@@ -1,7 +1,7 @@
 /* vim: set et sw=2 ts=2 sts=2: */
 
 // TODO: this thing is huge. try to split it into multiple smaller files, it's
-// is nearly impossible to follow
+// nearly impossible to follow
 
 function gamefox_log(msg) {
   var consoleService = Components.classes["@mozilla.org/consoleservice;1"]

@@ -39,6 +39,10 @@
       <label class="name" value="Michael Ryan"/>
       <label class="username" value="RockMFR 5"/>
     </hbox>
+    <hbox>
+      <label class="name" value="zero_ant"/>
+      <label class="username" value="ZeroAnt"/>
+    </hbox>
 
     <separator class="thin"/>
     <label class="subtitle" value="&previousdevs.label;"/>
@@ -56,11 +60,6 @@
       <label class="description" value="GameFOX TK" tooltiptext="GameFOX TK 0.5.x is based on GameFOX 0.5"/>
       <spacer flex="1"/>
       <label class="url-label" value="http://www.toadking.com/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
-    <hbox>
-      <label class="name" value="zero_ant"/>
-      <label class="username" value="ZeroAnt"/>
-      <label class="description" value="GameFOX TK+" tooltiptext="GameFOX TK+ 0.5.x is based on GameFOX TK 0.5.4.1"/>
     </hbox>
 
     <separator class="thin"/>
