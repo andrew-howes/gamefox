@@ -14,12 +14,16 @@
     defaultButton=""
     onload="gamefoxSelectedPrefTabFix();"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-<script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
-<script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
 
 <!-- P A G E -->
 
   <prefpane id="gamefox-page-pane" label="Page">
+    <!-- These have to be inside the first prefpane because of BMO bug #296418
+         Luckily, the scripts seem to be applied to all of the other prefpanes too, so
+         we only have to do this once. -->
+    <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
+    <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
+
     <preferences>
       <preference id="gamefox-pref-gfaqs9" name="gamefox.gfaqs9" type="bool"/>
       <preference id="gamefox-pref-quickpost-form" name="gamefox.elements.quickpost.form" type="bool"/>
