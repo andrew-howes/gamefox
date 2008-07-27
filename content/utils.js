@@ -174,14 +174,14 @@ var GameFOXUtils =
           return;
         }
         if (inOptions)
-          document.getElementById('sig-body').value = GameFOXUtils.specialCharsDecode(sig[1]);
+          document.getElementById('sig-body').value = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
         else
         {
           var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
               Components.interfaces.nsIPrefService).getBranch('gamefox.');
           var str = Components.classes['@mozilla.org/supports-string;1'].createInstance(
               Components.interfaces.nsISupportsString);
-          str.data = GameFOXUtils.specialCharsDecode(sig[1]);
+          str.data = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
           prefs.setComplexValue('signature.body', Components.interfaces.nsISupportsString,
             str);
         }
@@ -216,5 +216,12 @@ var GameFOXUtils =
       replace(/&lt;/g, '<').
       replace(/&quot;/g, '"').
       replace(/&amp;/g, '&');
+  },
+
+  convertNewlines: function(str)
+  {
+    return str.
+      replace(/\r\n/g, '\n').
+      replace(/\r/g, '\n');
   }
 };
