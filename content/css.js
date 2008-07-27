@@ -214,16 +214,16 @@ var GameFOXCSS =
     this.treeView.setCellText = this.setCell;
     this.treeView.setCellValue = this.setCell;
 
-    // treeView.selectionChanged doesn't seem to be called?
-    element.addEventListener('click', function() {
-      var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
-      if (category == 'user')
-        document.getElementById('css-remove').setAttribute('disabled', 'false');
-      else
-        document.getElementById('css-remove').setAttribute('disabled', 'true');
-    }, true);
-    
     element.view = this.treeView;
+  },
+
+  onselect: function()
+  {
+    var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
+    if (category == 'user')
+      document.getElementById('css-remove').setAttribute('disabled', 'false');
+    else
+      document.getElementById('css-remove').setAttribute('disabled', 'true');
   },
 
   setCell: function(idx, column, value)
@@ -272,7 +272,7 @@ var GameFOXCSS =
 
     file.initWithPath(this.getDirectory());
     file.append(filename);
-    var uri = Components.interfaces['@mozilla.org/network/io-service;1'].getService(
+    var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
         Components.interfaces.nsIIOService).newFileURI(file, null, null);
     sss.unregisterSheet(uri, sss.USER_SHEET);
 

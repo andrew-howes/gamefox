@@ -1,4 +1,3 @@
 Update version number in these files:
         * install.rdf
         * Makefile
-        * If stylesheets in jar have changed: chrome/content/css.js
