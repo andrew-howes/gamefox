@@ -241,6 +241,8 @@ var GameFOXCSS =
     css[category][filename][map[column.index]] = value;
     prefs.setCharPref('theme.css.serialized', css.toSource());
 
+    this.selection.select(idx);
+
     GameFOXCSS.reload();
   },
 
