@@ -31,10 +31,14 @@ var GameFOXCSS =
 
   userimport: function(uri)
   {
+    if (!uri.length) return;
+    if (!uri.match(/\.(css|txt)$/)) return;
+
     var filename = uri.split('/');
     filename = filename[filename.length - 1];
     
-    this.add('user', uri, filename, filename, '', '', false);
+    if (!this.add('user', uri, filename, filename, '', '', false))
+      return false;
     this.populate(document.getElementById('css-tree'));
     this.treeView.toggleOpenState(2);
 
@@ -114,6 +118,7 @@ var GameFOXCSS =
     }
 
     prefs.setCharPref('theme.css.serialized', css.toSource());
+    return true;
   },
 
   getDirectory: function()
@@ -277,7 +282,11 @@ var GameFOXCSS =
     file.append(filename);
     var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
         Components.interfaces.nsIIOService).newFileURI(file, null, null);
-    sss.unregisterSheet(uri, sss.USER_SHEET);
+    try
+    {
+      sss.unregisterSheet(uri, sss.USER_SHEET);
+    }
+    catch (e) {}
 
     this.populate(document.getElementById('css-tree'));
   }
