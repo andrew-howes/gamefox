@@ -34,6 +34,7 @@ XPI_FILES     = ${XPI_BIN_FILES} ${XPI_TXT_FILES}
 XPI_DIRS      = $(foreach f,${XPI_FILES},$(dir $f))
 XPI_NAME      = ${NAME}-${VERSION}.xpi
 XPI           = ${XPI_NAME}
+MOZXPI        = ${NAME}-${VERSION}_amo.xpi
 
 BUILD_DIR     = build.${VERSION}.${OS}
 BUILD_JAR_DIR = ${BUILD_DIR}/jar
@@ -48,7 +49,7 @@ PERL = perl
 
 #### rules
 
-.PHONY: all help info jar xpi install clean distclean
+.PHONY: all help info jar xpi mozxpi install clean distclean
 all: help
 
 help:
@@ -57,6 +58,7 @@ help:
 	@echo "  make info      - show some info about the system"
 	@echo "  make jar       - build a JAR (${JAR})"
 	@echo "  make xpi       - build an XPI (${XPI_NAME})"
+	@echo "  make mozxpi    - build an XPI (${MOZXPI}) for Mozilla Addons"
 	@echo "  make clean     - clean up"
 	@echo "  make distclean - clean up more"
 
@@ -69,9 +71,11 @@ info:
 xpi: ${XPI}
 jar: ${JAR}
 
+mozxpi: ${MOZXPI}
+
 clean:
 	@echo "Cleanup..."
-	${Q}rm -f ${JAR} ${XPI}
+	${Q}rm -f ${JAR} ${XPI} ${MOZXPI}
 	${Q}find . -name '*~' -exec rm -f {} \;
 
 distclean: clean
@@ -100,6 +104,26 @@ ${XPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
 	${Q}${PERL} -pe 's,\s(skin|content|locale)/, jar:${JAR}!/\1/,' \
 	           < chrome.manifest > ${BUILD_XPI_DIR}/chrome.manifest
 	${Q}( cd ${BUILD_XPI_DIR} && ${ZIP} -r9 ${TOP}/${XPI} ${XPI_FILES} )
+	@echo "SUCCESS: $@"
+
+${MOZXPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
+	@echo "Building XPI for Mozilla Addons..."
+	${Q}mkdir -p $(dir ${MOZXPI})
+	${Q}for f in ${XPI_BIN_FILES} ; do \
+		cp $$f ${BUILD_XPI_DIR}/$$f ; \
+	    done
+	${Q}for f in ${XPI_TXT_FILES} ; do \
+		${SED} -e "s,###VERSION###,${VERSION},g" \
+		       -e "s,###DATE###,${BUILD_DATE},g" \
+			   -e "s,<em:updateURL>.*</em:updateURL>,,g" \
+		       < $$f > ${BUILD_XPI_DIR}/$$f ; \
+		( diff -q $$f ${BUILD_XPI_DIR}/$$f 1>/dev/null ) || \
+		( echo "modified: $$f" ; \
+		  diff -u $$f ${BUILD_XPI_DIR}/$$f | grep '^[-+][^-+]' ) ; \
+	    done
+	${Q}${PERL} -pe 's,\s(skin|content|locale)/, jar:${JAR}!/\1/,' \
+	           < chrome.manifest > ${BUILD_XPI_DIR}/chrome.manifest
+	${Q}( cd ${BUILD_XPI_DIR} && ${ZIP} -r9 ${TOP}/${MOZXPI} ${XPI_FILES} )
 	@echo "SUCCESS: $@"
 
 #### jar
