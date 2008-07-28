@@ -10,6 +10,8 @@ var GameFOXCSS =
         'Standard Default (old quickpost)', 'GameFOX devs', 'gfaqs10,9', false, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-classic-default.css', 'gamefox-classic-default.css',
         'Classic Default', 'GameFOX devs', 'gfaqs9', false, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
+        'GFCode', 'Ant P.', 'gfaqs10,9', true, true)
     
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
         'Wide Default Layout', '', 'gfaqs10', false, true);

@@ -1094,7 +1094,7 @@ var GameFOX =
     /* Prepare quote header */
     var qhead = "";
     if (prefs.getBoolPref('quote.header.username')) qhead += username;
-    if (prefs.getBoolPref('quote.header.date')) qhead += "; posted " + postdate;
+    if (prefs.getBoolPref('quote.header.date')) qhead += " | Posted " + postdate;
     if (prefs.getBoolPref('quote.header.messagenum')) qhead += " (" + postnum + ")";
 
     if (prefs.getBoolPref('quote.header.italic')) qhead = "<i>" + qhead + "</i>";

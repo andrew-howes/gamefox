@@ -1,0 +1,33 @@
+@-moz-document domain(gamefaqs.com) {
+.message td {
+    text-rendering: optimizeLegibility;
+}
+.message i > p, .message b > p {
+    background: #eee !important;
+    color: #000 !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    margin: 0 auto !important;
+    overflow: auto;
+    width: 96% !important;
+}
+.message i > p {
+    border: 1px solid #bbb !important;
+}
+.message b > p {
+    font-family: monospace !important;
+    white-space: pre-wrap;
+    background: #edb !important;
+}
+.message i > p > strong:first-child {
+    display: block;
+    padding: 2px !important;
+    font-style: italic !important;
+    font-weight: bold !important;
+    background: #7ab !important;
+    color: #fff !important;
+}
+.message i > p > strong:first-child + br {
+    display: none !important;
+}
+}
