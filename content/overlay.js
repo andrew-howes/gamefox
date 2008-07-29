@@ -1097,8 +1097,11 @@ var GameFOX =
     if (prefs.getBoolPref('quote.header.date')) qhead += " | Posted " + postdate;
     if (prefs.getBoolPref('quote.header.messagenum')) qhead += " (" + postnum + ")";
 
-    if (prefs.getBoolPref('quote.header.italic')) qhead = "<i>" + qhead + "</i>";
-    if (prefs.getBoolPref('quote.header.bold')) qhead = "<b>" + qhead + "</b>";
+    if (prefs.getCharPref('quote.style') != 'gfcode_full')
+    {
+      if (prefs.getBoolPref('quote.header.italic')) qhead = "<i>" + qhead + "</i>";
+      if (prefs.getBoolPref('quote.header.bold')) qhead = "<b>" + qhead + "</b>";
+    }
 
     switch (prefs.getCharPref('quote.style'))
     {
