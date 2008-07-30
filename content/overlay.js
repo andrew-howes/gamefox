@@ -1114,7 +1114,7 @@ var GameFOX =
     var qhead = "";
     if (prefs.getBoolPref('quote.header.username')) qhead += username;
     if (prefs.getBoolPref('quote.header.date')) qhead += " | Posted " + postdate;
-    if (prefs.getBoolPref('quote.header.messagenum')) qhead += " (" + postnum + ")";
+    if (prefs.getBoolPref('quote.header.messagenum') && postnum) qhead += " (" + postnum + ")";
 
     if (prefs.getCharPref('quote.style') != 'gfcode_full')
     {
