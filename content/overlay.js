@@ -652,8 +652,17 @@ var GameFOX =
                   break;
               }
             }
-            
-            divs[i].id = 'p' + '000'.substr(0, 3 - j.toString().length) + (numberMsgs ? j - 1 : j++);
+           
+            if (numberMsgs)
+            {
+              var h = j - 1;
+              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
+            }
+            else
+            {
+              var h = j++;
+              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
+            }
             
             posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
             
@@ -717,7 +726,16 @@ var GameFOX =
               }
             }
 
-            divs[i].id = 'p' + '000'.substr(0, 3 - j.toString().length) + (numberMsgs ? j - 1 : j++);
+            if (numberMsgs)
+            {
+              var h = j - 1;
+              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
+            }
+            else
+            {
+              var h = j++;
+              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
+            }
 
             posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
 
