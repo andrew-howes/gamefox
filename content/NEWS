@@ -1,6 +1,7 @@
 2008-07-xx:
     * version 0.6.1
     * Clean quotes of tags that aren't parsed by GameFAQs
+    * Insert quotes at the position of the cursor in QuickPost
 
 2008-07-29:
     * version 0.6.0

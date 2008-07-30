@@ -831,6 +831,7 @@ var GameFOX =
             );
     }
     doc.getElementById('gamefox-quickpost-form').addEventListener('submit', GameFOX.autoAppendSignature, false);
+    doc.getElementById('gamefox-message').setSelectionRange(0, 0);
 
     if (!prefs.getBoolPref('elements.quickpost.button'))
     {
@@ -1146,21 +1147,11 @@ var GameFOX =
       quickpost.value += quote + "\n";
     else
     {
-      // Temporarily remove the signature to allow for new quotes to be added at
-      // the end of the message
-      quickpost.value = quickpost.value.replace("\n" + GameFOX.formatSig(
-            prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
-            prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
-            prefs.getBoolPref('signature.newline')
-            ), '');
-      quickpost.value += quote + "\n";
-      var length = quickpost.value.length;
-      // Add the signature back
-      quickpost.value += "\n" + GameFOX.formatSig(
-          prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
-          prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
-          prefs.getBoolPref('signature.newline')
-          );
+      // holy crap this is so mindnumbingly simple and it solves everything
+      var length = quickpost.value.substring(0, quickpost.selectionStart).length + quote.length + 1;
+      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
+                      + quote + "\n"
+                      + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
     }
     quickpost.focus();
     // Move the caret to the end of the last quote
