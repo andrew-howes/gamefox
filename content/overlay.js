@@ -1133,6 +1133,14 @@ var GameFOX =
         break;
     }
 
+    // Clean up the quote
+    quote = quote.
+      replace(/<br\s*\/?>/ig, '\n').
+      replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/ig, '$1').
+      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr)\b[^<>]*\/?>/gi, '').
+      replace(/&(amp|AMP);/g, '&').
+      replace(/^\s+|\s+$/g, '');
+
     var quickpost = event.target.ownerDocument.getElementById('gamefox-message');
     if (prefs.getIntPref('signature.addition') == 1)
       quickpost.value += quote + "\n";
