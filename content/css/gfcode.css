@@ -24,7 +24,7 @@
     padding: 2px !important;
     font-style: italic !important;
     font-weight: bold !important;
-    background: #7ab !important;
+    background: #777 !important;
     color: #fff !important;
 }
 .message i > p > strong:first-child + br {

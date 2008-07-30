@@ -2,6 +2,7 @@
     * version 0.6.1
     * Clean quotes of tags that aren't parsed by GameFAQs
     * Insert quotes at the position of the cursor in QuickPost
+    * Use neutral colors for GFCode quotes
 
 2008-07-29:
     * version 0.6.0
