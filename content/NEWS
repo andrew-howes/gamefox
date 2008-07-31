@@ -1,4 +1,7 @@
-2008-07-xx:
+2008-08-xx:
+    * version 0.6.2
+
+2008-07-31:
     * version 0.6.1
     * Remove tags that aren't parsed by GameFAQs from quotes
     * Insert quotes at the position of the cursor in QuickPost
