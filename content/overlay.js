@@ -1426,7 +1426,7 @@ var GameFOX =
       {
         link = doc.createElement('a');
         link.setAttribute('href', topicLink + (i ? '&page=' + i : ''));
-        link.innerHTML = (i < 9 ? '&nbsp;' : '') + (i+1);
+        link.innerHTML = i+1;
 
         td.appendChild(link);
 
