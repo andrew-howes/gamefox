@@ -21,6 +21,7 @@ JAR_BIN_FILES = $(shell find content skin               \
                         -type f                         \
                         -a \(                           \
                                 -path '*.png'           \
+                             -o -path '*.gif'           \
                              -o -path '*.bz2'           \
                         \)                              \
                 )
