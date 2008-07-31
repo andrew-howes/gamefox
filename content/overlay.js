@@ -1103,13 +1103,32 @@ var GameFOX =
     var postnum  = msgNum;
 
     /* Parse message body */
-    var body = quoteMsg.replace(/<br>/g, "\n");
-    // Get rid of signature
+    var body = quoteMsg.
+      replace(/<br\s*\/?>/ig, '\n').
+      replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/ig, '$1').
+      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr)\b[^<>]*\/?>/gi, '').
+      replace(/&(amp|AMP);/g, '&').
+      replace(/^\s+|\s+$/g, '');
+
+   // Get rid of signature
     if (prefs.getBoolPref('quote.removesignature'))
       body = body.replace(/---(\n.*\n?){0,2}$/, ''); // Only a simple regexp is needed because extraneous
                                                      // signatures are no longer allowed
     body = GameFOXUtils.specialCharsDecode(body.replace(/^\s+|\s+$/g, ''));
-
+    // Prevent too much GFCode quote nesting
+    var loops = 0;
+    while (body.match(/(<i><p>[\s\S]*?){3,}/) != null)
+    { // the number at the end of the regexp (e.g., {3,}) is max number of recursive quotes
+      if (loops > 6) // too many nests from when this wasn't enforced, just give up
+                     // and quote the last guy
+      {
+        body = body.replace(/\n*<i><p>[\s\S]*<\/p><\/i>\n*/, "");
+        break;
+      }
+      body = body.replace(/\n*<i><p>(?:(?=([^<]+))\1|<(?!i>))*?<\/p><\/i>\n*/, "\n");
+      loops++;
+    }
+    
     /* Prepare quote header */
     var qhead = "";
     if (prefs.getBoolPref('quote.header.username')) qhead += username;
@@ -1151,14 +1170,6 @@ var GameFOX =
           replace(/\%m/g, body);
         break;
     }
-
-    // Clean up the quote
-    quote = quote.
-      replace(/<br\s*\/?>/ig, '\n').
-      replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/ig, '$1').
-      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr)\b[^<>]*\/?>/gi, '').
-      replace(/&(amp|AMP);/g, '&').
-      replace(/^\s+|\s+$/g, '');
 
     var quickpost = event.target.ownerDocument.getElementById('gamefox-message');
     if (prefs.getIntPref('signature.addition') == 1)
