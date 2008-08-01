@@ -340,7 +340,7 @@
         <treechildren/>
       </tree>
       <hbox pack="end">
-        <button id="css-remove" disabled="true" icon="remove" onclick="GameFOXCSS.removeWithTree();" label="Delete"/>
+        <button id="css-remove" disabled="true" icon="remove" oncommand="GameFOXCSS.removeWithTree();" label="Delete"/>
       </hbox>
     </groupbox>
         
@@ -349,16 +349,16 @@
       <hbox>
         <label value="&theme.import.uri;" style="margin-top: 7px"/>
         <textbox flex="1" id="css-import-file" value=""/>
-        <button onclick="GameFOXCSS.filepicker();" label="&theme.import.browse;..."/>
+        <button oncommand="GameFOXCSS.filepicker();" label="&theme.import.browse;..."/>
       </hbox>
       <hbox pack="end">
-        <button icon="add" onclick="GameFOXCSS.userimport(document.getElementById('css-import-file').value);" label="&theme.import.submit;"/>
+        <button icon="add" oncommand="GameFOXCSS.userimport(document.getElementById('css-import-file').value);" label="&theme.import.submit;"/>
       </hbox>
     </groupbox>
 
     <hbox pack="center">
-      <button onclick="GameFOXCSS.reload();" icon="refresh" label="&theme.reload;"/>
-      <button onclick="GameFOXOptions.openCSSDirectory();" icon="open" label="&theme.edit;"/>
+      <button oncommand="GameFOXCSS.reload();" icon="refresh" label="&theme.reload;"/>
+      <button oncommand="GameFOXOptions.openCSSDirectory();" icon="open" label="&theme.edit;"/>
     </hbox>
  </prefpane>
 
