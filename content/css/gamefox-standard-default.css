@@ -101,15 +101,10 @@
     }
 
     /* annoyances */
-    .ad, .adbox, #gne_nav, #gnenav, #mpu_wrap, #footer, #sitenav, #broadnav,
-    #todayoncnet, #cnetfooter, #networkfooter, #aboutcnet, .rubics_netxp1_main
-    , #copyright
+    .ad, .adbox, #gne_nav, #mpu_wrap, #footer, #sitenav, #broadnav,
+    #todayoncnet, .rubics_netxp1_main
         {
        display: none !important;
-    }
-    .content2
-        {
-        overflow: visible !important;
     }
 
     /* below are from ToadKing's releases. For backwards compatibility */

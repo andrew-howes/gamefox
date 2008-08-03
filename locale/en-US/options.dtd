@@ -1,8 +1,5 @@
 <!ENTITY general.label "General">
 
-<!ENTITY gfaqs9.label "Assume GameFAQs 9">
-<!ENTITY gfaqs9.desc "When unable to be determined, use /gfaqs9/ URIs when linking to GameFAQs pages.">
-
 <!ENTITY signature.content "Content">
 <!ENTITY signature.desc "
         Pre-signatures are inserted before the separator. Signatures cannot exceed

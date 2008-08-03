@@ -12,29 +12,11 @@ function gfox_addTab(aUrl, focusType)
 
 function gfox_processAboutDialog()
 {
-  var gfaqs9 = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getBoolPref('gamefox.gfaqs9');
-
-  if (gfaqs9)
-  {
-    var links = document.getElementsByAttribute('class', 'url-label');
-    for (var i = 0; i < links.length; i++)
-    {
-      links[i].setAttribute('value', links[i].getAttribute('value').replace(/:\/\/boards\.gamefaqs\.com\/gfaqs\b/i, '://boards.gamefaqs.com/gfaqs9'));
-    }
-  }
+  // empty
 }
 
 function gfox_processSidebar()
 {
-  var gfaqs9 = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getBoolPref('gamefox.gfaqs9');
-
-  if (gfaqs9)
-  {
-    var content = document.getElementById('gamefox-sidebar-container');
-    content.innerHTML = content.innerHTML.replace(/:\/\/boards\.gamefaqs\.com\/gfaqs\b(?!\/tracked\.)/ig, '://boards.gamefaqs.com/gfaqs9');
-    // note that tracked.php will not be affected by gfaqs9 transformation
-  }
-
   // For link middle-clicking
   var links = document.getElementsByTagName('a');
   for (var i = 0; i < links.length; i++)
@@ -58,8 +40,7 @@ function gfox_newTabLogin(loginForm)
 
 function gfox_redirectLogin(loginForm)
 {
-  var gfaqs9 = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getBoolPref('gamefox.gfaqs9');
   var doc    = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow('navigator:browser').content.document;
   var path   = loginForm.ownerDocument.getElementById('gamefaqs-login-path');
-  path.value = (doc.location.protocol.match(/^https?:$/i) && doc.location.host.match(/(^|\.)gamefaqs\.com$/i)) ? doc.location.href.replace(/&(action)=[^&]*(?=&|$)|\b(action)=[^&]*&/ig, '') : 'http://boards.gamefaqs.com/gfaqs' + (gfaqs9 ? '9' : '') + '/';
+  path.value = (doc.location.protocol.match(/^https?:$/i) && doc.location.host.match(/(^|\.)gamefaqs\.com$/i)) ? doc.location.href.replace(/&(action)=[^&]*(?=&|$)|\b(action)=[^&]*&/ig, '') : 'http://boards.gamefaqs.com/gfaqs/';
 }

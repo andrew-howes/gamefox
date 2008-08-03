@@ -32,8 +32,7 @@ var GameFOX =
     var cxTag       = cxPrefs.getBoolPref('tag');
     var cxPageList  = cxPrefs.getBoolPref('pagelist');
 
-    var gfaqs9      = GameFOXNine.getNine(doc);
-    var onMyPosts   = doc.location.pathname.match(/^\/gfaqs9?\/myposts\.php$/i);
+    var onMyPosts   = doc.location.pathname.match(/^\/gfaqs\/myposts\.php$/i);
     var onMsgList;
     var onTopicList;
 
@@ -41,11 +40,6 @@ var GameFOX =
     {
       onMsgList   = false;
       onTopicList = false;
-    }
-    else if (gfaqs9)
-    {
-      onMsgList   = doc.location.pathname.match(/^\/gfaqs9\/genmessage\.php$/i);
-      onTopicList = !onMsgList && doc.location.pathname.match(/^\/gfaqs9\/(gentopic|search)\.php$/ig);
     }
     else
     {
@@ -59,10 +53,6 @@ var GameFOX =
     if (!onMsgList || !cxQuote)
     {
       document.getElementById('gamefox-context-quote').hidden = true;
-    }
-    else if (gfaqs9)
-    {
-      GameFOXNine.contextMenuDisplayQuote(gContextMenu);
     }
     else
     {
@@ -94,7 +84,7 @@ var GameFOX =
       {
         try
         {
-          if (!doc.evaluate((gfaqs9 ? '//div[@class="boxhead"]' : '//h1/following::h1'), doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
+          if (!doc.evaluate('//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
           {
             hideCxTag = true;
           }
@@ -187,10 +177,9 @@ var GameFOX =
 
     var i, j, posterIndex, anchor, vertmess;
     var msgsPerPage = prefs.getIntPref('msgsPerPage');
-    var gfaqs9      = GameFOXNine.getNine(doc);
     try
     {
-      vertmess = (gfaqs9 || doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1) ? true : false;
+      vertmess = (doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1) ? true : false;
     }
     catch (e)
     {
@@ -199,49 +188,17 @@ var GameFOX =
 
 
   /* Active Messages List (myposts.php) */
-    if (doc.location.pathname.match(/^\/gfaqs9?\/myposts\.php$/i))
+    if (doc.location.pathname.match(/^\/gfaqs\/myposts\.php$/i))
     {
-      if (gfaqs9) // gfaqs9
-      {
-        doc.evaluate('//div[@class="genrebox"]/table', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          addEventListener('dblclick', GameFOX.topicDblclick, false);
-        
-        if (prefs.getBoolPref('elements.myposts.boardlink'))
-        {
-          try {
-            var rows = doc.getElementsByTagName('table');
-            rows = (rows[2] ? rows[2] : rows[0]).getElementsByTagName('tr');
-            
-            for (i = 1; i < rows.length; i++)
-            {
-              // Convert board names to links
-              rows[i].cells[0].innerHTML = 
-                '<a href="' + 
-                rows[i].cells[1].getElementsByTagName('a')[0].getAttribute('href').
-                replace(/message(?=\.)/i, 'topic').
-                replace(/(&topic=[0-9-]+|\btopic=[0-9-]+&)/i, '') + 
-                '">' + 
-                rows[i].cells[0].textContent.replace(/^\s+|\s+$/g, '') + '</a>';
-            }
-          }
-          catch(e) {
-            GameFOXUtils.log('elements.myposts.boardlink, gfaqs9');
-          }
-        }
-      }
-      else // gfaqs10
-      {
-        doc.evaluate('//div[@class="board"]/table', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          addEventListener('dblclick', GameFOX.topicDblclick, false);
-      }
+      doc.evaluate('//div[@class="board"]/table', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+        addEventListener('dblclick', GameFOX.topicDblclick, false);
     }
     else
 
   /* Posting & Preview */
 
-    if (doc.location.pathname.match(/^\/gfaqs9?\/(post|preview)\.php$/ig))
+    if (doc.location.pathname.match(/^\/gfaqs\/(post|preview)\.php$/ig))
     {
       var newTopic = doc.getElementsByName('topictitle')[0];
 
@@ -250,7 +207,7 @@ var GameFOX =
       {
         var newTitle = 'GameFAQs: ' + (newTopic ? 'Create Topic' : 'Post Message');
 
-        if (newTopic && !gfaqs9)
+        if (newTopic)
         {
           newTitle += ' - ' + doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
         }
@@ -284,41 +241,19 @@ var GameFOX =
         gamefox_log('Error when processing elements.quickpost.button in Posting & Preview');
       }
 
-    /* Posting sig (gfaqs) */
+    /* Posting sig */
 
-      if (doc.location.pathname.match(/^\/gfaqs\/(post|preview)\.php$/ig))
+      if (prefs.getBoolPref('signature.applyeverywhere')
+          && (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
+           || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != '')
+          && !doc.documentElement.innerHTML.match(/\b(Error|Preview)\s*<\/h1>\s*<\/div>/ig))
       {
-        if (prefs.getBoolPref('signature.applyeverywhere')
-            && (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
-             || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != '')
-            && !doc.documentElement.innerHTML.match(/\b(Error|Preview)\s*<\/h1>\s*<\/div>/ig))
-        {
-          doc.getElementsByName('message')[0].value = "\n" +
-            GameFOX.formatSig(
-                prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
-                prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
-                prefs.getBoolPref('signature.newline')
-                );
-        }
-      }
-
-      else
-
-    /* Posting sig (gfaqs9) */
-
-      if (doc.location.pathname.match(/^\/gfaqs9\/post\.php$/i))
-      {
-        if (prefs.getBoolPref('signature.applyeverywhere')
-            && (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
-              || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != ''))
-        {
-          doc.getElementsByName('message')[0].value = "\n" +
-            GameFOX.formatSig(
-                prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
-                prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
-                prefs.getBoolPref('signature.newline')
-                );
-        }
+        doc.getElementsByName('message')[0].value = "\n" +
+          GameFOX.formatSig(
+              prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data,
+              prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data,
+              prefs.getBoolPref('signature.newline')
+              );
       }
     }
 
@@ -326,7 +261,7 @@ var GameFOX =
 
   /* User Information */
 
-    if (doc.location.pathname.match(/^\/gfaqs9?\/user\.php$/i) && titleChange)
+    if (doc.location.pathname.match(/^\/gfaqs\/user\.php$/i) && titleChange)
     {
       doc.title = 'GameFAQs: ' + doc.getElementsByTagName('td')[1].textContent.replace(/^\s+|\s+$/g, '');
       if (inFrame) parentDoc.title = doc.title;
@@ -337,36 +272,18 @@ var GameFOX =
 
     var onTopicList, onMsgList, onMsgDetail, userNav;
 
-    if (gfaqs9)
-    {
-      userNav     = doc.evaluate('//span[@class="boardnavright"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      onMsgList   = doc.location.pathname.match(/^\/gfaqs9\/genmessage\.php$/i);
-      onTopicList = !onMsgList && doc.location.pathname.match(/^\/gfaqs9\/(gentopic|search)\.php$/ig);
-      onMsgDetail = !onMsgList && !onTopicList && doc.location.pathname.match(/^\/gfaqs9\/detail.php$/ig);
-    }
-    else
-    {
-      userNav     = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      onMsgList   = !!userNav && !!doc.evaluate('//table[@class="message"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      onTopicList = !onMsgList && !!userNav && !!doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      onMsgDetail = onMsgList && !!doc.evaluate('//table[@class="message"]/ancestor::div/following-sibling::div//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      if (onMsgDetail) onMsgList = false;
-    }
+    userNav     = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    onMsgList   = !!userNav && !!doc.evaluate('//table[@class="message"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    onTopicList = !onMsgList && !!userNav && !!doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    onMsgDetail = onMsgList && !!doc.evaluate('//table[@class="message"]/ancestor::div/following-sibling::div//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    if (onMsgDetail) onMsgList = false;
 
 
   /* Message Detail */
 
     if (onMsgDetail && titleChange)
     {
-      var topicName;
-      if (gfaqs9)
-      {
-          topicName = doc.evaluate('//span[@class="subhead2"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '').replace(/^Topic:?\s*/i, '');
-      }
-      else
-      {
-          topicName = doc.evaluate('//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
-      }
+      var topicName = doc.evaluate('//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
       doc.title = 'GameFAQs: Message Detail - ' + topicName;
       if (inFrame) parentDoc.title = doc.title;
     }
@@ -387,8 +304,6 @@ var GameFOX =
     var highlightColor2 = prefs.getCharPref('highlight.colors.2');
     var highlightIgnore = prefs.getBoolPref('highlight.ignore');
 
-    var fix = gfaqs9 ? -1 : 0;
-
 
   /* Topic List */
 
@@ -408,11 +323,11 @@ var GameFOX =
 
       if (titleChange)
       {
-        doc.title = 'GameFAQs: ' + doc.evaluate((gfaqs9 ? '//div[@class="head1b"]' : '//h1'), doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
+        doc.title = 'GameFAQs: ' + doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
         if (inFrame) parentDoc.title = doc.title;
       }
 
-      doc.evaluate((gfaqs9 ? '//div[@class="genrebox"]/table' : '//table[@class="topics"]'), doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener('dblclick', GameFOX.topicDblclick, false);
+      doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener('dblclick', GameFOX.topicDblclick, false);
 
 
       var onTrackedList   = doc.location.pathname.match(/\btrack(ed|s)?\.php$/i);
@@ -471,7 +386,7 @@ var GameFOX =
           if (enableHighlight)
           {
             try {
-              posterIndex = highlightNames.indexOf(rows[i].getElementsByTagName('td')[2+fix].textContent.replace(/^\s+|\s+$/g, ''));
+              posterIndex = highlightNames.indexOf(rows[i].getElementsByTagName('td')[2].textContent.replace(/^\s+|\s+$/g, ''));
 
               if (posterIndex != -1)
               {
@@ -500,10 +415,10 @@ var GameFOX =
           if (enablePaging) // must be the last "if" so that it can "continue" properly
           {
             try {
-              numPages = Math.ceil(rows[i].cells[3+fix].textContent/msgsPerPage);
+              numPages = Math.ceil(rows[i].cells[3].textContent/msgsPerPage);
               if (numPages <= 1) continue;
 
-              topicLink = rows[i].cells[1+fix].getElementsByTagName('a')[0].getAttribute('href');
+              topicLink = rows[i].cells[1].getElementsByTagName('a')[0].getAttribute('href');
 
               if (!pgLocation)
               {
@@ -515,7 +430,7 @@ var GameFOX =
               }
               else
               {
-                tr = rows[i].cells[1+fix];
+                tr = rows[i].cells[1];
                 td = doc.createElement('span');
                 td.setAttribute('class', 'gamefox-pagelist');
                 td.setAttribute('tag', pgLocation);
@@ -569,7 +484,7 @@ var GameFOX =
     var highlightMsgs = prefs.getBoolPref('highlight.msgs');
     var pageNum       = doc.location.search.match(/\bpage=([0-9]+)/i);
     pageNum           = pageNum ? parseInt(pageNum[1]) : 0;
-    var contentdiv    = doc.evaluate((gfaqs9 ? '//div[@class="box"]' : '//table[@class="message"]'), doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    var contentdiv    = doc.evaluate('//table[@class="message"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 
     if (prefs.getBoolPref('elements.quickpost.form')
     && doc.evaluate('.//a[contains(@href, "post.php")]', userNav, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
@@ -577,7 +492,7 @@ var GameFOX =
       var quickpostdiv = doc.createElement('div');
       quickpostdiv.id = 'gamefox-quickpost-normal';
 
-      var footer = doc.evaluate((gfaqs9 ? '//div[@class="footer"]' : '//div[@id="footer"]'), doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var footer = doc.evaluate('//div[@id="footer"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       footer.parentNode.insertBefore(quickpostdiv, footer);
 
       GameFOX.appendQuickPost(doc, 'gamefox-quickpost-normal', false);
@@ -585,7 +500,7 @@ var GameFOX =
 
     if (titleChange)
     {
-      doc.title = 'GameFAQs:' + (pageNum != 0 ? pageNum+1 + ':' : '') + ' ' + doc.evaluate((gfaqs9 ? '//div[@class="boxhead"]' : '//h1/following::h1'), doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
+      doc.title = 'GameFAQs:' + (pageNum != 0 ? pageNum+1 + ':' : '') + ' ' + doc.evaluate('//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
       if (inFrame) parentDoc.title = doc.title;
     }
 
@@ -594,36 +509,20 @@ var GameFOX =
     try {
     if (numberMsgs || ((highlightMsgs || highlightIgnore) && !(highlightNames + '').match(/^\s*,\s*$/)))
     {
-      var divs;
-
-      if (gfaqs9)
-      {
-        divs = contentdiv.getElementsByTagName('div');
-      }
-      else
-      {
-        divs = doc.getElementsByTagName('td');
-      }
+      var divs = doc.getElementsByTagName('td');
 
       if (vertmess)
       {
         var messHead = false;
         for (i = 0, j = pageNum*msgsPerPage+1; i < divs.length; i++)
         {
-          if (gfaqs9)
+          try
           {
-            messHead = !messHead;
+            messHead = (divs[i].offsetParent.rows[divs[i].parentNode.rowIndex + 1].className == 'even' ? true : false);
           }
-          else
+          catch (e)
           {
-            try
-            {
-              messHead = (divs[i].offsetParent.rows[divs[i].parentNode.rowIndex + 1].className == 'even' ? true : false);
-            }
-            catch (e)
-            {
-              messHead = false;
-            }
+            messHead = false;
           }
           
           if (messHead)
@@ -825,7 +724,7 @@ var GameFOX =
 
     doc.getElementById(divID).innerHTML
     += '<div id="gamefox-quickpost-title">QuickPost</div>'
-    + '<form id="gamefox-quickpost-form" action="' + (GameFOXNine.getNine(doc) ? 'preview.php' : 'post.php') + doc.location.search.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/ig, '').replace(/&/, '&amp;') + '" method="post">'
+    + '<form id="gamefox-quickpost-form" action="post.php' + doc.location.search.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/ig, '').replace(/&/, '&amp;') + '" method="post">'
     + (forNewTopic ? '<input type="text" id="gamefox-topic" name="topictitle" size="60" maxlength="80" value=""/><br/>' : '')
     + '<textarea name="message" wrap="virtual" id="gamefox-message" rows="15" cols="60"></textarea><br/>'
     + '<input type="button" id="gamefox-quickpost-btn" name="quickpost" value="Post Message"/> '
@@ -898,7 +797,7 @@ var GameFOX =
     div.style.display = 'block';
 
     doc.getElementsByTagName('body')[0].appendChild(div);
-    //var footer = doc.evaluate((GameFOXNine.getNine(doc) ? '//div[@class="footer"]' : '//div[@id="footer"]'), doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    //var footer = doc.evaluate('//div[@id="footer"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     //footer.parentNode.insertBefore(div, footer);
 
     GameFOX.appendQuickPost(doc, 'gamefox-quickpost-afloat', true);
@@ -921,12 +820,6 @@ var GameFOX =
     // ignore double-click on images
     if (node.nodeName.toLowerCase() == 'img')
     {
-      return;
-    }
-
-    if (GameFOXNine.getNine(doc))
-    {
-      GameFOXNine.msglistDblclick(event, dblclickHead, dblclickMsg);
       return;
     }
 
@@ -999,11 +892,6 @@ var GameFOX =
   quote: function(event)
   {
     var doc = event.target.ownerDocument;
-    if (GameFOXNine.getNine(doc))
-    {
-      GameFOXNine.quote(event);
-      return;
-    }
 
     var node           = event.target;
     var nodeName       = node.nodeName.toLowerCase();
@@ -1239,7 +1127,7 @@ var GameFOX =
     node.appendChild(div);
 
     var request = new XMLHttpRequest();
-    request.open('GET', node.getElementsByTagName('a')[0].href.replace(/gfaqs9/, 'gfaqs'));
+    request.open('GET', node.getElementsByTagName('a')[0].href);
     request.onreadystatechange = function ()
     {
       if (request.readyState == 4)
@@ -1299,10 +1187,9 @@ var GameFOX =
       }
 
       var myposts = doc.location.pathname.match(/\/myposts\./i) ? true : false;
-      var fix = (!myposts && GameFOXNine.getNine(doc)) ? -1 : 0;
-      var msgsCell = (fix != 0 || myposts) ? node.parentNode.cells[2] : node.parentNode.cells[3];
+      var msgsCell = myposts ? node.parentNode.cells[2] : node.parentNode.cells[3];
       var pageNum = Math.floor((msgsCell.textContent-1)/Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.msgsPerPage'));
-      doc.location.href = node.parentNode.cells[1+fix].getElementsByTagName('a')[0].href + (pageNum ? '&page=' + pageNum : '');
+      doc.location.href = node.parentNode.cells[1].getElementsByTagName('a')[0].href + (pageNum ? '&page=' + pageNum : '');
     }
     catch (e)
     {
@@ -1316,7 +1203,6 @@ var GameFOX =
     var doc = node.ownerDocument;
     var nodeName = node.nodeName.toLowerCase();
     var topicLink, msgsCell;
-    var fix;
 
     try
     {
@@ -1327,11 +1213,10 @@ var GameFOX =
       }
 
       var myposts = doc.location.pathname.match(/\/myposts\./i) ? true : false;
-      fix = (!myposts && GameFOXNine.getNine(doc)) ? -1 : 0;
 
-      topicLink = node.parentNode.cells[1+fix].getElementsByTagName('a')[0].getAttribute('href');
+      topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0].getAttribute('href');
 
-      msgsCell = (fix != 0 || myposts) ? node.parentNode.cells[2] : node.parentNode.cells[3];
+      msgsCell = myposts ? node.parentNode.cells[2] : node.parentNode.cells[3];
     }
     catch (e)
     {
@@ -1348,7 +1233,7 @@ var GameFOX =
     {
       var pgPrefs    = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.paging.');
       var pgLocation = pgPrefs.getIntPref('location');
-      node = node.parentNode.cells[1+fix];
+      node = node.parentNode.cells[1];
 
       try {
         if (node.parentNode.nextSibling.className == 'gamefox-pagelist')
@@ -1471,10 +1356,8 @@ var GameFOX =
     var previewRequest = new XMLHttpRequest();
     var postRequest;
 
-    //[za] 'path' is to retain current page gfaqs or gfaqs9 path
-    var path     = doc.location.pathname.match(/^(\/gfaqs9?\/)/i);
-        path     = path ? path[1] : ('/gfaqs' + (GameFOXNine.getNine() ? '9/' : '/'));
-    var postFile = path.match(/9/) ? 'preview.php' : 'post.php';
+    var path     = '/gfaqs/'; // was for gfaqs9
+    var postFile = 'post.php';
     var psearch  = doc.location.search.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/ig, '');
     
     event.target.setAttribute('disabled', 'disabled');
@@ -1486,7 +1369,7 @@ var GameFOX =
     {
       if (previewRequest.readyState == 4)
       {
-        var postId = previewRequest.responseText.match(/\bname="post_?id"[^>]+?\bvalue="([^"]*)"/i);
+        var postId = previewRequest.responseText.match(/\bname="post_id"[^>]+?\bvalue="([^"]*)"/i);
 
         if (!postId || postId[1].match(/^\s*0?\s*$/))
         {
@@ -1509,8 +1392,8 @@ var GameFOX =
               var bigWordT   = previewRequest.responseText.match(/Your topic title contains a single word over 25 characters in length\.  This can cause problems for certain browsers, and is not allowed\./i);
               var bigWordM   = previewRequest.responseText.match(/Your message contains a single word over 80 characters in length\.  This can cause problems for certain browsers, and is not allowed\./i);
               var badHTML    = previewRequest.responseText.match(/Your HTML is not well-formed - please check for unmatched quotes and tags\./i);
-              var closedT    = previewRequest.responseText.match(/(This topic is closed|This topic has been closed\.)/i);
-              var deletedT   = previewRequest.responseText.match(/(This topic is no longer available for viewing|This topic has been deleted\.)/i);
+              var closedT    = previewRequest.responseText.match(/This topic is closed/i);
+              var deletedT   = previewRequest.responseText.match(/This topic is no longer available for viewing/i);
 
               if (badWord)
               {
@@ -1580,7 +1463,7 @@ var GameFOX =
         }
         else
         {
-          if (previewRequest.responseText.match(/<div class="error"><b>Post Warning<\/b><\/div>|<div class="head"><h1>Post Warning<\/h1><\/div>/i) && !confirm('Your message contains some content that makes GameFAQs suspect it might break the ToS. If you post this message, it will automatically be flagged for a moderator to look at. Are you sure you want to post this message?'))
+          if (previewRequest.responseText.match(/<div class="head"><h1>Post Warning<\/h1><\/div>/i) && !confirm('Your message contains some content that makes GameFAQs suspect it might break the ToS. If you post this message, it will automatically be flagged for a moderator to look at. Are you sure you want to post this message?'))
           {
             event.target.removeAttribute('disabled');
             event.target.addEventListener('click', GameFOX.quickPost, false);
@@ -1603,8 +1486,8 @@ var GameFOX =
                   else
                   {
                     var flooding   = postRequest.responseText.match(/To prevent flooding,/i);
-                    var closedT    = postRequest.responseText.match(/(This topic is closed|This topic has been closed\.)/i);
-                    var deletedT   = postRequest.responseText.match(/(This topic is no longer available for viewing|This topic has been deleted\.)/i);
+                    var closedT    = postRequest.responseText.match(/This topic is closed/i);
+                    var deletedT   = postRequest.responseText.match(/This topic is no longer available for viewing/i);
 
                     if (flooding)
                     {
@@ -1639,13 +1522,14 @@ var GameFOX =
           
           // This was a new field added to the post form. If it isn't provided, the request is ignored, so
           // we have to extract it
-          if ( !path.match(/9/) ) // This only exists in gfaqs10
-            var uid = previewRequest.responseText.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/i);
+          var uid = previewRequest.responseText.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/i);
           
           postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          postRequest.send((path.match(/9/) ? 'PostId=' : 'post_id=') + 
-              postId[1] + '&post=Post+Message'+
-              (path.match(/9/) ? '' : '&uid=' + uid[1]));
+          postRequest.send(
+              'post_id=' + postId[1] +
+              '&post=Post+Message' +
+              '&uid=' + uid[1]
+            );
         }
       }
     };
@@ -1670,7 +1554,7 @@ var GameFOX =
     var message = doc.getElementsByName('message')[0].value;
     
     if (
-        !doc.location.pathname.match(/^\/gfaqs9?\/(post|preview).php$/ig)
+        !doc.location.pathname.match(/^\/gfaqs\/(post|preview).php$/ig)
         && (
           prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
           || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != ''
@@ -1719,9 +1603,10 @@ var GameFOX =
     var buttonContainer = button.offsetParent; // td
     var postMsg;
 
-    if (GameFOXNine.getNine(doc))
+    var vertmess = (doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1) ? true : false;
+    if (vertmess)
     {
-      postMsg = button.parentNode.nextSibling.nextSibling;
+      postMsg = buttonContainer.offsetParent.rows[buttonContainer.parentNode.rowIndex + 1].cells[0];
       if (postMsg.style.fontSize == '0pt')
       {
         postMsg.style.removeProperty('font-size');
@@ -1738,40 +1623,19 @@ var GameFOX =
     }
     else
     {
-      var vertmess = (doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1) ? true : false;
-      if (vertmess)
+      postMsg = buttonContainer.parentNode.cells[1];
+      if (postMsg.style.fontSize == '0pt')
       {
-        postMsg = buttonContainer.offsetParent.rows[buttonContainer.parentNode.rowIndex + 1].cells[0];
-        if (postMsg.style.fontSize == '0pt')
-        {
-          postMsg.style.removeProperty('font-size');
-          postMsg.style.removeProperty('display');
-          postMsg.removeAttribute('style');
-          button.textContent = '[Hide]';
-        }
-        else
-        {
-          postMsg.style.setProperty('font-size', '0pt',  'important');
-          postMsg.style.setProperty('display', 'none', 'important');
-          button.textContent = '[Show]';
-        }
+        postMsg.style.removeProperty('font-size');
+        postMsg.removeAttribute('style');
+        buttonContainer.style.removeProperty('font-size');
+        button.textContent = '[Hide]';
       }
       else
       {
-        postMsg = buttonContainer.parentNode.cells[1];
-        if (postMsg.style.fontSize == '0pt')
-        {
-          postMsg.style.removeProperty('font-size');
-          postMsg.removeAttribute('style');
-          buttonContainer.style.removeProperty('font-size');
-          button.textContent = '[Hide]';
-        }
-        else
-        {
-          postMsg.style.setProperty('font-size', '0pt',  'important');
-          buttonContainer.style.setProperty('font-size', '0pt',  'important');
-          button.textContent = '[Show]';
-        }
+        postMsg.style.setProperty('font-size', '0pt',  'important');
+        buttonContainer.style.setProperty('font-size', '0pt',  'important');
+        button.textContent = '[Show]';
       }
     }
   },

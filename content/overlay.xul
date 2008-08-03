@@ -3,7 +3,6 @@
 <overlay id="gamefox-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/gfaqs9.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
 
