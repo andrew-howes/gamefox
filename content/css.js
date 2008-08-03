@@ -5,30 +5,14 @@ var GameFOXCSS =
   init: function()
   {
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default.css', 'gamefox-standard-default.css',
-        'Standard Default', 'GameFOX devs', 'gfaqs10,9', true, true);
+        'Standard Default', 'GameFOX devs', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default-old.css', 'gamefox-standard-default-old.css',
-        'Standard Default (old quickpost)', 'GameFOX devs', 'gfaqs10,9', false, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-classic-default.css', 'gamefox-classic-default.css',
-        'Classic Default', 'GameFOX devs', 'gfaqs9', false, true);
+        'Standard Default (old quickpost)', 'GameFOX devs', '', false, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
-        'GFCode', 'Ant P.', 'gfaqs10,9', true, true)
+        'GFCode', 'Ant P.', '', true, true)
     
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
-        'Wide Default Layout', '', 'gfaqs10', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/gamefox-no-sidebar.css', 'gamefox-no-sidebar.css',
-        'Sidebar Remover for Classic', '', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/classic-theme-by-jero.net.css', 'classic-theme-by-jero.net.css',
-        'Classic Theme', 'Jero', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/gamefox_sidebar.css', 'gamefox_sidebar.css',
-        'Classic GameFOX Sidebar', 'Michael J Buck', 'gfaqs10,9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/aquatakat.css', 'aquatakat.css',
-        'GameFAQs Alternate', 'Aquatakat', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/gfaqs-smooth.css', 'gfaqs-smooth.css',
-        'GameFAQs Smooth', 'headbanger', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/midnight-shade.css', 'midnight-shade.css',
-        'Midnight Shade', 'Jero', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
-        'Classic Theme', 'Ricapar', 'gfaqs9', false, true);
+        'Wide Default Layout', '', '', false, true);
 
     // Remove old stylesheets
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
