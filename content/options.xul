@@ -25,7 +25,6 @@
     <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
 
     <preferences>
-      <preference id="gamefox-pref-gfaqs9" name="gamefox.gfaqs9" type="bool"/>
       <preference id="gamefox-pref-quickpost-form" name="gamefox.elements.quickpost.form" type="bool"/>
       <preference id="gamefox-pref-quickpost-button" name="gamefox.elements.quickpost.button" type="bool"/>
       <preference id="gamefox-pref-quickpost-link" name="gamefox.elements.quickpost.link" type="bool"/>
@@ -46,7 +45,6 @@
       <preference id="gamefoxTpcSortOrder" name="gamefox.tpcSortOrder" type="int"/>
       <preference id="gamefoxMsgDisplay" name="gamefox.msgDisplay" type="int"/>
       <preference id="gamefoxTimeZone" name="gamefox.timeZone" type="int"/>
-      <preference id="gamefox-pref-myposts-boardlink" name="gamefox.elements.myposts.boardlink" type="bool"/>
       <preference id="gamefox-pref-tracked-boardlink" name="gamefox.elements.tracked.boardlink" type="bool"/>
       <preference id="gamefox-pref-paging-auto"       name="gamefox.paging.auto"      type="bool"/>
       <preference id="gamefox-pref-paging-location"   name="gamefox.paging.location"  type="int"/>
@@ -71,11 +69,6 @@
 
         <tabpanel orient="vertical" flex="1">
           <vbox>
-
-            <groupbox>
-              <caption label="General"/>
-              <checkbox preference="gamefox-pref-gfaqs9" label="&gfaqs9.label;" tooltiptext="&gfaqs9.desc;"/>
-            </groupbox>
 
             <groupbox flex="1">
               <caption label="Board Settings"/>
@@ -214,8 +207,6 @@
                     <caption label="Topic Lists"/>
                     <vbox>
                       <checkbox preference="gamefox-pref-quickpost-link" label="Enable QuickPost link"/>
-                      <checkbox preference="gamefox-pref-myposts-boardlink"
-                        label="Board link in Active Message List (gfaqs9)"/>
                       <checkbox preference="gamefox-pref-tracked-boardlink" label="Board link in Tracked Topics"/>
                     </vbox>
                   </groupbox>
