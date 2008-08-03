@@ -29,6 +29,29 @@ var GameFOXCSS =
         'Midnight Shade', 'Jero', 'gfaqs9', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
         'Classic Theme', 'Ricapar', 'gfaqs9', false, true);
+
+    // Remove old stylesheets
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+
+    var css = eval(prefs.getCharPref('theme.css.serialized'));
+    for (i in {"gamefox":"", "bundled":""})
+    {
+      for (j in css[i])
+      {
+        var req = new XMLHttpRequest();
+        req.overrideMimeType('text/plain'); // otherwise we get "not well-formed" errors in the error console
+        try
+        {
+          req.open('GET', 'chrome://gamefox/content/css/' + j, false);
+          req.send(null);
+        }
+        catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND")
+        {
+          this.remove(i, j);
+        }
+      }
+    }
   },
 
   userimport: function(uri)
@@ -254,34 +277,22 @@ var GameFOXCSS =
     GameFOXCSS.reload();
   },
 
-  removeWithTree: function()
+  remove: function(category, filename)
   {
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].
-      getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    var file = Components.classes['@mozilla.org/file/local;1'].
-      getService(Components.interfaces.nsILocalFile);
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var file = Components.classes['@mozilla.org/file/local;1'].getService(
+        Components.interfaces.nsILocalFile);
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
-    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].
-      getService(Components.interfaces.nsIStyleSheetService);
+    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].getService(
+        Components.interfaces.nsIStyleSheetService);
     var file = Components.classes['@mozilla.org/file/local;1'].getService(
         Components.interfaces.nsILocalFile);
 
-    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
-    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][5];
-
-    if (category != 'user')
-      return false;
-
     file.initWithPath(this.getDirectory());
     file.append(filename);
-    file.remove(false);
 
-    delete css[category][filename];
-    prefs.setCharPref('theme.css.serialized', css.toSource());
-
-    file.initWithPath(this.getDirectory());
-    file.append(filename);
     var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
         Components.interfaces.nsIIOService).newFileURI(file, null, null);
     try
@@ -290,6 +301,21 @@ var GameFOXCSS =
     }
     catch (e) {}
 
+    file.remove(false);
+
+    delete css[category][filename];
+    prefs.setCharPref('theme.css.serialized', css.toSource());
+  },
+
+  removeWithTree: function()
+  {
+    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
+    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][5];
+
+    if (category != 'user')
+      return false;
+
+    this.remove(category, filename);
     this.populate(document.getElementById('css-tree'));
   }
 }
