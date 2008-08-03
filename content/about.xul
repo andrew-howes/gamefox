@@ -65,24 +65,10 @@
     <separator class="thin"/>
     <label class="subtitle" value="&contributors.label;"/>
     <hbox>
-      <label value="Jero"/>
-      <label class="contrib description" value="Classic theme"/>
-      <spacer flex="1"/>
-      <label class="url-label" value="http://jero.net/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
-    <hbox>
-      <label value="Ricapar"/>
-      <label class="contrib description" value="Classic theme for new GameFAQs layout"/>
-    </hbox>
-    <hbox>
       <label value="Pardus"/>
       <label class="contrib description" value="Icons"/>
       <spacer flex="1"/>
       <label class="url-label" value="http://www.uludag.org.tr/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
-    <hbox>
-      <label value="Therum"/>
-      <label class="contrib description" value="gfaqs9 support"/>
     </hbox>
     <separator class="thin"/>
   </groupbox>
