@@ -229,6 +229,13 @@ var GameFOXCSS =
     this.treeView.setCellValue = this.setCell;
 
     element.view = this.treeView;
+
+    // this is sort of a hack, I couldn't be bothered with finding out how to push data
+    // directly to treeView.visibleData when populating the tree
+    this.treeView.toggleOpenState(0);
+    this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length + 1);
+    this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length +
+        this.treeView.childData["Bundled"].length + 2);
   },
 
   onselect: function()
