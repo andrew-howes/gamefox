@@ -139,7 +139,7 @@ var GameFOX =
     if (prefs.getBoolPref('theme.disablegamefaqscss') && (doc.location.host.match(/(^|\.)gamefaqs\.com$/gi)))
     {
       var stylesheets = doc.getElementsByTagName('link');
-      for (i = 0; i < stylesheets.length; i++)
+      for (var i = 0; i < stylesheets.length; i++)
       {
         stylesheets[i].disabled = true;
       }
@@ -175,7 +175,7 @@ var GameFOX =
       }
     }
 
-    var i, j, posterIndex, anchor, vertmess;
+    var posterIndex, anchor, vertmess;
     var msgsPerPage = prefs.getIntPref('msgsPerPage');
     try
     {
@@ -343,7 +343,7 @@ var GameFOX =
 
         var pgLocation, pgPrefix, pgSep, pgSuffix, prefixHTML, suffixHTML;
         var numPages, topicLink, tr, td, link;
-        var currentHiglightColor, cellIndex;
+        var currentHiglightColor;
 
         if (enablePaging)
         {
@@ -367,7 +367,7 @@ var GameFOX =
           suffixHTML = suffixHTML.innerHTML.replace(/\s/g, '&nbsp;');
         }
 
-        for (i = 1; i < rows.length; i++)
+        for (var i = 1; i < rows.length; i++)
         {
 
     /* topic-linking */
@@ -391,13 +391,13 @@ var GameFOX =
               if (posterIndex != -1)
               {
                 currentHiglightColor = (posterIndex < switchColorAt ? highlightColor1 : highlightColor2);
-                
-                rows[i].setAttribute('class', 
+
+                rows[i].setAttribute('class',
                     (rows[i].getAttribute('class') ? rows[i].getAttribute('class') : '')
                     + ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
                 rows[i].style.setProperty('background-color', currentHiglightColor, 'important');
-                
-                for (cellIndex = 0; cellIndex < rows[i].cells.length; cellIndex++)
+
+                for (var cellIndex = 0; cellIndex < rows[i].cells.length; cellIndex++)
                 {
                   rows[i].cells[cellIndex].style.setProperty('background-color', currentHiglightColor, 'important');
                   rows[i].cells[cellIndex].setAttribute('class',
@@ -438,7 +438,7 @@ var GameFOX =
 
               td.innerHTML = '' + prefixHTML;
 
-              for (j = 0; j < numPages; j++)
+              for (var j = 0; j < numPages; j++)
               {
                 link = doc.createElement('a');
                 link.setAttribute('href', topicLink + (j ? '&page=' + j : ''));
@@ -510,11 +510,12 @@ var GameFOX =
     if (numberMsgs || ((highlightMsgs || highlightIgnore) && !(highlightNames + '').match(/^\s*,\s*$/)))
     {
       var divs = doc.getElementsByTagName('td');
+      var msgNum = pageNum * msgsPerPage;
 
       if (vertmess)
       {
         var messHead = false;
-        for (i = 0, j = pageNum*msgsPerPage+1; i < divs.length; i++)
+        for (var i = 0; i < divs.length; i++)
         {
           try
           {
@@ -524,53 +525,46 @@ var GameFOX =
           {
             messHead = false;
           }
-          
+
           if (messHead)
           {
+            ++msgNum;
+            var msgNumString = '000'.substr(0, 3 - msgNum.toString().length) + msgNum;
+            divs[i].id = 'p' + msgNumString;
+
             if (numberMsgs)
             {
               switch (numberMsgsStyle)
               {
                 case 1:
                   // Reversed message numbering: #001 | message detail
-                  divs[i].insertBefore(doc.createTextNode('#' + '000'.substr(0, 3 - j.toString().length) + j++), divs[i].getElementsByTagName('a')[1]);
+                  divs[i].insertBefore(doc.createTextNode('#' + msgNumString), divs[i].getElementsByTagName('a')[1]);
                   divs[i].insertBefore(doc.createTextNode(' | '), divs[i].getElementsByTagName('a')[1]);
                   break;
                 case 2:
                   // New message numbering: #001
-                  divs[i].getElementsByTagName('a')[1].innerHTML = '#' + '000'.substr(0, 3 - j.toString().length) + j++;
+                  divs[i].getElementsByTagName('a')[1].innerHTML = '#' + msgNumString;
                   break;
                 case 3:
                   // Mixed message numbering: message #001
-                  divs[i].getElementsByTagName('a')[1].innerHTML = 'message #' + '000'.substr(0, 3 - j.toString().length) + j++;
+                  divs[i].getElementsByTagName('a')[1].innerHTML = 'message #' + msgNumString;
                   break;
                 default:
                 case 0:
                   // Original message numbering: message detail | #001
-                  divs[i].appendChild(doc.createTextNode(' | #' + '000'.substr(0, 3 - j.toString().length) + j++));
+                  divs[i].appendChild(doc.createTextNode(' | #' + msgNumString));
                   break;
               }
             }
-           
-            if (numberMsgs)
-            {
-              var h = j - 1;
-              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
-            }
-            else
-            {
-              var h = j++;
-              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
-            }
-            
+
             posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
-            
+
             if (posterIndex != -1)
             {
               if (highlightMsgs)
               {
                 //divs[i].setAttribute('class', 'gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
-                divs[i].setAttribute('class', 
+                divs[i].setAttribute('class',
                 (divs[i].getAttribute('class') ? divs[i].getAttribute('class') : '')
                 + ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
 
@@ -596,44 +590,38 @@ var GameFOX =
       }
       else
       {
-        for (i = 0, j = pageNum*msgsPerPage+1; i < divs.length; i++)
+        for (var i = 0; i < divs.length; i++)
         {
           if (divs[i].className == 'author')
           {
+            ++msgNum;
+            var msgNumString = '000'.substr(0, 3 - msgNum.toString().length) + msgNum;
+            divs[i].id = 'p' + msgNumString;
+
             if (numberMsgs)
             {
+
               switch (numberMsgsStyle) {
                 case 1:
                   // Reversed message numbering: #001 <br/> message detail
-                  divs[i].insertBefore(doc.createTextNode('#' + '000'.substr(0, 3 - j.toString().length) + j++), divs[i].getElementsByTagName('a')[1]);
+                  divs[i].insertBefore(doc.createTextNode('#' + msgNumString), divs[i].getElementsByTagName('a')[1]);
                   divs[i].insertBefore(doc.createElement('br'), divs[i].getElementsByTagName('a')[1]);
                   break;
                 case 2:
                   // New message numbering: #001
-                  divs[i].getElementsByTagName('a')[1].innerHTML = '#' + '000'.substr(0, 3 - j.toString().length) + j++;
+                  divs[i].getElementsByTagName('a')[1].innerHTML = '#' + msgNumString;
                   break;
                 case 3:
                   // Mixed message numbering: message #001
-                  divs[i].getElementsByTagName('a')[1].innerHTML = 'message #' + '000'.substr(0, 3 - j.toString().length) + j++;
+                  divs[i].getElementsByTagName('a')[1].innerHTML = 'message #' + msgNumString;
                   break;
                 default:
                 case 0:
                   // Original message numbering: message detail <br/> #001
                   divs[i].appendChild(doc.createElement('br'));
-                  divs[i].appendChild(doc.createTextNode('#' + '000'.substr(0, 3 - j.toString().length) + j++));
+                  divs[i].appendChild(doc.createTextNode('#' + msgNumString));
                   break;
               }
-            }
-
-            if (numberMsgs)
-            {
-              var h = j - 1;
-              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
-            }
-            else
-            {
-              var h = j++;
-              divs[i].id = 'p' + '000'.substr(0, 3 - h.toString().length) + h;
             }
 
             posterIndex = highlightNames.indexOf(divs[i].getElementsByTagName('a')[0].textContent);
@@ -643,7 +631,7 @@ var GameFOX =
               if (highlightMsgs) /* Message highlighting */
               {
                 // Use a class as a means for CSS developers to not completely break highlighting
-                divs[i].setAttribute('class', 
+                divs[i].setAttribute('class',
                 (divs[i].getAttribute('class') ? divs[i].getAttribute('class') : '')
                 + ' gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
                 //divs[i].setAttribute('class', 'gamefox-highlight-' + (posterIndex < switchColorAt ? 'one' : 'two'));
@@ -733,7 +721,7 @@ var GameFOX =
     + '<input type="reset" value="Reset"/> '
     + (forNewTopic ? '<input type="button" id="gamefox-quickpost-hide" value="Hide"/> ' : '')
     + '</form>';
-    
+
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click', GameFOX.quickPost, false);
     if (
         (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
@@ -763,7 +751,7 @@ var GameFOX =
   autoAppendSignature: function(event)
   {
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    
+
     if (
         (prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
          || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != ''
@@ -937,7 +925,7 @@ var GameFOX =
     {
       quoteHead = node.textContent;
       msgNum = '#' + node.id.substr(1);
-     
+
       if (vertmess)
       {
         node = tableNode.rows[node.parentNode.rowIndex + 1].cells[0];
@@ -1016,7 +1004,7 @@ var GameFOX =
       body = body.replace(/\n*<i><p>(?:(?=([^<]+))\1|<(?!i>))*?<\/p><\/i>\n*/, "\n");
       loops++;
     }
-    
+
     /* Prepare quote header */
     var qhead = "";
     if (prefs.getBoolPref('quote.header.username')) qhead += username;
@@ -1108,7 +1096,7 @@ var GameFOX =
     {
       var pattern = new RegExp('<td\\b[^>]*>(\\s*<a\\b[^>]*>)?\\s*' + what + '(\\s*</a>)?\\s*</td>\\s*<td\\b[^>]*>([^\\0]*?)</td>', 'gi');
       var matches = pattern.exec(where);
-      
+
       if (matches)
       {
         return matches[3].replace(/^\s+|\s+$/g, '');
@@ -1359,7 +1347,7 @@ var GameFOX =
     var path     = '/gfaqs/'; // was for gfaqs9
     var postFile = 'post.php';
     var psearch  = doc.location.search.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/ig, '');
-    
+
     event.target.setAttribute('disabled', 'disabled');
     event.target.blur();
     // NOTE TO uG: The 'click' event still fires even if the button is disabled
@@ -1519,11 +1507,11 @@ var GameFOX =
               return;
             }
           };
-          
+
           // This was a new field added to the post form. If it isn't provided, the request is ignored, so
           // we have to extract it
           var uid = previewRequest.responseText.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/i);
-          
+
           postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           postRequest.send(
               'post_id=' + postId[1] +
@@ -1533,7 +1521,7 @@ var GameFOX =
         }
       }
     };
-    
+
     previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     var postBody = '';
@@ -1552,7 +1540,7 @@ var GameFOX =
     }
 
     var message = doc.getElementsByName('message')[0].value;
-    
+
     if (
         !doc.location.pathname.match(/^\/gfaqs\/(post|preview).php$/ig)
         && (
@@ -1648,10 +1636,10 @@ var GameFOX =
       sig = sig[0] + "\n" + sig[1];
     else
       sig = sig[0];
-    
+
     sigPre = sigPre.split("\n");
     sigPre = sigPre[0];
-    
+
     var str = (sigNewline ? "\n" : "") +
       (sigPre != "" ? sigPre + (sig != "" ? "\n" : "") : "") +
       (sig != "" ? "---\n" + sig : "");
@@ -1668,7 +1656,7 @@ function GameFOXLoader()
       'popupshowing', GameFOX.contextMenuDisplay, false);
 
   var prefs = Components.classes['@mozilla.org/preferences-service;1'].
-    getService(Components.interfaces.nsIPrefService).getBranch('gamefox.'); 
+    getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
 
   try
   {
