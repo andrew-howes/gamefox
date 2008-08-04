@@ -30,7 +30,7 @@ var GameFOXCSS =
           req.open('GET', 'chrome://gamefox/content/css/' + j, false);
           req.send(null);
         }
-        catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND")
+        catch (e)
         {
           this.remove(i, j);
         }
