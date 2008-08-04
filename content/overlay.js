@@ -983,7 +983,6 @@ var GameFOX =
       replace(/<br\s*\/?>/ig, '\n').
       replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/ig, '$1').
       replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr)\b[^<>]*\/?>/gi, '').
-      replace(/&(amp|AMP);/g, '&').
       replace(/^\s+|\s+$/g, '');
 
    // Get rid of signature
@@ -1048,19 +1047,14 @@ var GameFOX =
     }
 
     var quickpost = event.target.ownerDocument.getElementById('gamefox-message');
-    if (prefs.getIntPref('signature.addition') == 1)
-      quickpost.value += quote + "\n";
-    else
-    {
-      // holy crap this is so mindnumbingly simple and it solves everything
-      var length = quickpost.value.substring(0, quickpost.selectionStart).length + quote.length + 1;
-      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
-                      + quote + "\n"
-                      + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
-    }
+    // holy crap this is so mindnumbingly simple and it solves everything
+    var endQuotePosition = quickpost.selectionStart + quote.length + 1; // +1 is for counting newline character
+    quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
+                    + quote + "\n"
+                    + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
     quickpost.focus();
     // Move the caret to the end of the last quote
-    quickpost.setSelectionRange(length, length);
+    quickpost.setSelectionRange(endQuotePosition, endQuotePosition);
   },
 
   quickWhois: function(event)
