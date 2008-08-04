@@ -24,7 +24,7 @@
       <label class="url-label important" value="&news.label;" onclick="gfox_addTab('chrome://gamefox/content/NEWS', event.button);"/>
       <spacer flex="1"/>
       <label class="url-label important" value="&support.label;" tooltiptext="&support.tooltip;"
-        onclick="gfox_addTab('http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885', event.button);"/>
+        onclick="gfox_addTab('http://www.gamefaqs.com/boards/gentopic.php?board=565885', event.button);"/>
     </hbox>
 
     <separator class="thin"/>

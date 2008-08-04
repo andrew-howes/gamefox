@@ -14,7 +14,7 @@ var GameFOXUtils =
     if (button) button.setAttribute('disabled', true);
 
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://boards.gamefaqs.com/gfaqs/settings.php');
+    request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -23,7 +23,7 @@ var GameFOXUtils =
         {
           GameFOXUtils.log('importBoardSettings: Bad things!');
           if (noisy)
-            alert('Something went wrong. Are you logged in to boards.gamefaqs.com?');
+            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -39,7 +39,7 @@ var GameFOXUtils =
         {
           this.log('importBoardSettings: Unable to retrieve all settings.');
           if (noisy)
-            alert('Something went wrong. Are you logged in to boards.gamefaqs.com?');
+            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -77,7 +77,7 @@ var GameFOXUtils =
   {
     if (button) button.setAttribute('disabled', true);
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://boards.gamefaqs.com/gfaqs/settings.php', true);
+    request.open('GET', 'http://www.gamefaqs.com/boards/settings.php', true);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -86,7 +86,7 @@ var GameFOXUtils =
         {
           GameFOXUtils.log('exportBoardSettings: Bad things!');
           if (noisy)
-            alert('Something went wrong. Are you logged in to boards.gamefaqs.com?');
+            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -103,7 +103,7 @@ var GameFOXUtils =
         action = action[1];
 
         var postRequest = new XMLHttpRequest();
-        postRequest.open('POST', 'http://boards.gamefaqs.com' + action);
+        postRequest.open('POST', 'http://www.gamefaqs.com' + action);
         postRequest.onreadystatechange = function()
         {
           if (postRequest.readyState == 4)
@@ -148,7 +148,7 @@ var GameFOXUtils =
     if (button) button.setAttribute('disabled', true);
 
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://boards.gamefaqs.com/gfaqs/sigquote.php');
+    request.open('GET', 'http://www.gamefaqs.com/boards/sigquote.php');
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -157,7 +157,7 @@ var GameFOXUtils =
         {
           GameFOXUtils.log('importSignature: Bad things!');
           if (noisy)
-            alert('Something went wrong. Are you logged in to boards.gamefaqs.com?');
+            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }

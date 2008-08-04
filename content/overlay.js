@@ -14,7 +14,7 @@ var GameFOX =
   contextMenuDisplay: function(event)
   {
     var doc     = gContextMenu.target.ownerDocument;
-    var notOnGF = !doc.location.protocol.match(/^https?:$/i) || !doc.domain || !doc.domain.match(/^boards\.gamefaqs\.com$/i);
+    var notOnGF = !doc.location.protocol.match(/^https?:$/i) || !doc.domain || !doc.domain.match(/^www\.gamefaqs\.com$/i);
     var cxPrefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.context.');
 
     document.getElementById('gamefox-toggle-sidebar').hidden = !cxPrefs.getBoolPref('sidebar');
@@ -32,7 +32,7 @@ var GameFOX =
     var cxTag       = cxPrefs.getBoolPref('tag');
     var cxPageList  = cxPrefs.getBoolPref('pagelist');
 
-    var onMyPosts   = doc.location.pathname.match(/^\/gfaqs\/myposts\.php$/i);
+    var onMyPosts   = doc.location.pathname.match(/^\/boards\/myposts\.php$/i);
     var onMsgList;
     var onTopicList;
 
@@ -147,7 +147,7 @@ var GameFOX =
 
     try
     {
-      if (!doc.domain.match(/^boards\.gamefaqs\.com$/i))
+      if (!doc.domain.match(/^www\.gamefaqs\.com$/i))
       {
         throw Components.results.NS_ERROR_FAILURE;
       }
@@ -188,7 +188,7 @@ var GameFOX =
 
 
   /* Active Messages List (myposts.php) */
-    if (doc.location.pathname.match(/^\/gfaqs\/myposts\.php$/i))
+    if (doc.location.pathname.match(/^\/boards\/myposts\.php$/i))
     {
       doc.evaluate('//div[@class="board"]/table', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
@@ -198,7 +198,7 @@ var GameFOX =
 
   /* Posting & Preview */
 
-    if (doc.location.pathname.match(/^\/gfaqs\/(post|preview)\.php$/ig))
+    if (doc.location.pathname.match(/^\/boards\/(post|preview)\.php$/ig))
     {
       var newTopic = doc.getElementsByName('topictitle')[0];
 
@@ -261,7 +261,7 @@ var GameFOX =
 
   /* User Information */
 
-    if (doc.location.pathname.match(/^\/gfaqs\/user\.php$/i) && titleChange)
+    if (doc.location.pathname.match(/^\/boards\/user\.php$/i) && titleChange)
     {
       doc.title = 'GameFAQs: ' + doc.getElementsByTagName('td')[1].textContent.replace(/^\s+|\s+$/g, '');
       if (inFrame) parentDoc.title = doc.title;
@@ -1338,7 +1338,7 @@ var GameFOX =
     var previewRequest = new XMLHttpRequest();
     var postRequest;
 
-    var path     = '/gfaqs/'; // was for gfaqs9
+    var path     = '/boards/'; // was for gfaqs9
     var postFile = 'post.php';
     var psearch  = doc.location.search.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/ig, '');
 
@@ -1346,7 +1346,7 @@ var GameFOX =
     event.target.blur();
     // NOTE TO uG: The 'click' event still fires even if the button is disabled
     event.target.removeEventListener('click', GameFOX.quickPost, false);
-    previewRequest.open('POST', 'http://boards.gamefaqs.com' + path + postFile + psearch);
+    previewRequest.open('POST', 'http://www.gamefaqs.com' + path + postFile + psearch);
     previewRequest.onreadystatechange = function()
     {
       if (previewRequest.readyState == 4)
@@ -1452,7 +1452,7 @@ var GameFOX =
             return;
           }
           postRequest = new XMLHttpRequest();
-          postRequest.open('POST', 'http://boards.gamefaqs.com' + path + postFile + psearch);
+          postRequest.open('POST', 'http://www.gamefaqs.com' + path + postFile + psearch);
           postRequest.onreadystatechange = function()
           {
             if (postRequest.readyState == 4)
@@ -1497,7 +1497,7 @@ var GameFOX =
                 event.target.addEventListener('click', GameFOX.quickPost, false);
                 return;
               }
-              doc.location = 'http://boards.gamefaqs.com' + path + ((doc.getElementsByName('topictitle')[0]) ? 'gentopic.php' : 'genmessage.php') + psearch;
+              doc.location = 'http://www.gamefaqs.com' + path + ((doc.getElementsByName('topictitle')[0]) ? 'gentopic.php' : 'genmessage.php') + psearch;
               return;
             }
           };
@@ -1536,7 +1536,7 @@ var GameFOX =
     var message = doc.getElementsByName('message')[0].value;
 
     if (
-        !doc.location.pathname.match(/^\/gfaqs\/(post|preview).php$/ig)
+        !doc.location.pathname.match(/^\/boards\/(post|preview).php$/ig)
         && (
           prefs.getComplexValue('signature.body', Components.interfaces.nsISupportsString).data != ''
           || prefs.getComplexValue('signature.presig', Components.interfaces.nsISupportsString).data != ''

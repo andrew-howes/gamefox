@@ -42,5 +42,5 @@ function gfox_redirectLogin(loginForm)
 {
   var doc    = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow('navigator:browser').content.document;
   var path   = loginForm.ownerDocument.getElementById('gamefaqs-login-path');
-  path.value = (doc.location.protocol.match(/^https?:$/i) && doc.location.host.match(/(^|\.)gamefaqs\.com$/i)) ? doc.location.href.replace(/&(action)=[^&]*(?=&|$)|\b(action)=[^&]*&/ig, '') : 'http://boards.gamefaqs.com/gfaqs/';
+  path.value = (doc.location.protocol.match(/^https?:$/i) && doc.location.host.match(/(^|\.)gamefaqs\.com$/i)) ? doc.location.href.replace(/&(action)=[^&]*(?=&|$)|\b(action)=[^&]*&/ig, '') : 'http://www.gamefaqs.com/boards/';
 }

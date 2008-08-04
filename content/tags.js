@@ -164,7 +164,7 @@ var GameFOXTags =
   open: function(tagID, openType)
   {
     var IDs     = tagID.split(/,/);
-    var tagURI  = 'http://boards.gamefaqs.com/gfaqs';
+    var tagURI  = 'http://www.gamefaqs.com/boards';
 
     if (IDs[0] == 0 && IDs[1] == -1)
     {
@@ -172,7 +172,7 @@ var GameFOXTags =
     }
     else if (IDs[0] == 0 && IDs[1] == -2)
     {
-      tagURI = 'http://boards.gamefaqs.com/gfaqs/tracked.php';
+      tagURI = 'http://www.gamefaqs.com/boards/tracked.php';
     }
     else
     {
@@ -331,7 +331,7 @@ var GameFOXTags =
 
     /* removePurged: dispatchRequest: open request */
 
-      request.open('GET', 'http://boards.gamefaqs.com/gfaqs/genmessage.php?board=' + board + '&topic=' + topic);
+      request.open('GET', 'http://www.gamefaqs.com/boards/genmessage.php?board=' + board + '&topic=' + topic);
 
 
     /* removePurged: dispatchRequest: request.onerror */
@@ -509,7 +509,7 @@ var GameFOXTags =
         event.preventDefault();
       }
 
-      var onMyPosts   = doc.location.pathname.match(/^\/gfaqs\/myposts\.php$/i);
+      var onMyPosts   = doc.location.pathname.match(/^\/boards\/myposts\.php$/i);
       var onTopicList;
 
       if (onMyPosts)
