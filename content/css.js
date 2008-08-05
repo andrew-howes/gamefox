@@ -118,9 +118,9 @@ var GameFOXCSS =
       return false;
     }
     
-    // css.serialized pref magic
-   
     var css = eval(prefs.getCharPref('theme.css.serialized'));
+    if (css[cat][filename]) // the stylesheet already exists, don't touch its enabled status
+      enabled = css[cat][filename]['enabled'];
 
     css[cat][filename] = {
       'title': title, 'author': author, 'compat': compat, 'enabled': enabled
