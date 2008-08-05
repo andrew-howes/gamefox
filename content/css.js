@@ -292,7 +292,11 @@ var GameFOXCSS =
     }
     catch (e) {}
 
-    file.remove(false);
+    try
+    {
+      file.remove(false);
+    }
+    catch (e) {}
 
     delete css[category][filename];
     prefs.setCharPref('theme.css.serialized', css.toSource());
