@@ -223,5 +223,60 @@ var GameFOXUtils =
     return str.
       replace(/\r\n/g, '\n').
       replace(/\r/g, '\n');
+  },
+
+  getString: function(pref)
+  {
+    return GameFOX.prefs.getComplexValue(pref, Components.interfaces.nsISupportsString).data;
+  },
+
+  trim: function(str)
+  {
+    return str.replace(/^\s+|\s+$/g, '');
+  },
+
+  formatPagination: function(topiclink, posts)
+  {
+    // Prefix and suffix stuff, looks a little messy
+    var loc = GameFOX.prefs.getIntPref('paging.location');
+    var prefix = GameFOX.prefs.getCharPref('paging.prefix');
+    var sep = GameFOX.prefs.getCharPref('paging.separator');
+    var suffix = GameFOX.prefs.getCharPref('paging.suffix');
+
+    var prefixHTML = GameFOX.doc.createElement('span');
+    prefixHTML.innerHTML = '';
+    if (loc == 2)
+      prefixHTML.appendChild(GameFOX.doc.createElement('br'));
+    prefixHTML.appendChild(GameFOX.doc.createTextNode(prefix));
+    prefixHTML = ' ' + prefixHTML.innerHTML.replace(/\s/g, '&nbsp;');
+
+    var suffixHTML = GameFOX.doc.createElement('span');
+    suffixHTML.innerHTML = '';
+    suffixHTML.appendChild(GameFOX.doc.createTextNode(suffix));
+    suffixHTML = suffixHTML.innerHTML.replace(/\s/g, '&nbsp;');
+    //
+
+    var pages = Math.ceil(posts / GameFOX.prefs.getIntPref('msgsPerPage'));
+    if (pages == 1)
+      return false;
+
+    var pageHTML = GameFOX.doc.createElement('span');
+    pageHTML.innerHTML = "" + prefixHTML;
+
+    for (var i = 0; i < pages; i++)
+    {
+      var a = GameFOX.doc.createElement('a');
+          a.setAttribute('href', topiclink + (i ? '&page=' + i : ''));
+          a.innerHTML = i + 1;
+
+      pageHTML.appendChild(a);
+
+      if (i < pages - 1)
+        pageHTML.appendChild(GameFOX.doc.createTextNode(sep));
+    }
+
+    pageHTML.innerHTML += suffixHTML;
+
+    return pageHTML;
   }
 };

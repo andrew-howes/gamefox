@@ -1,5 +1,34 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
+var GFlib =
+{
+  getDocument: function(evt)
+  {
+    return evt.originalTarget;
+  },
+
+  onGF: function()
+  {
+    return GameFOX.doc.location.host.match(/(^|\.)gamefaqs\.com$/i) != null;
+  },
+
+  onPage: function(page)
+  {
+    return GameFOX.doc.location.pathname.match(new RegExp("^\/boards\/" + page + "\.php"));
+  },
+
+  setTitle: function(title)
+  {
+    if (!GameFOX.prefs.getBoolPref("elements.titlechange")) return false;
+
+    var prefix = "GameFAQs: ";
+    if (GameFOX.doc.defaultView.parent != GameFOX.doc.defaultView.self) // we're in a frame
+      GameFOX.doc.defaultView.parent.document.title = prefix + title;
+    else
+      GameFOX.doc.title = prefix + title;
+  }
+};
+
 function gfox_addTab(aUrl, focusType)
 {
   var browserWindow = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow('navigator:browser');
@@ -10,10 +39,7 @@ function gfox_addTab(aUrl, focusType)
   }
 }
 
-function gfox_processAboutDialog()
-{
-  // empty
-}
+function gfox_processAboutDialog() {}
 
 function gfox_processSidebar()
 {
