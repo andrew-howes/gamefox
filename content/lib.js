@@ -7,9 +7,21 @@ var GFlib =
     return evt.originalTarget;
   },
 
+  /*
+     Facts, based on Firefox 2:
+     - Host name normally can be fetched from document.location.host, document.location.hostname, and document.domain
+       properties, as string.
+     - If the page uses system protocol (e.g. about:<something>), then it might not have document.location.host and
+       document.location.hostname properties, but it still has document.domain property whose content is null.
+     - For normal page, if it is not loaded succesfully and therefore Firefox displays its custom warning page (e.g.
+       Server not found), then its document.location.host and document.location.hostname properties remain pointing
+       to the original URI, but its document.domain property content will be null.
+     Expect rubbish in the error console, and possibly a breakage, if the above anomalies are not handled properly.
+   */
   onGF: function()
   {
-    return GameFOX.doc.location.host.match(/(^|\.)gamefaqs\.com$/i) != null;
+    try { return GameFOX.doc.domain.match(/(^|\.)gamefaqs\.com$/i) != null; }
+    catch (e) { return false; }
   },
 
   onPage: function(page)
