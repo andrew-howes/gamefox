@@ -181,9 +181,20 @@ var GameFOXCSS =
         }
         catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND")
         {
-          this.remove(category, filename);
-          if (document.getElementById('css-tree'))
-            this.populate(document.getElementById('css-tree'));
+          if (category == "user") // user stylesheet, remove it
+          {
+            this.remove(category, filename);
+            if (document.getElementById('css-tree'))
+              this.populate(document.getElementById('css-tree'));
+          }
+          else // gamefox stylesheet, restore it
+          {
+            if (this.add(category, "chrome://gamefox/content/css/" + filename, filename,
+                css[category][filename]["title"], css[category][filename]["author"],
+                null, true))
+              this.reload(); // oh no, a recursive function call!
+                             // it should be all right as this is only done if re-adding the sheet was successful
+          }
         }
       }
     }
