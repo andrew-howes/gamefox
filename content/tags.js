@@ -1,3 +1,5 @@
+/* vim: set et sw=2 sts=2 ts=2: */
+
 var GameFOXTags =
 {
   tags: '',
@@ -587,5 +589,26 @@ var GameFOXTags =
 
     GameFOXTags.write(GameFOXTags.tags);
     return true;
+  },
+
+  tagTopicEvent: function(event)
+  {
+    event.preventDefault();
+    if (GameFOXTags.add(event))
+    {
+      event.target.removeEventListener('click', GameFOXTags.tagTopicEvent, false);
+      event.target.addEventListener('click', GameFOXTags.untagTopicEvent, false);
+      event.target.textContent = 'Untag Topic';
+    }
+  },
+
+  untagTopicEvent: function(event)
+  {
+    event.preventDefault();
+    GameFOXTags.remove(event.target.hash.substring(1));
+    
+    event.target.removeEventListener('click', GameFOXTags.untagTopicEvent, false);
+    event.target.addEventListener('click', GameFOXTags.tagTopicEvent, false);
+    event.target.textContent = 'Tag Topic';
   }
 };

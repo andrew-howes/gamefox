@@ -7,11 +7,12 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/highlight.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/quote.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
     <menuseparator id="gamefox-context-separator"/>
-    <menuitem id="gamefox-context-quote" label="Quote" accesskey="Q" oncommand="GameFOX.quote(gContextMenu);"/>
+    <menuitem id="gamefox-context-quote" label="Quote" accesskey="Q" oncommand="GFQuote.quote(gContextMenu);"/>
     <menu label="Pages" id="gamefox-context-pages">
       <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
     </menu>
