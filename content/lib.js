@@ -14,7 +14,7 @@ var GFlib =
 
   onPage: function(page)
   {
-    return GameFOX.doc.location.pathname.match(new RegExp("^\/boards\/" + page + "\.php"));
+    return GameFOX.doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
   },
 
   setTitle: function(title)
