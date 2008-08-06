@@ -9,6 +9,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/highlight.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/quote.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/context.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/quickpost.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">

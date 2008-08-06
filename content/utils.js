@@ -324,4 +324,9 @@ var GameFOXUtils =
     
     return str;
   },
+
+  stripQueryString: function(str)
+  {
+    return str.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/, '');
+  }
 };
