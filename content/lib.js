@@ -2,9 +2,15 @@
 
 var GFlib =
 {
-  getDocument: function(evt)
+  domain: 'http://www.gamefaqs.com',
+  path: '/boards/',
+
+  getDocument: function(event)
   {
-    return evt.originalTarget;
+    if (event.target.ownerDocument)
+      return event.target.ownerDocument;
+    else
+      return event.originalTarget;
   },
 
   /*
@@ -23,6 +29,14 @@ var GFlib =
     doc = (doc == null) ? GameFOX.doc : doc;
     try { return doc.domain.match(/(^|\.)gamefaqs\.com$/i) != null; }
     catch (e) { return false; }
+  },
+
+  onBoards: function(doc)
+  {
+    doc = (doc == null) ? GameFOX.doc : doc;
+    if (!GFlib.onGF(doc)) return false;
+    if (!doc.location.pathname.match(/^\/boards\//)) return false;
+    return true;
   },
 
   onPage: function(page, doc)

@@ -16,12 +16,14 @@ var GameFOX =
 
   processPage: function(event)
   {
-    GameFOX.doc = GFlib.getDocument(event);
+    // TODO: don't use GameFOX.doc as variables are shared between tabs and
+    // windows, breaking anything that uses it asynchronously
+    if (!GFlib.onBoards(GFlib.getDocument(event))) return false;
+    else var doc = GFlib.getDocument(event);
+    GameFOX.doc = doc;
 
-    if (!GFlib.onGF()) return false;
-
-    // TODO: use something similar to what Adblock does so there's no jarring
-    // effect after the page has loaded
+    // TODO: use nsIContentPolicy to prevent the stylesheet being loaded before
+    // it's disabled
     if (GameFOX.prefs.getBoolPref('theme.disablegamefaqscss'))
     {
       var stylesheets = doc.getElementsByTagName('link');
