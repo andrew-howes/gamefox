@@ -1,12 +1,12 @@
-<!ENTITY dialog.title                   "About GameFOX">
+<!ENTITY dialog.title "About GameFOX">
 
-<!ENTITY caption.title                  "GameFOX TNG">
-<!ENTITY version.title                  "Version">
+<!ENTITY caption.title "GameFOX TNG">
+<!ENTITY version.title "Version">
 
-<!ENTITY news.label                     "News">
-<!ENTITY support.label                  "Support">
-<!ENTITY support.tooltip                "Complain here!">
+<!ENTITY news.label "News">
+<!ENTITY support.label "Support">
+<!ENTITY support.tooltip "Complain here!">
 
-<!ENTITY currentdevs.label              "Current Developers">
-<!ENTITY previousdevs.label             "Previous Developers">
-<!ENTITY contributors.label             "Contributors">
+<!ENTITY currentdevs.label "Current Developers">
+<!ENTITY previousdevs.label "Previous Developers">
+<!ENTITY contributors.label "Contributors">
