@@ -17,15 +17,16 @@ var GFlib =
     return GameFOX.doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
   },
 
-  setTitle: function(title)
+  setTitle: function(title, prefix)
   {
     if (!GameFOX.prefs.getBoolPref("elements.titlechange")) return false;
 
-    var prefix = "GameFAQs: ";
+    GameFOX.doc.title = "GameFAQs"
+                      + (prefix == null ? "" : ":" + (typeof prefix == "number" ? "" : " " ) + prefix)
+                      + ": " + title;
+
     if (GameFOX.doc.defaultView.parent != GameFOX.doc.defaultView.self) // we're in a frame
-      GameFOX.doc.defaultView.parent.document.title = prefix + title;
-    else
-      GameFOX.doc.title = prefix + title;
+      GameFOX.doc.defaultView.parent.document.title = GameFOX.doc.title;
   }
 };
 

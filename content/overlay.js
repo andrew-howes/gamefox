@@ -162,15 +162,17 @@ var GameFOX =
       // Titles
       if (GameFOX.doc.getElementsByName('topictitle')[0]) // new topic
       {
-        GFlib.setTitle('Create Topic: ' + GameFOX.doc.evaluate('//h1',
+        GFlib.setTitle(GameFOX.doc.evaluate('//h1',
               GameFOX.doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).
-            singleNodeValue.textContent.replace(/^\s+|\s+$/g, ''));
+            singleNodeValue.textContent.replace(/^\s+|\s+$/g, ''),
+              "Create Topic");
       }
       else // new post
       {
-        GFlib.setTitle('Post Message: ' + GameFOX.doc.getElementsByName('message')[0].
+        GFlib.setTitle(GameFOX.doc.getElementsByName('message')[0].
             parentNode.parentNode.getElementsByTagName('a')[0].textContent.
-            replace(/^\s+|\s+$/g, ''));
+            replace(/^\s+|\s+$/g, ''),
+              "Post Message");
       }
 
       // "Post Message" button
@@ -205,7 +207,7 @@ var GameFOX =
     /* User Information (user.php) */
     else if (GFlib.onPage('user'))
     {
-      GFlib.setTitle("User: " + GameFOXUtils.trim(GameFOX.doc.getElementsByTagName('td')[1].textContent));
+      GFlib.setTitle(GameFOXUtils.trim(GameFOX.doc.getElementsByTagName('td')[1].textContent), "User");
     }
 
 
@@ -235,7 +237,7 @@ var GameFOX =
         userNav.appendChild(GameFOX.doc.createTextNode(' | '));
         userNav.appendChild(anchor);
       }
-      
+
       // Double click action
       GameFOX.doc.evaluate('//table[@class="topics"]', GameFOX.doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener(
@@ -268,7 +270,7 @@ var GameFOX =
             else
             {
               var pageTR = rows[i].cells[1];
-              
+
               var pageTD = GameFOX.doc.createElement('span');
                   pageTD.setAttribute('class', 'gamefox-pagelist');
                   pageTD.setAttribute('tag', GameFOX.prefs.getIntPref('paging.location'));
@@ -324,9 +326,10 @@ var GameFOX =
       catch (e) { GameFOX.leftMsgData = false; }
 
       // Title
-      GFlib.setTitle((pagenum + 1) + ": " + GameFOXUtils.trim(GameFOX.doc.evaluate(
+      GFlib.setTitle(GameFOXUtils.trim(GameFOX.doc.evaluate(
               '//h1/following::h1', GameFOX.doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-              null).singleNodeValue.textContent));
+              null).singleNodeValue.textContent),
+                pagenum + 1);
 
       // "Tag Topic" link
       if (GameFOX.prefs.getBoolPref('elements.tag.link'))
@@ -421,7 +424,7 @@ var GameFOX =
               }
               else
                 td[j].appendChild(GameFOX.doc.createTextNode(' | #' + msgnumString));
-              
+
               break;
           }
         }
@@ -475,9 +478,10 @@ var GameFOX =
     /* Message Detail (detail.php) */
     else if (GFlib.onPage('detail'))
     {
-      GFlib.setTitle("Message Detail: " + GameFOXUtils.trim(GameFOX.doc.
+      GFlib.setTitle(GameFOXUtils.trim(GameFOX.doc.
             evaluate('//h1/following::h1', GameFOX.doc, null, XPathResult.
-              FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent));
+              FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent),
+                "Message Detail");
     }
   },
 
