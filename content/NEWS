@@ -1,3 +1,8 @@
+2008-08-xx:
+    * version 0.6.3
+    * More error handling with the CSS component
+    * Split GameFOX stylesheets into multiple files
+
 2008-08-04:
     * version 0.6.2
     * Remove gfaqs9 support

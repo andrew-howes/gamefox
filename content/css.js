@@ -4,13 +4,19 @@ var GameFOXCSS =
 {
   init: function()
   {
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default.css', 'gamefox-standard-default.css',
-        'Standard Default', 'GameFOX devs', '', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default-old.css', 'gamefox-standard-default-old.css',
-        'Standard Default (old quickpost)', 'GameFOX devs', '', false, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-essentials.css', 'gamefox-essentials.css',
+        'Essentials', 'GameFOX devs', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-ads.css', 'gamefox-ads.css',
+        'Ad blocking', 'GameFOX devs', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost.css', 'gamefox-quickpost.css',
+        'QuickPost', 'GameFOX devs', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost-old.css', 'gamefox-quickpost-old.css',
+        'QuickPost (0.5)', 'GameFOX devs', '', false, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickwhois.css', 'gamefox-quickwhois.css',
+        'QuickWhois', 'GameFOX devs', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
-        'GFCode', 'Ant P.', '', true, true)
-    
+        'GFCode', 'Ant P.', '', true, true);
+
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
         'Wide Default Layout', '', '', false, true);
 

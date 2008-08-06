@@ -1,0 +1,8 @@
+@-moz-document domain(gamefaqs.com)
+{
+    .ad, .adbox, #gne_nav, #mpu_wrap, #footer, #sitenav, #broadnav, #todayoncnet,
+    .rubics_netxp1_main
+    {
+        display: none !important;
+    }
+}
