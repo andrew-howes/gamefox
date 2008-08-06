@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- vim: set et sw=2 sts=2 ts=2: -->
+<!-- vim: set et sw=2 sts=2 ts=2 tw=79: -->
 <overlay id="gamefox-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
@@ -8,6 +8,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/highlight.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/quote.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/context.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">

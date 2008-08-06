@@ -18,15 +18,17 @@ var GFlib =
        to the original URI, but its document.domain property content will be null.
      Expect rubbish in the error console, and possibly a breakage, if the above anomalies are not handled properly.
    */
-  onGF: function()
+  onGF: function(doc)
   {
-    try { return GameFOX.doc.domain.match(/(^|\.)gamefaqs\.com$/i) != null; }
+    doc = (doc == null) ? GameFOX.doc : doc;
+    try { return doc.domain.match(/(^|\.)gamefaqs\.com$/i) != null; }
     catch (e) { return false; }
   },
 
-  onPage: function(page)
+  onPage: function(page, doc)
   {
-    return GameFOX.doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
+    doc = (doc == null) ? GameFOX.doc : doc;
+    return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
   },
 
   setTitle: function(title, prefix)

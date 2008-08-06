@@ -14,123 +14,6 @@ var GameFOX =
   prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
              Components.interfaces.nsIPrefService).getBranch('gamefox.'),
 
-  contextMenuDisplay: function(event)
-  {
-    var doc     = gContextMenu.target.ownerDocument;
-    var notOnGF = !doc.location.protocol.match(/^https?:$/i) || !doc.domain || !doc.domain.match(/^www\.gamefaqs\.com$/i);
-    var cxPrefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.context.');
-
-    document.getElementById('gamefox-toggle-sidebar').hidden = !cxPrefs.getBoolPref('sidebar');
-    document.getElementById('gamefox-tags').hidden           = !cxPrefs.getBoolPref('taglist');
-
-    if (notOnGF)
-    {
-      document.getElementById('gamefox-context-quote').hidden = true;
-      document.getElementById('gamefox-context-tag').hidden   = true;
-      document.getElementById('gamefox-context-pages').hidden = true;
-      return;
-    }
-
-    var cxQuote     = cxPrefs.getBoolPref('quote');
-    var cxTag       = cxPrefs.getBoolPref('tag');
-    var cxPageList  = cxPrefs.getBoolPref('pagelist');
-
-    var onMyPosts   = doc.location.pathname.match(/^\/boards\/myposts\.php$/i);
-    var onMsgList;
-    var onTopicList;
-
-    if (onMyPosts)
-    {
-      onMsgList   = false;
-      onTopicList = false;
-    }
-    else
-    {
-      var userNav = doc.evaluate('//div[@class="board_nav"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      onTopicList = !!userNav && !!doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      onMsgList   = !onTopicList && !!userNav && !!doc.evaluate('//table[@class="message"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    }
-
-    if (cxQuote) cxQuote = !!doc.getElementById('gamefox-message');
-
-    if (!onMsgList || !cxQuote)
-    {
-      document.getElementById('gamefox-context-quote').hidden = true;
-    }
-    else
-    {
-      try
-      {
-        var node      = gContextMenu.target;
-        var nodeName  = node.nodeName.toLowerCase();
-        var nodeClass = node.className.toLowerCase();
-
-        while (nodeName != 'table' || nodeClass != 'message')
-        {
-          node      = (nodeName == 'div') ? node.parentNode : node.offsetParent;
-          nodeName  = node.nodeName.toLowerCase();
-          nodeClass = node.className.toLowerCase();
-        }
-
-        document.getElementById('gamefox-context-quote').hidden = false;
-      }
-      catch (e)
-      {
-        document.getElementById('gamefox-context-quote').hidden = true;
-      }
-    }
-
-    if (!onTopicList && !onMyPosts)
-    {
-      var hideCxTag = !onMsgList || !cxTag;
-      if (!hideCxTag)
-      {
-        try
-        {
-          if (!doc.evaluate('//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
-          {
-            hideCxTag = true;
-          }
-        }
-        catch (e)
-        {
-          hideCxTag = true;
-        }
-      }
-      document.getElementById('gamefox-context-tag').hidden   = hideCxTag;
-      document.getElementById('gamefox-context-pages').hidden = true;
-    }
-    else if (!cxTag && !cxPageList)
-    {
-      document.getElementById('gamefox-context-tag').hidden   = true;
-      document.getElementById('gamefox-context-pages').hidden = true;
-    }
-    else
-    {
-      try
-      {
-        var node = gContextMenu.target;
-        var nodeName = node.nodeName.toLowerCase();
-
-        while (nodeName != 'td')
-        {
-          node = node.parentNode;
-          nodeName = node.nodeName.toLowerCase();
-        }
-
-        nodeName = node.parentNode.cells[1].nodeName; // this is an error raiser, detects gamefox-pagelist, will be catched
-
-        document.getElementById('gamefox-context-tag').hidden   = !cxTag;
-        document.getElementById('gamefox-context-pages').hidden = !cxPageList;
-      }
-      catch (e)
-      {
-        document.getElementById('gamefox-context-tag').hidden   = true;
-        document.getElementById('gamefox-context-pages').hidden = true;
-      }
-    }
-  },
-
   processPage: function(event)
   {
     GameFOX.doc = GFlib.getDocument(event);
@@ -1207,7 +1090,7 @@ function GameFOXLoader()
   document.getElementById('appcontent').addEventListener(
       'DOMContentLoaded', GameFOX.processPage, false);
   document.getElementById('contentAreaContextMenu').addEventListener(
-      'popupshowing', GameFOX.contextMenuDisplay, false);
+      'popupshowing', GFContextMenu.displayMenu, false);
 
   var prefs = Components.classes['@mozilla.org/preferences-service;1'].
     getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
