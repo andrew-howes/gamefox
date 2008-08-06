@@ -166,16 +166,25 @@ var GameFOXCSS =
     {
       for (var filename in css[category])
       {
-        file.initWithPath(this.getDirectory());
-        file.append(filename);
-        var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
-            Components.interfaces.nsIIOService).newFileURI(file, null, null);
+        try
+        {
+          file.initWithPath(this.getDirectory());
+          file.append(filename);
+          var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
+              Components.interfaces.nsIIOService).newFileURI(file, null, null);
 
-        if (sss.sheetRegistered(uri, sss.USER_SHEET))
-          sss.unregisterSheet(uri, sss.USER_SHEET);
+          if (sss.sheetRegistered(uri, sss.USER_SHEET))
+            sss.unregisterSheet(uri, sss.USER_SHEET);
 
-        if (css[category][filename]['enabled'].toString() == "true")
-          sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
+          if (css[category][filename]['enabled'].toString() == "true")
+            sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
+        }
+        catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND")
+        {
+          this.remove(category, filename);
+          if (document.getElementById('css-tree'))
+            this.populate(document.getElementById('css-tree'));
+        }
       }
     }
   },
@@ -229,6 +238,8 @@ var GameFOXCSS =
     this.treeView.setCellValue = this.setCell;
 
     element.view = this.treeView;
+
+    document.getElementById('css-remove').disabled = true;
 
     // this is sort of a hack, I couldn't be bothered with finding out how to push data
     // directly to treeView.visibleData when populating the tree
