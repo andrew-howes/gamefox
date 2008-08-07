@@ -2,6 +2,10 @@
     * version 0.6.3
     * More error handling with the CSS component
     * Split GameFOX stylesheets into multiple files
+    * Change checkmarks to checkboxes in the themes pane to make toggling CSS
+      more intuitive, add white outline to make them visible with dark Firefox widgets
+    * Get rid of the odd blue QuickPost border in Firefox 2
+    * Lots of code optimizations and refactoring
 
 2008-08-04:
     * version 0.6.2
