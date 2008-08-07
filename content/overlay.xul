@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <!-- vim: set et sw=2 sts=2 ts=2 tw=79: -->
+
+<!DOCTYPE dialog SYSTEM "chrome://gamefox/locale/overlay.dtd">
+
 <overlay id="gamefox-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
@@ -26,37 +29,25 @@
     </menu>
   </popup>
 
-  <!-- FireFox tools menu -->
+  <!-- tools menu -->
   <menupopup id="menu_ToolsPopup">
-    <menuitem insertbefore="prefSep" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+    <menuitem insertafter="javascriptConsole" label="&tools.label;"
+      oncommand="window.openDialog('chrome://gamefox/content/options.xul',
+      'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"
+      accesskey="&tools.accesskey;"/>
   </menupopup>
 
-  <!-- SeaMonkey tools menu -->
-  <menupopup id="taskPopup">
-    <menuitem insertafter="downloadmgr" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
-  </menupopup>
-
-  <!-- Firefox commands -->
+  <!-- commands -->
   <commandset id="mainCommandSet">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
   </commandset>
 
-  <!-- SeaMonkey commands -->
-  <commandset id="commands">
-    <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
-  </commandset>
-
-  <!-- Firefox keys -->
+  <!-- keys -->
   <keyset id="mainKeyset">
     <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
   </keyset>
 
-  <!-- SeaMonkey keys -->
-  <keyset id="navKeys">
-    <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
-  </keyset>
-
-  <!-- Firefox broadcasters -->
+  <!-- broadcasters -->
   <broadcasterset id="mainBroadcasterSet">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
@@ -69,20 +60,7 @@
     />
   </broadcasterset>
 
-  <!-- SeaMonkey broadcasters -->
-  <broadcasterset id="navBroadcasters">
-    <broadcaster id="viewGamefoxSidebar"
-      autoCheck="false"
-      label="GameFOX Sidebar"
-      type="checkbox"
-      group="sidebar"
-      sidebartitle="GameFOX Sidebar"
-      sidebarurl="chrome://gamefox/content/sidebar.xhtml"
-      command="cmd_gamefoxSidebar"
-    />
-  </broadcasterset>
-
-  <!-- Firefox view sidebar menu -->
+  <!-- view sidebar menu -->
   <menupopup id="viewSidebarMenu">
     <menuitem key="key_gamefoxSidebar" observes="viewGamefoxSidebar"/>
   </menupopup>
