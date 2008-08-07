@@ -21,8 +21,14 @@ var GameFOX =
       }
     }
 
+    /* Index (index.php) */
+    if (GFlib.onPage(doc, 'index'))
+    {
+      GFlib.setTitle(doc, 'Message Boards');
+    }
+
     /* Active Messages (myposts.php) */
-    if (GFlib.onPage(doc, 'myposts'))
+    else if (GFlib.onPage(doc, 'myposts'))
     {
       doc.evaluate('//div[@class="board"]/table', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.

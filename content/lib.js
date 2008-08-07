@@ -46,6 +46,8 @@ var GFlib =
 
   onPage: function(doc, page)
   {
+    if (page == 'index' && doc.location.pathname.match(new RegExp(
+            "^/boards/(\\?|$)"))) return true;
     return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
   },
 
