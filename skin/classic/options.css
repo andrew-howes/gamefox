@@ -79,13 +79,18 @@ radio[pane=gamefox-tags-pane]
     -moz-image-region: rect(0px, 160px,  32px, 128px);
 }
 
-treechildren::-moz-tree-checkbox {
-  /* unchecked checkbox treecells. This style MUST come before treechildren::-moz-tree-checkbox(checked) otherwise it won't take effect.  */
-  list-style-image: none;
+treechildren::-moz-tree-checkbox
+{
+    list-style-image: url('chrome://gamefox/skin/cbox-empty.png');
 }
 
-treechildren::-moz-tree-checkbox(checked) {
-  /* css for checked cells. */
-  list-style-image: url("chrome://gamefox/skin/cbox-check.gif");
+treechildren::-moz-tree-checkbox(container)
+{
+    list-style-image: none;
+}
+
+treechildren::-moz-tree-checkbox(checked)
+{
+    list-style-image: url("chrome://gamefox/skin/cbox-full.png");
 }
 
