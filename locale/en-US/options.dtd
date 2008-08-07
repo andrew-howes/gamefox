@@ -7,7 +7,6 @@
 <!ENTITY page.tab.board "Message Board">
 <!ENTITY page.tab.elements "Elements">
 <!ENTITY page.tab.highlight "User Highlighting">
-
 <!ENTITY page.board.settings.caption "Board Settings">
 <!ENTITY page.board.settings.tpp "Topics Per Page">
 <!ENTITY page.board.settings.tsort "Topic Sort">
@@ -25,7 +24,6 @@
 <!ENTITY page.board.settings.msgdata.above "Above Message">
 <!ENTITY page.board.settings.grab "Grab From GameFAQs">
 <!ENTITY page.board.settings.save "Save to GameFAQs">
-
 <!ENTITY page.elements.desctitles "Descriptive window titles">
 <!ENTITY page.elements.postmessage "&quot;Post Message&quot; (skip preview) button">
 <!ENTITY page.elements.topics.caption "Topic Lists">
@@ -45,13 +43,48 @@
 <!ENTITY page.elements.pages.format.prefix "Prefix:">
 <!ENTITY page.elements.pages.format.sep "Delimiter:">
 <!ENTITY page.elements.pages.format.suffix "Suffix:">
-
 <!ENTITY page.highlight.caption "User Highlighting">
 <!ENTITY page.highlight.instructions "Enter usernames separated by commas.">
 <!ENTITY page.highlight.group "Group">
 <!ENTITY page.highlight.hide "Hide posts from Group 2">
 <!ENTITY page.highlight.messages "Highlight messages">
 <!ENTITY page.highlight.topics "Highlight topics">
+
+<!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">
+<!ENTITY theme.stylesheets.label "Stylesheets">
+<!ENTITY theme.tree.name "Name">
+<!ENTITY theme.tree.author "Author">
+<!ENTITY theme.tree.compat "Compatibility">
+<!ENTITY theme.tree.enabled "Enabled">
+<!ENTITY theme.tree.delete "Delete">
+<!ENTITY theme.import.label "Import a Stylesheet">
+<!ENTITY theme.import.uri "URI">
+<!ENTITY theme.import.browse "Browse">
+<!ENTITY theme.import.submit "Import">
+<!ENTITY theme.reload "Reload Stylesheets">
+<!ENTITY theme.edit "Open CSS Directory">
+
+<!ENTITY quoting.label "Quoting">
+<!ENTITY quoting.header.caption "Quote Header">
+<!ENTITY quoting.header.username "Poster username">
+<!ENTITY quoting.header.date "Post date">
+<!ENTITY quoting.header.num "Post number">
+<!ENTITY quoting.body.caption "Quote Body">
+<!ENTITY quoting.body.removesig "Remove signature">
+<!ENTITY quoting.style.caption "Quote Style">
+<!ENTITY quoting.style.desc "Tags to use for quoting:">
+<!ENTITY quoting.style.regular.label "Use regular tags">
+<!ENTITY quoting.style.boldheader "Bold header">
+<!ENTITY quoting.style.italicheader "Italicize header">
+<!ENTITY quoting.style.boldmessage "Bold message">
+<!ENTITY quoting.style.italicmessage "Italicize message">
+<!ENTITY quoting.style.gfcodebody.label "Use GFCode for message body">
+<!ENTITY quoting.style.gfcodefull.label "Use GFCode for full quote">
+<!ENTITY quoting.style.custom.label "Use a custom template">
+<!ENTITY quoting.style.custom.u "username of poster">
+<!ENTITY quoting.style.custom.d "date of post">
+<!ENTITY quoting.style.custom.n "post number">
+<!ENTITY quoting.style.custom.m "message body">
 
 <!ENTITY signature.content "Content">
 <!ENTITY signature.desc "
@@ -67,17 +100,3 @@
 <!ENTITY signature.addition "Addition Method">
 <!ENTITY signature.addafter "Append signature after submitting or previewing the post">
 <!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
-
-<!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">
-<!ENTITY theme.stylesheets.label "Stylesheets">
-<!ENTITY theme.tree.name "Name">
-<!ENTITY theme.tree.author "Author">
-<!ENTITY theme.tree.compat "Compatibility">
-<!ENTITY theme.tree.enabled "Enabled">
-<!ENTITY theme.tree.delete "Delete">
-<!ENTITY theme.import.label "Import a Stylesheet">
-<!ENTITY theme.import.uri "URI">
-<!ENTITY theme.import.browse "Browse">
-<!ENTITY theme.import.submit "Import">
-<!ENTITY theme.reload "Reload Stylesheets">
-<!ENTITY theme.edit "Open CSS Directory">

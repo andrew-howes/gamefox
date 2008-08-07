@@ -360,7 +360,7 @@
 
 <!-- Q U O T I N G -->
 
-  <prefpane id="gamefox-quote-pane" label="Quoting">
+  <prefpane id="gamefox-quote-pane" label="&quoting.label;">
     <preferences>
       <preference id="header_italic"     name="gamefox.quote.header.italic"     type="bool"/>
       <preference id="header_bold"       name="gamefox.quote.header.bold"       type="bool"/>
@@ -375,50 +375,50 @@
     </preferences>
 
     <groupbox align="start" orient="horizontal">
-      <caption label="Quote Header"/>
-      <checkbox preference="header_username"   label="Poster username" flex="1"/>
-      <checkbox preference="header_date"       label="Post date" flex="1"/>
-      <checkbox preference="header_messagenum" label="Post number" flex="1"/>
+      <caption label="&quoting.header.caption;"/>
+      <checkbox preference="header_username" label="&quoting.header.username;" flex="1"/>
+      <checkbox preference="header_date" label="&quoting.header.date;" flex="1"/>
+      <checkbox preference="header_messagenum" label="&quoting.header.num;" flex="1"/>
     </groupbox>
 
     <groupbox>
-      <caption label="Quote Body"/>
-      <checkbox preference="removesignature" label="Remove signature"/>
+      <caption label="&quoting.body.caption;"/>
+      <checkbox preference="removesignature" label="&quoting.body.removesig;"/>
     </groupbox>
 
     <groupbox>
-      <caption label="Quote Style"/>
-      <label value="Tags to use for quoting:"/>
+      <caption label="&quoting.style.caption;"/>
+      <label value="&quoting.style.desc;"/>
       <radiogroup class="indent" preference="style">
-        <radio value="normal" label="Use regular tags"/>
+        <radio value="normal" label="&quoting.style.regular.label;"/>
         <hbox class="indent" orient="horizontal">
           <vbox>
-            <checkbox preference="header_bold"   label="Bold header"/>
-            <checkbox preference="header_italic" label="Italicize header"/>
+            <checkbox preference="header_bold"   label="&quoting.style.boldheader;"/>
+            <checkbox preference="header_italic" label="&quoting.style.italicheader;"/>
           </vbox>
           <vbox>
-            <checkbox preference="message_bold"   label="Bold message"/>
-            <checkbox preference="message_italic" label="Italicize message"/>
+            <checkbox preference="message_bold"   label="&quoting.style.boldmessage;"/>
+            <checkbox preference="message_italic" label="&quoting.style.italicmessage;"/>
           </vbox>
         </hbox>
-        <radio value="gfcode_body" label="Use GFCode for message body"/>
+        <radio value="gfcode_body" label="&quoting.style.gfcodebody.label;"/>
         <hbox class="indent" orient="horizontal">
           <vbox>
-            <checkbox preference="header_bold"   label="Bold header"/>
-            <checkbox preference="header_italic" label="Italicize header"/>
+            <checkbox preference="header_bold"   label="&quoting.style.boldheader;"/>
+            <checkbox preference="header_italic" label="&quoting.style.italicheader;"/>
           </vbox>
         </hbox>
-        <radio value="gfcode_full" label="Use GFCode for full quote"/>
-        <radio value="custom" label="Use a custom template"/>
+        <radio value="gfcode_full" label="&quoting.style.gfcodefull.label;"/>
+        <radio value="custom" label="&quoting.style.custom.label;"/>
         <textbox preference="style_custom" rows="3" multiline="true" class="indent"/>
         <hbox class="indent" orient="horizontal">
           <vbox>
-            <description>%u - username of poster</description>
-            <description>%d - date of post</description>
+            <description>%u - &quoting.style.custom.u;</description>
+            <description>%d - &quoting.style.custom.d;</description>
           </vbox>
           <vbox>
-            <description>%n - post number</description>
-            <description>%m - message</description>
+            <description>%n - &quoting.style.custom.n;</description>
+            <description>%m - &quoting.style.custom.m;</description>
           </vbox>
         </hbox>
       </radiogroup>
