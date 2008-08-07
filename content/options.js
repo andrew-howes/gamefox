@@ -42,21 +42,35 @@ var GameFOXOptions =
     {
       alert("That isn't supported here. You're probably using Firefox 2 and not using Windows.");
     }
-  }
-};
+  },
 
-function gamefoxSelectedPrefTabFix()
-{
-  if (navigator.platform.match(/^Mac/i))
+  saveSelectedTab: function(tab)
   {
-    document.getElementById('gamefox-prefwindow').showPane(document.getElementById('gamefox-page-pane'));
-  }
-  else
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.options.');
+    try
+    {
+      prefs.setIntPref(tab.getAttribute('tabGroup') + '.selectedtab', tab.selectedIndex);
+    }
+    catch (e)
+    {
+      prefs.setIntPref(tab.getAttribute('tabGroup') + '.selectedtab', 0);
+    }
+  },
+
+  restoreLastPane: function()
   {
+    if (navigator.platform.match(/^Mac/))
+    {
+      document.getElementById('gamefox-prefwindow').showPane(
+          document.getElementById('gamefox-page-pane'));
+      return;
+    }
+
     var prefWindow = document.getElementById('gamefox-prefwindow');
     try
     {
-      var lastTab    = prefWindow.lastSelected;
+      var lastTab = prefWindow.lastSelected;
       prefWindow.showPane(document.getElementById('gamefox-page-pane'));
       prefWindow.showPane(document.getElementById(lastTab));
     }
@@ -64,54 +78,40 @@ function gamefoxSelectedPrefTabFix()
     {
       prefWindow.showPane(document.getElementById('gamefox-page-pane'));
     }
-  }
 
-  // Restore selected tab position for every tab panel out there, well... there's currently only one
-  gamefoxRestoreSelectedTabs();
-}
+    GameFOXOptions.restoreLastTabs();
+  },
 
-function gamefoxSaveSelectedTab(which)
-{
-  var optPrefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.options.');
-
-  try
+  restoreLastTabs: function()
   {
-    optPrefs.setIntPref(which.getAttribute('tabGroup') + '.selectedtab', which.selectedIndex);
-  }
-  catch (e)
-  {
-    optPrefs.setIntPref(which.getAttribute('tabGroup') + '.selectedtab', 0);
-  }
-}
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.options.');
+    var tabs = document.getElementsByTagName('tabs');
+    var tabGroup;
 
-function gamefoxRestoreSelectedTabs()
-{
-  var optPrefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.options.');
-  var tabs     = document.getElementsByTagName('tabs');
-  var tabGroup;
-
-  for (var i = 0; i < tabs.length; i++)
-  {
-    tabGroup = tabs[i].getAttribute('tabGroup');
-    if (!tabGroup)
+    for (var i = 0; i < tabs.length; i++)
     {
-      tabs[i].setAttribute('tabGroup', 'tabGroup' + i);
       tabGroup = tabs[i].getAttribute('tabGroup');
-    }
+      if (!tabGroup)
+      {
+        tabs[i].setAttribute('tabGroup', 'tabGroup' + i);
+        tabGroup = tabs[i].setAttribute('tabGroup');
+      }
 
-    try
-    {
-      tabs[i].selectedIndex = optPrefs.getIntPref(tabGroup + '.selectedtab');
-    }
-    catch (e)
-    {
       try
       {
-        tabs[i].selectedIndex = 0;
+        tabs[i].selectedIndex = prefs.getIntPref(tabGroup + '.selectedtab');
       }
-      catch(e){;}
-    }
+      catch (e)
+      {
+        try
+        {
+          tabs[i].selectedIndex = 0;
+        }
+        catch (e) {}
+      }
 
-    tabs[i].setAttribute('onselect', 'gamefoxSaveSelectedTab(this)');
+      tabs[i].setAttribute('onselect', 'GameFOXOptions.saveSelectedTab(this)');
+    }
   }
-}
+};

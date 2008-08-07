@@ -12,7 +12,7 @@
     buttonlabelextra1="About"
     ondialogextra1="window.openDialog('chrome://gamefox/content/about.xul', 'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton=""
-    onload="gamefoxSelectedPrefTabFix();"
+    onload="GameFOXOptions.restoreLastPane()"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 <!-- P A G E -->
