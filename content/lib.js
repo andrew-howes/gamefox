@@ -68,7 +68,7 @@ var GFlib =
           'navigator:browser').getBrowser();
 
     var tab = browser.addTab(url);
-    if (focusType == 0)
+    if (focus == 0)
       browser.selectedTab = tab;
   }
 };
