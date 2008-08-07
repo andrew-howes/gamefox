@@ -4,14 +4,14 @@ var GFContextMenu =
 {
   displayMenu: function(event)
   {
-    var doc = GFlib.getDocument(event);
+    var doc = gContextMenu.target.ownerDocument;
 
     document.getElementById('gamefox-toggle-sidebar').hidden = !GameFOX.prefs.
       getBoolPref('context.sidebar');
     document.getElementById('gamefox-tags').hidden = !GameFOX.prefs.
       getBoolPref('context.taglist');
 
-    if (!GFlib.onGF(doc))
+    if (!GFlib.onBoards(doc))
     {
       document.getElementById('gamefox-context-quote').hidden = true;
       document.getElementById('gamefox-context-tag').hidden = true;
