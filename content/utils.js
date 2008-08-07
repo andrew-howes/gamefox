@@ -235,7 +235,7 @@ var GameFOXUtils =
     return str.replace(/^\s+|\s+$/g, '');
   },
 
-  formatPagination: function(topiclink, posts)
+  formatPagination: function(doc, topiclink, posts)
   {
     // Prefix and suffix stuff, looks a little messy
     var loc = GameFOX.prefs.getIntPref('paging.location');
@@ -243,16 +243,16 @@ var GameFOXUtils =
     var sep = GameFOX.prefs.getCharPref('paging.separator');
     var suffix = GameFOX.prefs.getCharPref('paging.suffix');
 
-    var prefixHTML = GameFOX.doc.createElement('span');
+    var prefixHTML = doc.createElement('span');
     prefixHTML.innerHTML = '';
     if (loc == 2)
-      prefixHTML.appendChild(GameFOX.doc.createElement('br'));
-    prefixHTML.appendChild(GameFOX.doc.createTextNode(prefix));
+      prefixHTML.appendChild(doc.createElement('br'));
+    prefixHTML.appendChild(doc.createTextNode(prefix));
     prefixHTML = ' ' + prefixHTML.innerHTML.replace(/\s/g, '&nbsp;');
 
-    var suffixHTML = GameFOX.doc.createElement('span');
+    var suffixHTML = doc.createElement('span');
     suffixHTML.innerHTML = '';
-    suffixHTML.appendChild(GameFOX.doc.createTextNode(suffix));
+    suffixHTML.appendChild(doc.createTextNode(suffix));
     suffixHTML = suffixHTML.innerHTML.replace(/\s/g, '&nbsp;');
     //
 
@@ -260,19 +260,19 @@ var GameFOXUtils =
     if (pages == 1)
       return false;
 
-    var pageHTML = GameFOX.doc.createElement('span');
+    var pageHTML = doc.createElement('span');
     pageHTML.innerHTML = "" + prefixHTML;
 
     for (var i = 0; i < pages; i++)
     {
-      var a = GameFOX.doc.createElement('a');
+      var a = doc.createElement('a');
           a.setAttribute('href', topiclink + (i ? '&page=' + i : ''));
           a.innerHTML = i + 1;
 
       pageHTML.appendChild(a);
 
       if (i < pages - 1)
-        pageHTML.appendChild(GameFOX.doc.createTextNode(sep));
+        pageHTML.appendChild(doc.createTextNode(sep));
     }
 
     pageHTML.innerHTML += suffixHTML;
@@ -328,5 +328,14 @@ var GameFOXUtils =
   stripQueryString: function(str)
   {
     return str.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/, '');
+  },
+
+  getMsgDataDisplay: function(doc)
+  {
+    try { var leftMsgData = !(doc.getElementsByTagName('tr')[0].
+        getElementsByTagName('td').length == 1); }
+    catch (e) { var leftMsgData = false; }
+
+    return leftMsgData;
   }
 };

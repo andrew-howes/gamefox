@@ -4,7 +4,7 @@ var GFContextMenu =
 {
   displayMenu: function(event)
   {
-    var doc = gContextMenu.target.ownerDocument;
+    var doc = GFlib.getDocument(event);
 
     document.getElementById('gamefox-toggle-sidebar').hidden = !GameFOX.prefs.
       getBoolPref('context.sidebar');
@@ -19,7 +19,7 @@ var GFContextMenu =
       return;
     }
 
-    if (!GFlib.onPage('genmessage', doc) && GameFOX.doc.getElementById('gamefox-message', doc))
+    if (!GFlib.onPage(doc, 'genmessage') && doc.getElementById('gamefox-message'))
       document.getElementById('gamefox-context-quote').hidden = true;
     else
     { // Quote
@@ -44,9 +44,9 @@ var GFContextMenu =
       }
     }
 
-    if (!GFlib.onPage('gentopic', doc) && !GFlib.onPage('myposts', doc))
+    if (!GFlib.onPage(doc, 'gentopic') && !GFlib.onPage(doc, 'myposts'))
     {
-      if (!GFlib.onPage('myposts', doc) || !GameFOX.prefs.getBoolPref('context.tag', doc))
+      if (!GFlib.onPage(doc, 'myposts') || !GameFOX.prefs.getBoolPref('context.tag'))
       { // Tag topic
         try
         {

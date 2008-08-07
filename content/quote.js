@@ -5,6 +5,7 @@ var GFQuote =
   quote: function(event)
   {
     var doc = event.target.ownerDocument;
+    var leftMsgData = GameFOXUtils.getMsgDataDisplay(doc);
 
     var node           = event.target;
     var nodeName       = node.nodeName.toLowerCase();
@@ -31,12 +32,12 @@ var GFQuote =
 
     var quoteHead, quoteMsg, msgNum;
     // in message header
-    if ((!GameFOX.leftMsgData && node.parentNode.className != 'even') || nodeClass.match('author'))
+    if ((!leftMsgData && node.parentNode.className != 'even') || nodeClass.match('author'))
     {
       quoteHead = node.textContent;
       msgNum = '#' + node.id.substr(1);
 
-      if (!GameFOX.leftMsgData)
+      if (!leftMsgData)
         node = tableNode.rows[node.parentNode.rowIndex + 1].cells[0];
       else
         node = node.parentNode.cells[1];
@@ -45,11 +46,11 @@ var GFQuote =
     }
 
     // in message body
-    else if ((!GameFOX.leftMsgData && node.parentNode.className == 'even') || !nodeClass.match('author'))
+    else if ((!leftMsgData && node.parentNode.className == 'even') || !nodeClass.match('author'))
     {
       quoteMsg = node.innerHTML;
 
-      if (!GameFOX.leftMsgData)
+      if (!leftMsgData)
         node = tableNode.rows[node.parentNode.rowIndex - 1].cells[0];
       else
         node = node.parentNode.cells[0];

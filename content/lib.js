@@ -26,35 +26,32 @@ var GFlib =
    */
   onGF: function(doc)
   {
-    doc = (doc == null) ? GameFOX.doc : doc;
     try { return doc.domain.match(/(^|\.)gamefaqs\.com$/i) != null; }
     catch (e) { return false; }
   },
 
   onBoards: function(doc)
   {
-    doc = (doc == null) ? GameFOX.doc : doc;
     if (!GFlib.onGF(doc)) return false;
     if (!doc.location.pathname.match(/^\/boards\//)) return false;
     return true;
   },
 
-  onPage: function(page, doc)
+  onPage: function(doc, page)
   {
-    doc = (doc == null) ? GameFOX.doc : doc;
     return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
   },
 
-  setTitle: function(title, prefix)
+  setTitle: function(doc, title, prefix)
   {
     if (!GameFOX.prefs.getBoolPref("elements.titlechange")) return false;
 
-    GameFOX.doc.title = "GameFAQs"
-                      + (prefix == null ? "" : ":" + (typeof prefix == "number" ? "" : " " ) + prefix)
-                      + ": " + title;
+    doc.title = "GameFAQs"
+      + (prefix == null ? "" : ":" + (typeof prefix == "number" ? "" : " " ) + prefix)
+      + ": " + title;
 
-    if (GameFOX.doc.defaultView.parent != GameFOX.doc.defaultView.self) // we're in a frame
-      GameFOX.doc.defaultView.parent.document.title = GameFOX.doc.title;
+    if (doc.defaultView.parent != doc.defaultView.self) // we're in a frame
+      doc.defaultView.parent.document.title = doc.title;
   }
 };
 

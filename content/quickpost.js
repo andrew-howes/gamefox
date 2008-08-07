@@ -223,7 +223,7 @@ var GFQuickPost =
     previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     var postBody = '';
-    var topicTitle = GameFOX.doc.getElementsByName('topictitle');
+    var topicTitle = doc.getElementsByName('topictitle');
 
     if (topicTitle[0])
     {
@@ -239,7 +239,7 @@ var GFQuickPost =
 
     var message = doc.getElementsByName('message')[0].value;
 
-    if (!GFlib.onPage('post', doc)
+    if (!GFlib.onPage(doc, 'post')
         && GameFOX.prefs.getIntPref('signature.addition') == 1)
       message +=
         GameFOXUtils.formatSig(
