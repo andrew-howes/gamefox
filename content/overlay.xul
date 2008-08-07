@@ -18,13 +18,23 @@
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
     <menuseparator id="gamefox-context-separator"/>
-    <menuitem id="gamefox-context-quote" label="Quote" accesskey="Q" oncommand="GFQuote.quote(gContextMenu);"/>
-    <menu label="Pages" id="gamefox-context-pages">
+    <menuitem label="&menu.label;" disabled="true"/>
+
+    <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
+      accesskey="&menu.quote.accesskey;" oncommand="GFQuote.quote(gContextMenu);"/>
+    
+    <menu id="gamefox-context-pages" label="&menu.pages.label;"
+      accesskey="&menu.pages.accesskey;">
       <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
     </menu>
-    <menuitem id="gamefox-context-tag" label="Tag Topic" accesskey="T" oncommand="GameFOXTags.add(gContextMenu);"/>
-    <menuitem id="gamefox-toggle-sidebar" label="Toggle GameFOX Sidebar" observes="viewGamefoxSidebar"/>
-    <menu label="GameFAQs Tags" id="gamefox-tags">
+
+    <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
+      accesskey="&menu.tagtopic.accesskey;" oncommand="GameFOXTags.add(gContextMenu);"/>
+
+    <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
+      accesskey="&menu.sidebar.accesskey;" observes="viewGamefoxSidebar"/>
+    
+    <menu id="gamefox-tags" label="&menu.tags.label;">
       <menupopup id="gamefox-tags-menu" onpopupshowing="GameFOXTags.populate(1);"/>
     </menu>
   </popup>
@@ -33,7 +43,7 @@
   <menupopup id="menu_ToolsPopup">
     <menuitem insertafter="javascriptConsole" label="&tools.label;"
       oncommand="window.openDialog('chrome://gamefox/content/options.xul',
-      'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"
+      '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"
       accesskey="&tools.accesskey;"/>
   </menupopup>
 
@@ -51,10 +61,10 @@
   <broadcasterset id="mainBroadcasterSet">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
-      label="GameFOX Sidebar"
+      label="&menu.sidebar.label;"
       type="checkbox"
       group="sidebar"
-      sidebartitle="GameFOX Sidebar"
+      sidebartitle="&sidebar.title;"
       sidebarurl="chrome://gamefox/content/sidebar.xhtml"
       command="cmd_gamefoxSidebar"
     />

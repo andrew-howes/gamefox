@@ -1,2 +1,15 @@
 <!ENTITY tools.label "GameFOX...">
 <!ENTITY tools.accesskey "G">
+
+<!ENTITY menu.label "GameFOX">
+<!ENTITY menu.quote.label "Quote">
+<!ENTITY menu.quote.accesskey "Q">
+<!ENTITY menu.pages.label "Pages">
+<!ENTITY menu.pages.accesskey "G">
+<!ENTITY menu.tagtopic.label "Tag Topic">
+<!ENTITY menu.tagtopic.accesskey "T">
+<!ENTITY menu.sidebar.label "Sidebar">
+<!ENTITY menu.sidebar.accesskey "S">
+<!ENTITY menu.tags.label "Tags">
+
+<!ENTITY sidebar.title "GameFOX Sidebar">
