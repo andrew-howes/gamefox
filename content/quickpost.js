@@ -13,19 +13,21 @@ var GFQuickPost =
     else
       var sig = '';
 
+    var action = 'post.php' +
+      GameFOXUtils.specialCharsDecode(doc.location.search.replace(
+            /&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/, ''
+            ));
     div.innerHTML +=
-      '<div id="gamefox-quickpost-title">QuickPost</div>\n' +
-      '  <form id="gamefox-quickpost-form" action="post.php' +
-        GameFOXUtils.specialCharsDecode(
-            doc.location.search.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/, '')
-            ) + '" method="post">\n' +
-      '  ' + (newTopic ? '<input type="text" id="gamefox-topic" name="topictitle" size="60" maxlength="80" value=""/><br/>\n' : '') +
+      '\n<div id="gamefox-quickpost-title">QuickPost</div>\n' +
+      '  <form id="gamefox-quickpost-form" action="' + action + '" method="post">\n' +
+      (newTopic ? '  <input type="text" id="gamefox-topic" name="topictitle" size="60" maxlength="80" value=""/><br/>\n' : '') +
       '  <textarea name="message" wrap="virtual" id="gamefox-message" rows="15" cols="60">\n' + sig + '</textarea><br/>\n' +
       '  <input type="button" id="gamefox-quickpost-btn" name="quickpost" value="Post Message"/>\n' +
       '  <input type="submit" name="post" value="Preview Message"/>\n' +
       '  <input type="submit" name="post" value="Preview and Spellcheck Message"/>\n' +
-      '  ' + (newTopic ? '<input type="button" id="gamefox-quickpost-hide" value="Hide"/>\n' : '') +
-      '</form>\n\n';
+      '  <input type="reset" name="reset" value="Reset"/>\n' +
+      (newTopic ? '  <input type="button" id="gamefox-quickpost-hide" value="Hide"/>\n' : '') +
+      '</form>\n';
 
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click',
         GFQuickPost.post, false);
