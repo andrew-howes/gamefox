@@ -2,13 +2,6 @@
 
 var GameFOXUtils =
 {
-  log: function(msg)
-  {
-    var consoleService = Components.classes['@mozilla.org/consoleservice;1'].
-      getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage('GameFOX: ' + msg);
-  },
-
   importBoardSettings: function(noisy, button, inOptions)
   {
     if (button) button.setAttribute('disabled', true);
@@ -21,7 +14,7 @@ var GameFOXUtils =
       {
         if (!request.responseText.match(/Board Display Settings/))
         {
-          GameFOXUtils.log('importBoardSettings: Bad things!');
+          GFlib.log('importBoardSettings: Bad things!');
           if (noisy)
             alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
@@ -37,7 +30,7 @@ var GameFOXUtils =
         if (topicpage == null || topicsort == null || messagepage == null
             || messagesort == null || timezone == null || userdisplay == null)
         {
-          this.log('importBoardSettings: Unable to retrieve all settings.');
+          GFlib.log('importBoardSettings: Unable to retrieve all settings.');
           if (noisy)
             alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
@@ -84,7 +77,7 @@ var GameFOXUtils =
       {
         if (!request.responseText.match(/Board Display Settings/))
         {
-          GameFOXUtils.log('exportBoardSettings: Bad things!');
+          GFlib.log('exportBoardSettings: Bad things!');
           if (noisy)
             alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
@@ -94,7 +87,7 @@ var GameFOXUtils =
         var action = request.responseText.match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
         if (!action)
         {
-          GameFOXUtils.log("exportBoardSettings: Couldn't get user id.");
+          GFlib.log("exportBoardSettings: Couldn't get user id.");
           if (noisy)
             alert("Couldn't get your user ID. This shouldn't happen.");
           if (button) button.setAttribute('disabled', false);
@@ -110,7 +103,7 @@ var GameFOXUtils =
           {
             if (!postRequest.responseText.match(/Display settings updated/))
             {
-              GameFOXUtils.log("exportBoardSettings: Update didn't work!");
+              GFlib.log("exportBoardSettings: Update didn't work!");
               if (noisy)
                 alert("Didn't receive the expected response from the server. The update probably failed.");
             }
@@ -155,7 +148,7 @@ var GameFOXUtils =
       {
         if (!request.responseText.match(/Board Signature and Quote/))
         {
-          GameFOXUtils.log('importSignature: Bad things!');
+          GFlib.log('importSignature: Bad things!');
           if (noisy)
             alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
@@ -165,7 +158,7 @@ var GameFOXUtils =
         var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
         if (!sig)
         {
-          GameFOXUtils.log("importSignature: Couldn't get sig");
+          GFlib.log("importSignature: Couldn't get sig");
           if (noisy)
             alert("Couldn't get your signature. This shouldn't happen. Maybe you have " +
                 "one of those really old signature that displays bold and italics in " +

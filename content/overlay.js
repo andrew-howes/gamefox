@@ -1,14 +1,5 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
 
-// TODO: this thing is huge. try to split it into multiple smaller files, it's
-// nearly impossible to follow
-
-function gamefox_log(msg) {
-  var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
-                                 .getService(Components.interfaces.nsIConsoleService);
-  consoleService.logStringMessage('GameFOX: ' + msg);
-}
-
 var GameFOX =
 {
   prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(

@@ -5,6 +5,13 @@ var GFlib =
   domain: 'http://www.gamefaqs.com',
   path: '/boards/',
 
+  log: function(msg)
+  {
+    var consoleService = Components.classes['@mozilla.org/consoleservice;1'].
+      getService(Components.interfaces.nsIConsoleService);
+    consoleService.logStringMessage('GameFOX: ' + msg);
+  },
+
   getDocument: function(event)
   {
     if (event.target.ownerDocument)
