@@ -419,7 +419,7 @@ var GameFOX =
       switch (dblclickHead)
       {
         case 1:
-          GameFOX.quickWhois(event);
+          GFQuickWhois.quickWhois(event);
           break;
         case 2:
           GFQuote.quote(event);
@@ -452,103 +452,6 @@ var GameFOX =
         GameFOXTags.add(event);
         break;
     }
-  },
-
-  quickWhois: function(event)
-  {
-    var node = event.target;
-    var doc = node.ownerDocument;
-    var nodeName = node.nodeName.toLowerCase();
-
-    try
-    {
-      while (nodeName != 'td' && node.className != 'whitebox')
-      {
-        node = node.parentNode;
-        nodeName = node.nodeName.toLowerCase();
-      }
-    }
-    catch (e)
-    {
-      return;
-    }
-
-    var div = node.getElementsByTagName('div');
-
-    if (div.length > 0)
-    {
-      div[0].style.display = div[0].style.display == 'block' ? 'none' : 'block';
-      div[0].style.top     = window.content.scrollY + event.clientY + 'px';
-      div[0].style.left    = window.content.scrollX + event.clientX + 'px';
-      return;
-    }
-
-    function GameFOXFindInfo(what, where)
-    {
-      var pattern = new RegExp('<td\\b[^>]*>(\\s*<a\\b[^>]*>)?\\s*' + what + '(\\s*</a>)?\\s*</td>\\s*<td\\b[^>]*>([^\\0]*?)</td>', 'gi');
-      var matches = pattern.exec(where);
-
-      if (matches)
-      {
-        return matches[3].replace(/^\s+|\s+$/g, '');
-      }
-
-      return '';
-    }
-
-    div = doc.createElement('div');
-    div.setAttribute('class', 'gamefox-quickwhois');
-    div.style.display = 'block';
-    div.style.setProperty('font-size', '10pt', '');
-    div.style.top     = window.content.scrollY + event.clientY + 'px';
-    div.style.left    = window.content.scrollX + event.clientX + 'px';
-    div.innerHTML     = 'Loading QuickWhois...'
-    node.appendChild(div);
-
-    var request = new XMLHttpRequest();
-    request.open('GET', node.getElementsByTagName('a')[0].href);
-    request.onreadystatechange = function ()
-    {
-      if (request.readyState == 4)
-      {
-        var profileFieldsHTML = '';
-        var profileFields = new Array(
-          'User ID', 'User ID',
-          'Board User Level', 'User Level',
-          'Account Created', 'Created At',
-          'Last Visit', 'Last Visit',
-          'E-Mail', 'Email',
-          'Website', 'Website',
-          'AIM', 'AIM',
-          'Yahoo IM', 'Yahoo IM',
-          'Windows Live \\(MSN\\)', 'MSN',
-          'Google Talk', 'Google Talk',
-          'ICQ', 'ICQ',
-          'Xbox Live', 'Xbox Live',
-          'PlayStation Network', 'PSN',
-          'DS Friend Code', 'DS Friend Code',
-          'Wii Number', 'Wii Number',
-          'Wii Friend Code', 'Wii Friend Code',
-          'Skype', 'Skype',
-          'Steam', 'Steam',
-          'xfire', 'xfire',
-          'Quote', 'Quote',
-          'Karma', 'Karma'
-        );
-        for (var i = 0; i < profileFields.length; i += 2) {
-          if ((profileField = GameFOXFindInfo(profileFields[i], request.responseText)) != '') {
-            if (profileFields[i] == 'Board User Level') {
-              profileField = profileField.split(/<br\s*\/?>/gi)[0].replace(/<\/?b>/ig, '');
-            }
-            profileFieldsHTML += '<b>' + profileFields[i+1] + ':</b> ' + profileField.replace(/<br\s*\/?>/gi, '<br/>') + '<br/>';
-          }
-        }
-        div.innerHTML = profileFieldsHTML.replace(/<br\/>$/, '')
-          + GameFOXFindInfo('Contributor Page', request.responseText).replace(/^</, '<br/><')
-          + GameFOXFindInfo('My Games', request.responseText).replace(/^</, '<br/><');
-      }
-    };
-    request.send(null);
   },
 
   gotoLastPage: function(event)
