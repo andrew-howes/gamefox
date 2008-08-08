@@ -256,7 +256,10 @@ var GameFOXCSS =
 
     element.view = this.treeView;
 
-    document.getElementById('css-remove').disabled = true;
+    this.treeView.selection.clearSelection();
+    this.treeView.selection.select(0);
+
+    //document.getElementById('css-remove').disabled = true;
 
     // this is sort of a hack, I couldn't be bothered with finding out how to push data
     // directly to treeView.visibleData when populating the tree
@@ -268,11 +271,18 @@ var GameFOXCSS =
 
   onselect: function()
   {
-    var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
-    if (category == 'user')
-      document.getElementById('css-remove').setAttribute('disabled', 'false');
-    else
-      document.getElementById('css-remove').setAttribute('disabled', 'true');
+    try
+    {
+      var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
+      if (category == 'user')
+        document.getElementById('css-remove').setAttribute('disabled', 'false');
+      else
+        document.getElementById('css-remove').setAttribute('disabled', 'true');
+    }
+    catch (e)
+    {
+      document.getElementById('css-remove').setAttribute('disabled', true);
+    }
   },
 
   setCell: function(idx, column, value)
