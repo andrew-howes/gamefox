@@ -288,8 +288,22 @@ var GameFOXUtils =
     return pageHTML;
   },
 
-  formatSig: function(sig, presig, newline)
+  formatSig: function(sig, presig, newline, doc)
   {
+    if (!sig && !presig) // fetch sig
+    {
+      if (!doc) return false;
+      var board = GameFOXUtils.trim(doc.evaluate('//h1', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+        textContent);
+      var account = GameFOXUtils.trim(doc.evaluate('//div[@class="msg"]', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+          textContent).replace('Welcome, ', '');
+      var getSig = GFSig.getSigByCriteria(account, board);
+      sig = getSig['body'];
+      presig = getSig['presig'];
+    }
+
     if (!sig.length && !presig.length)
       return "";
 

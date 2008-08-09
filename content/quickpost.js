@@ -5,11 +5,8 @@ var GFQuickPost =
   appendForm: function(doc, div, newTopic)
   {
     if (GameFOX.prefs.getIntPref('signature.addition') == 2)
-      var sig = GameFOXUtils.formatSig(
-          GameFOXUtils.getString('signature.body'),
-          GameFOXUtils.getString('signature.presig'),
-          GameFOX.prefs.getBoolPref('signature.newline')
-          );
+      var sig = GameFOXUtils.formatSig(null, null,
+          GameFOX.prefs.getBoolPref('signature.newline'), doc);
     else
       var sig = '';
 
@@ -51,10 +48,8 @@ var GFQuickPost =
 
     if (GameFOX.prefs.getIntPref('signature.addition') == 1)
       doc.getElementById('gamefox-message').value +=
-        GameFOXUtils.formatSig(
-            GameFOXUtils.getString('signature.body'),
-            GameFOXUtils.getString('signature.presig'),
-            GameFOX.prefs.getBoolPref('signature.newline')
+        GameFOXUtils.formatSig(null, null,
+            GameFOX.prefs.getBoolPref('signature.newline'), doc
             );
   },
 
@@ -244,11 +239,8 @@ var GFQuickPost =
     if (!GFlib.onPage(doc, 'post')
         && GameFOX.prefs.getIntPref('signature.addition') == 1)
       message +=
-        GameFOXUtils.formatSig(
-            GameFOXUtils.getString('signature.body'),
-            GameFOXUtils.getString('signature.presig'),
-            GameFOX.prefs.getBoolPref('signature.newline')
-            );
+        GameFOXUtils.formatSig(null, null,
+            GameFOX.prefs.getBoolPref('signature.newline'), doc);
 
     previewRequest.send(postBody + 'message=' + GameFOXUtils.URLEncode(message) +
         '&post=Preview+Message');

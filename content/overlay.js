@@ -75,11 +75,8 @@ var GameFOX =
           && !doc.documentElement.innerHTML.match(/\b(Error|Preview)\s*<\/h1>\s*<\/div>/ig))
       {
         doc.getElementsByName('message')[0].value =
-          GameFOXUtils.formatSig(
-              GameFOXUtils.getString('signature.body'),
-              GameFOXUtils.getString('signature.presig'),
-              GameFOX.prefs.getBoolPref('signature.newline')
-              );
+          GameFOXUtils.formatSig(null, null,
+              GameFOX.prefs.getBoolPref('signature.newline'), doc);
       }
     }
 

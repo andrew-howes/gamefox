@@ -15,6 +15,42 @@ var GFSig =
     }
     else // get based on current account and board
     {
+      account = account.toLowerCase();
+      board = board.toLowerCase();
+      var matches = new Array();
+      var accounts, boards;
+      for (i in sigs)
+      {
+        // skip empty sigs
+        // this allows for the default sig (which can't be deleted) to be
+        // ignored by leaving it blank
+        if (!sigs[i]['body'].length && !sigs[i]['presig'].length) continue;
+
+        accounts = sigs[i]['accounts'].toLowerCase().split(/\s*;\s*/g);
+        boards = sigs[i]['boards'].toLowerCase().split(/\s*;\s*/g);
+
+        // force the array length to 0
+        if (accounts.join() == '') accounts = new Array();
+        if (boards.join() == '') boards = new Array();
+
+        if (!accounts.length && boards.length && boards.indexOf(board) != -1)
+          matches.push(sigs[i]);
+        else if (accounts.length && !boards.length && accounts.indexOf(account) != -1)
+          matches.push(sigs[i]);
+        else if (accounts.length && boards.length && accounts.indexOf(account) != -1
+            && boards.indexOf(board) != -1)
+          matches.push(sigs[i]);
+        else if (!accounts.length && !boards.length)
+          matches.push(sigs[i]);
+      }
+
+      if (!matches.length) // no sigs matched, return default
+        return this.getSigByCriteria();
+
+      if (GameFOX.prefs.getIntPref('signature.selection') == 1)
+        return matches[0];
+      else
+        return matches[Math.round(Math.random() * (matches.length - 1))];
     }
   },
 
