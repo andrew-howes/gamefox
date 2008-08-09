@@ -42,8 +42,7 @@ var GFSig =
     for (i in sigs)
     {
       if (sigs[i]['default']) continue;
-
-      menu.insertItemAt(menu.itemCount - 2, this.getCriteriaString(sigs[i]['accounts'],
+      menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
             sigs[i]['boards']), i);
     }
   },
@@ -67,8 +66,8 @@ var GFSig =
       this.resetForm();
       document.getElementById('sig-delete').disabled = true;
 
-      var index = menu.itemCount - 2;
-      menu.insertItemAt(index, "Global signature", this.add());
+      var index = this.add();
+      menu.insertItemAt(index, "Global signature", index);
       menu.selectedIndex = index;
     }
     if (menu.selectedItem.value != 'default')
