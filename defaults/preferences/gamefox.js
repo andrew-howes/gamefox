@@ -33,11 +33,11 @@ pref("gamefox.quote.removesignature", true);
 pref("gamefox.quote.style", "gfcode_full");
 pref("gamefox.quote.style.custom", "<i><p><strong>Posted by %u</strong>\n%m</p></i>");
 
-pref("gamefox.signature.body", "");
-pref("gamefox.signature.presig", "");
+pref("gamefox.signature.serialized", "[{default:true, accounts:\"\", boards:\"\", body:\"\", presig:\"\"}]");
 pref("gamefox.signature.newline", false);
 pref("gamefox.signature.applyeverywhere", true);
 pref("gamefox.signature.addition", 2);
+pref("gamefox.signature.selection", 1);
 
 pref("gamefox.theme.disablegamefaqscss", false);
 pref("gamefox.theme.css.serialized", "({gamefox:{}, bundled:{}, user:{}})");

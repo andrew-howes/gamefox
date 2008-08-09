@@ -92,11 +92,20 @@
         two lines. GameFAQs imposes a 160-character limit on signatures, but GameFOX
         does not enforce this.
 ">
-<!ENTITY signature.presig.label "Pre-signature">
-<!ENTITY signature.sig.label "Signature">
+<!ENTITY signature.list.default "Default signature">
+<!ENTITY signature.list.new "New signature">
+<!ENTITY signature.list.delete "Delete">
+<!ENTITY signature.criteria.desc "Separate different accounts and boards with semicolons.">
+<!ENTITY signature.criteria.accounts.label "Accounts:">
+<!ENTITY signature.criteria.boards.label "Boards:">
+<!ENTITY signature.presig.label "Pre-signature:">
+<!ENTITY signature.sig.label "Signature:">
 <!ENTITY signature.grab.label "Grab From GameFAQs">
 <!ENTITY signature.applyeverywhere.label "Also use on standard GameFAQs post page">
 <!ENTITY signature.newline.label "Insert an additional line break before the separator">
 <!ENTITY signature.addition "Addition Method">
 <!ENTITY signature.addafter "Append signature after submitting or previewing the post">
 <!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
+<!ENTITY signature.selection "Selection Mode">
+<!ENTITY signature.selection.first "Choose first matching signature">
+<!ENTITY signature.selection.random "Choose random matching signature">

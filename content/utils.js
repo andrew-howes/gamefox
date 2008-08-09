@@ -167,7 +167,11 @@ var GameFOXUtils =
           return;
         }
         if (inOptions)
+        {
           document.getElementById('sig-body').value = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
+          // oninput doesn't seem to be called
+          GFSig.updatePref(document.getElementById('sig-body'));
+        }
         else
         {
           var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
@@ -218,9 +222,20 @@ var GameFOXUtils =
       replace(/\r/g, '\n');
   },
 
-  getString: function(pref)
+  getString: function(pref, prefService)
   {
-    return GameFOX.prefs.getComplexValue(pref, Components.interfaces.nsISupportsString).data;
+    return (prefService == null ? GameFOX.prefs : prefService).
+      getComplexValue(pref, Components.interfaces.nsISupportsString).data;
+  },
+
+  setString: function(pref, str, prefService)
+  {
+    prefService = (prefService == null) ? GameFOX.prefs : prefService;
+    var ustr = Components.classes['@mozilla.org/supports-string;1'].
+      createInstance(Components.interfaces.nsISupportsString);
+    ustr.data = str;
+    prefService.setComplexValue(pref, Components.interfaces.nsISupportsString,
+        ustr);
   },
 
   trim: function(str)
