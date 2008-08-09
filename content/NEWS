@@ -6,6 +6,8 @@
       more intuitive, add white outline to make them visible with dark Firefox widgets
     * Get rid of the odd blue QuickPost border in Firefox 2
     * Lots of code optimizations and refactoring
+    * Multiple signatures, including board- and account-specific signatures and
+      the option to randomly select them
 
 2008-08-04:
     * version 0.6.2
