@@ -10,10 +10,9 @@ var GFQuickPost =
     else
       var sig = '';
 
+    var query = GameFOXUtils.stripQueryString(doc.location.search);
     var action = 'post.php' +
-      GameFOXUtils.specialCharsDecode(doc.location.search.replace(
-            /&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/, ''
-            ));
+      GameFOXUtils.specialCharsDecode(query);
     div.innerHTML +=
       '\n<div id="gamefox-quickpost-title">QuickPost</div>\n' +
       '  <form id="gamefox-quickpost-form" action="' + action + '" method="post">\n' +
