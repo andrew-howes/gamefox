@@ -224,6 +224,8 @@ var GFSig =
     var menu = document.getElementById('sig-menu');
     var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
 
+    if (menu.selectedItem.value == 'default') return false;
+
     // remove it
     sigs.splice(menu.selectedItem.value, 1);
     GameFOXUtils.setString('signature.serialized', sigs.toSource(), this.prefs);
@@ -232,5 +234,13 @@ var GFSig =
     // return to default signature
     menu.selectedIndex = 0;
     this.menuCommand();
+
+    // re-index menuitems
+    var j = 1;
+    var menuitems = menu.getElementsByTagName('menuitem');
+    for (i in menuitems)
+      if (menuitems[i] && menuitems[i].value != 'new' && menuitems[i].value != 'default'
+          && menuitems[i].value)
+        menuitems[i].value = j++;
   }
 };
