@@ -176,11 +176,9 @@ var GameFOXUtils =
         {
           var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
               Components.interfaces.nsIPrefService).getBranch('gamefox.');
-          var str = Components.classes['@mozilla.org/supports-string;1'].createInstance(
-              Components.interfaces.nsISupportsString);
-          str.data = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
-          prefs.setComplexValue('signature.body', Components.interfaces.nsISupportsString,
-            str);
+          var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));
+          sigs[0]['body'] = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
+          GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
         }
         if (button) button.setAttribute('disabled', false);
       }
