@@ -33,7 +33,7 @@ pref("gamefox.quote.removesignature", true);
 pref("gamefox.quote.style", "gfcode_full");
 pref("gamefox.quote.style.custom", "<i><p><strong>Posted by %u</strong>\n%m</p></i>");
 
-pref("gamefox.signature.serialized", "[{default:true, accounts:\"\", boards:\"\", body:\"\", presig:\"\"}]");
+pref("gamefox.signature.serialized", "[{accounts:\"\", boards:\"\", body:\"\", presig:\"\"}]");
 pref("gamefox.signature.newline", false);
 pref("gamefox.signature.applyeverywhere", true);
 pref("gamefox.signature.addition", 2);

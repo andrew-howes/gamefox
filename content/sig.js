@@ -8,11 +8,7 @@ var GFSig =
   {
     var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
     if (account == null && board == null) // get default
-    {
-      for (i in sigs)
-        if (sigs[i]["default"] == true)
-          return sigs[i];
-    }
+      return sigs[0];
     else // get based on current account and board
     {
       account = account.toLowerCase();
@@ -77,7 +73,7 @@ var GFSig =
     var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
     for (i in sigs)
     {
-      if (sigs[i]['default']) continue;
+      if (i == 0) continue;
       menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
             sigs[i]['boards']), i);
     }
@@ -133,7 +129,7 @@ var GFSig =
   add: function()
   {
     var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
-    sigs.push({"default":false, "accounts":"", "boards":"", "body":"", "presig":""});
+    sigs.push({"accounts":"", "boards":"", "body":"", "presig":""});
     GameFOXUtils.setString('signature.serialized', sigs.toSource(), this.prefs);
 
     return sigs.length - 1;
@@ -182,7 +178,7 @@ var GFSig =
 
     GameFOXUtils.setString('signature.serialized', sigs.toSource(), this.prefs);
     menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
-        sigs[idx]['boards'], sigs[idx]['default']);
+        sigs[idx]['boards'], idx == 0);
   },
 
   getCriteriaString: function(accounts, boards, isDefault)
