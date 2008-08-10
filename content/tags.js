@@ -606,7 +606,7 @@ var GameFOXTags =
   {
     event.preventDefault();
     GameFOXTags.remove(event.target.hash.substring(1));
-    
+
     event.target.removeEventListener('click', GameFOXTags.untagTopicEvent, false);
     event.target.addEventListener('click', GameFOXTags.tagTopicEvent, false);
     event.target.textContent = 'Tag Topic';

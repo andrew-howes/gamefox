@@ -338,7 +338,7 @@
         <button id="css-remove" disabled="true" icon="remove" oncommand="GameFOXCSS.removeWithTree();" label="&theme.tree.delete;"/>
       </hbox>
     </groupbox>
-        
+
     <groupbox>
       <caption label="&theme.import.label;"/>
       <hbox>

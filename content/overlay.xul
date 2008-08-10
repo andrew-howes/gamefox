@@ -23,7 +23,7 @@
 
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
       accesskey="&menu.quote.accesskey;" oncommand="GFQuote.quote(gContextMenu);"/>
-    
+
     <menu id="gamefox-context-pages" label="&menu.pages.label;"
       accesskey="&menu.pages.accesskey;">
       <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
@@ -34,7 +34,7 @@
 
     <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
       accesskey="&menu.sidebar.accesskey;" observes="viewGamefoxSidebar"/>
-    
+
     <menu id="gamefox-tags" label="&menu.tags.label;">
       <menupopup id="gamefox-tags-menu" onpopupshowing="GameFOXTags.populate(1);"/>
     </menu>
