@@ -174,7 +174,7 @@ var GameFOXTags =
     }
     else if (IDs[0] == 0 && IDs[1] == -2)
     {
-      tagURI = 'http://www.gamefaqs.com/boards/tracked.php';
+      tagURI += '/tracked.php';
     }
     else
     {
