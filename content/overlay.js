@@ -655,8 +655,22 @@ function GameFOXLoader()
     getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
   var compareVersions = Components.classes['@mozilla.org/xpcom/version-comparator;1'].
     getService(Components.interfaces.nsIVersionComparator).compare(lastversion, version);
-  if (compareVersions != 0)
+  if (compareVersions != 0) // upgrade or downgrade
+  {
     GameFOXCSS.init();
+
+    // convert old signature prefs to serialized pref
+    var oldPresig, oldSig;
+    try { oldPresig = GameFOXUtils.getString('signature.presig', prefs); }
+    catch (e) {}
+    try { oldSig = GameFOXUtils.getString('signature.body', prefs); }
+    catch (e) {}
+
+    var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));
+    if (oldPresig) sigs[0]['presig'] = oldPresig;
+    if (oldSig) sigs[0]['body'] = oldSig;
+    GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
+  }
 
   prefs.setCharPref('version', version);
 
