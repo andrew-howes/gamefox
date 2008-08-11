@@ -13,10 +13,12 @@ var GFSig =
     {
       account = account.toLowerCase();
       board = board.toLowerCase();
-      var matches = new Array();
+      var matches = new Array(new Array(), new Array(), new Array());
       var accounts, boards;
       for (i in sigs)
       {
+        if (i == 0) continue; // skip default, it has lowest priority
+
         // skip empty sigs
         // this allows for the default sig (which can't be deleted) to be
         // ignored by leaving it blank
@@ -30,23 +32,27 @@ var GFSig =
         if (boards.join() == '') boards = new Array();
 
         if (!accounts.length && boards.length && boards.indexOf(board) != -1)
-          matches.push(sigs[i]);
+          matches[1].push(sigs[i]);
         else if (accounts.length && !boards.length && accounts.indexOf(account) != -1)
-          matches.push(sigs[i]);
+          matches[1].push(sigs[i]);
         else if (accounts.length && boards.length && accounts.indexOf(account) != -1
-            && boards.indexOf(board) != -1)
-          matches.push(sigs[i]);
-        else if (!accounts.length && !boards.length)
-          matches.push(sigs[i]);
+            && boards.indexOf(board) != -1) // account and board-specific sig, highest priority
+          matches[0].push(sigs[i]);
+        else if (!accounts.length && !boards.length) // global sig, lowest priority
+          matches[2].push(sigs[i]);
       }
+      matches[2].push(sigs[0]);
 
-      if (!matches.length) // no sigs matched, return default
-        return this.getSigByCriteria();
+      // merge all the arrays
+      var allMatches = new Array();
+      for (i in matches)
+        for (j in matches[i])
+          allMatches.push(matches[i][j]);
 
       if (GameFOX.prefs.getIntPref('signature.selection') == 1)
-        return matches[0];
+        return allMatches[0];
       else
-        return matches[Math.round(Math.random() * (matches.length - 1))];
+        return allMatches[Math.round(Math.random() * (allMatches.length - 1))];
     }
   },
 
