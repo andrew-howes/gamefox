@@ -77,6 +77,9 @@ var GFSig =
       menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
             sigs[i]['boards']), i);
     }
+
+    // function to watch pref for change and update signature
+    window.setInterval(this.watchPref, 1000);
   },
 
   menuCommand: function()
@@ -238,5 +241,17 @@ var GFSig =
       if (menuitems[i] && menuitems[i].value != 'new' && menuitems[i].value != 'default'
           && menuitems[i].value)
         menuitems[i].value = j++;
+  },
+
+  watchPref: function()
+  {
+    var sigs = eval(GameFOXUtils.getString('signature.serialized', GFSig.prefs));
+    var menu = document.getElementById('sig-menu');
+    var idx = menu.selectedItem.value;
+
+    if (idx == 'default') idx = 0;
+
+    document.getElementById('sig-presig').value = sigs[idx]['presig'];
+    document.getElementById('sig-body').value = sigs[idx]['body'];
   }
 };
