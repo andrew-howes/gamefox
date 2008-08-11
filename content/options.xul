@@ -23,6 +23,7 @@
          we only have to do this once. -->
     <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
+    <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
 
     <preferences>
       <preference id="gamefox-pref-quickpost-form" name="gamefox.elements.quickpost.form" type="bool"/>
