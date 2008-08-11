@@ -67,7 +67,7 @@
   <broadcasterset id="mainBroadcasterSet">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
-      label="&menu.sidebar.label;"
+      label="&sidebar.title;"
       type="checkbox"
       group="sidebar"
       sidebartitle="&sidebar.title;"
