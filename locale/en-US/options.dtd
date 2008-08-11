@@ -107,5 +107,5 @@
 <!ENTITY signature.addafter "Append signature after submitting or previewing the post">
 <!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
 <!ENTITY signature.selection "Selection Mode">
-<!ENTITY signature.selection.first "Choose first matching signature">
+<!ENTITY signature.selection.first "Choose most specific matching signature">
 <!ENTITY signature.selection.random "Choose random matching signature">
