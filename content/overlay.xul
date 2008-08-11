@@ -15,6 +15,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/quickpost.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/quickwhois.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/accounts.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
@@ -37,6 +38,10 @@
 
     <menu id="gamefox-tags" label="&menu.tags.label;">
       <menupopup id="gamefox-tags-menu" onpopupshowing="GameFOXTags.populate(1);"/>
+    </menu>
+
+    <menu id="gamefox-accounts" label="&menu.accounts.label;">
+      <menupopup id="gamefox-accounts-menu" onpopupshowing="GameFOXAccounts.populate();"/>
     </menu>
   </popup>
 

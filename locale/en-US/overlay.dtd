@@ -11,5 +11,6 @@
 <!ENTITY menu.sidebar.label "Sidebar">
 <!ENTITY menu.sidebar.accesskey "S">
 <!ENTITY menu.tags.label "Tags">
+<!ENTITY menu.accounts.label "Accounts">
 
 <!ENTITY sidebar.title "GameFOX Sidebar">

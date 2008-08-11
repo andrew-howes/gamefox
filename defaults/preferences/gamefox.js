@@ -43,6 +43,7 @@ pref("gamefox.theme.disablegamefaqscss", false);
 pref("gamefox.theme.css.serialized", "({gamefox:{}, bundled:{}, user:{}})");
 
 pref("gamefox.tags", "");
+pref("gamefox.accounts", "");
 pref("gamefox.topic.dblclick", 0);
 pref("gamefox.message.dblclick", false);
 pref("gamefox.message.header.dblclick", 0);
