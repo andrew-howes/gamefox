@@ -323,7 +323,7 @@
 
     <groupbox>
       <caption label="&theme.stylesheets.label;"/>
-      <tree id="css-tree" rows="10" hidecolumnpicker="true" editable="true" seltype="single"
+      <tree id="css-tree" rows="13" hidecolumnpicker="true" editable="true" seltype="single"
         onselect="GameFOXCSS.onselect();">
         <treecols>
           <treecol label="&theme.tree.name;" primary="true" flex="1"/>
