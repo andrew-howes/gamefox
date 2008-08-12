@@ -205,7 +205,7 @@ var GameFOX =
           GameFOXUtils.trim(doc.evaluate(
               '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
               null).singleNodeValue.textContent),
-                pagenum + 1);
+                pagenum ? pagenum + 1 : null);
 
       // "Tag Topic" link
       if (GameFOX.prefs.getBoolPref('elements.tag.link'))
