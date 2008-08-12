@@ -142,7 +142,7 @@ var GameFOXAccounts =
     {
       if (request.readyState == 4)
       {
-        if (/There was an error while logging you in/.test(request.responseText)) {
+        if (/<title>GameFAQs - Login Error<\/title>/.test(request.responseText)) {
           alert('Couldn\'t log in. Maybe your password was incorrect?');
           return;
         }
@@ -181,13 +181,19 @@ var GameFOXAccounts =
 
   promptRemoveAccount: function()
   {
-    var input = {value: ''};
-    var check = {value: true};
+    var account;
+    var items = [];
+    this.read();
+    for (account in this.accounts)
+    {
+      items.push(account);
+    }
+    var selected = {};
     var result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
-          .getService(Components.interfaces.nsIPromptService)
-          .prompt(null, 'GameFOX', 'Enter universal username:', input, null, check);
+        .getService(Components.interfaces.nsIPromptService)
+        .select(null, 'GameFOX', 'Select username to remove:', items.length, items, selected);
     if (result)
-      this.removeAccount(input.value);
+      this.removeAccount(items[selected.value]);
   },
 
   removeAccount: function(username)
