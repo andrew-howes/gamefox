@@ -45,6 +45,10 @@ var GameFOXAccounts =
     item.setAttribute('label', 'Add account...');
     item.setAttribute('oncommand', 'GameFOXAccounts.switchAccount(null, null, 0)');
     accountList.appendChild(item);
+    item = document.createElement('menuitem');
+    item.setAttribute('label', 'Remove account...');
+    item.setAttribute('oncommand', 'GameFOXAccounts.promptRemoveAccount()');
+    accountList.appendChild(item);
     accountList.appendChild(document.createElement('menuseparator'));
 
     for (account in this.accounts)
@@ -166,5 +170,23 @@ var GameFOXAccounts =
         'EMAILADDR=' + GameFOXUtils.URLEncode(username) +
         '&PASSWORD=' + GameFOXUtils.URLEncode(password.value)
         );
+  },
+
+  promptRemoveAccount: function()
+  {
+    var input = {value: ''};
+    var check = {value: true};
+    var result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
+          .getService(Components.interfaces.nsIPromptService)
+          .prompt(null, 'GameFOX', 'Enter universal username:', input, null, check);
+    if (result)
+      this.removeAccount(input.value);
+  },
+
+  removeAccount: function(username)
+  {
+    this.read();
+    delete this.accounts[username];
+    this.write(this.accounts);
   }
 };
