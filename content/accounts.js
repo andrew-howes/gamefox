@@ -62,12 +62,11 @@ var GameFOXAccounts =
 
   switchAccount: function(account, content, expires)
   {
-    this.removeCookie('MDAAuth');
-
     expires *= 1000;
     var d = new Date();
     if (d.getTime() < expires)
     {
+      this.removeCookie('MDAAuth');
       expires = new Date(Number(expires));
       var uri = Components.classes['@mozilla.org/network/io-service;1']
           .getService(Components.interfaces.nsIIOService)
@@ -75,7 +74,10 @@ var GameFOXAccounts =
       Components.classes['@mozilla.org/cookieService;1']
           .getService(Components.interfaces.nsICookieService)
           .setCookieString(uri, null, 'MDAAuth=' + content + '; expires=' + expires.toUTCString(), null);
-      Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow('navigator:browser').loadURI('http://www.gamefaqs.com/boards/');
+      Components.classes['@mozilla.org/appshell/window-mediator;1']
+          .getService(Components.interfaces.nsIWindowMediator)
+          .getMostRecentWindow('navigator:browser')
+          .loadURI('http://www.gamefaqs.com/boards/');
     }
     else
     {
@@ -132,6 +134,8 @@ var GameFOXAccounts =
         return;
     }
 
+    this.removeCookie('MDAAuth');
+
     var request = new XMLHttpRequest();
     request.open('POST', 'http://www.gamefaqs.com/user/login.html');
     request.onreadystatechange = function()
@@ -162,7 +166,10 @@ var GameFOXAccounts =
         }
         GameFOXAccounts.write(GameFOXAccounts.accounts);
 
-        Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow('navigator:browser').loadURI('http://www.gamefaqs.com/boards/');
+        Components.classes['@mozilla.org/appshell/window-mediator;1']
+            .getService(Components.interfaces.nsIWindowMediator)
+            .getMostRecentWindow('navigator:browser')
+            .loadURI('http://www.gamefaqs.com/boards/');
       }
     }
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
