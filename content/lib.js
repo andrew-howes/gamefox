@@ -56,7 +56,7 @@ var GFlib =
     if (!GameFOX.prefs.getBoolPref("elements.titlechange")) return false;
 
     doc.title = "GameFAQs"
-      + (prefix == null ? "" : ":" + (typeof prefix == "number" ? "" : " " ) + prefix)
+      + (prefix == null ? "" : ":" + prefix)
       + ": " + title;
 
     if (doc.defaultView.parent != doc.defaultView.self) // we're in a frame

@@ -24,7 +24,7 @@ var GameFOX =
     /* Index (index.php) */
     if (GFlib.onPage(doc, 'index'))
     {
-      GFlib.setTitle(doc, 'Message Boards');
+      GFlib.setTitle(doc, 'Message Boards', 'I');
     }
 
     /* Active Messages (myposts.php) */
@@ -83,7 +83,7 @@ var GameFOX =
     /* User Information (user.php) */
     else if (GFlib.onPage(doc, 'user'))
     {
-      GFlib.setTitle(doc, GameFOXUtils.trim(doc.getElementsByTagName('td')[1].textContent), "User");
+      GFlib.setTitle(doc, GameFOXUtils.trim(doc.getElementsByTagName('td')[1].textContent), "U");
     }
 
 
@@ -96,7 +96,7 @@ var GameFOX =
     {
       GFlib.setTitle(doc, GameFOXUtils.trim(doc.evaluate('//h1', doc,
               null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent));
+          textContent), "T");
 
       // Topic "QuickPost" link
       if (GameFOX.prefs.getBoolPref('elements.quickpost.link')
@@ -205,7 +205,7 @@ var GameFOX =
           GameFOXUtils.trim(doc.evaluate(
               '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
               null).singleNodeValue.textContent),
-                pagenum ? pagenum + 1 : null);
+                "M" + (pagenum ? ":" + (pagenum + 1) : ""));
 
       // "Tag Topic" link
       if (GameFOX.prefs.getBoolPref('elements.tag.link'))
@@ -358,7 +358,7 @@ var GameFOX =
           GameFOXUtils.trim(doc.evaluate('//h1/following::h1', doc,
               null, XPathResult. FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
             textContent),
-          "Message Detail");
+          "D");
     }
   },
 
