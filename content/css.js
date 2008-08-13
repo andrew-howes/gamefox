@@ -17,6 +17,8 @@ var GameFOXCSS =
     this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
         'GFCode', 'Ant P.', '', true, true);
 
+    this.add('bundled', 'chrome://gamefox/content/css/toad.css', 'toad.css',
+        'Ten On A Diet', 'TakatoMatsuki', '', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
         'Wide Default Layout', '', '', false, true);
 
