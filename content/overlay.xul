@@ -45,25 +45,40 @@
     </menu>
   </popup>
 
-  <!-- tools menu -->
+  <!-- firefox tools menu -->
   <menupopup id="menu_ToolsPopup">
     <menuitem insertafter="javascriptConsole" label="&tools.label;"
       oncommand="window.openDialog('chrome://gamefox/content/options.xul',
       '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"
       accesskey="&tools.accesskey;"/>
   </menupopup>
+  <!-- seamonkey tools menu -->
+  <menupopup id="taskPopup">
+    <menuitem insertafter="downloadmgr" label="&tools.label;"
+      oncommand="window.openDialog('chrome://gamefox/content/options.xul',
+      '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"
+      acesskey="&tools.accesskey;"/>
+  </menupopup>
 
-  <!-- commands -->
+  <!-- firefox commands -->
   <commandset id="mainCommandSet">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
   </commandset>
+  <!-- seamonkey commands -->
+  <commandset id="commands">
+    <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
+  </commandset>
 
-  <!-- keys -->
+  <!-- firefox keys -->
   <keyset id="mainKeyset">
     <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
   </keyset>
+  <!-- seamonkey keys -->
+  <keyset id="navKeys">
+    <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
+  </keyset>
 
-  <!-- broadcasters -->
+  <!-- firefox broadcasters -->
   <broadcasterset id="mainBroadcasterSet">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
@@ -72,11 +87,21 @@
       group="sidebar"
       sidebartitle="&sidebar.title;"
       sidebarurl="chrome://gamefox/content/sidebar.xhtml"
-      command="cmd_gamefoxSidebar"
-    />
+      command="cmd_gamefoxSidebar"/>
+  </broadcasterset>
+  <!-- seamonkey broadcasters -->
+  <broadcasterset id="navBroadcasters">
+    <broadcaster id="viewGamefoxSidebar"
+      autoCheck="false"
+      label="&sidebar.title;"
+      type="checkbox"
+      group="sidebar"
+      sidebartitle="&sidebar.title;"
+      sidebarurl="chrome://gamefox/content/sidebar.xhtml"
+      command="cmd_gamefoxSidebar"/>
   </broadcasterset>
 
-  <!-- view sidebar menu -->
+  <!-- firefox view sidebar menu -->
   <menupopup id="viewSidebarMenu">
     <menuitem key="key_gamefoxSidebar" observes="viewGamefoxSidebar"/>
   </menupopup>

@@ -1,5 +1,6 @@
 content   gamefox content/
 skin      gamefox classic/1.0 skin/classic/
 overlay   chrome://browser/content/browser.xul chrome://gamefox/content/overlay.xul
+overlay   chrome://navigator/content/navigator.xul chrome://gamefox/content/overlay.xul
 
 locale    gamefox en-US locale/en-US/
