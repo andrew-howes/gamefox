@@ -8,16 +8,20 @@ import paramiko
 paramiko.util.log_to_file('upload.log')
 
 if len(sys.argv) < 2:
-    print "upload.py gamefox.xpi [update.rdf]"
+    print "upload.py gamefox-0.0.0.xpi [update.rdf]"
     sys.exit()
+
+versionRegex = r"[0-9]+\.[0-9]+\.[0-9]+"
+xpiFilenameRegex = r"gamefox-" + versionRegex + r"\.xpi"
+checkfile = "gamefox-xpi-integrity-check"
 
 # get files
 lfile = sys.argv[1]
 rfile = os.path.basename(lfile)
 
 # check to make sure the filename is in a proper format
-if not re.match(r"gamefox-[0-9]+\.[0-9]+\.[0-9]+\.xpi$", rfile):
-    print "xpi filename must be /gamefox-[0-9]+\.[0-9]+\.[0-9]+\.xpi/"
+if not re.match(xpiFilenameRegex + "$", rfile):
+    print "xpi filename must be gamefox-0.0.0.xpi"
     sys.exit()
 
 passwd = open("upload.passwd", "r")
@@ -45,7 +49,6 @@ sftp.chdir("public_html/gfox")
 sftp.put(lfile, rfile)
 
 # verify the files
-checkfile = "gamefox-upload-integrity-check"
 os.system("wget -q -O " + checkfile + " http://beyondboredom.net/gfox/" + rfile)
 rsha1sum = sha.new(open(checkfile).read()).hexdigest()
 os.system("rm -f " + checkfile)
@@ -63,12 +66,12 @@ if lsha1sum == rsha1sum:
         f.close()
 
         fcontent = re.sub("sha1:[0-9a-z]+", "sha1:" + lsha1sum, fcontent)
-        fcontent = re.sub(r"gamefox-[0-9\.]+\.xpi", lfile, fcontent)
+        fcontent = re.sub(xpiFilenameRegex, lfile, fcontent)
         # extract the new version number
-        version = re.findall(r"[0-9]+\.[0-9]+\.[0-9]+", lfile)[0]
-        fcontent = re.sub(r"<em:version>[0-9]+\.[0-9]+\.[0-9]+<\/em:version>",
+        version = re.findall(versionRegex, lfile)[0]
+        fcontent = re.sub(r"<em:version>" + versionRegex + r"<\/em:version>",
                 "<em:version>" + version + "</em:version>", fcontent)
-        fcontent = re.sub(r"news/[0-9]+\.[0-9]+\.[0-9]+", "news/" + version, fcontent)
+        fcontent = re.sub(r"news/" + versionRegex, "news/" + version, fcontent)
 
         w = open(updatefile + ".tmp", "w")
         w.write(fcontent)
