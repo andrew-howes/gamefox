@@ -120,7 +120,7 @@ var GameFOXAccounts =
       username = {value: ''};
       result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
           .getService(Components.interfaces.nsIPromptService)
-          .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username and password:', username, password, null, check);
+          .promptUsernameAndPassword(null, 'GameFOX', 'IF YOU USE THIS, YOU MUST LOG OUT BY MANUALLY CLEARING YOUR COOKIES!\nEnter universal username and password:', username, password, null, check);
       if (!result)
         return;
       username = username.value;
