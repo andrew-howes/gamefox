@@ -58,7 +58,20 @@ var GFQuote =
       quoteHead = node.textContent;
       msgNum = '#' + node.id.substr(1);
     }
-    
+   
+    // selection quoting
+    var parentWin = new XPCNativeWrapper(document.commandDispatcher.focusedWindow,
+        'document', 'getSelection()');
+    var selection = parentWin.getSelection();
+    // only use the selection if it's inside the clicked message
+    if (selection.toString().length &&
+        GameFOXUtils.specialCharsDecode(
+          quoteMsg.replace(/(<[^>]+>|\s+)/g, '')).
+        match(selection.toString().replace(/\s+/g, '')))
+    {
+      quoteMsg = selection.toString();
+    }
+
     GFQuote.format(event, quoteHead, quoteMsg, msgNum);
   },
   
