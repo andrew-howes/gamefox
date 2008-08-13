@@ -46,7 +46,7 @@ var GameFOX =
             singleNodeValue.textContent.replace(/^\s+|\s+$/g, ''),
             "Create Topic");
       }
-      else // new post
+      else if (doc.getElementsByName('message')[0]) // new post
       {
         GFlib.setTitle(doc,
             GameFOXUtils.trim(doc.getElementsByName('message')[0].
@@ -72,7 +72,7 @@ var GameFOX =
 
       // Signature
       if (GameFOX.prefs.getBoolPref('signature.applyeverywhere')
-          && !doc.documentElement.innerHTML.match(/\b(Error|Preview)\s*<\/h1>\s*<\/div>/ig))
+          && !doc.documentElement.innerHTML.match(/\b(Error|Preview|Posted)\s*<\/h1>\s*<\/div>/ig))
       {
         doc.getElementsByName('message')[0].value =
           GameFOXUtils.formatSig(null, null,
