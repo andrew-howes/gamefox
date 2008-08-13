@@ -206,13 +206,13 @@ var GFSig =
 
   hideCriteriaForm: function()
   {
-    document.getElementById('sig-criteria').style.setProperty('display', 'none',
-        null);
+    document.getElementById('sig-criteria').style.setProperty('visibility',
+        'hidden', null);
   },
 
   showCriteriaForm: function()
   {
-    document.getElementById('sig-criteria').style.setProperty('display', '',
+    document.getElementById('sig-criteria').style.setProperty('visibility', '',
         null);
   },
 
