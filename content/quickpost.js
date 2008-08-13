@@ -112,7 +112,7 @@ var GFQuickPost =
             var badHTML = text.match(/Your HTML is not well-formed/);
             var closedTopic = text.match(/This topic is closed/);
             var deletedTopic = text.match(/This topic is no longer available/);
-            var maintenace = !text.match(/<body/) && text.match(/maintenace/);
+            var maintenance = !text.match(/<body/) && text.match(/maintenance/);
 
             if (badWord)
               alert('Your post includes the word "' + badWord[1] + '", which is a bad word. ' +
@@ -128,7 +128,7 @@ var GFQuickPost =
               alert('Turn off your caps lock and try typing your message again.');
             else if (noTopics)
               alert('You are not allowed to post topics here.');
-            else if (noPosts)
+            else if (noMessages)
               alert('You are not allowed to post messages here.');
             else if (longWordInTitle)
               alert('Your topic title contains a word over 25 characters in length. ' +
@@ -145,8 +145,8 @@ var GFQuickPost =
                   'Type faster next time.');
             else if (deletedTopic)
               alert('The topic is gone! Damn moderators...');
-            else if (maintenace)
-              alert('The site is temporarily down for maintenace.');
+            else if (maintenance)
+              alert('The site is temporarily down for maintenance.');
             else
               alert('Something went wrong but I don\'t know what. Try posting ' +
                   'without QuickPost, and if you think you\'ve found a bug ' +
