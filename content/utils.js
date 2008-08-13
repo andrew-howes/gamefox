@@ -291,13 +291,14 @@ var GameFOXUtils =
     if (!sig && !presig) // fetch sig
     {
       if (!doc) return false;
-      var board = GameFOXUtils.trim(doc.evaluate('//h1', doc, null,
+      var boardname = GameFOXUtils.trim(doc.evaluate('//h1', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
         textContent);
+      var boardid = doc.location.href.match(/board=([0-9]+)/)[1];
       var account = GameFOXUtils.trim(doc.evaluate('//div[@class="msg"]', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
           textContent).replace('Welcome, ', '');
-      var getSig = GFSig.getSigByCriteria(account, board);
+      var getSig = GFSig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
       presig = getSig['presig'];
     }

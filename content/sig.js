@@ -4,15 +4,15 @@ var GFSig =
   prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
              Components.interfaces.nsIPrefService).getBranch('gamefox.'),
 
-  getSigByCriteria: function(account, board)
+  getSigByCriteria: function(account, boardname, boardid)
   {
     var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
-    if (account == null && board == null) // get default
+    if (account == null && boardname == null && boardid == null) // get default
       return sigs[0];
     else // get based on current account and board
     {
       account = account.toLowerCase();
-      board = board.toLowerCase();
+      boardname = boardname.toLowerCase();
       var matches = new Array(new Array(), new Array(), new Array());
       var accounts, boards;
       for (i in sigs)
@@ -31,12 +31,13 @@ var GFSig =
         if (accounts.join() == '') accounts = new Array();
         if (boards.join() == '') boards = new Array();
 
-        if (!accounts.length && boards.length && boards.indexOf(board) != -1)
+        if (!accounts.length && boards.length && this.matchBoard(boards,
+              boardid, boardname))
           matches[1].push(sigs[i]);
         else if (accounts.length && !boards.length && accounts.indexOf(account) != -1)
           matches[1].push(sigs[i]);
         else if (accounts.length && boards.length && accounts.indexOf(account) != -1
-            && boards.indexOf(board) != -1) // account and board-specific sig, highest priority
+            && this.matchBoard(boards, boardid, boardname)) // account and board-specific sig, highest priority
           matches[0].push(sigs[i]);
         else if (!accounts.length && !boards.length) // global sig, lowest priority
           matches[2].push(sigs[i]);
@@ -259,5 +260,12 @@ var GFSig =
 
     document.getElementById('sig-presig').value = sigs[idx]['presig'];
     document.getElementById('sig-body').value = sigs[idx]['body'];
+  },
+
+  matchBoard: function(boards, boardid, boardname)
+  {
+    if (boardname && boards.indexOf(boardname) != -1) return true;
+    if (boardid && boards.indexOf(boardid) != -1) return true;
+    return false;
   }
 };
