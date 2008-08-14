@@ -68,12 +68,16 @@ var GameFOXAccounts =
     {
       this.removeCookie('MDAAuth');
       expires = new Date(Number(expires));
-      var uri = Components.classes['@mozilla.org/network/io-service;1']
-          .getService(Components.interfaces.nsIIOService)
-          .newURI('http://www.gamefaqs.com', null, null);
-      Components.classes['@mozilla.org/cookieService;1']
-          .getService(Components.interfaces.nsICookieService)
-          .setCookieString(uri, null, 'MDAAuth=' + content + '; expires=' + expires.toUTCString(), null);
+      
+      var cookieManager2 = Components.classes['@mozilla.org/cookiemanager;1']
+          .getService(Components.interfaces.nsICookieManager2);
+      if (navigator.userAgent.match('rv:1.9')) // mozilla 1.9 (fx3)
+        cookieManager2.add('.gamefaqs.com', '/', 'MDAAuth', content, false, true,
+            false, expires.getTime() / 1000);
+      else // mozilla 1.8
+        cookieManager2.add('.gamefaqs.com', '/', 'MDAAuth', content, false, false,
+            expires.getTime() / 1000);
+
       Components.classes['@mozilla.org/appshell/window-mediator;1']
           .getService(Components.interfaces.nsIWindowMediator)
           .getMostRecentWindow('navigator:browser')
@@ -120,7 +124,7 @@ var GameFOXAccounts =
       username = {value: ''};
       result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
           .getService(Components.interfaces.nsIPromptService)
-          .promptUsernameAndPassword(null, 'GameFOX', 'IF YOU USE THIS, YOU MUST LOG OUT BY MANUALLY CLEARING YOUR COOKIES!\nEnter universal username and password:', username, password, null, check);
+          .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username and password:', username, password, null, check);
       if (!result)
         return;
       username = username.value;
