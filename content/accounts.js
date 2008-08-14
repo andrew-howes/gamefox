@@ -74,7 +74,6 @@ var GameFOXAccounts =
     var d = new Date();
     if (d.getTime() < expires)
     {
-      var MDAAuth = account.MDAAuth.content;
       expires = new Date(Number(expires));
       expires = expires.getTime() / 1000;
 
@@ -85,22 +84,22 @@ var GameFOXAccounts =
           .getService(Components.interfaces.nsICookieManager2);
       if (navigator.userAgent.match('rv:1.9')) // mozilla 1.9 (fx3)
       {
-        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth, false, true,
-            false, expires);
+        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
+            false, true, false, expires);
         if (account.skin != undefined)
           cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content,
-            false, true, false, expires);
+              false, true, false, expires);
         if (account.filesplit != undefined)
           cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', account.filesplit.content,
-            false, true, false, expires);
+              false, true, false, expires);
       }
       else // mozilla 1.8
       {
-        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth, false, false,
-            expires);
+        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
+            false, false, expires);
         if (account.skin != undefined)
-          cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content, false,
-              false, expires);
+          cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content,
+              false, false, expires);
         if (account.filesplit != undefined)
           cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', account.filesplit.content,
               false, false, expires);
@@ -124,9 +123,9 @@ var GameFOXAccounts =
     for (var e = cookieMgr.enumerator; e.hasMoreElements();)
     {
       var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
-      if (/\.gamefaqs\.com/.test(cookie.host) && cookie.name == name)
+      if (cookie.host == '.gamefaqs.com' && cookie.name == name)
       {
-        cookieMgr.remove(cookie.host, name, cookie.path, false);
+        cookieMgr.remove('.gamefaqs.com', name, cookie.path, false);
         return;
       }
     }
@@ -139,7 +138,7 @@ var GameFOXAccounts =
     for (var e = cookieMgr.enumerator; e.hasMoreElements();)
     {
       var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
-      if (/\.gamefaqs\.com/.test(cookie.host) && cookie.name == name)
+      if (cookie.host == '.gamefaqs.com' && cookie.name == name)
         return {content: cookie.value, expires: cookie.expires};
     }
     return null;
