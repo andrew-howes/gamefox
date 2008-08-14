@@ -21,6 +21,8 @@ var GameFOXCSS =
         'Ten On A Diet', 'TakatoMatsuki', '', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
         'Wide Default Layout', '', '', false, true);
+    this.add('bundled', 'chrome://gamefox/content/css/ascii-art-font.css', 'ascii-art-font.css',
+        'ASCII art font', '', '', false, true);
 
     // Remove old stylesheets
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
