@@ -69,22 +69,42 @@ var GameFOXAccounts =
   {
     this.read();
     var account = this.accounts[username];
-    var content = account.MDAAuth.content;
     var expires = account.MDAAuth.expires * 1000;
 
     var d = new Date();
     if (d.getTime() < expires)
     {
+      var MDAAuth = account.MDAAuth.content;
       expires = new Date(Number(expires));
+      expires = expires.getTime() / 1000;
+
+      this.removeCookie('skin');
+      this.removeCookie('filesplit');
       
-      var cookieManager2 = Components.classes['@mozilla.org/cookiemanager;1']
+      var cookieMgr2 = Components.classes['@mozilla.org/cookiemanager;1']
           .getService(Components.interfaces.nsICookieManager2);
       if (navigator.userAgent.match('rv:1.9')) // mozilla 1.9 (fx3)
-        cookieManager2.add('.gamefaqs.com', '/', 'MDAAuth', content, false, true,
-            false, expires.getTime() / 1000);
+      {
+        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth, false, true,
+            false, expires);
+        if (account.skin != undefined)
+          cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content,
+            false, true, false, expires);
+        if (account.filesplit != undefined)
+          cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', account.filesplit.content,
+            false, true, false, expires);
+      }
       else // mozilla 1.8
-        cookieManager2.add('.gamefaqs.com', '/', 'MDAAuth', content, false, false,
-            expires.getTime() / 1000);
+      {
+        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth, false, false,
+            expires);
+        if (account.skin != undefined)
+          cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content, false,
+              false, expires);
+        if (account.filesplit != undefined)
+          cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', account.filesplit.content,
+              false, false, expires);
+      }
 
       Components.classes['@mozilla.org/appshell/window-mediator;1']
           .getService(Components.interfaces.nsIWindowMediator)
@@ -105,8 +125,10 @@ var GameFOXAccounts =
     {
       var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
       if (/\.gamefaqs\.com/.test(cookie.host) && cookie.name == name)
+      {
         cookieMgr.remove(cookie.host, name, cookie.path, false);
         return;
+      }
     }
   },
 
@@ -147,6 +169,10 @@ var GameFOXAccounts =
         return;
     }
 
+    this.removeCookie('skin');
+    this.removeCookie('filesplit');
+    // TODO: maybe restore these if the login fails?
+
     var request = new XMLHttpRequest();
     request.open('POST', 'http://www.gamefaqs.com/user/login.html');
     request.onreadystatechange = function()
@@ -167,6 +193,10 @@ var GameFOXAccounts =
 
         GameFOXAccounts.read();
         GameFOXAccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
+        if ((cookie = GameFOXAccounts.getCookie('skin')) != null)
+          GameFOXAccounts.accounts[username].skin = {content:cookie.content};
+        if ((cookie = GameFOXAccounts.getCookie('filesplit')) != null)
+          GameFOXAccounts.accounts[username].filesplit = {content:cookie.content};
         GameFOXAccounts.write(GameFOXAccounts.accounts);
 
         Components.classes['@mozilla.org/appshell/window-mediator;1']
