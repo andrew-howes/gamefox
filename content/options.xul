@@ -494,7 +494,7 @@
       </radiogroup>
     </groupbox>
 
-    <groupbox style="margin-bottom: 2em;">
+    <groupbox style="margin-bottom: 3em;">
       <caption label="&signature.selection;"/>
       <radiogroup preference="sig-selection">
         <radio value="1" label="&signature.selection.first;"/>
