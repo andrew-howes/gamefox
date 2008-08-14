@@ -1,0 +1,18 @@
+<!ENTITY topictitle.label "Topic Title">
+<!ENTITY tagid.label "Tag ID">
+
+<!ENTITY refresh.label "refresh">
+<!ENTITY deletepurged.label "delete purged">
+<!ENTITY deleteall.label "delete all">
+
+<!ENTITY menu.newtab.accesskey "T">
+<!ENTITY menu.focusedtab.accesskey "F">
+<!ENTITY menu.newwindow.accesskey "W">
+<!ENTITY menu.deletetag.accesskey "D">
+<!ENTITY menu.deleteselected.accesskey "S">
+
+<!ENTITY menu.newtab.label "Open in New Tab">
+<!ENTITY menu.focusedtab.label "Open in Focused Tab">
+<!ENTITY menu.newwindow.label "Open in New Window">
+<!ENTITY menu.deletetag.label "Delete Tag">
+<!ENTITY menu.deleteselected.label "Delete Selected">
