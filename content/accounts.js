@@ -106,10 +106,10 @@ var GameFOXAccounts =
               false, false, expires);
       }
 
-      Components.classes['@mozilla.org/appshell/window-mediator;1']
+      var win = Components.classes['@mozilla.org/appshell/window-mediator;1']
           .getService(Components.interfaces.nsIWindowMediator)
-          .getMostRecentWindow('navigator:browser')
-          .loadURI('http://www.gamefaqs.com/boards/');
+          .getMostRecentWindow('navigator:browser');
+      win.loadURI(win.content.document.location.href);
     }
     else
     {
@@ -199,10 +199,10 @@ var GameFOXAccounts =
           GameFOXAccounts.accounts[username].filesplit = {content:cookie.content};
         GameFOXAccounts.write(GameFOXAccounts.accounts);
 
-        Components.classes['@mozilla.org/appshell/window-mediator;1']
+        var win = Components.classes['@mozilla.org/appshell/window-mediator;1']
             .getService(Components.interfaces.nsIWindowMediator)
-            .getMostRecentWindow('navigator:browser')
-            .loadURI('http://www.gamefaqs.com/boards/');
+            .getMostRecentWindow('navigator:browser');
+        win.loadURI(win.content.document.location.href);
       }
     }
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
