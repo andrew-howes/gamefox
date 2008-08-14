@@ -1,3 +1,5 @@
+<!-- vim: set indentexpr=: -->
+
 <!ENTITY title "GameFOX Options">
 <!ENTITY about.label "About...">
 
@@ -50,6 +52,7 @@
 <!ENTITY page.highlight.messages "Highlight messages">
 <!ENTITY page.highlight.topics "Highlight topics">
 
+<!ENTITY theme.label "Theme">
 <!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">
 <!ENTITY theme.stylesheets.label "Stylesheets">
 <!ENTITY theme.tree.name "Name">
@@ -86,6 +89,7 @@
 <!ENTITY quoting.style.custom.n "post number">
 <!ENTITY quoting.style.custom.m "message body">
 
+<!ENTITY signature.label "Signature">
 <!ENTITY signature.content "Content">
 <!ENTITY signature.desc "
         Pre-signatures are inserted before the separator. Signatures cannot exceed
@@ -109,3 +113,33 @@
 <!ENTITY signature.selection "Selection Mode">
 <!ENTITY signature.selection.first "Choose most specific matching signature">
 <!ENTITY signature.selection.random "Choose random matching signature">
+
+<!ENTITY mouse.label "Mouse">
+<!ENTITY mouse.topics.caption "Topics">
+<!ENTITY mouse.topics.label "Double clicking on topic row action:">
+<!ENTITY mouse.topics.radio.nothing "Do nothing">
+<!ENTITY mouse.topics.radio.paginate "Show links to topic pages">
+<!ENTITY mouse.topics.radio.lastpage "Go to last page">
+<!ENTITY mouse.topics.radio.tagtopic "Tag topic">
+<!ENTITY mouse.aml.caption "Active Messages List">
+<!ENTITY mouse.aml.label "Double clicking on row action:">
+<!ENTITY mouse.aml.radio.nothing "Do nothing">
+<!ENTITY mouse.aml.radio.paginate "Show links to topic pages">
+<!ENTITY mouse.aml.radio.lastpage "Go to last page">
+<!ENTITY mouse.aml.radio.tagtopic "Tag topic">
+<!ENTITY mouse.messages.caption "Messages">
+<!ENTITY mouse.messages.label "Double clicking on message header action:">
+<!ENTITY mouse.messages.radio.nothing "Do nothing">
+<!ENTITY mouse.messages.radio.quickwhois "QuickWhois: display the poster's user information">
+<!ENTITY mouse.messages.radio.quote "Quote message">
+<!ENTITY mouse.messages.dblclickquoting "Quote by double clicking on the message">
+<!ENTITY mouse.context.caption "Context Menu">
+<!ENTITY mouse.context.sidebar "Sidebar">
+<!ENTITY mouse.context.tags "Tags">
+<!ENTITY mouse.context.pages "Pages">
+<!ENTITY mouse.context.tagtopic "Tag topic">
+<!ENTITY mouse.context.quote "Quote">
+<!ENTITY mouse.context.tags.aml "Tags: Active Messages">
+<!ENTITY mouse.context.tags.tracked "Tags: Tracked Topics">
+
+<!ENTITY tags.label "Tags">

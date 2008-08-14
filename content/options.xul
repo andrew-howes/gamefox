@@ -311,7 +311,7 @@
 
 <!-- T H E M E -->
 
-  <prefpane id="gamefox-theme-pane" label="Theme" onpaneload="GameFOXCSS.populate(document.getElementById('css-tree'));">
+  <prefpane id="gamefox-theme-pane" label="&theme.label;" onpaneload="GameFOXCSS.populate(document.getElementById('css-tree'));">
     <script type="application/x-javascript" src="chrome://gamefox/content/treeview.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
@@ -349,7 +349,8 @@
         <button oncommand="GameFOXCSS.filepicker();" label="&theme.import.browse;..."/>
       </hbox>
       <hbox pack="end">
-        <button icon="add" oncommand="GameFOXCSS.userimport(document.getElementById('css-import-file').value);" label="&theme.import.submit;"/>
+        <button icon="add" oncommand="GameFOXCSS.userimport(document.getElementById('css-import-file').value);"
+          label="&theme.import.submit;"/>
       </hbox>
     </groupbox>
 
@@ -431,7 +432,7 @@
 
 <!-- S I G N A T U R E -->
 
-  <prefpane id="gamefox-sig-pane" label="Signature" onpaneload="GFSig.prepareOptionsPane();">
+  <prefpane id="gamefox-sig-pane" label="&signature.label;" onpaneload="GFSig.prepareOptionsPane();">
     <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
     <preferences>
       <preference id="sig-newline"         name="gamefox.signature.newline"         type="bool"/>
@@ -506,7 +507,7 @@
 
 <!-- M O U S E -->
 
-  <prefpane id="gamefox-mouse-pane" label="Mouse">
+  <prefpane id="gamefox-mouse-pane" label="&mouse.label;">
     <preferences>
       <preference id="gamefox-pref-topic-dblclick"   name="gamefox.topic.dblclick"   type="int"/>
       <preference id="gamefox-pref-message-dblclick" name="gamefox.message.dblclick" type="bool"/>
@@ -522,63 +523,63 @@
     </preferences>
 
     <groupbox>
-      <caption label="Topics"/>
-      <label value="Double-clicking on topic row functionality"/>
+      <caption label="&mouse.topics.caption;"/>
+      <label value="&mouse.topics.label;"/>
       <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-topic-dblclick">
         <vbox>
-          <radio value="0" label="Do nothing"/>
-          <radio value="1" label="Show links to topic pages"/>
+          <radio value="0" label="&mouse.topics.radio.nothing;"/>
+          <radio value="1" label="&mouse.topics.radio.paginate;"/>
         </vbox>
         <vbox>
-          <radio value="2" label="Go to last page"/>
-          <radio value="3" label="Tag topic"/>
+          <radio value="2" label="&mouse.topics.radio.lastpage;"/>
+          <radio value="3" label="&mouse.topics.radio.tagtopic;"/>
         </vbox>
       </radiogroup>
     </groupbox>
 
     <groupbox>
-      <caption label="Active Message List"/>
-      <label value="Double-clicking on row functionality"/>
+      <caption label="&mouse.aml.caption;"/>
+      <label value="&mouse.aml.label;"/>
       <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-myposts-dblclick">
         <vbox>
-          <radio value="0" label="Do nothing"/>
-          <radio value="1" label="Show links to topic pages"/>
+          <radio value="0" label="&mouse.aml.radio.nothing;"/>
+          <radio value="1" label="&mouse.aml.radio.paginate;"/>
         </vbox>
         <vbox>
-          <radio value="2" label="Go to last page"/>
-          <radio value="3" label="Tag topic"/>
+          <radio value="2" label="&mouse.aml.radio.lastpage;"/>
+          <radio value="3" label="&mouse.aml.radio.tagtopic;"/>
         </vbox>
       </radiogroup>
     </groupbox>
 
     <groupbox>
-      <caption label="Messages"/>
-      <label value="Double-clicking on message header functionality"/>
+      <caption label="&mouse.messages.caption;"/>
+      <label value="&mouse.messages.label;"/>
       <radiogroup class="indent" preference="gamefox-pref-message-header-dblclick">
-        <radio value="0" label="Do nothing"/>
-        <radio value="1" label="QuickWhois: display quick info about poster"/>
-        <radio value="2" label="Quote message"/>
+        <radio value="0" label="&mouse.messages.radio.nothing;"/>
+        <radio value="1" label="&mouse.messages.radio.quickwhois;"/>
+        <radio value="2" label="&mouse.messages.radio.quote;"/>
       </radiogroup>
-      <checkbox preference="gamefox-pref-message-dblclick" label="Enable quoting by double-clicking on message"/>
+      <checkbox preference="gamefox-pref-message-dblclick" label="&mouse.messages.dblclickquoting;"/>
     </groupbox>
 
     <groupbox>
-      <caption label="Main Context Menu"/>
+      <caption label="&mouse.context.caption;"/>
       <hbox>
         <vbox>
-          <checkbox preference="gamefox-pref-context-sidebar"     label="GameFOX Sidebar"/>
-          <checkbox preference="gamefox-pref-context-taglist"     label="GameFAQs Tags"/>
+          <checkbox preference="gamefox-pref-context-sidebar"     label="&mouse.context.sidebar;"/>
+          <checkbox preference="gamefox-pref-context-taglist"     label="&mouse.context.tags;"/>
         </vbox>
         <vbox>
-          <checkbox preference="gamefox-pref-context-pagelist"    label="Pages"/>
-          <checkbox preference="gamefox-pref-context-tag"         label="Tag Topic"/>
+          <checkbox preference="gamefox-pref-context-pagelist"    label="&mouse.context.pages;"/>
+          <checkbox preference="gamefox-pref-context-tag"         label="&mouse.context.tags;"/>
         </vbox>
         <vbox>
-          <checkbox preference="gamefox-pref-context-quote"       label="Quote"/>
+          <checkbox preference="gamefox-pref-context-quote"       label="&mouse.context.quote;"/>
         </vbox>
         <vbox>
-          <checkbox preference="gamefox-pref-context-tag-myposts" label="GFTags: Active Messages"/>
-          <checkbox preference="gamefox-pref-context-tag-tracked" label="GFTags: Tracked Topics"/>
+          <checkbox preference="gamefox-pref-context-tag-myposts" label="&mouse.context.tags.aml;"/>
+          <checkbox preference="gamefox-pref-context-tag-tracked" label="&mouse.context.tags.tracked;"/>
         </vbox>
       </hbox>
     </groupbox>
@@ -588,7 +589,7 @@
 
 <!-- T A G S -->
 
-  <prefpane id="gamefox-tags-pane" label="Tags" flex="1">
+  <prefpane id="gamefox-tags-pane" label="&tags.label;" flex="1">
     <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul" flex="1" orient="vertical"/>
   </prefpane>
 
