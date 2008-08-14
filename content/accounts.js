@@ -28,7 +28,7 @@ var GameFOXAccounts =
 
   populate: function()
   {
-    var accountList, account, item;
+    var accountList, username, item;
 
     accountList = document.getElementById('gamefox-accounts-menu');
     if (!accountList)
@@ -43,30 +43,38 @@ var GameFOXAccounts =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', 'Add account...');
-    item.setAttribute('oncommand', 'GameFOXAccounts.switchAccount(null, null, 0)');
+    item.setAttribute('oncommand', 'GameFOXAccounts.loginAndSaveCookie()');
     accountList.appendChild(item);
-    item = document.createElement('menuitem');
-    item.setAttribute('label', 'Remove account...');
-    item.setAttribute('oncommand', 'GameFOXAccounts.promptRemoveAccount()');
-    accountList.appendChild(item);
-    accountList.appendChild(document.createElement('menuseparator'));
 
-    for (account in this.accounts)
+    var firstAccount = true;
+    for (username in this.accounts)
     {
+      if (firstAccount)
+      {
+        item = document.createElement('menuitem');
+        item.setAttribute('label', 'Remove account...');
+        item.setAttribute('oncommand', 'GameFOXAccounts.promptRemoveAccount()');
+        accountList.appendChild(item);
+        accountList.appendChild(document.createElement('menuseparator'));
+        firstAccount = false;
+      }
       item = document.createElement('menuitem');
-      item.setAttribute('label', account);
-      item.setAttribute('oncommand', 'GameFOXAccounts.switchAccount("' + account + '", "' + this.accounts[account].MDAAuth.content + '", "' + this.accounts[account].MDAAuth.expires + '")');
+      item.setAttribute('label', username);
+      item.setAttribute('oncommand', 'GameFOXAccounts.switchAccount("' + username + '")');
       accountList.appendChild(item);
     }
   },
 
-  switchAccount: function(account, content, expires)
+  switchAccount: function(username)
   {
-    expires *= 1000;
+    this.read();
+    var account = this.accounts[username];
+    var content = account.MDAAuth.content;
+    var expires = account.MDAAuth.expires * 1000;
+
     var d = new Date();
     if (d.getTime() < expires)
     {
-      this.removeCookie('MDAAuth');
       expires = new Date(Number(expires));
       
       var cookieManager2 = Components.classes['@mozilla.org/cookiemanager;1']
@@ -85,7 +93,7 @@ var GameFOXAccounts =
     }
     else
     {
-      this.loginAndSaveCookie(account);
+      this.loginAndSaveCookie(username);
     }
   },
 
@@ -96,8 +104,9 @@ var GameFOXAccounts =
     for (var e = cookieMgr.enumerator; e.hasMoreElements();)
     {
       var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
-      if (/(^|\.)gamefaqs\.com/.test(cookie.host) && cookie.name == name)
+      if (/\.gamefaqs\.com/.test(cookie.host) && cookie.name == name)
         cookieMgr.remove(cookie.host, name, cookie.path, false);
+        return;
     }
   },
 
@@ -108,7 +117,7 @@ var GameFOXAccounts =
     for (var e = cookieMgr.enumerator; e.hasMoreElements();)
     {
       var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
-      if (/(^|\.)gamefaqs\.com/.test(cookie.host) && cookie.name == name)
+      if (/\.gamefaqs\.com/.test(cookie.host) && cookie.name == name)
         return {content: cookie.value, expires: cookie.expires};
     }
     return null;
@@ -119,7 +128,7 @@ var GameFOXAccounts =
     var password = {value: ''};
     var check = {value: true};
     var result;
-    if (username == null)
+    if (username == undefined)
     {
       username = {value: ''};
       result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
@@ -137,8 +146,6 @@ var GameFOXAccounts =
       if (!result)
         return;
     }
-
-    this.removeCookie('MDAAuth');
 
     var request = new XMLHttpRequest();
     request.open('POST', 'http://www.gamefaqs.com/user/login.html');
@@ -159,15 +166,7 @@ var GameFOXAccounts =
         }
 
         GameFOXAccounts.read();
-        if (username in GameFOXAccounts.accounts)
-        {
-          GameFOXAccounts.accounts[username].MDAAuth.content = cookie.content;
-          GameFOXAccounts.accounts[username].MDAAuth.expires = cookie.expires;
-        }
-        else
-        {
-          GameFOXAccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
-        }
+        GameFOXAccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
         GameFOXAccounts.write(GameFOXAccounts.accounts);
 
         Components.classes['@mozilla.org/appshell/window-mediator;1']
