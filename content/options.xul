@@ -10,8 +10,9 @@
     id="gamefox-prefwindow"
     buttons="accept,cancel,extra1"
     buttonlabelextra1="&about.label;"
-    ondialogextra1="window.openDialog('chrome://gamefox/content/about.xul', 'gamefox-about-dialog', 'centerscreen,chrome');"
-    defaultButton=""
+    ondialogextra1="window.openDialog('chrome://gamefox/content/about.xul',
+      'gamefox-about-dialog', 'centerscreen,chrome');"
+    defaultButton="none"
     onload="GameFOXOptions.restoreLastPane()"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
