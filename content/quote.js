@@ -66,7 +66,7 @@ var GFQuote =
         'document', 'getSelection()');
     var selection = parentWin.getSelection();
     // only use the selection if it's inside the clicked message
-    if (selection.containsNode(msgNode, true))
+    if (gContextMenu && selection.containsNode(msgNode, true))
     {
       quoteMsg = selection.toString();
     }
