@@ -65,10 +65,10 @@ if lsha1sum == rsha1sum:
         fcontent = f.read()
         f.close()
 
-        fcontent = re.sub("sha1:[0-9a-z]+", "sha1:" + lsha1sum, fcontent)
-        fcontent = re.sub(xpiFilenameRegex, lfile, fcontent)
+        fcontent = re.sub("sha1:[0-9a-z]+", "sha1:" + rsha1sum, fcontent)
+        fcontent = re.sub(xpiFilenameRegex, rfile, fcontent)
         # extract the new version number
-        version = re.findall(versionRegex, lfile)[0]
+        version = re.findall(versionRegex, rfile)[0]
         fcontent = re.sub(r"<em:version>" + versionRegex + r"<\/em:version>",
                 "<em:version>" + version + "</em:version>", fcontent)
         fcontent = re.sub(r"news/" + versionRegex, "news/" + version, fcontent)
