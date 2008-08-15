@@ -103,6 +103,7 @@
 <!ENTITY signature.criteria.accounts.label "Accounts:">
 <!ENTITY signature.criteria.boards.label "Boards:">
 <!ENTITY signature.presig.label "Pre-signature:">
+<!ENTITY signature.presig.warning "At risk of being modded if not similar to your username">
 <!ENTITY signature.sig.label "Signature:">
 <!ENTITY signature.grab.label "Grab From GameFAQs">
 <!ENTITY signature.applyeverywhere.label "Also use on standard GameFAQs post page">

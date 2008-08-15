@@ -169,8 +169,12 @@ var GameFOXUtils =
         if (inOptions)
         {
           document.getElementById('sig-body').value = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
+          
           // oninput doesn't seem to be called
           GFSig.updatePref(document.getElementById('sig-body'));
+
+          // to make sure this call gets the last say
+          window.setTimeout(GFSig.updateCharCounts, 100);
         }
         else
         {
@@ -358,5 +362,15 @@ var GameFOXUtils =
     catch (e) { var leftMsgData = false; }
 
     return leftMsgData;
+  },
+
+  // because gamefaqs sucks and counts characters in signatures as their entities
+  specialCharsEncode: function(str)
+  {
+    return str.
+      replace(/&/g, '&amp;').
+      replace(/</g, '&lt;').
+      replace(/>/g, '&gt;').
+      replace(/"/g, '&quot;');
   }
 };

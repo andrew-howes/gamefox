@@ -87,6 +87,8 @@ var GFSig =
 
     // function to watch pref for change and update signature
     window.setInterval(this.watchPref, 1000);
+
+    this.updateCharCounts();
   },
 
   menuCommand: function()
@@ -134,6 +136,8 @@ var GFSig =
       presig.value = defaultSig['presig'];
       sig.value = defaultSig['body'];
     }
+
+    this.updateCharCounts();
   },
 
   add: function()
@@ -267,5 +271,21 @@ var GFSig =
     if (boardname && boards.indexOf(boardname) != -1) return true;
     if (boardid && boards.indexOf(boardid) != -1) return true;
     return false;
+  },
+
+  updateCharCounts: function()
+  {
+    var sigText =
+      GameFOXUtils.specialCharsEncode(document.getElementById('sig-body').value);
+    var sigChars = document.getElementById('sig-chars');
+
+    sigChars.value = sigText.length + " characters";
+    if (sigText.length > 160)
+    {
+      sigChars.value += "(!!)";
+      sigChars.style.setProperty('font-weight', 'bold', null);
+    }
+    else
+      sigChars.style.setProperty('font-weight', '', null);
   }
 };
