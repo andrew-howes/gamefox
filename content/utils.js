@@ -37,7 +37,7 @@ var GameFOXUtils =
           return;
         }
         // if GameFAQs gives us bad values, bad things happen
-        
+
         if (inOptions)
         {
           document.getElementById('gamefoxTpcsPerPage').value = topicpage;
@@ -169,7 +169,7 @@ var GameFOXUtils =
         if (inOptions)
         {
           document.getElementById('sig-body').value = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
-          
+
           // oninput doesn't seem to be called
           GFSig.updatePref(document.getElementById('sig-body'));
 
@@ -346,7 +346,7 @@ var GameFOXUtils =
          str = str.replace(new RegExp('%[Uu]' + element, 'g'), '%' + hex2[index]);
          }
          );
-    
+
     return str;
   },
 
@@ -372,5 +372,11 @@ var GameFOXUtils =
       replace(/</g, '&lt;').
       replace(/>/g, '&gt;').
       replace(/"/g, '&quot;');
+  },
+
+  specialRegexpCharsEscape: function(str)
+  {
+    return str.
+      replace(/([\\\[\](){}^.?*+|$])/g, '\\$1');
   }
 };

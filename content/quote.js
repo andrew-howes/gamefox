@@ -58,7 +58,7 @@ var GFQuote =
       quoteHead = node.textContent;
       msgNum = '#' + node.id.substr(1);
     }
-   
+
     // selection quoting
     var parentWin = new XPCNativeWrapper(document.commandDispatcher.focusedWindow,
         'document', 'getSelection()');
@@ -67,14 +67,14 @@ var GFQuote =
     if (selection.toString().length &&
         GameFOXUtils.specialCharsDecode(
           quoteMsg.replace(/(<[^>]+>|\s+)/g, '')).
-        match(selection.toString().replace(/\s+/g, '')))
+        match( new RegExp(GameFOXUtils.specialRegexpCharsEscape(selection.toString().replace(/\s+/g, ''))) ))
     {
       quoteMsg = selection.toString();
     }
 
     GFQuote.format(event, quoteHead, quoteMsg, msgNum);
   },
-  
+
   format: function(event, quoteHead, quoteMsg, msgNum)
   {
     var doc = event.target.ownerDocument;
