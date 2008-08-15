@@ -120,12 +120,12 @@ var GameFOX =
             'dblclick', GameFOX.topicDblclick, false);
 
       // Topic row loop
-      if (GameFOX.prefs.getBoolPref('paging.auto'))
-      {
-        var rows = doc.getElementsByTagName('table');
-            rows = (rows[2] ? rows[2] : rows[0]).getElementsByTagName('tr');
+      var rows = doc.getElementsByTagName('table');
+      rows = (rows[2] ? rows[2] : rows[0]).getElementsByTagName('tr');
 
-        for (var i = 1; i < rows.length; i++)
+      for (var i = 1; i < rows.length; i++)
+      {
+        if (GameFOX.prefs.getBoolPref('paging.auto'))
         {
           // Pagination
           var pageHTML = GameFOXUtils.formatPagination(
@@ -138,19 +138,19 @@ var GameFOX =
             if (GameFOX.prefs.getIntPref('paging.location') == 0)
             {
               var pageTR = doc.createElement('tr');
-                  pageTR.setAttribute('class', 'gamefox-pagelist');
-                  pageTR.style.display = 'table-row';
+              pageTR.setAttribute('class', 'gamefox-pagelist');
+              pageTR.style.display = 'table-row';
 
               var pageTD = doc.createElement('td');
-                  pageTD.setAttribute('colspan', '5');
+              pageTD.setAttribute('colspan', '5');
             }
             else
             {
               var pageTR = rows[i].cells[1];
 
               var pageTD = doc.createElement('span');
-                  pageTD.setAttribute('class', 'gamefox-pagelist');
-                  pageTD.setAttribute('tag', GameFOX.prefs.getIntPref('paging.location'));
+              pageTD.setAttribute('class', 'gamefox-pagelist');
+              pageTD.setAttribute('tag', GameFOX.prefs.getIntPref('paging.location'));
             }
 
             pageTD.innerHTML = pageHTML.innerHTML;
@@ -162,32 +162,32 @@ var GameFOX =
               i++;
             }
           }
+        }
 
-          // Board linkification (tracked.php)
-          if (GameFOX.prefs.getBoolPref('elements.tracked.boardlink') && GFlib.onPage(doc, 'tracked'))
+        // Board linkification (tracked.php)
+        if (GameFOX.prefs.getBoolPref('elements.tracked.boardlink') && GFlib.onPage(doc, 'tracked'))
+        {
+          rows[i].cells[2].innerHTML = '<a href="' + rows[i].cells[1].
+            getElementsByTagName('a')[0].getAttribute('href').replace(
+                /message(?=\.)/, 'topic').replace(/(&topic=[0-9-]+|\btopic=[0-9-]+&)/, '') + '">' +
+            GameFOXUtils.trim(rows[i].cells[2].textContent) + '</a>';
+        }
+
+        // User highlighting (only on gentopic.php, tracked.php has no topic
+        // creator names)
+        if (GFlib.onPage(doc, 'gentopic') && GameFOX.prefs.getBoolPref('highlight.topics'))
+        {
+          var username = GameFOXUtils.trim(rows[i].getElementsByTagName('td')[2].textContent);
+          var hlinfo = false;
+
+          if ((hlinfo = GFHL.getGroupData(username)) != false)
           {
-            rows[i].cells[2].innerHTML = '<a href="' + rows[i].cells[1].
-              getElementsByTagName('a')[0].getAttribute('href').replace(
-                  /message(?=\.)/, 'topic').replace(/(&topic=[0-9-]+|\btopic=[0-9-]+&)/, '') + '">' +
-              GameFOXUtils.trim(rows[i].cells[2].textContent) + '</a>';
-          }
+            rows[i].setAttribute('class', rows[i].getAttribute('class') +
+                ' gamefox-highlight-' + hlinfo[0]);
+            rows[i].style.setProperty('background-color', hlinfo[1], 'important');
 
-          // User highlighting (only on gentopic.php, tracked.php has no topic
-          // creator names)
-          if (GFlib.onPage(doc, 'gentopic') && GameFOX.prefs.getBoolPref('highlight.topics'))
-          {
-            var username = GameFOXUtils.trim(rows[i].getElementsByTagName('td')[2].textContent);
-            var hlinfo = false;
-
-            if ((hlinfo = GFHL.getGroupData(username)) != false)
-            {
-              rows[i].setAttribute('class', rows[i].getAttribute('class') +
-                  ' gamefox-highlight-' + hlinfo[0]);
-              rows[i].style.setProperty('background-color', hlinfo[1], 'important');
-
-              for (var j = 0; j < rows[i].cells.length; j++)
-                rows[i].cells[j].style.setProperty('background-color', hlinfo[1], 'important');
-            }
+            for (var j = 0; j < rows[i].cells.length; j++)
+              rows[i].cells[j].style.setProperty('background-color', hlinfo[1], 'important');
           }
         }
       }
