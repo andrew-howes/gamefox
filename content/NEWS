@@ -1,5 +1,7 @@
-2008-08-xx:
+2008-08-15:
     * version 0.6.4
+    * Handle topic lists properly when automatic pagination is disabled
+    * Treat detail.php as a message list
 
 2008-08-15:
     * version 0.6.3

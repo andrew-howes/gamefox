@@ -193,8 +193,8 @@ var GameFOX =
       }
     }
 
-    /* Message Lists (genmessage.php) */
-    else if (GFlib.onPage(doc, 'genmessage'))
+    /* Message Lists (genmessage.php, detail.php) */
+    else if (GFlib.onPage(doc, 'genmessage') || GFlib.onPage(doc, 'detail'))
     {
       var pagenum = doc.location.search.match(/\bpage=([0-9]+)/);
           pagenum = pagenum ? parseInt(pagenum[1]) : 0;
