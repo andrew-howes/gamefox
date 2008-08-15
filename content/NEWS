@@ -1,4 +1,7 @@
 2008-08-xx:
+    * version 0.6.4
+
+2008-08-15:
     * version 0.6.3
     * More error handling with the CSS component
     * Split GameFOX stylesheets into multiple files
