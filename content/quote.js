@@ -37,6 +37,7 @@ var GFQuote =
       quoteHead = node.textContent;
       msgNum = '#' + node.id.substr(1);
 
+      var msgNode = node;
       if (!leftMsgData)
         node = tableNode.rows[node.parentNode.rowIndex + 1].cells[0];
       else
@@ -50,6 +51,7 @@ var GFQuote =
     {
       quoteMsg = node.innerHTML;
 
+      var msgNode = node;
       if (!leftMsgData)
         node = tableNode.rows[node.parentNode.rowIndex - 1].cells[0];
       else
@@ -64,10 +66,7 @@ var GFQuote =
         'document', 'getSelection()');
     var selection = parentWin.getSelection();
     // only use the selection if it's inside the clicked message
-    if (selection.toString().length &&
-        GameFOXUtils.specialCharsDecode(
-          quoteMsg.replace(/(<[^>]+>|\s+)/g, '')).
-        match( new RegExp(GameFOXUtils.specialRegexpCharsEscape(selection.toString().replace(/\s+/g, ''))) ))
+    if (selection.containsNode(msgNode, true))
     {
       quoteMsg = selection.toString();
     }
