@@ -136,7 +136,8 @@
 <!ENTITY mouse.messages.dblclickquoting "Quote by double clicking on the message">
 <!ENTITY mouse.context.caption "Context Menu">
 <!ENTITY mouse.context.sidebar "Sidebar">
-<!ENTITY mouse.context.tags "Tags">
+<!ENTITY mouse.context.taglist "Tag List">
+<!ENTITY mouse.context.tags "Tag Topic">
 <!ENTITY mouse.context.pages "Pages">
 <!ENTITY mouse.context.tagtopic "Tag topic">
 <!ENTITY mouse.context.quote "Quote">

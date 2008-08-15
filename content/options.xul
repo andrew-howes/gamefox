@@ -575,7 +575,7 @@
       <hbox>
         <vbox>
           <checkbox preference="gamefox-pref-context-sidebar"     label="&mouse.context.sidebar;"/>
-          <checkbox preference="gamefox-pref-context-taglist"     label="&mouse.context.tags;"/>
+          <checkbox preference="gamefox-pref-context-taglist"     label="&mouse.context.taglist;"/>
         </vbox>
         <vbox>
           <checkbox preference="gamefox-pref-context-pagelist"    label="&mouse.context.pages;"/>
