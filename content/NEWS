@@ -1,3 +1,8 @@
+2008-08-xx:
+    * version 0.6.5
+    * Don't quote from the selection if it's empty, which can be caused by
+      selecting and deselecting a message
+
 2008-08-15:
     * version 0.6.4
     * Handle topic lists properly when automatic pagination is disabled
