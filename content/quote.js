@@ -82,7 +82,7 @@ var GFQuote =
     /* Parse message header */
     var head = quoteHead.replace(/\|/g, '').split("\n");
     for (var i = 0; i < head.length; i++)
-      head[i] = head[i].replace(/^\s+|\s+$/g, '');
+      head[i] = GameFOXUtils.trim(head[i]);
     var username = head[1];
     var postdate = head[2].replace('Posted ', '');
     var postnum  = msgNum;
@@ -98,7 +98,7 @@ var GFQuote =
     if (GameFOX.prefs.getBoolPref('quote.removesignature'))
       body = body.replace(/---(\n.*\n?){0,2}$/, ''); // Only a simple regexp is needed because extraneous
                                                      // signatures are no longer allowed
-    body = GameFOXUtils.specialCharsDecode(body.replace(/^\s+|\s+$/g, ''));
+    body = GameFOXUtils.specialCharsDecode(GameFOXUtils.trim(body));
     // Prevent too much GFCode quote nesting
     var loops = 0;
     while (body.match(/(<i><p>[\s\S]*?){3,}/) != null)
