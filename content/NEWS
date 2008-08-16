@@ -3,6 +3,8 @@
     * Don't quote from the selection if it's empty, which can be caused by
       selecting and deselecting a message
     * Option for removing Accounts list from context menu
+    * Split the signature pane into tabs so it looks cleaner and works on
+      800x600
 
 2008-08-15:
     * version 0.6.4

@@ -325,7 +325,7 @@
 
     <groupbox>
       <caption label="&theme.stylesheets.label;"/>
-      <tree id="css-tree" rows="13" editable="true" seltype="single"
+      <tree id="css-tree" rows="10" editable="true" seltype="single"
         onselect="GameFOXCSS.onselect();">
         <treecols>
           <treecol label="&theme.tree.name;" primary="true" flex="1"/>
@@ -435,80 +435,93 @@
   <prefpane id="gamefox-sig-pane" label="&signature.label;" onpaneload="GFSig.prepareOptionsPane();">
     <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
     <preferences>
-      <preference id="sig-newline"         name="gamefox.signature.newline"         type="bool"/>
+      <preference id="sig-newline" name="gamefox.signature.newline" type="bool"/>
       <preference id="sig-applyeverywhere" name="gamefox.signature.applyeverywhere" type="bool"/>
-      <preference id="sig-addition"        name="gamefox.signature.addition"        type="int"/>
-      <preference id="sig-selection"       name="gamefox.signature.selection"       type="int"/>
+      <preference id="sig-addition" name="gamefox.signature.addition" type="int"/>
+      <preference id="sig-selection" name="gamefox.signature.selection" type="int"/>
     </preferences>
 
-    <groupbox>
-      <caption label="&signature.content;"/>
+    <tabbox id="sig-tabbox" flex="1">
+      <tabs tabGroup="sig">
+        <tab id="sig-tab-content" label="&signature.content.label;"/>
+        <tab id="sig-tab-options" label="&signature.options.label;"/>
+      </tabs>
 
-      <description style="margin-bottom: 1em">&signature.desc;</description>
+      <tabpanels flex="1">
+        <!-- CONTENT -->
+        <tabpanel orient="vertical" flex="1">
+          <groupbox>
+            <caption label="&signature.content.label;"/>
 
-      <hbox>
-        <menulist flex="1" id="sig-menu" oncommand="GFSig.menuCommand();">
-          <menupopup>
-            <menuitem value="default" label="&signature.list.default;"/>
-            <menuseparator/>
-            <menuitem value="new" label="&signature.list.new;"/>
-          </menupopup>
-        </menulist>
-        <button id="sig-delete" icon="remove" label="&signature.list.delete;"
-          oncommand="GFSig.deleteSig();" disabled="true"/>
-      </hbox>
+            <description style="margin-bottom: 1em">&signature.desc;</description>
 
-      <groupbox id="sig-criteria">
-        <description>&signature.criteria.desc;</description>
-        <hbox align="center">
-          <label value="&signature.criteria.accounts.label;"/>
-          <textbox id="sig-criteria-accounts" oninput="GFSig.updatePref(this);" flex="1"/>
-          <label value="&signature.criteria.boards.label;"/>
-          <textbox id="sig-criteria-boards" oninput="GFSig.updatePref(this);" flex="1"/>
-        </hbox>
-      </groupbox>
+            <hbox>
+              <menulist flex="1" id="sig-menu" oncommand="GFSig.menuCommand();">
+                <menupopup>
+                  <menuitem value="default" label="&signature.list.default;"/>
+                  <menuseparator/>
+                  <menuitem value="new" label="&signature.list.new;"/>
+                </menupopup>
+              </menulist>
+              <button id="sig-delete" icon="remove" label="&signature.list.delete;"
+                oncommand="GFSig.deleteSig();" disabled="true"/>
+            </hbox>
 
-      <hbox>
-        <label value="&signature.presig.label;" flex="1"/>
-        <hbox pack="end"><label value="&signature.presig.warning;"/></hbox>
-      </hbox>
-      <textbox id="sig-presig" oninput="GFSig.updatePref(this);" size="8" class="indent"/>
+            <groupbox id="sig-criteria">
+              <description>&signature.criteria.desc;</description>
+              <hbox align="center">
+                <label value="&signature.criteria.accounts.label;"/>
+                <textbox id="sig-criteria-accounts" oninput="GFSig.updatePref(this);" flex="1"/>
+                <label value="&signature.criteria.boards.label;"/>
+                <textbox id="sig-criteria-boards" oninput="GFSig.updatePref(this);" flex="1"/>
+              </hbox>
+            </groupbox>
 
-      <hbox>
-        <label value="&signature.sig.label;" flex="1"/>
-        <hbox pack="end"><label id="sig-chars" value=""/></hbox>
-      </hbox>
-      <textbox id="sig-body" oninput="GFSig.updatePref(this);" rows="3" multiline="true" class="indent"
-        onkeyup="GFSig.updateCharCounts();"/>
-      <hbox pack="end">
-        <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
-          oncommand="GameFOXOptions.importSignature();"/>
-      </hbox>
+            <hbox>
+              <label value="&signature.presig.label;" flex="1"/>
+              <hbox pack="end"><label value="&signature.presig.warning;"/></hbox>
+            </hbox>
+            <textbox id="sig-presig" oninput="GFSig.updatePref(this);" size="8" class="indent"/>
 
-      <hbox>
-        <checkbox preference="sig-applyeverywhere" label="&signature.applyeverywhere.label;"/>
-      </hbox>
-      <hbox>
-        <checkbox preference="sig-newline" label="&signature.newline.label;"/>
-      </hbox>
-    </groupbox>
+            <hbox>
+              <label value="&signature.sig.label;" flex="1"/>
+              <hbox pack="end"><label id="sig-chars" value=""/></hbox>
+            </hbox>
+            <textbox id="sig-body" oninput="GFSig.updatePref(this);" rows="3" multiline="true" class="indent"
+              onkeyup="GFSig.updateCharCounts();"/>
+            <hbox pack="end">
+              <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
+                oncommand="GameFOXOptions.importSignature();"/>
+            </hbox>
+          </groupbox>
+        </tabpanel>
 
-    <groupbox>
-      <caption label="&signature.addition;"/>
-      <radiogroup preference="sig-addition">
-        <radio value="1" label="&signature.addafter;"/>
-        <radio value="2" label="&signature.addbefore;"/>
-      </radiogroup>
-    </groupbox>
+        <!-- OPTIONS -->
+        <tabpanel orient="vertical" flex="1">
+          <groupbox>
+            <caption label="&general.label;"/>
+            <checkbox preference="sig-applyeverywhere" label="&signature.applyeverywhere.label;"/>
+            <checkbox preference="sig-newline" label="&signature.newline.label;"/>
+          </groupbox>
 
-    <groupbox style="margin-bottom: 3em;">
-      <caption label="&signature.selection;"/>
-      <radiogroup preference="sig-selection">
-        <radio value="1" label="&signature.selection.first;"/>
-        <radio value="2" label="&signature.selection.random;"/>
-      </radiogroup>
-    </groupbox>
+          <groupbox>
+            <caption label="&signature.addition;"/>
+            <radiogroup preference="sig-addition">
+              <radio value="1" label="&signature.addafter;"/>
+              <radio value="2" label="&signature.addbefore;"/>
+            </radiogroup>
+          </groupbox>
 
+          <groupbox style="margin-bottom: 3em;">
+            <caption label="&signature.selection;"/>
+            <radiogroup preference="sig-selection">
+              <radio value="1" label="&signature.selection.first;"/>
+              <radio value="2" label="&signature.selection.random;"/>
+            </radiogroup>
+          </groupbox>
+        </tabpanel>
+      </tabpanels>
+    </tabbox>
   </prefpane>
 
 
