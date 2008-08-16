@@ -520,6 +520,7 @@
       <preference id="gamefox-pref-message-dblclick" name="gamefox.message.dblclick" type="bool"/>
       <preference id="gamefox-pref-message-header-dblclick" name="gamefox.message.header.dblclick" type="int"/>
       <preference id="gamefox-pref-myposts-dblclick" name="gamefox.myposts.dblclick" type="int"/>
+      <preference id="gamefox-pref-context-accounts" name="gamefox.context.accounts" type="bool"/>
       <preference id="gamefox-pref-context-pagelist" name="gamefox.context.pagelist" type="bool"/>
       <preference id="gamefox-pref-context-quote"    name="gamefox.context.quote"    type="bool"/>
       <preference id="gamefox-pref-context-sidebar"  name="gamefox.context.sidebar"  type="bool"/>
@@ -579,10 +580,11 @@
         </vbox>
         <vbox>
           <checkbox preference="gamefox-pref-context-pagelist"    label="&mouse.context.pages;"/>
-          <checkbox preference="gamefox-pref-context-tag"         label="&mouse.context.tags;"/>
+          <checkbox preference="gamefox-pref-context-tag"         label="&mouse.context.tagtopic;"/>
         </vbox>
         <vbox>
           <checkbox preference="gamefox-pref-context-quote"       label="&mouse.context.quote;"/>
+          <checkbox preference="gamefox-pref-context-accounts"    label="&mouse.context.accounts;"/>
         </vbox>
         <vbox>
           <checkbox preference="gamefox-pref-context-tag-myposts" label="&mouse.context.tags.aml;"/>

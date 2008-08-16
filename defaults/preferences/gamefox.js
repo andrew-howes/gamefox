@@ -53,6 +53,7 @@ pref("gamefox.paging.location", 2);
 pref("gamefox.paging.prefix", "[Pages: ");
 pref("gamefox.paging.separator", ", ");
 pref("gamefox.paging.suffix", "]");
+pref("gamefox.context.accounts", true);
 pref("gamefox.context.pagelist", true);
 pref("gamefox.context.quote", true);
 pref("gamefox.context.sidebar", true);

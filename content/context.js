@@ -10,6 +10,8 @@ var GFContextMenu =
       getBoolPref('context.sidebar');
     document.getElementById('gamefox-tags').hidden = !GameFOX.prefs.
       getBoolPref('context.taglist');
+    document.getElementById('gamefox-accounts').hidden = !GameFOX.prefs.
+      getBoolPref('context.accounts');
 
     if (!GFlib.onBoards(doc))
     {

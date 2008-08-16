@@ -137,10 +137,10 @@
 <!ENTITY mouse.context.caption "Context Menu">
 <!ENTITY mouse.context.sidebar "Sidebar">
 <!ENTITY mouse.context.taglist "Tag List">
-<!ENTITY mouse.context.tags "Tag Topic">
 <!ENTITY mouse.context.pages "Pages">
-<!ENTITY mouse.context.tagtopic "Tag topic">
+<!ENTITY mouse.context.tagtopic "Tag Topic">
 <!ENTITY mouse.context.quote "Quote">
+<!ENTITY mouse.context.accounts "Accounts">
 <!ENTITY mouse.context.tags.aml "Tags: Active Messages">
 <!ENTITY mouse.context.tags.tracked "Tags: Tracked Topics">
 
