@@ -6,9 +6,9 @@ var GFHL =
   {
     this.hlusernames = new Array(
         GameFOXUtils.trim(GameFOX.prefs.getCharPref('highlight.groups.1')).
-        split(/\s*,\s*/g),
+        toLowerCase().split(/\s*,\s*/g),
         GameFOXUtils.trim(GameFOX.prefs.getCharPref('highlight.groups.2')).
-        split(/\s*,\s*/g)
+        toLowerCase().split(/\s*,\s*/g)
         );
     this.hlcolors = new Array(
         GameFOX.prefs.getCharPref('highlight.colors.1'),
@@ -20,6 +20,7 @@ var GFHL =
   getGroupData: function(username)
   {
     if (this.hlusernames.toString() == ',') return false;
+    username = username.toLowerCase();
 
     var hlgroup = 0;
     var hlindex = -1;
