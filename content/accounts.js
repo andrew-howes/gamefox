@@ -154,7 +154,7 @@ var GameFOXAccounts =
       username = {value: ''};
       result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
           .getService(Components.interfaces.nsIPromptService)
-          .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username and password:', username, password, null, check);
+          .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username (or e-mail address) and password:', username, password, null, check);
       if (!result)
         return;
       username = username.value;
@@ -223,7 +223,7 @@ var GameFOXAccounts =
     var selected = {};
     var result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
         .getService(Components.interfaces.nsIPromptService)
-        .select(null, 'GameFOX', 'Select username to remove:', items.length, items, selected);
+        .select(null, 'GameFOX', 'Select account to remove:', items.length, items, selected);
     if (result)
       this.removeAccount(items[selected.value]);
   },
