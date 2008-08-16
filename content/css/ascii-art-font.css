@@ -1,12 +1,15 @@
 @-moz-document domain(gamefaqs.com)
 {
-  table.message tr.even td { font-size: 13px !important; font-family: arial !important; }
-  table.message tr td + td { font-size: 13px !important; font-family: arial !important; }
-  table.message tr td.author { font-size: 11px !important; font-family: arial !important; }
-  table.message tr td.author a.name { font-size: 12px !important; font-family: arial !important; }
+  table.message tr.even td:not(.author),
+  table.message tr td + td,
+  #gne_nav ~ #content table.message > tbody > tr.even > td:not(.author),
+  #gne_nav ~ #content table.message > tbody > tr > td.author + td
+  { font-size: 13px !important; font-family: arial !important; }
 }
 
 @-moz-document url-prefix(http://www.gamefaqs.com/boards/post.php)
 {
-  table.message tr td { font-size: 13px !important; font-family: arial !important; }
+  table.message tr td,
+  #gne_nav ~ #content div.preview table.message > tbody > tr > td
+  { font-size: 13px !important; font-family: arial !important; }
 }
