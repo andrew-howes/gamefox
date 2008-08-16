@@ -49,7 +49,7 @@ var GFQuickWhois =
             'Account Created', 'Created At',
             'Last Visit', 'Last Visit',
             'E-Mail', 'Email',
-            'Website', 'Website',
+            'Web Site', 'Website',
             'AIM', 'AIM',
             'Yahoo IM', 'Yahoo IM',
             'Windows Live \\(MSN\\)', 'MSN',
