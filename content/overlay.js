@@ -320,16 +320,18 @@ var GameFOX =
 
           if (hlinfo[2]) // Hide post
           {
-            td[j].style.setProperty('font-size', '0pt', 'important');
             td[j + 1].style.setProperty('font-size', '0pt', 'important');
+            td[j + 1].style.setProperty('display', 'none', 'important');
 
             var a = doc.createElement('a');
                 a.setAttribute('href', '#');
-                a.style.setProperty('font-size', '10px', 'important');
                 a.appendChild(doc.createTextNode('[Show]'));
-                a.addEventListener('click', GameFOX.showPost, false);
+                a.addEventListener('click', GFHL.showPost, false);
 
-            td[j].appendChild(doc.createElement('br'));
+            if (leftMsgData)
+              td[j].appendChild(doc.createElement('br'));
+            else
+              td[j].appendChild(doc.createTextNode(' | '));
             td[j].appendChild(a);
           }
         }
