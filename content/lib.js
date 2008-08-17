@@ -46,14 +46,19 @@ var GFlib =
 
   onPage: function(doc, page)
   {
-    // TODO: cache the result in doc?
+    // gfPage is an array because of overlapping pages, e.g. message detail and messages
     switch (page)
     {
       case "index":
         var h1 = doc.evaluate('//div[@class="pod"]/div[@class="head"]/h1', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (h1) return h1.textContent == "Board Information";
-        else return false;
+        if (h1 && h1.textContent == "Board Information")
+        {
+          doc.gfPage = ["index"];
+          return true;
+        }
+        else
+          return false;
 
       case "topics":
         var col = doc.evaluate('//col[@class="status"]', doc, null, XPathResult.
@@ -62,14 +67,26 @@ var GFlib =
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if ((notopics && notopics.textContent.match("No topics are available"))
             || col)
+        {
+          doc.gfPage = ["topics"];
           return true;
+        }
         else
           return false;
 
       case "messages":
         var table = doc.evaluate('//table[@class="message"]', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        return table != null;
+        if (table != null)
+        {
+          if (GFlib.onPage(doc, "detail"))
+            doc.gfPage = ["messages", "detail"];
+          else
+            doc.gfPage = ["messages"];
+          return true;
+        }
+        else
+          return false;
 
       default:
         return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
