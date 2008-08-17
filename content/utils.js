@@ -352,7 +352,7 @@ var GameFOXUtils =
 
   stripQueryString: function(str)
   {
-    return str.replace(/&(action|message|search)=[^&]*(?=&|$)|\b(action|message|search)=[^&]*&/, '');
+    return str.replace(/&(action|message|search)=[^&]*/g, '');
   },
 
   getMsgDataDisplay: function(doc)
