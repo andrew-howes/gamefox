@@ -8,9 +8,9 @@
 <prefwindow
     title="&title;"
     id="gamefox-prefwindow"
-    buttons="accept,cancel,extra1"
-    buttonlabelextra1="&about.label;"
-    ondialogextra1="window.openDialog('chrome://gamefox/content/about.xul',
+    buttons="accept,cancel,extra2"
+    buttonlabelextra2="&about.label;"
+    ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"
     onload="GameFOXOptions.restoreLastPane()"
