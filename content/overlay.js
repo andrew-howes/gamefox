@@ -648,23 +648,31 @@ function GameFOXLoader()
   var version = Components.classes['@mozilla.org/extensions/manager;1'].
     getService(Components.interfaces.nsIExtensionManager).
     getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
-  var compareVersions = Components.classes['@mozilla.org/xpcom/version-comparator;1'].
-    getService(Components.interfaces.nsIVersionComparator).compare(lastversion, version);
+  var versionComparator =
+    Components.classes['@mozilla.org/xpcom/version-comparator;1'].getService(
+        Components.interfaces.nsIVersionComparator);
+
+  var compareVersions = versionComparator.compare(lastversion, version);
   if (compareVersions != 0) // upgrade or downgrade
   {
     GameFOXCSS.init();
 
     // convert old signature prefs to serialized pref
-    var oldPresig, oldSig;
-    try { oldPresig = GameFOXUtils.getString('signature.presig', prefs); }
-    catch (e) {}
-    try { oldSig = GameFOXUtils.getString('signature.body', prefs); }
-    catch (e) {}
+    // TODO: remove this after a while, it's not necessary when the majority
+    // of people have already updated with previous versions
+    if (versionComparator.compare("0.6.2", version) == -1)
+    {
+      var oldPresig, oldSig;
+      try { oldPresig = GameFOXUtils.getString('signature.presig', prefs); }
+      catch (e) {}
+      try { oldSig = GameFOXUtils.getString('signature.body', prefs); }
+      catch (e) {}
 
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));
-    if (oldPresig) sigs[0]['presig'] = oldPresig;
-    if (oldSig) sigs[0]['body'] = oldSig;
-    GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
+      var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));
+      if (oldPresig) sigs[0]['presig'] = oldPresig;
+      if (oldSig) sigs[0]['body'] = oldSig;
+      GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
+    }
   }
 
   prefs.setCharPref('version', version);
