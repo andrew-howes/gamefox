@@ -1,5 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
 
+// TODO: QuickPosting a topic while on detail.php (after deleting a topic)
 var GFQuickPost =
 {
   appendForm: function(doc, div, newTopic)

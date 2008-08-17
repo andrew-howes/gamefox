@@ -92,8 +92,8 @@ var GameFOX =
         doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     GFHL.loadGroups();
 
-    /* Topic Lists (gentopic.php and tracked.php) */
-    if (GFlib.onPage(doc, 'gentopic') || GFlib.onPage(doc, 'tracked'))
+    /* Topic Lists */
+    if (GFlib.onPage(doc, 'topics'))
     {
       GFlib.setTitle(doc, GameFOXUtils.trim(doc.evaluate('//h1', doc,
               null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
@@ -176,7 +176,7 @@ var GameFOX =
 
         // User highlighting (only on gentopic.php, tracked.php has no topic
         // creator names)
-        if (GFlib.onPage(doc, 'gentopic') && GameFOX.prefs.getBoolPref('highlight.topics'))
+        if (!GFlib.onPage(doc, 'tracked') && GameFOX.prefs.getBoolPref('highlight.topics'))
         {
           var username = GameFOXUtils.trim(rows[i].getElementsByTagName('td')[2].textContent);
           var hlinfo = false;
@@ -194,8 +194,8 @@ var GameFOX =
       }
     }
 
-    /* Message Lists (genmessage.php, detail.php) */
-    else if (GFlib.onPage(doc, 'genmessage') || GFlib.onPage(doc, 'detail'))
+    /* Message Lists */
+    else if (GFlib.onPage(doc, 'messages'))
     {
       var pagenum = doc.location.search.match(/\bpage=([0-9]+)/);
           pagenum = pagenum ? parseInt(pagenum[1]) : 0;
@@ -206,7 +206,8 @@ var GameFOX =
           GameFOXUtils.trim(doc.evaluate(
               '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
               null).singleNodeValue.textContent),
-                "M", (pagenum ? (pagenum + 1) : null));
+                "M" + (GFlib.onPage(doc, "detail") ? "D" : ""),
+                (pagenum ? (pagenum + 1) : null));
 
       // "Tag Topic" link
       if (GameFOX.prefs.getBoolPref('elements.tag.link'))
@@ -267,7 +268,8 @@ var GameFOX =
         var msgnumString = '000'.substr(0, 3 - msgnum.toString().length) + msgnum;
         td[j].id = 'p' + msgnumString;
 
-        if (GameFOX.prefs.getBoolPref('elements.msgnum'))
+        // don't try to number the message detail page
+        if (!GFlib.onPage(doc, 'detail') && GameFOX.prefs.getBoolPref('elements.msgnum'))
         {
           switch (GameFOX.prefs.getIntPref('elements.msgnum.style'))
           {
@@ -352,16 +354,6 @@ var GameFOX =
 
         GFQuickPost.appendForm(doc, doc.getElementById('gamefox-quickpost-normal'), false);
       }
-    }
-
-    /* Message Detail (detail.php) */
-    else if (GFlib.onPage(doc, 'detail'))
-    {
-      GFlib.setTitle(doc,
-          GameFOXUtils.trim(doc.evaluate('//h1/following::h1', doc,
-              null, XPathResult. FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-            textContent),
-          "MD");
     }
   },
 

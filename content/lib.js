@@ -40,15 +40,40 @@ var GFlib =
   onBoards: function(doc)
   {
     if (!GFlib.onGF(doc)) return false;
-    if (!doc.location.pathname.match(/^\/boards\//)) return false;
+    if (!doc.location.pathname.match(/^\/boards(\/|$|\?)/)) return false;
     return true;
   },
 
   onPage: function(doc, page)
   {
-    if (page == 'index' && doc.location.pathname.match(new RegExp(
-            "^/boards/(\\?|$)"))) return true;
-    return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
+    // TODO: cache the result in doc?
+    switch (page)
+    {
+      case "index":
+        var h1 = doc.evaluate('//div[@class="pod"]/div[@class="head"]/h1', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (h1) return h1.textContent == "Board Information";
+        else return false;
+
+      case "topics":
+        var col = doc.evaluate('//col[@class="status"]', doc, null, XPathResult.
+            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var notopics = doc.evaluate('//div[@id="board_wrap"]/p', doc, null, XPathResult.
+            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if ((notopics && notopics.textContent.match("No topics are available"))
+            || col)
+          return true;
+        else
+          return false;
+
+      case "messages":
+        var table = doc.evaluate('//table[@class="message"]', doc, null, XPathResult.
+            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        return table != null;
+
+      default:
+        return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
+    }
   },
 
   setTitle: function(doc, title, prefix, page)

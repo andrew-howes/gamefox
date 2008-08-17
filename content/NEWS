@@ -7,6 +7,7 @@
       800x600
     * Option to select random signature from most specific matching signatures
     * Option to disable page prefixes in the title
+    * More reliable detection of the page type (topics/messages/etc)
 
 2008-08-15:
     * version 0.6.4
