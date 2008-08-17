@@ -44,14 +44,14 @@ var GameFOX =
         GFlib.setTitle(doc,
             doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).
             singleNodeValue.textContent.replace(/^\s+|\s+$/g, ''),
-            "Create Topic");
+            "CT");
       }
       else if (doc.getElementsByName('message')[0]) // new post
       {
         GFlib.setTitle(doc,
             GameFOXUtils.trim(doc.getElementsByName('message')[0].
             parentNode.parentNode.getElementsByTagName('a')[0].textContent),
-            "Post Message");
+            "PM");
       }
 
       // "Post Message" button
@@ -83,7 +83,8 @@ var GameFOX =
     /* User Information (user.php) */
     else if (GFlib.onPage(doc, 'user'))
     {
-      GFlib.setTitle(doc, GameFOXUtils.trim(doc.getElementsByTagName('td')[1].textContent), "U");
+      GFlib.setTitle(doc, GameFOXUtils.trim(doc.getElementsByTagName('td')[1].
+            textContent), "U");
     }
 
 
@@ -205,7 +206,7 @@ var GameFOX =
           GameFOXUtils.trim(doc.evaluate(
               '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
               null).singleNodeValue.textContent),
-                "M" + (pagenum ? ":" + (pagenum + 1) : ""));
+                "M", (pagenum ? (pagenum + 1) : null));
 
       // "Tag Topic" link
       if (GameFOX.prefs.getBoolPref('elements.tag.link'))
@@ -360,7 +361,7 @@ var GameFOX =
           GameFOXUtils.trim(doc.evaluate('//h1/following::h1', doc,
               null, XPathResult. FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
             textContent),
-          "D");
+          "MD");
     }
   },
 

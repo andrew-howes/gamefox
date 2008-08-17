@@ -5,6 +5,8 @@
     * Option for removing Accounts list from context menu
     * Split the signature pane into tabs so it looks cleaner and works on
       800x600
+    * Option to select random signature from most specific matching signatures
+    * Option to disable page prefixes in the title
 
 2008-08-15:
     * version 0.6.4

@@ -4,6 +4,7 @@ pref("gamefox.elements.quickpost.link", true);
 pref("gamefox.elements.quickpost.link.title", "QuickPost");
 pref("gamefox.elements.tag.link", true);
 pref("gamefox.elements.titlechange", true);
+pref("gamefox.elements.titleprefix", true);
 pref("gamefox.elements.msgnum", true);
 pref("gamefox.elements.msgnum.style", 0);
 pref("gamefox.elements.tracked.boardlink", true);

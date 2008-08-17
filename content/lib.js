@@ -51,12 +51,14 @@ var GFlib =
     return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
   },
 
-  setTitle: function(doc, title, prefix)
+  setTitle: function(doc, title, prefix, page)
   {
     if (!GameFOX.prefs.getBoolPref("elements.titlechange")) return false;
+    if (!GameFOX.prefs.getBoolPref("elements.titleprefix")) prefix = null;
 
     doc.title = "GameFAQs"
       + (prefix == null ? "" : ":" + prefix)
+      + (page == null ? "" : ":" + page)
       + ": " + title;
 
     if (doc.defaultView.parent != doc.defaultView.self) // we're in a frame
