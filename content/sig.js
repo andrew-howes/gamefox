@@ -44,16 +44,31 @@ var GFSig =
       }
       matches[2].push(sigs[0]);
 
-      // merge all the arrays
-      var allMatches = new Array();
-      for (i in matches)
-        for (j in matches[i])
-          allMatches.push(matches[i][j]);
+      var selectionPref = GameFOX.prefs.getIntPref('signature.selection');
 
-      if (GameFOX.prefs.getIntPref('signature.selection') == 1)
-        return allMatches[0];
-      else
-        return allMatches[Math.round(Math.random() * (allMatches.length - 1))];
+      if (selectionPref == 1 || selectionPref == 2)
+      {
+        // merge all the arrays
+        var allMatches = new Array();
+        for (i in matches)
+          for (j in matches[i])
+            allMatches.push(matches[i][j]);
+        if (selectionPref == 1)
+          return allMatches[0];
+        else // selectionPref == 2
+          return allMatches[Math.round(Math.random() * (allMatches.length - 1))];
+      }
+      else // selectionPref == 3
+      {
+        var bestIndex;
+        if (matches[0].length)
+          bestIndex = 0;
+        else if (matches[1].length)
+          bestIndex = 1;
+        else
+          bestIndex = 2;
+        return matches[bestIndex][Math.round(Math.random() * (matches[bestIndex].length - 1))];
+      }
     }
   },
 
@@ -125,7 +140,7 @@ var GFSig =
       presig.value = sigData['presig'];
       sig.value = sigData['body'];
     }
-    else if (menu.selectedItem.value == 'default')
+    else // menu.selectedItem.value == 'default'
     {
       this.hideCriteriaForm();
       document.getElementById('sig-delete').disabled = true;
@@ -158,16 +173,16 @@ var GFSig =
    */
   getSigType: function(accounts, boards)
   {
-    boards = boards.replace(/\s+/, '');
-    accounts = accounts.replace(/\s+/, '');
+    boards = boards.match(/\S/);
+    accounts = accounts.match(/\S/);
 
-    if (boards.match(/[^\s]/) || accounts.match(/[^\s]/))
+    if (boards || accounts)
     {
-      if (boards.match(/[^\s]/) && accounts.match(/[^\s]/))
+      if (boards && accounts)
         return 2;
-      else if (boards.match(/[^\s]/))
+      else if (boards)
         return 3;
-      else if (accounts.match(/[^\s]/))
+      else if (accounts)
         return 4;
     }
     else
@@ -180,7 +195,7 @@ var GFSig =
     var menu = document.getElementById('sig-menu');
     var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
     var idx = menu.selectedItem.value;
-        idx = (idx == 'default') ? 0 : idx;
+    if (idx == 'default') idx = 0;
     
     switch (event.id)
     {
@@ -217,8 +232,8 @@ var GFSig =
 
   showCriteriaForm: function()
   {
-    document.getElementById('sig-criteria').style.setProperty('visibility', '',
-        null);
+    document.getElementById('sig-criteria').style.setProperty('visibility',
+        '', null);
   },
 
   resetForm: function()
@@ -268,8 +283,9 @@ var GFSig =
 
   matchBoard: function(boards, boardid, boardname)
   {
-    if (boardname && boards.indexOf(boardname) != -1) return true;
-    if (boardid && boards.indexOf(boardid) != -1) return true;
+    if ((boardid && boards.indexOf(boardid) != -1)
+        || (boardname && boards.indexOf(boardname) != -1))
+      return true;
     return false;
   },
 

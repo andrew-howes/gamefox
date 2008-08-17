@@ -217,6 +217,15 @@ var GameFOXUtils =
       replace(/&amp;/g, '&');
   },
 
+  specialCharsEncode: function(str)
+  {
+    return str.
+      replace(/&/g, '&amp;').
+      replace(/</g, '&lt;').
+      replace(/>/g, '&gt;').
+      replace(/"/g, '&quot;');
+  },
+
   convertNewlines: function(str)
   {
     return str.
@@ -328,24 +337,30 @@ var GameFOXUtils =
 
   URLEncode: function(str)
   {
-    str = escape(str).replace(/\+/g, '%2B').replace(/%20/g, '+').replace(/\//g, '%2F').replace(/@/g, '%40');
+    str = escape(str).
+      replace(/\+/g, '%2B').
+      replace(/%20/g, '+').
+      replace(/\//g, '%2F').
+      replace(/@/g, '%40');
 
     // 4 hex characters to 2 hex characters conversion table for some Unicode
     // chars borrowed from ToadKing's releases and modified. I tried using
     // Mozilla's localization and conversion interfaces to convert from
     // ISO-8859-1 to Unicode, vice versa, Unicode to UTF-8, vice versa, and all
     // other sorts of shit but to no avail. This seems to be the only way to do
-    // it, unless CJayC changes GameFAQ's character encoding to UTF-8 or Unicode
-    var hex2  = ['80', '82', '83', '84', '85', '86', '87', '88', '89', '8A', '8B', '8C', '8E', '91',
-        '92', '93', '94', '95', '96', '97', '98', '99', '9A', '9B', '9C', '9E', '9F'];
-    ['20AC', '201A', '0192', '201E', '2026', '2020', '2021', '02C6', '2030', '0160', '2039', '0152', '017D', '2018',
-      '2019', '201C', '201D', '2022', '2013', '2014', '02DC', '2122', '0161', '203A', '0153', '017E', '0178'].forEach
-        (
-         function(element, index, array)
-         {
-         str = str.replace(new RegExp('%[Uu]' + element, 'g'), '%' + hex2[index]);
-         }
-         );
+    // it, unless GameFAQs changes its character encoding to UTF-8 or Unicode
+    var hex2 = ['80', '82', '83', '84', '85', '86', '87', '88', '89',
+                '8A', '8B', '8C', '8E', '91', '92', '93', '94', '95',
+                '96', '97', '98', '99', '9A', '9B', '9C', '9E', '9F'];
+    ['20AC', '201A', '0192', '201E', '2026', '2020', '2021', '02C6', '2030',
+     '0160', '2039', '0152', '017D', '2018', '2019', '201C', '201D', '2022',
+     '2013', '2014', '02DC', '2122', '0161', '203A', '0153', '017E', '0178'].
+      forEach(
+        function(element, index, array)
+        {
+          str = str.replace(new RegExp('%[Uu]' + element, 'g'), '%' + hex2[index]);
+        }
+      );
 
     return str;
   },
@@ -357,21 +372,12 @@ var GameFOXUtils =
 
   getMsgDataDisplay: function(doc)
   {
-    try { var leftMsgData = !(doc.getElementsByTagName('tr')[0].
+    var leftMsgData;
+    try { leftMsgData = !(doc.getElementsByTagName('tr')[0].
         getElementsByTagName('td').length == 1); }
-    catch (e) { var leftMsgData = false; }
+    catch (e) { leftMsgData = false; }
 
     return leftMsgData;
-  },
-
-  // because gamefaqs sucks and counts characters in signatures as their entities
-  specialCharsEncode: function(str)
-  {
-    return str.
-      replace(/&/g, '&amp;').
-      replace(/</g, '&lt;').
-      replace(/>/g, '&gt;').
-      replace(/"/g, '&quot;');
   },
 
   specialRegexpCharsEscape: function(str)

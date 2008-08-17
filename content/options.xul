@@ -516,7 +516,8 @@
             <caption label="&signature.selection;"/>
             <radiogroup preference="sig-selection">
               <radio value="1" label="&signature.selection.first;"/>
-              <radio value="2" label="&signature.selection.random;"/>
+              <radio value="2" label="&signature.selection.anyrandom;"/>
+              <radio value="3" label="&signature.selection.bestrandom;"/>
             </radiogroup>
           </groupbox>
         </tabpanel>

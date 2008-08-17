@@ -114,7 +114,8 @@
 <!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
 <!ENTITY signature.selection "Selection Mode">
 <!ENTITY signature.selection.first "Choose most specific matching signature">
-<!ENTITY signature.selection.random "Choose random matching signature">
+<!ENTITY signature.selection.anyrandom "Choose random from any matching signature">
+<!ENTITY signature.selection.bestrandom "Choose random from most specific matching signatures">
 
 <!ENTITY mouse.label "Mouse">
 <!ENTITY mouse.topics.caption "Topics">
