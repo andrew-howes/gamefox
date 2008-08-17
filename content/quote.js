@@ -155,14 +155,26 @@ var GFQuote =
         break;
     }
     var quickpost = doc.getElementById('gamefox-message');
-    // insert quote at cursor position, doesn't have to deal with signature
-    // crap
-    var endQuotePosition = quickpost.selectionStart + quote.length + 1; // +1 is for counting newline character
-    quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
-                    + quote + "\n"
-                    + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
+
+    // try to insert at the cursor position, but only if the cursor isn't in
+    // a stupid place like after the signature separator
+    var sigStart = quickpost.value.search(/---(\n.*\n?){0,2}/);
+
+    if (quickpost.selectionStart > sigStart) // insert at beginning
+    {
+      quickpost.value = quote + "\n" + quickpost.value;
+      var endPosition = quote + 1;
+    }
+    else // insert at cursor
+    {
+      var endPosition = quickpost.selectionStart + quote.length + 1;
+      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
+        + quote + "\n"
+        + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
+    }
+
     quickpost.focus();
     // Move the caret to the end of the last quote
-    quickpost.setSelectionRange(endQuotePosition, endQuotePosition);
+    quickpost.setSelectionRange(endPosition, endPosition);
   }
 }
