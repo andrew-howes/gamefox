@@ -196,7 +196,7 @@
                   <checkbox preference="gamefox-pref-titlechange" label="&page.elements.desctitles;"/>
                   <checkbox preference="gamefox-pref-quickpost-button" label="&page.elements.postmessage;"/>
                 </vbox>
-                <vbox flex="1">
+                <vbox flex="3">
                   <checkbox preference="gamefox-pref-titleprefix" label="&page.elements.titleprefix;"/>
                 </vbox>
               </hbox>
