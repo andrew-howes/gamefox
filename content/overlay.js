@@ -7,8 +7,8 @@ var GameFOX =
 
   processPage: function(event)
   {
-    if (!GFlib.onBoards(GFlib.getDocument(event))) return false;
-    else var doc = GFlib.getDocument(event);
+    var doc = GFlib.getDocument(event);
+    if (!GFlib.onGF(doc)) return false;
 
     // TODO: use nsIContentPolicy to prevent the stylesheet being loaded before
     // it's disabled
@@ -20,6 +20,8 @@ var GameFOX =
         stylesheets[i].disabled = true;
       }
     }
+
+    if (!GFlib.onBoards(doc)) return false;
 
     /* Index (index.php) */
     if (GFlib.onPage(doc, 'index'))
