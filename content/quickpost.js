@@ -187,6 +187,7 @@ var GFQuickPost =
                   var flooding = text.match(/To prevent flooding,/);
                   var closedTopic = text.match(/This topic is closed/);
                   var deletedTopic = text.match(/This topic is no longer available/);
+                  var dupeTitle = text.match(/A topic with this title already exists/);
 
                   if (flooding)
                     alert('You are posting too quickly and have hit one of the flooding limits.');
@@ -194,6 +195,8 @@ var GFQuickPost =
                     alert('The topic was closed while you were typing your message. Type faster next time!');
                   else if (deletedTopic)
                     alert('The topic is gone! Damn moderators...');
+                  else if (dupeTitle)
+                    alert('A topic with this title already exists. Choose another title.');
                   else
                     alert('Something went wrong but I don\'t know what. Try posting ' +
                         'without QuickPost, and if you think you\'ve found a bug ' +
