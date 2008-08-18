@@ -24,7 +24,7 @@ var GameFOX =
     /* Index (index.php) */
     if (GFlib.onPage(doc, 'index'))
     {
-      GFlib.setTitle(doc, 'Message Boards', 'I');
+      GFlib.setTitle(doc, 'Message Boards');
     }
 
     /* Active Messages (myposts.php) */
