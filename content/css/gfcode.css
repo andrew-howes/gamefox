@@ -3,7 +3,8 @@
     text-rendering: optimizeLegibility;
 }
 .message i > p, .message b > p {
-    background: #eee !important;
+    background: #fefefe !important;
+    -moz-border-radius: 4px;
     color: #000 !important;
     font-style: normal !important;
     font-weight: normal !important;
@@ -12,20 +13,21 @@
     width: 96% !important;
 }
 .message i > p {
-    border: 1px solid #bbb !important;
+    border: 1px solid #ccc !important;
 }
 .message b > p {
     font-family: monospace !important;
     white-space: pre-wrap;
-    background: #edb !important;
+    background: #bbb !important;
 }
 .message i > p > strong:first-child {
     display: block;
     padding: 2px !important;
     font-style: italic !important;
     font-weight: bold !important;
-    background: #777 !important;
-    color: #fff !important;
+    background: #eee !important;
+    border-bottom: #aaa 1px solid;
+    -moz-border-radius: 4px 4px 0 0;
 }
 .message i > p > strong:first-child + br {
     display: none !important;
