@@ -22,26 +22,28 @@ var GFlib =
 
   /*
      Facts, based on Firefox 2:
-     - Host name normally can be fetched from document.location.host, document.location.hostname, and document.domain
-       properties, as string.
-     - If the page uses system protocol (e.g. about:<something>), then it might not have document.location.host and
-       document.location.hostname properties, but it still has document.domain property whose content is null.
-     - For normal page, if it is not loaded succesfully and therefore Firefox displays its custom warning page (e.g.
-       Server not found), then its document.location.host and document.location.hostname properties remain pointing
-       to the original URI, but its document.domain property content will be null.
-     Expect rubbish in the error console, and possibly a breakage, if the above anomalies are not handled properly.
+     - Host name normally can be fetched from document.location.host,
+       document.location.hostname, and document.domain properties, as string.
+     - If the page uses system protocol (e.g. about:<something>), then it might
+       not have document.location.host and document.location.hostname
+       properties, but it still has document.domain property whose content is
+       null.
+     - For normal page, if it is not loaded successfully and therefore Firefox
+       displays its custom warning page (e.g. Server not found), then its
+       document.location.host and document.location.hostname properties remain
+       pointing to the original URI, but its document.domain property content
+       will be null. Expect rubbish in the error console, and possibly a
+       breakage, if the above anomalies are not handled properly.
    */
   onGF: function(doc)
   {
-    try { return doc.domain.match(/(^|\.)gamefaqs\.com$/i) != null; }
-    catch (e) { return false; }
+    return /(^|\.)gamefaqs\.com$/.test(doc.domain);
   },
 
   onBoards: function(doc)
   {
     if (!GFlib.onGF(doc)) return false;
-    if (!doc.location.pathname.match(/^\/boards(\/|$|\?)/)) return false;
-    return true;
+    return /^\/boards(\/|$|\?)/.test(doc.location.pathname);
   },
 
   onPage: function(doc, page)
@@ -52,63 +54,63 @@ var GFlib =
     // gfPage is an array because of overlapping pages, e.g. message detail and messages
     switch (page)
     {
-      case "index":
+      case 'index':
         var h1 = doc.evaluate('//div[@class="pod"]/div[@class="head"]/h1', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (h1 && h1.textContent == "Board Information")
+        if (h1 && h1.textContent == 'Board Information')
         {
-          doc.gfPage = ["index"];
+          doc.gfPage = ['index'];
           return true;
         }
         else
           return false;
 
-      case "topics":
+      case 'topics':
         var col = doc.evaluate('//col[@class="status"]', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         var notopics = doc.evaluate('//div[@id="board_wrap"]/p', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if ((notopics && notopics.textContent.match("No topics are available"))
+        if ((notopics && notopics.textContent.indexOf('No topics are available') != -1)
             || col)
         {
-          doc.gfPage = ["topics"];
+          doc.gfPage = ['topics'];
           return true;
         }
         else
           return false;
 
-      case "messages":
+      case 'messages':
         var table = doc.evaluate('//table[@class="message"]', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (table != null)
         {
-          if (GFlib.onPage(doc, "detail"))
-            doc.gfPage = ["messages", "detail"];
+          if (GFlib.onPage(doc, 'detail'))
+            doc.gfPage = ['messages', 'detail'];
           else if (doc.evaluate('//div[@class="user"]', doc, null, XPathResult.
                 FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.indexOf(
-                  "Topic Archived") != -1)
-            doc.gfPage = ["messages", "archive"];
+                  'Topic Archived') != -1)
+            doc.gfPage = ['messages', 'archive'];
           else
-            doc.gfPage = ["messages"];
+            doc.gfPage = ['messages'];
           return true;
         }
         else
           return false;
 
       default:
-        return doc.location.pathname.match(new RegExp("^/boards/" + page + "\\.php"));
+        return doc.location.pathname.match(new RegExp('^/boards/' + page + '\\.php'));
     }
   },
 
   setTitle: function(doc, title, prefix, page)
   {
-    if (!GameFOX.prefs.getBoolPref("elements.titlechange")) return false;
-    if (!GameFOX.prefs.getBoolPref("elements.titleprefix")) prefix = null;
+    if (!GameFOX.prefs.getBoolPref('elements.titlechange')) return false;
+    if (!GameFOX.prefs.getBoolPref('elements.titleprefix')) prefix = null;
 
-    doc.title = "GameFAQs"
-      + (prefix == null ? "" : ":" + prefix)
-      + (page == null ? "" : ":" + page)
-      + ": " + title;
+    doc.title = 'GameFAQs'
+      + (prefix == null ? '' : ':' + prefix)
+      + (page == null ? '' : ':' + page)
+      + ': ' + title;
 
     if (doc.defaultView.parent != doc.defaultView.self) // we're in a frame
       doc.defaultView.parent.document.title = doc.title;
