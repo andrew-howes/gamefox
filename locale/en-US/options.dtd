@@ -37,8 +37,8 @@
 <!ENTITY page.elements.messages.taglink "&quot;Tag Topic&quot; link">
 <!ENTITY page.elements.messages.numbering "Number messages">
 <!ENTITY page.elements.pages.caption "Topic Pagination">
-<!ENTITY page.elements.pages.auto "Automatically paginate topics">
-<!ENTITY page.elements.pages.where "Location of pages:">
+<!ENTITY page.elements.pages.auto "Automatically add page numbers on topic list">
+<!ENTITY page.elements.pages.where "Location of page numbers:">
 <!ENTITY page.elements.pages.where.right "Right of topic title">
 <!ENTITY page.elements.pages.where.below "Below topic title">
 <!ENTITY page.elements.pages.where.newrow "New row below topic title">
@@ -119,7 +119,7 @@
 <!ENTITY signature.selection.bestrandom "Choose random from most specific matching signatures">
 
 <!ENTITY mouse.label "Mouse">
-<!ENTITY mouse.topics.caption "Topics">
+<!ENTITY mouse.topics.caption "Topic Lists">
 <!ENTITY mouse.topics.label "Double clicking on topic row action:">
 <!ENTITY mouse.topics.radio.nothing "Do nothing">
 <!ENTITY mouse.topics.radio.paginate "Show links to topic pages">
@@ -131,7 +131,7 @@
 <!ENTITY mouse.aml.radio.paginate "Show links to topic pages">
 <!ENTITY mouse.aml.radio.lastpage "Go to last page">
 <!ENTITY mouse.aml.radio.tagtopic "Tag topic">
-<!ENTITY mouse.messages.caption "Messages">
+<!ENTITY mouse.messages.caption "Message Lists">
 <!ENTITY mouse.messages.label "Double clicking on message header action:">
 <!ENTITY mouse.messages.radio.nothing "Do nothing">
 <!ENTITY mouse.messages.radio.quickwhois "QuickWhois: display the poster's user information">
