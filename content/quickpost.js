@@ -104,7 +104,7 @@ var GFQuickPost =
           else
           {
             // Thanks to KSOT's Secondary FAQ for all of these errors
-            var badWord = text.match(/<p>Banned word found: <b>(.+?)<\/b>/);
+            var badWord = text.match(/<p>Banned word found: <b>(.+?)<\/b>/i);
             var tooBig = text.match(/4096 characters\. Your message is ([0-9]+) characters/);
             var titleLength = text.match(/Topic titles must be between 5 and 80 characters/);
             var allCapsTitle = text.match(/Topic titles cannot be in all uppercase/);
