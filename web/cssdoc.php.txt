@@ -56,3 +56,7 @@ tr.gamefox-highlight-one tr.gamefox-highlight-two
 Applied to highlighted table rows. The `tr` also has a `background-color`
 property containing the highlight color. Note that all child `td`s also have this
 `background-color` property.
+
+<h3 id="tr_gamefox-pagelist">tr.gamefox-pagelist</h3>
+
+Contains topic pagination text when pages are set to be generated in a new row.
