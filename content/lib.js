@@ -46,6 +46,9 @@ var GFlib =
 
   onPage: function(doc, page)
   {
+    if (doc.gfPage)
+      return doc.gfPage.indexOf(page) != -1;
+
     // gfPage is an array because of overlapping pages, e.g. message detail and messages
     switch (page)
     {
