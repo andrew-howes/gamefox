@@ -1,6 +1,5 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
 
-// TODO: QuickPosting a topic while on detail.php (after deleting a topic)
 var GFQuickPost =
 {
   appendForm: function(doc, div, newTopic)
@@ -78,6 +77,10 @@ var GFQuickPost =
   {
     var doc = GFlib.getDocument(event);
     var query = GameFOXUtils.stripQueryString(doc.location.search);
+    // make sure we're not trying to post a message to a topic that was
+    // deleted by the user due to the topic list being on detail.php
+    if (GFlib.onPage(doc, "topics"))
+      query = query.replace(/&(message|topic)=[^&]*/g, '');
 
     event.target.disabled = true;
     event.target.blur();
