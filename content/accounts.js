@@ -10,7 +10,7 @@ var GameFOXAccounts =
         .getService(Components.interfaces.nsIPrefBranch)
         .getCharPref('gamefox.accounts');
 
-    if (this.accounts.replace(/\s/g, '') == '')
+    if (!/\S/.test(this.accounts))
       this.accounts = '({})';
 
     this.accounts = eval(this.accounts);
@@ -28,7 +28,7 @@ var GameFOXAccounts =
 
   populate: function()
   {
-    var accountList, username, item;
+    var accountList, username, item, firstAccount;
 
     accountList = document.getElementById('gamefox-accounts-menu');
     if (!accountList)
@@ -46,7 +46,7 @@ var GameFOXAccounts =
     item.setAttribute('oncommand', 'GameFOXAccounts.loginAndSaveCookie()');
     accountList.appendChild(item);
 
-    var firstAccount = true;
+    firstAccount = true;
     for (username in this.accounts)
     {
       if (firstAccount)
@@ -69,20 +69,16 @@ var GameFOXAccounts =
   {
     this.read();
     var account = this.accounts[username];
-    var expires = account.MDAAuth.expires * 1000;
+    var expires = account.MDAAuth.expires;
 
-    var d = new Date();
-    if (d.getTime() < expires)
+    if (new Date().getTime() < expires * 1000)
     {
-      expires = new Date(Number(expires));
-      expires = expires.getTime() / 1000;
-
       this.removeCookie('skin');
       this.removeCookie('filesplit');
-      
+
       var cookieMgr2 = Components.classes['@mozilla.org/cookiemanager;1']
           .getService(Components.interfaces.nsICookieManager2);
-      if (navigator.userAgent.match('rv:1.9')) // mozilla 1.9 (fx3)
+      if (navigator.userAgent.indexOf('rv:1.9') != -1) // mozilla 1.9 (fx3)
       {
         cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
             false, true, false, expires);
@@ -105,10 +101,7 @@ var GameFOXAccounts =
               false, false, expires);
       }
 
-      var win = Components.classes['@mozilla.org/appshell/window-mediator;1']
-          .getService(Components.interfaces.nsIWindowMediator)
-          .getMostRecentWindow('navigator:browser');
-      win.loadURI(win.content.document.location.href);
+      this.loadGameFAQs();
     }
     else
     {
@@ -120,7 +113,8 @@ var GameFOXAccounts =
   {
     var cookieMgr = Components.classes['@mozilla.org/cookiemanager;1']
         .getService(Components.interfaces.nsICookieManager);
-    for (var e = cookieMgr.enumerator; e.hasMoreElements();)
+    var e = cookieMgr.enumerator;
+    while (e.hasMoreElements())
     {
       var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
       if (cookie.host == '.gamefaqs.com' && cookie.name == name)
@@ -135,7 +129,8 @@ var GameFOXAccounts =
   {
     var cookieMgr = Components.classes['@mozilla.org/cookiemanager;1']
         .getService(Components.interfaces.nsICookieManager);
-    for (var e = cookieMgr.enumerator; e.hasMoreElements();)
+    var e = cookieMgr.enumerator;
+    while (e.hasMoreElements())
     {
       var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
       if (cookie.host == '.gamefaqs.com' && cookie.name == name)
@@ -170,7 +165,7 @@ var GameFOXAccounts =
 
     this.removeCookie('skin');
     this.removeCookie('filesplit');
-    // TODO: maybe restore these if the login fails?
+    // TODO: restore these if the login fails
 
     var request = new XMLHttpRequest();
     request.open('POST', 'http://www.gamefaqs.com/user/login.html');
@@ -178,7 +173,7 @@ var GameFOXAccounts =
     {
       if (request.readyState == 4)
       {
-        if (/<title>GameFAQs - Login Error<\/title>/.test(request.responseText)) {
+        if (request.responseText.indexOf('<title>GameFAQs - Login Error</title>') != -1) {
           alert('Couldn\'t log in. Maybe your password was incorrect?');
           return;
         }
@@ -198,10 +193,7 @@ var GameFOXAccounts =
           GameFOXAccounts.accounts[username].filesplit = {content:cookie.content};
         GameFOXAccounts.write(GameFOXAccounts.accounts);
 
-        var win = Components.classes['@mozilla.org/appshell/window-mediator;1']
-            .getService(Components.interfaces.nsIWindowMediator)
-            .getMostRecentWindow('navigator:browser');
-        win.loadURI(win.content.document.location.href);
+        GameFOXAccounts.loadGameFAQs();
       }
     }
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -233,5 +225,16 @@ var GameFOXAccounts =
     this.read();
     delete this.accounts[username];
     this.write(this.accounts);
+  },
+
+  loadGameFAQs: function()
+  {
+    var win = Components.classes['@mozilla.org/appshell/window-mediator;1']
+        .getService(Components.interfaces.nsIWindowMediator)
+        .getMostRecentWindow('navigator:browser');
+    if (GFlib.onGF(win.content.document))
+      win.loadURI(win.content.document.location.href);
+    else
+      win.loadURI('http://www.gamefaqs.com/boards/');
   }
 };
