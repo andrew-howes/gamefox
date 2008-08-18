@@ -84,6 +84,10 @@ var GFlib =
         {
           if (GFlib.onPage(doc, "detail"))
             doc.gfPage = ["messages", "detail"];
+          else if (doc.evaluate('//div[@class="user"]', doc, null, XPathResult.
+                FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.indexOf(
+                  "Topic Archived") != -1)
+            doc.gfPage = ["messages", "archive"];
           else
             doc.gfPage = ["messages"];
           return true;

@@ -280,36 +280,49 @@ var GameFOX =
               if (leftMsgData)
                 td[j].insertBefore(doc.createElement('br'), td[j].
                     getElementsByTagName('a')[1])
-              else
+              else if (!GFlib.onPage(doc, "archive"))
                 td[j].insertBefore(doc.createTextNode(' | '), td[j].
                     getElementsByTagName('a')[1]);
 
               break;
 
             case 2: // Number only: #001
-              td[j].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
+              if (GFlib.onPage(doc, "archive"))
+                td[j].innerHTML += "<b>#" + msgnumString + "</b>";
+              else
+                td[j].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
               break;
 
             case 3: // Mixed: message #001
-              td[j].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
+              if (GFlib.onPage(doc, "archive"))
+                td[j].innerHTML += "<b>message #" + msgnumString + "</b>";
+              else
+                td[j].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
               break;
 
             default:
             case 0: // Original: message detail | #001
               if (leftMsgData)
               {
-                td[j].appendChild(doc.createElement('br'));
+                if (!GFlib.onPage(doc, "archive"))
+                  td[j].appendChild(doc.createElement('br'));
                 td[j].appendChild(doc.createTextNode('#' + msgnumString));
               }
               else
-                td[j].appendChild(doc.createTextNode(' | #' + msgnumString));
+                if (GFlib.onPage(doc, "archive"))
+                  td[j].appendChild(doc.createTextNode('#' + msgnumString));
+                else
+                  td[j].appendChild(doc.createTextNode(' | #' + msgnumString));
 
               break;
           }
         }
 
         // Message highlighting
-        var username = td[j].getElementsByTagName('a')[0].textContent;
+        if (GFlib.onPage(doc, "archive")) // archived topics have no message links
+          var username = td[j].getElementsByTagName('b')[0].textContent;
+        else
+          var username = td[j].getElementsByTagName('a')[0].textContent;
         var hlinfo = false;
 
         if ((hlinfo = GFHL.getGroupData(username)) != false)
