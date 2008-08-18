@@ -11,8 +11,7 @@ var GFQuickPost =
       var sig = '';
 
     var query = GameFOXUtils.stripQueryString(doc.location.search);
-    var action = 'post.php' +
-      GameFOXUtils.specialCharsDecode(query);
+    var action = 'post.php' + GameFOXUtils.specialCharsDecode(query);
     div.innerHTML +=
       '\n<div id="gamefox-quickpost-title">QuickPost</div>\n' +
       '  <form id="gamefox-quickpost-form" action="' + action + '" method="post">\n' +
@@ -21,7 +20,7 @@ var GFQuickPost =
       '  <input type="button" id="gamefox-quickpost-btn" name="quickpost" value="Post Message"/>\n' +
       '  <input type="submit" name="post" value="Preview Message"/>\n' +
       '  <input type="submit" name="post" value="Preview and Spellcheck Message"/>\n' +
-      '  <input type="reset" name="reset" value="Reset"/>\n' +
+      '  <input type="reset" value="Reset"/>\n' +
       (newTopic ? '  <input type="button" id="gamefox-quickpost-hide" value="Hide"/>\n' : '') +
       '</form>\n';
 
@@ -85,7 +84,7 @@ var GFQuickPost =
     event.target.disabled = true;
     event.target.blur();
     // NOTE TO uG: The 'click' event still fires even if the button is disabled
-    // ???
+    //   (this doesn't seem to be true)
     event.target.removeEventListener('click', GFQuickPost.post, false);
 
     var previewRequest = new XMLHttpRequest();
@@ -97,26 +96,26 @@ var GFQuickPost =
         var text = previewRequest.responseText;
         var postId = text.match(/\bname="post_id"[^>]+?\bvalue="([^"]*)"/);
 
-        if (!postId || postId[1].match(/^\s*0?\s*$/))
+        if (!postId || /^\s*0?\s*$/.test(postId[1]))
         { // error
           if (GameFOXUtils.trim(text).length == 0)
             alert('Request timed out. Check your network connection and try again.');
           else
           {
-            // Thanks to KSOT's Secondary FAQ for all of these errors
             var badWord = text.match(/<p>Banned word found: <b>(.+?)<\/b>/i);
             var tooBig = text.match(/4096 characters\. Your message is ([0-9]+) characters/);
-            var titleLength = text.match(/Topic titles must be between 5 and 80 characters/);
-            var allCapsTitle = text.match(/Topic titles cannot be in all uppercase/);
-            var allCapsMessage = text.match(/Messages cannot be in all uppercase/);
-            var noTopics = text.match(/You are not authorized to create topics on this board/);
-            var noMessages = text.match(/You are not authorized to post messages on this board/);
-            var longWordInTitle = text.match(/Your topic title contains a single word over 25 characters/);
-            var longWordInMessage = text.match(/Your message contains a single word over 80 characters/);
-            var badHTML = text.match(/Your HTML is not well-formed/);
-            var closedTopic = text.match(/This topic is closed/);
-            var deletedTopic = text.match(/This topic is no longer available/);
-            var maintenance = !text.match(/<body/) && text.match(/maintenance/);
+            var titleLength = text.indexOf('Topic titles must be between 5 and 80 characters') != -1;
+            var allCapsTitle = text.indexOf('Topic titles cannot be in all uppercase') != -1;
+            var allCapsMessage = text.indexOf('Messages cannot be in all uppercase') != -1;
+            var noTopics = text.indexOf('You are not authorized to create topics on this board') != -1;
+            var noMessages = text.indexOf('You are not authorized to post messages on this board') != -1;
+            var longWordInTitle = text.indexOf('Your topic title contains a single word over 25 characters') != -1;
+            var longWordInMessage = text.indexOf('Your message contains a single word over 80 characters') != -1;
+            var blankMessage = text.indexOf('Messages cannot be blank') != -1;
+            var badHTML = text.indexOf('Your HTML is not well-formed') != -1;
+            var closedTopic = text.indexOf('This topic is closed') != -1;
+            var deletedTopic = text.indexOf('This topic is no longer available') != -1;
+            var maintenance = text.indexOf('<body') == -1 && text.indexOf('maintenance') != -1;
 
             if (badWord)
               alert('Your post includes the word "' + badWord[1] + '", which is a bad word. ' +
@@ -142,6 +141,8 @@ var GFQuickPost =
               alert('Your message contains a word over 80 characters in length. ' +
                   'This makes CJayC unhappy because it stretches his 640x480 resolution ' +
                   'screen, so he doesn\'t allow it.');
+            else if (blankMessage)
+              alert('Maybe you should actually type something...');
             else if (badHTML)
               alert('Your HTML is not well-formed. Check for mismatched tags.');
             else if (closedTopic)
@@ -163,7 +164,7 @@ var GFQuickPost =
         }
         else
         {
-          if (text.match(/<div class="head"><h1>Post Warning<\/h1><\/div>/) &&
+          if (text.indexOf('<div class="head"><h1>Post Warning</h1></div>') != -1 &&
               !confirm('Your message contains an autoflagged word. Submit anyway?'))
           {
             event.target.removeAttribute('disabled');
@@ -178,16 +179,16 @@ var GFQuickPost =
             if (postRequest.readyState == 4)
             {
               var text = postRequest.responseText;
-              if (!text.match(/<p>You should be returned to the Message List automatically/))
-              {
+              if (text.indexOf('<p>You should be returned to the Message List automatically') == -1)
+              { // error
                 if (GameFOXUtils.trim(text).length == 0)
                   alert('Request timed out. Check your network connection and try again.');
                 else
                 {
-                  var flooding = text.match(/To prevent flooding,/);
-                  var closedTopic = text.match(/This topic is closed/);
-                  var deletedTopic = text.match(/This topic is no longer available/);
-                  var dupeTitle = text.match(/A topic with this title already exists/);
+                  var flooding = text.indexOf('To prevent flooding,') != -1;
+                  var closedTopic = text.indexOf('This topic is closed') != -1;
+                  var deletedTopic = text.indexOf('This topic is no longer available') != -1;
+                  var dupeTitle = text.indexOf('A topic with this title already exists') != -1;
 
                   if (flooding)
                     alert('You are posting too quickly and have hit one of the flooding limits.');
@@ -232,9 +233,9 @@ var GFQuickPost =
     {
       if (topicTitle[0].value.length < 5)
       {
+        alert('Topic titles must be at least 5 characters long.');
         event.target.removeAttribute('disabled');
         event.target.addEventListener('click', GFQuickPost.post, false);
-        alert('Topic titles must be at least 5 characters long.');
         return;
       }
       postBody = 'topictitle=' + GameFOXUtils.URLEncode(topicTitle[0].value) + '&';
