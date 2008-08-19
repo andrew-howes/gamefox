@@ -14,6 +14,7 @@ var GFUL =
     userlist.push({"name": "", "color": "", "users": "", "messages": "highlight", "topics": "highlight"});
 
     this.prefs.setCharPref("userlist.serialized", userlist.toSource());
+    this.populate();
   },
 
   populate: function()
@@ -23,6 +24,11 @@ var GFUL =
 
     // This is pretty verbose
     var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+
+    var vbox = document.getElementById('usergroups');
+    if (vbox.hasChildNodes())
+      while (vbox.childNodes.length >= 1)
+        vbox.removeChild(vbox.firstChild);
 
     for (i in userlist)
     {
@@ -150,9 +156,8 @@ var GFUL =
 
       groupbox.appendChild(radiogroup);
 
-      document.getElementById('usergroups').appendChild(groupbox);
+      vbox.appendChild(groupbox);
     }
-
   },
 
   updatePref: function(event)
