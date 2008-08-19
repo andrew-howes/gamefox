@@ -46,14 +46,14 @@ var GameFOX =
         GFlib.setTitle(doc,
             doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).
             singleNodeValue.textContent.replace(/^\s+|\s+$/g, ''),
-            "CT");
+            'CT');
       }
       else if (doc.getElementsByName('message')[0]) // new post
       {
         GFlib.setTitle(doc,
             GameFOXUtils.trim(doc.getElementsByName('message')[0].
             parentNode.parentNode.getElementsByTagName('a')[0].textContent),
-            "PM");
+            'PM');
       }
 
       // "Post Message" button
@@ -66,7 +66,7 @@ var GameFOX =
             button.addEventListener('click', GFQuickPost.post, false);
 
         var refChild = doc.getElementsByName('post');
-            refChild = (refChild[0].getAttribute('value').match(/post/i) ?
+            refChild = (refChild[0].getAttribute('value') == 'Post Message' ?
                 refChild[1] : refChild[0]);
             refChild.parentNode.insertBefore(button, refChild);
             refChild.parentNode.insertBefore(doc.createTextNode(' '), refChild);
@@ -74,7 +74,7 @@ var GameFOX =
 
       // Signature
       if (GameFOX.prefs.getBoolPref('signature.applyeverywhere')
-          && !doc.documentElement.innerHTML.match(/\b(Error|Preview|Posted)\s*<\/h1>\s*<\/div>/ig))
+          && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
       {
         doc.getElementsByName('message')[0].value =
           GameFOXUtils.formatSig(null, null,
@@ -86,7 +86,7 @@ var GameFOX =
     else if (GFlib.onPage(doc, 'user'))
     {
       GFlib.setTitle(doc, GameFOXUtils.trim(doc.getElementsByTagName('td')[1].
-            textContent), "U");
+            textContent), 'U');
     }
 
 
@@ -99,7 +99,7 @@ var GameFOX =
     {
       GFlib.setTitle(doc, GameFOXUtils.trim(doc.evaluate('//h1', doc,
               null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent), "T");
+          textContent), 'T');
 
       // Topic "QuickPost" link
       if (GameFOX.prefs.getBoolPref('elements.quickpost.link')
@@ -181,7 +181,7 @@ var GameFOX =
         if (!GFlib.onPage(doc, 'tracked') && GameFOX.prefs.getBoolPref('highlight.topics'))
         {
           var username = GameFOXUtils.trim(rows[i].getElementsByTagName('td')[2].textContent);
-          var hlinfo = false;
+          var hlinfo;
 
           if ((hlinfo = GFHL.getGroupData(username)) != false)
           {
@@ -208,7 +208,7 @@ var GameFOX =
           GameFOXUtils.trim(doc.evaluate(
               '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
               null).singleNodeValue.textContent),
-                "M" + (GFlib.onPage(doc, "detail") ? "D" : ""),
+                'M' + (GFlib.onPage(doc, 'detail') ? 'D' : ''),
                 (pagenum ? (pagenum + 1) : null));
 
       // "Tag Topic" link
@@ -259,8 +259,14 @@ var GameFOX =
           continue;
         else if (!leftMsgData)
         {
-          try { msgHeader = td[j].offsetParent.rows[td[j].parentNode.rowIndex + 1].className == 'even'; }
-          catch (e) { msgHeader = false; }
+          try
+          {
+            msgHeader = td[j].offsetParent.rows[td[j].parentNode.rowIndex + 1].className == 'even';
+          }
+          catch (e)
+          {
+            msgHeader = false;
+          }
 
           if (!msgHeader) continue;
         }
@@ -282,22 +288,22 @@ var GameFOX =
               if (leftMsgData)
                 td[j].insertBefore(doc.createElement('br'), td[j].
                     getElementsByTagName('a')[1])
-              else if (!GFlib.onPage(doc, "archive"))
+              else if (!GFlib.onPage(doc, 'archive'))
                 td[j].insertBefore(doc.createTextNode(' | '), td[j].
                     getElementsByTagName('a')[1]);
 
               break;
 
             case 2: // Number only: #001
-              if (GFlib.onPage(doc, "archive"))
-                td[j].innerHTML += "<b>#" + msgnumString + "</b>";
+              if (GFlib.onPage(doc, 'archive'))
+                td[j].innerHTML += '<b>#' + msgnumString + '</b>';
               else
                 td[j].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
               break;
 
             case 3: // Mixed: message #001
-              if (GFlib.onPage(doc, "archive"))
-                td[j].innerHTML += "<b>message #" + msgnumString + "</b>";
+              if (GFlib.onPage(doc, 'archive'))
+                td[j].innerHTML += '<b>message #' + msgnumString + '</b>';
               else
                 td[j].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
               break;
@@ -306,12 +312,12 @@ var GameFOX =
             case 0: // Original: message detail | #001
               if (leftMsgData)
               {
-                if (!GFlib.onPage(doc, "archive"))
+                if (!GFlib.onPage(doc, 'archive'))
                   td[j].appendChild(doc.createElement('br'));
                 td[j].appendChild(doc.createTextNode('#' + msgnumString));
               }
               else
-                if (GFlib.onPage(doc, "archive"))
+                if (GFlib.onPage(doc, 'archive'))
                   td[j].appendChild(doc.createTextNode('#' + msgnumString));
                 else
                   td[j].appendChild(doc.createTextNode(' | #' + msgnumString));
@@ -321,11 +327,11 @@ var GameFOX =
         }
 
         // Message highlighting
-        if (GFlib.onPage(doc, "archive")) // archived topics have no message links
+        if (GFlib.onPage(doc, 'archive')) // archived topics have no message links
           var username = td[j].getElementsByTagName('b')[0].textContent;
         else
           var username = td[j].getElementsByTagName('a')[0].textContent;
-        var hlinfo = false;
+        var hlinfo;
 
         if ((hlinfo = GFHL.getGroupData(username)) != false)
         {
@@ -416,9 +422,9 @@ var GameFOX =
     }
 
 
-    var vertmess = (doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1) ? true : false;
+    var vertmess = doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1;
 
-    if (dblclickHead != 0 && ((vertmess && node.parentNode.className != 'even') || nodeClass.match(/author/)))
+    if (dblclickHead != 0 && ((vertmess && node.parentNode.className != 'even') || nodeClass.indexOf('author') != -1))
     {
       switch (dblclickHead)
       {
@@ -440,8 +446,8 @@ var GameFOX =
 
   topicDblclick: function(event)
   {
-    var onMyPosts = event.target.ownerDocument.location.pathname.match(/\bmyposts\./i);
-    var switcher  = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.' + (onMyPosts ? 'myposts' : 'topic') + '.dblclick');
+    var myposts = GFlib.onPage(event.target.ownerDocument, 'myposts');
+    var switcher  = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.' + (myposts ? 'myposts' : 'topic') + '.dblclick');
     switch (switcher)
     {
       case 0:
@@ -472,7 +478,7 @@ var GameFOX =
         nodeName = node.nodeName.toLowerCase();
       }
 
-      var myposts = doc.location.pathname.match(/\/myposts\./i) ? true : false;
+      var myposts = GFlib.onPage(doc, 'myposts');
       var msgsCell = myposts ? node.parentNode.cells[2] : node.parentNode.cells[3];
       var pageNum = Math.floor((msgsCell.textContent-1)/Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.msgsPerPage'));
       doc.location.href = node.parentNode.cells[1].getElementsByTagName('a')[0].href + (pageNum ? '&page=' + pageNum : '');
@@ -498,7 +504,7 @@ var GameFOX =
         nodeName = node.nodeName.toLowerCase();
       }
 
-      var myposts = doc.location.pathname.match(/\/myposts\./i) ? true : false;
+      var myposts = GFlib.onPage(doc, 'myposts');
 
       topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0].getAttribute('href');
 
@@ -509,8 +515,8 @@ var GameFOX =
       return;
     }
 
-    var boardID   = topicLink.match(/\bboard=([0-9-]+)/i)[1];
-    var topicID   = topicLink.match(/\btopic=([0-9-]+)/i)[1];
+    var boardID   = topicLink.match(/\bboard=([0-9-]+)/)[1];
+    var topicID   = topicLink.match(/\btopic=([0-9-]+)/)[1];
     var numPages  = Math.ceil(msgsCell.textContent/Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.msgsPerPage'));
     var pageList  = document.getElementById('gamefox-pages-menu');
     var i, item, link, tr, td;
@@ -521,25 +527,30 @@ var GameFOX =
       var pgLocation = pgPrefs.getIntPref('location');
       node = node.parentNode.cells[1];
 
-      try {
+      try
+      {
         if (node.parentNode.nextSibling.className == 'gamefox-pagelist')
         {
           node.parentNode.nextSibling.style.display = (!pgLocation && node.parentNode.nextSibling.style.display != 'table-row') ? 'table-row' : 'none';
           if (!pgLocation)
           {
-            try {
+            try
+            {
               node.getElementsByTagName('span')[0].style.display = 'none';
-            } catch(e){;}
+            }
+            catch (e) {}
             return;
           }
         }
-      } catch(e){;}
+      }
+      catch (e) {}
 
       var notNewElement = (node.getElementsByTagName('span').length > 0);
       if (notNewElement)
       {
         td = node.getElementsByTagName('span')[0];
-        try {
+        try
+        {
           if (parseInt(td.getAttribute('tag')) == pgLocation)
           {
             td.style.display = (td.style.display == 'none') ? '' : 'none';
@@ -550,7 +561,8 @@ var GameFOX =
           {
             td.style.display = 'none';
           }
-        } catch(e){;}
+        }
+        catch (e) {}
 
         if (pgLocation)
         {
@@ -633,7 +645,7 @@ var GameFOX =
   toggleSidebar: function()
   {
     toggleSidebar('viewGamefoxSidebar');
-  },
+  }
 };
 
 function GameFOXLoader()
@@ -651,7 +663,7 @@ function GameFOXLoader()
   {
     var lastversion = prefs.getCharPref('version');
   }
-  catch (e if e.name == "NS_ERROR_UNEXPECTED") // the pref isn't set, we can assume this is a first run
+  catch (e if e.name == 'NS_ERROR_UNEXPECTED') // the pref isn't set, we can assume this is a first run
   {
     GameFOXCSS.init();
     GameFOXUtils.importBoardSettings();
@@ -675,12 +687,18 @@ function GameFOXLoader()
     // convert old signature prefs to serialized pref
     // TODO: remove this after a while, it's not necessary when the majority
     // of people have already updated with previous versions
-    if (versionComparator.compare("0.6.2", version) == -1)
+    if (versionComparator.compare('0.6.2', version) == -1)
     {
       var oldPresig, oldSig;
-      try { oldPresig = GameFOXUtils.getString('signature.presig', prefs); }
+      try
+      {
+        oldPresig = GameFOXUtils.getString('signature.presig', prefs);
+      }
       catch (e) {}
-      try { oldSig = GameFOXUtils.getString('signature.body', prefs); }
+      try
+      {
+        oldSig = GameFOXUtils.getString('signature.body', prefs);
+      }
       catch (e) {}
 
       var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));

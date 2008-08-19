@@ -42,8 +42,7 @@ var GFlib =
 
   onBoards: function(doc)
   {
-    if (!GFlib.onGF(doc)) return false;
-    return /^\/boards(\/|$|\?)/.test(doc.location.pathname);
+    return GFlib.onGF(doc) && /^\/boards(\/|$|\?)/.test(doc.location.pathname);
   },
 
   onPage: function(doc, page)
@@ -98,7 +97,7 @@ var GFlib =
           return false;
 
       default:
-        return doc.location.pathname.match(new RegExp('^/boards/' + page + '\\.php'));
+        return new RegExp('^/boards/' + page + '\\.php').test(doc.location.pathname);
     }
   },
 
