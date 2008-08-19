@@ -58,10 +58,16 @@ var GFUL =
       /*** colorpicker ***/
       colorpicker = document.createElement('colorpicker');
       colorpicker.setAttribute('type', 'button');
+      colorpicker.setAttribute('class', 'ug-color');
+      colorpicker.setAttribute('color', userlist[i]['color']);
+      colorpicker.addEventListener('change', this.updatePref, false);
       hbox.appendChild(colorpicker);
       /*** textbox ***/
       textbox = document.createElement('textbox');
       textbox.setAttribute('size', '6');
+      textbox.setAttribute('value', userlist[i]['color']);
+      textbox.setAttribute('class', 'ug-color');
+      textbox.addEventListener('input', this.updatePref, false);
       hbox.appendChild(textbox);
 
       groupbox.appendChild(hbox);
@@ -174,9 +180,26 @@ var GFUL =
     // get pref name
     var name = node.className.substring(3);
 
+    // get value
+    if (node.tagName == 'colorpicker')
+      var value = node.color;
+    else
+      var value = node.value;
+
+    // color has 2 elements to update
+    if (name == 'color')
+    {
+      var colors = parentNode.getElementsByClassName('ug-color');
+      for (i in colors)
+        if (colors[i].tagName == 'colorpicker')
+          colors[i].color = value;
+        else
+          colors[i].value = value;
+    }
+
     // get and set pref
     var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
-    userlist[idx][name] = node.value;
+    userlist[idx][name] = value;
     GFUL.prefs.setCharPref('userlist.serialized', userlist.toSource());
   }
 };
