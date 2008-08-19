@@ -6,7 +6,7 @@
 <!ENTITY general.label "General">
 
 <!ENTITY page.label "Page">
-<!ENTITY page.tab.board "Message Board">
+<!ENTITY page.tab.board "Board Settings">
 <!ENTITY page.tab.elements "Elements">
 <!ENTITY page.tab.highlight "User Highlighting">
 <!ENTITY page.board.settings.caption "Board Settings">

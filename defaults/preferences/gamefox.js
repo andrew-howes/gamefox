@@ -63,3 +63,4 @@ pref("gamefox.context.taglist", true);
 pref("gamefox.context.tag.myposts", true);
 pref("gamefox.context.tag.tracked", true);
 pref("gamefox.options.page.selectedtab", 0);
+pref("gamefox.options.sig.selectedtab", 0);
