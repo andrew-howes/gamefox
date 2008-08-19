@@ -168,7 +168,7 @@
           </groupbox>
           
           <hbox pack="end">
-            <button oncommand="GFUL.add();" label="Add a Group" icon="add"/>
+            <button oncommand="GFUL.add(); GFUL.populate();" label="Add a Group" icon="add"/>
           </hbox>
           <vbox id="usergroups" style="height:320px;overflow:auto"/>
         </tabpanel>

@@ -15,7 +15,6 @@ var GFUL =
         "messages": "highlight", "topics": "highlight"});
 
     this.prefs.setCharPref("userlist.serialized", userlist.toSource());
-    this.populate();
   },
 
   populate: function()

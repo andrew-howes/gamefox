@@ -692,6 +692,7 @@ function GameFOXLoader()
     GameFOXCSS.init();
     GameFOXUtils.importBoardSettings();
     GameFOXUtils.importSignature();
+    GFUL.add(); // default group
     window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
   }
