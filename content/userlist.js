@@ -202,5 +202,61 @@ var GFUL =
     var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
     userlist[idx][name] = value;
     GFUL.prefs.setCharPref('userlist.serialized', userlist.toSource());
+  },
+
+  loadGroups: function()
+  {
+    var usernames, username;
+    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    this.usernameIndex = {};
+
+    // build the index
+    for (i in userlist)
+    {
+      usernames = userlist[i]['users'].split(/\s*,\s*/);
+      for (j in usernames)
+      {
+        var username = GameFOXUtils.trim(usernames[j]);
+        if (!username.length) continue;
+
+        if (this.usernameIndex[username])
+          this.usernameIndex[username].push(i);
+        else
+          this.usernameIndex[username] = new Array(i);
+      }
+    }
+  },
+
+  searchUsername: function(username)
+  {
+    if (!this.usernameIndex) return false; // no index
+
+    username = GameFOXUtils.trim(username);
+    if (!username.length) return false;
+
+    if (!this.usernameIndex[username]) return false; // username isn't in any groups
+
+    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var groups = this.usernameIndex[username];
+
+    // first group decides everything
+    var color = userlist[groups[0]]['color'];
+    var messages = userlist[groups[0]]['messages'];
+    var topics = userlist[groups[0]]['topics'];
+
+    // list of all groups where the user is present
+    var groupNames = "";
+    var name;
+    for (i in groups)
+    {
+      name = userlist[groups[i]]['name'];
+      if (!name.length) continue;
+
+      groupNames += name + ", ";
+    }
+    groupNames = groupNames.length ? "(" + groupNames.substring(0,
+          groupNames.length - 2) + ")" : "";
+
+    return [groupNames, color, messages, topics];
   }
 };
