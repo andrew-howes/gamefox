@@ -102,7 +102,7 @@ var GFQuickPost =
             alert('Request timed out. Check your network connection and try again.');
           else
           {
-            var badWord = text.match(/<p>Banned word found: <b>(.+?)<\/b>/i);
+            var badWord = text.match(/<p>Banned word found: <b>([^<]+)<\/b>/i);
             var tooBig = text.match(/4096 characters\. Your message is ([0-9]+) characters/);
             var titleLength = text.indexOf('Topic titles must be between 5 and 80 characters') != -1;
             var allCapsTitle = text.indexOf('Topic titles cannot be in all uppercase') != -1;
@@ -147,7 +147,7 @@ var GFQuickPost =
               alert('Your HTML is not well-formed. Check for mismatched tags.');
             else if (closedTopic)
               alert('The topic was closed while you were typing your message. ' +
-                  'Type faster next time.');
+                  'Type faster next time!');
             else if (deletedTopic)
               alert('The topic is gone! Damn moderators...');
             else if (maintenance)
@@ -156,11 +156,10 @@ var GFQuickPost =
               alert('Something went wrong but I don\'t know what. Try posting ' +
                   'without QuickPost, and if you think you\'ve found a bug ' +
                   'report it at Blood Money.');
-
-            event.target.removeAttribute('disabled');
-            event.target.addEventListener('click', GFQuickPost.post, false);
-            return;
           }
+          event.target.removeAttribute('disabled');
+          event.target.addEventListener('click', GFQuickPost.post, false);
+          return;
         }
         else
         {
@@ -179,7 +178,7 @@ var GFQuickPost =
             if (postRequest.readyState == 4)
             {
               var text = postRequest.responseText;
-              if (text.indexOf('<p>You should be returned to the Message List automatically') == -1)
+              if (text.indexOf('<div class="head"><h1>Message Posted</h1></div>') == -1)
               { // error
                 if (GameFOXUtils.trim(text).length == 0)
                   alert('Request timed out. Check your network connection and try again.');
