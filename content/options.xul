@@ -18,7 +18,7 @@
 
 <!-- P A G E -->
 
-  <prefpane id="gamefox-page-pane" label="&page.label;">
+  <prefpane id="gamefox-page-pane" label="&page.label;" onpaneload="GFUL.populate();">
     <!-- These have to be inside the first prefpane because of BMO bug #296418
          Luckily, the scripts seem to be applied to all of the other prefpanes too, so
          we only have to do this once. -->
@@ -35,13 +35,6 @@
       <preference id="gamefox-pref-titleprefix" name="gamefox.elements.titleprefix" type="bool"/>
       <preference id="gamefox-pref-msgnum" name="gamefox.elements.msgnum" type="bool"/>
       <preference id="gamefox-pref-msgnum-style" name="gamefox.elements.msgnum.style" type="int"/>
-      <preference id="gamefox-pref-highlight-msgs" name="gamefox.highlight.msgs" type="bool"/>
-      <preference id="gamefox-pref-highlight-topics" name="gamefox.highlight.topics" type="bool"/>
-      <preference id="gamefox-pref-highlight-ignore" name="gamefox.highlight.ignore" type="bool"/>
-      <preference id="gamefox-pref-highlight-groups-1" name="gamefox.highlight.groups.1" type="string"/>
-      <preference id="gamefox-pref-highlight-groups-2" name="gamefox.highlight.groups.2" type="string"/>
-      <preference id="gamefox-pref-highlight-colors-1" name="gamefox.highlight.colors.1" type="string"/>
-      <preference id="gamefox-pref-highlight-colors-2" name="gamefox.highlight.colors.2" type="string"/>
       <preference id="gamefoxMsgsPerPage" name="gamefox.msgsPerPage" type="int"/>
       <preference id="gamefoxTpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
       <preference id="gamefoxMsgSortOrder" name="gamefox.msgSortOrder" type="int"/>
@@ -54,6 +47,9 @@
       <preference id="gamefox-pref-paging-prefix"     name="gamefox.paging.prefix"    type="string"/>
       <preference id="gamefox-pref-paging-separator"  name="gamefox.paging.separator" type="string"/>
       <preference id="gamefox-pref-paging-suffix"     name="gamefox.paging.suffix"    type="string"/>
+
+      <preference id="userlist-topics-groupnames" name="gamefox.userlist.topics.showgroupnames" type="bool"/>
+      <preference id="userlist-messages-groupnames" name="gamefox.userlist.messages.showgroupnames" type="bool"/>
     </preferences>
 
 
@@ -61,7 +57,7 @@
 
       <tabs tabGroup="page">
         <tab id="gamefox-tab-elements" label="&page.tab.elements;"/>
-        <tab id="gamefox-tab-highlight" label="&page.tab.highlight;"/>
+        <tab id="gamefox-tab-highlight" label="&page.tab.userlists;"/>
         <tab id="gamefox-tab-general" label="&page.tab.board;"/>
       </tabs>
 
@@ -161,35 +157,20 @@
         </tabpanel>
 
 
-<!-- USER HIGHLIGHTING -->
-
+<!-- USER LISTS -->
         <tabpanel orient="vertical" flex="1">
-          <vbox>
+          <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
 
-            <groupbox>
-              <caption label="&page.highlight.caption;"/>
-              <label value="&page.highlight.instructions;"/>
-              <hbox align="center">
-                <label value="&page.highlight.group; 1:"/>
-                <textbox preference="gamefox-pref-highlight-groups-1" size="2" flex="15"/>
-                <colorpicker preference="gamefox-pref-highlight-colors-1" type="button" flex="1"/>
-                <textbox preference="gamefox-pref-highlight-colors-1" size="1" flex="2"/>
-              </hbox>
-              <hbox align="center">
-                <label value="&page.highlight.group; 2:"/>
-                <textbox preference="gamefox-pref-highlight-groups-2" size="2" flex="15"/>
-                <colorpicker preference="gamefox-pref-highlight-colors-2" type="button" flex="1"/>
-                <textbox preference="gamefox-pref-highlight-colors-2" size="1" flex="2"/>
-              </hbox>
-              <separator class="thin"/>
-              <hbox pack="end">
-                <checkbox preference="gamefox-pref-highlight-ignore" label="&page.highlight.hide;"/>
-                <checkbox preference="gamefox-pref-highlight-msgs" label="&page.highlight.messages;"/>
-                <checkbox preference="gamefox-pref-highlight-topics" label="&page.highlight.topics;"/>
-              </hbox>
-            </groupbox>
-
-          </vbox>
+          <groupbox>
+            <caption label="Options"/>
+            <checkbox preference="userlist-topics-groupnames" label="Show group names on topic lists"/>
+            <checkbox preference="userlist-messages-groupnames" label="Show group names on message lists"/>
+          </groupbox>
+          
+          <hbox pack="end">
+            <button oncommand="GFUL.add();" label="Add a Group" icon="add"/>
+          </hbox>
+          <vbox id="usergroups" style="height:320px;overflow:auto"/>
         </tabpanel>
 
 
