@@ -69,7 +69,12 @@ var GFlib =
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         var notopics = doc.evaluate('//div[@id="board_wrap"]/p', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if ((notopics && notopics.textContent.indexOf('No topics are available') != -1)
+        if (GFlib.onPage(doc, 'tracked'))
+        {
+          doc.gfPage = ['topics', 'tracked'];
+          return true;
+        }
+        else if ((notopics && notopics.textContent.indexOf('No topics are available') != -1)
             || col)
         {
           doc.gfPage = ['topics'];
