@@ -35,13 +35,6 @@
       <preference id="gamefox-pref-titleprefix" name="gamefox.elements.titleprefix" type="bool"/>
       <preference id="gamefox-pref-msgnum" name="gamefox.elements.msgnum" type="bool"/>
       <preference id="gamefox-pref-msgnum-style" name="gamefox.elements.msgnum.style" type="int"/>
-      <preference id="gamefox-pref-highlight-msgs" name="gamefox.highlight.msgs" type="bool"/>
-      <preference id="gamefox-pref-highlight-topics" name="gamefox.highlight.topics" type="bool"/>
-      <preference id="gamefox-pref-highlight-ignore" name="gamefox.highlight.ignore" type="bool"/>
-      <preference id="gamefox-pref-highlight-groups-1" name="gamefox.highlight.groups.1" type="string"/>
-      <preference id="gamefox-pref-highlight-groups-2" name="gamefox.highlight.groups.2" type="string"/>
-      <preference id="gamefox-pref-highlight-colors-1" name="gamefox.highlight.colors.1" type="string"/>
-      <preference id="gamefox-pref-highlight-colors-2" name="gamefox.highlight.colors.2" type="string"/>
       <preference id="gamefoxMsgsPerPage" name="gamefox.msgsPerPage" type="int"/>
       <preference id="gamefoxTpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
       <preference id="gamefoxMsgSortOrder" name="gamefox.msgSortOrder" type="int"/>

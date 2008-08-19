@@ -178,7 +178,7 @@ var GameFOX =
 
         // User highlighting (only on gentopic.php, tracked.php has no topic
         // creator names)
-        if (!GFlib.onPage(doc, 'tracked') && GameFOX.prefs.getBoolPref('highlight.topics'))
+        if (!GFlib.onPage(doc, 'tracked'))
         {
           var username = GameFOXUtils.trim(rows[i].getElementsByTagName('td')[2].textContent);
           var hlinfo = false;
