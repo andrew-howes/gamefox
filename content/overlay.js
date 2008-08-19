@@ -184,14 +184,26 @@ var GameFOX =
           var username = GameFOXUtils.trim(rows[i].getElementsByTagName('td')[2].textContent);
           var hlinfo = false;
 
-          if ((hlinfo = GFHL.getGroupData(username)) != false)
+          if ((hlinfo = GFUL.searchUsername(username)) != false)
           {
-            rows[i].setAttribute('class', rows[i].getAttribute('class') +
-                ' gamefox-highlight-' + hlinfo[0]);
-            rows[i].style.setProperty('background-color', hlinfo[1], 'important');
+            // list of groups
+            if (hlinfo[0].length)
+              rows[i].cells[2].appendChild(doc.createTextNode(' ' +
+                    hlinfo[0]));
+            
+            if (hlinfo[3] == 'remove') // remove topic
+            {
+              rows[i].style.setProperty('display', 'none', null);
+            }
+            else if (hlinfo[3] == 'highlight') // highlight topic
+            {
+              rows[i].setAttribute('class', rows[i].getAttribute('class') +
+                  ' gamefox-highlight');
+              rows[i].style.setProperty('background-color', hlinfo[1], 'important');
 
-            for (var j = 0; j < rows[i].cells.length; j++)
-              rows[i].cells[j].style.setProperty('background-color', hlinfo[1], 'important');
+              for (var j = 0; j < rows[i].cells.length; j++)
+                rows[i].cells[j].style.setProperty('background-color', hlinfo[1], 'important');
+            }
           }
         }
       }
