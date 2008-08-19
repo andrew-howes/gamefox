@@ -184,13 +184,13 @@ var GFQuickPost =
                   alert('Request timed out. Check your network connection and try again.');
                 else
                 {
-                  var flooding = text.indexOf('To prevent flooding,') != -1;
+                  var flooding = text.indexOf('Please wait and try your post again') != -1;
                   var closedTopic = text.indexOf('This topic is closed') != -1;
                   var deletedTopic = text.indexOf('This topic is no longer available') != -1;
                   var dupeTitle = text.indexOf('A topic with this title already exists') != -1;
 
                   if (flooding)
-                    alert('You are posting too quickly and have hit one of the flooding limits.');
+                    alert('You have hit one of the time-based posting limits (e.g., 2 posts per minute).');
                   else if (closedTopic)
                     alert('The topic was closed while you were typing your message. Type faster next time!');
                   else if (deletedTopic)
