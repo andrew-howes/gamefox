@@ -9,13 +9,6 @@ pref("gamefox.elements.msgnum", true);
 pref("gamefox.elements.msgnum.style", 0);
 pref("gamefox.elements.tracked.boardlink", true);
 
-pref("gamefox.highlight.groups.1", "");
-pref("gamefox.highlight.groups.2", "");
-pref("gamefox.highlight.colors.1", "#CCFFFF");
-pref("gamefox.highlight.colors.2", "#99CC66");
-pref("gamefox.highlight.msgs", true);
-pref("gamefox.highlight.topics", true);
-pref("gamefox.highlight.ignore", false);
 pref("gamefox.msgsPerPage", 50);
 pref("gamefox.tpcsPerPage", 50);
 pref("gamefox.msgSortOrder", 1);
@@ -66,4 +59,3 @@ pref("gamefox.context.tag.myposts", true);
 pref("gamefox.context.tag.tracked", true);
 pref("gamefox.options.page.selectedtab", 0);
 pref("gamefox.options.sig.selectedtab", 0);
->>>>>>> abb0dbf1e90000d2dc5367bdfaa8e32abc218e9f:defaults/preferences/gamefox.js

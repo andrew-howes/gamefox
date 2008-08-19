@@ -92,7 +92,6 @@ var GameFOX =
 
     var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
         doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    GFHL.loadGroups();
     GFUL.loadGroups();
 
     /* Topic Lists */
@@ -351,7 +350,7 @@ var GameFOX =
           if (hlinfo[2] == 'highlight')
           {
             td[j].setAttribute('class', td[j].getAttribute('class') +
-                ' gamefox-highlight' + hlinfo[1]);
+                ' gamefox-highlight');
             td[j].style.setProperty('background-color', hlinfo[1], 'important');
           }
           else if (hlinfo[2] == 'collapse') // Collapse post

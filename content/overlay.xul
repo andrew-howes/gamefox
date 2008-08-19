@@ -9,7 +9,6 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/highlight.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/quote.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/context.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/quickpost.js"/>
