@@ -8,7 +8,6 @@
 <dialog
   buttons="accept"
   title="&dialog.title;"
-  onload="gfox_processAboutDialog();"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/about.js"/>
@@ -21,10 +20,10 @@
     <label id="version" value="&version.title; "/>
 
     <hbox>
-      <label class="url-label important" value="&news.label;" onclick="gfox_addTab('chrome://gamefox/content/NEWS', event.button);"/>
+      <label class="url-label important" value="&news.label;" onclick="GFlib.newTab('chrome://gamefox/content/NEWS', event.button);"/>
       <spacer flex="1"/>
       <label class="url-label important" value="&support.label;" tooltiptext="&support.tooltip;"
-        onclick="gfox_addTab('http://boards.gamefaqs.com/gfaqs/gentopic.php?board=565885', event.button);"/>
+        onclick="GFlib.newTab('http://www.gamefaqs.com/boards/gentopic.php?board=565885', event.button);"/>
     </hbox>
 
     <separator class="thin"/>
@@ -33,7 +32,7 @@
       <label class="name" value="Brian Marshall"/>
       <label class="username" value="Karamthulhu"/>
       <spacer flex="1"/>
-      <label class="url-label" value="http://beyondboredom.net/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+      <label class="url-label" value="http://beyondboredom.net/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
     <hbox>
       <label class="name" value="Michael Ryan"/>
@@ -51,7 +50,7 @@
       <label class="username" value="ultimategamer00"/>
       <label class="description" value="Original Developer"/>
       <spacer flex="1"/>
-      <label class="url-label" value="http://whitefyre.com/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+      <label class="url-label" value="http://whitefyre.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
 
     <hbox>
@@ -59,30 +58,16 @@
       <label class="username" value="Calvinjpwalker"/>
       <label class="description" value="GameFOX TK" tooltiptext="GameFOX TK 0.5.x is based on GameFOX 0.5"/>
       <spacer flex="1"/>
-      <label class="url-label" value="http://www.toadking.com/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
+      <label class="url-label" value="http://www.toadking.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
 
     <separator class="thin"/>
     <label class="subtitle" value="&contributors.label;"/>
     <hbox>
-      <label value="Jero"/>
-      <label class="contrib description" value="Classic theme"/>
-      <spacer flex="1"/>
-      <label class="url-label" value="http://jero.net/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
-    <hbox>
-      <label value="Ricapar"/>
-      <label class="contrib description" value="Classic theme for new GameFAQs layout"/>
-    </hbox>
-    <hbox>
       <label value="Pardus"/>
       <label class="contrib description" value="Icons"/>
       <spacer flex="1"/>
-      <label class="url-label" value="http://www.uludag.org.tr/" onclick="gfox_addTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
-    <hbox>
-      <label value="Therum"/>
-      <label class="contrib description" value="gfaqs9 support"/>
+      <label class="url-label" value="http://www.uludag.org.tr/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
     <separator class="thin"/>
   </groupbox>

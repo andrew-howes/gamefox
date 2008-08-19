@@ -4,31 +4,48 @@ var GameFOXCSS =
 {
   init: function()
   {
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default.css', 'gamefox-standard-default.css',
-        'Standard Default', 'GameFOX devs', 'gfaqs10,9', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-standard-default-old.css', 'gamefox-standard-default-old.css',
-        'Standard Default (old quickpost)', 'GameFOX devs', 'gfaqs10,9', false, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-classic-default.css', 'gamefox-classic-default.css',
-        'Classic Default', 'GameFOX devs', 'gfaqs9', false, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-essentials.css', 'gamefox-essentials.css',
+        'Essentials', 'GameFOX devs', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-ads.css', 'gamefox-ads.css',
+        'Ad blocking', 'GameFOX devs', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost.css', 'gamefox-quickpost.css',
+        'QuickPost', 'GameFOX devs', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost-old.css', 'gamefox-quickpost-old.css',
+        'QuickPost (0.5)', 'GameFOX devs', '', false, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickwhois.css', 'gamefox-quickwhois.css',
+        'QuickWhois', 'GameFOX devs', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
-        'GFCode', 'Ant P.', 'gfaqs10,9', true, true)
-    
+        'GFCode', 'Ant P.', '', true, true);
+
+    this.add('bundled', 'chrome://gamefox/content/css/toad.css', 'toad.css',
+        'Ten On A Diet', 'TakatoMatsuki', '', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
-        'Wide Default Layout', '', 'gfaqs10', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/gamefox-no-sidebar.css', 'gamefox-no-sidebar.css',
-        'Sidebar Remover for Classic', '', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/classic-theme-by-jero.net.css', 'classic-theme-by-jero.net.css',
-        'Classic Theme', 'Jero', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/gamefox_sidebar.css', 'gamefox_sidebar.css',
-        'Classic GameFOX Sidebar', 'Michael J Buck', 'gfaqs10,9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/aquatakat.css', 'aquatakat.css',
-        'GameFAQs Alternate', 'Aquatakat', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/gfaqs-smooth.css', 'gfaqs-smooth.css',
-        'GameFAQs Smooth', 'headbanger', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/midnight-shade.css', 'midnight-shade.css',
-        'Midnight Shade', 'Jero', 'gfaqs9', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
-        'Classic Theme', 'Ricapar', 'gfaqs9', false, true);
+        'Wide Default Layout', '', '', false, true);
+    this.add('bundled', 'chrome://gamefox/content/css/ascii-art-font.css', 'ascii-art-font.css',
+        'ASCII art font', '', '', false, true);
+
+    // Remove old stylesheets
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+
+    var css = eval(prefs.getCharPref('theme.css.serialized'));
+    for (i in {"gamefox":"", "bundled":""})
+    {
+      for (j in css[i])
+      {
+        var req = new XMLHttpRequest();
+        req.overrideMimeType('text/plain'); // otherwise we get "not well-formed" errors in the error console
+        try
+        {
+          req.open('GET', 'chrome://gamefox/content/css/' + j, false);
+          req.send(null);
+        }
+        catch (e)
+        {
+          this.remove(i, j);
+        }
+      }
+    }
   },
 
   userimport: function(uri)
@@ -111,9 +128,9 @@ var GameFOXCSS =
       return false;
     }
     
-    // css.serialized pref magic
-   
     var css = eval(prefs.getCharPref('theme.css.serialized'));
+    if (css[cat][filename]) // the stylesheet already exists, don't touch its enabled status
+      enabled = css[cat][filename]['enabled'];
 
     css[cat][filename] = {
       'title': title, 'author': author, 'compat': compat, 'enabled': enabled
@@ -159,16 +176,36 @@ var GameFOXCSS =
     {
       for (var filename in css[category])
       {
-        file.initWithPath(this.getDirectory());
-        file.append(filename);
-        var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
-            Components.interfaces.nsIIOService).newFileURI(file, null, null);
+        try
+        {
+          file.initWithPath(this.getDirectory());
+          file.append(filename);
+          var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
+              Components.interfaces.nsIIOService).newFileURI(file, null, null);
 
-        if (sss.sheetRegistered(uri, sss.USER_SHEET))
-          sss.unregisterSheet(uri, sss.USER_SHEET);
+          if (sss.sheetRegistered(uri, sss.USER_SHEET))
+            sss.unregisterSheet(uri, sss.USER_SHEET);
 
-        if (css[category][filename]['enabled'].toString() == "true")
-          sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
+          if (css[category][filename]['enabled'].toString() == "true")
+            sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
+        }
+        catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND")
+        {
+          if (category == "user") // user stylesheet, remove it
+          {
+            this.remove(category, filename);
+            if (document.getElementById('css-tree'))
+              this.populate(document.getElementById('css-tree'));
+          }
+          else // gamefox stylesheet, restore it
+          {
+            if (this.add(category, "chrome://gamefox/content/css/" + filename, filename,
+                css[category][filename]["title"], css[category][filename]["author"],
+                null, true))
+              this.reload(); // oh no, a recursive function call!
+                             // it should be all right as this is only done if re-adding the sheet was successful
+          }
+        }
       }
     }
   },
@@ -222,15 +259,34 @@ var GameFOXCSS =
     this.treeView.setCellValue = this.setCell;
 
     element.view = this.treeView;
+
+    this.treeView.selection.clearSelection();
+    this.treeView.selection.select(0);
+
+    //document.getElementById('css-remove').disabled = true;
+
+    // this is sort of a hack, I couldn't be bothered with finding out how to push data
+    // directly to treeView.visibleData when populating the tree
+    this.treeView.toggleOpenState(0);
+    this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length + 1);
+    this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length +
+        this.treeView.childData["Bundled"].length + 2);
   },
 
   onselect: function()
   {
-    var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
-    if (category == 'user')
-      document.getElementById('css-remove').setAttribute('disabled', 'false');
-    else
-      document.getElementById('css-remove').setAttribute('disabled', 'true');
+    try
+    {
+      var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
+      if (category == 'user')
+        document.getElementById('css-remove').setAttribute('disabled', 'false');
+      else
+        document.getElementById('css-remove').setAttribute('disabled', 'true');
+    }
+    catch (e)
+    {
+      document.getElementById('css-remove').setAttribute('disabled', true);
+    }
   },
 
   setCell: function(idx, column, value)
@@ -254,34 +310,22 @@ var GameFOXCSS =
     GameFOXCSS.reload();
   },
 
-  removeWithTree: function()
+  remove: function(category, filename)
   {
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].
-      getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    var file = Components.classes['@mozilla.org/file/local;1'].
-      getService(Components.interfaces.nsILocalFile);
+    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
+        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var file = Components.classes['@mozilla.org/file/local;1'].getService(
+        Components.interfaces.nsILocalFile);
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
-    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].
-      getService(Components.interfaces.nsIStyleSheetService);
+    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].getService(
+        Components.interfaces.nsIStyleSheetService);
     var file = Components.classes['@mozilla.org/file/local;1'].getService(
         Components.interfaces.nsILocalFile);
 
-    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
-    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][5];
-
-    if (category != 'user')
-      return false;
-
     file.initWithPath(this.getDirectory());
     file.append(filename);
-    file.remove(false);
 
-    delete css[category][filename];
-    prefs.setCharPref('theme.css.serialized', css.toSource());
-
-    file.initWithPath(this.getDirectory());
-    file.append(filename);
     var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
         Components.interfaces.nsIIOService).newFileURI(file, null, null);
     try
@@ -290,6 +334,25 @@ var GameFOXCSS =
     }
     catch (e) {}
 
+    try
+    {
+      file.remove(false);
+    }
+    catch (e) {}
+
+    delete css[category][filename];
+    prefs.setCharPref('theme.css.serialized', css.toSource());
+  },
+
+  removeWithTree: function()
+  {
+    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
+    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][5];
+
+    if (category != 'user')
+      return false;
+
+    this.remove(category, filename);
     this.populate(document.getElementById('css-tree'));
   }
 }

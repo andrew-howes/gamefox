@@ -1,0 +1,24 @@
+@-moz-document domain(gamefaqs.com)
+{
+    .gamefox-quickwhois
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        padding: 3px !important;
+        width: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: none;
+        border: 2px solid #6564ff;
+        color: #000000;
+        background-color: #fff;
+        font-family: monospace;
+        font-size: larger;
+        max-width: 80%;
+        text-align: left;
+        -moz-border-radius: 10px;
+        -moz-opacity: 0.9;
+    }
+}

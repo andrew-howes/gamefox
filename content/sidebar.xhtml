@@ -6,8 +6,9 @@
   <title>GameFOX Sidebar</title>
   <base href="about:blank" target="_main"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/sidebar.js"/>
 </head>
-<body onload="gfox_processSidebar()">
+<body onload="GFSidebar.processLinks()">
   <div id="gamefox-sidebar-container">
     <h1 id="title"><a id="title-link" href="http://beyondboredom.net/projects/gamefox/">GameFOX</a></h1>
     <div class="left">
@@ -17,7 +18,7 @@
       <a href="http://www.gamefaqs.com/features/">Features</a><br/>
       <a href="http://www.gamefaqs.com/features/feedback/">Feedback</a><br/>
       <a href="http://www.gamefaqs.com/contribute/">Contribute</a><br/>
-      <a href="http://boards.gamefaqs.com/gfaqs/">Boards</a><br/>
+      <a href="http://www.gamefaqs.com/boards/">Boards</a><br/>
       <a href="http://www.gamefaqs.com/features/help/">Help</a><br/>
       <a href="http://www.gamefaqs.com/console/gamecube/">GameCube</a>
     </div>
@@ -33,8 +34,8 @@
       <a href="http://www.gamefaqs.com/console/xbox360/">Xbox 360</a>
     </div>
     <br/>
-    <div class="search-head"><a href="http://boards.gamefaqs.com/gfaqs/user.php">Profile</a> / <a href="http://www.gamefaqs.com/user/manage.html">Manage</a></div>
-    <div class="search-head"><a href="http://boards.gamefaqs.com/gfaqs/myposts.php">Posts</a> / <a href="http://boards.gamefaqs.com/gfaqs/tracked.php">Tracked</a> / <a href="http://boards.gamefaqs.com/gfaqs/modhist.php">Mods</a></div>
+    <div class="search-head"><a href="http://www.gamefaqs.com/boards/user.php">Profile</a> / <a href="http://www.gamefaqs.com/user/manage.html">Manage</a></div>
+    <div class="search-head"><a href="http://www.gamefaqs.com/boards/myposts.php">Posts</a> / <a href="http://www.gamefaqs.com/boards/tracked.php">Tracked</a> / <a href="http://www.gamefaqs.com/boards/modhist.php">Mods</a></div>
     <div class="search-head"><a href="http://www.gamefaqs.com/search/">Search GameFAQs</a></div>
     <form method="get" action="http://www.gamefaqs.com/search/index.html">
       <input type="hidden" name="platform" value="0"/>
@@ -42,17 +43,17 @@
       <input type="text" name="game" size="10"/>
     </form>
     <div class="search-head">Go to board ID</div>
-    <form method="get" action="http://boards.gamefaqs.com/gfaqs/gentopic.php">
+    <form method="get" action="http://www.gamefaqs.com/boards/gentopic.php">
       <input type="text" name="board" size="10"/>
     </form>
     <div class="search-head">Login (Email/Pass)</div>
-    <form method="post" action="http://www.gamefaqs.com/user/login.html" onsubmit="gfox_redirectLogin(this)">
-      <input type="hidden" name="path" id="gamefaqs-login-path" value="http://boards.gamefaqs.com/gfaqs/"/>
+    <form method="post" action="http://www.gamefaqs.com/user/login.html" onsubmit="GFSidebar.redirectLogin(this)">
+      <input type="hidden" name="path" id="gamefaqs-login-path" value="http://www.gamefaqs.com/boards/"/>
       <input type="text" name="EMAILADDR" maxlength="90"/>
       <input type="password" name="PASSWORD" maxlength="20"/><br/>
-      <input type="submit" value="Login" onmousedown="if (event.button == 1) gfox_newTabLogin(this.parentNode)"/>
+      <input type="submit" value="Login" onmousedown="if (event.button == 1) GFSidebar.newTabLogin(this.parentNode)"/>
     </form>
-    <div class="search-head"><a href="http://www.gamefaqs.com/user/logout.html?r=boards.gamefaqs.com%2Fgfaqs%2F">Logout</a> / <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a></div>
+    <div class="search-head"><a href="http://www.gamefaqs.com/user/logout.html?r=www.gamefaqs.com%2Fboards%2F">Logout</a> / <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a></div>
     <div class="search-head"><a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a></div>
     <iframe src="chrome://gamefox/content/tags.xul" style="width: 100%; height: 300px;"/>
   </div>

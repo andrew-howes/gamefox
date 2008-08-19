@@ -1,83 +1,107 @@
 <?xml version="1.0"?>
-<!-- vim: set et sw=2 sts=2 ts=2: -->
+<!-- vim: set et sw=2 sts=2 ts=2 tw=79: -->
+
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/overlay.dtd">
+
 <overlay id="gamefox-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/gfaqs9.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/highlight.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/quote.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/context.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/quickpost.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/quickwhois.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/accounts.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
     <menuseparator id="gamefox-context-separator"/>
-    <menuitem id="gamefox-context-quote" label="Quote" accesskey="Q" oncommand="GameFOX.quote(gContextMenu);"/>
-    <menu label="Pages" id="gamefox-context-pages">
+    <menuitem label="&menu.label;" disabled="true"/>
+
+    <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
+      accesskey="&menu.quote.accesskey;" oncommand="GFQuote.quote(gContextMenu);"/>
+
+    <menu id="gamefox-context-pages" label="&menu.pages.label;"
+      accesskey="&menu.pages.accesskey;">
       <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
     </menu>
-    <menuitem id="gamefox-context-tag" label="Tag Topic" accesskey="T" oncommand="GameFOXTags.add(gContextMenu);"/>
-    <menuitem id="gamefox-toggle-sidebar" label="Toggle GameFOX Sidebar" observes="viewGamefoxSidebar"/>
-    <menu label="GameFAQs Tags" id="gamefox-tags">
+
+    <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
+      accesskey="&menu.tagtopic.accesskey;" oncommand="GameFOXTags.add(gContextMenu);"/>
+
+    <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
+      accesskey="&menu.sidebar.accesskey;" observes="viewGamefoxSidebar"/>
+
+    <menu id="gamefox-tags" label="&menu.tags.label;">
       <menupopup id="gamefox-tags-menu" onpopupshowing="GameFOXTags.populate(1);"/>
+    </menu>
+
+    <menu id="gamefox-accounts" label="&menu.accounts.label;">
+      <menupopup id="gamefox-accounts-menu" onpopupshowing="GameFOXAccounts.populate();"/>
     </menu>
   </popup>
 
-  <!-- FireFox tools menu -->
+  <!-- firefox tools menu -->
   <menupopup id="menu_ToolsPopup">
-    <menuitem insertbefore="prefSep" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+    <menuitem insertafter="javascriptConsole" label="&tools.label;"
+      oncommand="window.openDialog('chrome://gamefox/content/options.xul',
+      '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"
+      accesskey="&tools.accesskey;"/>
   </menupopup>
-
-  <!-- SeaMonkey tools menu -->
+  <!-- seamonkey tools menu -->
   <menupopup id="taskPopup">
-    <menuitem insertafter="downloadmgr" label="GameFOX Options" oncommand="window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+    <menuitem insertafter="downloadmgr" label="&tools.label;"
+      oncommand="window.openDialog('chrome://gamefox/content/options.xul',
+      '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"
+      acesskey="&tools.accesskey;"/>
   </menupopup>
 
-  <!-- Firefox commands -->
+  <!-- firefox commands -->
   <commandset id="mainCommandSet">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
   </commandset>
-
-  <!-- SeaMonkey commands -->
+  <!-- seamonkey commands -->
   <commandset id="commands">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
   </commandset>
 
-  <!-- Firefox keys -->
+  <!-- firefox keys -->
   <keyset id="mainKeyset">
     <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
   </keyset>
-
-  <!-- SeaMonkey keys -->
+  <!-- seamonkey keys -->
   <keyset id="navKeys">
     <key id="key_gamefoxSidebar" modifiers="accel,alt,shift" key="G" command="cmd_gamefoxSidebar"/>
   </keyset>
 
-  <!-- Firefox broadcasters -->
+  <!-- firefox broadcasters -->
   <broadcasterset id="mainBroadcasterSet">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
-      label="GameFOX Sidebar"
+      label="&sidebar.title;"
       type="checkbox"
       group="sidebar"
-      sidebartitle="GameFOX Sidebar"
+      sidebartitle="&sidebar.title;"
       sidebarurl="chrome://gamefox/content/sidebar.xhtml"
-      command="cmd_gamefoxSidebar"
-    />
+      command="cmd_gamefoxSidebar"/>
   </broadcasterset>
-
-  <!-- SeaMonkey broadcasters -->
+  <!-- seamonkey broadcasters -->
   <broadcasterset id="navBroadcasters">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
-      label="GameFOX Sidebar"
+      label="&sidebar.title;"
       type="checkbox"
       group="sidebar"
-      sidebartitle="GameFOX Sidebar"
+      sidebartitle="&sidebar.title;"
       sidebarurl="chrome://gamefox/content/sidebar.xhtml"
-      command="cmd_gamefoxSidebar"
-    />
+      command="cmd_gamefoxSidebar"/>
   </broadcasterset>
 
-  <!-- Firefox view sidebar menu -->
+  <!-- firefox view sidebar menu -->
   <menupopup id="viewSidebarMenu">
     <menuitem key="key_gamefoxSidebar" observes="viewGamefoxSidebar"/>
   </menupopup>

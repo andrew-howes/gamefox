@@ -1,3 +1,5 @@
+/* vim: set et sw=2 sts=2 ts=2: */
+
 var GameFOXTags =
 {
   tags: '',
@@ -164,8 +166,7 @@ var GameFOXTags =
   open: function(tagID, openType)
   {
     var IDs     = tagID.split(/,/);
-    var gfaqs9  = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getBoolPref('gamefox.gfaqs9');
-    var tagURI  = 'http://boards.gamefaqs.com/gfaqs' + (gfaqs9 ? '9' : '');
+    var tagURI  = 'http://www.gamefaqs.com/boards';
 
     if (IDs[0] == 0 && IDs[1] == -1)
     {
@@ -173,7 +174,7 @@ var GameFOXTags =
     }
     else if (IDs[0] == 0 && IDs[1] == -2)
     {
-      tagURI = 'http://boards.gamefaqs.com/gfaqs/tracked.php';
+      tagURI += '/tracked.php';
     }
     else
     {
@@ -332,7 +333,7 @@ var GameFOXTags =
 
     /* removePurged: dispatchRequest: open request */
 
-      request.open('GET', 'http://boards.gamefaqs.com/gfaqs/genmessage.php?board=' + board + '&topic=' + topic);
+      request.open('GET', 'http://www.gamefaqs.com/boards/genmessage.php?board=' + board + '&topic=' + topic);
 
 
     /* removePurged: dispatchRequest: request.onerror */
@@ -510,17 +511,12 @@ var GameFOXTags =
         event.preventDefault();
       }
 
-      var gfaqs9      = GameFOXNine.getNine(doc);
-      var onMyPosts   = doc.location.pathname.match(/^\/gfaqs9?\/myposts\.php$/i);
+      var onMyPosts   = doc.location.pathname.match(/^\/boards\/myposts\.php$/i);
       var onTopicList;
 
       if (onMyPosts)
       {
         onTopicList = false;
-      }
-      else if (gfaqs9)
-      {
-        onTopicList = doc.location.pathname.match(/^\/gfaqs9\/(gentopic|search)\.php$/ig);
       }
       else
       {
@@ -534,7 +530,6 @@ var GameFOXTags =
         {
           var node = event.target;
           var nodeName = node.nodeName.toLowerCase();
-          var fix = (onTopicList && gfaqs9) ? -1 : 0;
 
           while (nodeName != 'td')
           {
@@ -542,7 +537,7 @@ var GameFOXTags =
             nodeName = node.nodeName.toLowerCase();
           }
 
-          var topicLink = node.parentNode.cells[1+fix].getElementsByTagName('a')[0];
+          var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
           queryStr   = topicLink.href;
           topicTitle = topicLink.textContent.replace(/^\s+|\s+$/g, '');
 
@@ -559,28 +554,14 @@ var GameFOXTags =
     var topicID     = queryStr.match(/\btopic=([0-9-]+)/i)[1];
     var tagID       = boardID + ',' + topicID;
 
-    if (gfaqs9)
+    var h1s         = doc.getElementsByTagName('h1');
+    if (!boardTitle)
     {
-      if (!boardTitle)
-      {
-        boardTitle = doc.evaluate('//div[@class="head1b"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
-      }
-      if (!topicTitle)
-      {
-        topicTitle = doc.evaluate('//div[@class="boxhead"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.replace(/^\s+|\s+$/g, '');
-      }
+      boardTitle  = h1s[0].textContent.replace(/^\s+|\s+$/g, '');
     }
-    else
+    if (!topicTitle)
     {
-      var h1s         = doc.getElementsByTagName('h1');
-      if (!boardTitle)
-      {
-        boardTitle  = h1s[0].textContent.replace(/^\s+|\s+$/g, '');
-      }
-      if (!topicTitle)
-      {
-        topicTitle  = h1s[1].textContent.replace(/^\s+|\s+$/g, '');
-      }
+      topicTitle  = h1s[1].textContent.replace(/^\s+|\s+$/g, '');
     }
 
     GameFOXTags.read();
@@ -608,5 +589,26 @@ var GameFOXTags =
 
     GameFOXTags.write(GameFOXTags.tags);
     return true;
+  },
+
+  tagTopicEvent: function(event)
+  {
+    event.preventDefault();
+    if (GameFOXTags.add(event))
+    {
+      event.target.removeEventListener('click', GameFOXTags.tagTopicEvent, false);
+      event.target.addEventListener('click', GameFOXTags.untagTopicEvent, false);
+      event.target.textContent = 'Untag Topic';
+    }
+  },
+
+  untagTopicEvent: function(event)
+  {
+    event.preventDefault();
+    GameFOXTags.remove(event.target.hash.substring(1));
+
+    event.target.removeEventListener('click', GameFOXTags.untagTopicEvent, false);
+    event.target.addEventListener('click', GameFOXTags.tagTopicEvent, false);
+    event.target.textContent = 'Tag Topic';
   }
 };

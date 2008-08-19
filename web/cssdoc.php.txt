@@ -1,0 +1,62 @@
+<h2 id="a">a</h2>
+<h3 id="a+gamefox-quickpost-link">a#gamefox-quickpost-link</h3>
+
+Used on gentopic.php to activate the floating topic QuickPost.
+
+<h2 id="div">div</h2>
+<h3 id="div+gamefox-quickpost-afloat">div#gamefox-quickpost-afloat</h3>
+
+Contains the floating topic QuickPost.
+
+<h3 id="div+gamefox-quickpost-normal">div#gamefox-quickpost-normal</h3>
+
+Container `div` for genmessage.php QuickPost.
+
+<h3 id="div+gamefox-quickpost-title">div#gamefox-quickpost-title</h3>
+
+Contains the title ("QuickPost") of QuickPost.
+
+<h3 id="div_gamefox-quickwhois">div.gamefox-quickwhois</h3>
+
+Contains text for QuickWhois.
+
+<h2 id="form">form</h2>
+<h3 id="form+gamefox-quickpost-form">form#gamefox-quickpost-form</h3>
+
+QuickPost form.
+
+<h2 id="input">input</h2>
+<h3 id="input+gamefox-quickpost-btn">input#gamefox-quickpost-btn</h3>
+
+"Post Message" button to bypass message preview. Used by QuickPost and on post.php.
+
+<h3 id="input+gamefox-quickpost-hide">input#gamefox-quickpost-hide</h3>
+
+`input` button to hide the floating topic QuickPost.
+
+<h3 id="input+gamefox-topic">input#gamefox-topic</h3>
+
+`input` text element for the topic title. Only present in the floating topic QuickPost.
+
+<h2 id="span">span</h2>
+<h3 id="span_gamefox-pagelist">span.gamefox-pagelist</h3>
+
+Contains topic pagination text.
+
+<h2 id="textarea">textarea</h2>
+<h3 id="textarea+gamefox-message">textarea#gamefox-message</h3>
+
+`textarea` for QuickPost containing the message body.
+
+<h2 id="tr">tr</h2>
+<h3 id="tr_gamefox-highlight-one tr_gamefox-highlight-two">
+tr.gamefox-highlight-one tr.gamefox-highlight-two
+</h3>
+
+Applied to highlighted table rows. The `tr` also has a `background-color`
+property containing the highlight color. Note that all child `td`s also have this
+`background-color` property.
+
+<h3 id="tr_gamefox-pagelist">tr.gamefox-pagelist</h3>
+
+Contains topic pagination text when pages are set to be generated in a new row.

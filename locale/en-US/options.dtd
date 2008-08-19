@@ -1,32 +1,150 @@
+<!-- vim: set indentexpr=: -->
+
+<!ENTITY title "GameFOX Options">
+<!ENTITY about.label "About...">
+
 <!ENTITY general.label "General">
 
-<!ENTITY gfaqs9.label "Assume GameFAQs 9">
-<!ENTITY gfaqs9.desc "When unable to be determined, use /gfaqs9/ URIs when linking to GameFAQs pages.">
+<!ENTITY page.label "Page">
+<!ENTITY page.tab.board "Board Settings">
+<!ENTITY page.tab.elements "Elements">
+<!ENTITY page.tab.highlight "User Highlighting">
+<!ENTITY page.board.settings.caption "Board Settings">
+<!ENTITY page.board.settings.tpp "Topics Per Page">
+<!ENTITY page.board.settings.tsort "Topic Sort">
+<!ENTITY page.board.settings.tsort.fo "By First Post, Oldest First">
+<!ENTITY page.board.settings.tsort.fn "By First Post, Newest First">
+<!ENTITY page.board.settings.tsort.lo "By Last Post, Oldest First">
+<!ENTITY page.board.settings.tsort.ln "By Last Post, Newest First">
+<!ENTITY page.board.settings.mpp "Messages Per Page">
+<!ENTITY page.board.settings.msort "Message Sort">
+<!ENTITY page.board.settings.msort.of "Oldest First">
+<!ENTITY page.board.settings.msort.nf "Newest First">
+<!ENTITY page.board.settings.timezone "Time Zone">
+<!ENTITY page.board.settings.msgdata "Message Poster Display">
+<!ENTITY page.board.settings.msgdata.left "Left of Message">
+<!ENTITY page.board.settings.msgdata.above "Above Message">
+<!ENTITY page.board.settings.grab "Grab From GameFAQs">
+<!ENTITY page.board.settings.save "Save to GameFAQs">
+<!ENTITY page.elements.desctitles "Descriptive window titles">
+<!ENTITY page.elements.titleprefix "Page title prefixes">
+<!ENTITY page.elements.postmessage "&quot;Post Message&quot; (skip preview) button">
+<!ENTITY page.elements.topics.caption "Topic Lists">
+<!ENTITY page.elements.topics.quickpost "QuickPost Topic form">
+<!ENTITY page.elements.topics.trackedlink "Link to boards on Tracked Topics page">
+<!ENTITY page.elements.messages.caption "Message Lists">
+<!ENTITY page.elements.messages.quickpost "QuickPost Message form">
+<!ENTITY page.elements.messages.taglink "&quot;Tag Topic&quot; link">
+<!ENTITY page.elements.messages.numbering "Number messages">
+<!ENTITY page.elements.pages.caption "Topic Pagination">
+<!ENTITY page.elements.pages.auto "Automatically add page numbers on topic list">
+<!ENTITY page.elements.pages.where "Location of page numbers:">
+<!ENTITY page.elements.pages.where.right "Right of topic title">
+<!ENTITY page.elements.pages.where.below "Below topic title">
+<!ENTITY page.elements.pages.where.newrow "New row below topic title">
+<!ENTITY page.elements.pages.format.caption "Format">
+<!ENTITY page.elements.pages.format.prefix "Prefix:">
+<!ENTITY page.elements.pages.format.sep "Delimiter:">
+<!ENTITY page.elements.pages.format.suffix "Suffix:">
+<!ENTITY page.highlight.caption "User Highlighting">
+<!ENTITY page.highlight.instructions "Enter usernames separated by commas.">
+<!ENTITY page.highlight.group "Group">
+<!ENTITY page.highlight.hide "Hide posts from Group 2">
+<!ENTITY page.highlight.messages "Highlight messages">
+<!ENTITY page.highlight.topics "Highlight topics">
 
-<!ENTITY signature.content "Content">
-<!ENTITY signature.desc "
-        Pre-signatures are inserted before the separator. Signatures cannot exceed
-        two lines. GameFAQs imposes a 160-character limit on signatures, but GameFOX
-        does not enforce this.
-">
-<!ENTITY signature.presig.label "Pre-signature">
-<!ENTITY signature.sig.label "Signature">
-<!ENTITY signature.grab.label "Grab From GameFAQs">
-<!ENTITY signature.applyeverywhere.label "Also use on standard GameFAQs post page">
-<!ENTITY signature.newline.label "Insert an additional line break before the separator">
-<!ENTITY signature.addition "Addition Method">
-<!ENTITY signature.addafter "Append signature after submitting or previewing the post">
-<!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
-
+<!ENTITY theme.label "Theme">
 <!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">
 <!ENTITY theme.stylesheets.label "Stylesheets">
 <!ENTITY theme.tree.name "Name">
 <!ENTITY theme.tree.author "Author">
 <!ENTITY theme.tree.compat "Compatibility">
 <!ENTITY theme.tree.enabled "Enabled">
+<!ENTITY theme.tree.delete "Delete">
 <!ENTITY theme.import.label "Import a Stylesheet">
 <!ENTITY theme.import.uri "URI">
 <!ENTITY theme.import.browse "Browse">
 <!ENTITY theme.import.submit "Import">
 <!ENTITY theme.reload "Reload Stylesheets">
-<!ENTITY theme.edit "Edit Stylesheets Contents">
+<!ENTITY theme.edit "Open CSS Directory">
+
+<!ENTITY quoting.label "Quoting">
+<!ENTITY quoting.header.caption "Quote Header">
+<!ENTITY quoting.header.username "Poster username">
+<!ENTITY quoting.header.date "Post date">
+<!ENTITY quoting.header.num "Post number">
+<!ENTITY quoting.body.caption "Quote Body">
+<!ENTITY quoting.body.removesig "Remove signature">
+<!ENTITY quoting.style.caption "Quote Style">
+<!ENTITY quoting.style.desc "Tags to use for quoting:">
+<!ENTITY quoting.style.regular.label "Use regular tags">
+<!ENTITY quoting.style.boldheader "Bold header">
+<!ENTITY quoting.style.italicheader "Italicize header">
+<!ENTITY quoting.style.boldmessage "Bold message">
+<!ENTITY quoting.style.italicmessage "Italicize message">
+<!ENTITY quoting.style.gfcodebody.label "Use GFCode for message body">
+<!ENTITY quoting.style.gfcodefull.label "Use GFCode for full quote">
+<!ENTITY quoting.style.custom.label "Use a custom template">
+<!ENTITY quoting.style.custom.u "username of poster">
+<!ENTITY quoting.style.custom.d "date of post">
+<!ENTITY quoting.style.custom.n "post number">
+<!ENTITY quoting.style.custom.m "message body">
+
+<!ENTITY signature.label "Signature">
+<!ENTITY signature.content.label "Content">
+<!ENTITY signature.options.label "Options">
+<!ENTITY signature.desc "
+        Pre-signatures are inserted before the separator. Signatures cannot exceed
+        two lines. GameFAQs imposes a 160-character limit on signatures, but GameFOX
+        does not enforce this.
+">
+<!ENTITY signature.list.default "Default signature">
+<!ENTITY signature.list.new "New signature">
+<!ENTITY signature.list.delete "Delete">
+<!ENTITY signature.criteria.desc "Separate different accounts and boards with semicolons. Use the universal account name.">
+<!ENTITY signature.criteria.accounts.label "Accounts:">
+<!ENTITY signature.criteria.boards.label "Boards:">
+<!ENTITY signature.presig.label "Pre-signature:">
+<!ENTITY signature.presig.warning "At risk of being modded if not similar to your username">
+<!ENTITY signature.sig.label "Signature:">
+<!ENTITY signature.grab.label "Grab From GameFAQs">
+<!ENTITY signature.applyeverywhere.label "Also use on standard GameFAQs post page">
+<!ENTITY signature.newline.label "Insert an additional line break before the separator">
+<!ENTITY signature.addition "Addition Method">
+<!ENTITY signature.addafter "Append signature after submitting or previewing the post">
+<!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
+<!ENTITY signature.selection "Selection Mode">
+<!ENTITY signature.selection.first "Choose most specific matching signature">
+<!ENTITY signature.selection.anyrandom "Choose random from any matching signature">
+<!ENTITY signature.selection.bestrandom "Choose random from most specific matching signatures">
+
+<!ENTITY mouse.label "Mouse">
+<!ENTITY mouse.topics.caption "Topic Lists">
+<!ENTITY mouse.topics.label "Double clicking on topic row action:">
+<!ENTITY mouse.topics.radio.nothing "Do nothing">
+<!ENTITY mouse.topics.radio.paginate "Show links to topic pages">
+<!ENTITY mouse.topics.radio.lastpage "Go to last page">
+<!ENTITY mouse.topics.radio.tagtopic "Tag topic">
+<!ENTITY mouse.aml.caption "Active Messages List">
+<!ENTITY mouse.aml.label "Double clicking on row action:">
+<!ENTITY mouse.aml.radio.nothing "Do nothing">
+<!ENTITY mouse.aml.radio.paginate "Show links to topic pages">
+<!ENTITY mouse.aml.radio.lastpage "Go to last page">
+<!ENTITY mouse.aml.radio.tagtopic "Tag topic">
+<!ENTITY mouse.messages.caption "Message Lists">
+<!ENTITY mouse.messages.label "Double clicking on message header action:">
+<!ENTITY mouse.messages.radio.nothing "Do nothing">
+<!ENTITY mouse.messages.radio.quickwhois "QuickWhois: display the poster's user information">
+<!ENTITY mouse.messages.radio.quote "Quote message">
+<!ENTITY mouse.messages.dblclickquoting "Quote by double clicking on the message">
+<!ENTITY mouse.context.caption "Context Menu">
+<!ENTITY mouse.context.sidebar "Sidebar">
+<!ENTITY mouse.context.taglist "Tag List">
+<!ENTITY mouse.context.pages "Pages">
+<!ENTITY mouse.context.tagtopic "Tag Topic">
+<!ENTITY mouse.context.quote "Quote">
+<!ENTITY mouse.context.accounts "Accounts">
+<!ENTITY mouse.context.tags.aml "Tags: Active Messages">
+<!ENTITY mouse.context.tags.tracked "Tags: Tracked Topics">
+
+<!ENTITY tags.label "Tags">

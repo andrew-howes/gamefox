@@ -1,5 +1,43 @@
 2008-08-xx:
+    * version 0.6.5
+    * Don't quote from the selection if it's empty, which can be caused by
+      selecting and deselecting a message
+    * Option for removing Accounts list from context menu
+    * Split the signature pane into tabs so it looks cleaner and works on
+      800x600
+    * Option to select random signature from most specific matching signatures
+    * Option to disable page prefixes in the title
+    * More reliable detection of the page type (topics/messages/etc)
+    * Fix user highlighting and numbering in archived topics
+
+2008-08-15:
+    * version 0.6.4
+    * Handle topic lists properly when automatic pagination is disabled
+    * Treat detail.php as a message list
+    * Fix double click quoting
+
+2008-08-15:
+    * version 0.6.3
+    * More error handling with the CSS component
+    * Split GameFOX stylesheets into multiple files
+    * Change checkmarks to checkboxes in the themes pane to make toggling CSS
+      more intuitive, add white outline to make them visible with dark Firefox widgets
+    * Get rid of the odd blue QuickPost border in Firefox 2
+    * Lots of code optimizations and refactoring
+    * Multiple signatures, including board- and account-specific signatures and
+      the option to randomly select them
+    * Quick account switching from the context menu
+    * New CSS: Ten On A Diet
+    * Selection quoting: quote excerpts from messages by selecting them before
+      right clicking and quoting
+    * New CSS: ASCII art font (larger fonts in messages)
+    * Signature character counter in the options window
+
+2008-08-04:
     * version 0.6.2
+    * Remove gfaqs9 support
+    * Remove a bunch of old CSS
+    * boards.gamefaqs.com/gfaqs -> www.gamefaqs.com/boards
 
 2008-07-31:
     * version 0.6.1

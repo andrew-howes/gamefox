@@ -1,0 +1,17 @@
+/* This file contains unobtrusive styles that work with some of GameFOX's features */
+@-moz-document domain(gamefaqs.com)
+{
+    tr.gamefox-pagelist
+    {
+        display: table-row;
+    }
+
+    tr.gamefox-pagelist > td
+    {
+        background-color: #fff !important;
+        border-top: 1px solid #00004f !important;
+        border-bottom: 1px solid #00004f !important;
+        text-align: center !important;
+        font-weight: bold !important;
+    }
+}
