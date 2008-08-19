@@ -36,6 +36,8 @@ pref("gamefox.signature.selection", 1);
 pref("gamefox.theme.disablegamefaqscss", false);
 pref("gamefox.theme.css.serialized", "({gamefox:{}, bundled:{}, user:{}})");
 
+pref("gamefox.userlist.topics.showgroupnames", true);
+pref("gamefox.userlist.messages.showgroupnames", true);
 pref("gamefox.userlist.serialized", "[]");
 
 pref("gamefox.tags", "");

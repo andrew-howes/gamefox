@@ -47,6 +47,9 @@
       <preference id="gamefox-pref-paging-prefix"     name="gamefox.paging.prefix"    type="string"/>
       <preference id="gamefox-pref-paging-separator"  name="gamefox.paging.separator" type="string"/>
       <preference id="gamefox-pref-paging-suffix"     name="gamefox.paging.suffix"    type="string"/>
+
+      <preference id="userlist-topics-groupnames" name="gamefox.userlist.topics.showgroupnames" type="bool"/>
+      <preference id="userlist-messages-groupnames" name="gamefox.userlist.messages.showgroupnames" type="bool"/>
     </preferences>
 
 
@@ -157,11 +160,17 @@
 <!-- USER LISTS -->
         <tabpanel orient="vertical" flex="1">
           <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
+
+          <groupbox>
+            <caption label="Options"/>
+            <checkbox preference="userlist-topics-groupnames" label="Show group names on topic lists"/>
+            <checkbox preference="userlist-messages-groupnames" label="Show group names on message lists"/>
+          </groupbox>
           
           <hbox pack="end">
             <button oncommand="GFUL.add();" label="Add a Group" icon="add"/>
           </hbox>
-          <vbox id="usergroups" style="height:380px;overflow:auto"/>
+          <vbox id="usergroups" style="height:320px;overflow:auto"/>
         </tabpanel>
 
 

@@ -186,7 +186,8 @@ var GameFOX =
           if ((hlinfo = GFUL.searchUsername(username)) != false)
           {
             // list of groups
-            if (hlinfo[0].length)
+            if (GameFOX.prefs.getBoolPref('userlist.topics.showgroupnames') &&
+                hlinfo[0].length)
               rows[i].cells[2].appendChild(doc.createTextNode(' ' +
                     hlinfo[0]));
             
@@ -342,7 +343,8 @@ var GameFOX =
         if ((hlinfo = GFUL.searchUsername(username)) != false)
         {
           // add group names after username
-          if (hlinfo[0].length)
+          if (GameFOX.prefs.getBoolPref('userlist.messages.showgroupnames') &&
+              hlinfo[0].length)
             td[j].insertBefore(doc.createTextNode(" " + hlinfo[0]), td[j].
                 getElementsByTagName(GFlib.onPage(doc, "archive") ? 'b' : 'a')[0].
                 nextSibling);
