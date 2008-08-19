@@ -50,7 +50,7 @@ var GFUL =
       textbox.setAttribute('emptytext', 'Group Name');
       textbox.setAttribute('class', 'ug-name');
       textbox.setAttribute('value', userlist[i]['name']);
-      textbox.addEventListener('input', this.updatePref, false);
+      textbox.addEventListener('keyup', this.updatePref, false);
       hbox.appendChild(textbox);
       /*** separator **/
       separator = document.createElement('separator');
@@ -68,7 +68,7 @@ var GFUL =
       textbox.setAttribute('size', '6');
       textbox.setAttribute('value', userlist[i]['color']);
       textbox.setAttribute('class', 'ug-color');
-      textbox.addEventListener('input', this.updatePref, false);
+      textbox.addEventListener('keyup', this.updatePref, false);
       hbox.appendChild(textbox);
 
       groupbox.appendChild(hbox);
@@ -86,7 +86,7 @@ var GFUL =
       textbox.setAttribute('class', 'ug-users');
       textbox.setAttribute('value', userlist[i]['users']);
       textbox.setAttribute('flex', '1');
-      textbox.addEventListener('input', this.updatePref, false);
+      textbox.addEventListener('keyup', this.updatePref, false);
       hbox.appendChild(textbox);
 
       groupbox.appendChild(hbox);
