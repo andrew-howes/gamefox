@@ -11,7 +11,8 @@ var GFUL =
   {
     var userlist = eval(this.prefs.getCharPref("userlist.serialized"));
 
-    userlist.push({"name": "", "color": "", "users": "", "messages": "highlight", "topics": "highlight"});
+    userlist.push({"name": "", "color": "#CCFFFF", "users": "",
+        "messages": "highlight", "topics": "highlight"});
 
     this.prefs.setCharPref("userlist.serialized", userlist.toSource());
     this.populate();
