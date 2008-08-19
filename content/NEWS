@@ -9,6 +9,7 @@
     * Option to disable page prefixes in the title
     * More reliable detection of the page type (topics/messages/etc)
     * Fix user highlighting and numbering in archived topics
+    * Unlimited user highlighting groups
 
 2008-08-15:
     * version 0.6.4
