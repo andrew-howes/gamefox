@@ -93,6 +93,7 @@ var GameFOX =
     var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
         doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     GFHL.loadGroups();
+    GFUL.loadGroups();
 
     /* Topic Lists */
     if (GFlib.onPage(doc, 'topics'))
@@ -327,16 +328,21 @@ var GameFOX =
           var username = td[j].getElementsByTagName('a')[0].textContent;
         var hlinfo = false;
 
-        if ((hlinfo = GFHL.getGroupData(username)) != false)
+        if ((hlinfo = GFUL.searchUsername(username)) != false)
         {
-          if (GameFOX.prefs.getBoolPref('highlight.msgs'))
+          // add group names after username
+          if (hlinfo[0].length)
+            td[j].insertBefore(doc.createTextNode(" " + hlinfo[0]), td[j].
+                getElementsByTagName(GFlib.onPage(doc, "archive") ? 'b' : 'a')[0].
+                nextSibling);
+          
+          if (hlinfo[2] == 'highlight')
           {
             td[j].setAttribute('class', td[j].getAttribute('class') +
-                ' gamefox-highlight-' + hlinfo[0]);
+                ' gamefox-highlight' + hlinfo[1]);
             td[j].style.setProperty('background-color', hlinfo[1], 'important');
           }
-
-          if (hlinfo[2]) // Hide post
+          else if (hlinfo[2] == 'collapse') // Collapse post
           {
             td[j + 1].style.setProperty('font-size', '0pt', 'important');
             td[j + 1].style.setProperty('display', 'none', 'important');
@@ -351,6 +357,11 @@ var GameFOX =
             else
               td[j].appendChild(doc.createTextNode(' | '));
             td[j].appendChild(a);
+          }
+          else if (hlinfo[2] == 'remove') // remove post
+          {
+            td[j].style.setProperty('display', 'none', 'important');
+            td[j + 1].style.setProperty('display', 'none', 'important');
           }
         }
       }
