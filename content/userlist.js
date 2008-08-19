@@ -20,7 +20,7 @@ var GFUL =
 
   populate: function()
   {
-    var groupbox, caption, hbox, textbox, separator, colorpicker, label, radiogroup, radio;
+    var groupbox, caption, hbox, textbox, separator, colorpicker, label, radiogroup, radio, button;
     var radios;
 
     // This is pretty verbose
@@ -53,6 +53,16 @@ var GFUL =
       textbox.addEventListener('keyup', this.updatePref, false);
       hbox.appendChild(textbox);
       /*** separator **/
+      separator = document.createElement('separator');
+      separator.setAttribute('flex', '1');
+      hbox.appendChild(separator);
+      /*** button ***/
+      button = document.createElement('button');
+      button.setAttribute('label', 'Delete');
+      button.setAttribute('icon', 'remove');
+      button.addEventListener('command', this.removeWithButton, false);
+      hbox.appendChild(button);
+      /*** separator ***/
       separator = document.createElement('separator');
       separator.setAttribute('flex', '1');
       hbox.appendChild(separator);
@@ -258,5 +268,26 @@ var GFUL =
           groupNames.length - 2) + ")" : "";
 
     return [groupNames, color, messages, topics];
+  },
+
+  removeWithButton: function(event)
+  {
+    var id = event.target.parentNode.parentNode.id.substring(3);
+    var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
+
+    if (userlist[id]['name'].length)
+    {
+      if (!confirm('Really delete the group "' + userlist[id]['name'] + '"?'))
+        return;
+    }
+    else
+    {
+      if (!confirm('Really delete group ' + (parseInt(id) + 1) + '?'))
+        return;
+    }
+
+    userlist.splice(id, 1);
+    GFUL.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    GFUL.populate();
   }
 };
