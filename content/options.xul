@@ -61,7 +61,7 @@
 
       <tabs tabGroup="page">
         <tab id="gamefox-tab-elements" label="&page.tab.elements;"/>
-        <tab id="gamefox-tab-highlight" label="&page.tab.highlight;"/>
+        <tab id="gamefox-tab-highlight" label="&page.tab.userlists;"/>
         <tab id="gamefox-tab-general" label="&page.tab.board;"/>
       </tabs>
 
@@ -162,7 +162,6 @@
 
 
 <!-- USER LISTS -->
-
         <tabpanel orient="vertical" flex="1">
           <hbox pack="end">
             <button oncommand="GFUL.add();" label="Add a Group" icon="add"/>
@@ -195,8 +194,6 @@
             </radiogroup>
           </groupbox>
         </tabpanel>
-
-      </tabpanels>
 
 
 <!-- GENERAL -->

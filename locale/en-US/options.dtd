@@ -8,7 +8,7 @@
 <!ENTITY page.label "Page">
 <!ENTITY page.tab.board "Board Settings">
 <!ENTITY page.tab.elements "Elements">
-<!ENTITY page.tab.highlight "User Highlighting">
+<!ENTITY page.tab.userlists "User Lists">
 <!ENTITY page.board.settings.caption "Board Settings">
 <!ENTITY page.board.settings.tpp "Topics Per Page">
 <!ENTITY page.board.settings.tsort "Topic Sort">
