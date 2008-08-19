@@ -369,7 +369,7 @@ var GameFOX =
             var a = doc.createElement('a');
                 a.setAttribute('href', '#');
                 a.appendChild(doc.createTextNode('[Show]'));
-                a.addEventListener('click', GFHL.showPost, false);
+                a.addEventListener('click', GFUL.showPost, false);
 
             if (leftMsgData)
               td[j].appendChild(doc.createElement('br'));
