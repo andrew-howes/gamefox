@@ -21,7 +21,7 @@ var GFContextMenu =
       return;
     }
 
-    if (!GFlib.onPage(doc, 'genmessage') && doc.getElementById('gamefox-message'))
+    if (!GFlib.onPage(doc, 'messages') && doc.getElementById('gamefox-message'))
       document.getElementById('gamefox-context-quote').hidden = true;
     else
     { // Quote
@@ -46,7 +46,7 @@ var GFContextMenu =
       }
     }
 
-    if (!GFlib.onPage(doc, 'gentopic') && !GFlib.onPage(doc, 'myposts'))
+    if (!GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'myposts'))
     {
       if (!GFlib.onPage(doc, 'myposts') || !GameFOX.prefs.getBoolPref('context.tag'))
       { // Tag topic

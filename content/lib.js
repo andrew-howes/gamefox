@@ -56,7 +56,7 @@ var GFlib =
       case 'index':
         var h1 = doc.evaluate('//div[@class="pod"]/div[@class="head"]/h1', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (h1 && h1.textContent == 'Board Information')
+        if (h1 != null && h1.textContent == 'Board Information')
         {
           doc.gfPage = ['index'];
           return true;
@@ -74,8 +74,8 @@ var GFlib =
           doc.gfPage = ['topics', 'tracked'];
           return true;
         }
-        else if ((notopics && notopics.textContent.indexOf('No topics are available') != -1)
-            || col)
+        if ((notopics != null && notopics.textContent.indexOf('No topics are available') != -1)
+            || col != null)
         {
           doc.gfPage = ['topics'];
           return true;
@@ -90,12 +90,15 @@ var GFlib =
         {
           if (GFlib.onPage(doc, 'detail'))
             doc.gfPage = ['messages', 'detail'];
-          else if (doc.evaluate('//div[@class="user"]', doc, null, XPathResult.
-                FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent.indexOf(
-                  'Topic Archived') != -1)
-            doc.gfPage = ['messages', 'archive'];
           else
-            doc.gfPage = ['messages'];
+          {
+            var user = doc.evaluate('//div[@class="user"]', doc, null, XPathResult.
+                FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            if (user != null && user.textContent.indexOf('Topic Archived') != -1)
+              doc.gfPage = ['messages', 'archive'];
+            else
+              doc.gfPage = ['messages'];
+          }
           return true;
         }
         else
