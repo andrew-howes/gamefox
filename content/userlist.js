@@ -2,6 +2,8 @@
 
 var GFUL =
 {
+  groupClassName: 'gamefox-groupname',
+
   prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
       Components.interfaces.nsIPrefService).getBranch('gamefox.'),
 

@@ -188,8 +188,12 @@ var GameFOX =
             // list of groups
             if (GameFOX.prefs.getBoolPref('userlist.topics.showgroupnames') &&
                 hlinfo[0].length)
-              rows[i].cells[2].appendChild(doc.createTextNode(' ' +
-                    hlinfo[0]));
+            {
+              var groupname = doc.createElement('span');
+              groupname.className = GFUL.groupClassName;
+              groupname.appendChild(doc.createTextNode(' ' + hlinfo[0]));
+              rows[i].cells[2].appendChild(groupname);
+            }
             
             if (hlinfo[3] == 'remove') // remove topic
             {
@@ -329,16 +333,25 @@ var GameFOX =
           var username = td[j].getElementsByTagName('b')[0].textContent;
         else
           var username = td[j].getElementsByTagName('a')[0].textContent;
-        var hlinfo;
+        var hlinfo, groupname;
 
         if ((hlinfo = GFUL.searchUsername(username)) != false)
         {
           // add group names after username
           if (GameFOX.prefs.getBoolPref('userlist.messages.showgroupnames') &&
               hlinfo[0].length)
-            td[j].insertBefore(doc.createTextNode(" " + hlinfo[0]), td[j].
-                getElementsByTagName(GFlib.onPage(doc, "archive") ? 'b' : 'a')[0].
-                nextSibling);
+          {
+            groupname = doc.createElement('span');
+            groupname.className = GFUL.groupClassName;
+            groupname.appendChild(doc.createTextNode(' ' + hlinfo[0]));
+
+            if (GFlib.onPage(doc, 'archive'))
+              td[j].insertBefore(groupname,
+                  td[j].getElementsByTagName('b')[0].nextSibling);
+            else
+              td[j].insertBefore(groupname,
+                  td[j].getElementsByTagName('a')[0].nextSibling);
+          }
           
           if (hlinfo[2] == 'highlight')
           {
