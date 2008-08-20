@@ -39,6 +39,13 @@ QuickPost form.
 `input` text element for the topic title. Only present in the floating topic QuickPost.
 
 <h2 id="span">span</h2>
+<h3 id="span_gamefox-groupname">
+span.gamefox-groupname
+<span class="new">New in 0.6.5</span>
+</h3>
+
+Contains group name(s) the adjacent username is a member of.
+
 <h3 id="span_gamefox-pagelist">span.gamefox-pagelist</h3>
 
 Contains topic pagination text.
@@ -48,9 +55,32 @@ Contains topic pagination text.
 
 `textarea` for QuickPost containing the message body.
 
+<h2 id="td">td</h2>
+<h3 id="td_gamefox-highlight">
+td.gamefox-highlight
+<span class="new">New in 0.6.5</span>
+</h3>
+
+Applied to highlighted messages.
+
+<h3 id="td_gamefox-highlight-one td_gamefox-highlight-two">
+td.gamefox-highlight-one td.gamefox-highlight-two
+<span class="removed">Removed in 0.6.5</span>
+</h3>
+
+Applied to highlighted messages.
+
 <h2 id="tr">tr</h2>
+<h3 id="tr_gamefox-highlight">
+tr.gamefox-highlight
+<span class="new">New in 0.6.5</span>
+</h3>
+
+Applied to highlighted topics.
+
 <h3 id="tr_gamefox-highlight-one tr_gamefox-highlight-two">
 tr.gamefox-highlight-one tr.gamefox-highlight-two
+<span class="removed">Removed in 0.6.5</span>
 </h3>
 
 Applied to highlighted table rows. The `tr` also has a `background-color`
