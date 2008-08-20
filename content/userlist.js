@@ -199,12 +199,16 @@ var GFUL =
     // color has 2 elements to update
     if (name == 'color')
     {
-      var colors = parentNode.getElementsByClassName('ug-color');
+      var colors = parentNode.getElementsByTagName('*');
       for (i in colors)
+      {
+        if (colors[i].className != 'ug-color') continue;
+
         if (colors[i].tagName == 'colorpicker')
           colors[i].color = value;
         else
           colors[i].value = value;
+      }
     }
 
     // get and set pref
