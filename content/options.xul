@@ -162,13 +162,13 @@
           <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
 
           <groupbox>
-            <caption label="Options"/>
-            <checkbox preference="userlist-topics-groupnames" label="Show group names on topic lists"/>
-            <checkbox preference="userlist-messages-groupnames" label="Show group names on message lists"/>
+            <caption label="&page.userlists.options.label;"/>
+            <checkbox preference="userlist-topics-groupnames" label="&page.userlists.options.topicgroups;"/>
+            <checkbox preference="userlist-messages-groupnames" label="&page.userlists.options.msggroups;"/>
           </groupbox>
           
           <hbox pack="end">
-            <button oncommand="GFUL.add(); GFUL.populate();" label="Add a Group" icon="add"/>
+            <button oncommand="GFUL.add(); GFUL.populate();" label="&page.userlists.add;" icon="add"/>
           </hbox>
           <vbox id="usergroups" style="height:320px;overflow:auto"/>
         </tabpanel>

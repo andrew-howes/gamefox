@@ -46,12 +46,10 @@
 <!ENTITY page.elements.pages.format.prefix "Prefix:">
 <!ENTITY page.elements.pages.format.sep "Delimiter:">
 <!ENTITY page.elements.pages.format.suffix "Suffix:">
-<!ENTITY page.highlight.caption "User Highlighting">
-<!ENTITY page.highlight.instructions "Enter usernames separated by commas.">
-<!ENTITY page.highlight.group "Group">
-<!ENTITY page.highlight.hide "Hide posts from Group 2">
-<!ENTITY page.highlight.messages "Highlight messages">
-<!ENTITY page.highlight.topics "Highlight topics">
+<!ENTITY page.userlists.options.label "Options">
+<!ENTITY page.userlists.options.topicgroups "Show group names on topic lists">
+<!ENTITY page.userlists.options.msggroups "Show group names on message lists">
+<!ENTITY page.userlists.add "Add a Group">
 
 <!ENTITY theme.label "Theme">
 <!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">
