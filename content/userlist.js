@@ -15,8 +15,8 @@ var GFUL =
     var messages = (typeof messages == 'string') ? messages : 'highlight';
     var topics = (typeof topics == 'string') ? topics : 'highlight';
 
-    userlist.push({'name':name, 'color':'#CCFFFF', 'users':users,
-        'messages':messages,'topics':topics});
+    userlist.push({'name':name, 'color':color, 'users':users,
+        'messages':messages, 'topics':topics});
 
     this.prefs.setCharPref("userlist.serialized", userlist.toSource());
   },

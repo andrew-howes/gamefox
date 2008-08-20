@@ -744,9 +744,9 @@ function GameFOXLoader()
       catch (e) { var ignore = false; }
 
       if (ignore)
-        GFUL.add('', colors2, groups2, messages, topics);
-      else
         GFUL.add('', colors2, groups2, 'remove', 'remove');
+      else
+        GFUL.add('', colors2, groups2, messages, topics);
     }
   }
 
