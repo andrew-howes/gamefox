@@ -184,7 +184,7 @@ var GFUL =
       idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
       groups[i].getElementsByTagName('radiogroup')[0].selectedIndex = idx[userlist[i]['messages']];
 
-      idx = {'remove':0, 'highlight':1, 'nothing':3};
+      idx = {'remove':0, 'highlight':1, 'nothing':2};
       groups[i].getElementsByTagName('radiogroup')[1].selectedIndex = idx[userlist[i]['topics']];
     }
   },
@@ -213,7 +213,7 @@ var GFUL =
     if (name == 'color')
     {
       var colors = parentNode.getElementsByTagName('*');
-      for (i in colors)
+      for (var i = 0; i < colors.length; i++)
       {
         if (colors[i].className != 'ug-color') continue;
 
