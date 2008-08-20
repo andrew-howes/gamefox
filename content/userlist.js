@@ -176,8 +176,6 @@ var GFUL =
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
     {
-      if (!groups[i].id) continue; // huh?
-
       // set colorpicker, mostly because of fx2
       groups[i].getElementsByTagName('colorpicker')[0].color = userlist[i]['color'];
 
