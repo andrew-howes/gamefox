@@ -187,7 +187,7 @@
                   <column flex="1"/>
                 </columns>
                 <rows>
-                  <row>
+                  <row align="center">
                     <label value="&page.board.settings.tpp;"/>
                     <menulist preference="gamefoxTpcsPerPage" id="topicpage" flex="1">
                       <menupopup>
@@ -199,7 +199,7 @@
                       </menupopup>
                     </menulist>
                   </row>
-                  <row>
+                  <row align="center">
                     <label value="&page.board.settings.tsort;"/>
                     <menulist preference="gamefoxTpcSortOrder" id="topicsort" flex="1">
                       <menupopup>
@@ -210,7 +210,7 @@
                       </menupopup>
                     </menulist>
                   </row>
-                  <row>
+                  <row align="center">
                     <label value="&page.board.settings.mpp;"/>
                     <menulist preference="gamefoxMsgsPerPage" id="messagepage" flex="1">
                       <menupopup>
@@ -222,7 +222,7 @@
                       </menupopup>
                     </menulist>
                   </row>
-                  <row>
+                  <row align="center">
                     <label value="&page.board.settings.msort;"/>
                     <menulist preference="gamefoxMsgSortOrder" id="messagesort" flex="1">
                       <menupopup>
@@ -231,7 +231,7 @@
                       </menupopup>
                     </menulist>
                   </row>
-                  <row>
+                  <row align="center">
                     <label value="&page.board.settings.timezone;"/>
                     <menulist preference="gamefoxTimeZone" id="timezone" flex="1">
                       <menupopup>
@@ -268,7 +268,7 @@
                       </menupopup>
                     </menulist>
                   </row>
-                  <row>
+                  <row align="center">
                     <label value="&page.board.settings.msgdata;"/>
                     <menulist preference="gamefoxMsgDisplay" id="userdisplay" flex="1">
                       <menupopup>
