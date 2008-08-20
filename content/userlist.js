@@ -110,32 +110,21 @@ var GFUL =
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Collapse messages');
       radio.setAttribute('value', 'collapse');
-      /* I couldn't find another easy way to do this: radiogroup.selectedIndex
-         isn't set until this loop is over, which would require another loop to
-         set all the radios. */
-      if (userlist[i]['messages'] == 'collapse')
-        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
       /*** radio ***/
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Remove messages');
       radio.setAttribute('value', 'remove');
-      if (userlist[i]['messages'] == 'remove')
-        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
       /*** radio ***/
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Highlight messages');
       radio.setAttribute('value', 'highlight');
-      if (userlist[i]['messages'] == 'highlight')
-        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
       /*** radio ***/
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Nothing');
       radio.setAttribute('value', 'nothing');
-      if (userlist[i]['messages'] == 'nothing')
-        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
 
       groupbox.appendChild(radiogroup);
@@ -152,27 +141,47 @@ var GFUL =
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Remove topics');
       radio.setAttribute('value', 'remove');
-      if (userlist[i]['topics'] == 'remove')
-        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
       /*** radio ***/
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Highlight topics');
       radio.setAttribute('value', 'highlight');
-      if (userlist[i]['topics'] == 'highlight')
-        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
       /*** radio ***/
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Nothing');
       radio.setAttribute('value', 'nothing');
-      if (userlist[i]['topics'] == 'nothing')
-        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
 
       groupbox.appendChild(radiogroup);
 
       vbox.appendChild(groupbox);
+    }
+
+    setTimeout(GFUL.setDefaultValues, 0);
+  },
+
+  setDefaultValues: function()
+  {
+    var vbox = document.getElementById('usergroups');
+    var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
+    var groups = vbox.getElementsByTagName('groupbox');
+    var id;
+    for (i in groups)
+    {
+      if (!groups[i].id) continue;
+      id = groups[i].id.substring(3);
+
+      // set colorpicker, mostly because of fx2
+      groups[i].getElementsByTagName('colorpicker')[0].color = userlist[i]['color'];
+
+      // set radiogroups
+      var idx;
+      idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
+      groups[i].getElementsByTagName('radiogroup')[0].selectedIndex = idx[userlist[i]['messages']];
+
+      idx = {'remove':0, 'highlight':1, 'nothing':3};
+      groups[i].getElementsByTagName('radiogroup')[1].selectedIndex = idx[userlist[i]['topics']];
     }
   },
 
