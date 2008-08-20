@@ -28,6 +28,7 @@ var GFlib =
        not have document.location.host and document.location.hostname
        properties, but it still has document.domain property whose content is
        null.
+     - chrome: pages throw an exception when accessing document.domain.
      - For normal page, if it is not loaded successfully and therefore Firefox
        displays its custom warning page (e.g. Server not found), then its
        document.location.host and document.location.hostname properties remain
@@ -37,7 +38,14 @@ var GFlib =
    */
   onGF: function(doc)
   {
-    return /(^|\.)gamefaqs\.com$/.test(doc.domain);
+    try
+    {
+      return /(^|\.)gamefaqs\.com$/.test(doc.domain);
+    }
+    catch (e)
+    {
+      return false;
+    }
   },
 
   onBoards: function(doc)
