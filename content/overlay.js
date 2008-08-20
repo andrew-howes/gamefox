@@ -259,31 +259,16 @@ var GameFOX =
         addEventListener('dblclick', GameFOX.msglistDblclick, false);
 
       // Message numbering and highlighting
-      var td = doc.getElementsByTagName('td');
+      var tdResult = doc.evaluate('//table[@class="message"]/tbody/tr/td', doc, null,
+          XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+      var td = [];
+      for (var j = 0; j < tdResult.snapshotLength; j++)
+        td[j] = tdResult.snapshotItem(j);
+
       var msgnum = pagenum * GameFOX.prefs.getIntPref('msgsPerPage');
-      var msgHeader = false;
-      for (var j = 0; j < td.length; j++)
+      for (var j = 0; j < td.length; j += 2)
       {
         // Message numbering
-        //
-        // Make sure we're working on a message header. Works for both message
-        // data display formats
-        if (leftMsgData && td[j].className != 'author')
-          continue;
-        else if (!leftMsgData)
-        {
-          try
-          {
-            msgHeader = td[j].offsetParent.rows[td[j].parentNode.rowIndex + 1].className == 'even';
-          }
-          catch (e)
-          {
-            msgHeader = false;
-          }
-
-          if (!msgHeader) continue;
-        }
-
         ++msgnum;
 
         var msgnumString = '000'.substr(0, 3 - msgnum.toString().length) + msgnum;
