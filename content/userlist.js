@@ -112,14 +112,16 @@ var GFUL =
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Collapse messages');
       radio.setAttribute('value', 'collapse');
+      /* I couldn't find another easy way to do this: radiogroup.selectedIndex
+         isn't set until this loop is over, which would require another loop to
+         set all the radios. */
+      if (userlist[i]['messages'] == 'collapse')
+        radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
       /*** radio ***/
       radio = document.createElement('radio');
       radio.setAttribute('label', 'Remove messages');
       radio.setAttribute('value', 'remove');
-      /* I couldn't find another easy way to do this: radiogroup.selectedIndex
-         isn't set until this loop is over, which would require another loop to
-         set all the radios. */
       if (userlist[i]['messages'] == 'remove')
         radio.setAttribute('selected', 'true');
       radiogroup.appendChild(radio);
