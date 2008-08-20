@@ -5,12 +5,18 @@ var GFUL =
   prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
       Components.interfaces.nsIPrefService).getBranch('gamefox.'),
 
-  add: function()
+  add: function(name, color, users, messages, topics)
   {
     var userlist = eval(this.prefs.getCharPref("userlist.serialized"));
 
-    userlist.push({"name": "", "color": "#CCFFFF", "users": "",
-        "messages": "highlight", "topics": "highlight"});
+    var name = (typeof name == 'string') ? name : '';
+    var color = (typeof color == 'string') ? color : '#CCFFFF';
+    var users = (typeof users == 'string') ? users : '';
+    var messages = (typeof messages == 'string') ? messages : 'highlight';
+    var topics = (typeof topics == 'string') ? topics : 'highlight';
+
+    userlist.push({'name':name, 'color':'#CCFFFF', 'users':users,
+        'messages':messages,'topics':topics});
 
     this.prefs.setCharPref("userlist.serialized", userlist.toSource());
   },

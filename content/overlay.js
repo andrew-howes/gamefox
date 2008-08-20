@@ -680,6 +680,8 @@ function GameFOXLoader()
     GFUL.add(); // default group
     window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
+
+    var lastversion = '';
   }
 
   var version = Components.classes['@mozilla.org/extensions/manager;1'].
@@ -694,27 +696,57 @@ function GameFOXLoader()
   {
     GameFOXCSS.init();
 
-    // convert old signature prefs to serialized pref
-    // TODO: remove this after a while, it's not necessary when the majority
-    // of people have already updated with previous versions
-    if (versionComparator.compare('0.6.2', version) == -1)
+    // TODO: remove these after a while
+
+    // old signature prefs
+    if (versionComparator.compare('0.6.2', lastversion) == 1)
     {
       var oldPresig, oldSig;
-      try
-      {
-        oldPresig = GameFOXUtils.getString('signature.presig', prefs);
-      }
+      try { oldPresig = GameFOXUtils.getString('signature.presig', prefs); }
       catch (e) {}
-      try
-      {
-        oldSig = GameFOXUtils.getString('signature.body', prefs);
-      }
+
+      try { oldSig = GameFOXUtils.getString('signature.body', prefs); }
       catch (e) {}
 
       var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));
       if (oldPresig) sigs[0]['presig'] = oldPresig;
       if (oldSig) sigs[0]['body'] = oldSig;
       GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
+    }
+    // user highlighting groups
+    if (versionComparator.compare('0.6.5', lastversion) == 1)
+    {
+      try
+      { var messages = prefs.getBoolPref('highlight.msgs') ? 'highlight' : 'nothing'; }
+      catch (e) { var messages = 'highlight'; }
+      
+      try
+      { var topics = prefs.getBoolPref('highlight.topics') ? 'highlight' : 'nothing'; }
+      catch (e) { var topics = 'highlight'; }
+
+      try
+      { var colors1 = prefs.getCharPref('highlight.colors.1'); }
+      catch (e) { var colors1 = null; }
+      try
+      { var colors2 = prefs.getCharPref('highlight.colors.2'); }
+      catch (e) { var colors2 = null; }
+
+      try
+      { var groups1 = prefs.getCharPref('highlight.groups.1'); }
+      catch (e) { var groups1 = null; }
+      try
+      { var groups2 = prefs.getCharPref('highlight.groups.2'); }
+      catch (e) { var groups2 = null; }
+      
+      GFUL.add('', colors1, groups1, messages, topics);
+     
+      try { var ignore = prefs.getBoolPref('highlight.ignore'); }
+      catch (e) { var ignore = false; }
+
+      if (ignore)
+        GFUL.add('', colors2, groups2, messages, topics);
+      else
+        GFUL.add('', colors2, groups2, 'remove', 'remove');
     }
   }
 
