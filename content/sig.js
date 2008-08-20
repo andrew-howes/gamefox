@@ -24,8 +24,8 @@ var GFSig =
         // ignored by leaving it blank
         if (!sigs[i]['body'].length && !sigs[i]['presig'].length) continue;
 
-        accounts = GameFOXUtils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*;\s*/g);
-        boards = GameFOXUtils.trim(sigs[i]['boards'].toLowerCase()).split(/\s*;\s*/g);
+        accounts = GameFOXUtils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*;\s*/);
+        boards = GameFOXUtils.trim(sigs[i]['boards'].toLowerCase()).split(/\s*;\s*/);
 
         // force the array length to 0
         if (accounts.join() == '') accounts = new Array();

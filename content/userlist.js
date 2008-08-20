@@ -2,8 +2,6 @@
 
 var GFUL =
 {
-  Cc: Components.classes,
-  Ci: Components.interfaces,
   prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
       Components.interfaces.nsIPrefService).getBranch('gamefox.'),
 
@@ -228,10 +226,10 @@ var GFUL =
     // build the index
     for (i in userlist)
     {
-      usernames = userlist[i]['users'].split(/\s*,\s*/);
+      usernames = GameFOXUtils.trim(userlist[i]['users']).split(/\s*,\s*/);
       for (j in usernames)
       {
-        var username = GameFOXUtils.trim(usernames[j]);
+        var username = usernames[j];
         if (!username.length) continue;
 
         if (this.usernameIndex[username])
