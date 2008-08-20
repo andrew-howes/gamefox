@@ -174,11 +174,9 @@ var GFUL =
     var vbox = document.getElementById('usergroups');
     var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
     var groups = vbox.getElementsByTagName('groupbox');
-    var id;
-    for (i in groups)
+    for (var i = 0; i < groups.length; i++)
     {
-      if (!groups[i].id) continue;
-      id = groups[i].id.substring(3);
+      if (!groups[i].id) continue; // huh?
 
       // set colorpicker, mostly because of fx2
       groups[i].getElementsByTagName('colorpicker')[0].color = userlist[i]['color'];
