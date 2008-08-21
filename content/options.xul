@@ -124,10 +124,10 @@
               <caption label="&page.elements.pages.caption;"/>
               <checkbox preference="gamefox-pref-paging-auto" label="&page.elements.pages.auto;"/>
               <label value="&page.elements.pages.where;"/>
-              <radiogroup class="indent" preference="gamefox-pref-paging-location">
-                <radio value="1" label="&page.elements.pages.where.right;"/>
-                <radio value="2" label="&page.elements.pages.where.below;"/>
-                <radio value="0" label="&page.elements.pages.where.newrow;"/>
+              <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-paging-location">
+                <radio value="1" label="&page.elements.pages.where.right;" flex="1"/>
+                <radio value="2" label="&page.elements.pages.where.below;" flex="1"/>
+                <radio value="0" label="&page.elements.pages.where.newrow;" flex="1"/>
               </radiogroup>
               <spacer height="1px"/>
               <groupbox>
@@ -166,7 +166,7 @@
           <hbox pack="end">
             <button oncommand="GFUL.add(); GFUL.populate();" label="&page.userlists.add;" icon="add"/>
           </hbox>
-          <vbox id="usergroups" style="height:300px;overflow:auto"/>
+          <vbox id="usergroups" style="height:280px;overflow:auto"/>
         </tabpanel>
 
 
@@ -307,7 +307,7 @@
 
     <groupbox>
       <caption label="&theme.stylesheets.label;"/>
-      <tree id="css-tree" rows="10" editable="true" seltype="single"
+      <tree id="css-tree" rows="9" editable="true" seltype="single"
         onselect="GameFOXCSS.onselect();">
         <treecols>
           <treecol label="&theme.tree.name;" primary="true" flex="1"/>
@@ -390,6 +390,8 @@
         <hbox class="indent" orient="horizontal">
           <vbox>
             <checkbox preference="header_bold"   label="&quoting.style.boldheader;"/>
+          </vbox>
+          <vbox>
             <checkbox preference="header_italic" label="&quoting.style.italicheader;"/>
           </vbox>
         </hbox>
