@@ -436,9 +436,7 @@
         <tabpanel orient="vertical" flex="1">
           <groupbox>
             <caption label="&signature.content.label;"/>
-
-            <description style="margin-bottom: 1em">&signature.desc;</description>
-
+            
             <hbox>
               <menulist flex="1" id="sig-menu" oncommand="GFSig.menuCommand();">
                 <menupopup>

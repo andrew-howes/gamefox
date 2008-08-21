@@ -91,11 +91,6 @@
 <!ENTITY signature.label "Signature">
 <!ENTITY signature.content.label "Content">
 <!ENTITY signature.options.label "Options">
-<!ENTITY signature.desc "
-        Pre-signatures are inserted before the separator. Signatures cannot exceed
-        two lines. GameFAQs imposes a 160-character limit on signatures, but GameFOX
-        does not enforce this.
-">
 <!ENTITY signature.list.default "Default signature">
 <!ENTITY signature.list.new "New signature">
 <!ENTITY signature.list.delete "Delete">
