@@ -104,8 +104,28 @@ var GFSig =
             sigs[i]['boards']), i);
     }
 
-    // function to watch pref for change and update signature
-    window.setInterval(this.watchPref, 1000);
+    this.updateCharCounts();
+
+    // watch pref for change and update signature
+    this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    this.prefs.addObserver('', this, false);
+  },
+
+  observe: function()
+  {
+    var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
+    var idx = document.getElementById('sig-menu').selectedItem.value;
+
+    if (idx == 'default') idx = 0;
+
+    if (sigs[idx] != undefined)
+    {
+      // don't reset the scrollbar while typing
+      if (document.getElementById('sig-presig').value != sigs[idx]['presig'])
+        document.getElementById('sig-presig').value = sigs[idx]['presig'];
+      if (document.getElementById('sig-body').value != sigs[idx]['body'])
+        document.getElementById('sig-body').value = sigs[idx]['body'];
+    }
 
     this.updateCharCounts();
   },
@@ -271,18 +291,6 @@ var GFSig =
       if (menuitems[i] && menuitems[i].value != 'new' && menuitems[i].value != 'default'
           && menuitems[i].value)
         menuitems[i].value = j++;
-  },
-
-  watchPref: function()
-  {
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', GFSig.prefs));
-    var menu = document.getElementById('sig-menu');
-    var idx = menu.selectedItem.value;
-
-    if (idx == 'default') idx = 0;
-
-    document.getElementById('sig-presig').value = sigs[idx]['presig'];
-    document.getElementById('sig-body').value = sigs[idx]['body'];
   },
 
   matchBoard: function(boards, boardid, boardname)

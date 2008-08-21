@@ -469,8 +469,7 @@
               <label value="&signature.sig.label;" flex="1"/>
               <hbox pack="end"><label id="sig-chars" value=""/></hbox>
             </hbox>
-            <textbox id="sig-body" oninput="GFSig.updatePref(this);" rows="3" multiline="true" class="indent"
-              onkeyup="GFSig.updateCharCounts();"/>
+            <textbox id="sig-body" oninput="GFSig.updatePref(this);" rows="3" multiline="true" class="indent"/>
             <hbox pack="end">
               <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
                 oncommand="GameFOXOptions.importSignature();"/>
