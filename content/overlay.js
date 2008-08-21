@@ -201,8 +201,7 @@ var GameFOX =
             }
             else if (hlinfo[3] == 'highlight') // highlight topic
             {
-              rows[i].setAttribute('class', rows[i].getAttribute('class') +
-                  ' gamefox-highlight');
+              rows[i].className += ' ' + GFUL.highlightClassName;
               rows[i].style.setProperty('background-color', hlinfo[1], 'important');
 
               for (var j = 0; j < rows[i].cells.length; j++)
@@ -355,8 +354,7 @@ var GameFOX =
           
           if (hlinfo[2] == 'highlight')
           {
-            td[j].setAttribute('class', td[j].getAttribute('class') +
-                ' gamefox-highlight');
+            td[j].className += ' ' + GFUL.highlightClassName;
             td[j].style.setProperty('background-color', hlinfo[1], 'important');
           }
           else if (hlinfo[2] == 'collapse') // Collapse post

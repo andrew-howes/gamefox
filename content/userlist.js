@@ -2,6 +2,7 @@
 
 var GFUL =
 {
+  highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
 
   prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
