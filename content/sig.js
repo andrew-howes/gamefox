@@ -45,6 +45,7 @@ var GFSig =
         matches[2].push(sigs[0]);
 
       var selectionPref = GameFOX.prefs.getIntPref('signature.selection');
+      var sig;
 
       if (selectionPref == 1 || selectionPref == 2)
       {
@@ -54,9 +55,9 @@ var GFSig =
           for (j in matches[i])
             allMatches.push(matches[i][j]);
         if (selectionPref == 1)
-          return allMatches[0];
+          sig = allMatches[0];
         else // selectionPref == 2
-          return allMatches[Math.round(Math.random() * (allMatches.length - 1))];
+          sig = allMatches[Math.round(Math.random() * (allMatches.length - 1))];
       }
       else // selectionPref == 3
       {
@@ -67,8 +68,11 @@ var GFSig =
           bestIndex = 1;
         else
           bestIndex = 2;
-        return matches[bestIndex][Math.round(Math.random() * (matches[bestIndex].length - 1))];
+        sig = matches[bestIndex][Math.round(Math.random() * (matches[bestIndex].length - 1))];
       }
+      if (sig == undefined)
+        sig = {accounts:'', boards:'', body:'', presig:''};
+      return sig;
     }
   },
 
