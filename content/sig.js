@@ -109,6 +109,16 @@ var GFSig =
     // watch pref for change and update signature
     this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
     this.prefs.addObserver('', this, false);
+
+    window.addEventListener('unload', this.unload, false);
+  },
+
+  unload: function()
+  {
+    // if we don't do this, the observer will persist after the window is
+    // closed. this isn't needed and the observe() function won't be able
+    // to use any other resources like GameFOXUtils
+    GFSig.prefs.removeObserver('', GFSig);
   },
 
   observe: function()
