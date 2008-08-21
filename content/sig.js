@@ -20,8 +20,6 @@ var GFSig =
         if (i == 0) continue; // skip default, it has lowest priority
 
         // skip empty sigs
-        // this allows for the default sig (which can't be deleted) to be
-        // ignored by leaving it blank
         if (!sigs[i]['body'].length && !sigs[i]['presig'].length) continue;
 
         accounts = GameFOXUtils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*;\s*/);
@@ -42,7 +40,9 @@ var GFSig =
         else if (!accounts.length && !boards.length) // global sig, lowest priority
           matches[2].push(sigs[i]);
       }
-      matches[2].push(sigs[0]);
+      // add the default if it's non-empty
+      if (sigs[0]['body'].length || sigs[0]['presig'].length)
+        matches[2].push(sigs[0]);
 
       var selectionPref = GameFOX.prefs.getIntPref('signature.selection');
 
