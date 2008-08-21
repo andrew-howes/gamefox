@@ -243,7 +243,7 @@ var GFUL =
       usernames = GameFOXUtils.trim(userlist[i]['users']).split(/\s*,\s*/);
       for (j in usernames)
       {
-        var username = usernames[j];
+        var username = usernames[j].toLowerCase();
         if (!username.length) continue;
 
         if (this.usernameIndex[username])
@@ -258,7 +258,7 @@ var GFUL =
   {
     if (!this.usernameIndex) return false; // no index
 
-    username = GameFOXUtils.trim(username);
+    username = GameFOXUtils.trim(username).toLowerCase();
     if (!username.length) return false;
 
     if (!this.usernameIndex[username]) return false; // username isn't in any groups
