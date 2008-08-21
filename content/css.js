@@ -56,7 +56,7 @@ var GameFOXCSS =
     var filename = uri.split('/');
     filename = filename[filename.length - 1];
     
-    if (!this.add('user', uri, filename, filename, '', '', false))
+    if (!this.add('user', uri, filename, filename, '', false))
       return false;
     this.populate(document.getElementById('css-tree'));
     this.treeView.toggleOpenState(2);
@@ -200,8 +200,7 @@ var GameFOXCSS =
           else // gamefox stylesheet, restore it
           {
             if (this.add(category, "chrome://gamefox/content/css/" + filename, filename,
-                css[category][filename]["title"], css[category][filename]["author"],
-                null, true))
+                css[category][filename]["title"], css[category][filename]["author"], true))
               this.reload(); // oh no, a recursive function call!
                              // it should be all right as this is only done if re-adding the sheet was successful
           }
@@ -217,8 +216,7 @@ var GameFOXCSS =
 
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
-    this.treeView = treeView; // we don't want to mess with treeView directly as it's supposed
-                              // to be a generic class
+    this.treeView = treeView;
     this.treeView.childData = {};
     this.treeView.visibleData = [];
     for (var category in {"GameFOX":"", "Bundled":"", "User":""})
