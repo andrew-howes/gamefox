@@ -122,35 +122,31 @@
 
             <groupbox>
               <caption label="&page.elements.pages.caption;"/>
+              <checkbox preference="gamefox-pref-paging-auto" label="&page.elements.pages.auto;"/>
+              <label value="&page.elements.pages.where;"/>
+              <radiogroup class="indent" preference="gamefox-pref-paging-location">
+                <radio value="1" label="&page.elements.pages.where.right;"/>
+                <radio value="2" label="&page.elements.pages.where.below;"/>
+                <radio value="0" label="&page.elements.pages.where.newrow;"/>
+              </radiogroup>
+              <spacer height="1px"/>
               <groupbox>
-                <checkbox preference="gamefox-pref-paging-auto" label="&page.elements.pages.auto;"/>
+                <caption label="&page.elements.pages.format.caption;"/>
+                <hbox align="center">
+                  <spacer width="8px"/>
+                  <label value="&page.elements.pages.format.prefix;"/>
+                  <textbox preference="gamefox-pref-paging-prefix" size="5" flex="30"/>
+                  <spacer flex="1"/>
+                  <label value="&page.elements.pages.format.sep;"/>
+                  <textbox preference="gamefox-pref-paging-separator" size="1" flex="2"/>
+                  <spacer flex="1"/>
+                  <label value="&page.elements.pages.format.suffix;"/>
+                  <textbox preference="gamefox-pref-paging-suffix" size="4" flex="24"/>
+                  <spacer width="8px"/>
+                </hbox>
+                <spacer height="6px"/>
               </groupbox>
-              <groupbox>
-                <label value="&page.elements.pages.where;"/>
-                <radiogroup class="indent" preference="gamefox-pref-paging-location">
-                  <radio value="1" label="&page.elements.pages.where.right;"/>
-                  <radio value="2" label="&page.elements.pages.where.below;"/>
-                  <radio value="0" label="&page.elements.pages.where.newrow;"/>
-                </radiogroup>
-                <spacer height="1px"/>
-                <groupbox>
-                  <caption label="&page.elements.pages.format.caption;"/>
-                  <hbox align="center">
-                    <spacer width="8px"/>
-                    <label value="&page.elements.pages.format.prefix;"/>
-                    <textbox preference="gamefox-pref-paging-prefix" size="5" flex="30"/>
-                    <spacer flex="1"/>
-                    <label value="&page.elements.pages.format.sep;"/>
-                    <textbox preference="gamefox-pref-paging-separator" size="1" flex="2"/>
-                    <spacer flex="1"/>
-                    <label value="&page.elements.pages.format.suffix;"/>
-                    <textbox preference="gamefox-pref-paging-suffix" size="4" flex="24"/>
-                    <spacer width="8px"/>
-                  </hbox>
-                  <spacer height="6px"/>
-                </groupbox>
-                <spacer height="1px"/>
-              </groupbox>
+              <spacer height="1px"/>
             </groupbox>
 
           </vbox>
@@ -170,7 +166,7 @@
           <hbox pack="end">
             <button oncommand="GFUL.add(); GFUL.populate();" label="&page.userlists.add;" icon="add"/>
           </hbox>
-          <vbox id="usergroups" style="height:320px;overflow:auto"/>
+          <vbox id="usergroups" style="height:300px;overflow:auto"/>
         </tabpanel>
 
 
@@ -467,7 +463,7 @@
               <label value="&signature.presig.label;" flex="1"/>
               <hbox pack="end"><label value="&signature.presig.warning;"/></hbox>
             </hbox>
-            <textbox id="sig-presig" oninput="GFSig.updatePref(this);" size="8" class="indent"/>
+            <textbox id="sig-presig" oninput="GFSig.updatePref(this);" class="indent"/>
 
             <hbox>
               <label value="&signature.sig.label;" flex="1"/>
@@ -498,7 +494,7 @@
             </radiogroup>
           </groupbox>
 
-          <groupbox style="margin-bottom: 3em;">
+          <groupbox style="margin-bottom: 6em;">
             <caption label="&signature.selection;"/>
             <radiogroup preference="sig-selection">
               <radio value="1" label="&signature.selection.first;"/>
