@@ -5,14 +5,12 @@ var GFQuickWhois =
   {
     var node = event.target;
     var doc = node.ownerDocument;
-    var nodeName = node.nodeName.toLowerCase();
 
     try
     {
-      while (nodeName != 'td' && node.className != 'whitebox')
+      while (node.nodeName.toLowerCase() != 'td')
       {
         node = node.parentNode;
-        nodeName = node.nodeName.toLowerCase();
       }
     }
     catch (e) { return; }
@@ -75,7 +73,7 @@ var GFQuickWhois =
             if (profileFields[i] == 'Board User Level')
               profileField = profileField.split(/<br\s*\/?>/gi)[0].replace(
                   /<\/?b>/ig, '');
-            profileFieldsHTML += "<b>" + profileFields[i+1] + ':</b> ' +
+            profileFieldsHTML += '<b>' + profileFields[i+1] + ':</b> ' +
               profileField.replace(/<br\s*\/?>/g, '<br/>') + '<br/>';
           }
         }
