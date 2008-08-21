@@ -5,24 +5,24 @@ var GameFOXCSS =
   init: function()
   {
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-essentials.css', 'gamefox-essentials.css',
-        'Essentials', 'GameFOX devs', '', true, true);
+        'Essentials', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-ads.css', 'gamefox-ads.css',
-        'Ad blocking', 'GameFOX devs', '', true, true);
+        'Ad blocking', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost.css', 'gamefox-quickpost.css',
-        'QuickPost', 'GameFOX devs', '', true, true);
+        'QuickPost', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost-old.css', 'gamefox-quickpost-old.css',
-        'QuickPost (0.5)', 'GameFOX devs', '', false, true);
+        'QuickPost (0.5)', '', false, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickwhois.css', 'gamefox-quickwhois.css',
-        'QuickWhois', 'GameFOX devs', '', true, true);
+        'QuickWhois', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
-        'GFCode', 'Ant P.', '', true, true);
+        'GFCode', 'Ant P.', true, true);
 
     this.add('bundled', 'chrome://gamefox/content/css/toad.css', 'toad.css',
-        'Ten On A Diet', 'TakatoMatsuki', '', false, true);
+        'Ten On A Diet', 'TakatoMatsuki', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
-        'Wide Default Layout', '', '', false, true);
+        'Wide Default Layout', '', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/ascii-art-font.css', 'ascii-art-font.css',
-        'ASCII art font', '', '', false, true);
+        'ASCII art font', '', false, true);
 
     // Remove old stylesheets
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
@@ -78,7 +78,7 @@ var GameFOXCSS =
     }
   },
 
-  add: function(cat, uri, filename, title, author, compat, enabled, overwrite)
+  add: function(cat, uri, filename, title, author, enabled, overwrite)
   {
     overwrite = (overwrite == null ? false : overwrite);
     var file = Components.classes['@mozilla.org/file/local;1'].getService(
@@ -133,7 +133,7 @@ var GameFOXCSS =
       enabled = css[cat][filename]['enabled'];
 
     css[cat][filename] = {
-      'title': title, 'author': author, 'compat': compat, 'enabled': enabled
+      'title': title, 'author': author, 'enabled': enabled
     }
 
     prefs.setCharPref('theme.css.serialized', css.toSource());
@@ -231,7 +231,6 @@ var GameFOXCSS =
           this.treeView.childData[category] = [[
             css[cat][sheet]["title"],
             css[cat][sheet]["author"],
-            css[cat][sheet]["compat"],
             css[cat][sheet]["enabled"],
             sheet, // filename, stored in an invisible column. used to uniquely
                    // identify what stylesheet a particular row belongs to
@@ -241,7 +240,6 @@ var GameFOXCSS =
           this.treeView.childData[category].push([
               css[cat][sheet]["title"],
               css[cat][sheet]["author"],
-              css[cat][sheet]["compat"],
               css[cat][sheet]["enabled"],
               sheet,
               cat
@@ -252,8 +250,8 @@ var GameFOXCSS =
     this.treeView.isEditable = function(idx, column)
     {
       if (this.isContainer(idx)) return false;
-      if (column.index == 3) return true;
-      if (this.visibleData[idx][0][5] == "user") return true;
+      if (column.index == 2) return true;
+      if (this.visibleData[idx][0][4] == "user") return true;
     }
     this.treeView.setCellText = this.setCell;
     this.treeView.setCellValue = this.setCell;
@@ -262,8 +260,6 @@ var GameFOXCSS =
 
     this.treeView.selection.clearSelection();
     this.treeView.selection.select(0);
-
-    //document.getElementById('css-remove').disabled = true;
 
     // this is sort of a hack, I couldn't be bothered with finding out how to push data
     // directly to treeView.visibleData when populating the tree
@@ -277,7 +273,7 @@ var GameFOXCSS =
   {
     try
     {
-      var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][5];
+      var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][4];
       if (category == 'user')
         document.getElementById('css-remove').setAttribute('disabled', 'false');
       else
@@ -295,16 +291,15 @@ var GameFOXCSS =
 
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
         Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    var filename = this.visibleData[idx][0][4];
-    var category = this.visibleData[idx][0][5];
+    var filename = this.visibleData[idx][0][3];
+    var category = this.visibleData[idx][0][4];
     // Map column to associative array in pref
-    var map = new Array('title', 'author', 'compat', 'enabled');
+    var map = new Array('title', 'author', 'enabled');
 
     var css = eval(prefs.getCharPref('theme.css.serialized'));
     css[category][filename][map[column.index]] = value;
     prefs.setCharPref('theme.css.serialized', css.toSource());
 
-    this.selection.clearSelection();
     this.selection.select(idx);
 
     GameFOXCSS.reload();
@@ -346,8 +341,8 @@ var GameFOXCSS =
 
   removeWithTree: function()
   {
-    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
-    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][5];
+    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][3];
+    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
 
     if (category != 'user')
       return false;

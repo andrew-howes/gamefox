@@ -56,7 +56,6 @@
 <!ENTITY theme.stylesheets.label "Stylesheets">
 <!ENTITY theme.tree.name "Name">
 <!ENTITY theme.tree.author "Author">
-<!ENTITY theme.tree.compat "Compatibility">
 <!ENTITY theme.tree.enabled "Enabled">
 <!ENTITY theme.tree.delete "Delete">
 <!ENTITY theme.import.label "Import a Stylesheet">

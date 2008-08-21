@@ -307,12 +307,11 @@
 
     <groupbox>
       <caption label="&theme.stylesheets.label;"/>
-      <tree id="css-tree" rows="9" editable="true" seltype="single"
+      <tree id="css-tree" rows="9" editable="true" seltype="single" hidecolumnpicker="true"
         onselect="GameFOXCSS.onselect();">
         <treecols>
           <treecol label="&theme.tree.name;" primary="true" flex="1"/>
           <treecol label="&theme.tree.author;" width="100"/>
-          <treecol label="&theme.tree.compat;"/>
           <treecol label="&theme.tree.enabled;" type="checkbox" editable="true"/>
         </treecols>
 
