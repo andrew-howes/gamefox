@@ -71,7 +71,7 @@ var GFSig =
         sig = matches[bestIndex][Math.round(Math.random() * (matches[bestIndex].length - 1))];
       }
       if (sig == undefined)
-        sig = {accounts:'', boards:'', body:'', presig:''};
+        sig = sigs[0];
       return sig;
     }
   },
