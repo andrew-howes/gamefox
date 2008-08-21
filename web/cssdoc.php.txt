@@ -63,8 +63,9 @@ td.gamefox-highlight
 
 Applied to highlighted messages.
 
-<h3 id="td_gamefox-highlight-one td_gamefox-highlight-two">
-td.gamefox-highlight-one td.gamefox-highlight-two
+<h3>
+<span id="td_gamefox_highlight-one">td.gamefox-highlight-one</span>
+<span id="td_gamefox-highlight-two">td.gamefox-highlight-two</span>
 <span class="removed">Removed in 0.6.5</span>
 </h3>
 
@@ -78,8 +79,9 @@ tr.gamefox-highlight
 
 Applied to highlighted topics.
 
-<h3 id="tr_gamefox-highlight-one tr_gamefox-highlight-two">
-tr.gamefox-highlight-one tr.gamefox-highlight-two
+<h3>
+<span id="tr_gamefox-highlight-one">tr.gamefox-highlight-one</span>
+<span id="tr_gamefox-highlight-two">tr.gamefox-highlight-two</span>
 <span class="removed">Removed in 0.6.5</span>
 </h3>
 
