@@ -535,7 +535,10 @@
           <radio value="1" label="&mouse.topics.radio.paginate;"/>
         </vbox>
         <vbox>
-          <radio value="2" label="&mouse.topics.radio.lastpage;"/>
+          <radio value="4" label="&mouse.topics.radio.lastpage;"/>
+          <radio value="2" label="Go to last post"/>
+        </vbox>
+        <vbox>
           <radio value="3" label="&mouse.topics.radio.tagtopic;"/>
         </vbox>
       </radiogroup>
@@ -550,7 +553,10 @@
           <radio value="1" label="&mouse.aml.radio.paginate;"/>
         </vbox>
         <vbox>
-          <radio value="2" label="&mouse.aml.radio.lastpage;"/>
+          <radio value="4" label="&mouse.aml.radio.lastpage;"/>
+          <radio value="2" label="Go to last post"/>
+        </vbox>
+        <vbox>
           <radio value="3" label="&mouse.aml.radio.tagtopic;"/>
         </vbox>
       </radiogroup>

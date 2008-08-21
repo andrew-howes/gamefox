@@ -397,6 +397,11 @@ var GameFOX =
 
         GFQuickPost.appendForm(doc, doc.getElementById('gamefox-quickpost-normal'), false);
       }
+
+      // post ids are generated after the page is loaded
+      // this is at the bottom because firefox 2 doesn't re-center the page after
+      // QuickPost is added
+      if (doc.location.hash.length) doc.location.hash = doc.location.hash;
     }
   },
 
@@ -478,15 +483,18 @@ var GameFOX =
         GameFOX.showPages(event);
         break;
       case 2:
-        GameFOX.gotoLastPage(event);
+        GameFOX.gotoLastPage(event, true); // last post
         break;
       case 3:
         GameFOXTags.add(event);
         break;
+      case 4:
+        GameFOX.gotoLastPage(event);
+        break;
     }
   },
 
-  gotoLastPage: function(event)
+  gotoLastPage: function(event, lastPost)
   {
     var node = event.target;
     var doc = node.ownerDocument;
@@ -500,15 +508,23 @@ var GameFOX =
         nodeName = node.nodeName.toLowerCase();
       }
 
-      var myposts = GFlib.onPage(doc, 'myposts');
-      var msgsCell = myposts ? node.parentNode.cells[2] : node.parentNode.cells[3];
-      var pageNum = Math.floor((msgsCell.textContent-1)/Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.msgsPerPage'));
-      doc.location.href = node.parentNode.cells[1].getElementsByTagName('a')[0].href + (pageNum ? '&page=' + pageNum : '');
+      if (GFlib.onPage(doc, 'myposts'))
+        var cell = node.parentNode.cells[2];
+      else
+        var cell = node.parentNode.cells[3];
+
+      var posts = cell.textContent;
+      var pages = Math.floor((posts - 1)/ GameFOX.prefs.getIntPref('msgsPerPage'));
+
+      var uri = node.parentNode.cells[1].getElementsByTagName('a')[0].href
+        + (pages ? '&page=' + pages : '');
+      if (lastPost)
+        doc.location.href = uri + '#p' +
+          '000'.substring(posts.toString().length) + posts;
+      else
+        doc.location.href = uri;
     }
-    catch (e)
-    {
-      return;
-    }
+    catch (e) {}
   },
 
   showPages: function(event)
