@@ -28,7 +28,7 @@ var GFQuickPost =
       '  <span id="gamefox-message-count"></span>\n' + 
       '</form>\n';
 
-    if (1) // preference
+    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
     {
       if (newTopic)
       {

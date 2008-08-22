@@ -28,6 +28,7 @@
 <!ENTITY page.board.settings.save "Save to GameFAQs">
 <!ENTITY page.elements.desctitles "Descriptive window titles">
 <!ENTITY page.elements.titleprefix "Page title prefixes">
+<!ENTITY page.elements.charcounts "Title and message character counts">
 <!ENTITY page.elements.postmessage "&quot;Post Message&quot; (skip preview) button">
 <!ENTITY page.elements.topics.caption "Topic Lists">
 <!ENTITY page.elements.topics.quickpost "QuickPost Topic form">

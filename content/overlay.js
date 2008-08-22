@@ -57,7 +57,7 @@ var GameFOX =
       }
 
       // Message and title character count
-      if (1) // preference
+      if (GameFOX.prefs.getBoolPref('elements.charcounts'))
       {
         // title count
         if (doc.getElementsByName('topictitle')[0])
