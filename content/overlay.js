@@ -795,9 +795,9 @@ function GameFOXLoader()
       window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
     }
-  }
 
-  prefs.setCharPref('version', version);
+    prefs.setCharPref('version', version);
+  }
 
   GameFOXCSS.reload();
 }
