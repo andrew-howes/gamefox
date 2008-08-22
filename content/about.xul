@@ -64,10 +64,17 @@
     <separator class="thin"/>
     <label class="subtitle" value="&contributors.label;"/>
     <hbox>
+      <label value="Nuvola"/>
+      <label class="contrib description" value="Icons"/>
+      <spacer flex="1"/>
+      <label class="url-label" value="http://icon-king.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
+    </hbox>
+
+    <hbox>
       <label value="Pardus"/>
       <label class="contrib description" value="Icons"/>
       <spacer flex="1"/>
-      <label class="url-label" value="http://www.uludag.org.tr/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
+      <label class="url-label" value="http://uludag.org.tr/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
     <separator class="thin"/>
   </groupbox>
