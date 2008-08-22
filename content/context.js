@@ -50,21 +50,19 @@ var GFContextMenu =
 
     if (!GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'myposts'))
     {
-      if (!GFlib.onPage(doc, 'myposts') || !GameFOX.prefs.getBoolPref('context.tag'))
-      { // Tag topic
-        try
-        {
-          if (!doc.evaluate('//h1/following::h1', doc, null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
-            document.getElementById('gamefox-context-tag').hidden = true;
-        }
-        catch (e)
-        {
+      // Tag topic
+      try
+      {
+        if (!doc.evaluate('//h1/following::h1', doc, null,
+              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
           document.getElementById('gamefox-context-tag').hidden = true;
-        }
-
-        document.getElementById('gamefox-context-pages').hidden = true;
       }
+      catch (e)
+      {
+        document.getElementById('gamefox-context-tag').hidden = true;
+      }
+
+      document.getElementById('gamefox-context-pages').hidden = true;
     }
     else if (!GameFOX.prefs.getBoolPref('context.tag') && !GameFOX.prefs.
         getBoolPref('context.pagelist'))
