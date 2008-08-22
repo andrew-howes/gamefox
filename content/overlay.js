@@ -705,15 +705,8 @@ function GameFOXLoader()
   {
     var lastversion = prefs.getCharPref('version');
   }
-  catch (e if e.name == 'NS_ERROR_UNEXPECTED') // the pref isn't set, we can assume this is a first run
+  catch (e if e.name == 'NS_ERROR_UNEXPECTED') // pref isn't set, assume this is a first run
   {
-    GameFOXCSS.init();
-    GameFOXUtils.importBoardSettings();
-    GameFOXUtils.importSignature();
-    GFUL.add(); // default group
-    window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
-        'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
-
     var lastversion = '';
   }
 
@@ -724,8 +717,8 @@ function GameFOXLoader()
     Components.classes['@mozilla.org/xpcom/version-comparator;1'].getService(
         Components.interfaces.nsIVersionComparator);
 
-  var compareVersions = versionComparator.compare(lastversion, version);
-  if (compareVersions != 0) // upgrade or downgrade
+  var compareVersions = versionComparator.compare(version, lastversion);
+  if (compareVersions != 0) // upgrade, downgrade, or first run
   {
     GameFOXCSS.init();
 
@@ -746,23 +739,17 @@ function GameFOXLoader()
       if (oldSig) sigs[0]['body'] = oldSig;
       GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
     }
+
     // user highlighting groups
+    var groupAdded = false;
     if (versionComparator.compare('0.6.5', lastversion) == 1)
     {
       try
       { var messages = prefs.getBoolPref('highlight.msgs') ? 'highlight' : 'nothing'; }
-      catch (e) { var messages = 'highlight'; }
-      
+      catch (e) { var messages = null; }
       try
       { var topics = prefs.getBoolPref('highlight.topics') ? 'highlight' : 'nothing'; }
-      catch (e) { var topics = 'highlight'; }
-
-      try
-      { var colors1 = prefs.getCharPref('highlight.colors.1'); }
-      catch (e) { var colors1 = null; }
-      try
-      { var colors2 = prefs.getCharPref('highlight.colors.2'); }
-      catch (e) { var colors2 = null; }
+      catch (e) { var topics = null; }
 
       try
       { var groups1 = prefs.getCharPref('highlight.groups.1'); }
@@ -770,16 +757,43 @@ function GameFOXLoader()
       try
       { var groups2 = prefs.getCharPref('highlight.groups.2'); }
       catch (e) { var groups2 = null; }
-      
-      GFUL.add('', colors1, groups1, messages, topics);
-     
-      try { var ignore = prefs.getBoolPref('highlight.ignore'); }
-      catch (e) { var ignore = false; }
 
-      if (ignore)
-        GFUL.add('', colors2, groups2, 'remove', 'remove');
-      else
-        GFUL.add('', colors2, groups2, messages, topics);
+      if (groups1)
+      {
+        try
+        { var colors1 = prefs.getCharPref('highlight.colors.1'); }
+        catch (e) { var colors1 = null; }
+
+        GFUL.add('', colors1, groups1, messages, topics);
+        groupAdded = true;
+      }
+
+      if (groups2)
+      {
+        try
+        { var colors2 = prefs.getCharPref('highlight.colors.2'); }
+        catch (e) { var colors2 = null; }
+
+        try { var ignore = prefs.getBoolPref('highlight.ignore'); }
+        catch (e) { var ignore = false; }
+
+        if (ignore)
+          GFUL.add('', colors2, groups2, 'remove', 'remove');
+        else
+          GFUL.add('', colors2, groups2, messages, topics);
+        groupAdded = true;
+      }
+    }
+
+    if (!groupAdded) // TODO: move this into first run after above code is removed
+      GFUL.add();
+
+    if (lastversion == '') // first run
+    {
+      GameFOXUtils.importBoardSettings();
+      GameFOXUtils.importSignature();
+      window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
+        'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
     }
   }
 
