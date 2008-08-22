@@ -162,7 +162,7 @@ var GFQuote =
 
     // try to insert at the cursor position, but only if the cursor isn't in
     // a stupid place like after the signature separator
-    var sigStart = quickpost.value.indexOf('---');
+    var sigStart = quickpost.value.search(/---(\n.*\n?){0,2}$/);
 
     if (sigStart != -1 && quickpost.selectionStart > sigStart) // insert at beginning
     {
