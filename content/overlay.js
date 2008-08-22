@@ -56,6 +56,34 @@ var GameFOX =
             'PM');
       }
 
+      // Message and title character count
+      if (1) // preference
+      {
+        // title count
+        if (doc.getElementsByName('topictitle')[0])
+        {
+          var titlecount = doc.createElement('span');
+              titlecount.id = 'gamefox-title-count';
+          var titleInput = doc.getElementsByName('topictitle')[0];
+              titleInput.parentNode.insertBefore(titlecount,
+                  titleInput.nextSibling);
+
+          GFMessages.updateTitleCount(doc);
+          doc.getElementsByName('topictitle')[0].addEventListener('keyup',
+              GFMessages.updateTitleCount, false);
+        }
+
+        var msgcount = doc.createElement('span');
+            msgcount.id = 'gamefox-message-count';
+        var resetBtn = doc.getElementsByName('reset')[0];
+            resetBtn.parentNode.appendChild(msgcount);
+
+        GFMessages.updateMessageCount(doc);
+
+        doc.getElementsByName('message')[0].addEventListener('keyup',
+            GFMessages.updateMessageCount, false);
+      }
+
       // "Post Message" button
       if (GameFOX.prefs.getBoolPref('elements.quickpost.button'))
       {

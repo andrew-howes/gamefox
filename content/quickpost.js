@@ -12,17 +12,35 @@ var GFQuickPost =
 
     var query = GameFOXUtils.stripQueryString(doc.location.search);
     var action = 'post.php' + GameFOXUtils.specialCharsDecode(query);
-    div.innerHTML +=
-      '\n<div id="gamefox-quickpost-title">QuickPost</div>\n' +
+    div.innerHTML += '\n' +
+      '<div id="gamefox-quickpost-title">QuickPost</div>\n' +
       '  <form id="gamefox-quickpost-form" action="' + action + '" method="post">\n' +
-      (newTopic ? '  <input type="text" id="gamefox-topic" name="topictitle" size="60" maxlength="80" value=""/><br/>\n' : '') +
-      '  <textarea name="message" wrap="virtual" id="gamefox-message" rows="15" cols="60">\n' + sig + '</textarea><br/>\n' +
+      (newTopic ? '  <input type="text" id="gamefox-topic" name="topictitle" ' +
+                      'size="60" maxlength="80" value=""/>\n' +
+                     '<span id="gamefox-title-count"></span><br/>' : '') +
+      '  <textarea name="message" wrap="virtual" id="gamefox-message" rows="15" ' +
+          'cols="60">\n' + sig + '</textarea><br/>\n' +
       '  <input type="button" id="gamefox-quickpost-btn" name="quickpost" value="Post Message"/>\n' +
       '  <input type="submit" name="post" value="Preview Message"/>\n' +
       '  <input type="submit" name="post" value="Preview and Spellcheck Message"/>\n' +
       '  <input type="reset" value="Reset"/>\n' +
       (newTopic ? '  <input type="button" id="gamefox-quickpost-hide" value="Hide"/>\n' : '') +
+      '  <span id="gamefox-message-count"></span>\n' + 
       '</form>\n';
+
+    if (1) // preference
+    {
+      if (newTopic)
+      {
+        GFMessages.updateTitleCount(doc);
+        doc.getElementById('gamefox-topic').addEventListener('keyup',
+            GFMessages.updateTitleCount, false);
+      }
+    
+      GFMessages.updateMessageCount(doc);
+      doc.getElementById('gamefox-message').addEventListener('keyup',
+          GFMessages.updateMessageCount, false);
+    }
 
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click',
         GFQuickPost.post, false);

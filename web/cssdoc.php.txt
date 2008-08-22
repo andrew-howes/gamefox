@@ -46,9 +46,23 @@ span.gamefox-groupname
 
 Contains group name(s) the adjacent username is a member of.
 
+<h3 id="span+gamefox-message-count">
+span#gamefox-message-count
+<span class="new">New in 0.6.5</span>
+</h3>
+
+Shows the character count for the message.
+
 <h3 id="span_gamefox-pagelist">span.gamefox-pagelist</h3>
 
 Contains topic pagination text.
+
+<h3 id="span+gamefox-title-count">
+span#gamefox-title-count
+<span class="new">New in 0.6.5</span>
+</h3>
+
+Shows the character count for the title.
 
 <h2 id="textarea">textarea</h2>
 <h3 id="textarea+gamefox-message">textarea#gamefox-message</h3>

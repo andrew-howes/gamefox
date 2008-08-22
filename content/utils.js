@@ -384,5 +384,23 @@ var GameFOXUtils =
   {
     return str.
       replace(/([\\\[\](){}^.?*+|$])/g, '\\$1');
+  },
+
+  // decodes all tags parsed by GameFAQs
+  decodeValidTags: function(str)
+  {
+    var tags = new Array(
+        '<b>', '</b>',
+        '<i>', '</i>',
+        '<strong>', '</strong>',
+        '<em>', '</em>',
+        '<br>', '<br />', '</br>', // lol
+        '<p>', '</p>', '<p />'
+        );
+
+    for (i in tags)
+      str = str.replace(this.specialCharsEncode(tags[i]), tags[i]);
+
+    return str;
   }
 };

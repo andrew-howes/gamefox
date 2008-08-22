@@ -14,7 +14,9 @@ var GFlib =
 
   getDocument: function(event)
   {
-    if (event.target.ownerDocument)
+    if (!event.type)
+      return event;
+    else if (event.target.ownerDocument)
       return event.target.ownerDocument;
     else
       return event.originalTarget;
