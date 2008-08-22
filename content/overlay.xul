@@ -23,7 +23,8 @@
     <menuitem label="&menu.label;" disabled="true"/>
 
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
-      accesskey="&menu.quote.accesskey;" oncommand="GFQuote.quote(gContextMenu);"/>
+      accesskey="&menu.quote.accesskey;" oncommand="GFQuote.quote(gContextMenu,
+      true);"/>
 
     <menu id="gamefox-context-pages" label="&menu.pages.label;"
       accesskey="&menu.pages.accesskey;">

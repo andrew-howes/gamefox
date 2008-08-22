@@ -2,7 +2,7 @@
 
 var GFQuote =
 {
-  quote: function(event)
+  quote: function(event, context)
   {
     var doc = event.target.ownerDocument;
     var leftMsgData = GameFOXUtils.getMsgDataDisplay(doc);
@@ -65,8 +65,9 @@ var GFQuote =
     var parentWin = new XPCNativeWrapper(document.commandDispatcher.focusedWindow,
         'document', 'getSelection()');
     var selection = parentWin.getSelection();
-    // only use the selection if it's inside the clicked message
-    if (gContextMenu && GameFOXUtils.trim(selection.toString()).length &&
+    // only use the selection if it's inside the clicked message and this
+    // function is called from the context menu
+    if (context && GameFOXUtils.trim(selection.toString()).length &&
         selection.containsNode(msgNode, true))
     {
       quoteMsg = selection.toString();
