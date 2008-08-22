@@ -741,9 +741,10 @@ function GameFOXLoader()
     }
 
     // user highlighting groups
-    var groupAdded = false;
     if (versionComparator.compare('0.6.5', lastversion) == 1)
     {
+      var groupAdded = false;
+
       try
       { var messages = prefs.getBoolPref('highlight.msgs') ? 'highlight' : 'nothing'; }
       catch (e) { var messages = null; }
@@ -783,10 +784,10 @@ function GameFOXLoader()
           GFUL.add('', colors2, groups2, messages, topics);
         groupAdded = true;
       }
-    }
 
-    if (!groupAdded) // TODO: move this into first run after above code is removed
-      GFUL.add();
+      if (!groupAdded)
+        GFUL.add(); // TODO: move this into first run after above code is removed
+    }
 
     if (lastversion == '') // first run
     {
