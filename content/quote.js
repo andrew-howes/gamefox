@@ -80,11 +80,11 @@ var GFQuote =
     var doc = event.target.ownerDocument;
 
     /* Parse message header */
-    var head = quoteHead.replace(/\|\s*$/g, '').split('\n');
+    var head = quoteHead.replace(/\|/g, '').split('\n');
     for (var i = 0; i < head.length; i++)
       head[i] = GameFOXUtils.trim(head[i]);
-    var username = head[1].replace(/\s*\|(.*\|\s*)?/, ''); // group names
-    var postdate = head[2].replace('Posted ', '');
+    var username = head[1];
+    var postdate = head[(head.length > 5 ? 3 : 2)].replace('Posted ', '');
     var postnum  = msgNum;
 
     /* Parse message body */
