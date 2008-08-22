@@ -94,7 +94,7 @@ var GFlib =
       case 'messages':
         var table = doc.evaluate('//table[@class="message"]', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (table != null)
+        if (table != null && !GFlib.onPage(doc, 'post'))
         {
           if (GFlib.onPage(doc, 'detail'))
             doc.gfPage = ['messages', 'detail'];

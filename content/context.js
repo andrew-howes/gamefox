@@ -21,7 +21,9 @@ var GFContextMenu =
       return;
     }
 
-    if (!GFlib.onPage(doc, 'messages') && doc.getElementById('gamefox-message'))
+    if (!GFlib.onPage(doc, 'messages')
+        || !doc.getElementById('gamefox-message')
+        || !GameFOX.prefs.getBoolPref('context.quote'))
       document.getElementById('gamefox-context-quote').hidden = true;
     else
     { // Quote
