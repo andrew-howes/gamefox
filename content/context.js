@@ -51,16 +51,14 @@ var GFContextMenu =
     if (!GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'myposts'))
     {
       // Tag topic
-      try
+      if (GFlib.onPage(doc, 'messages') && GameFOX.prefs.getBoolPref('context.tag'))
       {
         if (!doc.evaluate('//h1/following::h1', doc, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
           document.getElementById('gamefox-context-tag').hidden = true;
       }
-      catch (e)
-      {
+      else
         document.getElementById('gamefox-context-tag').hidden = true;
-      }
 
       document.getElementById('gamefox-context-pages').hidden = true;
     }
