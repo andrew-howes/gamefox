@@ -273,16 +273,9 @@ var GFUL =
 
     // list of all groups where the user is present
     var groupNames = "";
-    var name;
-    for (i in groups)
-    {
-      name = userlist[groups[i]]['name'];
-      if (!name.length) continue;
-
-      groupNames += name + ", ";
-    }
-    groupNames = groupNames.length ? "(" + groupNames.substring(0,
-          groupNames.length - 2) + ")" : "";
+    for (var i = 0; i < groups.length; i++)
+      if (userlist[groups[i]]['name'].length)
+        groupNames += userlist[groups[i]]['name'] + ((i + 1) == groups.length ? '' : ', ');
 
     return [groupNames, color, messages, topics];
   },

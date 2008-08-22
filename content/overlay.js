@@ -191,7 +191,8 @@ var GameFOX =
             {
               var groupname = doc.createElement('span');
               groupname.className = GFUL.groupClassName;
-              groupname.appendChild(doc.createTextNode(' ' + hlinfo[0]));
+              groupname.style.setProperty('font-style', 'italic', '');
+              groupname.appendChild(doc.createTextNode(' (' + hlinfo[0] + ')'));
               rows[i].cells[2].appendChild(groupname);
             }
             
@@ -332,8 +333,8 @@ var GameFOX =
           var username = td[j].getElementsByTagName('b')[0].textContent;
         else
           var username = td[j].getElementsByTagName('a')[0].textContent;
-        var hlinfo, groupname;
 
+        var hlinfo, groupname;
         if ((hlinfo = GFUL.searchUsername(username)) != false)
         {
           // add group names after username
@@ -350,6 +351,11 @@ var GameFOX =
             else
               td[j].insertBefore(groupname,
                   td[j].getElementsByTagName('a')[0].nextSibling);
+
+            if (leftMsgData)
+              td[j].insertBefore(doc.createElement('br'), groupname);
+            else
+              td[j].insertBefore(doc.createTextNode(' |'), groupname);
           }
           
           if (hlinfo[2] == 'highlight')
