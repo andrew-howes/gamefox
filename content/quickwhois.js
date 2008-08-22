@@ -71,10 +71,10 @@ var GFQuickWhois =
               != '')
           {
             if (profileFields[i] == 'Board User Level')
-              profileField = profileField.split(/<br\s*\/?>/gi)[0].replace(
-                  /<\/?b>/ig, '');
+              profileField = profileField.split(/<br\s*\/?>/i)[0].replace(
+                  /<\/?b>/gi, '');
             profileFieldsHTML += '<b>' + profileFields[i+1] + ':</b> ' +
-              profileField.replace(/<br\s*\/?>/g, '<br/>') + '<br/>';
+              profileField.replace(/<br\s*\/?>/gi, '<br/>') + '<br/>';
           }
         }
         div.innerHTML = profileFieldsHTML.replace(/<br\/>$/, '')
