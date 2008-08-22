@@ -80,7 +80,7 @@ var GFQuote =
     var doc = event.target.ownerDocument;
 
     /* Parse message header */
-    var head = quoteHead.replace(/\|/g, '').split("\n");
+    var head = quoteHead.replace(/\|/g, '').split('\n');
     for (var i = 0; i < head.length; i++)
       head[i] = GameFOXUtils.trim(head[i]);
     var username = head[1];
@@ -89,9 +89,9 @@ var GFQuote =
 
     /* Parse message body */
     var body = quoteMsg.
-      replace(/<br\s*\/?>/ig, '\n').
-      replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/ig, '$1').
-      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr)\b[^<>]*\/?>/gi, '').
+      replace(/<br\s*\/?>/gi, '\n').
+      replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1').
+      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u)\b[^<>]*\/?>/gi, '').
       replace(/^\s+|\s+$/g, '');
 
    // Get rid of signature
@@ -106,24 +106,24 @@ var GFQuote =
       if (loops > 6) // too many nests from when this wasn't enforced, just give up
                      // and quote the last guy
       {
-        body = body.replace(/\n*<i><p>[\s\S]*<\/p><\/i>\n*/, "");
+        body = body.replace(/\n*<i><p>[\s\S]*<\/p><\/i>\n*/, '');
         break;
       }
-      body = body.replace(/\n*<i><p>(?:(?=([^<]+))\1|<(?!i>))*?<\/p><\/i>\n*/, "\n");
+      body = body.replace(/\n*<i><p>(?:(?=([^<]+))\1|<(?!i>))*?<\/p><\/i>\n*/, '\n');
       loops++;
     }
 
     /* Prepare quote header */
-    var qhead = "";
+    var qhead = '';
     if (GameFOX.prefs.getBoolPref('quote.header.username')) qhead += username;
-    if (GameFOX.prefs.getBoolPref('quote.header.date')) qhead += " | Posted " + postdate;
-    if (GameFOX.prefs.getBoolPref('quote.header.messagenum') && postnum) qhead += " (" + postnum + ")";
+    if (GameFOX.prefs.getBoolPref('quote.header.date')) qhead += ' | Posted ' + postdate;
+    if (GameFOX.prefs.getBoolPref('quote.header.messagenum') && postnum) qhead += ' (' + postnum + ')';
 
     if (qhead.length && GameFOX.prefs.getCharPref('quote.style') != 'gfcode_full')
     {
-      if (GameFOX.prefs.getBoolPref('quote.header.italic')) qhead = "<i>" + qhead + "</i>";
-      if (GameFOX.prefs.getBoolPref('quote.header.bold')) qhead = "<b>" + qhead + "</b>";
-      qhead += "\n";
+      if (GameFOX.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
+      if (GameFOX.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
+      qhead += '\n';
     }
 
     var qbody, quote;
@@ -131,23 +131,23 @@ var GFQuote =
     {
       case 'normal':
         qbody = body;
-        if (GameFOX.prefs.getBoolPref('quote.message.italic')) qbody = "<i>" + qbody + "</i>";
-        if (GameFOX.prefs.getBoolPref('quote.message.bold')) qbody = "<b>" + qbody + "</b>";
+        if (GameFOX.prefs.getBoolPref('quote.message.italic')) qbody = '<i>' + qbody + '</i>';
+        if (GameFOX.prefs.getBoolPref('quote.message.bold')) qbody = '<b>' + qbody + '</b>';
 
         quote = qhead + qbody;
         break;
       case 'gfcode_body':
-        qbody = "<i><p>" + body + "</p></i>";
+        qbody = '<i><p>' + body + '</p></i>';
 
         quote = qhead + qbody;
         break;
       case 'gfcode_full':
         if (qhead.length)
-          qhead = "<i><p><strong>" + qhead + "</strong>\n";
+          qhead = '<i><p><strong>' + qhead + '</strong>\n';
         else // no header
-          qhead = "<i><p>";
+          qhead = '<i><p>';
 
-        quote = qhead + body + "</p></i>";
+        quote = qhead + body + '</p></i>';
         break;
       case 'custom':
         var quoteTemplate = GameFOXUtils.getString('quote.style.custom');
@@ -162,18 +162,18 @@ var GFQuote =
 
     // try to insert at the cursor position, but only if the cursor isn't in
     // a stupid place like after the signature separator
-    var sigStart = quickpost.value.search(/---(\n.*\n?){0,2}/);
+    var sigStart = quickpost.value.indexOf('---');
 
-    if (quickpost.selectionStart > sigStart) // insert at beginning
+    if (sigStart != -1 && quickpost.selectionStart > sigStart) // insert at beginning
     {
-      quickpost.value = quote + "\n" + quickpost.value;
+      quickpost.value = quote + '\n' + quickpost.value;
       var endPosition = quote + 1;
     }
     else // insert at cursor
     {
       var endPosition = quickpost.selectionStart + quote.length + 1;
       quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
-        + quote + "\n"
+        + quote + '\n'
         + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
     }
 
