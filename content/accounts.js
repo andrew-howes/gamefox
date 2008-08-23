@@ -6,8 +6,8 @@ var GameFOXAccounts =
 
   read: function()
   {
-    this.accounts = Components.classes['@mozilla.org/preferences-service;1']
-        .getService(Components.interfaces.nsIPrefBranch)
+    this.accounts = Cc['@mozilla.org/preferences-service;1']
+        .getService(Ci.nsIPrefBranch)
         .getCharPref('gamefox.accounts');
 
     if (!/\S/.test(this.accounts))
@@ -21,8 +21,8 @@ var GameFOXAccounts =
     if (typeof(accounts) == 'object')
       accounts = accounts.toSource();
 
-    Components.classes['@mozilla.org/preferences-service;1']
-        .getService(Components.interfaces.nsIPrefBranch)
+    Cc['@mozilla.org/preferences-service;1']
+        .getService(Ci.nsIPrefBranch)
         .setCharPref('gamefox.accounts', accounts);
   },
 
@@ -76,8 +76,8 @@ var GameFOXAccounts =
       this.removeCookie('skin');
       this.removeCookie('filesplit');
 
-      var cookieMgr2 = Components.classes['@mozilla.org/cookiemanager;1']
-          .getService(Components.interfaces.nsICookieManager2);
+      var cookieMgr2 = Cc['@mozilla.org/cookiemanager;1']
+          .getService(Ci.nsICookieManager2);
       if (navigator.userAgent.indexOf('rv:1.9') != -1) // mozilla 1.9 (fx3)
       {
         cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
@@ -111,12 +111,12 @@ var GameFOXAccounts =
 
   removeCookie: function(name)
   {
-    var cookieMgr = Components.classes['@mozilla.org/cookiemanager;1']
-        .getService(Components.interfaces.nsICookieManager);
+    var cookieMgr = Cc['@mozilla.org/cookiemanager;1']
+        .getService(Ci.nsICookieManager);
     var e = cookieMgr.enumerator;
     while (e.hasMoreElements())
     {
-      var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
+      var cookie = e.getNext().QueryInterface(Ci.nsICookie);
       if (cookie.host == '.gamefaqs.com' && cookie.name == name)
       {
         cookieMgr.remove('.gamefaqs.com', name, cookie.path, false);
@@ -127,12 +127,12 @@ var GameFOXAccounts =
 
   getCookie: function(name)
   {
-    var cookieMgr = Components.classes['@mozilla.org/cookiemanager;1']
-        .getService(Components.interfaces.nsICookieManager);
+    var cookieMgr = Cc['@mozilla.org/cookiemanager;1']
+        .getService(Ci.nsICookieManager);
     var e = cookieMgr.enumerator;
     while (e.hasMoreElements())
     {
-      var cookie = e.getNext().QueryInterface(Components.interfaces.nsICookie);
+      var cookie = e.getNext().QueryInterface(Ci.nsICookie);
       if (cookie.host == '.gamefaqs.com' && cookie.name == name)
         return {content: cookie.value, expires: cookie.expires};
     }
@@ -147,8 +147,8 @@ var GameFOXAccounts =
     if (username == undefined)
     {
       username = {value: ''};
-      result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
-          .getService(Components.interfaces.nsIPromptService)
+      result = Cc['@mozilla.org/embedcomp/prompt-service;1']
+          .getService(Ci.nsIPromptService)
           .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username (or e-mail address) and password:', username, password, null, check);
       if (!result)
         return;
@@ -156,8 +156,8 @@ var GameFOXAccounts =
     }
     else
     {
-      result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
-          .getService(Components.interfaces.nsIPromptService)
+      result = Cc['@mozilla.org/embedcomp/prompt-service;1']
+          .getService(Ci.nsIPromptService)
           .promptPassword(null, 'GameFOX', 'Enter password for "' + username + '":', password, null, check);
       if (!result)
         return;
@@ -213,8 +213,8 @@ var GameFOXAccounts =
       items.push(account);
     }
     var selected = {};
-    var result = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
-        .getService(Components.interfaces.nsIPromptService)
+    var result = Cc['@mozilla.org/embedcomp/prompt-service;1']
+        .getService(Ci.nsIPromptService)
         .select(null, 'GameFOX', 'Select account to remove:', items.length, items, selected);
     if (result)
       this.removeAccount(items[selected.value]);
@@ -229,8 +229,8 @@ var GameFOXAccounts =
 
   loadGameFAQs: function()
   {
-    var win = Components.classes['@mozilla.org/appshell/window-mediator;1']
-        .getService(Components.interfaces.nsIWindowMediator)
+    var win = Cc['@mozilla.org/appshell/window-mediator;1']
+        .getService(Ci.nsIWindowMediator)
         .getMostRecentWindow('navigator:browser');
     if (GFlib.onGF(win.content.document))
       win.loadURI(win.content.document.location.href);

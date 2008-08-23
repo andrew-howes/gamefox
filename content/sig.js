@@ -1,8 +1,8 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
 var GFSig =
 {
-  prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
-             Components.interfaces.nsIPrefService).getBranch('gamefox.'),
+  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
+             Ci.nsIPrefService).getBranch('gamefox.'),
 
   getSigByCriteria: function(account, boardname, boardid)
   {
@@ -107,7 +107,7 @@ var GFSig =
     this.updateCharCounts();
 
     // watch pref for change and update signature
-    this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
     this.prefs.addObserver('', this, false);
 
     window.addEventListener('unload', this.unload, false);

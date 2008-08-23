@@ -27,10 +27,10 @@ var GameFOXOptions =
 
   openCSSDirectory: function()
   {
-    var directoryService = Components.classes['@mozilla.org/file/directory_service;1'].
-      getService(Components.interfaces.nsIProperties);
+    var directoryService = Cc['@mozilla.org/file/directory_service;1'].
+      getService(Ci.nsIProperties);
 
-    var directory = directoryService.get('ProfD', Components.interfaces.nsILocalFile);
+    var directory = directoryService.get('ProfD', Ci.nsILocalFile);
     directory.append("gamefox");
     directory.append("css");
 
@@ -46,8 +46,8 @@ var GameFOXOptions =
 
   saveSelectedTab: function(tab)
   {
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.options.');
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.options.');
     try
     {
       prefs.setIntPref(tab.getAttribute('tabGroup') + '.selectedtab', tab.selectedIndex);
@@ -84,8 +84,8 @@ var GameFOXOptions =
 
   restoreLastTabs: function()
   {
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.options.');
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.options.');
     var tabs = document.getElementsByTagName('tabs');
     var tabGroup;
 

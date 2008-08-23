@@ -5,8 +5,8 @@ var GFUL =
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
 
-  prefs: Components.classes['@mozilla.org/preferences-service;1'].getService(
-      Components.interfaces.nsIPrefService).getBranch('gamefox.'),
+  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
+      Ci.nsIPrefService).getBranch('gamefox.'),
 
   add: function(name, color, users, messages, topics)
   {

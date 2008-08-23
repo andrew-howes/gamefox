@@ -7,8 +7,8 @@ var GFlib =
 
   log: function(msg)
   {
-    var consoleService = Components.classes['@mozilla.org/consoleservice;1'].
-      getService(Components.interfaces.nsIConsoleService);
+    var consoleService = Cc['@mozilla.org/consoleservice;1'].
+      getService(Ci.nsIConsoleService);
     consoleService.logStringMessage('GameFOX: ' + msg);
   },
 
@@ -135,8 +135,8 @@ var GFlib =
 
   newTab: function(url, focus)
   {
-    var browser = Components.classes['@mozilla.org/appshell/window-mediator;1'].
-      getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow(
+    var browser = Cc['@mozilla.org/appshell/window-mediator;1'].
+      getService(Ci.nsIWindowMediator).getMostRecentWindow(
           'navigator:browser').getBrowser();
 
     var tab = browser.addTab(url);

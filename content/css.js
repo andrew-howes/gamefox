@@ -29,8 +29,8 @@ var GameFOXCSS =
         'Classic GameFOX Sidebar', 'MichaelJBuck', false, true);
 
     // Remove old stylesheets
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.');
 
     var css = eval(prefs.getCharPref('theme.css.serialized'));
     for (i in {"gamefox":"", "bundled":""})
@@ -79,14 +79,14 @@ var GameFOXCSS =
 
   filepicker: function()
   {
-    var filepicker = Components.classes['@mozilla.org/filepicker;1'].createInstance(
-        Components.interfaces.nsIFilePicker);
-    filepicker.init(window, 'Import Stylesheet', Components.interfaces.nsIFilePicker.modeOpen);
+    var filepicker = Cc['@mozilla.org/filepicker;1'].createInstance(
+        Ci.nsIFilePicker);
+    filepicker.init(window, 'Import Stylesheet', Ci.nsIFilePicker.modeOpen);
     filepicker.appendFilter('Stylesheets', '*.css; *.txt');
 
-    if (filepicker.show() == Components.interfaces.nsIFilePicker.returnOK)
+    if (filepicker.show() == Ci.nsIFilePicker.returnOK)
     {
-      var uri = filepicker.fileURL.QueryInterface(Components.interfaces.nsIURI);
+      var uri = filepicker.fileURL.QueryInterface(Ci.nsIURI);
       document.getElementById('css-import-file').value = uri.spec;
     }
   },
@@ -94,14 +94,14 @@ var GameFOXCSS =
   add: function(cat, uri, filename, title, author, enabled, overwrite)
   {
     overwrite = (overwrite == null ? false : overwrite);
-    var file = Components.classes['@mozilla.org/file/local;1'].getService(
-        Components.interfaces.nsILocalFile);
-    var foStream = Components.classes['@mozilla.org/network/file-output-stream;1'].getService(
-        Components.interfaces.nsIFileOutputStream);
-    var siStream = Components.classes['@mozilla.org/scriptableinputstream;1'].getService(
-        Components.interfaces.nsIScriptableInputStream);
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var file = Cc['@mozilla.org/file/local;1'].getService(
+        Ci.nsILocalFile);
+    var foStream = Cc['@mozilla.org/network/file-output-stream;1'].getService(
+        Ci.nsIFileOutputStream);
+    var siStream = Cc['@mozilla.org/scriptableinputstream;1'].getService(
+        Ci.nsIScriptableInputStream);
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.');
 
     file.initWithPath(this.getDirectory());
     file.append(filename);
@@ -115,8 +115,8 @@ var GameFOXCSS =
 
     try
     {
-      var channel = Components.classes['@mozilla.org/network/io-service;1'].getService(
-          Components.interfaces.nsIIOService).newChannel(uri, null, null);
+      var channel = Cc['@mozilla.org/network/io-service;1'].getService(
+          Ci.nsIIOService).newChannel(uri, null, null);
       var input = channel.open();
       siStream.init(input);
       var fileData = siStream.read(input.available());
@@ -155,8 +155,8 @@ var GameFOXCSS =
 
   getDirectory: function()
   {
-    var directory = Components.classes['@mozilla.org/file/directory_service;1'].getService(
-        Components.interfaces.nsIProperties).get('ProfD', Components.interfaces.nsIFile);
+    var directory = Cc['@mozilla.org/file/directory_service;1'].getService(
+        Ci.nsIProperties).get('ProfD', Ci.nsIFile);
     
     try
     {
@@ -164,7 +164,7 @@ var GameFOXCSS =
       directory.append('css');
 
       if (!directory.exists())
-        directory.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
+        directory.create(Ci.nsIFile.DIRECTORY_TYPE, 0755);
 
       return directory.path;
     }
@@ -177,12 +177,12 @@ var GameFOXCSS =
 
   reload: function()
   {
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].getService(
-        Components.interfaces.nsIStyleSheetService);
-    var file = Components.classes['@mozilla.org/file/local;1'].getService(
-        Components.interfaces.nsILocalFile);
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.');
+    var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
+        Ci.nsIStyleSheetService);
+    var file = Cc['@mozilla.org/file/local;1'].getService(
+        Ci.nsILocalFile);
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
     for (var category in css)
@@ -193,8 +193,8 @@ var GameFOXCSS =
         {
           file.initWithPath(this.getDirectory());
           file.append(filename);
-          var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
-              Components.interfaces.nsIIOService).newFileURI(file, null, null);
+          var uri = Cc['@mozilla.org/network/io-service;1'].getService(
+              Ci.nsIIOService).newFileURI(file, null, null);
 
           if (sss.sheetRegistered(uri, sss.USER_SHEET))
             sss.unregisterSheet(uri, sss.USER_SHEET);
@@ -224,8 +224,8 @@ var GameFOXCSS =
 
   populate: function(element)
   {
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.');
 
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
@@ -300,8 +300,8 @@ var GameFOXCSS =
   {
     this.visibleData[idx][0][column.index] = value;
 
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.');
     var filename = this.visibleData[idx][0][3];
     var category = this.visibleData[idx][0][4];
     // Map column to associative array in pref
@@ -318,22 +318,22 @@ var GameFOXCSS =
 
   remove: function(category, filename)
   {
-    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-        Components.interfaces.nsIPrefService).getBranch('gamefox.');
-    var file = Components.classes['@mozilla.org/file/local;1'].getService(
-        Components.interfaces.nsILocalFile);
+    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+        Ci.nsIPrefService).getBranch('gamefox.');
+    var file = Cc['@mozilla.org/file/local;1'].getService(
+        Ci.nsILocalFile);
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
-    var sss = Components.classes['@mozilla.org/content/style-sheet-service;1'].getService(
-        Components.interfaces.nsIStyleSheetService);
-    var file = Components.classes['@mozilla.org/file/local;1'].getService(
-        Components.interfaces.nsILocalFile);
+    var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
+        Ci.nsIStyleSheetService);
+    var file = Cc['@mozilla.org/file/local;1'].getService(
+        Ci.nsILocalFile);
 
     file.initWithPath(this.getDirectory());
     file.append(filename);
 
-    var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(
-        Components.interfaces.nsIIOService).newFileURI(file, null, null);
+    var uri = Cc['@mozilla.org/network/io-service;1'].getService(
+        Ci.nsIIOService).newFileURI(file, null, null);
     try
     {
       sss.unregisterSheet(uri, sss.USER_SHEET);

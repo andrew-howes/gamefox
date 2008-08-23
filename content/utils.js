@@ -49,8 +49,8 @@ var GameFOXUtils =
         }
         else
         {
-          var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-              Components.interfaces.nsIPrefService).getBranch('gamefox.');
+          var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+              Ci.nsIPrefService).getBranch('gamefox.');
           prefs.setIntPref('tpcsPerPage', topicpage);
           prefs.setIntPref('tpcSortOrder', topicsort);
           prefs.setIntPref('msgsPerPage', messagepage);
@@ -178,8 +178,8 @@ var GameFOXUtils =
         }
         else
         {
-          var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(
-              Components.interfaces.nsIPrefService).getBranch('gamefox.');
+          var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
+              Ci.nsIPrefService).getBranch('gamefox.');
           var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));
           sigs[0]['body'] = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
           GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
@@ -236,16 +236,16 @@ var GameFOXUtils =
   getString: function(pref, prefService)
   {
     return (prefService == null ? GameFOX.prefs : prefService).
-      getComplexValue(pref, Components.interfaces.nsISupportsString).data;
+      getComplexValue(pref, Ci.nsISupportsString).data;
   },
 
   setString: function(pref, str, prefService)
   {
     prefService = (prefService == null) ? GameFOX.prefs : prefService;
-    var ustr = Components.classes['@mozilla.org/supports-string;1'].
-      createInstance(Components.interfaces.nsISupportsString);
+    var ustr = Cc['@mozilla.org/supports-string;1'].
+      createInstance(Ci.nsISupportsString);
     ustr.data = str;
-    prefService.setComplexValue(pref, Components.interfaces.nsISupportsString,
+    prefService.setComplexValue(pref, Ci.nsISupportsString,
         ustr);
   },
 

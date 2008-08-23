@@ -15,8 +15,8 @@ var GFSidebar =
   {
     this.redirectLogin(form);
 
-    var browserWindow = Components.classes['@mozilla.org/appshell/window-mediator;1'].
-      getService(Components.interfaces.nsIWindowMediator).
+    var browserWindow = Cc['@mozilla.org/appshell/window-mediator;1'].
+      getService(Ci.nsIWindowMediator).
       getMostRecentWindow('navigator:browser');
     browserWindow.BrowserOpenTab();
 
@@ -28,8 +28,8 @@ var GFSidebar =
 
   redirectLogin: function(form)
   {
-    var doc = Components.classes['@mozilla.org/appshell/window-mediator;1'].
-      getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow(
+    var doc = Cc['@mozilla.org/appshell/window-mediator;1'].
+      getService(Ci.nsIWindowMediator).getMostRecentWindow(
           'navigator:browser').content.document;
     var path = form.ownerDocument.getElementById('gamefaqs-login-path');
 

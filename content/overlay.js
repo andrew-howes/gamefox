@@ -443,7 +443,7 @@ var GameFOX =
 
   msglistDblclick: function(event)
   {
-    var prefs        = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
+    var prefs        = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService).getBranch('gamefox.');
     var dblclickHead = prefs.getIntPref('message.header.dblclick');
     var dblclickMsg  = prefs.getBoolPref('message.dblclick');
 
@@ -510,7 +510,7 @@ var GameFOX =
   topicDblclick: function(event)
   {
     var myposts = GFlib.onPage(event.target.ownerDocument, 'myposts');
-    var switcher  = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.' + (myposts ? 'myposts' : 'topic') + '.dblclick');
+    var switcher  = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch).getIntPref('gamefox.' + (myposts ? 'myposts' : 'topic') + '.dblclick');
     switch (switcher)
     {
       case 0:
@@ -591,13 +591,13 @@ var GameFOX =
 
     var boardID   = topicLink.match(/\bboard=([0-9-]+)/)[1];
     var topicID   = topicLink.match(/\btopic=([0-9-]+)/)[1];
-    var numPages  = Math.ceil(msgsCell.textContent/Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getIntPref('gamefox.msgsPerPage'));
+    var numPages  = Math.ceil(msgsCell.textContent/Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch).getIntPref('gamefox.msgsPerPage'));
     var pageList  = document.getElementById('gamefox-pages-menu');
     var i, item, link, tr, td;
 
     if ('type' in event) // triggered from double-click event
     {
-      var pgPrefs    = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.paging.');
+      var pgPrefs    = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService).getBranch('gamefox.paging.');
       var pgLocation = pgPrefs.getIntPref('location');
       node = node.parentNode.cells[1];
 
@@ -730,8 +730,8 @@ function GameFOXLoader()
   document.getElementById('contentAreaContextMenu').addEventListener(
       'popupshowing', GFContextMenu.displayMenu, false);
 
-  var prefs = Components.classes['@mozilla.org/preferences-service;1'].
-    getService(Components.interfaces.nsIPrefService).getBranch('gamefox.');
+  var prefs = Cc['@mozilla.org/preferences-service;1'].
+    getService(Ci.nsIPrefService).getBranch('gamefox.');
 
   try
   {
@@ -742,12 +742,12 @@ function GameFOXLoader()
     var lastversion = '';
   }
 
-  var version = Components.classes['@mozilla.org/extensions/manager;1'].
-    getService(Components.interfaces.nsIExtensionManager).
+  var version = Cc['@mozilla.org/extensions/manager;1'].
+    getService(Ci.nsIExtensionManager).
     getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
   var versionComparator =
-    Components.classes['@mozilla.org/xpcom/version-comparator;1'].getService(
-        Components.interfaces.nsIVersionComparator);
+    Cc['@mozilla.org/xpcom/version-comparator;1'].getService(
+        Ci.nsIVersionComparator);
 
   var compareVersions = versionComparator.compare(version, lastversion);
   if (compareVersions != 0) // upgrade, downgrade, or first run
