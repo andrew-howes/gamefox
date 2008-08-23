@@ -6,12 +6,12 @@ var GameFOXTags =
 
   read: function()
   {
-    this.tags = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).getCharPref('gamefox.tags');
+    this.tags = Cc['@mozilla.org/preferences-service;1']
+        .getService(Ci.nsIPrefBranch)
+        .getCharPref('gamefox.tags');
 
-    if (this.tags.replace(/\s/g, '') == '')
-    {
+    if (!/\S/.test(this.tags))
       this.tags = '({})';
-    }
 
     this.tags = eval(this.tags);
   },
@@ -19,11 +19,11 @@ var GameFOXTags =
   write: function(tags)
   {
     if (typeof(tags) == 'object')
-    {
       tags = tags.toSource();
-    }
 
-    Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch).setCharPref('gamefox.tags', tags);
+    Cc['@mozilla.org/preferences-service;1']
+        .getService(Ci.nsIPrefBranch)
+        .setCharPref('gamefox.tags', tags);
   },
 
   populate: function(method)
@@ -54,7 +54,9 @@ var GameFOXTags =
     if (method == 1)
     {
       // For Active Message List and Tracked Topics link section
-      var tagPrefs   = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch('gamefox.context.tag.');
+      var tagPrefs = Cc['@mozilla.org/preferences-service;1']
+          .getService(Ci.nsIPrefService)
+          .getBranch('gamefox.context.tag.');
       var tagMyPosts = tagPrefs.getBoolPref('myposts');
       var tagTracked = tagPrefs.getBoolPref('tracked');
       if (tagMyPosts)
@@ -75,7 +77,7 @@ var GameFOXTags =
         item.setAttribute('onclick', 'if (event.button == 1) GameFOXTags.open("' + 0 + ',' + -2 + '", 0)');
         tagList.appendChild(item);
       }
-      var createSep = (tagMyPosts || tagTracked) ? true : false;
+      var createSep = tagMyPosts || tagTracked;
       // End section
 
       for (board in this.tags)
@@ -165,8 +167,8 @@ var GameFOXTags =
 
   open: function(tagID, openType)
   {
-    var IDs     = tagID.split(/,/);
-    var tagURI  = 'http://www.gamefaqs.com/boards';
+    var IDs    = tagID.split(/,/);
+    var tagURI = 'http://www.gamefaqs.com/boards';
 
     if (IDs[0] == 0 && IDs[1] == -1)
     {
@@ -178,10 +180,12 @@ var GameFOXTags =
     }
     else
     {
-      tagURI += (IDs[1] ? '/genmessage.php' : '/gentopic.php') + '?board=' + IDs[0] + (IDs[1] ? '&topic=' + IDs[1] + (IDs[2] && parseInt(IDs[2]) ? '&page=' + IDs[2]  : '') : '' );
+      tagURI += (IDs[1] ? '/genmessage.php' : '/gentopic.php')
+                + '?board=' + IDs[0] + (IDs[1] ? '&topic=' + IDs[1]
+                + (IDs[2] && parseInt(IDs[2]) ? '&page=' + IDs[2] : '') : '');
     }
 
-    var winMed  = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow('navigator:browser');
+    var winMed  = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator).getMostRecentWindow('navigator:browser');
 
     switch (openType)
     {
@@ -245,7 +249,6 @@ var GameFOXTags =
     this.populate(2);
   },
 
-
   removePurged: function()
   {
     this.read();
@@ -294,7 +297,7 @@ var GameFOXTags =
             {
               err[errNumber.indexOf(status)] += 1;
             }
-            catch(e){;}
+            catch (e) {}
             break;
         }
 
@@ -308,7 +311,7 @@ var GameFOXTags =
           if (remove.length)
           {
             GameFOXTags.remove(remove);
-            msg =  'Successfully deleted ' + remove.length + ' purged topics.\n\n';
+            msg = 'Successfully deleted ' + remove.length + ' purged topics.\n\n';
           }
           else
           {
@@ -351,48 +354,48 @@ var GameFOXTags =
       {
         if (!processed && request.readyState >= 3)
         {
-          if (!checkMessageBody && request.responseText.match(/^\s*[^<\s]/))  // Not (X)HTML
+          if (!checkMessageBody && /^\s*[^<\s]/.test(request.responseText)) // Not (X)HTML
           {
-            if (request.responseText.match(/maintenance/i))
+            if (/maintenance/i.test(request.responseText))
             {
               processed = true;
               request.abort();
               processRespond(503);
             }
-            else if (request.responseText.match(/Internal Error|Database error/i))
+            else if (/Internal Error|Database error/i.test(request.responseText))
             {
               processed = true;
               request.abort();
               processRespond(500);
             }
-            else if (request.responseText.match(/Too many connections?/i))
+            else if (/Too many connections?/i.test(request.responseText))
             {
               processed = true;
               request.abort();
               processRespond(504);
             }
           }
-          if (!checkMessageBody && request.responseText.match(/<\/title>/i))
+          if (!checkMessageBody && /<\/title>/i.test(request.responseText))
           {
-            if (request.responseText.match(/<title>404 Not Found<\/title>/i))
+            if (/<title>404 Not Found<\/title>/i.test(request.responseText))
             {
               processed = true;
               request.abort();
               processRespond(-404);
             }
-            else if (request.responseText.match(/<title\b[^>]*>[^<]*\b(Error\W*404|404\W*Error)\b[^<]*<\/title>/ig))
+            else if (/<title\b[^>]*>[^<]*\b(Error\W*404|404\W*Error)\b[^<]*<\/title>/i.test(request.responseText))
             {
               processed = true;
               request.abort();
               processRespond(404); //-> this is an old behaviour, now is not like this anymore. Need to be cleaned up?!
             }
-            else if (request.responseText.match(/<title\b[^>]*>[^<]*\b(Error\W*403|403\W*Error)\b[^<]*<\/title>/ig))
+            else if (/<title\b[^>]*>[^<]*\b(Error\W*403|403\W*Error)\b[^<]*<\/title>/i.test(request.responseText))
             {
               processed = true;
               request.abort();
               processRespond(403);
             }
-            else if (request.responseText.match(/<title\b[^>]*>[^<]*\b(Error\W*401|401\W*Error)\b[^<]*<\/title>/ig))
+            else if (/<title\b[^>]*>[^<]*\b(Error\W*401|401\W*Error)\b[^<]*<\/title>/i.test(request.responseText))
             {
               processed = true;
               request.abort();
@@ -406,7 +409,7 @@ var GameFOXTags =
               //processRespond(200);
             }
           }
-          else if (!checkMessageBody && request.responseText.match(/<\/head>/i))
+          else if (!checkMessageBody && /<\/head>/i.test(request.responseText))
           {
             processed = true;
             request.abort();
@@ -414,13 +417,13 @@ var GameFOXTags =
           }
           else if (request.readyState == 4 && !processed)
           {
-            if (request.responseText.replace(/^\s+|\s+$/g, '').length == 0)
+            if (!/\S/.test(request.responseText))
             {
               processRespond(0);
             }
             else if (checkMessageBody)
             {
-              if (request.responseText.match(/<table\b[^>]*\bclass=['"]?messages?['"]?\b[^>]*>/ig))
+              if (/<table\b[^>]*\bclass=['"]?messages?['"]?\b[^>]*>/i.test(request.responseText))
               {
                 // Added: for GameFAQs' new deleted topic handling
                 processRespond(200);
@@ -500,7 +503,7 @@ var GameFOXTags =
   add: function(event)
   {
     var doc = event.target.ownerDocument;
-    var queryStr   = doc.location.search;
+    var queryStr = doc.location.search;
     var boardTitle = false;
     var topicTitle = false;
 
@@ -511,7 +514,7 @@ var GameFOXTags =
         event.preventDefault();
       }
 
-      var onMyPosts   = doc.location.pathname.match(/^\/boards\/myposts\.php$/i);
+      var onMyPosts = GFlib.onPage(doc, 'myposts');
       var onTopicList;
 
       if (onMyPosts)
@@ -520,8 +523,8 @@ var GameFOXTags =
       }
       else
       {
-        onTopicList = !!doc.evaluate('//div[@class="board_nav"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-                    && !!doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        onTopicList = doc.evaluate('//div[@class="board_nav"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null
+                    && doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
       }
 
       if (onMyPosts || onTopicList)
@@ -529,46 +532,44 @@ var GameFOXTags =
         try
         {
           var node = event.target;
-          var nodeName = node.nodeName.toLowerCase();
 
-          while (nodeName != 'td')
+          while (node.nodeName.toLowerCase() != 'td')
           {
             node = node.parentNode;
-            nodeName = node.nodeName.toLowerCase();
           }
 
           var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
-          queryStr   = topicLink.href;
-          topicTitle = topicLink.textContent.replace(/^\s+|\s+$/g, '');
+          queryStr = topicLink.href;
+          topicTitle = GameFOXUtils.trim(topicLink.textContent);
 
           if (onMyPosts)
           {
-            boardTitle = node.parentNode.cells[0].innerHTML.replace(/<(font|div|span)\b[^\0]+$/i, '').replace(/<\/?a\b[^>]*>/ig, '').replace(/^\s+|\s+$/g, '');
+            boardTitle = GameFOXUtils.trim(node.parentNode.cells[0].innerHTML.replace(/<(font|div|span)\b[^\0]+$/i, '').replace(/<\/?a\b[^>]*>/ig, ''));
           }
         }
-        catch(e){return false;}
+        catch (e) { return false; }
       }
     }
 
-    var boardID     = queryStr.match(/\bboard=([0-9-]+)/i)[1];
-    var topicID     = queryStr.match(/\btopic=([0-9-]+)/i)[1];
+    var boardID     = queryStr.match(/\bboard=([0-9-]+)/)[1];
+    var topicID     = queryStr.match(/\btopic=([0-9-]+)/)[1];
     var tagID       = boardID + ',' + topicID;
 
     var h1s         = doc.getElementsByTagName('h1');
     if (!boardTitle)
     {
-      boardTitle  = h1s[0].textContent.replace(/^\s+|\s+$/g, '');
+      boardTitle = GameFOXUtils.trim(h1s[0].textContent);
     }
     if (!topicTitle)
     {
-      topicTitle  = h1s[1].textContent.replace(/^\s+|\s+$/g, '');
+      topicTitle = GameFOXUtils.trim(h1s[1].textContent);
     }
 
     GameFOXTags.read();
 
     if (boardID in GameFOXTags.tags && topicID in GameFOXTags.tags[boardID].topics)
     {
-      if (confirm("You have already tagged this topic!\nDo you wish to un-tag it?"))
+      if (confirm('You have already tagged this topic!\nDo you wish to un-tag it?'))
       {
         GameFOXTags.remove(tagID);
         return false;
