@@ -546,6 +546,10 @@ var GameFOXTags =
           {
             boardTitle = GameFOXUtils.trim(node.parentNode.cells[0].innerHTML.replace(/<(font|div|span)\b[^\0]+$/i, '').replace(/<\/?a\b[^>]*>/ig, ''));
           }
+          else if (GFlib.onPage(doc, 'tracked'))
+          {
+            boardTitle = GameFOXUtils.trim(node.parentNode.cells[2].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
+          }
         }
         catch (e) { return false; }
       }
