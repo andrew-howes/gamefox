@@ -1,7 +1,5 @@
 2008-08-xx:
     * version 0.6.5
-    * Don't quote from the selection if it's empty, which can be caused by
-      selecting and deselecting a message
     * Option for removing Accounts list from context menu
     * Usable options window on smaller resolutions
     * Option to select random signature from most specific matching signatures
@@ -11,6 +9,9 @@
     * Unlimited user highlighting groups
     * "Go to last post" double click action
     * Title and message character counts
+    * New CSS: Classic GameFOX Sidebar
+    * New CSS: Ricapar's Classic Theme
+    * Some quoting fixes
 
 2008-08-15:
     * version 0.6.4
