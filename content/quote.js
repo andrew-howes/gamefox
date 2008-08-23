@@ -178,6 +178,10 @@ var GFQuote =
         + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
     }
 
+    // update the character count
+    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
+      GFMessages.updateMessageCount(doc);
+
     quickpost.focus();
     // Move the caret to the end of the last quote
     quickpost.setSelectionRange(endPosition, endPosition);
