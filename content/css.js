@@ -19,10 +19,14 @@ var GameFOXCSS =
 
     this.add('bundled', 'chrome://gamefox/content/css/toad.css', 'toad.css',
         'Ten On A Diet', 'TakatoMatsuki', false, true);
+    this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
+        'Classic Theme', 'Ricapar', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
         'Wide Default Layout', '', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/ascii-art-font.css', 'ascii-art-font.css',
         'ASCII art font', '', false, true);
+    this.add('bundled', 'chrome://gamefox/content/css/gamefox-sidebar.css', 'gamefox-sidebar.css',
+        'Classic GameFOX Sidebar', 'Michael J Buck', false, true);
 
     // Remove old stylesheets
     var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(

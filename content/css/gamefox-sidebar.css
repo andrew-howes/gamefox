@@ -1,0 +1,14 @@
+/*******************************************************************************
+			GameFOX Sidebar - GameFAQs theme
+				By MichaelJBuck (with small edits by Toad King)
+*******************************************************************************/
+
+@-moz-document url-prefix(chrome://gamefox/content/sidebar.xhtml)
+{
+  html, body { background-color: #66F !important; }
+  iframe { width: 97% !important; }
+  form { padding: auto 0px !important; margin: auto 0px !important; text-align: center !important; }
+  .search-head, input { width: 97% !important; }
+  #title { background: url('http://www.gamefaqs.com/shared/bar2001.gif') no-repeat left center !important; width: 100% !important; height: 30px !important; }
+  #title-link { display: none !important; }
+}

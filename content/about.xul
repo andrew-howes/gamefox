@@ -65,13 +65,28 @@
     <separator class="thin"/>
     <label class="subtitle" value="&contributors.label;"/>
     <hbox>
+      <label value="TakatoMatsuki"/>
+      <label class="contrib description" value="&contrib.css.label;"/>
+    </hbox>
+
+    <hbox>
+      <label value="Ricapar"/>
+      <label class="contrib description" value="&contrib.css.label;"/>
+    </hbox>
+
+    <hbox>
+      <label value="Michael J Buck"/>
+      <label class="contrib description" value="&contrib.css.label;"/>
+    </hbox>
+
+    <hbox>
       <label value="Nuvola"/>
-      <label class="contrib description" value="&nuvola.desc.label;"/>
+      <label class="contrib description" value="&contrib.icons.label;"/>
     </hbox>
 
     <hbox>
       <label value="Pardus"/>
-      <label class="contrib description" value="&pardus.desc.label;"/>
+      <label class="contrib description" value="&contrib.icons.label;"/>
       <spacer flex="1"/>
       <label class="url-label" value="http://uludag.org.tr/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
