@@ -67,6 +67,8 @@ var GameFOX =
           var titleInput = doc.getElementsByName('topictitle')[0];
               titleInput.parentNode.insertBefore(titlecount,
                   titleInput.nextSibling);
+              titleInput.parentNode.insertBefore(doc.createTextNode(' '),
+                  titleInput.nextSibling);
 
           GFMessages.updateTitleCount(doc);
           doc.getElementsByName('topictitle')[0].addEventListener('keyup',
@@ -76,6 +78,7 @@ var GameFOX =
         var msgcount = doc.createElement('span');
             msgcount.id = 'gamefox-message-count';
         var resetBtn = doc.getElementsByName('reset')[0];
+            resetBtn.parentNode.appendChild(doc.createTextNode(' '));
             resetBtn.parentNode.appendChild(msgcount);
 
         GFMessages.updateMessageCount(doc);
