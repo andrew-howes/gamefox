@@ -310,25 +310,7 @@ var GFUL =
     var buttonContainer = button.offsetParent; // td
     var postMsg;
 
-    var leftMsgData = !GameFOXUtils.getMsgDataDisplay(doc);
-    if (leftMsgData)
-    {
-      postMsg = buttonContainer.offsetParent.rows[buttonContainer.parentNode.rowIndex + 1].cells[0];
-      if (postMsg.style.fontSize == '0pt')
-      {
-        postMsg.style.removeProperty('font-size');
-        postMsg.style.removeProperty('display');
-        postMsg.removeAttribute('style');
-        button.textContent = '[Hide]';
-      }
-      else
-      {
-        postMsg.style.setProperty('font-size', '0pt',  'important');
-        postMsg.style.setProperty('display', 'none', 'important');
-        button.textContent = '[Show]';
-      }
-    }
-    else
+    if (GameFOXUtils.getMsgDataDisplay(doc)) // left of message
     {
       postMsg = buttonContainer.parentNode.cells[1];
       if (postMsg.style.fontSize == '0pt')
@@ -340,7 +322,24 @@ var GFUL =
       }
       else
       {
-        postMsg.style.setProperty('font-size', '0pt',  'important');
+        postMsg.style.setProperty('font-size', '0pt', 'important');
+        postMsg.style.setProperty('display', 'none', 'important');
+        button.textContent = '[Show]';
+      }
+    }
+    else // above message
+    {
+      postMsg = buttonContainer.offsetParent.rows[buttonContainer.parentNode.rowIndex + 1].cells[0];
+      if (postMsg.style.fontSize == '0pt')
+      {
+        postMsg.style.removeProperty('font-size');
+        postMsg.style.removeProperty('display');
+        postMsg.removeAttribute('style');
+        button.textContent = '[Hide]';
+      }
+      else
+      {
+        postMsg.style.setProperty('font-size', '0pt', 'important');
         postMsg.style.setProperty('display', 'none', 'important');
         button.textContent = '[Show]';
       }
