@@ -10,18 +10,18 @@ var GFUL =
 
   add: function(name, color, users, messages, topics)
   {
-    var userlist = eval(this.prefs.getCharPref("userlist.serialized"));
+    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
 
-    var name = (typeof name == 'string') ? name : '';
-    var color = (typeof color == 'string') ? color : '#CCFFFF';
-    var users = (typeof users == 'string') ? users : '';
-    var messages = (typeof messages == 'string') ? messages : 'highlight';
-    var topics = (typeof topics == 'string') ? topics : 'highlight';
+    name = (typeof name == 'string') ? name : '';
+    color = (typeof color == 'string') ? color : '#CCFFFF';
+    users = (typeof users == 'string') ? users : '';
+    messages = (typeof messages == 'string') ? messages : 'highlight';
+    topics = (typeof topics == 'string') ? topics : 'highlight';
 
     userlist.push({'name':name, 'color':color, 'users':users,
         'messages':messages, 'topics':topics});
 
-    this.prefs.setCharPref("userlist.serialized", userlist.toSource());
+    this.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   populate: function()
@@ -37,7 +37,7 @@ var GFUL =
       while (vbox.childNodes.length >= 1)
         vbox.removeChild(vbox.firstChild);
 
-    for (i in userlist)
+    for (var i in userlist)
     {
       /* groupbox */
       groupbox = document.createElement('groupbox');
@@ -238,10 +238,10 @@ var GFUL =
     this.usernameIndex = {};
 
     // build the index
-    for (i in userlist)
+    for (var i in userlist)
     {
       usernames = GameFOXUtils.trim(userlist[i]['users']).split(/\s*,\s*/);
-      for (j in usernames)
+      for (var j = 0; j < usernames.length; j++)
       {
         var username = usernames[j].toLowerCase();
         if (!username.length) continue;
@@ -272,7 +272,7 @@ var GFUL =
     var topics = userlist[groups[0]]['topics'];
 
     // list of all groups where the user is present
-    var groupNames = "";
+    var groupNames = '';
     for (var i = 0; i < groups.length; i++)
       if (userlist[groups[i]]['name'].length)
         groupNames += userlist[groups[i]]['name'] + ', ';
