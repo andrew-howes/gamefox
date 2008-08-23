@@ -75,7 +75,7 @@
     </hbox>
 
     <hbox>
-      <label value="Michael J Buck"/>
+      <label value="MichaelJBuck"/>
       <label class="contrib description" value="&contrib.css.label;"/>
     </hbox>
 
