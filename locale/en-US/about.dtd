@@ -10,3 +10,9 @@
 <!ENTITY currentdevs.label "Current Developers">
 <!ENTITY previousdevs.label "Previous Developers">
 <!ENTITY contributors.label "Contributors">
+
+<!ENTITY abdullaha.desc.label "Original Developer">
+<!ENTITY toadking.desc.label "GameFOX TK">
+
+<!ENTITY nuvola.desc.label "Icons">
+<!ENTITY pardus.desc.label "Icons">

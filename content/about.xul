@@ -49,7 +49,7 @@
     <hbox>
       <label class="name" value="Abdullah A"/>
       <label class="username" value="ultimategamer00"/>
-      <label class="description" value="Original Developer"/>
+      <label class="description" value="&abdullaha.desc.label;"/>
       <spacer flex="1"/>
       <label class="url-label" value="http://whitefyre.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
@@ -57,7 +57,7 @@
     <hbox>
       <label class="name" value="Toad King"/>
       <label class="username" value="Calvinjpwalker"/>
-      <label class="description" value="GameFOX TK" tooltiptext="GameFOX TK 0.5.x is based on GameFOX 0.5"/>
+      <label class="description" value="&toadking.desc.label;"/>
       <spacer flex="1"/>
       <label class="url-label" value="http://www.toadking.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
@@ -66,14 +66,12 @@
     <label class="subtitle" value="&contributors.label;"/>
     <hbox>
       <label value="Nuvola"/>
-      <label class="contrib description" value="Icons"/>
-      <spacer flex="1"/>
-      <label class="url-label" value="http://icon-king.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
+      <label class="contrib description" value="&nuvola.desc.label;"/>
     </hbox>
 
     <hbox>
       <label value="Pardus"/>
-      <label class="contrib description" value="Icons"/>
+      <label class="contrib description" value="&pardus.desc.label;"/>
       <spacer flex="1"/>
       <label class="url-label" value="http://uludag.org.tr/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>

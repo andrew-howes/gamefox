@@ -117,12 +117,14 @@
 <!ENTITY mouse.topics.radio.nothing "Do nothing">
 <!ENTITY mouse.topics.radio.paginate "Show links to topic pages">
 <!ENTITY mouse.topics.radio.lastpage "Go to last page">
+<!ENTITY mouse.topics.radio.lastpost "Go to last post">
 <!ENTITY mouse.topics.radio.tagtopic "Tag topic">
 <!ENTITY mouse.aml.caption "Active Messages List">
 <!ENTITY mouse.aml.label "Double clicking on row action:">
 <!ENTITY mouse.aml.radio.nothing "Do nothing">
 <!ENTITY mouse.aml.radio.paginate "Show links to topic pages">
 <!ENTITY mouse.aml.radio.lastpage "Go to last page">
+<!ENTITY mouse.aml.radio.lastpost "Go to last post">
 <!ENTITY mouse.aml.radio.tagtopic "Tag topic">
 <!ENTITY mouse.messages.caption "Message Lists">
 <!ENTITY mouse.messages.label "Double clicking on message header action:">

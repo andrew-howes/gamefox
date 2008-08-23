@@ -537,7 +537,7 @@
         </vbox>
         <vbox>
           <radio value="4" label="&mouse.topics.radio.lastpage;"/>
-          <radio value="2" label="Go to last post"/>
+          <radio value="2" label="&mouse.topics.radio.lastpost;"/>
         </vbox>
         <vbox>
           <radio value="3" label="&mouse.topics.radio.tagtopic;"/>
@@ -555,7 +555,7 @@
         </vbox>
         <vbox>
           <radio value="4" label="&mouse.aml.radio.lastpage;"/>
-          <radio value="2" label="Go to last post"/>
+          <radio value="2" label="&mouse.aml.radio.lastpost;"/>
         </vbox>
         <vbox>
           <radio value="3" label="&mouse.aml.radio.tagtopic;"/>
