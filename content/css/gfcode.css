@@ -18,7 +18,7 @@
 .message b > p {
     font-family: monospace !important;
     white-space: pre-wrap;
-    background: #bbb !important;
+    background: #eee !important;
 }
 .message i > p > strong:first-child {
     display: block;
