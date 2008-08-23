@@ -584,6 +584,11 @@ var GameFOXTags =
 
     if (boardID in GameFOXTags.tags)
     {
+      if (!GFlib.onPage(doc, 'tracked'))
+      { // overwrite if not on tracked topics - fixes abbreviated board titles
+        //   from tracked topics and changed board titles, if that happens
+        GameFOXTags.tags[boardID].title = boardTitle;
+      }
       GameFOXTags.tags[boardID].topics[topicID] = topicTitle;
     }
     else
