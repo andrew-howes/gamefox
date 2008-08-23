@@ -48,6 +48,15 @@ var GameFOXCSS =
         {
           this.remove(i, j);
         }
+
+        // deal with user styles that are now bundled
+        if (css['user'][j] != undefined && css[i][j] != undefined)
+        {
+          if (css['user'][j]['enabled'].toString() == 'true')
+            css[i][j]['enabled'] = true;
+          delete css['user'][j];
+          prefs.setCharPref('theme.css.serialized', css.toSource());
+        }
       }
     }
   },
