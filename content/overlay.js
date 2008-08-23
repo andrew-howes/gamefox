@@ -795,7 +795,7 @@ function GameFOXLoader()
       {
         try
         { var colors1 = prefs.getCharPref('highlight.colors.1'); }
-        catch (e) { var colors1 = null; }
+        catch (e) { var colors1 = '#CCFFFF'; }
 
         GFUL.add('', colors1, groups1, messages, topics);
         groupAdded = true;
@@ -805,7 +805,7 @@ function GameFOXLoader()
       {
         try
         { var colors2 = prefs.getCharPref('highlight.colors.2'); }
-        catch (e) { var colors2 = null; }
+        catch (e) { var colors2 = '#99CC66'; }
 
         try { var ignore = prefs.getBoolPref('highlight.ignore'); }
         catch (e) { var ignore = false; }
