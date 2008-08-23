@@ -11,11 +11,11 @@ var GFMessages =
           replace(/\n/g, '<br/>');
 
     var messageCount = doc.getElementById('gamefox-message-count');
-    messageCount.innerHTML = message.length + " / 4096 characters";
+    messageCount.innerHTML = message.length + ' / 4096 characters';
 
     if (message.length > 4096)
     {
-      messageCount.innerHTML += "(!!)";
+      messageCount.innerHTML += '(!!)';
       messageCount.style.setProperty('font-weight', 'bold', '');
     }
     else
@@ -27,7 +27,7 @@ var GFMessages =
     var doc = GFlib.getDocument(event);
     var title = doc.getElementsByName('topictitle')[0].value;
     title =
-      GameFOXUtils.trim(GameFOXUtils.decodeValidTags(GameFOXUtils.specialCharsEncode(title))).
+      GameFOXUtils.trim(GameFOXUtils.specialCharsEncode(title)).
           replace(/&quot;/, '"');
 
     var titleCount = doc.getElementById('gamefox-title-count');
@@ -35,7 +35,7 @@ var GFMessages =
 
     if (title.length > 80)
     {
-      titleCount.innerHTML += "(!!)";
+      titleCount.innerHTML += '(!!)';
       titleCount.style.setProperty('font-weight', 'bold', '');
     }
     else
