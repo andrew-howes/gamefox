@@ -9,6 +9,7 @@
   buttons="accept"
   title="&dialog.title;"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/about.js"/>
   <groupbox>

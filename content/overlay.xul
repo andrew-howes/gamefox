@@ -4,6 +4,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/overlay.dtd">
 
 <overlay id="gamefox-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
