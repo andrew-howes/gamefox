@@ -275,9 +275,9 @@ var GFUL =
     var groupNames = "";
     for (var i = 0; i < groups.length; i++)
       if (userlist[groups[i]]['name'].length)
-        groupNames += userlist[groups[i]]['name'] + ((i + 1) == groups.length ? '' : ', ');
+        groupNames += userlist[groups[i]]['name'] + ', ';
 
-    return [groupNames, color, messages, topics];
+    return [groupNames.substr(0, groupNames.length - 2), color, messages, topics];
   },
 
   removeWithButton: function(event)
