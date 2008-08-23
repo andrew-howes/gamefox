@@ -386,20 +386,30 @@ var GameFOXUtils =
       replace(/([\\\[\](){}^.?*+|$])/g, '\\$1');
   },
 
-  // decodes all tags parsed by GameFAQs
-  decodeValidTags: function(str)
+  // encode message like GameFAQs does
+  encodeMessage: function(str)
   {
-    var tags = new Array(
+    var tags = [
         '<b>', '</b>',
         '<i>', '</i>',
         '<strong>', '</strong>',
         '<em>', '</em>',
         '<br>', '<br />', '</br>', // lol
         '<p>', '</p>', '<p />'
-        );
+        ];
 
-    for (i in tags)
-      str = str.replace(this.specialCharsEncode(tags[i]), tags[i]);
+    str = this.specialCharsEncode(str);
+    for (var i = 0; i < tags.length; i++)
+      str = str.replace(this.specialCharsEncode(tags[i]), tags[i], 'gi');
+    str = this.trim(str).replace(/\n/g, '<br/>');
+
+    return str;
+  },
+
+  // encode topic title like GameFAQs does
+  encodeTitle: function(str)
+  {
+    str = this.trim(this.specialCharsEncode(str).replace(/&quot;/g, '"'));
 
     return str;
   }
