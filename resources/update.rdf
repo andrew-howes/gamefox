@@ -9,7 +9,7 @@
 
                 <RDF:li>
                     <RDF:Description>
-                        <em:version>0.6.4</em:version>
+                        <em:version>0.6.5</em:version>
 
                         <!-- Firefox -->
                         <em:targetApplication>
@@ -18,9 +18,9 @@
                                 <em:minVersion>2.0</em:minVersion>
                                 <em:maxVersion>3.0.*</em:maxVersion>
 
-                                <em:updateLink>http://beyondboredom.net/gfox/gamefox-0.6.4.xpi</em:updateLink>
-                                <em:updateHash>sha1:db686ccb5f7f93b498301f72b09a50ab6d5e22cb</em:updateHash>
-                                <em:updateInfoURL>http://beyondboredom.net/gfox/news/0.6.4.xhtml</em:updateInfoURL>
+                                <em:updateLink>http://beyondboredom.net/gfox/gamefox-0.6.5.xpi</em:updateLink>
+                                <em:updateHash>sha1:293dce4ba7ed867486ede830c3eb0fe92502fb8f</em:updateHash>
+                                <em:updateInfoURL>http://beyondboredom.net/gfox/news/0.6.5.xhtml</em:updateInfoURL>
                             </RDF:Description>
                         </em:targetApplication>
 
@@ -31,9 +31,9 @@
                                 <em:minVersion>2.0a1pre</em:minVersion>
                                 <em:maxVersion>2.0a1pre</em:maxVersion>
 
-                                <em:updateLink>http://beyondboredom.net/gfox/gamefox-0.6.4.xpi</em:updateLink>
-                                <em:updateHash>sha1:db686ccb5f7f93b498301f72b09a50ab6d5e22cb</em:updateHash>
-                                <em:updateInfoURL>http://beyondboredom.net/gfox/news/0.6.4.xhtml</em:updateInfoURL>
+                                <em:updateLink>http://beyondboredom.net/gfox/gamefox-0.6.5.xpi</em:updateLink>
+                                <em:updateHash>sha1:293dce4ba7ed867486ede830c3eb0fe92502fb8f</em:updateHash>
+                                <em:updateInfoURL>http://beyondboredom.net/gfox/news/0.6.5.xhtml</em:updateInfoURL>
                             </RDF:Description>
                         </em:targetApplication>
 
@@ -44,9 +44,9 @@
                                 <em:minVersion>1.0</em:minVersion>
                                 <em:maxVersion>1.2.*</em:maxVersion>
 
-                                <em:updateLink>http://beyondboredom.net/gfox/gamefox-0.6.4.xpi</em:updateLink>
-                                <em:updateHash>sha1:db686ccb5f7f93b498301f72b09a50ab6d5e22cb</em:updateHash>
-                                <em:updateInfoURL>http://beyondboredom.net/gfox/news/0.6.4.xhtml</em:updateInfoURL>
+                                <em:updateLink>http://beyondboredom.net/gfox/gamefox-0.6.5.xpi</em:updateLink>
+                                <em:updateHash>sha1:293dce4ba7ed867486ede830c3eb0fe92502fb8f</em:updateHash>
+                                <em:updateInfoURL>http://beyondboredom.net/gfox/news/0.6.5.xhtml</em:updateInfoURL>
                             </RDF:Description>
                         </em:targetApplication>
                     </RDF:Description>
