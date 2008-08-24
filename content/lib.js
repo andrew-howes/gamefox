@@ -35,19 +35,11 @@ var GFlib =
        displays its custom warning page (e.g. Server not found), then its
        document.location.host and document.location.hostname properties remain
        pointing to the original URI, but its document.domain property content
-       will be null. Expect rubbish in the error console, and possibly a
-       breakage, if the above anomalies are not handled properly.
+       will be null.
    */
   onGF: function(doc)
   {
-    try
-    {
-      return /(^|\.)gamefaqs\.com$/.test(doc.domain);
-    }
-    catch (e)
-    {
-      return false;
-    }
+    return doc.domain && /(^|\.)gamefaqs\.com$/.test(doc.domain);
   },
 
   onBoards: function(doc)
