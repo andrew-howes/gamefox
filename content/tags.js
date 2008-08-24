@@ -544,7 +544,7 @@ var GameFOXTags =
 
           if (onMyPosts)
           {
-            boardTitle = GameFOXUtils.trim(node.parentNode.cells[0].innerHTML.replace(/<(font|div|span)\b[^\0]+$/i, '').replace(/<\/?a\b[^>]*>/ig, ''));
+            boardTitle = GameFOXUtils.trim(node.parentNode.cells[0].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
           }
           else if (GFlib.onPage(doc, 'tracked'))
           {
