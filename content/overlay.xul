@@ -85,7 +85,6 @@
   <broadcasterset id="mainBroadcasterSet">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
-      label="&sidebar.title;"
       type="checkbox"
       group="sidebar"
       sidebartitle="&sidebar.title;"
@@ -96,7 +95,6 @@
   <broadcasterset id="navBroadcasters">
     <broadcaster id="viewGamefoxSidebar"
       autoCheck="false"
-      label="&sidebar.title;"
       type="checkbox"
       group="sidebar"
       sidebartitle="&sidebar.title;"
@@ -106,7 +104,8 @@
 
   <!-- firefox view sidebar menu -->
   <menupopup id="viewSidebarMenu">
-    <menuitem key="key_gamefoxSidebar" observes="viewGamefoxSidebar"/>
+    <menuitem key="key_gamefoxSidebar" label="&sidebar.title;"
+      observes="viewGamefoxSidebar"/>
   </menupopup>
 
 </overlay>
