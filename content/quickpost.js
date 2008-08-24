@@ -33,13 +33,17 @@ var GFQuickPost =
       if (newTopic)
       {
         GFMessages.updateTitleCount(doc);
-        doc.getElementById('gamefox-topic').addEventListener('keyup',
+        doc.getElementById('gamefox-topic').addEventListener('input',
             GFMessages.updateTitleCount, false);
+        doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
+            function(event) {setTimeout(function() {GFMessages.updateTitleCount(event)}, 0)}, false);
       }
-    
+
       GFMessages.updateMessageCount(doc);
-      doc.getElementById('gamefox-message').addEventListener('keyup',
+      doc.getElementById('gamefox-message').addEventListener('input',
           GFMessages.updateMessageCount, false);
+      doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
+          function(event) {setTimeout(function() {GFMessages.updateMessageCount(event)}, 0)}, false);
     }
 
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click',

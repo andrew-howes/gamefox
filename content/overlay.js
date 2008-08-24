@@ -71,8 +71,10 @@ var GameFOX =
                   titleInput.nextSibling);
 
           GFMessages.updateTitleCount(doc);
-          doc.getElementsByName('topictitle')[0].addEventListener('keyup',
+          doc.getElementsByName('topictitle')[0].addEventListener('input',
               GFMessages.updateTitleCount, false);
+          doc.getElementsByName('topictitle')[0].form.addEventListener('reset',
+              function(event) {setTimeout(function() {GFMessages.updateTitleCount(event)}, 0)}, false);
         }
 
         var msgcount = doc.createElement('span');
@@ -83,8 +85,10 @@ var GameFOX =
 
         GFMessages.updateMessageCount(doc);
 
-        doc.getElementsByName('message')[0].addEventListener('keyup',
+        doc.getElementsByName('message')[0].addEventListener('input',
             GFMessages.updateMessageCount, false);
+        doc.getElementsByName('message')[0].form.addEventListener('reset',
+            function(event) {setTimeout(function() {GFMessages.updateMessageCount(event)}, 0)}, false);
       }
 
       // "Post Message" button
