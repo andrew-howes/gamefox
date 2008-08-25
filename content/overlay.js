@@ -43,9 +43,9 @@ var GameFOX =
       // Titles
       if (doc.getElementsByName('topictitle')[0]) // new topic
       {
-        GFlib.setTitle(doc,
+        GFlib.setTitle(doc, GameFOXUtils.trim(
             doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).
-            singleNodeValue.textContent.replace(/^\s+|\s+$/g, ''),
+            singleNodeValue.textContent),
             'CT');
       }
       else if (doc.getElementsByName('message')[0]) // new post
@@ -56,7 +56,7 @@ var GameFOX =
             'PM');
       }
 
-      // Message and title character count
+      // Character count
       if (GameFOX.prefs.getBoolPref('elements.charcounts'))
       {
         // title count
@@ -71,12 +71,14 @@ var GameFOX =
                   titleInput.nextSibling);
 
           GFMessages.updateTitleCount(doc);
+
           doc.getElementsByName('topictitle')[0].addEventListener('input',
               GFMessages.updateTitleCount, false);
           doc.getElementsByName('topictitle')[0].form.addEventListener('reset',
               function(event) {setTimeout(function() {GFMessages.updateTitleCount(event)}, 0)}, false);
         }
 
+        // message count
         var msgcount = doc.createElement('span');
             msgcount.id = 'gamefox-message-count';
         var resetBtn = doc.getElementsByName('reset')[0];
@@ -124,14 +126,14 @@ var GameFOX =
             textContent), 'U');
     }
 
-
-    var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
-        doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    GFUL.loadGroups();
-
     /* Topic Lists */
-    if (GFlib.onPage(doc, 'topics'))
+    else if (GFlib.onPage(doc, 'topics'))
     {
+      var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
+          doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      GFUL.loadGroups();
+
+      // Title
       GFlib.setTitle(doc, GameFOXUtils.trim(doc.evaluate('//h1', doc,
               null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
           textContent), 'T');
@@ -152,20 +154,32 @@ var GameFOX =
         userNav.appendChild(anchor);
       }
 
-      // Double click action
-      doc.evaluate('//table[@class="topics"]', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.addEventListener(
-            'dblclick', GameFOX.topicDblclick, false);
+      var topicsTable = doc.evaluate('//table[@class="topics"]', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var rows;
+
+      if (topicsTable != null)
+      {
+        // Double click action
+        topicsTable.addEventListener('dblclick', GameFOX.topicDblclick, false);
+
+        // Topic rows
+        rows = topicsTable.getElementsByTagName('tr');
+      }
+      else
+      {
+        // No topics
+        rows = [];
+      }
 
       // Topic row loop
-      var rows = doc.getElementsByTagName('table');
-      rows = (rows[2] ? rows[2] : rows[0]).getElementsByTagName('tr');
-
       for (var i = 1; i < rows.length; i++)
       {
+        var skipNext = false;
+
+        // Pagination
         if (GameFOX.prefs.getBoolPref('paging.auto'))
         {
-          // Pagination
           var pageHTML = GameFOXUtils.formatPagination(
               doc,
               rows[i].cells[1].getElementsByTagName('a')[0].getAttribute('href'),
@@ -197,24 +211,28 @@ var GameFOX =
             if (GameFOX.prefs.getIntPref('paging.location') == 0)
             {
               rows[i].parentNode.insertBefore(pageTR, rows[i].nextSibling);
-              i++;
+              skipNext = true;
             }
           }
         }
 
-        // Board linkification (tracked.php)
-        if (GameFOX.prefs.getBoolPref('elements.tracked.boardlink') && GFlib.onPage(doc, 'tracked'))
+        // tracked.php
+        if (GFlib.onPage(doc, 'tracked'))
         {
-          rows[i].cells[2].innerHTML = '<a href="' + rows[i].cells[1].
-            getElementsByTagName('a')[0].getAttribute('href').replace(
-                /message(?=\.)/, 'topic').replace(/(&topic=[0-9-]+|\btopic=[0-9-]+&)/, '') + '">' +
-            GameFOXUtils.trim(rows[i].cells[2].textContent) + '</a>';
+          // Board linkification
+          if (GameFOX.prefs.getBoolPref('elements.tracked.boardlink'))
+          {
+            rows[i].cells[2].innerHTML = '<a href="' + rows[i].cells[1].
+              getElementsByTagName('a')[0].getAttribute('href').replace(
+                  /message(?=\.)/, 'topic').replace(/(&topic=[0-9]+|\btopic=[0-9]+&)/, '') + '">' +
+              GameFOXUtils.trim(rows[i].cells[2].textContent) + '</a>';
+          }
         }
 
-        // User highlighting (only on gentopic.php, tracked.php has no topic
-        // creator names)
-        if (!GFlib.onPage(doc, 'tracked'))
+        // gentopic.php
+        else
         {
+          // User highlighting
           var username = GameFOXUtils.trim(rows[i].getElementsByTagName('td')[2].textContent);
           var hlinfo;
 
@@ -245,12 +263,21 @@ var GameFOX =
             }
           }
         }
+
+        if (skipNext)
+        {
+          ++i;
+        }
       }
     }
 
     /* Message Lists */
     else if (GFlib.onPage(doc, 'messages'))
     {
+      var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
+          doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      GFUL.loadGroups();
+
       var pagenum = doc.location.search.match(/\bpage=([0-9]+)/);
           pagenum = pagenum ? parseInt(pagenum[1]) : 0;
       var leftMsgData = GameFOXUtils.getMsgDataDisplay(doc);
@@ -270,7 +297,7 @@ var GameFOX =
         GameFOXTags.read();
         var queryStr = doc.location.search;
         var boardID = queryStr.match(/\bboard=([0-9-]+)/)[1];
-        var topicID = queryStr.match(/\btopic=([0-9-]+)/)[1];
+        var topicID = queryStr.match(/\btopic=([0-9]+)/)[1];
         var tagID = boardID + ',' + topicID;
 
         var a = doc.createElement('a');
@@ -594,7 +621,7 @@ var GameFOX =
     }
 
     var boardID   = topicLink.match(/\bboard=([0-9-]+)/)[1];
-    var topicID   = topicLink.match(/\btopic=([0-9-]+)/)[1];
+    var topicID   = topicLink.match(/\btopic=([0-9]+)/)[1];
     var numPages  = Math.ceil(msgsCell.textContent/Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch).getIntPref('gamefox.msgsPerPage'));
     var pageList  = document.getElementById('gamefox-pages-menu');
     var i, item, link, tr, td;

@@ -12,7 +12,7 @@ var GameFOXUtils =
     {
       if (request.readyState == 4)
       {
-        if (!request.responseText.match(/Board Display Settings/))
+        if (request.responseText.indexOf('Board Display Settings') == -1)
         {
           GFlib.log('importBoardSettings: Bad things!');
           if (noisy)
@@ -36,8 +36,8 @@ var GameFOXUtils =
           if (button) button.setAttribute('disabled', false);
           return;
         }
-        // if GameFAQs gives us bad values, bad things happen
 
+        // if GameFAQs gives us bad values, bad things happen
         if (inOptions)
         {
           document.getElementById('gamefoxTpcsPerPage').value = topicpage;
@@ -75,7 +75,7 @@ var GameFOXUtils =
     {
       if (request.readyState == 4)
       {
-        if (!request.responseText.match(/Board Display Settings/))
+        if (request.responseText.indexOf('Board Display Settings') == -1)
         {
           GFlib.log('exportBoardSettings: Bad things!');
           if (noisy)
@@ -101,7 +101,7 @@ var GameFOXUtils =
         {
           if (postRequest.readyState == 4)
           {
-            if (!postRequest.responseText.match(/Display settings updated/))
+            if (postRequest.responseText.indexOf('Display settings updated') == -1)
             {
               GFlib.log("exportBoardSettings: Update didn't work!");
               if (noisy)
@@ -146,7 +146,7 @@ var GameFOXUtils =
     {
       if (request.readyState == 4)
       {
-        if (!request.responseText.match(/Board Signature and Quote/))
+        if (request.responseText.indexOf('Board Signature and Quote') == -1)
         {
           GFlib.log('importSignature: Bad things!');
           if (noisy)
@@ -161,7 +161,7 @@ var GameFOXUtils =
           GFlib.log("importSignature: Couldn't get sig");
           if (noisy)
             alert("Couldn't get your signature. This shouldn't happen. Maybe you have " +
-                "one of those really old signature that displays bold and italics in " +
+                "one of those really old signature that displays bold and italics on " +
                 "the profile page?");
           if (button) button.setAttribute('disabled', false);
           return;
@@ -196,6 +196,7 @@ var GameFOXUtils =
     var selectStart = str.search(new RegExp('<select\\b[^>]+?\\bname="' + name + '"[^>]*>', 'i'));
     if (selectStart != -1)
     {
+      // TODO: simplify when GameFAQs puts in </select> tags
       var selectSubstring = str.substring(selectStart+1);
       var selectEnd = selectSubstring.search(/<\/?select\b/i);
       if (selectEnd != -1)
@@ -273,14 +274,13 @@ var GameFOXUtils =
     suffixHTML.innerHTML = '';
     suffixHTML.appendChild(doc.createTextNode(suffix));
     suffixHTML = suffixHTML.innerHTML.replace(/\s/g, '&nbsp;');
-    //
 
     var pages = Math.ceil(posts / GameFOX.prefs.getIntPref('msgsPerPage'));
     if (pages == 1)
       return false;
 
     var pageHTML = doc.createElement('span');
-    pageHTML.innerHTML = "" + prefixHTML;
+    pageHTML.innerHTML = '' + prefixHTML;
 
     for (var i = 0; i < pages; i++)
     {
@@ -307,7 +307,7 @@ var GameFOXUtils =
       var boardname = GameFOXUtils.trim(doc.evaluate('//h1', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
         textContent);
-      var boardid = doc.location.href.match(/board=([0-9]+)/)[1];
+      var boardid = doc.location.search.match(/board=([0-9-]+)/)[1];
       var account = GameFOXUtils.trim(doc.evaluate('//div[@class="msg"]', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
           textContent).replace('Welcome, ', '');
@@ -317,22 +317,22 @@ var GameFOXUtils =
     }
 
     if (!sig.length && !presig.length)
-      return "";
+      return '';
 
     // Restrict signature to 2 lines, presignature to 1
-    sig = sig.split("\n");
+    sig = sig.split('\n');
     if (sig.length >= 2)
-      sig = sig[0] + "\n" + sig[1];
+      sig = sig[0] + '\n' + sig[1];
     else
       sig = sig[0];
 
-    presig = presig.split("\n");
+    presig = presig.split('\n');
     presig = presig[0];
 
-    var str = (newline ? "\n" : "") +
-      (presig != "" ? presig + (sig != "" ? "\n" : "") : "") +
-      (sig != "" ? "---\n" + sig : "");
-    return "\n" + str;
+    var str = (newline ? '\n' : '') +
+      (presig != '' ? presig + (sig != '' ? '\n' : '') : '') +
+      (sig != '' ? '---\n' + sig : '');
+    return '\n' + str;
   },
 
   URLEncode: function(str)
@@ -348,7 +348,7 @@ var GameFOXUtils =
     // Mozilla's localization and conversion interfaces to convert from
     // ISO-8859-1 to Unicode, vice versa, Unicode to UTF-8, vice versa, and all
     // other sorts of shit but to no avail. This seems to be the only way to do
-    // it, unless GameFAQs changes its character encoding to UTF-8 or Unicode
+    // it, unless GameFAQs changes its character encoding to UTF-8 or Unicode.
     var hex2 = ['80', '82', '83', '84', '85', '86', '87', '88', '89',
                 '8A', '8B', '8C', '8E', '91', '92', '93', '94', '95',
                 '96', '97', '98', '99', '9A', '9B', '9C', '9E', '9F'];
@@ -382,8 +382,7 @@ var GameFOXUtils =
 
   specialRegexpCharsEscape: function(str)
   {
-    return str.
-      replace(/([\\\[\](){}^.?*+|$])/g, '\\$1');
+    return str.replace(/([\\\[\](){}^.?*+|$])/g, '\\$1');
   },
 
   // encode message like GameFAQs does
@@ -409,8 +408,6 @@ var GameFOXUtils =
   // encode topic title like GameFAQs does
   encodeTitle: function(str)
   {
-    str = this.trim(this.specialCharsEncode(str).replace(/&quot;/g, '"'));
-
-    return str;
+    return this.trim(this.specialCharsEncode(str).replace(/&quot;/g, '"'));
   }
 };
