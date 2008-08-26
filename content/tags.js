@@ -245,8 +245,11 @@ var GFtags =
 
   removeAll: function()
   {
-    this.write('');
-    this.populate(2);
+    if (confirm('Are you sure you want to delete all your tags?'))
+    {
+      this.write('');
+      this.populate(2);
+    }
   },
 
   removePurged: function()
@@ -485,7 +488,7 @@ var GFtags =
 
       if (!IDs[1] && delFolder && typeof(GFtags.tags[IDs[0]].title) == 'string')
       {
-        if (confirm('Are you you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + GFtags.tags[IDs[0]].title))
+        if (confirm('Are you sure you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + GFtags.tags[IDs[0]].title))
         {
           delete GFtags.tags[IDs[0]];
         }
