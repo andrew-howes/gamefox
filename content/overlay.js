@@ -172,11 +172,12 @@ var GameFOX =
         rows = [];
       }
 
+      var skipNext = false;
+      var alternateColor = false;
+
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
-        var skipNext = false;
-
         // Pagination
         if (GameFOX.prefs.getBoolPref('paging.auto'))
         {
@@ -252,6 +253,7 @@ var GameFOX =
             if (hlinfo[3] == 'remove') // remove topic
             {
               rows[i].style.setProperty('display', 'none', null);
+              alternateColor = !alternateColor;
             }
             else if (hlinfo[3] == 'highlight') // highlight topic
             {
@@ -262,11 +264,21 @@ var GameFOX =
                 rows[i].cells[j].style.setProperty('background-color', hlinfo[1], 'important');
             }
           }
+
+          // for removed topics
+          if (alternateColor)
+          {
+            if (/\beven\b/.test(rows[i].className))
+              rows[i].className = rows[i].className.replace(/\beven\b/, '');
+            else
+              rows[i].className += ' even';
+          }
         }
 
         if (skipNext)
         {
           ++i;
+          skipNext = false;
         }
       }
     }
