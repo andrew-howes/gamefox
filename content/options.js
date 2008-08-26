@@ -1,15 +1,15 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GameFOXOptions =
+var GFoptions =
 {
   importBoardSettings: function()
   {
-    GameFOXUtils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'), true);
+    GFutils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'), true);
   },
 
   exportBoardSettings: function()
   {
-    GameFOXUtils.exportBoardSettings(
+    GFutils.exportBoardSettings(
         document.getElementById('topicpage').value,
         document.getElementById('topicsort').value,
         document.getElementById('messagepage').value,
@@ -22,7 +22,7 @@ var GameFOXOptions =
 
   importSignature: function()
   {
-    GameFOXUtils.importSignature(true, document.getElementById('gamefox-css-grab-sig'), true);
+    GFutils.importSignature(true, document.getElementById('gamefox-css-grab-sig'), true);
   },
 
   openCSSDirectory: function()
@@ -79,7 +79,7 @@ var GameFOXOptions =
       prefWindow.showPane(document.getElementById('gamefox-page-pane'));
     }
 
-    GameFOXOptions.restoreLastTabs();
+    GFoptions.restoreLastTabs();
   },
 
   restoreLastTabs: function()
@@ -111,7 +111,7 @@ var GameFOXOptions =
         catch (e) {}
       }
 
-      tabs[i].setAttribute('onselect', 'GameFOXOptions.saveSelectedTab(this)');
+      tabs[i].setAttribute('onselect', 'GFoptions.saveSelectedTab(this)');
     }
   }
 };

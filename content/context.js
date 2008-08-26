@@ -1,6 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GFContextMenu =
+var GFcontext =
 {
   displayMenu: function(event)
   {

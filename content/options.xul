@@ -13,12 +13,12 @@
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"
-    onload="GameFOXOptions.restoreLastPane()"
+    onload="GFoptions.restoreLastPane()"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 <!-- P A G E -->
 
-  <prefpane id="gamefox-page-pane" label="&page.label;" onpaneload="GFUL.populate();">
+  <prefpane id="gamefox-page-pane" label="&page.label;" onpaneload="GFuserlist.populate();">
     <!-- These have to be inside the first prefpane because of BMO bug #296418
          Luckily, the scripts seem to be applied to all of the other prefpanes too, so
          we only have to do this once. -->
@@ -167,7 +167,7 @@
           </groupbox>
           
           <hbox pack="end">
-            <button oncommand="GFUL.add(); GFUL.populate();" label="&page.userlists.add;" icon="add"/>
+            <button oncommand="GFuserlist.add(); GFuserlist.populate();" label="&page.userlists.add;" icon="add"/>
           </hbox>
           <vbox id="usergroups" style="height:280px;overflow:auto"/>
         </tabpanel>
@@ -280,9 +280,9 @@
               </grid>
               <hbox pack="end">
                 <button id="gamefox-css-grab-bs" label="&page.board.settings.grab;" icon="refresh"
-                  oncommand="GameFOXOptions.importBoardSettings();"/>
+                  oncommand="GFoptions.importBoardSettings();"/>
                 <button id="gamefox-css-apply-bs" label="&page.board.settings.save;" icon="save"
-                  oncommand="GameFOXOptions.exportBoardSettings();"/>
+                  oncommand="GFoptions.exportBoardSettings();"/>
               </hbox>
             </groupbox>
 
@@ -296,7 +296,7 @@
 
 <!-- T H E M E -->
 
-  <prefpane id="gamefox-theme-pane" label="&theme.label;" onpaneload="GameFOXCSS.populate(document.getElementById('css-tree'));">
+  <prefpane id="gamefox-theme-pane" label="&theme.label;" onpaneload="GFcss.populate(document.getElementById('css-tree'));">
     <script type="application/x-javascript" src="chrome://gamefox/content/treeview.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
@@ -311,7 +311,7 @@
     <groupbox>
       <caption label="&theme.stylesheets.label;"/>
       <tree id="css-tree" rows="9" editable="true" seltype="single" hidecolumnpicker="true"
-        onselect="GameFOXCSS.onselect();">
+        onselect="GFcss.onselect();">
         <treecols>
           <treecol label="&theme.tree.name;" primary="true" flex="1"/>
           <treecol label="&theme.tree.author;" width="100"/>
@@ -321,7 +321,7 @@
         <treechildren/>
       </tree>
       <hbox pack="end">
-        <button id="css-remove" disabled="true" icon="remove" oncommand="GameFOXCSS.removeWithTree();" label="&theme.tree.delete;"/>
+        <button id="css-remove" disabled="true" icon="remove" oncommand="GFcss.removeWithTree();" label="&theme.tree.delete;"/>
       </hbox>
     </groupbox>
 
@@ -330,17 +330,17 @@
       <hbox>
         <label value="&theme.import.uri;" style="margin-top: 7px"/>
         <textbox flex="1" id="css-import-file" value=""/>
-        <button oncommand="GameFOXCSS.filepicker();" label="&theme.import.browse;..."/>
+        <button oncommand="GFcss.filepicker();" label="&theme.import.browse;..."/>
       </hbox>
       <hbox pack="end">
-        <button icon="add" oncommand="GameFOXCSS.userimport(document.getElementById('css-import-file').value);"
+        <button icon="add" oncommand="GFcss.userimport(document.getElementById('css-import-file').value);"
           label="&theme.import.submit;"/>
       </hbox>
     </groupbox>
 
     <hbox pack="center">
-      <button oncommand="GameFOXCSS.reload();" icon="refresh" label="&theme.reload;"/>
-      <button oncommand="GameFOXOptions.openCSSDirectory();" icon="open" label="&theme.edit;"/>
+      <button oncommand="GFcss.reload();" icon="refresh" label="&theme.reload;"/>
+      <button oncommand="GFoptions.openCSSDirectory();" icon="open" label="&theme.edit;"/>
     </hbox>
  </prefpane>
 
@@ -418,7 +418,7 @@
 
 <!-- S I G N A T U R E -->
 
-  <prefpane id="gamefox-sig-pane" label="&signature.label;" onpaneload="GFSig.prepareOptionsPane();">
+  <prefpane id="gamefox-sig-pane" label="&signature.label;" onpaneload="GFsig.prepareOptionsPane();">
     <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
     <preferences>
       <preference id="sig-newline" name="gamefox.signature.newline" type="bool"/>
@@ -440,7 +440,7 @@
             <caption label="&signature.content.label;"/>
             
             <hbox>
-              <menulist flex="1" id="sig-menu" oncommand="GFSig.menuCommand();">
+              <menulist flex="1" id="sig-menu" oncommand="GFsig.menuCommand();">
                 <menupopup>
                   <menuitem value="default" label="&signature.list.default;"/>
                   <menuseparator/>
@@ -448,16 +448,16 @@
                 </menupopup>
               </menulist>
               <button id="sig-delete" icon="remove" label="&signature.list.delete;"
-                oncommand="GFSig.deleteSig();" disabled="true"/>
+                oncommand="GFsig.deleteSig();" disabled="true"/>
             </hbox>
 
             <groupbox id="sig-criteria">
               <description>&signature.criteria.desc;</description>
               <hbox align="center">
                 <label value="&signature.criteria.accounts.label;"/>
-                <textbox id="sig-criteria-accounts" oninput="GFSig.updatePref(this);" flex="1"/>
+                <textbox id="sig-criteria-accounts" oninput="GFsig.updatePref(this);" flex="1"/>
                 <label value="&signature.criteria.boards.label;"/>
-                <textbox id="sig-criteria-boards" oninput="GFSig.updatePref(this);" flex="1"/>
+                <textbox id="sig-criteria-boards" oninput="GFsig.updatePref(this);" flex="1"/>
               </hbox>
             </groupbox>
 
@@ -465,16 +465,16 @@
               <label value="&signature.presig.label;" flex="1"/>
               <hbox pack="end"><label value="&signature.presig.warning;"/></hbox>
             </hbox>
-            <textbox id="sig-presig" oninput="GFSig.updatePref(this);" class="indent"/>
+            <textbox id="sig-presig" oninput="GFsig.updatePref(this);" class="indent"/>
 
             <hbox>
               <label value="&signature.sig.label;" flex="1"/>
               <hbox pack="end"><label id="sig-chars" value=""/></hbox>
             </hbox>
-            <textbox id="sig-body" oninput="GFSig.updatePref(this);" rows="3" multiline="true" class="indent"/>
+            <textbox id="sig-body" oninput="GFsig.updatePref(this);" rows="3" multiline="true" class="indent"/>
             <hbox pack="end">
               <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
-                oncommand="GameFOXOptions.importSignature();"/>
+                oncommand="GFoptions.importSignature();"/>
             </hbox>
           </groupbox>
         </tabpanel>

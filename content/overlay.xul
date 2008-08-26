@@ -25,7 +25,7 @@
     <menuitem label="&menu.label;" disabled="true"/>
 
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
-      accesskey="&menu.quote.accesskey;" oncommand="GFQuote.quote(gContextMenu,
+      accesskey="&menu.quote.accesskey;" oncommand="GFquote.quote(gContextMenu,
       true);"/>
 
     <menu id="gamefox-context-pages" label="&menu.pages.label;"
@@ -34,17 +34,17 @@
     </menu>
 
     <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
-      accesskey="&menu.tagtopic.accesskey;" oncommand="GameFOXTags.add(gContextMenu);"/>
+      accesskey="&menu.tagtopic.accesskey;" oncommand="GFtags.add(gContextMenu);"/>
 
     <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
       accesskey="&menu.sidebar.accesskey;" observes="viewGamefoxSidebar"/>
 
     <menu id="gamefox-tags" label="&menu.tags.label;">
-      <menupopup id="gamefox-tags-menu" onpopupshowing="GameFOXTags.populate(1);"/>
+      <menupopup id="gamefox-tags-menu" onpopupshowing="GFtags.populate(1);"/>
     </menu>
 
     <menu id="gamefox-accounts" label="&menu.accounts.label;">
-      <menupopup id="gamefox-accounts-menu" onpopupshowing="GameFOXAccounts.populate();"/>
+      <menupopup id="gamefox-accounts-menu" onpopupshowing="GFaccounts.populate();"/>
     </menu>
   </popup>
 

@@ -1,11 +1,11 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GFQuote =
+var GFquote =
 {
   quote: function(event, context)
   {
     var doc = event.target.ownerDocument;
-    var leftMsgData = GameFOXUtils.getMsgDataDisplay(doc);
+    var leftMsgData = GFutils.getMsgDataDisplay(doc);
 
     var node           = event.target;
     var nodeName       = node.nodeName.toLowerCase();
@@ -67,13 +67,13 @@ var GFQuote =
     var selection = parentWin.getSelection();
     // only use the selection if it's inside the clicked message and this
     // function is called from the context menu
-    if (context && GameFOXUtils.trim(selection.toString()).length &&
+    if (context && GFutils.trim(selection.toString()).length &&
         selection.containsNode(msgNode, true))
     {
       quoteMsg = selection.toString();
     }
 
-    GFQuote.format(event, quoteHead, quoteMsg, msgNum);
+    GFquote.format(event, quoteHead, quoteMsg, msgNum);
   },
 
   format: function(event, quoteHead, quoteMsg, msgNum)
@@ -83,7 +83,7 @@ var GFQuote =
     /* Parse message header */
     var head = quoteHead.replace(/\|/g, '').split('\n');
     for (var i = 0; i < head.length; i++)
-      head[i] = GameFOXUtils.trim(head[i]);
+      head[i] = GFutils.trim(head[i]);
     var username = head[1];
     var postdate = head[(head.length > 5 ? 3 : 2)].replace('Posted ', '');
     var postnum  = msgNum;
@@ -99,7 +99,7 @@ var GFQuote =
     if (GameFOX.prefs.getBoolPref('quote.removesignature'))
       body = body.replace(/---(\n.*\n?){0,2}$/, ''); // Only a simple regexp is needed because extraneous
                                                      // signatures are no longer allowed
-    body = GameFOXUtils.specialCharsDecode(GameFOXUtils.trim(body));
+    body = GFutils.specialCharsDecode(GFutils.trim(body));
     // Prevent too much GFCode quote nesting
     var loops = 0;
     while (body.match(/(<i><p>[\s\S]*?){3,}/) != null)
@@ -151,7 +151,7 @@ var GFQuote =
         quote = qhead + body + '</p></i>';
         break;
       case 'custom':
-        var quoteTemplate = GameFOXUtils.getString('quote.style.custom');
+        var quoteTemplate = GFutils.getString('quote.style.custom');
         var quote = quoteTemplate.
           replace(/\%u/g, username).
           replace(/\%d/g, postdate).
@@ -180,10 +180,10 @@ var GFQuote =
 
     // update the character count
     if (GameFOX.prefs.getBoolPref('elements.charcounts'))
-      GFMessages.updateMessageCount(doc);
+      GFmessages.updateMessageCount(doc);
 
     quickpost.focus();
     // Move the caret to the end of the last quote
     quickpost.setSelectionRange(endPosition, endPosition);
   }
-}
+};

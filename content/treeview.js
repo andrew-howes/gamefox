@@ -1,4 +1,5 @@
-var treeView = {
+var GFtreeview =
+{
   childData : {},
   visibleData : [],
 
@@ -79,4 +80,3 @@ var treeView = {
   setCellText: function(idx, column, value) { this.visibleData[idx][0][column.index] = value; },
   setCellValue: function(idx, column, value) { this.visibleData[idx][0][column.index] = value; }
 };
-

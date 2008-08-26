@@ -1,17 +1,17 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
 
-var GFQuickPost =
+var GFquickpost =
 {
   appendForm: function(doc, div, newTopic)
   {
     if (GameFOX.prefs.getIntPref('signature.addition') == 2)
-      var sig = GameFOXUtils.formatSig(null, null,
+      var sig = GFutils.formatSig(null, null,
           GameFOX.prefs.getBoolPref('signature.newline'), doc);
     else
       var sig = '';
 
-    var query = GameFOXUtils.stripQueryString(doc.location.search);
-    var action = 'post.php' + GameFOXUtils.specialCharsDecode(query);
+    var query = GFutils.stripQueryString(doc.location.search);
+    var action = 'post.php' + GFutils.specialCharsDecode(query);
     div.innerHTML += '\n' +
       '<div id="gamefox-quickpost-title">QuickPost</div>\n' +
       '  <form id="gamefox-quickpost-form" action="' + action + '" method="post">\n' +
@@ -32,25 +32,25 @@ var GFQuickPost =
     {
       if (newTopic)
       {
-        GFMessages.updateTitleCount(doc);
+        GFmessages.updateTitleCount(doc);
         doc.getElementById('gamefox-topic').addEventListener('input',
-            GFMessages.updateTitleCount, false);
+            GFmessages.updateTitleCount, false);
         doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
-            function(event) {setTimeout(function() {GFMessages.updateTitleCount(event)}, 0)}, false);
+            function(event) {setTimeout(function() {GFmessages.updateTitleCount(event)}, 0)}, false);
       }
 
-      GFMessages.updateMessageCount(doc);
+      GFmessages.updateMessageCount(doc);
       doc.getElementById('gamefox-message').addEventListener('input',
-          GFMessages.updateMessageCount, false);
+          GFmessages.updateMessageCount, false);
       doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
-          function(event) {setTimeout(function() {GFMessages.updateMessageCount(event)}, 0)}, false);
+          function(event) {setTimeout(function() {GFmessages.updateMessageCount(event)}, 0)}, false);
     }
 
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click',
-        GFQuickPost.post, false);
+        GFquickpost.post, false);
 
     doc.getElementById('gamefox-quickpost-form').addEventListener('submit',
-        GFQuickPost.appendSig, false);
+        GFquickpost.appendSig, false);
 
     doc.getElementById('gamefox-message').setSelectionRange(0, 0);
 
@@ -59,7 +59,7 @@ var GFQuickPost =
 
     if (newTopic)
       doc.getElementById('gamefox-quickpost-hide').addEventListener('click',
-          GFQuickPost.toggleVisibility, false);
+          GFquickpost.toggleVisibility, false);
   },
 
   appendSig: function(event)
@@ -68,7 +68,7 @@ var GFQuickPost =
 
     if (GameFOX.prefs.getIntPref('signature.addition') == 1)
       doc.getElementById('gamefox-message').value +=
-        GameFOXUtils.formatSig(null, null,
+        GFutils.formatSig(null, null,
             GameFOX.prefs.getBoolPref('signature.newline'), doc
             );
   },
@@ -90,14 +90,14 @@ var GFQuickPost =
     quickpost.style.display = 'block';
 
     doc.getElementsByTagName('body')[0].appendChild(quickpost);
-    GFQuickPost.appendForm(doc, doc.getElementById('gamefox-quickpost-afloat'),
+    GFquickpost.appendForm(doc, doc.getElementById('gamefox-quickpost-afloat'),
         true);
   },
 
   post: function(event)
   {
     var doc = GFlib.getDocument(event);
-    var query = GameFOXUtils.stripQueryString(doc.location.search);
+    var query = GFutils.stripQueryString(doc.location.search);
     // make sure we're not trying to post a message to a topic that was
     // deleted by the user due to the topic list being on detail.php
     if (GFlib.onPage(doc, "topics"))
@@ -107,7 +107,7 @@ var GFQuickPost =
     event.target.blur();
     // NOTE TO uG: The 'click' event still fires even if the button is disabled
     //   (this doesn't seem to be true)
-    event.target.removeEventListener('click', GFQuickPost.post, false);
+    event.target.removeEventListener('click', GFquickpost.post, false);
 
     var previewRequest = new XMLHttpRequest();
     previewRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
@@ -120,7 +120,7 @@ var GFQuickPost =
 
         if (!postId || /^\s*0?\s*$/.test(postId[1]))
         { // error
-          if (GameFOXUtils.trim(text).length == 0)
+          if (GFutils.trim(text).length == 0)
             alert('Request timed out. Check your network connection and try again.');
           else
           {
@@ -180,7 +180,7 @@ var GFQuickPost =
                   'report it at Blood Money.');
           }
           event.target.removeAttribute('disabled');
-          event.target.addEventListener('click', GFQuickPost.post, false);
+          event.target.addEventListener('click', GFquickpost.post, false);
           return;
         }
         else
@@ -189,7 +189,7 @@ var GFQuickPost =
               !confirm('Your message contains an autoflagged word. Submit anyway?'))
           {
             event.target.removeAttribute('disabled');
-            event.target.addEventListener('click', GFQuickPost.post, false);
+            event.target.addEventListener('click', GFquickpost.post, false);
             return;
           }
 
@@ -202,7 +202,7 @@ var GFQuickPost =
               var text = postRequest.responseText;
               if (text.indexOf('<div class="head"><h1>Message Posted</h1></div>') == -1)
               { // error
-                if (GameFOXUtils.trim(text).length == 0)
+                if (GFutils.trim(text).length == 0)
                   alert('Request timed out. Check your network connection and try again.');
                 else
                 {
@@ -225,7 +225,7 @@ var GFQuickPost =
                         'report it at Blood Money.');
                 }
                 event.target.removeAttribute('disabled');
-                event.target.addEventListener('click', GFQuickPost.post, false);
+                event.target.addEventListener('click', GFquickpost.post, false);
                 return;
               }
               doc.location = GFlib.domain + GFlib.path +
@@ -256,10 +256,10 @@ var GFQuickPost =
       {
         alert('Topic titles must be at least 5 characters long.');
         event.target.removeAttribute('disabled');
-        event.target.addEventListener('click', GFQuickPost.post, false);
+        event.target.addEventListener('click', GFquickpost.post, false);
         return;
       }
-      postBody = 'topictitle=' + GameFOXUtils.URLEncode(topicTitle[0].value) + '&';
+      postBody = 'topictitle=' + GFutils.URLEncode(topicTitle[0].value) + '&';
     }
 
     var message = doc.getElementsByName('message')[0].value;
@@ -267,10 +267,10 @@ var GFQuickPost =
     if (!GFlib.onPage(doc, 'post')
         && GameFOX.prefs.getIntPref('signature.addition') == 1)
       message +=
-        GameFOXUtils.formatSig(null, null,
+        GFutils.formatSig(null, null,
             GameFOX.prefs.getBoolPref('signature.newline'), doc);
 
-    previewRequest.send(postBody + 'message=' + GameFOXUtils.URLEncode(message) +
+    previewRequest.send(postBody + 'message=' + GFutils.URLEncode(message) +
         '&post=Preview+Message');
   }
 };

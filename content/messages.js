@@ -1,12 +1,12 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
 
-var GFMessages =
+var GFmessages =
 {
   updateMessageCount: function(event)
   {
     var doc = GFlib.getDocument(event);
     var message = doc.getElementsByName('message')[0].value;
-    message = GameFOXUtils.encodeMessage(message);
+    message = GFutils.encodeMessage(message);
 
     var messageCount = doc.getElementById('gamefox-message-count');
     messageCount.innerHTML = message.length + ' / 4096 characters';
@@ -24,7 +24,7 @@ var GFMessages =
   {
     var doc = GFlib.getDocument(event);
     var title = doc.getElementsByName('topictitle')[0].value;
-    title = GameFOXUtils.encodeTitle(title);
+    title = GFutils.encodeTitle(title);
 
     var titleCount = doc.getElementById('gamefox-title-count');
     titleCount.innerHTML = title.length + ' / 80 characters';

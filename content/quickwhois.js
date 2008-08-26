@@ -1,5 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
-var GFQuickWhois =
+
+var GFquickwhois =
 {
   quickWhois: function(event)
   {
@@ -67,7 +68,7 @@ var GFQuickWhois =
               );
         for (var i = 0; i < profileFields.length; i += 2)
         {
-          if ((profileField = GFQuickWhois.findInfo(profileFields[i], request.responseText))
+          if ((profileField = GFquickwhois.findInfo(profileFields[i], request.responseText))
               != '')
           {
             if (profileFields[i] == 'Board User Level')
@@ -78,9 +79,9 @@ var GFQuickWhois =
           }
         }
         div.innerHTML = profileFieldsHTML.replace(/<br\/>$/, '')
-          + GFQuickWhois.findInfo('Contributor Page', request.responseText).
+          + GFquickwhois.findInfo('Contributor Page', request.responseText).
           replace(/^</, '<br/><')
-          + GFQuickWhois.findInfo('My Games', request.responseText).
+          + GFquickwhois.findInfo('My Games', request.responseText).
           replace(/^</, '<br/><');
       }
     };
@@ -94,7 +95,7 @@ var GFQuickWhois =
     var matches = pattern.exec(where);
 
     if (matches)
-      return GameFOXUtils.trim(matches[3]);
+      return GFutils.trim(matches[3]);
     
     return '';
   }

@@ -1,6 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GameFOXTags =
+var GFtags =
 {
   tags: '',
 
@@ -64,8 +64,8 @@ var GameFOXTags =
         item = document.createElement('menuitem');
         item.setAttribute('label', 'Active Message List');
         item.setAttribute('accesskey', 'A');
-        item.setAttribute('oncommand', 'GameFOXTags.open("' + 0 + ',' + -1 + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GameFOXTags.open("' + 0 + ',' + -1 + '", 0)');
+        item.setAttribute('oncommand', 'GFtags.open("' + 0 + ',' + -1 + '", 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + 0 + ',' + -1 + '", 0)');
         tagList.appendChild(item);
       }
       if (tagTracked)
@@ -73,8 +73,8 @@ var GameFOXTags =
         item = document.createElement('menuitem');
         item.setAttribute('label', 'Tracked Topics');
         item.setAttribute('accesskey', 'T');
-        item.setAttribute('oncommand', 'GameFOXTags.open("' + 0 + ',' + -2 + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GameFOXTags.open("' + 0 + ',' + -2 + '", 0)');
+        item.setAttribute('oncommand', 'GFtags.open("' + 0 + ',' + -2 + '", 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + 0 + ',' + -2 + '", 0)');
         tagList.appendChild(item);
       }
       var createSep = tagMyPosts || tagTracked;
@@ -91,8 +91,8 @@ var GameFOXTags =
           }
           item = document.createElement('menuitem');
           item.setAttribute('label', this.tags[board].topics[topic]);
-          item.setAttribute('oncommand', 'GameFOXTags.open("' + board + ',' + topic + '", 2)');
-          item.setAttribute('onclick', 'if (event.button == 1) GameFOXTags.open("' + board + ',' + topic + '", 0)');
+          item.setAttribute('oncommand', 'GFtags.open("' + board + ',' + topic + '", 2)');
+          item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + board + ',' + topic + '", 0)');
           tagList.appendChild(item);
         }
       }
@@ -310,7 +310,7 @@ var GameFOXTags =
 
           if (remove.length)
           {
-            GameFOXTags.remove(remove);
+            GFtags.remove(remove);
             msg = 'Successfully deleted ' + remove.length + ' purged topics.\n\n';
           }
           else
@@ -483,16 +483,16 @@ var GameFOXTags =
     {
       IDs = element.split(/,/);
 
-      if (!IDs[1] && delFolder && typeof(GameFOXTags.tags[IDs[0]].title) == 'string')
+      if (!IDs[1] && delFolder && typeof(GFtags.tags[IDs[0]].title) == 'string')
       {
-        if (confirm('Are you you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + GameFOXTags.tags[IDs[0]].title))
+        if (confirm('Are you you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + GFtags.tags[IDs[0]].title))
         {
-          delete GameFOXTags.tags[IDs[0]];
+          delete GFtags.tags[IDs[0]];
         }
       }
-      else if (IDs[1] && typeof(GameFOXTags.tags[IDs[0]].topics[IDs[1]]) == 'string')
+      else if (IDs[1] && typeof(GFtags.tags[IDs[0]].topics[IDs[1]]) == 'string')
       {
-        delete GameFOXTags.tags[IDs[0]].topics[IDs[1]];
+        delete GFtags.tags[IDs[0]].topics[IDs[1]];
       }
     });
 
@@ -540,15 +540,15 @@ var GameFOXTags =
 
           var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
           queryStr = topicLink.href;
-          topicTitle = GameFOXUtils.trim(topicLink.textContent);
+          topicTitle = GFutils.trim(topicLink.textContent);
 
           if (onMyPosts)
           {
-            boardTitle = GameFOXUtils.trim(node.parentNode.cells[0].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
+            boardTitle = GFutils.trim(node.parentNode.cells[0].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
           }
           else if (GFlib.onPage(doc, 'tracked'))
           {
-            boardTitle = GameFOXUtils.trim(node.parentNode.cells[2].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
+            boardTitle = GFutils.trim(node.parentNode.cells[2].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
           }
         }
         catch (e) { return false; }
@@ -562,52 +562,52 @@ var GameFOXTags =
     var h1s         = doc.getElementsByTagName('h1');
     if (!boardTitle)
     {
-      boardTitle = GameFOXUtils.trim(h1s[0].textContent);
+      boardTitle = GFutils.trim(h1s[0].textContent);
     }
     if (!topicTitle)
     {
-      topicTitle = GameFOXUtils.trim(h1s[1].textContent);
+      topicTitle = GFutils.trim(h1s[1].textContent);
     }
 
-    GameFOXTags.read();
+    GFtags.read();
 
-    if (boardID in GameFOXTags.tags && topicID in GameFOXTags.tags[boardID].topics)
+    if (boardID in GFtags.tags && topicID in GFtags.tags[boardID].topics)
     {
       if (confirm('You have already tagged this topic!\nDo you wish to un-tag it?'))
       {
-        GameFOXTags.remove(tagID);
+        GFtags.remove(tagID);
         return false;
       }
 
       return true;
     }
 
-    if (boardID in GameFOXTags.tags)
+    if (boardID in GFtags.tags)
     {
       if (!GFlib.onPage(doc, 'tracked'))
       { // overwrite if not on tracked topics - fixes abbreviated board titles
         //   from tracked topics and changed board titles, if that happens
-        GameFOXTags.tags[boardID].title = boardTitle;
+        GFtags.tags[boardID].title = boardTitle;
       }
-      GameFOXTags.tags[boardID].topics[topicID] = topicTitle;
+      GFtags.tags[boardID].topics[topicID] = topicTitle;
     }
     else
     {
-      GameFOXTags.tags[boardID] = {title: boardTitle, topics: {}};
-      GameFOXTags.tags[boardID].topics[topicID] = topicTitle;
+      GFtags.tags[boardID] = {title: boardTitle, topics: {}};
+      GFtags.tags[boardID].topics[topicID] = topicTitle;
     }
 
-    GameFOXTags.write(GameFOXTags.tags);
+    GFtags.write(GFtags.tags);
     return true;
   },
 
   tagTopicEvent: function(event)
   {
     event.preventDefault();
-    if (GameFOXTags.add(event))
+    if (GFtags.add(event))
     {
-      event.target.removeEventListener('click', GameFOXTags.tagTopicEvent, false);
-      event.target.addEventListener('click', GameFOXTags.untagTopicEvent, false);
+      event.target.removeEventListener('click', GFtags.tagTopicEvent, false);
+      event.target.addEventListener('click', GFtags.untagTopicEvent, false);
       event.target.textContent = 'Untag Topic';
     }
   },
@@ -615,10 +615,10 @@ var GameFOXTags =
   untagTopicEvent: function(event)
   {
     event.preventDefault();
-    GameFOXTags.remove(event.target.hash.substring(1));
+    GFtags.remove(event.target.hash.substring(1));
 
-    event.target.removeEventListener('click', GameFOXTags.untagTopicEvent, false);
-    event.target.addEventListener('click', GameFOXTags.tagTopicEvent, false);
+    event.target.removeEventListener('click', GFtags.untagTopicEvent, false);
+    event.target.addEventListener('click', GFtags.tagTopicEvent, false);
     event.target.textContent = 'Tag Topic';
   }
 };

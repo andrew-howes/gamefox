@@ -1,6 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GFUL =
+var GFuserlist =
 {
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
@@ -167,13 +167,13 @@ var GFUL =
       vbox.appendChild(groupbox);
     }
 
-    setTimeout(GFUL.setDefaultValues, 0);
+    setTimeout(GFuserlist.setDefaultValues, 0);
   },
 
   setDefaultValues: function()
   {
     var vbox = document.getElementById('usergroups');
-    var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
     {
@@ -226,9 +226,9 @@ var GFUL =
     }
 
     // get and set pref
-    var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
     userlist[idx][name] = value;
-    GFUL.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    GFuserlist.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   loadGroups: function()
@@ -240,7 +240,7 @@ var GFUL =
     // build the index
     for (var i in userlist)
     {
-      usernames = GameFOXUtils.trim(userlist[i]['users']).split(/\s*,\s*/);
+      usernames = GFutils.trim(userlist[i]['users']).split(/\s*,\s*/);
       for (var j = 0; j < usernames.length; j++)
       {
         var username = usernames[j].toLowerCase();
@@ -258,7 +258,7 @@ var GFUL =
   {
     if (!this.usernameIndex) return false; // no index
 
-    username = GameFOXUtils.trim(username).toLowerCase();
+    username = GFutils.trim(username).toLowerCase();
     if (!username.length) return false;
 
     if (!this.usernameIndex[username]) return false; // username isn't in any groups
@@ -283,7 +283,7 @@ var GFUL =
   removeWithButton: function(event)
   {
     var id = event.target.parentNode.parentNode.id.substring(3);
-    var userlist = eval(GFUL.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
 
     if (userlist[id]['name'].length)
     {
@@ -297,8 +297,8 @@ var GFUL =
     }
 
     userlist.splice(id, 1);
-    GFUL.prefs.setCharPref('userlist.serialized', userlist.toSource());
-    GFUL.populate();
+    GFuserlist.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    GFuserlist.populate();
   },
 
   showPost: function(event)
@@ -310,7 +310,7 @@ var GFUL =
     var buttonContainer = button.offsetParent; // td
     var postMsg;
 
-    if (GameFOXUtils.getMsgDataDisplay(doc)) // left of message
+    if (GFutils.getMsgDataDisplay(doc)) // left of message
     {
       postMsg = buttonContainer.parentNode.cells[1];
       if (postMsg.style.fontSize == '0pt')

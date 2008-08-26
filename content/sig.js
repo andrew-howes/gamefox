@@ -1,12 +1,13 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79: */
-var GFSig =
+
+var GFsig =
 {
   prefs: Cc['@mozilla.org/preferences-service;1'].getService(
              Ci.nsIPrefService).getBranch('gamefox.'),
 
   getSigByCriteria: function(account, boardname, boardid)
   {
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
     if (account == null && boardname == null && boardid == null) // get default
       return sigs[0];
     else // get based on current account and board
@@ -22,8 +23,8 @@ var GFSig =
         // skip empty sigs
         if (!sigs[i]['body'].length && !sigs[i]['presig'].length) continue;
 
-        accounts = GameFOXUtils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*;\s*/);
-        boards = GameFOXUtils.trim(sigs[i]['boards'].toLowerCase()).split(/\s*;\s*/);
+        accounts = GFutils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*;\s*/);
+        boards = GFutils.trim(sigs[i]['boards'].toLowerCase()).split(/\s*;\s*/);
 
         // force the array length to 0
         if (accounts.join() == '') accounts = new Array();
@@ -78,7 +79,7 @@ var GFSig =
 
   getSigById: function(id)
   {
-    return eval(GameFOXUtils.getString('signature.serialized', this.prefs))[id];
+    return eval(GFutils.getString('signature.serialized', this.prefs))[id];
   },
 
   prepareOptionsPane: function()
@@ -96,7 +97,7 @@ var GFSig =
     sig.value = defaultSig['body'];
 
     // loop through sigs and add them to menulist
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
     for (i in sigs)
     {
       if (i == 0) continue;
@@ -117,13 +118,13 @@ var GFSig =
   {
     // if we don't do this, the observer will persist after the window is
     // closed. this isn't needed and the observe() function won't be able
-    // to use any other resources like GameFOXUtils
-    GFSig.prefs.removeObserver('', GFSig);
+    // to use any other resources like GFutils
+    GFsig.prefs.removeObserver('', GFsig);
   },
 
   observe: function()
   {
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
     var idx = document.getElementById('sig-menu').selectedItem.value;
 
     if (idx == 'default') idx = 0;
@@ -191,9 +192,9 @@ var GFSig =
 
   add: function()
   {
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
     sigs.push({"accounts":"", "boards":"", "body":"", "presig":""});
-    GameFOXUtils.setString('signature.serialized', sigs.toSource(), this.prefs);
+    GFutils.setString('signature.serialized', sigs.toSource(), this.prefs);
 
     return sigs.length - 1;
   },
@@ -227,7 +228,7 @@ var GFSig =
   updatePref: function(event)
   {
     var menu = document.getElementById('sig-menu');
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
     var idx = menu.selectedItem.value;
     if (idx == 'default') idx = 0;
     
@@ -239,7 +240,7 @@ var GFSig =
       case 'sig-body': sigs[idx]['body'] = event.value; break;
     }
 
-    GameFOXUtils.setString('signature.serialized', sigs.toSource(), this.prefs);
+    GFutils.setString('signature.serialized', sigs.toSource(), this.prefs);
     menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
         sigs[idx]['boards'], idx == 0);
   },
@@ -281,13 +282,13 @@ var GFSig =
   deleteSig: function()
   {
     var menu = document.getElementById('sig-menu');
-    var sigs = eval(GameFOXUtils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
 
     if (menu.selectedItem.value == 'default') return false;
 
     // remove it
     sigs.splice(menu.selectedItem.value, 1);
-    GameFOXUtils.setString('signature.serialized', sigs.toSource(), this.prefs);
+    GFutils.setString('signature.serialized', sigs.toSource(), this.prefs);
     menu.removeItemAt(menu.selectedIndex);
 
     // return to default signature
@@ -314,7 +315,7 @@ var GFSig =
   updateCharCounts: function()
   {
     var sigText =
-      GameFOXUtils.specialCharsEncode(document.getElementById('sig-body').value);
+      GFutils.specialCharsEncode(document.getElementById('sig-body').value);
     var sigChars = document.getElementById('sig-chars');
 
     sigChars.value = sigText.length + " characters";

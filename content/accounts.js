@@ -1,6 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GameFOXAccounts =
+var GFaccounts =
 {
   accounts: '',
 
@@ -43,7 +43,7 @@ var GameFOXAccounts =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', 'Add account...');
-    item.setAttribute('oncommand', 'GameFOXAccounts.loginAndSaveCookie()');
+    item.setAttribute('oncommand', 'GFaccounts.loginAndSaveCookie()');
     accountList.appendChild(item);
 
     firstAccount = true;
@@ -53,14 +53,14 @@ var GameFOXAccounts =
       {
         item = document.createElement('menuitem');
         item.setAttribute('label', 'Remove account...');
-        item.setAttribute('oncommand', 'GameFOXAccounts.promptRemoveAccount()');
+        item.setAttribute('oncommand', 'GFaccounts.promptRemoveAccount()');
         accountList.appendChild(item);
         accountList.appendChild(document.createElement('menuseparator'));
         firstAccount = false;
       }
       item = document.createElement('menuitem');
       item.setAttribute('label', username);
-      item.setAttribute('oncommand', 'GameFOXAccounts.switchAccount("' + username + '")');
+      item.setAttribute('oncommand', 'GFaccounts.switchAccount("' + username + '")');
       accountList.appendChild(item);
     }
   },
@@ -178,28 +178,28 @@ var GameFOXAccounts =
           return;
         }
 
-        var cookie = GameFOXAccounts.getCookie('MDAAuth');
+        var cookie = GFaccounts.getCookie('MDAAuth');
         if (cookie == null)
         {
           alert('Somebody ate the cookie!');
           return;
         }
 
-        GameFOXAccounts.read();
-        GameFOXAccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
-        if ((cookie = GameFOXAccounts.getCookie('skin')) != null)
-          GameFOXAccounts.accounts[username].skin = {content:cookie.content};
-        if ((cookie = GameFOXAccounts.getCookie('filesplit')) != null)
-          GameFOXAccounts.accounts[username].filesplit = {content:cookie.content};
-        GameFOXAccounts.write(GameFOXAccounts.accounts);
+        GFaccounts.read();
+        GFaccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
+        if ((cookie = GFaccounts.getCookie('skin')) != null)
+          GFaccounts.accounts[username].skin = {content:cookie.content};
+        if ((cookie = GFaccounts.getCookie('filesplit')) != null)
+          GFaccounts.accounts[username].filesplit = {content:cookie.content};
+        GFaccounts.write(GFaccounts.accounts);
 
-        GameFOXAccounts.loadGameFAQs();
+        GFaccounts.loadGameFAQs();
       }
     }
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(
-        'EMAILADDR=' + GameFOXUtils.URLEncode(username) +
-        '&PASSWORD=' + GameFOXUtils.URLEncode(password.value)
+        'EMAILADDR=' + GFutils.URLEncode(username) +
+        '&PASSWORD=' + GFutils.URLEncode(password.value)
         );
   },
 

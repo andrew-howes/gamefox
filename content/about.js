@@ -1,5 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
-var GFAbout =
+
+var GFabout =
 {
   process: function()
   {
@@ -9,6 +10,6 @@ var GFAbout =
         document.getElementById('version').getAttribute('value')
         + em.getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version);
   }
-}
+};
 
-window.addEventListener('load', GFAbout.process, false);
+window.addEventListener('load', GFabout.process, false);

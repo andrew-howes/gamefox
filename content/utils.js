@@ -1,6 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GameFOXUtils =
+var GFutils =
 {
   importBoardSettings: function(noisy, button, inOptions)
   {
@@ -21,12 +21,12 @@ var GameFOXUtils =
           return;
         }
 
-        var topicpage = GameFOXUtils.parseHTMLSelect(request.responseText, 'topicpage'),
-            topicsort = GameFOXUtils.parseHTMLSelect(request.responseText, 'topicsort'),
-            messagepage = GameFOXUtils.parseHTMLSelect(request.responseText, 'messagepage'),
-            messagesort = GameFOXUtils.parseHTMLSelect(request.responseText, 'messagesort'),
-            timezone = GameFOXUtils.parseHTMLSelect(request.responseText, 'timezone'),
-            userdisplay = GameFOXUtils.parseHTMLSelect(request.responseText, 'userdisplay');
+        var topicpage = GFutils.parseHTMLSelect(request.responseText, 'topicpage'),
+            topicsort = GFutils.parseHTMLSelect(request.responseText, 'topicsort'),
+            messagepage = GFutils.parseHTMLSelect(request.responseText, 'messagepage'),
+            messagesort = GFutils.parseHTMLSelect(request.responseText, 'messagesort'),
+            timezone = GFutils.parseHTMLSelect(request.responseText, 'timezone'),
+            userdisplay = GFutils.parseHTMLSelect(request.responseText, 'userdisplay');
         if (topicpage == null || topicsort == null || messagepage == null
             || messagesort == null || timezone == null || userdisplay == null)
         {
@@ -168,21 +168,21 @@ var GameFOXUtils =
         }
         if (inOptions)
         {
-          document.getElementById('sig-body').value = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
+          document.getElementById('sig-body').value = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
 
           // oninput doesn't seem to be called
-          GFSig.updatePref(document.getElementById('sig-body'));
+          GFsig.updatePref(document.getElementById('sig-body'));
 
           // to make sure this call gets the last say
-          window.setTimeout(GFSig.updateCharCounts, 100);
+          window.setTimeout(GFsig.updateCharCounts, 100);
         }
         else
         {
           var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
               Ci.nsIPrefService).getBranch('gamefox.');
-          var sigs = eval(GameFOXUtils.getString('signature.serialized', prefs));
-          sigs[0]['body'] = GameFOXUtils.convertNewlines(GameFOXUtils.specialCharsDecode(sig[1]));
-          GameFOXUtils.setString('signature.serialized', sigs.toSource(), prefs);
+          var sigs = eval(GFutils.getString('signature.serialized', prefs));
+          sigs[0]['body'] = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
+          GFutils.setString('signature.serialized', sigs.toSource(), prefs);
         }
         if (button) button.setAttribute('disabled', false);
       }
@@ -304,14 +304,14 @@ var GameFOXUtils =
     if (!sig && !presig) // fetch sig
     {
       if (!doc) return false;
-      var boardname = GameFOXUtils.trim(doc.evaluate('//h1', doc, null,
+      var boardname = GFutils.trim(doc.evaluate('//h1', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
         textContent);
       var boardid = doc.location.search.match(/board=([0-9-]+)/)[1];
-      var account = GameFOXUtils.trim(doc.evaluate('//div[@class="msg"]', doc, null,
+      var account = GFutils.trim(doc.evaluate('//div[@class="msg"]', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
           textContent).replace('Welcome, ', '');
-      var getSig = GFSig.getSigByCriteria(account, boardname, boardid);
+      var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
       presig = getSig['presig'];
     }

@@ -9,7 +9,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/sidebar.js"/>
 </head>
-<body onload="GFSidebar.processLinks()">
+<body onload="GFsidebar.processLinks()">
   <div id="gamefox-sidebar-container">
     <h1 id="title"><a id="title-link" href="http://beyondboredom.net/projects/gamefox/">GameFOX</a></h1>
     <div class="left">
@@ -48,11 +48,11 @@
       <input type="text" name="board" size="10"/>
     </form>
     <div class="search-head">Login (Email/Pass)</div>
-    <form method="post" action="http://www.gamefaqs.com/user/login.html" onsubmit="GFSidebar.redirectLogin(this)">
+    <form method="post" action="http://www.gamefaqs.com/user/login.html" onsubmit="GFsidebar.redirectLogin(this)">
       <input type="hidden" name="path" id="gamefaqs-login-path" value="http://www.gamefaqs.com/boards/"/>
       <input type="text" name="EMAILADDR" maxlength="90"/>
       <input type="password" name="PASSWORD" maxlength="20"/><br/>
-      <input type="submit" value="Login" onmousedown="if (event.button == 1) GFSidebar.newTabLogin(this.parentNode)"/>
+      <input type="submit" value="Login" onmousedown="if (event.button == 1) GFsidebar.newTabLogin(this.parentNode)"/>
     </form>
     <div class="search-head"><a href="http://www.gamefaqs.com/user/logout.html?r=www.gamefaqs.com%2Fboards%2F">Logout</a> / <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a></div>
     <div class="search-head"><a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a></div>

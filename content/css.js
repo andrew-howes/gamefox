@@ -1,6 +1,6 @@
 /* vim: set et sw=2 sts=2 ts=2: */
 
-var GameFOXCSS =
+var GFcss =
 {
   init: function()
   {
@@ -229,7 +229,7 @@ var GameFOXCSS =
 
     var css = eval(prefs.getCharPref('theme.css.serialized'));
 
-    this.treeView = treeView;
+    this.treeView = GFtreeview;
     this.treeView.childData = {};
     this.treeView.visibleData = [];
     for (var category in {"GameFOX":"", "Bundled":"", "User":""})
@@ -284,7 +284,7 @@ var GameFOXCSS =
   {
     try
     {
-      var category = GameFOXCSS.treeView.visibleData[GameFOXCSS.treeView.selection.currentIndex][0][4];
+      var category = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][4];
       if (category == 'user')
         document.getElementById('css-remove').setAttribute('disabled', 'false');
       else
@@ -313,7 +313,7 @@ var GameFOXCSS =
 
     this.selection.select(idx);
 
-    GameFOXCSS.reload();
+    GFcss.reload();
   },
 
   remove: function(category, filename)
@@ -361,4 +361,4 @@ var GameFOXCSS =
     this.remove(category, filename);
     this.populate(document.getElementById('css-tree'));
   }
-}
+};
