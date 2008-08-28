@@ -5,13 +5,13 @@ var GFmessages =
   updateMessageCount: function(event)
   {
     var doc = GFlib.getDocument(event);
-    var message = doc.getElementsByName('message')[0].value;
-    message = GFutils.encodeMessage(message);
+    var messageLength = GFutils.encodedMessageLength(
+        doc.getElementsByName('message')[0].value);
 
     var messageCount = doc.getElementById('gamefox-message-count');
-    messageCount.innerHTML = message.length + ' / 4096 characters';
+    messageCount.innerHTML = messageLength + ' / 4096 characters';
 
-    if (message.length > 4096)
+    if (messageLength > 4096)
     {
       messageCount.innerHTML += '(!!)';
       messageCount.style.setProperty('font-weight', 'bold', '');
@@ -23,13 +23,13 @@ var GFmessages =
   updateTitleCount: function(event)
   {
     var doc = GFlib.getDocument(event);
-    var title = doc.getElementsByName('topictitle')[0].value;
-    title = GFutils.encodeTitle(title);
+    var titleLength = GFutils.encodedTitleLength(
+        doc.getElementsByName('topictitle')[0].value);
 
     var titleCount = doc.getElementById('gamefox-title-count');
-    titleCount.innerHTML = title.length + ' / 80 characters';
+    titleCount.innerHTML = titleLength + ' / 80 characters';
 
-    if (title.length > 80)
+    if (titleLength > 80)
     {
       titleCount.innerHTML += '(!!)';
       titleCount.style.setProperty('font-weight', 'bold', '');

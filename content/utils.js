@@ -386,28 +386,77 @@ var GFutils =
   },
 
   // encode message like GameFAQs does
-  encodeMessage: function(str)
+  encodedMessageLength: function(str)
   {
-    var tags = [
-        '<b>', '</b>',
-        '<i>', '</i>',
-        '<strong>', '</strong>',
-        '<em>', '</em>',
-        '<br>', '<br />', '</br>', // lol
-        '<p>', '</p>', '<p />'
+    var diffs = [
+        '&', 4, '<', 3, '>', 3, '"', 5,
+        '<b>', -6, '<B>', -6,
+        '</b>', -6, '</B>', -6,
+        '<i>', -6, '<I>', -6,
+        '</i>', -6, '</I>', -6,
+        '<strong>', -6, '<stronG>', -6, '<stroNg>', -6, '<stroNG>', -6,
+        '<strOng>', -6, '<strOnG>', -6, '<strONg>', -6, '<strONG>', -6,
+        '<stRong>', -6, '<stRonG>', -6, '<stRoNg>', -6, '<stRoNG>', -6,
+        '<stROng>', -6, '<stROnG>', -6, '<stRONg>', -6, '<stRONG>', -6,
+        '<sTrong>', -6, '<sTronG>', -6, '<sTroNg>', -6, '<sTroNG>', -6,
+        '<sTrOng>', -6, '<sTrOnG>', -6, '<sTrONg>', -6, '<sTrONG>', -6,
+        '<sTRong>', -6, '<sTRonG>', -6, '<sTRoNg>', -6, '<sTRoNG>', -6,
+        '<sTROng>', -6, '<sTROnG>', -6, '<sTRONg>', -6, '<sTRONG>', -6,
+        '<Strong>', -6, '<StronG>', -6, '<StroNg>', -6, '<StroNG>', -6,
+        '<StrOng>', -6, '<StrOnG>', -6, '<StrONg>', -6, '<StrONG>', -6,
+        '<StRong>', -6, '<StRonG>', -6, '<StRoNg>', -6, '<StRoNG>', -6,
+        '<StROng>', -6, '<StROnG>', -6, '<StRONg>', -6, '<StRONG>', -6,
+        '<STrong>', -6, '<STronG>', -6, '<STroNg>', -6, '<STroNG>', -6,
+        '<STrOng>', -6, '<STrOnG>', -6, '<STrONg>', -6, '<STrONG>', -6,
+        '<STRong>', -6, '<STRonG>', -6, '<STRoNg>', -6, '<STRoNG>', -6,
+        '<STROng>', -6, '<STROnG>', -6, '<STRONg>', -6, '<STRONG>', -6,
+        '</strong>', -6, '</stronG>', -6, '</stroNg>', -6, '</stroNG>', -6,
+        '</strOng>', -6, '</strOnG>', -6, '</strONg>', -6, '</strONG>', -6,
+        '</stRong>', -6, '</stRonG>', -6, '</stRoNg>', -6, '</stRoNG>', -6,
+        '</stROng>', -6, '</stROnG>', -6, '</stRONg>', -6, '</stRONG>', -6,
+        '</sTrong>', -6, '</sTronG>', -6, '</sTroNg>', -6, '</sTroNG>', -6,
+        '</sTrOng>', -6, '</sTrOnG>', -6, '</sTrONg>', -6, '</sTrONG>', -6,
+        '</sTRong>', -6, '</sTRonG>', -6, '</sTRoNg>', -6, '</sTRoNG>', -6,
+        '</sTROng>', -6, '</sTROnG>', -6, '</sTRONg>', -6, '</sTRONG>', -6,
+        '</Strong>', -6, '</StronG>', -6, '</StroNg>', -6, '</StroNG>', -6,
+        '</StrOng>', -6, '</StrOnG>', -6, '</StrONg>', -6, '</StrONG>', -6,
+        '</StRong>', -6, '</StRonG>', -6, '</StRoNg>', -6, '</StRoNG>', -6,
+        '</StROng>', -6, '</StROnG>', -6, '</StRONg>', -6, '</StRONG>', -6,
+        '</STrong>', -6, '</STronG>', -6, '</STroNg>', -6, '</STroNG>', -6,
+        '</STrOng>', -6, '</STrOnG>', -6, '</STrONg>', -6, '</STrONG>', -6,
+        '</STRong>', -6, '</STRonG>', -6, '</STRoNg>', -6, '</STRoNG>', -6,
+        '</STROng>', -6, '</STROnG>', -6, '</STRONg>', -6, '</STRONG>', -6,
+        '<em>', -6, '<eM>', -6, '<Em>', -6, '<EM>', -6,
+        '</em>', -6, '</eM>', -6, '</Em>', -6, '</EM>', -6,
+        '<br>', -6, '<bR>', -6, '<Br>', -6, '<BR>', -6,
+        '</br>', -6, '</bR>', -6, '</Br>', -6, '</BR>', -6, // lol
+        '<br />', -6, '<bR />', -6, '<Br />', -6, '<BR />', -6,
+        '<p>', -6, '<P>', -6,
+        '</p>', -6, '</P>', -6,
+        '<p />', -6, '<P />', -6,
+        '\n', 4
         ];
-
-    str = this.specialCharsEncode(str);
-    for (var i = 0; i < tags.length; i++)
-      str = str.replace(this.specialCharsEncode(tags[i]), tags[i], 'gi');
-    str = this.trim(str).replace(/\n/g, '<br/>');
-
-    return str;
+    str = this.trim(str);
+    var len = str.length;
+    var pos;
+    var count;
+    for (var i = 0; i < diffs.length; i += 2)
+    {
+      pos = -1;
+      count = 0;
+      while ((pos = str.indexOf(diffs[i], pos + 1)) != -1)
+        ++count;
+      len += count * diffs[i+1];
+    }
+    return len;
   },
 
   // encode topic title like GameFAQs does
-  encodeTitle: function(str)
+  encodedTitleLength: function(str)
   {
-    return this.trim(this.specialCharsEncode(str).replace(/&quot;/g, '"'));
+    return this.trim(str).
+      replace(/&/g, '&amp;').
+      replace(/</g, '&lt;').
+      replace(/>/g, '&gt;').length;
   }
 };
