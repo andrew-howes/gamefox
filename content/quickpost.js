@@ -100,8 +100,8 @@ var GFquickpost =
     var query = GFutils.stripQueryString(doc.location.search);
     // make sure we're not trying to post a message to a topic that was
     // deleted by the user due to the topic list being on detail.php
-    if (GFlib.onPage(doc, "topics"))
-      query = query.replace(/&(message|topic)=[^&]*/g, '');
+    if (GFlib.onPage(doc, 'topics'))
+      query = query.replace(/&topic=[^&]*/g, '');
 
     event.target.disabled = true;
     event.target.blur();
@@ -120,7 +120,7 @@ var GFquickpost =
 
         if (!postId || /^\s*0?\s*$/.test(postId[1]))
         { // error
-          if (GFutils.trim(text).length == 0)
+          if (!/\S/.test(text))
             alert('Request timed out. Check your network connection and try again.');
           else
           {
@@ -202,7 +202,7 @@ var GFquickpost =
               var text = postRequest.responseText;
               if (text.indexOf('<div class="head"><h1>Message Posted</h1></div>') == -1)
               { // error
-                if (GFutils.trim(text).length == 0)
+                if (!/\S/.test(text))
                   alert('Request timed out. Check your network connection and try again.');
                 else
                 {
@@ -238,8 +238,8 @@ var GFquickpost =
           postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           postRequest.send(
               'post_id=' + postId[1] +
-              '&post=Post+Message' +
-              '&uid=' + text.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/)[1]
+              '&uid=' + text.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/)[1] +
+              '&post=Post+Message'
               );
         }
       }
@@ -270,7 +270,10 @@ var GFquickpost =
         GFutils.formatSig(null, null,
             GameFOX.prefs.getBoolPref('signature.newline'), doc);
 
-    previewRequest.send(postBody + 'message=' + GFutils.URLEncode(message) +
-        '&post=Preview+Message');
+    previewRequest.send(
+        postBody +
+        'message=' + GFutils.URLEncode(message) +
+        '&post=Preview+Message'
+        );
   }
 };
