@@ -460,7 +460,8 @@ var GameFOX =
           {
             td[j].style.setProperty('display', 'none', 'important');
             td[j + 1].style.setProperty('display', 'none', 'important');
-            alternateColor = !alternateColor;
+            if (leftMsgData)
+              alternateColor = !alternateColor;
           }
         }
 
