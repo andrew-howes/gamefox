@@ -1,5 +1,9 @@
 2008-08-xx:
     * version 0.6.6
+    * Save userlist groups when pasting
+    * Fix "new row" pagination
+    * Alternate colors when removing topics/messages
+    * Improve speed of character counters
 
 2008-08-23:
     * version 0.6.5
