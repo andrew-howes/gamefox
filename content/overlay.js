@@ -548,7 +548,8 @@ var GameFOX =
       switch (dblclickHead)
       {
         case 1:
-          GFquickwhois.quickWhois(event);
+          if (!GFlib.onPage(doc, 'archive'))
+            GFquickwhois.quickWhois(event);
           break;
         case 2:
           GFquote.quote(event);

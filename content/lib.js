@@ -73,17 +73,21 @@ var GFlib =
           return false;
 
       case 'topics':
-        var col = doc.evaluate('//col[@class="status"]', doc, null, XPathResult.
-            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        var notopics = doc.evaluate('//div[@id="board_wrap"]/p', doc, null, XPathResult.
-            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (GFlib.onPage(doc, 'tracked'))
         {
           doc.gfPage = ['topics', 'tracked'];
           return true;
         }
-        if ((notopics != null && notopics.textContent.indexOf('No topics are available') != -1)
-            || col != null)
+        var col = doc.evaluate('//col[@class="status"]', doc, null, XPathResult.
+            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (col != null)
+        {
+          doc.gfPage = ['topics'];
+          return true;
+        }
+        var notopics = doc.evaluate('//div[@id="board_wrap"]/p', doc, null, XPathResult.
+            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (notopics != null && notopics.textContent.indexOf('No topics are available') != -1)
         {
           doc.gfPage = ['topics'];
           return true;
