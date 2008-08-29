@@ -199,31 +199,6 @@ var GFsig =
     return sigs.length - 1;
   },
 
-  /*
-   * return values:
-   * 1: global
-   * 2: boards and accounts
-   * 3: boards
-   * 4: accounts
-   */
-  getSigType: function(accounts, boards)
-  {
-    boards = /\S/.test(boards);
-    accounts = /\S/.test(accounts);
-
-    if (boards || accounts)
-    {
-      if (boards && accounts)
-        return 2;
-      else if (boards)
-        return 3;
-      else if (accounts)
-        return 4;
-    }
-    else
-      return 1;
-  },
-
   // update sig while typing
   updatePref: function(event)
   {
@@ -249,13 +224,12 @@ var GFsig =
   {
     if (isDefault) return 'Default signature';
 
-    var type = this.getSigType(accounts, boards);
-    switch (type)
+    switch ((/\S/.test(accounts) ? 1 : 0) + (/\S/.test(boards) ? 2 : 0))
     {
-      case 1: return 'Global signature';
-      case 2: return 'Accounts: ' + accounts + ' + Boards: ' + boards;
-      case 3: return 'Boards: ' + boards;
-      case 4: return 'Accounts: ' + accounts;
+      case 0: return 'Global signature';
+      case 1: return 'Accounts: ' + accounts;
+      case 2: return 'Boards: ' + boards;
+      case 3: return 'Accounts: ' + accounts + ' + Boards: ' + boards;
     }
   },
 
