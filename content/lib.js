@@ -39,7 +39,13 @@ var GFlib =
    */
   onGF: function(doc)
   {
-    return doc.domain && /(^|\.)gamefaqs\.com$/.test(doc.domain);
+    try {
+      return /(^|\.)gamefaqs\.com$/.test(doc.domain);
+    }
+    catch (e)
+    {
+      return false;
+    }
   },
 
   onBoards: function(doc)
