@@ -3,11 +3,11 @@
 var GFsig =
 {
   prefs: Cc['@mozilla.org/preferences-service;1'].getService(
-             Ci.nsIPrefService).getBranch('gamefox.'),
+             Ci.nsIPrefService).getBranch('gamefox.signature.'),
 
   getSigByCriteria: function(account, boardname, boardid)
   {
-    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('serialized', this.prefs));
     if (account == null && boardname == null && boardid == null) // get default
       return sigs[0];
     else // get based on current account and board
@@ -45,7 +45,7 @@ var GFsig =
       if (sigs[0]['body'].length || sigs[0]['presig'].length)
         matches[2].push(sigs[0]);
 
-      var selectionPref = GameFOX.prefs.getIntPref('signature.selection');
+      var selectionPref = this.prefs.getIntPref('selection');
       var sig;
 
       if (selectionPref == 1 || selectionPref == 2)
@@ -79,7 +79,7 @@ var GFsig =
 
   getSigById: function(id)
   {
-    return eval(GFutils.getString('signature.serialized', this.prefs))[id];
+    return eval(GFutils.getString('serialized', this.prefs))[id];
   },
 
   prepareOptionsPane: function()
@@ -97,7 +97,7 @@ var GFsig =
     sig.value = defaultSig['body'];
 
     // loop through sigs and add them to menulist
-    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('serialized', this.prefs));
     for (i in sigs)
     {
       if (i == 0) continue;
@@ -124,7 +124,7 @@ var GFsig =
 
   observe: function()
   {
-    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('serialized', this.prefs));
     var idx = document.getElementById('sig-menu').selectedItem.value;
 
     if (idx == 'default') idx = 0;
@@ -161,7 +161,7 @@ var GFsig =
       document.getElementById('sig-delete').disabled = true;
 
       var index = this.add();
-      menu.insertItemAt(index, "Global signature", index);
+      menu.insertItemAt(index, 'Global signature', index);
       menu.selectedIndex = index;
     }
     if (menu.selectedItem.value != 'default')
@@ -192,9 +192,9 @@ var GFsig =
 
   add: function()
   {
-    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('serialized', this.prefs));
     sigs.push({"accounts":"", "boards":"", "body":"", "presig":""});
-    GFutils.setString('signature.serialized', sigs.toSource(), this.prefs);
+    GFutils.setString('serialized', sigs.toSource(), this.prefs);
 
     return sigs.length - 1;
   },
@@ -208,8 +208,8 @@ var GFsig =
    */
   getSigType: function(accounts, boards)
   {
-    boards = boards.match(/\S/);
-    accounts = accounts.match(/\S/);
+    boards = /\S/.test(boards);
+    accounts = /\S/.test(accounts);
 
     if (boards || accounts)
     {
@@ -228,7 +228,7 @@ var GFsig =
   updatePref: function(event)
   {
     var menu = document.getElementById('sig-menu');
-    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('serialized', this.prefs));
     var idx = menu.selectedItem.value;
     if (idx == 'default') idx = 0;
     
@@ -240,7 +240,7 @@ var GFsig =
       case 'sig-body': sigs[idx]['body'] = event.value; break;
     }
 
-    GFutils.setString('signature.serialized', sigs.toSource(), this.prefs);
+    GFutils.setString('serialized', sigs.toSource(), this.prefs);
     menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
         sigs[idx]['boards'], idx == 0);
   },
@@ -282,13 +282,13 @@ var GFsig =
   deleteSig: function()
   {
     var menu = document.getElementById('sig-menu');
-    var sigs = eval(GFutils.getString('signature.serialized', this.prefs));
+    var sigs = eval(GFutils.getString('serialized', this.prefs));
 
     if (menu.selectedItem.value == 'default') return false;
 
     // remove it
     sigs.splice(menu.selectedItem.value, 1);
-    GFutils.setString('signature.serialized', sigs.toSource(), this.prefs);
+    GFutils.setString('serialized', sigs.toSource(), this.prefs);
     menu.removeItemAt(menu.selectedIndex);
 
     // return to default signature
@@ -314,14 +314,14 @@ var GFsig =
 
   updateCharCounts: function()
   {
-    var sigText =
-      GFutils.specialCharsEncode(document.getElementById('sig-body').value);
+    var sigLength =
+      GFutils.specialCharsEncode(document.getElementById('sig-body').value).length;
     var sigChars = document.getElementById('sig-chars');
 
-    sigChars.value = sigText.length + " characters";
-    if (sigText.length > 160)
+    sigChars.value = sigLength + ' characters';
+    if (sigLength > 160)
     {
-      sigChars.value += "(!!)";
+      sigChars.value += '(!!)';
       sigChars.style.setProperty('font-weight', 'bold', null);
     }
     else
