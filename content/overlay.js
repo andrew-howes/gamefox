@@ -2,8 +2,8 @@
 
 var GameFOX =
 {
-  prefs: Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService).
-           getBranch('gamefox.'),
+  prefs: Cc['@mozilla.org/preferences-service;1'].
+           getService(Ci.nsIPrefService).getBranch('gamefox.'),
 
   processPage: function(event)
   {
@@ -275,6 +275,7 @@ var GameFOX =
           }
         }
 
+        // for added page rows
         if (skipNext)
         {
           ++i;
@@ -343,13 +344,14 @@ var GameFOX =
       for (var j = 0; j < tdResult.snapshotLength; j++)
         td[j] = tdResult.snapshotItem(j);
 
+      var alternateColor = false;
       var msgnum = pagenum * GameFOX.prefs.getIntPref('msgsPerPage');
       for (var j = 0; j < td.length; j += 2)
       {
         // Message numbering
         ++msgnum;
 
-        var msgnumString = '000'.substr(0, 3 - msgnum.toString().length) + msgnum;
+        var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[j].id = 'p' + msgnumString;
 
         // don't try to number the message detail page
@@ -458,7 +460,18 @@ var GameFOX =
           {
             td[j].style.setProperty('display', 'none', 'important');
             td[j + 1].style.setProperty('display', 'none', 'important');
+            alternateColor = !alternateColor;
           }
+        }
+
+        // for removed posts
+        if (alternateColor)
+        {
+          var tr = td[j].parentNode;
+          if (/\beven\b/.test(tr.className))
+            tr.className = tr.className.replace(/\beven\b/, '');
+          else
+            tr.className += ' even';
         }
       }
 
@@ -497,14 +510,14 @@ var GameFOX =
 
     var node = event.target;
     var doc = node.ownerDocument;
+    var nodeName = node.nodeName.toLowerCase();
 
     // ignore double-click on images
-    if (node.nodeName.toLowerCase() == 'img')
+    if (nodeName == 'img')
     {
       return;
     }
 
-    var nodeName  = node.nodeName.toLowerCase();
     var nodeClass = node.className.toLowerCase();
     try
     {
@@ -527,10 +540,9 @@ var GameFOX =
       return;
     }
 
+    var leftMsgData = GFutils.getMsgDataDisplay(doc);
 
-    var vertmess = doc.getElementsByTagName('tr')[0].getElementsByTagName('td').length == 1;
-
-    if (dblclickHead != 0 && ((vertmess && node.parentNode.className != 'even') || nodeClass.indexOf('author') != -1))
+    if (dblclickHead != 0 && ((!leftMsgData && node.parentNode.className != 'even') || nodeClass.indexOf('author') != -1))
     {
       switch (dblclickHead)
       {
@@ -541,10 +553,9 @@ var GameFOX =
           GFquote.quote(event);
           break;
       }
-      return;
     }
 
-    if (dblclickMsg)
+    else if (dblclickMsg)
     {
       GFquote.quote(event);
     }
@@ -553,7 +564,7 @@ var GameFOX =
   topicDblclick: function(event)
   {
     var myposts = GFlib.onPage(event.target.ownerDocument, 'myposts');
-    var switcher  = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch).getIntPref('gamefox.' + (myposts ? 'myposts' : 'topic') + '.dblclick');
+    var switcher = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch).getIntPref('gamefox.' + (myposts ? 'myposts' : 'topic') + '.dblclick');
     switch (switcher)
     {
       case 0:
@@ -577,14 +588,12 @@ var GameFOX =
   {
     var node = event.target;
     var doc = node.ownerDocument;
-    var nodeName = node.nodeName.toLowerCase();
 
     try
     {
-      while (nodeName != 'td')
+      while (node.nodeName.toLowerCase() != 'td')
       {
         node = node.parentNode;
-        nodeName = node.nodeName.toLowerCase();
       }
 
       if (GFlib.onPage(doc, 'myposts'))
@@ -593,7 +602,7 @@ var GameFOX =
         var cell = node.parentNode.cells[3];
 
       var posts = cell.textContent;
-      var pages = Math.floor((posts - 1)/ GameFOX.prefs.getIntPref('msgsPerPage'));
+      var pages = Math.floor((posts - 1) / GameFOX.prefs.getIntPref('msgsPerPage'));
 
       var uri = node.parentNode.cells[1].getElementsByTagName('a')[0].href
         + (pages ? '&page=' + pages : '');
@@ -610,15 +619,13 @@ var GameFOX =
   {
     var node = event.target;
     var doc = node.ownerDocument;
-    var nodeName = node.nodeName.toLowerCase();
     var topicLink, msgsCell;
 
     try
     {
-      while (nodeName != 'td')
+      while (node.nodeName.toLowerCase() != 'td')
       {
         node = node.parentNode;
-        nodeName = node.nodeName.toLowerCase();
       }
 
       var myposts = GFlib.onPage(doc, 'myposts');
