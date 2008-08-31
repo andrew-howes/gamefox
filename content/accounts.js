@@ -78,18 +78,19 @@ var GFaccounts =
 
       var cookieMgr2 = Cc['@mozilla.org/cookiemanager;1']
           .getService(Ci.nsICookieManager2);
-      if (navigator.userAgent.indexOf('rv:1.9') != -1) // mozilla 1.9 (fx3)
+      if (Cc['@mozilla.org/xre/app-info;1'].getService(Ci.nsIXULAppInfo)
+          .platformVersion.indexOf('1.9') == 0) // Gecko 1.9 (Firefox 3)
       {
         cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
-            false, true, false, expires);
+            false, false, false, expires);
         if (account.skin != undefined)
           cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content,
-              false, true, false, expires);
+              false, false, false, expires);
         if (account.filesplit != undefined)
           cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', account.filesplit.content,
-              false, true, false, expires);
+              false, false, false, expires);
       }
-      else // mozilla 1.8
+      else // Gecko 1.8
       {
         cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
             false, false, expires);

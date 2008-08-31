@@ -797,19 +797,17 @@ function GameFOXLoader()
   var version = Cc['@mozilla.org/extensions/manager;1'].
     getService(Ci.nsIExtensionManager).
     getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
-  var versionComparator =
-    Cc['@mozilla.org/xpcom/version-comparator;1'].getService(
-        Ci.nsIVersionComparator);
+  var versionComparator = Cc['@mozilla.org/xpcom/version-comparator;1'].
+    getService(Ci.nsIVersionComparator);
 
-  var compareVersions = versionComparator.compare(version, lastversion);
-  if (compareVersions != 0) // upgrade, downgrade, or first run
+  if (versionComparator.compare(version, lastversion) != 0) // upgrade, downgrade, or first run
   {
     GFcss.init();
 
     // TODO: remove these after a while
 
     // old signature prefs
-    if (versionComparator.compare('0.6.2', lastversion) == 1)
+    if (versionComparator.compare('0.6.2', lastversion) > 0)
     {
       var oldPresig, oldSig;
       try { oldPresig = GFutils.getString('signature.presig', prefs); }
@@ -825,7 +823,7 @@ function GameFOXLoader()
     }
 
     // user highlighting groups
-    if (versionComparator.compare('0.6.5', lastversion) == 1)
+    if (versionComparator.compare('0.6.5', lastversion) > 0)
     {
       var groupAdded = false;
 
@@ -859,7 +857,8 @@ function GameFOXLoader()
         { var colors2 = prefs.getCharPref('highlight.colors.2'); }
         catch (e) { var colors2 = '#99CC66'; }
 
-        try { var ignore = prefs.getBoolPref('highlight.ignore'); }
+        try
+        { var ignore = prefs.getBoolPref('highlight.ignore'); }
         catch (e) { var ignore = false; }
 
         if (ignore)
