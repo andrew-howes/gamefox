@@ -14,3 +14,6 @@
 <!ENTITY menu.accounts.label "Accounts">
 
 <!ENTITY sidebar.title "GameFOX Sidebar">
+
+<!ENTITY toolbarbutton.label "GameFOX">
+<!ENTITY toolbarbutton.tooltip "GameFOX Options">
