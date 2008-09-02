@@ -164,9 +164,11 @@ var GFaccounts =
         return;
     }
 
+    this.removeCookie('MDAAuth');
     this.removeCookie('skin');
     this.removeCookie('filesplit');
     // TODO: restore these if the login fails
+    // TODO: check for ctk cookie and fetch if it's not there
 
     var request = new XMLHttpRequest();
     request.open('POST', 'http://www.gamefaqs.com/user/login.html');
@@ -174,7 +176,7 @@ var GFaccounts =
     {
       if (request.readyState == 4)
       {
-        if (request.responseText.indexOf('<title>GameFAQs - Login Error</title>') != -1) {
+        if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1) {
           alert('Couldn\'t log in. Maybe your password was incorrect?');
           return;
         }
