@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://gamefox/skin/toolbar-button.css" type="text/css"?>
+<?xml-stylesheet href="chrome://gamefox/skin/toolbar.css" type="text/css"?>
 <!-- vim: set et sw=2 sts=2 ts=2 tw=79: -->
 
 <!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/overlay.dtd">
@@ -111,10 +111,13 @@
 
   <!-- firefox toolbar -->
   <toolbarpalette id="BrowserToolbarPalette">
-    <toolbarbutton id="gamefox-button" class="toolbarbutton-1"
-      label="&toolbarbutton.label;" tooltiptext="&toolbarbutton.tooltip;"
+    <toolbarbutton id="gamefox-button-options" class="toolbarbutton-1"
+      label="&toolbar.options.label;" tooltiptext="&toolbar.options.tooltip;"
       oncommand="window.openDialog('chrome://gamefox/content/options.xul',
       '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+    <toolbarbutton id="gamefox-button-sidebar" class="toolbarbutton-1"
+      label="&toolbar.sidebar.label;" tooltiptext="&toolbar.sidebar.tooltip;"
+      oncommand="GameFOX.toggleSidebar();"/>
   </toolbarpalette>
 
 </overlay>

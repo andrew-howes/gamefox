@@ -1,9 +1,0 @@
-#gamefox-button
-{
-  list-style-image: url("chrome://gamefox/skin/btn-large.png");
-}
-
-toolbar[iconsize="small"] #gamefox-button
-{
-  list-style-image: url("chrome://gamefox/skin/btn-small.png");
-}
