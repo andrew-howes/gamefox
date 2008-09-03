@@ -13,7 +13,7 @@
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"
-    onload="GFoptions.restoreLastPane()"
+    onload="GFoptions.restoreLastPane();"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 <!-- P A G E -->
@@ -495,7 +495,7 @@
             </radiogroup>
           </groupbox>
 
-          <groupbox style="margin-bottom: 6em;">
+          <groupbox>
             <caption label="&signature.selection;"/>
             <radiogroup preference="sig-selection">
               <radio value="1" label="&signature.selection.first;"/>
