@@ -31,8 +31,8 @@ var GFoptions =
       getService(Ci.nsIProperties);
 
     var directory = directoryService.get('ProfD', Ci.nsILocalFile);
-    directory.append("gamefox");
-    directory.append("css");
+    directory.append('gamefox');
+    directory.append('css');
 
     try
     {
@@ -60,7 +60,7 @@ var GFoptions =
 
   restoreLastPane: function()
   {
-    if (navigator.platform.match(/^Mac/))
+    if (navigator.platform.indexOf('Mac') == 0)
     {
       document.getElementById('gamefox-prefwindow').showPane(
           document.getElementById('gamefox-page-pane'));
