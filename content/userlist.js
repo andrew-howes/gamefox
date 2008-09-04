@@ -34,7 +34,7 @@ var GFuserlist =
 
     /** caption **/
     caption = document.createElement('caption');
-    caption.setAttribute('label', 'User Group');
+    caption.setAttribute('label', 'Group #' + (id + 1));
     groupbox.appendChild(caption);
 
     /** hbox **/
@@ -330,8 +330,11 @@ var GFuserlist =
       var vbox = document.getElementById('usergroups');
       vbox.removeChild(groupbox);
       var groups = vbox.getElementsByTagName('groupbox');
-      for (var i = id; i < groups.length; i++)
+      for (var i = parseInt(id); i < groups.length; i++)
+      {
         groups[i].id = 'ug-' + i;
+        groups[i].getElementsByTagName('caption')[0].setAttribute('label', 'Group #' + (i + 1));
+      }
     }
   },
 
