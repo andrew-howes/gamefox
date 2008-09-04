@@ -24,156 +24,156 @@ var GFuserlist =
     this.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
-  populate: function()
+  makeGroupbox: function(id, name, color, users)
   {
     var groupbox, caption, hbox, textbox, separator, colorpicker, label, radiogroup, radio, button;
-    var radios;
 
-    // This is pretty verbose
+    /* groupbox */
+    groupbox = document.createElement('groupbox');
+    groupbox.id = 'ug-' + id;
+
+    /** caption **/
+    caption = document.createElement('caption');
+    caption.setAttribute('label', 'User Group');
+    groupbox.appendChild(caption);
+
+    /** hbox **/
+    hbox = document.createElement('hbox');
+    hbox.setAttribute('align', 'center');
+
+    /*** textbox ***/
+    textbox = document.createElement('textbox');
+    textbox.setAttribute('emptytext', 'Group Name');
+    textbox.setAttribute('class', 'ug-name');
+    textbox.setAttribute('value', name);
+    textbox.addEventListener('input', this.updatePref, false);
+    hbox.appendChild(textbox);
+    /*** separator **/
+    separator = document.createElement('separator');
+    separator.setAttribute('flex', '1');
+    hbox.appendChild(separator);
+    /*** button ***/
+    button = document.createElement('button');
+    button.setAttribute('label', 'Delete');
+    button.setAttribute('icon', 'remove');
+    button.addEventListener('command', this.removeWithButton, false);
+    hbox.appendChild(button);
+    /*** separator ***/
+    separator = document.createElement('separator');
+    separator.setAttribute('flex', '1');
+    hbox.appendChild(separator);
+    /*** colorpicker ***/
+    colorpicker = document.createElement('colorpicker');
+    colorpicker.setAttribute('type', 'button');
+    colorpicker.setAttribute('class', 'ug-color');
+    colorpicker.setAttribute('color', color);
+    colorpicker.addEventListener('change', this.updatePref, false);
+    hbox.appendChild(colorpicker);
+    /*** textbox ***/
+    textbox = document.createElement('textbox');
+    textbox.setAttribute('size', '6');
+    textbox.setAttribute('class', 'ug-color');
+    textbox.setAttribute('value', color);
+    textbox.addEventListener('input', this.updatePref, false);
+    hbox.appendChild(textbox);
+
+    groupbox.appendChild(hbox);
+
+    /** hbox **/
+    hbox = document.createElement('hbox');
+    hbox.setAttribute('align', 'center');
+
+    /*** label ***/
+    label = document.createElement('label');
+    label.setAttribute('value', 'Users:');
+    hbox.appendChild(label);
+    /*** textbox ***/
+    textbox = document.createElement('textbox');
+    textbox.setAttribute('class', 'ug-users');
+    textbox.setAttribute('value', users);
+    textbox.setAttribute('flex', '1');
+    textbox.addEventListener('input', this.updatePref, false);
+    hbox.appendChild(textbox);
+
+    groupbox.appendChild(hbox);
+
+    /** radiogroup **/
+    radiogroup = document.createElement('radiogroup');
+    radiogroup.setAttribute('align', 'start');
+    radiogroup.setAttribute('orient', 'horizontal');
+    radiogroup.setAttribute('pack', 'end');
+    radiogroup.setAttribute('class', 'ug-messages');
+    radiogroup.addEventListener('click', this.updatePref, false);
+
+    /*** radio ***/
+    radio = document.createElement('radio');
+    radio.setAttribute('label', 'Collapse messages');
+    radio.setAttribute('value', 'collapse');
+    radiogroup.appendChild(radio);
+    /*** radio ***/
+    radio = document.createElement('radio');
+    radio.setAttribute('label', 'Remove messages');
+    radio.setAttribute('value', 'remove');
+    radiogroup.appendChild(radio);
+    /*** radio ***/
+    radio = document.createElement('radio');
+    radio.setAttribute('label', 'Highlight messages');
+    radio.setAttribute('value', 'highlight');
+    radiogroup.appendChild(radio);
+    /*** radio ***/
+    radio = document.createElement('radio');
+    radio.setAttribute('label', 'Nothing');
+    radio.setAttribute('value', 'nothing');
+    radiogroup.appendChild(radio);
+
+    groupbox.appendChild(radiogroup);
+
+    /** radiogroup **/
+    radiogroup = document.createElement('radiogroup');
+    radiogroup.setAttribute('align', 'start');
+    radiogroup.setAttribute('orient', 'horizontal');
+    radiogroup.setAttribute('pack', 'end');
+    radiogroup.setAttribute('class', 'ug-topics');
+    radiogroup.addEventListener('click', this.updatePref, false);
+
+    /*** radio ***/
+    radio = document.createElement('radio');
+    radio.setAttribute('label', 'Remove topics');
+    radio.setAttribute('value', 'remove');
+    radiogroup.appendChild(radio);
+    /*** radio ***/
+    radio = document.createElement('radio');
+    radio.setAttribute('label', 'Highlight topics');
+    radio.setAttribute('value', 'highlight');
+    radiogroup.appendChild(radio);
+    /*** radio ***/
+    radio = document.createElement('radio');
+    radio.setAttribute('label', 'Nothing');
+    radio.setAttribute('value', 'nothing');
+    radiogroup.appendChild(radio);
+
+    groupbox.appendChild(radiogroup);
+
+    return groupbox;
+  },
+
+  populate: function()
+  {
     var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
-
     var vbox = document.getElementById('usergroups');
-    if (vbox.hasChildNodes())
-      while (vbox.childNodes.length >= 1)
-        vbox.removeChild(vbox.firstChild);
 
-    for (var i in userlist)
-    {
-      /* groupbox */
-      groupbox = document.createElement('groupbox');
-      groupbox.id = 'ug-' + i;
+    for (var i = 0; i < userlist.length; i++)
+      vbox.appendChild(this.makeGroupbox(
+          i, userlist[i]['name'], userlist[i]['color'], userlist[i]['users']));
 
-      /** caption **/
-      caption = document.createElement('caption');
-      caption.setAttribute('label', 'User Group');
-      groupbox.appendChild(caption);
-      /** hbox **/
-      hbox = document.createElement('hbox');
-      hbox.setAttribute('align', 'center');
-
-      /*** textbox ***/
-      textbox = document.createElement('textbox');
-      textbox.setAttribute('emptytext', 'Group Name');
-      textbox.setAttribute('class', 'ug-name');
-      textbox.setAttribute('value', userlist[i]['name']);
-      textbox.addEventListener('input', this.updatePref, false);
-      hbox.appendChild(textbox);
-      /*** separator **/
-      separator = document.createElement('separator');
-      separator.setAttribute('flex', '1');
-      hbox.appendChild(separator);
-      /*** button ***/
-      button = document.createElement('button');
-      button.setAttribute('label', 'Delete');
-      button.setAttribute('icon', 'remove');
-      button.addEventListener('command', this.removeWithButton, false);
-      hbox.appendChild(button);
-      /*** separator ***/
-      separator = document.createElement('separator');
-      separator.setAttribute('flex', '1');
-      hbox.appendChild(separator);
-      /*** colorpicker ***/
-      colorpicker = document.createElement('colorpicker');
-      colorpicker.setAttribute('type', 'button');
-      colorpicker.setAttribute('class', 'ug-color');
-      colorpicker.setAttribute('color', userlist[i]['color']);
-      colorpicker.addEventListener('change', this.updatePref, false);
-      hbox.appendChild(colorpicker);
-      /*** textbox ***/
-      textbox = document.createElement('textbox');
-      textbox.setAttribute('size', '6');
-      textbox.setAttribute('value', userlist[i]['color']);
-      textbox.setAttribute('class', 'ug-color');
-      textbox.addEventListener('input', this.updatePref, false);
-      hbox.appendChild(textbox);
-
-      groupbox.appendChild(hbox);
-
-      /** hbox **/
-      hbox = document.createElement('hbox');
-      hbox.setAttribute('align', 'center');
-
-      /*** label ***/
-      label = document.createElement('label');
-      label.setAttribute('value', 'Users:');
-      hbox.appendChild(label);
-      /*** textbox ***/
-      textbox = document.createElement('textbox');
-      textbox.setAttribute('class', 'ug-users');
-      textbox.setAttribute('value', userlist[i]['users']);
-      textbox.setAttribute('flex', '1');
-      textbox.addEventListener('input', this.updatePref, false);
-      hbox.appendChild(textbox);
-
-      groupbox.appendChild(hbox);
-
-      /** radiogroup **/
-      radiogroup = document.createElement('radiogroup');
-      radiogroup.setAttribute('align', 'start');
-      radiogroup.setAttribute('orient', 'horizontal');
-      radiogroup.setAttribute('pack', 'end');
-      radiogroup.setAttribute('class', 'ug-messages');
-      radiogroup.addEventListener('click', this.updatePref, false);
-
-      /*** radio ***/
-      radio = document.createElement('radio');
-      radio.setAttribute('label', 'Collapse messages');
-      radio.setAttribute('value', 'collapse');
-      radiogroup.appendChild(radio);
-      /*** radio ***/
-      radio = document.createElement('radio');
-      radio.setAttribute('label', 'Remove messages');
-      radio.setAttribute('value', 'remove');
-      radiogroup.appendChild(radio);
-      /*** radio ***/
-      radio = document.createElement('radio');
-      radio.setAttribute('label', 'Highlight messages');
-      radio.setAttribute('value', 'highlight');
-      radiogroup.appendChild(radio);
-      /*** radio ***/
-      radio = document.createElement('radio');
-      radio.setAttribute('label', 'Nothing');
-      radio.setAttribute('value', 'nothing');
-      radiogroup.appendChild(radio);
-
-      groupbox.appendChild(radiogroup);
-      
-      /** radiogroup **/
-      radiogroup = document.createElement('radiogroup');
-      radiogroup.setAttribute('align', 'start');
-      radiogroup.setAttribute('orient', 'horizontal');
-      radiogroup.setAttribute('pack', 'end');
-      radiogroup.setAttribute('class', 'ug-topics');
-      radiogroup.addEventListener('click', this.updatePref, false);
-
-      /*** radio ***/
-      radio = document.createElement('radio');
-      radio.setAttribute('label', 'Remove topics');
-      radio.setAttribute('value', 'remove');
-      radiogroup.appendChild(radio);
-      /*** radio ***/
-      radio = document.createElement('radio');
-      radio.setAttribute('label', 'Highlight topics');
-      radio.setAttribute('value', 'highlight');
-      radiogroup.appendChild(radio);
-      /*** radio ***/
-      radio = document.createElement('radio');
-      radio.setAttribute('label', 'Nothing');
-      radio.setAttribute('value', 'nothing');
-      radiogroup.appendChild(radio);
-
-      groupbox.appendChild(radiogroup);
-
-      vbox.appendChild(groupbox);
-    }
-
+    // if called directly, will throw "TypeError: this.mColorBox has no properties"
     setTimeout(GFuserlist.setDefaultValues, 0);
   },
 
   setDefaultValues: function()
   {
-    var vbox = document.getElementById('usergroups');
     var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+    var vbox = document.getElementById('usergroups');
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
     {
@@ -188,6 +188,28 @@ var GFuserlist =
       idx = {'remove':0, 'highlight':1, 'nothing':2};
       groups[i].getElementsByTagName('radiogroup')[1].selectedIndex = idx[userlist[i]['topics']];
     }
+  },
+
+  populateLast: function()
+  {
+    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var id = userlist.length - 1;
+    userlist = userlist[id];
+    var vbox = document.getElementById('usergroups');
+    var groupbox = this.makeGroupbox(
+        id, userlist['name'], userlist['color'], userlist['users']);
+    vbox.appendChild(groupbox);
+
+    // set colorpicker, mostly because of fx2
+    groupbox.getElementsByTagName('colorpicker')[0].color = userlist['color'];
+
+    // set radiogroups
+    var idx;
+    idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
+    groupbox.getElementsByTagName('radiogroup')[0].selectedIndex = idx[userlist['messages']];
+
+    idx = {'remove':0, 'highlight':1, 'nothing':2};
+    groupbox.getElementsByTagName('radiogroup')[1].selectedIndex = idx[userlist['topics']];
   },
 
   updatePref: function(event)
@@ -238,18 +260,18 @@ var GFuserlist =
     this.usernameIndex = {};
 
     // build the index
-    for (var i in userlist)
+    for (var i = 0; i < userlist.length; i++)
     {
-      usernames = GFutils.trim(userlist[i]['users']).split(/\s*,\s*/);
+      usernames = GFutils.trim(userlist[i]['users']).toLowerCase().split(/\s*,\s*/);
       for (var j = 0; j < usernames.length; j++)
       {
-        var username = usernames[j].toLowerCase();
+        username = usernames[j];
         if (!username.length) continue;
 
         if (this.usernameIndex[username])
           this.usernameIndex[username].push(i);
         else
-          this.usernameIndex[username] = new Array(i);
+          this.usernameIndex[username] = [i];
       }
     }
   },
@@ -282,7 +304,8 @@ var GFuserlist =
 
   removeWithButton: function(event)
   {
-    var id = event.target.parentNode.parentNode.id.substring(3);
+    var groupbox = event.target.parentNode.parentNode;
+    var id = groupbox.id.substring(3);
     var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
 
     if (userlist[id]['name'].length)
@@ -292,13 +315,24 @@ var GFuserlist =
     }
     else
     {
-      if (!confirm('Really delete group ' + (parseInt(id) + 1) + '?'))
+      if (!confirm('Really delete group #' + (parseInt(id) + 1) + '?'))
         return;
     }
 
     userlist.splice(id, 1);
     GFuserlist.prefs.setCharPref('userlist.serialized', userlist.toSource());
-    GFuserlist.populate();
+
+    // in case user hits button twice; however, bad things can still happen
+    // if the user leaves one of the confirms open and adds/deletes, since the
+    // prefs will no longer match the groupboxes
+    if (groupbox.parentNode)
+    {
+      var vbox = document.getElementById('usergroups');
+      vbox.removeChild(groupbox);
+      var groups = vbox.getElementsByTagName('groupbox');
+      for (var i = id; i < groups.length; i++)
+        groups[i].id = 'ug-' + i;
+    }
   },
 
   showPost: function(event)

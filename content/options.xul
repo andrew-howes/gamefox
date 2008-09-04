@@ -165,9 +165,9 @@
             <checkbox preference="userlist-topics-groupnames" label="&page.userlists.options.topicgroups;"/>
             <checkbox preference="userlist-messages-groupnames" label="&page.userlists.options.msggroups;"/>
           </groupbox>
-          
+
           <hbox pack="end">
-            <button oncommand="GFuserlist.add(); GFuserlist.populate();" label="&page.userlists.add;" icon="add"/>
+            <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
           </hbox>
           <vbox id="usergroups" style="height:280px;overflow:auto"/>
         </tabpanel>
