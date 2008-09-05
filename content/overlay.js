@@ -294,6 +294,7 @@ var GameFOX =
       var pagenum = doc.location.search.match(/\bpage=([0-9]+)/);
           pagenum = pagenum ? parseInt(pagenum[1]) : 0;
       var leftMsgData = GFutils.getMsgDataDisplay(doc);
+      var onArchive = GFlib.onPage(doc, 'archive');
 
       // Title
       GFlib.setTitle(doc,
@@ -346,6 +347,8 @@ var GameFOX =
 
       var alternateColor = false;
       var msgnum = pagenum * GameFOX.prefs.getIntPref('msgsPerPage');
+      var msgnumCond = !GFlib.onPage(doc, 'detail') && GameFOX.prefs.getBoolPref('elements.msgnum');
+      var msgnumStyle = GameFOX.prefs.getIntPref('elements.msgnum.style');
       for (var j = 0; j < td.length; j += 2)
       {
         // Message numbering
@@ -354,10 +357,9 @@ var GameFOX =
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[j].id = 'p' + msgnumString;
 
-        // don't try to number the message detail page
-        if (!GFlib.onPage(doc, 'detail') && GameFOX.prefs.getBoolPref('elements.msgnum'))
+        if (msgnumCond)
         {
-          switch (GameFOX.prefs.getIntPref('elements.msgnum.style'))
+          switch (msgnumStyle)
           {
             case 1: // Reversed: #001 | message detail
               td[j].insertBefore(doc.createTextNode('#' + msgnumString),
@@ -366,21 +368,21 @@ var GameFOX =
               if (leftMsgData)
                 td[j].insertBefore(doc.createElement('br'), td[j].
                     getElementsByTagName('a')[1])
-              else if (!GFlib.onPage(doc, 'archive'))
+              else if (!onArchive)
                 td[j].insertBefore(doc.createTextNode(' | '), td[j].
                     getElementsByTagName('a')[1]);
 
               break;
 
             case 2: // Number only: #001
-              if (GFlib.onPage(doc, 'archive'))
+              if (onArchive)
                 td[j].innerHTML += '<b>#' + msgnumString + '</b>';
               else
                 td[j].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
               break;
 
             case 3: // Mixed: message #001
-              if (GFlib.onPage(doc, 'archive'))
+              if (onArchive)
                 td[j].innerHTML += '<b>message #' + msgnumString + '</b>';
               else
                 td[j].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
@@ -390,12 +392,12 @@ var GameFOX =
             case 0: // Original: message detail | #001
               if (leftMsgData)
               {
-                if (!GFlib.onPage(doc, 'archive'))
+                if (!onArchive)
                   td[j].appendChild(doc.createElement('br'));
                 td[j].appendChild(doc.createTextNode('#' + msgnumString));
               }
               else
-                if (GFlib.onPage(doc, 'archive'))
+                if (onArchive)
                   td[j].appendChild(doc.createTextNode('#' + msgnumString));
                 else
                   td[j].appendChild(doc.createTextNode(' | #' + msgnumString));
@@ -405,10 +407,7 @@ var GameFOX =
         }
 
         // Message highlighting
-        if (GFlib.onPage(doc, 'archive')) // archived topics have no message links
-          var username = td[j].getElementsByTagName('b')[0].textContent;
-        else
-          var username = td[j].getElementsByTagName('a')[0].textContent;
+        var username = td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
 
         var hlinfo, groupname;
         if ((hlinfo = GFuserlist.searchUsername(username)) != false)
@@ -421,7 +420,7 @@ var GameFOX =
             groupname.className = GFuserlist.groupClassName;
             groupname.appendChild(doc.createTextNode(' ' + hlinfo[0]));
 
-            if (GFlib.onPage(doc, 'archive'))
+            if (onArchive)
               td[j].insertBefore(groupname,
                   td[j].getElementsByTagName('b')[0].nextSibling);
             else
