@@ -13,7 +13,7 @@
 <!ENTITY menu.tags.label "Tags">
 <!ENTITY menu.accounts.label "Accounts">
 
-<!ENTITY sidebar.title "GameFOX Sidebar">
+<!ENTITY sidebar.title "GameFOX">
 
 <!ENTITY toolbar.options.label "GameFOX Options">
 <!ENTITY toolbar.options.tooltip "GameFOX Options">
