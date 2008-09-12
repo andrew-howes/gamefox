@@ -22,31 +22,32 @@
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
-    <menuseparator id="gamefox-context-separator"/>
-    <menuitem label="&menu.label;" disabled="true"/>
+    <menu id="gamefox-context-menu" class="menu-iconic" label="&menu.label;"
+      image="chrome://gamefox/skin/logo-tiny.png">
+      <menupopup id="gamefox-context-popup">
+        <menu id="gamefox-context-pages" label="&menu.pages.label;"
+          accesskey="&menu.pages.accesskey;">
+          <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
+        </menu>
+
+        <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
+          accesskey="&menu.sidebar.accesskey;" observes="viewGamefoxSidebar"/>
+
+        <menu id="gamefox-tags" label="&menu.tags.label;">
+          <menupopup id="gamefox-tags-menu" onpopupshowing="GFtags.populate(1);"/>
+        </menu>
+
+        <menu id="gamefox-accounts" label="&menu.accounts.label;">
+          <menupopup id="gamefox-accounts-menu" onpopupshowing="GFaccounts.populate();"/>
+        </menu>
+      </menupopup>
+    </menu>
 
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
       accesskey="&menu.quote.accesskey;" oncommand="GFquote.quote(gContextMenu,
       true);"/>
-
-    <menu id="gamefox-context-pages" label="&menu.pages.label;"
-      accesskey="&menu.pages.accesskey;">
-      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
-    </menu>
-
     <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
       accesskey="&menu.tagtopic.accesskey;" oncommand="GFtags.add(gContextMenu);"/>
-
-    <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
-      accesskey="&menu.sidebar.accesskey;" observes="viewGamefoxSidebar"/>
-
-    <menu id="gamefox-tags" label="&menu.tags.label;">
-      <menupopup id="gamefox-tags-menu" onpopupshowing="GFtags.populate(1);"/>
-    </menu>
-
-    <menu id="gamefox-accounts" label="&menu.accounts.label;">
-      <menupopup id="gamefox-accounts-menu" onpopupshowing="GFaccounts.populate();"/>
-    </menu>
   </popup>
 
   <!-- firefox tools menu -->
