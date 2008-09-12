@@ -122,7 +122,7 @@ var GFuserlist =
     radiogroup.appendChild(radio);
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'Nothing');
+    radio.setAttribute('label', 'None');
     radio.setAttribute('value', 'nothing');
     radiogroup.appendChild(radio);
 
@@ -148,7 +148,7 @@ var GFuserlist =
     radiogroup.appendChild(radio);
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'Nothing');
+    radio.setAttribute('label', 'None');
     radio.setAttribute('value', 'nothing');
     radiogroup.appendChild(radio);
 
