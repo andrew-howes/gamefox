@@ -42,7 +42,7 @@ pref("gamefox.userlist.messages.showgroupnames", true);
 pref("gamefox.userlist.serialized", "[]");
 
 pref("gamefox.tags", "");
-pref("gamefox.accounts", "");
+pref("gamefox.accounts", "({})");
 pref("gamefox.topic.dblclick", 0);
 pref("gamefox.message.dblclick", false);
 pref("gamefox.message.header.dblclick", 0);

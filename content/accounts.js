@@ -6,24 +6,16 @@ var GFaccounts =
 
   read: function()
   {
-    this.accounts = Cc['@mozilla.org/preferences-service;1']
+    this.accounts = eval(Cc['@mozilla.org/preferences-service;1']
         .getService(Ci.nsIPrefBranch)
-        .getCharPref('gamefox.accounts');
-
-    if (!/\S/.test(this.accounts))
-      this.accounts = '({})';
-
-    this.accounts = eval(this.accounts);
+        .getCharPref('gamefox.accounts'));
   },
 
   write: function(accounts)
   {
-    if (typeof(accounts) == 'object')
-      accounts = accounts.toSource();
-
     Cc['@mozilla.org/preferences-service;1']
         .getService(Ci.nsIPrefBranch)
-        .setCharPref('gamefox.accounts', accounts);
+        .setCharPref('gamefox.accounts', accounts.toSource());
   },
 
   populate: function()
@@ -35,9 +27,7 @@ var GFaccounts =
       return;
 
     while (accountList.hasChildNodes())
-    {
-      accountList.removeChild(accountList.childNodes[0]);
-    }
+      accountList.removeChild(accountList.firstChild);
 
     this.read();
 
@@ -75,38 +65,21 @@ var GFaccounts =
     {
       this.removeCookie('skin');
       this.removeCookie('filesplit');
-
-      var cookieMgr2 = Cc['@mozilla.org/cookiemanager;1']
-          .getService(Ci.nsICookieManager2);
-      if (Cc['@mozilla.org/xre/app-info;1'].getService(Ci.nsIXULAppInfo)
-          .platformVersion.indexOf('1.9') == 0) // Gecko 1.9 (Firefox 3)
-      {
-        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
-            false, false, false, expires);
-        if (account.skin != undefined)
-          cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content,
-              false, false, false, expires);
-        if (account.filesplit != undefined)
-          cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', account.filesplit.content,
-              false, false, false, expires);
-      }
-      else // Gecko 1.8
-      {
-        cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', account.MDAAuth.content,
-            false, false, expires);
-        if (account.skin != undefined)
-          cookieMgr2.add('.gamefaqs.com', '/', 'skin', account.skin.content,
-              false, false, expires);
-        if (account.filesplit != undefined)
-          cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', account.filesplit.content,
-              false, false, expires);
-      }
-
-      this.loadGameFAQs();
+      this.fetchCtk(fetchCtkCallback);
     }
     else
     {
       this.loginAndSaveCookie(username);
+    }
+
+    function fetchCtkCallback()
+    {
+      GFaccounts.loadAccount(
+          account.MDAAuth.content,
+          account.skin != undefined ? account.skin.content : null,
+          account.filesplit != undefined ? account.filesplit.content : null,
+          expires);
+      GFaccounts.loadGameFAQs();
     }
   },
 
@@ -121,16 +94,17 @@ var GFaccounts =
       if (cookie.host == '.gamefaqs.com' && cookie.name == name)
       {
         cookieMgr.remove('.gamefaqs.com', name, cookie.path, false);
-        return;
+        return {content: cookie.value, expires: cookie.expires};
       }
     }
+    return null;
   },
 
   getCookie: function(name)
   {
-    var cookieMgr = Cc['@mozilla.org/cookiemanager;1']
-        .getService(Ci.nsICookieManager);
-    var e = cookieMgr.enumerator;
+    var e = Cc['@mozilla.org/cookiemanager;1']
+        .getService(Ci.nsICookieManager)
+        .enumerator;
     while (e.hasMoreElements())
     {
       var cookie = e.getNext().QueryInterface(Ci.nsICookie);
@@ -138,6 +112,35 @@ var GFaccounts =
         return {content: cookie.value, expires: cookie.expires};
     }
     return null;
+  },
+
+  loadAccount: function(MDAAuth, skin, filesplit, expires)
+  {
+    var cookieMgr2 = Cc['@mozilla.org/cookiemanager;1']
+        .getService(Ci.nsICookieManager2);
+    if (Cc['@mozilla.org/xre/app-info;1'].getService(Ci.nsIXULAppInfo)
+        .platformVersion.indexOf('1.9') == 0) // Gecko 1.9 (Firefox 3)
+    {
+      cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth,
+          false, false, false, expires);
+      if (skin != null)
+        cookieMgr2.add('.gamefaqs.com', '/', 'skin', skin,
+            false, false, false, expires);
+      if (filesplit != null)
+        cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', filesplit,
+            false, false, false, expires);
+    }
+    else // Gecko 1.8 (Firefox 2)
+    {
+      cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth,
+          false, false, expires);
+      if (skin != null)
+        cookieMgr2.add('.gamefaqs.com', '/', 'skin', skin,
+            false, false, expires);
+      if (filesplit != null)
+        cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', filesplit,
+            false, false, expires);
+    }
   },
 
   loginAndSaveCookie: function(username)
@@ -164,46 +167,77 @@ var GFaccounts =
         return;
     }
 
-    this.removeCookie('MDAAuth');
-    this.removeCookie('skin');
-    this.removeCookie('filesplit');
-    // TODO: restore these if the login fails
-    // TODO: check for ctk cookie and fetch if it's not there
+    var MDAAuth = this.removeCookie('MDAAuth');
+    var skin = this.removeCookie('skin');
+    if (skin != null)
+      skin = skin.content;
+    var filesplit = this.removeCookie('filesplit');
+    if (filesplit != null)
+      filesplit = filesplit.content;
 
-    var request = new XMLHttpRequest();
-    request.open('POST', 'http://www.gamefaqs.com/user/login.html');
-    request.onreadystatechange = function()
+    this.fetchCtk(fetchCtkCallback);
+
+    function fetchCtkCallback()
     {
-      if (request.readyState == 4)
+      var request = new XMLHttpRequest();
+      // TODO: find a way to make page not redirect
+      request.open('POST', 'http://www.gamefaqs.com/user/login.html?r=www.gamefaqs.com/images/default/rec.gif');
+      request.onreadystatechange = function()
       {
-        if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1) {
-          alert('Couldn\'t log in. Maybe your password was incorrect?');
-          return;
-        }
-
-        var cookie = GFaccounts.getCookie('MDAAuth');
-        if (cookie == null)
+        if (request.readyState == 4)
         {
-          alert('Somebody ate the cookie!');
-          return;
+          if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1) {
+            alert('Login error! Maybe your password was incorrect? Try it again.');
+            GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
+            GFaccounts.loginAndSaveCookie(username);
+            return;
+          }
+
+          var cookie = GFaccounts.getCookie('MDAAuth');
+          if (cookie == null)
+          {
+            alert('Somebody ate the cookie! This means that something unexpected happened. Try it again.');
+            GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
+            GFaccounts.loginAndSaveCookie(username);
+            return;
+          }
+
+          GFaccounts.read();
+          GFaccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
+          if ((cookie = GFaccounts.getCookie('skin')) != null)
+            GFaccounts.accounts[username].skin = {content:cookie.content};
+          if ((cookie = GFaccounts.getCookie('filesplit')) != null)
+            GFaccounts.accounts[username].filesplit = {content:cookie.content};
+          GFaccounts.write(GFaccounts.accounts);
+
+          GFaccounts.loadGameFAQs();
         }
-
-        GFaccounts.read();
-        GFaccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
-        if ((cookie = GFaccounts.getCookie('skin')) != null)
-          GFaccounts.accounts[username].skin = {content:cookie.content};
-        if ((cookie = GFaccounts.getCookie('filesplit')) != null)
-          GFaccounts.accounts[username].filesplit = {content:cookie.content};
-        GFaccounts.write(GFaccounts.accounts);
-
-        GFaccounts.loadGameFAQs();
       }
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      request.send(
+          'EMAILADDR=' + GFutils.URLEncode(username) +
+          '&PASSWORD=' + GFutils.URLEncode(password.value)
+          );
     }
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    request.send(
-        'EMAILADDR=' + GFutils.URLEncode(username) +
-        '&PASSWORD=' + GFutils.URLEncode(password.value)
-        );
+  },
+
+  fetchCtk: function(callback)
+  {
+    if (this.getCookie('ctk') == null)
+    {
+      var request = new XMLHttpRequest();
+      request.open('HEAD', 'http://www.gamefaqs.com/');
+      request.onreadystatechange = function()
+      {
+        if (request.readyState == 4)
+          callback();
+      }
+      request.send(null);
+    }
+    else
+    {
+      callback();
+    }
   },
 
   promptRemoveAccount: function()
@@ -212,22 +246,19 @@ var GFaccounts =
     var items = [];
     this.read();
     for (account in this.accounts)
-    {
       items.push(account);
-    }
     var selected = {};
     var result = Cc['@mozilla.org/embedcomp/prompt-service;1']
         .getService(Ci.nsIPromptService)
         .select(null, 'GameFOX', 'Select account to remove:', items.length, items, selected);
     if (result)
-      this.removeAccount(items[selected.value]);
-  },
-
-  removeAccount: function(username)
-  {
-    this.read();
-    delete this.accounts[username];
-    this.write(this.accounts);
+    {
+      delete this.accounts[items[selected.value]];
+      this.write(this.accounts);
+      alert('"' + items[selected.value] + '" has been removed.');
+      if (items.length > 1)
+        this.promptRemoveAccount();
+    }
   },
 
   loadGameFAQs: function()
