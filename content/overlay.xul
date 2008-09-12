@@ -25,11 +25,6 @@
     <menu id="gamefox-context-menu" class="menu-iconic" label="&menu.label;"
       image="chrome://gamefox/skin/logo-tiny.png">
       <menupopup id="gamefox-context-popup">
-        <menu id="gamefox-context-pages" label="&menu.pages.label;"
-          accesskey="&menu.pages.accesskey;">
-          <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
-        </menu>
-
         <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
           accesskey="&menu.sidebar.accesskey;" observes="viewGamefoxSidebar"/>
 
@@ -43,6 +38,10 @@
       </menupopup>
     </menu>
 
+    <menu id="gamefox-context-pages" label="&menu.pages.label;"
+      accesskey="&menu.pages.accesskey;">
+      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
+    </menu>
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
       accesskey="&menu.quote.accesskey;" oncommand="GFquote.quote(gContextMenu,
       true);"/>

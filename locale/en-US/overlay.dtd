@@ -4,7 +4,7 @@
 <!ENTITY menu.label "GameFOX">
 <!ENTITY menu.quote.label "Quote Message">
 <!ENTITY menu.quote.accesskey "Q">
-<!ENTITY menu.pages.label "Pages">
+<!ENTITY menu.pages.label "Topic Pages">
 <!ENTITY menu.pages.accesskey "G">
 <!ENTITY menu.tagtopic.label "Tag This Topic">
 <!ENTITY menu.tagtopic.accesskey "T">
