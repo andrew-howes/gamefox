@@ -6,6 +6,7 @@
 <!ENTITY menu.quote.accesskey "Q">
 <!ENTITY menu.pages.label "Topic Pages">
 <!ENTITY menu.pages.accesskey "G">
+<!ENTITY menu.usergroups.label "User Groups">
 <!ENTITY menu.tagtopic.label "Tag This Topic">
 <!ENTITY menu.tagtopic.accesskey "T">
 <!ENTITY menu.sidebar.label "Sidebar">

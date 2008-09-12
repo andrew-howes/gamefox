@@ -299,7 +299,7 @@ var GFuserlist =
       if (userlist[groups[i]]['name'].length)
         groupNames += userlist[groups[i]]['name'] + ', ';
 
-    return [groupNames.substr(0, groupNames.length - 2), color, messages, topics];
+    return [groupNames.substr(0, groupNames.length - 2), color, messages, topics, groups];
   },
 
   removeWithButton: function(event)
@@ -380,6 +380,49 @@ var GFuserlist =
         postMsg.style.setProperty('display', 'none', 'important');
         button.textContent = '[Show]';
       }
+    }
+  },
+
+  fillMenu: function(event)
+  {
+    var node = event.target;
+    var list = document.getElementById('gamefox-context-usergroups-list');
+
+    // get the username of the target, return if it's not valid
+    if (node.nodeName != 'A') return;
+    if (node.href.indexOf('user.php') == -1) return;
+    var username = node.textContent;
+
+    this.loadGroups();
+    var activeGroups = this.searchUsername(username)[4];
+    if (!activeGroups) activeGroups = {};
+
+    while (list.hasChildNodes())
+      list.removeChild(list.childNodes[0]);
+
+    var groups = eval(this.prefs.getCharPref('userlist.serialized'));
+    if (!groups.length)
+    {
+      item = document.createElement('menuitem');
+      item.setAttribute('label', 'No groups');
+      item.setAttribute('disabled', 'true');
+      list.appendChild(item);
+      return;
+    }
+
+    var item;
+    for (var i = 0; i < groups.length; i++)
+    {
+      item = document.createElement('menuitem');
+      item.setAttribute('type', 'checkbox');
+      if (activeGroups[i] != undefined)
+        item.setAttribute('checked', 'true');
+
+      if (groups[i]['name'].length)
+        item.setAttribute('label', groups[i]['name']);
+      else
+        item.setAttribute('label', 'Group #' + (i + 1));
+      list.appendChild(item);
     }
   }
 };
