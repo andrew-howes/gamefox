@@ -5,6 +5,9 @@
     * Alternate colors when removing topics/messages
     * Improve speed of character counters
     * Toolbar buttons
+    * Move clutter to a GameFOX submenu in the context menu
+    * Right click option to add or remove someone from a user highlighting
+      group
 
 2008-08-23:
     * version 0.6.5
