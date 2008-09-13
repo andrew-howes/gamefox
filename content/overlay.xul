@@ -121,7 +121,7 @@
       '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
     <toolbarbutton id="gamefox-button-sidebar" class="toolbarbutton-1"
       label="&toolbar.sidebar.label;" tooltiptext="&toolbar.sidebar.tooltip;"
-      oncommand="GameFOX.toggleSidebar();"/>
+      observes="viewGamefoxSidebar"/>
   </toolbarpalette>
 
 </overlay>
