@@ -18,15 +18,34 @@ var GFcontext =
       document.getElementById('gamefox-context-quote').hidden = true;
       document.getElementById('gamefox-context-tag').hidden = true;
       document.getElementById('gamefox-context-pages').hidden = true;
+      document.getElementById('gamefox-context-usergroups').hidden = true;
       return;
     }
 
     if (!GFlib.onPage(doc, 'messages')
         || !doc.getElementById('gamefox-message')
         || !GameFOX.prefs.getBoolPref('context.quote'))
+    {
       document.getElementById('gamefox-context-quote').hidden = true;
+      document.getElementById('gamefox-context-usergroups').hidden = true;
+    }
     else
-    { // Quote
+    {
+      // User groups
+      try
+      {
+        var node = gContextMenu.target;
+        if (node.nodeName == 'A' && node.href.indexOf('user.php') != -1)
+          document.getElementById('gamefox-context-usergroups').hidden = false;
+        else
+          document.getElementById('gamefox-context-usergroups').hidden = true;
+      }
+      catch (e)
+      {
+        document.getElementById('gamefox-context-usergroups').hidden = true;
+      }
+
+      // Quote
       try
       {
         var node = gContextMenu.target;
