@@ -443,7 +443,11 @@ var GFuserlist =
     else // remove from group
     {
       groups[group]['users'] = groups[group]['users'].replace
-        (new RegExp(',?\\s*' + username, 'gi'), '');
+        (new RegExp('(,\\s*' + username + '\\s*$|' +
+                      '^\\s*' + username + '\\s*,\\s*|' +
+                      '^\\s*' + username + '\\s$)', 'gi'), '');
+      groups[group]['users'] = groups[group]['users'].replace
+        (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
     this.prefs.setCharPref('userlist.serialized', groups.toSource());
