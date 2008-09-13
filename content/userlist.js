@@ -416,7 +416,7 @@ var GFuserlist =
       item = document.createElement('menuitem');
       item.setAttribute('type', 'checkbox');
       item.setAttribute('oncommand', 'GFuserlist.menuCheckChange(event, "' + username + '", this.value);');
-      if (activeGroups[i] != undefined)
+      if (activeGroups.indexOf(i) != -1)
         item.setAttribute('checked', 'true');
 
       if (groups[i]['name'].length)
