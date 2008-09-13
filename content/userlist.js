@@ -388,6 +388,9 @@ var GFuserlist =
     var node = event.target;
     var list = document.getElementById('gamefox-context-usergroups-list');
 
+    while (list.hasChildNodes())
+      list.removeChild(list.childNodes[0]);
+
     // get the username of the target, return if it's not valid
     if (node.nodeName != 'A') return;
     if (node.href.indexOf('user.php') == -1) return;
@@ -396,9 +399,6 @@ var GFuserlist =
     this.loadGroups();
     var activeGroups = this.searchUsername(username)[4];
     if (!activeGroups) activeGroups = {};
-
-    while (list.hasChildNodes())
-      list.removeChild(list.childNodes[0]);
 
     var groups = eval(this.prefs.getCharPref('userlist.serialized'));
     if (!groups.length)
@@ -415,6 +415,7 @@ var GFuserlist =
     {
       item = document.createElement('menuitem');
       item.setAttribute('type', 'checkbox');
+      item.setAttribute('oncommand', 'GFuserlist.menuCheckChange(event, "' + username + '", this.value);');
       if (activeGroups[i] != undefined)
         item.setAttribute('checked', 'true');
 
@@ -422,7 +423,29 @@ var GFuserlist =
         item.setAttribute('label', groups[i]['name']);
       else
         item.setAttribute('label', 'Group #' + (i + 1));
+      
+      item.setAttribute('value', i);
       list.appendChild(item);
     }
+  },
+
+  menuCheckChange: function(event, username, group)
+  {
+    var groups = eval(this.prefs.getCharPref('userlist.serialized'));
+    
+    if (event.target.getAttribute('checked')) // add to group
+    {
+      if (GFutils.trim(groups[group]['users']).length)
+        groups[group]['users'] += ", " + username;
+      else
+        groups[group]['users'] = username;
+    }
+    else // remove from group
+    {
+      groups[group]['users'] = groups[group]['users'].replace
+        (new RegExp(',?\\s*' + username, 'g'), '');
+    }
+
+    this.prefs.setCharPref('userlist.serialized', groups.toSource());
   }
 };
