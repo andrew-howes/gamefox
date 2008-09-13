@@ -37,6 +37,6 @@ var GFsidebar =
       path.value = doc.location.href.replace(
           /&(action)=[^&]*(?=&|$)|\b(action)=[^&]*&/, '');
     else
-      path.value = GFlib.domain + GFlib.path;
+      path.value = GFlib.domain + GFlib.path + 'index.php';
   }
 };

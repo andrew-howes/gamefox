@@ -156,7 +156,7 @@ var GFaccounts =
           .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username (or e-mail address) and password:', username, password, null, check);
       if (!result)
         return;
-      username = username.value;
+      username = GFutils.trim(username.value);
     }
     else
     {
@@ -269,6 +269,6 @@ var GFaccounts =
     if (GFlib.onGF(win.content.document))
       win.loadURI(win.content.document.location.href);
     else
-      win.loadURI('http://www.gamefaqs.com/boards/');
+      win.loadURI('http://www.gamefaqs.com/boards/index.php');
   }
 };
