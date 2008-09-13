@@ -107,9 +107,9 @@
 <!ENTITY signature.addafter "Append signature after submitting or previewing the post">
 <!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
 <!ENTITY signature.selection "Selection Mode">
-<!ENTITY signature.selection.first "Choose most specific matching signature">
-<!ENTITY signature.selection.anyrandom "Choose random from any matching signature">
-<!ENTITY signature.selection.bestrandom "Choose random from most specific matching signatures">
+<!ENTITY signature.selection.first "First signature, highest specificity">
+<!ENTITY signature.selection.anyrandom "Random signature, no specificity">
+<!ENTITY signature.selection.bestrandom "Random signature, highest specificity">
 
 <!ENTITY mouse.label "Mouse">
 <!ENTITY mouse.topics.caption "Topic Lists">
