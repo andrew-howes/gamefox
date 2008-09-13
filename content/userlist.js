@@ -269,7 +269,11 @@ var GFuserlist =
         if (!username.length) continue;
 
         if (this.usernameIndex[username])
-          this.usernameIndex[username].push(i);
+        {
+          // don't add the same group twice, if the user is listed multiple times
+          if (this.usernameIndex[username].indexOf(i) == -1)
+            this.usernameIndex[username].push(i);
+        }
         else
           this.usernameIndex[username] = [i];
       }
