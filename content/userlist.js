@@ -449,7 +449,7 @@ var GFuserlist =
       groups[group]['users'] = groups[group]['users'].replace
         (new RegExp('(,\\s*' + username + '\\s*$|' +
                       '^\\s*' + username + '\\s*,\\s*|' +
-                      '^\\s*' + username + '\\s$)', 'gi'), '');
+                      '^\\s*' + username + '\\s*$)', 'gi'), '');
       groups[group]['users'] = groups[group]['users'].replace
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
