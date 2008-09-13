@@ -423,7 +423,7 @@ var GFuserlist =
         item.setAttribute('label', groups[i]['name']);
       else
         item.setAttribute('label', 'Group #' + (i + 1));
-      
+
       item.setAttribute('value', i);
       list.appendChild(item);
     }
@@ -432,18 +432,18 @@ var GFuserlist =
   menuCheckChange: function(event, username, group)
   {
     var groups = eval(this.prefs.getCharPref('userlist.serialized'));
-    
+
     if (event.target.getAttribute('checked')) // add to group
     {
       if (GFutils.trim(groups[group]['users']).length)
-        groups[group]['users'] += ", " + username;
+        groups[group]['users'] += ', ' + username;
       else
         groups[group]['users'] = username;
     }
     else // remove from group
     {
       groups[group]['users'] = groups[group]['users'].replace
-        (new RegExp(',?\\s*' + username, 'g'), '');
+        (new RegExp(',?\\s*' + username, 'gi'), '');
     }
 
     this.prefs.setCharPref('userlist.serialized', groups.toSource());
