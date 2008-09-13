@@ -455,5 +455,41 @@ var GFuserlist =
     }
 
     this.prefs.setCharPref('userlist.serialized', groups.toSource());
+  },
+
+  prepareOptionsPane: function()
+  {
+    this.populate();
+
+    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
+    this.prefs.addObserver('userlist.', this, false);
+
+    window.addEventListener('unload', this.unload, false);
+  },
+
+  unload: function()
+  {
+    GFuserlist.prefs.removeObserver('userlist.', GFuserlist);
+  },
+
+  observe: function()
+  {
+    var usergroups = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+
+    var textboxes, userbox;
+    for (var i = 0; i < usergroups.length; i++)
+    {
+      // save some processing power by only updating the list of users, since
+      // that's all we care about
+      textboxes = document.getElementById('ug-' + i).getElementsByTagName('textbox');
+      for (var j = 0; j < textboxes.length; j++)
+        if (textboxes[j].className == 'ug-users')
+          userbox = textboxes[j];
+
+      if (userbox && userbox.value != usergroups[i]['users'])
+        userbox.value = usergroups[i]['users'];
+
+      textboxes, userbox = null;
+    }
   }
 };

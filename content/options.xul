@@ -18,7 +18,7 @@
 
 <!-- P A G E -->
 
-  <prefpane id="gamefox-page-pane" label="&page.label;" onpaneload="GFuserlist.populate();">
+  <prefpane id="gamefox-page-pane" label="&page.label;" onpaneload="GFuserlist.prepareOptionsPane();">
     <!-- These have to be inside the first prefpane because of BMO bug #296418
          Luckily, the scripts seem to be applied to all of the other prefpanes too, so
          we only have to do this once. -->
