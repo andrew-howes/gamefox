@@ -398,7 +398,7 @@ var GFuserlist =
 
     this.loadGroups();
     var activeGroups = this.searchUsername(username)[4];
-    if (!activeGroups) activeGroups = {};
+    if (!activeGroups) activeGroups = [];
 
     var groups = eval(this.prefs.getCharPref('userlist.serialized'));
     if (!groups.length)
