@@ -16,7 +16,7 @@ var GFutils =
         {
           GFlib.log('importBoardSettings: Bad things!');
           if (noisy)
-            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
+            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -32,7 +32,7 @@ var GFutils =
         {
           GFlib.log('importBoardSettings: Unable to retrieve all settings.');
           if (noisy)
-            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
+            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -79,7 +79,7 @@ var GFutils =
         {
           GFlib.log('exportBoardSettings: Bad things!');
           if (noisy)
-            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
+            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -89,7 +89,7 @@ var GFutils =
         {
           GFlib.log("exportBoardSettings: Couldn't get user id.");
           if (noisy)
-            alert("Couldn't get your user ID. This shouldn't happen.");
+            GFlib.alert("Couldn't get your user ID. This shouldn't happen.");
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -105,12 +105,12 @@ var GFutils =
             {
               GFlib.log("exportBoardSettings: Update didn't work!");
               if (noisy)
-                alert("Didn't receive the expected response from the server. The update probably failed.");
+                GFlib.alert("Didn't receive the expected response from the server. The update probably failed.");
             }
             else
             {
               if (noisy)
-                alert("Your board display settings have been updated.");
+                GFlib.alert("Your board display settings have been updated.");
             }
             if (button) button.setAttribute('disabled', false);
           }
@@ -150,7 +150,7 @@ var GFutils =
         {
           GFlib.log('importSignature: Bad things!');
           if (noisy)
-            alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
+            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -160,7 +160,7 @@ var GFutils =
         {
           GFlib.log("importSignature: Couldn't get sig");
           if (noisy)
-            alert("Couldn't get your signature. This shouldn't happen. Maybe you have " +
+            GFlib.alert("Couldn't get your signature. This shouldn't happen. Maybe you have " +
                 "one of those really old signature that displays bold and italics on " +
                 "the profile page?");
           if (button) button.setAttribute('disabled', false);

@@ -314,12 +314,12 @@ var GFuserlist =
 
     if (userlist[id]['name'].length)
     {
-      if (!confirm('Really delete the group "' + userlist[id]['name'] + '"?'))
+      if (!GFlib.confirm('Really delete the group "' + userlist[id]['name'] + '"?'))
         return;
     }
     else
     {
-      if (!confirm('Really delete group #' + (parseInt(id) + 1) + '?'))
+      if (!GFlib.confirm('Really delete group #' + (parseInt(id) + 1) + '?'))
         return;
     }
 

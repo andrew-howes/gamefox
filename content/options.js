@@ -17,7 +17,7 @@ var GFoptions =
         document.getElementById('timezone').value,
         document.getElementById('userdisplay').value,
         true, document.getElementById('gamefox-css-apply-bs')
-        )
+        );
   },
 
   importSignature: function()
@@ -40,7 +40,7 @@ var GFoptions =
     }
     catch (e)
     {
-      alert("That isn't supported here. You're probably using Firefox 2 and not using Windows.");
+      GFlib.alert("That isn't supported here. You're probably using Firefox 2 and not using Windows.");
     }
   },
 

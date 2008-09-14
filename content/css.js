@@ -125,7 +125,7 @@ var GFcss =
     }
     catch (e)
     {
-      alert('There was an error importing the stylesheet:\n' + e);
+      GFlib.alert('There was an error importing the stylesheet:\n' + e);
       return false;
     }
 
@@ -137,7 +137,7 @@ var GFcss =
     }
     catch (e)
     {
-      alert('There was an error writing the stylesheet to its destination:\n' + e);
+      GFlib.alert('There was an error writing the stylesheet to its destination:\n' + e);
       return false;
     }
     
@@ -170,7 +170,7 @@ var GFcss =
     }
     catch (e)
     {
-      alert('Caught exception while creating the CSS directory:\n' + e);
+      GFlib.alert('Caught exception while creating the CSS directory:\n' + e);
       return false;
     }
   },

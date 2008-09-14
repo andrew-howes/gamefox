@@ -245,7 +245,7 @@ var GFtags =
 
   removeAll: function()
   {
-    if (confirm('Are you sure you want to delete all your tags?'))
+    if (GFlib.confirm('Are you sure you want to delete all your tags?'))
     {
       this.write('');
       this.populate(2);
@@ -332,7 +332,7 @@ var GFtags =
           if (err[errNumber.indexOf(302)])  msg += err[errNumber.indexOf(302)] + ' topics were skipped because no topic title was found. It\'s blasphemy! Alert the creator.\n';
           if (err[errNumber.indexOf(-404)]) msg += err[errNumber.indexOf(-404)]+ ' topics were skipped because the requested URL was not found. Alert the creator.\n';
 
-          alert(msg);
+          GFlib.alert(msg);
         }
       }
 
@@ -346,7 +346,7 @@ var GFtags =
 
       request.onerror = function()
       {
-        //alert('Whoops! I\'m Error.');
+        //GFlib.alert('Whoops! I\'m Error.');
         if (!processed) processRespond(-1);
       };
 
@@ -476,7 +476,7 @@ var GFtags =
 
     if (tagIDs.length <= 0)
     {
-      alert('Nothing to delete.');
+      GFlib.alert('Nothing to delete.');
       return;
     }
 
@@ -488,7 +488,7 @@ var GFtags =
 
       if (!IDs[1] && delFolder && typeof(GFtags.tags[IDs[0]].title) == 'string')
       {
-        if (confirm('Are you sure you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + GFtags.tags[IDs[0]].title))
+        if (GFlib.confirm('Are you sure you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + GFtags.tags[IDs[0]].title))
         {
           delete GFtags.tags[IDs[0]];
         }
@@ -576,7 +576,7 @@ var GFtags =
 
     if (boardID in GFtags.tags && topicID in GFtags.tags[boardID].topics)
     {
-      if (confirm('You have already tagged this topic!\nDo you wish to un-tag it?'))
+      if (GFlib.confirm('You have already tagged this topic!\nDo you wish to un-tag it?'))
       {
         GFtags.remove(tagID);
         return false;

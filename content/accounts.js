@@ -187,7 +187,7 @@ var GFaccounts =
         if (request.readyState == 4)
         {
           if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1) {
-            alert('Login error! Maybe your password was incorrect? Try it again.');
+            GFlib.alert('Login error! Maybe your password was incorrect? Try it again.');
             GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
             GFaccounts.loginAndSaveCookie(username);
             return;
@@ -196,7 +196,7 @@ var GFaccounts =
           var cookie = GFaccounts.getCookie('MDAAuth');
           if (cookie == null)
           {
-            alert('Somebody ate the cookie! This means that something unexpected happened. Try it again.');
+            GFlib.alert('Somebody ate the cookie! This means that something unexpected happened. Try it again.');
             GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
             GFaccounts.loginAndSaveCookie(username);
             return;
@@ -255,7 +255,7 @@ var GFaccounts =
     {
       delete this.accounts[items[selected.value]];
       this.write(this.accounts);
-      alert('"' + items[selected.value] + '" has been removed.');
+      GFlib.alert('"' + items[selected.value] + '" has been removed.');
       if (items.length > 1)
         this.promptRemoveAccount();
     }

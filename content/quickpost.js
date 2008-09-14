@@ -121,7 +121,7 @@ var GFquickpost =
         if (!postId || /^\s*0?\s*$/.test(postId[1]))
         { // error
           if (!/\S/.test(text))
-            alert('Request timed out. Check your network connection and try again.');
+            GFlib.alert('Request timed out. Check your network connection and try again.');
           else
           {
             var badWord = text.match(/<p>Banned word found: <b>([^<]+)<\/b>/i);
@@ -140,42 +140,42 @@ var GFquickpost =
             var maintenance = text.indexOf('<body') == -1 && text.indexOf('maintenance') != -1;
 
             if (badWord)
-              alert('Your post includes the word "' + badWord[1] + '", which is a bad word. ' +
+              GFlib.alert('Your post includes the word "' + badWord[1] + '", which is a bad word. ' +
                   'Didn\'t anyone ever tell you "' + badWord[1] + '" was a bad word?');
             else if (tooBig)
-              alert('Your post is too big! A message can only contain 4096 characters, ' +
+              GFlib.alert('Your post is too big! A message can only contain 4096 characters, ' +
                   'but yours has ' + tooBig[1] + '.');
             else if (titleLength)
-              alert('Your topic title must be between 5 and 80 characters in length.');
+              GFlib.alert('Your topic title must be between 5 and 80 characters in length.');
             else if (allCapsTitle)
-              alert('Turn off your caps lock and try typing your topic title again.');
+              GFlib.alert('Turn off your caps lock and try typing your topic title again.');
             else if (allCapsMessage)
-              alert('Turn off your caps lock and try typing your message again.');
+              GFlib.alert('Turn off your caps lock and try typing your message again.');
             else if (noTopics)
-              alert('You are not allowed to post topics here.');
+              GFlib.alert('You are not allowed to post topics here.');
             else if (noMessages)
-              alert('You are not allowed to post messages here.');
+              GFlib.alert('You are not allowed to post messages here.');
             else if (longWordInTitle)
-              alert('Your topic title contains a word over 25 characters in length. ' +
+              GFlib.alert('Your topic title contains a word over 25 characters in length. ' +
                   'This makes CJayC unhappy because it stretches his 640x480 resolution ' +
                   'screen, so he doesn\'t allow it.');
             else if (longWordInMessage)
-              alert('Your message contains a word over 80 characters in length. ' +
+              GFlib.alert('Your message contains a word over 80 characters in length. ' +
                   'This makes CJayC unhappy because it stretches his 640x480 resolution ' +
                   'screen, so he doesn\'t allow it.');
             else if (blankMessage)
-              alert('Maybe you should actually type something...');
+              GFlib.alert('Maybe you should actually type something...');
             else if (badHTML)
-              alert('Your HTML is not well-formed. Check for mismatched tags.');
+              GFlib.alert('Your HTML is not well-formed. Check for mismatched tags.');
             else if (closedTopic)
-              alert('The topic was closed while you were typing your message. ' +
+              GFlib.alert('The topic was closed while you were typing your message. ' +
                   'Type faster next time!');
             else if (deletedTopic)
-              alert('The topic is gone! Damn moderators...');
+              GFlib.alert('The topic is gone! Damn moderators...');
             else if (maintenance)
-              alert('The site is temporarily down for maintenance.');
+              GFlib.alert('The site is temporarily down for maintenance.');
             else
-              alert('Something went wrong but I don\'t know what. Try posting ' +
+              GFlib.alert('Something went wrong but I don\'t know what. Try posting ' +
                   'without QuickPost, and if you think you\'ve found a bug ' +
                   'report it at Blood Money.');
           }
@@ -186,7 +186,7 @@ var GFquickpost =
         else
         {
           if (text.indexOf('<div class="head"><h1>Post Warning</h1></div>') != -1 &&
-              !confirm('Your message contains an autoflagged word. Submit anyway?'))
+              !GFlib.confirm('Your message contains an autoflagged word. Submit anyway?'))
           {
             event.target.removeAttribute('disabled');
             event.target.addEventListener('click', GFquickpost.post, false);
@@ -203,7 +203,7 @@ var GFquickpost =
               if (text.indexOf('<div class="head"><h1>Message Posted</h1></div>') == -1)
               { // error
                 if (!/\S/.test(text))
-                  alert('Request timed out. Check your network connection and try again.');
+                  GFlib.alert('Request timed out. Check your network connection and try again.');
                 else
                 {
                   var flooding = text.indexOf('Please wait and try your post again') != -1;
@@ -212,15 +212,15 @@ var GFquickpost =
                   var dupeTitle = text.indexOf('A topic with this title already exists') != -1;
 
                   if (flooding)
-                    alert('You have hit one of the time-based posting limits (e.g., 2 posts per minute).');
+                    GFlib.alert('You have hit one of the time-based posting limits (e.g., 2 posts per minute).');
                   else if (closedTopic)
-                    alert('The topic was closed while you were typing your message. Type faster next time!');
+                    GFlib.alert('The topic was closed while you were typing your message. Type faster next time!');
                   else if (deletedTopic)
-                    alert('The topic is gone! Damn moderators...');
+                    GFlib.alert('The topic is gone! Damn moderators...');
                   else if (dupeTitle)
-                    alert('A topic with this title already exists. Choose another title.');
+                    GFlib.alert('A topic with this title already exists. Choose another title.');
                   else
-                    alert('Something went wrong but I don\'t know what. Try posting ' +
+                    GFlib.alert('Something went wrong but I don\'t know what. Try posting ' +
                         'without QuickPost, and if you think you\'ve found a bug ' +
                         'report it at Blood Money.');
                 }
@@ -254,7 +254,7 @@ var GFquickpost =
     {
       if (topicTitle[0].value.length < 5)
       {
-        alert('Topic titles must be at least 5 characters long.');
+        GFlib.alert('Topic titles must be at least 5 characters long.');
         event.target.removeAttribute('disabled');
         event.target.addEventListener('click', GFquickpost.post, false);
         return;

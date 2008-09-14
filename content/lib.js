@@ -7,9 +7,23 @@ var GFlib =
 
   log: function(msg)
   {
-    var consoleService = Cc['@mozilla.org/consoleservice;1'].
-      getService(Ci.nsIConsoleService);
-    consoleService.logStringMessage('GameFOX: ' + msg);
+    Cc['@mozilla.org/consoleservice;1']
+        .getService(Ci.nsIConsoleService)
+        .logStringMessage('GameFOX: ' + msg);
+  },
+
+  alert: function(msg)
+  {
+    Cc['@mozilla.org/embedcomp/prompt-service;1']
+        .getService(Ci.nsIPromptService)
+        .alert(null, 'GameFOX', msg);
+  },
+
+  confirm: function(msg)
+  {
+    return Cc['@mozilla.org/embedcomp/prompt-service;1']
+        .getService(Ci.nsIPromptService)
+        .confirm(null, 'GameFOX', msg);
   },
 
   getDocument: function(event)
