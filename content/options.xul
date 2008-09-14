@@ -519,6 +519,7 @@
       <preference id="gamefox-pref-context-taglist"  name="gamefox.context.taglist"  type="bool"/>
       <preference id="gamefox-pref-context-tag-myposts" name="gamefox.context.tag.myposts" type="bool"/>
       <preference id="gamefox-pref-context-tag-tracked" name="gamefox.context.tag.tracked" type="bool"/>
+      <preference id="gamefox-pref-context-usergroups" name="gamefox.context.usergroups" type="bool"/>
     </preferences>
 
     <groupbox>
@@ -561,9 +562,13 @@
       <caption label="&mouse.messages.caption;"/>
       <label value="&mouse.messages.label;"/>
       <radiogroup class="indent" preference="gamefox-pref-message-header-dblclick">
-        <radio value="0" label="&mouse.messages.radio.nothing;"/>
-        <radio value="1" label="&mouse.messages.radio.quickwhois;"/>
-        <radio value="2" label="&mouse.messages.radio.quote;"/>
+        <hbox>
+          <radio value="0" label="&mouse.messages.radio.nothing;"/>
+          <radio value="1" label="&mouse.messages.radio.quickwhois;"/>
+        </hbox>
+        <hbox>
+          <radio value="2" label="&mouse.messages.radio.quote;"/>
+        </hbox>
       </radiogroup>
       <checkbox preference="gamefox-pref-message-dblclick" label="&mouse.messages.dblclickquoting;"/>
     </groupbox>
@@ -571,22 +576,36 @@
     <groupbox>
       <caption label="&mouse.context.caption;"/>
       <hbox>
-        <vbox>
-          <checkbox preference="gamefox-pref-context-sidebar"     label="&mouse.context.sidebar;"/>
-          <checkbox preference="gamefox-pref-context-taglist"     label="&mouse.context.taglist;"/>
-        </vbox>
-        <vbox>
-          <checkbox preference="gamefox-pref-context-pagelist"    label="&mouse.context.pages;"/>
-          <checkbox preference="gamefox-pref-context-tag"         label="&mouse.context.tagtopic;"/>
-        </vbox>
-        <vbox>
-          <checkbox preference="gamefox-pref-context-quote"       label="&mouse.context.quote;"/>
-          <checkbox preference="gamefox-pref-context-accounts"    label="&mouse.context.accounts;"/>
-        </vbox>
-        <vbox>
+        <groupbox>
+          <caption label="Submenu"/>
+          <hbox>
+            <vbox>
+              <checkbox preference="gamefox-pref-context-sidebar"     label="&mouse.context.sidebar;"/>
+              <checkbox preference="gamefox-pref-context-taglist"     label="&mouse.context.taglist;"/>
+            </vbox>
+            <vbox>
+              <checkbox preference="gamefox-pref-context-accounts"    label="&mouse.context.accounts;"/>
+            </vbox>
+          </hbox>
+        </groupbox>
+        <groupbox>
+          <caption label="Main"/>
+          <hbox>
+            <vbox>
+              <checkbox preference="gamefox-pref-context-pagelist"    label="&mouse.context.pages;"/>
+              <checkbox preference="gamefox-pref-context-tag"         label="&mouse.context.tagtopic;"/>
+            </vbox>
+            <vbox>
+              <checkbox preference="gamefox-pref-context-quote"       label="&mouse.context.quote;"/>
+              <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.context.usergroups;"/>
+            </vbox>
+          </hbox>
+        </groupbox>
+        <groupbox>
+          <caption label="Tags"/>
           <checkbox preference="gamefox-pref-context-tag-myposts" label="&mouse.context.tags.aml;"/>
           <checkbox preference="gamefox-pref-context-tag-tracked" label="&mouse.context.tags.tracked;"/>
-        </vbox>
+        </groupbox>
       </hbox>
     </groupbox>
 

@@ -1,4 +1,4 @@
-/* vim: set et sw=2 sts=2 ts=2: */
+/* vim: set et sw=2 sts=2 ts=2 tw=79: */
 
 var GFcontext =
 {
@@ -12,6 +12,23 @@ var GFcontext =
       getBoolPref('context.taglist');
     document.getElementById('gamefox-accounts').hidden = !GameFOX.prefs.
       getBoolPref('context.accounts');
+
+    // hide the entire menu
+    var items = document.getElementById('gamefox-context-popup').childNodes;
+    var hidden = true;
+    for (var i = 0; i < items.length; i++)
+    {
+      if (!items[i].hidden)
+      {
+        hidden = false;
+        break;
+      }
+    }
+
+    if (hidden)
+      document.getElementById('gamefox-context-menu').hidden = true;
+    else
+      document.getElementById('gamefox-context-menu').hidden = false;
 
     if (!GFlib.onBoards(doc))
     {
@@ -35,7 +52,8 @@ var GFcontext =
       try
       {
         var node = gContextMenu.target;
-        if (node.nodeName == 'A' && node.href.indexOf('user.php') != -1)
+        if (GameFOX.prefs.getBoolPref('context.usergroups') && node.nodeName == 'A'
+            && node.href.indexOf('user.php') != -1)
           document.getElementById('gamefox-context-usergroups').hidden = false;
         else
           document.getElementById('gamefox-context-usergroups').hidden = true;

@@ -137,7 +137,8 @@
 <!ENTITY mouse.context.tagtopic "Tag Topic">
 <!ENTITY mouse.context.quote "Quote">
 <!ENTITY mouse.context.accounts "Accounts">
-<!ENTITY mouse.context.tags.aml "Tags: Active Messages">
-<!ENTITY mouse.context.tags.tracked "Tags: Tracked Topics">
+<!ENTITY mouse.context.tags.aml "Active Messages">
+<!ENTITY mouse.context.tags.tracked "Tracked Topics">
+<!ENTITY mouse.context.usergroups "User Groups">
 
 <!ENTITY tags.label "Tags">
