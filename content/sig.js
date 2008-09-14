@@ -21,7 +21,7 @@ var GFsig =
         if (i == 0) continue; // skip default, it has lowest priority
 
         // skip empty sigs
-        if (!sigs[i]['body'].length && !sigs[i]['presig'].length) continue;
+        if (!sigs[i]['body'].length) continue;
 
         accounts = GFutils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*;\s*/);
         boards = GFutils.trim(sigs[i]['boards'].toLowerCase()).split(/\s*;\s*/);
@@ -42,7 +42,7 @@ var GFsig =
           matches[2].push(sigs[i]);
       }
       // add the default if it's non-empty
-      if (sigs[0]['body'].length || sigs[0]['presig'].length)
+      if (sigs[0]['body'].length)
         matches[2].push(sigs[0]);
 
       var selectionPref = this.prefs.getIntPref('selection');
@@ -84,7 +84,6 @@ var GFsig =
 
   prepareOptionsPane: function()
   {
-    var presig = document.getElementById('sig-presig');
     var sig = document.getElementById('sig-body');
     var menu = document.getElementById('sig-menu');
 
@@ -93,7 +92,6 @@ var GFsig =
 
     // fill in fields
     var defaultSig = this.getSigByCriteria();
-    presig.value = defaultSig['presig'];
     sig.value = defaultSig['body'];
 
     // loop through sigs and add them to menulist
@@ -132,8 +130,6 @@ var GFsig =
     if (sigs[idx] != undefined)
     {
       // don't reset the scrollbar while typing
-      if (document.getElementById('sig-presig').value != sigs[idx]['presig'])
-        document.getElementById('sig-presig').value = sigs[idx]['presig'];
       if (document.getElementById('sig-body').value != sigs[idx]['body'])
         document.getElementById('sig-body').value = sigs[idx]['body'];
     }
@@ -151,7 +147,6 @@ var GFsig =
     var menu = document.getElementById('sig-menu');
     var accounts = document.getElementById('sig-criteria-accounts');
     var boards = document.getElementById('sig-criteria-boards');
-    var presig = document.getElementById('sig-presig');
     var sig = document.getElementById('sig-body');
 
     if (menu.selectedItem.value == 'new')
@@ -172,7 +167,6 @@ var GFsig =
       var sigData = this.getSigById(menu.selectedItem.value);
       accounts.value = sigData['accounts'];
       boards.value = sigData['boards'];
-      presig.value = sigData['presig'];
       sig.value = sigData['body'];
     }
     else // menu.selectedItem.value == 'default'
@@ -183,7 +177,6 @@ var GFsig =
       accounts.value = '';
       boards.value = '';
       var defaultSig = this.getSigByCriteria();
-      presig.value = defaultSig['presig'];
       sig.value = defaultSig['body'];
     }
 
@@ -193,7 +186,7 @@ var GFsig =
   add: function()
   {
     var sigs = eval(GFutils.getString('serialized', this.prefs));
-    sigs.push({"accounts":"", "boards":"", "body":"", "presig":""});
+    sigs.push({"accounts":"", "boards":"", "body":""});
     GFutils.setString('serialized', sigs.toSource(), this.prefs);
 
     return sigs.length - 1;
@@ -211,7 +204,6 @@ var GFsig =
     {
       case 'sig-criteria-accounts': sigs[idx]['accounts'] = event.value; break;
       case 'sig-criteria-boards': sigs[idx]['boards'] = event.value; break;
-      case 'sig-presig': sigs[idx]['presig'] = event.value; break;
       case 'sig-body': sigs[idx]['body'] = event.value; break;
     }
 
@@ -249,7 +241,6 @@ var GFsig =
   {
     document.getElementById('sig-criteria-accounts').value = '';
     document.getElementById('sig-criteria-boards').value = '';
-    document.getElementById('sig-presig').value = '';
     document.getElementById('sig-body').value = '';
   },
 

@@ -5,7 +5,7 @@ var GFquickpost =
   appendForm: function(doc, div, newTopic)
   {
     if (GameFOX.prefs.getIntPref('signature.addition') == 2)
-      var sig = GFutils.formatSig(null, null,
+      var sig = GFutils.formatSig(null,
           GameFOX.prefs.getBoolPref('signature.newline'), doc);
     else
       var sig = '';
@@ -68,7 +68,7 @@ var GFquickpost =
 
     if (GameFOX.prefs.getIntPref('signature.addition') == 1)
       doc.getElementById('gamefox-message').value +=
-        GFutils.formatSig(null, null,
+        GFutils.formatSig(null,
             GameFOX.prefs.getBoolPref('signature.newline'), doc
             );
   },
@@ -267,7 +267,7 @@ var GFquickpost =
     if (!GFlib.onPage(doc, 'post')
         && GameFOX.prefs.getIntPref('signature.addition') == 1)
       message +=
-        GFutils.formatSig(null, null,
+        GFutils.formatSig(null,
             GameFOX.prefs.getBoolPref('signature.newline'), doc);
 
     previewRequest.send(

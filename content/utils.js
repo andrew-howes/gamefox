@@ -304,9 +304,9 @@ var GFutils =
     return pageHTML;
   },
 
-  formatSig: function(sig, presig, newline, doc)
+  formatSig: function(sig, newline, doc)
   {
-    if (!sig && !presig) // fetch sig
+    if (!sig) // fetch sig
     {
       if (!doc) return false;
       var boardname = GFutils.trim(doc.evaluate('//h1', doc, null,
@@ -318,24 +318,19 @@ var GFutils =
           textContent).replace('Welcome, ', '');
       var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
-      presig = getSig['presig'];
     }
 
-    if (!sig.length && !presig.length)
+    if (!sig.length)
       return '';
 
-    // Restrict signature to 2 lines, presignature to 1
+    // Restrict signature to 2 lines
     sig = sig.split('\n');
     if (sig.length >= 2)
       sig = sig[0] + '\n' + sig[1];
     else
       sig = sig[0];
 
-    presig = presig.split('\n');
-    presig = presig[0];
-
     var str = (newline ? '\n' : '') +
-      (presig != '' ? presig + (sig != '' ? '\n' : '') : '') +
       (sig != '' ? '---\n' + sig : '');
     return '\n' + str;
   },

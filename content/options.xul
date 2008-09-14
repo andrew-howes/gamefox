@@ -462,12 +462,6 @@
             </groupbox>
 
             <hbox>
-              <label value="&signature.presig.label;" flex="1"/>
-              <hbox pack="end"><label value="&signature.presig.warning;"/></hbox>
-            </hbox>
-            <textbox id="sig-presig" oninput="GFsig.updatePref(this);" class="indent"/>
-
-            <hbox>
               <label value="&signature.sig.label;" flex="1"/>
               <hbox pack="end"><label id="sig-chars" value=""/></hbox>
             </hbox>

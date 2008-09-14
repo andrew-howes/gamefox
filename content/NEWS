@@ -8,6 +8,7 @@
     * Move clutter to a GameFOX submenu in the context menu
     * Right click option to add or remove someone from a user highlighting
       group
+    * Remove pre-signature field
 
 2008-08-23:
     * version 0.6.5

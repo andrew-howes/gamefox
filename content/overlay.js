@@ -114,7 +114,7 @@ var GameFOX =
           && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
       {
         doc.getElementsByName('message')[0].value =
-          GFutils.formatSig(null, null,
+          GFutils.formatSig(null,
               GameFOX.prefs.getBoolPref('signature.newline'), doc);
       }
     }
@@ -808,17 +808,15 @@ function GameFOXLoader()
     // old signature prefs
     if (versionComparator.compare('0.6.2', lastversion) > 0)
     {
-      var oldPresig, oldSig;
-      try { oldPresig = GFutils.getString('signature.presig', prefs); }
-      catch (e) {}
+      try { var oldSig = GFutils.getString('signature.body', prefs); }
+      catch (e) { var oldSig = false; }
 
-      try { oldSig = GFutils.getString('signature.body', prefs); }
-      catch (e) {}
-
-      var sigs = eval(GFutils.getString('signature.serialized', prefs));
-      if (oldPresig) sigs[0]['presig'] = oldPresig;
-      if (oldSig) sigs[0]['body'] = oldSig;
-      GFutils.setString('signature.serialized', sigs.toSource(), prefs);
+      if (oldSig)
+      {
+        var sigs = eval(GFutils.getString('signature.serialized', prefs));
+        sigs[0]['body'] = oldSig;
+        GFutils.setString('signature.serialized', sigs.toSource(), prefs);
+      }
     }
 
     // user highlighting groups
