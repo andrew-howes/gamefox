@@ -24,11 +24,7 @@ var GFcontext =
         break;
       }
     }
-
-    if (hidden)
-      document.getElementById('gamefox-context-menu').hidden = true;
-    else
-      document.getElementById('gamefox-context-menu').hidden = false;
+    document.getElementById('gamefox-context-menu').hidden = hidden;
 
     if (!GFlib.onBoards(doc))
     {

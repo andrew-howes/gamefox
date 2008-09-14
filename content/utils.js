@@ -329,13 +329,16 @@ var GFutils =
       sig = sig[0] + '\n' + sig[1];
     else
       sig = sig[0];
+
+    var disableCharLimit;
     try
     {
       // check a hidden pref just because I can
-      if (!GameFOX.prefs.getBoolPref('signature.disablecharlimit'))
-        sig = GFutils.specialCharsDecode(GFutils.specialCharsEncode(sig).substr(0, 160));
+      disableCharLimit = GameFOX.prefs.getBoolPref('signature.disablecharlimit');
     }
-    catch (e) {}
+    catch (e) { disableCharLimit = false; }
+    if (!disableCharLimit)
+      sig = GFutils.specialCharsDecode(GFutils.specialCharsEncode(sig).substr(0, 160));
 
     var str = (newline ? '\n' : '') +
       (sig != '' ? '---\n' + sig : '');
