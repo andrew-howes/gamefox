@@ -131,14 +131,17 @@
 <!ENTITY mouse.messages.radio.quote "Quote message">
 <!ENTITY mouse.messages.dblclickquoting "Quote by double clicking on the message">
 <!ENTITY mouse.context.caption "Context Menu">
+<!ENTITY mouse.context.submenu "Submenu">
 <!ENTITY mouse.context.sidebar "Sidebar">
 <!ENTITY mouse.context.taglist "Tag List">
+<!ENTITY mouse.context.accounts "Accounts">
+<!ENTITY mouse.context.main "Main">
 <!ENTITY mouse.context.pages "Pages">
 <!ENTITY mouse.context.tagtopic "Tag Topic">
 <!ENTITY mouse.context.quote "Quote">
-<!ENTITY mouse.context.accounts "Accounts">
+<!ENTITY mouse.context.usergroups "User Groups">
+<!ENTITY mouse.context.tags "Tags">
 <!ENTITY mouse.context.tags.aml "Active Messages">
 <!ENTITY mouse.context.tags.tracked "Tracked Topics">
-<!ENTITY mouse.context.usergroups "User Groups">
 
 <!ENTITY tags.label "Tags">

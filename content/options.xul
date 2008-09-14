@@ -577,32 +577,32 @@
       <caption label="&mouse.context.caption;"/>
       <hbox>
         <groupbox>
-          <caption label="Submenu"/>
+          <caption label="&mouse.context.submenu;"/>
           <hbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-sidebar"     label="&mouse.context.sidebar;"/>
-              <checkbox preference="gamefox-pref-context-taglist"     label="&mouse.context.taglist;"/>
+              <checkbox preference="gamefox-pref-context-sidebar" label="&mouse.context.sidebar;"/>
+              <checkbox preference="gamefox-pref-context-taglist" label="&mouse.context.taglist;"/>
             </vbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-accounts"    label="&mouse.context.accounts;"/>
+              <checkbox preference="gamefox-pref-context-accounts" label="&mouse.context.accounts;"/>
             </vbox>
           </hbox>
         </groupbox>
         <groupbox>
-          <caption label="Main"/>
+          <caption label="&mouse.context.main;"/>
           <hbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-pagelist"    label="&mouse.context.pages;"/>
-              <checkbox preference="gamefox-pref-context-tag"         label="&mouse.context.tagtopic;"/>
+              <checkbox preference="gamefox-pref-context-pagelist" label="&mouse.context.pages;"/>
+              <checkbox preference="gamefox-pref-context-tag" label="&mouse.context.tagtopic;"/>
             </vbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-quote"       label="&mouse.context.quote;"/>
+              <checkbox preference="gamefox-pref-context-quote" label="&mouse.context.quote;"/>
               <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.context.usergroups;"/>
             </vbox>
           </hbox>
         </groupbox>
         <groupbox>
-          <caption label="Tags"/>
+          <caption label="&mouse.context.tags;"/>
           <checkbox preference="gamefox-pref-context-tag-myposts" label="&mouse.context.tags.aml;"/>
           <checkbox preference="gamefox-pref-context-tag-tracked" label="&mouse.context.tags.tracked;"/>
         </groupbox>
