@@ -323,9 +323,6 @@ var GFuserlist =
         return;
     }
 
-    userlist.splice(id, 1);
-    GFuserlist.prefs.setCharPref('userlist.serialized', userlist.toSource());
-
     // in case user hits button twice; however, bad things can still happen
     // if the user leaves one of the confirms open and adds/deletes, since the
     // prefs will no longer match the groupboxes
@@ -340,6 +337,9 @@ var GFuserlist =
         groups[i].getElementsByTagName('caption')[0].setAttribute('label', 'Group #' + (i + 1));
       }
     }
+
+    userlist.splice(id, 1);
+    GFuserlist.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   showPost: function(event)
@@ -474,22 +474,21 @@ var GFuserlist =
 
   observe: function()
   {
-    var usergroups = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+    var groups = document.getElementById('usergroups').getElementsByTagName('groupbox');
 
     var textboxes, userbox;
-    for (var i = 0; i < usergroups.length; i++)
+    for (var i = 0; i < groups.length; i++)
     {
       // save some processing power by only updating the list of users, since
       // that's all we care about
-      textboxes = document.getElementById('ug-' + i).getElementsByTagName('textbox');
+      textboxes = groups[i].getElementsByTagName('textbox');
       for (var j = 0; j < textboxes.length; j++)
         if (textboxes[j].className == 'ug-users')
           userbox = textboxes[j];
 
-      if (userbox && userbox.value != usergroups[i]['users'])
-        userbox.value = usergroups[i]['users'];
-
-      textboxes, userbox = null;
+      if (userbox.value != userlist[i]['users'])
+        userbox.value = userlist[i]['users'];
     }
   }
 };
