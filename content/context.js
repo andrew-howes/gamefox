@@ -49,7 +49,7 @@ var GFcontext =
       {
         var node = gContextMenu.target;
         if (GameFOX.prefs.getBoolPref('context.usergroups') && node.nodeName == 'A'
-            && node.href.indexOf('user.php') != -1)
+            && node.href.indexOf('user.php') != -1 && node.parentNode.id.indexOf('p') == 0)
           document.getElementById('gamefox-context-usergroups').hidden = false;
         else
           document.getElementById('gamefox-context-usergroups').hidden = true;
