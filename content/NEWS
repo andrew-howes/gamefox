@@ -8,6 +8,7 @@
     * Right click option to add or remove someone from a user highlighting
       group
     * Remove pre-signature field
+    * Enforce the 160-character limit in signatures
 
 2008-08-23:
     * version 0.6.5

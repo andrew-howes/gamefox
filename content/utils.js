@@ -323,12 +323,19 @@ var GFutils =
     if (!sig.length)
       return '';
 
-    // Restrict signature to 2 lines
+    // Restrict signature to 2 lines, 160 characters
     sig = sig.split('\n');
     if (sig.length >= 2)
       sig = sig[0] + '\n' + sig[1];
     else
       sig = sig[0];
+    try
+    {
+      // check a hidden pref just because I can
+      if (!GameFOX.prefs.getBoolPref('signature.disablecharlimit'))
+        sig = GFutils.specialCharsDecode(GFutils.specialCharsEncode(sig).substr(0, 160));
+    }
+    catch (e) {}
 
     var str = (newline ? '\n' : '') +
       (sig != '' ? '---\n' + sig : '');
