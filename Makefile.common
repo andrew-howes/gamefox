@@ -117,6 +117,7 @@ ${MOZXPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
 		${SED} -e "s,###VERSION###,${VERSION},g" \
 		       -e "s,###DATE###,${BUILD_DATE},g" \
 			   -e "s,<em:updateURL>.*</em:updateURL>,,g" \
+			   -e "s,<em:updateKey>.*</em:updateKey>,,g" \
 		       < $$f > ${BUILD_XPI_DIR}/$$f ; \
 		( diff -q $$f ${BUILD_XPI_DIR}/$$f 1>/dev/null ) || \
 		( echo "modified: $$f" ; \
