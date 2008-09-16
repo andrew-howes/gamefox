@@ -1,5 +1,5 @@
 <h2 id="a">a</h2>
-<h3 id="a+gamefox-last-post-link">
+<h3 id="a_gamefox-last-post-link">
 a.gamefox-last-post-link
 <span class="new">New in 0.6.6</span>
 </h3>
