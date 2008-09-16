@@ -1,4 +1,11 @@
 <h2 id="a">a</h2>
+<h3 id="a+gamefox-last-post-link">
+a#gamefox-last-post-link
+<span class="new">New in 0.6.6</span>
+</h3>
+
+Used on topic lists in the "last post" column.
+
 <h3 id="a+gamefox-quickpost-link">a#gamefox-quickpost-link</h3>
 
 Used on gentopic.php to activate the floating topic QuickPost.

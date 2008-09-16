@@ -65,6 +65,7 @@ var GameFOX =
               a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
                 lastPost[0] + '#p' + lastPost[1];
               a.textContent = text;
+              a.id = 'gamefox-last-post-link';
           rows[i].cells[3].appendChild(a);
         }
       }
@@ -223,6 +224,7 @@ var GameFOX =
               a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
                 lastPost[0] + '#p' + lastPost[1];
               a.textContent = text;
+              a.id = 'gamefox-last-post-link';
           rows[i].cells[4].appendChild(a);
         }
 
