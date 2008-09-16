@@ -65,7 +65,7 @@ var GameFOX =
               a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
                 lastPost[0] + '#p' + lastPost[1];
               a.textContent = text;
-              a.id = 'gamefox-last-post-link';
+              a.className = 'gamefox-last-post-link';
           rows[i].cells[3].appendChild(a);
         }
       }
@@ -224,7 +224,7 @@ var GameFOX =
               a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
                 lastPost[0] + '#p' + lastPost[1];
               a.textContent = text;
-              a.id = 'gamefox-last-post-link';
+              a.className = 'gamefox-last-post-link';
           rows[i].cells[4].appendChild(a);
         }
 
@@ -299,7 +299,7 @@ var GameFOX =
               groupname.appendChild(doc.createTextNode(' (' + hlinfo[0] + ')'));
               rows[i].cells[2].appendChild(groupname);
             }
-            
+
             if (hlinfo[3] == 'remove') // remove topic
             {
               rows[i].style.setProperty('display', 'none', null);
@@ -483,7 +483,7 @@ var GameFOX =
             else
               td[j].insertBefore(doc.createTextNode(' |'), groupname);
           }
-          
+
           if (hlinfo[2] == 'highlight')
           {
             td[j].className += ' ' + GFuserlist.highlightClassName;
