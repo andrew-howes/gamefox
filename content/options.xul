@@ -52,6 +52,8 @@
 
       <preference id="userlist-topics-groupnames" name="gamefox.userlist.topics.showgroupnames" type="bool"/>
       <preference id="userlist-messages-groupnames" name="gamefox.userlist.messages.showgroupnames" type="bool"/>
+
+      <preference id="elements-topics-lastpostlink" name="gamefox.elements.topics.lastpostlink" type="bool"/>
     </preferences>
 
 
@@ -97,6 +99,7 @@
                     <vbox>
                       <checkbox preference="gamefox-pref-quickpost-link" label="&page.elements.topics.quickpost;"/>
                       <checkbox preference="gamefox-pref-tracked-boardlink" label="&page.elements.topics.trackedlink;"/>
+                      <checkbox preference="elements-topics-lastpostlink" label="&page.elements.topics.lastpostlink;"/>
                     </vbox>
                   </groupbox>
 

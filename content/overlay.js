@@ -32,9 +32,42 @@ var GameFOX =
     /* Active Messages (myposts.php) */
     else if (GFlib.onPage(doc, 'myposts'))
     {
-      doc.evaluate('//div[@class="board"]/table', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-        addEventListener('dblclick', GameFOX.topicDblclick, false);
+      var topicsTable = doc.evaluate('//div[@class="board"]/table', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var rows;
+
+      if (topicsTable != null)
+      {
+        // Double click action
+        topicsTable.addEventListener('dblclick', GameFOX.topicDblclick, false);
+
+        // Topic rows
+        rows = topicsTable.getElementsByTagName('tr');
+      }
+      else
+      {
+        // No topics
+        rows = [];
+      }
+
+      // Topic row loop
+      for (var i = 1; i < rows.length; i++)
+      {
+        // Last post link
+        if (GameFOX.prefs.getBoolPref('elements.topics.lastpostlink')) // pref
+        {
+          var lastPost = GFutils.getLastPost(rows[i].cells[2].textContent);
+
+          var text = rows[i].cells[3].textContent;
+          rows[i].cells[3].textContent = '';
+
+          var a = doc.createElement('a');
+              a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
+                lastPost[0] + '#p' + lastPost[1];
+              a.textContent = text;
+          rows[i].cells[3].appendChild(a);
+        }
+      }
     }
 
     /* Posting and Preview (post.php) */
@@ -178,6 +211,21 @@ var GameFOX =
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
+        // Last post link
+        if (GameFOX.prefs.getBoolPref('elements.topics.lastpostlink')) // pref
+        {
+          var lastPost = GFutils.getLastPost(rows[i].cells[3].textContent);
+
+          var text = rows[i].cells[4].textContent;
+          rows[i].cells[4].textContent = '';
+
+          var a = doc.createElement('a');
+              a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
+                lastPost[0] + '#p' + lastPost[1];
+              a.textContent = text;
+          rows[i].cells[4].appendChild(a);
+        }
+
         // Pagination
         if (GameFOX.prefs.getBoolPref('paging.auto'))
         {
@@ -585,7 +633,7 @@ var GameFOX =
     }
   },
 
-  gotoLastPage: function(event, lastPost)
+  gotoLastPage: function(event, gotoLastPost)
   {
     var node = event.target;
     var doc = node.ownerDocument;
@@ -602,16 +650,11 @@ var GameFOX =
       else
         var cell = node.parentNode.cells[3];
 
-      var posts = cell.textContent;
-      var pages = Math.floor((posts - 1) / GameFOX.prefs.getIntPref('msgsPerPage'));
+      var lastPost = GFutils.getLastPost(cell.textContent);
 
       var uri = node.parentNode.cells[1].getElementsByTagName('a')[0].href
-        + (pages ? '&page=' + pages : '');
-      if (lastPost)
-        doc.location.href = uri + '#p' +
-          '000'.substring(posts.toString().length) + posts;
-      else
-        doc.location.href = uri;
+        + lastPost[0] + (gotoLastPost ? '#p' + lastPost[1] : '');
+      doc.location.href = uri;
     }
     catch (e) {}
   },

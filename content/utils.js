@@ -468,5 +468,18 @@ var GFutils =
       replace(/&/g, '&amp;').
       replace(/</g, '&lt;').
       replace(/>/g, '&gt;').length;
+  },
+
+  getLastPost: function(msgs)
+  {
+    var lastPage = Math.floor((msgs - 1) / GameFOX.prefs.getIntPref('msgsPerPage'));
+    if (lastPage)
+      var pageStr = '&page=' + lastPage;
+    else
+      var pageStr = '';
+
+    var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
+
+    return [pageStr, lastPostNum];
   }
 };
