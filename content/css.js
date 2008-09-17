@@ -311,6 +311,7 @@ var GFcss =
     css[category][filename][map[column.index]] = value;
     prefs.setCharPref('theme.css.serialized', css.toSource());
 
+    this.selection.clearSelection();
     this.selection.select(idx);
 
     GFcss.reload();
