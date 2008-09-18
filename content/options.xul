@@ -391,16 +391,7 @@
             <checkbox preference="message_italic" label="&quoting.style.italicmessage;"/>
           </vbox>
         </hbox>
-        <radio value="gfcode_body" label="&quoting.style.gfcodebody.label;"/>
-        <hbox class="indent" orient="horizontal">
-          <vbox>
-            <checkbox preference="header_bold"   label="&quoting.style.boldheader;"/>
-          </vbox>
-          <vbox>
-            <checkbox preference="header_italic" label="&quoting.style.italicheader;"/>
-          </vbox>
-        </hbox>
-        <radio value="gfcode_full" label="&quoting.style.gfcodefull.label;"/>
+        <radio value="gfcode" label="&quoting.style.gfcode.label;"/>
         <radio value="custom" label="&quoting.style.custom.label;"/>
         <textbox preference="style_custom" rows="3" multiline="true" class="indent"/>
         <hbox class="indent" orient="horizontal">

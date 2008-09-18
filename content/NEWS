@@ -10,6 +10,7 @@
     * Remove pre-signature field
     * Enforce the 160-character limit in signatures
     * Link to the last post of a topic in its "last post" column
+    * Remove "GFCode for message body" quoting style
 
 2008-08-23:
     * version 0.6.5

@@ -120,7 +120,7 @@ var GFquote =
     if (GameFOX.prefs.getBoolPref('quote.header.date')) qhead += ' | Posted ' + postdate;
     if (GameFOX.prefs.getBoolPref('quote.header.messagenum') && postnum) qhead += ' (' + postnum + ')';
 
-    if (qhead.length && GameFOX.prefs.getCharPref('quote.style') != 'gfcode_full')
+    if (qhead.length && GameFOX.prefs.getCharPref('quote.style') != 'gfcode')
     {
       if (GameFOX.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
       if (GameFOX.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
@@ -137,12 +137,7 @@ var GFquote =
 
         quote = qhead + qbody;
         break;
-      case 'gfcode_body':
-        qbody = '<i><p>' + body + '</p></i>';
-
-        quote = qhead + qbody;
-        break;
-      case 'gfcode_full':
+      case 'gfcode':
         if (qhead.length)
           qhead = '<i><p><strong>' + qhead + '</strong>\n';
         else // no header

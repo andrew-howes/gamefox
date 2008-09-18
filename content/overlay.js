@@ -848,7 +848,8 @@ function GameFOXLoader()
   {
     GFcss.init();
 
-    // TODO: remove these after a while
+    /* compatibilty crap
+     * TODO: remove these after a while */
 
     // old signature prefs
     if (versionComparator.compare('0.6.2', lastversion) > 0)
@@ -912,6 +913,12 @@ function GameFOXLoader()
 
       if (!groupAdded)
         GFuserlist.add(); // TODO: move this into first run after above code is removed
+    }
+
+    if (versionComparator.compare('0.6.6', lastversion) > 0)
+    {
+      if (prefs.getCharPref('quote.style') == 'gfcode_body')
+        prefs.setCharPref('quote.style', 'gfcode');
     }
 
     if (lastversion == '') // first run

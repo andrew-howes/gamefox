@@ -81,8 +81,7 @@
 <!ENTITY quoting.style.italicheader "Italicize header">
 <!ENTITY quoting.style.boldmessage "Bold message">
 <!ENTITY quoting.style.italicmessage "Italicize message">
-<!ENTITY quoting.style.gfcodebody.label "Use GFCode for message body">
-<!ENTITY quoting.style.gfcodefull.label "Use GFCode for full quote">
+<!ENTITY quoting.style.gfcode.label "Use GFCode">
 <!ENTITY quoting.style.custom.label "Use a custom template">
 <!ENTITY quoting.style.custom.u "username of poster">
 <!ENTITY quoting.style.custom.d "date of post">
