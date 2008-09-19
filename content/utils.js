@@ -333,12 +333,22 @@ var GFutils =
     var disableCharLimit;
     try
     {
-      // check a hidden pref just because I can
       disableCharLimit = GameFOX.prefs.getBoolPref('signature.disablecharlimit');
     }
     catch (e) { disableCharLimit = false; }
     if (!disableCharLimit)
-      sig = GFutils.specialCharsDecode(GFutils.specialCharsEncode(sig).substr(0, 160));
+    {
+      sig = GFutils.specialCharsEncode(sig).substr(0, 160);
+
+      // remove truncated entities
+      var amp = sig.lastIndexOf('&');
+      // only do this if the signature is too long, to prevent butchering
+      // something the user included in their sig
+      if (GFutils.specialCharsEncode(sig).length > 160 && sig.lastIndexOf(';') < amp)
+        sig = sig.substr(0, amp);
+
+      sig = GFutils.specialCharsDecode(sig);
+    }
 
     var str = (newline ? '\n' : '') +
       (sig != '' ? '---\n' + sig : '');

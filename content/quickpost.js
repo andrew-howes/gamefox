@@ -5,13 +5,14 @@ var GFquickpost =
   appendForm: function(doc, div, newTopic)
   {
     if (GameFOX.prefs.getIntPref('signature.addition') == 2)
-      var sig = GFutils.formatSig(null,
-          GameFOX.prefs.getBoolPref('signature.newline'), doc);
+      var sig = GFutils.specialCharsEncode(GFutils.formatSig(null, GameFOX.prefs.
+            getBoolPref('signature.newline'), doc));
     else
       var sig = '';
 
     var query = GFutils.stripQueryString(doc.location.search);
     var action = 'post.php' + GFutils.specialCharsDecode(query);
+    // TODO: use DOM?
     div.innerHTML += '\n' +
       '<div id="gamefox-quickpost-title">QuickPost</div>\n' +
       '  <form id="gamefox-quickpost-form" action="' + action + '" method="post">\n' +
