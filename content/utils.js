@@ -342,9 +342,7 @@ var GFutils =
 
       // remove truncated entities
       var amp = sig.lastIndexOf('&');
-      // only do this if the signature is too long, to prevent butchering
-      // something the user included in their sig
-      if (GFutils.specialCharsEncode(sig).length > 160 && sig.lastIndexOf(';') < amp)
+      if (sig.lastIndexOf(';') < amp)
         sig = sig.substr(0, amp);
 
       sig = GFutils.specialCharsDecode(sig);
