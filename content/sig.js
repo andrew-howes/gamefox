@@ -100,7 +100,7 @@ var GFsig =
     {
       if (i == 0) continue;
       menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
-            sigs[i]['boards']), i);
+            sigs[i]['boards']) + ' / ' + sigs[i]['body'], i);
     }
 
     this.updateCharCounts();
@@ -209,7 +209,7 @@ var GFsig =
 
     GFutils.setString('serialized', sigs.toSource(), this.prefs);
     menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
-        sigs[idx]['boards'], idx == 0);
+        sigs[idx]['boards'], idx == 0) + ' / ' + sigs[idx]['body'];
   },
 
   getCriteriaString: function(accounts, boards, isDefault)
