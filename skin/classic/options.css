@@ -27,6 +27,7 @@
     background-color:  #FFFFFF;
 }
 
+#gamefox-tags-rows::-moz-tree-row(selected, container),
 #gamefox-tags-rows::-moz-tree-row(selected, leaf)
 {
     background-color: #5BA1D4;
@@ -42,6 +43,11 @@
     padding-left: 4px;
     font-weight: bold;
     color: #DDDDDD;
+}
+
+#gamefox-tags-rows::-moz-tree-cell-text(selected, container)
+{
+    color: #000000;
 }
 
 #gamefox-prefwindow radio[pane]
