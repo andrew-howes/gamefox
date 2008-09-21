@@ -28,20 +28,14 @@
         position: fixed;
         top: 30%;
         left: 20%;
-        width: 70%;
         z-index: 3;
         display: none;
-        border: 2px solid #6564FF;
-        color: #000000;
-        background-color: #DFDFDF;
+        width: 55%;
+        border: #aaa 1px solid;
         -moz-border-radius: 10px;
-        -moz-opacity: 0.9;
-    }
-
-    #gamefox-quickpost-afloat > #gamefox-quickpost-title
-    {
-        -moz-border-radius: 10px 10px 0 0;
-        -moz-opacity: 0.9;
+        padding: 10px;
+        background: #eee;
+        padding: 5px !important;
     }
 
     #gamefox-message, #gamefox-topic
