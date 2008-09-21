@@ -171,7 +171,7 @@
 
           <hbox align="center">
             <description flex="1">&page.userlists.desc;</description>
-            <box pack="end">
+            <box>
               <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
             </box>
           </hbox>
