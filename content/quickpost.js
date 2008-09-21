@@ -79,20 +79,19 @@ var GFquickpost =
     var doc = GFlib.getDocument(event);
     event.preventDefault();
 
-    var quickpost = doc.getElementById('gamefox-quickpost-afloat');
-    if (quickpost)
+    var qpDiv = doc.getElementById('gamefox-quickpost-afloat');
+    if (qpDiv)
     {
-      quickpost.style.display = (quickpost.style.display == 'none') ? 'block' : 'none';
+      qpDiv.style.display = (qpDiv.style.display == 'none') ? 'block' : 'none';
       return;
     }
 
-    quickpost = doc.createElement('div');
-    quickpost.setAttribute('id', 'gamefox-quickpost-afloat');
-    quickpost.style.display = 'block';
+    qpDiv = doc.createElement('div');
+    qpDiv.id = 'gamefox-quickpost-afloat';
+    qpDiv.style.display = 'block';
 
-    doc.getElementsByTagName('body')[0].appendChild(quickpost);
-    GFquickpost.appendForm(doc, doc.getElementById('gamefox-quickpost-afloat'),
-        true);
+    doc.getElementById('board_wrap').appendChild(qpDiv);
+    GFquickpost.appendForm(doc, qpDiv, true);
   },
 
   post: function(event)

@@ -530,14 +530,11 @@ var GameFOX =
           && doc.evaluate('.//a[contains(@href, "post.php")]', userNav, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
       {
-        var qpdiv = doc.createElement('div');
-            qpdiv.id = 'gamefox-quickpost-normal';
+        var qpDiv = doc.createElement('div');
+            qpDiv.id = 'gamefox-quickpost-normal';
 
-        var footer = doc.evaluate('//div[@id="footer"]', doc,
-            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        footer.parentNode.insertBefore(qpdiv, footer);
-
-        GFquickpost.appendForm(doc, doc.getElementById('gamefox-quickpost-normal'), false);
+        doc.getElementById('board_wrap').appendChild(qpDiv);
+        GFquickpost.appendForm(doc, qpDiv, false);
       }
 
       // post ids are generated after the page is loaded

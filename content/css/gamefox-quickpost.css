@@ -6,21 +6,10 @@
         clear: both;
     }
 
-    #gamefox-quickpost-normal #gamefox-quickpost-title,
-    #gamefox-quickpost-normal #gamefox-quickpost-form
-    {
-        text-indent: 1em;
-    }
-    
     #gamefox-quickpost-title
     {
         font-size: 1.8em;
         border-bottom: #aaa 1px solid;
-    }
-
-    #gamefox-quickpost-normal #gamefox-quickpost-btn
-    {
-        margin-left: 1em;
     }
 
     #gamefox-quickpost-afloat
@@ -30,12 +19,11 @@
         left: 20%;
         z-index: 3;
         display: none;
-        width: 55%;
+        width: 60%;
         border: #aaa 1px solid;
-        -moz-border-radius: 10px;
-        padding: 10px;
         background: #eee;
         padding: 5px !important;
+        -moz-border-radius: 10px;
     }
 
     #gamefox-message, #gamefox-topic
