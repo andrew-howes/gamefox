@@ -169,10 +169,12 @@
             <checkbox preference="userlist-messages-groupnames" label="&page.userlists.options.msggroups;"/>
           </groupbox>
 
-          <hbox pack="end">
-            <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
+          <hbox align="center">
+            <description flex="1">&page.userlists.desc;</description>
+            <box pack="end">
+              <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
+            </box>
           </hbox>
-          <description>&page.userlists.desc;</description>
           <vbox id="usergroups" style="height:280px;overflow:auto"/>
         </tabpanel>
 
