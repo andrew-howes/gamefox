@@ -172,6 +172,7 @@
           <hbox pack="end">
             <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
           </hbox>
+          <description>&page.userlists.desc;</description>
           <vbox id="usergroups" style="height:280px;overflow:auto"/>
         </tabpanel>
 

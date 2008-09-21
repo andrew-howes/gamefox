@@ -52,6 +52,7 @@
 <!ENTITY page.userlists.options.topicgroups "Show group names on topic lists">
 <!ENTITY page.userlists.options.msggroups "Show group names on message lists">
 <!ENTITY page.userlists.add "Add a Group">
+<!ENTITY page.userlists.desc "Users should be comma-separated.">
 
 <!ENTITY theme.label "Theme">
 <!ENTITY theme.disablegamefaqscss "Disable main GameFAQs stylesheets">
