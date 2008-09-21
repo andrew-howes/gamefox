@@ -109,7 +109,7 @@ var GameFOX =
           doc.getElementsByName('topictitle')[0].addEventListener('input',
               GFmessages.updateTitleCount, false);
           doc.getElementsByName('topictitle')[0].form.addEventListener('reset',
-              function(event) {setTimeout(function() {GFmessages.updateTitleCount(event)}, 0)}, false);
+              function(event) {setTimeout(GFmessages.updateTitleCount, 0, event)}, false);
         }
 
         // message count
@@ -124,7 +124,7 @@ var GameFOX =
         doc.getElementsByName('message')[0].addEventListener('input',
             GFmessages.updateMessageCount, false);
         doc.getElementsByName('message')[0].form.addEventListener('reset',
-            function(event) {setTimeout(function() {GFmessages.updateMessageCount(event)}, 0)}, false);
+            function(event) {setTimeout(GFmessages.updateMessageCount, 0, event)}, false);
       }
 
       // "Post Message" button
