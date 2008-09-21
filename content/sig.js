@@ -209,7 +209,7 @@ var GFsig =
 
     GFutils.setString('serialized', sigs.toSource(), this.prefs);
     menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
-        sigs[idx]['boards'], idx == 0) + ' / ' + sigs[idx]['body'];
+        sigs[idx]['boards'], idx == 0) + (idx != 0 ? ' / ' + sigs[idx]['body'] : '');
   },
 
   getCriteriaString: function(accounts, boards, isDefault)
