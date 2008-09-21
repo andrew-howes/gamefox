@@ -26,7 +26,7 @@ var GFquickpost =
       '  <input type="submit" name="post" value="Preview and Spellcheck Message"/>\n' +
       '  <input type="reset" value="Reset"/>\n' +
       (newTopic ? '  <input type="button" id="gamefox-quickpost-hide" value="Hide"/>\n' : '') +
-      '  <span id="gamefox-message-count"></span>\n' + 
+      '  <span id="gamefox-message-count"></span>\n' +
       '</form>\n';
 
     if (GameFOX.prefs.getBoolPref('elements.charcounts'))
@@ -37,14 +37,14 @@ var GFquickpost =
         doc.getElementById('gamefox-topic').addEventListener('input',
             GFmessages.updateTitleCount, false);
         doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
-            function(event) {setTimeout(function() {GFmessages.updateTitleCount(event)}, 0)}, false);
+            function(event) {setTimeout(GFmessages.updateTitleCount, 0, event)}, false);
       }
 
       GFmessages.updateMessageCount(doc);
       doc.getElementById('gamefox-message').addEventListener('input',
           GFmessages.updateMessageCount, false);
       doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
-          function(event) {setTimeout(function() {GFmessages.updateMessageCount(event)}, 0)}, false);
+          function(event) {setTimeout(GFmessages.updateMessageCount, 0, event)}, false);
     }
 
     doc.getElementById('gamefox-quickpost-btn').addEventListener('click',
