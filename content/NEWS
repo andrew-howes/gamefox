@@ -1,4 +1,7 @@
-2008-08-xx:
+2008-09-xx:
+    * version 0.6.7
+
+2008-09-21:
     * version 0.6.6
     * Fix "new row" pagination
     * Alternate colors when removing topics/messages

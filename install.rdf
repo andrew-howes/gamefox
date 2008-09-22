@@ -3,7 +3,7 @@
         <Description about="urn:mozilla:install-manifest">
                 <em:id>{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}</em:id>
                 <em:name>GameFOX TNG</em:name>
-                <em:version>0.6.6pre</em:version>
+                <em:version>0.6.7pre</em:version>
                 <em:description>Improves browsing of the GameFAQs message boards.</em:description>
                 <em:creator>Abdullah A</em:creator>
                 <em:extension>true</em:extension>
