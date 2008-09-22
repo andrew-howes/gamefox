@@ -2,7 +2,16 @@
 
 var GFmessages =
 {
-  updateDelay: 1200,
+  updateDelay: 100,
+
+  delayedUpdateMessageCount: function(event)
+  {
+    if (this.timeoutId)
+      clearTimeout(this.timeoutId);
+    
+    this.timeoutId = setTimeout(GFmessages.updateMessageCount,
+        GFmessages.updateDelay, event);
+  },
 
   updateMessageCount: function(event)
   {
@@ -22,6 +31,15 @@ var GFmessages =
       messageCount.style.setProperty('font-weight', '', '');
   },
 
+  delayedUpdateTitleCount: function(event)
+  {
+    if (this.timeoutId)
+      clearTimeout(this.timeoutId);
+    
+    this.timeoutId = setTimeout(GFmessages.updateTitleCount,
+        GFmessages.updateDelay, event);
+  },
+
   updateTitleCount: function(event)
   {
     var doc = GFlib.getDocument(event);
@@ -39,16 +57,4 @@ var GFmessages =
     else
       titleCount.style.setProperty('font-weight', '', '');
   }
-};
-
-GFmessages.delayedUpdateMessageCount = function(event)
-{
-  if (this.timeoutId) clearTimeout(this.timeoutId);
-  this.timeoutId = setTimeout(GFmessages.updateMessageCount, GFmessages.updateDelay, event);
-};
-
-GFmessages.delayedUpdateTitleCount = function(event)
-{
-  if (this.timeoutId) clearTimeout(this.timeoutId);
-  this.timeoutId = setTimeout(GFmessages.updateTitleCount, GFmessages.updateDelay, event);
 };
