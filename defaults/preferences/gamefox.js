@@ -1,5 +1,6 @@
 pref("gamefox.elements.quickpost.form", true);
 pref("gamefox.elements.quickpost.button", true);
+pref("gamefox.elements.quickpost.otherbuttons", true);
 pref("gamefox.elements.quickpost.link", true);
 pref("gamefox.elements.quickpost.link.title", "QuickPost");
 pref("gamefox.elements.tag.link", true);

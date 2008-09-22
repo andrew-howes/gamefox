@@ -24,12 +24,13 @@
 <!ENTITY page.board.settings.msgdata "Message Poster Display">
 <!ENTITY page.board.settings.msgdata.left "Left of Message">
 <!ENTITY page.board.settings.msgdata.above "Above Message">
-<!ENTITY page.board.settings.grab "Grab From GameFAQs">
+<!ENTITY page.board.settings.grab "Grab from GameFAQs">
 <!ENTITY page.board.settings.save "Save to GameFAQs">
 <!ENTITY page.elements.desctitles "Descriptive window titles">
 <!ENTITY page.elements.titleprefix "Page title prefixes">
 <!ENTITY page.elements.charcounts "Title and message character counts">
 <!ENTITY page.elements.postmessage "&quot;Post Message&quot; (skip preview) button">
+<!ENTITY page.elements.otherbuttons "QuickPost preview/reset buttons">
 <!ENTITY page.elements.topics.caption "Topic Lists">
 <!ENTITY page.elements.topics.quickpost "QuickPost Topic form">
 <!ENTITY page.elements.topics.trackedlink "Link to boards on Tracked Topics page">
@@ -99,7 +100,7 @@
 <!ENTITY signature.criteria.accounts.label "Accounts:">
 <!ENTITY signature.criteria.boards.label "Boards:">
 <!ENTITY signature.sig.label "Signature:">
-<!ENTITY signature.grab.label "Grab From GameFAQs">
+<!ENTITY signature.grab.label "Grab from GameFAQs">
 <!ENTITY signature.applyeverywhere.label "Also use on standard GameFAQs post page">
 <!ENTITY signature.newline.label "Insert an additional line break before the separator">
 <!ENTITY signature.addition "Addition Method">

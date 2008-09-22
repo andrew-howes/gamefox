@@ -30,6 +30,7 @@
     <preferences>
       <preference id="gamefox-pref-quickpost-form" name="gamefox.elements.quickpost.form" type="bool"/>
       <preference id="gamefox-pref-quickpost-button" name="gamefox.elements.quickpost.button" type="bool"/>
+      <preference id="gamefox-pref-quickpost-otherbuttons" name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
       <preference id="gamefox-pref-quickpost-link" name="gamefox.elements.quickpost.link" type="bool"/>
       <preference id="gamefox-pref-tag-link" name="gamefox.elements.tag.link" type="bool"/>
       <preference id="gamefox-pref-titlechange" name="gamefox.elements.titlechange" type="bool"/>
@@ -37,23 +38,23 @@
       <preference id="gamefox-pref-charcounts" name="gamefox.elements.charcounts" type="bool"/>
       <preference id="gamefox-pref-msgnum" name="gamefox.elements.msgnum" type="bool"/>
       <preference id="gamefox-pref-msgnum-style" name="gamefox.elements.msgnum.style" type="int"/>
+      <preference id="gamefox-pref-tracked-boardlink" name="gamefox.elements.tracked.boardlink" type="bool"/>
+      <preference id="gamefox-pref-lastpostlink" name="gamefox.elements.topics.lastpostlink" type="bool"/>
+      <preference id="gamefox-pref-paging-auto" name="gamefox.paging.auto" type="bool"/>
+      <preference id="gamefox-pref-paging-location" name="gamefox.paging.location" type="int"/>
+      <preference id="gamefox-pref-paging-prefix" name="gamefox.paging.prefix" type="string"/>
+      <preference id="gamefox-pref-paging-separator" name="gamefox.paging.separator" type="string"/>
+      <preference id="gamefox-pref-paging-suffix" name="gamefox.paging.suffix" type="string"/>
+
+      <preference id="userlist-topics-groupnames" name="gamefox.userlist.topics.showgroupnames" type="bool"/>
+      <preference id="userlist-messages-groupnames" name="gamefox.userlist.messages.showgroupnames" type="bool"/>
+
       <preference id="gamefoxMsgsPerPage" name="gamefox.msgsPerPage" type="int"/>
       <preference id="gamefoxTpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
       <preference id="gamefoxMsgSortOrder" name="gamefox.msgSortOrder" type="int"/>
       <preference id="gamefoxTpcSortOrder" name="gamefox.tpcSortOrder" type="int"/>
       <preference id="gamefoxMsgDisplay" name="gamefox.msgDisplay" type="int"/>
       <preference id="gamefoxTimeZone" name="gamefox.timeZone" type="int"/>
-      <preference id="gamefox-pref-tracked-boardlink" name="gamefox.elements.tracked.boardlink" type="bool"/>
-      <preference id="gamefox-pref-paging-auto"       name="gamefox.paging.auto"      type="bool"/>
-      <preference id="gamefox-pref-paging-location"   name="gamefox.paging.location"  type="int"/>
-      <preference id="gamefox-pref-paging-prefix"     name="gamefox.paging.prefix"    type="string"/>
-      <preference id="gamefox-pref-paging-separator"  name="gamefox.paging.separator" type="string"/>
-      <preference id="gamefox-pref-paging-suffix"     name="gamefox.paging.suffix"    type="string"/>
-
-      <preference id="userlist-topics-groupnames" name="gamefox.userlist.topics.showgroupnames" type="bool"/>
-      <preference id="userlist-messages-groupnames" name="gamefox.userlist.messages.showgroupnames" type="bool"/>
-
-      <preference id="elements-topics-lastpostlink" name="gamefox.elements.topics.lastpostlink" type="bool"/>
     </preferences>
 
 
@@ -61,8 +62,8 @@
 
       <tabs tabGroup="page">
         <tab id="gamefox-tab-elements" label="&page.tab.elements;"/>
-        <tab id="gamefox-tab-highlight" label="&page.tab.userlists;"/>
-        <tab id="gamefox-tab-general" label="&page.tab.board;"/>
+        <tab id="gamefox-tab-userlists" label="&page.tab.userlists;"/>
+        <tab id="gamefox-tab-board" label="&page.tab.board;"/>
       </tabs>
 
       <tabpanels flex="1">
@@ -78,10 +79,11 @@
                 <vbox flex="1">
                   <checkbox preference="gamefox-pref-titlechange" label="&page.elements.desctitles;"/>
                   <checkbox preference="gamefox-pref-quickpost-button" label="&page.elements.postmessage;"/>
+                  <checkbox preference="gamefox-pref-charcounts" label="&page.elements.charcounts;"/>
                 </vbox>
                 <vbox flex="3">
                   <checkbox preference="gamefox-pref-titleprefix" label="&page.elements.titleprefix;"/>
-                  <checkbox preference="gamefox-pref-charcounts" label="&page.elements.charcounts;"/>
+                  <checkbox preference="gamefox-pref-quickpost-otherbuttons" label="&page.elements.otherbuttons;"/>
                 </vbox>
               </hbox>
             </groupbox>
@@ -99,7 +101,7 @@
                     <vbox>
                       <checkbox preference="gamefox-pref-quickpost-link" label="&page.elements.topics.quickpost;"/>
                       <checkbox preference="gamefox-pref-tracked-boardlink" label="&page.elements.topics.trackedlink;"/>
-                      <checkbox preference="elements-topics-lastpostlink" label="&page.elements.topics.lastpostlink;"/>
+                      <checkbox preference="gamefox-pref-lastpostlink" label="&page.elements.topics.lastpostlink;"/>
                     </vbox>
                   </groupbox>
 
@@ -177,7 +179,7 @@
         </tabpanel>
 
 
-<!-- GENERAL -->
+<!-- BOARD SETTINGS -->
 
         <tabpanel orient="vertical" flex="1">
           <vbox>
