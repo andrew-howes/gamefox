@@ -2,6 +2,8 @@
 
 var GFmessages =
 {
+  updateDelay: 1200,
+
   updateMessageCount: function(event)
   {
     var doc = GFlib.getDocument(event);
@@ -37,4 +39,16 @@ var GFmessages =
     else
       titleCount.style.setProperty('font-weight', '', '');
   }
+};
+
+GFmessages.delayedUpdateMessageCount = function(event)
+{
+  if (this.timeoutId) clearTimeout(this.timeoutId);
+  this.timeoutId = setTimeout(GFmessages.updateMessageCount, GFmessages.updateDelay, event);
+};
+
+GFmessages.delayedUpdateTitleCount = function(event)
+{
+  if (this.timeoutId) clearTimeout(this.timeoutId);
+  this.timeoutId = setTimeout(GFmessages.updateTitleCount, GFmessages.updateDelay, event);
 };

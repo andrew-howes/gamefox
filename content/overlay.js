@@ -107,7 +107,7 @@ var GameFOX =
           GFmessages.updateTitleCount(doc);
 
           doc.getElementsByName('topictitle')[0].addEventListener('input',
-              GFmessages.updateTitleCount, false);
+              GFmessages.delayedUpdateTitleCount, false);
           doc.getElementsByName('topictitle')[0].form.addEventListener('reset',
               function(event) {setTimeout(GFmessages.updateTitleCount, 0, event)}, false);
         }
@@ -122,7 +122,7 @@ var GameFOX =
         GFmessages.updateMessageCount(doc);
 
         doc.getElementsByName('message')[0].addEventListener('input',
-            GFmessages.updateMessageCount, false);
+            GFmessages.delayedUpdateMessageCount, false);
         doc.getElementsByName('message')[0].form.addEventListener('reset',
             function(event) {setTimeout(GFmessages.updateMessageCount, 0, event)}, false);
       }

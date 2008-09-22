@@ -36,14 +36,14 @@ var GFquickpost =
       {
         GFmessages.updateTitleCount(doc);
         doc.getElementById('gamefox-topic').addEventListener('input',
-            GFmessages.updateTitleCount, false);
+            GFmessages.delayedUpdateTitleCount, false);
         doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
             function(event) {setTimeout(GFmessages.updateTitleCount, 0, event)}, false);
       }
 
       GFmessages.updateMessageCount(doc);
       doc.getElementById('gamefox-message').addEventListener('input',
-          GFmessages.updateMessageCount, false);
+          GFmessages.delayedUpdateMessageCount, false);
       doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
           function(event) {setTimeout(GFmessages.updateMessageCount, 0, event)}, false);
     }
