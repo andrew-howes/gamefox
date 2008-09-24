@@ -29,7 +29,8 @@ JAR_FILES     = ${JAR_BIN_FILES} ${JAR_TXT_FILES}
 JAR_DIRS      = $(foreach f,${JAR_FILES},$(dir $f))
 JAR           = chrome/${NAME}.jar
 
-XPI_TXT_FILES = install.rdf chrome.manifest COPYING defaults/preferences/gamefox.js
+XPI_TXT_FILES = install.rdf chrome.manifest COPYING defaults/preferences/gamefox.js \
+                components/policy.js
 XPI_BIN_FILES = ${JAR}
 XPI_FILES     = ${XPI_BIN_FILES} ${XPI_TXT_FILES}
 XPI_DIRS      = $(foreach f,${XPI_FILES},$(dir $f))
