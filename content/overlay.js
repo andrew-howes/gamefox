@@ -399,6 +399,7 @@ var GameFOX =
       var msgnum = pagenum * GameFOX.prefs.getIntPref('msgsPerPage');
       var msgnumCond = !GFlib.onPage(doc, 'detail') && GameFOX.prefs.getBoolPref('elements.msgnum');
       var msgnumStyle = GameFOX.prefs.getIntPref('elements.msgnum.style');
+      var tcMarker = ' ✪'; // have a pref for this?
       for (var j = 0; j < td.length; j += 2)
       {
         // Message numbering
@@ -522,6 +523,25 @@ var GameFOX =
             tr.className = tr.className.replace(/\beven\b/, '');
           else
             tr.className += ' even';
+        }
+
+        // Distinguish posts from the topic creator
+        // TODO: save the username in the URI for multiple pages
+        // e.g. board=1&topic=1&hl=username
+        if (1) // preference
+        {
+          if (msgnum == 1)
+            var tc = username;
+
+          if (tc == username)
+          {
+            if (onArchive)
+              td[j].insertBefore(doc.createTextNode(tcMarker),
+                  td[j].getElementsByTagName('b')[0].nextSibling);
+            else
+              td[j].insertBefore(doc.createTextNode(tcMarker),
+                  td[j].getElementsByTagName('a')[0].nextSibling);
+          }
         }
       }
 
