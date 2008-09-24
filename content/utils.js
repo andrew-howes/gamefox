@@ -264,9 +264,9 @@ var GFutils =
   {
     // Prefix and suffix stuff, looks a little messy
     var loc = GameFOX.prefs.getIntPref('paging.location');
-    var prefix = GameFOX.prefs.getCharPref('paging.prefix');
-    var sep = GameFOX.prefs.getCharPref('paging.separator');
-    var suffix = GameFOX.prefs.getCharPref('paging.suffix');
+    var prefix = GFutils.getString('paging.prefix');
+    var sep = GFutils.getString('paging.separator');
+    var suffix = GFutils.getString('paging.suffix');
 
     var prefixHTML = doc.createElement('span');
     prefixHTML.innerHTML = '';
