@@ -8,19 +8,6 @@ var GameFOX =
   processPage: function(event)
   {
     var doc = GFlib.getDocument(event);
-    if (!GFlib.onGF(doc)) return false;
-
-    // TODO: use nsIContentPolicy to prevent the stylesheet being loaded before
-    // it's disabled
-    if (GameFOX.prefs.getBoolPref('theme.disablegamefaqscss'))
-    {
-      var stylesheets = doc.getElementsByTagName('link');
-      for (var i = 0; i < stylesheets.length; i++)
-      {
-        stylesheets[i].disabled = true;
-      }
-    }
-
     if (!GFlib.onBoards(doc)) return false;
 
     /* Index (index.php) */
