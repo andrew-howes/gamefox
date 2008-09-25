@@ -388,7 +388,8 @@ var GameFOX =
       var msgnum = pagenum * GameFOX.prefs.getIntPref('msgsPerPage');
       var msgnumCond = !GFlib.onPage(doc, 'detail') && GameFOX.prefs.getBoolPref('elements.msgnum');
       var msgnumStyle = GameFOX.prefs.getIntPref('elements.msgnum.style');
-      
+
+      var tcPref = GameFOX.prefs.getBoolPref('elements.marktc');
       var tcMarker = ' ✪'; // have a pref for this?
       var tc = '';
       for (var j = 0; j < td.length; j += 2)
@@ -462,12 +463,8 @@ var GameFOX =
             groupname.className = GFuserlist.groupClassName;
             groupname.appendChild(doc.createTextNode(' ' + hlinfo[0]));
 
-            if (onArchive)
-              td[j].insertBefore(groupname,
-                  td[j].getElementsByTagName('b')[0].nextSibling);
-            else
-              td[j].insertBefore(groupname,
-                  td[j].getElementsByTagName('a')[0].nextSibling);
+            td[j].insertBefore(groupname,
+                td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
 
             td[j].insertBefore(doc.createTextNode('\n'), groupname);
             if (leftMsgData)
@@ -517,7 +514,7 @@ var GameFOX =
         }
 
         // Distinguish posts from the topic creator
-        if (1) // preference
+        if (tcPref)
         {
           if (msgnum == 1)
             tc = username;
@@ -525,19 +522,13 @@ var GameFOX =
             tc = doc.location.href.match(/tc=([\w%\+]+)/)[1].replace(/\+/g, ' ');
 
           if (tc == username)
-          {
-            if (onArchive)
-              td[j].insertBefore(doc.createTextNode(tcMarker),
-                  td[j].getElementsByTagName('b')[0].nextSibling);
-            else
-              td[j].insertBefore(doc.createTextNode(tcMarker),
-                  td[j].getElementsByTagName('a')[0].nextSibling);
-          }
+            td[j].insertBefore(doc.createTextNode(tcMarker),
+                td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
         }
       }
 
       // Add TC to page links
-      if (tc)
+      if (tc && pageJumper)
       {
         var links = GFutils.mergeArray(userNav.parentNode.getElementsByTagName('a'),
             pageJumper.getElementsByTagName('a'));

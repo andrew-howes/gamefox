@@ -11,6 +11,7 @@ pref("gamefox.elements.msgnum.style", 0);
 pref("gamefox.elements.tracked.boardlink", true);
 pref("gamefox.elements.charcounts", true);
 pref("gamefox.elements.topics.lastpostlink", true);
+pref("gamefox.elements.marktc", true);
 
 pref("gamefox.msgsPerPage", 50);
 pref("gamefox.tpcsPerPage", 50);
