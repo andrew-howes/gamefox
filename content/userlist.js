@@ -396,7 +396,7 @@ var GFuserlist =
       list.removeChild(list.childNodes[0]);
 
     // get the username of the target, return if it's not valid
-    if (node.nodeName != 'A') return;
+    if (node.nodeName.toLowerCase() != 'a') return;
     if (node.href.indexOf('user.php') == -1) return;
     var username = node.textContent;
 

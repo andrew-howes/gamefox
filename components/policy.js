@@ -1,7 +1,6 @@
 /***********************************************************
 constants
 ***********************************************************/
-
 const nsIContentPolicy = Components.interfaces.nsIContentPolicy;
 const nsISupports = Components.interfaces.nsISupports;
 const CLASS_ID = Components.ID('{2572941e-68cb-41a8-be97-cbb40611dcbc}');
@@ -11,14 +10,13 @@ const CONTRACT_ID = '@gamefox/contentpolicy;1';
 /***********************************************************
 class definition
 ***********************************************************/
-
-//class constructor
+// constructor
 function GFcontentPolicy()
 {
   this.wrappedJSObject = this;
 };
 
-// class definition
+// definition
 GFcontentPolicy.prototype =
 {
   shouldLoad: function(contentType, contentLocation, requestOrigin, context, mimeTypeGuess, extra)
@@ -50,7 +48,8 @@ GFcontentPolicy.prototype =
 /***********************************************************
 class factory
 ***********************************************************/
-var GFcontentPolicyFactory = {
+var GFcontentPolicyFactory =
+{
   createInstance: function (aOuter, aIID)
   {
     if (aOuter != null)
@@ -62,26 +61,26 @@ var GFcontentPolicyFactory = {
 /***********************************************************
 module definition (xpcom registration)
 ***********************************************************/
-var GFcontentPolicyModule = {
+var GFcontentPolicyModule =
+{
   registerSelf: function(aCompMgr, aFileSpec, aLocation, aType)
   {
-    aCompMgr = aCompMgr.
-        QueryInterface(Components.interfaces.nsIComponentRegistrar);
-    aCompMgr.registerFactoryLocation(CLASS_ID, CLASS_NAME, 
-        CONTRACT_ID, aFileSpec, aLocation, aType);
+    aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar)
+        .registerFactoryLocation(CLASS_ID, CLASS_NAME, 
+            CONTRACT_ID, aFileSpec, aLocation, aType);
 
     var catMgr = Components.classes['@mozilla.org/categorymanager;1']
         .getService(Components.interfaces.nsICategoryManager);
     catMgr.deleteCategoryEntry('content-policy', CONTRACT_ID, true);
-    catMgr.addCategoryEntry('content-policy', CONTRACT_ID,
-        CONTRACT_ID, true, true);
+    catMgr.addCategoryEntry('content-policy', CONTRACT_ID, CONTRACT_ID, true,
+        true);
   },
 
   unregisterSelf: function(aCompMgr, aLocation, aType)
   {
-    aCompMgr = aCompMgr.
-        QueryInterface(Components.interfaces.nsIComponentRegistrar);
-    aCompMgr.unregisterFactoryLocation(CLASS_ID, aLocation);
+    aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar)
+        .unregisterFactoryLocation(CLASS_ID, aLocation);
+
     Components.classes['@mozilla.org/categorymanager;1']
         .getService(Components.interfaces.nsICategoryManager)
         .deleteCategoryEntry('content-policy', CONTRACT_ID, true);

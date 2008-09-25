@@ -43,7 +43,7 @@ var GFcontext =
       try
       {
         var node = gContextMenu.target;
-        if (node.nodeName == 'A'
+        if (node.nodeName.toLowerCase() == 'a'
             && node.href.indexOf('user.php') != -1
             && node.parentNode.id.indexOf('p') == 0)
           hideUsergroups = false;
