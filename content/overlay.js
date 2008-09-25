@@ -522,7 +522,7 @@ var GameFOX =
           if (msgnum == 1)
             tc = username;
           else if (doc.location.href.match(/tc=([\w%]+)/))
-            tc = doc.location.href.match(/tc=([\w%]+)/)[1].replace(/%20/g, ' ');
+            tc = doc.location.href.match(/tc=([\w%\+]+)/)[1].replace(/\+/g, ' ');
 
           if (tc == username)
           {
@@ -545,7 +545,7 @@ var GameFOX =
         {
           if (links[j].href.indexOf('genmessage') != -1 &&
               links[j].href.indexOf('page') != -1)
-            links[j].href += '&tc=' + tc;
+            links[j].href += '&tc=' + tc.replace(/ /g, '+');
         }
       }
 
