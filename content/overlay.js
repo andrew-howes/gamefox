@@ -326,6 +326,8 @@ var GameFOX =
     {
       var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
           doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var pageJumper = doc.evaluate('//div[@class="pagejumper"]', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       GFuserlist.loadGroups();
 
       var pagenum = doc.location.search.match(/\bpage=([0-9]+)/);
@@ -386,7 +388,9 @@ var GameFOX =
       var msgnum = pagenum * GameFOX.prefs.getIntPref('msgsPerPage');
       var msgnumCond = !GFlib.onPage(doc, 'detail') && GameFOX.prefs.getBoolPref('elements.msgnum');
       var msgnumStyle = GameFOX.prefs.getIntPref('elements.msgnum.style');
+      
       var tcMarker = ' ✪'; // have a pref for this?
+      var tc = '';
       for (var j = 0; j < td.length; j += 2)
       {
         // Message numbering
@@ -513,12 +517,12 @@ var GameFOX =
         }
 
         // Distinguish posts from the topic creator
-        // TODO: save the username in the URI for multiple pages
-        // e.g. board=1&topic=1&hl=username
         if (1) // preference
         {
           if (msgnum == 1)
-            var tc = username;
+            tc = username;
+          else if (doc.location.href.match(/tc=([\w%]+)/))
+            tc = doc.location.href.match(/tc=([\w%]+)/)[1].replace(/%20/g, ' ');
 
           if (tc == username)
           {
@@ -529,6 +533,19 @@ var GameFOX =
               td[j].insertBefore(doc.createTextNode(tcMarker),
                   td[j].getElementsByTagName('a')[0].nextSibling);
           }
+        }
+      }
+
+      // Add TC to page links
+      if (tc)
+      {
+        var links = GFutils.mergeArray(userNav.parentNode.getElementsByTagName('a'),
+            pageJumper.getElementsByTagName('a'));
+        for (var j = 0; j < links.length; j++)
+        {
+          if (links[j].href.indexOf('genmessage') != -1 &&
+              links[j].href.indexOf('page') != -1)
+            links[j].href += '&tc=' + tc;
         }
       }
 

@@ -451,5 +451,18 @@ var GFutils =
     var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
 
     return [pageStr, lastPostNum];
+  },
+
+  mergeArray: function()
+  {
+    var arr = new Array();
+    for (var i = 0; i < arguments.length; i++)
+    {
+      for (var j = 0; j < arguments[i].length; j++)
+      {
+        arr.push(arguments[i][j]);
+      }
+    }
+    return arr;
   }
 };
