@@ -391,7 +391,9 @@ var GameFOX =
 
       var tcPref = GameFOX.prefs.getBoolPref('elements.marktc');
       var tcMarker = ' ✪'; // have a pref for this?
-      var tc = '';
+      var tc = tcPref ? doc.location.href.match(/\btc=([^&]+)/) : null;
+      if (tc)
+        tc = tc[1].replace(/\+/g, ' ');
       for (var j = 0; j < td.length; j += 2)
       {
         // Message numbering
@@ -516,10 +518,9 @@ var GameFOX =
         // Distinguish posts from the topic creator
         if (tcPref)
         {
+          // TODO: Fix for newest first ordering
           if (msgnum == 1)
             tc = username;
-          else if (doc.location.href.match(/tc=([\w%]+)/))
-            tc = doc.location.href.match(/tc=([\w%\+]+)/)[1].replace(/\+/g, ' ');
 
           if (tc == username)
             td[j].insertBefore(doc.createTextNode(tcMarker),
@@ -536,7 +537,8 @@ var GameFOX =
         {
           if (links[j].href.indexOf('genmessage') != -1 &&
               links[j].href.indexOf('page') != -1)
-            links[j].href += '&tc=' + tc.replace(/ /g, '+');
+            // tc stripped of <>" for added safety
+            links[j].href += '&tc=' + tc.replace(/[<>"]+/g, '').replace(/ /g, '+');
         }
       }
 
