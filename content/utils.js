@@ -260,13 +260,15 @@ var GFutils =
     //return str.replace(/^\s+|\s+$/g, '');
   },
 
-  formatPagination: function(doc, topiclink, posts)
+  formatPagination: function(doc, topiclink, posts, tc)
   {
     // Prefix and suffix stuff, looks a little messy
     var loc = GameFOX.prefs.getIntPref('paging.location');
     var prefix = GFutils.getString('paging.prefix');
     var sep = GFutils.getString('paging.separator');
     var suffix = GFutils.getString('paging.suffix');
+
+    tc = tc.replace(/ /g, '+');
 
     var prefixHTML = doc.createElement('span');
     prefixHTML.innerHTML = '';
@@ -290,7 +292,7 @@ var GFutils =
     for (var i = 0; i < pages; i++)
     {
       var a = doc.createElement('a');
-          a.setAttribute('href', topiclink + (i ? '&page=' + i : ''));
+          a.setAttribute('href', topiclink + (i ? '&page=' + i + '&tc=' + tc: ''));
           a.innerHTML = i + 1;
 
       pageHTML.appendChild(a);
@@ -440,11 +442,12 @@ var GFutils =
       replace(/>/g, '&gt;').length;
   },
 
-  getLastPost: function(msgs)
+  getLastPost: function(msgs, tc)
   {
     var lastPage = Math.floor((msgs - 1) / GameFOX.prefs.getIntPref('msgsPerPage'));
     if (lastPage)
-      var pageStr = '&page=' + lastPage;
+      var pageStr = '&page=' + lastPage + (tc ? '&tc=' + tc.replace(/ /g, '+') :
+          '');
     else
       var pageStr = '';
 

@@ -202,7 +202,8 @@ var GameFOX =
         // Last post link
         if (GameFOX.prefs.getBoolPref('elements.topics.lastpostlink')) // pref
         {
-          var lastPost = GFutils.getLastPost(rows[i].cells[3].textContent);
+          var lastPost = GFutils.getLastPost(rows[i].cells[3].textContent,
+              rows[i].cells[2].textContent);
 
           var text = rows[i].cells[4].textContent;
           rows[i].cells[4].textContent = '';
@@ -221,7 +222,8 @@ var GameFOX =
           var pageHTML = GFutils.formatPagination(
               doc,
               rows[i].cells[1].getElementsByTagName('a')[0].getAttribute('href'),
-              Math.ceil(rows[i].cells[3].textContent));
+              Math.ceil(rows[i].cells[3].textContent),
+              rows[i].cells[2].textContent);
 
           if (pageHTML) // this topic has multiple pages
           {
@@ -391,7 +393,7 @@ var GameFOX =
 
       var tcPref = GameFOX.prefs.getBoolPref('elements.marktc');
       var tcMarker = '\n✪'; // have a pref for this?
-      var tc = tcPref ? doc.location.href.match(/&tc=([^&]+)/) : null;
+      var tc = tcPref ? doc.location.href.match(/\btc=([^&#]+)/) : null
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
       for (var j = 0; j < td.length; j += 2)
@@ -666,7 +668,8 @@ var GameFOX =
       else
         var cell = node.parentNode.cells[3];
 
-      var lastPost = GFutils.getLastPost(cell.textContent);
+      var lastPost = GFutils.getLastPost(cell.textContent,
+          node.parentNode.cells[2].textContent);
 
       var uri = node.parentNode.cells[1].getElementsByTagName('a')[0].href
         + lastPost[0] + (gotoLastPost ? '#p' + lastPost[1] : '');
