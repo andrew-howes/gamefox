@@ -393,7 +393,7 @@ var GameFOX =
 
       var tcPref = GameFOX.prefs.getBoolPref('elements.marktc');
       var tcMarker = '\n✪'; // have a pref for this?
-      var tc = tcPref ? doc.location.href.match(/\btc=([^&#]+)/) : null
+      var tc = tcPref ? doc.location.search.match(/\btc=([^&]+)/) : null;
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
       for (var j = 0; j < td.length; j += 2)
