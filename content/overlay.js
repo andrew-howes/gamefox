@@ -390,8 +390,8 @@ var GameFOX =
       var msgnumStyle = GameFOX.prefs.getIntPref('elements.msgnum.style');
 
       var tcPref = GameFOX.prefs.getBoolPref('elements.marktc');
-      var tcMarker = ' ✪'; // have a pref for this?
-      var tc = tcPref ? doc.location.href.match(/\btc=([^&]+)/) : null;
+      var tcMarker = '\n✪'; // have a pref for this?
+      var tc = tcPref ? doc.location.href.match(/&tc=([^&]+)/) : null;
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
       for (var j = 0; j < td.length; j += 2)
