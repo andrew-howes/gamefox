@@ -246,8 +246,7 @@ var GFutils =
     var ustr = Cc['@mozilla.org/supports-string;1'].
       createInstance(Ci.nsISupportsString);
     ustr.data = str;
-    prefService.setComplexValue(pref, Ci.nsISupportsString,
-        ustr);
+    prefService.setComplexValue(pref, Ci.nsISupportsString, ustr);
   },
 
   trim: function(str)
@@ -268,8 +267,6 @@ var GFutils =
     var sep = GFutils.getString('paging.separator');
     var suffix = GFutils.getString('paging.suffix');
 
-    tc = tc.replace(/ /g, '+');
-
     var prefixHTML = doc.createElement('span');
     prefixHTML.innerHTML = '';
     if (loc == 2)
@@ -289,10 +286,12 @@ var GFutils =
     var pageHTML = doc.createElement('span');
     pageHTML.innerHTML = '' + prefixHTML;
 
+    tc = this.tcParam(tc);
+
     for (var i = 0; i < pages; i++)
     {
       var a = doc.createElement('a');
-          a.setAttribute('href', topiclink + (i ? '&page=' + i + '&tc=' + tc: ''));
+          a.setAttribute('href', topiclink + (i ? '&page=' + i + tc : ''));
           a.innerHTML = i + 1;
 
       pageHTML.appendChild(a);
@@ -445,11 +444,7 @@ var GFutils =
   getLastPost: function(msgs, tc)
   {
     var lastPage = Math.floor((msgs - 1) / GameFOX.prefs.getIntPref('msgsPerPage'));
-    if (lastPage)
-      var pageStr = '&page=' + lastPage + (tc ? '&tc=' + tc.replace(/ /g, '+') :
-          '');
-    else
-      var pageStr = '';
+    var pageStr = lastPage ? '&page=' + lastPage + this.tcParam(tc) : '';
 
     var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
 
@@ -467,5 +462,11 @@ var GFutils =
       }
     }
     return arr;
+  },
+
+  tcParam: function(tc)
+  {
+    return tc && GameFOX.prefs.getBoolPref('elements.marktc') ?
+        '&tc=' + tc.replace(/ /g, '+') : '';
   }
 };
