@@ -49,9 +49,9 @@ Nightly builds are snapshots of the latest development code automatically
 generated at 3AM every night. They should be used to test experimental features.
 
 Be aware that **things will undoubtedly be broken**. We ask that if you use the
-nightlies to report any problems you find at [Blood Money]
-(http://www.gamefaqs.com/boards/gentopic.php?board=565885), being as descriptive
-as possible.
+nightlies to report any problems you find at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885),
+being as descriptive as possible.
 
 The extension will automatically update every night when a new version is built.
 You can downgrade to the stable release at the top of the page at any time.
