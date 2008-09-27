@@ -793,7 +793,7 @@ var GameFOX =
       td.innerHTML = ' ' + td.innerHTML.replace(/\s/g, '&nbsp;');
 
       var tc = GFlib.onPage(doc, 'tracked') ? '' : GFutils.tcParam(
-          GFutils.trim(node.parentNode.cells[2].textContent));
+          GFutils.trim(node.parentNode.cells[2].firstChild.textContent));
 
       for (i = 0; i < numPages; i++)
       {
