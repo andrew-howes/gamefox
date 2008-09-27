@@ -394,9 +394,9 @@ var GameFOX =
       var msgnumCond = !onDetail && GameFOX.prefs.getBoolPref('elements.msgnum');
       var msgnumStyle = GameFOX.prefs.getIntPref('elements.msgnum.style');
 
-      var tcPref = !onDetail && GameFOX.prefs.getBoolPref('elements.marktc');
-      var tcMarker = '\n✪'; // have a pref for this?
-      var tc = tcPref ? doc.location.search.match(/\btc=([^&]+)/) : null;
+      var tcCond = !onDetail && GameFOX.prefs.getBoolPref('elements.marktc');
+      var tcMarker = '\xA0' + GFutils.getString('elements.marktc.marker');
+      var tc = tcCond ? doc.location.search.match(/\btc=([^&]+)/) : null;
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
 
@@ -522,7 +522,7 @@ var GameFOX =
         }
 
         // Distinguish posts from the topic creator
-        if (tcPref)
+        if (tcCond)
         {
           // TODO: Fix for newest first ordering
           if (msgnum == 1)

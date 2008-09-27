@@ -37,6 +37,7 @@
       <preference id="gamefox-pref-titleprefix" name="gamefox.elements.titleprefix" type="bool"/>
       <preference id="gamefox-pref-charcounts" name="gamefox.elements.charcounts" type="bool"/>
       <preference id="gamefox-pref-marktc" name="gamefox.elements.marktc" type="bool"/>
+      <preference id="gamefox-pref-marktc-marker" name="gamefox.elements.marktc.marker" type="string"/>
       <preference id="gamefox-pref-msgnum" name="gamefox.elements.msgnum" type="bool"/>
       <preference id="gamefox-pref-msgnum-style" name="gamefox.elements.msgnum.style" type="int"/>
       <preference id="gamefox-pref-tracked-boardlink" name="gamefox.elements.tracked.boardlink" type="bool"/>
@@ -85,7 +86,10 @@
                 <vbox flex="3">
                   <checkbox preference="gamefox-pref-titleprefix" label="&page.elements.titleprefix;"/>
                   <checkbox preference="gamefox-pref-quickpost-otherbuttons" label="&page.elements.otherbuttons;"/>
-                  <checkbox preference="gamefox-pref-marktc" label="&page.elements.marktc;"/>
+                  <hbox align="baseline">
+                    <checkbox preference="gamefox-pref-marktc" label="&page.elements.marktc;"/>
+                    <textbox preference="gamefox-pref-marktc-marker"/>
+                  </hbox>
                 </vbox>
               </hbox>
             </groupbox>

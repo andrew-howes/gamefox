@@ -76,7 +76,7 @@ var GFquote =
     var doc = event.target.ownerDocument;
 
     /* Parse message header */
-    var head = quoteHead.replace(/\|/g, '').split('\n');
+    var head = quoteHead.replace(/\|/g, '').split(/\xA0|\n/);
     for (var i = 0; i < head.length; i++)
       head[i] = GFutils.trim(head[i]);
     var username = head[1];
