@@ -22,8 +22,8 @@ GFcontentPolicy.prototype =
   shouldLoad: function(contentType, contentLocation, requestOrigin, context, mimeTypeGuess, extra)
   {
     if (Components.classes['@mozilla.org/preferences-service;1']
-            .getService(Components.interfaces.nsIPrefService)
-            .getBranch('gamefox.').getBoolPref('theme.disablegamefaqscss') &&
+            .getService(Components.interfaces.nsIPrefBranch)
+            .getBoolPref('gamefox.theme.disablegamefaqscss') &&
         contentLocation.host == 'www.gamefaqs.com' &&
         contentType == nsIContentPolicy.TYPE_STYLESHEET)
       return nsIContentPolicy.REJECT_REQUEST;
