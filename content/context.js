@@ -13,7 +13,7 @@ var GFcontext =
     document.getElementById('gamefox-accounts').hidden = !GameFOX.prefs.
       getBoolPref('context.accounts');
 
-    // hide the entire menu
+    // Submenu
     var items = document.getElementById('gamefox-context-popup').childNodes;
     var hideMenu = true;
     for (var i = 0; i < items.length; i++)
@@ -56,14 +56,11 @@ var GFcontext =
         try
         {
           var node = gContextMenu.target;
-          var nodeName = node.nodeName.toLowerCase();
-          var nodeClass = node.className.toLowerCase();
 
-          while (nodeName != 'table' || nodeClass != 'message')
+          while (node.nodeName.toLowerCase() != 'table'
+                 || node.className.toLowerCase() != 'message')
           {
             node = node.offsetParent;
-            nodeName = node.nodeName.toLowerCase();
-            nodeClass = node.className.toLowerCase();
           }
 
           hideQuote = false;
@@ -76,51 +73,37 @@ var GFcontext =
     document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups
       || !GameFOX.prefs.getBoolPref('context.usergroups');
 
+    var hideTag = true;
+    var hidePages = true;
     if (!GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'myposts'))
     {
-      // Tag topic
-      if (GFlib.onPage(doc, 'messages') && GameFOX.prefs.getBoolPref('context.tag'))
-      {
-        if (!doc.evaluate('//h1/following::h1', doc, null,
-              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
-          document.getElementById('gamefox-context-tag').hidden = true;
-      }
-      else
-        document.getElementById('gamefox-context-tag').hidden = true;
-
-      document.getElementById('gamefox-context-pages').hidden = true;
-    }
-    else if (!GameFOX.prefs.getBoolPref('context.tag') && !GameFOX.prefs.
-        getBoolPref('context.pagelist'))
-    {
-      document.getElementById('gamefox-context-tag').hidden = true;
-      document.getElementById('gamefox-context-pages').hidden = true;
+      // Tag topic (message list)
+      if (GFlib.onPage(doc, 'messages') && doc.getElementsByTagName('h1').length > 1)
+        hideTag = false;
     }
     else
     {
+      // Tag topic and pages (topic list)
       try
       {
         var node = gContextMenu.target;
-        var nodeName = node.nodeName.toLowerCase();
 
-        while (nodeName != 'td')
+        while (node.nodeName.toLowerCase() != 'td')
         {
           node = node.parentNode;
-          nodeName = node.nodeName.toLowerCase();
         }
 
-        nodeName = node.parentNode.cells[1].nodeName; // will throw exception
-
-        document.getElementById('gamefox-context-tag').hidden = !GameFOX.prefs.
-          getBoolPref('context.tag');
-        document.getElementById('gamefox-context-pages').hidden = !GameFOX.prefs.
-          getBoolPref('context.pagelist');
+        if (node.parentNode.cells.length > 1)
+        {
+          hideTag = false;
+          hidePages = false;
+        }
       }
-      catch (e)
-      {
-        document.getElementById('gamefox-context-tag').hidden = true;
-        document.getElementById('gamefox-context-pages').hidden = true;
-      }
+      catch (e) {}
     }
+    document.getElementById('gamefox-context-tag').hidden = hideTag
+      || !GameFOX.prefs.getBoolPref('context.tag');
+    document.getElementById('gamefox-context-pages').hidden = hidePages
+      || !GameFOX.prefs.getBoolPref('context.pagelist');
   }
 };
