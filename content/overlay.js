@@ -792,10 +792,13 @@ var GameFOX =
       td.appendChild(doc.createTextNode(pgPrefix));
       td.innerHTML = ' ' + td.innerHTML.replace(/\s/g, '&nbsp;');
 
+      var tc = GFlib.onPage(doc, 'tracked') ? '' : GFutils.tcParam(
+          GFutils.trim(node.parentNode.cells[2].textContent));
+
       for (i = 0; i < numPages; i++)
       {
         link = doc.createElement('a');
-        link.setAttribute('href', topicLink + (i ? '&page=' + i : ''));
+        link.setAttribute('href', topicLink + (i ? '&page=' + i + tc : ''));
         link.innerHTML = i+1;
 
         td.appendChild(link);
