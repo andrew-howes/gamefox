@@ -135,8 +135,7 @@ var GameFOX =
           && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
       {
         doc.getElementsByName('message')[0].value =
-          GFutils.formatSig(null,
-              GameFOX.prefs.getBoolPref('signature.newline'), doc);
+          GFutils.formatSig(null, null, doc);
       }
     }
 

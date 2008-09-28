@@ -307,7 +307,7 @@ var GFutils =
 
   formatSig: function(sig, newline, doc)
   {
-    if (!sig) // fetch sig
+    if (sig == null) // fetch sig
     {
       if (!doc) return false;
       var boardname = GFutils.trim(doc.evaluate('//h1', doc, null,
@@ -320,6 +320,8 @@ var GFutils =
       var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
     }
+    if (newline == null) // fetch newline
+      newline = GameFOX.prefs.getBoolPref('signature.newline');
 
     if (!sig.length)
       return '';
@@ -349,9 +351,7 @@ var GFutils =
       sig = GFutils.specialCharsDecode(sig);
     }
 
-    var str = (newline ? '\n' : '') +
-      (sig != '' ? '---\n' + sig : '');
-    return '\n' + str;
+    return '\n' + (newline ? '\n' : '') + (sig != '' ? '---\n' + sig : '');
   },
 
   URLEncode: function(str)

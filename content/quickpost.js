@@ -4,22 +4,13 @@ var GFquickpost =
 {
   appendForm: function(doc, div, newTopic)
   {
-    if (GameFOX.prefs.getIntPref('signature.addition') == 2)
-      var sig = GFutils.formatSig(null,
-          GameFOX.prefs.getBoolPref('signature.newline'), doc);
-    else
-      var sig = '';
-
-    var query = GFutils.stripQueryString(doc.location.search);
-    var action = 'post.php' + GFutils.specialCharsDecode(query);
     var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
 
     var form = doc.createElement('form');
     div.appendChild(form);
     form.id = 'gamefox-quickpost-form';
-    form.action = action;
+    form.action = 'post.php' + GFutils.stripQueryString(doc.location.search);
     form.method = 'post';
-    form.addEventListener('submit', GFquickpost.appendSig, false);
 
     if (newTopic)
     {
@@ -40,8 +31,6 @@ var GFquickpost =
         GFmessages.updateTitleCount(doc);
         topictitle.addEventListener('input', GFmessages.delayedUpdateTitleCount,
             false);
-        form.addEventListener('reset', function(event) {
-            setTimeout(GFmessages.updateTitleCount, 0, event) }, false);
       }
     }
 
@@ -52,7 +41,10 @@ var GFquickpost =
     message.wrap = 'virtual';
     message.rows = 16;
     message.cols = 60;
-    message.value = sig;
+    if (GameFOX.prefs.getIntPref('signature.addition') == 1)
+      form.addEventListener('submit', GFquickpost.appendSig, false);
+    else
+      message.value = GFutils.formatSig(null, null, doc);
     message.setSelectionRange(0, 0);
 
     var linebreak = doc.createElement('br');
@@ -103,20 +95,18 @@ var GFquickpost =
       GFmessages.updateMessageCount(doc);
       message.addEventListener('input', GFmessages.delayedUpdateMessageCount,
           false);
-      form.addEventListener('reset', function(event) {
-          setTimeout(GFMessages.updateMessageCount, 0, event) }, false);
     }
   },
 
   appendSig: function(event)
   {
     var doc = GFlib.getDocument(event);
-
-    if (GameFOX.prefs.getIntPref('signature.addition') == 1)
+    if (!doc.gfSigAdded)
+    {
       doc.getElementById('gamefox-message').value +=
-        GFutils.formatSig(null,
-            GameFOX.prefs.getBoolPref('signature.newline'), doc
-            );
+          GFutils.formatSig(null, null, doc);
+      doc.gfSigAdded = true;
+    }
   },
 
   toggleVisibility: function(event)
@@ -293,27 +283,25 @@ var GFquickpost =
     previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     var postBody = '';
-    var topicTitle = doc.getElementsByName('topictitle');
+    var topicTitle = doc.getElementsByName('topictitle')[0];
 
-    if (topicTitle[0])
+    if (topicTitle)
     {
-      if (topicTitle[0].value.length < 5)
+      if (topicTitle.value.length < 5)
       {
         GFlib.alert('Topic titles must be at least 5 characters long.');
         event.target.removeAttribute('disabled');
         event.target.addEventListener('click', GFquickpost.post, false);
         return;
       }
-      postBody = 'topictitle=' + GFutils.URLEncode(topicTitle[0].value) + '&';
+      postBody = 'topictitle=' + GFutils.URLEncode(topicTitle.value) + '&';
     }
 
     var message = doc.getElementsByName('message')[0].value;
 
     if (!GFlib.onPage(doc, 'post')
         && GameFOX.prefs.getIntPref('signature.addition') == 1)
-      message +=
-        GFutils.formatSig(null,
-            GameFOX.prefs.getBoolPref('signature.newline'), doc);
+      message += GFutils.formatSig(null, null, doc);
 
     previewRequest.send(
         postBody +
