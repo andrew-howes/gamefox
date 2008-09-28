@@ -10,7 +10,8 @@ const CLASS_NAME = 'GameFOX content policy';
 const CONTRACT_ID = '@gamefox/contentpolicy;1';
 const adServers = new Array(
     'atdmt.com', 'ad.doubleclick.net', 'adserver.yahoo.com', 'revsci.net',
-    'eyewonder.com', 'pointroll.com', 'questionmarket.com'
+    'eyewonder.com', 'pointroll.com', 'questionmarket.com', 'tribalfusion.com',
+    'advertising.com', '2mdn.net', 'mads.cnet.com'
     );
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
               .getService(Components.interfaces.nsIPrefService)
