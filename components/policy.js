@@ -1,3 +1,5 @@
+/* vim: set et sw=2 ts=2 sts=2 tw=79: */
+
 /***********************************************************
 constants
 ***********************************************************/
@@ -6,6 +8,14 @@ const nsISupports = Components.interfaces.nsISupports;
 const CLASS_ID = Components.ID('{2572941e-68cb-41a8-be97-cbb40611dcbc}');
 const CLASS_NAME = 'GameFOX content policy';
 const CONTRACT_ID = '@gamefox/contentpolicy;1';
+const adServers = new Array(
+    'atdmt.com', 'ad.doubleclick.net', 'adserver.yahoo.com', 'revsci.net',
+    'eyewonder.com', 'pointroll.com', 'questionmarket.com'
+    );
+const prefs = Components.classes['@mozilla.org/preferences-service;1']
+              .getService(Components.interfaces.nsIPrefService)
+              .getBranch('gamefox.');
+
 
 /***********************************************************
 class definition
@@ -21,14 +31,35 @@ GFcontentPolicy.prototype =
 {
   shouldLoad: function(contentType, contentLocation, requestOrigin, context, mimeTypeGuess, extra)
   {
-    if (Components.classes['@mozilla.org/preferences-service;1']
-            .getService(Components.interfaces.nsIPrefBranch)
-            .getBoolPref('gamefox.theme.disablegamefaqscss') &&
-        contentLocation.host == 'www.gamefaqs.com' &&
-        contentType == nsIContentPolicy.TYPE_STYLESHEET)
-      return nsIContentPolicy.REJECT_REQUEST;
-    else
+    try
+    {
+      if (requestOrigin.host != 'www.gamefaqs.com')
+        return nsIContentPolicy.ACCEPT;
+
+      // ad servers
+      if (prefs.getBoolPref('elements.stopads'))
+      {
+        for (var i = 0; i < adServers.length; i++)
+        {
+          if (contentLocation.host.indexOf(adServers[i]) != -1)
+            return nsIContentPolicy.REJECT_REQUEST;
+        }
+      }
+
+      if (prefs.getBoolPref('theme.disablegamefaqscss') &&
+          contentLocation.host == 'www.gamefaqs.com' &&
+          contentType == nsIContentPolicy.TYPE_STYLESHEET)
+        return nsIContentPolicy.REJECT_REQUEST;
+      else
+        return nsIContentPolicy.ACCEPT;
+    }
+    catch (e)
+    {
+      // contentLocation is not always available, and I couldn't find a more
+      // reliable way of preventing exceptions in the error console without
+      // this try/catch block
       return nsIContentPolicy.ACCEPT;
+    }
   },
 
   shouldProcess: function(contentType, contentLocation, requestOrigin, context, mimeTypeGuess, extra)

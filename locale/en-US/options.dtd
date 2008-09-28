@@ -31,6 +31,7 @@
 <!ENTITY page.elements.charcounts "Title and message character counts">
 <!ENTITY page.elements.postmessage "&quot;Post Message&quot; (skip preview) button">
 <!ENTITY page.elements.otherbuttons "QuickPost preview buttons">
+<!ENTITY page.elements.stopads "Stop ad servers from loading">
 <!ENTITY page.elements.marktc "Mark topic creator">
 <!ENTITY page.elements.topics.caption "Topic Lists">
 <!ENTITY page.elements.topics.quickpost "QuickPost Topic form">

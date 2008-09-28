@@ -57,6 +57,8 @@
       <preference id="gamefoxTpcSortOrder" name="gamefox.tpcSortOrder" type="int"/>
       <preference id="gamefoxMsgDisplay" name="gamefox.msgDisplay" type="int"/>
       <preference id="gamefoxTimeZone" name="gamefox.timeZone" type="int"/>
+
+      <preference id="elements-stopads" name="gamefox.elements.stopads" type="bool"/>
     </preferences>
 
 
@@ -86,6 +88,7 @@
                 <vbox flex="3">
                   <checkbox preference="gamefox-pref-titleprefix" label="&page.elements.titleprefix;"/>
                   <checkbox preference="gamefox-pref-quickpost-otherbuttons" label="&page.elements.otherbuttons;"/>
+                  <checkbox preference="elements-stopads" label="&page.elements.stopads;"/>
                 </vbox>
               </hbox>
             </groupbox>
