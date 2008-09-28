@@ -50,7 +50,7 @@ var GFquickpost =
     message.id = 'gamefox-message';
     message.name = 'message';
     message.wrap = 'virtual';
-    message.rows = 15;
+    message.rows = 16;
     message.cols = 60;
     message.value = sig;
     message.setSelectionRange(0, 0);

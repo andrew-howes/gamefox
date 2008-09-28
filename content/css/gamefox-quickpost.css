@@ -1,17 +1,5 @@
 @-moz-document domain(gamefaqs.com)
 {
-    #gamefox-quickpost-title, #gamefox-quickpost-form
-    {
-        width: 100%;
-        clear: both;
-    }
-
-    #gamefox-quickpost-title
-    {
-        font-size: 1.8em;
-        border-bottom: #aaa 1px solid;
-    }
-
     #gamefox-quickpost-afloat
     {
         position: fixed;
@@ -26,14 +14,18 @@
         -moz-border-radius: 10px;
     }
 
-    #gamefox-message, #gamefox-topic
+    #gamefox-topic
     {
         width: 70%;
-        margin-top: 5px;
     }
 
-    textarea#gamefox-message
+    #gamefox-message
     {
-        font-size: 12px;
+        width: 95%;
+    }
+
+    #gamefox-message-count, #gamefox-title-count
+    {
+        margin-left: 2em;
     }
 }
