@@ -86,10 +86,6 @@
                 <vbox flex="3">
                   <checkbox preference="gamefox-pref-titleprefix" label="&page.elements.titleprefix;"/>
                   <checkbox preference="gamefox-pref-quickpost-otherbuttons" label="&page.elements.otherbuttons;"/>
-                  <hbox align="baseline">
-                    <checkbox preference="gamefox-pref-marktc" label="&page.elements.marktc;"/>
-                    <textbox preference="gamefox-pref-marktc-marker"/>
-                  </hbox>
                 </vbox>
               </hbox>
             </groupbox>
@@ -127,9 +123,12 @@
                           </menupopup>
                         </menulist>
                       </hbox>
+                      <hbox align="center">
+                        <checkbox preference="gamefox-pref-marktc" label="&page.elements.marktc;"/>
+                        <textbox preference="gamefox-pref-marktc-marker" size="3"/>
+                      </hbox>
                     </vbox>
                   </groupbox>
-
                 </row>
               </rows>
             </grid>
