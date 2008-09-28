@@ -5,63 +5,107 @@ var GFquickpost =
   appendForm: function(doc, div, newTopic)
   {
     if (GameFOX.prefs.getIntPref('signature.addition') == 2)
-      var sig = GFutils.specialCharsEncode(GFutils.formatSig(null, GameFOX.prefs.
-            getBoolPref('signature.newline'), doc));
+      var sig = GFutils.formatSig(null,
+          GameFOX.prefs.getBoolPref('signature.newline'), doc);
     else
       var sig = '';
 
     var query = GFutils.stripQueryString(doc.location.search);
     var action = 'post.php' + GFutils.specialCharsDecode(query);
-    var otherbuttons = GameFOX.prefs.getBoolPref('elements.quickpost.otherbuttons');
-    // TODO: use DOM?
-    div.innerHTML += '\n' +
-      '<div id="gamefox-quickpost-title">QuickPost</div>\n' +
-      '  <form id="gamefox-quickpost-form" action="' + action + '" method="post">\n' +
-      (newTopic ? '  <input type="text" id="gamefox-topic" name="topictitle" ' +
-                      'size="60" maxlength="80" value=""/>\n' +
-                     '<span id="gamefox-title-count"></span><br/>' : '') +
-      '  <textarea name="message" wrap="virtual" id="gamefox-message" rows="15" ' +
-          'cols="60">\n' + sig + '</textarea><br/>\n' +
-      '  <input type="button" id="gamefox-quickpost-btn" name="quickpost" value="Post Message"/>\n' +
-      (otherbuttons ? '  <input type="submit" name="post" value="Preview Message"/>\n' +
-      '  <input type="submit" name="post" value="Preview and Spellcheck Message"/>\n' +
-      '  <input type="reset" value="Reset"/>\n' : '') +
-      (newTopic ? '  <input type="button" id="gamefox-quickpost-hide" value="Hide"/>\n' : '') +
-      '  <span id="gamefox-message-count"></span>\n' +
-      '</form>\n';
+    var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
 
-    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
-    {
-      if (newTopic)
-      {
-        GFmessages.updateTitleCount(doc);
-        doc.getElementById('gamefox-topic').addEventListener('input',
-            GFmessages.delayedUpdateTitleCount, false);
-        doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
-            function(event) {setTimeout(GFmessages.updateTitleCount, 0, event)}, false);
-      }
-
-      GFmessages.updateMessageCount(doc);
-      doc.getElementById('gamefox-message').addEventListener('input',
-          GFmessages.delayedUpdateMessageCount, false);
-      doc.getElementById('gamefox-quickpost-form').addEventListener('reset',
-          function(event) {setTimeout(GFmessages.updateMessageCount, 0, event)}, false);
-    }
-
-    doc.getElementById('gamefox-quickpost-btn').addEventListener('click',
-        GFquickpost.post, false);
-
-    doc.getElementById('gamefox-quickpost-form').addEventListener('submit',
-        GFquickpost.appendSig, false);
-
-    doc.getElementById('gamefox-message').setSelectionRange(0, 0);
-
-    if (!GameFOX.prefs.getBoolPref('elements.quickpost.button'))
-      doc.getElementById('gamefox-quickpost-btn').style.display = 'none';
+    var form = doc.createElement('form');
+    div.appendChild(form);
+    form.id = 'gamefox-quickpost-form';
+    form.action = action;
+    form.method = 'post';
+    form.addEventListener('submit', GFquickpost.appendSig, false);
 
     if (newTopic)
-      doc.getElementById('gamefox-quickpost-hide').addEventListener('click',
-          GFquickpost.toggleVisibility, false);
+    {
+      var topictitle = doc.createElement('input');
+      form.appendChild(topictitle);
+      topictitle.id = 'gamefox-topic';
+      topictitle.type = 'text';
+      topictitle.name = 'topictitle';
+      topictitle.size = 60;
+      topictitle.maxlength = 80;
+
+      if (charCounts)
+      {
+        var titlecount = doc.createElement('span');
+        form.appendChild(titlecount);
+        titlecount.id = 'gamefox-title-count';
+
+        GFmessages.updateTitleCount(doc);
+        topictitle.addEventListener('input', GFmessages.delayedUpdateTitleCount,
+            false);
+        form.addEventListener('reset', function(event) {
+            setTimeout(GFmessages.updateTitleCount, 0, event) }, false);
+      }
+    }
+
+    var message = doc.createElement('textarea');
+    form.appendChild(message);
+    message.id = 'gamefox-message';
+    message.name = 'message';
+    message.wrap = 'virtual';
+    message.rows = 15;
+    message.cols = 60;
+    message.value = sig;
+    message.setSelectionRange(0, 0);
+
+    var linebreak = doc.createElement('br');
+    form.appendChild(linebreak);
+
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.button'))
+    {
+      var postbutton = doc.createElement('input');
+      form.appendChild(postbutton);
+      postbutton.id = 'gamefox-quickpost-btn';
+      postbutton.type = 'button';
+      postbutton.name = 'quickpost';
+      postbutton.value = 'Post Message';
+      postbutton.addEventListener('click', GFquickpost.post, false);
+    }
+
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.otherbuttons'))
+    {
+      var previewbutton = doc.createElement('input');
+      form.appendChild(previewbutton);
+      previewbutton.type = 'submit';
+      previewbutton.name = 'post';
+      previewbutton.value = 'Preview Message';
+
+      var spellchkbutton = doc.createElement('input');
+      form.appendChild(spellchkbutton);
+      spellchkbutton.type = 'submit';
+      spellchkbutton.name = 'post';
+      spellchkbutton.value = 'Preview and Spellcheck Message';
+    }
+
+    if (newTopic)
+    {
+      var hidebutton = doc.createElement('input');
+      form.appendChild(hidebutton);
+      hidebutton.id = 'gamefox-quickpost-hide';
+      hidebutton.type = 'button';
+      hidebutton.value = 'Hide';
+      hidebutton.addEventListener('click', GFquickpost.toggleVisibility, false);
+    }
+
+    if (charCounts)
+    {
+      var messagecount = doc.createElement('span');
+      form.appendChild(messagecount);
+      messagecount.id = 'gamefox-message-count';
+
+      GFmessages.updateMessageCount(doc);
+      message.addEventListener('input', GFmessages.delayedUpdateMessageCount,
+          false);
+      form.addEventListener('reset', function(event) {
+          setTimeout(GFMessages.updateMessageCount, 0, event) }, false);
+    }
   },
 
   appendSig: function(event)
