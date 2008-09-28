@@ -7,18 +7,14 @@
         left: 0;
         z-index: 3;
         padding: 3px !important;
-        width: auto;
         overflow-x: auto;
         overflow-y: hidden;
         display: none;
-        border: 2px solid #6564ff;
-        color: #000000;
-        background-color: #fff;
-        font-family: monospace;
-        font-size: larger;
+        color: #000;
+        background-color: #eee;
         max-width: 80%;
-        text-align: left;
         -moz-border-radius: 10px;
-        -moz-opacity: 0.9;
+        border: #aaa 1px solid;
+        font-size: inherit !important;
     }
 }
