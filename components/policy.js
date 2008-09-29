@@ -8,11 +8,6 @@ const nsISupports = Components.interfaces.nsISupports;
 const CLASS_ID = Components.ID('{2572941e-68cb-41a8-be97-cbb40611dcbc}');
 const CLASS_NAME = 'GameFOX content policy';
 const CONTRACT_ID = '@gamefox/contentpolicy;1';
-const adServers = new Array(
-    'atdmt.com', 'ad.doubleclick.net', 'adserver.yahoo.com', 'revsci.net',
-    'eyewonder.com', 'pointroll.com', 'questionmarket.com', 'tribalfusion.com',
-    'advertising.com', '2mdn.net', 'mads.cnet.com'
-    );
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
               .getService(Components.interfaces.nsIPrefService)
               .getBranch('gamefox.');
@@ -37,14 +32,12 @@ GFcontentPolicy.prototype =
       if (requestOrigin.host != 'www.gamefaqs.com')
         return nsIContentPolicy.ACCEPT;
 
-      // ad servers
+      // block ad servers by only allowing legitimate hosts
       if (prefs.getBoolPref('elements.stopads'))
       {
-        for (var i = 0; i < adServers.length; i++)
-        {
-          if (contentLocation.host.indexOf(adServers[i]) != -1)
-            return nsIContentPolicy.REJECT_REQUEST;
-        }
+        if (contentLocation.host.indexOf('gamefaqs.com') == -1 &&
+            contentLocation.host.indexOf('com.com') == -1)
+          return nsIContentPolicy.REJECT_REQUEST;
       }
 
       if (prefs.getBoolPref('theme.disablegamefaqscss') &&
