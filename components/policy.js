@@ -9,14 +9,15 @@ const CLASS_ID = Components.ID('{2572941e-68cb-41a8-be97-cbb40611dcbc}');
 const CLASS_NAME = 'GameFOX content policy';
 const CONTRACT_ID = '@gamefox/contentpolicy;1';
 const adServers = new Array(
-    'atdmt.com', 'ad.doubleclick.net', 'adserver.yahoo.com', 'revsci.net',
-    'eyewonder.com', 'pointroll.com', 'questionmarket.com', 'tribalfusion.com',
-    'advertising.com', '2mdn.net', 'mads.cnet.com', 'adlog.com.com', 'surveys.cnet.com'
+    '2mdn.net', 'advertising.com', 'atdmt.com', 'adimg.cnet.com',
+    'mads.cnet.com', 'surveys.cnet.com', 'adlog.com.com', 'dw.com.com',
+    'i.i.com.com', 'doubleclick.net', 'eyewonder.com', 'bwp.gamefaqs.com',
+    'pointroll.com', 'questionmarket.com', 'revsci.net', 'serving-sys.com',
+    'tribalfusion.com', 'adserver.yahoo.com'
     );
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
               .getService(Components.interfaces.nsIPrefService)
               .getBranch('gamefox.');
-
 
 /***********************************************************
 class definition
@@ -38,7 +39,8 @@ GFcontentPolicy.prototype =
         return nsIContentPolicy.ACCEPT;
 
       // ad servers
-      if (prefs.getBoolPref('elements.stopads'))
+      if (prefs.getBoolPref('elements.stopads') &&
+          contentType != nsIContentPolicy.TYPE_DOCUMENT)
       {
         for (var i = 0; i < adServers.length; i++)
         {
@@ -47,6 +49,7 @@ GFcontentPolicy.prototype =
         }
       }
 
+      // stylesheets
       if (prefs.getBoolPref('theme.disablegamefaqscss') &&
           contentLocation.host == 'www.gamefaqs.com' &&
           contentType == nsIContentPolicy.TYPE_STYLESHEET)
@@ -56,9 +59,7 @@ GFcontentPolicy.prototype =
     }
     catch (e)
     {
-      // contentLocation is not always available, and I couldn't find a more
-      // reliable way of preventing exceptions in the error console without
-      // this try/catch block
+      // requestOrigin.host and contentLocation.host may throw exceptions
       return nsIContentPolicy.ACCEPT;
     }
   },
@@ -70,7 +71,7 @@ GFcontentPolicy.prototype =
 
   QueryInterface: function(aIID)
   {
-    if (!aIID.equals(nsIContentPolicy) &&    
+    if (!aIID.equals(nsIContentPolicy) &&
         !aIID.equals(nsISupports))
       throw Components.results.NS_ERROR_NO_INTERFACE;
     return this;
