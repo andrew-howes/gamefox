@@ -12,8 +12,8 @@ const adServers = new Array(
     '2mdn.net', 'advertising.com', 'atdmt.com', 'adimg.cnet.com',
     'mads.cnet.com', 'surveys.cnet.com', 'adlog.com.com', 'dw.com.com',
     'i.i.com.com', 'doubleclick.net', 'eyewonder.com', 'bwp.gamefaqs.com',
-    'pointroll.com', 'questionmarket.com', 'revsci.net', 'serving-sys.com',
-    'tribalfusion.com', 'adserver.yahoo.com'
+    'mads.gamefaqs.com', 'pointroll.com', 'questionmarket.com', 'revsci.net',
+    'serving-sys.com', 'tribalfusion.com', 'adserver.yahoo.com'
     );
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
               .getService(Components.interfaces.nsIPrefService)
