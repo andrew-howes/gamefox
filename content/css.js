@@ -4,29 +4,27 @@ var GFcss =
 {
   init: function()
   {
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-essentials.css', 'gamefox-essentials.css',
-        'Essentials', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gamefox-ads.css', 'gamefox-ads.css',
         'Ad blocking', '', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost.css', 'gamefox-quickpost.css',
-        'QuickPost', '', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost-old.css', 'gamefox-quickpost-old.css',
-        'QuickPost (0.5)', '', false, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickwhois.css', 'gamefox-quickwhois.css',
-        'QuickWhois', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-sidebar.css', 'gamefox-sidebar.css',
+        'Classic Sidebar', 'MichaelJBuck', false, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-essentials.css', 'gamefox-essentials.css',
+        'Essentials', '', true, true);
     this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
         'GFCode', 'Ant P.', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost.css', 'gamefox-quickpost.css',
+        'QuickPost', '', true, true);
+    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickwhois.css', 'gamefox-quickwhois.css',
+        'QuickWhois', '', true, true);
 
-    this.add('bundled', 'chrome://gamefox/content/css/toad.css', 'toad.css',
-        'Ten On A Diet', 'TakatoMatsuki', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
-        'Classic Theme', 'Ricapar', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
-        'Wide Default Layout', '', false, true);
     this.add('bundled', 'chrome://gamefox/content/css/ascii-art-font.css', 'ascii-art-font.css',
         'ASCII art font', '', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/gamefox-sidebar.css', 'gamefox-sidebar.css',
-        'Classic GameFOX Sidebar', 'MichaelJBuck', false, true);
+    this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
+        'Classic', 'Ricapar', false, true);
+    this.add('bundled', 'chrome://gamefox/content/css/toad.css', 'toad.css',
+        'Ten On A Diet', 'TakatoMatsuki', false, true);
+    this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
+        'Wide default', '', false, true);
 
     // Remove old stylesheets
     var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
@@ -149,6 +147,13 @@ var GFcss =
       'title': title, 'author': author, 'enabled': enabled
     }
 
+    // changing categories
+    for (i in css)
+    {
+      if (css[i][filename] && cat != i)
+        delete css[i][filename];
+    }
+
     prefs.setCharPref('theme.css.serialized', css.toSource());
     return true;
   },
@@ -232,12 +237,13 @@ var GFcss =
     this.treeView = GFtreeview;
     this.treeView.childData = {};
     this.treeView.visibleData = [];
-    for (var category in {"GameFOX":"", "Bundled":"", "User":""})
+    var categories = {'GameFOX':'gamefox', 'GameFAQs':'bundled', 'User':'user'};
+    for (var category in categories)
     {
       this.treeView.visibleData.push([[category], true, false]);
-      for (var sheet in css[category.toLowerCase()])
+      for (var sheet in css[categories[category]])
       {
-        var cat = category.toLowerCase();
+        var cat = categories[category];
         if (!this.treeView.childData[category])
           this.treeView.childData[category] = [[
             css[cat][sheet]["title"],
@@ -277,7 +283,7 @@ var GFcss =
     this.treeView.toggleOpenState(0);
     this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length + 1);
     this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length +
-        this.treeView.childData["Bundled"].length + 2);
+        this.treeView.childData["GameFAQs"].length + 2);
   },
 
   onselect: function()
