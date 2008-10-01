@@ -2,13 +2,66 @@
 
 var GFsidebar =
 {
-  processLinks: function()
+  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
+             Ci.nsIPrefService).getBranch('gamefox.'),
+
+  onload: function()
   {
     // link middle clicking
     var links = document.getElementsByTagName('a');
     for (var i = 0; i < links.length; i++)
       links[i].setAttribute('onmousedown', 'if (event.button == 1) ' +
           'GFlib.newTab(this.href, 1)');
+
+    // accounts
+    this.populateAccounts();
+
+    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
+    this.prefs.addObserver('accounts', this, false);
+
+    window.addEventListener('unload', this.unload, false);
+  },
+
+  unload: function()
+  {
+    GFsidebar.prefs.removeObserver('accounts', GFsidebar);
+  },
+
+  observe: function()
+  {
+    this.populateAccounts();
+  },
+
+  populateAccounts: function()
+  {
+    var accountList, username, item, firstAccount;
+
+    accountList = document.getElementById('accounts-menu');
+    if (!accountList)
+      return;
+
+    while (accountList.hasChildNodes())
+      accountList.removeChild(accountList.firstChild);
+
+    GFaccounts.read();
+
+    document.getElementById('accounts-remove').style.display = 'none';
+    firstAccount = true;
+    for (username in GFaccounts.accounts)
+    {
+      if (firstAccount)
+      {
+        document.getElementById('accounts-remove').style.display = 'inline';
+        firstAccount = false;
+      }
+      item = document.createElement('a');
+      item.setAttribute('href', 'chrome://gamefox/content/sidebar.xhtml');
+      item.setAttribute('onclick', 'GFaccounts.switchAccount("' + username + '");return false');
+      item.appendChild(document.createTextNode(username));
+      accountList.appendChild(item);
+      item = document.createElement('br');
+      accountList.appendChild(item);
+    }
   },
 
   newTabLogin: function(form)

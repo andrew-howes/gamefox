@@ -33,7 +33,7 @@ var GFaccounts =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', 'Add account...');
-    item.setAttribute('oncommand', 'GFaccounts.loginAndSaveCookie()');
+    item.setAttribute('oncommand', 'GFaccounts.promptLogin()');
     accountList.appendChild(item);
 
     firstAccount = true;
@@ -69,7 +69,7 @@ var GFaccounts =
     }
     else
     {
-      this.loginAndSaveCookie(username);
+      this.promptLogin(username);
     }
 
     function fetchCtkCallback()
@@ -143,7 +143,7 @@ var GFaccounts =
     }
   },
 
-  loginAndSaveCookie: function(username)
+  promptLogin: function(username)
   {
     var password = {value: ''};
     var check = {value: true};
@@ -189,7 +189,7 @@ var GFaccounts =
           if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1) {
             GFlib.alert('Login error! Maybe your password was incorrect? Try it again.');
             GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
-            GFaccounts.loginAndSaveCookie(username);
+            GFaccounts.promptLogin(username);
             return;
           }
 
@@ -198,7 +198,7 @@ var GFaccounts =
           {
             GFlib.alert('Somebody ate the cookie! This means that something unexpected happened. Try it again.');
             GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
-            GFaccounts.loginAndSaveCookie(username);
+            GFaccounts.promptLogin(username);
             return;
           }
 
