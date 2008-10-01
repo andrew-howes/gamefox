@@ -347,7 +347,7 @@
         <button oncommand="GFcss.filepicker();" label="&theme.import.browse;..."/>
       </hbox>
       <hbox pack="end">
-        <button icon="add" oncommand="GFcss.userimport(document.getElementById('css-import-file').value);"
+        <button icon="add" oncommand="GFcss.userimport();"
           label="&theme.import.submit;"/>
       </hbox>
     </groupbox>

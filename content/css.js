@@ -55,17 +55,18 @@ var GFcss =
     }
   },
 
-  userimport: function(uri)
+  userimport: function()
   {
-    if (!uri.length) return;
+    var uri = document.getElementById('css-import-file').value;
     if (!/\.(css|txt)$/.test(uri)) return;
 
     var filename = uri.substr(uri.lastIndexOf('/') + 1);
 
-    if (!this.add('user', uri, filename, filename, '', true))
-      return false;
+    if (!this.add('user', uri, filename, filename, '', true)) return;
+
     this.populate(document.getElementById('css-tree'));
     this.treeView.toggleOpenState(2);
+    this.reload();
 
     document.getElementById('css-import-file').value = '';
   },
@@ -338,11 +339,16 @@ var GFcss =
 
   removeWithTree: function()
   {
-    var filename = this.treeView.visibleData[this.treeView.selection.currentIndex][0][3];
-    var category = this.treeView.visibleData[this.treeView.selection.currentIndex][0][4];
+    var current = this.treeView.visibleData[this.treeView.selection.currentIndex][0];
+
+    if (!GFlib.confirm('Really delete "' + current[0] + '"?'))
+      return;
+
+    var filename = current[3];
+    var category = current[4];
 
     if (category != 'user')
-      return false;
+      return;
 
     this.remove(category, filename);
     this.populate(document.getElementById('css-tree'));
