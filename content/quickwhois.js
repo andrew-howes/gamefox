@@ -97,7 +97,7 @@ var GFquickwhois =
 
     if (matches)
       return GFutils.trim(matches[3]);
-    
+
     return '';
   }
 };

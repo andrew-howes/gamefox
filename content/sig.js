@@ -199,7 +199,7 @@ var GFsig =
     var sigs = eval(GFutils.getString('serialized', this.prefs));
     var idx = menu.selectedItem.value;
     if (idx == 'default') idx = 0;
-    
+
     switch (event.id)
     {
       case 'sig-criteria-accounts': sigs[idx]['accounts'] = event.value; break;

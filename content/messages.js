@@ -8,7 +8,7 @@ var GFmessages =
   {
     if (this.timeoutId)
       clearTimeout(this.timeoutId);
-    
+
     this.timeoutId = setTimeout(GFmessages.updateMessageCount,
         GFmessages.updateDelay, event);
   },
@@ -35,7 +35,7 @@ var GFmessages =
   {
     if (this.timeoutId)
       clearTimeout(this.timeoutId);
-    
+
     this.timeoutId = setTimeout(GFmessages.updateTitleCount,
         GFmessages.updateDelay, event);
   },

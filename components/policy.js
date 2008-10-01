@@ -99,7 +99,7 @@ var GFcontentPolicyModule =
   registerSelf: function(aCompMgr, aFileSpec, aLocation, aType)
   {
     aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar)
-        .registerFactoryLocation(CLASS_ID, CLASS_NAME, 
+        .registerFactoryLocation(CLASS_ID, CLASS_NAME,
             CONTRACT_ID, aFileSpec, aLocation, aType);
 
     var catMgr = Components.classes['@mozilla.org/categorymanager;1']

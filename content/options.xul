@@ -443,7 +443,7 @@
         <tabpanel orient="vertical" flex="1">
           <groupbox>
             <caption label="&signature.content.label;"/>
-            
+
             <hbox>
               <menulist flex="1" id="sig-menu" oncommand="GFsig.menuCommand();">
                 <menupopup>
