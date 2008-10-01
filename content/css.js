@@ -2,36 +2,32 @@
 
 var GFcss =
 {
+  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
+             Ci.nsIPrefService).getBranch('gamefox.theme.css.'),
+
   init: function()
   {
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-ads.css', 'gamefox-ads.css',
-        'Ad blocking', '', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-sidebar.css', 'gamefox-sidebar.css',
-        'Classic Sidebar', 'MichaelJBuck', false, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-essentials.css', 'gamefox-essentials.css',
-        'Essentials', '', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gfcode.css', 'gfcode.css',
-        'GFCode', 'Ant P.', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickpost.css', 'gamefox-quickpost.css',
-        'QuickPost', '', true, true);
-    this.add('gamefox', 'chrome://gamefox/content/css/gamefox-quickwhois.css', 'gamefox-quickwhois.css',
-        'QuickWhois', '', true, true);
-
-    this.add('bundled', 'chrome://gamefox/content/css/ascii-art-font.css', 'ascii-art-font.css',
-        'ASCII art font', '', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/ricapar.css', 'ricapar.css',
-        'Classic', 'Ricapar', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/toad.css', 'toad.css',
-        'Ten On A Diet', 'TakatoMatsuki', false, true);
-    this.add('bundled', 'chrome://gamefox/content/css/wide-layout.css', 'wide-layout.css',
-        'Wide default', '', false, true);
+    var defaults = [
+        ['gamefox', 'gamefox-ads.css', 'Ad blocking', '', true],
+        ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar', 'MichaelJBuck', false],
+        ['gamefox', 'gamefox-essentials.css', 'Essentials', '', true],
+        ['gamefox', 'gfcode.css', 'GFCode', 'Ant P.', true],
+        ['gamefox', 'gamefox-quickpost.css', 'QuickPost', '', true],
+        ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois', '', true],
+        ['bundled', 'ascii-art-font.css', 'ASCII art font', '', false],
+        ['bundled', 'ricapar.css', 'Classic', 'Ricapar', false],
+        ['bundled', 'toad.css', 'Ten On A Diet', 'TakatoMatsuki', false],
+        ['bundled', 'wide-layout.css', 'Wide default', '', false]
+        ];
+    for (var i = 0; i < defaults.length; i++)
+    {
+      var j = defaults[i];
+      this.add(j[0], 'chrome://gamefox/content/css/' + j[1], j[1], j[2], j[3], j[4], true);
+    }
 
     // Remove old stylesheets
-    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-        Ci.nsIPrefService).getBranch('gamefox.');
-
-    var css = eval(prefs.getCharPref('theme.css.serialized'));
-    for (i in {"gamefox":"", "bundled":""})
+    var css = eval(this.prefs.getCharPref('serialized'));
+    for (i in {'gamefox':'', 'bundled':''})
     {
       for (j in css[i])
       {
@@ -53,7 +49,7 @@ var GFcss =
           if (css['user'][j]['enabled'].toString() == 'true')
             css[i][j]['enabled'] = true;
           delete css['user'][j];
-          prefs.setCharPref('theme.css.serialized', css.toSource());
+          this.prefs.setCharPref('serialized', css.toSource());
         }
       }
     }
@@ -62,12 +58,11 @@ var GFcss =
   userimport: function(uri)
   {
     if (!uri.length) return;
-    if (!uri.match(/\.(css|txt)$/)) return;
+    if (!/\.(css|txt)$/.test(uri)) return;
 
-    var filename = uri.split('/');
-    filename = filename[filename.length - 1];
-    
-    if (!this.add('user', uri, filename, filename, '', false))
+    var filename = uri.substr(uri.lastIndexOf('/') + 1);
+
+    if (!this.add('user', uri, filename, filename, '', true))
       return false;
     this.populate(document.getElementById('css-tree'));
     this.treeView.toggleOpenState(2);
@@ -80,7 +75,7 @@ var GFcss =
     var filepicker = Cc['@mozilla.org/filepicker;1'].createInstance(
         Ci.nsIFilePicker);
     filepicker.init(window, 'Import Stylesheet', Ci.nsIFilePicker.modeOpen);
-    filepicker.appendFilter('Stylesheets', '*.css; *.txt');
+    filepicker.appendFilter('Stylesheets (*.css;*.txt)', '*.css; *.txt');
 
     if (filepicker.show() == Ci.nsIFilePicker.returnOK)
     {
@@ -98,14 +93,12 @@ var GFcss =
         Ci.nsIFileOutputStream);
     var siStream = Cc['@mozilla.org/scriptableinputstream;1'].getService(
         Ci.nsIScriptableInputStream);
-    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-        Ci.nsIPrefService).getBranch('gamefox.');
 
     file.initWithPath(this.getDirectory());
     file.append(filename);
     if (overwrite == false && file.exists()) {
       var d = new Date();
-      filename = filename.replace(/\.(css|txt)$/, d.getTime() + ".$1");
+      filename = filename.replace(/\.(css|txt)$/, d.getTime() + '.$1');
       file.initWithPath(this.getDirectory());
       file.append(filename);
       delete d;
@@ -138,8 +131,8 @@ var GFcss =
       GFlib.alert('There was an error writing the stylesheet to its destination:\n' + e);
       return false;
     }
-    
-    var css = eval(prefs.getCharPref('theme.css.serialized'));
+
+    var css = eval(this.prefs.getCharPref('serialized'));
     if (css[cat][filename]) // the stylesheet already exists, don't touch its enabled status
       enabled = css[cat][filename]['enabled'];
 
@@ -154,7 +147,7 @@ var GFcss =
         delete css[i][filename];
     }
 
-    prefs.setCharPref('theme.css.serialized', css.toSource());
+    this.prefs.setCharPref('serialized', css.toSource());
     return true;
   },
 
@@ -162,7 +155,7 @@ var GFcss =
   {
     var directory = Cc['@mozilla.org/file/directory_service;1'].getService(
         Ci.nsIProperties).get('ProfD', Ci.nsIFile);
-    
+
     try
     {
       directory.append('gamefox');
@@ -175,20 +168,18 @@ var GFcss =
     }
     catch (e)
     {
-      GFlib.alert('Caught exception while creating the CSS directory:\n' + e);
+      GFlib.alert('There was an error creating the CSS directory:\n' + e);
       return false;
     }
   },
 
   reload: function()
   {
-    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-        Ci.nsIPrefService).getBranch('gamefox.');
     var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
         Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1'].getService(
         Ci.nsILocalFile);
-    var css = eval(prefs.getCharPref('theme.css.serialized'));
+    var css = eval(this.prefs.getCharPref('serialized'));
 
     for (var category in css)
     {
@@ -204,12 +195,12 @@ var GFcss =
           if (sss.sheetRegistered(uri, sss.USER_SHEET))
             sss.unregisterSheet(uri, sss.USER_SHEET);
 
-          if (css[category][filename]['enabled'].toString() == "true")
+          if (css[category][filename]['enabled'].toString() == 'true')
             sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
         }
-        catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND")
+        catch (e if e.name == 'NS_ERROR_FILE_NOT_FOUND')
         {
-          if (category == "user") // user stylesheet, remove it
+          if (category == 'user') // user stylesheet, remove it
           {
             this.remove(category, filename);
             if (document.getElementById('css-tree'))
@@ -217,8 +208,8 @@ var GFcss =
           }
           else // gamefox stylesheet, restore it
           {
-            if (this.add(category, "chrome://gamefox/content/css/" + filename, filename,
-                css[category][filename]["title"], css[category][filename]["author"], true))
+            if (this.add(category, 'chrome://gamefox/content/css/' + filename, filename,
+                css[category][filename]['title'], css[category][filename]['author'], true))
               this.reload(); // oh no, a recursive function call!
                              // it should be all right as this is only done if re-adding the sheet was successful
           }
@@ -229,10 +220,7 @@ var GFcss =
 
   populate: function(element)
   {
-    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-        Ci.nsIPrefService).getBranch('gamefox.');
-
-    var css = eval(prefs.getCharPref('theme.css.serialized'));
+    var css = eval(this.prefs.getCharPref('serialized'));
 
     this.treeView = GFtreeview;
     this.treeView.childData = {};
@@ -246,18 +234,18 @@ var GFcss =
         var cat = categories[category];
         if (!this.treeView.childData[category])
           this.treeView.childData[category] = [[
-            css[cat][sheet]["title"],
-            css[cat][sheet]["author"],
-            css[cat][sheet]["enabled"],
+            css[cat][sheet]['title'],
+            css[cat][sheet]['author'],
+            css[cat][sheet]['enabled'],
             sheet, // filename, stored in an invisible column. used to uniquely
                    // identify what stylesheet a particular row belongs to
             cat
           ]];
         else
           this.treeView.childData[category].push([
-              css[cat][sheet]["title"],
-              css[cat][sheet]["author"],
-              css[cat][sheet]["enabled"],
+              css[cat][sheet]['title'],
+              css[cat][sheet]['author'],
+              css[cat][sheet]['enabled'],
               sheet,
               cat
           ]);
@@ -268,7 +256,7 @@ var GFcss =
     {
       if (this.isContainer(idx)) return false;
       if (column.index == 2) return true;
-      if (this.visibleData[idx][0][4] == "user") return true;
+      if (this.visibleData[idx][0][4] == 'user') return true;
     }
     this.treeView.setCellText = this.setCell;
     this.treeView.setCellValue = this.setCell;
@@ -281,9 +269,9 @@ var GFcss =
     // this is sort of a hack, I couldn't be bothered with finding out how to push data
     // directly to treeView.visibleData when populating the tree
     this.treeView.toggleOpenState(0);
-    this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length + 1);
-    this.treeView.toggleOpenState(this.treeView.childData["GameFOX"].length +
-        this.treeView.childData["GameFAQs"].length + 2);
+    this.treeView.toggleOpenState(this.treeView.childData['GameFOX'].length + 1);
+    this.treeView.toggleOpenState(this.treeView.childData['GameFOX'].length +
+        this.treeView.childData['GameFAQs'].length + 2);
   },
 
   onselect: function()
@@ -291,13 +279,11 @@ var GFcss =
     try
     {
       var category = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][4];
-      if (category == 'user')
-        document.getElementById('css-remove').setAttribute('disabled', 'false');
-      else
-        document.getElementById('css-remove').setAttribute('disabled', 'true');
+      document.getElementById('css-remove').setAttribute('disabled', category != 'user');
     }
     catch (e)
     {
+      // nothing selected
       document.getElementById('css-remove').setAttribute('disabled', true);
     }
   },
@@ -306,16 +292,14 @@ var GFcss =
   {
     this.visibleData[idx][0][column.index] = value;
 
-    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-        Ci.nsIPrefService).getBranch('gamefox.');
     var filename = this.visibleData[idx][0][3];
     var category = this.visibleData[idx][0][4];
     // Map column to associative array in pref
     var map = new Array('title', 'author', 'enabled');
 
-    var css = eval(prefs.getCharPref('theme.css.serialized'));
+    var css = eval(GFcss.prefs.getCharPref('serialized'));
     css[category][filename][map[column.index]] = value;
-    prefs.setCharPref('theme.css.serialized', css.toSource());
+    GFcss.prefs.setCharPref('serialized', css.toSource());
 
     this.selection.clearSelection();
     this.selection.select(idx);
@@ -325,16 +309,11 @@ var GFcss =
 
   remove: function(category, filename)
   {
-    var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-        Ci.nsIPrefService).getBranch('gamefox.');
-    var file = Cc['@mozilla.org/file/local;1'].getService(
-        Ci.nsILocalFile);
-    var css = eval(prefs.getCharPref('theme.css.serialized'));
-
     var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
         Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1'].getService(
         Ci.nsILocalFile);
+    var css = eval(this.prefs.getCharPref('serialized'));
 
     file.initWithPath(this.getDirectory());
     file.append(filename);
@@ -354,7 +333,7 @@ var GFcss =
     catch (e) {}
 
     delete css[category][filename];
-    prefs.setCharPref('theme.css.serialized', css.toSource());
+    this.prefs.setCharPref('serialized', css.toSource());
   },
 
   removeWithTree: function()
