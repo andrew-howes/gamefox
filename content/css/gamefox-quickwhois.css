@@ -16,5 +16,6 @@
         -moz-border-radius: 10px;
         border: #aaa 1px solid;
         font-size: inherit !important;
+        text-align: left;
     }
 }
