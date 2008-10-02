@@ -28,32 +28,26 @@ var GFtags =
 
   populate: function(method)
   {
-    var tagList, board, topic, i, item, childItem, children, row, cell1, cell2;
+    // context menu: method == 1
+    // tag tree: method == 2
+    var tagList, board, topic, item, childItem, children, row, cell1, cell2;
 
     if (method == 1)
-    {
       tagList = document.getElementById('gamefox-tags-menu');
-    }
     else
-    {
       tagList = document.getElementById('gamefox-tags-rows');
-    }
 
     if (!tagList)
-    {
       return;
-    }
 
     while (tagList.hasChildNodes())
-    {
-      tagList.removeChild(tagList.childNodes[0]);
-    }
+      tagList.removeChild(tagList.firstChild);
 
     this.read();
 
     if (method == 1)
     {
-      // For Active Message List and Tracked Topics link section
+      // Active Message List and Tracked Topics links
       var tagPrefs = Cc['@mozilla.org/preferences-service;1']
           .getService(Ci.nsIPrefService)
           .getBranch('gamefox.context.tag.');
@@ -78,7 +72,6 @@ var GFtags =
         tagList.appendChild(item);
       }
       var createSep = tagMyPosts || tagTracked;
-      // End section
 
       for (board in this.tags)
       {
@@ -137,84 +130,85 @@ var GFtags =
   doAction: function(actID, dblclick)
   {
     var tree = document.getElementById('gamefox-tags-tree');
+    var index = tree.view.selection.currentIndex;
 
-    if (tree.view.isContainer(tree.view.selection.currentIndex) && dblclick)
-    {
+    if (index == -1 || (tree.view.isContainer(index) && dblclick))
       return;
-    }
 
-    var tagID = tree.view.getCellText(tree.view.selection.currentIndex, tree.columns.getNamedColumn('gamefox-tags-tagid'));
+    var tagID = tree.view.getCellText(index, tree.columns.getNamedColumn('gamefox-tags-tagid'));
 
     switch (actID)
     {
       case 0:
-        this.open(tagID, 0); // open in new tab
+        this.open(tagID, 0); // new tab
         break;
       case 1:
-        this.open(tagID, 1); // open in new focused tab
+        this.open(tagID, 1); // new focused tab
         break;
       case 2:
-        this.open(tagID, 2); // open in current tab
+        this.open(tagID, 2); // focused tab
         break;
       case 3:
-        this.open(tagID, 3); // open in new window
+        this.open(tagID, 3); // new window
         break;
       case 4:
-        this.remove(tagID, tree.view.isContainer(tree.view.selection.currentIndex));
+        this.remove(tagID, tree.view.isContainer(index));
         break;
     }
   },
 
   open: function(tagID, openType)
   {
-    var IDs    = tagID.split(/,/);
-    var tagURI = 'http://www.gamefaqs.com/boards';
+    var IDs = tagID.split(/,/);
+    var tagURI = GFlib.domain + GFlib.path;
 
-    if (IDs[0] == 0 && IDs[1] == -1)
+    if (IDs[1] == -1)
     {
-      tagURI += '/myposts.php';
+      tagURI += 'myposts.php';
     }
-    else if (IDs[0] == 0 && IDs[1] == -2)
+    else if (IDs[1] == -2)
     {
-      tagURI += '/tracked.php';
+      tagURI += 'tracked.php';
     }
     else
     {
-      tagURI += (IDs[1] ? '/genmessage.php' : '/gentopic.php')
+      tagURI += (IDs[1] ? 'genmessage.php' : 'gentopic.php')
                 + '?board=' + IDs[0] + (IDs[1] ? '&topic=' + IDs[1]
-                + (IDs[2] && parseInt(IDs[2]) ? '&page=' + IDs[2] : '') : '');
+                + (IDs[2] && parseInt(IDs[2]) ? '&page=' + IDs[2]
+                + (IDs[3] ? IDs[3] : '') : '') : '');
     }
 
-    var winMed  = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator).getMostRecentWindow('navigator:browser');
+    var win = Cc['@mozilla.org/appshell/window-mediator;1']
+        .getService(Ci.nsIWindowMediator)
+        .getMostRecentWindow('navigator:browser');
 
     switch (openType)
     {
-      case 0:
+      case 0: // new tab
         try
         {
-          var browser = winMed.getBrowser();
-          browser.addTab(tagURI);
+          win.getBrowser().addTab(tagURI);
         }
         catch (e)
         {
-          winMed.loadURI(tagURI);
+          win.loadURI(tagURI);
         }
         break;
-      case 1:
+      case 1: // new focused tab
         try
         {
-          winMed.delayedOpenTab(tagURI);
+          win.delayedOpenTab(tagURI);
         }
         catch (e)
         {
-          winMed.loadURI(tagURI);
+          win.loadURI(tagURI);
         }
         break;
-      case 2:
-        winMed.loadURI(tagURI);
+      case 2: // focused tab
+        win.loadURI(tagURI);
         break;
-      case 3:
-        winMed.open(tagURI);
+      case 3: // new window
+        win.open(tagURI);
         break;
     }
   },
@@ -339,7 +333,7 @@ var GFtags =
 
     /* removePurged: dispatchRequest: open request */
 
-      request.open('GET', 'http://www.gamefaqs.com/boards/genmessage.php?board=' + board + '&topic=' + topic);
+      request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
 
 
     /* removePurged: dispatchRequest: request.onerror */
@@ -510,56 +504,44 @@ var GFtags =
     var boardTitle = false;
     var topicTitle = false;
 
-    if (event) // this will always be true, lulz!!?
+    if (event.type == 'dblclick')
+      event.preventDefault();
+
+    var onMyPosts = GFlib.onPage(doc, 'myposts');
+    var onTracked = GFlib.onPage(doc, 'tracked');
+    var onTopicList = !onMyPosts
+        && doc.evaluate('//div[@class="board_nav"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null
+        && doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
+
+    if (onTopicList || onMyPosts)
     {
-      if (event.type && event.type == 'dblclick')
+      try
       {
-        event.preventDefault();
-      }
+        var node = event.target;
 
-      var onMyPosts = GFlib.onPage(doc, 'myposts');
-      var onTopicList;
-
-      if (onMyPosts)
-      {
-        onTopicList = false;
-      }
-      else
-      {
-        onTopicList = doc.evaluate('//div[@class="board_nav"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null
-                    && doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
-      }
-
-      if (onMyPosts || onTopicList)
-      {
-        try
+        while (node.nodeName.toLowerCase() != 'td')
         {
-          var node = event.target;
-
-          while (node.nodeName.toLowerCase() != 'td')
-          {
-            node = node.parentNode;
-          }
-
-          var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
-          queryStr = topicLink.href;
-          topicTitle = GFutils.trim(topicLink.textContent);
-
-          if (onMyPosts)
-          {
-            boardTitle = GFutils.trim(node.parentNode.cells[0].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
-          }
-          else if (GFlib.onPage(doc, 'tracked'))
-          {
-            boardTitle = GFutils.trim(node.parentNode.cells[2].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
-          }
+          node = node.parentNode;
         }
-        catch (e) { return false; }
+
+        var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
+        queryStr = topicLink.href;
+        topicTitle = GFutils.trim(topicLink.textContent);
+
+        if (onMyPosts)
+        {
+          boardTitle = GFutils.trim(node.parentNode.cells[0].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
+        }
+        else if (onTracked)
+        {
+          boardTitle = GFutils.trim(node.parentNode.cells[2].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
+        }
       }
+      catch (e) { return false; }
     }
 
     var boardID     = queryStr.match(/\bboard=([0-9-]+)/)[1];
-    var topicID     = queryStr.match(/\btopic=([0-9-]+)/)[1];
+    var topicID     = queryStr.match(/\btopic=([0-9]+)/)[1];
     var tagID       = boardID + ',' + topicID;
 
     var h1s         = doc.getElementsByTagName('h1');
@@ -587,21 +569,46 @@ var GFtags =
 
     if (boardID in GFtags.tags)
     {
-      if (!GFlib.onPage(doc, 'tracked'))
+      if (!onTracked)
       { // overwrite if not on tracked topics - fixes abbreviated board titles
         //   from tracked topics and changed board titles, if that happens
         GFtags.tags[boardID].title = boardTitle;
       }
-      GFtags.tags[boardID].topics[topicID] = topicTitle;
     }
     else
     {
       GFtags.tags[boardID] = {title: boardTitle, topics: {}};
-      GFtags.tags[boardID].topics[topicID] = topicTitle;
     }
+    GFtags.tags[boardID].topics[topicID] = topicTitle;
 
     GFtags.write(GFtags.tags);
     return true;
+  },
+
+  tagTopicLink: function(doc)
+  {
+    this.read();
+    var queryStr = doc.location.search;
+    var boardID = queryStr.match(/\bboard=([0-9-]+)/)[1];
+    var topicID = queryStr.match(/\btopic=([0-9]+)/)[1];
+    var tagID = boardID + ',' + topicID;
+
+    var a = doc.createElement('a');
+        a.setAttribute('id', 'gamefox-tag-link');
+        a.setAttribute('href', '#' + tagID);
+
+    if (boardID in this.tags && topicID in this.tags[boardID].topics)
+    {
+      a.textContent = 'Untag Topic';
+      a.addEventListener('click', this.untagTopicEvent, false);
+    }
+    else
+    {
+      a.textContent = 'Tag Topic';
+      a.addEventListener('click', this.tagTopicEvent, false);
+    }
+
+    return a;
   },
 
   tagTopicEvent: function(event)
@@ -618,7 +625,7 @@ var GFtags =
   untagTopicEvent: function(event)
   {
     event.preventDefault();
-    GFtags.remove(event.target.hash.substring(1));
+    GFtags.remove(event.target.hash.substr(1));
 
     event.target.removeEventListener('click', GFtags.untagTopicEvent, false);
     event.target.addEventListener('click', GFtags.tagTopicEvent, false);

@@ -350,30 +350,8 @@ var GameFOX =
       // "Tag Topic" link
       if (GameFOX.prefs.getBoolPref('elements.tag.link'))
       {
-        // TODO: move some of this to tag.js?
-        GFtags.read();
-        var queryStr = doc.location.search;
-        var boardID = queryStr.match(/\bboard=([0-9-]+)/)[1];
-        var topicID = queryStr.match(/\btopic=([0-9]+)/)[1];
-        var tagID = boardID + ',' + topicID;
-
-        var a = doc.createElement('a');
-            a.setAttribute('id', 'gamefox-tag-link');
-            a.setAttribute('href', '#' + tagID);
-
-        if (boardID in GFtags.tags && topicID in GFtags.tags[boardID].topics)
-        {
-          a.textContent = 'Untag Topic';
-          a.addEventListener('click', GFtags.untagTopicEvent, false);
-        }
-        else
-        {
-          a.textContent = 'Tag Topic';
-          a.addEventListener('click', GFtags.tagTopicEvent, false);
-        }
-
         userNav.appendChild(doc.createTextNode(' | '));
-        userNav.appendChild(a);
+        userNav.appendChild(GFtags.tagTopicLink(doc));
       }
 
       // Double click
@@ -683,7 +661,7 @@ var GameFOX =
   {
     var node = event.target;
     var doc = node.ownerDocument;
-    var topicLink, msgsCell;
+    var topicLink, msgsCell, tc;
 
     try
     {
@@ -695,6 +673,9 @@ var GameFOX =
       topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0].getAttribute('href');
 
       msgsCell = node.parentNode.cells[GFlib.onPage(doc, 'myposts') ? 2 : 3];
+
+      tc = GFlib.onPage(doc, 'tracked') || GFlib.onPage(doc, 'myposts') ? '' :
+          GFutils.tcParam(GFutils.trim(node.parentNode.cells[2].firstChild.textContent));
     }
     catch (e)
     {
@@ -791,9 +772,6 @@ var GameFOX =
       td.appendChild(doc.createTextNode(pgPrefix));
       td.innerHTML = ' ' + td.innerHTML.replace(/\s/g, '&nbsp;');
 
-      var tc = GFlib.onPage(doc, 'tracked') ? '' : GFutils.tcParam(
-          GFutils.trim(node.parentNode.cells[2].firstChild.textContent));
-
       for (i = 0; i < numPages; i++)
       {
         link = doc.createElement('a');
@@ -816,16 +794,14 @@ var GameFOX =
     else // triggered from context menu
     {
       while (pageList.hasChildNodes())
-      {
-        pageList.removeChild(pageList.childNodes[0]);
-      }
+        pageList.removeChild(pageList.firstChild);
 
       for (i = 0; i < numPages; i++)
       {
         item = document.createElement('menuitem');
         item.setAttribute('label', i+1);
-        item.setAttribute('oncommand', 'GFtags.open("' + boardID + ',' + topicID + ',' + i + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + boardID + ',' + topicID + ',' + i + '", 0)');
+        item.setAttribute('oncommand', 'GFtags.open("' + boardID + ',' + topicID + ',' + i + ',' + tc + '", 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + boardID + ',' + topicID + ',' + i + ',' + tc + '", 0)');
         pageList.appendChild(item);
       }
     }
