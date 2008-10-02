@@ -1,7 +1,6 @@
 @-moz-document domain(gamefaqs.com)
 {
-    .ad, .adbox, #gne_nav, #mpu_wrap, #footer, #sitenav, #broadnav, #todayoncnet,
-    .rubics_netxp1_main, iframe
+    .ad, .adbox, .rubics_netxp1_main, #gne_nav, #mpu_wrap, #footer, iframe
     {
         display: none !important;
     }

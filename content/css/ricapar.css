@@ -13,21 +13,22 @@
 @-moz-document domain(gamefaqs.com) {
     /* First we kill off the useless crap */
 
+    .rubics_netxp1_main,
     #gne_nav,
-    img[alt="madison"],
-    #content + img,
-    img[alt="advertisement"],
-    img[alt="Click Here"],
-    #footer,
     #logo,
-    div[style="padding:10px 0px 0px 0px; float:left; clear:left;"],
-    iframe,
-    div[style="text-align:center"],
+    #content + img,
+    #board_wrap > div.ad,
     #board_wrap + div,
     #searchbox label,
     #searchbox .btn,
-    #board_wrap > div.ad,
-    #mpu_wrap {
+    #mpu_wrap,
+    #footer,
+    img[alt="madison"],
+    img[alt="advertisement"],
+    img[alt="Click Here"],
+    div[style="padding:10px 0px 0px 0px; float:left; clear:left;"],
+    div[style="text-align:center"],
+    iframe {
         display: none !important;
     }
 
@@ -37,7 +38,7 @@
     body {
         margin: 0 !important;
         padding: 0 !important;
-        font-family: Arial, sans-serif !important;
+        font-family: arial, sans-serif !important;
         font-size: 12px !important;
     }
 
@@ -95,10 +96,6 @@
         padding: 10px 5px !important;
         font-weight: bold !important;
         margin: 2px !important;
-    }
-
-    #headerbottomright {
-        display: none !important;
     }
 
     #quicknav,
@@ -175,17 +172,6 @@
         content: ' | ' !important;
         color: #fff !important;
         font-weight: bold !important;
-    }
-
-    /* Footer */
-
-    #copyright {
-        background: #66f !important;
-        padding: 4px !important;
-        color: #fff !important;
-        text-align: center !important;
-        font-size: 10px !important;
-        margin: 2px !important;
     }
 
     /* User Bar */
@@ -293,8 +279,7 @@
 
     .message .even > td:last-child,
     .message tr:not(.even) > .author + td:not([style]):last-child,
-    .author + td,
-    .graybox {
+    .author + td {
         background: #d0d0ff !important;
     }
 
@@ -321,17 +306,5 @@
         margin: 0 !important;
         padding: 3px !important;
         font-style: normal !important;
-    }
-
-    /* Post/Preview Page stuff */
-
-    .subhead1 {
-        display: block !important;
-        background: #00f !important;
-        padding: 2px !important;
-        margin: 2px !important;
-        color: #fff !important;
-        font-weight: bold !important;
-        font-size: 15px !important;
     }
 }
