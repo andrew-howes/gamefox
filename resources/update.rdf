@@ -29,7 +29,7 @@
                             <RDF:Description>
                                 <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
                                 <em:minVersion>2.0a1pre</em:minVersion>
-                                <em:maxVersion>2.0a1pre</em:maxVersion>
+                                <em:maxVersion>2.0a2pre</em:maxVersion>
 
                                 <em:updateLink>http://beyondboredom.net/gfox/gamefox-0.6.6.xpi</em:updateLink>
                                 <em:updateHash>sha1:4644afdab44e1c424a825a2f77b38b72888e1f6a</em:updateHash>
