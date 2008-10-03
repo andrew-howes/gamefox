@@ -69,10 +69,10 @@ var GFlib =
 
   onPage: function(doc, page)
   {
-    if (doc.gfPage)
-      return doc.gfPage.indexOf(page) != -1;
+    if (doc.gamefox.pageType)
+      return doc.gamefox.pageType.indexOf(page) != -1;
 
-    // gfPage is an array because of overlapping pages, e.g. message detail and messages
+    // pageType is an array because of overlapping pages, e.g. message detail and messages
     switch (page)
     {
       case 'index':
@@ -80,7 +80,7 @@ var GFlib =
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (h1 != null && h1.textContent == 'Board Information')
         {
-          doc.gfPage = ['index'];
+          doc.gamefox.pageType = ['index'];
           return true;
         }
         else
@@ -89,21 +89,21 @@ var GFlib =
       case 'topics':
         if (GFlib.onPage(doc, 'tracked'))
         {
-          doc.gfPage = ['topics', 'tracked'];
+          doc.gamefox.pageType = ['topics', 'tracked'];
           return true;
         }
         var col = doc.evaluate('//col[@class="status"]', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (col != null)
         {
-          doc.gfPage = ['topics'];
+          doc.gamefox.pageType = ['topics'];
           return true;
         }
         var notopics = doc.evaluate('//div[@id="board_wrap"]/p', doc, null, XPathResult.
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (notopics != null && notopics.textContent.indexOf('No topics are available') != -1)
         {
-          doc.gfPage = ['topics'];
+          doc.gamefox.pageType = ['topics'];
           return true;
         }
         else
@@ -115,15 +115,15 @@ var GFlib =
         if (table != null && !GFlib.onPage(doc, 'post'))
         {
           if (GFlib.onPage(doc, 'detail'))
-            doc.gfPage = ['messages', 'detail'];
+            doc.gamefox.pageType = ['messages', 'detail'];
           else
           {
             var user = doc.evaluate('//div[@class="user"]', doc, null, XPathResult.
                 FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
             if (user != null && user.textContent.indexOf('Topic Archived') != -1)
-              doc.gfPage = ['messages', 'archive'];
+              doc.gamefox.pageType = ['messages', 'archive'];
             else
-              doc.gfPage = ['messages'];
+              doc.gamefox.pageType = ['messages'];
           }
           return true;
         }

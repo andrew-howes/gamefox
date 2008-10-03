@@ -101,11 +101,11 @@ var GFquickpost =
   appendSig: function(event)
   {
     var doc = GFlib.getDocument(event);
-    if (!doc.gfSigAdded)
+    if (!doc.gamefox.sigAdded)
     {
       doc.getElementById('gamefox-message').value +=
           GFutils.formatSig(null, null, doc);
-      doc.gfSigAdded = true;
+      doc.gamefox.sigAdded = true;
     }
   },
 
