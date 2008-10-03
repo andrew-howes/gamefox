@@ -263,9 +263,27 @@ var GFquickpost =
                 event.target.addEventListener('click', GFquickpost.post, false);
                 return;
               }
-              doc.location = GFlib.domain + GFlib.path +
-                ((doc.getElementsByName('topictitle')[0]) ? 'gentopic.php' :
-                 'genmessage.php') + query;
+
+              query = GFutils.parseQueryString(query);
+              if (doc.getElementsByName('topictitle')[0]) // topic list
+                doc.location = GFlib.domain + GFlib.path + 'gentopic.php?' +
+                  'board=' + query['board'];
+              else // message list
+              {
+                if (doc.gamefox.pages * GameFOX.prefs.getIntPref('msgsPerPage') == doc.gamefox.msgnum)
+                  var end = '&page=' + doc.gamefox.pages; // next page
+                else if (doc.gamefox.pages > 1)
+                  var end = '&page=' + (doc.gamefox.pages - 1); // last page
+                else
+                  var end = ''; // first page
+
+                if (end.length && GameFOX.prefs.getBoolPref('elements.marktc'))
+                  end += "&tc=" + doc.gamefox.tc;
+
+                doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
+                  'board=' + query['board'] + '&topic=' + query['topic'] + end;
+              }
+              
               return;
             }
           }

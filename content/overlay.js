@@ -10,6 +10,8 @@ var GameFOX =
     var doc = GFlib.getDocument(event);
     if (!GFlib.onBoards(doc)) return false;
 
+    doc.gamefox = {};
+
     /* Index (index.php) */
     if (GFlib.onPage(doc, 'index'))
     {
@@ -510,6 +512,13 @@ var GameFOX =
                 td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
         }
       }
+
+      doc.gamefox.tc = tc;
+      doc.gamefox.msgnum = msgnum;
+      if (pageJumper)
+        doc.gamefox.pages = pageJumper.getElementsByTagName('li').length;
+      else
+        doc.gamefox.pages = 1;
 
       // Add TC to page links
       if (tc && pageJumper)

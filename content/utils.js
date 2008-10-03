@@ -468,5 +468,22 @@ var GFutils =
   {
     return tc && GameFOX.prefs.getBoolPref('elements.marktc') ?
         '&tc=' + tc.replace(/ /g, '+') : '';
+  },
+
+  parseQueryString: function(str)
+  {
+    if (str[0] == '?')
+      str = str.substr(1);
+
+    var query = str.split(/&/);
+    var obj = {};
+    var arg;
+    for (var i = 0; i < query.length; i++)
+    {
+      arg = query[i].split(/=/);
+      obj[arg[0]] = arg[1];
+    }
+
+    return obj;
   }
 };
