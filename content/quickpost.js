@@ -277,8 +277,8 @@ var GFquickpost =
                 else
                   var end = ''; // first page
 
-                if (end.length && GameFOX.prefs.getBoolPref('elements.marktc'))
-                  end += "&tc=" + doc.gamefox.tc;
+                if (end.length)
+                  end += GFutils.tcParam(doc.gamefox.tc);
 
                 doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
                   'board=' + query['board'] + '&topic=' + query['topic'] + end;
