@@ -64,12 +64,14 @@ var GFquickpost =
     if (GameFOX.prefs.getBoolPref('elements.quickpost.otherbuttons'))
     {
       var previewbutton = doc.createElement('input');
+      form.appendChild(doc.createTextNode(' '));
       form.appendChild(previewbutton);
       previewbutton.type = 'submit';
       previewbutton.name = 'post';
       previewbutton.value = 'Preview Message';
 
       var spellchkbutton = doc.createElement('input');
+      form.appendChild(doc.createTextNode(' '));
       form.appendChild(spellchkbutton);
       spellchkbutton.type = 'submit';
       spellchkbutton.name = 'post';
@@ -79,6 +81,7 @@ var GFquickpost =
     if (newTopic)
     {
       var hidebutton = doc.createElement('input');
+      form.appendChild(doc.createTextNode(' '));
       form.appendChild(hidebutton);
       hidebutton.id = 'gamefox-quickpost-hide';
       hidebutton.type = 'button';
