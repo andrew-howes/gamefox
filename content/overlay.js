@@ -564,7 +564,13 @@ var GameFOX =
       // post ids are generated after the page is loaded
       // this is at the bottom because firefox 2 doesn't re-center the page after
       // QuickPost is added
-      if (doc.location.hash.length) doc.location.hash = doc.location.hash;
+      if (doc.location.hash.length)
+      {
+        if (doc.location.hash == '#last-post')
+          doc.location.hash = '#p' + msgnumString;
+        else
+          doc.location.hash = doc.location.hash;
+      }
     }
   },
 
