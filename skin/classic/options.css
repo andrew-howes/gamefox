@@ -85,6 +85,11 @@ radio[pane=gamefox-tags-pane]
     -moz-image-region: rect(0px, 160px,  32px, 128px);
 }
 
+radio[pane=gamefox-users-pane]
+{
+    -moz-image-region: rect(0px, 224px, 32px, 192px);
+}
+
 treechildren::-moz-tree-checkbox
 {
     list-style-image: url('chrome://gamefox/skin/cbox-empty.png');

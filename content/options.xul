@@ -69,7 +69,6 @@
 
       <tabs tabGroup="page">
         <tab id="gamefox-tab-elements" label="&page.tab.elements;"/>
-        <tab id="gamefox-tab-userlists" label="&page.tab.userlists;"/>
         <tab id="gamefox-tab-board" label="&page.tab.board;"/>
       </tabs>
 
@@ -171,25 +170,6 @@
 
           </vbox>
         </tabpanel>
-
-
-<!-- USER LISTS -->
-        <tabpanel orient="vertical" flex="1">
-          <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
-
-          <groupbox>
-            <caption label="&page.userlists.options.label;"/>
-            <checkbox preference="userlist-topics-groupnames" label="&page.userlists.options.topicgroups;"/>
-            <checkbox preference="userlist-messages-groupnames" label="&page.userlists.options.msggroups;"/>
-          </groupbox>
-
-          <hbox align="center">
-            <description flex="1">&page.userlists.desc;</description>
-            <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
-          </hbox>
-          <vbox id="usergroups" style="height:280px;overflow:auto"/>
-        </tabpanel>
-
 
 <!-- BOARD SETTINGS -->
 
@@ -625,6 +605,24 @@
 
   <prefpane id="gamefox-tags-pane" label="&tags.label;" flex="1">
     <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul" flex="1" orient="vertical"/>
+  </prefpane>
+
+<!-- U S E R S -->
+
+  <prefpane id="gamefox-users-pane" label="&users.label;" flex="1">
+    <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
+
+    <groupbox>
+      <caption label="&page.userlists.options.label;"/>
+      <checkbox preference="userlist-topics-groupnames" label="&page.userlists.options.topicgroups;"/>
+      <checkbox preference="userlist-messages-groupnames" label="&page.userlists.options.msggroups;"/>
+    </groupbox>
+
+    <hbox align="center">
+      <description flex="1">&page.userlists.desc;</description>
+      <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
+    </hbox>
+    <vbox id="usergroups" style="height:330px;overflow:auto"/>
   </prefpane>
 
 </prefwindow>
