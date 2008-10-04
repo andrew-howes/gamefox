@@ -43,7 +43,7 @@ var GameFOX =
       for (var i = 1; i < rows.length; i++)
       {
         // Last post link
-        if (GameFOX.prefs.getBoolPref('elements.topics.lastpostlink')) // pref
+        if (GameFOX.prefs.getBoolPref('elements.topics.lastpostlink'))
         {
           var lastPost = GFutils.getLastPost(rows[i].cells[2].textContent);
 
@@ -56,6 +56,21 @@ var GameFOX =
               a.textContent = text;
               a.className = 'gamefox-last-post-link';
           rows[i].cells[3].appendChild(a);
+        }
+
+        // Label topics with messages after your last post
+        if (GameFOX.prefs.getBoolPref('elements.aml.marknewposts'))
+        {
+          if (rows[i].cells[3].textContent != rows[i].cells[4].textContent)
+          { // "last post" and "your last post" differ
+            var span = doc.createElement('span');
+                span.className = 'gamefox-new-posts';
+                span.style.setProperty('font-weight', 'bold', null);
+                span.appendChild(doc.createTextNode('(new)'));
+
+            rows[i].cells[4].appendChild(doc.createTextNode(' '));
+            rows[i].cells[4].appendChild(span);
+          }
         }
       }
     }

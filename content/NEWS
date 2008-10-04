@@ -6,6 +6,8 @@
     * Remove CSS: QuickPost (0.5)
     * Add account switcher to the sidebar
     * Jump to the last post or page after QuickPosting
+    * Label topics on the active messages list that have messages after your
+      last post
 
 2008-09-21:
     * version 0.6.6

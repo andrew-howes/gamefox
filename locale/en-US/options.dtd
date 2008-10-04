@@ -37,6 +37,7 @@
 <!ENTITY page.elements.topics.quickpost "QuickPost Topic form">
 <!ENTITY page.elements.topics.trackedlink "Link to boards on Tracked Topics page">
 <!ENTITY page.elements.topics.lastpostlink "Link to last post">
+<!ENTITY page.elements.topics.marknewposts "Label topics with messages after your last post on the active messages list">
 <!ENTITY page.elements.messages.caption "Message Lists">
 <!ENTITY page.elements.messages.quickpost "QuickPost Message form">
 <!ENTITY page.elements.messages.taglink "&quot;Tag Topic&quot; link">
