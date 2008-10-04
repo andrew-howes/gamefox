@@ -191,13 +191,6 @@
         margin: 2px 2px 0 2px !important;
     }
 
-    #gamefox-quickpost-title {
-        background-color: #00f !important;
-        font: bold 16px arial, sans-serif !important;
-        margin: 0 2px 2px 2px !important;
-        width: auto !important;
-    }
-
     .pages {
         background: #8080ff !important;
     }
@@ -232,7 +225,7 @@
         color: #fff !important;
     }
 
-    table:not(.message) td {
+    table:not(.message) tr:not(.gamefox-highlight) td {
         background: #d0d0ff !important;
     }
 
@@ -320,5 +313,21 @@
 
     .bracket .part {
         background: #ff8;
+    }
+    
+    /* QuickPost */
+    #gamefox-quickpost-title {
+        background-color: #00f !important;
+        font: bold 16px arial, sans-serif !important;
+        margin: 0 2px 2px 2px !important;
+        width: auto !important;
+    }
+    
+    #gamefox-quickpost-form {
+        text-align: center;
+    }
+    
+    #gamefox-message {
+        max-width: 700px;
     }
 }
