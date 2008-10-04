@@ -11,7 +11,7 @@
 }
 
 @-moz-document domain(gamefaqs.com) {
-    /* First we kill off the useless crap */
+    /* Ads, etc */
 
     .rubics_netxp1_main,
     #gne_nav,
@@ -306,5 +306,19 @@
         margin: 0 !important;
         padding: 3px !important;
         font-style: normal !important;
+    }
+
+    /* Bracket */
+
+    .bracket .win {
+        background: #8f8;
+    }
+
+    .bracket .lose {
+        background: #f88;
+    }
+
+    .bracket .part {
+        background: #ff8;
     }
 }
