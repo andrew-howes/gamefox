@@ -291,6 +291,8 @@ var GFquickpost =
                   var postnumStr = (doc.gamefox.msgnum + 1).toString();
                   end += '#p' + ('000'.substr(postnumStr.length)) + postnumStr;
                 }
+                else
+                  end += '#last-post';
 
                 doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
                   'board=' + query['board'] + '&topic=' + query['topic'] + end;
