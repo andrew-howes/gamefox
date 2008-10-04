@@ -1,7 +1,6 @@
 <!ENTITY topictitle.label "Topic Title">
 <!ENTITY tagid.label "Tag ID">
 
-<!ENTITY refresh.label "refresh">
 <!ENTITY deletepurged.label "delete purged">
 <!ENTITY deleteall.label "delete all">
 
