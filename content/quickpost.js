@@ -270,7 +270,9 @@ var GFquickpost =
                   'board=' + query['board'];
               else // message list
               {
-                if (doc.gamefox.pages * GameFOX.prefs.getIntPref('msgsPerPage') == doc.gamefox.msgnum)
+                var msgsPerPage = GameFOX.prefs.getIntPref('msgsPerPage');
+
+                if (doc.gamefox.pages * msgsPerPage == doc.gamefox.msgnum)
                   var end = '&page=' + doc.gamefox.pages; // next page
                 else if (doc.gamefox.pages > 1)
                   var end = '&page=' + (doc.gamefox.pages - 1); // last page
@@ -280,8 +282,19 @@ var GFquickpost =
                 if (end.length)
                   end += GFutils.tcParam(doc.gamefox.tc);
 
+                if (doc.gamefox.msgnum > (doc.gamefox.pages - 1) * msgsPerPage &&
+                    doc.gamefox.pages * msgsPerPage != doc.gamefox.msgnum)
+                { // on last page
+                  var postnumStr = (doc.gamefox.msgnum + 1).toString();
+                  end += '#p' + ('000'.substr(postnumStr.length)) + postnumStr;
+                }
+
                 doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
                   'board=' + query['board'] + '&topic=' + query['topic'] + end;
+
+                if ((query['page'] == (doc.gamefox.pages - 1) || doc.gamefox.pages == 1)
+                    && doc.location.hash.length)
+                  doc.location.reload(); // hash changes don't reload the page
               }
               
               return;
