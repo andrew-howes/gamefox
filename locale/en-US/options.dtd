@@ -27,19 +27,19 @@
 <!ENTITY page.board.settings.grab "Grab from GameFAQs">
 <!ENTITY page.board.settings.save "Save to GameFAQs">
 <!ENTITY page.elements.desctitles "Descriptive window titles">
-<!ENTITY page.elements.titleprefix "Page title prefixes">
-<!ENTITY page.elements.charcounts "Title and message character counts">
+<!ENTITY page.elements.titleprefix "Window title page prefixes">
+<!ENTITY page.elements.charcounts "Title and message character counters">
 <!ENTITY page.elements.postmessage "&quot;Post Message&quot; (skip preview) button">
 <!ENTITY page.elements.otherbuttons "QuickPost preview buttons">
-<!ENTITY page.elements.stopads "Stop ad servers from loading">
-<!ENTITY page.elements.marktc "Mark topic creator">
+<!ENTITY page.elements.stopads "Block ad servers">
+<!ENTITY page.elements.marktc "Label topic creator">
 <!ENTITY page.elements.topics.caption "Topic Lists">
-<!ENTITY page.elements.topics.quickpost "QuickPost Topic form">
-<!ENTITY page.elements.topics.trackedlink "Link to boards on Tracked Topics page">
+<!ENTITY page.elements.topics.quickpost "QuickPost">
+<!ENTITY page.elements.topics.trackedlink "Link to boards (Tracked Topics)">
 <!ENTITY page.elements.topics.lastpostlink "Link to last post">
-<!ENTITY page.elements.topics.marknewposts "Label topics with messages after your last post on the active messages list">
+<!ENTITY page.elements.topics.marknewposts "Label topics with messages after your last post (Active Messages)">
 <!ENTITY page.elements.messages.caption "Message Lists">
-<!ENTITY page.elements.messages.quickpost "QuickPost Message form">
+<!ENTITY page.elements.messages.quickpost "QuickPost">
 <!ENTITY page.elements.messages.taglink "&quot;Tag Topic&quot; link">
 <!ENTITY page.elements.messages.numbering "Number messages">
 <!ENTITY page.elements.pages.caption "Topic Pagination">

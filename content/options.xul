@@ -108,8 +108,8 @@
                     <caption label="&page.elements.topics.caption;"/>
                     <vbox>
                       <checkbox preference="gamefox-pref-quickpost-link" label="&page.elements.topics.quickpost;"/>
-                      <checkbox preference="gamefox-pref-tracked-boardlink" label="&page.elements.topics.trackedlink;"/>
                       <checkbox preference="gamefox-pref-lastpostlink" label="&page.elements.topics.lastpostlink;"/>
+                      <checkbox preference="gamefox-pref-tracked-boardlink" label="&page.elements.topics.trackedlink;"/>
                       <checkbox preference="elements-aml-marknewposts" label="&page.elements.topics.marknewposts;"/>
                     </vbox>
                   </groupbox>
