@@ -4,7 +4,7 @@ var GFoptions =
 {
   importBoardSettings: function()
   {
-    GFutils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'), true);
+    GFutils.importBoardSettings(true, true, document.getElementById('gamefox-css-grab-bs'));
   },
 
   exportBoardSettings: function()
@@ -22,7 +22,7 @@ var GFoptions =
 
   importSignature: function()
   {
-    GFutils.importSignature(true, document.getElementById('gamefox-css-grab-sig'), true);
+    GFutils.importSignature(true, true, document.getElementById('gamefox-css-grab-sig'));
   },
 
   openCSSDirectory: function()
@@ -112,6 +112,15 @@ var GFoptions =
       }
 
       tabs[i].setAttribute('onselect', 'GFoptions.saveSelectedTab(this)');
+    }
+  },
+
+  firstRun: function()
+  {
+    if (window.arguments && window.arguments[0])
+    {
+      GFutils.importBoardSettings(true);
+      GFutils.importSignature(true);
     }
   }
 };

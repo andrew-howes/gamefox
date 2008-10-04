@@ -2,9 +2,6 @@
 
 var GFsidebar =
 {
-  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
-             Ci.nsIPrefService).getBranch('gamefox.'),
-
   onload: function()
   {
     // link middle clicking
@@ -15,21 +12,7 @@ var GFsidebar =
 
     // accounts
     this.populateAccounts();
-
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('accounts', this, false);
-
-    window.addEventListener('unload', this.unload, false);
-  },
-
-  unload: function()
-  {
-    GFsidebar.prefs.removeObserver('accounts', GFsidebar);
-  },
-
-  observe: function()
-  {
-    this.populateAccounts();
+    GFsidebarAccountsObserver.register();
   },
 
   populateAccounts: function()

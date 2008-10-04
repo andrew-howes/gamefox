@@ -2,7 +2,7 @@
 
 var GFutils =
 {
-  importBoardSettings: function(noisy, button, inOptions)
+  importBoardSettings: function(inOptions, noisy, button)
   {
     if (button) button.setAttribute('disabled', true);
 
@@ -16,7 +16,7 @@ var GFutils =
         {
           GFlib.log('importBoardSettings: Bad things!');
           if (noisy)
-            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
+            GFlib.alert('Something went wrong. Are you logged in to gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -32,12 +32,12 @@ var GFutils =
         {
           GFlib.log('importBoardSettings: Unable to retrieve all settings.');
           if (noisy)
-            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
+            GFlib.alert('Something went wrong. Are you logged in to gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
 
-        // if GameFAQs gives us bad values, bad things happen
+        // TODO: validate settings from GameFAQs
         if (inOptions)
         {
           document.getElementById('gamefoxTpcsPerPage').value = topicpage;
@@ -79,7 +79,7 @@ var GFutils =
         {
           GFlib.log('exportBoardSettings: Bad things!');
           if (noisy)
-            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
+            GFlib.alert('Something went wrong. Are you logged in to gamefaqs.com?');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -136,7 +136,7 @@ var GFutils =
     return true;
   },
 
-  importSignature: function(noisy, button, inOptions)
+  importSignature: function(inOptions, noisy, button)
   {
     if (button) button.setAttribute('disabled', true);
 
@@ -166,24 +166,24 @@ var GFutils =
           if (button) button.setAttribute('disabled', false);
           return;
         }
+        sig = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
+
         if (inOptions)
         {
-          document.getElementById('sig-body').value = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
+          document.getElementById('sig-body').value = sig;
 
-          // oninput doesn't seem to be called
+          // oninput isn't called
           GFsig.updatePref(document.getElementById('sig-body'));
-
-          // to make sure this call gets the last say
-          window.setTimeout(GFsig.updateCharCounts, 100);
         }
         else
         {
           var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
               Ci.nsIPrefService).getBranch('gamefox.');
           var sigs = eval(GFutils.getString('signature.serialized', prefs));
-          sigs[0]['body'] = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
+          sigs[0]['body'] = sig;
           GFutils.setString('signature.serialized', sigs.toSource(), prefs);
         }
+
         if (button) button.setAttribute('disabled', false);
       }
     };

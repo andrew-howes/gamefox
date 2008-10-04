@@ -91,8 +91,7 @@ var GFsig =
     this.hideCriteriaForm();
 
     // fill in fields
-    var defaultSig = this.getSigByCriteria();
-    sig.value = defaultSig['body'];
+    sig.value = this.getSigByCriteria()['body'];
 
     // loop through sigs and add them to menulist
     var sigs = eval(GFutils.getString('serialized', this.prefs));
@@ -101,37 +100,6 @@ var GFsig =
       if (i == 0) continue;
       menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
             sigs[i]['boards']) + ' / ' + sigs[i]['body'], i);
-    }
-
-    this.updateCharCounts();
-
-    // watch pref for change and update signature
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('', this, false);
-
-    window.addEventListener('unload', this.unload, false);
-  },
-
-  unload: function()
-  {
-    // if we don't do this, the observer will persist after the window is
-    // closed. this isn't needed and the observe() function won't be able
-    // to use any other resources like GFutils
-    GFsig.prefs.removeObserver('', GFsig);
-  },
-
-  observe: function()
-  {
-    var sigs = eval(GFutils.getString('serialized', this.prefs));
-    var idx = document.getElementById('sig-menu').selectedItem.value;
-
-    if (idx == 'default') idx = 0;
-
-    if (sigs[idx] != undefined)
-    {
-      // don't reset the scrollbar while typing
-      if (document.getElementById('sig-body').value != sigs[idx]['body'])
-        document.getElementById('sig-body').value = sigs[idx]['body'];
     }
 
     this.updateCharCounts();
@@ -159,7 +127,17 @@ var GFsig =
       menu.insertItemAt(index, 'Global signature', index);
       menu.selectedIndex = index;
     }
-    if (menu.selectedItem.value != 'default')
+
+    if (menu.selectedItem.value == 'default')
+    {
+      this.hideCriteriaForm();
+      document.getElementById('sig-delete').disabled = true;
+
+      accounts.value = '';
+      boards.value = '';
+      sig.value = this.getSigByCriteria()['body'];
+    }
+    else
     {
       this.showCriteriaForm();
       document.getElementById('sig-delete').disabled = false; // immutable
@@ -169,16 +147,6 @@ var GFsig =
       boards.value = sigData['boards'];
       sig.value = sigData['body'];
     }
-    else // menu.selectedItem.value == 'default'
-    {
-      this.hideCriteriaForm();
-      document.getElementById('sig-delete').disabled = true;
-
-      accounts.value = '';
-      boards.value = '';
-      var defaultSig = this.getSigByCriteria();
-      sig.value = defaultSig['body'];
-    }
 
     this.updateCharCounts();
   },
@@ -186,7 +154,7 @@ var GFsig =
   add: function()
   {
     var sigs = eval(GFutils.getString('serialized', this.prefs));
-    sigs.push({"accounts":"", "boards":"", "body":""});
+    sigs.push({'accounts':'', 'boards':'', 'body':''});
     GFutils.setString('serialized', sigs.toSource(), this.prefs);
 
     return sigs.length - 1;
@@ -210,6 +178,8 @@ var GFsig =
     GFutils.setString('serialized', sigs.toSource(), this.prefs);
     menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
         sigs[idx]['boards'], idx == 0) + (idx != 0 ? ' / ' + sigs[idx]['body'] : '');
+
+    this.updateCharCounts();
   },
 
   getCriteriaString: function(accounts, boards, isDefault)

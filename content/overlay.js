@@ -939,10 +939,8 @@ function GameFOXLoader()
 
     if (lastversion == '') // first run
     {
-      GFutils.importBoardSettings();
-      GFutils.importSignature();
       window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
-        'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');
+        'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar', true);
     }
 
     GameFOX.prefs.setCharPref('version', version);

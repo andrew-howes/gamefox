@@ -13,7 +13,7 @@
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"
-    onload="GFoptions.restoreLastPane();"
+    onload="GFoptions.restoreLastPane();GFoptions.firstRun();"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 <!-- P A G E -->
@@ -26,6 +26,7 @@
     <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
+    <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
 
     <preferences>
       <preference id="gamefox-pref-quickpost-form" name="gamefox.elements.quickpost.form" type="bool"/>
