@@ -159,7 +159,7 @@ var GFtags =
 
   open: function(tagID, openType)
   {
-    var IDs = tagID.split(/,/);
+    var IDs = tagID.split(',');
     var tagURI = GFlib.domain + GFlib.path;
 
     if (IDs[1] == -1)
@@ -478,7 +478,7 @@ var GFtags =
 
     tagIDs.forEach(function(element, index, array)
     {
-      IDs = element.split(/,/);
+      IDs = element.split(',');
 
       if (!IDs[1] && delFolder && typeof(GFtags.tags[IDs[0]].title) == 'string')
       {
