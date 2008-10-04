@@ -2,7 +2,7 @@
 
 var GFutils =
 {
-  importBoardSettings: function(inOptions, noisy, button)
+  importBoardSettings: function(inOptions, button, noisy)
   {
     if (button) button.setAttribute('disabled', true);
 
@@ -66,7 +66,7 @@ var GFutils =
     request.send(null);
   },
 
-  exportBoardSettings: function(topicpage, topicsort, messagepage, messagesort, timezone, userdisplay, noisy, button)
+  exportBoardSettings: function(topicpage, topicsort, messagepage, messagesort, timezone, userdisplay, button, noisy)
   {
     if (button) button.setAttribute('disabled', true);
     var request = new XMLHttpRequest();
@@ -136,7 +136,7 @@ var GFutils =
     return true;
   },
 
-  importSignature: function(inOptions, noisy, button)
+  importSignature: function(inOptions, button, noisy)
   {
     if (button) button.setAttribute('disabled', true);
 

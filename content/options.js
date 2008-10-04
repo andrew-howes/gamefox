@@ -4,7 +4,7 @@ var GFoptions =
 {
   importBoardSettings: function()
   {
-    GFutils.importBoardSettings(true, true, document.getElementById('gamefox-css-grab-bs'));
+    GFutils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'), true);
   },
 
   exportBoardSettings: function()
@@ -16,13 +16,14 @@ var GFoptions =
         document.getElementById('messagesort').value,
         document.getElementById('timezone').value,
         document.getElementById('userdisplay').value,
-        true, document.getElementById('gamefox-css-apply-bs')
+        document.getElementById('gamefox-css-apply-bs'),
+        true
         );
   },
 
   importSignature: function()
   {
-    GFutils.importSignature(true, true, document.getElementById('gamefox-css-grab-sig'));
+    GFutils.importSignature(true, document.getElementById('gamefox-css-grab-sig'), true);
   },
 
   openCSSDirectory: function()
@@ -119,8 +120,8 @@ var GFoptions =
   {
     if (window.arguments && window.arguments[0])
     {
-      GFutils.importBoardSettings(true);
-      GFutils.importSignature(true);
+      GFutils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'));
+      GFutils.importSignature(true, document.getElementById('gamefox-css-grab-sig'));
     }
   }
 };
