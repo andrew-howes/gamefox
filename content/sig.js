@@ -92,14 +92,13 @@ var GFsig =
   prepareOptionsPane: function()
   {
     var menu = document.getElementById('sig-menu');
-    var sig = document.getElementById('sig-body');
+    var sigs = eval(GFutils.getString('serialized', this.prefs));
 
     // default sig is initially selected
     this.hideCriteriaForm();
-    sig.value = this.getSigById(0)['body'];
+    document.getElementById('sig-body').value = sigs[0]['body'];
 
     // loop through sigs and add them to menulist
-    var sigs = eval(GFutils.getString('serialized', this.prefs));
     for (var i = 1; i < sigs.length; i++)
     {
       menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
