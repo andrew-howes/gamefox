@@ -14,4 +14,9 @@
         text-align: center !important;
         font-weight: bold !important;
     }
+
+    .gamefox-highlight td
+    {
+        background: transparent !important;
+    }
 }

@@ -316,9 +316,6 @@ var GameFOX =
             {
               rows[i].className += ' ' + GFuserlist.highlightClassName;
               rows[i].style.setProperty('background-color', hlinfo[1], 'important');
-
-              for (var j = 0; j < rows[i].cells.length; j++)
-                rows[i].cells[j].style.setProperty('background-color', hlinfo[1], 'important');
             }
           }
 
