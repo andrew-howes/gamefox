@@ -15,5 +15,5 @@ else
         -d ./mccoy/ -v $VERSION -u http://beyondboredom.net/gfox/gamefox-$BASEVERSION-git.xpi \
         -f ../$XPI > nightly.rdf || exit 1
 
-    ./put.py ../$XPI gamefox-$BASEVERSION-git-test.xpi nightly.rdf nightly-test.rdf || exit 1
+    ./put.py ../$XPI gamefox-$BASEVERSION-git.xpi nightly.rdf nightly.rdf || exit 1
 fi
