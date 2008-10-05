@@ -19,4 +19,9 @@
     {
         background: transparent !important;
     }
+
+    .topics .gamefox-groupname
+    {
+        font-style: italic;
+    }
 }

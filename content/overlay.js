@@ -302,8 +302,8 @@ var GameFOX =
             {
               var groupname = doc.createElement('span');
               groupname.className = GFuserlist.groupClassName;
-              groupname.style.setProperty('font-style', 'italic', '');
-              groupname.appendChild(doc.createTextNode(' (' + hlinfo[0] + ')'));
+              groupname.appendChild(doc.createTextNode('(' + hlinfo[0] + ')'));
+              rows[i].cells[2].appendChild(doc.createTextNode(' '));
               rows[i].cells[2].appendChild(groupname);
             }
 
@@ -460,7 +460,7 @@ var GameFOX =
           {
             groupname = doc.createElement('span');
             groupname.className = GFuserlist.groupClassName;
-            groupname.appendChild(doc.createTextNode(' ' + hlinfo[0]));
+            groupname.appendChild(doc.createTextNode(hlinfo[0]));
 
             td[j].insertBefore(groupname,
                 td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
@@ -469,7 +469,7 @@ var GameFOX =
             if (leftMsgData)
               td[j].insertBefore(doc.createElement('br'), groupname);
             else
-              td[j].insertBefore(doc.createTextNode(' |'), groupname);
+              td[j].insertBefore(doc.createTextNode(' | '), groupname);
           }
 
           if (hlinfo[2] == 'highlight')
