@@ -1,0 +1,6 @@
+[server]
+host = example.com
+port = 22 ;sftp
+user = someguy
+pass = somepassword
+dir  = public_html/gfox

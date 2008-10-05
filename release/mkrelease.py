@@ -4,11 +4,11 @@ import sys
 import os
 import sha
 import re
+import ConfigParser
 import paramiko
-paramiko.util.log_to_file('upload.log')
 
 if len(sys.argv) < 2:
-    print "upload.py gamefox-0.0.0.xpi [update.rdf]"
+    print "upload.py gamefox-n.n.n.xpi [update.rdf]"
     sys.exit()
 
 versionRegex = r"[0-9]+\.[0-9]+\.[0-9]+"
@@ -24,17 +24,14 @@ if not re.match(xpiFilenameRegex + "$", rfile):
     print "xpi filename must be gamefox-0.0.0.xpi"
     sys.exit()
 
-passwd = open("upload.passwd", "r")
-credentials = passwd.readlines()
-passwd.close()
+config = ConfigParser.ConfigParser()
+config.read("server.conf")
 
-host = credentials[0].strip()
-port = int(credentials[1])
-transport = paramiko.Transport((host, port))
+transport = paramiko.Transport((config.get("server", "host"),
+    int(config.get("server", "port"))))
 
-username = credentials[2].strip()
-password = credentials[3].strip()
-transport.connect(username = username, password = password)
+transport.connect(username = config.get("server", "user"),
+        password = config.get("server", "pass"))
 
 sftp = paramiko.SFTPClient.from_transport(transport)
 
@@ -45,7 +42,7 @@ lsha1sum = sha.new(open(lfile).read()).hexdigest()
 print "local sha1  :", lsha1sum
 
 # put files to server
-sftp.chdir("public_html/gfox")
+sftp.chdir(config.get("server", "dir"))
 sftp.put(lfile, rfile)
 
 # verify the files

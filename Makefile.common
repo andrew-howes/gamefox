@@ -53,7 +53,7 @@ PERL = perl
 
 #### rules
 
-.PHONY: all help info jar xpi mozxpi install clean distclean
+.PHONY: all help info jar xpi mozxpi install clean distclean nightly upnightly
 all: help
 
 help:
@@ -64,6 +64,7 @@ help:
 	@echo "  make xpi       - build an XPI (${XPI_NAME})"
 	@echo "  make mozxpi    - build an XPI (${MOZXPI}) for Mozilla Addons"
 	@echo "  make nightly   - build a nightly (${NIGHTLYXPI})"
+	@echo "  make upnightly - create, sign and upload a nightly update RDF file"
 	@echo "  make clean     - clean up"
 	@echo "  make distclean - clean up more"
 
@@ -87,6 +88,9 @@ clean:
 distclean: clean
 	@echo "More cleanup..."
 	${Q}rm -rf ${BUILD_DIR}
+
+upnightly: ${NIGHTLYXPI}
+	${Q}( cd release/ && ./mknightly.sh ${NIGHTLYXPI} ${VERSION}${NIGHTLYDATE} ${VERSION})
 
 #### xpi
 
