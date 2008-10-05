@@ -24,4 +24,9 @@
     {
         font-style: italic;
     }
+    
+    .gamefox-tc-label
+    {
+        font-weight: bold;
+    }
 }

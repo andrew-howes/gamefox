@@ -520,8 +520,14 @@ var GameFOX =
             tc = username;
 
           if (tc == username)
-            td[j].insertBefore(doc.createTextNode(tcMarker),
+          {
+            var span = doc.createElement('span');
+                span.className = 'gamefox-tc-label';
+                span.appendChild(doc.createTextNode(tcMarker));
+
+            td[j].insertBefore(span,
                 td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
+          }
         }
       }
 

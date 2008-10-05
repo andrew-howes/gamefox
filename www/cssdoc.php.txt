@@ -64,6 +64,13 @@ Shows the character count for the message.
 
 Contains topic pagination text.
 
+<h3 id="span_gamefox-tc-label">
+span.gamefox-tc-label
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Text displayed next to the username of the topic creator.
+
 <h3 id="span+gamefox-title-count">
 span#gamefox-title-count
 <span class="new">New in 0.6.5</span>

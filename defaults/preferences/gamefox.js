@@ -12,7 +12,7 @@ pref("gamefox.elements.tracked.boardlink", true);
 pref("gamefox.elements.charcounts", true);
 pref("gamefox.elements.topics.lastpostlink", true);
 pref("gamefox.elements.marktc", true);
-pref("gamefox.elements.marktc.marker", "\u272A");
+pref("gamefox.elements.marktc.marker", "(tc)");
 pref("gamefox.elements.stopads", true);
 pref("gamefox.elements.aml.marknewposts", true);
 
