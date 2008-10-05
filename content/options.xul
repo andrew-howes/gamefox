@@ -431,7 +431,7 @@
             <hbox>
               <menulist flex="1" id="sig-menu" oncommand="GFsig.menuCommand();">
                 <menupopup>
-                  <menuitem value="default" label="&signature.list.default;"/>
+                  <menuitem value="" label="&signature.list.default;"/>
                   <menuseparator/>
                   <menuitem value="new" label="&signature.list.new;"/>
                 </menupopup>
