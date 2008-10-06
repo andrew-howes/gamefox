@@ -309,7 +309,15 @@
         font-style: normal !important;
     }
 
-    /* Bracket */
+    /* Poll and Contest Bracket */
+
+    div.bar {
+        background: #00f;
+    }
+
+    td.divh {
+        font-weight: bold;
+    }
 
     .bracket .win {
         background: #8f8;
@@ -322,7 +330,7 @@
     .bracket .part {
         background: #ff8;
     }
-    
+
     /* QuickPost */
     #gamefox-quickpost-title {
         background-color: #00f !important;
@@ -330,11 +338,11 @@
         margin: 0 2px 2px 2px !important;
         width: auto !important;
     }
-    
+
     #gamefox-quickpost-form {
         text-align: center;
     }
-    
+
     #gamefox-message {
         max-width: 700px;
     }
