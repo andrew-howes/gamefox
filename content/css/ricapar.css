@@ -71,8 +71,12 @@
     .gamespace_nav a {
         color: #fff !important;
         font-weight: bold !important;
-        margin-left: 5px !important;
+        margin: 0 5px !important;
         text-transform: capitalize !important;
+    }
+    
+    #header a {
+        margin-right: 0 !important;
     }
 
     #header a:hover,
