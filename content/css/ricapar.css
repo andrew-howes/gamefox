@@ -74,9 +74,11 @@
         margin: 0 5px !important;
         text-transform: capitalize !important;
     }
-    
     #header a {
         margin-right: 0 !important;
+    }
+    .user a {
+        margin: 0 !important;
     }
 
     #header a:hover,
@@ -285,6 +287,8 @@
     }
 
     .message a.name + a,
+    .message a.name + span + a,
+    .message a.name + span + span + a,
     .message a.name + br + br + a {
         text-transform: capitalize !important;
     }
