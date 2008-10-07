@@ -42,23 +42,20 @@ var GFcss =
         {
           this.remove(i, j);
         }
-
-        // deal with user styles that are now bundled
-        if (css['user'][j] != undefined && css[i][j] != undefined)
-        {
-          if (css['user'][j]['enabled'].toString() == 'true')
-            css[i][j]['enabled'] = true;
-          delete css['user'][j];
-          this.prefs.setCharPref('serialized', css.toSource());
-        }
       }
     }
   },
 
   userimport: function()
   {
+    // TODO: make sure all errors result in alert
+    // TODO: if name conflict, option to overwrite or rename
     var uri = document.getElementById('css-import-file').value;
-    if (!/\.(css|txt)$/.test(uri)) return;
+    if (!/\.(css|txt)$/.test(uri))
+    {
+      GFlib.alert('Filename must end in .css or .txt');
+      return;
+    }
 
     var filename = uri.substr(uri.lastIndexOf('/') + 1);
 
@@ -134,19 +131,23 @@ var GFcss =
     }
 
     var css = eval(this.prefs.getCharPref('serialized'));
-    if (css[cat][filename]) // the stylesheet already exists, don't touch its enabled status
-      enabled = css[cat][filename]['enabled'];
+
+    // this loop does a few things:
+    //  -force re-ordering when overwriting
+    //  -don't change enabled status
+    //  -handle category changing
+    for (var i in css)
+    {
+      if (css[i][filename])
+      {
+        enabled = css[i][filename]['enabled'];
+        delete css[i][filename];
+      }
+    }
 
     css[cat][filename] = {
       'title': title, 'author': author, 'enabled': enabled
-    }
-
-    // changing categories
-    for (i in css)
-    {
-      if (css[i][filename] && cat != i)
-        delete css[i][filename];
-    }
+    };
 
     this.prefs.setCharPref('serialized', css.toSource());
     return true;
@@ -227,29 +228,20 @@ var GFcss =
     this.treeView.childData = {};
     this.treeView.visibleData = [];
     var categories = {'GameFOX':'gamefox', 'GameFAQs':'bundled', 'User':'user'};
-    for (var category in categories)
+    for (var treeCat in categories)
     {
-      this.treeView.visibleData.push([[category], true, false]);
-      for (var sheet in css[categories[category]])
+      this.treeView.visibleData.push([[treeCat], true, false]);
+      this.treeView.childData[treeCat] = [];
+      var prefCat = categories[treeCat];
+      for (var filename in css[categories[treeCat]])
       {
-        var cat = categories[category];
-        if (!this.treeView.childData[category])
-          this.treeView.childData[category] = [[
-            css[cat][sheet]['title'],
-            css[cat][sheet]['author'],
-            css[cat][sheet]['enabled'],
-            sheet, // filename, stored in an invisible column. used to uniquely
-                   // identify what stylesheet a particular row belongs to
-            cat
-          ]];
-        else
-          this.treeView.childData[category].push([
-              css[cat][sheet]['title'],
-              css[cat][sheet]['author'],
-              css[cat][sheet]['enabled'],
-              sheet,
-              cat
-          ]);
+        this.treeView.childData[treeCat].push([
+          css[prefCat][filename]['title'],
+          css[prefCat][filename]['author'],
+          css[prefCat][filename]['enabled'],
+          filename, // stored in invisible column; uniquely identifies stylesheet
+          prefCat
+        ]);
       }
     }
 
