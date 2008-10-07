@@ -69,7 +69,7 @@ var GFaccounts =
     }
     else
     {
-      this.promptLogin(username);
+      this.promptLogin(username, 'Cookie has expired!');
     }
 
     function fetchCtkCallback()
@@ -143,7 +143,7 @@ var GFaccounts =
     }
   },
 
-  promptLogin: function(username)
+  promptLogin: function(username, error)
   {
     var password = {value: ''};
     var check = {value: true};
@@ -160,9 +160,13 @@ var GFaccounts =
     }
     else
     {
+      if (error == undefined)
+        error = '';
+      else
+        error += '\n\n';
       result = Cc['@mozilla.org/embedcomp/prompt-service;1']
           .getService(Ci.nsIPromptService)
-          .promptPassword(null, 'GameFOX', 'Enter password for "' + username + '":', password, null, check);
+          .promptPassword(null, 'GameFOX', error + 'Enter password for "' + username + '":', password, null, check);
       if (!result)
         return;
     }
@@ -187,18 +191,16 @@ var GFaccounts =
         if (request.readyState == 4)
         {
           if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1) {
-            GFlib.alert('Login error! Maybe your password was incorrect? Try it again.');
             GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
-            GFaccounts.promptLogin(username);
+            GFaccounts.promptLogin(username, 'Login error! Maybe your password was incorrect? Try it again.');
             return;
           }
 
           var cookie = GFaccounts.getCookie('MDAAuth');
           if (cookie == null)
           {
-            GFlib.alert('Somebody ate the cookie! This means that something unexpected happened. Try it again.');
             GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
-            GFaccounts.promptLogin(username);
+            GFaccounts.promptLogin(username, 'Somebody ate the cookie! This means that something unexpected happened. Try it again.');
             return;
           }
 
