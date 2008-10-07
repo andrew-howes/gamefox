@@ -77,7 +77,8 @@
     #header a {
         margin-right: 0 !important;
     }
-    .user a {
+    .user a,
+    .pages a {
         margin: 0 !important;
     }
 
