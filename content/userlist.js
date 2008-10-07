@@ -393,7 +393,7 @@ var GFuserlist =
     var list = document.getElementById('gamefox-context-usergroups-list');
 
     while (list.hasChildNodes())
-      list.removeChild(list.childNodes[0]);
+      list.removeChild(list.firstChild);
 
     // get the username of the target, return if it's not valid
     if (node.nodeName.toLowerCase() != 'a') return;
@@ -404,8 +404,8 @@ var GFuserlist =
     var activeGroups = this.searchUsername(username)[4];
     if (!activeGroups) activeGroups = [];
 
-    var groups = eval(this.prefs.getCharPref('userlist.serialized'));
-    if (!groups.length)
+    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    if (!userlist.length)
     {
       item = document.createElement('menuitem');
       item.setAttribute('label', 'No groups');
@@ -414,81 +414,96 @@ var GFuserlist =
       return;
     }
 
-    var item;
-    for (var i = 0; i < groups.length; i++)
+    var item, label, info;
+    for (var i = 0; i < userlist.length; i++)
     {
       item = document.createElement('menuitem');
       item.setAttribute('type', 'checkbox');
-      item.setAttribute('oncommand', 'GFuserlist.menuCheckChange(event, "' + username + '", this.value);');
+      item.setAttribute('oncommand', 'GFuserlist.menuCheckChange(event, "' + username + '", ' + i + ');');
       if (activeGroups.indexOf(i) != -1)
         item.setAttribute('checked', 'true');
 
-      if (groups[i]['name'].length)
-        item.setAttribute('label', groups[i]['name']);
+      // label
+      label = userlist[i]['name'].length ? userlist[i]['name'] : 'Group #' + (i + 1);
+      info = '';
+      if (userlist[i]['messages'] == userlist[i]['topics'])
+      {
+        if (userlist[i]['messages'] != 'nothing')
+          info = userlist[i]['messages'] + ' messages/topics';
+      }
       else
-        item.setAttribute('label', 'Group #' + (i + 1));
+      {
+        if (userlist[i]['messages'] != 'nothing')
+        {
+          info = userlist[i]['messages'] + ' messages';
+        }
+        if (userlist[i]['topics'] != 'nothing')
+        {
+          if (info.length)
+            info += ', ';
+          info += userlist[i]['topics'] + ' topics';
+        }
+      }
+      if (info.length)
+        label += ' (' + info + ')';
+      item.setAttribute('label', label);
 
-      item.setAttribute('value', i);
+      // highlight color
+      if (userlist[i]['messages'] == 'highlight' || userlist[i]['topics'] == 'highlight')
+      {
+        item.style.borderRightWidth = '10px';
+        item.style.borderRightColor = userlist[i]['color'];
+      }
+
       list.appendChild(item);
     }
   },
 
   menuCheckChange: function(event, username, group)
   {
-    var groups = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
 
     if (event.target.getAttribute('checked')) // add to group
     {
-      if (GFutils.trim(groups[group]['users']).length)
-        groups[group]['users'] += ', ' + username;
+      if (/\S/.test(userlist[group]['users']))
+        userlist[group]['users'] += ', ' + username;
       else
-        groups[group]['users'] = username;
+        userlist[group]['users'] = username;
     }
     else // remove from group
     {
-      groups[group]['users'] = groups[group]['users'].replace
+      userlist[group]['users'] = userlist[group]['users'].replace
         (new RegExp('(,\\s*' + username + '\\s*$|' +
                       '^\\s*' + username + '\\s*,\\s*|' +
                       '^\\s*' + username + '\\s*$)', 'gi'), '');
-      groups[group]['users'] = groups[group]['users'].replace
+      userlist[group]['users'] = userlist[group]['users'].replace
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
-    this.prefs.setCharPref('userlist.serialized', groups.toSource());
+    this.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   prepareOptionsPane: function()
   {
     this.populate();
 
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('userlist.', this, false);
-
-    window.addEventListener('unload', this.unload, false);
+    // watch for changes caused by menuCheckChange
+    GFuserlistObserver.register();
   },
 
-  unload: function()
+  updateUsers: function()
   {
-    GFuserlist.prefs.removeObserver('userlist.', GFuserlist);
-  },
-
-  observe: function()
-  {
-    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
     var groups = document.getElementById('usergroups').getElementsByTagName('groupbox');
-
-    var textboxes, userbox;
+    var textboxes;
     for (var i = 0; i < groups.length; i++)
     {
-      // save some processing power by only updating the list of users, since
-      // that's all we care about
+      // only update the list of users
       textboxes = groups[i].getElementsByTagName('textbox');
       for (var j = 0; j < textboxes.length; j++)
-        if (textboxes[j].className == 'ug-users')
-          userbox = textboxes[j];
-
-      if (userbox.value != userlist[i]['users'])
-        userbox.value = userlist[i]['users'];
+        if (textboxes[j].className == 'ug-users' &&
+            textboxes[j].value != userlist[i]['users'])
+          textboxes[j].value = userlist[i]['users'];
     }
   }
 };
