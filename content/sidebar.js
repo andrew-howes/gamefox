@@ -38,7 +38,7 @@ var GFsidebar =
         firstAccount = false;
       }
       item = document.createElement('a');
-      item.setAttribute('href', 'chrome://gamefox/content/sidebar.xhtml');
+      item.style.cursor = 'pointer';
       item.setAttribute('onclick', 'GFaccounts.switchAccount("' + username + '");return false');
       item.appendChild(document.createTextNode(username));
       accountList.appendChild(item);

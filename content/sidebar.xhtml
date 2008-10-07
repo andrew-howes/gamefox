@@ -58,7 +58,7 @@
       <input type="submit" value="Login" onmousedown="if (event.button == 1) GFsidebar.newTabLogin(this.parentNode)"/>
     </form>
     <div class="search-head"><a href="http://www.gamefaqs.com/user/logout.html?r=www.gamefaqs.com%2Fboards%2Findex.php">Logout</a> / <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a></div>
-    <div class="search-head">Accounts (<a href="chrome://gamefox/content/sidebar.xhtml" onclick="GFaccounts.promptLogin();return false">Add</a><span id="accounts-remove"> / <a href="chrome://gamefox/content/sidebar.xhtml" onclick="GFaccounts.promptRemoveAccount();return false">Remove</a></span>)</div>
+    <div class="search-head">Accounts (<a onclick="GFaccounts.promptLogin();return false" style="cursor: pointer;">Add</a><span id="accounts-remove"> / <a onclick="GFaccounts.promptRemoveAccount();return false" style="cursor: pointer;">Remove</a></span>)</div>
     <div id="accounts-menu"></div>
     <div class="search-head"><a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a></div>
     <iframe src="chrome://gamefox/content/tags.xul" style="width: 100%; height: 300px;"/>
