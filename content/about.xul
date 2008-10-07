@@ -80,15 +80,8 @@
     </hbox>
 
     <hbox>
-      <label value="Nuvola"/>
+      <label value="Tango Desktop Project"/>
       <label class="contrib description" value="&contrib.icons.label;"/>
-    </hbox>
-
-    <hbox>
-      <label value="Pardus"/>
-      <label class="contrib description" value="&contrib.icons.label;"/>
-      <spacer flex="1"/>
-      <label class="url-label" value="http://uludag.org.tr/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
     </hbox>
     <separator class="thin"/>
   </groupbox>
