@@ -62,7 +62,6 @@ var GFcss =
     if (!this.add('user', uri, filename, filename, '', true)) return;
 
     this.populate(document.getElementById('css-tree'));
-    this.treeView.toggleOpenState(2);
     this.reload();
 
     document.getElementById('css-import-file').value = '';
