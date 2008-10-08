@@ -90,7 +90,7 @@ distclean: clean
 	${Q}rm -rf ${BUILD_DIR}
 
 upnightly: ${NIGHTLYXPI}
-	${Q}( cd release/ && ./mknightly.sh ${NIGHTLYXPI} ${VERSION}${NIGHTLYDATE} ${VERSION})
+	${Q}( cd release/ && ./mknightly.sh ${NIGHTLYXPI} ${VERSION}${NIGHTLY_DATE} ${VERSION} )
 
 #### xpi
 
