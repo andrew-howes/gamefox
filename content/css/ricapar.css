@@ -142,7 +142,7 @@
     .crumbs,
     .gamespace_nav {
         background: #00f !important;
-        padding: 2px !important;
+        padding: 2px 2px 2px 0 !important;
         margin: 2px !important;
         overflow: hidden !important;
     }
@@ -155,7 +155,7 @@
     #platformlist .nav {
         float: left !important;
         font-weight: bold !important;
-        padding: 5px 4px 0 10px !important;
+        padding: 5px 4px 0 8px !important;
         color: #fff !important;
     }
 
