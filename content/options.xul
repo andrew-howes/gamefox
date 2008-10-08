@@ -292,9 +292,10 @@
   </prefpane>
 
 
-<!-- T H E M E -->
+<!-- S T Y L E -->
 
-  <prefpane id="gamefox-theme-pane" label="&theme.label;" onpaneload="GFcss.populate(document.getElementById('css-tree'));">
+  <prefpane id="gamefox-theme-pane" label="&style.label;"
+    onpaneload="GFcss.populate(document.getElementById('css-tree'));">
     <script type="application/x-javascript" src="chrome://gamefox/content/treeview.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
     <preferences>
@@ -303,42 +304,43 @@
 
     <groupbox>
       <caption label="&general.label;"/>
-      <checkbox preference="theme-disable_gamefaqs_css" label="&theme.disablegamefaqscss;"/>
+      <checkbox preference="theme-disable_gamefaqs_css" label="&style.disablegamefaqscss;"/>
     </groupbox>
 
     <groupbox>
-      <caption label="&theme.stylesheets.label;"/>
+      <caption label="&style.stylesheets.label;"/>
       <tree id="css-tree" rows="9" editable="true" seltype="single" hidecolumnpicker="true"
         onselect="GFcss.onselect();">
         <treecols>
-          <treecol label="&theme.tree.name;" primary="true" flex="1"/>
-          <treecol label="&theme.tree.author;" width="100"/>
-          <treecol label="&theme.tree.enabled;" type="checkbox" editable="true"/>
+          <treecol label="&style.tree.name;" primary="true" flex="1"/>
+          <treecol label="&style.tree.author;" width="100"/>
+          <treecol label="&style.tree.enabled;" type="checkbox" editable="true"/>
         </treecols>
 
         <treechildren/>
       </tree>
       <hbox pack="end">
-        <button id="css-remove" disabled="true" icon="remove" oncommand="GFcss.removeWithTree();" label="&theme.tree.delete;"/>
+        <button id="css-remove" disabled="true" icon="remove"
+          oncommand="GFcss.removeWithTree();" label="&style.tree.delete;"/>
       </hbox>
     </groupbox>
 
     <groupbox>
-      <caption label="&theme.import.label;"/>
+      <caption label="&style.import.label;"/>
       <hbox>
-        <label value="&theme.import.uri;" style="margin-top: 7px"/>
+        <label value="&style.import.uri;" style="margin-top: 7px"/>
         <textbox flex="1" id="css-import-file" value=""/>
-        <button oncommand="GFcss.filepicker();" label="&theme.import.browse;..."/>
+        <button oncommand="GFcss.filepicker();" label="&style.import.browse;..."/>
       </hbox>
       <hbox pack="end">
         <button icon="add" oncommand="GFcss.userimport();"
-          label="&theme.import.submit;"/>
+          label="&style.import.submit;"/>
       </hbox>
     </groupbox>
 
     <hbox pack="center">
-      <button oncommand="GFcss.reload();" icon="refresh" label="&theme.reload;"/>
-      <button oncommand="GFoptions.openCSSDirectory();" icon="open" label="&theme.edit;"/>
+      <button oncommand="GFcss.reload();" icon="refresh" label="&style.reload;"/>
+      <button oncommand="GFoptions.openCSSDirectory();" icon="open" label="&style.edit;"/>
     </hbox>
  </prefpane>
 
@@ -613,14 +615,14 @@
     <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
 
     <groupbox>
-      <caption label="&page.userlists.options.label;"/>
-      <checkbox preference="userlist-topics-groupnames" label="&page.userlists.options.topicgroups;"/>
-      <checkbox preference="userlist-messages-groupnames" label="&page.userlists.options.msggroups;"/>
+      <caption label="&users.options.label;"/>
+      <checkbox preference="userlist-topics-groupnames" label="&users.options.topicgroups;"/>
+      <checkbox preference="userlist-messages-groupnames" label="&users.options.msggroups;"/>
     </groupbox>
 
     <hbox align="center">
-      <description flex="1">&page.userlists.desc;</description>
-      <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&page.userlists.add;" icon="add"/>
+      <description flex="1">&users.desc;</description>
+      <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&users.add;" icon="add"/>
     </hbox>
     <vbox id="usergroups" style="height:330px;overflow:auto"/>
   </prefpane>
