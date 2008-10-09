@@ -387,7 +387,7 @@ var GameFOX =
 
       var tcCond = !onDetail && GameFOX.prefs.getBoolPref('elements.marktc');
       var tcMarker = '\xA0' + GFutils.getString('elements.marktc.marker');
-      var tc = tcCond ? doc.location.search.match(/\btc=([^&]+)/) : null;
+      var tc = tcCond ? doc.location.search.match(/\btc=([^&<>"]+)/) : null;
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
 
@@ -541,14 +541,14 @@ var GameFOX =
       // Add TC to page links
       if (tc && pageJumper)
       {
+        var tcParam = GFutils.tcParam(tc);
         var links = GFutils.mergeArray(userNav.parentNode.getElementsByTagName('a'),
             pageJumper.getElementsByTagName('a'));
         for (var j = 0; j < links.length; j++)
         {
           if (links[j].href.indexOf('genmessage') != -1 &&
               links[j].href.indexOf('page') != -1)
-            // tc stripped of <>" for added safety
-            links[j].href += '&tc=' + tc.replace(/[<>"]+/g, '').replace(/ /g, '+');
+            links[j].href += tcParam;
         }
       }
 
