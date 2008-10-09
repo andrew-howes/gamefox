@@ -19,8 +19,8 @@ var GFsig =
       // skip empty sigs
       if (!sigs[i]['body'].length) continue;
 
-      accounts = GFutils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*;\s*/);
-      boards = GFutils.trim(sigs[i]['boards'].toLowerCase()).split(/\s*;\s*/);
+      accounts = sigs[i]['accounts'].toLowerCase().trim().split(/\s*;\s*/);
+      boards = sigs[i]['boards'].toLowerCase().trim().split(/\s*;\s*/);
 
       // force the array length to 0
       if (accounts.join() == '') accounts = new Array();

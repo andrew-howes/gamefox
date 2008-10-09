@@ -156,7 +156,7 @@ var GFaccounts =
           .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username (or e-mail address) and password:', username, password, null, check);
       if (!result)
         return;
-      username = GFutils.trim(username.value);
+      username = username.value.trim();
     }
     else
     {

@@ -81,16 +81,16 @@ var GameFOX =
       // Titles
       if (doc.getElementsByName('topictitle')[0]) // new topic
       {
-        GFlib.setTitle(doc, GFutils.trim(
+        GFlib.setTitle(doc,
             doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).
-            singleNodeValue.textContent),
+            singleNodeValue.textContent.trim(),
             'CT');
       }
       else if (doc.getElementsByName('message')[0]) // new post
       {
         GFlib.setTitle(doc,
-            GFutils.trim(doc.getElementsByName('message')[0].
-            parentNode.parentNode.getElementsByTagName('a')[0].textContent),
+            doc.getElementsByName('message')[0].
+            parentNode.parentNode.getElementsByTagName('a')[0].textContent.trim(),
             'PM');
       }
 
@@ -159,8 +159,8 @@ var GameFOX =
     /* User Information (user.php) */
     else if (GFlib.onPage(doc, 'user'))
     {
-      GFlib.setTitle(doc, GFutils.trim(doc.getElementsByTagName('td')[1].
-            textContent), 'U');
+      GFlib.setTitle(doc, doc.getElementsByTagName('td')[1].
+            textContent.trim(), 'U');
     }
 
     /* Topic Lists */
@@ -173,9 +173,9 @@ var GameFOX =
       var onTracked = GFlib.onPage(doc, 'tracked');
 
       // Title
-      GFlib.setTitle(doc, GFutils.trim(doc.evaluate('//h1', doc,
-              null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent), 'T');
+      GFlib.setTitle(doc, doc.evaluate('//h1', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+          textContent.trim(), 'T');
 
       // Topic "QuickPost" link
       if (GameFOX.prefs.getBoolPref('elements.quickpost.link')
@@ -283,7 +283,7 @@ var GameFOX =
             rows[i].cells[2].innerHTML = '<a href="' + rows[i].cells[1].
               getElementsByTagName('a')[0].getAttribute('href').replace(
                   /message(?=\.)/, 'topic').replace(/(&topic=[0-9]+|\btopic=[0-9]+&)/, '') + '">' +
-              GFutils.trim(rows[i].cells[2].textContent) + '</a>';
+              rows[i].cells[2].textContent.trim() + '</a>';
           }
         }
 
@@ -291,7 +291,7 @@ var GameFOX =
         else
         {
           // User highlighting
-          var username = GFutils.trim(rows[i].getElementsByTagName('td')[2].textContent);
+          var username = rows[i].getElementsByTagName('td')[2].textContent.trim();
           var hlinfo;
 
           if ((hlinfo = GFuserlist.searchUsername(username)) != false)
@@ -355,9 +355,9 @@ var GameFOX =
 
       // Title
       GFlib.setTitle(doc,
-          GFutils.trim(doc.evaluate(
+          doc.evaluate(
               '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-              null).singleNodeValue.textContent),
+              null).singleNodeValue.textContent.trim(),
                 'M' + (onDetail ? 'D' : ''),
                 (pagenum ? (pagenum + 1) : null));
 
@@ -708,7 +708,7 @@ var GameFOX =
       msgsCell = node.parentNode.cells[GFlib.onPage(doc, 'myposts') ? 2 : 3];
 
       tc = GFlib.onPage(doc, 'tracked') || GFlib.onPage(doc, 'myposts') ? '' :
-          GFutils.tcParam(GFutils.trim(node.parentNode.cells[2].firstChild.textContent));
+          GFutils.tcParam(node.parentNode.cells[2].firstChild.textContent.trim());
     }
     catch (e)
     {

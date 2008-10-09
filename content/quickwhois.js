@@ -96,7 +96,7 @@ var GFquickwhois =
     var matches = pattern.exec(where);
 
     if (matches)
-      return GFutils.trim(matches[3]);
+      return matches[3].trim();
 
     return '';
   }

@@ -526,15 +526,17 @@ var GFtags =
 
         var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
         queryStr = topicLink.href;
-        topicTitle = GFutils.trim(topicLink.textContent);
+        topicTitle = topicLink.textContent.trim();
 
         if (onMyPosts)
         {
-          boardTitle = GFutils.trim(node.parentNode.cells[0].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
+          boardTitle = node.parentNode.cells[0].innerHTML.
+            replace(/<\/?a\b[^>]*>/ig, '').trim();
         }
         else if (onTracked)
         {
-          boardTitle = GFutils.trim(node.parentNode.cells[2].innerHTML.replace(/<\/?a\b[^>]*>/ig, ''));
+          boardTitle = node.parentNode.cells[2].innerHTML.
+            replace(/<\/?a\b[^>]*>/ig, '').trim();
         }
       }
       catch (e) { return false; }
@@ -547,11 +549,11 @@ var GFtags =
     var h1s         = doc.getElementsByTagName('h1');
     if (!boardTitle)
     {
-      boardTitle = GFutils.trim(h1s[0].textContent);
+      boardTitle = h1s[0].textContent.trim();
     }
     if (!topicTitle)
     {
-      topicTitle = GFutils.trim(h1s[1].textContent);
+      topicTitle = h1s[1].textContent.trim();
     }
 
     GFtags.read();

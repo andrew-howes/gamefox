@@ -249,16 +249,6 @@ var GFutils =
     prefService.setComplexValue(pref, Ci.nsISupportsString, ustr);
   },
 
-  trim: function(str)
-  {
-    var str = str.replace(/^\s\s*/, ''),
-         ws = /\s/,
-          i = str.length;
-    while (ws.test(str.charAt(--i)));
-    return str.slice(0, i + 1);
-    //return str.replace(/^\s+|\s+$/g, '');
-  },
-
   formatPagination: function(doc, topiclink, posts, tc)
   {
     // Prefix and suffix stuff, looks a little messy
@@ -310,13 +300,13 @@ var GFutils =
     if (sig == null) // fetch sig
     {
       if (!doc) return false;
-      var boardname = GFutils.trim(doc.evaluate('//h1', doc, null,
+      var boardname = doc.evaluate('//h1', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-        textContent);
+        textContent.trim();
       var boardid = doc.location.search.match(/board=([0-9-]+)/)[1];
-      var account = GFutils.trim(doc.evaluate('//div[@class="msg"]', doc, null,
+      var account = doc.evaluate('//div[@class="msg"]', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent).replace('Welcome, ', '');
+          textContent.trim().replace('Welcome, ', '');
       var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
     }
@@ -417,7 +407,7 @@ var GFutils =
         '<p>', -6, '</p>', -6, '<p />', -6,
         '\n', 4
         ];
-    str = this.trim(str).toLowerCase();
+    str = str.trim().toLowerCase();
     var len = str.length;
     var pos;
     var count;
@@ -435,7 +425,7 @@ var GFutils =
   // encode topic title like GameFAQs does
   encodedTitleLength: function(str)
   {
-    return this.trim(str).
+    return str.trim().
       replace(/&/g, '&amp;').
       replace(/</g, '&lt;').
       replace(/>/g, '&gt;').length;
@@ -487,3 +477,12 @@ var GFutils =
     return obj;
   }
 };
+
+String.prototype.trim = function()
+{
+  var str = this.replace(/^\s\s*/, ''),
+      ws = /\s/,
+      i = this.length;
+  while (ws.test(this.charAt(--i)));
+  return this.slice(0, i + 1);
+}
