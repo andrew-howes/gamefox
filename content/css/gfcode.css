@@ -40,4 +40,8 @@
 .message i > p > strong:first-child + br {
     display: none !important;
 }
+
+.message i > p i > p i > p i > p {
+    display: none;
+}
 }
