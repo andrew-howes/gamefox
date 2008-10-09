@@ -3,6 +3,7 @@ pref("gamefox.elements.quickpost.button", true);
 pref("gamefox.elements.quickpost.otherbuttons", true);
 pref("gamefox.elements.quickpost.link", true);
 pref("gamefox.elements.quickpost.link.title", "QuickPost");
+pref("gamefox.elements.quickpost.lastpost", true);
 pref("gamefox.elements.tag.link", true);
 pref("gamefox.elements.titlechange", true);
 pref("gamefox.elements.titleprefix", true);

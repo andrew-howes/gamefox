@@ -271,8 +271,9 @@ var GFquickpost =
               if (doc.getElementsByName('topictitle')[0]) // topic list
                 doc.location = GFlib.domain + GFlib.path + 'gentopic.php?' +
                   'board=' + query['board'];
-              else // message list
+              else if (GameFOX.prefs.getBoolPref('elements.quickpost.lastpost'))
               {
+                // message list (try to go to last page/post)
                 var msgsPerPage = GameFOX.prefs.getIntPref('msgsPerPage');
 
                 if (doc.gamefox.pages * msgsPerPage == doc.gamefox.msgnum)
@@ -301,7 +302,12 @@ var GFquickpost =
                     && doc.location.hash.length)
                   doc.location.reload(); // hash changes don't reload the page
               }
-              
+              else
+                // message list (old behavior)
+                doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
+                  'board=' + query['board'] + '&topic=' + query['topic'] +
+                  (query['page'] ? '&page=' + query['page'] : '');
+
               return;
             }
           }
