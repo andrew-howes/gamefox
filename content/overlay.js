@@ -204,6 +204,14 @@ var GameFOX =
 
         // Topic rows
         rows = topicsTable.getElementsByTagName('tr');
+
+        // No status column
+        if (GameFOX.prefs.getBoolPref('elements.nostatuscolumn'))
+        {
+          var col = topicsTable.getElementsByTagName('col')[0];
+          col.parentNode.removeChild(col);
+          rows[0].cells[0].style.display = 'none';
+        }
       }
       else
       {
@@ -213,13 +221,6 @@ var GameFOX =
 
       var skipNext = false;
       var alternateColor = false;
-
-      // No status column
-      if (GameFOX.prefs.getBoolPref('elements.nostatuscolumn'))
-      {
-        topicsTable.getElementsByTagName('col')[0].style.display = 'none';
-        rows[0].cells[0].style.display = 'none';
-      }
 
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
