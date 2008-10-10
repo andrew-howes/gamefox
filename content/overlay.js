@@ -229,7 +229,7 @@ var GameFOX =
         {
           rows[i].cells[0].style.display = 'none';
           var statusSrc = rows[i].cells[0].getElementsByTagName('img')[0].src;
-          if (statusSrc.match(/\/images\/default\/([^\.]+)\.gif/)[1] != 'topic')
+          if (statusSrc != 'http://www.gamefaqs.com/images/default/topic.gif')
           {
             var statusImg = doc.createElement('img');
             statusImg.src = statusSrc;
