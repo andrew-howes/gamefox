@@ -400,8 +400,8 @@ var GameFOX =
       var tdResult = doc.evaluate('//table[@class="message"]/tbody/tr/td', doc, null,
           XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
       var td = [];
-      for (var j = 0; j < tdResult.snapshotLength; j++)
-        td[j] = tdResult.snapshotItem(j);
+      for (var i = 0; i < tdResult.snapshotLength; i++)
+        td[i] = tdResult.snapshotItem(i);
 
       var alternateColor = false;
       var msgnum = pagenum * GameFOX.prefs.getIntPref('msgsPerPage');
@@ -414,43 +414,43 @@ var GameFOX =
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
 
-      for (var j = 0; j < td.length; j += 2)
+      for (var i = 0; i < td.length; i += 2)
       {
         // Message numbering
         ++msgnum;
 
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
-        td[j].id = 'p' + msgnumString;
+        td[i].id = 'p' + msgnumString;
 
         if (msgnumCond)
         {
           switch (msgnumStyle)
           {
             case 1: // Reversed: #001 | message detail
-              td[j].insertBefore(doc.createTextNode('#' + msgnumString),
-                  td[j].getElementsByTagName('a')[1]);
+              td[i].insertBefore(doc.createTextNode('#' + msgnumString),
+                  td[i].getElementsByTagName('a')[1]);
 
               if (leftMsgData)
-                td[j].insertBefore(doc.createElement('br'), td[j].
+                td[i].insertBefore(doc.createElement('br'), td[i].
                     getElementsByTagName('a')[1])
               else if (!onArchive)
-                td[j].insertBefore(doc.createTextNode(' | '), td[j].
+                td[i].insertBefore(doc.createTextNode(' | '), td[i].
                     getElementsByTagName('a')[1]);
 
               break;
 
             case 2: // Number only: #001
               if (onArchive)
-                td[j].innerHTML += '<b>#' + msgnumString + '</b>';
+                td[i].innerHTML += '<b>#' + msgnumString + '</b>';
               else
-                td[j].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
+                td[i].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
               break;
 
             case 3: // Mixed: message #001
               if (onArchive)
-                td[j].innerHTML += '<b>message #' + msgnumString + '</b>';
+                td[i].innerHTML += '<b>message #' + msgnumString + '</b>';
               else
-                td[j].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
+                td[i].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
               break;
 
             default:
@@ -458,21 +458,21 @@ var GameFOX =
               if (leftMsgData)
               {
                 if (!onArchive)
-                  td[j].appendChild(doc.createElement('br'));
-                td[j].appendChild(doc.createTextNode('#' + msgnumString));
+                  td[i].appendChild(doc.createElement('br'));
+                td[i].appendChild(doc.createTextNode('#' + msgnumString));
               }
               else
                 if (onArchive)
-                  td[j].appendChild(doc.createTextNode('#' + msgnumString));
+                  td[i].appendChild(doc.createTextNode('#' + msgnumString));
                 else
-                  td[j].appendChild(doc.createTextNode(' | #' + msgnumString));
+                  td[i].appendChild(doc.createTextNode(' | #' + msgnumString));
 
               break;
           }
         }
 
         // Message highlighting
-        var username = td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
+        var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
 
         var hlinfo, groupname;
         if ((hlinfo = GFuserlist.searchUsername(username)) != false)
@@ -485,25 +485,25 @@ var GameFOX =
             groupname.className = GFuserlist.groupClassName;
             groupname.appendChild(doc.createTextNode(hlinfo[0]));
 
-            td[j].insertBefore(groupname,
-                td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
+            td[i].insertBefore(groupname,
+                td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
 
-            td[j].insertBefore(doc.createTextNode('\n'), groupname);
+            td[i].insertBefore(doc.createTextNode('\n'), groupname);
             if (leftMsgData)
-              td[j].insertBefore(doc.createElement('br'), groupname);
+              td[i].insertBefore(doc.createElement('br'), groupname);
             else
-              td[j].insertBefore(doc.createTextNode(' | '), groupname);
+              td[i].insertBefore(doc.createTextNode(' | '), groupname);
           }
 
           if (hlinfo[2] == 'highlight')
           {
-            td[j].className += ' ' + GFuserlist.highlightClassName;
-            td[j].style.setProperty('background-color', hlinfo[1], 'important');
+            td[i].className += ' ' + GFuserlist.highlightClassName;
+            td[i].style.setProperty('background-color', hlinfo[1], 'important');
           }
           else if (hlinfo[2] == 'collapse') // Collapse post
           {
-            td[j + 1].style.setProperty('font-size', '0pt', 'important');
-            td[j + 1].style.setProperty('display', 'none', 'important');
+            td[i + 1].style.setProperty('font-size', '0pt', 'important');
+            td[i + 1].style.setProperty('display', 'none', 'important');
 
             var a = doc.createElement('a');
                 a.setAttribute('href', '#');
@@ -511,15 +511,15 @@ var GameFOX =
                 a.addEventListener('click', GFuserlist.showPost, false);
 
             if (leftMsgData)
-              td[j].appendChild(doc.createElement('br'));
+              td[i].appendChild(doc.createElement('br'));
             else
-              td[j].appendChild(doc.createTextNode(' | '));
-            td[j].appendChild(a);
+              td[i].appendChild(doc.createTextNode(' | '));
+            td[i].appendChild(a);
           }
           else if (hlinfo[2] == 'remove') // remove post
           {
-            td[j].style.setProperty('display', 'none', 'important');
-            td[j + 1].style.setProperty('display', 'none', 'important');
+            td[i].style.setProperty('display', 'none', 'important');
+            td[i + 1].style.setProperty('display', 'none', 'important');
             if (leftMsgData)
               alternateColor = !alternateColor;
           }
@@ -528,7 +528,7 @@ var GameFOX =
         // for removed posts
         if (alternateColor)
         {
-          var tr = td[j].parentNode;
+          var tr = td[i].parentNode;
           if (/\beven\b/.test(tr.className))
             tr.className = tr.className.replace(/\beven\b/, '');
           else
@@ -548,8 +548,8 @@ var GameFOX =
                 span.className = 'gamefox-tc-label';
                 span.appendChild(doc.createTextNode(tcMarker));
 
-            td[j].insertBefore(span,
-                td[j].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
+            td[i].insertBefore(span,
+                td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
           }
         }
       }
@@ -565,13 +565,14 @@ var GameFOX =
       if (tc && pageJumper)
       {
         var tcParam = GFutils.tcParam(tc);
-        var links = GFutils.mergeArray(userNav.parentNode.getElementsByTagName('a'),
+        var pageJumperTop = doc.evaluate('//div[@class="pages"]', userNav.parentNode,
+            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var links = GFutils.mergeArray(pageJumperTop.getElementsByTagName('a'),
             pageJumper.getElementsByTagName('a'));
-        for (var j = 0; j < links.length; j++)
+        for (var i = 0; i < links.length; i++)
         {
-          if (links[j].href.indexOf('genmessage') != -1 &&
-              links[j].href.indexOf('page') != -1)
-            links[j].href += tcParam;
+          if (links[i].search.indexOf('page') != -1)
+            links[i].search += tcParam;
         }
       }
 
