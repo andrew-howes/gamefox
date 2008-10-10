@@ -214,11 +214,33 @@ var GameFOX =
       var skipNext = false;
       var alternateColor = false;
 
+      // No status column
+      if (GameFOX.prefs.getBoolPref('elements.nostatuscolumn'))
+      {
+        topicsTable.getElementsByTagName('col')[0].style.display = 'none';
+        rows[0].cells[0].style.display = 'none';
+      }
+
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
+        // No status column
+        if (GameFOX.prefs.getBoolPref('elements.nostatuscolumn'))
+        {
+          rows[i].cells[0].style.display = 'none';
+          var statusSrc = rows[i].cells[0].getElementsByTagName('img')[0].src;
+          if (statusSrc.match(/\/images\/default\/([^\.]+)\.gif/)[1] != 'topic')
+          {
+            var statusImg = doc.createElement('img');
+            statusImg.src = statusSrc;
+            statusImg.style.verticalAlign = 'middle';
+            rows[i].cells[1].insertBefore(doc.createTextNode(' '), rows[i].cells[1].firstChild);
+            rows[i].cells[1].insertBefore(statusImg, rows[i].cells[1].firstChild);
+          }
+        }
+
         // Last post link
-        if (GameFOX.prefs.getBoolPref('elements.topics.lastpostlink')) // pref
+        if (GameFOX.prefs.getBoolPref('elements.topics.lastpostlink'))
         {
           var lastPost = GFutils.getLastPost(rows[i].cells[3].textContent,
               onTracked ? '' : rows[i].cells[2].textContent);
@@ -239,7 +261,7 @@ var GameFOX =
         {
           var pageHTML = GFutils.formatPagination(
               doc,
-              rows[i].cells[1].getElementsByTagName('a')[0].getAttribute('href'),
+              rows[i].cells[1].getElementsByTagName('a')[0].href,
               Math.ceil(rows[i].cells[3].textContent),
               onTracked ? '' : rows[i].cells[2].textContent);
 
@@ -252,7 +274,7 @@ var GameFOX =
               pageTR.style.display = 'table-row';
 
               var pageTD = doc.createElement('td');
-              pageTD.setAttribute('colspan', '5');
+              pageTD.setAttribute('colspan', GameFOX.prefs.getBoolPref('elements.nostatuscolumn') ? '4' : '5');
             }
             else
             {

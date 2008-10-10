@@ -17,6 +17,7 @@ pref("gamefox.elements.marktc", true);
 pref("gamefox.elements.marktc.marker", "(tc)");
 pref("gamefox.elements.stopads", true);
 pref("gamefox.elements.aml.marknewposts", true);
+pref("gamefox.elements.nostatuscolumn", false);
 
 pref("gamefox.msgsPerPage", 50);
 pref("gamefox.tpcsPerPage", 50);
