@@ -57,6 +57,7 @@ var GFcss =
       return;
     }
 
+    uri = decodeURI(uri);
     var filename = uri.substr(uri.lastIndexOf('/') + 1);
 
     if (!this.add('user', uri, filename, filename, '', true)) return;
