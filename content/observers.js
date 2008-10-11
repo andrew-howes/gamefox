@@ -1,3 +1,5 @@
+/* vim: set et sw=2 ts=2 sts=2 tw=79: */
+
 var GFtagTreeObserver =
 {
   register: function()
