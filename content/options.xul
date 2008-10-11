@@ -152,10 +152,8 @@
                 <radio value="2" label="&page.elements.pages.where.below;" flex="1"/>
                 <radio value="0" label="&page.elements.pages.where.newrow;" flex="1"/>
               </radiogroup>
-              <spacer height="1px"/>
-              <groupbox>
-                <caption label="&page.elements.pages.format.caption;"/>
-                <hbox align="center">
+              <hbox align="center">
+                <label value="&page.elements.pages.format.label;"/>
                   <spacer width="8px"/>
                   <label value="&page.elements.pages.format.prefix;"/>
                   <textbox preference="gamefox-pref-paging-prefix" size="5" flex="30"/>
@@ -167,9 +165,6 @@
                   <textbox preference="gamefox-pref-paging-suffix" size="4" flex="24"/>
                   <spacer width="8px"/>
                 </hbox>
-                <spacer height="6px"/>
-              </groupbox>
-              <spacer height="1px"/>
             </groupbox>
 
           </vbox>

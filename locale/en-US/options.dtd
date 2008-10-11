@@ -48,7 +48,7 @@
 <!ENTITY page.elements.pages.where.right "Right of topic title">
 <!ENTITY page.elements.pages.where.below "Below topic title">
 <!ENTITY page.elements.pages.where.newrow "New row below topic title">
-<!ENTITY page.elements.pages.format.caption "Format">
+<!ENTITY page.elements.pages.format.label "Format:">
 <!ENTITY page.elements.pages.format.prefix "Prefix:">
 <!ENTITY page.elements.pages.format.sep "Delimiter:">
 <!ENTITY page.elements.pages.format.suffix "Suffix:">
