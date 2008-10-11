@@ -212,10 +212,6 @@ var GameFOX =
           var col = topicsTable.getElementsByTagName('col')[0];
           col.parentNode.removeChild(col);
           rows[0].cells[0].style.display = 'none';
-          var clearImg =
-              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAA' +
-              'l21bKAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeF4FwIEI' +
-              'AAAAAKD9qY8AAgABdDtSRwAAAABJRU5ErkJggg==';
         }
       }
       else
@@ -238,16 +234,16 @@ var GameFOX =
               .match(/\/images\/default\/([^\.]+)\.gif/)[1];
           if (statusType != 'topic')
           {
-            var statusImg = doc.createElement('img');
-            statusImg.src = clearImg;
-            statusImg.className = statusType + '-end';
-            statusImg.style.verticalAlign = 'middle';
-            rows[i].cells[1].insertBefore(statusImg, rows[i].cells[1].firstChild.nextSibling);
-            statusImg = doc.createElement('img');
-            statusImg.src = clearImg;
-            statusImg.className = statusType + '-start';
-            statusImg.style.verticalAlign = 'middle';
-            rows[i].cells[1].insertBefore(statusImg, rows[i].cells[1].firstChild);
+            var statusSpan = doc.createElement('span');
+            statusSpan.className = statusType + '-end';
+            statusSpan.style.verticalAlign = 'middle';
+            statusSpan.style.display = '-moz-inline-box';
+            rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild.nextSibling);
+            statusSpan = doc.createElement('span');
+            statusSpan.className = statusType + '-start';
+            statusSpan.style.verticalAlign = 'middle';
+            statusSpan.style.display = '-moz-inline-box';
+            rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild);
           }
         }
 
