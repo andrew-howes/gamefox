@@ -206,11 +206,16 @@ var GameFOX =
         rows = topicsTable.getElementsByTagName('tr');
 
         // No status column
-        if (GameFOX.prefs.getBoolPref('elements.nostatuscolumn'))
+        var statusPref = GameFOX.prefs.getBoolPref('elements.nostatuscolumn');
+        if (statusPref)
         {
           var col = topicsTable.getElementsByTagName('col')[0];
           col.parentNode.removeChild(col);
           rows[0].cells[0].style.display = 'none';
+          var clearImg =
+              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAA' +
+              'l21bKAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABJJREFUeF4FwIEI' +
+              'AAAAAKD9qY8AAgABdDtSRwAAAABJRU5ErkJggg==';
         }
       }
       else
@@ -226,16 +231,22 @@ var GameFOX =
       for (var i = 1; i < rows.length; i++)
       {
         // No status column
-        if (GameFOX.prefs.getBoolPref('elements.nostatuscolumn'))
+        if (statusPref)
         {
           rows[i].cells[0].style.display = 'none';
-          var statusSrc = rows[i].cells[0].getElementsByTagName('img')[0].src;
-          if (statusSrc != 'http://www.gamefaqs.com/images/default/topic.gif')
+          var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
+              .match(/\/images\/default\/([^\.]+)\.gif/)[1];
+          if (statusType != 'topic')
           {
             var statusImg = doc.createElement('img');
-            statusImg.src = statusSrc;
+            statusImg.src = clearImg;
+            statusImg.className = statusType + '-end';
             statusImg.style.verticalAlign = 'middle';
-            rows[i].cells[1].insertBefore(doc.createTextNode(' '), rows[i].cells[1].firstChild);
+            rows[i].cells[1].insertBefore(statusImg, rows[i].cells[1].firstChild.nextSibling);
+            statusImg = doc.createElement('img');
+            statusImg.src = clearImg;
+            statusImg.className = statusType + '-start';
+            statusImg.style.verticalAlign = 'middle';
             rows[i].cells[1].insertBefore(statusImg, rows[i].cells[1].firstChild);
           }
         }

@@ -16,6 +16,8 @@ var GFcss =
         ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois', '', true],
         ['bundled', 'ascii-art-font.css', 'ASCII art font', '', false],
         ['bundled', 'ricapar.css', 'Classic', 'Ricapar', false],
+        ['bundled', 'status-default.css', 'Status icons (default)', '', true],
+        ['bundled', 'status-classic.css', 'Status icons (classic)', '', false],
         ['bundled', 'toad.css', 'Ten On A Diet', 'TakatoMatsuki', false],
         ['bundled', 'wide-layout.css', 'Wide default', '', false]
         ];

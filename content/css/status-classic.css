@@ -1,0 +1,23 @@
+@-moz-document domain(gamefaqs.com)
+{
+  .topic_closed-end, .sticky_closed-end
+  {
+    background-image: url(http://www.gamefaqs.com/images/closed.gif);
+    width: 11px;
+    height: 13px;
+    margin-left: 3px;
+  }
+
+  .sticky-start, .sticky_closed-start
+  {
+    background-image: url(http://www.gamefaqs.com/images/sticky.gif);
+    width: 11px;
+    height: 13px;
+    margin-right: 3px;
+  }
+
+  .topic_closed-start, .sticky-end
+  {
+    display: none;
+  }
+}
