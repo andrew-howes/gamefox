@@ -15,15 +15,15 @@
 
 /**On every page**/
 @-moz-document domain("gamefaqs.com") {
-#quicknav a {line-height:20px !important ; background:url(http://img142.imageshack.us/img142/4439/quicknavdividertoadku9.gif) no-repeat top right !important; }
-#quicknav {height:24px !important; background-image:url(http://img71.imageshack.us/img71/9675/quicknavbgtoaduy7.gif) !important;  }
+#quicknav a {line-height:20px !important; background:url(http://img142.imageshack.us/img142/4439/quicknavdividertoadku9.gif) no-repeat top right !important; }
+#quicknav {height:24px !important; background-image:url(http://img71.imageshack.us/img71/9675/quicknavbgtoaduy7.gif) !important; }
 #platformlist .nav {line-height:1px !important;}
 #platformlist .jumper {padding-top:3px !important;}
 #platformlist {height:24px !important; background-image:url(http://img84.imageshack.us/img84/6679/platformlistbgtoadep5.gif) !important; }
 #logo {background-image:url(http://www.gamefaqs.com/images/default/logo_clean.gif) !important;}
 #container {width:990px !important; position:relative !important; left:-1px !important;}
-body {background-image:url(http://img152.imageshack.us/img152/6990/bg1000pxzn2.gif)  !important;}
-#footer {width:970px !important ; background:none !important;}
+body {background-image:url(http://img152.imageshack.us/img152/6990/bg1000pxzn2.gif) !important;}
+#footer {width:970px !important; background:none !important;}
 #cbsi_f p:last-child {display:inline !important; width:980px !important;}
 
 /** FAQ Fix - makes FAQ background go back to normal **/
@@ -35,7 +35,7 @@ body>#footer {width:100% !important;}
 }
 
 /** Index page **/
-@-moz-document url("http://www.gamefaqs.com/index.php"), url("http://gamefaqs.com/index.php"), url("http://www.gamefaqs.com/"), url("http://gamefaqs.com/"), url("http://www.gamefaqs.com"), url("http://gamefaqs.com") {
+@-moz-document url("http://www.gamefaqs.com/index.php"), url("http://www.gamefaqs.com/") {
 
 #full_col_wrap {width:1000px !important; background:none !important;}
 #main_col_wrap {width:664px !important;}
@@ -48,11 +48,11 @@ body>#footer {width:100% !important;}
 #main_col .gs .pod {width:645px !important;}
 #main_col .gs .pod .body {width:629px !important;}
 #main_col .gs .pod .body .item {width:629px !important;}
-#main_col .gs .pod .body .item .details {width:400px !important;} 
+#main_col .gs .pod .body .item .details {width:400px !important;}
 }
 
 /**Boards List**/
-@-moz-document url-prefix("http://boards.gamefaqs.com/gfaqs/index.php"),url-prefix("http://www.gamefaqs.com/boards/index.php"),url-prefix("http://gamefaqs.com/boards/index.php")  {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/index.php") {
 
 td {padding-top: 3px !important; padding-bottom: 3px !important;}
 #full_col_wrap {width:1000px !important; background:none !important;}
@@ -67,7 +67,7 @@ td {padding-top: 3px !important; padding-bottom: 3px !important;}
 }
 
 /**Topic List and Topic Search**/
-@-moz-document url-prefix("http://boards.gamefaqs.com/gfaqs/gentopic"), url-prefix("http://boards.gamefaqs.com/gfaqs/search"),url-prefix("http://www.gamefaqs.com/boards/gentopic"), url-prefix("http://www.gamefaqs.com/boards/search"),url-prefix("http://gamefaqs.com/boards/gentopic"), url-prefix("http://gamefaqs.com/boards/search") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/gentopic"), url-prefix("http://www.gamefaqs.com/boards/search") {
 
 .board .topics td{padding-top:3px !important; padding-bottom:3px !important;}
 .board {width:976px !important;}
@@ -80,7 +80,7 @@ img[src*="topic_closed.gif"] {width:13px !important;} /**Remove this line to see
 }
 
 /**Message List, Message Detail, Moderation Detail**/
-@-moz-document url-prefix("http://boards.gamefaqs.com/gfaqs/genmessage"), url-prefix("http://boards.gamefaqs.com/gfaqs/detail.php"), url-prefix("http://boards.gamefaqs.com/gfaqs/moddetl.php"), url-prefix("http://www.gamefaqs.com/boards/genmessage"), url-prefix("http://www.gamefaqs.com/boards/detail.php"), url-prefix("http://www.gamefaqs.com/boards/moddetl.php"), url-prefix("http://gamefaqs.com/boards/genmessage"), url-prefix("http://gamefaqs.com/boards/detail.php"), url-prefix("http://gamefaqs.com/boards/moddetl.php")   {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/genmessage"), url-prefix("http://www.gamefaqs.com/boards/detail.php"), url-prefix("http://www.gamefaqs.com/boards/moddetl.php") {
 
 .board .message td {padding-top:1px !important; padding-bottom:1px !important;}
 .board {width:976px !important;}
@@ -90,7 +90,7 @@ img[src*="topic_closed.gif"] {width:13px !important;} /**Remove this line to see
 }
 
 /** Post Preview, New Post, New Topic **/
-@-moz-document url-prefix("http://boards.gamefaqs.com/gfaqs/post.php"),url-prefix("http://www.gamefaqs.com/boards/post.php"),url-prefix("http://gamefaqs.com/boards/post.php")  {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/post.php") {
 
 #board_wrap {width:976px !important;}
 .board {width:976px !important;}
@@ -109,7 +109,7 @@ textarea {width:954px !important;}
 
 
 /**What's New**/
-@-moz-document url-prefix("http://gamefaqs.com/new/"), url-prefix("http://www.gamefaqs.com/new/") {
+@-moz-document url-prefix("http://www.gamefaqs.com/new/") {
 
 #content {width:986px !important;}
 #sky_col_wrap {width:986px !important; background:none !important;}
@@ -121,7 +121,7 @@ textarea {width:954px !important;}
 }
 
 /**Contributor Central**/
-@-moz-document url-prefix("http://gamefaqs.com/contribute"), url-prefix("http://www.gamefaqs.com/contribute") {
+@-moz-document url-prefix("http://www.gamefaqs.com/contribute") {
 
 #content {width:986px !important;}
 #sky_col_wrap {width:986px !important; background:none !important;}
@@ -133,7 +133,7 @@ textarea {width:954px !important;}
 }
 
 /**Features**/
-@-moz-document url-prefix("http://gamefaqs.com/features"), url-prefix("http://www.gamefaqs.com/features") {
+@-moz-document url-prefix("http://www.gamefaqs.com/features") {
 
 #content {width:986px !important;}
 #sky_col_wrap {width:986px !important; background:none !important;}
@@ -146,7 +146,7 @@ textarea {width:954px !important;}
 }
 
 /**Search**/
-@-moz-document url-prefix("http://gamefaqs.com/search"), url-prefix("http://www.gamefaqs.com/search") {
+@-moz-document url-prefix("http://www.gamefaqs.com/search") {
 
 #content {width:986px !important;}
 #sky_col_wrap {width:986px !important; background:none !important;}
@@ -158,7 +158,7 @@ textarea {width:954px !important;}
 }
 
 /**Poll of the Day**/
-@-moz-document url-prefix("http://gamefaqs.com/poll"), url-prefix("http://www.gamefaqs.com/poll") {
+@-moz-document url-prefix("http://www.gamefaqs.com/poll") {
 
 #content {width:986px !important;}
 #sky_col_wrap {width:986px !important; background:none !important;}
@@ -169,7 +169,7 @@ textarea {width:954px !important;}
 }
 
 /** System List **/
-@-moz-document url-prefix("http://gamefaqs.com/systems.html"), url-prefix("http://www.gamefaqs.com/systems.html") {
+@-moz-document url-prefix("http://www.gamefaqs.com/systems.html") {
 
 #content {width:986px !important;}
 #sky_col_wrap {width:986px !important; background:none !important;}
@@ -182,8 +182,7 @@ textarea {width:954px !important;}
 }
 
 /** Game and Platform Pages **/
-@-moz-document url-prefix("http://gamefaqs.com/console/"), url-prefix("http://www.gamefaqs.com/console/"), url-prefix("http://gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/portable/"), url-prefix("http://gamefaqs.com/computer/"), url-prefix("http://www.gamefaqs.com/computer/"), url-prefix("http://gamefaqs.com/coinop/"), 
-url-prefix("http://www.gamefaqs.com/coinop/"), url-prefix("http://gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/portable/") {
+@-moz-document url-prefix("http://www.gamefaqs.com/console/"), url-prefix("http://www.gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/computer/"), url-prefix("http://www.gamefaqs.com/coinop/"), url-prefix("http://www.gamefaqs.com/portable/") {
 
 #content {width:986px !important;}
 #sky_col_wrap {width:986px !important; background:none !important;}
@@ -194,12 +193,12 @@ url-prefix("http://www.gamefaqs.com/coinop/"), url-prefix("http://gamefaqs.com/p
 #main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:790px !important;}
 .pod .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 .gs .pod .head h1{background-image:url(http://img158.imageshack.us/img158/2733/headbglitetoadae6.gif) !important;}
-.topten .pod  {width:365px !important;}
+.topten .pod {width:365px !important;}
 }
 
 
 /**User, Karma, My Posts, Moderations, Tracked Topics, Ignore List, Board Manager, User Contact Info**/
-@-moz-document url-prefix("http://boards.gamefaqs.com/gfaqs/user.php"),  url-prefix("http://boards.gamefaqs.com/gfaqs/karma.php"), url-prefix("http://boards.gamefaqs.com/gfaqs/myposts.php"), url-prefix("http://boards.gamefaqs.com/gfaqs/modhist.php"), url-prefix("http://boards.gamefaqs.com/gfaqs/tracked.php"), url-prefix("http://boards.gamefaqs.com/gfaqs/index.php?action=ignorelist"), url-prefix("http://boards.gamefaqs.com/gfaqs/bman.php"), url-prefix("http://boards.gamefaqs.com/gfaqs/contact.php"), url-prefix("http://www.gamefaqs.com/boards/user.php"),  url-prefix("http://www.gamefaqs.com/boards/karma.php"), url-prefix("http://www.gamefaqs.com/boards/myposts.php"), url-prefix("http://www.gamefaqs.com/boards/modhist.php"), url-prefix("http://www.gamefaqs.com/boards/tracked.php"), url-prefix("http://www.gamefaqs.com/boards/index.php?action=ignorelist"), url-prefix("http://www.gamefaqs.com/boards/bman.php"), url-prefix("http://www.gamefaqs.com/boards/contact.php"), url-prefix("http://gamefaqs.com/boards/user.php"),  url-prefix("http://gamefaqs.com/boards/karma.php"), url-prefix("http://gamefaqs.com/boards/myposts.php"), url-prefix("http://gamefaqs.com/boards/modhist.php"), url-prefix("http://gamefaqs.com/boards/tracked.php"), url-prefix("http://gamefaqs.com/boards/index.php?action=ignorelist"), url-prefix("http://gamefaqs.com/boards/bman.php"), url-prefix("http://gamefaqs.com/boards/contact.php") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/user.php"), url-prefix("http://www.gamefaqs.com/boards/karma.php"), url-prefix("http://www.gamefaqs.com/boards/myposts.php"), url-prefix("http://www.gamefaqs.com/boards/modhist.php"), url-prefix("http://www.gamefaqs.com/boards/tracked.php"), url-prefix("http://www.gamefaqs.com/boards/index.php?action=ignorelist"), url-prefix("http://www.gamefaqs.com/boards/bman.php"), url-prefix("http://www.gamefaqs.com/boards/contact.php") {
 
 td{padding-top:3px !important; padding-bottom:3px !important;}
 #board_wrap {width:976px !important;}
@@ -210,7 +209,7 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 }
 
 /** Manage Account (Account Settings) **/
-@-moz-document url-prefix("http://www.gamefaqs.com/user/"), url-prefix("http://gamefaqs.com/user/") {
+@-moz-document url-prefix("http://www.gamefaqs.com/user/") {
 
 #sky_col_wrap {width:986px !important; background:none !important;}
 #main_col_wrap {width:800px !important;}
@@ -223,7 +222,7 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 
 /**GameFOX Stuff**/
 /** Some code here is based on code that is integrated with GameFOX **/
-@-moz-document url-prefix("http://boards.gamefaqs.com/gfaqs/"), url-prefix("http://www.gamefaqs.com/boards/"), url-prefix("http://gamefaqs.com/boards/") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/") {
 
 #gamefox-quickpost-title {font-size:11px !important; font-weight:bold !important; color:white !important; padding-left:16px !important; padding-bottom:0px !important; line-height:22px !important; border-bottom:none !important; text-indent:0 !important;}
 #gamefox-quickpost-title {background:url(http://img186.imageshack.us/img186/4696/quickpostheadbgtoadai2.gif) no-repeat bottom left !important;}
@@ -235,7 +234,7 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 #gamefox-quickpost-afloat #gamefox-quickpost-form {padding-left:0px !important; padding-bottom:0px !important;}
 #gamefox-quickpost-afloat #gamefox-quickpost-form textarea {width:99% !important;}
 #gamefox-quickpost-afloat #gamefox-topic {width:99% !important;}
-#gamefox-quickpost-afloat {position:fixed !important; top:30% !important; left:20% !important; width:70% !important; z-index: 3 !important; border: 2px solid #6564FF !important; color:#000000 !important; background-color: #DFDFDF !important; -moz-border-radius: 10px !important; -moz-opacity: 0.90 !important;}   
+#gamefox-quickpost-afloat {position:fixed !important; top:30% !important; left:20% !important; width:70% !important; z-index: 3 !important; border: 2px solid #6564FF !important; color:#000000 !important; background-color: #DFDFDF !important; -moz-border-radius: 10px !important; -moz-opacity: 0.90 !important;}
 #gamefox-quickpost-afloat #gamefox-quickpost-title {-moz-border-radius: 10px 10px 0 0 !important; -moz-opacity: 0.90 !important;}
 }
 
@@ -251,45 +250,44 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 
 /**Resize certain elements after removing ads**/
 /**What's New**/
-@-moz-document url-prefix("http://gamefaqs.com/new/"), url-prefix("http://www.gamefaqs.com/new/") {
+@-moz-document url-prefix("http://www.gamefaqs.com/new/") {
 #main_col_wrap {width:986px !important;}
 #main_col {width: 986px !important;}
 #main_col .pod {width:976px !important;}
 }/**Contributor Central**/
-@-moz-document url-prefix("http://gamefaqs.com/contribute"), url-prefix("http://www.gamefaqs.com/contribute") {
+@-moz-document url-prefix("http://www.gamefaqs.com/contribute") {
 #main_col_wrap {width:986px !important;}
 #main_col {width: 986px !important;}
 #main_col .pod {width:976px !important;}
 }/**Features**/
-@-moz-document url-prefix("http://gamefaqs.com/features"), url-prefix("http://www.gamefaqs.com/features") {
+@-moz-document url-prefix("http://www.gamefaqs.com/features") {
 #main_col_wrap {width:986px !important;}
 #main_col {width: 986px !important;}
 #main_col .pod {width:976px !important;}
 }/**Search**/
-@-moz-document url-prefix("http://gamefaqs.com/search"), url-prefix("http://www.gamefaqs.com/search") {
+@-moz-document url-prefix("http://www.gamefaqs.com/search") {
 #main_col_wrap {width:986px !important;}
 #main_col {width: 986px !important;}
 #main_col .pod {width:976px !important;}
 }/**Poll of the Day**/
-@-moz-document url-prefix("http://gamefaqs.com/poll"), url-prefix("http://www.gamefaqs.com/poll") {
+@-moz-document url-prefix("http://www.gamefaqs.com/poll") {
 #main_col_wrap {width:986px !important;}
 #main_col {width: 986px !important;}
 #main_col .pod {width:976px !important;}
 }/** System List **/
-@-moz-document url-prefix("http://gamefaqs.com/systems.html"), url-prefix("http://www.gamefaqs.com/systems.html") {
+@-moz-document url-prefix("http://www.gamefaqs.com/systems.html") {
 #main_col_wrap {width:986px !important;}
 #main_col {width: 986px !important;}
 #main_col .pod {width:976px !important;}
 }/** Game and Platform Pages **/
-@-moz-document url-prefix("http://gamefaqs.com/console/"), url-prefix("http://www.gamefaqs.com/console/"), url-prefix("http://gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/portable/"), url-prefix("http://gamefaqs.com/computer/"), url-prefix("http://www.gamefaqs.com/computer/"), url-prefix("http://gamefaqs.com/coinop/"), 
-url-prefix("http://www.gamefaqs.com/coinop/"), url-prefix("http://gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/portable/") {
+@-moz-document url-prefix("http://www.gamefaqs.com/console/"), url-prefix("http://www.gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/computer/"), url-prefix("http://www.gamefaqs.com/coinop/"), url-prefix("http://www.gamefaqs.com/portable/") {
 #main_col_wrap {width:986px !important;}
 #main_col {width: 986px !important;}
 #main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:976px !important;}
-.topten .pod  {width:480px !important;}
+.topten .pod {width:480px !important;}
 .hub_nav {width:966px !important;}
 }/** Manage Account (Account Settings) **/
-@-moz-document url-prefix("http://www.gamefaqs.com/user/"), url-prefix("http://gamefaqs.com/user/") {
+@-moz-document url-prefix("http://www.gamefaqs.com/user/") {
 #main_col_wrap {width:986px !important;}
 #main_col .pod {width:976px !important;}
 }
