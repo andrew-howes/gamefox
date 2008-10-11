@@ -97,10 +97,10 @@ var GFquote =
     body = GFutils.specialCharsDecode(body.trim());
     // Prevent too much GFCode quote nesting
     var loops = 0;
-    while (body.match(/(<i><p>[\s\S]*?){3,}/) != null)
-    { // the number at the end of the regexp (e.g., {3,}) is max number of recursive quotes
-      if (loops > 6) // too many nests from when this wasn't enforced, just give up
-                     // and quote the last guy
+    while (body.match(/(<i><p>[\s\S]*?){2,}/) != null)
+    {
+      // TODO: handle consecutive, but not nested quotes
+      if (loops > 6) // too many loops can cause slowness
       {
         body = body.replace(/\n*<i><p>[\s\S]*<\/p><\/i>\n*/, '');
         break;
