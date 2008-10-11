@@ -32,6 +32,57 @@ var GameFOX =
 
         // Topic rows
         rows = topicsTable.getElementsByTagName('tr');
+
+        // Page jumper
+        if (GameFOX.prefs.getBoolPref('elements.aml.pagejumper'))
+        {
+          var pageJumperTop = doc.evaluate('//div[@class="pages"]', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          if (pageJumperTop != null)
+          {
+            var pageMatches = pageJumperTop.textContent.match(/Page ([0-9]+) of ([0-9]+)/);
+            if (pageMatches)
+            {
+              var currentPage = pageMatches[1] - 1;
+              var lastPage = pageMatches[2] - 1;
+              var query = GFutils.parseQueryString(doc.location.search);
+              query = '/boards/myposts.php?' +
+                 (query['board'] ? 'board=' + query['board'] + '&' : '') +
+                 (query['topic'] ? 'topic=' + query['topic'] + '&' : '') +
+                 (query['user'] ? 'user=' + query['user'] + '&' : '');
+
+              var pageJumper = doc.createElement('div');
+              pageJumper.className = 'pagejumper';
+
+              var pageUL = doc.createElement('ul');
+              var pageLI, pageA;
+              for (var i = 0; i <= lastPage; i++)
+              {
+                pageLI = doc.createElement('li');
+                if (i == 0)
+                {
+                  pageLI.className = 'first';
+                  pageLI.appendChild(doc.createTextNode('Jump to Page: '));
+                }
+                if (i == currentPage)
+                {
+                  pageLI.appendChild(doc.createTextNode(i + 1));
+                }
+                else
+                {
+                  pageA = doc.createElement('a');
+                  pageA.href = query + 'page=' + i;
+                  pageA.appendChild(doc.createTextNode(i + 1));
+                  pageLI.appendChild(pageA);
+                }
+                pageUL.appendChild(pageLI);
+              }
+
+              pageJumper.appendChild(pageUL);
+              topicsTable.parentNode.parentNode.appendChild(pageJumper);
+            }
+          }
+        }
       }
       else
       {
@@ -282,7 +333,7 @@ var GameFOX =
               pageTR.style.display = 'table-row';
 
               var pageTD = doc.createElement('td');
-              pageTD.setAttribute('colspan', GameFOX.prefs.getBoolPref('elements.nostatuscolumn') ? '4' : '5');
+              pageTD.setAttribute('colspan', statusPref ? '4' : '5');
             }
             else
             {
