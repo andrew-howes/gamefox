@@ -339,7 +339,7 @@
     <groupbox>
       <caption label="&style.stylesheets.label;"/>
       <description>&style.deschelp;</description>
-      <tree id="css-tree" rows="9" editable="true" seltype="single" hidecolumnpicker="true"
+      <tree id="css-tree" rows="8" editable="true" seltype="single" hidecolumnpicker="true"
         onselect="GFcss.onselect();">
         <treecols>
           <treecol label="&style.tree.name;" primary="true" flex="1"/>

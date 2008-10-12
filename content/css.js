@@ -288,7 +288,7 @@ var GFcss =
   {
     try
     {
-      var category = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][4];
+      var category = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][5];
       document.getElementById('css-remove').setAttribute('disabled', category != 'user');
     }
     catch (e)
