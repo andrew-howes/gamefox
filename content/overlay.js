@@ -90,6 +90,8 @@ var GameFOX =
         rows = [];
       }
 
+      var skipNext = false;
+
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
@@ -141,7 +143,7 @@ var GameFOX =
               pageTR.style.display = 'table-row';
 
               var pageTD = doc.createElement('td');
-              pageTD.setAttribute('colspan', statusPref ? '4' : '5');
+              pageTD.setAttribute('colspan', '5');
             }
             else
             {
@@ -161,6 +163,13 @@ var GameFOX =
               skipNext = true;
             }
           }
+        }
+
+        // for added page rows
+        if (skipNext)
+        {
+          ++i;
+          skipNext = false;
         }
       }
     }
