@@ -11,6 +11,8 @@
     * Improved Ricapar Classic CSS
     * Option to hide status column on the topic list and use GF9-style topic
       icons
+    * Add page jumper to the bottom of the active messages list
+    * Options to control where you're redirected to after QuickPosting
 
 2008-09-21:
     * version 0.6.6
