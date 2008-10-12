@@ -73,6 +73,9 @@
         margin: 0 5px !important;
         text-transform: capitalize !important;
     }
+    .gamespace_nav a {
+        text-decoration: none !important;
+    }
     #header a {
         margin-right: 0 !important;
     }
@@ -144,6 +147,15 @@
         margin: 2px !important;
         overflow: hidden !important;
     }
+    
+    .gamespace_nav:before {
+        content: 'Message Board';
+        color: #fff;
+        text-align: center;
+        font-size: 13pt !important;
+        font-weight: bold;
+        display: block;
+    }
 
     .crumbs {
         background: #d0d0ff !important;
@@ -164,7 +176,7 @@
     .gamespace_nav ul {
         margin: 0 !important;
         padding: 0 !important;
-        font-size: 15px !important;
+        font-size: 13px !important;
         text-align: center !important;
     }
 
@@ -183,8 +195,7 @@
 
     .user,
     .pages,
-    .pagejumper,
-    .searchtopics {
+    .pagejumper {
         display: block !important;
         padding: 2px !important;
         font-size: 15px !important;
@@ -194,6 +205,11 @@
         text-align: center !important;
         margin: 2px 2px 0 2px !important;
     }
+    
+    .pages,
+    .pagejumper {
+        font-style: italic;
+    }
 
     .pages {
         background: #8080ff !important;
@@ -201,14 +217,17 @@
 
     .pagejumper {
         margin: 2px !important;
+        background: #8080ff !important;
+        margin-top: 0 !important;
     }
 
     .searchtopics {
         margin-top: 0 !important;
+        text-align: center;
     }
 
     .searchtopics a {
-        color: #fff !important;
+        display: none;
     }
 
     .pagejumper ul {
@@ -232,6 +251,14 @@
         font-size: 15px !important;
         color: #fff !important;
     }
+    
+    table:not(.topics) tbody .head:first-child th {
+        background: #00f !important;
+    }
+    
+    .topics th {
+        font-style: italic;
+    }
 
     table:not(.message) tr:not(.gamefox-highlight) td {
         background: #d0d0ff !important;
@@ -245,6 +272,10 @@
         padding: 3px !important;
         font-size: 28px !important;
         font-style: italic !important;
+    }
+    
+    .crumbs + h1 { /* game boards */
+        font-size: 36pt !important;
     }
 
     /* Messages */
@@ -319,6 +350,11 @@
         background: #ff8;
     }
 
+    /* Board Information */
+    #side_col .pod p {
+        margin-top: 1em !important;
+    }
+    
     /* QuickPost */
     #gamefox-quickpost-title {
         background-color: #00f !important;
