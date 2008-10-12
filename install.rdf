@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- version ###VERSION### (###GIT_VERSION###) built on ###DATE### -->
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
         <Description about="urn:mozilla:install-manifest">
                 <em:id>{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}</em:id>

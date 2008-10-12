@@ -4,8 +4,9 @@
 
 TOP           = $(shell pwd)
 OS            = $(shell uname -s)
-BUILD_DATE    = $(shell date "+%Y/%m/%d %H:%M:%S")
+BUILD_DATE    = $(shell date "+%Y-%m-%d %H:%M:%S")
 NIGHTLY_DATE  = $(shell date "+%Y%m%d")
+GIT_VERSION   = $(shell git describe)
 
 JAR_TXT_FILES = $(shell find -L content skin locale     \
                         -type f                         \
@@ -105,6 +106,7 @@ ${XPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
 	    done
 	${Q}for f in ${XPI_TXT_FILES} ; do \
 		${SED} -e "s,###VERSION###,${VERSION},g" \
+		       -e "s,###GIT_VERSION###,${GIT_VERSION},g" \
 		       -e "s,###DATE###,${BUILD_DATE},g" \
 		       < $$f > ${BUILD_XPI_DIR}/$$f ; \
 		( diff -q $$f ${BUILD_XPI_DIR}/$$f 1>/dev/null ) || \
@@ -124,6 +126,7 @@ ${MOZXPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
 	    done
 	${Q}for f in ${XPI_TXT_FILES} ; do \
 		${SED} -e "s,###VERSION###,${VERSION},g" \
+		       -e "s,###GIT_VERSION###,${GIT_VERSION},g" \
 		       -e "s,###DATE###,${BUILD_DATE},g" \
 			   -e "s,<em:updateURL>.*</em:updateURL>,,g" \
 			   -e "s,<em:updateKey>.*</em:updateKey>,,g" \
@@ -145,6 +148,7 @@ ${NIGHTLYXPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
 	    done
 	${Q}for f in ${XPI_TXT_FILES} ; do \
 		${SED} -e "s,###VERSION###,${VERSION},g" \
+		       -e "s,###GIT_VERSION###,${GIT_VERSION},g" \
 		       -e "s,###DATE###,${BUILD_DATE},g" \
 			   -e "s,<em:version>\([0-9.]\+\)pre</em:version>,<em:version>\1pre${NIGHTLY_DATE}</em:version>,g" \
 			   -e "s,<em:updateURL>.*</em:updateURL>,<em:updateURL>http://beyondboredom.net/gfox/nightly.rdf</em:updateURL>,g" \
