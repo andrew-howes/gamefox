@@ -5,9 +5,9 @@
 
 <!ENTITY general.label "General">
 
-<!ENTITY page.label "Page">
+<!ENTITY page.label "Main">
 <!ENTITY page.tab.board "Board Settings">
-<!ENTITY page.tab.elements "Features">
+<!ENTITY page.tab.elements "Page">
 <!ENTITY page.tab.posting "Posting">
 <!ENTITY page.boardsettings.caption "Board Settings">
 <!ENTITY page.boardsettings.tpp "Topics Per Page">
