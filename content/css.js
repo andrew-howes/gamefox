@@ -8,23 +8,34 @@ var GFcss =
   init: function()
   {
     var defaults = [
-        ['gamefox', 'gamefox-ads.css', 'Ad blocking', '', true],
-        ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar', 'MichaelJBuck', false],
-        ['gamefox', 'gamefox-essentials.css', 'Essentials', '', true],
-        ['gamefox', 'gfcode.css', 'GFCode', 'Ant P.', true],
-        ['gamefox', 'gamefox-quickpost.css', 'QuickPost', '', true],
-        ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois', '', true],
-        ['bundled', 'ascii-art-font.css', 'ASCII art font', '', false],
-        ['bundled', 'ricapar.css', 'Classic', 'Ricapar', false],
-        ['bundled', 'status-default.css', 'Status icons (default)', '', true],
-        ['bundled', 'status-classic.css', 'Status icons (classic)', '', false],
-        ['bundled', 'toad.css', 'Ten On A Diet', 'TakatoMatsuki', false],
-        ['bundled', 'wide-layout.css', 'Wide default', '', false]
+        ['gamefox', 'gamefox-ads.css', 'Ad blocking', '', '', true],
+        ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar', '', 'MichaelJBuck', false],
+        ['gamefox', 'gamefox-essentials.css', 'Essentials', '', '', true],
+        ['gamefox', 'gfcode.css', 'GFCode', '', 'Ant P.', true],
+        ['gamefox', 'gamefox-quickpost.css', 'QuickPost', '', '', true],
+        ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois', '', '', true],
+        ['bundled', 'ascii-art-font.css', 'ASCII art font',
+              'Increases the font size of messages to make ASCII art look better.',
+              '', false],
+        ['bundled', 'ricapar.css', 'Classic',
+              'Emulates the classic "GF8" look of GameFAQs. Disable main ' +
+              'GameFAQs stylesheets to use.', 'Ricapar', false],
+        ['bundled', 'status-default.css', 'Status icons (default)',
+              'Used when "hide topic status column" is enabled. This CSS ' +
+              'conflicts with "Status icons (classic)".', '', true],
+        ['bundled', 'status-classic.css', 'Status icons (classic)',
+              'Used when "hide topic status column" is enabled - ' +
+              'emulates the GF9 look of topic status icons. This CSS ' +
+              'conflicts with "Status icons (default)".', '', false],
+        ['bundled', 'toad.css', 'Ten On A Diet', '', 'TakatoMatsuki', false],
+        ['bundled', 'wide-layout.css', 'Wide default',
+              'Increases the width of the page to fill the whole window. ' +
+              'Works with the default GameFAQs skin.', '', false]
         ];
     for (var i = 0; i < defaults.length; i++)
     {
       var j = defaults[i];
-      this.add(j[0], 'chrome://gamefox/content/css/' + j[1], j[1], j[2], j[3], j[4], true);
+      this.add(j[0], 'chrome://gamefox/content/css/' + j[1], j[1], j[2], j[3], j[4], j[5], true);
     }
 
     // Remove old stylesheets
@@ -61,7 +72,7 @@ var GFcss =
 
     var filename = decodeURIComponent(uri.substr(uri.lastIndexOf('/') + 1));
 
-    if (!this.add('user', uri, filename, filename, '', true)) return;
+    if (!this.add('user', uri, filename, filename, '', '', true)) return;
 
     this.populate(document.getElementById('css-tree'));
     this.reload();
@@ -83,7 +94,7 @@ var GFcss =
     }
   },
 
-  add: function(cat, uri, filename, title, author, enabled, overwrite)
+  add: function(cat, uri, filename, title, desc, author, enabled, overwrite)
   {
     overwrite = (overwrite == null ? false : overwrite);
     var file = Cc['@mozilla.org/file/local;1'].getService(
@@ -147,7 +158,7 @@ var GFcss =
     }
 
     css[cat][filename] = {
-      'title': title, 'author': author, 'enabled': enabled
+      'title': title, 'desc': desc, 'author': author, 'enabled': enabled
     };
 
     this.prefs.setCharPref('serialized', css.toSource());
@@ -238,6 +249,7 @@ var GFcss =
       {
         this.treeView.childData[treeCat].push([
           css[prefCat][filename]['title'],
+          css[prefCat][filename]['desc'],
           css[prefCat][filename]['author'],
           css[prefCat][filename]['enabled'],
           filename, // stored in invisible column; uniquely identifies stylesheet
@@ -249,8 +261,13 @@ var GFcss =
     this.treeView.isEditable = function(idx, column)
     {
       if (this.isContainer(idx)) return false;
-      if (column.index == 2) return true;
-      if (this.visibleData[idx][0][4] == 'user') return true;
+      if (column.index == 3) return true;
+      if (this.visibleData[idx][0][5] == 'user') return true;
+
+      // description
+      if (column.index == 1 && this.visibleData[idx][0][1].length)
+        GFlib.alert(this.visibleData[idx][0][0] + '\n\n' +
+            this.visibleData[idx][0][1]);
     }
     this.treeView.setCellText = this.setCell;
     this.treeView.setCellValue = this.setCell;
@@ -285,10 +302,10 @@ var GFcss =
   {
     this.visibleData[idx][0][column.index] = value;
 
-    var filename = this.visibleData[idx][0][3];
-    var category = this.visibleData[idx][0][4];
+    var filename = this.visibleData[idx][0][4];
+    var category = this.visibleData[idx][0][5];
     // Map column to associative array in pref
-    var map = new Array('title', 'author', 'enabled');
+    var map = new Array('title', 'desc', 'author', 'enabled');
 
     var css = eval(GFcss.prefs.getCharPref('serialized'));
     css[category][filename][map[column.index]] = value;
@@ -336,8 +353,8 @@ var GFcss =
     if (!GFlib.confirm('Really delete "' + current[0] + '"?'))
       return;
 
-    var filename = current[3];
-    var category = current[4];
+    var filename = current[4];
+    var category = current[5];
 
     if (category != 'user')
       return;

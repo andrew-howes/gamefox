@@ -64,9 +64,11 @@
 <!ENTITY page.posting.quickpost.aftermessage.firstpage "Go to first page">
 
 <!ENTITY style.label "Style">
+<!ENTITY style.deschelp "Double click on the description (if any) of a stylesheet to read more.">
 <!ENTITY style.disablegamefaqscss "Disable main GameFAQs stylesheets">
 <!ENTITY style.stylesheets.label "Stylesheets">
 <!ENTITY style.tree.name "Name">
+<!ENTITY style.tree.desc "Description">
 <!ENTITY style.tree.author "Author">
 <!ENTITY style.tree.enabled "Enabled">
 <!ENTITY style.tree.delete "Delete">
