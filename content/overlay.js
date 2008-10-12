@@ -123,6 +123,45 @@ var GameFOX =
             rows[i].cells[4].appendChild(span);
           }
         }
+
+        // Pagination
+        if (GameFOX.prefs.getBoolPref('paging.auto'))
+        {
+          var pageHTML = GFutils.formatPagination(
+              doc,
+              rows[i].cells[1].getElementsByTagName('a')[0].href,
+              Math.ceil(rows[i].cells[2].textContent), '');
+
+          if (pageHTML) // this topic has multiple pages
+          {
+            if (GameFOX.prefs.getIntPref('paging.location') == 0)
+            {
+              var pageTR = doc.createElement('tr');
+              pageTR.setAttribute('class', 'gamefox-pagelist');
+              pageTR.style.display = 'table-row';
+
+              var pageTD = doc.createElement('td');
+              pageTD.setAttribute('colspan', statusPref ? '4' : '5');
+            }
+            else
+            {
+              var pageTR = rows[i].cells[1];
+
+              var pageTD = doc.createElement('span');
+              pageTD.setAttribute('class', 'gamefox-pagelist');
+              pageTD.setAttribute('tag', GameFOX.prefs.getIntPref('paging.location'));
+            }
+
+            pageTD.innerHTML = pageHTML.innerHTML;
+            pageTR.appendChild(pageTD);
+
+            if (GameFOX.prefs.getIntPref('paging.location') == 0)
+            {
+              rows[i].parentNode.insertBefore(pageTR, rows[i].nextSibling);
+              skipNext = true;
+            }
+          }
+        }
       }
     }
 
