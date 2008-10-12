@@ -1,5 +1,5 @@
 @-moz-document url-prefix(http://www.gamefaqs.com/boards) {
-    /* Added " > # > :not()" to redisplay Board Information side pane in the bottom of board list */
+    /* redisplay Board Information side pane in the bottom of board list */
     #side_col_wrap > #side_col > div:not(:first-child) {
         display: none !important;
     }
@@ -65,7 +65,6 @@
     #quicknav a,
     .user a,
     .pages a,
-    .boardnavright a,
     .pagejumper a,
     #platformlist a,
     .gamespace_nav a {
@@ -86,7 +85,6 @@
     #quicknav a:hover,
     .user a:hover,
     .pages a:hover,
-    .boardnavright a:hover,
     .pagejumper a:hover,
     #platformlist a:hover,
     .gamespace_nav a:hover {
@@ -114,7 +112,7 @@
         position: absolute !important;
         top: 3px !important;
         left: 5px !important;
-        background: #66f url('data:image/gif;base64,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') no-repeat top left !important;
+        background: #66f url(http://www.gamefaqs.com/shared/bar2001.gif) no-repeat top left !important;
         padding-top: 30px !important;
         padding-left: 0 !important;
     }
@@ -185,7 +183,6 @@
 
     .user,
     .pages,
-    .boardnavright,
     .pagejumper,
     .searchtopics {
         display: block !important;
@@ -208,6 +205,10 @@
 
     .searchtopics {
         margin-top: 0 !important;
+    }
+
+    .searchtopics a {
+        color: #fff !important;
     }
 
     .pagejumper ul {
@@ -244,20 +245,6 @@
         padding: 3px !important;
         font-size: 28px !important;
         font-style: italic !important;
-    }
-
-    .notice {
-        padding: 2px !important;
-    }
-
-    .notice h2 {
-        font-size: 13px !important;
-        margin: 0 !important;
-        text-transform: uppercase !important;
-    }
-
-    .notice span {
-        margin: 2px 0 -2px 0 !important;
     }
 
     /* Messages */
