@@ -8,6 +8,16 @@
         margin-right: auto !important;
         max-width: 850px !important;
     }
+    
+    /* add title to gamespace */
+    .gamespace_nav:before {
+        content: 'Message Board';
+        color: #fff;
+        text-align: center;
+        font-size: 13pt !important;
+        font-weight: bold;
+        display: block;
+    }
 }
 
 @-moz-document domain(gamefaqs.com) {
@@ -75,6 +85,7 @@
     }
     .gamespace_nav a {
         text-decoration: none !important;
+        margin: 0 !important;
     }
     #header a {
         margin-right: 0 !important;
@@ -146,15 +157,6 @@
         padding: 2px 2px 2px 0 !important;
         margin: 2px !important;
         overflow: hidden !important;
-    }
-    
-    .gamespace_nav:before {
-        content: 'Message Board';
-        color: #fff;
-        text-align: center;
-        font-size: 13pt !important;
-        font-weight: bold;
-        display: block;
     }
 
     .crumbs {
