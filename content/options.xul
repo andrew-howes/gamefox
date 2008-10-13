@@ -40,6 +40,7 @@
       <preference id="elements-aml-pagejumper" name="gamefox.elements.aml.pagejumper" type="bool"/>
 
       <preference id="elements-tag-link" name="gamefox.elements.tag.link" type="bool"/>
+      <preference id="elements-deletelink" name="gamefox.elements.deletelink" type="bool"/>
       <preference id="elements-msgnum" name="gamefox.elements.msgnum" type="bool"/>
       <preference id="elements-msgnum-style" name="gamefox.elements.msgnum.style" type="int"/>
       <preference id="elements-marktc" name="gamefox.elements.marktc" type="bool"/>
@@ -116,6 +117,7 @@
                     <caption label="&page.elements.messages.caption;"/>
                     <vbox>
                       <checkbox preference="elements-tag-link" label="&page.elements.messages.taglink;"/>
+                      <checkbox preference="elements-deletelink" label="&page.elements.messages.deletelink;"/>
                       <checkbox flex="1" preference="elements-msgnum" label="&page.elements.messages.numbering;"/>
                       <hbox class="indent" align="baseline">
                         <menulist preference="elements-msgnum-style">
@@ -128,7 +130,7 @@
                         </menulist>
                       </hbox>
                       <hbox align="center">
-                        <checkbox preference="elements-marktc" label="&page.elements.marktc;"/>
+                        <checkbox preference="elements-marktc" label="&page.elements.messages.marktc;"/>
                         <textbox preference="elements-marktc-marker" size="3"/>
                       </hbox>
                     </vbox>

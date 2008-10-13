@@ -1,7 +1,10 @@
-2008-09-xx:
+2008-10-xx:
     * version 0.6.7
-    * Option to remove preview and reset buttons for QuickPost
+    * Option to remove preview buttons for QuickPost
+    * QuickPost reset button removed
     * Label posts from the topic creator
+    * When GameFAQs stylesheets are disabled, they no longer briefly appear
+      when the page is loaded
     * Better ad blocking, similar to Adblock Plus
     * Remove CSS: QuickPost (0.5)
     * Add account switcher to the sidebar

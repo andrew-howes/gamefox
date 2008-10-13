@@ -29,7 +29,6 @@
 <!ENTITY page.elements.desctitles "Descriptive window titles">
 <!ENTITY page.elements.titleprefix "Window title page prefixes">
 <!ENTITY page.elements.stopads "Block ad servers">
-<!ENTITY page.elements.marktc "Label topic creator">
 <!ENTITY page.elements.topics.caption "Topic Lists">
 <!ENTITY page.elements.topics.lastpostlink "Link to last post">
 <!ENTITY page.elements.topics.nostatuscolumn "Hide topic status column">
@@ -38,7 +37,9 @@
 <!ENTITY page.elements.topics.pagejumper "Show page jumper (Active Messages)">
 <!ENTITY page.elements.messages.caption "Message Lists">
 <!ENTITY page.elements.messages.taglink "&quot;Tag Topic&quot; link">
+<!ENTITY page.elements.messages.deletelink "&quot;delete&quot; links">
 <!ENTITY page.elements.messages.numbering "Number messages">
+<!ENTITY page.elements.messages.marktc "Label topic creator">
 <!ENTITY page.elements.pages.caption "Topic Pagination">
 <!ENTITY page.elements.pages.auto "Automatically add page numbers on topic list">
 <!ENTITY page.elements.pages.where "Location of page numbers:">
@@ -64,7 +65,7 @@
 <!ENTITY page.posting.quickpost.aftermessage.firstpage "Go to first page">
 
 <!ENTITY style.label "Style">
-<!ENTITY style.deschelp "Double click on the description (if any) of a stylesheet to read more.">
+<!ENTITY style.deschelp "Double click or hover over the description (if any) of a stylesheet to read more.">
 <!ENTITY style.disablegamefaqscss "Disable main GameFAQs stylesheets">
 <!ENTITY style.stylesheets.label "Stylesheets">
 <!ENTITY style.tree.name "Name">
