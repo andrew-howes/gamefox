@@ -658,6 +658,31 @@ var GameFOX =
                 td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
           }
         }
+
+        // Add "delete" link
+        if (GameFOX.prefs.getBoolPref('elements.deletelink') &&
+            msgnum != 1 && !onArchive &&
+            td[i + 1].textContent.trim() != '[This message was deleted at ' +
+            'the request of the original poster]' &&
+            td[i + 1].textContent.trim() != '[This message was deleted at ' +
+            'the request of a moderator or administrator]')
+        {
+          var loggedInUser = userNav.getElementsByTagName('a')[0].textContent;
+          loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
+          if (loggedInUser == username)
+          {
+            var msgDetailLink = td[i].getElementsByTagName('a')[1];
+
+            var a = doc.createElement('a');
+            a.appendChild(doc.createTextNode('delete'));
+            a.className = 'gamefox-delete-link';
+            a.href = '#' + GFutils.parseQueryString(msgDetailLink.href)['message'];
+            a.addEventListener('click', GFmessages.deletePost, false);
+
+            td[i].insertBefore(a, msgDetailLink.nextSibling);
+            td[i].insertBefore(doc.createTextNode(' | '), msgDetailLink.nextSibling);
+          }
+        }
       }
 
       doc.gamefox.tc = tc;

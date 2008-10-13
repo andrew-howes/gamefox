@@ -56,5 +56,43 @@ var GFmessages =
     }
     else
       titleCount.style.setProperty('font-weight', '', '');
+  },
+
+  deletePost: function(event)
+  {
+    event.preventDefault();
+
+    if (!GFlib.confirm('Delete this post?')) return false;
+    
+    var doc = GFlib.getDocument(event);
+    var query = GFutils.parseQueryString(doc.location.search);
+    var uri = GFlib.domain + GFlib.path + 'detail.php?board=' + query['board'] +
+        '&topic=' + query['topic'] + '&message=' + event.target.hash.substr(1);
+
+    var get = new XMLHttpRequest();
+    get.open('GET', uri);
+    get.onreadystatechange = function()
+    {
+      if (get.readyState == 4)
+      {
+        if (get.responseText.indexOf('Delete this Message') == -1)
+          return false;
+
+        var post = new XMLHttpRequest();
+        post.open('POST', uri + '&action=delete');
+        post.onreadystatechange = function()
+        {
+          if (post.readyState == 4)
+          {
+            doc.location.hash = '#' + event.target.parentNode.id;
+            doc.location.reload();
+          }
+        }
+        post.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        post.send('key=' + get.responseText.match(/\bname="key"[^>]+?\bvalue="([^"]*)"/)[1] +
+            '&YES=Delete+this+Post');
+      }
+    }
+    get.send(null);
   }
 };
