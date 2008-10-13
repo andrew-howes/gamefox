@@ -1082,6 +1082,12 @@ function GameFOXLoader()
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar', true);
     }
 
+    if (version.indexOf('pre') != -1 && lastversion.indexOf('pre') == -1)
+    {
+      // new nightly install
+      GFlib.newTab('chrome://gamefox/content/nightly.html', 0);
+    }
+
     GameFOX.prefs.setCharPref('version', version);
   }
 
