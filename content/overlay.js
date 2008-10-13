@@ -676,7 +676,8 @@ var GameFOX =
             var a = doc.createElement('a');
             a.appendChild(doc.createTextNode('delete'));
             a.className = 'gamefox-delete-link';
-            a.href = '#' + GFutils.parseQueryString(msgDetailLink.href)['message'];
+            a.href = msgDetailLink.href + '#' +
+              GFutils.parseQueryString(msgDetailLink.href)['message'];
             a.addEventListener('click', GFmessages.deletePost, false);
 
             td[i].insertBefore(a, msgDetailLink.nextSibling);
