@@ -272,15 +272,15 @@ var GFquickpost =
               {
                 switch (GameFOX.prefs.getIntPref('elements.quickpost.aftertopic'))
                 {
-                  case 0: // go to board
-                    doc.location = GFlib.domain + GFlib.path + 'gentopic.php?' +
-                      'board=' + query['board'];
-                    break;
-
-                  case 1: // go to topic
+                  case 0: // go to topic
                     doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
                       'board=' + query['board'] + '&topic=' +
                       text.match(/genmessage\.php\?board=(?:[0-9-]+)&topic=([0-9]+)/)[1];
+                    break;
+
+                  case 1: // go to board
+                    doc.location = GFlib.domain + GFlib.path + 'gentopic.php?' +
+                      'board=' + query['board'];
                     break;
                 }
               }

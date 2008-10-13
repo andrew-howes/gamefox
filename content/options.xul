@@ -185,8 +185,8 @@
 
               <label value="&page.posting.quickpost.aftertopic;"/>
               <radiogroup class="indent" orient="horizontal" preference="posting-aftertopic">
-                <radio value="0" label="&page.posting.quickpost.aftertopic.board;"/>
-                <radio value="1" label="&page.posting.quickpost.aftertopic.topic;"/>
+                <radio value="0" label="&page.posting.quickpost.aftertopic.topic;"/>
+                <radio value="1" label="&page.posting.quickpost.aftertopic.board;"/>
               </radiogroup>
 
               <label value="&page.posting.quickpost.aftermessage;"/>
