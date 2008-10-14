@@ -523,6 +523,8 @@ var GameFOX =
       var deletelinkCond = GameFOX.prefs.getBoolPref('elements.deletelink') && !onArchive;
       var loggedInUser = userNav.getElementsByTagName('a')[0].textContent;
       loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
+      var topicOpen = doc.evaluate('.//a[contains(@href, "post.php")]', userNav,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
 
       for (var i = 0; i < td.length; i += 2)
       {
@@ -664,7 +666,8 @@ var GameFOX =
         }
 
         // Add "delete" link
-        if (deletelinkCond && msgnum != 1 && loggedInUser == username &&
+        if (deletelinkCond && loggedInUser == username &&
+            ((msgnum == 1 && topicOpen) || msgnum != 1) &&
             td[i + 1].textContent.trim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
             td[i + 1].textContent.trim() != '[This message was deleted at ' +
@@ -673,7 +676,10 @@ var GameFOX =
           var msgDetailLink = td[i].getElementsByTagName('a')[1];
 
           var a = doc.createElement('a');
-          a.appendChild(doc.createTextNode('delete'));
+          if (msgnum == 1 && td.length > 2)
+            a.appendChild(doc.createTextNode('close'));
+          else
+            a.appendChild(doc.createTextNode('delete'));
           a.className = 'gamefox-delete-link';
           a.href = msgDetailLink.href;
           a.addEventListener('click', GFmessages.deletePost, false);
@@ -707,9 +713,7 @@ var GameFOX =
       }
 
       // QuickPost
-      if (GameFOX.prefs.getBoolPref('elements.quickpost.form')
-          && doc.evaluate('.//a[contains(@href, "post.php")]', userNav, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
+      if (GameFOX.prefs.getBoolPref('elements.quickpost.form') && topicOpen)
       {
         var qpDiv = doc.createElement('div');
             qpDiv.id = 'gamefox-quickpost-normal';
