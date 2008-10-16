@@ -114,7 +114,9 @@ var GFlib =
             FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (table != null && !GFlib.onPage(doc, 'post'))
         {
-          if (GFlib.onPage(doc, 'detail'))
+          var boards = doc.evaluate('//div[@class="board"]', doc, null,
+              XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+          if (boards.snapshotLength > 1)
             doc.gamefox.pageType = ['messages', 'detail'];
           else
           {
