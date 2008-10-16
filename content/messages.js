@@ -99,7 +99,7 @@ var GFmessages =
           if (post.readyState == 4)
           {
             if (post.responseText.indexOf('<title>401 Error') != -1)
-              GFlib.alert('Someone already posted in your topic.');
+              GFlib.alert('Can\'t delete this message.');
             else if (deleteTopic)
               doc.location = GFlib.domain + GFlib.path + 'gentopic.php?board='
                 + GFutils.parseQueryString(doc.location.search)['board'];
