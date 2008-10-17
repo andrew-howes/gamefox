@@ -1,84 +1,82 @@
 #!/usr/bin/python
 
-import sys
-import os
-import sha
-import re
-import ConfigParser
-import paramiko
+from xml.dom import minidom
+import getopt, sys
 
-if len(sys.argv) < 2:
-    print "upload.py gamefox-n.n.n.xpi [update.rdf]"
-    sys.exit()
+class ReleaseGenerator:
+    def __init__(self, file = "update.rdf"):
+        self.__dom = minidom.parse(file)
 
-versionRegex = r"[0-9]+\.[0-9]+\.[0-9]+"
-xpiFilenameRegex = r"gamefox-" + versionRegex + r"\.xpi"
-checkfile = "gamefox-xpi-integrity-check"
+    def changeDOM(self):
+        for i in self.__dom.getElementsByTagName("em:updateLink"):
+            i.appendChild(self.__dom.createTextNode(self.__updateLink))
 
-# get files
-lfile = sys.argv[1]
-rfile = os.path.basename(lfile)
+        for i in self.__dom.getElementsByTagName("em:updateHash"):
+            i.appendChild(self.__dom.createTextNode(self.__updateHash))
 
-# check to make sure the filename is in a proper format
-if not re.match(xpiFilenameRegex + "$", rfile):
-    print "xpi filename must be gamefox-0.0.0.xpi"
-    sys.exit()
+        for i in self.__dom.getElementsByTagName("em:updateInfoURL"):
+            i.appendChild(self.__dom.createTextNode(self.__updateInfoURL))
 
-config = ConfigParser.ConfigParser()
-config.read("server.conf")
+    def printXML(self):
+        print self.__dom.toxml()
 
-transport = paramiko.Transport((config.get("server", "host"),
-    int(config.get("server", "port"))))
+    def setUpdateLink(self, link):
+        self.__updateLink = link
 
-transport.connect(username = config.get("server", "user"),
-        password = config.get("server", "pass"))
+    def setUpdateHash(self, hash):
+        self.__updateHash = hash
 
-sftp = paramiko.SFTPClient.from_transport(transport)
+    def setUpdateInfoURL(self, url):
+        self.__updateInfoURL = url
 
-print lfile, "->", rfile
+def main():
+    release = ReleaseGenerator()
 
-# sha1sum
-lsha1sum = sha.new(open(lfile).read()).hexdigest()
-print "local sha1  :", lsha1sum
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "x:b:h",
+                ["xpi=", "base-uri=", "hash="])
+    except getopt.GetoptError, err:
+        print str(err)
+        usage()
+        sys.exit(2)
 
-# put files to server
-sftp.chdir(config.get("server", "dir"))
-sftp.put(lfile, rfile)
+    if len(args) > 0:
+        version = args[0]
+    else:
+        print "must provide version number"
+        sys.exit(2)
 
-# verify the files
-os.system("wget -q -O " + checkfile + " http://beyondboredom.net/gfox/" + rfile)
-rsha1sum = sha.new(open(checkfile).read()).hexdigest()
-os.system("rm -f " + checkfile)
-print "remote sha1 :", rsha1sum
+    xpi = "gamefox-" + version + ".xpi"
+    baseURI = "http://beyondboredom.net/gfox/"
+    newsDir = "news/"
+    hash = ""
+    for o, a in opts:
+       if o in ("-x", "--xpi"):
+           xpi = a
+       elif o in ("-b", "--base-uri"):
+           baseURI = a
+       elif o in ("-h", "--help"):
+           usage()
+           sys.exit(0)
+       elif o == "--hash":
+           hash = a
+       else:
+            assert False, "unhandled option"
 
-if lsha1sum == rsha1sum:
-    print "File uploaded and verified successfully."
-    if len(sys.argv) > 2: # update the stuff in an RDF file
-        updatefile = sys.argv[2]
-        print
-        print "Updating", updatefile, "..."
+    release.setUpdateLink(baseURI + xpi)
+    release.setUpdateHash(hash)
+    release.setUpdateInfoURL(baseURI + newsDir + version + ".xhtml")
 
-        f = open(updatefile, "r")
-        fcontent = f.read()
-        f.close()
+    release.changeDOM()
+    release.printXML()
 
-        fcontent = re.sub("sha1:[0-9a-z]+", "sha1:" + rsha1sum, fcontent)
-        fcontent = re.sub(xpiFilenameRegex, rfile, fcontent)
-        # extract the new version number
-        version = re.findall(versionRegex, rfile)[0]
-        fcontent = re.sub(r"<em:version>" + versionRegex + r"<\/em:version>",
-                "<em:version>" + version + "</em:version>", fcontent)
-        fcontent = re.sub(r"news/" + versionRegex, "news/" + version, fcontent)
+def usage():
+    print "Usage: " + sys.argv[0] + " [options] VERSION"
+    print "    -x, --xpi XPI         name of the XPI"
+    print "    --hash HASH           hash of the XPI"
+    print "    -b, --base-uri URI    base URI of resources"
+    print "    -n, --news-dir DIR    directory for release news"
+    print "    -h, --help            print this usage information"
 
-        w = open(updatefile + ".tmp", "w")
-        w.write(fcontent)
-        w.close()
-
-        os.rename(updatefile + ".tmp", updatefile)
-
-        print "Finished. Sign the file with McCoy."
-else:
-    print "!!! Uploaded file's sha1sum doesn't match"
-
-sftp.close()
-transport.close()
+if __name__ == "__main__":
+    main()
