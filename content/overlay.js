@@ -1122,6 +1122,12 @@ function GameFOXLoader()
         GameFOX.prefs.setCharPref('quote.style', 'gfcode');
     }
 
+    if (versionComparator.compare('0.6.7', lastversion) > 0)
+    {
+      if (GameFOX.prefs.getCharPref('quote.style') == 'custom')
+        GameFOX.prefs.setCharPref('quote.style', 'gfcode');
+    }
+
     if (lastversion == '') // first run
     {
       window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
