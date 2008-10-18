@@ -19,6 +19,7 @@
     * Descriptions for stylesheets in the options window
     * Fix automatic pagination on the Active Messages list
     * Link to delete your posts from the message list
+    * Remove custom quote templates
 
 2008-09-21:
     * version 0.6.6

@@ -95,11 +95,6 @@
 <!ENTITY quoting.style.boldmessage "Bold message">
 <!ENTITY quoting.style.italicmessage "Italicize message">
 <!ENTITY quoting.style.gfcode.label "Use GFCode">
-<!ENTITY quoting.style.custom.label "Use a custom template">
-<!ENTITY quoting.style.custom.u "username of poster">
-<!ENTITY quoting.style.custom.d "date of post">
-<!ENTITY quoting.style.custom.n "post number">
-<!ENTITY quoting.style.custom.m "message body">
 
 <!ENTITY signature.label "Signatures">
 <!ENTITY signature.content.label "Content">

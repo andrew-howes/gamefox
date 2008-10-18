@@ -37,7 +37,6 @@ pref("gamefox.quote.message.italic", true);
 pref("gamefox.quote.message.bold", false);
 pref("gamefox.quote.removesignature", true);
 pref("gamefox.quote.style", "gfcode");
-pref("gamefox.quote.style.custom", "<i><p><strong>Posted by %u</strong>\n%m</p></i>");
 
 pref("gamefox.signature.serialized", "[{accounts:\"\", boards:\"\", body:\"\"}]");
 pref("gamefox.signature.newline", false);

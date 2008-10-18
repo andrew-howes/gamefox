@@ -130,9 +130,9 @@ var GFquote =
     var qhead = '';
     if (GameFOX.prefs.getBoolPref('quote.header.username')) qhead += username;
     if (GameFOX.prefs.getBoolPref('quote.header.date')) qhead += ' | Posted ' + postdate;
-    if (GameFOX.prefs.getBoolPref('quote.header.messagenum') && postnum) qhead += ' (' + postnum + ')';
+    if (GameFOX.prefs.getBoolPref('quote.header.messagenum')) qhead += ' | ' + postnum;
 
-    if (qhead.length && GameFOX.prefs.getCharPref('quote.style') != 'gfcode')
+    if (qhead.length && GameFOX.prefs.getCharPref('quote.style') == 'normal')
     {
       if (GameFOX.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
       if (GameFOX.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
@@ -149,21 +149,14 @@ var GFquote =
 
         quote = qhead + qbody;
         break;
-      case 'gfcode':
+
+      default: // gfcode
         if (qhead.length)
           qhead = '<i><p><strong>' + qhead + '</strong>\n';
         else // no header
           qhead = '<i><p>';
 
         quote = qhead + body + '</p></i>';
-        break;
-      case 'custom':
-        var quoteTemplate = GFutils.getString('quote.style.custom');
-        var quote = quoteTemplate.
-          replace(/\%u/g, username).
-          replace(/\%d/g, postdate).
-          replace(/\%n/g, postnum).
-          replace(/\%m/g, body);
         break;
     }
     var quickpost = doc.getElementById('gamefox-message');

@@ -391,10 +391,9 @@
       <preference id="message_bold"      name="gamefox.quote.message.bold"      type="bool"/>
       <preference id="removesignature"   name="gamefox.quote.removesignature"   type="bool"/>
       <preference id="style"             name="gamefox.quote.style"             type="string"/>
-      <preference id="style_custom"      name="gamefox.quote.style.custom"      type="string"/>
     </preferences>
 
-    <groupbox align="start" orient="horizontal">
+    <groupbox align="start">
       <caption label="&quoting.header.caption;"/>
       <checkbox preference="header_username" label="&quoting.header.username;" flex="1"/>
       <checkbox preference="header_date" label="&quoting.header.date;" flex="1"/>
@@ -422,18 +421,6 @@
           </vbox>
         </hbox>
         <radio value="gfcode" label="&quoting.style.gfcode.label;"/>
-        <radio value="custom" label="&quoting.style.custom.label;"/>
-        <textbox preference="style_custom" rows="3" multiline="true" class="indent"/>
-        <hbox class="indent" orient="horizontal">
-          <vbox>
-            <description>%u - &quoting.style.custom.u;</description>
-            <description>%d - &quoting.style.custom.d;</description>
-          </vbox>
-          <vbox>
-            <description>%n - &quoting.style.custom.n;</description>
-            <description>%m - &quoting.style.custom.m;</description>
-          </vbox>
-        </hbox>
       </radiogroup>
     </groupbox>
 
