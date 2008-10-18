@@ -95,7 +95,12 @@ upnightly: ${NIGHTLYXPI}
 	${Q}( cd release/ && ./mknightly.sh ${NIGHTLYXPI} ${VERSION}${NIGHTLY_DATE} ${VERSION} )
 
 uprelease: ${XPI}
-	${Q}( cd release/ && ./mkrelease.py ${VERSION} ${XPI_NAME} > release.rdf )
+	${Q}( cd release/ && ./mkrelease.py -x ${XPI_NAME} \
+		--hash "sha1:$(shell sha1sum ${XPI} |cut -d ' ' -f 1)" \
+		${VERSION} > release.rdf )
+	${Q}( cd release/ && ./put.py ../${XPI} ${XPI_NAME})
+	@echo
+	@echo "Sign ./release/release.rdf with McCoy and upload."
 
 #### xpi
 

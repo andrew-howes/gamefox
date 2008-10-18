@@ -30,11 +30,9 @@ class ReleaseGenerator:
         self.__updateInfoURL = url
 
 def main():
-    release = ReleaseGenerator()
-
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "x:b:h",
-                ["xpi=", "base-uri=", "hash="])
+        opts, args = getopt.getopt(sys.argv[1:], "x:b:n:h",
+                ["xpi=", "base-uri=", "hash=", "news-dir=", "help"])
     except getopt.GetoptError, err:
         print str(err)
         usage()
@@ -43,8 +41,7 @@ def main():
     if len(args) > 0:
         version = args[0]
     else:
-        print "must provide version number"
-        sys.exit(2)
+        version = ""
 
     xpi = "gamefox-" + version + ".xpi"
     baseURI = "http://beyondboredom.net/gfox/"
@@ -60,8 +57,16 @@ def main():
            sys.exit(0)
        elif o == "--hash":
            hash = a
+       elif o in ("-n", "--news-dir"):
+           newsDir = a
        else:
             assert False, "unhandled option"
+
+    if version == "":
+        print "must provide version number"
+        sys.exit(2)
+
+    release = ReleaseGenerator()
 
     release.setUpdateLink(baseURI + xpi)
     release.setUpdateHash(hash)
