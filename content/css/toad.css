@@ -21,7 +21,7 @@
 #platformlist .jumper {padding-top:3px !important;}
 #platformlist {height:24px !important; background-image:url(http://img84.imageshack.us/img84/6679/platformlistbgtoadep5.gif) !important; }
 #logo {background-image:url(http://www.gamefaqs.com/images/default/logo_clean.gif) !important;}
-#container {width:990px !important; position:relative !important; left:-1px !important;}
+#container {width:990px !important;}
 body {background-image:url(http://img152.imageshack.us/img152/6990/bg1000pxzn2.gif) !important;}
 #footer {width:970px !important; background:none !important;}
 #cbsi_f p:last-child {display:inline !important; width:980px !important;}
@@ -224,18 +224,6 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 /** Some code here is based on code that is integrated with GameFOX **/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/") {
 
-#gamefox-quickpost-title {font-size:11px !important; font-weight:bold !important; color:white !important; padding-left:16px !important; padding-bottom:0px !important; line-height:22px !important; border-bottom:none !important; text-indent:0 !important;}
-#gamefox-quickpost-title {background:url(http://img186.imageshack.us/img186/4696/quickpostheadbgtoadai2.gif) no-repeat bottom left !important;}
-#gamefox-quickpost-form {padding-left:5px !important; padding-bottom:6px !important; text-indent:0 !important;}
-#gamefox-quickpost-form textarea {width:972px !important;}
-#gamefox-quickpost-btn {margin-left:0 !important;}
-
-#gamefox-quickpost-afloat #gamefox-quickpost-title {padding-bottom:0px !important; padding-left:0px !important; background:none !important; color:black !important; font-size:20px !important; font-weight:normal !important; border-bottom:1px grey solid !important;}
-#gamefox-quickpost-afloat #gamefox-quickpost-form {padding-left:0px !important; padding-bottom:0px !important;}
-#gamefox-quickpost-afloat #gamefox-quickpost-form textarea {width:99% !important;}
-#gamefox-quickpost-afloat #gamefox-topic {width:99% !important;}
-#gamefox-quickpost-afloat {position:fixed !important; top:30% !important; left:20% !important; width:70% !important; z-index: 3 !important; border: 2px solid #6564FF !important; color:#000000 !important; background-color: #DFDFDF !important; -moz-border-radius: 10px !important; -moz-opacity: 0.90 !important;}
-#gamefox-quickpost-afloat #gamefox-quickpost-title {-moz-border-radius: 10px 10px 0 0 !important; -moz-opacity: 0.90 !important;}
 }
 
 
