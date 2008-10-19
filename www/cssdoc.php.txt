@@ -78,6 +78,54 @@ span#gamefox-title-count
 
 Shows the character count for the title.
 
+<h3 id="span_sticky-end">
+span.sticky-end
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Empty span element used for topic icons of a sticky topic.
+Requires "hide topic status column" checked.
+
+<h3 id="span_sticky-start">
+span.sticky-start
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Empty span element used for topic icons of a sticky topic.
+Requires "hide topic status column" checked.
+
+<h3 id="span_sticky_closed-end">
+span.sticky_closed-end
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Empty span element used for topic icons of a sticky and closed topic.
+Requires "hide topic status column" checked.
+
+<h3 id="span_sticky_closed-start">
+span.sticky_closed-start
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Empty span element used for topic icons of a sticky and closed topic.
+Requires "hide topic status column" checked.
+
+<h3 id="span_topic_closed-end">
+span.topic_closed-end
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Empty span element used for topic icons of a closed topic.
+Requires "hide topic status column" checked.
+
+<h3 id="span_topic_closed-start">
+span.topic_closed-start
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Empty span element used for topic icons of a closed topic.
+Requires "hide topic status column" checked.
+
 <h2 id="textarea">textarea</h2>
 <h3 id="textarea+gamefox-message">textarea#gamefox-message</h3>
 
