@@ -14,8 +14,16 @@ class ReleaseGenerator:
         for i in self.__dom.getElementsByTagName("em:updateHash"):
             i.appendChild(self.__dom.createTextNode(self.__updateHash))
 
-        for i in self.__dom.getElementsByTagName("em:updateInfoURL"):
-            i.appendChild(self.__dom.createTextNode(self.__updateInfoURL))
+        # All this is because spock breaks when em:updateInfoURL elements
+        # are present. Bah.
+        for i in self.__dom.getElementsByTagName("em:targetApplication"):
+            for j in i.getElementsByTagName("RDF:Description"):
+                updateInfoURL = j.appendChild(self.__dom.createElement("em:updateInfoURL"))
+                updateInfoURL.appendChild(self.__dom.createTextNode(self.__updateInfoURL))
+
+                j.appendChild(self.__dom.createTextNode("    "))
+                j.appendChild(updateInfoURL)
+                j.appendChild(self.__dom.createTextNode("\n                            "))
 
     def printXML(self):
         print self.__dom.toxml()

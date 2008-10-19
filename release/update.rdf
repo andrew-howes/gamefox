@@ -20,7 +20,6 @@
 
                                 <em:updateLink></em:updateLink>
                                 <em:updateHash></em:updateHash>
-                                <em:updateInfoURL></em:updateInfoURL>
                             </RDF:Description>
                         </em:targetApplication>
 
@@ -33,7 +32,6 @@
 
                                 <em:updateLink></em:updateLink>
                                 <em:updateHash></em:updateHash>
-                                <em:updateInfoURL></em:updateInfoURL>
                             </RDF:Description>
                         </em:targetApplication>
 
@@ -46,7 +44,6 @@
 
                                 <em:updateLink></em:updateLink>
                                 <em:updateHash></em:updateHash>
-                                <em:updateInfoURL></em:updateInfoURL>
                             </RDF:Description>
                         </em:targetApplication>
                     </RDF:Description>
