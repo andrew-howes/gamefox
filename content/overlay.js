@@ -1,7 +1,7 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
  * Copyright 2005, 2006, 2007, 2008
- * Abdullah A, Andrianto Effendy, Brian Marshall, Michael Ryan
+ * Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
