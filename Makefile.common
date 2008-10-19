@@ -66,7 +66,7 @@ help:
 	@echo "  make mozxpi    - build an XPI (${MOZXPI}) for Mozilla Addons"
 	@echo "  make nightly   - build a nightly (${NIGHTLYXPI})"
 	@echo "  make upnightly - upload a nightly snapshot and its update RDF (not for you)"
-	@echo "  make uprelease - upload a new release and create its update RDF (not for you)"
+	@echo "  make uprelease - upload a new release and accompanying files (not for you)"
 	@echo "  make clean     - clean up"
 	@echo "  make distclean - clean up more"
 
@@ -98,7 +98,9 @@ uprelease: ${XPI}
 	${Q}( cd release/ && ./mkrelease.py -x ${XPI_NAME} \
 		--hash "sha1:$(shell sha1sum ${XPI} |cut -d ' ' -f 1)" \
 		${VERSION} > release.rdf )
-	${Q}( cd release/ && ./put.py ../${XPI} ${XPI_NAME})
+	${Q}( cd release/ && ./mknews.py ${VERSION} > ${VERSION}.xhtml )
+	${Q}( cd release/ && ./put.py ../${XPI} ${XPI_NAME} ${VERSION}.xhtml news/${VERSION}.xhtml)
+	${Q}( rm -f release/${VERSION}.xhtml )
 	@echo
 	@echo "Sign ./release/release.rdf with McCoy and upload."
 
