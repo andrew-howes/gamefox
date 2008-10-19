@@ -649,7 +649,7 @@
       <description flex="1">&users.desc;</description>
       <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&users.add;" icon="add"/>
     </hbox>
-    <vbox id="usergroups" style="height:320px;overflow:auto"/>
+    <vbox id="usergroups" style="height:330px;overflow:auto"/>
   </prefpane>
 
 </prefwindow>
