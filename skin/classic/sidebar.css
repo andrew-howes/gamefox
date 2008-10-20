@@ -3,8 +3,8 @@ html
 {
     background-color: #5BA1D4;
     color: #ffffff;
-    font-family: Trebuchet, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Arial, Verdana, sans-serif;
-    font-size: .9em;
+    font-family: Arial, sans-serif;
+    font-size: .8em;
 }
 
 body
@@ -29,7 +29,7 @@ a:hover
 #title, a#title-link
 {
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 1.6em;
     color:  #296794;
     text-align: center;
     margin-bottom: 10px;
