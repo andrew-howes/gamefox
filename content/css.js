@@ -48,7 +48,7 @@ var GFcss =
               'conflicts with "Status icons (classic)".', '', true],
         ['bundled', 'status-classic.css', 'Status icons (classic)',
               'Used when "hide topic status column" is enabled - ' +
-              'emulates the 1999-2006 style of topic status icons. This CSS ' +
+              'emulates the pre-2006 style of topic status icons. This CSS ' +
               'conflicts with "Status icons (normal)".', '', false],
         ['bundled', 'toad.css', 'Ten On A Diet',
               'A wider, less padded style. ' +
