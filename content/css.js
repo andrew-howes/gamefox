@@ -43,13 +43,13 @@ var GFcss =
         ['bundled', 'ricapar.css', 'Classic',
               'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
               'GameFAQs stylesheets to use.', 'Ricapar', false],
-        ['bundled', 'status-default.css', 'Status icons (default)',
+        ['bundled', 'status-default.css', 'Status icons (normal)',
               'Used when "hide topic status column" is enabled. This CSS ' +
               'conflicts with "Status icons (classic)".', '', true],
         ['bundled', 'status-classic.css', 'Status icons (classic)',
               'Used when "hide topic status column" is enabled - ' +
               'emulates the 1999-2006 style of topic status icons. This CSS ' +
-              'conflicts with "Status icons (default)".', '', false],
+              'conflicts with "Status icons (normal)".', '', false],
         ['bundled', 'toad.css', 'Ten On A Diet',
               'A wider, less padded style. ' +
               'Works with the default GameFAQs skin.', 'TakatoMatsuki', false],
