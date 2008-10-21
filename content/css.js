@@ -25,26 +25,34 @@ var GFcss =
   init: function()
   {
     var defaults = [
-        ['gamefox', 'gamefox-ads.css', 'Ad blocking', '', '', true],
-        ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar', '', 'MichaelJBuck', false],
-        ['gamefox', 'gamefox-essentials.css', 'Essentials', '', '', true],
-        ['gamefox', 'gfcode.css', 'GFCode', '', 'Ant P.', true],
-        ['gamefox', 'gamefox-quickpost.css', 'QuickPost', '', '', true],
-        ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois', '', '', true],
+        ['gamefox', 'gamefox-ads.css', 'Ad blocking',
+              'Hides ads. Best used with "block ad servers" enabled.', '', true],
+        ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar',
+              'A classic style for the GameFOX sidebar.', 'MichaelJBuck', false],
+        ['gamefox', 'gamefox-essentials.css', 'Essentials',
+              'Works with some of GameFOX\'s features. Should always be enabled.', '', true],
+        ['gamefox', 'gfcode.css', 'GFCode',
+              'Makes quotes look pretty.', 'Ant P.', true],
+        ['gamefox', 'gamefox-quickpost.css', 'QuickPost',
+              'Makes QuickPost look pretty.', '', true],
+        ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois',
+              'Makes QuickWhois look pretty.', '', true],
         ['bundled', 'ascii-art-font.css', 'ASCII art font',
               'Increases the font size of messages to make ASCII art look better.',
               '', false],
         ['bundled', 'ricapar.css', 'Classic',
-              'Emulates the classic "GF8" look of GameFAQs. Disable main ' +
+              'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
               'GameFAQs stylesheets to use.', 'Ricapar', false],
         ['bundled', 'status-default.css', 'Status icons (default)',
               'Used when "hide topic status column" is enabled. This CSS ' +
               'conflicts with "Status icons (classic)".', '', true],
         ['bundled', 'status-classic.css', 'Status icons (classic)',
               'Used when "hide topic status column" is enabled - ' +
-              'emulates the GF9 look of topic status icons. This CSS ' +
+              'emulates the 1999-2006 style of topic status icons. This CSS ' +
               'conflicts with "Status icons (default)".', '', false],
-        ['bundled', 'toad.css', 'Ten On A Diet', '', 'TakatoMatsuki', false],
+        ['bundled', 'toad.css', 'Ten On A Diet',
+              'A wider, less padded style. ' +
+              'Works with the default GameFAQs skin.', 'TakatoMatsuki', false],
         ['bundled', 'wide-layout.css', 'Wide default',
               'Increases the width of the page to fill the whole window. ' +
               'Works with the default GameFAQs skin.', '', false]
