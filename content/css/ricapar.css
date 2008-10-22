@@ -29,7 +29,6 @@
     #content + img,
     #board_wrap > div.ad,
     #board_wrap + div,
-    #searchbox label,
     #searchbox .btn,
     #mpu_wrap,
     #footer,
@@ -44,6 +43,9 @@
 
     /* Basic Page Stuff */
 
+    html {
+        border-left: #6666FF 150px solid;
+    }
     html,
     body {
         margin: 0 !important;
@@ -111,10 +113,42 @@
     #header {
         background: #66f !important;
         color: #fff !important;
-        text-align: right !important;
-        padding: 10px 5px !important;
-        font-weight: bold !important;
-        margin: 2px !important;
+        text-align: center !important;
+        padding: 25px 0 3px 0 !important;
+        font-size: 1.1em;
+    }
+    #header div {
+        display: inline;
+    }
+    #header .nav {
+        margin-left: 15px;
+    }
+    #header .nav a {
+        text-decoration: none !important;
+    }
+    #header .nav a:hover {
+        text-decoration: underline !important;
+    }
+
+    #platformlist {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        color: #fff !important;
+    }
+    #platformlist div, #platformlist form {
+        display: inline !important;
+    }
+    #platformlist a {
+        text-decoration: none !important;
+        margin: 0 2px !important;
+    }
+    #platformlist a:hover {
+        text-decoration: hover !important;
+    }
+    #platformlist b {
+        display: none !important;
     }
 
     #quicknav,
@@ -123,16 +157,24 @@
     }
 
     #quicknav {
-        position: absolute !important;
-        top: 3px !important;
-        left: 5px !important;
+        position: absolute;
+        top: 3px;
+        left: -150px;
         background: #66f url(http://www.gamefaqs.com/shared/bar2001.gif) no-repeat top left !important;
         padding-top: 30px !important;
         padding-left: 0 !important;
+        width: 148px;
     }
 
     #quicknav a {
-        margin-right: 8px !important;
+        font-size: 1.1em;
+        margin-left: 1px !important;
+        display: block;
+        text-decoration: none !important;
+    }
+
+    #quicknav a:hover {
+        text-decoration: underline;
     }
 
     #searchbox {
@@ -140,17 +182,29 @@
         padding: 2px !important;
         font-weight: bold !important;
         position: absolute !important;
-        top: 2px !important;
-        left: 150px !important;
+        top:  143px !important;
+        left: -150px !important;
         z-index: 5 !important;
     }
 
-    #searchbox input,
+    #searchbox input {
+        width: 90px !important;
+    }
     #searchbox select {
-        width: 140px !important;
+        display: none;
     }
 
-    #platformlist,
+    #searchbox a {
+        font-size: 1.1em;
+        display: block;
+        color: #fff !important;
+        text-decoration: none !important;
+    }
+    #searchbox a:hover {
+        text-decoration: underline !important;
+        color: #ff0 !important;
+    }
+
     .crumbs,
     .gamespace_nav {
         background: #00f !important;
@@ -162,17 +216,6 @@
     .crumbs {
         background: #d0d0ff !important;
         padding: 5px 7px !important;
-    }
-
-    #platformlist .nav {
-        float: left !important;
-        font-weight: bold !important;
-        padding: 5px 4px 0 8px !important;
-        color: #fff !important;
-    }
-
-    #platformlist .jumper {
-        float: right !important;
     }
 
     .gamespace_nav ul {
