@@ -75,15 +75,14 @@
 
     #header a,
     #quicknav a,
+    #platformlist a,
     .user a,
     .pages a,
     .pagejumper a,
-    #platformlist a,
     .gamespace_nav a {
         color: #fff !important;
         font-weight: bold !important;
         margin: 0 5px !important;
-        text-transform: capitalize !important;
     }
     .gamespace_nav a {
         text-decoration: none !important;
@@ -91,6 +90,7 @@
     }
     #header a {
         margin-right: 0 !important;
+        text-transform: capitalize !important;
     }
     .user a,
     .pages a {
@@ -99,10 +99,10 @@
 
     #header a:hover,
     #quicknav a:hover,
+    #platformlist a:hover,
     .user a:hover,
     .pages a:hover,
     .pagejumper a:hover,
-    #platformlist a:hover,
     .gamespace_nav a:hover {
         color: #ff0 !important;
         text-decoration: underline !important;
