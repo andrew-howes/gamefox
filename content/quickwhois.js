@@ -38,8 +38,8 @@ var GFquickwhois =
     {
       div[0].style.display = (div[0].style.display == 'block') ?
         'none' : 'block';
-      div[0].style.top = window.content.scrollY + event.clientY + 'px';
-      div[0].style.left = window.content.scrollX + event.clientX + 'px';
+      div[0].style.top = window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop + 'px';
+      div[0].style.left = window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft + 'px';
       return;
     }
 
@@ -47,8 +47,8 @@ var GFquickwhois =
     div.setAttribute('class', 'gamefox-quickwhois');
     div.style.display = 'block';
     div.style.setProperty('font-size', '10pt', '');
-    div.style.top = window.content.scrollY + event.clientY + 'px';
-    div.style.left = window.content.scrollX + event.clientX + 'px';
+    div.style.top = window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop + 'px';
+    div.style.left = window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft + 'px';
     div.innerHTML = 'Loading QuickWhois...';
     node.appendChild(div);
 
