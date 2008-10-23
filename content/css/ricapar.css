@@ -8,7 +8,7 @@
         margin-right: auto !important;
         max-width: 850px !important;
     }
-    
+
     /* add title to gamespace */
     .gamespace_nav:before {
         content: 'Message Board';
@@ -29,7 +29,6 @@
     #content + img,
     #board_wrap > div.ad,
     #board_wrap + div,
-    #searchbox .btn,
     #mpu_wrap,
     #footer,
     img[alt="madison"],
@@ -44,7 +43,7 @@
     /* Basic Page Stuff */
 
     html {
-        border-left: #6666FF 150px solid;
+        border-left: #6666ff 150px solid;
     }
     html,
     body {
@@ -97,9 +96,10 @@
         margin: 0 !important;
     }
 
-    #header a:hover,
+    #header .nav a:hover,
     #quicknav a:hover,
     #platformlist a:hover,
+    #searchbox a:hover,
     .user a:hover,
     .pages a:hover,
     .pagejumper a:hover,
@@ -126,9 +126,6 @@
     #header .nav a {
         text-decoration: none !important;
     }
-    #header .nav a:hover {
-        text-decoration: underline !important;
-    }
 
     #platformlist {
         position: absolute;
@@ -143,9 +140,6 @@
     #platformlist a {
         text-decoration: none !important;
         margin: 0 2px !important;
-    }
-    #platformlist a:hover {
-        text-decoration: hover !important;
     }
     #platformlist b {
         display: none !important;
@@ -173,10 +167,6 @@
         text-decoration: none !important;
     }
 
-    #quicknav a:hover {
-        text-decoration: underline;
-    }
-
     #searchbox {
         color: #fff !important;
         padding: 2px !important;
@@ -199,10 +189,6 @@
         display: block;
         color: #fff !important;
         text-decoration: none !important;
-    }
-    #searchbox a:hover {
-        text-decoration: underline !important;
-        color: #ff0 !important;
     }
 
     .crumbs,
@@ -250,7 +236,7 @@
         text-align: center !important;
         margin: 2px 2px 0 2px !important;
     }
-    
+
     .pages,
     .pagejumper {
         font-style: italic;
@@ -296,11 +282,11 @@
         font-size: 15px !important;
         color: #fff !important;
     }
-    
+
     table:not(.topics) tbody .head:first-child th {
         background: #00f !important;
     }
-    
+
     .topics th {
         font-style: italic;
     }
@@ -318,7 +304,7 @@
         font-size: 28px !important;
         font-style: italic !important;
     }
-    
+
     .crumbs + h1 { /* game boards */
         font-size: 36pt !important;
     }
@@ -400,7 +386,7 @@
     #side_col .pod p {
         margin-top: 1em !important;
     }
-    
+
     /* QuickPost */
     #gamefox-quickpost-title {
         background-color: #00f !important;
