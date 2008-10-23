@@ -31,7 +31,6 @@
 <!ENTITY page.elements.stopads "Block ad servers">
 <!ENTITY page.elements.topics.caption "Topic Lists">
 <!ENTITY page.elements.topics.lastpostlink "Link to last post">
-<!ENTITY page.elements.topics.nostatuscolumn "Hide topic status column">
 <!ENTITY page.elements.topics.trackedlink "Link to boards (Tracked Topics)">
 <!ENTITY page.elements.topics.marknewposts "Label new posts (Active Messages)">
 <!ENTITY page.elements.topics.pagejumper "Show page jumper (Active Messages)">

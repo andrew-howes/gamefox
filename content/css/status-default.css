@@ -1,5 +1,18 @@
 @-moz-document domain(gamefaqs.com)
 {
+  col.status,
+  table.topics tr th:first-child,
+  table.topics tr:not(.gamefox-pagelist) td:first-child
+  {
+    display: none;
+  }
+
+  .gamefox-status
+  {
+    vertical-align: middle;
+    display: -moz-inline-box;
+  }
+
   .topic_closed-start
   {
     background-image: url(http://www.gamefaqs.com/images/default/topic_closed.gif);

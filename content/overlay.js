@@ -321,15 +321,6 @@ var GameFOX =
 
         // Topic rows
         rows = topicsTable.getElementsByTagName('tr');
-
-        // No status column
-        var statusPref = GameFOX.prefs.getBoolPref('elements.nostatuscolumn');
-        if (statusPref)
-        {
-          var col = topicsTable.getElementsByTagName('col')[0];
-          col.parentNode.removeChild(col);
-          rows[0].cells[0].style.display = 'none';
-        }
       }
       else
       {
@@ -343,25 +334,18 @@ var GameFOX =
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
-        // No status column
-        if (statusPref)
+        // Status spans
+        // TODO: maybe have pref for users who notice lag?
+        var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
+            .match(/\/images\/default\/([^\.]+)\.gif/)[1];
+        if (statusType != 'topic')
         {
-          rows[i].cells[0].style.display = 'none';
-          var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
-              .match(/\/images\/default\/([^\.]+)\.gif/)[1];
-          if (statusType != 'topic')
-          {
-            var statusSpan = doc.createElement('span');
-            statusSpan.className = statusType + '-end';
-            statusSpan.style.verticalAlign = 'middle';
-            statusSpan.style.display = '-moz-inline-box';
-            rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild.nextSibling);
-            statusSpan = doc.createElement('span');
-            statusSpan.className = statusType + '-start';
-            statusSpan.style.verticalAlign = 'middle';
-            statusSpan.style.display = '-moz-inline-box';
-            rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild);
-          }
+          var statusSpan = doc.createElement('span');
+          statusSpan.className = statusType + '-end gamefox-status';
+          rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild.nextSibling);
+          statusSpan = doc.createElement('span');
+          statusSpan.className = statusType + '-start gamefox-status';
+          rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild);
         }
 
         // Last post link
@@ -399,7 +383,7 @@ var GameFOX =
               pageTR.style.display = 'table-row';
 
               var pageTD = doc.createElement('td');
-              pageTD.setAttribute('colspan', statusPref ? '4' : '5');
+              pageTD.setAttribute('colspan', '0');
             }
             else
             {
@@ -1045,7 +1029,8 @@ function GameFOXLoader()
   var versionComparator = Cc['@mozilla.org/xpcom/version-comparator;1'].
     getService(Ci.nsIVersionComparator);
 
-  if (versionComparator.compare(version, lastversion) != 0) // upgrade, downgrade, or first run
+  // upgrade, downgrade, first run, or dev version
+  if (versionComparator.compare(version, lastversion) != 0 || version.indexOf('pre') != -1)
   {
     GFcss.init();
 

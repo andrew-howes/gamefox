@@ -52,7 +52,6 @@
       <preference id="elements-stopads" name="gamefox.elements.stopads" type="bool"/>
 
       <preference id="elements-lastpostlink" name="gamefox.elements.topics.lastpostlink" type="bool"/>
-      <preference id="elements-nostatuscolumn" name="gamefox.elements.nostatuscolumn" type="bool"/>
       <preference id="elements-tracked-boardlink" name="gamefox.elements.tracked.boardlink" type="bool"/>
       <preference id="elements-aml-marknewposts" name="gamefox.elements.aml.marknewposts" type="bool"/>
       <preference id="elements-aml-pagejumper" name="gamefox.elements.aml.pagejumper" type="bool"/>
@@ -123,8 +122,6 @@
                     <caption label="&page.elements.topics.caption;"/>
                     <vbox>
                       <checkbox preference="elements-lastpostlink" label="&page.elements.topics.lastpostlink;"/>
-                      <checkbox preference="elements-nostatuscolumn"
-                        label="&page.elements.topics.nostatuscolumn;"/>
                       <checkbox preference="elements-tracked-boardlink" label="&page.elements.topics.trackedlink;"/>
                       <checkbox preference="elements-aml-marknewposts" label="&page.elements.topics.marknewposts;"/>
                       <checkbox preference="elements-aml-pagejumper" label="&page.elements.topics.pagejumper;"/>
