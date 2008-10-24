@@ -476,6 +476,15 @@ var GameFOX =
           doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var pageJumper = doc.evaluate('//div[@class="pagejumper"]', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (pageJumper)
+      {
+        var pageJumperItems = pageJumper.getElementsByTagName('li');
+        doc.gamefox.pages = parseInt(pageJumperItems[pageJumperItems.length - 1].textContent);
+      }
+      else
+      {
+        doc.gamefox.pages = 1;
+      }
       GFuserlist.loadGroups();
 
       var pagenum = doc.location.search.match(/\bpage=([0-9]+)/);
@@ -526,7 +535,9 @@ var GameFOX =
       var loggedInUser = userNav.getElementsByTagName('a')[0].textContent;
       loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
       var topicOpen = doc.evaluate('.//a[contains(@href, "post.php")]', userNav,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var firstPostNum = GameFOX.prefs.getIntPref('msgSortOrder') == 2 ?
+          (doc.gamefox.pages - 1) * GameFOX.prefs.getIntPref('msgsPerPage') + td.length / 2 : 1;
 
       for (var i = 0; i < td.length; i += 2)
       {
@@ -669,7 +680,7 @@ var GameFOX =
 
         // Add "delete" link
         if (deletelinkCond && loggedInUser == username &&
-            ((msgnum == 1 && topicOpen) || msgnum != 1) &&
+            ((msgnum == firstPostNum && topicOpen) || msgnum != firstPostNum) &&
             td[i + 1].textContent.trim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
             td[i + 1].textContent.trim() != '[This message was deleted at ' +
@@ -678,8 +689,7 @@ var GameFOX =
           var msgDetailLink = td[i].getElementsByTagName('a')[1];
 
           var a = doc.createElement('a');
-          // TODO: Fix for newest first ordering
-          if (msgnum == 1 && td.length > 2 && GameFOX.prefs.getIntPref('msgSortOrder') == 1)
+          if (msgnum == firstPostNum && td.length > 2)
             a.appendChild(doc.createTextNode('close'));
           else
             a.appendChild(doc.createTextNode('delete'));
@@ -695,10 +705,6 @@ var GameFOX =
 
       doc.gamefox.tc = tc;
       doc.gamefox.msgnum = msgnum;
-      if (pageJumper)
-        doc.gamefox.pages = pageJumper.getElementsByTagName('li').length;
-      else
-        doc.gamefox.pages = 1;
 
       // Add TC to page links
       if (tc && pageJumper)
@@ -1035,72 +1041,8 @@ function GameFOXLoader()
   {
     GFcss.init();
 
-    /* compatibilty crap
+    /* compatibility crap
      * TODO: remove these after a while */
-
-    // old signature prefs
-    if (versionComparator.compare('0.6.2', lastversion) > 0)
-    {
-      try { var oldSig = GFutils.getString('signature.body'); }
-      catch (e) { var oldSig = false; }
-
-      if (oldSig)
-      {
-        var sigs = eval(GFutils.getString('signature.serialized'));
-        sigs[0]['body'] = oldSig;
-        GFutils.setString('signature.serialized', sigs.toSource());
-      }
-    }
-
-    // user highlighting groups
-    if (versionComparator.compare('0.6.5', lastversion) > 0)
-    {
-      var groupAdded = false;
-
-      try
-      { var messages = GameFOX.prefs.getBoolPref('highlight.msgs') ? 'highlight' : 'nothing'; }
-      catch (e) { var messages = null; }
-      try
-      { var topics = GameFOX.prefs.getBoolPref('highlight.topics') ? 'highlight' : 'nothing'; }
-      catch (e) { var topics = null; }
-
-      try
-      { var groups1 = GameFOX.prefs.getCharPref('highlight.groups.1'); }
-      catch (e) { var groups1 = null; }
-      try
-      { var groups2 = GameFOX.prefs.getCharPref('highlight.groups.2'); }
-      catch (e) { var groups2 = null; }
-
-      if (groups1)
-      {
-        try
-        { var colors1 = GameFOX.prefs.getCharPref('highlight.colors.1'); }
-        catch (e) { var colors1 = '#CCFFFF'; }
-
-        GFuserlist.add('', colors1, groups1, messages, topics);
-        groupAdded = true;
-      }
-
-      if (groups2)
-      {
-        try
-        { var colors2 = GameFOX.prefs.getCharPref('highlight.colors.2'); }
-        catch (e) { var colors2 = '#99CC66'; }
-
-        try
-        { var ignore = GameFOX.prefs.getBoolPref('highlight.ignore'); }
-        catch (e) { var ignore = false; }
-
-        if (ignore)
-          GFuserlist.add('', colors2, groups2, 'remove', 'remove');
-        else
-          GFuserlist.add('', colors2, groups2, messages, topics);
-        groupAdded = true;
-      }
-
-      if (!groupAdded)
-        GFuserlist.add(); // TODO: move this into first run after above code is removed
-    }
 
     if (versionComparator.compare('0.6.6', lastversion) > 0)
     {
@@ -1116,6 +1058,7 @@ function GameFOXLoader()
 
     if (lastversion == '') // first run
     {
+      GFuserlist.add();
       window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar', true);
     }
