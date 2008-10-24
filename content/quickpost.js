@@ -75,6 +75,7 @@ var GFquickpost =
       postbutton.type = 'button';
       postbutton.name = 'quickpost';
       postbutton.value = 'Post Message';
+      postbutton.accessKey = 'z';
       postbutton.addEventListener('click', GFquickpost.post, false);
     }
 
@@ -86,6 +87,7 @@ var GFquickpost =
       previewbutton.type = 'submit';
       previewbutton.name = 'post';
       previewbutton.value = 'Preview Message';
+      previewbutton.accessKey = 'x';
 
       var spellchkbutton = doc.createElement('input');
       form.appendChild(doc.createTextNode(' '));
@@ -93,6 +95,7 @@ var GFquickpost =
       spellchkbutton.type = 'submit';
       spellchkbutton.name = 'post';
       spellchkbutton.value = 'Preview and Spellcheck Message';
+      spellchkbutton.accessKey = 'c';
     }
 
     if (newTopic)
