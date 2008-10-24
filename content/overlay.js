@@ -653,7 +653,7 @@ var GameFOX =
         if (tcCond)
         {
           // TODO: Fix for newest first ordering
-          if (msgnum == 1)
+          if (msgnum == 1 && GameFOX.prefs.getIntPref('msgSortOrder') == 1)
             tc = username;
 
           if (tc == username)
@@ -678,7 +678,8 @@ var GameFOX =
           var msgDetailLink = td[i].getElementsByTagName('a')[1];
 
           var a = doc.createElement('a');
-          if (msgnum == 1 && td.length > 2)
+          // TODO: Fix for newest first ordering
+          if (msgnum == 1 && td.length > 2 && GameFOX.prefs.getIntPref('msgSortOrder') == 1)
             a.appendChild(doc.createTextNode('close'));
           else
             a.appendChild(doc.createTextNode('delete'));
