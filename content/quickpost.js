@@ -75,6 +75,7 @@ var GFquickpost =
       postbutton.type = 'button';
       postbutton.name = 'quickpost';
       postbutton.value = 'Post Message';
+      postbutton.title = 'Post Message [z]';
       postbutton.accessKey = 'z';
       postbutton.addEventListener('click', GFquickpost.post, false);
     }
@@ -87,6 +88,7 @@ var GFquickpost =
       previewbutton.type = 'submit';
       previewbutton.name = 'post';
       previewbutton.value = 'Preview Message';
+      previewbutton.title = 'Preview Message [x]';
       previewbutton.accessKey = 'x';
 
       var spellchkbutton = doc.createElement('input');
@@ -95,6 +97,7 @@ var GFquickpost =
       spellchkbutton.type = 'submit';
       spellchkbutton.name = 'post';
       spellchkbutton.value = 'Preview and Spellcheck Message';
+      spellchkbutton.title = 'Preview and Spellcheck Message [c]';
       spellchkbutton.accessKey = 'c';
     }
 
