@@ -52,6 +52,9 @@
         font-family: arial, sans-serif !important;
         font-size: 9pt !important;
     }
+    body {
+        background: #fff !important;
+    }
 
     table {
         width: 100% !important;
