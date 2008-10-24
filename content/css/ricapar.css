@@ -190,18 +190,22 @@
         color: #fff !important;
         text-decoration: none !important;
     }
-
-    .crumbs,
     .gamespace_nav {
         background: #00f !important;
         padding: 2px 2px 2px 0 !important;
-        margin: 2px !important;
+        margin: 2px 0 !important;
         overflow: hidden !important;
     }
 
     .crumbs {
-        background: #d0d0ff !important;
-        padding: 5px 7px !important;
+        background: #00f;
+        padding: 2px;
+        color: #fff;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    .crumbs a {
+        color: #fff !important;
     }
 
     .gamespace_nav ul {
@@ -306,7 +310,8 @@
     }
 
     .crumbs + h1 { /* game boards */
-        font-size: 36pt !important;
+        font-size: 3em !important;
+        padding: 0 !important;
     }
 
     /* Messages */
@@ -356,7 +361,7 @@
         font-size: 16px !important;
         text-align: center !important;
         margin: 0 !important;
-        padding: 3px !important;
+        padding: 1px !important;
         font-style: normal !important;
     }
 
