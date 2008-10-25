@@ -390,6 +390,17 @@
         font-style: normal !important;
     }
 
+    /* Whois */
+    table.userinfo tr {
+        margin: 0 !important;
+    }
+    table.userinfo tr.even td {
+        background: #e0e0e0 !important;
+    }
+    table.userinfo tr:not(.even) td {
+        background: #fff !important;
+    }
+
     /* Poll and Contest Bracket */
 
     div.bar {
