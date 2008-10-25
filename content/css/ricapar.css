@@ -100,7 +100,8 @@
         text-transform: capitalize !important;
     }
     .user a,
-    .pages a {
+    .pages a,
+    .pagejumper a {
         margin: 0 !important;
     }
 
@@ -322,6 +323,10 @@
     .crumbs + h1 { /* game boards */
         font-size: 3em !important;
         padding: 0 !important;
+    }
+
+    .split {
+        text-align: center;
     }
 
     /* Main Page */
