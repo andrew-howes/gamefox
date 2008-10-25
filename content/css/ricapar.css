@@ -8,6 +8,11 @@
         margin-right: auto !important;
         max-width: 850px !important;
     }
+    #side_col_wrap > #side_col > div:first-child h1 {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 2.5em !important;
+    }
 
     /* add title to gamespace */
     .gamespace_nav:before {
@@ -158,7 +163,7 @@
         top: 3px;
         left: -150px;
         background: #66f url(http://www.gamefaqs.com/shared/bar2001.gif) no-repeat top left !important;
-        padding-top: 30px !important;
+        padding-top: 50px !important;
         padding-left: 0 !important;
         width: 148px;
     }
@@ -175,8 +180,8 @@
         padding: 2px !important;
         font-weight: bold !important;
         position: absolute !important;
-        top:  143px !important;
-        left: -150px !important;
+        top:  163px !important;
+        left: -151px !important;
         z-index: 5 !important;
     }
 
@@ -284,7 +289,9 @@
         padding: 2px !important;
     }
 
-    th {
+    th,
+    .today .head h1,
+    .pod .head h1 {
         background: #8080ff !important;
         font-size: 15px !important;
         color: #fff !important;
@@ -315,6 +322,21 @@
     .crumbs + h1 { /* game boards */
         font-size: 3em !important;
         padding: 0 !important;
+    }
+
+    /* Main Page */
+
+    .today .date {
+        background: #00f;
+        font-size: 1.2em;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 2px;
+    }
+
+    .gs {
+        display: none;
     }
 
     /* Messages */
