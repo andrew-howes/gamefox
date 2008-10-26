@@ -210,19 +210,15 @@ var GFutils =
 
   parseHTMLSelect: function(str, name)
   {
-    var selectStart = str.search(new RegExp('<select\\b[^>]+?\\bname="' + name + '"[^>]*>', 'i'));
-    if (selectStart != -1)
+    var selectStart = str.search(new RegExp('<select\\b[^>]+?\\bname="' + name + '"[^>]*>'));
+    var selectEnd = str.indexOf('</select>', selectStart);
+    if (selectStart != -1 && selectEnd != -1)
     {
-      // TODO: simplify when GameFAQs puts in </select> tags
-      var selectSubstring = str.substring(selectStart+1);
-      var selectEnd = selectSubstring.search(/<\/?select\b/i);
-      if (selectEnd != -1)
-        selectSubstring = selectSubstring.substring(0, selectEnd);
-      var option = selectSubstring.match(/<option\b[^>]+?\bvalue="([^"]*)"[^>]+?\bselected="selected"[^>]*>/i);
+      var option = str.substring(selectStart, selectEnd)
+          .match(/<option\b[^>]+?\bvalue="([^"]*)"[^>]+?\bselected="selected"[^>]*>/);
       if (option)
         return option[1];
     }
-
     return null;
   },
 
