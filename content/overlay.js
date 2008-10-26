@@ -1068,6 +1068,12 @@ function GameFOXLoader()
       // new nightly install
       GFlib.newTab('chrome://gamefox/content/nightly.html', 0);
     }
+    else if (version.indexOf('pre') == -1)
+    {
+      // release notes for new stable release
+      GFlib.newTab('http://beyondboredom.net/projects/gamefox/releasenotes/'
+          + version + '.html', 0);
+    }
 
     GameFOX.prefs.setCharPref('version', version);
   }
