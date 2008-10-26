@@ -360,7 +360,7 @@
         onselect="GFcss.onselect();">
         <treecols>
           <treecol label="&style.tree.name;" primary="true" flex="1"/>
-          <treecol label="&style.tree.desc;"/>
+          <treecol label="&style.tree.desc;" width="100"/>
           <treecol label="&style.tree.author;" width="100"/>
           <treecol label="&style.tree.enabled;" type="checkbox" editable="true"/>
         </treecols>
