@@ -128,8 +128,8 @@ var GFquote =
 
     /* Prepare quote header */
     var qhead = '';
-    if (GameFOX.prefs.getBoolPref('quote.header.username')) qhead += username;
-    if (GameFOX.prefs.getBoolPref('quote.header.date')) qhead += ' | Posted ' + postdate;
+    if (GameFOX.prefs.getBoolPref('quote.header.username')) qhead += "From: " + username;
+    if (GameFOX.prefs.getBoolPref('quote.header.date')) qhead += ' | Posted: ' + postdate;
     if (GameFOX.prefs.getBoolPref('quote.header.messagenum')) qhead += ' | ' + postnum;
 
     if (qhead.length && GameFOX.prefs.getCharPref('quote.style') == 'normal')

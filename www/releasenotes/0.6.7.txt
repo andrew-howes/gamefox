@@ -2,7 +2,7 @@
 
 Custom quote templates were removed in favor of consistency due to widespread
 abuse. The standard quote header was changed from "username | date (number)" to
-"username | date | number".
+"From: username | Posted: date | number".
 
 Posts from the topic creator are now labeled with a "(tc)" next to their name.
 You can change the label or disable it entirely from the options.
