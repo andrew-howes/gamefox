@@ -112,6 +112,7 @@
     .user a:hover,
     .pages a:hover,
     .pagejumper a:hover,
+    .crumbs a:hover,
     .gamespace_nav a:hover {
         color: #ff0 !important;
         text-decoration: underline !important;
@@ -214,6 +215,7 @@
         font-weight: bold;
     }
     .crumbs a {
+        text-decoration: none !important;
         color: #fff !important;
     }
 
