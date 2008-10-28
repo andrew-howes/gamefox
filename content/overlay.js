@@ -30,6 +30,12 @@ var GameFOX =
 
     doc.gamefox = {};
 
+    /* user notification */
+    var usernote = doc.evaluate('//div[@id="board_wrap"]/p/a[contains(@href, "usernote.php")]',
+        doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    if (usernote)
+      usernote.parentNode.className += ' gamefox-usernote';
+
     /* Index (index.php) */
     if (GFlib.onPage(doc, 'index'))
     {

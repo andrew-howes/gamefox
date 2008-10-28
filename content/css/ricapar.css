@@ -381,6 +381,9 @@
     table.userinfo tr:not(.even) td {
         background: #fff;
     }
+    table.userinfo td:first-child {
+        font-weight: bold;
+    }
 
     /* Poll and Contest Bracket */
 
@@ -423,5 +426,11 @@
 
     #gamefox-message {
         max-width: 700px;
+    }
+
+    /* User Notification */
+    .gamefox-usernote {
+        background-color: #ff0;
+        text-align: center;
     }
 }
