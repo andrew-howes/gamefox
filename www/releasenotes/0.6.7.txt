@@ -17,6 +17,10 @@ been improved so there should never be any flicker while the page is loading.
 To add to the classic feel, the old style of topic icons can be emulated by
 enabling the "status icons (classic)" CSS.
 
+QuickPost now has access keys, enabling you to post messages using only the
+keyboard. Shift + Alt + Z, X and C will post, preview, and spellcheck the
+message respectively.
+
 ### Feedback
 
 Questions, suggestions or complaints? Let us know at
