@@ -48,3 +48,4 @@ last post
 * Remove custom quote templates
 * New CSS: Status icons (normal)
 * New CSS: Status icons (classic)
+* Access keys for QuickPost
