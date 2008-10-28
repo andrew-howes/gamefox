@@ -45,6 +45,11 @@ QuickPost form.
 
 `input` text element for the topic title. Only present in the floating topic QuickPost.
 
+<h2 id="p">p</h2>
+<h3 id="p_gamefox-usernote">p.gamefox-usernote</h3>
+
+Applied to system notification message.
+
 <h2 id="span">span</h2>
 <h3 id="span_gamefox-groupname">
 span.gamefox-groupname
@@ -63,6 +68,13 @@ Shows the character count for the message.
 <h3 id="span_gamefox-pagelist">span.gamefox-pagelist</h3>
 
 Contains topic pagination text.
+
+<h3 id="span_gamefox-status">
+span.gamefox-status
+<span class="new">New in 0.6.7</span>
+</h3>
+
+Empty span element used for topic icons of a sticky or closed topic.
 
 <h3 id="span_gamefox-tc-label">
 span.gamefox-tc-label
@@ -84,7 +96,6 @@ span.sticky-end
 </h3>
 
 Empty span element used for topic icons of a sticky topic.
-Requires "hide topic status column" checked.
 
 <h3 id="span_sticky-start">
 span.sticky-start
@@ -92,7 +103,6 @@ span.sticky-start
 </h3>
 
 Empty span element used for topic icons of a sticky topic.
-Requires "hide topic status column" checked.
 
 <h3 id="span_sticky_closed-end">
 span.sticky_closed-end
@@ -100,7 +110,6 @@ span.sticky_closed-end
 </h3>
 
 Empty span element used for topic icons of a sticky and closed topic.
-Requires "hide topic status column" checked.
 
 <h3 id="span_sticky_closed-start">
 span.sticky_closed-start
@@ -108,7 +117,6 @@ span.sticky_closed-start
 </h3>
 
 Empty span element used for topic icons of a sticky and closed topic.
-Requires "hide topic status column" checked.
 
 <h3 id="span_topic_closed-end">
 span.topic_closed-end
@@ -116,7 +124,6 @@ span.topic_closed-end
 </h3>
 
 Empty span element used for topic icons of a closed topic.
-Requires "hide topic status column" checked.
 
 <h3 id="span_topic_closed-start">
 span.topic_closed-start
@@ -124,7 +131,6 @@ span.topic_closed-start
 </h3>
 
 Empty span element used for topic icons of a closed topic.
-Requires "hide topic status column" checked.
 
 <h2 id="textarea">textarea</h2>
 <h3 id="textarea+gamefox-message">textarea#gamefox-message</h3>
