@@ -72,10 +72,11 @@
         text-decoration: underline !important;
     }
 
-    table a:visited {
+    table td a:visited {
         color: #0000af !important;
     }
 
+    th a,
     #header a,
     #quicknav a,
     #platformlist a,
@@ -98,6 +99,7 @@
         text-decoration: none !important;
     }
 
+    th a:hover,
     #header a:hover,
     #quicknav a:hover,
     #platformlist a:hover,
