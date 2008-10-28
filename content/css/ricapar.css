@@ -1,12 +1,9 @@
 @-moz-document url-prefix(http://www.gamefaqs.com/boards) {
-    /* redisplay Board Information side pane in the bottom of board list */
-    #side_col_wrap > #side_col > div:not(:first-child) {
-        display: none !important;
-    }
+    /* display Board Information side pane at bottom of board list */
     #side_col_wrap > #side_col > div:first-child {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        max-width: 850px !important;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 850px;
     }
     #side_col_wrap > #side_col > div:first-child h1 {
         background: #fff !important;
@@ -19,7 +16,7 @@
         content: 'Message Board';
         color: #fff;
         text-align: center;
-        font-size: 13pt !important;
+        font-size: 13pt;
         font-weight: bold;
         display: block;
     }
@@ -27,12 +24,11 @@
 
 @-moz-document domain(www.gamefaqs.com) {
     /* Ads, etc */
-
+    .ad,
     .rubics_netxp1_main,
     #gne_nav,
     #logo,
     #content + img,
-    #board_wrap > div.ad,
     #board_wrap + div,
     #mpu_wrap,
     #footer,
@@ -45,28 +41,28 @@
         display: none !important;
     }
 
-    /* Basic Page Stuff */
+    /* Basic Stuff */
 
     html {
-        border-left: #6666ff 150px solid;
+        border-left: #66f 150px solid;
     }
     html,
     body {
-        margin: 0 !important;
-        padding: 0 !important;
-        font-family: arial, sans-serif !important;
-        font-size: 9pt !important;
+        margin: 0;
+        padding: 0;
+        font-family: arial, sans-serif;
+        font-size: 9pt;
     }
     body {
         background: #fff !important;
     }
 
     table {
-        width: 100% !important;
+        width: 100%;
     }
 
     p {
-        margin: 0 !important;
+        margin: 0;
     }
 
     /* Links */
@@ -83,37 +79,34 @@
     #header a,
     #quicknav a,
     #platformlist a,
-    .user a,
-    .pages a,
-    .pagejumper a,
-    .gamespace_nav a {
-        color: #fff !important;
-        font-weight: bold !important;
-        margin: 0 5px !important;
-    }
-    .gamespace_nav a {
-        text-decoration: none !important;
-        margin: 0 !important;
-    }
-    #header a {
-        margin-right: 0 !important;
-        text-transform: capitalize !important;
-    }
+    #searchbox a,
+    .crumbs a,
+    .gamespace_nav a,
     .user a,
     .pages a,
     .pagejumper a {
-        margin: 0 !important;
+        color: #fff !important;
+        font-weight: bold;
+    }
+
+    #header a,
+    #quicknav a,
+    #platformlist a,
+    #searchbox a,
+    .crumbs a,
+    .gamespace_nav a {
+        text-decoration: none !important;
     }
 
     #header a:hover,
     #quicknav a:hover,
     #platformlist a:hover,
     #searchbox a:hover,
+    .crumbs a:hover,
+    .gamespace_nav a:hover,
     .user a:hover,
     .pages a:hover,
-    .pagejumper a:hover,
-    .crumbs a:hover,
-    .gamespace_nav a:hover {
+    .pagejumper a:hover {
         color: #ff0 !important;
         text-decoration: underline !important;
     }
@@ -121,11 +114,15 @@
     /* Header */
 
     #header {
-        background: #66f !important;
-        color: #fff !important;
-        text-align: center !important;
-        padding: 25px 0 3px 0 !important;
+        background: #66f;
+        color: #fff;
+        text-align: center;
+        padding: 25px 0 3px 0;
         font-size: 1.1em;
+    }
+    #header a {
+        margin-left: 5px;
+        text-transform: capitalize;
     }
     #header div {
         display: inline;
@@ -133,78 +130,63 @@
     #header .nav {
         margin-left: 15px;
     }
-    #header a {
-        text-decoration: none !important;
-    }
 
     #platformlist {
         position: absolute;
         top: 0;
         width: 100%;
         text-align: center;
-        color: #fff !important;
-    }
-    #platformlist div, #platformlist form {
-        display: inline !important;
+        color: #fff;
     }
     #platformlist a {
-        text-decoration: none !important;
-        margin: 0 2px !important;
+        margin: 0 2px;
+    }
+    #platformlist div, #platformlist form {
+        display: inline;
     }
     #platformlist b {
-        display: none !important;
-    }
-
-    #quicknav,
-    #searchbox {
-        padding: 2px !important;
+        display: none;
     }
 
     #quicknav {
         position: absolute;
         top: 3px;
         left: -150px;
-        background: #66f url(http://www.gamefaqs.com/shared/bar2001.gif) no-repeat top left !important;
-        padding-top: 50px !important;
-        padding-left: 0 !important;
+        background: #66f url(http://www.gamefaqs.com/shared/bar2001.gif) no-repeat top left;
+        padding: 50px 2px 2px 0;
         width: 148px;
     }
-
     #quicknav a {
         font-size: 1.1em;
-        margin-left: 1px !important;
+        margin-left: 1px;
         display: block;
-        text-decoration: none !important;
     }
 
     #searchbox {
-        color: #fff !important;
-        padding: 2px !important;
-        font-weight: bold !important;
-        position: absolute !important;
-        top:  163px !important;
-        left: -151px !important;
-        z-index: 5 !important;
+        color: #fff;
+        padding: 2px;
+        font-weight: bold;
+        position: absolute;
+        top: 163px;
+        left: -151px;
+        z-index: 5;
     }
-
+    #searchbox a {
+        font-size: 1.1em;
+        display: block;
+    }
     #searchbox input {
-        width: 90px !important;
+        width: 90px;
     }
     #searchbox select {
         display: none;
     }
 
-    #searchbox a {
-        font-size: 1.1em;
-        display: block;
-        color: #fff !important;
-        text-decoration: none !important;
-    }
     .gamespace_nav {
-        background: #00f !important;
-        padding: 2px 2px 2px 0 !important;
-        margin: 2px 0 !important;
-        overflow: hidden !important;
+        background: #00f;
+        padding: 2px 2px 2px 0;
+        margin: 2px 0;
+        overflow: hidden;
     }
 
     .crumbs {
@@ -214,21 +196,17 @@
         font-size: 1.2em;
         font-weight: bold;
     }
-    .crumbs a {
-        text-decoration: none !important;
-        color: #fff !important;
-    }
 
     .gamespace_nav ul {
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 13px !important;
-        text-align: center !important;
+        margin: 0;
+        padding: 0;
+        font-size: 13px;
+        text-align: center;
     }
 
     .gamespace_nav li,
     .pagejumper li {
-        display: inline !important;
+        display: inline;
     }
 
     .gamespace_nav li:not(:last-child):after {
