@@ -147,7 +147,7 @@ var GFquote =
         if (GameFOX.prefs.getBoolPref('quote.message.italic')) qbody = '<i>' + qbody + '</i>';
         if (GameFOX.prefs.getBoolPref('quote.message.bold')) qbody = '<b>' + qbody + '</b>';
 
-        quote = qhead + qbody;
+        quote = qhead + qbody + '\n';
         break;
 
       default: // gfcode
