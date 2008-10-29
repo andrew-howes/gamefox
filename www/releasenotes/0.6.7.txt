@@ -7,6 +7,9 @@ abuse. The standard quote header was changed from "username | date (number)" to
 Posts from the topic creator are now labeled with a "(tc)" next to their name.
 You can change the label or disable it entirely from the options.
 
+Topics can now be filtered to show only a single user's posts on a page by
+clicking "filter" in the message header.
+
 The active messages list now has an indicator for topics with new posts. This
 is determined by comparing the "last post" and "your last post" columns. It
 can be disabled from the options.
@@ -49,3 +52,4 @@ last post
 * New CSS: Status icons (normal)
 * New CSS: Status icons (classic)
 * Access keys for QuickPost
+* Link to filter posts by user

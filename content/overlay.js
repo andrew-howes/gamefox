@@ -544,6 +544,7 @@ var GameFOX =
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var firstPostNum = GameFOX.prefs.getIntPref('msgSortOrder') == 2 ?
           (doc.gamefox.pages - 1) * GameFOX.prefs.getIntPref('msgsPerPage') + td.length / 2 : 1;
+      var filterCond = GameFOX.prefs.getBoolPref('elements.filterlink') && !onDetail;
 
       for (var i = 0; i < td.length; i += 2)
       {
@@ -649,10 +650,12 @@ var GameFOX =
           }
           else if (hlinfo[2] == 'remove') // remove post
           {
-            td[i].style.setProperty('display', 'none', 'important');
-            td[i + 1].style.setProperty('display', 'none', 'important');
+            td[i].parentNode.className += ' gamefox-removed';
+            td[i].parentNode.style.display = 'none';
             if (leftMsgData)
               alternateColor = !alternateColor;
+            else
+              td[i + 1].parentNode.style.display = 'none';
           }
         }
 
@@ -704,8 +707,21 @@ var GameFOX =
           a.addEventListener('click', GFmessages.deletePost, false);
 
           td[i].insertBefore(a, msgDetailLink.nextSibling);
-          var separator = leftMsgData ? doc.createElement('br') : doc.createTextNode(' | ');
-          td[i].insertBefore(separator, msgDetailLink.nextSibling);
+          td[i].insertBefore(leftMsgData ? doc.createElement('br') : doc.createTextNode(' | '),
+              msgDetailLink.nextSibling);
+        }
+
+        // Filtering
+        if (filterCond)
+        {
+          var a = doc.createElement('a');
+          a.appendChild(doc.createTextNode('filter'));
+          a.className = 'gamefox-filter-link';
+          a.href = '#';
+          a.addEventListener('click', GameFOX.toggleFilter, false);
+
+          td[i].appendChild(leftMsgData ? doc.createElement('br') : doc.createTextNode(' | '));
+          td[i].appendChild(a);
         }
       }
 
@@ -1011,6 +1027,58 @@ var GameFOX =
         pageList.appendChild(item);
       }
     }
+  },
+
+  toggleFilter: function(event)
+  {
+    event.preventDefault();
+
+    var doc = GFlib.getDocument(event);
+    var button = event.target;
+    var tdResult = doc.evaluate('//table[@class="message"]/tbody/tr/td', doc, null,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    var td = [];
+    for (var i = 0; i < tdResult.snapshotLength; i++)
+      td[i] = tdResult.snapshotItem(i);
+    var leftMsgData = GFutils.getMsgDataDisplay(doc);
+    var userTagName = GFlib.onPage(doc, 'archive') ? 'b' : 'a';
+    var newText;
+
+    if (button.textContent == 'filter')
+    {
+      var username = button.parentNode.getElementsByTagName(userTagName)[0].textContent;
+
+      for (var i = 0; i < td.length; i += 2)
+      {
+        if (td[i].getElementsByTagName(userTagName)[0].textContent == username)
+          td[i].parentNode.style.display = '';
+        else
+          td[i].parentNode.style.display = 'none';
+        if (!leftMsgData)
+          td[i + 1].parentNode.style.display = td[i].parentNode.style.display;
+      }
+
+      newText = 'unfilter';
+    }
+    else
+    {
+      for (var i = 0; i < td.length; i += 2)
+      {
+        if (!/\bgamefox-removed\b/.test(td[i].parentNode.className))
+        {
+          td[i].parentNode.style.display = '';
+          if (!leftMsgData)
+            td[i + 1].parentNode.style.display = '';
+        }
+      }
+
+      newText = 'filter';
+    }
+
+    var filterResult = doc.evaluate('//a[@class="gamefox-filter-link"]', doc, null,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    for (var i = 0; i < filterResult.snapshotLength; i++)
+      filterResult.snapshotItem(i).textContent = newText;
   },
 
   toggleSidebar: function()

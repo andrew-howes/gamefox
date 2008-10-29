@@ -58,6 +58,7 @@
 
       <preference id="elements-tag-link" name="gamefox.elements.tag.link" type="bool"/>
       <preference id="elements-deletelink" name="gamefox.elements.deletelink" type="bool"/>
+      <preference id="elements-filterlink" name="gamefox.elements.filterlink" type="bool"/>
       <preference id="elements-msgnum" name="gamefox.elements.msgnum" type="bool"/>
       <preference id="elements-msgnum-style" name="gamefox.elements.msgnum.style" type="int"/>
       <preference id="elements-marktc" name="gamefox.elements.marktc" type="bool"/>
@@ -133,6 +134,7 @@
                     <vbox>
                       <checkbox preference="elements-tag-link" label="&page.elements.messages.taglink;"/>
                       <checkbox preference="elements-deletelink" label="&page.elements.messages.deletelink;"/>
+                      <checkbox preference="elements-filterlink" label="&page.elements.messages.filterlink;"/>
                       <checkbox flex="1" preference="elements-msgnum" label="&page.elements.messages.numbering;"/>
                       <hbox class="indent" align="baseline">
                         <menulist preference="elements-msgnum-style">
