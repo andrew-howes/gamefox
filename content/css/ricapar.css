@@ -351,7 +351,7 @@
         background: #b0b0ff;
     }
 
-    .message tr > td:first-child:before {
+    .message > tbody > tr > td:first-child:before {
         content: 'From: ';
         font-weight: bold;
     }
