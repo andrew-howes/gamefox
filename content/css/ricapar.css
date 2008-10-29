@@ -178,9 +178,7 @@
     }
 
     #searchbox {
-        color: #fff;
         padding: 2px;
-        font-weight: bold;
         position: absolute;
         top: 163px;
         left: -151px;
@@ -189,6 +187,9 @@
     #searchbox a {
         font-size: 1.1em;
         display: block;
+    }
+    #searchbox button {
+        text-transform: capitalize;
     }
     #searchbox input {
         width: 90px;
