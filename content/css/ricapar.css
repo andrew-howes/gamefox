@@ -67,15 +67,17 @@
 
     input {
         font-family: arial;
+        font-size: 9pt;
+        font-weight: normal;
     }
-    
+
     .body .details, .body p {
         padding: 5px;
     }
     .body .details p {
         padding: 5px 0 !important;
     }
-   
+
     /* Links */
 
     a {
