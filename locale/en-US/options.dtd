@@ -36,7 +36,7 @@
 <!ENTITY page.elements.topics.pagejumper "Show page jumper (Active Messages)">
 <!ENTITY page.elements.messages.caption "Message Lists">
 <!ENTITY page.elements.messages.taglink "&quot;Tag Topic&quot; link">
-<!ENTITY page.elements.messages.deletelink "&quot;delete&quot; links">
+<!ENTITY page.elements.messages.deletelink "&quot;Delete&quot; and &quot;Close&quot; links">
 <!ENTITY page.elements.messages.numbering "Number messages">
 <!ENTITY page.elements.messages.marktc "Label topic creator">
 <!ENTITY page.elements.pages.caption "Topic Pagination">
