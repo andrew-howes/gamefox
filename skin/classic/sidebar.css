@@ -4,6 +4,7 @@ body
   font: .8em 'Arial', sans-serif;
   text-align: center;
   background: #eee;
+  margin: 0;
 }
 
 a
@@ -25,6 +26,7 @@ iframe
 {
   background: #6564ff;
   padding: 2px;
+  margin: 0 0 5px 0;
 }
 #title a
 {
@@ -53,13 +55,15 @@ iframe
 .quicknav
 {
   float: left;
-  margin-right: 25px;
+  margin-left: 5px;
+  margin-right: 20px;
 }
 
 .platformlist
 {
   float: right;
   margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 #accounts-menu
