@@ -246,12 +246,16 @@ var GFquickpost =
         }
         else
         {
-          if (text.indexOf('<div class="head"><h1>Post Warning</h1></div>') != -1 &&
-              !GFlib.confirm('Your message contains an autoflagged word. Submit anyway?'))
+          if (text.indexOf('<div class="head"><h1>Post Warning</h1></div>') != -1)
           {
-            event.target.removeAttribute('disabled');
-            event.target.addEventListener('click', GFquickpost.post, false);
-            return;
+            var warning = text.match(/message:<\/b><\/p>\s+(.*)/)[1].
+              replace(/<P>/g, '\n\n');
+            if (!GFlib.confirm(warning + 'Submit this post?'))
+            {
+              event.target.removeAttribute('disabled');
+              event.target.addEventListener('click', GFquickpost.post, false);
+              return;
+            }
           }
 
           var postRequest = new XMLHttpRequest();
