@@ -1,63 +1,69 @@
-/* vim: set et sw=4 sts=4 ts=4: */
-html
-{
-    background-color: #5BA1D4;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    font-size: .8em;
-}
-
+/* vim: set et sw=2 ts=2 sts=2 tw=79: */
 body
 {
-    margin: 0;
-    padding: 0 6px 0 2px;
+  font: .8em 'Arial', sans-serif;
+  text-align: center;
+  background: #eee;
 }
 
 a
 {
-    color: #ffffff;
-    font-weight: bold;
-    text-decoration: none;
+  color: #03c;
+  font-weight: bold;
 }
-
 a:hover
 {
-    color: #D6DF60;
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-#title, a#title-link
+iframe
 {
-    font-weight: bold;
-    font-size: 1.6em;
-    color:  #296794;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 5px;
+  border: 0;
+}
+
+#title
+{
+  background: #6564ff;
+  padding: 2px;
+}
+#title a
+{
+  color: #fff;
 }
 
 .search-head
 {
-    border-top: 2px solid #296794;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    padding: 2px;
+  clear: both;
+  font-weight: bold;
+  margin: 5px 0;
+  background: #636ab6;
+  color: #fff;
+  padding: 2px;
+}
+.search-head a
+{
+  color: #fff;
 }
 
-.left
+.quicknav, .platformlist
 {
-    float: left;
-    margin-right: 25px;
+  text-align: left;
 }
 
-input
+.quicknav
 {
-    width: 101%;
-    border: 0 solid #000000;
+  float: left;
+  margin-right: 25px;
 }
 
-input[type="text"]
+.platformlist
 {
-    border-bottom: 1px dashed #296794;
+  float: right;
+  margin-bottom: 5px;
+}
+
+#accounts-menu
+{
+  text-align: left;
+  margin-left: 5px;
 }

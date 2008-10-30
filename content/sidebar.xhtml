@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="chrome://gamefox/skin/sidebar.css" type="text/css"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>GameFOX Sidebar</title>
@@ -15,27 +16,27 @@
 <body onload="GFsidebar.onload()">
   <div id="gamefox-sidebar-container">
     <h1 id="title"><a id="title-link" href="http://beyondboredom.net/projects/gamefox/">GameFOX</a></h1>
-    <div class="left">
+    <div class="quicknav">
       <a href="http://www.gamefaqs.com/">Home</a><br/>
       <a href="http://www.gamefaqs.com/new/">What's New</a><br/>
-      <a href="http://www.gamefaqs.com/systems.html">Systems</a><br/>
-      <a href="http://www.gamefaqs.com/features/">Features</a><br/>
-      <a href="http://www.gamefaqs.com/features/feedback/">Feedback</a><br/>
       <a href="http://www.gamefaqs.com/contribute/">Contribute</a><br/>
+      <a href="http://www.gamefaqs.com/features/">Features</a><br/>
       <a href="http://www.gamefaqs.com/boards/index.php">Boards</a><br/>
+      <a href="http://www.gamefaqs.com/features/mygames/index.html">My Games</a><br/>
       <a href="http://www.gamefaqs.com/features/help/">Help</a><br/>
-      <a href="http://www.gamefaqs.com/console/gamecube/">GameCube</a>
     </div>
-    <div>
+    <div class="platformlist">
       <a href="http://www.gamefaqs.com/portable/ds/">DS</a><br/>
-      <a href="http://www.gamefaqs.com/portable/psp/">PSP</a><br/>
       <a href="http://www.gamefaqs.com/portable/gbadvance/">GBA</a><br/>
-      <a href="http://www.gamefaqs.com/console/wii/">Wii</a><br/>
+      <a href="http://www.gamefaqs.com/console/gamecube/">GameCube</a><br/>
       <a href="http://www.gamefaqs.com/computer/doswin/">PC</a><br/>
       <a href="http://www.gamefaqs.com/console/ps2/">PS2</a><br/>
       <a href="http://www.gamefaqs.com/console/ps3/">PS3</a><br/>
+      <a href="http://www.gamefaqs.com/portable/psp/">PSP</a><br/>
+      <a href="http://www.gamefaqs.com/console/wii/">Wii</a><br/>
       <a href="http://www.gamefaqs.com/console/xbox/">Xbox</a><br/>
-      <a href="http://www.gamefaqs.com/console/xbox360/">Xbox 360</a>
+      <a href="http://www.gamefaqs.com/console/xbox360/">Xbox 360</a><br/>
+      <a href="http://www.gamefaqs.com/systems.html">All Systems</a>
     </div>
     <br/>
     <div class="search-head"><a href="http://www.gamefaqs.com/boards/user.php">Profile</a> / <a href="http://www.gamefaqs.com/user/manage.html">Manage</a></div>
@@ -44,11 +45,13 @@
     <form method="get" action="http://www.gamefaqs.com/search/index.html">
       <input type="hidden" name="platform" value="0"/>
       <input type="hidden" name="submit" value="Search GameFAQs"/>
-      <input type="text" name="game" size="10"/>
+      <input type="text" name="game" size="12"/>
+      <input type="submit" value="Go"/>
     </form>
     <div class="search-head">Go to board ID</div>
     <form method="get" action="http://www.gamefaqs.com/boards/gentopic.php">
       <input type="text" name="board" size="10"/>
+      <input type="submit" value="Go"/>
     </form>
     <div class="search-head">Login (Email/Pass)</div>
     <form method="post" action="http://www.gamefaqs.com/user/login.html" onsubmit="GFsidebar.redirectLogin(this)">
