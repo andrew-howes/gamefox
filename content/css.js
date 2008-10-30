@@ -28,7 +28,7 @@ var GFcss =
         ['gamefox', 'gamefox-ads.css', 'Ad blocking',
               'Hides ads. Best used with "block ad servers" enabled.', '', true],
         ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar',
-              'A classic style for the GameFOX sidebar.', 'MichaelJBuck', false],
+              'A classic style for the GameFOX sidebar.', '', false],
         ['gamefox', 'gamefox-essentials.css', 'Essentials',
               'Works with some of GameFOX\'s features. Should always be enabled.', '', true],
         ['gamefox', 'gfcode.css', 'GFCode',

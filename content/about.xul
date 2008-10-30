@@ -93,11 +93,6 @@
     </hbox>
 
     <hbox>
-      <label value="MichaelJBuck"/>
-      <label class="contrib description" value="&contrib.css.label;"/>
-    </hbox>
-
-    <hbox>
       <label value="Tango Desktop Project"/>
       <label class="contrib description" value="&contrib.icons.label;"/>
     </hbox>
