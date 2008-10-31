@@ -66,6 +66,11 @@ iframe
   margin-right: 5px;
 }
 
+input[name="game"]
+{
+  width: 70%;
+}
+
 #accounts-menu
 {
   text-align: left;
