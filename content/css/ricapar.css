@@ -384,11 +384,11 @@
     }
 
     /* Posting */
-    .message tr:only-child > td:only-child:before {
+    .preview .message tr:only-child > td:only-child:before {
         content: '';
     }
-    .message tr:only-child > td:only-child {
-        background: #d0d0ff !important;
+    .preview .message tr:only-child > td:only-child {
+        background: #d0d0ff;
     }
 
     /* Whois */

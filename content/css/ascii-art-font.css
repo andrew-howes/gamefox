@@ -2,14 +2,9 @@
 {
   table.message tr.even td:not(.author),
   table.message tr td + td,
+  div.preview table.message tr td,
   #gne_nav ~ #content table.message > tbody > tr.even > td:not(.author),
-  #gne_nav ~ #content table.message > tbody > tr > td.author + td
-  { font-size: 13px !important; font-family: arial !important; }
-}
-
-@-moz-document url-prefix(http://www.gamefaqs.com/boards/post.php)
-{
-  table.message tr td,
+  #gne_nav ~ #content table.message > tbody > tr > td.author + td,
   #gne_nav ~ #content div.preview table.message > tbody > tr > td
   { font-size: 13px !important; font-family: arial !important; }
 }
