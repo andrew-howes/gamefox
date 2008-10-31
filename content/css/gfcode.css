@@ -2,7 +2,7 @@
 .message td {
     text-rendering: optimizeLegibility;
 }
-.message i > p, .message b > p {
+.message i > p, .message b > p, .message em > p {
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCA\
     YAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFlzAAALEwA\
     ACxMBAJqcGAAAAAd0SU1FB9gKBRc3Hjy29NMAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRo\
@@ -17,7 +17,7 @@
 .message i > p {
     border: 1px solid #bbb !important;
 }
-.message b > p {
+.message b > p, .message em > p {
     font-family: monospace !important;
     white-space: pre-wrap;
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCA\
