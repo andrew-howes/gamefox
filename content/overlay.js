@@ -1143,7 +1143,7 @@ function GameFOXLoader()
       window.setTimeout(function(){
           GFlib.newTab('chrome://gamefox/content/nightly.html', 0)}, 10);
     }
-    else if (version.indexOf('pre') == -1)
+    else if (version.indexOf('pre') == -1 && lastversion != '')
     {
       // release notes for new stable release
       window.setTimeout(function(){
