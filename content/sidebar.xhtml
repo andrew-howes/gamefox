@@ -3,20 +3,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79: -->
 <head>
   <title>GameFOX Sidebar</title>
   <base href="about:blank" target="_main"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/sidebar.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/accounts.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"></script>
+  <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"></script>
+  <script type="application/x-javascript" src="chrome://gamefox/content/sidebar.js"></script>
+  <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"></script>
+  <script type="application/x-javascript" src="chrome://gamefox/content/accounts.js"></script>
+  <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"></script>
 </head>
-<body onload="GFsidebar.onload()">
-  <div id="gamefox-sidebar-container">
-    <h1 id="title"><a id="title-link" href="http://beyondboredom.net/projects/gamefox/">GameFOX</a></h1>
-    <div class="quicknav">
+<body>
+    <h1><a href="http://beyondboredom.net/projects/gamefox/">GameFOX</a></h1>
+
+    <div id="quicknav">
       <a href="http://www.gamefaqs.com/">Home</a><br/>
       <a href="http://www.gamefaqs.com/new/">What's New</a><br/>
       <a href="http://www.gamefaqs.com/contribute/">Contribute</a><br/>
@@ -25,7 +26,7 @@
       <a href="http://www.gamefaqs.com/features/mygames/index.html">My Games</a><br/>
       <a href="http://www.gamefaqs.com/features/help/">Help</a><br/>
     </div>
-    <div class="platformlist">
+    <div id="platformlist">
       <a href="http://www.gamefaqs.com/portable/ds/">DS</a><br/>
       <a href="http://www.gamefaqs.com/portable/gbadvance/">GBA</a><br/>
       <a href="http://www.gamefaqs.com/console/gamecube/">GameCube</a><br/>
@@ -38,32 +39,59 @@
       <a href="http://www.gamefaqs.com/console/xbox360/">Xbox 360</a><br/>
       <a href="http://www.gamefaqs.com/systems.html">All Systems</a>
     </div>
-    <br/>
-    <div class="search-head"><a href="http://www.gamefaqs.com/boards/user.php">Profile</a> / <a href="http://www.gamefaqs.com/user/manage.html">Manage</a></div>
-    <div class="search-head"><a href="http://www.gamefaqs.com/boards/myposts.php">Posts</a> / <a href="http://www.gamefaqs.com/boards/tracked.php">Tracked</a> / <a href="http://www.gamefaqs.com/boards/modhist.php">Mods</a></div>
-    <div class="search-head"><a href="http://www.gamefaqs.com/search/">Search GameFAQs</a></div>
+    
+    <div class="strip">
+      <a href="http://www.gamefaqs.com/boards/user.php">Profile</a> /
+      <a href="http://www.gamefaqs.com/user/manage.html">Manage</a>
+    </div>
+    
+    <div class="strip">
+      <a href="http://www.gamefaqs.com/boards/myposts.php">Posts</a> /
+      <a href="http://www.gamefaqs.com/boards/tracked.php">Tracked</a> /
+      <a href="http://www.gamefaqs.com/boards/modhist.php">Mods</a>
+    </div>
+
+    <div class="strip">
+      <a href="http://www.gamefaqs.com/search/">Search GameFAQs</a>
+    </div>
     <form method="get" action="http://www.gamefaqs.com/search/index.html">
       <input type="hidden" name="platform" value="0"/>
       <input type="text" name="game" size="12"/>
       <input type="submit" value="Go"/>
     </form>
-    <div class="search-head">Go to board ID</div>
+
+    <div class="strip">Go to board ID</div>
     <form method="get" action="http://www.gamefaqs.com/boards/gentopic.php">
       <input type="text" name="board" size="10"/>
       <input type="submit" value="Go"/>
     </form>
-    <div class="search-head">Login (Email/Pass)</div>
-    <form method="post" action="http://www.gamefaqs.com/user/login.html" onsubmit="GFsidebar.redirectLogin(this)">
-      <input type="hidden" name="path" id="gamefaqs-login-path" value="http://www.gamefaqs.com/boards/index.php"/>
+
+    <div class="strip">Login (Email/Pass)</div>
+    <form method="post" action="http://www.gamefaqs.com/user/login.html"
+        id="gamefaqs-login-form">
+      <input type="hidden" name="path" id="gamefaqs-login-path"
+        value="http://www.gamefaqs.com/boards/index.php"/>
       <input type="text" name="EMAILADDR" maxlength="90"/>
-      <input type="password" name="PASSWORD" maxlength="20"/><br/>
-      <input type="submit" value="Login" onmousedown="if (event.button == 1) GFsidebar.newTabLogin(this.parentNode)"/>
+      <input type="password" name="PASSWORD" maxlength="20"/>
+      <input type="submit" value="Login" id="gamefaqs-login-submit"/>
     </form>
-    <div class="search-head"><a href="http://www.gamefaqs.com/user/logout.html?r=www.gamefaqs.com%2Fboards%2Findex.php">Logout</a> / <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a></div>
-    <div class="search-head">Accounts (<a onclick="GFaccounts.promptLogin();return false" style="cursor: pointer;">Add</a><span id="accounts-remove"> / <a onclick="GFaccounts.promptRemoveAccount();return false" style="cursor: pointer;">Remove</a></span>)</div>
+
+    <div class="strip">
+      <a href="http://www.gamefaqs.com/user/logout.html?r=www.gamefaqs.com%2Fboards%2Findex.php"
+          >Logout</a> /
+      <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a>
+    </div>
+
+    <div class="strip">
+      Accounts (<a id="accounts-add-link">Add</a>
+        <span id="accounts-remove"> / <a id="accounts-rm-link">Remove</a></span>)
+    </div>
+
     <div id="accounts-menu"></div>
-    <div class="search-head"><a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a></div>
+
+    <div class="strip">
+      <a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a>
+    </div>
     <iframe src="chrome://gamefox/content/tags.xul" style="width: 100%; height: 300px;"/>
-  </div>
 </body>
 </html>

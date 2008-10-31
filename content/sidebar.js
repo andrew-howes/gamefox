@@ -28,8 +28,18 @@ var GFsidebar =
       links[i].setAttribute('onmousedown', 'if (event.button == 1) ' +
           'GFlib.newTab(this.href, 1)');
 
+    // listeners
+    document.getElementById('gamefaqs-login-form').addEventListener(
+        'submit', GFsidebar.redirectLogin, false);
+    document.getElementById('gamefaqs-login-submit').addEventListener(
+        'mousedown', GFsidebar.newTabLogin, false);
+    document.getElementById('accounts-add-link').addEventListener(
+        'click', GFsidebar.promptAccountsLogin, false);
+    document.getElementById('accounts-rm-link').addEventListener(
+        'click', GFsidebar.promptAccountsRemove, false);
+
     // accounts
-    this.populateAccounts();
+    GFsidebar.populateAccounts();
     GFsidebarAccountsObserver.register();
   },
 
@@ -65,9 +75,13 @@ var GFsidebar =
     }
   },
 
-  newTabLogin: function(form)
+  newTabLogin: function(event)
   {
-    this.redirectLogin(form);
+    if (event.button != 1)
+      return false;
+
+    var form = event.target.parentNode;
+    GFsidebar.redirectLogin(event);
 
     var browserWindow = Cc['@mozilla.org/appshell/window-mediator;1'].
       getService(Ci.nsIWindowMediator).
@@ -80,17 +94,33 @@ var GFsidebar =
     form.setAttribute('onsubmit', oldSubmitEvent);
   },
 
-  redirectLogin: function(form)
+  redirectLogin: function(event)
   {
+    var sidebarDoc = GFlib.getDocument(event);
+
     var doc = Cc['@mozilla.org/appshell/window-mediator;1'].
       getService(Ci.nsIWindowMediator).getMostRecentWindow(
           'navigator:browser').content.document;
-    var path = form.ownerDocument.getElementById('gamefaqs-login-path');
+    var path = sidebarDoc.getElementById('gamefaqs-login-path');
 
     if (GFlib.onGF(doc))
       path.value = doc.location.href.replace(
           /&(action)=[^&]*(?=&|$)|\b(action)=[^&]*&/, '');
     else
       path.value = GFlib.domain + GFlib.path + 'index.php';
+  },
+
+  promptAccountsLogin: function(event)
+  {
+    event.preventDefault();
+    GFaccounts.promptLogin();
+  },
+
+  promptAccountsRemove: function(event)
+  {
+    event.preventDefault();
+    GFaccounts.promptRemoveAccount();
   }
 };
+
+window.addEventListener('load', GFsidebar.onload, false);
