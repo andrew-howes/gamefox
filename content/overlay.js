@@ -1053,8 +1053,12 @@ var GameFOX =
         if (td[i].getElementsByTagName(userTagName)[0].textContent == username)
         {
           td[i].parentNode.style.removeProperty('display');
+          td[i].parentNode.removeAttribute('style');
           if (!leftMsgData)
+          {
             td[i + 1].parentNode.style.removeProperty('display');
+            td[i + 1].parentNode.removeAttribute('style');
+          }
         }
         else
         {
@@ -1073,8 +1077,10 @@ var GameFOX =
         if (!/\bgamefox-removed\b/.test(td[i].parentNode.className))
         {
           td[i].parentNode.style.removeProperty('display');
+          td[i].parentNode.removeAttribute('style');
           if (!leftMsgData)
             td[i + 1].parentNode.style.removeProperty('display');
+            td[i + 1].parentNode.removeAttribute('style');
         }
       }
 
