@@ -167,7 +167,7 @@ var GameFOX =
               pageTR.style.display = 'table-row';
 
               var pageTD = doc.createElement('td');
-              pageTD.setAttribute('colspan', '5');
+              pageTD.setAttribute('colspan', '0');
             }
             else
             {
@@ -944,7 +944,7 @@ var GameFOX =
           {
             td.style.display = (td.style.display == 'none') ? '' : 'none';
             if (td.style.display == 'none')
-            return;
+              return;
           }
           else if (!pgLocation)
           {
@@ -974,7 +974,7 @@ var GameFOX =
         tr.setAttribute('class', 'gamefox-pagelist');
         tr.style.display = 'table-row';
         td = doc.createElement('td');
-        td.setAttribute('colspan', '5');
+        td.setAttribute('colspan', '0');
       }
 
       var pgPrefix = pgPrefs.getCharPref('prefix');
