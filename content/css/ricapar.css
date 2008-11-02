@@ -366,12 +366,7 @@
         content: '';
     }
 
-    .message a.name + a,
-    .message a.name + span + a,
-    .message a.name + span + span + a,
-    .message .author a:not(.name),
-    a.gamefox-delete-link,
-    a.gamefox-filter-link {
+    .message a.name ~ a {
         text-transform: capitalize;
     }
 
