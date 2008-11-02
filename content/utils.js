@@ -264,38 +264,33 @@ var GFutils =
 
   formatPagination: function(doc, topiclink, posts, tc)
   {
-    // Prefix and suffix stuff, looks a little messy
+    var pages = Math.ceil(posts / GameFOX.prefs.getIntPref('msgsPerPage'));
+    if (pages == 1)
+      return false;
+
     var loc = GameFOX.prefs.getIntPref('paging.location');
     var prefix = GFutils.getString('paging.prefix');
     var sep = GFutils.getString('paging.separator');
     var suffix = GFutils.getString('paging.suffix');
 
     var prefixHTML = doc.createElement('span');
-    prefixHTML.innerHTML = '';
     if (loc == 2)
       prefixHTML.appendChild(doc.createElement('br'));
-    prefixHTML.appendChild(doc.createTextNode(prefix));
-    prefixHTML = ' ' + prefixHTML.innerHTML.replace(/\s/g, '&nbsp;');
+    prefixHTML.appendChild(doc.createTextNode(' ' + prefix.replace(/\s/g, '\xA0')));
 
     var suffixHTML = doc.createElement('span');
-    suffixHTML.innerHTML = '';
-    suffixHTML.appendChild(doc.createTextNode(suffix));
-    suffixHTML = suffixHTML.innerHTML.replace(/\s/g, '&nbsp;');
-
-    var pages = Math.ceil(posts / GameFOX.prefs.getIntPref('msgsPerPage'));
-    if (pages == 1)
-      return false;
+    suffixHTML.appendChild(doc.createTextNode(suffix.replace(/\s/g, '\xA0')));
 
     var pageHTML = doc.createElement('span');
-    pageHTML.innerHTML = '' + prefixHTML;
+    pageHTML.appendChild(prefixHTML);
 
     tc = this.tcParam(tc);
-
+    var a;
     for (var i = 0; i < pages; i++)
     {
-      var a = doc.createElement('a');
-          a.setAttribute('href', topiclink + (i ? '&page=' + i + tc : ''));
-          a.innerHTML = i + 1;
+      a = doc.createElement('a');
+      a.href = topiclink + (i ? '&page=' + i + tc : '');
+      a.appendChild(doc.createTextNode(i + 1));
 
       pageHTML.appendChild(a);
 
@@ -303,7 +298,7 @@ var GFutils =
         pageHTML.appendChild(doc.createTextNode(sep));
     }
 
-    pageHTML.innerHTML += suffixHTML;
+    pageHTML.appendChild(suffixHTML);
 
     return pageHTML;
   },
