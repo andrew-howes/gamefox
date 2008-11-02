@@ -56,4 +56,4 @@ Nightly builds will receive automatic updates daily when a new version is built.
 If nightly testing isn't for you, you can downgrade to the stable release
 at the [top of the page](#download) at any time.
 
-The latest nightly snapshot is available from [this location](/gfox/gamefox-0.6.8pre.xpi).
+The latest nightly snapshot is available from [this location](/gfox/nightly/).

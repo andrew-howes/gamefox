@@ -162,7 +162,7 @@ ${NIGHTLYXPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
 		       -e "s,###GIT_VERSION###,${GIT_VERSION},g" \
 		       -e "s,###DATE###,${BUILD_DATE},g" \
 			   -e "s,<em:version>\([0-9.]\+\)pre</em:version>,<em:version>\1pre${NIGHTLY_DATE}</em:version>,g" \
-			   -e "s,<em:updateURL>.*</em:updateURL>,<em:updateURL>http://beyondboredom.net/gfox/nightly.rdf</em:updateURL>,g" \
+			   -e "s,<em:updateURL>.*</em:updateURL>,<em:updateURL>http://beyondboredom.net/gfox/nightly/${VERSION}.rdf</em:updateURL>,g" \
 			   -e "s,<em:updateKey>.*</em:updateKey>,<em:updateKey>MIGfMA0GCSqGSIb3DQEB\
 AQUAA4GNADCBiQKBgQC7eAy22UWonorb/WB+eeDeE6eMDgRB9gjRt4LGzoOB+jgxc1ZkOMuLwbU599zu+GvW038T\
 LCyUgpvEC6Nh5NoOryFCKbPNM/Hun+GPITbSl59ZqpRj9mFie5ASlPnU3xI+FG5czTJLsBSAZF6pfhnCNzfcVD9mH\
