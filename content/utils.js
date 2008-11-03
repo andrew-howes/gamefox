@@ -262,47 +262,6 @@ var GFutils =
     prefService.setComplexValue(pref, Ci.nsISupportsString, ustr);
   },
 
-  formatPagination: function(doc, topiclink, posts, tc)
-  {
-    var pages = Math.ceil(posts / GameFOX.prefs.getIntPref('msgsPerPage'));
-    if (pages == 1)
-      return false;
-
-    var loc = GameFOX.prefs.getIntPref('paging.location');
-    var prefix = GFutils.getString('paging.prefix');
-    var sep = GFutils.getString('paging.separator');
-    var suffix = GFutils.getString('paging.suffix');
-
-    var prefixHTML = doc.createElement('span');
-    if (loc == 2)
-      prefixHTML.appendChild(doc.createElement('br'));
-    prefixHTML.appendChild(doc.createTextNode(' ' + prefix.replace(/\s/g, '\xA0')));
-
-    var suffixHTML = doc.createElement('span');
-    suffixHTML.appendChild(doc.createTextNode(suffix.replace(/\s/g, '\xA0')));
-
-    var pageHTML = doc.createElement('span');
-    pageHTML.appendChild(prefixHTML);
-
-    tc = this.tcParam(tc);
-    var a;
-    for (var i = 0; i < pages; i++)
-    {
-      a = doc.createElement('a');
-      a.href = topiclink + (i ? '&page=' + i + tc : '');
-      a.appendChild(doc.createTextNode(i + 1));
-
-      pageHTML.appendChild(a);
-
-      if (i < pages - 1)
-        pageHTML.appendChild(doc.createTextNode(sep));
-    }
-
-    pageHTML.appendChild(suffixHTML);
-
-    return pageHTML;
-  },
-
   formatSig: function(sig, newline, doc)
   {
     if (sig == null) // fetch sig
