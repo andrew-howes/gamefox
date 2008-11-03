@@ -55,6 +55,10 @@
         <menu id="gamefox-accounts" label="&menu.accounts.label;">
           <menupopup id="gamefox-accounts-menu" onpopupshowing="GFaccounts.populate();"/>
         </menu>
+
+        <menu id="gamefox-favorites" label="&menu.favorites.label;">
+          <menupopup id="gamefox-favorites-menu" onpopupshowing="GameFOX.showFavs();"/>
+        </menu>
       </menupopup>
     </menu>
 

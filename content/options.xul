@@ -540,6 +540,7 @@
       <preference id="gamefox-pref-message-header-dblclick" name="gamefox.message.header.dblclick" type="int"/>
       <preference id="gamefox-pref-myposts-dblclick" name="gamefox.myposts.dblclick" type="int"/>
       <preference id="gamefox-pref-context-accounts" name="gamefox.context.accounts" type="bool"/>
+      <preference id="gamefox-pref-context-favorites" name="gamefox.context.favorites" type="bool"/>
       <preference id="gamefox-pref-context-pagelist" name="gamefox.context.pagelist" type="bool"/>
       <preference id="gamefox-pref-context-quote"    name="gamefox.context.quote"    type="bool"/>
       <preference id="gamefox-pref-context-sidebar"  name="gamefox.context.sidebar"  type="bool"/>
@@ -613,6 +614,7 @@
             </vbox>
             <vbox>
               <checkbox preference="gamefox-pref-context-accounts" label="&mouse.context.accounts;"/>
+              <checkbox preference="gamefox-pref-context-favorites" label="&mouse.context.favorites;"/>
             </vbox>
           </hbox>
         </groupbox>

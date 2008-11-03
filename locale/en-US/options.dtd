@@ -143,6 +143,7 @@
 <!ENTITY mouse.context.sidebar "Sidebar">
 <!ENTITY mouse.context.taglist "Tag List">
 <!ENTITY mouse.context.accounts "Accounts">
+<!ENTITY mouse.context.favorites "Favorites">
 <!ENTITY mouse.context.main "Main">
 <!ENTITY mouse.context.pages "Pages">
 <!ENTITY mouse.context.tagtopic "Tag Topic">

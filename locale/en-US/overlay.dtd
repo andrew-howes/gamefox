@@ -13,6 +13,7 @@
 <!ENTITY menu.sidebar.accesskey "S">
 <!ENTITY menu.tags.label "Tags">
 <!ENTITY menu.accounts.label "Accounts">
+<!ENTITY menu.favorites.label "Favorites">
 
 <!ENTITY sidebar.title "GameFOX">
 

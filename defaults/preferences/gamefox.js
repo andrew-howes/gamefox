@@ -51,6 +51,8 @@ pref("gamefox.userlist.topics.showgroupnames", true);
 pref("gamefox.userlist.messages.showgroupnames", true);
 pref("gamefox.userlist.serialized", "[]");
 
+pref("gamefox.favorites.serialized", "[]");
+
 pref("gamefox.tags", "");
 pref("gamefox.accounts", "({})");
 pref("gamefox.topic.dblclick", 0);
@@ -63,6 +65,7 @@ pref("gamefox.paging.prefix", "[Pages: ");
 pref("gamefox.paging.separator", ", ");
 pref("gamefox.paging.suffix", "]");
 pref("gamefox.context.accounts", true);
+pref("gamefox.context.favorites", true);
 pref("gamefox.context.pagelist", true);
 pref("gamefox.context.quote", true);
 pref("gamefox.context.sidebar", true);

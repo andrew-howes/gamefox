@@ -40,6 +40,30 @@ var GameFOX =
     if (GFlib.onPage(doc, 'index'))
     {
       GFlib.setTitle(doc, 'Message Boards');
+
+      // Get favorites
+      if (1) // pref?
+      {
+        var i, query;
+        var favorites = [];
+
+        var favResult = doc.evaluate('//div[@class="board"]/table/tbody/tr/td[1]/a',
+            doc, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+        var favLinks = [];
+        for (i = 0; i < favResult.snapshotLength; i++)
+          favLinks[i] = favResult.snapshotItem(i);
+
+        for (i = 0; i < favLinks.length; i++)
+        {
+          query = GFutils.parseQueryString(favLinks[i].search);
+          if (query['board'])
+          {
+            favorites.push({'id':query['board'], 'name':favLinks[i].textContent});
+          }
+        }
+
+        GameFOX.prefs.setCharPref('favorites.serialized', favorites.toSource());
+      }
     }
 
     /* Active Messages (myposts.php) */
@@ -1073,6 +1097,29 @@ var GameFOX =
   toggleSidebar: function()
   {
     toggleSidebar('viewGamefoxSidebar');
+  },
+
+  showFavs: function()
+  {
+    var favList, item, i;
+
+    favList = document.getElementById('gamefox-favorites-menu');
+    if (!favList)
+      return;
+
+    while (favList.hasChildNodes())
+      favList.removeChild(favList.firstChild);
+
+    favs = eval(GameFOX.prefs.getCharPref('favorites.serialized'));
+
+    for (i = 0; i < favs.length; i++)
+    {
+      item = document.createElement('menuitem');
+      item.setAttribute('label', favs[i].name);
+      item.setAttribute('oncommand', 'GFtags.open("' + favs[i].id + '", 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + favs[i].id + '", 0)');
+      favList.appendChild(item);
+    }
   }
 };
 
