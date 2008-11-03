@@ -153,30 +153,30 @@ var GameFOX =
         // Pagination
         if (GameFOX.prefs.getBoolPref('paging.auto'))
         {
-          var pageHTML = GameFOX.formatPagination(
+          var pageList = GameFOX.formatPagination(
               doc,
               rows[i].cells[1].getElementsByTagName('a')[0].href,
               Math.ceil(rows[i].cells[2].textContent), '');
 
-          if (pageHTML) // multiple pages
+          if (pageList) // multiple pages
           {
-            var pageTR;
+            var pageListParent;
             if (GameFOX.prefs.getIntPref('paging.location') == 0)
             {
-              pageTR = doc.createElement('tr');
-              pageTR.setAttribute('class', 'gamefox-pagelist');
-              pageTR.style.display = 'table-row';
+              pageListParent = doc.createElement('tr');
+              pageListParent.setAttribute('class', 'gamefox-pagelist');
+              pageListParent.style.display = 'table-row';
             }
             else
             {
-              pageTR = rows[i].cells[1];
+              pageListParent = rows[i].cells[1];
             }
 
-            pageTR.appendChild(pageHTML);
+            pageListParent.appendChild(pageList);
 
             if (GameFOX.prefs.getIntPref('paging.location') == 0)
             {
-              rows[i].parentNode.insertBefore(pageTR, rows[i].nextSibling);
+              rows[i].parentNode.insertBefore(pageListParent, rows[i].nextSibling);
               skipNext = true;
             }
           }
@@ -367,31 +367,31 @@ var GameFOX =
         // Pagination
         if (GameFOX.prefs.getBoolPref('paging.auto'))
         {
-          var pageHTML = GameFOX.formatPagination(
+          var pageList = GameFOX.formatPagination(
               doc,
               rows[i].cells[1].getElementsByTagName('a')[0].href,
               Math.ceil(rows[i].cells[3].textContent),
               onTracked ? '' : rows[i].cells[2].textContent);
 
-          if (pageHTML) // multiple pages
+          if (pageList) // multiple pages
           {
-            var pageTR;
+            var pageListParent;
             if (GameFOX.prefs.getIntPref('paging.location') == 0)
             {
-              pageTR = doc.createElement('tr');
-              pageTR.setAttribute('class', 'gamefox-pagelist');
-              pageTR.style.display = 'table-row';
+              pageListParent = doc.createElement('tr');
+              pageListParent.setAttribute('class', 'gamefox-pagelist');
+              pageListParent.style.display = 'table-row';
             }
             else
             {
-              pageTR = rows[i].cells[1];
+              pageListParent = rows[i].cells[1];
             }
 
-            pageTR.appendChild(pageHTML);
+            pageListParent.appendChild(pageList);
 
             if (GameFOX.prefs.getIntPref('paging.location') == 0)
             {
-              rows[i].parentNode.insertBefore(pageTR, rows[i].nextSibling);
+              rows[i].parentNode.insertBefore(pageListParent, rows[i].nextSibling);
               skipNext = true;
             }
           }
@@ -848,9 +848,7 @@ var GameFOX =
     try
     {
       while (node.nodeName.toLowerCase() != 'td')
-      {
         node = node.parentNode;
-      }
       node = node.parentNode; // topic row
 
       var cell = node.cells[GFlib.onPage(doc, 'myposts') ? 2 : 3];
@@ -869,80 +867,79 @@ var GameFOX =
   {
     var node = event.target;
     var doc = node.ownerDocument;
-    var topiclink, posts, tc;
+    var topiclink, posts, tc, pageList;
 
     try
     {
       while (node.nodeName.toLowerCase() != 'td')
         node = node.parentNode;
+      node = node.parentNode; // topic row
 
-      topiclink = node.parentNode.cells[1].getElementsByTagName('a')[0].href;
-      posts = node.parentNode.cells[GFlib.onPage(doc, 'myposts') ? 2 : 3].textContent;
+      topiclink = node.cells[1].getElementsByTagName('a')[0].href;
+      posts = node.cells[GFlib.onPage(doc, 'myposts') ? 2 : 3].textContent;
       tc = GFlib.onPage(doc, 'tracked') || GFlib.onPage(doc, 'myposts') ? '' :
-          node.parentNode.cells[2].firstChild.textContent.trim();
+          node.cells[2].firstChild.textContent.trim();
     }
     catch (e)
     {
       return;
     }
 
-    var boardID = topiclink.match(/\bboard=([0-9-]+)/)[1];
-    var topicID = topiclink.match(/\btopic=([0-9]+)/)[1];
-
     if ('type' in event) // triggered from double-click event
     {
       var loc = GameFOX.prefs.getIntPref('paging.location');
-      node = node.parentNode.cells[1];
+      node = node.cells[1];
 
-      var pagelistElement;
       if (loc == 0)
       {
         if (node.parentNode.nextSibling
             && node.parentNode.nextSibling.className == 'gamefox-pagelist')
-          pagelistElement = node.parentNode.nextSibling;
+          pageList = node.parentNode.nextSibling;
       }
       else
       {
-        pagelistElement = doc.evaluate('span[@class="gamefox-pagelist"]',
+        pageList = doc.evaluate('span[@class="gamefox-pagelist"]',
             node, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       }
 
-      if (pagelistElement)
+      if (pageList)
       {
-        pagelistElement.style.display = pagelistElement.style.display == 'none' ?
-            (pagelistElement.tagName.toLowerCase() == 'span' ? '' : 'table-row') : 'none';
+        pageList.style.display = pageList.style.display == 'none' ?
+            (pageList.tagName.toLowerCase() == 'tr' ? 'table-row' : '') : 'none';
       }
       else
       {
-        var pageHTML = GameFOX.formatPagination(doc, topiclink, posts, tc);
+        pageList = GameFOX.formatPagination(doc, topiclink, posts, tc);
 
-        if (pageHTML) // multiple pages
+        if (pageList) // multiple pages
         {
-          var pageTR;
+          var pageListParent;
           if (loc == 0)
           {
-            pageTR = doc.createElement('tr');
-            pageTR.setAttribute('class', 'gamefox-pagelist');
-            pageTR.style.display = 'table-row';
+            pageListParent = doc.createElement('tr');
+            pageListParent.setAttribute('class', 'gamefox-pagelist');
+            pageListParent.style.display = 'table-row';
           }
           else
           {
-            pageTR = node;
+            pageListParent = node;
           }
 
-          pageTR.appendChild(pageHTML);
+          pageListParent.appendChild(pageList);
 
           if (loc == 0)
-            node.parentNode.parentNode.insertBefore(pageTR, node.parentNode.nextSibling);
+            node.parentNode.parentNode.insertBefore(pageListParent, node.parentNode.nextSibling);
         }
       }
     }
     else // triggered from context menu
     {
-      var pageList = document.getElementById('gamefox-pages-menu');
+      pageList = document.getElementById('gamefox-pages-menu');
       while (pageList.hasChildNodes())
         pageList.removeChild(pageList.firstChild);
 
+      var boardID = topiclink.match(/\bboard=([0-9-]+)/)[1];
+      var topicID = topiclink.match(/\btopic=([0-9]+)/)[1];
       var pages = Math.ceil(posts / GameFOX.prefs.getIntPref('msgsPerPage'));
       var tcParam = GFutils.tcParam(tc);
       var item;
