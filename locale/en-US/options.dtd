@@ -5,64 +5,64 @@
 
 <!ENTITY general.label "General">
 
-<!ENTITY page.label "Main">
-<!ENTITY page.tab.board "Board Settings">
-<!ENTITY page.tab.elements "Page">
-<!ENTITY page.tab.posting "Posting">
-<!ENTITY page.boardsettings.caption "Board Settings">
-<!ENTITY page.boardsettings.tpp "Topics Per Page">
-<!ENTITY page.boardsettings.tsort "Topic Sort">
-<!ENTITY page.boardsettings.tsort.fo "By First Post, Oldest First">
-<!ENTITY page.boardsettings.tsort.fn "By First Post, Newest First">
-<!ENTITY page.boardsettings.tsort.lo "By Last Post, Oldest First">
-<!ENTITY page.boardsettings.tsort.ln "By Last Post, Newest First">
-<!ENTITY page.boardsettings.mpp "Messages Per Page">
-<!ENTITY page.boardsettings.msort "Message Sort">
-<!ENTITY page.boardsettings.msort.of "Oldest First">
-<!ENTITY page.boardsettings.msort.nf "Newest First">
-<!ENTITY page.boardsettings.timezone "Time Zone">
-<!ENTITY page.boardsettings.msgdata "Message Poster Display">
-<!ENTITY page.boardsettings.msgdata.left "Left of Message">
-<!ENTITY page.boardsettings.msgdata.above "Above Message">
-<!ENTITY page.boardsettings.grab "Grab from GameFAQs">
-<!ENTITY page.boardsettings.save "Save to GameFAQs">
-<!ENTITY page.elements.desctitles "Descriptive window titles">
-<!ENTITY page.elements.titleprefix "Window title page prefixes">
-<!ENTITY page.elements.stopads "Block ad servers">
-<!ENTITY page.elements.topics.caption "Topic Lists">
-<!ENTITY page.elements.topics.lastpostlink "Link to last post">
-<!ENTITY page.elements.topics.trackedlink "Link to boards (Tracked Topics)">
-<!ENTITY page.elements.topics.marknewposts "Label new posts (Active Messages)">
-<!ENTITY page.elements.topics.pagejumper "Show page jumper (Active Messages)">
-<!ENTITY page.elements.messages.caption "Message Lists">
-<!ENTITY page.elements.messages.taglink "&quot;Tag Topic&quot; link">
-<!ENTITY page.elements.messages.deletelink "&quot;Delete&quot; and &quot;Close&quot; links">
-<!ENTITY page.elements.messages.filterlink "&quot;Filter&quot; links">
-<!ENTITY page.elements.messages.numbering "Number messages">
-<!ENTITY page.elements.messages.marktc "Label topic creator">
-<!ENTITY page.elements.pages.caption "Topic Pagination">
-<!ENTITY page.elements.pages.auto "Automatically add page numbers on topic list">
-<!ENTITY page.elements.pages.where "Location of page numbers:">
-<!ENTITY page.elements.pages.where.right "Right of topic title">
-<!ENTITY page.elements.pages.where.below "Below topic title">
-<!ENTITY page.elements.pages.where.newrow "New row below topic title">
-<!ENTITY page.elements.pages.format.label "Format:">
-<!ENTITY page.elements.pages.format.prefix "Prefix:">
-<!ENTITY page.elements.pages.format.sep "Delimiter:">
-<!ENTITY page.elements.pages.format.suffix "Suffix:">
-<!ENTITY page.posting.postbutton "&quot;Post Message&quot; (skip preview) button">
-<!ENTITY page.posting.charcounts "Character counters">
-<!ENTITY page.posting.quickpost.caption "QuickPost">
-<!ENTITY page.posting.quickpost.otherbuttons "Show preview buttons">
-<!ENTITY page.posting.quickpost.topics "QuickPost link on topic lists">
-<!ENTITY page.posting.quickpost.messages "QuickPost form on message lists">
-<!ENTITY page.posting.quickpost.aftertopic "After QuickPosting a topic:">
-<!ENTITY page.posting.quickpost.aftermessage "After QuickPosting a message:">
-<!ENTITY page.posting.quickpost.aftertopic.board "Go to board">
-<!ENTITY page.posting.quickpost.aftertopic.topic "Go to topic">
-<!ENTITY page.posting.quickpost.aftermessage.lastpost "Go to last post">
-<!ENTITY page.posting.quickpost.aftermessage.samepage "Go back to same page">
-<!ENTITY page.posting.quickpost.aftermessage.firstpage "Go to first page">
+<!ENTITY main.label "Main">
+<!ENTITY main.tab.page "Page">
+<!ENTITY main.tab.posting "Posting">
+<!ENTITY main.tab.board "Board Settings">
+<!ENTITY main.page.desctitles "Descriptive window titles">
+<!ENTITY main.page.titleprefix "Window title page prefixes">
+<!ENTITY main.page.stopads "Block ad servers">
+<!ENTITY main.page.topics.caption "Topic Lists">
+<!ENTITY main.page.topics.lastpostlink "Link to last post">
+<!ENTITY main.page.topics.trackedlink "Link to boards (Tracked Topics)">
+<!ENTITY main.page.topics.marknewposts "Label new posts (Active Messages)">
+<!ENTITY main.page.topics.pagejumper "Show page jumper (Active Messages)">
+<!ENTITY main.page.messages.caption "Message Lists">
+<!ENTITY main.page.messages.taglink "&quot;Tag Topic&quot; link">
+<!ENTITY main.page.messages.deletelink "&quot;Delete&quot; and &quot;Close&quot; links">
+<!ENTITY main.page.messages.filterlink "&quot;Filter&quot; links">
+<!ENTITY main.page.messages.numbering "Number messages">
+<!ENTITY main.page.messages.marktc "Label topic creator">
+<!ENTITY main.page.pages.caption "Topic Pagination">
+<!ENTITY main.page.pages.auto "Automatically add page numbers on topic list">
+<!ENTITY main.page.pages.where "Location of page numbers:">
+<!ENTITY main.page.pages.where.right "Right of topic title">
+<!ENTITY main.page.pages.where.below "Below topic title">
+<!ENTITY main.page.pages.where.newrow "New row below topic title">
+<!ENTITY main.page.pages.format.label "Format:">
+<!ENTITY main.page.pages.format.prefix "Prefix:">
+<!ENTITY main.page.pages.format.sep "Delimiter:">
+<!ENTITY main.page.pages.format.suffix "Suffix:">
+<!ENTITY main.posting.postbutton "&quot;Post Message&quot; (skip preview) button">
+<!ENTITY main.posting.charcounts "Character counters">
+<!ENTITY main.posting.quickpost.caption "QuickPost">
+<!ENTITY main.posting.quickpost.otherbuttons "Show preview buttons">
+<!ENTITY main.posting.quickpost.topics "QuickPost link on topic lists">
+<!ENTITY main.posting.quickpost.messages "QuickPost form on message lists">
+<!ENTITY main.posting.quickpost.aftertopic "After QuickPosting a topic:">
+<!ENTITY main.posting.quickpost.aftermessage "After QuickPosting a message:">
+<!ENTITY main.posting.quickpost.aftertopic.board "Go to board">
+<!ENTITY main.posting.quickpost.aftertopic.topic "Go to topic">
+<!ENTITY main.posting.quickpost.aftermessage.lastpost "Go to last post">
+<!ENTITY main.posting.quickpost.aftermessage.samepage "Go back to same page">
+<!ENTITY main.posting.quickpost.aftermessage.firstpage "Go to first page">
+<!ENTITY main.board.caption "Board Settings">
+<!ENTITY main.board.tpp "Topics Per Page">
+<!ENTITY main.board.tsort "Topic Sort">
+<!ENTITY main.board.tsort.fo "By First Post, Oldest First">
+<!ENTITY main.board.tsort.fn "By First Post, Newest First">
+<!ENTITY main.board.tsort.lo "By Last Post, Oldest First">
+<!ENTITY main.board.tsort.ln "By Last Post, Newest First">
+<!ENTITY main.board.mpp "Messages Per Page">
+<!ENTITY main.board.msort "Message Sort">
+<!ENTITY main.board.msort.of "Oldest First">
+<!ENTITY main.board.msort.nf "Newest First">
+<!ENTITY main.board.timezone "Time Zone">
+<!ENTITY main.board.msgdata "Message Poster Display">
+<!ENTITY main.board.msgdata.left "Left of Message">
+<!ENTITY main.board.msgdata.above "Above Message">
+<!ENTITY main.board.grab "Grab from GameFAQs">
+<!ENTITY main.board.save "Save to GameFAQs">
 
 <!ENTITY style.label "Style">
 <!ENTITY style.deschelp "Double click or hover over the description (if any) of a stylesheet to read more.">
