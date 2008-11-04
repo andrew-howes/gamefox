@@ -2,7 +2,7 @@
     * version 0.6.8
     * Fix manual topic pagination
     * Show favorite boards in context menu and sidebar
-    * Scroll to clicked message when filtering/unfiltering
+    * Scroll to appropriate location when filtering/unfiltering
 
 2008-11-01:
     * version 0.6.7

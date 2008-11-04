@@ -1044,6 +1044,7 @@ var GameFOX =
     var leftMsgData = GFutils.getMsgDataDisplay(doc);
     var userTagName = GFlib.onPage(doc, 'archive') ? 'b' : 'a';
     var newText;
+    var newFocus;
 
     if (button.textContent == 'filter')
     {
@@ -1053,6 +1054,8 @@ var GameFOX =
       {
         if (td[i].getElementsByTagName(userTagName)[0].textContent == username)
         {
+          if (!newFocus)
+            newFocus = td[i];
           td[i].parentNode.style.removeProperty('display');
           td[i].parentNode.removeAttribute('style');
           if (!leftMsgData)
@@ -1093,7 +1096,7 @@ var GameFOX =
     for (var i = 0; i < filterResult.snapshotLength; i++)
       filterResult.snapshotItem(i).textContent = newText;
 
-    doc.defaultView.scrollTo(0, GFutils.getTopOffset(button.parentNode));
+    doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus ? newFocus : button.parentNode));
   },
 
   toggleSidebar: function()
