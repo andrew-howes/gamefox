@@ -37,6 +37,8 @@ var GFsidebar =
         'click', GFsidebar.promptAccountsLogin, false);
     document.getElementById('accounts-rm-link').addEventListener(
         'click', GFsidebar.promptAccountsRemove, false);
+    document.getElementById('favorites-menu').addEventListener(
+        'mousedown', GFsidebar.selectFavorite, false);
 
     // accounts
     GFsidebar.populateAccounts();
@@ -94,14 +96,15 @@ var GFsidebar =
                .getService(Ci.nsIPrefService).getBranch('gamefox.')
                .getCharPref('favorites.serialized'));
 
+    item = document.createElement('option');
+    item.value = 0;
+    item.appendChild(document.createTextNode('Select board...'));
+    favList.appendChild(item);
     for (i = 0; i < favs.length; i++)
     {
-      item = document.createElement('a');
-      item.style.cursor = 'pointer';
-      item.setAttribute('onmousedown', 'GFlib.open("' + favs[i].id + '", event.button == 1 ? 0 : 2)');
+      item = document.createElement('option');
+      item.value = favs[i].id;
       item.appendChild(document.createTextNode(favs[i].name));
-      favList.appendChild(item);
-      item = document.createElement('br');
       favList.appendChild(item);
     }
   },
@@ -151,6 +154,15 @@ var GFsidebar =
   {
     event.preventDefault();
     GFaccounts.promptRemoveAccount();
+  },
+
+  selectFavorite: function(event)
+  {
+    var node = event.target;
+    if (node.nodeName.toLowerCase() == 'option' && node.value != 0)
+    {
+      GFlib.open(node.value, event.button == 1 ? 0 : 2);
+    }
   }
 };
 

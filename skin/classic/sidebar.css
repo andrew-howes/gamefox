@@ -49,7 +49,7 @@ h1 a
 
 #links
 {
-  max-width: 250px;
+  max-width: 200px;
   margin: auto;
 }
 
@@ -77,10 +77,15 @@ input[name="game"]
   width: 70%;
 }
 
-#accounts-menu, #favorites-menu
+#accounts-menu
 {
   text-align: left;
   margin-left: 5px;
+}
+
+#favorites-menu
+{
+  max-width: 200px;
 }
 
 #accounts-add-link, #accounts-rm-link
