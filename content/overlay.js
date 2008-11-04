@@ -1092,6 +1092,8 @@ var GameFOX =
         XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < filterResult.snapshotLength; i++)
       filterResult.snapshotItem(i).textContent = newText;
+
+    doc.defaultView.scrollTo(0, GFutils.getTopOffset(button.parentNode));
   },
 
   toggleSidebar: function()

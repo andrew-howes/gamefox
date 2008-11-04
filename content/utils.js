@@ -442,6 +442,19 @@ var GFutils =
     }
 
     return obj;
+  },
+
+  getTopOffset: function(node)
+  {
+    var top = 0;
+
+    while (node)
+    {
+      top += node.offsetTop;
+      node = node.offsetParent;
+    }
+
+    return top;
   }
 };
 
