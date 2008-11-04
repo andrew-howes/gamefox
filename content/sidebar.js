@@ -41,6 +41,10 @@ var GFsidebar =
     // accounts
     GFsidebar.populateAccounts();
     GFsidebarAccountsObserver.register();
+
+    // favorites
+    GFsidebar.populateFavorites();
+    GFsidebarFavoritesObserver.register();
   },
 
   populateAccounts: function()
@@ -72,6 +76,33 @@ var GFsidebar =
       accountList.appendChild(item);
       item = document.createElement('br');
       accountList.appendChild(item);
+    }
+  },
+
+  populateFavorites: function()
+  {
+    var favList, favs, item, i;
+
+    favList = document.getElementById('favorites-menu');
+    if (!favList)
+      return;
+
+    while (favList.hasChildNodes())
+      favList.removeChild(favList.firstChild);
+
+    favs = eval(Cc['@mozilla.org/preferences-service;1']
+               .getService(Ci.nsIPrefService).getBranch('gamefox.')
+               .getCharPref('favorites.serialized'));
+
+    for (i = 0; i < favs.length; i++)
+    {
+      item = document.createElement('a');
+      item.style.cursor = 'pointer';
+      item.setAttribute('onmousedown', 'GFlib.open("' + favs[i].id + '", event.button == 1 ? 0 : 2)');
+      item.appendChild(document.createTextNode(favs[i].name));
+      favList.appendChild(item);
+      item = document.createElement('br');
+      favList.appendChild(item);
     }
   },
 

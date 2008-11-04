@@ -971,8 +971,8 @@ var GameFOX =
       {
         item = document.createElement('menuitem');
         item.setAttribute('label', i+1);
-        item.setAttribute('oncommand', 'GFtags.open("' + boardID + ',' + topicID + ',' + i + ',' + tcParam + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + boardID + ',' + topicID + ',' + i + ',' + tcParam + '", 0)');
+        item.setAttribute('oncommand', 'GFlib.open("' + boardID + ',' + topicID + ',' + i + ',' + tcParam + '", 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + boardID + ',' + topicID + ',' + i + ',' + tcParam + '", 0)');
         pageList.appendChild(item);
       }
     }
@@ -1101,7 +1101,7 @@ var GameFOX =
 
   showFavs: function()
   {
-    var favList, item, i;
+    var favList, favs, item, i;
 
     favList = document.getElementById('gamefox-favorites-menu');
     if (!favList)
@@ -1116,8 +1116,8 @@ var GameFOX =
     {
       item = document.createElement('menuitem');
       item.setAttribute('label', favs[i].name);
-      item.setAttribute('oncommand', 'GFtags.open("' + favs[i].id + '", 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + favs[i].id + '", 0)');
+      item.setAttribute('oncommand', 'GFlib.open("' + favs[i].id + '", 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + favs[i].id + '", 0)');
       favList.appendChild(item);
     }
   }

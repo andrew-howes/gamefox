@@ -77,7 +77,7 @@ input[name="game"]
   width: 70%;
 }
 
-#accounts-menu
+#accounts-menu, #favorites-menu
 {
   text-align: left;
   margin-left: 5px;

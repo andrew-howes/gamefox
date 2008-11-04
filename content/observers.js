@@ -63,6 +63,29 @@ var GFsidebarAccountsObserver =
   }
 };
 
+var GFsidebarFavoritesObserver =
+{
+  register: function()
+  {
+    this.prefs = Cc['@mozilla.org/preferences-service;1']
+        .getService(Ci.nsIPrefService)
+        .getBranch('gamefox.');
+    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
+    this.prefs.addObserver('favorites.serialized', this, false);
+    window.addEventListener('unload', this.unregister, false);
+  },
+
+  unregister: function()
+  {
+    GFsidebarFavoritesObserver.prefs.removeObserver('favorites.serialized', GFsidebarFavoritesObserver);
+  },
+
+  observe: function()
+  {
+    GFsidebar.populateFavorites();
+  }
+};
+
 var GFuserlistObserver =
 {
   register: function()

@@ -76,8 +76,8 @@ var GFtags =
         item = document.createElement('menuitem');
         item.setAttribute('label', 'Active Message List');
         item.setAttribute('accesskey', 'A');
-        item.setAttribute('oncommand', 'GFtags.open("' + 0 + ',' + -1 + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + 0 + ',' + -1 + '", 0)');
+        item.setAttribute('oncommand', 'GFlib.open("' + 0 + ',' + -1 + '", 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + 0 + ',' + -1 + '", 0)');
         tagList.appendChild(item);
       }
       if (tagTracked)
@@ -85,8 +85,8 @@ var GFtags =
         item = document.createElement('menuitem');
         item.setAttribute('label', 'Tracked Topics');
         item.setAttribute('accesskey', 'T');
-        item.setAttribute('oncommand', 'GFtags.open("' + 0 + ',' + -2 + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + 0 + ',' + -2 + '", 0)');
+        item.setAttribute('oncommand', 'GFlib.open("' + 0 + ',' + -2 + '", 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + 0 + ',' + -2 + '", 0)');
         tagList.appendChild(item);
       }
       var createSep = tagMyPosts || tagTracked;
@@ -102,8 +102,8 @@ var GFtags =
           }
           item = document.createElement('menuitem');
           item.setAttribute('label', this.tags[board].topics[topic]);
-          item.setAttribute('oncommand', 'GFtags.open("' + board + ',' + topic + '", 2)');
-          item.setAttribute('onclick', 'if (event.button == 1) GFtags.open("' + board + ',' + topic + '", 0)');
+          item.setAttribute('oncommand', 'GFlib.open("' + board + ',' + topic + '", 2)');
+          item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + board + ',' + topic + '", 0)');
           tagList.appendChild(item);
         }
       }
@@ -158,75 +158,19 @@ var GFtags =
     switch (actID)
     {
       case 0:
-        this.open(tagID, 0); // new tab
+        GFlib.open(tagID, 0); // new tab
         break;
       case 1:
-        this.open(tagID, 1); // new focused tab
+        GFlib.open(tagID, 1); // new focused tab
         break;
       case 2:
-        this.open(tagID, 2); // focused tab
+        GFlib.open(tagID, 2); // focused tab
         break;
       case 3:
-        this.open(tagID, 3); // new window
+        GFlib.open(tagID, 3); // new window
         break;
       case 4:
         this.remove(tagID, tree.view.isContainer(index));
-        break;
-    }
-  },
-
-  open: function(tagID, openType)
-  {
-    var IDs = tagID.split(',');
-    var tagURI = GFlib.domain + GFlib.path;
-
-    if (IDs[1] == -1)
-    {
-      tagURI += 'myposts.php';
-    }
-    else if (IDs[1] == -2)
-    {
-      tagURI += 'tracked.php';
-    }
-    else
-    {
-      tagURI += (IDs[1] ? 'genmessage.php' : 'gentopic.php')
-                + '?board=' + IDs[0] + (IDs[1] ? '&topic=' + IDs[1]
-                + (IDs[2] && parseInt(IDs[2]) ? '&page=' + IDs[2]
-                + (IDs[3] ? IDs[3] : '') : '') : '');
-    }
-
-    var win = Cc['@mozilla.org/appshell/window-mediator;1']
-        .getService(Ci.nsIWindowMediator)
-        .getMostRecentWindow('navigator:browser');
-
-    switch (openType)
-    {
-      case 0: // new tab
-        try
-        {
-          win.getBrowser().addTab(tagURI);
-        }
-        catch (e)
-        {
-          win.loadURI(tagURI);
-        }
-        break;
-      case 1: // new focused tab
-        try
-        {
-          win.delayedOpenTab(tagURI);
-        }
-        catch (e)
-        {
-          win.loadURI(tagURI);
-        }
-        break;
-      case 2: // focused tab
-        win.loadURI(tagURI);
-        break;
-      case 3: // new window
-        win.open(tagURI);
         break;
     }
   },
