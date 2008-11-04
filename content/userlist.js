@@ -43,6 +43,7 @@ var GFuserlist =
 
   makeGroupbox: function(id, name, color, users)
   {
+    var strbundle = document.getElementById('userlist-strings');
     var groupbox, caption, hbox, textbox, separator, colorpicker, label, radiogroup, radio, button;
 
     /* groupbox */
@@ -51,7 +52,7 @@ var GFuserlist =
 
     /** caption **/
     caption = document.createElement('caption');
-    caption.setAttribute('label', 'Group #' + (id + 1));
+    caption.setAttribute('label', strbundle.getFormattedString('groupNum', [id + 1]));
     groupbox.appendChild(caption);
 
     /** hbox **/
@@ -60,7 +61,7 @@ var GFuserlist =
 
     /*** textbox ***/
     textbox = document.createElement('textbox');
-    textbox.setAttribute('emptytext', 'Group Name');
+    textbox.setAttribute('emptytext', strbundle.getString('groupNameEmpty'));
     textbox.setAttribute('class', 'ug-name');
     textbox.setAttribute('value', name);
     textbox.addEventListener('input', this.updatePref, false);
@@ -71,7 +72,7 @@ var GFuserlist =
     hbox.appendChild(separator);
     /*** button ***/
     button = document.createElement('button');
-    button.setAttribute('label', 'Delete');
+    button.setAttribute('label', strbundle.getString('delete'));
     button.setAttribute('icon', 'remove');
     button.addEventListener('command', this.removeWithButton, false);
     hbox.appendChild(button);
@@ -102,7 +103,7 @@ var GFuserlist =
 
     /*** label ***/
     label = document.createElement('label');
-    label.setAttribute('value', 'Users:');
+    label.setAttribute('value', strbundle.getString('users'));
     hbox.appendChild(label);
     /*** textbox ***/
     textbox = document.createElement('textbox');
@@ -124,22 +125,22 @@ var GFuserlist =
 
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'Collapse messages');
+    radio.setAttribute('label', strbundle.getString('messagesCollapse'));
     radio.setAttribute('value', 'collapse');
     radiogroup.appendChild(radio);
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'Remove messages');
+    radio.setAttribute('label', strbundle.getString('messagesRemove'));
     radio.setAttribute('value', 'remove');
     radiogroup.appendChild(radio);
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'Highlight messages');
+    radio.setAttribute('label', strbundle.getString('messagesHighlight'));
     radio.setAttribute('value', 'highlight');
     radiogroup.appendChild(radio);
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'None');
+    radio.setAttribute('label', strbundle.getString('none'));
     radio.setAttribute('value', 'nothing');
     radiogroup.appendChild(radio);
 
@@ -155,17 +156,17 @@ var GFuserlist =
 
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'Remove topics');
+    radio.setAttribute('label', strbundle.getString('topicsRemove'));
     radio.setAttribute('value', 'remove');
     radiogroup.appendChild(radio);
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'Highlight topics');
+    radio.setAttribute('label', strbundle.getString('topicsHighlight'));
     radio.setAttribute('value', 'highlight');
     radiogroup.appendChild(radio);
     /*** radio ***/
     radio = document.createElement('radio');
-    radio.setAttribute('label', 'None');
+    radio.setAttribute('label', strbundle.getString('none'));
     radio.setAttribute('value', 'nothing');
     radiogroup.appendChild(radio);
 
