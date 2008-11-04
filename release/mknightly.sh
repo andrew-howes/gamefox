@@ -12,7 +12,7 @@ elif [[ ! -d mccoy ]]; then
     echo "You need the mccoy profile in release/mccoy/" 1>&2
 else
     ./spock/spock ./update.rdf -i urn:mozilla:extension:{6dd0bdba-0a02-429e-b595-87a7dfdca7a1} \
-        -d ./mccoy/ -v $VERSION -u http://beyondboredom.net/gfox/gamefox-$BASEVERSION.xpi \
+        -d ./mccoy/ -v $VERSION -u http://beyondboredom.net/gfox/nightly/gamefox-$BASEVERSION.xpi \
         -f ../$XPI > nightly.rdf || exit 1
 
     ./put.py ../$XPI nightly/gamefox-$BASEVERSION.xpi \
