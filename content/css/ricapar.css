@@ -78,6 +78,10 @@
         padding: 5px 0 !important;
     }
 
+    .pod {
+        clear: both;
+    }
+
     /* Links */
 
     a {
