@@ -88,7 +88,7 @@ input[name="game"]
   max-width: 200px;
 }
 
-#accounts-add-link, #accounts-rm-link
+#accounts-add-link, #accounts-rm-link, #accounts-menu a
 {
   cursor: pointer;
 }
