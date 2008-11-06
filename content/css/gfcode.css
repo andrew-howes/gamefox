@@ -19,6 +19,7 @@
 }
 .message b > p, .message em > p {
     font-family: monospace !important;
+    white-space: -moz-pre-wrap;
     white-space: pre-wrap;
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCA\
     YAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFlzAAALEwA\
