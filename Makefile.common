@@ -16,6 +16,7 @@ JAR_TXT_FILES = $(shell find -L content skin locale     \
                              -o -path '*.xul'           \
                              -o -path '*.*html'         \
                              -o -path '*.dtd'           \
+                             -o -path '*.properties'    \
                              -o -path '*/NEWS'          \
                         \)                              \
                 )
