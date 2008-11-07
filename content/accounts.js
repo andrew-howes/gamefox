@@ -208,8 +208,10 @@ var GFaccounts =
       {
         if (request.readyState == 4)
         {
-          if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1) {
-            GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
+          if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1)
+          {
+            if (MDAAuth)
+              GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
             GFaccounts.promptLogin(username, 'Login error! Maybe your password was incorrect? Try it again.');
             return;
           }
@@ -217,7 +219,8 @@ var GFaccounts =
           var cookie = GFaccounts.getCookie('MDAAuth');
           if (cookie == null)
           {
-            GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
+            if (MDAAuth)
+              GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
             GFaccounts.promptLogin(username, 'Somebody ate the cookie! This means that something unexpected happened. Try it again.');
             return;
           }
