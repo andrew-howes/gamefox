@@ -19,7 +19,7 @@
 
 var GFquote =
 {
-  quote: function(event, context)
+  quote: function(event, context, debug)
   {
     var doc = event.target.ownerDocument;
     if (!doc.getElementById('gamefox-message'))
@@ -83,6 +83,16 @@ var GFquote =
         selection.containsNode(msgNode, true))
     {
       quoteMsg = selection.toString();
+    }
+
+    if (debug)
+    {
+      var debugMsg = '';
+      for (var i = 0; i < quoteMsg.length; i++)
+      {
+        debugMsg += quoteMsg.charCodeAt(i) + ' ';
+      }
+      quoteMsg = debugMsg;
     }
 
     GFquote.format(event, quoteHead, quoteMsg, msgNum);

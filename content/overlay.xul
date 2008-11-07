@@ -68,6 +68,8 @@
     </menu>
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
       accesskey="&menu.quote.accesskey;" oncommand="GFquote.quote(gContextMenu, true);"/>
+    <menuitem id="gamefox-context-debugquote" label="Debug Quote"
+      oncommand="GFquote.quote(gContextMenu, true, true);"/>
     <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
       accesskey="&menu.tagtopic.accesskey;" oncommand="GFtags.add(gContextMenu);"/>
     <menu id="gamefox-context-usergroups" label="&menu.usergroups.label;">
