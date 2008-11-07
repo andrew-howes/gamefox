@@ -172,6 +172,7 @@ var GFquickpost =
 
     var previewRequest = new XMLHttpRequest();
     previewRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
+    GFlib.thirdPartyCookieFix(previewRequest);
     previewRequest.onreadystatechange = function()
     {
       if (previewRequest.readyState == 4)
@@ -260,6 +261,7 @@ var GFquickpost =
 
           var postRequest = new XMLHttpRequest();
           postRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
+          GFlib.thirdPartyCookieFix(postRequest);
           postRequest.onreadystatechange = function()
           {
             if (postRequest.readyState == 4)

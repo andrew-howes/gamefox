@@ -296,7 +296,7 @@ var GFtags =
     /* removePurged: dispatchRequest: open request */
 
       request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
-
+      GFlib.thirdPartyCookieFix(request);
 
     /* removePurged: dispatchRequest: request.onerror */
 

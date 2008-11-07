@@ -95,6 +95,7 @@ var GFmessages =
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
+    GFlib.thirdPartyCookieFix(get);
     get.onreadystatechange = function()
     {
       if (get.readyState == 4)
@@ -107,10 +108,8 @@ var GFmessages =
         }
 
         var post = new XMLHttpRequest();
-        if (closeTopic)
-          post.open('POST', uri + '&action=closetopic');
-        else
-          post.open('POST', uri + '&action=delete');
+        post.open('POST', uri + '&action=' + (closeTopic ? 'closetopic' : 'delete'));
+        GFlib.thirdPartyCookieFix(post);
         post.onreadystatechange = function()
         {
           if (post.readyState == 4)

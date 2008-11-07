@@ -203,6 +203,7 @@ var GFaccounts =
       var request = new XMLHttpRequest();
       // TODO: find a way to make page not redirect
       request.open('POST', 'http://www.gamefaqs.com/user/login.html?r=www.gamefaqs.com/images/default/rec.gif');
+      GFlib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
@@ -246,6 +247,7 @@ var GFaccounts =
     {
       var request = new XMLHttpRequest();
       request.open('HEAD', 'http://www.gamefaqs.com/');
+      GFlib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)

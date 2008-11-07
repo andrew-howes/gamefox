@@ -54,6 +54,7 @@ var GFquickwhois =
 
     var request = new XMLHttpRequest();
     request.open('GET', node.getElementsByTagName('a')[0].href);
+    GFlib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
