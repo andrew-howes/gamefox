@@ -5,6 +5,8 @@ pref("gamefox.elements.quickpost.link", true);
 pref("gamefox.elements.quickpost.link.title", "QuickPost");
 pref("gamefox.elements.quickpost.aftertopic", 0);
 pref("gamefox.elements.quickpost.aftermessage", 0);
+pref("gamefox.elements.quickpost.resetconfirm", true);
+pref("gamefox.elements.quickpost.resetnewsig", false);
 pref("gamefox.elements.tag.link", true);
 pref("gamefox.elements.titlechange", true);
 pref("gamefox.elements.titleprefix", true);

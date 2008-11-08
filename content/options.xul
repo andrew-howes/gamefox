@@ -34,7 +34,7 @@
     onload="GFoptions.restoreLastPane();GFoptions.firstRun();"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-<!-- P A G E -->
+<!-- M A I N -->
 
   <prefpane id="gamefox-page-pane" label="&main.label;" onpaneload="GFuserlist.prepareOptionsPane();">
     <!-- These have to be inside the first prefpane because of BMO bug #296418
@@ -79,6 +79,10 @@
       <preference id="posting-otherbuttons" name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
       <preference id="posting-link" name="gamefox.elements.quickpost.link" type="bool"/>
       <preference id="posting-form" name="gamefox.elements.quickpost.form" type="bool"/>
+      <preference id="posting-resetnewsig"
+        name="gamefox.elements.quickpost.resetnewsig" type="bool"/>
+      <preference id="posting-resetconfirm"
+        name="gamefox.elements.quickpost.resetconfirm" type="bool"/>
       <preference id="posting-aftertopic" name="gamefox.elements.quickpost.aftertopic" type="int"/>
       <preference id="posting-aftermessage" name="gamefox.elements.quickpost.aftermessage" type="int"/>
 
@@ -102,7 +106,7 @@
       <tabpanels flex="1">
 
 
-<!-- ELEMENTS -->
+<!-- PAGE -->
 
         <tabpanel orient="vertical" flex="1">
           <vbox>
@@ -205,6 +209,10 @@
               <checkbox preference="posting-otherbuttons" label="&main.posting.quickpost.otherbuttons;"/>
               <checkbox preference="posting-link" label="&main.posting.quickpost.topics;"/>
               <checkbox preference="posting-form" label="&main.posting.quickpost.messages;"/>
+              <checkbox preference="posting-resetconfirm"
+                label="&main.posting.quickpost.resetconfirm;"/>
+              <checkbox preference="posting-resetnewsig"
+                label="&main.posting.quickpost.resetnewsig;"/>
 
               <label value="&main.posting.quickpost.aftertopic;"/>
               <radiogroup class="indent" orient="horizontal" preference="posting-aftertopic">

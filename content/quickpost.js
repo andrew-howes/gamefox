@@ -421,13 +421,23 @@ var GFquickpost =
   {
     event.preventDefault();
 
-    if (!GFlib.confirm('Are you sure? This will clear your entire post so far.'))
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.resetconfirm') &&
+        !GFlib.confirm('Are you sure? This will clear your entire post so far.'))
       return;
 
     var doc = GFlib.getDocument(event);
     var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
 
-    doc.getElementById('gamefox-message').value = doc.gamefox.sig;
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.resetnewsig'))
+    {
+      if (GameFOX.prefs.getIntPref('signature.addition') == 1)
+        doc.getElementById('gamefox-message').value = '';
+      else
+        doc.getElementById('gamefox-message').value = GFutils.formatSig(null, null, doc);
+    }
+    else
+      doc.getElementById('gamefox-message').value = doc.gamefox.sig;
+
     if (charCounts)
       GFmessages.updateMessageCount(doc);
     if (doc.getElementById('gamefox-topic'))
