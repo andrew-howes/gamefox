@@ -64,6 +64,8 @@ var GFquickpost =
       message.value = GFutils.formatSig(null, null, doc);
     message.setSelectionRange(0, 0);
 
+    doc.gamefox.sig = message.value;
+
     var linebreak = doc.createElement('br');
     form.appendChild(linebreak);
 
@@ -99,6 +101,15 @@ var GFquickpost =
       spellchkbutton.value = 'Preview and Spellcheck Message';
       spellchkbutton.title = 'Preview and Spellcheck Message [c]';
       spellchkbutton.accessKey = 'c';
+
+      var resetbutton = doc.createElement('input');
+      form.appendChild(doc.createTextNode(' '));
+      form.appendChild(resetbutton);
+      resetbutton.type = 'reset';
+      resetbutton.value = 'Reset';
+      resetbutton.title = 'Reset [v]';
+      resetbutton.accessKey = 'v';
+      resetbutton.addEventListener('click', GFquickpost.resetPost, false);
     }
 
     if (newTopic)
@@ -404,5 +415,17 @@ var GFquickpost =
         'message=' + GFutils.URLEncode(message) +
         '&post=Preview+Message'
         );
+  },
+
+  resetPost: function(event)
+  {
+    event.preventDefault();
+
+    if (!GFlib.confirm('Are you sure? This will clear your entire post so far.'))
+      return;
+    
+    var doc = GFlib.getDocument(event);
+
+    doc.getElementById('gamefox-message').value = doc.gamefox.sig;
   }
 };
