@@ -423,9 +423,18 @@ var GFquickpost =
 
     if (!GFlib.confirm('Are you sure? This will clear your entire post so far.'))
       return;
-    
+
     var doc = GFlib.getDocument(event);
+    var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
 
     doc.getElementById('gamefox-message').value = doc.gamefox.sig;
+    if (charCounts)
+      GFmessages.updateMessageCount(doc);
+    if (doc.getElementById('gamefox-topic'))
+    {
+      doc.getElementById('gamefox-topic').value = '';
+      if (charCounts)
+        GFmessages.updateTitleCount(doc);
+    }
   }
 };
