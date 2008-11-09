@@ -58,13 +58,12 @@ var GFquickpost =
     message.wrap = 'virtual';
     message.rows = 16;
     message.cols = 60;
+    doc.gamefox.sig = GFutils.formatSig(null, null, doc);
     if (GameFOX.prefs.getIntPref('signature.addition') == 1)
       form.addEventListener('submit', GFquickpost.appendSig, false);
     else
-      message.value = GFutils.formatSig(null, null, doc);
+      message.value = doc.gamefox.sig;
     message.setSelectionRange(0, 0);
-
-    doc.gamefox.sig = message.value;
 
     var linebreak = doc.createElement('br');
     form.appendChild(linebreak);
@@ -140,8 +139,7 @@ var GFquickpost =
     var doc = GFlib.getDocument(event);
     if (!doc.gamefox.sigAdded)
     {
-      doc.getElementById('gamefox-message').value +=
-          GFutils.formatSig(null, null, doc);
+      doc.getElementById('gamefox-message').value += doc.gamefox.sig;
       doc.gamefox.sigAdded = true;
     }
   },
@@ -429,11 +427,11 @@ var GFquickpost =
     var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
 
     if (GameFOX.prefs.getBoolPref('elements.quickpost.resetnewsig'))
+      doc.gamefox.sig = GFutils.formatSig(null, null, doc);
+    if (GameFOX.prefs.getIntPref('signature.addition') == 1)
     {
-      if (GameFOX.prefs.getIntPref('signature.addition') == 1)
-        doc.getElementById('gamefox-message').value = '';
-      else
-        doc.getElementById('gamefox-message').value = GFutils.formatSig(null, null, doc);
+      doc.getElementById('gamefox-message').value = '';
+      doc.gamefox.sigAdded = false;
     }
     else
       doc.getElementById('gamefox-message').value = doc.gamefox.sig;
