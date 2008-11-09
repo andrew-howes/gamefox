@@ -5,7 +5,7 @@
     * Scroll to appropriate location when filtering/unfiltering
     * Workaround Firefox 3 bug that breaks QuickPost and other features when
       third-party cookies are blocked
-    * Restore QuickPost reset button
+    * Restore QuickPost reset button with additional functionality
 
 2008-11-01:
     * version 0.6.7
