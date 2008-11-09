@@ -85,20 +85,10 @@ var GFquote =
       quoteMsg = selection.toString();
     }
 
-    if (debug)
-    {
-      var debugMsg = '';
-      for (var i = 0; i < quoteMsg.length; i++)
-      {
-        debugMsg += quoteMsg.charCodeAt(i) + ' ';
-      }
-      quoteMsg = debugMsg;
-    }
-
-    GFquote.format(event, quoteHead, quoteMsg, msgNum);
+    GFquote.format(event, quoteHead, quoteMsg, msgNum, debug);
   },
 
-  format: function(event, quoteHead, quoteMsg, msgNum)
+  format: function(event, quoteHead, quoteMsg, msgNum, debug)
   {
     var doc = event.target.ownerDocument;
 
@@ -110,12 +100,31 @@ var GFquote =
     var postdate = head[head.length - 3].replace('Posted ', '');
     var postnum = msgNum;
 
+    if (debug)
+    {
+      var debugMsg1 = 'pre-parse: ';
+      for (i = 0; i < quoteMsg.length; i++)
+      {
+        debugMsg1 += quoteMsg.charCodeAt(i) + ' ';
+      }
+    }
+
     /* Parse message body */
     var body = quoteMsg.
       replace(/<br\s*\/?>/gi, '\n').
       replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1').
       replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u)\b[^<>]*\/?>/gi, '').
       trim();
+
+    if (debug)
+    {
+      var debugMsg2 = '\nindex of br: ' + body.indexOf('<br') + '\nindex of \\n: ' + body.indexOf('\n') + '\nindex of \\r: ' + body.indexOf('\r') + '\nindex of sp: ' + body.indexOf(' ') +'\npost-parse: ';
+      for (i = 0; i < body.length; i++)
+      {
+        debugMsg2 += body.charCodeAt(i) + ' ';
+      }
+      body = debugMsg1 + debugMsg2;
+    }
 
     // Get rid of signature
     if (GameFOX.prefs.getBoolPref('quote.removesignature'))
