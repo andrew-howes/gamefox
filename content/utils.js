@@ -287,30 +287,22 @@ var GFutils =
     if (!sig.length)
       return '';
 
-    // Restrict signature to 2 lines, 160 characters
+    // truncate at 2 lines
     sig = sig.split('\n');
     if (sig.length >= 2)
       sig = sig[0] + '\n' + sig[1];
     else
       sig = sig[0];
 
-    var disableCharLimit;
-    try
-    {
-      disableCharLimit = GameFOX.prefs.getBoolPref('signature.disablecharlimit');
-    }
-    catch (e) { disableCharLimit = false; }
-    if (!disableCharLimit)
-    {
-      sig = GFutils.specialCharsEncode(sig).substr(0, 160);
+    // truncate at 160 characters
+    sig = GFutils.specialCharsEncode(sig).substr(0, 160);
 
-      // remove truncated entities
-      var amp = sig.lastIndexOf('&');
-      if (sig.lastIndexOf(';') < amp)
-        sig = sig.substr(0, amp);
+    // remove truncated entities
+    var amp = sig.lastIndexOf('&');
+    if (sig.lastIndexOf(';') < amp)
+      sig = sig.substr(0, amp);
 
-      sig = GFutils.specialCharsDecode(sig);
-    }
+    sig = GFutils.specialCharsDecode(sig);
 
     return '\n' + (newline ? '\n' : '') + (sig != '' ? '---\n' + sig : '');
   },
