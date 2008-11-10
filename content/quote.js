@@ -100,15 +100,6 @@ var GFquote =
     var postdate = head[head.length - 3].replace('Posted ', '');
     var postnum = msgNum;
 
-    if (debug)
-    {
-      var debugMsg1 = 'pre-parse: ';
-      for (i = 0; i < quoteMsg.length; i++)
-      {
-        debugMsg1 += quoteMsg.charCodeAt(i) + ' ';
-      }
-    }
-
     /* Parse message body */
     var body = quoteMsg.
       replace(/<br\s*\/?>/gi, '\n').
@@ -118,12 +109,49 @@ var GFquote =
 
     if (debug)
     {
-      var debugMsg2 = '\nindex of br: ' + body.indexOf('<br') + '\nindex of \\n: ' + body.indexOf('\n') + '\nindex of \\r: ' + body.indexOf('\r') + '\nindex of sp: ' + body.indexOf(' ') +'\npost-parse: ';
+      var debugMsg1 = '';
+      var debugMsg2 = '';
+      var debugMsg3 = '';
+      var debugMsg4 = '';
+      var debugMsg5 = '';
+      var debugMsg6 = '';
+      var debugMsg7 = '';
+      body = quoteMsg;
+      for (i = 0; i < body.length; i++)
+      {
+        debugMsg1 += body.charCodeAt(i) + ' ';
+      }
+      body = body.replace(/<br\s*\/?>/gi, '\n');
       for (i = 0; i < body.length; i++)
       {
         debugMsg2 += body.charCodeAt(i) + ' ';
       }
-      body = debugMsg1 + debugMsg2;
+      body = body.replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1');
+      for (i = 0; i < body.length; i++)
+      {
+        debugMsg3 += body.charCodeAt(i) + ' ';
+      }
+      body = body.replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u)\b[^<>]*\/?>/gi, '');
+      for (i = 0; i < body.length; i++)
+      {
+        debugMsg4 += body.charCodeAt(i) + ' ';
+      }
+      body = body.trim();
+      for (i = 0; i < body.length; i++)
+      {
+        debugMsg5 += body.charCodeAt(i) + ' ';
+      }
+      body = '\n';
+      for (i = 0; i < body.length; i++)
+      {
+        debugMsg6 += body.charCodeAt(i) + ' ';
+      }
+      var body2 = '\n';
+      for (i = 0; i < body2.length; i++)
+      {
+        debugMsg7 += body2.charCodeAt(i) + ' ';
+      }
+      body = '1: ' + debugMsg1 + '2: ' + debugMsg2 + '3: ' + debugMsg3 + '4: ' + debugMsg4 + '5: ' + debugMsg5 + '6: ' + debugMsg6 + '7: ' + debugMsg7;
     }
 
     // Get rid of signature
