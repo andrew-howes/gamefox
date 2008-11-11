@@ -35,6 +35,19 @@ var GameFOX =
         styles[i].disabled = true;
     }
 
+    // favorites
+    if (1) // pref
+    {
+      var favorites = doc.createElement('select');
+      favorites.id = 'gamefox-favorites-menu';
+      favorites.addEventListener('mousedown', GFfavorites.selectFavorite, false);
+
+      GFfavorites.populateFavorites(doc, favorites);
+
+      doc.getElementById('search').parentNode.insertBefore(favorites,
+          doc.getElementById('search').nextSibling);
+    }
+
     if (!GFlib.onBoards(doc)) return false;
 
     doc.gamefox = {};

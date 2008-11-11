@@ -38,14 +38,15 @@ var GFsidebar =
     document.getElementById('accounts-rm-link').addEventListener(
         'click', GFsidebar.promptAccountsRemove, false);
     document.getElementById('favorites-menu').addEventListener(
-        'mousedown', GFsidebar.selectFavorite, false);
+        'mousedown', GFfavorites.selectFavorite, false);
 
     // accounts
     GFsidebar.populateAccounts();
     GFsidebarAccountsObserver.register();
 
     // favorites
-    GFsidebar.populateFavorites();
+    GFfavorites.populateFavorites(document,
+        document.getElementById('favorites-menu'));
     GFsidebarFavoritesObserver.register();
   },
 
@@ -77,34 +78,6 @@ var GFsidebar =
       accountList.appendChild(item);
       item = document.createElement('br');
       accountList.appendChild(item);
-    }
-  },
-
-  populateFavorites: function()
-  {
-    var favList, favs, item, i;
-
-    favList = document.getElementById('favorites-menu');
-    if (!favList)
-      return;
-
-    while (favList.hasChildNodes())
-      favList.removeChild(favList.firstChild);
-
-    favs = eval(Cc['@mozilla.org/preferences-service;1']
-               .getService(Ci.nsIPrefService).getBranch('gamefox.')
-               .getCharPref('favorites.serialized'));
-
-    item = document.createElement('option');
-    item.value = 0;
-    item.appendChild(document.createTextNode('Select board...'));
-    favList.appendChild(item);
-    for (i = 0; i < favs.length; i++)
-    {
-      item = document.createElement('option');
-      item.value = favs[i].id;
-      item.appendChild(document.createTextNode(favs[i].name));
-      favList.appendChild(item);
     }
   },
 
@@ -153,15 +126,6 @@ var GFsidebar =
   {
     event.preventDefault();
     GFaccounts.promptRemoveAccount();
-  },
-
-  selectFavorite: function(event)
-  {
-    var node = event.target;
-    if (node.nodeName.toLowerCase() == 'option' && node.value != 0)
-    {
-      GFlib.open(node.value, event.button == 1 ? 0 : 2);
-    }
   }
 };
 
