@@ -28,6 +28,7 @@ var GameFOX =
     var doc = GFlib.getDocument(event);
     if (!GFlib.onGF(doc)) return false;
 
+    // Disable style elements
     if (GameFOX.prefs.getBoolPref('elements.stopads'))
     {
       var styles = doc.getElementsByTagName('style');
@@ -35,8 +36,8 @@ var GameFOX =
         styles[i].disabled = true;
     }
 
-    // favorites
-    if (1) // pref
+    // Add favorites
+    if (GameFOX.prefs.getBoolPref('elements.favorites'))
     {
       var favorites = doc.createElement('select');
       favorites.id = 'gamefox-favorites-menu';
@@ -52,7 +53,7 @@ var GameFOX =
 
     doc.gamefox = {};
 
-    /* user notification */
+    // User notification
     var usernote = doc.evaluate('//div[@id="board_wrap"]/p/a[contains(@href, "usernote.php")]',
         doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     if (usernote)

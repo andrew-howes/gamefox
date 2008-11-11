@@ -18,6 +18,7 @@ pref("gamefox.elements.topics.lastpostlink", true);
 pref("gamefox.elements.marktc", true);
 pref("gamefox.elements.marktc.marker", "(tc)");
 pref("gamefox.elements.stopads", true);
+pref("gamefox.elements.favorites", true);
 pref("gamefox.elements.aml.marknewposts", true);
 pref("gamefox.elements.aml.pagejumper", true);
 pref("gamefox.elements.deletelink", true);

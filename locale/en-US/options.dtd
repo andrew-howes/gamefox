@@ -12,6 +12,7 @@
 <!ENTITY main.page.desctitles "Descriptive window titles">
 <!ENTITY main.page.titleprefix "Window title page prefixes">
 <!ENTITY main.page.stopads "Block ad servers">
+<!ENTITY main.page.favorites "Add favorites menu">
 <!ENTITY main.page.topics.caption "Topic Lists">
 <!ENTITY main.page.topics.lastpostlink "Link to last post">
 <!ENTITY main.page.topics.trackedlink "Link to boards (Tracked Topics)">
@@ -36,7 +37,7 @@
 <!ENTITY main.posting.postbutton "&quot;Post Message&quot; (skip preview) button">
 <!ENTITY main.posting.charcounts "Character counters">
 <!ENTITY main.posting.quickpost.caption "QuickPost">
-<!ENTITY main.posting.quickpost.otherbuttons "Show preview buttons">
+<!ENTITY main.posting.quickpost.otherbuttons "Show preview/reset buttons">
 <!ENTITY main.posting.quickpost.topics "QuickPost link on topic lists">
 <!ENTITY main.posting.quickpost.messages "QuickPost form on message lists">
 <!ENTITY main.posting.quickpost.resetconfirm "Confirm resetting post">
