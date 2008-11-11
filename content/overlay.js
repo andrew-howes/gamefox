@@ -26,6 +26,15 @@ var GameFOX =
   processPage: function(event)
   {
     var doc = GFlib.getDocument(event);
+    if (!GFlib.onGF(doc)) return false;
+
+    if (GameFOX.prefs.getBoolPref('elements.stopads'))
+    {
+      var styles = doc.getElementsByTagName('style');
+      for (var i = 0; i < styles.length; i++)
+        styles[i].disabled = true;
+    }
+
     if (!GFlib.onBoards(doc)) return false;
 
     doc.gamefox = {};
