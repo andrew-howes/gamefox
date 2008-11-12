@@ -19,7 +19,7 @@
 
 var GFquote =
 {
-  quote: function(event, context, debug)
+  quote: function(event, context)
   {
     var doc = event.target.ownerDocument;
     if (!doc.getElementById('gamefox-message'))
@@ -85,10 +85,10 @@ var GFquote =
       quoteMsg = selection.toString();
     }
 
-    GFquote.format(event, quoteHead, quoteMsg, msgNum, debug);
+    GFquote.format(event, quoteHead, quoteMsg, msgNum);
   },
 
-  format: function(event, quoteHead, quoteMsg, msgNum, debug)
+  format: function(event, quoteHead, quoteMsg, msgNum)
   {
     var doc = event.target.ownerDocument;
 
@@ -106,53 +106,6 @@ var GFquote =
       replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1').
       replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u)\b[^<>]*\/?>/gi, '').
       trim();
-
-    if (debug)
-    {
-      var debugMsg1 = '';
-      var debugMsg2 = '';
-      var debugMsg3 = '';
-      var debugMsg4 = '';
-      var debugMsg5 = '';
-      var debugMsg6 = '';
-      var debugMsg7 = '';
-      body = quoteMsg;
-      for (i = 0; i < body.length; i++)
-      {
-        debugMsg1 += body.charCodeAt(i) + ' ';
-      }
-      body = body.replace(/<br\s*\/?>/gi, '\n');
-      for (i = 0; i < body.length; i++)
-      {
-        debugMsg2 += body.charCodeAt(i) + ' ';
-      }
-      body = body.replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1');
-      for (i = 0; i < body.length; i++)
-      {
-        debugMsg3 += body.charCodeAt(i) + ' ';
-      }
-      body = body.replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u)\b[^<>]*\/?>/gi, '');
-      for (i = 0; i < body.length; i++)
-      {
-        debugMsg4 += body.charCodeAt(i) + ' ';
-      }
-      body = body.trim();
-      for (i = 0; i < body.length; i++)
-      {
-        debugMsg5 += body.charCodeAt(i) + ' ';
-      }
-      body = '\n';
-      for (i = 0; i < body.length; i++)
-      {
-        debugMsg6 += body.charCodeAt(i) + ' ';
-      }
-      var body2 = '\n';
-      for (i = 0; i < body2.length; i++)
-      {
-        debugMsg7 += body2.charCodeAt(i) + ' ';
-      }
-      body = '1: ' + debugMsg1 + '2: ' + debugMsg2 + '3: ' + debugMsg3 + '4: ' + debugMsg4 + '5: ' + debugMsg5 + '6: ' + debugMsg6 + '7: ' + debugMsg7;
-    }
 
     // Get rid of signature
     if (GameFOX.prefs.getBoolPref('quote.removesignature'))
