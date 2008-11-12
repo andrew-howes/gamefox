@@ -82,7 +82,8 @@ var GFsidebarFavoritesObserver =
 
   observe: function()
   {
-    GFsidebar.populateFavorites();
+    GFfavorites.populateFavorites(document,
+        document.getElementById('favorites-menu'));
   }
 };
 
