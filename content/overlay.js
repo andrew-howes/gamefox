@@ -246,14 +246,14 @@ var GameFOX =
       {
         GFlib.setTitle(doc,
             doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).
-            singleNodeValue.textContent.trim(),
+            singleNodeValue.textContent.GFtrim(),
             'CT');
       }
       else if (doc.getElementsByName('message')[0]) // new post
       {
         GFlib.setTitle(doc,
             doc.getElementsByName('message')[0].
-            parentNode.parentNode.getElementsByTagName('a')[0].textContent.trim(),
+            parentNode.parentNode.getElementsByTagName('a')[0].textContent.GFtrim(),
             'PM');
       }
 
@@ -323,7 +323,7 @@ var GameFOX =
     else if (GFlib.onPage(doc, 'user'))
     {
       GFlib.setTitle(doc, doc.getElementsByTagName('td')[1].
-            textContent.trim(), 'U');
+            textContent.GFtrim(), 'U');
     }
 
     /* Topic Lists */
@@ -338,7 +338,7 @@ var GameFOX =
       // Title
       GFlib.setTitle(doc, doc.evaluate('//h1', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent.trim(), 'T');
+          textContent.GFtrim(), 'T');
 
       // Topic "QuickPost" link
       if (GameFOX.prefs.getBoolPref('elements.quickpost.link')
@@ -453,7 +453,7 @@ var GameFOX =
             rows[i].cells[2].innerHTML = '<a href="' + rows[i].cells[1].
               getElementsByTagName('a')[0].getAttribute('href').replace(
                   /message(?=\.)/, 'topic').replace(/(&topic=[0-9]+|\btopic=[0-9]+&)/, '') + '">' +
-              rows[i].cells[2].textContent.trim() + '</a>';
+              rows[i].cells[2].textContent.GFtrim() + '</a>';
           }
         }
 
@@ -461,7 +461,7 @@ var GameFOX =
         else
         {
           // User highlighting
-          var username = rows[i].getElementsByTagName('td')[2].textContent.trim();
+          var username = rows[i].getElementsByTagName('td')[2].textContent.GFtrim();
           var hlinfo;
 
           if ((hlinfo = GFuserlist.searchUsername(username)) != false)
@@ -536,7 +536,7 @@ var GameFOX =
       GFlib.setTitle(doc,
           doc.evaluate(
               '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-              null).singleNodeValue.textContent.trim(),
+              null).singleNodeValue.textContent.GFtrim(),
                 'M' + (onDetail ? 'D' : ''),
                 (pagenum ? (pagenum + 1) : null));
 
@@ -723,9 +723,9 @@ var GameFOX =
         // Add "delete" link
         if (deletelinkCond && loggedInUser == username &&
             ((msgnum == firstPostNum && topicOpen) || msgnum != firstPostNum) &&
-            td[i + 1].textContent.trim() != '[This message was deleted at ' +
+            td[i + 1].textContent.GFtrim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
-            td[i + 1].textContent.trim() != '[This message was deleted at ' +
+            td[i + 1].textContent.GFtrim() != '[This message was deleted at ' +
             'the request of a moderator or administrator]')
         {
           var msgDetailLink = td[i].getElementsByTagName('a')[1];
@@ -925,7 +925,7 @@ var GameFOX =
       topiclink = node.cells[1].getElementsByTagName('a')[0].href;
       posts = node.cells[GFlib.onPage(doc, 'myposts') ? 2 : 3].textContent;
       tc = GFlib.onPage(doc, 'tracked') || GFlib.onPage(doc, 'myposts') ? '' :
-          node.cells[2].firstChild.textContent.trim();
+          node.cells[2].firstChild.textContent.GFtrim();
     }
     catch (e)
     {

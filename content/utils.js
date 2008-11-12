@@ -273,11 +273,11 @@ var GFutils =
       if (!doc) return false;
       var boardname = doc.evaluate('//h1', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-        textContent.trim();
+        textContent.GFtrim();
       var boardid = doc.location.search.match(/board=([0-9-]+)/)[1];
       var account = doc.evaluate('//div[@class="msg"]', doc, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent.trim().replace('Welcome, ', '');
+          textContent.GFtrim().replace('Welcome, ', '');
       var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
     }
@@ -370,7 +370,7 @@ var GFutils =
         '<p>', -6, '</p>', -6, '<p />', -6,
         '\n', 4
         ];
-    str = str.trim().toLowerCase();
+    str = str.GFtrim().toLowerCase();
     var len = str.length;
     var pos;
     var count;
@@ -388,7 +388,7 @@ var GFutils =
   // encode topic title like GameFAQs does
   encodedTitleLength: function(str)
   {
-    return str.trim().
+    return str.GFtrim().
       replace(/&/g, '&amp;').
       replace(/</g, '&lt;').
       replace(/>/g, '&gt;').length;
@@ -454,7 +454,7 @@ var GFutils =
   }
 };
 
-String.prototype.trim = function()
+String.prototype.GFtrim = function()
 {
   var str = this.replace(/^\s\s*/, ''),
       ws = /\s/,

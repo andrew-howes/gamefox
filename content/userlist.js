@@ -280,7 +280,7 @@ var GFuserlist =
     // build the index
     for (var i = 0; i < userlist.length; i++)
     {
-      usernames = userlist[i]['users'].trim().toLowerCase().split(/\s*,\s*/);
+      usernames = userlist[i]['users'].GFtrim().toLowerCase().split(/\s*,\s*/);
       for (var j = 0; j < usernames.length; j++)
       {
         username = usernames[j];
@@ -302,7 +302,7 @@ var GFuserlist =
   {
     if (!this.usernameIndex) return false; // no index
 
-    username = username.trim().toLowerCase();
+    username = username.GFtrim().toLowerCase();
     if (!username.length) return false;
 
     if (!this.usernameIndex[username]) return false; // username isn't in any groups

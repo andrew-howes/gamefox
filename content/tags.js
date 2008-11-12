@@ -488,17 +488,17 @@ var GFtags =
 
         var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
         queryStr = topicLink.href;
-        topicTitle = topicLink.textContent.trim();
+        topicTitle = topicLink.textContent.GFtrim();
 
         if (onMyPosts)
         {
           boardTitle = node.parentNode.cells[0].innerHTML.
-            replace(/<\/?a\b[^>]*>/ig, '').trim();
+            replace(/<\/?a\b[^>]*>/ig, '').GFtrim();
         }
         else if (onTracked)
         {
           boardTitle = node.parentNode.cells[2].innerHTML.
-            replace(/<\/?a\b[^>]*>/ig, '').trim();
+            replace(/<\/?a\b[^>]*>/ig, '').GFtrim();
         }
       }
       catch (e) { return false; }
@@ -511,11 +511,11 @@ var GFtags =
     var h1s         = doc.getElementsByTagName('h1');
     if (!boardTitle)
     {
-      boardTitle = h1s[0].textContent.trim();
+      boardTitle = h1s[0].textContent.GFtrim();
     }
     if (!topicTitle)
     {
-      topicTitle = h1s[1].textContent.trim();
+      topicTitle = h1s[1].textContent.GFtrim();
     }
 
     GFtags.read();
