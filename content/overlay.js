@@ -76,7 +76,7 @@ var GameFOX =
         for (i = 0; i < favResult.snapshotLength; i++)
           favLinks[i] = favResult.snapshotItem(i);
 
-        for (i = 0; i < favLinks.length; i++)
+        for (i = 1; i < favLinks.length; i++)
         {
           query = GFutils.parseQueryString(favLinks[i].search);
           if (query['board'])
