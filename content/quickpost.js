@@ -51,6 +51,38 @@ var GFquickpost =
       }
     }
 
+    // HTML buttons
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
+    {
+      if (newTopic)
+        form.appendChild(doc.createElement('br'));
+
+      var tags = new Array(
+          'b', 'Bold',
+          'i', 'Italics',
+          'em', 'Emphasis',
+          'strong', 'Strong Emphasis',
+          'p', 'Paragraph',
+          'br', 'Break',
+          // GameFOX
+          'i,p', 'Quote',
+          'em,p', 'Code'
+          );
+      for (var i = 0; i < tags.length; i += 2)
+      {
+        var tagbutton = doc.createElement('input');
+        form.appendChild(tagbutton);
+        tagbutton.type = 'submit';
+        tagbutton.value = tags[i + 1];
+        tagbutton.name = tags[i];
+        tagbutton.tagOpen = false;
+
+        tagbutton.addEventListener('click', GFquickpost.insertTag, false);
+
+        form.appendChild(doc.createTextNode(' '));
+      }
+    }
+
     var message = doc.createElement('textarea');
     form.appendChild(message);
     message.id = 'gamefox-message';
@@ -444,5 +476,71 @@ var GFquickpost =
       if (charCounts)
         GFmessages.updateTitleCount(doc);
     }
+  },
+
+  formatTag: function(tag, end)
+  {
+    tag = tag.split(',');
+    var str = '';
+
+    if (!end)
+    {
+      for (var i = 0; i < tag.length; i++)
+      {
+        if (tag[i] == 'br')
+          str += '<br />';
+        else
+          str += '<' + tag[i] + '>';
+      }
+    }
+    else
+    {
+      for (var i = (tag.length - 1); i >= 0; i--)
+      {
+        if (tag[i] == 'br')
+          str += '<br />'
+        else
+          str += '</' + tag[i] + '>';
+      }
+    }
+
+    return str;
+  },
+
+  insertTag: function(event)
+  {
+    event.preventDefault();
+    var doc = GFlib.getDocument(event);
+    
+    var quickpost = doc.getElementById('gamefox-message');
+
+    if (quickpost.selectionStart == quickpost.selectionEnd)
+    {
+      var tagStr = GFquickpost.formatTag(this.name, this.tagOpen);
+      var endPosition = quickpost.selectionEnd + tagStr.length;
+
+      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
+        + tagStr
+        + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
+
+      this.tagOpen = !this.tagOpen;
+    }
+    else
+    {
+      // encapsulate selected text
+      var tagStrStart = GFquickpost.formatTag(this.name, false);
+      var tagStrEnd = GFquickpost.formatTag(this.name, true);
+      var endPosition = quickpost.selectionEnd + tagStrStart.length +
+        tagStrEnd.length;
+
+      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
+        + tagStrStart + quickpost.value.substring(quickpost.selectionStart,
+            quickpost.selectionEnd) + tagStrEnd +
+        quickpost.value.substring(quickpost.selectionEnd,
+            quickpost.value.length);
+    }
+
+    quickpost.setSelectionRange(endPosition, endPosition);
+    quickpost.focus();
   }
 };

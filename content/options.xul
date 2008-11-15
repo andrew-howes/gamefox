@@ -77,6 +77,8 @@
 
       <preference id="posting-postbutton" name="gamefox.elements.quickpost.button" type="bool"/>
       <preference id="posting-charcounts" name="gamefox.elements.charcounts" type="bool"/>
+      <preference id="posting-htmlbuttons"
+        name="gamefox.elements.quickpost.htmlbuttons" type="bool"/>
       <preference id="posting-otherbuttons" name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
       <preference id="posting-link" name="gamefox.elements.quickpost.link" type="bool"/>
       <preference id="posting-form" name="gamefox.elements.quickpost.form" type="bool"/>
@@ -211,10 +213,12 @@
 
             <groupbox>
               <caption label="&main.posting.quickpost.caption;"/>
-
-              <checkbox preference="posting-otherbuttons" label="&main.posting.quickpost.otherbuttons;"/>
+              
               <checkbox preference="posting-link" label="&main.posting.quickpost.topics;"/>
               <checkbox preference="posting-form" label="&main.posting.quickpost.messages;"/>
+              <checkbox preference="posting-htmlbuttons"
+                label="&main.posting.quickpost.htmlbuttons;"/>
+              <checkbox preference="posting-otherbuttons" label="&main.posting.quickpost.otherbuttons;"/>
               <checkbox preference="posting-resetconfirm"
                 label="&main.posting.quickpost.resetconfirm;"/>
               <checkbox preference="posting-resetnewsig"
