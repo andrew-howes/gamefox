@@ -81,6 +81,8 @@ var GFquickpost =
 
         form.appendChild(doc.createTextNode(' '));
       }
+
+      form.appendChild(doc.createElement('br'));
     }
 
     var message = doc.createElement('textarea');
