@@ -503,6 +503,10 @@ var GFquickpost =
         + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
 
       this.tagOpen = !this.tagOpen;
+      if (this.tagOpen)
+        this.value = this.value + '*';
+      else
+        this.value = this.value.substr(0, this.value.length - 1);
     }
     else
     {
