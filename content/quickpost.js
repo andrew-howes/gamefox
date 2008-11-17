@@ -57,30 +57,7 @@ var GFquickpost =
       if (newTopic)
         form.appendChild(doc.createElement('br'));
 
-      var tags = new Array(
-          'b', 'Bold',
-          'i', 'Italics',
-          'em', 'Emphasis',
-          'strong', 'Strong Emphasis',
-          'p', 'Paragraph',
-          'br', 'Break',
-          // GameFOX
-          'i,p', 'Quote',
-          'em,p', 'Code'
-          );
-      for (var i = 0; i < tags.length; i += 2)
-      {
-        var tagbutton = doc.createElement('input');
-        form.appendChild(tagbutton);
-        tagbutton.type = 'submit';
-        tagbutton.value = tags[i + 1];
-        tagbutton.name = tags[i];
-        tagbutton.tagOpen = false;
-
-        tagbutton.addEventListener('click', GFquickpost.insertTag, false);
-
-        form.appendChild(doc.createTextNode(' '));
-      }
+      GFquickpost.appendHTMLButtons(doc, form);
 
       form.appendChild(doc.createElement('br'));
     }
@@ -514,7 +491,7 @@ var GFquickpost =
     event.preventDefault();
     var doc = GFlib.getDocument(event);
     
-    var quickpost = doc.getElementById('gamefox-message');
+    var quickpost = doc.getElementsByName('message')[0];
 
     if (quickpost.selectionStart == quickpost.selectionEnd)
     {
@@ -544,5 +521,33 @@ var GFquickpost =
 
     quickpost.setSelectionRange(endPosition, endPosition);
     quickpost.focus();
+  },
+  
+  appendHTMLButtons: function(doc, element)
+  {
+    var tags = new Array(
+        'b', 'Bold',
+        'i', 'Italics',
+        'em', 'Emphasis',
+        'strong', 'Strong Emphasis',
+        'p', 'Paragraph',
+        'br', 'Break',
+        // GameFOX
+        'i,p', 'Quote',
+        'em,p', 'Code'
+        );
+    for (var i = 0; i < tags.length; i += 2)
+    {
+      var tagbutton = doc.createElement('input');
+      element.appendChild(tagbutton);
+      tagbutton.type = 'submit';
+      tagbutton.value = tags[i + 1];
+      tagbutton.name = tags[i];
+      tagbutton.tagOpen = false;
+
+      tagbutton.addEventListener('click', GFquickpost.insertTag, false);
+
+      element.appendChild(doc.createTextNode(' '));
+    }
   }
 };

@@ -257,6 +257,17 @@ var GameFOX =
             'PM');
       }
 
+      // HTML buttons
+      if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
+      {
+        var message = doc.getElementsByName('message')[0];
+        var buttons = doc.createElement('span');
+        GFquickpost.appendHTMLButtons(doc, buttons);
+        message.parentNode.insertBefore(buttons, message);
+        
+        message.setSelectionRange(0, 0);
+      }
+     
       // Character count
       if (GameFOX.prefs.getBoolPref('elements.charcounts'))
       {
