@@ -192,7 +192,11 @@ var GFquickpost =
 
     var previewRequest = new XMLHttpRequest();
     previewRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
-    GFlib.thirdPartyCookieFix(previewRequest);
+    var ds = Cc['@mozilla.org/webshell;1']
+        .createInstance(Ci.nsIDocShellTreeItem)
+        .QueryInterface(Ci.nsIInterfaceRequestor);
+    previewRequest.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+    previewRequest.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     previewRequest.onreadystatechange = function()
     {
       if (previewRequest.readyState == 4)
@@ -281,7 +285,11 @@ var GFquickpost =
 
           var postRequest = new XMLHttpRequest();
           postRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
-          GFlib.thirdPartyCookieFix(postRequest);
+          var ds = Cc['@mozilla.org/webshell;1']
+              .createInstance(Ci.nsIDocShellTreeItem)
+              .QueryInterface(Ci.nsIInterfaceRequestor);
+          postRequest.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+          postRequest.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
           postRequest.onreadystatechange = function()
           {
             if (postRequest.readyState == 4)

@@ -234,15 +234,5 @@ var GFlib =
     var tab = browser.addTab(url);
     if (focus == 0)
       browser.selectedTab = tab;
-  },
-
-  thirdPartyCookieFix: function(request)
-  {
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=437174
-    request.channel.loadGroup = Cc['@mozilla.org/webshell;1']
-        .createInstance(Ci.nsIDocShellTreeItem)
-        .QueryInterface(Ci.nsIInterfaceRequestor)
-        .getInterface(Ci.nsILoadGroup);
-    request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
   }
 };

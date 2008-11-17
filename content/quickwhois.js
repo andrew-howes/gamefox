@@ -54,7 +54,11 @@ var GFquickwhois =
 
     var request = new XMLHttpRequest();
     request.open('GET', node.getElementsByTagName('a')[0].href);
-    GFlib.thirdPartyCookieFix(request);
+    var ds = Cc['@mozilla.org/webshell;1']
+        .createInstance(Ci.nsIDocShellTreeItem)
+        .QueryInterface(Ci.nsIInterfaceRequestor);
+    request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+    request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)

@@ -25,7 +25,11 @@ var GFutils =
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
-    GFlib.thirdPartyCookieFix(request);
+    var ds = Cc['@mozilla.org/webshell;1']
+        .createInstance(Ci.nsIDocShellTreeItem)
+        .QueryInterface(Ci.nsIInterfaceRequestor);
+    request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+    request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -89,7 +93,11 @@ var GFutils =
     if (button) button.setAttribute('disabled', true);
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
-    GFlib.thirdPartyCookieFix(request);
+    var ds = Cc['@mozilla.org/webshell;1']
+        .createInstance(Ci.nsIDocShellTreeItem)
+        .QueryInterface(Ci.nsIInterfaceRequestor);
+    request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+    request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -116,7 +124,11 @@ var GFutils =
 
         var postRequest = new XMLHttpRequest();
         postRequest.open('POST', 'http://www.gamefaqs.com' + action);
-        GFlib.thirdPartyCookieFix(postRequest);
+        var ds = Cc['@mozilla.org/webshell;1']
+            .createInstance(Ci.nsIDocShellTreeItem)
+            .QueryInterface(Ci.nsIInterfaceRequestor);
+        postRequest.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+        postRequest.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
         postRequest.onreadystatechange = function()
         {
           if (postRequest.readyState == 4)
@@ -162,7 +174,11 @@ var GFutils =
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/sigquote.php');
-    GFlib.thirdPartyCookieFix(request);
+    var ds = Cc['@mozilla.org/webshell;1']
+        .createInstance(Ci.nsIDocShellTreeItem)
+        .QueryInterface(Ci.nsIInterfaceRequestor);
+    request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+    request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)

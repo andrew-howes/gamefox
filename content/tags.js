@@ -296,7 +296,11 @@ var GFtags =
     /* removePurged: dispatchRequest: open request */
 
       request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
-      GFlib.thirdPartyCookieFix(request);
+      var ds = Cc['@mozilla.org/webshell;1']
+          .createInstance(Ci.nsIDocShellTreeItem)
+          .QueryInterface(Ci.nsIInterfaceRequestor);
+      request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+      request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
 
     /* removePurged: dispatchRequest: request.onerror */
 

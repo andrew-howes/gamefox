@@ -203,7 +203,11 @@ var GFaccounts =
       var request = new XMLHttpRequest();
       // TODO: find a way to make page not redirect
       request.open('POST', 'http://www.gamefaqs.com/user/login.html?r=www.gamefaqs.com/images/default/rec.gif');
-      GFlib.thirdPartyCookieFix(request);
+      var ds = Cc['@mozilla.org/webshell;1']
+          .createInstance(Ci.nsIDocShellTreeItem)
+          .QueryInterface(Ci.nsIInterfaceRequestor);
+      request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+      request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
@@ -250,7 +254,11 @@ var GFaccounts =
     {
       var request = new XMLHttpRequest();
       request.open('HEAD', 'http://www.gamefaqs.com/');
-      GFlib.thirdPartyCookieFix(request);
+      var ds = Cc['@mozilla.org/webshell;1']
+          .createInstance(Ci.nsIDocShellTreeItem)
+          .QueryInterface(Ci.nsIInterfaceRequestor);
+      request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
+      request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
