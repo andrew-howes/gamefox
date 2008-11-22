@@ -106,7 +106,7 @@
 <!ENTITY signature.list.default "Default signature">
 <!ENTITY signature.list.new "New signature">
 <!ENTITY signature.list.delete "Delete">
-<!ENTITY signature.criteria.desc "Separate different accounts and boards with semicolons. Use the universal account name.">
+<!ENTITY signature.criteria.desc "Separate accounts and boards with commas. You must use your universal account name. Both the board name and ID can be used.">
 <!ENTITY signature.criteria.accounts.label "Accounts:">
 <!ENTITY signature.criteria.boards.label "Boards:">
 <!ENTITY signature.sig.label "Signature:">

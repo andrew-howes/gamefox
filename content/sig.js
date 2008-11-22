@@ -36,8 +36,8 @@ var GFsig =
       // skip empty sigs
       if (!sigs[i]['body'].length) continue;
 
-      accounts = sigs[i]['accounts'].toLowerCase().GFtrim().split(/\s*;\s*/);
-      boards = sigs[i]['boards'].toLowerCase().GFtrim().split(/\s*;\s*/);
+      accounts = sigs[i]['accounts'].toLowerCase().GFtrim().split(/\s*,\s*/);
+      boards = sigs[i]['boards'].toLowerCase().GFtrim().split(/\s*,\s*/);
 
       // force the array length to 0
       if (accounts.join() == '') accounts = new Array();

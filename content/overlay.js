@@ -1205,6 +1205,18 @@ function GameFOXLoader()
         GameFOX.prefs.setCharPref('quote.style', 'gfcode');
     }
 
+    if (versionComparator.compare('0.6.8', lastversion) > 0)
+    {
+      var sigs = eval(GFutils.getString('signature.serialized'));
+      // delimiter changed from ; to ,
+      for (var i = 1; i < sigs.length; i++)
+      {
+        sigs[i]['accounts'] = sigs[i]['accounts'].replace(/;/g, ',');
+        sigs[i]['boards'] = sigs[i]['boards'].replace(/;/g, ',');
+      }
+      GFutils.setString('signature.serialized', sigs.toSource());
+    }
+
     if (lastversion == '') // first run
     {
       GFuserlist.add();
