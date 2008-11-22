@@ -912,7 +912,8 @@ var GameFOX =
       var cell = node.cells[GFlib.onPage(doc, 'myposts') ? 2 : 3];
 
       var lastPost = GFutils.getLastPost(cell.textContent,
-          GFlib.onPage(doc, 'tracked') ? '' : node.cells[2].firstChild.textContent);
+          (GFlib.onPage(doc, 'tracked') || GFlib.onPage(doc, 'myposts')) ? ''
+            : node.cells[2].firstChild.textContent);
 
       var uri = node.cells[1].getElementsByTagName('a')[0].href + lastPost[0] +
           (gotoLastPost ? '#p' + lastPost[1] : '');
