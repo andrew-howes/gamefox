@@ -592,60 +592,14 @@ var GameFOX =
 
       for (var i = 0; i < td.length; i += 2)
       {
-        // Message numbering
         ++msgnum;
-
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[i].id = 'p' + msgnumString;
 
-        if (msgnumCond)
-        {
-          switch (msgnumStyle)
-          {
-            case 1: // Reversed: #001 | message detail
-              td[i].insertBefore(doc.createTextNode('#' + msgnumString),
-                  td[i].getElementsByTagName('a')[1]);
-
-              if (leftMsgData)
-                td[i].insertBefore(doc.createElement('br'), td[i].
-                    getElementsByTagName('a')[1])
-              else if (!onArchive)
-                td[i].insertBefore(doc.createTextNode(' | '), td[i].
-                    getElementsByTagName('a')[1]);
-
-              break;
-
-            case 2: // Number only: #001
-              if (onArchive)
-                td[i].innerHTML += '<b>#' + msgnumString + '</b>';
-              else
-                td[i].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
-              break;
-
-            case 3: // Mixed: message #001
-              if (onArchive)
-                td[i].innerHTML += '<b>message #' + msgnumString + '</b>';
-              else
-                td[i].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
-              break;
-
-            default:
-            case 0: // Original: message detail | #001
-              if (leftMsgData)
-              {
-                if (!onArchive)
-                  td[i].appendChild(doc.createElement('br'));
-                td[i].appendChild(doc.createTextNode('#' + msgnumString));
-              }
-              else
-                if (onArchive)
-                  td[i].appendChild(doc.createTextNode('#' + msgnumString));
-                else
-                  td[i].appendChild(doc.createTextNode(' | #' + msgnumString));
-
-              break;
-          }
-        }
+        // Element for GameFOX links
+        var msgLinks = doc.createElement('span');
+        td[i].appendChild(msgLinks);
+        msgLinks.id = 'gamefox-message-links';
 
         // Message highlighting
         var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
@@ -764,8 +718,86 @@ var GameFOX =
           a.href = '#';
           a.addEventListener('click', GameFOX.toggleFilter, false);
 
-          td[i].appendChild(leftMsgData ? doc.createElement('br') : doc.createTextNode(' | '));
-          td[i].appendChild(a);
+          if (!onArchive || msgLinks.hasChildNodes())
+            msgLinks.appendChild(leftMsgData ? doc.createElement('br') : doc.createTextNode(' | '));
+          msgLinks.appendChild(a);
+        }
+
+        // Message numbering
+        if (msgnumCond)
+        {
+          switch (msgnumStyle)
+          {
+            case 1: // Reversed: #001 | message detail
+              if (onArchive)
+                var element = msgLinks;
+              else
+                var element = td[i].getElementsByTagName('a')[1];
+
+              td[i].insertBefore(doc.createTextNode('#' + msgnumString),
+                  element);
+
+              if (leftMsgData)
+                td[i].insertBefore(doc.createElement('br'), element)
+              else if (!onArchive || msgLinks.hasChildNodes())
+                td[i].insertBefore(doc.createTextNode(' | '), element);
+
+              break;
+
+            case 2: // Number only: #001
+              if (onArchive)
+              {
+                var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
+                numElement.appendChild(doc.createTextNode('#' + msgnumString));
+
+                if (!msgLinks.hasChildNodes())
+                  td[i].appendChild(numElement);
+                else
+                {
+                  td[i].appendChild(leftMsgData ? doc.createElement('br') : 
+                      doc.createTextNode(' | '));
+                  td[i].appendChild(numElement);
+                }
+              }
+              else
+                td[i].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
+              break;
+
+            case 3: // Mixed: message #001
+              if (onArchive)
+              {
+                var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
+                numElement.appendChild(doc.createTextNode('message #' + msgnumString));
+
+                if (!msgLinks.hasChildNodes())
+                  td[i].appendChild(numElement);
+                else
+                {
+                  td[i].appendChild(leftMsgData ? doc.createElement('br') :
+                      doc.createTextNode(' | '));
+                  td[i].appendChild(numElement);
+                }
+              }
+              else
+                td[i].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
+              break;
+
+            default:
+            case 0: // Original: message detail | #001
+              if (leftMsgData)
+              {
+                if (!onArchive || msgLinks.hasChildNodes())
+                  td[i].appendChild(doc.createElement('br'));
+                td[i].appendChild(doc.createTextNode('#' + msgnumString));
+              }
+              else
+                if (onArchive && !msgLinks.hasChildNodes())
+                  td[i].appendChild(doc.createTextNode('#' + msgnumString));
+                else
+                  td[i].appendChild(doc.createTextNode(' | #' + msgnumString));
+
+              break;
+          }
         }
       }
 
