@@ -257,16 +257,24 @@ var GameFOX =
             'PM');
       }
 
+      // Signature
+      if (GameFOX.prefs.getBoolPref('signature.applyeverywhere')
+          && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
+      {
+        doc.getElementsByName('message')[0].value =
+          GFutils.formatSig(null, null, doc);
+      }
+
       // HTML buttons
       if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
       {
         var message = doc.getElementsByName('message')[0];
+        message.setSelectionRange(0, 0);
+
         var buttons = doc.createElement('span');
         GFquickpost.appendHTMLButtons(doc, buttons);
         message.parentNode.insertBefore(buttons, message);
         message.parentNode.insertBefore(doc.createElement('br'), message);
-
-        message.setSelectionRange(0, 0);
       }
 
       // Character count
@@ -320,14 +328,6 @@ var GameFOX =
                 refChild[1] : refChild[0]);
             refChild.parentNode.insertBefore(button, refChild);
             refChild.parentNode.insertBefore(doc.createTextNode(' '), refChild);
-      }
-
-      // Signature
-      if (GameFOX.prefs.getBoolPref('signature.applyeverywhere')
-          && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
-      {
-        doc.getElementsByName('message')[0].value =
-          GFutils.formatSig(null, null, doc);
       }
     }
 
