@@ -24,6 +24,7 @@ pref("gamefox.elements.aml.marknewposts", true);
 pref("gamefox.elements.aml.pagejumper", true);
 pref("gamefox.elements.deletelink", true);
 pref("gamefox.elements.filterlink", true);
+pref("gamefox.elements.quotelink", true);
 
 pref("gamefox.msgsPerPage", 50);
 pref("gamefox.tpcsPerPage", 50);

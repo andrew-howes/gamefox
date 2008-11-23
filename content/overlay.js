@@ -589,6 +589,8 @@ var GameFOX =
       var firstPostNum = GameFOX.prefs.getIntPref('msgSortOrder') == 2 ?
           (doc.gamefox.pages - 1) * GameFOX.prefs.getIntPref('msgsPerPage') + td.length / 2 : 1;
       var filterCond = GameFOX.prefs.getBoolPref('elements.filterlink') && !onDetail;
+      var quotelinkCond = GameFOX.prefs.getBoolPref('elements.quotelink') &&
+        topicOpen;
 
       for (var i = 0; i < td.length; i += 2)
       {
@@ -718,6 +720,22 @@ var GameFOX =
 
           if (!onArchive || msgLinks.hasChildNodes())
             msgLinks.appendChild(leftMsgData ? doc.createElement('br') : doc.createTextNode(' | '));
+          msgLinks.appendChild(a);
+        }
+
+        // Quoting
+        if (quotelinkCond)
+        {
+          var a = doc.createElement('a');
+          a.appendChild(doc.createTextNode('quote'));
+          a.className = 'gamefox-quote-link';
+          a.href = '#';
+          a.addEventListener('click', function(event){
+              GFquote.quote(event); event.preventDefault();}, false);
+
+          if (!onArchive || msgLinks.hasChildNodes())
+            msgLinks.appendChild(leftMsgData ? doc.createElement('br') :
+                doc.createTextNode(' | '));
           msgLinks.appendChild(a);
         }
 

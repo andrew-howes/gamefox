@@ -22,6 +22,7 @@
 <!ENTITY main.page.messages.taglink "&quot;Tag Topic&quot; link">
 <!ENTITY main.page.messages.deletelink "&quot;Delete&quot; and &quot;Close&quot; links">
 <!ENTITY main.page.messages.filterlink "&quot;Filter&quot; links">
+<!ENTITY main.page.messages.quotelink "&quot;Quote&quot; links">
 <!ENTITY main.page.messages.numbering "Number messages">
 <!ENTITY main.page.messages.marktc "Label topic creator">
 <!ENTITY main.page.pages.caption "Topic Pagination">
