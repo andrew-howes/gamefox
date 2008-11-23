@@ -1132,7 +1132,8 @@ var GameFOX =
 
     if (button.textContent == 'filter')
     {
-      var username = button.parentNode.getElementsByTagName(userTagName)[0].textContent;
+      var username = button.parentNode.parentNode.
+        getElementsByTagName(userTagName)[0].textContent;
 
       for (var i = 0; i < td.length; i += 2)
       {
