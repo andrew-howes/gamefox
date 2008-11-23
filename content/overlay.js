@@ -264,10 +264,11 @@ var GameFOX =
         var buttons = doc.createElement('span');
         GFquickpost.appendHTMLButtons(doc, buttons);
         message.parentNode.insertBefore(buttons, message);
-        
+        message.parentNode.insertBefore(doc.createElement('br'), message);
+
         message.setSelectionRange(0, 0);
       }
-     
+
       // Character count
       if (GameFOX.prefs.getBoolPref('elements.charcounts'))
       {
