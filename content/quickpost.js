@@ -483,12 +483,7 @@ var GFquickpost =
     else
     {
       for (var i = (tag.length - 1); i >= 0; i--)
-      {
-        if (tag[i] == 'br')
-          str += '<br />'
-        else
-          str += '</' + tag[i] + '>';
-      }
+        str += '</' + tag[i] + '>';
     }
 
     return str;
@@ -510,10 +505,10 @@ var GFquickpost =
         + tagStr
         + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
 
-      this.tagOpen = !this.tagOpen;
+      this.tagOpen = (!this.tagOpen && this.name != 'br');
       if (this.tagOpen)
         this.value = this.value + '*';
-      else
+      else if (this.value.charAt(this.value.length - 1) == '*')
         this.value = this.value.substr(0, this.value.length - 1);
     }
     else
