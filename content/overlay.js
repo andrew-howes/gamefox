@@ -599,7 +599,7 @@ var GameFOX =
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
         td[i].appendChild(msgLinks);
-        msgLinks.id = 'gamefox-message-links';
+        msgLinks.className = 'gamefox-message-links';
 
         // Message highlighting
         var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
@@ -693,20 +693,18 @@ var GameFOX =
             td[i + 1].textContent.GFtrim() != '[This message was deleted at ' +
             'the request of a moderator or administrator]')
         {
-          var msgDetailLink = td[i].getElementsByTagName('a')[1];
-
           var a = doc.createElement('a');
           if (msgnum == firstPostNum && td.length > 2)
             a.appendChild(doc.createTextNode('close'));
           else
             a.appendChild(doc.createTextNode('delete'));
           a.className = 'gamefox-delete-link';
-          a.href = msgDetailLink.href;
+          a.href = td[i].getElementsByTagName('a')[1].href;
           a.addEventListener('click', GFmessages.deletePost, false);
 
-          td[i].insertBefore(a, msgDetailLink.nextSibling);
-          td[i].insertBefore(leftMsgData ? doc.createElement('br') : doc.createTextNode(' | '),
-              msgDetailLink.nextSibling);
+          msgLinks.appendChild(leftMsgData ? doc.createElement('br') :
+              doc.createTextNode(' | '));
+          msgLinks.appendChild(a);
         }
 
         // Filtering
