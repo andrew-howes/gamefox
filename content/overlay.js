@@ -1179,7 +1179,7 @@ var GameFOX =
     for (var i = 0; i < filterResult.snapshotLength; i++)
       filterResult.snapshotItem(i).textContent = newText;
 
-    doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus ? newFocus : button.parentNode));
+    doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus ? newFocus : button.parentNode.parentNode));
   },
 
   toggleSidebar: function()
