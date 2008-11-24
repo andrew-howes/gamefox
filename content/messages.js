@@ -80,7 +80,7 @@ var GFmessages =
     event.preventDefault();
 
     var closeTopic = event.target.textContent == 'close';
-    var deleteTopic = !closeTopic && event.target.parentNode.id == 'p001';
+    var deleteTopic = !closeTopic && event.target.parentNode.parentNode.id == 'p001';
 
     if (deleteTopic)
       var str = 'Delete this topic?';
@@ -130,7 +130,7 @@ var GFmessages =
             else
             {
               if (!closeTopic)
-                doc.location.hash = '#' + event.target.parentNode.id;
+                doc.location.hash = '#' + event.target.parentNode.parentNode.id;
               doc.location.reload();
             }
           }
