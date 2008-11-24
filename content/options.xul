@@ -90,6 +90,21 @@
       <preference id="posting-aftertopic" name="gamefox.elements.quickpost.aftertopic" type="int"/>
       <preference id="posting-aftermessage" name="gamefox.elements.quickpost.aftermessage" type="int"/>
 
+      <preference id="sidebar-gamefaqsnav" name="gamefox.sidebar.gamefaqsnav"
+        type="bool"/>
+      <preference id="sidebar-userlinks" name="gamefox.sidebar.userlinks"
+        type="bool"/>
+      <preference id="sidebar-favorites" name="gamefox.sidebar.favorites"
+        type="bool"/>
+      <preference id="sidebar-search" name="gamefox.sidebar.search"
+        type="bool"/>
+      <preference id="sidebar-gotoboard" name="gamefox.sidebar.gotoboard"
+        type="bool"/>
+      <preference id="sidebar-login" name="gamefox.sidebar.login" type="bool"/>
+      <preference id="sidebar-accounts" name="gamefox.sidebar.accounts"
+        type="bool"/>
+      <preference id="sidebar-tags" name="gamefox.sidebar.tags" type="bool"/>
+
       <preference id="gamefoxMsgsPerPage" name="gamefox.msgsPerPage" type="int"/>
       <preference id="gamefoxTpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
       <preference id="gamefoxMsgSortOrder" name="gamefox.msgSortOrder" type="int"/>
@@ -104,6 +119,7 @@
       <tabs tabGroup="page">
         <tab id="gamefox-tab-elements" label="&main.tab.page;"/>
         <tab id="gamefox-tab-posting" label="&main.tab.posting;"/>
+        <tab id="gamefox-tab-sidebar" label="&main.tab.sidebar;"/>
         <tab id="gamefox-tab-board" label="&main.tab.board;"/>
       </tabs>
 
@@ -239,6 +255,32 @@
                 <radio value="2" label="&main.posting.quickpost.aftermessage.firstpage;"/>
               </radiogroup>
 
+            </groupbox>
+          </vbox>
+        </tabpanel>
+
+<!-- SIDEBAR -->
+
+        <tabpanel orient="vertical" flex="1">
+          <vbox>
+            <groupbox>
+              <caption label="Sections"/>
+
+              <checkbox preference="sidebar-gamefaqsnav"
+                label="&main.sidebar.gamefaqsnav;"/>
+              <checkbox preference="sidebar-userlinks"
+                label="&main.sidebar.userlinks;"/>
+              <checkbox preference="sidebar-favorites"
+                label="&main.sidebar.favorites;"/>
+              <checkbox preference="sidebar-search"
+                label="&main.sidebar.search;"/>
+              <checkbox preference="sidebar-gotoboard"
+                label="&main.sidebar.gotoboard;"/>
+              <checkbox preference="sidebar-login"
+                label="&main.sidebar.login;"/>
+              <checkbox preference="sidebar-accounts"
+                label="&main.sidebar.accounts;"/>
+              <checkbox preference="sidebar-tags" label="&main.sidebar.tags;"/>
             </groupbox>
           </vbox>
         </tabpanel>

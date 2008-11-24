@@ -8,6 +8,7 @@
 <!ENTITY main.label "Main">
 <!ENTITY main.tab.page "Page">
 <!ENTITY main.tab.posting "Posting">
+<!ENTITY main.tab.sidebar "Sidebar">
 <!ENTITY main.tab.board "Board Settings">
 <!ENTITY main.page.desctitles "Descriptive window titles">
 <!ENTITY main.page.titleprefix "Window title page prefixes">
@@ -51,6 +52,14 @@
 <!ENTITY main.posting.quickpost.aftermessage.lastpost "Go to last post">
 <!ENTITY main.posting.quickpost.aftermessage.samepage "Go back to same page">
 <!ENTITY main.posting.quickpost.aftermessage.firstpage "Go to first page">
+<!ENTITY main.sidebar.gamefaqsnav "GameFAQs navigation links">
+<!ENTITY main.sidebar.userlinks "User links">
+<!ENTITY main.sidebar.favorites "Favorites list">
+<!ENTITY main.sidebar.search "Game search">
+<!ENTITY main.sidebar.gotoboard "Go to board ID">
+<!ENTITY main.sidebar.login "Login form">
+<!ENTITY main.sidebar.accounts "Accounts switcher">
+<!ENTITY main.sidebar.tags "Tags list">
 <!ENTITY main.board.caption "Board Settings">
 <!ENTITY main.board.tpp "Topics Per Page">
 <!ENTITY main.board.tsort "Topic Sort">
