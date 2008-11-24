@@ -76,6 +76,13 @@ Applied to system notification message.
 
 Contains group name(s) the adjacent username is a member of. (v0.6.5)
 
+<h3 id="span+gamefox-html-buttons">
+span#gamefox-html-buttons
+<span class="new">New in 0.6.8pre</span>
+</h3>
+
+Container for HTML buttons.
+
 <h3 id="span+gamefox-message-count">span#gamefox-message-count</h3>
 
 Shows the character count for the message. (v0.6.5)

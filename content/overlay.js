@@ -271,9 +271,7 @@ var GameFOX =
         var message = doc.getElementsByName('message')[0];
         message.setSelectionRange(0, 0);
 
-        var buttons = doc.createElement('span');
-        GFquickpost.appendHTMLButtons(doc, buttons);
-        message.parentNode.insertBefore(buttons, message);
+        message.parentNode.insertBefore(GFquickpost.createHTMLButtons(doc), message);
         message.parentNode.insertBefore(doc.createElement('br'), message);
       }
 
@@ -771,7 +769,7 @@ var GameFOX =
                   td[i].appendChild(numElement);
                 else
                 {
-                  td[i].appendChild(leftMsgData ? doc.createElement('br') : 
+                  td[i].appendChild(leftMsgData ? doc.createElement('br') :
                       doc.createTextNode(' | '));
                   td[i].appendChild(numElement);
                 }

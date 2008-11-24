@@ -57,7 +57,7 @@ var GFquickpost =
       if (newTopic)
         form.appendChild(doc.createElement('br'));
 
-      GFquickpost.appendHTMLButtons(doc, form);
+      form.appendChild(GFquickpost.createHTMLButtons(doc));
 
       form.appendChild(doc.createElement('br'));
     }
@@ -493,7 +493,7 @@ var GFquickpost =
   {
     event.preventDefault();
     var doc = GFlib.getDocument(event);
-    
+
     var quickpost = doc.getElementsByName('message')[0];
 
     if (quickpost.selectionStart == quickpost.selectionEnd)
@@ -529,9 +529,11 @@ var GFquickpost =
     quickpost.setSelectionRange(endPosition, endPosition);
     quickpost.focus();
   },
-  
-  appendHTMLButtons: function(doc, element)
+
+  createHTMLButtons: function(doc)
   {
+    var span = doc.createElement('span');
+    span.id = 'gamefox-html-buttons';
     var tags = new Array(
         'b', 'Bold',
         'i', 'Italics',
@@ -546,7 +548,7 @@ var GFquickpost =
     for (var i = 0; i < tags.length; i += 2)
     {
       var tagbutton = doc.createElement('input');
-      element.appendChild(tagbutton);
+      span.appendChild(tagbutton);
       tagbutton.type = 'submit';
       tagbutton.value = tags[i + 1];
       tagbutton.name = tags[i];
@@ -554,7 +556,8 @@ var GFquickpost =
 
       tagbutton.addEventListener('click', GFquickpost.insertTag, false);
 
-      element.appendChild(doc.createTextNode(' '));
+      span.appendChild(doc.createTextNode(' '));
     }
+    return span;
   }
 };
