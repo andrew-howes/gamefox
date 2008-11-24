@@ -26,6 +26,15 @@ pref("gamefox.elements.deletelink", true);
 pref("gamefox.elements.filterlink", true);
 pref("gamefox.elements.quotelink", true);
 
+pref("gamefox.sidebar.gamefaqsnav", true);
+pref("gamefox.sidebar.userlinks", true);
+pref("gamefox.sidebar.favorites", true);
+pref("gamefox.sidebar.search", true);
+pref("gamefox.sidebar.gotoboard", true);
+pref("gamefox.sidebar.login", true);
+pref("gamefox.sidebar.accounts", true);
+pref("gamefox.sidebar.tags", true);
+
 pref("gamefox.msgsPerPage", 50);
 pref("gamefox.tpcsPerPage", 50);
 pref("gamefox.msgSortOrder", 1);

@@ -20,8 +20,29 @@
 
 var GFsidebar =
 {
+  prefs: Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService)
+           .getBranch('gamefox.sidebar.'),
+
   onload: function()
   {
+    // hide user disabled sections
+    if (!GFsidebar.prefs.getBoolPref('gamefaqsnav'))
+      document.getElementById('links').style.display = 'none';
+    if (!GFsidebar.prefs.getBoolPref('userlinks'))
+      document.getElementById('userlinks').style.display = 'none';
+    if (!GFsidebar.prefs.getBoolPref('favorites'))
+      document.getElementById('favorites').style.display = 'none';
+    if (!GFsidebar.prefs.getBoolPref('search'))
+      document.getElementById('search').style.display = 'none';
+    if (!GFsidebar.prefs.getBoolPref('gotoboard'))
+      document.getElementById('gotoboard').style.display = 'none';
+    if (!GFsidebar.prefs.getBoolPref('login'))
+      document.getElementById('login').style.display = 'none';
+    if (!GFsidebar.prefs.getBoolPref('accounts'))
+      document.getElementById('accounts').style.display = 'none';
+    if (!GFsidebar.prefs.getBoolPref('tags'))
+      document.getElementById('tags').style.display = 'none';
+
     // link middle clicking
     var links = document.getElementsByTagName('a');
     for (var i = 0; i < links.length; i++)

@@ -42,62 +42,76 @@
           <a href="http://www.gamefaqs.com/systems.html">All Systems</a>
       </div>
     </div>
-    
-    <div class="strip">
-      <a href="http://www.gamefaqs.com/boards/user.php">Profile</a> /
-      <a href="http://www.gamefaqs.com/user/manage.html">Manage</a>
-    </div>
-    
-    <div class="strip">
-      <a href="http://www.gamefaqs.com/boards/myposts.php">Posts</a> /
-      <a href="http://www.gamefaqs.com/boards/tracked.php">Tracked</a> /
-      <a href="http://www.gamefaqs.com/boards/modhist.php">Mods</a>
-    </div>
 
-    <div class="strip">Favorites</div>
-    <select id="favorites-menu"></select>
+    <div id="userlinks">
+      <div class="strip">
+        <a href="http://www.gamefaqs.com/boards/user.php">Profile</a> /
+        <a href="http://www.gamefaqs.com/user/manage.html">Manage</a>
+      </div>
 
-    <div class="strip">
-      <a href="http://www.gamefaqs.com/search/">Search GameFAQs</a>
-    </div>
-    <form method="get" action="http://www.gamefaqs.com/search/index.html">
-      <input type="hidden" name="platform" value="0"/>
-      <input type="text" name="game" size="12"/>
-      <input type="submit" value="Go"/>
-    </form>
-
-    <div class="strip">Go to board ID</div>
-    <form method="get" action="http://www.gamefaqs.com/boards/gentopic.php">
-      <input type="text" name="board" size="10"/>
-      <input type="submit" value="Go"/>
-    </form>
-
-    <div class="strip">Login (Email/Pass)</div>
-    <form method="post" action="http://www.gamefaqs.com/user/login.html"
-        id="gamefaqs-login-form">
-      <input type="hidden" name="path" id="gamefaqs-login-path"
-        value="http://www.gamefaqs.com/boards/index.php"/>
-      <input type="text" name="EMAILADDR" maxlength="90"/>
-      <input type="password" name="PASSWORD" maxlength="20"/>
-      <input type="submit" value="Login" id="gamefaqs-login-submit"/>
-    </form>
-
-    <div class="strip">
-      <a href="http://www.gamefaqs.com/user/logout.html?r=www.gamefaqs.com%2Fboards%2Findex.php"
-          >Logout</a> /
-      <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a>
+      <div class="strip">
+        <a href="http://www.gamefaqs.com/boards/myposts.php">Posts</a> /
+        <a href="http://www.gamefaqs.com/boards/tracked.php">Tracked</a> /
+        <a href="http://www.gamefaqs.com/boards/modhist.php">Mods</a>
+      </div>
     </div>
 
-    <div class="strip">
-      Accounts (<a id="accounts-add-link">Add</a><span
-        id="accounts-remove"> / <a id="accounts-rm-link">Remove</a></span>)
+    <div id="favorites">
+      <div class="strip">Favorites</div>
+      <select id="favorites-menu"></select>
     </div>
 
-    <div id="accounts-menu"></div>
-
-    <div class="strip">
-      <a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a>
+    <div id="search">
+      <div class="strip">
+        <a href="http://www.gamefaqs.com/search/">Search GameFAQs</a>
+      </div>
+      <form method="get" action="http://www.gamefaqs.com/search/index.html">
+        <input type="hidden" name="platform" value="0"/>
+        <input type="text" name="game" size="12"/>
+        <input type="submit" value="Go"/>
+      </form>
     </div>
-    <iframe src="chrome://gamefox/content/tags.xul" style="width: 100%; height: 300px;"/>
+
+    <div id="gotoboard">
+      <div class="strip">Go to board ID</div>
+      <form method="get" action="http://www.gamefaqs.com/boards/gentopic.php">
+        <input type="text" name="board" size="10"/>
+        <input type="submit" value="Go"/>
+      </form>
+    </div>
+
+    <div id="login">
+      <div class="strip">Login (Email/Pass)</div>
+      <form method="post" action="http://www.gamefaqs.com/user/login.html"
+          id="gamefaqs-login-form">
+        <input type="hidden" name="path" id="gamefaqs-login-path"
+          value="http://www.gamefaqs.com/boards/index.php"/>
+        <input type="text" name="EMAILADDR" maxlength="90"/>
+        <input type="password" name="PASSWORD" maxlength="20"/>
+        <input type="submit" value="Login" id="gamefaqs-login-submit"/>
+      </form>
+
+      <div class="strip">
+        <a href="http://www.gamefaqs.com/user/logout.html?r=www.gamefaqs.com%2Fboards%2Findex.php"
+            >Logout</a> /
+        <a href="http://membership.gamefaqs.com/1328-4-46.html">Password</a>
+      </div>
+    </div>
+
+    <div id="accounts">
+      <div class="strip">
+        Accounts (<a id="accounts-add-link">Add</a><span
+          id="accounts-remove"> / <a id="accounts-rm-link">Remove</a></span>)
+      </div>
+
+      <div id="accounts-menu"></div>
+    </div>
+
+    <div id="tags">
+      <div class="strip">
+        <a href="chrome://gamefox/content/tags.xul" target="_self">Tags</a>
+      </div>
+      <iframe src="chrome://gamefox/content/tags.xul" style="width: 100%; height: 300px;"/>
+    </div>
 </body>
 </html>
