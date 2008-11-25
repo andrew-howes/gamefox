@@ -407,15 +407,32 @@ var GFuserlist =
 
   fillMenu: function(event)
   {
-    var node = event.target;
+    var doc = event.target.ownerDocument;
     var list = document.getElementById('gamefox-context-usergroups-list');
 
     while (list.hasChildNodes())
       list.removeChild(list.firstChild);
 
+    var node = event.target;
+    while (node.nodeName != 'TR')
+      node = node.parentNode;
+
     // get the username of the target, return if it's not valid
-    if (node.nodeName.toLowerCase() != 'a') return;
-    if (node.href.indexOf('user.php') == -1) return;
+    if (GFlib.onPage(doc, 'topics')) // topic list
+    {
+      node = node.getElementsByTagName('td')[2];
+    }
+    else
+    {
+      node = node.getElementsByTagName('td')[0]; // message header
+      if (!node.id || node.id.charAt(0) != 'p') return; // not a post
+
+      if (GFlib.onPage(doc, 'archive'))
+        node = node.getElementsByTagName('b')[0];
+      else
+        node = node.getElementsByTagName('a')[0];
+    }
+
     var username = node.textContent;
 
     this.loadGroups();

@@ -58,34 +58,22 @@ var GFcontext =
     var hideUsergroups = true;
     if (GFlib.onPage(doc, 'messages'))
     {
-      // User groups
+      // Quoting and user groups
       try
       {
         var node = gContextMenu.target;
-        if (node.nodeName.toLowerCase() == 'a'
-            && node.href.indexOf('user.php') != -1
-            && node.parentNode.id.indexOf('p') == 0)
-          hideUsergroups = false;
+
+        while (node.nodeName.toLowerCase() != 'table'
+               || node.className.toLowerCase() != 'message')
+        {
+          node = node.offsetParent;
+        }
+
+        if (doc.getElementById('gamefox-message'))
+          hideQuote = false;
+        hideUsergroups = false;
       }
       catch (e) {}
-
-      // Quote
-      if (doc.getElementById('gamefox-message'))
-      {
-        try
-        {
-          var node = gContextMenu.target;
-
-          while (node.nodeName.toLowerCase() != 'table'
-                 || node.className.toLowerCase() != 'message')
-          {
-            node = node.offsetParent;
-          }
-
-          hideQuote = false;
-        }
-        catch (e) {}
-      }
     }
     document.getElementById('gamefox-context-quote').hidden = hideQuote
       || !GameFOX.prefs.getBoolPref('context.quote');
@@ -102,7 +90,7 @@ var GFcontext =
     }
     else
     {
-      // Tag topic and pages (topic list)
+      // Tag topic, pages and user groups (topic list)
       try
       {
         var node = gContextMenu.target;
@@ -116,6 +104,7 @@ var GFcontext =
         {
           hideTag = false;
           hidePages = false;
+          hideUsergroups = node.parentNode.cells[0].firstChild.nodeName != 'IMG';
         }
       }
       catch (e) {}
@@ -124,5 +113,7 @@ var GFcontext =
       || !GameFOX.prefs.getBoolPref('context.tag');
     document.getElementById('gamefox-context-pages').hidden = hidePages
       || !GameFOX.prefs.getBoolPref('context.pagelist');
+    document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups
+      || !GameFOX.prefs.getBoolPref('context.usergroups');
   }
 };
