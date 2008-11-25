@@ -414,13 +414,13 @@ var GFuserlist =
       list.removeChild(list.firstChild);
 
     var node = event.target;
-    while (node.nodeName != 'TR')
+    while (node.nodeName != 'TD')
       node = node.parentNode;
 
     // get the username of the target, return if it's not valid
     if (GFlib.onPage(doc, 'topics')) // topic list
     {
-      node = node.cells[2];
+      node = node.parentNode.cells[2];
     }
     else
     {
