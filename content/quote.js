@@ -75,7 +75,7 @@ var GFquote =
     bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;
 
-    var quotes = doc.evaluate('/i/p', bodyDOM, null, XPathResult.
+    var quotes = doc.evaluate('./i/p', bodyDOM, null, XPathResult.
         ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < quotes.snapshotLength; i++)
       quotes.snapshotItem(i).parentNode.replaceChild(
