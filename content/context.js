@@ -55,42 +55,13 @@ var GFcontext =
     }
 
     var hideQuote = true;
-    var hideUsergroups = true;
-    if (GFlib.onPage(doc, 'messages'))
-    {
-      // Quoting and user groups
-      try
-      {
-        var node = gContextMenu.target;
-
-        while (node.nodeName.toLowerCase() != 'table'
-               || node.className != 'message')
-        {
-          node = node.offsetParent;
-        }
-
-        if (doc.getElementById('gamefox-message'))
-          hideQuote = false;
-        hideUsergroups = false;
-      }
-      catch (e) {}
-    }
-    document.getElementById('gamefox-context-quote').hidden = hideQuote
-      || !GameFOX.prefs.getBoolPref('context.quote');
-    document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups
-      || !GameFOX.prefs.getBoolPref('context.usergroups');
-
     var hideTag = true;
     var hidePages = true;
-    if (!GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'myposts'))
+    var hideUsergroups = true;
+
+    if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
     {
-      // Tag topic (message list)
-      if (GFlib.onPage(doc, 'messages') && doc.getElementsByTagName('h1').length > 1)
-        hideTag = false;
-    }
-    else
-    {
-      // Tag topic, pages and user groups (topic list)
+      // Tag topic, pages and user groups
       try
       {
         var node = gContextMenu.target;
@@ -110,6 +81,32 @@ var GFcontext =
       }
       catch (e) {}
     }
+    else if (GFlib.onPage(doc, 'messages'))
+    {
+      // Tag topic
+      if (doc.getElementsByTagName('h1').length > 1)
+        hideTag = false;
+
+      // Quoting and user groups
+      try
+      {
+        var node = gContextMenu.target;
+
+        while (node.nodeName.toLowerCase() != 'table'
+               || node.className != 'message')
+        {
+          node = node.offsetParent;
+        }
+
+        if (doc.getElementById('gamefox-message'))
+          hideQuote = false;
+        hideUsergroups = false;
+      }
+      catch (e) {}
+    }
+
+    document.getElementById('gamefox-context-quote').hidden = hideQuote
+      || !GameFOX.prefs.getBoolPref('context.quote');
     document.getElementById('gamefox-context-tag').hidden = hideTag
       || !GameFOX.prefs.getBoolPref('context.tag');
     document.getElementById('gamefox-context-pages').hidden = hidePages
