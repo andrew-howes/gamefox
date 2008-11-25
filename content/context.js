@@ -104,7 +104,8 @@ var GFcontext =
         {
           hideTag = false;
           hidePages = false;
-          hideUsergroups = node.parentNode.cells[0].firstChild.nodeName != 'IMG';
+          if (GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'tracked'))
+            hideUsergroups = false;
         }
       }
       catch (e) {}
