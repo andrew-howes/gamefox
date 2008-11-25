@@ -109,22 +109,20 @@ var GFquote =
 
     // Get rid of signature
     if (GameFOX.prefs.getBoolPref('quote.removesignature'))
-      body = body.replace(/---(\n.*\n?){0,2}$/, ''); // Only a simple regexp is needed because extraneous
-                                                     // signatures are no longer allowed
-    body = GFutils.specialCharsDecode(body.GFtrim());
-    // Prevent too much GFCode quote nesting
-    var loops = 0;
-    while (body.match(/(<i><p>[\s\S]*?){2,}/) != null)
-    {
-      // TODO: handle consecutive, but not nested quotes
-      if (loops > 6) // too many loops can cause slowness
-      {
-        body = body.replace(/\n*<i><p>[\s\S]*<\/p><\/i>\n*/, '');
-        break;
-      }
-      body = body.replace(/\n*<i><p>(?:(?=([^<]+))\1|<(?!i>))*?<\/p><\/i>\n*/, '\n');
-      loops++;
-    }
+      body = body.replace(/---(\n.*\n?){0,2}$/, '');
+
+    // Remove nested quotes
+    body = GFutils.specialCharsDecode(body);
+    bodyDOM = doc.createElement('td');
+    bodyDOM.innerHTML = body;
+
+    var quotes = doc.evaluate('/i/p', bodyDOM, null, XPathResult.
+        ORDERED_NODE_SNAPSHOT_TYPE, null);
+    for (var i = 0; i < quotes.snapshotLength; i++)
+      quotes.snapshotItem(i).parentNode.replaceChild(
+          doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
+
+    body = bodyDOM.innerHTML.GFtrim();
 
     /* Prepare quote header */
     var qhead = '';
