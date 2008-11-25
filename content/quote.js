@@ -72,7 +72,6 @@ var GFquote =
       body = body.replace(/---(\n.*\n?){0,2}$/, '');
 
     // Remove nested quotes
-    body = GFutils.specialCharsDecode(body);
     bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;
 
@@ -82,7 +81,7 @@ var GFquote =
       quotes.snapshotItem(i).parentNode.replaceChild(
           doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
 
-    body = bodyDOM.innerHTML.GFtrim();
+    body = GFutils.specialCharsDecode(bodyDOM.innerHTML.GFtrim());
 
     /* Prepare quote header */
     var qhead = '';
