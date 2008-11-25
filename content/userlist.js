@@ -420,17 +420,14 @@ var GFuserlist =
     // get the username of the target, return if it's not valid
     if (GFlib.onPage(doc, 'topics')) // topic list
     {
-      node = node.getElementsByTagName('td')[2];
+      node = node.cells[2];
     }
     else
     {
-      node = node.getElementsByTagName('td')[0]; // message header
-      if (!node.id || node.id.charAt(0) != 'p') return; // not a post
+      node = GFutils.getMsgComponents(node, doc);
+      if (!node) return;
 
-      if (GFlib.onPage(doc, 'archive'))
-        node = node.getElementsByTagName('b')[0];
-      else
-        node = node.getElementsByTagName('a')[0];
+      node = node.header.getElementsByTagName(GFlib.onPage(doc, 'archive') ? 'b' : 'a')[0];
     }
 
     var username = node.textContent;

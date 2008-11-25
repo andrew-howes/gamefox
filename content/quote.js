@@ -25,53 +25,13 @@ var GFquote =
     if (!doc.getElementById('gamefox-message'))
       return;
 
-    // TODO: review this for gfaqs9 cruft
-    var node           = event.target;
-    var nodeName       = node.nodeName.toLowerCase();
-    var nodeClass      = node.className.toLowerCase();
-    var tableNode      = (nodeName == 'div') ? node.parentNode : node.offsetParent;
-    var tableNodeName  = tableNode.nodeName.toLowerCase();
-    var tableNodeClass = tableNode.className.toLowerCase();
-    try
-    {
-      while (tableNodeName != 'table' || tableNodeClass != 'message')
-      {
-        node           = tableNode;
-        nodeName       = tableNodeName;
-        nodeClass      = tableNodeClass;
-        tableNode      = (nodeName == 'div') ? node.parentNode : node.offsetParent;
-        tableNodeName  = tableNode.nodeName.toLowerCase();
-        tableNodeClass = tableNode.className.toLowerCase();
-      }
-    }
-    catch (e) { return; }
+    var msgComponents = GFutils.getMsgComponents(event.target, doc);
+    if (!msgComponents)
+      return;
 
-    var leftMsgData = GFutils.getMsgDataDisplay(doc);
-
-    var quoteHead, quoteMsg, msgNum, headNode, msgNode;
-    if ((!leftMsgData && node.parentNode.className != 'even') || nodeClass.indexOf('author') != -1)
-    {
-      // in message header
-      headNode = node;
-
-      if (!leftMsgData)
-        msgNode = tableNode.rows[node.parentNode.rowIndex + 1].cells[0];
-      else
-        msgNode = node.parentNode.cells[1];
-    }
-    else
-    {
-      // in message body
-      msgNode = node;
-
-      if (!leftMsgData)
-        headNode = tableNode.rows[node.parentNode.rowIndex - 1].cells[0];
-      else
-        headNode = node.parentNode.cells[0];
-    }
-    quoteMsg = msgNode.innerHTML;
-    quoteHead = headNode.textContent;
-    msgNum = '#' + headNode.id.substr(1);
+    var quoteMsg = msgComponents.body.innerHTML;
+    var quoteHead = msgComponents.header.textContent;
+    var msgNum = '#' + msgComponents.header.id.substr(1);
 
     // selection quoting
     var parentWin = new XPCNativeWrapper(document.commandDispatcher.focusedWindow,
@@ -80,7 +40,7 @@ var GFquote =
     // only use the selection if it's inside the clicked message and this
     // function is called from the context menu
     if (context && /\S/.test(selection.toString()) &&
-        selection.containsNode(msgNode, true))
+        selection.containsNode(msgComponents.body, true))
     {
       quoteMsg = selection.toString();
     }

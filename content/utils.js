@@ -368,6 +368,50 @@ var GFutils =
     return leftMsgData;
   },
 
+  getMsgComponents: function(node, doc)
+  {
+    var tableNode = node.offsetParent;
+    try
+    {
+      while (tableNode.nodeName.toLowerCase() != 'table'
+             || tableNode.className != 'message')
+      {
+        node = tableNode;
+        tableNode = node.offsetParent;
+      }
+    }
+    catch (e)
+    {
+      return false;
+    }
+
+    var leftMsgData = GFutils.getMsgDataDisplay(doc);
+    var header, body;
+    if ((!leftMsgData && node.parentNode.className != 'even')
+        || node.className.indexOf('author') != -1)
+    {
+      // in header
+      header = node;
+
+      if (!leftMsgData)
+        body = tableNode.rows[node.parentNode.rowIndex + 1].cells[0];
+      else
+        body = node.parentNode.cells[1];
+    }
+    else
+    {
+      // in body
+      body = node;
+
+      if (!leftMsgData)
+        header = tableNode.rows[node.parentNode.rowIndex - 1].cells[0];
+      else
+        header = node.parentNode.cells[0];
+    }
+
+    return { header: header, body: body };
+  },
+
   specialRegexpCharsEscape: function(str)
   {
     return str.replace(/([\\\[\](){}^.?*+|$])/g, '\\$1');

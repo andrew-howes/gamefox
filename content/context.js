@@ -64,7 +64,7 @@ var GFcontext =
         var node = gContextMenu.target;
 
         while (node.nodeName.toLowerCase() != 'table'
-               || node.className.toLowerCase() != 'message')
+               || node.className != 'message')
         {
           node = node.offsetParent;
         }

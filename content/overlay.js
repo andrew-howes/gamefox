@@ -869,29 +869,21 @@ var GameFOX =
 
     var node = event.target;
     var doc = node.ownerDocument;
-    var nodeName = node.nodeName.toLowerCase();
 
     // ignore double-click on images
-    if (nodeName == 'img')
+    if (node.nodeName.toLowerCase() == 'img')
     {
       return;
     }
 
-    var nodeClass = node.className.toLowerCase();
+    var tableNode = node.offsetParent;
     try
     {
-      var tableNode      = (nodeName == 'div') ? node.parentNode : node.offsetParent;
-      var tableNodeName  = tableNode.nodeName.toLowerCase();
-      var tableNodeClass = tableNode.className.toLowerCase();
-
-      while (tableNodeName != 'table' || tableNodeClass != 'message')
+      while (tableNode.nodeName.toLowerCase() != 'table'
+             || tableNode.className != 'message')
       {
-        node           = tableNode;
-        nodeName       = tableNodeName;
-        nodeClass      = tableNodeClass;
-        tableNode      = (nodeName == 'div') ? node.parentNode : node.offsetParent;
-        tableNodeName  = tableNode.nodeName.toLowerCase();
-        tableNodeClass = tableNode.className.toLowerCase();
+        node = tableNode;
+        tableNode = node.offsetParent;
       }
     }
     catch (e)
@@ -902,7 +894,7 @@ var GameFOX =
     var leftMsgData = GFutils.getMsgDataDisplay(doc);
 
     if (dblclickHead != 0 && ((!leftMsgData && node.parentNode.className != 'even')
-            || nodeClass.indexOf('author') != -1))
+            || node.className.indexOf('author') != -1))
     {
       switch (dblclickHead)
       {
