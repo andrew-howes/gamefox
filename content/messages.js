@@ -95,11 +95,7 @@ var GFmessages =
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
-    var ds = Cc['@mozilla.org/webshell;1']
-        .createInstance(Ci.nsIDocShellTreeItem)
-        .QueryInterface(Ci.nsIInterfaceRequestor);
-    get.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
-    get.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
+    var ds = GFlib.thirdPartyCookieFix(get);
     get.onreadystatechange = function()
     {
       if (get.readyState == 4)
@@ -113,11 +109,7 @@ var GFmessages =
 
         var post = new XMLHttpRequest();
         post.open('POST', uri + '&action=' + (closeTopic ? 'closetopic' : 'delete'));
-        var ds = Cc['@mozilla.org/webshell;1']
-            .createInstance(Ci.nsIDocShellTreeItem)
-            .QueryInterface(Ci.nsIInterfaceRequestor);
-        post.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
-        post.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
+        var ds = GFlib.thirdPartyCookieFix(post);
         post.onreadystatechange = function()
         {
           if (post.readyState == 4)
