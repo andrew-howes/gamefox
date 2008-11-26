@@ -8,6 +8,9 @@ class ReleaseGenerator:
         self.__dom = minidom.parse(file)
 
     def changeDOM(self):
+        for i in self.__dom.getElementsByTagName("em:version"):
+            i.appendChild(self.__dom.createTextNode(self.__version))
+
         for i in self.__dom.getElementsByTagName("em:updateLink"):
             i.appendChild(self.__dom.createTextNode(self.__updateLink))
 
@@ -27,6 +30,9 @@ class ReleaseGenerator:
 
     def printXML(self):
         print self.__dom.toxml()
+
+    def setVersion(self, version):
+        self.__version = version
 
     def setUpdateLink(self, link):
         self.__updateLink = link
@@ -76,6 +82,7 @@ def main():
 
     release = ReleaseGenerator()
 
+    release.setVersion(version)
     release.setUpdateLink(baseURI + xpi)
     release.setUpdateHash(hash)
     release.setUpdateInfoURL(baseURI + newsDir + version + ".xhtml")
