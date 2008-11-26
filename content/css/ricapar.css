@@ -43,18 +43,15 @@
 
     /* Basic Stuff */
 
-    html {
-        border-left: #66f 150px solid;
-    }
-    html,
     body {
         margin: 0;
-        padding: 0;
         font-family: arial, sans-serif;
         font-size: 9pt;
-    }
-    body {
         background: #fff !important;
+    }
+
+    body {
+        border-left: #66f 150px solid;
     }
 
     table {
@@ -155,8 +152,6 @@
     #platformlist {
         position: absolute;
         top: 0;
-        width: 100%;
-        text-align: center;
         color: #fff;
     }
     #platformlist a {
@@ -172,7 +167,7 @@
     #quicknav {
         position: absolute;
         top: 3px;
-        left: -150px;
+        left: 0;
         background: #66f url(http://www.gamefaqs.com/shared/bar2001.gif) no-repeat top left;
         padding: 50px 2px 2px 0;
         width: 148px;
@@ -187,7 +182,7 @@
         padding: 2px;
         position: absolute;
         top: 163px;
-        left: -151px;
+        left: -1px;
         z-index: 5;
     }
     #searchbox a {
