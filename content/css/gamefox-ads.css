@@ -1,7 +1,7 @@
 @-moz-document domain(gamefaqs.com)
 {
     .ad, .adbox, .rubics_netxp1_main, .prWrap, #gne_nav, #mpu_wrap, #footer,
-    iframe, img[alt="madison"]
+    iframe, img[alt="madison"], div[style="text-align: center;"]
     {
         display: none !important;
     }
