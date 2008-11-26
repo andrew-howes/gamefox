@@ -135,7 +135,7 @@
         background: #66f;
         color: #fff;
         text-align: center;
-        padding: 25px 0 3px 0;
+        padding-top: 2px;
         font-size: 1.1em;
     }
     #header a {
@@ -150,9 +150,10 @@
     }
 
     #platformlist {
-        position: absolute;
-        top: 0;
+        background: #66f;
         color: #fff;
+        text-align: center;
+        padding-bottom: 2px;
     }
     #platformlist a {
         margin: 0 2px;
@@ -195,7 +196,7 @@
     #searchbox input {
         width: 90px;
     }
-    #searchbox select {
+    #searchbox form select {
         display: none;
     }
 
@@ -449,5 +450,11 @@
     .gamefox-usernote {
         background-color: #ff0;
         text-align: center;
+    }
+
+    /* Favorites */
+    #gamefox-favorites-menu {
+        position: absolute;
+        margin-top: 4px !important;
     }
 }
