@@ -42,7 +42,7 @@ var GFquote =
     if (context && /\S/.test(selection.toString()) &&
         selection.containsNode(msgComponents.body, true))
     {
-      quoteMsg = selection.toString();
+      quoteMsg = GFutils.specialCharsEncode(selection.toString());
     }
 
     GFquote.format(event, quoteHead, quoteMsg, msgNum);
