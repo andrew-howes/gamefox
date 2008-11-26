@@ -1211,15 +1211,8 @@ function GameFOXLoader()
   document.getElementById('contentAreaContextMenu').addEventListener(
       'popupshowing', GFcontext.displayMenu, false);
 
-  try
-  {
-    var lastversion = GameFOX.prefs.getCharPref('version');
-  }
-  catch (e if e.name == 'NS_ERROR_UNEXPECTED') // pref isn't set, assume this is a first run
-  {
-    var lastversion = '';
-  }
-
+  var lastversion = GameFOX.prefs.prefHasUserValue('version') ?
+      GameFOX.prefs.getCharPref('version') : '';
   var version = Cc['@mozilla.org/extensions/manager;1'].
     getService(Ci.nsIExtensionManager).
     getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
@@ -1268,15 +1261,15 @@ function GameFOXLoader()
     if (version.indexOf('pre') != -1 && lastversion.indexOf('pre') == -1)
     {
       // new nightly install
-      window.setTimeout(function(){
-          GFlib.newTab('chrome://gamefox/content/nightly.html', 0)}, 10);
+      window.setTimeout(GFlib.newTab, 10,
+          'chrome://gamefox/content/nightly.html', 0);
     }
     else if (version.indexOf('pre') == -1 && lastversion != '')
     {
       // release notes for new stable release
-      window.setTimeout(function(){
-          GFlib.newTab('http://beyondboredom.net/projects/gamefox/releasenotes/'
-            + version + '.html', 0)}, 10);
+      window.setTimeout(GFlib.newTab, 10,
+          'http://beyondboredom.net/projects/gamefox/releasenotes/' + version +
+              '.html', 0);
     }
 
     GameFOX.prefs.setCharPref('version', version);
