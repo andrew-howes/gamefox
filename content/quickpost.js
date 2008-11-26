@@ -503,7 +503,7 @@ var GFquickpost =
       else if (this.value.charAt(this.value.length - 1) == '*')
         this.value = this.value.substr(0, this.value.length - 1);
     }
-    else
+    else if (this.name != 'br')
     {
       // encapsulate selected text
       var tagStrStart = GFquickpost.formatTag(this.name, false);
