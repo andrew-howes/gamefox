@@ -730,7 +730,7 @@ var GameFOX =
           a.className = 'gamefox-quote-link';
           a.href = '#';
           a.addEventListener('click', function(event){
-              GFquote.quote(event); event.preventDefault();}, false);
+              GFquote.quote(event, true); event.preventDefault();}, false);
 
           if (!onArchive || msgLinks.hasChildNodes())
             msgLinks.appendChild(leftMsgData ? doc.createElement('br') :

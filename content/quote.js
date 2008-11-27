@@ -19,7 +19,7 @@
 
 var GFquote =
 {
-  quote: function(event, context)
+  quote: function(event, allowSelection)
   {
     var doc = event.target.ownerDocument;
     if (!doc.getElementById('gamefox-message'))
@@ -38,8 +38,8 @@ var GFquote =
         'document', 'getSelection()');
     var selection = parentWin.getSelection();
     // only use the selection if it's inside the clicked message and this
-    // function is called from the context menu
-    if (context && /\S/.test(selection.toString()) &&
+    // function is not from a double-click
+    if (allowSelection && /\S/.test(selection.toString()) &&
         selection.containsNode(msgComponents.body, true))
     {
       quoteMsg = GFutils.specialCharsEncode(selection.toString());
