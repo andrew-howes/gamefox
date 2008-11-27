@@ -6,20 +6,16 @@
 
 /** CBS, CNET and GameSpot Removal **/
 @-moz-document domain("gamefaqs.com") {
-#gne_nav {display:none !important;}
-.gs {display:none !important;}
-.rubics_netxp1_main {display:none !important;}
-#rbx_netxp1_parent {display:none !important;}
-#footer #sitenav, #footer #broadnav, #footer #todayoncnet, #footer #cnetfooter, #footer #cbsi_f form, #cbsi_f noscript, #cbsi_f p {display:none !important;}
+#gne_nav, .gs, .rubics_netxp1_main, #rbx_netxp1_parent, #footer #sitenav, #footer #broadnav, #footer #todayoncnet, #footer #cnetfooter, #footer #cbsi_f form, #cbsi_f noscript, #cbsi_f p {display:none !important;}
 }
 
 /**On every page**/
 @-moz-document domain("gamefaqs.com") {
-#quicknav a {line-height:20px !important; background:url(http://img142.imageshack.us/img142/4439/quicknavdividertoadku9.gif) no-repeat top right !important; }
-#quicknav {height:24px !important; background-image:url(http://img71.imageshack.us/img71/9675/quicknavbgtoaduy7.gif) !important; }
+#quicknav a {line-height:20px !important; background:url(http://img142.imageshack.us/img142/4439/quicknavdividertoadku9.gif) no-repeat top right !important;}
+#quicknav {height:24px !important; background-image:url(http://img71.imageshack.us/img71/9675/quicknavbgtoaduy7.gif) !important;}
 #platformlist .nav {line-height:1px !important;}
 #platformlist .jumper {padding-top:3px !important;}
-#platformlist {height:24px !important; background-image:url(http://img84.imageshack.us/img84/6679/platformlistbgtoadep5.gif) !important; }
+#platformlist {height:24px !important; background-image:url(http://img84.imageshack.us/img84/6679/platformlistbgtoadep5.gif) !important;}
 #logo {background-image:url(http://www.gamefaqs.com/images/default/logo_clean.gif) !important;}
 #container {width:990px !important;}
 body {background-image:url(http://img152.imageshack.us/img152/6990/bg1000pxzn2.gif) !important;}
@@ -28,253 +24,125 @@ body {background-image:url(http://img152.imageshack.us/img152/6990/bg1000pxzn2.g
 
 /** FAQ Fix - makes FAQ background go back to normal **/
 body>#body {background:white !important;}
-body>#footer>.lefttext {background:black !important;}
-body>#footer>.righttext {background:black !important;}
-body>#footer {background:black !important;}
+body>#footer, body>#footer>.lefttext, body>#footer>.righttext {background:black !important;}
 body>#footer {width:100% !important;}
 }
 
 /** Index page **/
 @-moz-document url("http://www.gamefaqs.com/index.php"), url("http://www.gamefaqs.com/") {
-
-#full_col_wrap {width:1000px !important; background:none !important;}
+#full_col_wrap {width:1000px !important;}
 #main_col_wrap {width:664px !important;}
-#main_col {width:655px !important; }
-.today {width:645px !important;}
-.topten {width:645px !important; }
-.topten .pod {width:310px !important; }
-#side_col_wrap, #side_col {background:none !important;}
-#main_col .gs {width:645px !important;}
-#main_col .gs .pod {width:645px !important;}
-#main_col .gs .pod .body {width:629px !important;}
-#main_col .gs .pod .body .item {width:629px !important;}
+#main_col {width:655px !important;}
+.topten .pod {width:310px !important;}
+#side_col_wrap, #side_col, #full_col_wrap {background:none !important;}
+#main_col .gs, #main_col .gs .pod, .today, .topten {width:645px !important;}
+#main_col .gs .pod .body, #main_col .gs .pod .body .item {width:629px !important;}
 #main_col .gs .pod .body .item .details {width:400px !important;}
 }
 
 /**Boards List**/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/index.php") {
-
-td {padding-top: 3px !important; padding-bottom: 3px !important;}
-#full_col_wrap {width:1000px !important; background:none !important;}
+td {padding-top:3px !important; padding-bottom:3px !important;}
+#full_col_wrap {width:1000px !important;}
 #main_col_wrap {width:664px !important;}
-#main_col {width:655px !important; }
+#main_col, .board {width:655px !important;}
 #board_wrap {width:665px !important;}
-.board {width:655px !important; }
-#side_col_wrap, #side_col {background:none !important;}
-
-
-
+#side_col_wrap, #side_col, #full_col_wrap {background:none !important;}
 }
 
 /**Topic List and Topic Search**/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/gentopic"), url-prefix("http://www.gamefaqs.com/boards/search") {
-
 .board .topics td{padding-top:3px !important; padding-bottom:3px !important;}
-.board {width:976px !important;}
-#board_wrap {width:976px !important;}
-.board_nav, .board_nav .body{width:976px !important;}
+#board_wrap, #mpu_wrap, .board, .board_nav, .board_nav .body {width:976px !important;}
 img[src*="topic.gif"] {width:13px !important;} /**Remove this line to see full size active topic icons**/
 img[src*="topic_closed.gif"] {width:13px !important;} /**Remove this line to see full size closed topic icons**/
-#mpu_wrap {width:976px !important;}
 #board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /**Message List, Message Detail, Moderation Detail**/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/genmessage"), url-prefix("http://www.gamefaqs.com/boards/detail.php"), url-prefix("http://www.gamefaqs.com/boards/moddetl.php") {
-
 .board .message td {padding-top:1px !important; padding-bottom:1px !important;}
-.board {width:976px !important;}
-#board_wrap {width:976px !important;}
-.board_nav .body {width:976px !important;}
+#board_wrap, .board, .board_nav .body {width:976px !important;}
 #board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /** Post Preview, New Post, New Topic **/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/post.php") {
-
-#board_wrap {width:976px !important;}
-.board {width:976px !important;}
-.pod {width:976px !important;}
+#board_wrap, .board, .pod {width:976px !important;}
 #board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 textarea {width:954px !important;}
 }
 
 /**Sponsored Links**/
 @-moz-document url-prefix("http://bwp.gamefaqs.com/search") {
-
 /** This CSS makes the Sponsored Links get the main website background, which it shouldnt be doing. This section fixes the problem. **/
 .bwp {background:none !important;}
-
 }
 
-
-/**What's New**/
-@-moz-document url-prefix("http://www.gamefaqs.com/new/") {
-
-#content {width:986px !important;}
-#sky_col_wrap {width:986px !important; background:none !important;}
+/**What's New, Contributor Central, Features, Search, System List**/
+@-moz-document url-prefix("http://www.gamefaqs.com/new/"), url-prefix("http://www.gamefaqs.com/contribute"), url-prefix("http://www.gamefaqs.com/features"), url-prefix("http://www.gamefaqs.com/search"), url-prefix("http://www.gamefaqs.com/systems.html") {
+#content, #sky_col_wrap {width:986px !important;}
 #main_col_wrap {width:800px !important;}
-#main_col {width: 790px !important;}
-#side_col_wrap, #side_col {background:none !important;}
-#main_col .pod {width:790px !important;}
-#main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
-}
-
-/**Contributor Central**/
-@-moz-document url-prefix("http://www.gamefaqs.com/contribute") {
-
-#content {width:986px !important;}
-#sky_col_wrap {width:986px !important; background:none !important;}
-#main_col_wrap {width:800px !important;}
-#main_col {width: 790px !important;}
-#side_col_wrap, #side_col {background:none !important;}
-#main_col .pod {width:790px !important;}
-#main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
-}
-
-/**Features**/
-@-moz-document url-prefix("http://www.gamefaqs.com/features") {
-
-#content {width:986px !important;}
-#sky_col_wrap {width:986px !important; background:none !important;}
-#main_col_wrap {width:800px !important;}
-#main_col {width: 790px !important;}
-#side_col_wrap, #side_col {background:none !important;}
-#main_col .pod {width:790px !important;}
-#main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
-
-}
-
-/**Search**/
-@-moz-document url-prefix("http://www.gamefaqs.com/search") {
-
-#content {width:986px !important;}
-#sky_col_wrap {width:986px !important; background:none !important;}
-#main_col_wrap {width:800px !important;}
-#main_col {width: 790px !important;}
-#side_col_wrap, #side_col {background:none !important;}
-#main_col .pod {width:790px !important;}
+#main_col, #main_col .pod {width:790px !important;}
+#sky_col_wrap, #side_col_wrap, #side_col {background:none !important;}
 #main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /**Poll of the Day**/
 @-moz-document url-prefix("http://www.gamefaqs.com/poll") {
-
-#content {width:986px !important;}
-#sky_col_wrap {width:986px !important; background:none !important;}
+#content, #sky_col_wrap {width:986px !important;}
 #main_col_wrap {width:800px !important;}
-#main_col {width: 790px !important;}
-#side_col_wrap, #side_col {background:none !important;}
-#main_col .pod {width:790px !important;}
-}
-
-/** System List **/
-@-moz-document url-prefix("http://www.gamefaqs.com/systems.html") {
-
-#content {width:986px !important;}
-#sky_col_wrap {width:986px !important; background:none !important;}
-#main_col_wrap {width:800px !important;}
-#main_col {width: 790px !important;}
-#side_col_wrap, #side_col {background:none !important;}
-#main_col .pod {width:790px !important;}
-#main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
-
+#main_col, #main_col .pod {width:790px !important;}
+#sky_col_wrap, #side_col_wrap, #side_col {background:none !important;}
 }
 
 /** Game and Platform Pages **/
 @-moz-document url-prefix("http://www.gamefaqs.com/console/"), url-prefix("http://www.gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/computer/"), url-prefix("http://www.gamefaqs.com/coinop/"), url-prefix("http://www.gamefaqs.com/portable/") {
-
-#content {width:986px !important;}
-#sky_col_wrap {width:986px !important; background:none !important;}
-#full_col_wrap {width:986px !important; background:none !important;}
+#content, #sky_col_wrap, #full_col_wrap {width:986px !important;}
 #main_col_wrap {width:800px !important;}
-#main_col {width: 790px !important;}
-#side_col_wrap, #side_col {background:none !important;}
-#main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:790px !important;}
+#sky_col_wrap, #side_col_wrap, #side_col, #full_col_wrap {background:none !important;}
+#main_col, #main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:790px !important;}
 .pod .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 .gs .pod .head h1{background-image:url(http://img158.imageshack.us/img158/2733/headbglitetoadae6.gif) !important;}
 .topten .pod {width:365px !important;}
 }
 
-
 /**User, Karma, My Posts, Moderations, Tracked Topics, Ignore List, Board Manager, User Contact Info**/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/user.php"), url-prefix("http://www.gamefaqs.com/boards/karma.php"), url-prefix("http://www.gamefaqs.com/boards/myposts.php"), url-prefix("http://www.gamefaqs.com/boards/modhist.php"), url-prefix("http://www.gamefaqs.com/boards/tracked.php"), url-prefix("http://www.gamefaqs.com/boards/index.php?action=ignorelist"), url-prefix("http://www.gamefaqs.com/boards/bman.php"), url-prefix("http://www.gamefaqs.com/boards/contact.php") {
-
 td{padding-top:3px !important; padding-bottom:3px !important;}
-#board_wrap {width:976px !important;}
-.board_nav, .board_nav .body{width:976px !important;}
+#board_wrap, #mpu_wrap, .board_nav, .board_nav .body {width:976px !important;}
 img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topic icons**/
-#mpu_wrap {width:976px !important;}
 #board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /** Manage Account (Account Settings) **/
 @-moz-document url-prefix("http://www.gamefaqs.com/user/") {
-
-#sky_col_wrap {width:986px !important; background:none !important;}
+#sky_col_wrap {width:986px !important;}
 #main_col_wrap {width:800px !important;}
-#side_col_wrap, #side_col {background:none !important;}
+#sky_col_wrap, #side_col_wrap, #side_col {background:none !important;}
 #main_col .pod {width:790px !important;}
 #main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
-
-
-/**GameFOX Stuff**/
-/** Some code here is based on code that is integrated with GameFOX **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/") {
-
-}
-
-
-
 /**Ad Removal**/
 @-moz-document domain("gamefaqs.com") {
-
-#mpu_wrap {display:none !important;}
-.ad {display:none !important;}
-#sponsored_links {display:none !important;}
+#mpu_wrap, #sponsored_links, .ad {display:none !important;}
 }
 
 /**Resize certain elements after removing ads**/
-/**What's New**/
-@-moz-document url-prefix("http://www.gamefaqs.com/new/") {
-#main_col_wrap {width:986px !important;}
-#main_col {width: 986px !important;}
+/**What's New, Contributor Central, Features, Search, Poll of the Day, System List**/
+@-moz-document url-prefix("http://www.gamefaqs.com/new/"), url-prefix("http://www.gamefaqs.com/contribute"), url-prefix("http://www.gamefaqs.com/features"), url-prefix("http://www.gamefaqs.com/search"), url-prefix("http://www.gamefaqs.com/poll"), url-prefix("http://www.gamefaqs.com/systems.html") {
+#main_col_wrap, #main_col {width:986px !important;}
 #main_col .pod {width:976px !important;}
-}/**Contributor Central**/
-@-moz-document url-prefix("http://www.gamefaqs.com/contribute") {
-#main_col_wrap {width:986px !important;}
-#main_col {width: 986px !important;}
-#main_col .pod {width:976px !important;}
-}/**Features**/
-@-moz-document url-prefix("http://www.gamefaqs.com/features") {
-#main_col_wrap {width:986px !important;}
-#main_col {width: 986px !important;}
-#main_col .pod {width:976px !important;}
-}/**Search**/
-@-moz-document url-prefix("http://www.gamefaqs.com/search") {
-#main_col_wrap {width:986px !important;}
-#main_col {width: 986px !important;}
-#main_col .pod {width:976px !important;}
-}/**Poll of the Day**/
-@-moz-document url-prefix("http://www.gamefaqs.com/poll") {
-#main_col_wrap {width:986px !important;}
-#main_col {width: 986px !important;}
-#main_col .pod {width:976px !important;}
-}/** System List **/
-@-moz-document url-prefix("http://www.gamefaqs.com/systems.html") {
-#main_col_wrap {width:986px !important;}
-#main_col {width: 986px !important;}
-#main_col .pod {width:976px !important;}
-}/** Game and Platform Pages **/
+}
+/** Game and Platform Pages **/
 @-moz-document url-prefix("http://www.gamefaqs.com/console/"), url-prefix("http://www.gamefaqs.com/portable/"), url-prefix("http://www.gamefaqs.com/computer/"), url-prefix("http://www.gamefaqs.com/coinop/"), url-prefix("http://www.gamefaqs.com/portable/") {
-#main_col_wrap {width:986px !important;}
-#main_col {width: 986px !important;}
+#main_col_wrap, #main_col {width:986px !important;}
 #main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:976px !important;}
 .topten .pod {width:480px !important;}
 .hub_nav {width:966px !important;}
-}/** Manage Account (Account Settings) **/
+}
+/** Manage Account (Account Settings) **/
 @-moz-document url-prefix("http://www.gamefaqs.com/user/") {
 #main_col_wrap {width:986px !important;}
 #main_col .pod {width:976px !important;}
