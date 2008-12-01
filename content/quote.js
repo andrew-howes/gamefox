@@ -83,8 +83,14 @@ var GFquote =
     var quotes = doc.evaluate('./i/p', bodyDOM, null, XPathResult.
         ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < quotes.snapshotLength; i++)
-      quotes.snapshotItem(i).parentNode.replaceChild(
-          doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
+    {
+      if (quotes.snapshotLength == 1 && quotes.snapshotItem(i).parentNode
+          .previousSibling == null)
+        bodyDOM.removeChild(quotes.snapshotItem(i).parentNode);
+      else
+        quotes.snapshotItem(i).parentNode.replaceChild(
+            doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
+    }
 
     body = GFutils.specialCharsDecode(bodyDOM.innerHTML.GFtrim());
 
