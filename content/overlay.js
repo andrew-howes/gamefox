@@ -718,7 +718,8 @@ var GameFOX =
           a.addEventListener('click', GameFOX.toggleFilter, false);
 
           if (!onArchive || msgLinks.hasChildNodes())
-            msgLinks.appendChild(leftMsgData ? doc.createElement('br') : doc.createTextNode(' | '));
+            msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
+                doc.createElement('br') : doc.createTextNode(' | '));
           msgLinks.appendChild(a);
         }
 
@@ -733,8 +734,8 @@ var GameFOX =
               GFquote.quote(event, true); event.preventDefault();}, false);
 
           if (!onArchive || msgLinks.hasChildNodes())
-            msgLinks.appendChild(leftMsgData ? doc.createElement('br') :
-                doc.createTextNode(' | '));
+            msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
+                doc.createElement('br') : doc.createTextNode(' | '));
           msgLinks.appendChild(a);
         }
 
