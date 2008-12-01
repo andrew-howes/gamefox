@@ -1211,8 +1211,7 @@ function GameFOXLoader()
   document.getElementById('contentAreaContextMenu').addEventListener(
       'popupshowing', GFcontext.displayMenu, false);
 
-  var lastversion = GameFOX.prefs.prefHasUserValue('version') ?
-      GameFOX.prefs.getCharPref('version') : '';
+  var lastversion = GameFOX.prefs.getCharPref('version');
   var version = Cc['@mozilla.org/extensions/manager;1'].
     getService(Ci.nsIExtensionManager).
     getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
@@ -1251,8 +1250,9 @@ function GameFOXLoader()
       GFutils.setString('signature.serialized', sigs.toSource());
     }
 
-    if (lastversion == '') // first run
+    if (lastversion == '')
     {
+      // first run
       GFuserlist.add();
       window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
         'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar', true);
