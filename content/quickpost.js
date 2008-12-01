@@ -487,27 +487,20 @@ var GFquickpost =
     var doc = GFlib.getDocument(event);
 
     var quickpost = doc.getElementsByName('message')[0];
+    var tagStrStart = GFquickpost.formatTag(this.name, false);
+    var tagStrEnd = GFquickpost.formatTag(this.name, true);
 
     if (quickpost.selectionStart == quickpost.selectionEnd)
     {
-      var tagStr = GFquickpost.formatTag(this.name, this.tagOpen);
-      var endPosition = quickpost.selectionEnd + tagStr.length;
+      var endPosition = quickpost.selectionEnd + tagStrStart.length;
 
       quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
-        + tagStr
+        + tagStrStart + (this.name != 'br' ? tagStrEnd : '')
         + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
-
-      this.tagOpen = (!this.tagOpen && this.name != 'br');
-      if (this.tagOpen)
-        this.value = this.value + '*';
-      else if (this.value.charAt(this.value.length - 1) == '*')
-        this.value = this.value.substr(0, this.value.length - 1);
     }
     else if (this.name != 'br')
     {
       // encapsulate selected text
-      var tagStrStart = GFquickpost.formatTag(this.name, false);
-      var tagStrEnd = GFquickpost.formatTag(this.name, true);
       var endPosition = quickpost.selectionEnd + tagStrStart.length +
         tagStrEnd.length;
 
@@ -544,7 +537,6 @@ var GFquickpost =
       tagbutton.type = 'submit';
       tagbutton.value = tags[i + 1];
       tagbutton.name = tags[i];
-      tagbutton.tagOpen = false;
 
       tagbutton.addEventListener('click', GFquickpost.insertTag, false);
 
