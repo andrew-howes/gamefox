@@ -495,6 +495,36 @@ var GFutils =
     }
 
     return top;
+  },
+
+  getAccesskeyPrefix: function()
+  {
+    var prefix = '';
+    var rootPrefs = Cc['@mozilla.org/preferences-service;1']
+      .getService(Ci.nsIPrefBranch);
+    if (rootPrefs.getPrefType('ui.key.generalAccessKey') == rootPrefs.PREF_INT)
+    {
+      var generalAccess = rootPrefs.getIntPref('ui.key.generalAccessKey');
+      var generalAccessKeys = { 16: 'shift', 17: 'ctrl', 18: 'alt', 224: 'meta' };
+      if (generalAccess == -1)
+      {
+        if (rootPrefs.getPrefType('ui.key.contentAccess') == rootPrefs.PREF_INT)
+        {
+          var contentAccess = rootPrefs.getIntPref('ui.key.contentAccess');
+          var contentAccessKeys = { 1: 'shift', 2: 'ctrl', 4: 'alt', 8: 'meta' };
+          for (var i in contentAccessKeys)
+          {
+            if (contentAccess & i)
+              prefix += contentAccessKeys[i] + '-';
+          }
+        }
+      }
+      else if (generalAccess in generalAccessKeys)
+      {
+        prefix = generalAccessKeys[generalAccess] + '-';
+      }
+    }
+    return prefix;
   }
 };
 

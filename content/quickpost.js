@@ -22,6 +22,7 @@ var GFquickpost =
   appendForm: function(doc, div, newTopic)
   {
     var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
+    var accesskeyPrefix = GFutils.getAccesskeyPrefix();
 
     var form = doc.createElement('form');
     div.appendChild(form);
@@ -87,7 +88,7 @@ var GFquickpost =
       postbutton.type = 'button';
       postbutton.name = 'quickpost';
       postbutton.value = 'Post Message';
-      postbutton.title = 'Post Message [z]';
+      postbutton.title = 'Post Message [' + accesskeyPrefix + 'z]';
       postbutton.accessKey = 'z';
       postbutton.addEventListener('click', GFquickpost.post, false);
     }
@@ -100,7 +101,7 @@ var GFquickpost =
       previewbutton.type = 'submit';
       previewbutton.name = 'post';
       previewbutton.value = 'Preview Message';
-      previewbutton.title = 'Preview Message [x]';
+      previewbutton.title = 'Preview Message [' + accesskeyPrefix + 'x]';
       previewbutton.accessKey = 'x';
 
       var spellchkbutton = doc.createElement('input');
@@ -109,7 +110,7 @@ var GFquickpost =
       spellchkbutton.type = 'submit';
       spellchkbutton.name = 'post';
       spellchkbutton.value = 'Preview and Spellcheck Message';
-      spellchkbutton.title = 'Preview and Spellcheck Message [c]';
+      spellchkbutton.title = 'Preview and Spellcheck Message [' + accesskeyPrefix + 'c]';
       spellchkbutton.accessKey = 'c';
 
       var resetbutton = doc.createElement('input');
@@ -117,7 +118,7 @@ var GFquickpost =
       form.appendChild(resetbutton);
       resetbutton.type = 'reset';
       resetbutton.value = 'Reset';
-      resetbutton.title = 'Reset [v]';
+      resetbutton.title = 'Reset [' + accesskeyPrefix + 'v]';
       resetbutton.accessKey = 'v';
       resetbutton.addEventListener('click', GFquickpost.resetPost, false);
     }
