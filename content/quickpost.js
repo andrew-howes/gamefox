@@ -514,6 +514,9 @@ var GFquickpost =
 
     quickpost.setSelectionRange(endPosition, endPosition);
     quickpost.focus();
+
+    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
+      GFmessages.updateMessageCount(doc);
   },
 
   createHTMLButtons: function(doc)
