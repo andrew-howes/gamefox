@@ -327,6 +327,10 @@ var GameFOX =
             refChild.parentNode.insertBefore(button, refChild);
             refChild.parentNode.insertBefore(doc.createTextNode(' '), refChild);
       }
+
+      // GFCode whitespace control
+      doc.getElementsByName('message')[0].form.addEventListener('submit',
+          GFquickpost.removeGFCodeWhitespace, false);
     }
 
     /* User Information (user.php) */

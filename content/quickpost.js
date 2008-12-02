@@ -29,6 +29,7 @@ var GFquickpost =
     form.id = 'gamefox-quickpost-form';
     form.action = 'post.php' + GFutils.stripQueryString(doc.location.search);
     form.method = 'post';
+    form.addEventListener('submit', GFquickpost.removeGFCodeWhitespace, false);
 
     if (newTopic)
     {
@@ -547,5 +548,13 @@ var GFquickpost =
       span.appendChild(doc.createTextNode(' '));
     }
     return span;
+  },
+
+  removeGFCodeWhitespace: function(event)
+  {
+    if (!GameFOX.prefs.getBoolPref('quote.controlwhitespace'))
+      return false;
+    var message = event.target.elements.namedItem('message');
+    message.value = message.value.replace(/<\/p>\s*<\/i>\n+/g, '</p></i>\n');
   }
 };
