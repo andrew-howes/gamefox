@@ -428,8 +428,8 @@
     <groupbox>
       <caption label="&style.stylesheets.label;"/>
       <description>&style.deschelp;</description>
-      <tree id="css-tree" rows="8" editable="true" seltype="single" hidecolumnpicker="true"
-        onselect="GFcss.onselect();">
+      <tree id="css-tree" rows="15" editable="true" seltype="single" hidecolumnpicker="true"
+        onselect="GFcss.onselect();" contextmenu="css-tree-contextmenu">
         <treecols>
           <treecol label="&style.tree.name;" primary="true" flex="1"/>
           <treecol label="&style.tree.desc;" width="100"/>
@@ -439,26 +439,16 @@
 
         <treechildren/>
       </tree>
-      <hbox pack="end">
-        <button id="css-remove" disabled="true" icon="remove"
-          oncommand="GFcss.removeWithTree();" label="&style.tree.delete;"/>
-      </hbox>
-    </groupbox>
-
-    <groupbox>
-      <caption label="&style.import.label;"/>
-      <hbox>
-        <label value="&style.import.uri;" style="margin-top: 7px"/>
-        <textbox flex="1" id="css-import-file" value=""/>
-        <button oncommand="GFcss.filepicker();" label="&style.import.browse;..."/>
-      </hbox>
-      <hbox pack="end">
-        <button icon="add" oncommand="GFcss.userimport();"
-          label="&style.import.submit;"/>
-      </hbox>
+      <menupopup id="css-tree-contextmenu"
+        onpopupshowing="GFcss.onpopupshowing();">
+        <menuitem label="&style.tree.delete;"
+          oncommand="GFcss.removeWithTree();" id="css-remove"/>
+      </menupopup>
     </groupbox>
 
     <hbox pack="center">
+      <button oncommand="GFcss.userimport(GFcss.filepicker());" icon="add"
+        label="&style.import;"/>
       <button oncommand="GFcss.reload();" icon="refresh" label="&style.reload;"/>
       <button oncommand="GFoptions.openCSSDirectory();" icon="open" label="&style.edit;"/>
     </hbox>

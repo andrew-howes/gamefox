@@ -84,14 +84,14 @@ var GFcss =
     }
   },
 
-  userimport: function()
+  userimport: function(uri)
   {
     // TODO: make sure all errors result in alert
     // TODO: if name conflict, option to overwrite or rename
-    var uri = document.getElementById('css-import-file').value;
     if (!/\.(css|txt)$/.test(uri))
     {
-      GFlib.alert('Filename must end in .css or .txt');
+      if (uri.length > 0)
+        GFlib.alert('Filename must end in .css or .txt');
       return;
     }
 
@@ -101,8 +101,6 @@ var GFcss =
 
     this.populate(document.getElementById('css-tree'));
     this.reload();
-
-    document.getElementById('css-import-file').value = '';
   },
 
   filepicker: function()
@@ -110,12 +108,12 @@ var GFcss =
     var filepicker = Cc['@mozilla.org/filepicker;1'].createInstance(
         Ci.nsIFilePicker);
     filepicker.init(window, 'Import Stylesheet', Ci.nsIFilePicker.modeOpen);
-    filepicker.appendFilter('Stylesheets (*.css;*.txt)', '*.css; *.txt');
+    filepicker.appendFilter('Stylesheets (*.css; *.txt)', '*.css; *.txt');
 
     if (filepicker.show() == Ci.nsIFilePicker.returnOK)
     {
       var uri = filepicker.fileURL.QueryInterface(Ci.nsIURI);
-      document.getElementById('css-import-file').value = uri.spec;
+      return uri.spec;
     }
   },
 
@@ -309,7 +307,7 @@ var GFcss =
     this.treeView.toggleOpenState(0);
   },
 
-  onselect: function()
+  onpopupshowing: function()
   {
     try
     {
