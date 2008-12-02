@@ -42,6 +42,7 @@
 <!ENTITY main.posting.quickpost.topics "QuickPost link on topic lists">
 <!ENTITY main.posting.quickpost.messages "QuickPost form on message lists">
 <!ENTITY main.posting.quickpost.htmlbuttons "Show HTML buttons">
+<!ENTITY main.posting.quickpost.htmlbuttons.gfcode "Show GFCode buttons">
 <!ENTITY main.posting.quickpost.otherbuttons "Show preview/reset buttons">
 <!ENTITY main.posting.quickpost.resetconfirm "Confirm resetting post">
 <!ENTITY main.posting.quickpost.resetnewsig "Choose a new signature when resetting post">

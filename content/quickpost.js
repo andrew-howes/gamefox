@@ -530,11 +530,15 @@ var GFquickpost =
         'em', 'Emphasis',
         'strong', 'Strong Emphasis',
         'p', 'Paragraph',
-        'br', 'Break',
-        // GameFOX
-        'i,p', 'Quote',
-        'em,p', 'Code'
+        'br', 'Break'
         );
+    // GameFOX
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
+    {
+      tags.push('i,p'); tags.push('Quote');
+      tags.push('em,p'); tags.push('Code');
+    }
+
     for (var i = 0; i < tags.length; i += 2)
     {
       var tagbutton = doc.createElement('input');

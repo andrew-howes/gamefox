@@ -80,6 +80,8 @@
       <preference id="posting-charcounts" name="gamefox.elements.charcounts" type="bool"/>
       <preference id="posting-htmlbuttons"
         name="gamefox.elements.quickpost.htmlbuttons" type="bool"/>
+      <preference id="posting-htmlbuttons-gfcode"
+        name="gamefox.elements.quickpost.htmlbuttons.gfcode" type="bool"/>
       <preference id="posting-otherbuttons" name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
       <preference id="posting-link" name="gamefox.elements.quickpost.link" type="bool"/>
       <preference id="posting-form" name="gamefox.elements.quickpost.form" type="bool"/>
@@ -236,6 +238,8 @@
               <checkbox preference="posting-form" label="&main.posting.quickpost.messages;"/>
               <checkbox preference="posting-htmlbuttons"
                 label="&main.posting.quickpost.htmlbuttons;"/>
+              <checkbox class="indent" preference="posting-htmlbuttons-gfcode"
+                label="&main.posting.quickpost.htmlbuttons.gfcode;"/>
               <checkbox preference="posting-otherbuttons" label="&main.posting.quickpost.otherbuttons;"/>
               <checkbox preference="posting-resetconfirm"
                 label="&main.posting.quickpost.resetconfirm;"/>
