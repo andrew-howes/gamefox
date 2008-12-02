@@ -49,32 +49,34 @@
           <observes element="viewGamefoxSidebar" attribute="checked"/>
         </menuitem>
 
-        <menu id="gamefox-tags" label="&menu.tags.label;">
+        <menu id="gamefox-tags" label="&menu.tags.label;"
+          accesskey="&menu.tags.accesskey;">
           <menupopup id="gamefox-tags-menu" onpopupshowing="GFtags.populate(1);"/>
         </menu>
 
-        <menu id="gamefox-accounts" label="&menu.accounts.label;">
+        <menu id="gamefox-accounts" label="&menu.accounts.label;"
+          accesskey="&menu.accounts.accesskey;">
           <menupopup id="gamefox-accounts-menu" onpopupshowing="GFaccounts.populate();"/>
         </menu>
 
-        <menu id="gamefox-favorites" label="&menu.favorites.label;">
+        <menu id="gamefox-favorites" label="&menu.favorites.label;"
+          accesskey="&menu.favorites.accesskey;">
           <menupopup id="gamefox-favorites-menu" onpopupshowing="GameFOX.showFavs();"/>
         </menu>
       </menupopup>
     </menu>
 
-    <menu id="gamefox-context-pages" label="&menu.pages.label;"
-      accesskey="&menu.pages.accesskey;">
-      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
-    </menu>
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
-      accesskey="&menu.quote.accesskey;" oncommand="GFquote.quote(gContextMenu, true);"/>
-    <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
-      accesskey="&menu.tagtopic.accesskey;" oncommand="GFtags.add(gContextMenu);"/>
+      oncommand="GFquote.quote(gContextMenu, true);"/>
     <menu id="gamefox-context-usergroups" label="&menu.usergroups.label;">
       <menupopup id="gamefox-context-usergroups-list"
         onpopupshowing="GFuserlist.fillMenu(gContextMenu);"/>
     </menu>
+    <menu id="gamefox-context-pages" label="&menu.pages.label;">
+      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
+    </menu>
+    <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
+      oncommand="GFtags.add(gContextMenu);"/>
   </popup>
 
   <!-- firefox tools menu -->
