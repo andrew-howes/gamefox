@@ -330,7 +330,7 @@ var GameFOX =
 
       // GFCode whitespace control
       doc.getElementsByName('message')[0].form.addEventListener('submit',
-          GFquickpost.removeGFCodeWhitespace, false);
+          GFquickpost.removeGFCodeWhitespaceListener, false);
     }
 
     /* User Information (user.php) */

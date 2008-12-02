@@ -29,7 +29,8 @@ var GFquickpost =
     form.id = 'gamefox-quickpost-form';
     form.action = 'post.php' + GFutils.stripQueryString(doc.location.search);
     form.method = 'post';
-    form.addEventListener('submit', GFquickpost.removeGFCodeWhitespace, false);
+    form.addEventListener('submit', GFquickpost.removeGFCodeWhitespaceListener,
+        false);
 
     if (newTopic)
     {
@@ -415,7 +416,8 @@ var GFquickpost =
       postBody = 'topictitle=' + GFutils.URLEncode(topicTitle.value) + '&';
     }
 
-    var message = doc.getElementsByName('message')[0].value;
+    var message = GFquickpost.removeGFCodeWhitespace(doc
+        .getElementsByName('message')[0].value);
 
     if (!GFlib.onPage(doc, 'post')
         && GameFOX.prefs.getIntPref('signature.addition') == 1)
@@ -554,11 +556,16 @@ var GFquickpost =
     return span;
   },
 
-  removeGFCodeWhitespace: function(event)
+  removeGFCodeWhitespace: function(str)
+  {
+    return str.replace(/<\/p>\s*<\/i>\n*/g, '</p></i>\n');
+  },
+
+  removeGFCodeWhitespaceListener: function(event)
   {
     if (!GameFOX.prefs.getBoolPref('quote.controlwhitespace'))
       return false;
     var message = event.target.elements.namedItem('message');
-    message.value = message.value.replace(/<\/p>\s*<\/i>\n+/g, '</p></i>\n');
+    message.value = GFquickpost.removeGFCodeWhitespace(message.value);
   }
 };
