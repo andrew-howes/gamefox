@@ -429,7 +429,7 @@
       <caption label="&style.stylesheets.label;"/>
       <description>&style.deschelp;</description>
       <tree id="css-tree" rows="15" editable="true" seltype="single" hidecolumnpicker="true"
-        onselect="GFcss.onselect();" contextmenu="css-tree-contextmenu">
+        contextmenu="css-tree-contextmenu">
         <treecols>
           <treecol label="&style.tree.name;" primary="true" flex="1"/>
           <treecol label="&style.tree.desc;" width="100"/>

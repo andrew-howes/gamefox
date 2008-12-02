@@ -111,10 +111,8 @@ var GFcss =
     filepicker.appendFilter('Stylesheets (*.css; *.txt)', '*.css; *.txt');
 
     if (filepicker.show() == Ci.nsIFilePicker.returnOK)
-    {
-      var uri = filepicker.fileURL.QueryInterface(Ci.nsIURI);
-      return uri.spec;
-    }
+      return filepicker.fileURL.spec;
+    return '';
   },
 
   add: function(cat, uri, filename, title, desc, author, enabled, overwrite)
@@ -309,16 +307,8 @@ var GFcss =
 
   onpopupshowing: function()
   {
-    try
-    {
-      var category = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][5];
-      document.getElementById('css-remove').setAttribute('disabled', category != 'user');
-    }
-    catch (e)
-    {
-      // nothing selected
-      document.getElementById('css-remove').setAttribute('disabled', true);
-    }
+    var category = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][5];
+    document.getElementById('css-remove').setAttribute('disabled', category != 'user');
   },
 
   setCell: function(idx, column, value)
