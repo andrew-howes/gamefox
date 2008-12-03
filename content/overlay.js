@@ -1207,10 +1207,10 @@ var GameFOX =
     }
   },
 
-  openOptionsDialog: function()
+  openOptionsDialog: function(firstRun)
   {
     window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
-        'chrome,centerscreen,toolbar');
+        'chrome,centerscreen,toolbar', firstRun);
   }
 };
 
@@ -1265,7 +1265,7 @@ function GameFOXLoader()
     {
       // first run
       GFuserlist.add();
-      window.setTimeout(GameFOX.openOptionsDialog, 10);
+      window.setTimeout(GameFOX.openOptionsDialog, 10, true);
     }
 
     if (version.indexOf('pre') != -1 && lastversion.indexOf('pre') == -1)
