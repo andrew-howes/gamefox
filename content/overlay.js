@@ -1205,6 +1205,12 @@ var GameFOX =
       item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + favs[i].id + '", 0)');
       favList.appendChild(item);
     }
+  },
+
+  openOptionsDialog: function()
+  {
+    window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
+        'chrome,centerscreen,toolbar');
   }
 };
 
@@ -1259,8 +1265,7 @@ function GameFOXLoader()
     {
       // first run
       GFuserlist.add();
-      window.openDialog('chrome://gamefox/content/options.xul', 'GameFOX',
-        'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar', true);
+      window.setTimeout(GameFOX.openOptionsDialog, 10);
     }
 
     if (version.indexOf('pre') != -1 && lastversion.indexOf('pre') == -1)

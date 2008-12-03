@@ -93,14 +93,12 @@
   <!-- firefox commands -->
   <commandset id="mainCommandSet">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
-    <command id="cmd_gamefoxOptions" oncommand="window.openDialog('chrome://gamefox/content/options.xul',
-      '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+    <command id="cmd_gamefoxOptions" oncommand="GameFOX.openOptionsDialog();"/>
   </commandset>
   <!-- seamonkey commands -->
   <commandset id="commands">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
-    <command id="cmd_gamefoxOptions" oncommand="window.openDialog('chrome://gamefox/content/options.xul',
-      '&tools.label;', 'chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar');"/>
+    <command id="cmd_gamefoxOptions" oncommand="GameFOX.openOptionsDialog();"/>
   </commandset>
 
   <!-- firefox keys -->
