@@ -195,12 +195,14 @@
             <groupbox>
               <caption label="&main.page.pages.caption;"/>
               <checkbox preference="elements-paging-auto" label="&main.page.pages.auto;"/>
-              <label value="&main.page.pages.where;"/>
-              <radiogroup class="indent" orient="horizontal" preference="elements-paging-location">
-                <radio value="1" label="&main.page.pages.where.right;" flex="1"/>
-                <radio value="2" label="&main.page.pages.where.below;" flex="1"/>
-                <radio value="0" label="&main.page.pages.where.newrow;" flex="1"/>
-              </radiogroup>
+              <hbox align="center">
+                <label value="&main.page.pages.where;"/>
+                <radiogroup orient="horizontal" preference="elements-paging-location">
+                  <radio value="1" label="&main.page.pages.where.right;" flex="1"/>
+                  <radio value="2" label="&main.page.pages.where.below;" flex="1"/>
+                  <radio value="0" label="&main.page.pages.where.newrow;" flex="1"/>
+                </radiogroup>
+              </hbox>
               <hbox align="center">
                 <label value="&main.page.pages.format.label;"/>
                   <spacer width="8px"/>
@@ -728,7 +730,7 @@
       <description flex="1">&users.desc;</description>
       <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&users.add;" icon="add"/>
     </hbox>
-    <vbox id="usergroups" style="height:330px;overflow:auto"/>
+    <vbox id="usergroups" style="height:320px;overflow:auto"/>
   </prefpane>
 
 </prefwindow>

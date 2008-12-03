@@ -28,7 +28,7 @@
 <!ENTITY main.page.messages.marktc "Label topic creator">
 <!ENTITY main.page.pages.caption "Topic Pagination">
 <!ENTITY main.page.pages.auto "Automatically add page numbers on topic list">
-<!ENTITY main.page.pages.where "Location of page numbers:">
+<!ENTITY main.page.pages.where "Location:">
 <!ENTITY main.page.pages.where.right "Right of topic title">
 <!ENTITY main.page.pages.where.below "Below topic title">
 <!ENTITY main.page.pages.where.newrow "New row below topic title">
@@ -92,7 +92,7 @@
 <!ENTITY style.reload "Reload Stylesheets">
 <!ENTITY style.edit "Open CSS Directory">
 
-<!ENTITY quoting.label "Quotes">
+<!ENTITY quoting.label "Quoting">
 <!ENTITY quoting.header.caption "Quote Header">
 <!ENTITY quoting.header.username "Poster username">
 <!ENTITY quoting.header.date "Post date">
