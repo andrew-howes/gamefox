@@ -51,7 +51,7 @@ var GameFOX =
 
     if (!GFlib.onBoards(doc)) return false;
 
-    doc.gamefox = {filtered: false};
+    doc.gamefox = {};
 
     // User notification
     var usernote = doc.evaluate('//div[@id="board_wrap"]/p/a[contains(@href, "usernote.php")]',
@@ -1133,7 +1133,6 @@ var GameFOX =
     context || event.preventDefault();
 
     var doc = GFlib.getDocument(event);
-    var button = event.target;
     var tdResult = doc.evaluate('//table[@class="message"]/tbody/tr/td', doc, null,
         XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];
@@ -1144,9 +1143,13 @@ var GameFOX =
     var newText;
     var newFocus;
 
+    var msgComponents = GFutils.getMsgComponents(event.target, doc);
+    if (!msgComponents)
+      return;
+
     if (!doc.gamefox.filtered)
     {
-      var username = button.parentNode.parentNode.
+      var username = msgComponents.header.
         getElementsByTagName(userTagName)[0].textContent;
 
       for (var i = 0; i < td.length; i += 2)
@@ -1197,7 +1200,7 @@ var GameFOX =
     for (var i = 0; i < filterResult.snapshotLength; i++)
       filterResult.snapshotItem(i).textContent = newText;
 
-    doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus ? newFocus : button.parentNode.parentNode));
+    doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus ? newFocus : msgComponents.header));
   },
 
   toggleSidebar: function()
