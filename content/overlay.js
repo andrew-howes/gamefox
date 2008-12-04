@@ -192,6 +192,7 @@ var GameFOX =
           {
             var newLink = doc.createElement('a');
             // make sure our test link gets the same CSS applied to it
+            newLink.href = 'about:blank'; // for :link rules
             rows[i].cells[3].appendChild(newLink);
             var newLinkStyle = doc.defaultView.getComputedStyle(newLink, null);
 
