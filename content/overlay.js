@@ -185,12 +185,30 @@ var GameFOX =
         // Label topics with messages after your last post
         if (GameFOX.prefs.getBoolPref('elements.aml.marknewposts'))
         {
-          if (rows[i].cells[3].textContent != rows[i].cells[4].textContent)
+          // don't mark row as new if the last post link is visited
+          var visited = false;
+          var link = rows[i].cells[3].getElementsByTagName('a')[0];
+          if (link)
+          {
+            var newLink = doc.createElement('a');
+            // make sure our test link gets the same CSS applied to it
+            rows[i].cells[3].appendChild(newLink);
+            var newLinkStyle = doc.defaultView.getComputedStyle(newLink, null);
+
+            var linkStyle = doc.defaultView.getComputedStyle(link, null);
+
+            if (linkStyle.color != newLinkStyle.color)
+              visited = true;
+          }
+
+          if (rows[i].cells[3].textContent != rows[i].cells[4].textContent
+              && !visited)
           { // "last post" and "your last post" differ
             var span = doc.createElement('span');
                 span.className = 'gamefox-new-posts';
                 span.style.setProperty('font-weight', 'bold', null);
-                span.appendChild(doc.createTextNode('(new)'));
+                span.title = 'New posts in this topic';
+                span.appendChild(doc.createTextNode('(N)'));
 
             rows[i].cells[4].appendChild(doc.createTextNode(' '));
             rows[i].cells[4].appendChild(span);
