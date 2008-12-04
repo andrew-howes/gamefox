@@ -51,7 +51,7 @@ var GameFOX =
 
     if (!GFlib.onBoards(doc)) return false;
 
-    doc.gamefox = {};
+    doc.gamefox = {filtered: false};
 
     // User notification
     var usernote = doc.evaluate('//div[@id="board_wrap"]/p/a[contains(@href, "usernote.php")]',
@@ -1128,9 +1128,9 @@ var GameFOX =
     return pageHTML;
   },
 
-  toggleFilter: function(event)
+  toggleFilter: function(event, context)
   {
-    event.preventDefault();
+    context || event.preventDefault();
 
     var doc = GFlib.getDocument(event);
     var button = event.target;
@@ -1144,7 +1144,7 @@ var GameFOX =
     var newText;
     var newFocus;
 
-    if (button.textContent == 'filter')
+    if (!doc.gamefox.filtered)
     {
       var username = button.parentNode.parentNode.
         getElementsByTagName(userTagName)[0].textContent;
@@ -1172,6 +1172,7 @@ var GameFOX =
       }
 
       newText = 'unfilter';
+      doc.gamefox.filtered = true;
     }
     else
     {
@@ -1188,6 +1189,7 @@ var GameFOX =
       }
 
       newText = 'filter';
+      doc.gamefox.filtered = false;
     }
 
     var filterResult = doc.evaluate('//a[@class="gamefox-filter-link"]', doc, null,

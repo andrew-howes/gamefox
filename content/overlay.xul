@@ -41,6 +41,11 @@
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
+    <stringbundleset id="strbundles">
+      <stringbundle id="context-strings"
+        src="chrome://gamefox/locale/context.properties"/>
+    </stringbundleset>
+
     <menu id="gamefox-context-menu" class="menu-iconic" label="&menu.label;"
       image="chrome://gamefox/skin/logo-tiny.png">
       <menupopup id="gamefox-context-popup">
@@ -66,17 +71,22 @@
       </menupopup>
     </menu>
 
+    <!-- topic -->
+    <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
+      oncommand="GFtags.add(gContextMenu);"/>
+    <menu id="gamefox-context-pages" label="&menu.pages.label;">
+      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
+    </menu>
+
+    <!-- message -->
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
       oncommand="GFquote.quote(gContextMenu, true);"/>
+    <menuitem id="gamefox-context-filter" label=""
+      oncommand="GameFOX.toggleFilter(gContextMenu, true);"/>
     <menu id="gamefox-context-usergroups" label="&menu.usergroups.label;">
       <menupopup id="gamefox-context-usergroups-list"
         onpopupshowing="GFuserlist.fillMenu(gContextMenu);"/>
     </menu>
-    <menu id="gamefox-context-pages" label="&menu.pages.label;">
-      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
-    </menu>
-    <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
-      oncommand="GFtags.add(gContextMenu);"/>
   </popup>
 
   <!-- firefox tools menu -->

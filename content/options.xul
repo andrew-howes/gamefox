@@ -611,6 +611,7 @@
       <preference id="gamefox-pref-context-tag-myposts" name="gamefox.context.tag.myposts" type="bool"/>
       <preference id="gamefox-pref-context-tag-tracked" name="gamefox.context.tag.tracked" type="bool"/>
       <preference id="gamefox-pref-context-usergroups" name="gamefox.context.usergroups" type="bool"/>
+      <preference id="gamefox-pref-context-filter" name="gamefox.context.filter" type="bool"/>
     </preferences>
 
     <groupbox>
@@ -686,9 +687,10 @@
             <vbox>
               <checkbox preference="gamefox-pref-context-pagelist" label="&mouse.context.pages;"/>
               <checkbox preference="gamefox-pref-context-tag" label="&mouse.context.tagtopic;"/>
+              <checkbox preference="gamefox-pref-context-quote" label="&mouse.context.quote;"/>
             </vbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-quote" label="&mouse.context.quote;"/>
+              <checkbox preference="gamefox-pref-context-filter" label="&mouse.context.filter;"/>
               <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.context.usergroups;"/>
             </vbox>
           </hbox>

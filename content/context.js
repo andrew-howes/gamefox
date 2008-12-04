@@ -22,6 +22,7 @@ var GFcontext =
   displayMenu: function(event)
   {
     var doc = gContextMenu.target.ownerDocument;
+    var strbundle = document.getElementById('context-strings');
 
     document.getElementById('gamefox-toggle-sidebar').hidden = !GameFOX.prefs.
       getBoolPref('context.sidebar');
@@ -51,6 +52,7 @@ var GFcontext =
       document.getElementById('gamefox-context-tag').hidden = true;
       document.getElementById('gamefox-context-pages').hidden = true;
       document.getElementById('gamefox-context-usergroups').hidden = true;
+      document.getElementById('gamefox-context-filter').hidden = true;
       return;
     }
 
@@ -58,6 +60,7 @@ var GFcontext =
     var hideTag = true;
     var hidePages = true;
     var hideUsergroups = true;
+    var hideFilter = true;
 
     if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
     {
@@ -87,7 +90,7 @@ var GFcontext =
       if (doc.getElementsByTagName('h1').length > 1)
         hideTag = false;
 
-      // Quoting and user groups
+      // Quoting, filtering and user groups
       try
       {
         var node = gContextMenu.target;
@@ -101,6 +104,14 @@ var GFcontext =
         if (doc.getElementById('gamefox-message'))
           hideQuote = false;
         hideUsergroups = false;
+
+        hideFilter = false;
+        if (!doc.gamefox.filtered)
+          document.getElementById('gamefox-context-filter')
+            .label = strbundle.getString('filter');
+        else
+          document.getElementById('gamefox-context-filter')
+            .label = strbundle.getString('unfilter');
       }
       catch (e) {}
     }
@@ -113,5 +124,7 @@ var GFcontext =
       || !GameFOX.prefs.getBoolPref('context.pagelist');
     document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups
       || !GameFOX.prefs.getBoolPref('context.usergroups');
+    document.getElementById('gamefox-context-filter').hidden = hideFilter
+      || !GameFOX.prefs.getBoolPref('context.filter');
   }
 };

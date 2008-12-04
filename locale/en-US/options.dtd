@@ -160,6 +160,7 @@
 <!ENTITY mouse.context.pages "Pages">
 <!ENTITY mouse.context.tagtopic "Tag Topic">
 <!ENTITY mouse.context.quote "Quote">
+<!ENTITY mouse.context.filter "Filter">
 <!ENTITY mouse.context.usergroups "User Groups">
 <!ENTITY mouse.context.tags "Tags">
 <!ENTITY mouse.context.tags.aml "Active Messages">

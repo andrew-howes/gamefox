@@ -45,12 +45,12 @@ var GFlib =
 
   getDocument: function(event)
   {
-    if (!event.type)
-      return event;
-    else if (event.target.ownerDocument)
+    if (event.target && event.target.ownerDocument)
       return event.target.ownerDocument;
-    else
+    else if (event.originalTarget)
       return event.originalTarget;
+    else
+      return event;
   },
 
   /*
