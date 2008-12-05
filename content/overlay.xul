@@ -93,12 +93,12 @@
 
   <!-- firefox tools menu -->
   <menupopup id="menu_ToolsPopup">
-    <menuitem insertafter="javascriptConsole" label="&tools.label;"
+    <menuitem insertafter="javascriptConsole" label="&tools.label;..."
       command="cmd_gamefoxOptions" accesskey="&tools.accesskey;"/>
   </menupopup>
   <!-- seamonkey tools menu -->
   <menupopup id="taskPopup">
-    <menuitem insertafter="downloadmgr" label="&tools.label;"
+    <menuitem insertafter="downloadmgr" label="&tools.label;..."
       command="cmd_gamefoxOptions" accesskey="&tools.accesskey;"/>
   </menupopup>
 
