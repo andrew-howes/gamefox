@@ -367,7 +367,8 @@
         content: '';
     }
 
-    .message a.name ~ a {
+    .message a.name ~ a,
+    .gamefox-message-links a {
         text-transform: capitalize;
     }
 
