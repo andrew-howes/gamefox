@@ -710,26 +710,38 @@ var GameFOX =
         }
 
         // Add "delete" link
-        if (deletelinkCond && loggedInUser == username &&
+        if (loggedInUser == username &&
             ((msgnum == firstPostNum && topicOpen) || msgnum != firstPostNum) &&
             td[i + 1].textContent.GFtrim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
             td[i + 1].textContent.GFtrim() != '[This message was deleted at ' +
             'the request of a moderator or administrator]')
         {
-          var a = doc.createElement('a');
+          var a = deletelinkCond ? doc.createElement('a') : null;
           if (msgnum == firstPostNum && td.length > 2)
-            a.appendChild(doc.createTextNode('close'));
+          {
+            td[i].setAttribute('gfdeletetype', 'close');
+            deletelinkCond && a.appendChild(doc.createTextNode('close'));
+          }
           else
-            a.appendChild(doc.createTextNode('delete'));
-          a.className = 'gamefox-delete-link';
-          a.href = td[i].getElementsByTagName('a')[1].href;
-          a.addEventListener('click', GFmessages.deletePost, false);
+          {
+            td[i].setAttribute('gfdeletetype', 'delete');
+            deletelinkCond && a.appendChild(doc.createTextNode('delete'));
+          }
 
-          msgLinks.appendChild(leftMsgData ? doc.createElement('br') :
-              doc.createTextNode(' | '));
-          msgLinks.appendChild(a);
+          if (deletelinkCond)
+          {
+            a.className = 'gamefox-delete-link';
+            a.href = td[i].getElementsByTagName('a')[1].href;
+            a.addEventListener('click', GFmessages.deletePost, false);
+
+            msgLinks.appendChild(leftMsgData ? doc.createElement('br') :
+                doc.createTextNode(' | '));
+            msgLinks.appendChild(a);
+          }
         }
+        else
+          td[i].setAttribute('gfdeletetype', 'none');
 
         // Filtering
         if (filterCond)

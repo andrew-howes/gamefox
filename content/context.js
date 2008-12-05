@@ -53,6 +53,7 @@ var GFcontext =
       document.getElementById('gamefox-context-pages').hidden = true;
       document.getElementById('gamefox-context-usergroups').hidden = true;
       document.getElementById('gamefox-context-filter').hidden = true;
+      document.getElementById('gamefox-context-delete').hidden = true;
       return;
     }
 
@@ -61,6 +62,7 @@ var GFcontext =
     var hidePages = true;
     var hideUsergroups = true;
     var hideFilter = true;
+    var hideDelete = true;
 
     if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
     {
@@ -101,6 +103,9 @@ var GFcontext =
           node = node.offsetParent;
         }
 
+        var msgComponents = GFutils.getMsgComponents(gContextMenu.target);
+        var deleteType = msgComponents.header.getAttribute('gfdeletetype');
+
         if (doc.getElementById('gamefox-message'))
           hideQuote = false;
         hideUsergroups = false;
@@ -112,6 +117,25 @@ var GFcontext =
         else
           document.getElementById('gamefox-context-filter')
             .label = strbundle.getString('unfilter');
+
+        if (deleteType == 'delete' && msgComponents.header.id == 'p001')
+        {
+          hideDelete = false;
+          document.getElementById('gamefox-context-delete')
+            .label = strbundle.getString('deleteTopic');
+        }
+        else if (deleteType == 'delete')
+        {
+          hideDelete = false;
+          document.getElementById('gamefox-context-delete')
+            .label = strbundle.getString('deletePost');
+        }
+        else if (deleteType == 'close')
+        {
+          hideDelete = false;
+          document.getElementById('gamefox-context-delete')
+            .label = strbundle.getString('closeTopic');
+        }
       }
       catch (e) {}
     }
@@ -126,5 +150,7 @@ var GFcontext =
       || !GameFOX.prefs.getBoolPref('context.usergroups');
     document.getElementById('gamefox-context-filter').hidden = hideFilter
       || !GameFOX.prefs.getBoolPref('context.filter');
+    document.getElementById('gamefox-context-delete').hidden = hideDelete
+      || !GameFOX.prefs.getBoolPref('context.delete');
   }
 };

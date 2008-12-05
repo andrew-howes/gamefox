@@ -75,23 +75,31 @@ var GFmessages =
       titleCount.style.setProperty('font-weight', '', '');
   },
 
-  deletePost: function(event)
+  deletePost: function(event, context)
   {
-    event.preventDefault();
+    context || event.preventDefault();
 
-    var closeTopic = event.target.textContent == 'close';
-    var deleteTopic = !closeTopic && event.target.parentNode.parentNode.id == 'p001';
+    var doc = GFlib.getDocument(event);
+    var msgComponents = GFutils.getMsgComponents(event.target, doc);
+    var deleteType = msgComponents.header.getAttribute('gfdeletetype');
+
+    var closeTopic = deleteType == 'close';
+    var deletePost = deleteType == 'delete';
+    var deleteTopic = deletePost && msgComponents.header.id == 'p001';
 
     if (deleteTopic)
       var str = 'Delete this topic?';
     else if (closeTopic)
       var str = 'Close this topic?';
-    else
+    else if (deletePost)
       var str = 'Delete this post?';
+    else
+      return;
+
     if (!GFlib.confirm(str)) return false;
 
     var doc = GFlib.getDocument(event);
-    var uri = event.target.href;
+    var uri = msgComponents.header.getElementsByTagName('a')[1].href;
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
@@ -122,7 +130,7 @@ var GFmessages =
             else
             {
               if (!closeTopic)
-                doc.location.hash = '#' + event.target.parentNode.parentNode.id;
+                doc.location.hash = '#' + msgComponents.header.id;
               doc.location.reload();
             }
           }

@@ -612,6 +612,7 @@
       <preference id="gamefox-pref-context-tag-tracked" name="gamefox.context.tag.tracked" type="bool"/>
       <preference id="gamefox-pref-context-usergroups" name="gamefox.context.usergroups" type="bool"/>
       <preference id="gamefox-pref-context-filter" name="gamefox.context.filter" type="bool"/>
+      <preference id="gamefox-pref-context-delete" name="gamefox.context.delete" type="bool"/>
     </preferences>
 
     <groupbox>
@@ -691,6 +692,7 @@
             </vbox>
             <vbox>
               <checkbox preference="gamefox-pref-context-filter" label="&mouse.context.filter;"/>
+              <checkbox preference="gamefox-pref-context-delete" label="&mouse.context.delete;"/>
               <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.context.usergroups;"/>
             </vbox>
           </hbox>

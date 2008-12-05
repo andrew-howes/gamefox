@@ -23,6 +23,7 @@
     * Excessive whitespace after quotes is now automatically removed
     * User interface for style pane simplified - deletion of imported
       stylesheets now handled in the context menu
+    * Add delete/close and filter actions to the context menu
 
 2008-11-01:
     * version 0.6.7

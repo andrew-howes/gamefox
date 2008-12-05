@@ -6,7 +6,7 @@
 <!ENTITY menu.quote.label "Quote Message">
 <!ENTITY menu.usergroups.label "User Groups">
 <!ENTITY menu.pages.label "Topic Pages">
-<!ENTITY menu.tagtopic.label "Tag This Topic">
+<!ENTITY menu.tagtopic.label "Tag Topic">
 <!ENTITY menu.sidebar.label "Sidebar">
 <!ENTITY menu.sidebar.accesskey "S">
 <!ENTITY menu.tags.label "Tags">

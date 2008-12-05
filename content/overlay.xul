@@ -83,6 +83,8 @@
       oncommand="GFquote.quote(gContextMenu, true);"/>
     <menuitem id="gamefox-context-filter" label=""
       oncommand="GameFOX.toggleFilter(gContextMenu, true);"/>
+    <menuitem id="gamefox-context-delete" label=""
+      oncommand="GFmessages.deletePost(gContextMenu, true);"/>
     <menu id="gamefox-context-usergroups" label="&menu.usergroups.label;">
       <menupopup id="gamefox-context-usergroups-list"
         onpopupshowing="GFuserlist.fillMenu(gContextMenu);"/>
