@@ -22,25 +22,30 @@ var GFlib =
   domain: 'http://www.gamefaqs.com',
   path: '/boards/',
 
+  version: Cc['@mozilla.org/extensions/manager;1']
+    .getService(Ci.nsIExtensionManager)
+    .getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}')
+    .version,
+
   log: function(msg)
   {
     Cc['@mozilla.org/consoleservice;1']
-        .getService(Ci.nsIConsoleService)
-        .logStringMessage('GameFOX: ' + msg);
+      .getService(Ci.nsIConsoleService)
+      .logStringMessage('GameFOX: ' + msg);
   },
 
   alert: function(msg)
   {
     Cc['@mozilla.org/embedcomp/prompt-service;1']
-        .getService(Ci.nsIPromptService)
-        .alert(null, 'GameFOX', msg);
+      .getService(Ci.nsIPromptService)
+      .alert(null, 'GameFOX', msg);
   },
 
   confirm: function(msg)
   {
     return Cc['@mozilla.org/embedcomp/prompt-service;1']
-        .getService(Ci.nsIPromptService)
-        .confirm(null, 'GameFOX', msg);
+      .getService(Ci.nsIPromptService)
+      .confirm(null, 'GameFOX', msg);
   },
 
   getDocument: function(event)
@@ -190,8 +195,8 @@ var GFlib =
     }
 
     var win = Cc['@mozilla.org/appshell/window-mediator;1']
-        .getService(Ci.nsIWindowMediator)
-        .getMostRecentWindow('navigator:browser');
+      .getService(Ci.nsIWindowMediator)
+      .getMostRecentWindow('navigator:browser');
 
     switch (openType)
     {
@@ -227,9 +232,9 @@ var GFlib =
   newTab: function(url, focus)
   {
     var browser = Cc['@mozilla.org/appshell/window-mediator;1']
-        .getService(Ci.nsIWindowMediator)
-        .getMostRecentWindow('navigator:browser')
-        .getBrowser();
+      .getService(Ci.nsIWindowMediator)
+      .getMostRecentWindow('navigator:browser')
+      .getBrowser();
 
     var tab = browser.addTab(url);
     if (focus == 0)
@@ -240,8 +245,8 @@ var GFlib =
   {
     // https://bugzilla.mozilla.org/show_bug.cgi?id=437174
     var ds = Cc['@mozilla.org/webshell;1']
-        .createInstance(Ci.nsIDocShellTreeItem)
-        .QueryInterface(Ci.nsIInterfaceRequestor);
+      .createInstance(Ci.nsIDocShellTreeItem)
+      .QueryInterface(Ci.nsIInterfaceRequestor);
     request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
     request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     return ds;

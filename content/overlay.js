@@ -1262,9 +1262,7 @@ function GameFOXLoader()
       'popupshowing', GFcontext.displayMenu, false);
 
   var lastversion = GameFOX.prefs.getCharPref('version');
-  var version = Cc['@mozilla.org/extensions/manager;1'].
-    getService(Ci.nsIExtensionManager).
-    getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}').version;
+  var version = GFlib.version;
   var versionComparator = Cc['@mozilla.org/xpcom/version-comparator;1'].
     getService(Ci.nsIVersionComparator);
 
