@@ -1,7 +1,7 @@
 <!-- vim: set indentexpr=: -->
 
 <!ENTITY title "GameFOX">
-<!ENTITY about.label "About...">
+<!ENTITY about.label "About">
 
 <!ENTITY general.label "General">
 
@@ -18,7 +18,7 @@
 <!ENTITY main.page.topics.lastpostlink "Link to last post">
 <!ENTITY main.page.topics.trackedlink "Link to boards (Tracked Topics)">
 <!ENTITY main.page.topics.marknewposts "Label new posts (Active Messages)">
-<!ENTITY main.page.topics.pagejumper "Show page jumper (Active Messages)">
+<!ENTITY main.page.topics.pagejumper "Page jumper (Active Messages)">
 <!ENTITY main.page.messages.caption "Message Lists">
 <!ENTITY main.page.messages.taglink "&quot;Tag Topic&quot; link">
 <!ENTITY main.page.messages.deletelink "&quot;Delete&quot; and &quot;Close&quot; links">
@@ -41,9 +41,9 @@
 <!ENTITY main.posting.quickpost.caption "QuickPost">
 <!ENTITY main.posting.quickpost.topics "QuickPost link on topic lists">
 <!ENTITY main.posting.quickpost.messages "QuickPost form on message lists">
-<!ENTITY main.posting.quickpost.htmlbuttons "Show HTML buttons">
-<!ENTITY main.posting.quickpost.htmlbuttons.gfcode "Show GFCode buttons">
-<!ENTITY main.posting.quickpost.otherbuttons "Show preview/reset buttons">
+<!ENTITY main.posting.quickpost.htmlbuttons "HTML tag buttons">
+<!ENTITY main.posting.quickpost.htmlbuttons.gfcode "Additional GFCode buttons">
+<!ENTITY main.posting.quickpost.otherbuttons "Preview and reset buttons">
 <!ENTITY main.posting.quickpost.resetconfirm "Confirm resetting post">
 <!ENTITY main.posting.quickpost.resetnewsig "Choose a new signature when resetting post">
 <!ENTITY main.posting.quickpost.aftertopic "After QuickPosting a topic:">
@@ -93,20 +93,19 @@
 <!ENTITY style.edit "Open CSS Directory">
 
 <!ENTITY quoting.label "Quoting">
-<!ENTITY quoting.header.caption "Quote Header">
+<!ENTITY quoting.header.caption "Header">
 <!ENTITY quoting.header.username "Poster username">
 <!ENTITY quoting.header.date "Post date">
 <!ENTITY quoting.header.num "Post number">
-<!ENTITY quoting.body.caption "Quote Body">
+<!ENTITY quoting.body.caption "Body">
 <!ENTITY quoting.body.removesig "Remove signature">
-<!ENTITY quoting.style.caption "Quote Style">
-<!ENTITY quoting.style.desc "Tags to use for quoting:">
-<!ENTITY quoting.style.regular.label "Use regular tags">
+<!ENTITY quoting.style.caption "Style">
+<!ENTITY quoting.style.gfcode.label "GFCode tags (&lt;i&gt;, &lt;p&gt; and &lt;strong&gt;)">
+<!ENTITY quoting.style.regular.label "Classic tags (&lt;b&gt; and &lt;i&gt;)">
 <!ENTITY quoting.style.boldheader "Bold header">
 <!ENTITY quoting.style.italicheader "Italicize header">
 <!ENTITY quoting.style.boldmessage "Bold message">
 <!ENTITY quoting.style.italicmessage "Italicize message">
-<!ENTITY quoting.style.gfcode.label "Use GFCode">
 
 <!ENTITY signature.label "Signatures">
 <!ENTITY signature.content.label "Content">
@@ -171,7 +170,7 @@
 
 <!ENTITY users.label "Users">
 <!ENTITY users.options.label "Options">
-<!ENTITY users.options.topicgroups "Show group names on topic lists">
-<!ENTITY users.options.msggroups "Show group names on message lists">
+<!ENTITY users.options.topicgroups "Group names on topic lists">
+<!ENTITY users.options.msggroups "Group names on message lists">
 <!ENTITY users.add "Add a Group">
 <!ENTITY users.desc "Separate users with commas.">

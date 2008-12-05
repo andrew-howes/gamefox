@@ -27,7 +27,7 @@
     title="&title;"
     id="gamefox-prefwindow"
     buttons="accept,cancel,extra2"
-    buttonlabelextra2="&about.label;"
+    buttonlabelextra2="&about.label;..."
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"
@@ -486,8 +486,8 @@
 
     <groupbox>
       <caption label="&quoting.style.caption;"/>
-      <label value="&quoting.style.desc;"/>
       <radiogroup class="indent" preference="style">
+        <radio value="gfcode" label="&quoting.style.gfcode.label;"/>
         <radio value="normal" label="&quoting.style.regular.label;"/>
         <hbox class="indent" orient="horizontal">
           <vbox>
@@ -499,7 +499,6 @@
             <checkbox preference="message_italic" label="&quoting.style.italicmessage;"/>
           </vbox>
         </hbox>
-        <radio value="gfcode" label="&quoting.style.gfcode.label;"/>
       </radiogroup>
     </groupbox>
 
