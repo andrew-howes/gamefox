@@ -84,8 +84,8 @@ var GFmessages =
     var deleteType = msgComponents.header.getAttribute('gfdeletetype');
 
     var closeTopic = deleteType == 'close';
-    var deletePost = deleteType == 'delete';
-    var deleteTopic = deletePost && msgComponents.header.id == 'p001';
+    var deletePost = deleteType == 'deletepost';
+    var deleteTopic = deleteType == 'deletetopic';
 
     if (deleteTopic)
       var str = 'Delete this topic?';

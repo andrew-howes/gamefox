@@ -110,13 +110,13 @@ var GFcontext =
           document.getElementById('gamefox-context-filter')
             .label = strbundle.getString('unfilter');
 
-        if (deleteType == 'delete' && msgComponents.header.id == 'p001')
+        if (deleteType == 'deletetopic')
         {
           hideDelete = false;
           document.getElementById('gamefox-context-delete')
             .label = strbundle.getString('deleteTopic');
         }
-        else if (deleteType == 'delete')
+        else if (deleteType == 'deletepost')
         {
           hideDelete = false;
           document.getElementById('gamefox-context-delete')

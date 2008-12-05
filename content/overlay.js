@@ -718,14 +718,17 @@ var GameFOX =
             'the request of a moderator or administrator]')
         {
           var a = deletelinkCond ? doc.createElement('a') : null;
-          if (msgnum == firstPostNum && td.length > 2)
+          if (msgnum == firstPostNum && (td.length > 2 || pagenum > 0))
           {
             td[i].setAttribute('gfdeletetype', 'close');
             deletelinkCond && a.appendChild(doc.createTextNode('close'));
           }
           else
           {
-            td[i].setAttribute('gfdeletetype', 'delete');
+            if (msgnum == firstPostNum)
+              td[i].setAttribute('gfdeletetype', 'deletetopic');
+            else
+              td[i].setAttribute('gfdeletetype', 'deletepost');
             deletelinkCond && a.appendChild(doc.createTextNode('delete'));
           }
 
