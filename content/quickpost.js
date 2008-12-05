@@ -534,12 +534,9 @@ var GFquickpost =
         'p', 'Paragraph',
         'br', 'Break'
         );
-    // GameFOX
+    // GFCode
     if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
-    {
-      tags.push('i,p'); tags.push('Quote');
-      tags.push('em,p'); tags.push('Code');
-    }
+      tags.push('i,p', 'Quote', 'em,p', 'Code');
 
     for (var i = 0; i < tags.length; i += 2)
     {
