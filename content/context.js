@@ -93,17 +93,9 @@ var GFcontext =
         hideTag = false;
 
       // Quoting, filtering and user groups
-      try
+      var msgComponents = GFutils.getMsgComponents(gContextMenu.target, doc);
+      if (msgComponents)
       {
-        var node = gContextMenu.target;
-
-        while (node.nodeName.toLowerCase() != 'table'
-               || node.className != 'message')
-        {
-          node = node.offsetParent;
-        }
-
-        var msgComponents = GFutils.getMsgComponents(gContextMenu.target);
         var deleteType = msgComponents.header.getAttribute('gfdeletetype');
 
         if (doc.getElementById('gamefox-message'))
@@ -137,7 +129,6 @@ var GFcontext =
             .label = strbundle.getString('closeTopic');
         }
       }
-      catch (e) {}
     }
 
     document.getElementById('gamefox-context-quote').hidden = hideQuote
