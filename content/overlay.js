@@ -612,7 +612,7 @@ var GameFOX =
           (doc.gamefox.pages - 1) * GameFOX.prefs.getIntPref('msgsPerPage') + td.length / 2 : 1;
       var filterCond = GameFOX.prefs.getBoolPref('elements.filterlink') && !onDetail;
       var quotelinkCond = GameFOX.prefs.getBoolPref('elements.quotelink') &&
-        topicOpen;
+        topicOpen && GameFOX.prefs.getBoolPref('elements.quickpost.form');
 
       for (var i = 0; i < td.length; i += 2)
       {
