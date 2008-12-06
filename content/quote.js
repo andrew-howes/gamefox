@@ -136,7 +136,7 @@ var GFquote =
     if (sigStart != -1 && quickpost.selectionStart > sigStart) // insert at beginning
     {
       quickpost.value = quote + '\n' + quickpost.value;
-      var endPosition = quote + 1;
+      var endPosition = quote.length + 1;
     }
     else // insert at cursor
     {
