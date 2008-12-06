@@ -899,41 +899,23 @@ var GameFOX =
   msglistDblclick: function(event)
   {
     var dblclickHead = GameFOX.prefs.getIntPref('message.header.dblclick');
-    var dblclickMsg  = GameFOX.prefs.getBoolPref('message.dblclick');
+    var dblclickMsg = GameFOX.prefs.getBoolPref('message.dblclick');
 
     if (dblclickHead == 0 && !dblclickMsg)
-    {
       return;
-    }
 
     var node = event.target;
     var doc = node.ownerDocument;
 
     // ignore double-click on images
     if (node.nodeName.toLowerCase() == 'img')
-    {
       return;
-    }
 
-    var tableNode = node.offsetParent;
-    try
-    {
-      while (tableNode.nodeName.toLowerCase() != 'table'
-             || tableNode.className != 'message')
-      {
-        node = tableNode;
-        tableNode = node.offsetParent;
-      }
-    }
-    catch (e)
-    {
+    var msgComponents = GFutils.getMsgComponents(node, doc);
+    if (!msgComponents)
       return;
-    }
 
-    var leftMsgData = GFutils.getMsgDataDisplay(doc);
-
-    if (dblclickHead != 0 && ((!leftMsgData && node.parentNode.className != 'even')
-            || node.className.indexOf('author') != -1))
+    if (msgComponents.header == msgComponents.original)
     {
       switch (dblclickHead)
       {
@@ -946,7 +928,6 @@ var GameFOX =
           break;
       }
     }
-
     else if (dblclickMsg)
     {
       GFquote.quote(event);

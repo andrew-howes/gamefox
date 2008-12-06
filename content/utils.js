@@ -354,14 +354,17 @@ var GFutils =
 
   getMsgComponents: function(node, doc)
   {
-    var tableNode = node.offsetParent;
+    var tdNode, tableNode;
     try
     {
-      while (tableNode.nodeName.toLowerCase() != 'table'
-             || tableNode.className != 'message')
+      while (!tdNode || !tableNode)
       {
-        node = tableNode;
-        tableNode = node.offsetParent;
+        if (node.nodeName.toLowerCase() == 'td')
+          tdNode = node;
+        else if (node.nodeName.toLowerCase() == 'table'
+                 && node.className == 'message')
+          tableNode = node;
+        node = node.parentNode;
       }
     }
     catch (e)
@@ -371,29 +374,29 @@ var GFutils =
 
     var leftMsgData = GFutils.getMsgDataDisplay(doc);
     var header, body;
-    if ((!leftMsgData && node.parentNode.className != 'even')
-        || node.className.indexOf('author') != -1)
+    if ((!leftMsgData && tdNode.parentNode.className != 'even')
+        || tdNode.className.indexOf('author') != -1)
     {
       // in header
-      header = node;
+      header = tdNode;
 
       if (!leftMsgData)
-        body = tableNode.rows[node.parentNode.rowIndex + 1].cells[0];
+        body = tableNode.rows[tdNode.parentNode.rowIndex + 1].cells[0];
       else
-        body = node.parentNode.cells[1];
+        body = tdNode.parentNode.cells[1];
     }
     else
     {
       // in body
-      body = node;
+      body = tdNode;
 
       if (!leftMsgData)
-        header = tableNode.rows[node.parentNode.rowIndex - 1].cells[0];
+        header = tableNode.rows[tdNode.parentNode.rowIndex - 1].cells[0];
       else
-        header = node.parentNode.cells[0];
+        header = tdNode.parentNode.cells[0];
     }
 
-    return { header: header, body: body };
+    return { header: header, body: body, original: tdNode };
   },
 
   specialRegexpCharsEscape: function(str)
