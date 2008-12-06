@@ -736,4 +736,20 @@
     <vbox id="usergroups" style="height:320px;overflow:auto"/>
   </prefpane>
 
+<!-- M A N A G E -->
+
+  <prefpane id="gamefox-manage-pane" label="Manage" flex="1">
+    <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
+
+    <hbox>
+      <button oncommand="GFprefs.importPrefs(event.target);" label="Import Preferences" icon="open"/>
+    </hbox>
+    <hbox>
+      <button oncommand="GFprefs.exportPrefs(event.target);" label="Export Preferences" icon="save"/>
+    </hbox>
+    <hbox>
+      <button oncommand="GFprefs.resetPrefs(event.target);" label="Reset Preferences" icon="clear"/>
+    </hbox>
+  </prefpane>
+
 </prefwindow>
