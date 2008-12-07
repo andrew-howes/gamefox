@@ -135,6 +135,8 @@ var GFprefs =
     GFlib.alert('Preferences imported.');
     button.setAttribute('disabled', false);
 
+    GFcss.init();
+    GFcss.reload();
     this.resetOptionsDialog();
   },
 
@@ -185,6 +187,8 @@ var GFprefs =
     GFlib.alert('Preferences reset.');
     button.setAttribute('disabled', false);
 
+    GFcss.init();
+    GFcss.reload();
     this.resetOptionsDialog(true);
   },
 
