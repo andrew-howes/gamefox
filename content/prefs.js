@@ -95,9 +95,12 @@ var GFprefs =
   {
     button.setAttribute('disabled', true);
 
+    var strbundle = document.getElementById('manage-strings');
+
     var filePicker = Cc['@mozilla.org/filepicker;1']
       .createInstance(Ci.nsIFilePicker);
-    filePicker.init(window, 'Import Preferences', Ci.nsIFilePicker.modeOpen);
+    filePicker.init(window, strbundle.getString('importFilePicker'),
+        Ci.nsIFilePicker.modeOpen);
     filePicker.appendFilters(filePicker.filterAll);
     if (filePicker.show() != Ci.nsIFilePicker.returnOK)
     {
@@ -124,7 +127,7 @@ var GFprefs =
     }
     catch (e)
     {
-      GFlib.alert('Invalid syntax!');
+      GFlib.alert(strbundle.getString('invalidSyntax'));
       button.setAttribute('disabled', false);
       return;
     }
@@ -133,7 +136,7 @@ var GFprefs =
       this.setPrefValue(i, importedPrefs[i]);
     }
 
-    GFlib.alert('Preferences imported.');
+    GFlib.alert(strbundle.getString('importSuccess'));
     button.setAttribute('disabled', false);
 
     this.resetOptionsDialog();
@@ -143,9 +146,12 @@ var GFprefs =
   {
     button.setAttribute('disabled', true);
 
+    var strbundle = document.getElementById('manage-strings');
+
     var filePicker = Cc['@mozilla.org/filepicker;1']
       .createInstance(Ci.nsIFilePicker);
-    filePicker.init(window, 'Export Preferences', Ci.nsIFilePicker.modeSave);
+    filePicker.init(window, strbundle.getString('exportFilePicker'),
+        Ci.nsIFilePicker.modeSave);
     filePicker.appendFilters(filePicker.filterAll);
     filePicker.defaultString = 'gamefox-prefs.txt';
     var showValue = filePicker.show();
@@ -163,7 +169,7 @@ var GFprefs =
     foStream.write(outputData, outputData.length);
     foStream.close();
 
-    GFlib.alert('Preferences exported.');
+    GFlib.alert(strbundle.getString('exportSuccess'));
     button.setAttribute('disabled', false);
   },
 
@@ -171,7 +177,9 @@ var GFprefs =
   {
     button.setAttribute('disabled', true);
 
-    if (!GFlib.confirm('Really reset your preferences?'))
+    var strbundle = document.getElementById('manage-strings');
+
+    if (!GFlib.confirm(strbundle.getString('resetConfirm')))
     {
       button.setAttribute('disabled', false);
       return;
@@ -183,7 +191,7 @@ var GFprefs =
 
     this.prefs.setCharPref('version', GFlib.version);
 
-    GFlib.alert('Preferences reset.');
+    GFlib.alert(strbundle.getString('resetSuccess'));
     button.setAttribute('disabled', false);
 
     GFcss.init();

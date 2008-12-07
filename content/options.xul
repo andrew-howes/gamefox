@@ -49,6 +49,7 @@
 
     <stringbundleset id="strbundles">
       <stringbundle id="userlist-strings" src="chrome://gamefox/locale/userlist.properties"/>
+      <stringbundle id="manage-strings" src="chrome://gamefox/locale/manage-prefs.properties"/>
     </stringbundleset>
 
     <preferences>
@@ -739,17 +740,20 @@
 
 <!-- M A N A G E -->
 
-  <prefpane id="gamefox-manage-pane" label="Manage" flex="1">
+  <prefpane id="gamefox-manage-pane" label="&manage.label;" flex="1">
     <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
 
-    <hbox>
-      <button oncommand="GFprefs.importPrefs(event.target);" label="Import Preferences" icon="open"/>
-    </hbox>
-    <hbox>
-      <button oncommand="GFprefs.exportPrefs(event.target);" label="Export Preferences" icon="save"/>
-    </hbox>
-    <hbox>
-      <button oncommand="GFprefs.resetPrefs(event.target);" label="Reset Preferences" icon="clear"/>
+    <groupbox>
+      <caption label="&manage.desc.label;"/>
+
+      <description>&manage.desc.export;</description>
+      <description>&manage.desc.reset;</description>
+    </groupbox>
+
+    <hbox pack="center">
+      <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.label;" icon="open"/>
+      <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.label;" icon="save"/>
+      <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.label;" icon="clear"/>
     </hbox>
   </prefpane>
 

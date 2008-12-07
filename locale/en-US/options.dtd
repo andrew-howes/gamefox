@@ -174,3 +174,11 @@
 <!ENTITY users.options.msggroups "Group names on message lists">
 <!ENTITY users.add "Add a Group">
 <!ENTITY users.desc "Separate users with commas.">
+
+<!ENTITY manage.label "Manage">
+<!ENTITY manage.desc.label "Manage Preferences">
+<!ENTITY manage.desc.export "Your preferences can be exported as a backup or to transfer between profiles. Signatures and user groups are included, but stylesheets are not. You must export these manually using the Open CSS Directory button in the Style pane.">
+<!ENTITY manage.desc.reset "Preferences are not recoverable after being reset unless you have exported them prior.">
+<!ENTITY manage.import.label "Import Preferences">
+<!ENTITY manage.export.label "Export Preferences">
+<!ENTITY manage.reset.label "Reset Preferences">
