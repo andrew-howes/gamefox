@@ -38,7 +38,8 @@ var GFprefs =
     var userPrefNames = [];
     for (var i = 0; i < allPrefNames.length; i++)
     {
-      if (this.prefs.prefHasUserValue(allPrefNames[i]))
+      if (allPrefNames[i] != 'theme.css.serialized' &&
+          this.prefs.prefHasUserValue(allPrefNames[i]))
         userPrefNames.push(allPrefNames[i]);
     }
     return userPrefNames;
@@ -135,8 +136,6 @@ var GFprefs =
     GFlib.alert('Preferences imported.');
     button.setAttribute('disabled', false);
 
-    GFcss.init();
-    GFcss.reload();
     this.resetOptionsDialog();
   },
 
