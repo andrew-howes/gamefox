@@ -1276,7 +1276,6 @@ function GameFOXLoader()
     if (lastversion == '')
     {
       // first run
-      GFuserlist.add();
       window.setTimeout(GFlib.openOptionsDialog, 10, true);
     }
 

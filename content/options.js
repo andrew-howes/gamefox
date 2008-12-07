@@ -137,6 +137,8 @@ var GFoptions =
   {
     if (window.arguments && window.arguments[0])
     {
+      GFuserlist.add();
+      GFuserlist.populateLast();
       GFutils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'));
       GFutils.importSignature(true, document.getElementById('gamefox-css-grab-sig'));
     }
