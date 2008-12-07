@@ -250,5 +250,36 @@ var GFlib =
     request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
     request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     return ds;
+  },
+
+  openOptionsDialog: function(firstRun, forceOpen)
+  {
+    // Stolen from Adblock Plus
+    var windowMediator = Cc['@mozilla.org/appshell/window-mediator;1']
+      .getService(Ci.nsIWindowMediator);
+    var windowWatcher = Cc['@mozilla.org/embedcomp/window-watcher;1']
+      .getService(Ci.nsIWindowWatcher);
+
+    var dlg = windowMediator.getMostRecentWindow('gamefox:options');
+
+    if (dlg && !forceOpen)
+    {
+      try
+      {
+        dlg.focus();
+      }
+      catch (e)
+      {
+        // There must be some modal dialog open
+        dlg = windowMediator.getMostRecentWindow('gamefox:options');
+        if (dlg)
+          dlg.focus();
+      }
+    }
+    else
+    {
+      dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options.xul',
+          '_blank', 'chrome,centerscreen,toolbar', firstRun ? [] : null);
+    }
   }
 };

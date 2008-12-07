@@ -105,12 +105,12 @@
   <!-- firefox commands -->
   <commandset id="mainCommandSet">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
-    <command id="cmd_gamefoxOptions" oncommand="GameFOX.openOptionsDialog();"/>
+    <command id="cmd_gamefoxOptions" oncommand="GFlib.openOptionsDialog();"/>
   </commandset>
   <!-- seamonkey commands -->
   <commandset id="commands">
     <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
-    <command id="cmd_gamefoxOptions" oncommand="GameFOX.openOptionsDialog();"/>
+    <command id="cmd_gamefoxOptions" oncommand="GFlib.openOptionsDialog();"/>
   </commandset>
 
   <!-- firefox keys -->

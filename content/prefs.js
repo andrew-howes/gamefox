@@ -18,11 +18,9 @@
  */
 
 // TODO:
-//   - Update stylesheets/sigs/groups when importing or resetting
 //   - Handle stylesheet files
 //   - getCharPref and setCharPref are used for all string prefs. This seems
 //     to work alright, but I'm not sure if it is the correct thing to do.
-//   - Import board settings and sig from GameFAQs after reset?
 
 var GFprefs =
 {
@@ -136,6 +134,8 @@ var GFprefs =
 
     GFlib.alert('Preferences imported.');
     button.setAttribute('disabled', false);
+
+    this.resetOptionsDialog();
   },
 
   exportPrefs: function(button)
@@ -184,5 +184,17 @@ var GFprefs =
 
     GFlib.alert('Preferences reset.');
     button.setAttribute('disabled', false);
+
+    this.resetOptionsDialog(true);
+  },
+
+  resetOptionsDialog: function(firstRun)
+  {
+    window.close();
+    
+    var win = Cc['@mozilla.org/appshell/window-mediator;1']
+      .getService(Ci.nsIWindowMediator)
+      .getMostRecentWindow('navigator:browser');
+    GFlib.openOptionsDialog(firstRun, true);
   }
 }
