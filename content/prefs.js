@@ -202,10 +202,6 @@ var GFprefs =
   resetOptionsDialog: function(firstRun)
   {
     window.close();
-    
-    var win = Cc['@mozilla.org/appshell/window-mediator;1']
-      .getService(Ci.nsIWindowMediator)
-      .getMostRecentWindow('navigator:browser');
     GFlib.openOptionsDialog(firstRun, true);
   }
 }
