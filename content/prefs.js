@@ -168,6 +168,7 @@ var GFprefs =
       return;
     }
 
+    this.savePrefs();
     var outputData = this.getSerializedUserPrefs();
     var foStream = Cc['@mozilla.org/network/file-output-stream;1']
       .createInstance(Ci.nsIFileOutputStream);
@@ -206,5 +207,12 @@ var GFprefs =
   {
     window.close();
     GFlib.openOptionsDialog(firstRun, true);
+  },
+
+  savePrefs: function()
+  {
+    var panes = document.getElementById('gamefox-prefwindow').preferencePanes;
+    for (var i = 0; i < panes.length; i++)
+      panes[i].writePreferences();
   }
 }
