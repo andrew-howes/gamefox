@@ -220,6 +220,7 @@ var GFquickpost =
             var longWordInMessage = text.indexOf('Your message contains a single word over 80 characters') != -1;
             var blankMessage = text.indexOf('Messages cannot be blank') != -1;
             var badHTML = text.indexOf('Your HTML is not well-formed') != -1;
+            var nonASCIITitle = text.indexOf('Topic titles cannot contain non-ASCII characters') != -1;
             var closedTopic = text.indexOf('This topic is closed') != -1;
             var deletedTopic = text.indexOf('This topic is no longer available') != -1;
             var maintenance = text.indexOf('<body') == -1 && text.indexOf('maintenance') != -1;
@@ -252,6 +253,8 @@ var GFquickpost =
               GFlib.alert('Maybe you should actually type something...');
             else if (badHTML)
               GFlib.alert('Your HTML is not well-formed. Check for mismatched tags.');
+            else if (nonASCIITitle)
+              GFlib.alert('Topic titles cannot contain non-ASCII characters.');
             else if (closedTopic)
               GFlib.alert('The topic was closed while you were typing your message. ' +
                   'Type faster next time!');
@@ -405,16 +408,7 @@ var GFquickpost =
     var topicTitle = doc.getElementsByName('topictitle')[0];
 
     if (topicTitle)
-    {
-      if (topicTitle.value.length < 5)
-      {
-        GFlib.alert('Topic titles must be at least 5 characters long.');
-        event.target.removeAttribute('disabled');
-        event.target.addEventListener('click', GFquickpost.post, false);
-        return;
-      }
       postBody = 'topictitle=' + GFutils.URLEncode(topicTitle.value) + '&';
-    }
 
     var message = GFquickpost.removeGFCodeWhitespace(doc
         .getElementsByName('message')[0].value);
