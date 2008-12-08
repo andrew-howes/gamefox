@@ -88,6 +88,7 @@
 <!ENTITY style.tree.author "Author">
 <!ENTITY style.tree.enabled "Enabled">
 <!ENTITY style.tree.delete "Delete">
+<!ENTITY style.tree.edit "Edit">
 <!ENTITY style.import "Import Stylesheet">
 <!ENTITY style.reload "Reload Stylesheets">
 <!ENTITY style.edit "Open CSS Directory">

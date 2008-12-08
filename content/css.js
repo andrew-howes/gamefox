@@ -188,8 +188,9 @@ var GFcss =
 
   getDirectory: function()
   {
-    var directory = Cc['@mozilla.org/file/directory_service;1'].getService(
-        Ci.nsIProperties).get('ProfD', Ci.nsIFile);
+    var directory = Cc['@mozilla.org/file/directory_service;1']
+      .getService(Ci.nsIProperties)
+      .get('ProfD', Ci.nsIFile);
 
     try
     {
@@ -307,8 +308,9 @@ var GFcss =
 
   onpopupshowing: function()
   {
-    var category = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][5];
-    document.getElementById('css-remove').setAttribute('disabled', category != 'user');
+    var disabled = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][5] != 'user';
+    document.getElementById('css-remove').setAttribute('disabled', disabled);
+    document.getElementById('css-edit').setAttribute('disabled', disabled);
   },
 
   setCell: function(idx, column, value)
@@ -369,10 +371,32 @@ var GFcss =
     var filename = current[4];
     var category = current[5];
 
+    // TODO: is this check necessary?
     if (category != 'user')
       return;
 
     this.remove(category, filename);
     this.populate(document.getElementById('css-tree'));
+  },
+
+  editWithTree: function()
+  {
+    var current = this.treeView.visibleData[this.treeView.selection.currentIndex][0];
+    var filename = current[4];
+
+    var file = Cc['@mozilla.org/file/local;1']
+      .getService(Ci.nsILocalFile);
+
+    file.initWithPath(this.getDirectory());
+    file.append(filename);
+
+    try
+    {
+      file.launch();
+    }
+    catch (e)
+    {
+      GFlib.alert('This command does not work on your platform.');
+    }
   }
 };

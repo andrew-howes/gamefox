@@ -45,10 +45,9 @@ var GFoptions =
 
   openCSSDirectory: function()
   {
-    var directoryService = Cc['@mozilla.org/file/directory_service;1'].
-      getService(Ci.nsIProperties);
-
-    var directory = directoryService.get('ProfD', Ci.nsILocalFile);
+    var directory = Cc['@mozilla.org/file/directory_service;1']
+      .getService(Ci.nsIProperties)
+      .get('ProfD', Ci.nsILocalFile);
     directory.append('gamefox');
     directory.append('css');
 
@@ -58,7 +57,7 @@ var GFoptions =
     }
     catch (e)
     {
-      GFlib.alert("That isn't supported here. You're probably using Firefox 2 and not using Windows.");
+      GFlib.alert('This command does not work on your platform. You\'re probably using Firefox 2 and not using Windows.');
     }
   },
 

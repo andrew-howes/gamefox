@@ -447,6 +447,8 @@
         onpopupshowing="GFcss.onpopupshowing();">
         <menuitem label="&style.tree.delete;"
           oncommand="GFcss.removeWithTree();" id="css-remove"/>
+        <menuitem label="&style.tree.edit;"
+          oncommand="GFcss.editWithTree();" id="css-edit"/>
       </menupopup>
     </groupbox>
 
@@ -488,7 +490,7 @@
 
     <groupbox>
       <caption label="&quoting.style.caption;"/>
-      <radiogroup class="indent" preference="style">
+      <radiogroup preference="style">
         <radio value="gfcode" label="&quoting.style.gfcode.label;"/>
         <radio value="normal" label="&quoting.style.regular.label;"/>
         <hbox class="indent" orient="horizontal">
