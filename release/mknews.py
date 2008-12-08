@@ -22,15 +22,11 @@ class NewsGenerator:
         doc.documentElement.appendChild(doc.createTextNode("\n    "))
 
         body = doc.createElement("body")
-        h1 = doc.createElement("h1")
-        h1.appendChild(doc.createTextNode(release))
-        body.appendChild(doc.createTextNode("\n        "))
-        body.appendChild(h1)
 
         h2 = doc.createElement("h2")
         now = time.localtime()
-        h2.appendChild(doc.createTextNode(str(now[0]) + "-" + str(now[1]) + "-" \
-                + str(now[2])))
+        h2.appendChild(doc.createTextNode("%d-%02d-%02d" %
+            (now[0], now[1], now[2])))
         body.appendChild(doc.createTextNode("\n        "))
         body.appendChild(h2)
 
