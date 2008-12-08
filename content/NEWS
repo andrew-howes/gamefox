@@ -24,6 +24,7 @@
     * User interface for style pane simplified - deletion of imported
       stylesheets now handled in the context menu
     * Add delete/close and filter actions to the context menu
+    * Add a system to export, import and reset preferences
 
 2008-11-01:
     * version 0.6.7
