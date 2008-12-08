@@ -91,6 +91,13 @@ var GFprefs =
     return userPrefs.toSource();
   },
 
+  clearUserPrefs: function()
+  {
+    var userPrefNames = this.getUserPrefNames();
+    for (var i = 0; i < userPrefNames.length; i++)
+      this.prefs.clearUserPref(userPrefNames[i]);
+  },
+
   importPrefs: function(button)
   {
     button.setAttribute('disabled', true);
@@ -131,10 +138,9 @@ var GFprefs =
       button.setAttribute('disabled', false);
       return;
     }
+    this.clearUserPrefs();
     for (var i in importedPrefs)
-    {
       this.setPrefValue(i, importedPrefs[i]);
-    }
 
     GFlib.alert(strbundle.getString('importSuccess'));
     button.setAttribute('disabled', false);
@@ -185,10 +191,7 @@ var GFprefs =
       return;
     }
 
-    var userPrefNames = this.getUserPrefNames();
-    for (var i = 0; i < userPrefNames.length; i++)
-      this.prefs.clearUserPref(userPrefNames[i]);
-
+    this.clearUserPrefs();
     this.prefs.setCharPref('version', GFlib.version);
 
     GFlib.alert(strbundle.getString('resetSuccess'));
