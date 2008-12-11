@@ -261,5 +261,46 @@ var GFsig =
     }
     else
       sigChars.style.setProperty('font-weight', '', null);
+  },
+  
+  format: function(sig, newline, doc)
+  {
+    if (sig == null) // fetch sig
+    {
+      if (!doc) return false;
+      var boardname = doc.evaluate('//h1', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+        textContent.GFtrim();
+      var boardid = doc.location.search.match(/board=([0-9-]+)/)[1];
+      var account = doc.evaluate('//div[@class="msg"]', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
+          textContent.GFtrim().replace('Welcome, ', '');
+      var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
+      sig = getSig['body'];
+    }
+    if (newline == null) // fetch newline
+      newline = GameFOX.prefs.getBoolPref('signature.newline');
+
+    if (!sig.length)
+      return '';
+
+    // truncate at 2 lines
+    sig = sig.split('\n');
+    if (sig.length >= 2)
+      sig = sig[0] + '\n' + sig[1];
+    else
+      sig = sig[0];
+
+    // truncate at 160 characters
+    sig = GFutils.specialCharsEncode(sig).substr(0, 160);
+
+    // remove truncated entities
+    var amp = sig.lastIndexOf('&');
+    if (sig.lastIndexOf(';') < amp)
+      sig = sig.substr(0, amp);
+
+    sig = GFutils.specialCharsDecode(sig);
+    
+    return '\n' + (newline ? '\n' : '') + (sig != '' ? '---\n' + sig : '');
   }
 };

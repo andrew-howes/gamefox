@@ -72,7 +72,7 @@ var GFquickpost =
     message.wrap = 'virtual';
     message.rows = 16;
     message.cols = 60;
-    doc.gamefox.sig = GFutils.formatSig(null, null, doc);
+    doc.gamefox.sig = GFsig.format(null, null, doc);
     if (GameFOX.prefs.getIntPref('signature.addition') == 1)
       form.addEventListener('submit', GFquickpost.appendSig, false);
     else
@@ -415,7 +415,7 @@ var GFquickpost =
 
     if (!GFlib.onPage(doc, 'post')
         && GameFOX.prefs.getIntPref('signature.addition') == 1)
-      message += GFutils.formatSig(null, null, doc);
+      message += GFsig.format(null, null, doc);
 
     previewRequest.send(
         postBody +
@@ -436,7 +436,7 @@ var GFquickpost =
     var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
 
     if (GameFOX.prefs.getBoolPref('elements.quickpost.resetnewsig'))
-      doc.gamefox.sig = GFutils.formatSig(null, null, doc);
+      doc.gamefox.sig = GFsig.format(null, null, doc);
     if (GameFOX.prefs.getIntPref('signature.addition') == 1)
     {
       doc.getElementById('gamefox-message').value = '';

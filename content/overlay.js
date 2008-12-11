@@ -281,7 +281,7 @@ var GameFOX =
           && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
       {
         doc.getElementsByName('message')[0].value =
-          GFutils.formatSig(null, null, doc);
+          GFsig.format(null, null, doc);
       }
 
       // HTML buttons
