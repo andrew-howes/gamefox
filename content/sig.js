@@ -262,7 +262,7 @@ var GFsig =
     else
       sigChars.style.setProperty('font-weight', '', null);
   },
-  
+
   format: function(sig, newline, doc)
   {
     if (sig == null) // fetch sig
@@ -291,6 +291,9 @@ var GFsig =
     else
       sig = sig[0];
 
+    // remove p
+    sig = sig.replace(/<\/?p>/g, '');
+
     // truncate at 160 characters
     sig = GFutils.specialCharsEncode(sig).substr(0, 160);
 
@@ -300,7 +303,7 @@ var GFsig =
       sig = sig.substr(0, amp);
 
     sig = GFutils.specialCharsDecode(sig);
-    
+
     return '\n' + (newline ? '\n' : '') + (sig != '' ? '---\n' + sig : '');
   }
 };
