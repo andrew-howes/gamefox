@@ -119,7 +119,7 @@ var GFsig =
     for (var i = 1; i < sigs.length; i++)
     {
       menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
-            sigs[i]['boards']) + ' / ' + sigs[i]['body'], '');
+            sigs[i]['boards']) + this.formatSigPreview(sigs[i]['body']));
     }
 
     this.updateCharCounts();
@@ -192,7 +192,7 @@ var GFsig =
 
     if (idx != 0) // don't set default
       menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
-          sigs[idx]['boards']) + ' / ' + sigs[idx]['body'];
+          sigs[idx]['boards']) + this.formatSigPreview(sigs[idx]['body']);
 
     this.updateCharCounts();
   },
@@ -309,5 +309,13 @@ var GFsig =
     sig = GFutils.specialCharsDecode(sig);
 
     return '\n' + (newline ? '\n' : '') + (sig != '' ? '---\n' + sig : '');
+  },
+
+  formatSigPreview: function(str)
+  {
+    if (!/\S/.test(str))
+      return '';
+
+    return ' / ' + str.replace(/(\s+|\n+)/g, ' ');
   }
 };
