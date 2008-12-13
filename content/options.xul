@@ -544,6 +544,7 @@
                 oncommand="GFsig.deleteSig();" disabled="true"/>
             </hbox>
 
+            <label id="sig-criteria-label" value="&signature.criteria.label;"/>
             <groupbox id="sig-criteria">
               <description>&signature.criteria.desc;</description>
               <hbox align="center">

@@ -210,12 +210,16 @@ var GFsig =
 
   hideCriteriaForm: function()
   {
+    document.getElementById('sig-criteria-label').style.setProperty(
+        'visibility', 'hidden', null);
     document.getElementById('sig-criteria').style.setProperty('visibility',
         'hidden', null);
   },
 
   showCriteriaForm: function()
   {
+    document.getElementById('sig-criteria-label').style.setProperty(
+        'visibility', '', null);
     document.getElementById('sig-criteria').style.setProperty('visibility',
         '', null);
   },
