@@ -3,10 +3,6 @@
     text-rendering: optimizeLegibility;
 }
 .message i > p, .message b > p, .message em > p {
-    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCA\
-    YAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFlzAAALEwA\
-    ACxMBAJqcGAAAAAd0SU1FB9gKBRc3Hjy29NMAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRo\
-    IEdJTVBXgQ4XAAAADUlEQVQI12NgYGBgAgAABwAD%2FrE%2BcwAAAABJRU5ErkJggg%3D%3D") !important;
     -moz-border-radius: 4px;
     font-style: normal !important;
     font-weight: normal !important;
