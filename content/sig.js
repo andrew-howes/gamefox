@@ -316,6 +316,6 @@ var GFsig =
     if (!/\S/.test(str))
       return '';
 
-    return ' / ' + str.replace(/(\s+|\n+)/g, ' ');
+    return ' / ' + str.GFtrim().replace(/\s+/g, ' ');
   }
 };
