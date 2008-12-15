@@ -1,44 +1,61 @@
-@-moz-document domain(gamefaqs.com) {
-.message td {
-    text-rendering: optimizeLegibility;
-}
-.message i > p, .message b > p, .message em > p {
-    -moz-border-radius: 4px;
-    font-style: normal !important;
-    font-weight: normal !important;
-    margin: 0 auto !important;
-    overflow: auto;
-    width: 96% !important;
-}
-.message i > p {
-    border: 1px solid #bbb !important;
-}
-.message b > p, .message em > p {
-    font-family: monospace !important;
-    white-space: -moz-pre-wrap;
-    white-space: pre-wrap;
-    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCA\
-    YAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFlzAAALEwA\
-    ACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRo\
-    IEdJTVBXgQ4XAAAADUlEQVQI12NgYGAQBAAAFgASs9Tk8AAAAABJRU5ErkJggg%3D%3D") !important;
-}
-.message i > p > strong:first-child {
-    display: block;
-    padding: 2px !important;
-    font-style: italic !important;
-    font-weight: bold !important;
-    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCA\
-    YAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFlzAAALEwA\
-    ACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRo\
-    IEdJTVBXgQ4XAAAADUlEQVQI12NgYGAQBAAAFgASs9Tk8AAAAABJRU5ErkJggg%3D%3D");
-    border-bottom: #aaa 1px solid;
-    -moz-border-radius: 4px 4px 0 0;
-}
-.message i > p > strong:first-child + br {
-    display: none !important;
-}
+@charset "utf-8";
+/*
+ * GFCode (GameFOX Implementation)
+ * © 2004-2008, Special Ops
+ */
+@-moz-document domain(www.gamefaqs.com) {
+    /* Common formatting for block elements */
+    .message i > p, .message b > p, .message em > p {
+        border: 1px #aaa solid !important;
 
-.message i > p i > p i > p i > p {
-    display: none;
-}
+        margin: 0 auto !important;
+        padding: 3px !important;
+        width: 96% !important;
+        -moz-border-radius: 4px;
+        
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
+        ABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFl\
+        zAAALEwAACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3Jl\
+        YXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12NgYGAQBAAAFgASs9Tk8AAAAABJRU5Er\
+        kJggg%3D%3D") !important;
+    }
+
+    /* <i><p> - blockquote */
+    .message i > p {
+    }
+
+    /* <i><p><strong> - blockquote header, for quoting full messages with userheader */
+    .message i > p > strong:first-child {
+        border-bottom: 1px #aaa solid !important;
+        
+        display: block;
+        font-style: italic !important;
+        font-weight: bold !important;
+        margin: -4px -4px 3px !important;
+        padding: 3px !important;
+        -moz-border-radius: 4px 4px 0 0;
+        
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
+        ABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFl\
+        zAAALEwAACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3Jl\
+        YXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12NgYGAQBAAAFgASs9Tk8AAAAABJRU5Er\
+        kJggg%3D%3D");
+    }
+
+    /* remove linebreak after quote header since it's already display:block */
+    .message i > p > strong:first-child + br {
+        display: none !important;
+    }
+
+    /* <em><p> - fixed-font block for code
+     */
+    .message em > p {
+        font: medium monospace !important;
+        white-space: pre-wrap;
+    }
+
+    /* Prevent users from seeing disruptive levels of nesting */
+    .message p p p p {
+        display: none !important;
+    }
 }
