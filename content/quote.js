@@ -92,7 +92,12 @@ var GFquote =
             doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
     }
 
-    body = GFutils.specialCharsDecode(bodyDOM.innerHTML.GFtrim());
+    body = GFutils.specialCharsDecode(bodyDOM.innerHTML);
+
+    // Remove p tags which break GFCode
+    body = body.replace(/<\/?p>/g, '\n');
+
+    body = body.GFtrim();
 
     /* Prepare quote header */
     var qhead = '';
