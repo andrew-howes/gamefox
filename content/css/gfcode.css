@@ -22,6 +22,7 @@
 
     /* <i><p> - blockquote */
     .message i > p {
+        font-style: normal !important;
     }
 
     /* <i><p><strong> - blockquote header, for quoting full messages with userheader */
