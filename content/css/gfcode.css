@@ -12,7 +12,7 @@
         padding: 3px !important;
         width: 96% !important;
         -moz-border-radius: 4px;
-        
+
         background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
         ABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFl\
         zAAALEwAACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3Jl\
@@ -28,14 +28,14 @@
     /* <i><p><strong> - blockquote header, for quoting full messages with userheader */
     .message i > p > strong:first-child {
         border-bottom: 1px #aaa solid !important;
-        
+
         display: block;
         font-style: italic !important;
         font-weight: bold !important;
         margin: -4px -4px 3px !important;
         padding: 3px !important;
         -moz-border-radius: 4px 4px 0 0;
-        
+
         background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
         ABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFl\
         zAAALEwAACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3Jl\
@@ -48,10 +48,10 @@
         display: none !important;
     }
 
-    /* <em><p> - fixed-font block for code
-     */
+    /* <em><p> - fixed-font block for code */
     .message em > p {
         font: medium monospace !important;
+        white-space: -moz-pre-wrap;
         white-space: pre-wrap;
     }
 
