@@ -88,8 +88,12 @@ var GFquote =
           .previousSibling == null)
         bodyDOM.removeChild(quotes.snapshotItem(i).parentNode);
       else
-        quotes.snapshotItem(i).parentNode.replaceChild(
+      {
+       bodyDOM.insertBefore(doc.createTextNode('\n'),
+           quotes.snapshotItem(i).parentNode.nextSibling);
+       quotes.snapshotItem(i).parentNode.replaceChild(
             doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
+      }
     }
 
     body = GFutils.specialCharsDecode(bodyDOM.innerHTML);
