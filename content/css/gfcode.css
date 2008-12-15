@@ -6,7 +6,7 @@
 @-moz-document domain(www.gamefaqs.com) {
     /* Common formatting for block elements */
     .message i > p, .message b > p, .message em > p {
-        border: 1px #aaa solid !important;
+        border: 1px #bbb solid !important;
 
         margin: 0 auto !important;
         padding: 3px !important;
@@ -23,11 +23,12 @@
     /* <i><p> - blockquote */
     .message i > p {
         font-style: normal !important;
+        background: none !important;
     }
 
     /* <i><p><strong> - blockquote header, for quoting full messages with userheader */
     .message i > p > strong:first-child {
-        border-bottom: 1px #aaa solid !important;
+        border-bottom: 1px #bbb solid !important;
 
         display: block;
         font-style: italic !important;
