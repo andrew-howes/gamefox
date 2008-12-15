@@ -751,13 +751,13 @@
 
       <description>&manage.desc.export;</description>
       <description>&manage.desc.reset;</description>
-
-      <hbox pack="center">
-        <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.label;" icon="open"/>
-        <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.label;" icon="save"/>
-        <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.label;" icon="clear"/>
-      </hbox>
     </groupbox>
+
+    <hbox pack="center" style="margin-bottom: 40px">
+      <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.label;" icon="open"/>
+      <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.label;" icon="save"/>
+      <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.label;" icon="clear"/>
+    </hbox>
   </prefpane>
 
 </prefwindow>
