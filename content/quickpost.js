@@ -549,7 +549,7 @@ var GFquickpost =
 
   removeGFCodeWhitespace: function(str)
   {
-    return str.replace(/<\/p>\s*<\/i>\n{2}/g, '</p></i>\n');
+    return str.replace(/<\/p>\s*<\/i>\n{2}(?!\n)/g, '</p></i>\n');
   },
 
   removeGFCodeWhitespaceListener: function(event)
