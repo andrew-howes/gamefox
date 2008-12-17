@@ -141,6 +141,8 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 #main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:976px !important;}
 .topten .pod {width:480px !important;}
 .hub_nav {width:966px !important;}
+.hub_nav .box_tl {background: transparent url(http://img159.imageshack.us/img159/2148/toadhubnavkl7.png) no-repeat scroll left top !important;}
+.hub_nav .box_bl, .hub_nav .box_tr, .hub_nav .box_br {background: none !important;}
 }
 /** Manage Account (Account Settings) **/
 @-moz-document url-prefix("http://www.gamefaqs.com/user/") {
