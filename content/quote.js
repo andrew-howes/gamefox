@@ -76,10 +76,10 @@ var GFquote =
       replace(/&lt;(\/?)(b|i|em|strong|br|p)&gt;/gi, '&lt;$1$2<b></b>&gt;').
       replace(/&lt;(br|p) \/&gt;/gi, '&lt;$1 /<b></b>&gt;');
 
-    // Remove nested quotes
     bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;
 
+    // Remove nested quotes
     var quotes = doc.evaluate('./i/p', bodyDOM, null, XPathResult.
         ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < quotes.snapshotLength; i++)
@@ -96,12 +96,17 @@ var GFquote =
       }
     }
 
-    body = GFutils.specialCharsDecode(bodyDOM.innerHTML);
-
     // Remove p tags which break GFCode
-    body = body.replace(/<\/?p>/g, '\n');
+    var p = doc.evaluate('./p', bodyDOM, null, XPathResult.
+        ORDERED_NODE_SNAPSHOT_TYPE, null);
+    for (var i = 0; i < p.snapshotLength; i++)
+    {
+      bodyDOM.insertBefore(doc.createTextNode('\n' + p.snapshotItem(i).textContent),
+          p.snapshotItem(i));
+      bodyDOM.removeChild(p.snapshotItem(i));
+    }
 
-    body = body.GFtrim();
+    body = GFutils.specialCharsDecode(bodyDOM.innerHTML.GFtrim());
 
     /* Prepare quote header */
     var qhead = '';
