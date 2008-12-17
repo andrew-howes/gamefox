@@ -66,16 +66,6 @@ var GFuserlist =
     textbox.setAttribute('value', name);
     textbox.addEventListener('input', this.updatePref, false);
     hbox.appendChild(textbox);
-    /*** separator **/
-    separator = document.createElement('separator');
-    separator.setAttribute('flex', '1');
-    hbox.appendChild(separator);
-    /*** button ***/
-    button = document.createElement('button');
-    button.setAttribute('label', strbundle.getString('delete'));
-    button.setAttribute('icon', 'remove');
-    button.addEventListener('command', this.removeWithButton, false);
-    hbox.appendChild(button);
     /*** separator ***/
     separator = document.createElement('separator');
     separator.setAttribute('flex', '1');
@@ -94,7 +84,16 @@ var GFuserlist =
     textbox.setAttribute('value', color);
     textbox.addEventListener('input', this.updatePref, false);
     hbox.appendChild(textbox);
-
+    /*** separator **/
+    separator = document.createElement('separator');
+    separator.setAttribute('flex', '1');
+    hbox.appendChild(separator);
+    /*** button ***/
+    button = document.createElement('button');
+    button.setAttribute('label', strbundle.getString('delete'));
+    button.setAttribute('icon', 'remove');
+    button.addEventListener('command', this.removeWithButton, false);
+    hbox.appendChild(button);
     groupbox.appendChild(hbox);
 
     /** hbox **/
