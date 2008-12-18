@@ -661,14 +661,13 @@ var GameFOX =
 
             var a = doc.createElement('a');
                 a.setAttribute('href', '#');
-                a.appendChild(doc.createTextNode('[Show]'));
+                a.appendChild(doc.createTextNode('show'));
                 a.addEventListener('click', GFuserlist.showPost, false);
 
-            if (leftMsgData)
-              td[i].appendChild(doc.createElement('br'));
-            else
-              td[i].appendChild(doc.createTextNode(' | '));
-            td[i].appendChild(a);
+            if (!onArchive || msgLinks.hasChildNodes())
+              msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
+                  doc.createElement('br') : doc.createTextNode(' | '));
+            msgLinks.appendChild(a);
           }
           else if (hlinfo[2] == 'remove') // remove post
           {

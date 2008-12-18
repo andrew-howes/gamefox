@@ -376,13 +376,13 @@ var GFuserlist =
         postMsg.style.removeProperty('font-size');
         postMsg.removeAttribute('style');
         buttonContainer.style.removeProperty('font-size');
-        button.textContent = '[Hide]';
+        button.textContent = 'hide';
       }
       else
       {
         postMsg.style.setProperty('font-size', '0pt', 'important');
         postMsg.style.setProperty('display', 'none', 'important');
-        button.textContent = '[Show]';
+        button.textContent = 'show';
       }
     }
     else // above message
@@ -393,13 +393,13 @@ var GFuserlist =
         postMsg.style.removeProperty('font-size');
         postMsg.style.removeProperty('display');
         postMsg.removeAttribute('style');
-        button.textContent = '[Hide]';
+        button.textContent = 'hide';
       }
       else
       {
         postMsg.style.setProperty('font-size', '0pt', 'important');
         postMsg.style.setProperty('display', 'none', 'important');
-        button.textContent = '[Show]';
+        button.textContent = 'show';
       }
     }
   },
