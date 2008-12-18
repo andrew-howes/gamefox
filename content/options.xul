@@ -583,7 +583,7 @@
             </radiogroup>
           </groupbox>
 
-          <groupbox>
+          <groupbox style="margin-bottom:10px">
             <caption label="&signature.selection;"/>
             <radiogroup preference="sig-selection">
               <radio value="1" label="&signature.selection.first;"/>
@@ -753,7 +753,7 @@
       <description>&manage.desc.reset;</description>
     </groupbox>
 
-    <hbox pack="center" style="margin-bottom: 40px">
+    <hbox pack="center" style="margin-bottom:40px">
       <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.label;" icon="open"/>
       <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.label;" icon="save"/>
       <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.label;" icon="clear"/>
