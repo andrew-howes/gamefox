@@ -83,7 +83,7 @@ var GFsig =
       if (selectionPref == 1)
         sig = matches[bestIndex][0];
       else // selectionPref == 3
-        sig = matches[bestIndex][Math.round(Math.random() * (matches[bestIndex].length - 1))];
+        sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
     }
     else // selectionPref == 2
     {
@@ -92,7 +92,7 @@ var GFsig =
       for (i = 0; i < matches.length; i++)
         for (var j = 0; j < matches[i].length; j++)
           allMatches.push(matches[i][j]);
-      sig = allMatches[Math.round(Math.random() * (allMatches.length - 1))];
+      sig = allMatches[Math.floor(Math.random() * allMatches.length)];
     }
     // default is only sig and is empty
     if (sig == undefined)
