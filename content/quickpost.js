@@ -539,6 +539,7 @@ var GFquickpost =
       tagbutton.type = 'submit';
       tagbutton.value = tags[i + 1];
       tagbutton.name = tags[i];
+      tagbutton.title = '<' + tags[i].replace(/,/g, '><') + '>';
 
       tagbutton.addEventListener('click', GFquickpost.insertTag, false);
 
