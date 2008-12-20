@@ -7,7 +7,7 @@
 <!ENTITY menu.pages.label "Topic Pages">
 <!ENTITY menu.quote.label "Quote Message">
 <!ENTITY menu.usergroups.label "User Groups">
-<!ENTITY menu.breaktags.label "Break Tags in Selection">
+<!ENTITY menu.breaktags.label "Break HTML Tags">
 
 <!ENTITY menu.sidebar.label "Sidebar">
 <!ENTITY menu.sidebar.accesskey "S">
