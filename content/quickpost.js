@@ -492,9 +492,9 @@ var GFquickpost =
     {
       var endPosition = quickpost.selectionEnd + tagStrStart.length;
 
-      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
+      quickpost.value = quickpost.value.substr(0, quickpost.selectionStart)
         + tagStrStart + (this.name != 'br' ? tagStrEnd : '')
-        + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
+        + quickpost.value.substr(quickpost.selectionEnd);
     }
     else if (this.name != 'br')
     {
@@ -502,11 +502,10 @@ var GFquickpost =
       var endPosition = quickpost.selectionEnd + tagStrStart.length +
         tagStrEnd.length;
 
-      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
+      quickpost.value = quickpost.value.substr(0, quickpost.selectionStart)
         + tagStrStart + quickpost.value.substring(quickpost.selectionStart,
             quickpost.selectionEnd) + tagStrEnd +
-        quickpost.value.substring(quickpost.selectionEnd,
-            quickpost.value.length);
+        quickpost.value.substr(quickpost.selectionEnd);
     }
 
     quickpost.setSelectionRange(endPosition, endPosition);
@@ -564,13 +563,13 @@ var GFquickpost =
   breakTags: function(msg)
   {
     var brokenStr = GFutils.specialCharsDecode(GFutils.breakTags(
-          GFutils.specialCharsEncode(msg.value.substr(msg.selectionStart,
+          GFutils.specialCharsEncode(msg.value.substring(msg.selectionStart,
               msg.selectionEnd))));
 
     var endPosition = msg.selectionStart + brokenStr.length;
     msg.value = msg.value.substr(0, msg.selectionStart)
       + brokenStr
-      + msg.value.substr(msg.selectionEnd, msg.value.length);
+      + msg.value.substr(msg.selectionEnd);
 
     msg.setSelectionRange(endPosition, endPosition);
   }
