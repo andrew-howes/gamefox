@@ -2,7 +2,19 @@
 
 This release polishes many existing features and fixes several bugs.
 
-(write more...)
+QuickPost's reset button has returned with an option to choose a different
+signature when resetting a post. <small>(Tools → GameFOX → Main → Posting →
+Choose a new signature when resetting post)</small>
+
+QuickPost and the Post Message page now have buttons to insert HTML tags into
+the post.
+
+The Style options pane has been simplified. Imported stylesheets can be deleted
+by right clicking. A new "edit" function has been added which directly opens a
+stylesheet in a text editor, also accessible by right click.
+
+GameFOX preferences can now be exported, imported and reset from the options
+window. <small>(Tools → GameFOX → Manage)</small>
 
 ### Feedback
 
