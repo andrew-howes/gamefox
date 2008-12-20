@@ -3,10 +3,12 @@
 <!ENTITY tools.accesskey "G">
 
 <!ENTITY menu.label "GameFOX">
+<!ENTITY menu.tagtopic.label "Tag Topic">
+<!ENTITY menu.pages.label "Topic Pages">
 <!ENTITY menu.quote.label "Quote Message">
 <!ENTITY menu.usergroups.label "User Groups">
-<!ENTITY menu.pages.label "Topic Pages">
-<!ENTITY menu.tagtopic.label "Tag Topic">
+<!ENTITY menu.breaktags.label "Break Tags in Selection">
+
 <!ENTITY menu.sidebar.label "Sidebar">
 <!ENTITY menu.sidebar.accesskey "S">
 <!ENTITY menu.tags.label "Tags">

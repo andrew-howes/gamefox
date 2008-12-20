@@ -63,6 +63,7 @@ var GFcontext =
     var hideUsergroups = true;
     var hideFilter = true;
     var hideDelete = true;
+    var hideBreakTags = true;
 
     if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
     {
@@ -129,6 +130,17 @@ var GFcontext =
             .label = strbundle.getString('closeTopic');
         }
       }
+
+      // Break tags
+      if (gContextMenu.target.nodeName == 'TEXTAREA'
+          && gContextMenu.target.selectionStart != gContextMenu.target.selectionEnd)
+        hideBreakTags = false;
+    }
+    else if (GFlib.onPage(doc, 'post'))
+    {
+      if (gContextMenu.target.nodeName == 'TEXTAREA'
+          && gContextMenu.target.selectionStart != gContextMenu.target.selectionEnd)
+        hideBreakTags = false;
     }
 
     document.getElementById('gamefox-context-quote').hidden = hideQuote
@@ -143,5 +155,6 @@ var GFcontext =
       || !GameFOX.prefs.getBoolPref('context.filter');
     document.getElementById('gamefox-context-delete').hidden = hideDelete
       || !GameFOX.prefs.getBoolPref('context.delete');
+    document.getElementById('gamefox-context-break-tags').hidden = hideBreakTags;
   }
 };

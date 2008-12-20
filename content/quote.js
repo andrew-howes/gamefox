@@ -72,9 +72,7 @@ var GFquote =
       body = body.replace(/---(\n.*\n?){0,2}$/, '');
 
     // Break escaped tags
-    body = body.
-      replace(/&lt;(\/?)(b|i|em|strong|br|p)&gt;/gi, '&lt;$1$2<b></b>&gt;').
-      replace(/&lt;(br|p) \/&gt;/gi, '&lt;$1 /<b></b>&gt;');
+    body = GFutils.breakTags(body);
 
     bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;

@@ -487,6 +487,14 @@ var GFutils =
       }
     }
     return prefix;
+  },
+
+  // Break tags for posting
+  breakTags: function(str)
+  {
+    return str.
+      replace(/&lt;(\/?)(b|i|em|strong|br|p)&gt;/gi, '&lt;$1$2<b></b>&gt;').
+      replace(/&lt;(br|p) \/&gt;/gi, '&lt;$1 /<b></b>&gt;');
   }
 };
 

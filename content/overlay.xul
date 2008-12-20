@@ -89,6 +89,10 @@
       <menupopup id="gamefox-context-usergroups-list"
         onpopupshowing="GFuserlist.fillMenu(gContextMenu);"/>
     </menu>
+
+    <!-- textarea -->
+    <menuitem id="gamefox-context-break-tags" label="&menu.breaktags.label;"
+      oncommand="GFquickpost.breakTags(gContextMenu.target);"/>
   </popup>
 
   <!-- firefox tools menu -->

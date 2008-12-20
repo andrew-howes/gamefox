@@ -51,3 +51,5 @@ anywhere on the message list, and in archived topics
 stylesheets now handled in the context menu
 * Add delete/close and filter actions to the context menu
 * Add a system to export, import and reset preferences
+* Add function to break HTML tags for posting by selecting text in the
+message box and right clicking

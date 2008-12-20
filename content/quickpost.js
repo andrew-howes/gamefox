@@ -559,5 +559,19 @@ var GFquickpost =
       return false;
     var message = event.target.elements.namedItem('message');
     message.value = GFquickpost.removeGFCodeWhitespace(message.value);
+  },
+
+  breakTags: function(msg)
+  {
+    var brokenStr = GFutils.specialCharsDecode(GFutils.breakTags(
+          GFutils.specialCharsEncode(msg.value.substr(msg.selectionStart,
+              msg.selectionEnd))));
+
+    var endPosition = msg.selectionStart + brokenStr.length;
+    msg.value = msg.value.substr(0, msg.selectionStart)
+      + brokenStr
+      + msg.value.substr(msg.selectionEnd, msg.value.length);
+
+    msg.setSelectionRange(endPosition, endPosition);
   }
 };
