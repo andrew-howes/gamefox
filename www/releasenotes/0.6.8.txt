@@ -16,6 +16,9 @@ stylesheet in a text editor, also accessible by right click.
 GameFOX preferences can now be exported, imported and reset from the options
 window. <small>(Tools → GameFOX → Manage)</small>
 
+Sections of the sidebar can now be toggled from the options window.
+<small>(Tools → GameFOX → Main → Sidebar)</small>
+
 ### Feedback
 
 Questions, suggestions or complaints? Let us know at
