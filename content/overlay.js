@@ -1266,7 +1266,9 @@ function GameFOXLoader()
       for (var i = 1; i < sigs.length; i++)
       {
         sigs[i]['accounts'] = sigs[i]['accounts'].replace(/;/g, ',');
-        sigs[i]['boards'] = sigs[i]['boards'].replace(/;/g, ',');
+        sigs[i]['boards'] = sigs[i]['boards']
+          .replace(/(^|;)\s*life, the universe, and everything\s*($|;)/gi, '$1402$2')
+          .replace(/;/g, ',');
       }
       GFutils.setString('signature.serialized', sigs.toSource());
     }
