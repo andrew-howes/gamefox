@@ -544,6 +544,27 @@ var GFquickpost =
 
       span.appendChild(doc.createTextNode(' '));
     }
+
+    // Break tags button
+    span.appendChild(doc.createTextNode(' | '));
+    var breaktags = doc.createElement('input');
+    span.appendChild(breaktags);
+    breaktags.type = 'submit';
+    breaktags.value = 'Break HTML Tags';
+    breaktags.title = 'Break HTML tags in selection';
+    
+    breaktags.addEventListener('click', function(event) {
+        event.preventDefault();
+        var doc = GFlib.getDocument(event);
+
+        var msg = doc.getElementsByName('message')[0];
+        if (msg.selectionStart == msg.selectionEnd)
+          return alert('You need to select some text first.');
+
+        GFquickpost.breakTags(msg);
+        msg.focus();
+      }, false);
+
     return span;
   },
 

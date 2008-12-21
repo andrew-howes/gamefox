@@ -155,6 +155,7 @@ var GFcontext =
       || !GameFOX.prefs.getBoolPref('context.filter');
     document.getElementById('gamefox-context-delete').hidden = hideDelete
       || !GameFOX.prefs.getBoolPref('context.delete');
-    document.getElementById('gamefox-context-break-tags').hidden = hideBreakTags;
+    document.getElementById('gamefox-context-break-tags').hidden = hideBreakTags
+      || !GameFOX.prefs.getBoolPref('context.breaktags');
   }
 };

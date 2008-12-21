@@ -164,6 +164,7 @@
 <!ENTITY mouse.context.filter "Filter">
 <!ENTITY mouse.context.delete "Delete/Close">
 <!ENTITY mouse.context.usergroups "User Groups">
+<!ENTITY mouse.context.breaktags "Break HTML Tags">
 <!ENTITY mouse.context.tags "Tags">
 <!ENTITY mouse.context.tags.aml "Active Messages">
 <!ENTITY mouse.context.tags.tracked "Tracked Topics">
