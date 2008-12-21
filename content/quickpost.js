@@ -41,6 +41,8 @@ var GFquickpost =
       topictitle.name = 'topictitle';
       topictitle.size = 60;
       topictitle.maxlength = 80;
+      topictitle.tabIndex = 1;
+      topictitle.focus();
 
       if (charCounts)
       {
@@ -72,6 +74,7 @@ var GFquickpost =
     message.wrap = 'virtual';
     message.rows = 16;
     message.cols = 60;
+    message.tabIndex = 2;
     doc.gamefox.sig = GFsig.format(null, null, doc);
     if (GameFOX.prefs.getIntPref('signature.addition') == 1)
       form.addEventListener('submit', GFquickpost.appendSig, false);
@@ -92,6 +95,7 @@ var GFquickpost =
       postbutton.value = 'Post Message';
       postbutton.title = 'Post Message [' + accesskeyPrefix + 'z]';
       postbutton.accessKey = 'z';
+      postbutton.tabIndex = 3;
       postbutton.addEventListener('click', GFquickpost.post, false);
     }
 
@@ -105,6 +109,7 @@ var GFquickpost =
       previewbutton.value = 'Preview Message';
       previewbutton.title = 'Preview Message [' + accesskeyPrefix + 'x]';
       previewbutton.accessKey = 'x';
+      previewbutton.tabIndex = 3;
 
       var spellchkbutton = doc.createElement('input');
       form.appendChild(doc.createTextNode(' '));
@@ -114,6 +119,7 @@ var GFquickpost =
       spellchkbutton.value = 'Preview and Spellcheck Message';
       spellchkbutton.title = 'Preview and Spellcheck Message [' + accesskeyPrefix + 'c]';
       spellchkbutton.accessKey = 'c';
+      spellchkbutton.tabIndex = 3;
 
       var resetbutton = doc.createElement('input');
       form.appendChild(doc.createTextNode(' '));
@@ -123,6 +129,7 @@ var GFquickpost =
       resetbutton.title = 'Reset [' + accesskeyPrefix + 'v]';
       resetbutton.accessKey = 'v';
       resetbutton.addEventListener('click', GFquickpost.resetPost, false);
+      resetbutton.tabIndex = 3;
     }
 
     if (newTopic)
@@ -133,6 +140,7 @@ var GFquickpost =
       hidebutton.id = 'gamefox-quickpost-hide';
       hidebutton.type = 'button';
       hidebutton.value = 'Hide';
+      hidebutton.tabIndex = 3;
       hidebutton.addEventListener('click', GFquickpost.toggleVisibility, false);
     }
 
@@ -539,6 +547,7 @@ var GFquickpost =
       tagbutton.value = tags[i + 1];
       tagbutton.name = tags[i];
       tagbutton.title = '<' + tags[i].replace(/,/g, '><') + '>';
+      tagbutton.tabIndex = 3;
 
       tagbutton.addEventListener('click', GFquickpost.insertTag, false);
 
@@ -552,6 +561,7 @@ var GFquickpost =
     breaktags.type = 'submit';
     breaktags.value = 'Break HTML Tags';
     breaktags.title = 'Break HTML tags in selection';
+    breaktags.tabIndex = 3;
     
     breaktags.addEventListener('click', function(event) {
         event.preventDefault();
