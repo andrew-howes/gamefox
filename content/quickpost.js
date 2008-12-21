@@ -547,7 +547,7 @@ var GFquickpost =
       tagbutton.value = tags[i + 1];
       tagbutton.name = tags[i];
       tagbutton.title = '<' + tags[i].replace(/,/g, '><') + '>';
-      tagbutton.tabIndex = 3;
+      tagbutton.tabIndex = 4;
 
       tagbutton.addEventListener('click', GFquickpost.insertTag, false);
 
@@ -561,8 +561,8 @@ var GFquickpost =
     breaktags.type = 'submit';
     breaktags.value = 'Break HTML Tags';
     breaktags.title = 'Break HTML tags in selection';
-    breaktags.tabIndex = 3;
-    
+    breaktags.tabIndex = 4;
+
     breaktags.addEventListener('click', function(event) {
         event.preventDefault();
         var doc = GFlib.getDocument(event);
