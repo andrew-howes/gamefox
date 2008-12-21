@@ -620,41 +620,35 @@
       <preference id="gamefox-pref-context-breaktags" name="gamefox.context.breaktags" type="bool"/>
     </preferences>
 
-    <groupbox>
-      <caption label="&mouse.topics.caption;"/>
-      <label value="&mouse.topics.label;"/>
-      <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-topic-dblclick">
-        <vbox>
-          <radio value="0" label="&mouse.topics.radio.nothing;"/>
-          <radio value="1" label="&mouse.topics.radio.paginate;"/>
-        </vbox>
-        <vbox>
-          <radio value="4" label="&mouse.topics.radio.lastpage;"/>
-          <radio value="2" label="&mouse.topics.radio.lastpost;"/>
-        </vbox>
-        <vbox>
-          <radio value="3" label="&mouse.topics.radio.tagtopic;"/>
-        </vbox>
-      </radiogroup>
-    </groupbox>
+    <hbox>
+      <groupbox flex="1">
+        <caption label="&mouse.topics.caption;"/>
+        <label value="&mouse.topics.label;"/>
+        <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-topic-dblclick">
+          <vbox>
+            <radio value="0" label="&mouse.topics.radio.nothing;"/>
+            <radio value="1" label="&mouse.topics.radio.paginate;"/>
+            <radio value="4" label="&mouse.topics.radio.lastpage;"/>
+            <radio value="2" label="&mouse.topics.radio.lastpost;"/>
+            <radio value="3" label="&mouse.topics.radio.tagtopic;"/>
+          </vbox>
+        </radiogroup>
+      </groupbox>
 
-    <groupbox>
-      <caption label="&mouse.aml.caption;"/>
-      <label value="&mouse.aml.label;"/>
-      <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-myposts-dblclick">
-        <vbox>
-          <radio value="0" label="&mouse.aml.radio.nothing;"/>
-          <radio value="1" label="&mouse.aml.radio.paginate;"/>
-        </vbox>
-        <vbox>
-          <radio value="4" label="&mouse.aml.radio.lastpage;"/>
-          <radio value="2" label="&mouse.aml.radio.lastpost;"/>
-        </vbox>
-        <vbox>
-          <radio value="3" label="&mouse.aml.radio.tagtopic;"/>
-        </vbox>
-      </radiogroup>
-    </groupbox>
+      <groupbox flex="1">
+        <caption label="&mouse.aml.caption;"/>
+        <label value="&mouse.aml.label;"/>
+        <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-myposts-dblclick">
+          <vbox>
+            <radio value="0" label="&mouse.aml.radio.nothing;"/>
+            <radio value="1" label="&mouse.aml.radio.paginate;"/>
+            <radio value="4" label="&mouse.aml.radio.lastpage;"/>
+            <radio value="2" label="&mouse.aml.radio.lastpost;"/>
+            <radio value="3" label="&mouse.aml.radio.tagtopic;"/>
+          </vbox>
+        </radiogroup>
+      </groupbox>
+    </hbox>
 
     <groupbox>
       <caption label="&mouse.messages.caption;"/>
@@ -675,19 +669,6 @@
       <caption label="&mouse.context.caption;"/>
       <hbox>
         <groupbox>
-          <caption label="&mouse.context.submenu;"/>
-          <hbox>
-            <vbox>
-              <checkbox preference="gamefox-pref-context-sidebar" label="&mouse.context.sidebar;"/>
-              <checkbox preference="gamefox-pref-context-taglist" label="&mouse.context.taglist;"/>
-            </vbox>
-            <vbox>
-              <checkbox preference="gamefox-pref-context-accounts" label="&mouse.context.accounts;"/>
-              <checkbox preference="gamefox-pref-context-favorites" label="&mouse.context.favorites;"/>
-            </vbox>
-          </hbox>
-        </groupbox>
-        <groupbox>
           <caption label="&mouse.context.main;"/>
           <hbox>
             <vbox>
@@ -700,6 +681,19 @@
               <checkbox preference="gamefox-pref-context-delete" label="&mouse.context.delete;"/>
               <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.context.usergroups;"/>
               <checkbox preference="gamefox-pref-context-breaktags" label="&mouse.context.breaktags;"/>
+            </vbox>
+          </hbox>
+        </groupbox>
+        <groupbox>
+          <caption label="&mouse.context.submenu;"/>
+          <hbox>
+            <vbox>
+              <checkbox preference="gamefox-pref-context-sidebar" label="&mouse.context.sidebar;"/>
+              <checkbox preference="gamefox-pref-context-taglist" label="&mouse.context.taglist;"/>
+            </vbox>
+            <vbox>
+              <checkbox preference="gamefox-pref-context-accounts" label="&mouse.context.accounts;"/>
+              <checkbox preference="gamefox-pref-context-favorites" label="&mouse.context.favorites;"/>
             </vbox>
           </hbox>
         </groupbox>
