@@ -38,11 +38,11 @@
 <!ENTITY main.page.pages.format.suffix "Suffix:">
 <!ENTITY main.posting.postbutton "&quot;Post Message&quot; (skip preview) button">
 <!ENTITY main.posting.charcounts "Character counters">
+<!ENTITY main.posting.htmlbuttons "HTML tag buttons">
+<!ENTITY main.posting.htmlbuttons.gfcode "Additional GFCode buttons">
 <!ENTITY main.posting.quickpost.caption "QuickPost">
 <!ENTITY main.posting.quickpost.topics "QuickPost link on topic lists">
 <!ENTITY main.posting.quickpost.messages "QuickPost form on message lists">
-<!ENTITY main.posting.quickpost.htmlbuttons "HTML tag buttons">
-<!ENTITY main.posting.quickpost.htmlbuttons.gfcode "Additional GFCode buttons">
 <!ENTITY main.posting.quickpost.otherbuttons "Preview and reset buttons">
 <!ENTITY main.posting.quickpost.resetconfirm "Confirm resetting post">
 <!ENTITY main.posting.quickpost.resetnewsig "Choose a new signature when resetting post">
