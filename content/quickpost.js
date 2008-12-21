@@ -549,13 +549,12 @@ var GFquickpost =
 
   removeGFCodeWhitespace: function(str)
   {
-    return str.replace(/<\/p>\s*<\/i>\n{2}(?!\n)/g, '</p></i>\n');
+    return GameFOX.prefs.getBoolPref('quote.controlwhitespace') ?
+      str.replace(/<\/p>\s*<\/i>\n{2}(?!\n)/g, '</p></i>\n') : str;
   },
 
   removeGFCodeWhitespaceListener: function(event)
   {
-    if (!GameFOX.prefs.getBoolPref('quote.controlwhitespace'))
-      return false;
     var message = event.target.elements.namedItem('message');
     message.value = GFquickpost.removeGFCodeWhitespace(message.value);
   },
