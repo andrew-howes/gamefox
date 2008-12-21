@@ -569,7 +569,10 @@ var GFquickpost =
 
         var msg = doc.getElementsByName('message')[0];
         if (msg.selectionStart == msg.selectionEnd)
-          return alert('You need to select some text containing HTML first.');
+        {
+          GFlib.alert('You need to select some text containing HTML first.');
+          return;
+        }
 
         GFquickpost.breakTags(msg);
         msg.focus();
