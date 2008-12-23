@@ -89,7 +89,7 @@ def main():
             else:
                 items[-1] = items[-1] + " " + i
 
-    news = NewsGenerator("GameFOX TNG " + version, items)
+    news = NewsGenerator("GameFOX " + version, items)
     news.printXML()
 
 def usage():
