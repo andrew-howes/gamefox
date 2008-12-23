@@ -577,6 +577,9 @@ var GFquickpost =
 
         GFquickpost.breakTags(msg);
         msg.focus();
+
+        if (GameFOX.prefs.getBoolPref('elements.charcounts'))
+          GFmessages.updateMessageCount(doc);
       }, false);
 
     return span;
