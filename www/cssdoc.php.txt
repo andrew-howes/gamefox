@@ -1,17 +1,11 @@
 <h2 id="a">a</h2>
-<h3 id="a_gamefox-delete-link">
-a.gamefox-delete-link
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="a_gamefox-delete-link">a.gamefox-delete-link</h3>
 
-"Delete" and "Close" links on message lists.
+"Delete" and "Close" links on message lists. (v0.6.7)
 
-<h3 id="a_gamefox-filter-link">
-a.gamefox-filter-link
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="a_gamefox-filter-link">a.gamefox-filter-link</h3>
 
-"Filter" links on message lists.
+"Filter" links on message lists. (v0.6.7)
 
 <h3 id="a_gamefox-last-post-link">a.gamefox-last-post-link</h3>
 
@@ -23,7 +17,7 @@ Used on gentopic.php to activate the floating topic QuickPost.
 
 <h3 id="a_gamefox-quote-link">
 a.gamefox-quote-link
-<span class="new">New in 0.6.8pre</span>
+<span class="new">New in 0.6.8</span>
 </h3>
 
 "Quote" links on message lists.
@@ -64,12 +58,9 @@ QuickPost form.
 `input` text element for the topic title. Only present in the floating topic QuickPost.
 
 <h2 id="p">p</h2>
-<h3 id="p_gamefox-usernote">
-p.gamefox-usernote
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="p_gamefox-usernote">p.gamefox-usernote</h3>
 
-Applied to system notification message.
+Applied to system notification message. (v0.6.7)
 
 <h2 id="span">span</h2>
 <h3 id="span_gamefox-groupname">span.gamefox-groupname</h3>
@@ -78,7 +69,7 @@ Contains group name(s) the adjacent username is a member of. (v0.6.5)
 
 <h3 id="span+gamefox-html-buttons">
 span#gamefox-html-buttons
-<span class="new">New in 0.6.8pre</span>
+<span class="new">New in 0.6.8</span>
 </h3>
 
 Container for HTML buttons.
@@ -89,7 +80,7 @@ Shows the character count for the message. (v0.6.5)
 
 <h3 id="span_gamefox-message-links">
 span.gamefox-message-links
-<span class="new">New in 0.6.8pre</span>
+<span class="new">New in 0.6.8</span>
 </h3>
 
 Container for GameFOX action links applied to message headers.
@@ -98,65 +89,41 @@ Container for GameFOX action links applied to message headers.
 
 Contains topic pagination text.
 
-<h3 id="span_gamefox-status">
-span.gamefox-status
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_gamefox-status">span.gamefox-status</h3>
 
-Empty span element used for topic icons of a sticky or closed topic.
+Empty span element used for topic icons of a sticky or closed topic. (v0.6.7)
 
-<h3 id="span_gamefox-tc-label">
-span.gamefox-tc-label
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_gamefox-tc-label">span.gamefox-tc-label</h3>
 
-Text displayed next to the username of the topic creator.
+Text displayed next to the username of the topic creator. (v0.6.7)
 
 <h3 id="span+gamefox-title-count">span#gamefox-title-count</h3>
 
 Shows the character count for the title. (v0.6.5)
 
-<h3 id="span_sticky-end">
-span.sticky-end
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_sticky-end">span.sticky-end</h3>
 
-Empty span element used for topic icons of a sticky topic.
+Empty span element used for topic icons of a sticky topic. (v0.6.7)
 
-<h3 id="span_sticky-start">
-span.sticky-start
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_sticky-start">span.sticky-start</h3>
 
-Empty span element used for topic icons of a sticky topic.
+Empty span element used for topic icons of a sticky topic. (v0.6.7)
 
-<h3 id="span_sticky_closed-end">
-span.sticky_closed-end
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_sticky_closed-end">span.sticky_closed-end</h3>
 
-Empty span element used for topic icons of a sticky and closed topic.
+Empty span element used for topic icons of a sticky and closed topic. (v0.6.7)
 
-<h3 id="span_sticky_closed-start">
-span.sticky_closed-start
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_sticky_closed-start">span.sticky_closed-start</h3>
 
-Empty span element used for topic icons of a sticky and closed topic.
+Empty span element used for topic icons of a sticky and closed topic. (v0.6.7)
 
-<h3 id="span_topic_closed-end">
-span.topic_closed-end
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_topic_closed-end">span.topic_closed-end</h3>
 
-Empty span element used for topic icons of a closed topic.
+Empty span element used for topic icons of a closed topic. (v0.6.7)
 
-<h3 id="span_topic_closed-start">
-span.topic_closed-start
-<span class="new">New in 0.6.7</span>
-</h3>
+<h3 id="span_topic_closed-start">span.topic_closed-start</h3>
 
-Empty span element used for topic icons of a closed topic.
+Empty span element used for topic icons of a closed topic. (v0.6.7)
 
 <h2 id="textarea">textarea</h2>
 <h3 id="textarea+gamefox-message">textarea#gamefox-message</h3>

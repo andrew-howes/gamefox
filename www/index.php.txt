@@ -4,10 +4,10 @@ provide a comprehensive environment for making GameFAQs perfect.
 
 ### Download ### {#download}
 
-<big>[GameFOX TNG 0.6.7](/gfox/gamefox-0.6.7.xpi) for Firefox 1.5 - 3.1b2pre,
-SeaMonkey 2.0a2pre and Flock 1.0 - 1.2</big>
+<big>[GameFOX 0.6.8](/gfox/gamefox-0.6.8.xpi) for Firefox 1.5 - 3.1b3pre,
+SeaMonkey 2.0a3pre and Flock 1.0 - 1.2</big>
 
-Released 2008 November 01 ([release notes](releasenotes/0.6.7.html)).
+Released 2008 December 23 ([release notes](releasenotes/0.6.8.html)).
 
 ### Features ### {#features}
 

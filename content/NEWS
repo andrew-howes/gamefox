@@ -1,4 +1,7 @@
 2008-12-xx:
+    * version 0.6.9
+
+2008-12-23:
     * version 0.6.8
     * Fix manual topic pagination
     * Cache favorite boards when on board index page; show in context menu,
