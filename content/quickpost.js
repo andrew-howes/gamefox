@@ -531,22 +531,24 @@ var GFquickpost =
     // Standard
     if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
       tags.push(
-          'b', 'Bold',
-          'i', 'Italics');
+          'b', 'Bold', 'b',
+          'i', 'Italics', 'i');
     // Extended
     if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended'))
       tags.push(
-          'em', 'Emphasis',
-          'strong', 'Strong Emphasis',
-          'p', 'Paragraph',
-          'br', 'Break');
+          'em', 'Emphasis', 'e',
+          'strong', 'Strong Emphasis', 's',
+          'p', 'Paragraph', 'g',
+          'br', 'Break', 'n');
     // GFCode
     if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
       tags.push(
-          'i,p', 'Quote', 
-          'em,p', 'Code');
+          'i,p', 'Quote', 'q',
+          'em,p', 'Code', 'd');
 
-    for (var i = 0; i < tags.length; i += 2)
+    var accesskeyPrefix = GFutils.getAccesskeyPrefix();
+
+    for (var i = 0; i < tags.length; i += 3)
     {
       var tagbutton = doc.createElement('input');
       span.appendChild(tagbutton);
@@ -554,7 +556,8 @@ var GFquickpost =
       tagbutton.value = tags[i + 1];
       tagbutton.name = tags[i];
       tagbutton.title = '<' + tags[i].replace(/,/g, '><') +
-        (tags[i] == 'br' ? ' /' : '') + '>';
+        (tags[i] == 'br' ? ' /' : '') + '> [' + accesskeyPrefix + tags[i + 2] + ']';
+      tagbutton.accessKey = tags[i + 2];
       tagbutton.tabIndex = 4;
 
       tagbutton.addEventListener('click', GFquickpost.insertTag, false);
@@ -568,7 +571,8 @@ var GFquickpost =
     span.appendChild(breaktags);
     breaktags.type = 'submit';
     breaktags.value = 'Break HTML Tags';
-    breaktags.title = 'Break HTML tags in selection';
+    breaktags.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
+    breaktags.accessKey = 'r';
     breaktags.tabIndex = 4;
 
     breaktags.addEventListener('click', function(event) {
