@@ -234,12 +234,15 @@
 
               <checkbox preference="posting-postbutton" label="&main.posting.postbutton;"/>
               <checkbox preference="posting-charcounts" label="&main.posting.charcounts;"/>
-              <checkbox preference="posting-htmlbuttons"
-                label="&main.posting.htmlbuttons;"/>
-              <checkbox preference="posting-htmlbuttons-extended"
-                label="&main.posting.htmlbuttons.extended;"/>
-              <checkbox preference="posting-htmlbuttons-gfcode"
-                label="&main.posting.htmlbuttons.gfcode;"/>
+              <label value="&main.posting.htmlbuttons.label;"/>
+              <hbox class="indent">
+                <checkbox preference="posting-htmlbuttons"
+                  label="&main.posting.htmlbuttons.standard;"/>
+                <checkbox preference="posting-htmlbuttons-extended"
+                  label="&main.posting.htmlbuttons.extended;"/>
+                <checkbox preference="posting-htmlbuttons-gfcode"
+                  label="&main.posting.htmlbuttons.gfcode;"/>
+              </hbox>
 
             </groupbox>
 
