@@ -38,6 +38,8 @@ var GFaccounts =
   populate: function()
   {
     var accountList, username, item, firstAccount;
+    var currentAccount = Cc['@mozilla.org/preferences-service;1']
+      .getService(Ci.nsIPrefBranch).getCharPref('gamefox.accounts.current');
 
     accountList = document.getElementById('gamefox-accounts-menu');
     if (!accountList)
@@ -66,7 +68,8 @@ var GFaccounts =
         firstAccount = false;
       }
       item = document.createElement('menuitem');
-      item.setAttribute('label', username);
+      item.setAttribute('label', username + 
+          (username == currentAccount ? '*' : ''));
       item.setAttribute('oncommand', 'GFaccounts.switchAccount("' + username + '")');
       accountList.appendChild(item);
     }

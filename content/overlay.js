@@ -49,6 +49,13 @@ var GameFOX =
           doc.getElementById('search').nextSibling);
     }
 
+    // Save logged-in account name
+    var loginbox = doc.evaluate('//div[@id="loginbox"]/div[@class="msg"]',
+        doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    if (loginbox)
+      GameFOX.prefs.setCharPref('accounts.current', loginbox.textContent.
+          replace(/Welcome,/, '').GFtrim());
+
     if (!GFlib.onBoards(doc)) return false;
 
     doc.gamefox = {};

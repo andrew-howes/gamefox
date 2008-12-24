@@ -71,7 +71,10 @@ pref("gamefox.userlist.serialized", "[]");
 pref("gamefox.favorites.serialized", "[]");
 
 pref("gamefox.tags", "");
+
 pref("gamefox.accounts", "({})");
+pref("gamefox.accounts.current", "");
+
 pref("gamefox.topic.dblclick", 0);
 pref("gamefox.message.dblclick", false);
 pref("gamefox.message.header.dblclick", 0);
