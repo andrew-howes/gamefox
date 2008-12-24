@@ -95,7 +95,7 @@ distclean: clean
 upnightly: ${NIGHTLYXPI}
 	${Q}( cd release/ && ./mknightly.sh ${NIGHTLYXPI} ${VERSION}${NIGHTLY_DATE} ${VERSION} )
 
-uprelease: ${XPI}
+uprelease: ${XPI} ${MOZXPI}
 	${Q}( cd release/ && ./mkrelease.py -x ${XPI_NAME} \
 		--hash "sha1:$(shell sha1sum ${XPI} |cut -d ' ' -f 1)" \
 		${VERSION} > release.rdf )
