@@ -5,7 +5,7 @@
  */
 @-moz-document domain(www.gamefaqs.com) {
     /* Common formatting for block elements */
-    .message i > p, .message b > p, .message em > p {
+    .message i > p, .message em > p {
         border: 1px #bbb solid !important;
 
         margin: 0 auto !important;
