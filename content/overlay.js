@@ -285,7 +285,7 @@ var GameFOX =
       }
 
       // HTML buttons
-      if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
+      if (GFquickpost.createHTMLButtonsPref())
       {
         var message = doc.getElementsByName('message')[0];
         message.setSelectionRange(0, 0);

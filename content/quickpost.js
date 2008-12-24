@@ -57,7 +57,7 @@ var GFquickpost =
     }
 
     // HTML buttons
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
+    if (GFquickpost.createHTMLButtonsPref())
     {
       if (newTopic)
         form.appendChild(doc.createElement('br'));
@@ -527,17 +527,24 @@ var GFquickpost =
   {
     var span = doc.createElement('span');
     span.id = 'gamefox-html-buttons';
-    var tags = new Array(
-        'b', 'Bold',
-        'i', 'Italics',
-        'em', 'Emphasis',
-        'strong', 'Strong Emphasis',
-        'p', 'Paragraph',
-        'br', 'Break'
-        );
+    var tags = new Array();
+    // Standard
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
+      tags.push(
+          'b', 'Bold',
+          'i', 'Italics');
+    // Extended
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended'))
+      tags.push(
+          'em', 'Emphasis',
+          'strong', 'Strong Emphasis',
+          'p', 'Paragraph',
+          'br', 'Break');
     // GFCode
     if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
-      tags.push('i,p', 'Quote', 'em,p', 'Code');
+      tags.push(
+          'i,p', 'Quote', 
+          'em,p', 'Code');
 
     for (var i = 0; i < tags.length; i += 2)
     {
@@ -609,5 +616,12 @@ var GFquickpost =
       + msg.value.substr(msg.selectionEnd);
 
     msg.setSelectionRange(endPosition, endPosition);
+  },
+
+  createHTMLButtonsPref: function()
+  {
+    return GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons')
+      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
+      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode');
   }
 };

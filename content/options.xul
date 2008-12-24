@@ -82,6 +82,8 @@
       <preference id="posting-charcounts" name="gamefox.elements.charcounts" type="bool"/>
       <preference id="posting-htmlbuttons"
         name="gamefox.elements.quickpost.htmlbuttons" type="bool"/>
+      <preference id="posting-htmlbuttons-extended" type="bool"
+        name="gamefox.elements.quickpost.htmlbuttons.extended"/>
       <preference id="posting-htmlbuttons-gfcode"
         name="gamefox.elements.quickpost.htmlbuttons.gfcode" type="bool"/>
       <preference id="posting-otherbuttons" name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
@@ -234,7 +236,9 @@
               <checkbox preference="posting-charcounts" label="&main.posting.charcounts;"/>
               <checkbox preference="posting-htmlbuttons"
                 label="&main.posting.htmlbuttons;"/>
-              <checkbox class="indent" preference="posting-htmlbuttons-gfcode"
+              <checkbox preference="posting-htmlbuttons-extended"
+                label="&main.posting.htmlbuttons.extended;"/>
+              <checkbox preference="posting-htmlbuttons-gfcode"
                 label="&main.posting.htmlbuttons.gfcode;"/>
 
             </groupbox>

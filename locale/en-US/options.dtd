@@ -38,8 +38,9 @@
 <!ENTITY main.page.pages.format.suffix "Suffix:">
 <!ENTITY main.posting.postbutton "&quot;Post Message&quot; (skip preview) button">
 <!ENTITY main.posting.charcounts "Character counters">
-<!ENTITY main.posting.htmlbuttons "HTML tag buttons">
-<!ENTITY main.posting.htmlbuttons.gfcode "Additional GFCode buttons">
+<!ENTITY main.posting.htmlbuttons "Standard HTML tag buttons">
+<!ENTITY main.posting.htmlbuttons.extended "Extended HTML tag buttons">
+<!ENTITY main.posting.htmlbuttons.gfcode "GFCode HTML tag buttons">
 <!ENTITY main.posting.quickpost.caption "QuickPost">
 <!ENTITY main.posting.quickpost.topics "QuickPost link on topic lists">
 <!ENTITY main.posting.quickpost.messages "QuickPost form on message lists">
