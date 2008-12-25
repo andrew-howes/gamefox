@@ -308,9 +308,11 @@ var GFuserlist =
       return false; // username isn't in any groups
 
     var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
-    if (tc)
+    if (tc && this.usernameIndex[username] && this.usernameIndex['(tc)'])
       var groups = GFutils.mergeArray(this.usernameIndex[username],
           this.usernameIndex['(tc)']);
+    else if (tc && this.usernameIndex['(tc)'])
+      var groups = this.usernameIndex['(tc)'];
     else
       var groups = this.usernameIndex[username];
 
