@@ -178,7 +178,7 @@
 <!ENTITY users.options.topicgroups "Group names on topic lists">
 <!ENTITY users.options.msggroups "Group names on message lists">
 <!ENTITY users.add "Add a Group">
-<!ENTITY users.desc "Separate users with commas.">
+<!ENTITY users.desc "Separate users with commas. List &quot;(tc)&quot; as a user (without quotes) to highlight the topic creator.">
 
 <!ENTITY manage.label "Manage">
 <!ENTITY manage.desc.label "Manage Preferences">

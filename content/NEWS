@@ -3,6 +3,7 @@
     * More configurable HTML button display options
     * Add keyboard shortcuts to HTML buttons
     * Label current logged-in account in the account switcher
+    * Allow highlighting of the topic creator with the user lists feature
 
 2008-12-23:
     * version 0.6.8

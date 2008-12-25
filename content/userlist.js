@@ -297,17 +297,22 @@ var GFuserlist =
     }
   },
 
-  searchUsername: function(username)
+  searchUsername: function(username, tc)
   {
     if (!this.usernameIndex) return false; // no index
 
     username = username.GFtrim().toLowerCase();
     if (!username.length) return false;
 
-    if (!this.usernameIndex[username]) return false; // username isn't in any groups
+    if (!this.usernameIndex[username] && !(tc && this.usernameIndex['(tc)']))
+      return false; // username isn't in any groups
 
     var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
-    var groups = this.usernameIndex[username];
+    if (tc)
+      var groups = GFutils.mergeArray(this.usernameIndex[username],
+          this.usernameIndex['(tc)']);
+    else
+      var groups = this.usernameIndex[username];
 
     // first group decides everything
     var color = userlist[groups[0]]['color'];

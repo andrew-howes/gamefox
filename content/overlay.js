@@ -627,16 +627,21 @@ var GameFOX =
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[i].id = 'p' + msgnumString;
 
+        var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
+        
+        // Topic creator
+        // TODO: Fix for newest first ordering
+        if (msgnum == 1 && GameFOX.prefs.getIntPref('msgSortOrder') == 1)
+          tc = username;
+
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
         td[i].appendChild(msgLinks);
         msgLinks.className = 'gamefox-message-links';
 
         // Message highlighting
-        var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
-
         var hlinfo, groupname;
-        if ((hlinfo = GFuserlist.searchUsername(username)) != false)
+        if ((hlinfo = GFuserlist.searchUsername(username, tc == username)) != false)
         {
           // add group names after username
           if (GameFOX.prefs.getBoolPref('userlist.messages.showgroupnames') &&
@@ -698,21 +703,14 @@ var GameFOX =
         }
 
         // Distinguish posts from the topic creator
-        if (tcCond)
+        if (tcCond && tc == username)
         {
-          // TODO: Fix for newest first ordering
-          if (msgnum == 1 && GameFOX.prefs.getIntPref('msgSortOrder') == 1)
-            tc = username;
+          var span = doc.createElement('span');
+          span.className = 'gamefox-tc-label';
+          span.appendChild(doc.createTextNode(tcMarker));
 
-          if (tc == username)
-          {
-            var span = doc.createElement('span');
-                span.className = 'gamefox-tc-label';
-                span.appendChild(doc.createTextNode(tcMarker));
-
-            td[i].insertBefore(span,
-                td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
-          }
+          td[i].insertBefore(span,
+              td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
         }
 
         // Add "delete" link
