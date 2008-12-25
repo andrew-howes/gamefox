@@ -1,0 +1,71 @@
+### About this version
+
+#### 0.6.9
+
+This release follows up 0.6.8 by removing unnecessary HTML buttons and adding a
+few minor features.
+
+#### 0.6.8
+
+This release polishes many existing features and fixes several bugs.
+
+QuickPost's reset button has returned with an option to choose a different
+signature when resetting a post. <small>(Tools → GameFOX → Main → Posting →
+Choose a new signature when resetting post)</small>
+
+QuickPost and the Post Message page now have buttons to insert HTML tags into
+the post.
+
+The Style options pane has been simplified. Imported stylesheets can be deleted
+by right clicking. A new "edit" function has been added which directly opens a
+stylesheet in a text editor, also accessible by right click.
+
+GameFOX preferences can now be exported, imported and reset from the options
+window. <small>(Tools → GameFOX → Manage)</small>
+
+Sections of the sidebar can now be toggled from the options window.
+<small>(Tools → GameFOX → Main → Sidebar)</small>
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+
+### New in this release
+
+#### 0.6.9
+
+* More configurable HTML button display options
+* Add keyboard shortcuts to HTML buttons
+* Label current logged-in account in the account switcher
+* Allow highlighting of the topic creator with the user lists feature
+
+#### 0.6.8
+
+* Fix manual topic pagination
+* Cache favorite boards when on board index page; show in context menu,
+sidebar, and GameFAQs header
+* Scroll to appropriate location when filtering/unfiltering
+* Improved Ricapar Classic CSS; now compatible with Firefox 3.1
+* Workaround Firefox 3 bug that breaks QuickPost and other features when
+third-party cookies are blocked
+* Restore QuickPost reset button with additional functionality
+* Remove `<style>` elements when ad servers are blocked
+* Fix quoting issue that occurs when certain extensions (e.g.,
+Session Manager) are installed
+* Add HTML buttons to posting
+* Commas now used in place of semicolons as the delimiter for signature
+fields
+* Add link to message headers to quote
+* Add options to remove sections from the GameFOX sidebar
+* The user groups context menu option can now be used on the topic list,
+anywhere on the message list, and in archived topics
+* Improved removal of nested quotes
+* Full key combination is shown in tooltip for QuickPost buttons
+* Excessive whitespace after quotes is now automatically removed
+* User interface for style pane simplified - deletion of imported
+stylesheets now handled in the context menu
+* Add delete/close and filter actions to the context menu
+* Add a system to export, import and reset preferences
+* Add function to break HTML tags for posting by selecting text in the
+message box and right clicking or using the "break HTML tags" button
