@@ -523,10 +523,30 @@ var GFquickpost =
       GFmessages.updateMessageCount(doc);
   },
 
+  breakTagsListener: function(event)
+  {
+    event.preventDefault();
+    var doc = GFlib.getDocument(event);
+
+    var msg = doc.getElementsByName('message')[0];
+    if (msg.selectionStart == msg.selectionEnd)
+    {
+      GFlib.alert('You need to select some text containing HTML first.');
+      return;
+    }
+
+    GFquickpost.breakTags(msg);
+    msg.focus();
+
+    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
+      GFmessages.updateMessageCount(doc);
+  },
+
   createHTMLButtons: function(doc)
   {
     var span = doc.createElement('span');
     span.id = 'gamefox-html-buttons';
+
     var tags = new Array();
     // Standard
     if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
@@ -566,32 +586,21 @@ var GFquickpost =
     }
 
     // Break tags button
-    span.appendChild(doc.createTextNode(' | '));
-    var breaktags = doc.createElement('input');
-    span.appendChild(breaktags);
-    breaktags.type = 'submit';
-    breaktags.value = 'Break HTML Tags';
-    breaktags.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
-    breaktags.accessKey = 'r';
-    breaktags.tabIndex = 4;
+    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags'))
+    {
+      if (tags.length)
+        span.appendChild(doc.createTextNode(' | '));
 
-    breaktags.addEventListener('click', function(event) {
-        event.preventDefault();
-        var doc = GFlib.getDocument(event);
+      var breaktags = doc.createElement('input');
+      span.appendChild(breaktags);
+      breaktags.type = 'submit';
+      breaktags.value = 'Break HTML Tags';
+      breaktags.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
+      breaktags.accessKey = 'r';
+      breaktags.tabIndex = 4;
 
-        var msg = doc.getElementsByName('message')[0];
-        if (msg.selectionStart == msg.selectionEnd)
-        {
-          GFlib.alert('You need to select some text containing HTML first.');
-          return;
-        }
-
-        GFquickpost.breakTags(msg);
-        msg.focus();
-
-        if (GameFOX.prefs.getBoolPref('elements.charcounts'))
-          GFmessages.updateMessageCount(doc);
-      }, false);
+      breaktags.addEventListener('click', GFquickpost.breakTagsListener, false);
+    }
 
     return span;
   },
@@ -626,6 +635,7 @@ var GFquickpost =
   {
     return GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons')
       || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
-      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode');
+      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode')
+      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags');
   }
 };

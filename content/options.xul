@@ -86,6 +86,8 @@
         name="gamefox.elements.quickpost.htmlbuttons.extended"/>
       <preference id="posting-htmlbuttons-gfcode"
         name="gamefox.elements.quickpost.htmlbuttons.gfcode" type="bool"/>
+      <preference id="posting-htmlbuttons-breaktags"
+        name="gamefox.elements.quickpost.htmlbuttons.breaktags" type="bool"/>
       <preference id="posting-otherbuttons" name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
       <preference id="posting-link" name="gamefox.elements.quickpost.link" type="bool"/>
       <preference id="posting-form" name="gamefox.elements.quickpost.form" type="bool"/>
@@ -242,6 +244,8 @@
                   label="&main.posting.htmlbuttons.extended;"/>
                 <checkbox preference="posting-htmlbuttons-gfcode"
                   label="&main.posting.htmlbuttons.gfcode;"/>
+                <checkbox preference="posting-htmlbuttons-breaktags"
+                  label="&main.posting.htmlbuttons.breaktags;"/>
               </hbox>
 
             </groupbox>

@@ -42,6 +42,7 @@
 <!ENTITY main.posting.htmlbuttons.standard "Standard">
 <!ENTITY main.posting.htmlbuttons.extended "Extended">
 <!ENTITY main.posting.htmlbuttons.gfcode "GFCode">
+<!ENTITY main.posting.htmlbuttons.breaktags "Break Tags">
 <!ENTITY main.posting.quickpost.caption "QuickPost">
 <!ENTITY main.posting.quickpost.topics "QuickPost link on topic lists">
 <!ENTITY main.posting.quickpost.messages "QuickPost form on message lists">
