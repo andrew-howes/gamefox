@@ -69,7 +69,8 @@ var GFaccounts =
       }
       item = document.createElement('menuitem');
       item.setAttribute('label', username + 
-          (username == currentAccount ? '*' : ''));
+          (username.toLowerCase() == currentAccount.toLowerCase() ?
+           '*' : ''));
       item.setAttribute('oncommand', 'GFaccounts.switchAccount("' + username + '")');
       accountList.appendChild(item);
     }

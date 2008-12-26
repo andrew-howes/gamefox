@@ -98,7 +98,8 @@ var GFsidebar =
       item = document.createElement('a');
       item.setAttribute('onclick', 'GFaccounts.switchAccount("' + username + '");return false');
       item.appendChild(document.createTextNode(username +
-            (username == currentAccount ? '*' : '')));
+            (username.toLowerCase() == currentAccount.toLowerCase() ?
+             '*' : '')));
       accountList.appendChild(item);
       item = document.createElement('br');
       accountList.appendChild(item);
