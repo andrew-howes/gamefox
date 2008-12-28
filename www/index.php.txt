@@ -2,12 +2,12 @@ GameFOX is a Firefox extension that improves browsing of the [GameFAQs message
 boards](http://www.gamefaqs.com/boards/index.php). The purpose of GameFOX is to
 provide a comprehensive environment for making GameFAQs perfect.
 
-### Download ### {#download}
+### Install ### {#download}
 
-<big>[GameFOX 0.6.9](/gfox/gamefox-0.6.9.xpi) for Firefox 1.5 - 3.1b3pre,
-SeaMonkey 2.0a3pre and Flock 1.0 - 1.2</big>
+<big>[GameFOX 0.6.9](/gfox/gamefox-0.6.9.xpi)</big> ([release notes](releasenotes/0.6.9.html))
 
-Released 2008 December 26 ([release notes](releasenotes/0.6.9.html)).
+Released 2008 December 26. Compatible with Firefox 1.5 - 3.1b3pre,
+SeaMonkey 2.0a3pre, Flock 1.0 - 1.2.
 
 ### Features ### {#features}
 
@@ -30,7 +30,7 @@ randomization
 
 ### Development ### {#development}
 
-These are the people that help make GameFOX what it is today:
+Current developers:
 
 * Andrianto Effendy (ZeroAnt)
 * Brian Marshall (Karamthulhu)
@@ -43,17 +43,15 @@ repository with a [web interface](http://repo.or.cz/w/gamefox.git) or clone it:
 
 ### Nightly snapshots ### {#nightly}
 
-Nightly builds are snapshots of the latest development code automatically
-generated at 3AM every night. They should be used to test experimental features.
+Nightly snapshots are builds of the latest development code automatically
+generated every night at 3 AM. They should be used to test experimental features.
 
-Be aware that **things will probably be broken**. We ask that if you use the
-nightlies to report any problems you find at
-[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885),
-being as descriptive as possible. This will allow us to resolve problems quickly,
-both for the next nightly builds and for future versions of GameFOX.
+These versions receive minimal testing, so **things will probably be broken.**
+If you use the nightlies, please report any problems you find on
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885), which
+will alert us of any problems we haven't discovered yet.
 
-Nightly builds will receive automatic updates daily when a new version is built.
-If nightly testing isn't for you, you can downgrade to the stable release
-at the [top of the page](#download) at any time.
-
-The latest nightly snapshot is available from [this location](/gfox/nightly/).
+To start using the nightlies, [install the XPI file here](/gfox/nightly/). It
+is recommended that you stay up-to-date by using Firefox's add-on manager to
+find updates for GameFOX. You can [revert to the stable releases](#download)
+at any time.
