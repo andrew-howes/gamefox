@@ -186,7 +186,7 @@ var GFuserlist =
 
   setDefaultValues: function()
   {
-    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     var vbox = document.getElementById('usergroups');
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
@@ -262,9 +262,9 @@ var GFuserlist =
     }
 
     // get and set pref
-    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     userlist[idx][name] = value;
-    GFuserlist.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   loadGroups: function()
@@ -331,7 +331,7 @@ var GFuserlist =
   {
     var groupbox = event.target.parentNode.parentNode;
     var id = groupbox.id.substring(3);
-    var userlist = eval(GFuserlist.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
 
     if (userlist[id]['name'].length)
     {
@@ -360,7 +360,7 @@ var GFuserlist =
     }
 
     userlist.splice(id, 1);
-    GFuserlist.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   showPost: function(event)
