@@ -23,23 +23,18 @@ var GFaccounts =
 
   read: function()
   {
-    this.accounts = eval(Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefBranch)
-        .getCharPref('gamefox.accounts'));
+    this.accounts = eval(GFlib.prefs.getCharPref('accounts'));
   },
 
   write: function(accounts)
   {
-    Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefBranch)
-        .setCharPref('gamefox.accounts', accounts.toSource());
+    GFlib.prefs.setCharPref('accounts', accounts.toSource());
   },
 
   populate: function()
   {
     var accountList, username, item, firstAccount;
-    var currentAccount = Cc['@mozilla.org/preferences-service;1']
-      .getService(Ci.nsIPrefBranch).getCharPref('gamefox.accounts.current');
+    var currentAccount = GFlib.prefs.getCharPref('accounts.current');
 
     accountList = document.getElementById('gamefox-accounts-menu');
     if (!accountList)

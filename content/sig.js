@@ -283,7 +283,7 @@ var GFsig =
       sig = getSig['body'];
     }
     if (newline == null) // fetch newline
-      newline = GameFOX.prefs.getBoolPref('signature.newline');
+      newline = GFlib.prefs.getBoolPref('signature.newline');
 
     if (!sig.length)
       return '';

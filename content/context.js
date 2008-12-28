@@ -24,13 +24,13 @@ var GFcontext =
     var doc = gContextMenu.target.ownerDocument;
     var strbundle = document.getElementById('context-strings');
 
-    document.getElementById('gamefox-toggle-sidebar').hidden = !GameFOX.prefs.
+    document.getElementById('gamefox-toggle-sidebar').hidden = !GFlib.prefs.
       getBoolPref('context.sidebar');
-    document.getElementById('gamefox-tags').hidden = !GameFOX.prefs.
+    document.getElementById('gamefox-tags').hidden = !GFlib.prefs.
       getBoolPref('context.taglist');
-    document.getElementById('gamefox-accounts').hidden = !GameFOX.prefs.
+    document.getElementById('gamefox-accounts').hidden = !GFlib.prefs.
       getBoolPref('context.accounts');
-    document.getElementById('gamefox-favorites').hidden = !GameFOX.prefs.
+    document.getElementById('gamefox-favorites').hidden = !GFlib.prefs.
       getBoolPref('context.favorites');
 
     // Submenu
@@ -144,18 +144,18 @@ var GFcontext =
     }
 
     document.getElementById('gamefox-context-quote').hidden = hideQuote
-      || !GameFOX.prefs.getBoolPref('context.quote');
+      || !GFlib.prefs.getBoolPref('context.quote');
     document.getElementById('gamefox-context-tag').hidden = hideTag
-      || !GameFOX.prefs.getBoolPref('context.tag');
+      || !GFlib.prefs.getBoolPref('context.tag');
     document.getElementById('gamefox-context-pages').hidden = hidePages
-      || !GameFOX.prefs.getBoolPref('context.pagelist');
+      || !GFlib.prefs.getBoolPref('context.pagelist');
     document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups
-      || !GameFOX.prefs.getBoolPref('context.usergroups');
+      || !GFlib.prefs.getBoolPref('context.usergroups');
     document.getElementById('gamefox-context-filter').hidden = hideFilter
-      || !GameFOX.prefs.getBoolPref('context.filter');
+      || !GFlib.prefs.getBoolPref('context.filter');
     document.getElementById('gamefox-context-delete').hidden = hideDelete
-      || !GameFOX.prefs.getBoolPref('context.delete');
+      || !GFlib.prefs.getBoolPref('context.delete');
     document.getElementById('gamefox-context-break-tags').hidden = hideBreakTags
-      || !GameFOX.prefs.getBoolPref('context.breaktags');
+      || !GFlib.prefs.getBoolPref('context.breaktags');
   }
 };

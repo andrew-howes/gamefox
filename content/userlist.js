@@ -22,12 +22,9 @@ var GFuserlist =
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
 
-  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
-      Ci.nsIPrefService).getBranch('gamefox.'),
-
   add: function(name, color, users, messages, topics)
   {
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
 
     name = (typeof name == 'string') ? name : '';
     color = (typeof color == 'string') ? color : '#CCFFFF';
@@ -38,7 +35,7 @@ var GFuserlist =
     userlist.push({'name':name, 'color':color, 'users':users,
         'messages':messages, 'topics':topics});
 
-    this.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   makeGroupbox: function(id, name, color, users)
@@ -176,7 +173,7 @@ var GFuserlist =
 
   populate: function()
   {
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     var vbox = document.getElementById('usergroups');
 
     for (var i = 0; i < userlist.length; i++)
@@ -209,7 +206,7 @@ var GFuserlist =
 
   populateLast: function()
   {
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     var id = userlist.length - 1;
     userlist = userlist[id];
     var vbox = document.getElementById('usergroups');
@@ -273,7 +270,7 @@ var GFuserlist =
   loadGroups: function()
   {
     var usernames, username;
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     this.usernameIndex = {};
 
     // build the index
@@ -307,7 +304,7 @@ var GFuserlist =
     if (!this.usernameIndex[username] && !(tc && this.usernameIndex['(tc)']))
       return false; // username isn't in any groups
 
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     if (tc && this.usernameIndex[username] && this.usernameIndex['(tc)'])
       var groups = GFutils.mergeArray(this.usernameIndex[username],
           this.usernameIndex['(tc)']);
@@ -442,7 +439,7 @@ var GFuserlist =
     var activeGroups = this.searchUsername(username)[4];
     if (!activeGroups) activeGroups = [];
 
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     if (!userlist.length)
     {
       item = document.createElement('menuitem');
@@ -499,7 +496,7 @@ var GFuserlist =
 
   menuCheckChange: function(event, username, group)
   {
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
 
     if (event.target.getAttribute('checked')) // add to group
     {
@@ -518,7 +515,7 @@ var GFuserlist =
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
-    this.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   prepareOptionsPane: function()
@@ -531,7 +528,7 @@ var GFuserlist =
 
   updateUsers: function()
   {
-    var userlist = eval(this.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     var groups = document.getElementById('usergroups').getElementsByTagName('groupbox');
     var textboxes;
     for (var i = 0; i < groups.length; i++)

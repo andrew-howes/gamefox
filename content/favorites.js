@@ -26,9 +26,7 @@ var GFfavorites =
     while (favList.hasChildNodes())
       favList.removeChild(favList.firstChild);
 
-    favs = eval(Cc['@mozilla.org/preferences-service;1']
-               .getService(Ci.nsIPrefService).getBranch('gamefox.')
-               .getCharPref('favorites.serialized'));
+    favs = eval(GFlib.getCharPref('favorites.serialized'));
 
     item = doc.createElement('option');
     item.value = 0;

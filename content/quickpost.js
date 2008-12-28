@@ -21,7 +21,7 @@ var GFquickpost =
 {
   appendForm: function(doc, div, newTopic)
   {
-    var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
+    var charCounts = GFlib.prefs.getBoolPref('elements.charcounts');
     var accesskeyPrefix = GFutils.getAccesskeyPrefix();
 
     var form = doc.createElement('form');
@@ -76,7 +76,7 @@ var GFquickpost =
     message.cols = 60;
     message.tabIndex = 2;
     doc.gamefox.sig = GFsig.format(null, null, doc);
-    if (GameFOX.prefs.getIntPref('signature.addition') == 1)
+    if (GFlib.prefs.getIntPref('signature.addition') == 1)
       form.addEventListener('submit', GFquickpost.appendSig, false);
     else
       message.value = doc.gamefox.sig;
@@ -85,7 +85,7 @@ var GFquickpost =
     var linebreak = doc.createElement('br');
     form.appendChild(linebreak);
 
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.button'))
+    if (GFlib.prefs.getBoolPref('elements.quickpost.button'))
     {
       var postbutton = doc.createElement('input');
       form.appendChild(postbutton);
@@ -99,7 +99,7 @@ var GFquickpost =
       postbutton.addEventListener('click', GFquickpost.post, false);
     }
 
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.otherbuttons'))
+    if (GFlib.prefs.getBoolPref('elements.quickpost.otherbuttons'))
     {
       var previewbutton = doc.createElement('input');
       form.appendChild(doc.createTextNode(' '));
@@ -333,7 +333,7 @@ var GFquickpost =
               query = GFutils.parseQueryString(query);
               if (topicTitle) // new topic
               {
-                switch (GameFOX.prefs.getIntPref('elements.quickpost.aftertopic'))
+                switch (GFlib.prefs.getIntPref('elements.quickpost.aftertopic'))
                 {
                   case 0: // go to topic
                     doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
@@ -349,10 +349,10 @@ var GFquickpost =
               }
               else // new message
               {
-                switch (GameFOX.prefs.getIntPref('elements.quickpost.aftermessage'))
+                switch (GFlib.prefs.getIntPref('elements.quickpost.aftermessage'))
                 {
                   case 0: // go to last page/post
-                    var msgsPerPage = GameFOX.prefs.getIntPref('msgsPerPage');
+                    var msgsPerPage = GFlib.prefs.getIntPref('msgsPerPage');
                     var end;
 
                     if (doc.gamefox.pages * msgsPerPage == doc.gamefox.msgnum)
@@ -422,7 +422,7 @@ var GFquickpost =
         .getElementsByName('message')[0].value);
 
     if (!GFlib.onPage(doc, 'post')
-        && GameFOX.prefs.getIntPref('signature.addition') == 1)
+        && GFlib.prefs.getIntPref('signature.addition') == 1)
       message += GFsig.format(null, null, doc);
 
     previewRequest.send(
@@ -436,16 +436,16 @@ var GFquickpost =
   {
     event.preventDefault();
 
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.resetconfirm') &&
+    if (GFlib.prefs.getBoolPref('elements.quickpost.resetconfirm') &&
         !GFlib.confirm('Are you sure? This will clear your entire post so far.'))
       return;
 
     var doc = GFlib.getDocument(event);
-    var charCounts = GameFOX.prefs.getBoolPref('elements.charcounts');
+    var charCounts = GFlib.prefs.getBoolPref('elements.charcounts');
 
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.resetnewsig'))
+    if (GFlib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
       doc.gamefox.sig = GFsig.format(null, null, doc);
-    if (GameFOX.prefs.getIntPref('signature.addition') == 1)
+    if (GFlib.prefs.getIntPref('signature.addition') == 1)
     {
       doc.getElementById('gamefox-message').value = '';
       doc.gamefox.sigAdded = false;
@@ -519,7 +519,7 @@ var GFquickpost =
     quickpost.setSelectionRange(endPosition, endPosition);
     quickpost.focus();
 
-    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
+    if (GFlib.prefs.getBoolPref('elements.charcounts'))
       GFmessages.updateMessageCount(doc);
   },
 
@@ -538,7 +538,7 @@ var GFquickpost =
     GFquickpost.breakTags(msg);
     msg.focus();
 
-    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
+    if (GFlib.prefs.getBoolPref('elements.charcounts'))
       GFmessages.updateMessageCount(doc);
   },
 
@@ -549,19 +549,19 @@ var GFquickpost =
 
     var tags = new Array();
     // Standard
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
+    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
       tags.push(
           'b', 'Bold', 'b',
           'i', 'Italics', 'i');
     // Extended
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended'))
+    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended'))
       tags.push(
           'em', 'Emphasis', 'e',
           'strong', 'Strong Emphasis', 's',
           'p', 'Paragraph', 'g',
           'br', 'Break', 'n');
     // GFCode
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
+    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
       tags.push(
           'i,p', 'Quote', 'q',
           'em,p', 'Code', 'd');
@@ -586,7 +586,7 @@ var GFquickpost =
     }
 
     // Break tags button
-    if (GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags'))
+    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags'))
     {
       if (tags.length)
         span.appendChild(doc.createTextNode(' | '));
@@ -607,7 +607,7 @@ var GFquickpost =
 
   removeGFCodeWhitespace: function(str)
   {
-    return GameFOX.prefs.getBoolPref('quote.controlwhitespace') ?
+    return GFlib.prefs.getBoolPref('quote.controlwhitespace') ?
       str.replace(/<\/p>\s*<\/i>\n{2}(?!\n)/g, '</p></i>\n') : str;
   },
 
@@ -633,9 +633,9 @@ var GFquickpost =
 
   createHTMLButtonsPref: function()
   {
-    return GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons')
-      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
-      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode')
-      || GameFOX.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags');
+    return GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons')
+      || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
+      || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode')
+      || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags');
   }
 };

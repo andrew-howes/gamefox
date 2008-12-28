@@ -253,13 +253,13 @@ var GFutils =
 
   getString: function(pref, prefService)
   {
-    return (prefService == null ? GameFOX.prefs : prefService).
+    return (prefService == null ? GFlib.prefs : prefService).
       getComplexValue(pref, Ci.nsISupportsString).data;
   },
 
   setString: function(pref, str, prefService)
   {
-    prefService = (prefService == null) ? GameFOX.prefs : prefService;
+    prefService = (prefService == null) ? GFlib.prefs : prefService;
     var ustr = Cc['@mozilla.org/supports-string;1'].
       createInstance(Ci.nsISupportsString);
     ustr.data = str;
@@ -402,7 +402,7 @@ var GFutils =
 
   getLastPost: function(msgs, tc)
   {
-    var lastPage = Math.floor((msgs - 1) / GameFOX.prefs.getIntPref('msgsPerPage'));
+    var lastPage = Math.floor((msgs - 1) / GFlib.prefs.getIntPref('msgsPerPage'));
     var pageStr = lastPage ? '&page=' + lastPage + this.tcParam(tc) : '';
 
     var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
@@ -425,7 +425,7 @@ var GFutils =
 
   tcParam: function(tc)
   {
-    return tc && GameFOX.prefs.getBoolPref('elements.marktc') ?
+    return tc && GFlib.prefs.getBoolPref('elements.marktc') ?
         '&tc=' + tc.replace(/ /g, '+') : '';
   },
 

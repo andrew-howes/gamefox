@@ -27,6 +27,10 @@ var GFlib =
     .getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}')
     .version,
 
+  prefs: Cc['@mozilla.org/preferences-service;1']
+    .getService(Ci.nsIPrefService)
+    .getBranch('gamefox.'),
+
   log: function(msg)
   {
     Cc['@mozilla.org/consoleservice;1']
@@ -161,8 +165,8 @@ var GFlib =
 
   setTitle: function(doc, title, prefix, page)
   {
-    if (!GameFOX.prefs.getBoolPref('elements.titlechange')) return false;
-    if (!GameFOX.prefs.getBoolPref('elements.titleprefix')) prefix = null;
+    if (!GFlib.prefs.getBoolPref('elements.titlechange')) return false;
+    if (!GFlib.prefs.getBoolPref('elements.titleprefix')) prefix = null;
 
     doc.title = 'GameFAQs'
       + (prefix == null ? '' : ':' + prefix)

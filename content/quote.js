@@ -68,7 +68,7 @@ var GFquote =
       GFtrim();
 
     // Get rid of signature
-    if (GameFOX.prefs.getBoolPref('quote.removesignature'))
+    if (GFlib.prefs.getBoolPref('quote.removesignature'))
       body = body.replace(/---(\n.*\n?){0,2}$/, '');
 
     // Break escaped tags
@@ -108,27 +108,27 @@ var GFquote =
 
     /* Prepare quote header */
     var qhead = '';
-    if (GameFOX.prefs.getBoolPref('quote.header.username'))
+    if (GFlib.prefs.getBoolPref('quote.header.username'))
       qhead += 'From: ' + username;
-    if (GameFOX.prefs.getBoolPref('quote.header.date'))
+    if (GFlib.prefs.getBoolPref('quote.header.date'))
       qhead += (qhead.length ? ' | ' : '') + 'Posted: ' + postdate;
-    if (GameFOX.prefs.getBoolPref('quote.header.messagenum'))
+    if (GFlib.prefs.getBoolPref('quote.header.messagenum'))
       qhead += (qhead.length ? ' | ' : '') + postnum;
 
-    if (qhead.length && GameFOX.prefs.getCharPref('quote.style') == 'normal')
+    if (qhead.length && GFlib.prefs.getCharPref('quote.style') == 'normal')
     {
-      if (GameFOX.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
-      if (GameFOX.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
+      if (GFlib.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
+      if (GFlib.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
       qhead += '\n';
     }
 
     var qbody, quote;
-    switch (GameFOX.prefs.getCharPref('quote.style'))
+    switch (GFlib.prefs.getCharPref('quote.style'))
     {
       case 'normal':
         qbody = body;
-        if (GameFOX.prefs.getBoolPref('quote.message.italic')) qbody = '<i>' + qbody + '</i>';
-        if (GameFOX.prefs.getBoolPref('quote.message.bold')) qbody = '<b>' + qbody + '</b>';
+        if (GFlib.prefs.getBoolPref('quote.message.italic')) qbody = '<i>' + qbody + '</i>';
+        if (GFlib.prefs.getBoolPref('quote.message.bold')) qbody = '<b>' + qbody + '</b>';
 
         quote = qhead + qbody + '\n';
         break;
@@ -162,7 +162,7 @@ var GFquote =
     }
 
     // update the character count
-    if (GameFOX.prefs.getBoolPref('elements.charcounts'))
+    if (GFlib.prefs.getBoolPref('elements.charcounts'))
       GFmessages.updateMessageCount(doc);
 
     quickpost.focus();
