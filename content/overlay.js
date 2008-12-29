@@ -1296,7 +1296,7 @@ function GameFOXLoader()
     {
       // updated nightly install
       window.setTimeout(GFlib.newTab, 10,
-          'http://beyondboredom.net/gfox/nightly/changes.php', 0);
+          'http://beyondboredom.net/projects/gamefox/nightlychanges.php', 0);
     }
     else if (version.indexOf('pre') == -1 && lastversion != '')
     {
