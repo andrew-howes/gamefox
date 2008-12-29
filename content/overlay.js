@@ -889,7 +889,8 @@ var GameFOX =
       if (doc.location.hash.length)
       {
         if (doc.location.hash == '#last-post'
-            || doc.location.hash.substr(2) != msgnumString)
+            || (doc.location.hash.substr(2) != msgnumString
+              && /#p[0-9]{3}/.test(doc.location.hash)))
           doc.location.hash = '#p' + msgnumString;
         else
           doc.location.hash = doc.location.hash;
