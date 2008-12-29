@@ -888,7 +888,8 @@ var GameFOX =
       // QuickPost is added
       if (doc.location.hash.length)
       {
-        if (doc.location.hash == '#last-post')
+        if (doc.location.hash == '#last-post'
+            || doc.location.hash.substr(2) != msgnumString)
           doc.location.hash = '#p' + msgnumString;
         else
           doc.location.hash = doc.location.hash;
