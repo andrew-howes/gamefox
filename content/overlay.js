@@ -1244,7 +1244,8 @@ function GameFOXLoader()
     getService(Ci.nsIVersionComparator);
 
   // upgrade, downgrade, first run, or dev version
-  if (versionComparator.compare(version, lastversion) != 0 || version.indexOf('pre') != -1)
+  if (versionComparator.compare(version, lastversion) != 0 ||
+      (version.indexOf('pre') != -1 && version.indexOf('pre') == version.length - 3))
   {
     GFcss.init();
 
@@ -1288,6 +1289,14 @@ function GameFOXLoader()
       // new nightly install
       window.setTimeout(GFlib.newTab, 10,
           'chrome://gamefox/content/nightly.html', 0);
+    }
+    else if (version.indexOf('pre') != -1
+        && version.indexOf('pre') != version.length - 3
+        && GFlib.prefs.getBoolPref('nightlyChangeLog'))
+    {
+      // updated nightly install
+      window.setTimeout(GFlib.newTab, 10,
+          'http://beyondboredom.net/gfox/nightly/changes.php', 0);
     }
     else if (version.indexOf('pre') == -1 && lastversion != '')
     {
