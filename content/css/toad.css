@@ -2,7 +2,7 @@
 /** GameFOX Bundle Release **/
 /** Made by TakatoMatsuki **/
 
-/** GameFOX 0.6.3 release, based on TOAD Build Number 2008-08-13-16-31 **/
+/** GameFOX 0.6.10 release, based on TOAD Build Number 2008-08-13-16-31 **/
 
 /** CBS, CNET and GameSpot Removal **/
 @-moz-document domain("gamefaqs.com") {
@@ -11,14 +11,14 @@
 
 /**On every page**/
 @-moz-document domain("gamefaqs.com") {
-#quicknav a {line-height:20px !important; background:url(http://img142.imageshack.us/img142/4439/quicknavdividertoadku9.gif) no-repeat top right !important;}
-#quicknav {height:24px !important; background-image:url(http://img71.imageshack.us/img71/9675/quicknavbgtoaduy7.gif) !important;}
+#quicknav a {line-height:20px !important; background:url("data:image/gif;base64,R0lGODlhAgAVAMQAAO7t7O3t7LS0tLCwsNXV1c7Ozo6PkO3s68vLy7e3t9TU1NnZ2erq6urq6aenp66urrGxseTk5MHBwa%2Bvr%2BHh4efn59LS0qurq93d3QAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAACABUAAAUiIBNUQRRQARYsAQFYQAEggAQkgJADEDAAE8ADcDk4GgZFCAA7") no-repeat top right !important;}
+#quicknav {height:24px !important; background-image:url("data:image/gif;base64,R0lGODlhAgAYAKIAAOLi4uHh4d%2Ff3tbW1tra2Z6go%2Fr59wAAACH5BAAAAAAALAAAAAACABgAAAMQOGMGEDBKB529ODshCClFAgA7") !important;}
 #platformlist .nav {line-height:1px !important;}
 #platformlist .jumper {padding-top:3px !important;}
-#platformlist {height:24px !important; background-image:url(http://img84.imageshack.us/img84/6679/platformlistbgtoadep5.gif) !important;}
+#platformlist {height:24px !important; background-image:url("data:image/gif;base64,R0lGODlhAgAYAMQAAOPj48%2FPz9LS0uHh4cfHx8XFxdjY2N%2Ff38jIyJqamsLCwsvLy2ZmZuLi4tnZ2by8vNzc3ODg4NPT06SkpLCwsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAACABgAAAUlIMMkyTRR1PMoSlEQBIIsSxBIkmFAUBQNg0YDQCwSDweHQyAIAQA7") !important;}
 #logo {background-image:url(http://www.gamefaqs.com/images/default/logo_clean.gif) !important;}
 #container {width:990px !important;}
-body {background-image:url(http://img152.imageshack.us/img152/6990/bg1000pxzn2.gif) !important;}
+body {background-image:url("data:image/gif;base64,R0lGODlhsAQBANUAAP%2F%2F%2F9zc3Nvb3Nrb3drb3Nvc3Nna3NbX2tra3djZ29XW2dfZ26mqrNbY2rGytcjJzMbHyszM0JaXmcrLztzb3NTV2NbY29TW2c3O0sPEx6Cho7%2FAw9LU18HCxMXFyL%2FAxLq6vc%2FQ1NHS1gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAACwBAEAAAaWwIBwSCwKKYGCclkQOAXMp9RJqFqvhEF2wO16EQiDWJxILBaWxmGtUFwqHFEIE5k8IJ5M57MBORgaEgCDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytEhoMDiAbHx0ZHhAPExEYISIcFRdtawcNFmdlY2JgXs1cWVjRU1JRT0xLAUhG20NBADs%3D") !important;}
 #footer {width:970px !important; background:none !important;}
 #cbsi_f p:last-child {display:inline !important; width:980px !important;}
 
@@ -26,6 +26,9 @@ body {background-image:url(http://img152.imageshack.us/img152/6990/bg1000pxzn2.g
 body>#body {background:white !important;}
 body>#footer, body>#footer>.lefttext, body>#footer>.righttext {background:black !important;}
 body>#footer {width:100% !important;}
+
+/** Reused background image **/
+#board_wrap .head h1, #main_col .pod .head h1 {background-image:url("data:image/gif;base64,R0lGODlh6AMWAMQQAIaI0y0temNqtnyAynp9yHV5xXJ3wmxxvYOG0GFntHZ6xWpvu4CDznp%2FyWZsuC0tef%2F%2F%2FwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABAALAAAAADoAxYAAAX%2FICSKQWmeaKqubOu%2BcCzPdG3feK7vfO%2F%2FwKBwSCwaj8ikcslsOp%2BjKKQEqFqv2Kx2y%2B16v%2BCweEwum8%2FotHrNbrvf8Lh8Tq%2Fb7%2Fi8fs%2Fv%2B%2F8lUgF%2FhIWGh4iJiouMjY6PkJGSk5SIASODlZqbnJ2en6ChoqOkpaZ3l1Onq6ytrq%2BwsbKztLVll5m2uru8vb6%2FwMHColTDxsfIycrLzM2dD1jQWCUI1dbX2Nna29zd3t%2Fg4eLj5OXm5%2Bjp6uvs7e7v8PHy8%2FT19vf4%2Bfr7%2FP3%2B%2Bg8eWAuYrQSDgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhT%2F6pcybKly5cwWQZ8wGDmwhINcurcybOnz59AgwodSrSo0aNIkypdyrSp06dQo0qdSrWq1atYs2rdyrWr169gw4r1CmBmQAA9SyhYy7at27dw48qdS7eu3bt48%2Brdy7ev37%2BAAwseTLiw4cOIEytezLix48eQI0ueTDly2bNwSwjYzLmz58%2BgQ4seTbq06dOoU6tezbq169ewY8ueTbu27du4c%2Bvezbu379%2FAgwsfThz4AwFlAQg47rlEgufQo0ufTr269evYs2vfzr279%2B%2Fgw4sfT768%2BfPo06tfz769%2B%2Ffw48ufT7%2B%2B%2Ffv46QdMACDBfumaFSfggAQWaOCBCCao4P%2BCDDbo4IMQRiihcQEtV2FzATig4YYcdujhhyCGKOKIJJZo4okopqjiiiy26OKLMMYo44w01mjjjTjmqOOOPPbo449ABinkkD9eNhMAHpawwJJMNunkk1BGKeWUVFZp5ZVYZqnlllx26eWXYIYp5phklmnmmWimqeaabLbp5ptwxinnnHTGaSQAUJZwwJ589unnn4AGKuighBZq6KGIJqrooow26uijkEYq6aSUVmrppZhmqummnHbq6aeghirqqKSKmlygJRig6qqsturqq7DGKuustNZq66245qrrrrz26uuvwAYr7LDEFmvsscgmq%2ByyzDbr7LPQRivttNICEGvGCQVkq%2B223Hbr7bfghivuuOSWa%2B656Kar7rrstuvuu%2FDGK%2B%2B89NZr77345qvvvvz26%2B%2B%2FAAcs8MDflkDAwQgnrPDCDDfs8MMQRyzxxBRXbPHFGGes8cYcd%2BzxxyCHLPLIJJds8skop6zyyiy37PLLMMfccAkD1GzzzTjnrPPOPPfs889ABy300EQXbfTRSCet9NJMN%2B3001BHLfXUVFdt9dVYZ6311lx37fXXOz8h9thkl2322WinrfbabLft9ttwxy132yEAADs%3D") !important;}
 }
 
 /** Index page **/
@@ -56,20 +59,17 @@ td {padding-top:3px !important; padding-bottom:3px !important;}
 #board_wrap, #mpu_wrap, .board, .board_nav, .board_nav .body {width:976px !important;}
 img[src*="topic.gif"] {width:13px !important;} /**Remove this line to see full size active topic icons**/
 img[src*="topic_closed.gif"] {width:13px !important;} /**Remove this line to see full size closed topic icons**/
-#board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /**Message List, Message Detail, Moderation Detail**/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/genmessage"), url-prefix("http://www.gamefaqs.com/boards/detail.php"), url-prefix("http://www.gamefaqs.com/boards/moddetl.php") {
 .board .message td {padding-top:1px !important; padding-bottom:1px !important;}
 #board_wrap, .board, .board_nav .body {width:976px !important;}
-#board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /** Post Preview, New Post, New Topic **/
 @-moz-document url-prefix("http://www.gamefaqs.com/boards/post.php") {
 #board_wrap, .board, .pod {width:976px !important;}
-#board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 textarea {width:954px !important;}
 }
 
@@ -85,7 +85,6 @@ textarea {width:954px !important;}
 #main_col_wrap {width:800px !important;}
 #main_col, #main_col .pod {width:790px !important;}
 #sky_col_wrap, #side_col_wrap, #side_col {background:none !important;}
-#main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /**Poll of the Day**/
@@ -102,8 +101,7 @@ textarea {width:954px !important;}
 #main_col_wrap {width:800px !important;}
 #sky_col_wrap, #side_col_wrap, #side_col, #full_col_wrap {background:none !important;}
 #main_col, #main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:790px !important;}
-.pod .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
-.gs .pod .head h1{background-image:url(http://img158.imageshack.us/img158/2733/headbglitetoadae6.gif) !important;}
+.gs .pod .head h1{background-image:url("data:image/gif;base64,R0lGODlh6AMWALMAAIaUqdvb2%2FLy8vf399%2Ff3%2Bzs7NbW1v39%2FeLi4ujo6PHx8evr6%2FX19dnZ2ZmZmf%2F%2F%2FyH5BAAAAAAALAAAAADoAxYAAAT%2F8Enpqr046827%2F2AojmRpnmiqrmzrvnAsz3Rt33iu73zv%2F5PgoyIsGo%2FIpHLJbDqf0Kh0Sq1ar9isdsvter%2FgsHhMLpvP6LR6nSQGHey4fE6v2%2B%2F4vH7P7%2Fv%2FgIFecBSChoeIiYqLjI2Oj5CRklaEhJOXmJmam5ydnp%2BgoW9DoqWmp6ipqqusrYJurrGys7S1tre4ewBCu0IVB8DBwsPExcbHyMnKy8zNzs%2FQ0dLT1NXW19jZ2tvc3d7f4OHi4%2BTl5ufo6eUAAMHsxBUD8vP09fb3%2BPn6%2B%2Fz9%2Fv8AAwocSLCgwYMIEypcyLChw4cQI0qcSLGixYsYM2rceJEdgAEe%2F%2B1VEECypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8%2BfQIMKHUq0qNGjSJMqXcq0adIHHtk9QFmhgNWrWLNq3cq1q9evYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3cu3r9%2B%2FfKFK3VqhgeHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s%2BfPoEOLHk26tOnTqFOrXs26tevXqwE0gPqggezEFQzo3s27t%2B%2FfwIMLH068uPHjyJMrX868ufPn0KNLn069uvXr2LNr3869u%2Ffv4MOLH%2F%2BdnYEHBsz3Lgy7vfv38OPLn0%2B%2Fvv37%2BPPr38%2B%2Ff2x2tgGIm%2F8DARRo4IEIJqjgggw26OCDEEYo4YQUVmjhhRhmqOGGHHbo4YcghijiiCSWaOKJKKao4oostuiiioJ59ECCFRBg44045qjjjjz26OOPQAYp5JBEFmnkkUgmqeSSTDbp5JNQRinllFRWaeWVWGap5ZZcdunll1zG%2BMCOFSBg5plopqnmmmy26eabcMYp55x01mnnnXjmqeeefPbp55%2BABirooIQWauihiCaq6KKMNuroo43SxmYFCVRq6aWYZqrpppx26umnoIYq6qiklmrqqaimquqqrLbq6quwxirrrLTWauutuOaq66689uprrw9wWsECxBZr7LHIJqvsssw26%2By1s9BGK%2B201FZr7bXYZqvtttx26%2B234IYr7rjklmvuueimq%2B667LbrrrIVKCDvvPTWa%2B%2B9%2BOar77789uvvvwAHLPDABBds8MEIJ6zwwgw37PDDEEcs8cQUV2zxxRhnrPHGHONbAQMghyzyyCSXbPLJKKes8sost%2BzyyzDHLPPMNNds880456zzzjz37PPPQAct9NBEF2300UgnrbTJPzTt9NNQRy311FRXbfXVWGet9dZcd411BAA7") !important;}
 .topten .pod {width:365px !important;}
 }
 
@@ -112,7 +110,6 @@ textarea {width:954px !important;}
 td{padding-top:3px !important; padding-bottom:3px !important;}
 #board_wrap, #mpu_wrap, .board_nav, .board_nav .body {width:976px !important;}
 img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topic icons**/
-#board_wrap .head h1 {background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /** Manage Account (Account Settings) **/
@@ -121,7 +118,6 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 #main_col_wrap {width:800px !important;}
 #sky_col_wrap, #side_col_wrap, #side_col {background:none !important;}
 #main_col .pod {width:790px !important;}
-#main_col .pod .head h1{background-image:url(http://img150.imageshack.us/img150/5047/headbgtoadcx4.gif) !important;}
 }
 
 /**Ad Removal**/
@@ -141,7 +137,7 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 #main_col div:not(.topten) .pod , #main_col_wrap div:not(.topten):not(#main_col) .pod, #sky_col_wrap #main_col_wrap #main_col .pod {width:976px !important;}
 .topten .pod {width:480px !important;}
 .hub_nav {width:966px !important;}
-.hub_nav .box_tl {background: transparent url(http://img159.imageshack.us/img159/2148/toadhubnavkl7.png) no-repeat scroll left top !important;}
+.hub_nav .box_tl {background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA8YAAACCCAYAAACEsNEmAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFlzAAAPOgAADxIBymR1aAAAAAd0SU1FB9gMERM4FXvOrCAAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEbklEQVR42u3dvW7iWgCF0W1HQXYExEbQ8P7PRUkREJAQgSEBT5H7M3NzXyCwVntc7e6TreOi7%2Fs%2B%2F9F1Xdbrdfb7fQ6HQwAAAOAnKooidV1nNBplOp2mqqrvz%2FwextfrNcvlMpvNJsPhMFVVZTAYWBIAAIAf63w%2Bp%2Bu6vL%2B%2FZzKZZD6fpyzL72G82%2B2yWq2SJE3TpCgK6wEAAHAz%2Br7PbrdLksxmszRNkyQpk69PpxeLRaqqStu2ohgAAICbUxRF2rZNVVVZLBY5nU7%2FhvFqtUrbtqnr2lIAAADctLqu0zRNXl5evsL4eDxmu91mNBpZBwAAgLswHo%2Bz3W7TdV3K9XotigEAALg7w%2BEw6%2FU65dvb2%2F9eVw0AAAC3rK7rvL6%2BpjydTnl8fLQIAAAAd%2BXh4SEfHx8pf%2FuNMQAAANyNsixzuVxSmgIAAIC7DmQTAAAAIIwBAABAGAMAAIAwBgAAAGEMAAAAwhgAAACEMQAAAAhjAAAAEMYAAAAgjAEAAEAYAwAAgDAGAAAAYQwAAADCGAAAAIQxAAAACGMAAAAQxgAAACCMAQAAQBgDAACAMAYAAABhDAAAAMIYAAAAhDEAAAAIYwAAABDGAAAAIIwBAABAGAMAAIAwBgAAAGEMAAAAwhgAAACEMQAAAAhjAAAAEMYAAAAgjAEAAEAYAwAAgDAGAAAAYQwAAADCGAAAAIQxAAAACGMAAAAQxgAAACCMAQAAQBgDAACAMAYAAABhDAAAAMIYAAAAhDEAAAAIYwAAABDGAAAAIIwBAABAGAMAAIAwBgAAQBgDAACAMAYAAABhDAAAAMIYAAAAhDEAAAAIYwAAABDGAAAAIIwBAABAGAMAAIAwBgAAAGEMAAAAwhgAAACEMQAAAAhjAAAAEMYAAAAgjAEAAEAYAwAAgDAGAAAAYQwAAADCGAAAAIQxAAAACGMAAAAQxgAAACCMAQAAQBgDAACAMAYAAABhDAAAAMIYAAAAhDEAAAAIYwAAABDGAAAAIIwBAABAGAMAAIAwBgAAAGEMAAAAwhgAAACEMQAAAAhjAAAAEMYAAAAgjAEAAEAYAwAAgDAGAAAAYQwAAADCGAAAAIQxAAAACGMAAAAQxgAAACCMAQAAQBgDAACAMAYAAABhDAAAAMIYAAAAYQwAAADCGAAAAIQxAAAACGMAAAAQxgAAACCMAQAA4NbDuCiK9H1vCQAAAO5K3%2FcpyzLlYDDI5XKxCAAAAHfl8%2FMzg8Eg5fPzc47Ho0UAAAC4K13XZTwep5xOp9nv9xYBAADgruz3%2B0yn05R1XadtW3EMAADAXUVx27ap6%2FrrVurZbJbtduuTagAAAG7e8XjMdrvNbDZLkhT9X1dS73a7rFarJEnTNCmKwloAAADcjL7vs9vtkny9IG6a5s8wTpLr9ZrlcpnNZpPhcJiqqjIYDKwHAADAj3U%2Bn9N1Xd7f3zOZTDKfz1OW5T%2Fnf4Tx37quy3q9zn6%2Fz%2BFwsCIAAAA%2F1tPTU0ajUabTaaqq%2Bnb%2BCx1VzIcMX8VTAAAAAElFTkSuQmCC") no-repeat scroll left top !important;}
 .hub_nav .box_bl, .hub_nav .box_tr, .hub_nav .box_br {background: none !important;}
 }
 /** Manage Account (Account Settings) **/
