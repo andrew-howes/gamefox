@@ -26,7 +26,7 @@ var GFfavorites =
     while (favList.hasChildNodes())
       favList.removeChild(favList.firstChild);
 
-    favs = eval(GFlib.getCharPref('favorites.serialized'));
+    favs = eval(GFlib.prefs.getCharPref('favorites.serialized'));
 
     item = doc.createElement('option');
     item.value = 0;
