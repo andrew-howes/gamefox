@@ -12,7 +12,7 @@ pref("gamefox.elements.quickpost.aftermessage", 0);
 pref("gamefox.elements.quickpost.resetconfirm", true);
 pref("gamefox.elements.quickpost.resetnewsig", false);
 pref("gamefox.elements.tag.link", true);
-pref("gamefox.elements.titlechange", true);
+pref("gamefox.elements.titlechange", false);
 pref("gamefox.elements.titleprefix", true);
 pref("gamefox.elements.msgnum", true);
 pref("gamefox.elements.msgnum.style", 0);

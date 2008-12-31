@@ -142,7 +142,7 @@
               <caption label="&general.label;"/>
               <hbox>
                 <vbox flex="1">
-                  <checkbox preference="elements-titlechange" label="&main.page.desctitles;"/>
+                  <checkbox preference="elements-titlechange" label="&main.page.titlechange;"/>
                   <checkbox preference="elements-titleprefix" label="&main.page.titleprefix;"/>
                 </vbox>
                 <vbox flex="1">

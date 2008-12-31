@@ -10,7 +10,7 @@
 <!ENTITY main.tab.posting "Posting">
 <!ENTITY main.tab.sidebar "Sidebar">
 <!ENTITY main.tab.board "Board Settings">
-<!ENTITY main.page.desctitles "Descriptive window titles">
+<!ENTITY main.page.titlechange "Custom window titles">
 <!ENTITY main.page.titleprefix "Window title page prefixes">
 <!ENTITY main.page.stopads "Block ad servers">
 <!ENTITY main.page.favorites "Add favorites menu">
