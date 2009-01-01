@@ -1,50 +1,35 @@
 /* vim: set et sw=4 sts=4 ts=4: */
+#gamefoxAbout
+{
+    padding: 0 0 10px 0;
+}
+
+#clientBox
+{
+    background: #fff;
+    padding: 10px;
+}
+
+#groove
+{
+    margin-top: 0;
+}
+
 #title
 {
     font-weight: bold;
-    font-size: x-large;
-    color: #296794;
-    text-align: center;
+    font-size: large;
 }
 
 #version
 {
-    font-size: medium;
-    color: #4D98CE;
-    text-align: center;
-}
-
-groupbox
-{
-    background-color: #ffffff;
+    font-weight: bold;
+    color: #909090;
 }
 
 .subtitle
 {
-    font-size: medium;
-    text-align: center;
-    border-bottom: #ccc 1px solid;
-}
-
-.description, .username
-{
-    margin-left: 1em;
-    padding-left: 1em;
-}
-
-.username
-{
-    font-style: italic;
-}
-
-.name
-{
     font-weight: bold;
-}
-
-.contrib
-{
-    font-size: x-small;
 }
 
 .url-label
@@ -54,12 +39,12 @@ groupbox
     cursor: pointer;
 }
 
-.url-label.internal-link
-{
-    text-decoration: none;
-}
-
 .important
 {
     font-size: 1.5em;
+}
+
+.boxIndent
+{
+    -moz-margin-start: 6px;
 }

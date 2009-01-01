@@ -24,78 +24,37 @@
 <!DOCTYPE dialog SYSTEM "chrome://gamefox/locale/about.dtd">
 
 <dialog
+  id="gamefoxAbout"
   buttons="accept"
+  buttonlabelaccept="Close"
   title="&dialog.title;"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/about.js"/>
-  <groupbox>
+
+  <vbox id="clientBox" flex="1">
     <hbox>
       <label id="title" value="&caption.title;"/>
       <spacer flex="1"/>
+      <label class="url-label important" value="&news.label;"
+        onclick="GFlib.newTab('chrome://gamefox/content/NEWS', event.button);"/>
+      <label class="url-label important" value="&support.label;"
+        tooltiptext="&support.tooltip;"
+        onclick="GFlib.newTab('http://www.gamefaqs.com/boards/gentopic.php?board=565885', event.button);"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
     <label id="version" value="&version.title; "/>
 
-    <hbox>
-      <label class="url-label important" value="&news.label;" onclick="GFlib.newTab('chrome://gamefox/content/NEWS', event.button);"/>
-      <spacer flex="1"/>
-      <label class="url-label important" value="&support.label;" tooltiptext="&support.tooltip;"
-        onclick="GFlib.newTab('http://www.gamefaqs.com/boards/gentopic.php?board=565885', event.button);"/>
-    </hbox>
+    <label class="subtitle" value="&currentdevs.label;:"/>
+    <vbox id="currentDeveloperBox" class="boxIndent"/>
 
-    <separator class="thin"/>
-    <label class="subtitle" value="&currentdevs.label;"/>
-    <hbox>
-      <label class="name" value="Brian Marshall"/>
-      <label class="username" value="Karamthulhu"/>
-      <spacer flex="1"/>
-      <label class="url-label" value="http://beyondboredom.net/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
-    <hbox>
-      <label class="name" value="Michael Ryan"/>
-      <label class="username" value="RockMFR 5"/>
-    </hbox>
-    <hbox>
-      <label class="name" value="zero_ant"/>
-      <label class="username" value="ZeroAnt"/>
-    </hbox>
+    <label class="subtitle" value="&previousdevs.label;:"/>
+    <vbox id="previousDeveloperBox" class="boxIndent"/>
 
-    <separator class="thin"/>
-    <label class="subtitle" value="&previousdevs.label;"/>
-    <hbox>
-      <label class="name" value="Abdullah A"/>
-      <label class="username" value="ultimategamer00"/>
-      <label class="description" value="&abdullaha.desc.label;"/>
-      <spacer flex="1"/>
-      <label class="url-label" value="http://whitefyre.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
+    <label class="subtitle" value="&contributors.label;:"/>
+    <vbox id="contributorBox" class="boxIndent"/>
+  </vbox>
 
-    <hbox>
-      <label class="name" value="Toad King"/>
-      <label class="username" value="Calvinjpwalker"/>
-      <label class="description" value="&toadking.desc.label;"/>
-      <spacer flex="1"/>
-      <label class="url-label" value="http://www.toadking.com/" onclick="GFlib.newTab(this.getAttribute('value'), event.button);"/>
-    </hbox>
-
-    <separator class="thin"/>
-    <label class="subtitle" value="&contributors.label;"/>
-    <hbox>
-      <label value="TakatoMatsuki"/>
-      <label class="contrib description" value="&contrib.css.label;"/>
-    </hbox>
-
-    <hbox>
-      <label value="Ricapar"/>
-      <label class="contrib description" value="&contrib.css.label;"/>
-    </hbox>
-
-    <hbox>
-      <label value="Tango Desktop Project"/>
-      <label class="contrib description" value="&contrib.icons.label;"/>
-    </hbox>
-    <separator class="thin"/>
-  </groupbox>
+  <separator id="groove" class="groove"/>
 </dialog>

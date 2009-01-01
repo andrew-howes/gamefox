@@ -24,6 +24,33 @@ var GFabout =
     document.getElementById('version').setAttribute('value',
         document.getElementById('version').getAttribute('value')
         + GFlib.version);
+
+    var sections = {
+      currentDevelopers: ['currentDeveloperBox',
+                         [['Andrianto Effendy', 'ZeroAnt'],
+                          ['Brian Marshall', 'Karamthulhu'],
+                          ['Michael Ryan', 'RockMFR 5']]],
+      previousDevelopers: ['previousDeveloperBox',
+                          [['Abdullah A', 'ultimategamer00'],
+                           ['Toad King', 'Calvinjpwalker']]],
+      contributors: ['contributorBox',
+                    [['Ant P.', 'GFCode'],
+                     ['TakatoMatsuki', 'CSS'],
+                     ['Ricapar', 'CSS'],
+                     ['Tango Desktop Project', 'icons']]]
+    };
+
+    for (var i in sections)
+    {
+      var node = document.getElementById(sections[i][0]);
+      for (var j = 0; j < sections[i][1].length; j++)
+      {
+        var label = document.createElement('label');
+        label.setAttribute('value', sections[i][1][j][0] +
+            ' (' + sections[i][1][j][1] + ')');
+        node.appendChild(label);
+      }
+    }
   }
 };
 

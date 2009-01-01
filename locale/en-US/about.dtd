@@ -1,7 +1,7 @@
 <!ENTITY dialog.title "About GameFOX">
 
 <!ENTITY caption.title "GameFOX">
-<!ENTITY version.title "Version">
+<!ENTITY version.title "version">
 
 <!ENTITY news.label "News">
 <!ENTITY support.label "Support">
