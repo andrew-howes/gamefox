@@ -1,7 +1,8 @@
+<!-- vim: set indentexpr=: -->
+
 <!ENTITY dialog.title "About GameFOX">
 
 <!ENTITY caption.title "GameFOX">
-<!ENTITY version.title "version">
 
 <!ENTITY news.label "News">
 <!ENTITY support.label "Support">
@@ -11,8 +12,4 @@
 <!ENTITY previousdevs.label "Previous Developers">
 <!ENTITY contributors.label "Contributors">
 
-<!ENTITY abdullaha.desc.label "Original Developer">
-<!ENTITY toadking.desc.label "GameFOX TK">
-
-<!ENTITY contrib.css.label "CSS">
-<!ENTITY contrib.icons.label "Icons">
+<!ENTITY close "Close">

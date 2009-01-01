@@ -26,12 +26,16 @@
 <dialog
   id="gamefoxAbout"
   buttons="accept"
-  buttonlabelaccept="Close"
+  buttonlabelaccept="&close;"
   title="&dialog.title;"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/about.js"/>
+
+  <stringbundleset id="strbundles">
+    <stringbundle id="strings" src="chrome://gamefox/locale/about.properties"/>
+  </stringbundleset>
 
   <vbox id="clientBox" flex="1">
     <hbox>
@@ -44,7 +48,7 @@
         onclick="GFlib.newTab('http://www.gamefaqs.com/boards/gentopic.php?board=565885', event.button);"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
-    <label id="version" value="&version.title; "/>
+    <label id="version" value=""/>
 
     <label class="subtitle" value="&currentdevs.label;:"/>
     <vbox id="currentDeveloperBox" class="boxIndent"/>

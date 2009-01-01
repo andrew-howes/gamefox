@@ -21,9 +21,10 @@ var GFabout =
 {
   process: function()
   {
-    document.getElementById('version').setAttribute('value',
-        document.getElementById('version').getAttribute('value')
-        + GFlib.version);
+    var strbundle = document.getElementById('strings');
+
+    document.getElementById('version').value =
+        strbundle.getString('version') + ' ' + GFlib.version;
 
     var sections = {
       currentDevelopers: ['currentDeveloperBox',
