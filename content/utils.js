@@ -426,7 +426,7 @@ var GFutils =
   tcParam: function(tc)
   {
     return tc && (GFlib.prefs.getBoolPref('elements.marktc')
-        || GFuserlist.usernameIndex['(tc)'] != undefined) ?
+        || GFuserlist.usernameIndex['(tc)']) ?
         '&tc=' + tc.replace(/ /g, '+') : '';
   },
 
