@@ -145,3 +145,8 @@ img[src*="topic.gif"] {display:none !important;} /**Remove this line to see topi
 #main_col_wrap {width:986px !important;}
 #main_col .pod {width:976px !important;}
 }
+/** Answers **/
+@-moz-document url-prefix("http://www.gamefaqs.com/features/qna/") {
+#main_col_wrap, #main_col {width: 670px !important;}
+#side_col_wrap {float: right !important;}
+}
