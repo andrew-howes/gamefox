@@ -638,7 +638,7 @@ var GameFOX =
 
         // Message highlighting
         var hlinfo, groupname;
-        if ((hlinfo = GFuserlist.searchUsername(username, tc == username)) != false)
+        if ((hlinfo = GFuserlist.searchUsername(username, tc == username && !onDetail)) != false)
         {
           // add group names after username
           if (GFlib.prefs.getBoolPref('userlist.messages.showgroupnames') &&
