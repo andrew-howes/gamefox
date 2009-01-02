@@ -19,63 +19,85 @@
 
 var GFtracked =
 {
-  grabFromRSS: function()
+  updateList: function()
   {
-    var urlRequest = new XMLHttpRequest();
-    urlRequest.open('GET', 'http://www.gamefaqs.com/boards/tracked.php');
-    urlRequest.onreadystatechange = function()
-    {
-      if (urlRequest.readyState == 4)
+    // Because of how the RSS feed works without cookies, we could have an
+    // option to always update from a certain account. This won't work well for
+    // removing or adding tracked topics though.
+    if (GFlib.prefs.getCharPref('tracked.lastAccount')
+        != GFlib.prefs.getCharPref('accounts.current'))
+    { // cached url is out of date
+      var request = new XMLHttpRequest();
+      request.open('GET', 'http://www.gamefaqs.com/boards/tracked.php');
+      request.onreadystatechange = function()
       {
-        var url = urlRequest.responseText.
-          match(/<link rel="alternate"[^>]*href="([^"]+)" \/>/)[1];
-
-        var rssRequest = new XMLHttpRequest();
-        rssRequest.open('GET', url);
-        rssRequest.onreadystatechange = function()
+        if (request.readyState == 4)
         {
-          if (rssRequest.readyState == 4)
-          {
-            var xmlobject = (new DOMParser()).parseFromString(rssRequest.
-                responseText, 'text/xml');
-            var items = xmlobject.getElementsByTagName('item');
-            var list = {};
-            for (var i = 0; i < items.length; i++)
-            {
-              var ids = GFutils.parseQueryString(items[i].
-                  getElementsByTagName('link')[0].textContent);
-              var title = items[i].getElementsByTagName('title')[0].textContent;
+          var url = request.responseText.
+            match(/<link rel="alternate"[^>]*href="([^"]+)" \/>/)[1];
 
-              var topic = {
-                id: ids['topic'],
-                title: title.substr(0, title.lastIndexOf('-') - 2),
-                age: title.substr(title.lastIndexOf('-') + 2)
-              };
-              var data = new Array(
-                  'Last Post', 'lastPost',
-                  'Messages', 'msgs',
-                  'Board', 'board'
-                  );
-              var desc = items[i].getElementsByTagName('description')[0].
-                textContent;
-              for (var j = 0; j < data.length; j += 2)
-              {
-                topic[data[j + 1]] = (new RegExp(data[j] + ': ([^\\0]*?)\n')).
-                  exec(desc)[1].replace(/<br \/>/g, '').GFtrim();
-              }
+          // cache it
+          GFlib.prefs.setCharPref('tracked.rssUrl', url);
+          GFlib.prefs.setCharPref('tracked.lastAccount',
+              GFlib.prefs.getCharPref('accounts.current'));
 
-              if (!list[ids['board']])
-                list[ids['board']] = {name: topic['board'], topics: []};
-              list[ids['board']]['topics'].push(topic);
-            }
-
-            GFlib.prefs.setCharPref('tracked.list', list.toSource());
-          }
+          GFtracked.grabFromRSS(url);
         }
-        rssRequest.send(null);
+      }
+      request.send(null);
+    }
+    else
+    {
+      // use cached url
+      GFtracked.grabFromRSS(GFlib.prefs.getCharPref('tracked.rssUrl'));
+    }
+  },
+
+  grabFromRSS: function(url)
+  {
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        var xmlobject = (new DOMParser()).parseFromString(request.
+            responseText, 'text/xml');
+        var items = xmlobject.getElementsByTagName('item');
+        var list = {};
+        for (var i = 0; i < items.length; i++)
+        {
+          var ids = GFutils.parseQueryString(items[i].
+              getElementsByTagName('link')[0].textContent);
+          var title = items[i].getElementsByTagName('title')[0].textContent;
+
+          var topic = {
+            id: ids['topic'],
+            title: title.substr(0, title.lastIndexOf('-') - 2),
+            age: title.substr(title.lastIndexOf('-') + 2)
+          };
+          var data = new Array(
+              'Last Post', 'lastPost',
+              'Messages', 'msgs',
+              'Board', 'board'
+              );
+          var desc = items[i].getElementsByTagName('description')[0].
+            textContent;
+          for (var j = 0; j < data.length; j += 2)
+          {
+            topic[data[j + 1]] = (new RegExp(data[j] + ': ([^\\0]*?)\n')).
+              exec(desc)[1].replace(/<br \/>/g, '').GFtrim();
+          }
+
+          if (!list[ids['board']])
+            list[ids['board']] = {name: topic['board'], topics: []};
+          list[ids['board']]['topics'].push(topic);
+        }
+
+        GFlib.prefs.setCharPref('tracked.list', list.toSource());
       }
     }
-    urlRequest.send(null);
+    request.send(null);
   },
 
   populate: function()
@@ -88,7 +110,7 @@ var GFtracked =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', 'Update');
-    item.setAttribute('oncommand', 'GFtracked.grabFromRSS()');
+    item.setAttribute('oncommand', 'GFtracked.updateList()');
     trackedMenu.appendChild(item);
 
     var firstTopic = true;
