@@ -432,9 +432,12 @@ var GFutils =
 
   parseQueryString: function(str)
   {
-    str = str.substr(str.indexOf('?'));
-    if (str.charAt(0) == '?')
-      str = str.substr(1);
+    if (str.indexOf('?') != -1)
+    {
+      str = str.substr(str.indexOf('?'));
+      if (str.charAt(0) == '?')
+        str = str.substr(1);
+    }
 
     var query = str.split('&');
     var obj = {};
