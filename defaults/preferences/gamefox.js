@@ -73,6 +73,8 @@ pref("gamefox.favorites.serialized", "[]");
 
 pref("gamefox.tags", "");
 
+pref("gamefox.tracked.list", "");
+
 pref("gamefox.accounts", "({})");
 pref("gamefox.accounts.current", "");
 

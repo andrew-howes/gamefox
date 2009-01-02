@@ -17,6 +17,8 @@
 <!ENTITY menu.accounts.accesskey "A">
 <!ENTITY menu.favorites.label "Favorites">
 <!ENTITY menu.favorites.accesskey "F">
+<!ENTITY menu.tracked.label "Tracked">
+<!ENTITY menu.tracked.accesskey "R">
 
 <!ENTITY sidebar.title "GameFOX">
 

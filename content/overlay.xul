@@ -38,6 +38,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/messages.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/favorites.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/tracked.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
@@ -67,6 +68,12 @@
         <menu id="gamefox-favorites" label="&menu.favorites.label;"
           accesskey="&menu.favorites.accesskey;">
           <menupopup id="gamefox-favorites-menu" onpopupshowing="GameFOX.showFavs();"/>
+        </menu>
+
+        <menu id="gamefox-tracked" label="&menu.tracked.label;"
+          accesskey="&menu.tracked.accesskey;">
+          <menupopup id="gamefox-tracked-menu"
+            onpopupshowing="GFtracked.populate();"/>
         </menu>
       </menupopup>
     </menu>

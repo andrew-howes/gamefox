@@ -432,6 +432,7 @@ var GFutils =
 
   parseQueryString: function(str)
   {
+    str = str.substr(str.indexOf('?'));
     if (str.charAt(0) == '?')
       str = str.substr(1);
 
