@@ -128,11 +128,9 @@ var GFcss =
     file.initWithPath(this.getDirectory());
     file.append(filename);
     if (overwrite == false && file.exists()) {
-      var d = new Date();
-      filename = filename.replace(/\.(css|txt)$/, d.getTime() + '.$1');
+      filename = filename.replace(/\.(css|txt)$/, (new Date()).getTime() + '.$1');
       file.initWithPath(this.getDirectory());
       file.append(filename);
-      delete d;
     }
 
     try
