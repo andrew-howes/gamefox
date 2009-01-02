@@ -199,7 +199,21 @@ var GFquickpost =
     event.target.blur();
     // NOTE TO uG: The 'click' event still fires even if the button is disabled
     //   (this doesn't seem to be true)
+    // TODO: figure out if this is needed
     event.target.removeEventListener('click', GFquickpost.post, false);
+
+    var topicTitle = doc.getElementsByName('topictitle')[0];
+    var message = GFquickpost.removeGFCodeWhitespace(
+        doc.getElementsByName('message')[0].value);
+    if (GFlib.prefs.getIntPref('signature.addition') == 1
+        && !GFlib.onPage(doc, 'post'))
+      message += GFsig.format(null, null, doc);
+    if (/^\s*---(\n|$)/.test(message) && !GFlib.confirm('Your message appears to only consist of a signature. Are you sure you want to post it?'))
+    {
+      event.target.removeAttribute('disabled');
+      event.target.addEventListener('click', GFquickpost.post, false);
+      return;
+    }
 
     var previewRequest = new XMLHttpRequest();
     previewRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
@@ -398,7 +412,7 @@ var GFquickpost =
 
               return;
             }
-          }
+          };
 
           postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           postRequest.send(
@@ -411,22 +425,8 @@ var GFquickpost =
     };
 
     previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    var postBody = '';
-    var topicTitle = doc.getElementsByName('topictitle')[0];
-
-    if (topicTitle)
-      postBody = 'topictitle=' + GFutils.URLEncode(topicTitle.value) + '&';
-
-    var message = GFquickpost.removeGFCodeWhitespace(doc
-        .getElementsByName('message')[0].value);
-
-    if (!GFlib.onPage(doc, 'post')
-        && GFlib.prefs.getIntPref('signature.addition') == 1)
-      message += GFsig.format(null, null, doc);
-
     previewRequest.send(
-        postBody +
+        (topicTitle ? 'topictitle=' + GFutils.URLEncode(topicTitle.value) + '&' : '') +
         'message=' + GFutils.URLEncode(message) +
         '&post=Preview+Message'
         );
