@@ -722,10 +722,15 @@
   </prefpane>
 
 
-<!-- T A G S -->
+<!-- T O P I C S -->
 
-  <prefpane id="gamefox-tags-pane" label="&tags.label;" flex="1">
-    <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul" flex="1" orient="vertical"/>
+  <prefpane id="gamefox-topics-pane" label="&topics.label;" flex="1">
+    <hbox flex="1">
+      <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul"
+        flex="1" orient="vertical"/>
+      <iframe id="gamefox-tracked-iframe"
+        src="chrome://gamefox/content/tracked.xul" flex="1" orient="vertical"/>
+    </hbox>
   </prefpane>
 
 <!-- U S E R S -->

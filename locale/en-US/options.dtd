@@ -173,7 +173,7 @@
 <!ENTITY mouse.context.tags.aml "Active Messages">
 <!ENTITY mouse.context.tags.tracked "Tracked Topics">
 
-<!ENTITY tags.label "Tags">
+<!ENTITY topics.label "Topics">
 
 <!ENTITY users.label "Users">
 <!ENTITY users.options.label "Options">
