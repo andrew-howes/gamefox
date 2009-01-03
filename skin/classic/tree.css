@@ -1,0 +1,72 @@
+/* Tags and Tracked */
+#gamefox-tags-rows::-moz-tree-row(container),
+#gamefox-tracked-rows::-moz-tree-row(container)
+{
+    border-top: 1px solid #3585BF;
+    border-bottom: 1px solid #3585BF;
+    background-color: #3079AF;
+}
+
+#gamefox-tags-rows::-moz-tree-image(container, closed),
+#gamefox-tracked-rows::-moz-tree-image(container, closed)
+{
+    list-style-image: url('folders.png');
+    -moz-image-region: rect(0px, 16px,  16px, 0px);
+}
+
+#gamefox-tags-rows::-moz-tree-image(container, open),
+#gamefox-tracked-rows::-moz-tree-image(container, open)
+{
+    list-style-image: url('folders.png');
+    -moz-image-region: rect(0px, 32px,  16px, 16px);
+}
+
+#gamefox-tags-rows::-moz-tree-row(leaf),
+#gamefox-tracked-rows::-moz-tree-row(leaf)
+{
+    background-color:  #FFFFFF;
+}
+
+#gamefox-tags-rows::-moz-tree-row(selected, container),
+#gamefox-tags-rows::-moz-tree-row(selected, leaf),
+#gamefox-tracked-rows::-moz-tree-row(selected, container),
+#gamefox-tracked-rows::-moz-tree-row(selected, leaf)
+{
+    background-color: #5BA1D4;
+}
+
+#gamefox-tags-rows::-moz-tree-cell-text,
+#gamefox-tracked-rows::-moz-tree-cell-text
+{
+    color: #000000;
+}
+
+#gamefox-tags-rows::-moz-tree-cell-text(container),
+#gamefox-tracked-rows::-moz-tree-cell-text(container)
+{
+    padding-left: 4px;
+    font-weight: bold;
+    color: #DDDDDD;
+}
+
+#gamefox-tags-rows::-moz-tree-cell-text(selected, container),
+#gamefox-tracked-rows::-moz-tree-cell-text(selected, container)
+{
+    color: #000000;
+}
+
+/* CSS */
+treechildren::-moz-tree-checkbox
+{
+    list-style-image: url('chrome://gamefox/skin/cbox-empty.png');
+}
+
+treechildren::-moz-tree-checkbox(container)
+{
+    list-style-image: none;
+}
+
+treechildren::-moz-tree-checkbox(checked)
+{
+    list-style-image: url("chrome://gamefox/skin/cbox-full.png");
+}
