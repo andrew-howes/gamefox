@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2005, 2006, 2007, 2008
+ * Copyright 2005, 2006, 2007, 2008, 2009
  * Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
@@ -583,6 +583,11 @@ var GameFOX =
         userNav.appendChild(doc.createTextNode(' | '));
         userNav.appendChild(GFtags.tagTopicLink(doc));
       }
+
+      // Tracking
+      var trackLink = doc.evaluate('./a[contains(@href, "track")]', userNav,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      trackLink.addEventListener('click', GFtracked.linkListener, false);
 
       // Double click
       doc.evaluate('//table[@class="message"]', doc, null,

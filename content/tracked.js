@@ -214,5 +214,47 @@ var GFtracked =
         GFlib.open(tagID, 3); // new window
         break;
     }
+  },
+
+  linkListener: function(event)
+  {
+    // Prevent the link from loading, make our own XMLHttpRequest to stop/start
+    // tracking and update the cached tracked list
+    event.preventDefault();
+
+    var request = new XMLHttpRequest();
+    request.open('GET', this.href);
+    var ds = GFlib.thirdPartyCookieFix(request);
+    var link = this;
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        if (request.responseText.indexOf('now tracking') != -1)
+          var result = 'start';
+        else if (request.responseText.indexOf('no longer tracking') != -1)
+          var result = 'stop';
+        else
+          var result = 'error';
+
+        if (result != 'error')
+        {
+          if (result == 'start')
+          {
+            link.textContent = 'Stop Tracking';
+            link.href = link.href.replace(/tracktopic/, 'stoptrack');
+          }
+          else
+          {
+            link.textContent = 'Track Topic';
+            link.href = link.href.replace(/stoptrack/, 'tracktopic');
+          }
+          GFtracked.updateList();
+        }
+        else
+          GFlib.alert('An error occurred tracking or stopping tracking of this topic.');
+      }
+    }
+    request.send(null);
   }
 };
