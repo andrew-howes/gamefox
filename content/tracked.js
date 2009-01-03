@@ -142,6 +142,12 @@ var GFtracked =
     var tree = document.getElementById('gamefox-tracked-rows');
     var list = eval(GFlib.prefs.getCharPref('tracked.list'));
 
+    if (!tree)
+      return;
+
+    while (tree.hasChildNodes())
+      tree.removeChild(tree.firstChild);
+
     for (board in list)
     {
       var children = document.createElement('treechildren');

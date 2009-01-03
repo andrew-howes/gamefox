@@ -24,7 +24,7 @@
 
 <page id="gamefox-tracked-page"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  onload="GFtracked.populateTree();">
+  onload="GFtracked.populateTree(); GFtrackedTreeObserver.register();">
   <script type="application/x-javascript"
     src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript"
@@ -33,6 +33,8 @@
     src="chrome://gamefox/content/tracked.js"/>
   <script type="application/x-javascript"
     src="chrome://gamefox/content/observers.js"/>
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/utils.js"/>
 
   <tree id="gamefox-tracked-tree" flex="1" hidecolumnpicker="true"
     contextmenu="gamefox-tracked-contextmenu"

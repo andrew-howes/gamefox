@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008 Michael Ryan
+ * Copyright 2008, 2009 Michael Ryan, Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -107,5 +107,28 @@ var GFuserlistObserver =
   observe: function()
   {
     GFuserlist.updateUsers();
+  }
+};
+
+var GFtrackedTreeObserver =
+{
+  register: function()
+  {
+    this.prefs = Cc['@mozilla.org/preferences-service;1']
+      .getService(Ci.nsIPrefService)
+      .getBranch('gamefox.');
+    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
+    this.prefs.addObserver('tracked', this, false);
+    window.addEventListener('unload', this.unregister, false);
+  },
+
+  unregister: function()
+  {
+    GFtrackedTreeObserver.prefs.removeObserver('tracked', GFtrackedTreeObserver);
+  },
+
+  observe: function()
+  {
+    GFtracked.populateTree();
   }
 };
