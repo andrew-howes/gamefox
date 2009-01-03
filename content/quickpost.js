@@ -25,34 +25,33 @@ var GFquickpost =
     var accesskeyPrefix = GFutils.getAccesskeyPrefix();
 
     var form = doc.createElement('form');
-    div.appendChild(form);
     form.id = 'gamefox-quickpost-form';
     form.action = 'post.php' + GFutils.stripQueryString(doc.location.search);
     form.method = 'post';
     form.addEventListener('submit', GFquickpost.removeGFCodeWhitespaceListener,
         false);
+    div.appendChild(form);
 
     if (newTopic)
     {
       var topictitle = doc.createElement('input');
-      form.appendChild(topictitle);
       topictitle.id = 'gamefox-topic';
       topictitle.type = 'text';
       topictitle.name = 'topictitle';
       topictitle.size = 60;
       topictitle.maxlength = 80;
       topictitle.tabIndex = 1;
+      form.appendChild(topictitle);
       topictitle.focus();
 
       if (charCounts)
       {
         var titlecount = doc.createElement('span');
-        form.appendChild(titlecount);
         titlecount.id = 'gamefox-title-count';
-
-        GFmessages.updateTitleCount(doc);
         topictitle.addEventListener('input', GFmessages.delayedUpdateTitleCount,
             false);
+        form.appendChild(titlecount);
+        GFmessages.updateTitleCount(doc);
       }
     }
 
@@ -68,7 +67,6 @@ var GFquickpost =
     }
 
     var message = doc.createElement('textarea');
-    form.appendChild(message);
     message.id = 'gamefox-message';
     message.name = 'message';
     message.wrap = 'virtual';
@@ -80,15 +78,14 @@ var GFquickpost =
       form.addEventListener('submit', GFquickpost.appendSig, false);
     else
       message.value = doc.gamefox.sig;
+    form.appendChild(message);
     message.setSelectionRange(0, 0);
 
-    var linebreak = doc.createElement('br');
-    form.appendChild(linebreak);
+    form.appendChild(doc.createElement('br'));
 
     if (GFlib.prefs.getBoolPref('elements.quickpost.button'))
     {
       var postbutton = doc.createElement('input');
-      form.appendChild(postbutton);
       postbutton.id = 'gamefox-quickpost-btn';
       postbutton.type = 'button';
       postbutton.name = 'quickpost';
@@ -97,62 +94,62 @@ var GFquickpost =
       postbutton.accessKey = 'z';
       postbutton.tabIndex = 3;
       postbutton.addEventListener('click', GFquickpost.post, false);
+      form.appendChild(postbutton);
     }
 
     if (GFlib.prefs.getBoolPref('elements.quickpost.otherbuttons'))
     {
       var previewbutton = doc.createElement('input');
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(previewbutton);
       previewbutton.type = 'submit';
       previewbutton.name = 'post';
       previewbutton.value = 'Preview Message';
       previewbutton.title = 'Preview Message [' + accesskeyPrefix + 'x]';
       previewbutton.accessKey = 'x';
       previewbutton.tabIndex = 3;
+      form.appendChild(doc.createTextNode(' '));
+      form.appendChild(previewbutton);
 
       var spellchkbutton = doc.createElement('input');
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(spellchkbutton);
       spellchkbutton.type = 'submit';
       spellchkbutton.name = 'post';
       spellchkbutton.value = 'Preview and Spellcheck Message';
       spellchkbutton.title = 'Preview and Spellcheck Message [' + accesskeyPrefix + 'c]';
       spellchkbutton.accessKey = 'c';
       spellchkbutton.tabIndex = 3;
+      form.appendChild(doc.createTextNode(' '));
+      form.appendChild(spellchkbutton);
 
       var resetbutton = doc.createElement('input');
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(resetbutton);
       resetbutton.type = 'reset';
       resetbutton.value = 'Reset';
       resetbutton.title = 'Reset [' + accesskeyPrefix + 'v]';
       resetbutton.accessKey = 'v';
       resetbutton.addEventListener('click', GFquickpost.resetPost, false);
       resetbutton.tabIndex = 3;
+      form.appendChild(doc.createTextNode(' '));
+      form.appendChild(resetbutton);
     }
 
     if (newTopic)
     {
       var hidebutton = doc.createElement('input');
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(hidebutton);
       hidebutton.id = 'gamefox-quickpost-hide';
       hidebutton.type = 'button';
       hidebutton.value = 'Hide';
       hidebutton.tabIndex = 3;
       hidebutton.addEventListener('click', GFquickpost.toggleVisibility, false);
+      form.appendChild(doc.createTextNode(' '));
+      form.appendChild(hidebutton);
     }
 
     if (charCounts)
     {
       var messagecount = doc.createElement('span');
-      form.appendChild(messagecount);
       messagecount.id = 'gamefox-message-count';
-
-      GFmessages.updateMessageCount(doc);
       message.addEventListener('input', GFmessages.delayedUpdateMessageCount,
           false);
+      form.appendChild(messagecount);
+      GFmessages.updateMessageCount(doc);
     }
   },
 
