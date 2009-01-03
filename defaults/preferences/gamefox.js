@@ -37,6 +37,7 @@ pref("gamefox.sidebar.gotoboard", true);
 pref("gamefox.sidebar.login", true);
 pref("gamefox.sidebar.accounts", true);
 pref("gamefox.sidebar.tags", true);
+pref("gamefox.sidebar.tracked", true);
 
 pref("gamefox.msgsPerPage", 50);
 pref("gamefox.tpcsPerPage", 50);

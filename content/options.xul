@@ -113,6 +113,8 @@
       <preference id="sidebar-accounts" name="gamefox.sidebar.accounts"
         type="bool"/>
       <preference id="sidebar-tags" name="gamefox.sidebar.tags" type="bool"/>
+      <preference id="sidebar-tracked" name="gamefox.sidebar.tracked"
+        type="bool"/>
 
       <preference id="gamefoxMsgsPerPage" name="gamefox.msgsPerPage" type="int"/>
       <preference id="gamefoxTpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
@@ -301,6 +303,8 @@
               <checkbox preference="sidebar-accounts"
                 label="&main.sidebar.accounts;"/>
               <checkbox preference="sidebar-tags" label="&main.sidebar.tags;"/>
+              <checkbox preference="sidebar-tracked"
+                label="&main.sidebar.tracked;"/>
             </groupbox>
           </vbox>
         </tabpanel>

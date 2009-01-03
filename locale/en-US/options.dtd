@@ -58,12 +58,13 @@
 <!ENTITY main.posting.quickpost.aftermessage.firstpage "Go to first page">
 <!ENTITY main.sidebar.gamefaqsnav "GameFAQs navigation links">
 <!ENTITY main.sidebar.userlinks "User links">
-<!ENTITY main.sidebar.favorites "Favorites list">
+<!ENTITY main.sidebar.favorites "Favorite boards">
 <!ENTITY main.sidebar.search "Game search">
 <!ENTITY main.sidebar.gotoboard "Go to board ID">
 <!ENTITY main.sidebar.login "Login form">
 <!ENTITY main.sidebar.accounts "Accounts switcher">
-<!ENTITY main.sidebar.tags "Tags list">
+<!ENTITY main.sidebar.tags "Tags">
+<!ENTITY main.sidebar.tracked "Tracked topics">
 <!ENTITY main.board.caption "Board Settings">
 <!ENTITY main.board.tpp "Topics Per Page">
 <!ENTITY main.board.tsort "Topic Sort">
