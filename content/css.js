@@ -128,7 +128,7 @@ var GFcss =
     file.initWithPath(this.getDirectory());
     file.append(filename);
     if (overwrite == false && file.exists()) {
-      filename = filename.replace(/\.(css|txt)$/, (new Date()).getTime() + '.$1');
+      filename = filename.replace(/\.(css|txt)$/, new Date().getTime() + '.$1');
       file.initWithPath(this.getDirectory());
       file.append(filename);
     }
