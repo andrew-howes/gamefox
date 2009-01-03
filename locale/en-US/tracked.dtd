@@ -1,0 +1,10 @@
+<!ENTITY topictitle.label "Topic Title">
+<!ENTITY tagid.label "Tag ID">
+
+<!ENTITY menu.newTab.accesskey "T">
+<!ENTITY menu.focusedTab.accesskey "F">
+<!ENTITY menu.newWindow.accesskey "W">
+
+<!ENTITY menu.newTab.label "Open in New Tab">
+<!ENTITY menu.focusedTab.label "Open in Focused Tab">
+<!ENTITY menu.newWindow.label "Open in New Window">

@@ -73,7 +73,7 @@
         <menu id="gamefox-tracked" label="&menu.tracked.label;"
           accesskey="&menu.tracked.accesskey;">
           <menupopup id="gamefox-tracked-menu"
-            onpopupshowing="GFtracked.populate();"/>
+            onpopupshowing="GFtracked.populateMenu();"/>
         </menu>
       </menupopup>
     </menu>

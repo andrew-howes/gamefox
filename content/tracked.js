@@ -101,7 +101,7 @@ var GFtracked =
     request.send(null);
   },
 
-  populate: function()
+  populateMenu: function()
   {
     var item, topic;
     var trackedMenu = document.getElementById('gamefox-tracked-menu');
@@ -134,6 +134,79 @@ var GFtracked =
             'GFlib.open("' + i + ',' + topic['id'] + '", 2)');
         trackedMenu.appendChild(item);
       }
+    }
+  },
+
+  populateTree: function()
+  {
+    var tree = document.getElementById('gamefox-tracked-rows');
+    var list = eval(GFlib.prefs.getCharPref('tracked.list'));
+
+    for (board in list)
+    {
+      var children = document.createElement('treechildren');
+      var item = document.createElement('treeitem');
+      var row = document.createElement('treerow');
+      var cell1 = document.createElement('treecell');
+      var cell2 = document.createElement('treecell');
+
+      item.setAttribute('container', 'true');
+      item.setAttribute('open', 'true');
+
+      cell1.setAttribute('label', list[board].name);
+      cell2.setAttribute('label', board);
+
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      item.appendChild(row);
+
+      for (var i = 0; i < list[board].topics.length; i++)
+      {
+        var childItem = document.createElement('treeitem');
+        var row = document.createElement('treerow');
+        var cell1 = document.createElement('treecell');
+        var cell2 = document.createElement('treecell');
+
+        cell1.setAttribute('label', list[board].topics[i].title);
+        cell2.setAttribute('label', board + ',' + list[board].topics[i].id);
+
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+
+        childItem.appendChild(row);
+        children.appendChild(childItem);
+      }
+
+      item.appendChild(children);
+      tree.appendChild(item);
+    }
+  },
+
+  treeAction: function(type, dblclick)
+  {
+    var tree = document.getElementById('gamefox-tracked-tree');
+    var index = tree.view.selection.currentIndex;
+
+    if (index == -1 || (tree.view.isContainer(index) && dblclick))
+      return;
+
+    var tagID = tree.view.getCellText(index,
+        tree.columns.getNamedColumn('gamefox-tracked-tagid'));
+
+    switch (type)
+    {
+      case 0:
+        GFlib.open(tagID, 0); // new tab
+        break;
+      case 1:
+        GFlib.open(tagID, 1); // new focused tab
+        break;
+      case 2:
+        GFlib.open(tagID, 2); // focused tab
+        break;
+      case 3:
+        GFlib.open(tagID, 3); // new window
+        break;
     }
   }
 };

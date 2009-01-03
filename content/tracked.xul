@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://gamefox/skin/options.css" type="text/css"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79:
+
+     Copyright 2009 Brian Marshall
+
+     This file is part of GameFOX.
+
+     GameFOX is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License version 2
+     as published by the Free Software Foundation.
+
+     GameFOX is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE page SYSTEM "chrome://gamefox/locale/tracked.dtd">
+
+<page id="gamefox-tracked-page"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  onload="GFtracked.populateTree();">
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/defs.js"/>
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/lib.js"/>
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/tracked.js"/>
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/observers.js"/>
+
+  <tree id="gamefox-tracked-tree" flex="1" hidecolumnpicker="true"
+    contextmenu="gamefox-tracked-contextmenu"
+    ondblclick="if (event.button == 0) GFtracked.treeAction(1, true);"
+    onclick="if (event.button == 1) GFtracked.treeAction(0);">
+    <treecols>
+      <treecol label="Topic Title" flex="1" primary="true"/>
+      <treecol label="Tag ID" id="gamefox-tracked-tagid" hidden="true"/>
+    </treecols>
+
+    <treechildren id="gamefox-tracked-rows"/>
+  </tree>
+
+  <toolbox>
+    <toolbar id="gamefox-tracked-toolbar">
+      <toolbarbutton label="update" oncommand="GFtracked.updateList();"/>
+    </toolbar>
+  </toolbox>
+
+  <popup id="gamefox-tracked-contextmenu">
+    <menuitem accesskey="&menu.newTab.accesskey;" label="&menu.newTab.label;"
+      oncommand="GFtracked.treeAction(1);"/>
+    <menuitem accesskey="&menu.focusedTab.accesskey;"
+      label="&menu.focusedTab.label;" oncommand="GFtracked.treeAction(2);"/>
+    <menuitem accesskey="&menu.newWindow.accesskey;"
+      label="&menu.newWindow.label;" oncommand="GFtracked.treeAction(3);"/>
+  </popup>
+</page>
