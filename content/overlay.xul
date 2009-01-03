@@ -81,6 +81,8 @@
     <!-- topic -->
     <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
       oncommand="GFtags.add(gContextMenu);"/>
+    <menuitem id="gamefox-context-track" label=""
+      oncommand="GFtracked.addFromContextMenu(gContextMenu);"/>
     <menu id="gamefox-context-pages" label="&menu.pages.label;">
       <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
     </menu>

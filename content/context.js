@@ -59,6 +59,7 @@ var GFcontext =
 
     var hideQuote = true;
     var hideTag = true;
+    var hideTrack = true;
     var hidePages = true;
     var hideUsergroups = true;
     var hideFilter = true;
@@ -79,7 +80,19 @@ var GFcontext =
 
         if (node.parentNode.cells.length > 1)
         {
+          var topic = GFutils.parseQueryString(node.parentNode.cells[1].
+              getElementsByTagName('a')[0].href);
+
           hideTag = false;
+
+          hideTrack = false;
+          if (!GFtracked.isTracked(topic['board'], topic['topic']))
+            document.getElementById('gamefox-context-track')
+              .label = strbundle.getString('trackTopic');
+          else
+            document.getElementById('gamefox-context-track')
+              .label = strbundle.getString('stopTrack');
+
           hidePages = false;
           if (GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'tracked'))
             hideUsergroups = false;
@@ -89,9 +102,24 @@ var GFcontext =
     }
     else if (GFlib.onPage(doc, 'messages'))
     {
-      // Tag topic
+      var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
+          doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
+      // Tag and track topic
       if (doc.getElementsByTagName('h1').length > 1)
+      {
         hideTag = false;
+        
+        hideTrack = false;
+        var trackLink = doc.evaluate('./a[contains(@href, "track")]', userNav,
+            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (trackLink.href.indexOf('tracktopic') != -1)
+          document.getElementById('gamefox-context-track')
+            .label = strbundle.getString('trackTopic');
+        else
+          document.getElementById('gamefox-context-track')
+            .label = strbundle.getString('stopTrack');
+      }
 
       // Quoting, filtering and user groups
       var msgComponents = GFutils.getMsgComponents(gContextMenu.target, doc);
@@ -147,6 +175,8 @@ var GFcontext =
       || !GFlib.prefs.getBoolPref('context.quote');
     document.getElementById('gamefox-context-tag').hidden = hideTag
       || !GFlib.prefs.getBoolPref('context.tag');
+    document.getElementById('gamefox-context-track').hidden = hideTrack
+      || !GFlib.prefs.getBoolPref('context.track');
     document.getElementById('gamefox-context-pages').hidden = hidePages
       || !GFlib.prefs.getBoolPref('context.pagelist');
     document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups

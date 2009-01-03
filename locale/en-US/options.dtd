@@ -163,6 +163,7 @@
 <!ENTITY mouse.context.main "Main">
 <!ENTITY mouse.context.pages "Pages">
 <!ENTITY mouse.context.tagtopic "Tag Topic">
+<!ENTITY mouse.context.track "Track Topic">
 <!ENTITY mouse.context.quote "Quote">
 <!ENTITY mouse.context.filter "Filter">
 <!ENTITY mouse.context.delete "Delete/Close">

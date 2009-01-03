@@ -630,6 +630,7 @@
       <preference id="gamefox-pref-context-filter" name="gamefox.context.filter" type="bool"/>
       <preference id="gamefox-pref-context-delete" name="gamefox.context.delete" type="bool"/>
       <preference id="gamefox-pref-context-breaktags" name="gamefox.context.breaktags" type="bool"/>
+      <preference id="gamefox-pref-context-track" name="gamefox.context.track" type="bool"/>
     </preferences>
 
     <hbox>
@@ -686,10 +687,11 @@
             <vbox>
               <checkbox preference="gamefox-pref-context-pagelist" label="&mouse.context.pages;"/>
               <checkbox preference="gamefox-pref-context-tag" label="&mouse.context.tagtopic;"/>
+              <checkbox preference="gamefox-pref-context-track" label="&mouse.context.track;"/>
               <checkbox preference="gamefox-pref-context-quote" label="&mouse.context.quote;"/>
-              <checkbox preference="gamefox-pref-context-filter" label="&mouse.context.filter;"/>
             </vbox>
             <vbox>
+              <checkbox preference="gamefox-pref-context-filter" label="&mouse.context.filter;"/>
               <checkbox preference="gamefox-pref-context-delete" label="&mouse.context.delete;"/>
               <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.context.usergroups;"/>
               <checkbox preference="gamefox-pref-context-breaktags" label="&mouse.context.breaktags;"/>

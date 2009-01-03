@@ -95,6 +95,7 @@ pref("gamefox.context.pagelist", true);
 pref("gamefox.context.quote", true);
 pref("gamefox.context.sidebar", true);
 pref("gamefox.context.tag", true);
+pref("gamefox.context.track", true);
 pref("gamefox.context.taglist", true);
 pref("gamefox.context.tag.myposts", true);
 pref("gamefox.context.tag.tracked", true);

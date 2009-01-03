@@ -19,6 +19,13 @@
 
 var GFtracked =
 {
+  list: {},
+
+  read: function()
+  {
+    this.list = eval(GFlib.prefs.getCharPref('tracked.list'));
+  },
+
   updateList: function()
   {
     // Because of how the RSS feed works without cookies, we could have an
@@ -250,6 +257,88 @@ var GFtracked =
             link.href = link.href.replace(/stoptrack/, 'tracktopic');
           }
           GFtracked.updateList();
+        }
+        else
+          GFlib.alert('An error occurred tracking or stopping tracking of this topic.');
+      }
+    }
+    request.send(null);
+  },
+
+  isTracked: function(board, topic)
+  {
+    this.read();
+
+    if (!this.list[board])
+      return false;
+
+    for (var i = 0; i < this.list[board].topics.length; i++)
+      if (this.list[board].topics[i].id == topic)
+        return true;
+
+    return false;
+  },
+
+  addFromContextMenu: function(event)
+  {
+    var doc = GFlib.getDocument(event);
+
+    if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
+    {
+      var node = event.target;
+      while (node.nodeName != 'TD')
+        node = node.parentNode;
+
+      var topic = GFutils.parseQueryString(node.parentNode.cells[1].
+          getElementsByTagName('a')[0].href);
+
+      var untrack = GFtracked.isTracked(topic['board'], topic['topic']);
+    }
+    else if (GFlib.onPage(doc, 'messages'))
+    {
+      var topic = GFutils.parseQueryString(doc.location.search);
+
+      var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
+          doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var trackLink = doc.evaluate('./a[contains(@href, "track")]', userNav,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
+      var untrack = trackLink.href.indexOf('stoptrack') != -1;
+    }
+
+    var request = new XMLHttpRequest();
+    request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board='
+        + topic['board'] + '&topic=' + topic['topic'] + '&action=' +
+        (untrack ? 'stoptrack' : 'tracktopic'));
+    var ds = GFlib.thirdPartyCookieFix(request);
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        if (request.responseText.indexOf('now tracking') != -1)
+          var result = 'start';
+        else if (request.responseText.indexOf('no longer tracking') != -1)
+          var result = 'stop';
+        else
+          var result = 'error';
+
+        if (result != 'error')
+        {
+          GFtracked.updateList();
+
+          if (GFlib.onPage(doc, 'messages'))
+          {
+            if (result == 'start')
+            {
+              trackLink.textContent = 'Stop Tracking';
+              trackLink.href = trackLink.href.replace(/tracktopic/, 'stoptrack');
+            }
+            else
+            {
+              trackLink.textContent = 'Track Topic';
+              trackLink.href = trackLink.href.replace(/stoptrack/, 'tracktopic');
+            }
+          }
         }
         else
           GFlib.alert('An error occurred tracking or stopping tracking of this topic.');
