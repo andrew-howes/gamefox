@@ -121,11 +121,11 @@ var GFtracked =
     item.setAttribute('oncommand', 'GFtracked.updateList()');
     trackedMenu.appendChild(item);
 
+    this.read();
     var firstTopic = true;
-    var list = eval(GFlib.prefs.getCharPref('tracked.list'));
-    for (var i in list)
+    for (var i in this.list)
     {
-      for (var j = 0; j < list[i]['topics'].length; j++)
+      for (var j = 0; j < this.list[i]['topics'].length; j++)
       {
         if (firstTopic)
         {
@@ -133,7 +133,7 @@ var GFtracked =
           firstTopic = false;
         }
 
-        topic = list[i]['topics'][j];
+        topic = this.list[i]['topics'][j];
 
         item = document.createElement('menuitem');
         item.setAttribute('label', topic['title']);
@@ -147,7 +147,6 @@ var GFtracked =
   populateTree: function()
   {
     var tree = document.getElementById('gamefox-tracked-rows');
-    var list = eval(GFlib.prefs.getCharPref('tracked.list'));
 
     if (!tree)
       return;
@@ -155,7 +154,8 @@ var GFtracked =
     while (tree.hasChildNodes())
       tree.removeChild(tree.firstChild);
 
-    for (board in list)
+    this.read();
+    for (board in this.list)
     {
       var children = document.createElement('treechildren');
       var item = document.createElement('treeitem');
@@ -166,22 +166,22 @@ var GFtracked =
       item.setAttribute('container', 'true');
       item.setAttribute('open', 'true');
 
-      cell1.setAttribute('label', list[board].name);
+      cell1.setAttribute('label', this.list[board].name);
       cell2.setAttribute('label', board);
 
       row.appendChild(cell1);
       row.appendChild(cell2);
       item.appendChild(row);
 
-      for (var i = 0; i < list[board].topics.length; i++)
+      for (var i = 0; i < this.list[board].topics.length; i++)
       {
         var childItem = document.createElement('treeitem');
         var row = document.createElement('treerow');
         var cell1 = document.createElement('treecell');
         var cell2 = document.createElement('treecell');
 
-        cell1.setAttribute('label', list[board].topics[i].title);
-        cell2.setAttribute('label', board + ',' + list[board].topics[i].id);
+        cell1.setAttribute('label', this.list[board].topics[i].title);
+        cell2.setAttribute('label', board + ',' + this.list[board].topics[i].id);
 
         row.appendChild(cell1);
         row.appendChild(cell2);
