@@ -197,10 +197,6 @@ var GFquickpost =
 
     event.target.disabled = true;
     event.target.blur();
-    // NOTE TO uG: The 'click' event still fires even if the button is disabled
-    //   (this doesn't seem to be true)
-    // TODO: figure out if this is needed
-    event.target.removeEventListener('click', GFquickpost.post, false);
 
     var topicTitle = doc.getElementsByName('topictitle')[0];
     var message = GFquickpost.removeGFCodeWhitespace(
@@ -211,7 +207,6 @@ var GFquickpost =
     if (/^\s*---(\n|$)/.test(message) && !GFlib.confirm('Your message appears to only consist of a signature. Are you sure you want to post it?'))
     {
       event.target.removeAttribute('disabled');
-      event.target.addEventListener('click', GFquickpost.post, false);
       return;
     }
 
@@ -290,7 +285,6 @@ var GFquickpost =
                   'report it at Blood Money.');
           }
           event.target.removeAttribute('disabled');
-          event.target.addEventListener('click', GFquickpost.post, false);
           return;
         }
         else
@@ -302,7 +296,6 @@ var GFquickpost =
             if (!GFlib.confirm(warning + 'Submit this post?'))
             {
               event.target.removeAttribute('disabled');
-              event.target.addEventListener('click', GFquickpost.post, false);
               return;
             }
           }
@@ -340,7 +333,6 @@ var GFquickpost =
                         'report it at Blood Money.');
                 }
                 event.target.removeAttribute('disabled');
-                event.target.addEventListener('click', GFquickpost.post, false);
                 return;
               }
 
