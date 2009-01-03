@@ -29,6 +29,7 @@ var GFtracked =
     { // cached url is out of date
       var request = new XMLHttpRequest();
       request.open('GET', 'http://www.gamefaqs.com/boards/tracked.php');
+      var ds = GFlib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
