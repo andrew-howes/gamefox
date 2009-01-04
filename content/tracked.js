@@ -28,6 +28,12 @@ var GFtracked =
 
   updateList: function()
   {
+    if (!GFlib.isLoggedIn())
+    {
+      GFlib.alert('Could not update your tracked topics because you aren\'t logged in.');
+      return;
+    }
+
     // Because of how the RSS feed works without cookies, we could have an
     // option to always update from a certain account. This won't work well for
     // removing or adding tracked topics though.

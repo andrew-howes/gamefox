@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008 Brian Marshall, Michael Ryan, Andrianto Effendy
+ * Copyright 2008, 2009 Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
  *
@@ -285,5 +285,20 @@ var GFlib =
       dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options.xul',
           '_blank', 'chrome,centerscreen,toolbar', firstRun ? [] : null);
     }
+  },
+
+  isLoggedIn: function()
+  {
+    var cookieMgr = Cc['@mozilla.org/cookiemanager;1']
+      .getService(Ci.nsICookieManager);
+
+    for (var e = cookieMgr.enumerator; e.hasMoreElements();)
+    {
+      var cookie = e.getNext().QueryInterface(Ci.nsICookie);
+      if (cookie.host == '.gamefaqs.com' && cookie.name == 'MDAAuth')
+        return true;
+    }
+
+    return false;
   }
 };

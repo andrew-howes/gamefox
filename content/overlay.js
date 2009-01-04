@@ -1315,6 +1315,10 @@ function GameFOXLoader()
   }
 
   GFcss.reload();
+  if (GFlib.isLoggedIn())
+  {
+    GFtracked.updateList();
+  }
 }
 
 window.addEventListener('load', GameFOXLoader, false);
