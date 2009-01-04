@@ -47,11 +47,9 @@ var GameFOX =
     }
 
     // Save logged-in account name
-    var loginbox = doc.evaluate('//div[@id="loginbox"]/div[@class="msg"]',
-        doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    if (loginbox)
-      GFlib.prefs.setCharPref('accounts.current', loginbox.textContent.
-          replace(/Welcome,/, '').GFtrim());
+    var accountName = GFutils.getAccountName(doc);
+    if (accountName)
+      GFlib.prefs.setCharPref('accounts.current', accountName);
 
     if (!GFlib.onBoards(doc)) return false;
 
@@ -630,7 +628,7 @@ var GameFOX =
         td[i].id = 'p' + msgnumString;
 
         var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
-        
+
         // Topic creator
         // TODO: Fix for newest first ordering
         if (msgnum == 1 && GFlib.prefs.getIntPref('msgSortOrder') == 1)

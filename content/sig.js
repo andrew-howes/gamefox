@@ -276,9 +276,7 @@ var GFsig =
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
         textContent.GFtrim();
       var boardid = doc.location.search.match(/board=([0-9-]+)/)[1];
-      var account = doc.evaluate('//div[@class="msg"]', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent.GFtrim().replace('Welcome, ', '');
+      var account = GFutils.getAccountName(doc);
       var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
     }

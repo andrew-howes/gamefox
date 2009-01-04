@@ -358,6 +358,13 @@ var GFutils =
     return { header: header, body: body, original: tdNode };
   },
 
+  getAccountName: function(doc)
+  {
+    var node = doc.evaluate('div[@class="msg"]', doc.getElementById('loginbox'),
+        null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    return node ? node.textContent.replace('Welcome,', '').GFtrim() : '';
+  },
+
   specialRegexpCharsEscape: function(str)
   {
     return str.replace(/([\\\[\](){}^.?*+|$])/g, '\\$1');
