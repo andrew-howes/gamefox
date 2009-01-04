@@ -38,7 +38,7 @@ var GFquote =
         'document', 'getSelection()');
     var selection = parentWin.getSelection();
     // only use the selection if it's inside the clicked message and this
-    // function is not from a double-click
+    // function is not triggered by a double-click
     if (allowSelection && /\S/.test(selection.toString()) &&
         selection.containsNode(msgComponents.body, true))
     {
@@ -78,7 +78,7 @@ var GFquote =
     bodyDOM.innerHTML = body;
 
     // Remove nested quotes
-    var quotes = doc.evaluate('./i/p', bodyDOM, null, XPathResult.
+    var quotes = doc.evaluate('i/p', bodyDOM, null, XPathResult.
         ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < quotes.snapshotLength; i++)
     {
@@ -87,15 +87,15 @@ var GFquote =
         bodyDOM.removeChild(quotes.snapshotItem(i).parentNode);
       else
       {
-       bodyDOM.insertBefore(doc.createTextNode('\n'),
-           quotes.snapshotItem(i).parentNode.nextSibling);
-       quotes.snapshotItem(i).parentNode.replaceChild(
-            doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
+         bodyDOM.insertBefore(doc.createTextNode('\n'),
+             quotes.snapshotItem(i).parentNode.nextSibling);
+         quotes.snapshotItem(i).parentNode.replaceChild(
+             doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
       }
     }
 
     // Remove p tags which break GFCode
-    var p = doc.evaluate('./p', bodyDOM, null, XPathResult.
+    var p = doc.evaluate('p', bodyDOM, null, XPathResult.
         ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < p.snapshotLength; i++)
     {
