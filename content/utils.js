@@ -360,9 +360,15 @@ var GFutils =
 
   getAccountName: function(doc)
   {
-    var node = doc.evaluate('div[@class="msg"]', doc.getElementById('loginbox'),
-        null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    return node ? node.textContent.replace('Welcome,', '').GFtrim() : '';
+    var loginbox = doc.getElementById('loginbox');
+    if (loginbox)
+    {
+      var node = doc.evaluate('div[@class="msg"]', loginbox, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (node)
+        return node.textContent.replace('Welcome,', '').GFtrim();
+    }
+    return '';
   },
 
   specialRegexpCharsEscape: function(str)
