@@ -101,7 +101,7 @@
 
     <!-- textarea -->
     <menuitem id="gamefox-context-break-tags" label="&menu.breaktags.label;"
-      oncommand="GFquickpost.breakTags(gContextMenu.target);"/>
+      oncommand="GFquickpost.breakTagsFromContext(gContextMenu);"/>
   </popup>
 
   <!-- firefox tools menu -->

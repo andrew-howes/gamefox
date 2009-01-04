@@ -512,25 +512,6 @@ var GFquickpost =
       GFmessages.updateMessageCount(doc);
   },
 
-  breakTagsListener: function(event)
-  {
-    event.preventDefault();
-    var doc = GFlib.getDocument(event);
-
-    var msg = doc.getElementsByName('message')[0];
-    if (msg.selectionStart == msg.selectionEnd)
-    {
-      GFlib.alert('You need to select some text containing HTML first.');
-      return;
-    }
-
-    GFquickpost.breakTags(msg);
-    msg.focus();
-
-    if (GFlib.prefs.getBoolPref('elements.charcounts'))
-      GFmessages.updateMessageCount(doc);
-  },
-
   createHTMLButtons: function(doc)
   {
     var span = doc.createElement('span');
@@ -588,7 +569,7 @@ var GFquickpost =
       breaktags.accessKey = 'r';
       breaktags.tabIndex = 4;
 
-      breaktags.addEventListener('click', GFquickpost.breakTagsListener, false);
+      breaktags.addEventListener('click', GFquickpost.breakTagsFromButton, false);
     }
 
     return span;
@@ -618,6 +599,33 @@ var GFquickpost =
       + msg.value.substr(msg.selectionEnd);
 
     msg.setSelectionRange(endPosition, endPosition);
+  },
+
+  breakTagsFromButton: function(event)
+  {
+    event.preventDefault();
+    var doc = GFlib.getDocument(event);
+
+    var msg = doc.getElementsByName('message')[0];
+    if (msg.selectionStart == msg.selectionEnd)
+    {
+      GFlib.alert('You need to select some text containing HTML first.');
+      return;
+    }
+
+    GFquickpost.breakTags(msg);
+    msg.focus();
+
+    if (GFlib.prefs.getBoolPref('elements.charcounts'))
+      GFmessages.updateMessageCount(doc);
+  },
+
+  breakTagsFromContext: function(event)
+  {
+    GFquickpost.breakTags(event.target);
+
+    if (GFlib.prefs.getBoolPref('elements.charcounts'))
+      GFmessages.updateMessageCount(GFlib.getDocument(event));
   },
 
   createHTMLButtonsPref: function()
