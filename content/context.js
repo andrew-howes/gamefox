@@ -50,10 +50,12 @@ var GFcontext =
     {
       document.getElementById('gamefox-context-quote').hidden = true;
       document.getElementById('gamefox-context-tag').hidden = true;
+      document.getElementById('gamefox-context-track').hidden = true;
       document.getElementById('gamefox-context-pages').hidden = true;
       document.getElementById('gamefox-context-usergroups').hidden = true;
       document.getElementById('gamefox-context-filter').hidden = true;
       document.getElementById('gamefox-context-delete').hidden = true;
+      document.getElementById('gamefox-context-break-tags').hidden = true;
       return;
     }
 
