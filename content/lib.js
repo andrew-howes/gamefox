@@ -79,7 +79,8 @@ var GFlib =
    */
   onGF: function(doc)
   {
-    try {
+    try
+    {
       return /(^|\.)gamefaqs\.com$/.test(doc.domain);
     }
     catch (e)
@@ -102,15 +103,18 @@ var GFlib =
     switch (page)
     {
       case 'index':
-        var h1 = doc.evaluate('//div[@class="pod"]/div[@class="head"]/h1', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (h1 != null && h1.textContent == 'Board Information')
+        var div = doc.getElementById('side_col');
+        if (div)
         {
-          doc.gamefox.pageType = ['index'];
-          return true;
+          var h1 = doc.evaluate('div[@class="pod"]/div[@class="head"]/h1', div,
+              null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          if (h1 && h1.textContent == 'Board Information')
+          {
+            doc.gamefox.pageType = ['index'];
+            return true;
+          }
         }
-        else
-          return false;
+        return false;
 
       case 'topics':
         if (GFlib.onPage(doc, 'tracked'))
@@ -118,48 +122,55 @@ var GFlib =
           doc.gamefox.pageType = ['topics', 'tracked'];
           return true;
         }
-        var col = doc.evaluate('//col[@class="status"]', doc, null, XPathResult.
-            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (col != null)
+        var div = doc.getElementById('board_wrap');
+        if (div)
         {
-          doc.gamefox.pageType = ['topics'];
-          return true;
+          var col = doc.evaluate('div[@class="board"]/table[@class="topics"]/colgroup/col[@class="status"]',
+              div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          if (col)
+          {
+            doc.gamefox.pageType = ['topics'];
+            return true;
+          }
+          var notopics = doc.evaluate('p', div, null,
+              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          if (notopics && notopics.textContent.indexOf('No topics are available') != -1)
+          {
+            doc.gamefox.pageType = ['topics'];
+            return true;
+          }
         }
-        var notopics = doc.evaluate('//div[@id="board_wrap"]/p', doc, null, XPathResult.
-            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (notopics != null && notopics.textContent.indexOf('No topics are available') != -1)
-        {
-          doc.gamefox.pageType = ['topics'];
-          return true;
-        }
-        else
-          return false;
+        return false;
 
       case 'messages':
-        var table = doc.evaluate('//table[@class="message"]', doc, null, XPathResult.
-            FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (table != null && !GFlib.onPage(doc, 'post'))
+        var div = doc.getElementById('board_wrap');
+        if (div)
         {
-          var boards = doc.evaluate('//div[@class="board"]', doc, null,
-              XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-          if (boards.snapshotLength > 1)
-            doc.gamefox.pageType = ['messages', 'detail'];
-          else
+          var table = doc.evaluate('div[@class="board"]/table[@class="message"]',
+              div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          if (table && !GFlib.onPage(doc, 'usernote'))
           {
-            var user = doc.evaluate('//div[@class="user"]', doc, null, XPathResult.
-                FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            if (user != null && user.textContent.indexOf('Topic Archived') != -1)
-              doc.gamefox.pageType = ['messages', 'archive'];
+            var boards = doc.evaluate('div[@class="board"]', div, null,
+                XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+            if (boards.snapshotLength > 1)
+              doc.gamefox.pageType = ['messages', 'detail'];
             else
-              doc.gamefox.pageType = ['messages'];
+            {
+              // TODO: maybe check for user profile links instead
+              var user = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
+                  div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+              if (user && user.textContent.indexOf('Topic Archived') != -1)
+                doc.gamefox.pageType = ['messages', 'archive'];
+              else
+                doc.gamefox.pageType = ['messages'];
+            }
+            return true;
           }
-          return true;
         }
-        else
-          return false;
+        return false;
 
       default:
-        return new RegExp('^/boards/' + page + '\\.php').test(doc.location.pathname);
+        return doc.location.pathname.indexOf('/boards/' + page + '.php') == 0;
     }
   },
 
