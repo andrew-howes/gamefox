@@ -36,6 +36,11 @@
   <script type="application/x-javascript"
     src="chrome://gamefox/content/utils.js"/>
 
+  <stringbundleset id="strbundles">
+    <stringbundle id="strings"
+      src="chrome://gamefox/locale/tracked.properties"/>
+  </stringbundleset>
+
   <tree id="gamefox-tracked-tree" flex="1" hidecolumnpicker="true"
     contextmenu="gamefox-tracked-contextmenu"
     ondblclick="if (event.button == 0) GFtracked.treeAction(1, true);"
@@ -54,12 +59,15 @@
     </toolbar>
   </toolbox>
 
-  <popup id="gamefox-tracked-contextmenu">
+  <popup id="gamefox-tracked-contextmenu"
+    onpopupshowing="GFtracked.displayTreeMenu();">
     <menuitem accesskey="&menu.newTab.accesskey;" label="&menu.newTab.label;"
       oncommand="GFtracked.treeAction(1);"/>
     <menuitem accesskey="&menu.focusedTab.accesskey;"
       label="&menu.focusedTab.label;" oncommand="GFtracked.treeAction(2);"/>
     <menuitem accesskey="&menu.newWindow.accesskey;"
       label="&menu.newWindow.label;" oncommand="GFtracked.treeAction(3);"/>
+    <menuitem accesskey="" label="" oncommand="GFtracked.treeAction(4);"
+      id="gamefox-tracked-contextmenu-hold"/>
   </popup>
 </page>

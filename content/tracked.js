@@ -24,6 +24,15 @@ var GFtracked =
   read: function()
   {
     this.list = eval(GFlib.prefs.getCharPref('tracked.list'));
+
+    // this.list will be undefined if the pref value isn't an object
+    if (!this.list)
+      this.list = {};
+  },
+
+  save: function()
+  {
+    GFlib.prefs.setCharPref('tracked.list', this.list.toSource());
   },
 
   updateList: function()
@@ -79,16 +88,26 @@ var GFtracked =
             responseText, 'text/xml');
         var items = xmlobject.getElementsByTagName('item');
         var list = {};
+        GFtracked.read();
         for (var i = 0; i < items.length; i++)
         {
           var ids = GFutils.parseQueryString(items[i].
               getElementsByTagName('link')[0].textContent);
           var title = items[i].getElementsByTagName('title')[0].textContent;
 
+          // keep hold status
+          if (GFtracked.list[ids['board']]
+              && GFtracked.list[ids['board']].topics[ids['topic']]
+              && GFtracked.list[ids['board']].topics[ids['topic']].hold)
+            var hold = true;
+          else
+            var hold = false;
+
           var topic = {
-            id: ids['topic'],
             title: title.substr(0, title.lastIndexOf('-') - 2),
-            age: title.substr(title.lastIndexOf('-') + 2)
+            age: title.substr(title.lastIndexOf('-') + 2),
+            hold: hold,
+            deleted: false
           };
           var data = new Array(
               'Last Post', 'lastPost',
@@ -104,11 +123,34 @@ var GFtracked =
           }
 
           if (!list[ids['board']])
-            list[ids['board']] = {name: topic['board'], topics: []};
-          list[ids['board']]['topics'].push(topic);
+            list[ids['board']] = {name: topic['board'], topics: {}};
+          list[ids['board']]['topics'][ids['topic']] = topic;
         }
 
-        GFlib.prefs.setCharPref('tracked.list', list.toSource());
+        // check deleted topics
+        for (var i in GFtracked.list)
+        {
+          for (var j in GFtracked.list[i].topics)
+          {
+            if (list[i] && list[i].topics[j]) continue; // topic still exists
+
+            var topic = GFtracked.list[i].topics[j];
+
+            if (!topic.hold) continue; // topic isn't held
+
+            if (!list[i])
+            {
+              // board has been removed from tracked list
+              list[i] = GFtracked.list[i];
+            }
+
+            topic.deleted = true;
+            list[i].topics[j] = topic;
+          }
+        }
+
+        GFtracked.list = list;
+        GFtracked.save();
       }
     }
     request.send(null);
@@ -131,7 +173,7 @@ var GFtracked =
     var firstTopic = true;
     for (var i in this.list)
     {
-      for (var j = 0; j < this.list[i]['topics'].length; j++)
+      for (var j in this.list[i].topics)
       {
         if (firstTopic)
         {
@@ -139,12 +181,12 @@ var GFtracked =
           firstTopic = false;
         }
 
-        topic = this.list[i]['topics'][j];
+        topic = this.list[i].topics[j];
 
         item = document.createElement('menuitem');
         item.setAttribute('label', topic['title']);
         item.setAttribute('oncommand',
-            'GFlib.open("' + i + ',' + topic['id'] + '", 2)');
+            'GFlib.open("' + i + ',' + j + '", 2)');
         trackedMenu.appendChild(item);
       }
     }
@@ -179,15 +221,20 @@ var GFtracked =
       row.appendChild(cell2);
       item.appendChild(row);
 
-      for (var i = 0; i < this.list[board].topics.length; i++)
+      for (var topic in this.list[board].topics)
       {
         var childItem = document.createElement('treeitem');
         var row = document.createElement('treerow');
         var cell1 = document.createElement('treecell');
         var cell2 = document.createElement('treecell');
 
-        cell1.setAttribute('label', this.list[board].topics[i].title);
-        cell2.setAttribute('label', board + ',' + this.list[board].topics[i].id);
+        if (this.list[board].topics[topic].deleted)
+          row.setAttribute('properties', 'deleted');
+        else if (this.list[board].topics[topic].hold)
+          row.setAttribute('properties', 'hold');
+
+        cell1.setAttribute('label', this.list[board].topics[topic].title);
+        cell2.setAttribute('label', board + ',' + topic);
 
         row.appendChild(cell1);
         row.appendChild(cell2);
@@ -211,6 +258,7 @@ var GFtracked =
 
     var tagID = tree.view.getCellText(index,
         tree.columns.getNamedColumn('gamefox-tracked-tagid'));
+    var topic = tagID.split(',');
 
     switch (type)
     {
@@ -225,6 +273,9 @@ var GFtracked =
         break;
       case 3:
         GFlib.open(tagID, 3); // new window
+        break;
+      case 4:
+        GFtracked.holdTopic(topic[0], topic[1]);
         break;
     }
   },
@@ -351,5 +402,40 @@ var GFtracked =
       }
     }
     request.send(null);
+  },
+
+  holdTopic: function(board, topic)
+  {
+    this.read();
+
+    if (!this.list[board].topics[topic])
+      return;
+
+    this.list[board].topics[topic].hold = !this.list[board].topics[topic].hold;
+
+    this.save();
+  },
+
+  displayTreeMenu: function()
+  {
+    var tree = document.getElementById('gamefox-tracked-tree');
+    var index = tree.view.selection.currentIndex;
+
+    if (index == -1)
+      return;
+
+    GFtracked.read();
+
+    var tagID = tree.view.getCellText(index,
+        tree.columns.getNamedColumn('gamefox-tracked-tagid')).split(',');
+    var topic = GFtracked.list[tagID[0]].topics[tagID[1]];
+    var menuItem = document.getElementById('gamefox-tracked-contextmenu-hold');
+
+    var strbundle = document.getElementById('strings');
+    menuItem.accessKey = strbundle.getString('holdAccessKey');
+    if (!topic.hold)
+      menuItem.label = strbundle.getString('holdTopic');
+    else
+      menuItem.label = strbundle.getString('unholdTopic');
   }
 };

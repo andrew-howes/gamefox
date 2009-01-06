@@ -1,3 +1,14 @@
+/* Tracked */
+#gamefox-tracked-rows::-moz-tree-row(hold)
+{
+    background: url('tracked-hold.png') no-repeat 1px;
+}
+
+#gamefox-tracked-rows::-moz-tree-row(deleted)
+{
+    background: url('tracked-deleted.png') no-repeat 1px;
+}
+
 /* Tags and Tracked */
 #gamefox-tags-rows::-moz-tree-row(container),
 #gamefox-tracked-rows::-moz-tree-row(container)
