@@ -69,15 +69,16 @@ var GFcss =
     {
       for (j in css[i])
       {
-        var req = new XMLHttpRequest();
-        req.overrideMimeType('text/plain'); // otherwise we get "not well-formed" errors in the error console
         try
         {
-          req.open('GET', 'chrome://gamefox/content/css/' + j, false);
-          req.send(null);
+          Cc['@mozilla.org/network/io-service;1']
+            .getService(Ci.nsIIOService)
+            .newChannel('chrome://gamefox/content/css/' + j, null, null)
+            .open().close();
         }
         catch (e)
         {
+          GFlib.log('Old bundled stylesheet "' + j + '" removed.');
           this.remove(i, j);
         }
       }
@@ -265,7 +266,7 @@ var GFcss =
       this.treeView.visibleData.push([[treeCat], true, false]);
       this.treeView.childData[treeCat] = [];
       var prefCat = categories[treeCat];
-      for (var filename in css[categories[treeCat]])
+      for (var filename in css[prefCat])
       {
         this.treeView.childData[treeCat].push([
           css[prefCat][filename]['title'],
