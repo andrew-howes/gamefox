@@ -431,6 +431,14 @@ var GFtracked =
     var topic = GFtracked.list[tagID[0]].topics[tagID[1]];
     var menuItem = document.getElementById('gamefox-tracked-contextmenu-hold');
 
+    if (!tagID[1]) // board
+    {
+      menuItem.hidden = true;
+      return;
+    }
+    else // topic
+      menuItem.hidden = false;
+
     var strbundle = document.getElementById('strings');
     menuItem.accessKey = strbundle.getString('holdAccessKey');
     if (!topic.hold)
