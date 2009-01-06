@@ -215,7 +215,7 @@ var GFtags =
     var err          = [    0,  0, 0,   0,   0,   0,   0,   0,   0,   0 ]
     var IDs          = 0;
     var processedIDs = 0;
-    var progress     = document.getElementById('gamefox-purge-meter');
+    var button       = document.getElementById('gamefox-purge');
     var remove       = [];
 
 
@@ -262,8 +262,7 @@ var GFtags =
 
         if (processedIDs == IDs)
         {
-          progress.setAttribute('hidden', 'true');
-          progress.parentNode.selectedIndex = 0;
+          button.removeAttribute('disabled');
 
           var msg;
 
@@ -411,8 +410,7 @@ var GFtags =
       {
         if (first)
         {
-          progress.removeAttribute('hidden');
-          progress.parentNode.selectedIndex = 1;
+          button.setAttribute('disabled', 'true');
           first = false;
         }
         IDs++;

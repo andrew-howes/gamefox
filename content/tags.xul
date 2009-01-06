@@ -37,12 +37,7 @@
   </tree>
   <toolbox>
     <toolbar id="gamefox-tags-toolbar">
-      <toolbaritem>
-        <deck selectedIndex="0">
-          <toolbarbutton label="&deletepurged.label;" oncommand="GFtags.removePurged();"/>
-          <progressmeter id="gamefox-purge-meter" mode="undetermined" hidden="true"/>
-        </deck>
-      </toolbaritem>
+      <toolbarbutton label="&deletepurged.label;" oncommand="GFtags.removePurged();" id="gamefox-purge"/>
       <toolbarbutton label="&deleteall.label;" oncommand="GFtags.removeAll();"/>
     </toolbar>
   </toolbox>
