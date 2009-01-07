@@ -326,14 +326,7 @@ var GFtracked =
   {
     this.read();
 
-    if (!this.list[board])
-      return false;
-
-    for (var i = 0; i < this.list[board].topics.length; i++)
-      if (this.list[board].topics[i].id == topic)
-        return true;
-
-    return false;
+    return this.list[board] && topic in this.list[board].topics;
   },
 
   addFromContextMenu: function(event)

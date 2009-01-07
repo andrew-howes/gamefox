@@ -21,7 +21,8 @@ var GFcontext =
 {
   displayMenu: function(event)
   {
-    var doc = gContextMenu.target.ownerDocument;
+    var target = gContextMenu.target;
+    var doc = target.ownerDocument;
     var strbundle = document.getElementById('context-strings');
 
     document.getElementById('gamefox-toggle-sidebar').hidden = !GFlib.prefs.
@@ -70,67 +71,66 @@ var GFcontext =
 
     if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
     {
-      // Tag topic, pages and user groups
+      // Tag topic, track topic, pages and user groups
       try
       {
-        var node = gContextMenu.target;
+        var node = target;
 
         while (node.nodeName.toLowerCase() != 'td')
-        {
           node = node.parentNode;
-        }
 
         if (node.parentNode.cells.length > 1)
         {
-          var topic = GFutils.parseQueryString(node.parentNode.cells[1].
-              getElementsByTagName('a')[0].href);
-
           hideTag = false;
 
           hideTrack = false;
-          if (!GFtracked.isTracked(topic['board'], topic['topic']))
-            document.getElementById('gamefox-context-track')
-              .label = strbundle.getString('trackTopic');
-          else
+          var topic = GFutils.parseQueryString(node.parentNode.cells[1].
+              getElementsByTagName('a')[0].href);
+          if (GFtracked.isTracked(topic['board'], topic['topic']))
             document.getElementById('gamefox-context-track')
               .label = strbundle.getString('stopTrack');
+          else
+            document.getElementById('gamefox-context-track')
+              .label = strbundle.getString('trackTopic');
 
           hidePages = false;
+
           if (GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'tracked'))
             hideUsergroups = false;
         }
       }
       catch (e) {}
+
+      // Break tags
+      if (target.nodeName == 'TEXTAREA'
+          && target.selectionStart != target.selectionEnd)
+        hideBreakTags = false;
     }
     else if (GFlib.onPage(doc, 'messages'))
     {
-      var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
-          doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-
-      // Tag and track topic
+      // Tag topic
       if (doc.getElementsByTagName('h1').length > 1)
-      {
         hideTag = false;
-        
-        hideTrack = false;
-        var trackLink = doc.evaluate('./a[contains(@href, "track")]', userNav,
-            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (trackLink.href.indexOf('tracktopic') != -1)
-          document.getElementById('gamefox-context-track')
-            .label = strbundle.getString('trackTopic');
-        else
-          document.getElementById('gamefox-context-track')
-            .label = strbundle.getString('stopTrack');
-      }
 
-      // Quoting, filtering and user groups
-      var msgComponents = GFutils.getMsgComponents(gContextMenu.target, doc);
+      // Track topic
+      hideTrack = false;
+      var topic = GFutils.parseQueryString(doc.location.search);
+      if (GFtracked.isTracked(topic['board'], topic['topic']))
+        document.getElementById('gamefox-context-track')
+          .label = strbundle.getString('stopTrack');
+      else
+        document.getElementById('gamefox-context-track')
+          .label = strbundle.getString('trackTopic');
+
+      // Quoting, user groups, filtering and delete
+      var msgComponents = GFutils.getMsgComponents(target, doc);
       if (msgComponents)
       {
         var deleteType = msgComponents.header.getAttribute('gfdeletetype');
 
         if (doc.getElementById('gamefox-message'))
           hideQuote = false;
+
         hideUsergroups = false;
 
         hideFilter = false;
@@ -162,14 +162,15 @@ var GFcontext =
       }
 
       // Break tags
-      if (gContextMenu.target.nodeName == 'TEXTAREA'
-          && gContextMenu.target.selectionStart != gContextMenu.target.selectionEnd)
+      if (target.nodeName == 'TEXTAREA'
+          && target.selectionStart != target.selectionEnd)
         hideBreakTags = false;
     }
     else if (GFlib.onPage(doc, 'post'))
     {
-      if (gContextMenu.target.nodeName == 'TEXTAREA'
-          && gContextMenu.target.selectionStart != gContextMenu.target.selectionEnd)
+      // Break tags
+      if (target.nodeName == 'TEXTAREA'
+          && target.selectionStart != target.selectionEnd)
         hideBreakTags = false;
     }
 
