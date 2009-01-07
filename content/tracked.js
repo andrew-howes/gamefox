@@ -141,7 +141,7 @@ var GFtracked =
             if (!list[i])
             {
               // board has been removed from tracked list
-              list[i] = GFtracked.list[i];
+              list[i] = {name: GFtracked.list[i].name, topics: {}};
             }
 
             topic.deleted = true;
@@ -438,6 +438,10 @@ var GFtracked =
     else
     {
       delete this.list[boardId].topics[topicId];
+
+      if (!this.list[boardId].topics.__count__)
+        delete this.list[boardId]; // board is empty
+
       this.save();
     }
   },
