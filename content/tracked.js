@@ -277,6 +277,9 @@ var GFtracked =
       case 4:
         GFtracked.holdTopic(topic[0], topic[1]);
         break;
+      case 5:
+        GFtracked.deleteTopic(topic[0], topic[1]);
+        break;
     }
   },
 
@@ -409,6 +412,36 @@ var GFtracked =
     this.save();
   },
 
+  deleteTopic: function(boardId, topicId)
+  {
+    this.read();
+
+    var topic = this.list[boardId].topics[topicId];
+    if (!topic.deleted)
+    {
+      var request = new XMLHttpRequest();
+      request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board='
+          + boardId + '&topic=' + topicId + '&action=stoptrack');
+      var ds = GFlib.thirdPartyCookieFix(request);
+      request.onreadystatechange = function()
+      {
+        if (request.readyState == 4)
+        {
+          if (request.responseText.indexOf('no longer tracking') != -1)
+            GFtracked.updateList();
+          else
+            GFlib.alert('An error occurred stopping tracking of this topic.');
+        }
+      }
+      request.send(null);
+    }
+    else
+    {
+      delete this.list[boardId].topics[topicId];
+      this.save();
+    }
+  },
+
   displayTreeMenu: function()
   {
     var tree = document.getElementById('gamefox-tracked-tree');
@@ -422,21 +455,29 @@ var GFtracked =
     var tagID = tree.view.getCellText(index,
         tree.columns.getNamedColumn('gamefox-tracked-tagid')).split(',');
     var topic = GFtracked.list[tagID[0]].topics[tagID[1]];
-    var menuItem = document.getElementById('gamefox-tracked-contextmenu-hold');
 
     if (!tagID[1]) // board
     {
-      menuItem.hidden = true;
+      document.getElementById('gamefox-tracked-contextmenu-hold')
+        .hidden = true;
+      document.getElementById('gamefox-tracked-contextmenu-stop')
+        .hidden = true;
       return;
     }
     else // topic
-      menuItem.hidden = false;
+    {
+      document.getElementById('gamefox-tracked-contextmenu-hold')
+        .hidden = false;
+      document.getElementById('gamefox-tracked-contextmenu-stop')
+        .hidden = false;
+    }
 
+    var menuItem = document.getElementById('gamefox-tracked-contextmenu-hold');
     var strbundle = document.getElementById('strings');
     menuItem.accessKey = strbundle.getString('holdAccessKey');
     if (!topic.hold)
-      menuItem.label = strbundle.getString('holdTopic');
+      menuItem.label = strbundle.getString('hold');
     else
-      menuItem.label = strbundle.getString('unholdTopic');
+      menuItem.label = strbundle.getString('unhold');
   }
 };

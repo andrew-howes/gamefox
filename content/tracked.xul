@@ -69,5 +69,8 @@
       label="&menu.newWindow.label;" oncommand="GFtracked.treeAction(3);"/>
     <menuitem accesskey="" label="" oncommand="GFtracked.treeAction(4);"
       id="gamefox-tracked-contextmenu-hold"/>
+    <menuitem accesskey="&menu.stopTracking.accesskey;"
+      label="&menu.stopTracking.label;" oncommand="GFtracked.treeAction(5);"
+      id="gamefox-tracked-contextmenu-stop"/>
   </popup>
 </page>
