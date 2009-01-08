@@ -1,8 +1,12 @@
-2008-12-xx:
+2009-01-xx:
     * version 0.6.10
     * Disable custom window titles by default
+    * Ten On A Diet CSS no longer uses external images
     * Fix topic creator highlighting beyond the first page when topic creator
       labeling is disabled
+    * Tracked topics are now integrated into GameFOX
+    * Disable all tag-related preferences by default
+    * Numerous performance improvements
 
 2008-12-26:
     * version 0.6.9

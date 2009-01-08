@@ -58,6 +58,13 @@ QuickPost form.
 `input` text element for the topic title. Only present in the floating topic QuickPost.
 
 <h2 id="p">p</h2>
+<h3 id="p_gamefox-ignorelist">
+p.gamefox-ignorelist
+<span class="new">New in 0.6.10</span>
+</h3>
+
+Applied to ignore list message.
+
 <h3 id="p_gamefox-usernote">p.gamefox-usernote</h3>
 
 Applied to system notification message. (v0.6.7)
