@@ -634,7 +634,6 @@ var GameFOX =
 
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
-        td[i].appendChild(msgLinks);
         msgLinks.className = 'gamefox-message-links';
 
         // Message highlighting
@@ -777,6 +776,9 @@ var GameFOX =
               doc.createElement('br') : doc.createTextNode(' | '));
           msgLinks.appendChild(a);
         }
+
+        // Append msgLinks
+        td[i].appendChild(msgLinks);
 
         // Message numbering
         if (msgnumCond)
