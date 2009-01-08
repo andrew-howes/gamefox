@@ -36,14 +36,17 @@ var GameFOX =
     // Add favorites
     if (GFlib.prefs.getBoolPref('elements.favorites'))
     {
-      var favorites = doc.createElement('select');
-      favorites.id = 'gamefox-favorites-menu';
-      favorites.addEventListener('mousedown', GFfavorites.selectFavorite, false);
+      var searchForm = doc.getElementById('search');
+      if (searchForm)
+      {
+        var favMenu = doc.createElement('select');
+        favMenu.id = 'gamefox-favorites-menu';
+        favMenu.addEventListener('mousedown', GFfavorites.selectFavorite, false);
 
-      GFfavorites.populateFavorites(doc, favorites);
+        GFfavorites.populateFavorites(doc, favMenu);
 
-      doc.getElementById('search').parentNode.insertBefore(favorites,
-          doc.getElementById('search').nextSibling);
+        searchForm.parentNode.insertBefore(favMenu, searchForm.nextSibling);
+      }
     }
 
     // Save logged-in account name
@@ -882,7 +885,7 @@ var GameFOX =
         var qpDiv = doc.createElement('div');
             qpDiv.id = 'gamefox-quickpost-normal';
 
-        doc.getElementById('board_wrap').appendChild(qpDiv);
+        boardWrap.appendChild(qpDiv);
         GFquickpost.appendForm(doc, qpDiv, false);
       }
 
