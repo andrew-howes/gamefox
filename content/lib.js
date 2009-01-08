@@ -117,14 +117,14 @@ var GFlib =
         return false;
 
       case 'topics':
-        if (GFlib.onPage(doc, 'tracked'))
-        {
-          doc.gamefox.pageType = ['topics', 'tracked'];
-          return true;
-        }
         var div = doc.getElementById('board_wrap');
         if (div)
         {
+          if (GFlib.onPage(doc, 'tracked'))
+          {
+            doc.gamefox.pageType = ['topics', 'tracked'];
+            return true;
+          }
           var col = doc.evaluate('div[@class="board"]/table[@class="topics"]/colgroup/col[@class="status"]',
               div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (col)

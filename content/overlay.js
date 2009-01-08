@@ -366,8 +366,8 @@ var GameFOX =
     /* Topic Lists */
     else if (GFlib.onPage(doc, 'topics'))
     {
-      var userNav = boardWrap ? doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
+      var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       GFuserlist.loadGroups();
 
       var onTracked = GFlib.onPage(doc, 'tracked');
@@ -391,8 +391,8 @@ var GameFOX =
         userNav.appendChild(anchor);
       }
 
-      var topicsTable = doc.evaluate('//table[@class="topics"]', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var topicsTable = doc.evaluate('div[@class="board"]/table[@class="topics"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
 
       if (topicsTable)
@@ -546,10 +546,10 @@ var GameFOX =
     /* Message Lists */
     else if (GFlib.onPage(doc, 'messages'))
     {
-      var userNav = boardWrap ? doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
-      var pageJumper = doc.evaluate('//div[@class="pagejumper"]', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var pageJumper = doc.evaluate('div[@class="pagejumper"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (pageJumper)
       {
         var pageJumperItems = pageJumper.getElementsByTagName('li');
@@ -568,12 +568,9 @@ var GameFOX =
       var onDetail = GFlib.onPage(doc, 'detail');
 
       // Title
-      GFlib.setTitle(doc,
-          doc.evaluate(
-              '//h1/following::h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-              null).singleNodeValue.textContent.GFtrim(),
-                'M' + (onDetail ? 'D' : ''),
-                (pagenum ? (pagenum + 1) : null));
+      GFlib.setTitle(doc, GFutils.getBoardWrapHeader(doc),
+          'M' + (onDetail ? 'D' : ''),
+          (pagenum ? (pagenum + 1) : null));
 
       // "Tag Topic" link
       if (GFlib.prefs.getBoolPref('elements.tag.link'))
@@ -589,12 +586,12 @@ var GameFOX =
         trackLink.addEventListener('click', GFtracked.linkListener, false);
 
       // Double click
-      doc.evaluate('//table[@class="message"]', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-        addEventListener('dblclick', GameFOX.msglistDblclick, false);
+      var messageTable = doc.evaluate('div[@class="board"]/table[@class="message"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      messageTable.addEventListener('dblclick', GameFOX.msglistDblclick, false);
 
       // Message numbering and highlighting
-      var tdResult = doc.evaluate('//table[@class="message"]/tbody/tr/td', doc, null,
+      var tdResult = doc.evaluate('tbody/tr/td', messageTable, null,
           XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
       var td = [];
       for (var i = 0; i < tdResult.snapshotLength; i++)
@@ -611,10 +608,10 @@ var GameFOX =
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
 
-      var deletelinkCond = GFlib.prefs.getBoolPref('elements.deletelink') && !onArchive;
+      var deletelinkCond = GFlib.prefs.getBoolPref('elements.deletelink');
       var loggedInUser = userNav.getElementsByTagName('a')[0].textContent;
       loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
-      var topicOpen = doc.evaluate('a[contains(@href, "post.php")]', userNav,
+      var topicOpen = !!doc.evaluate('a[contains(@href, "post.php")]', userNav,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var firstPostNum = GFlib.prefs.getIntPref('msgSortOrder') == 2 ?
           (doc.gamefox.pages - 1) * GFlib.prefs.getIntPref('msgsPerPage') + td.length / 2 : 1;
@@ -715,7 +712,7 @@ var GameFOX =
         }
 
         // Add "delete" link
-        if (loggedInUser == username &&
+        if (loggedInUser == username && !onArchive &&
             ((msgnum == firstPostNum && topicOpen) || msgnum != firstPostNum) &&
             td[i + 1].textContent.GFtrim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
