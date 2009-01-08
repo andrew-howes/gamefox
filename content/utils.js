@@ -360,13 +360,42 @@ var GFutils =
 
   getAccountName: function(doc)
   {
-    var loginbox = doc.getElementById('loginbox');
-    if (loginbox)
+    var div = doc.getElementById('loginbox');
+    if (div)
     {
-      var node = doc.evaluate('div[@class="msg"]', loginbox, null,
+      var node = doc.evaluate('div[@class="msg"]', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
         return node.textContent.replace('Welcome,', '').GFtrim();
+    }
+    return '';
+  },
+
+  getBoardName: function(doc)
+  {
+    // this may not return the real board name for split game boards
+    var div = doc.getElementById('content');
+    if (div)
+    {
+      var node = doc.evaluate('div[@class="head"]/h1', div, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+        || doc.evaluate('h1', div, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (node)
+        return node.textContent.GFtrim();
+    }
+    return '';
+  },
+
+  getBoardWrapHeader: function(doc)
+  {
+    var div = doc.getElementById('board_wrap');
+    if (div)
+    {
+      var node = doc.evaluate('div[@class="head"]/h1', div, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (node)
+        return node.textContent.GFtrim();
     }
     return '';
   },

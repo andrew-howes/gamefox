@@ -55,11 +55,21 @@ var GameFOX =
 
     doc.gamefox = {};
 
-    // User notification
-    var usernote = doc.evaluate('//div[@id="board_wrap"]/p/a[contains(@href, "usernote.php")]',
-        doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    if (usernote)
-      usernote.parentNode.className += ' gamefox-usernote';
+    var boardWrap = doc.getElementById('board_wrap');
+
+    // Apply classes to existing elements
+    if (boardWrap)
+    {
+      var element = doc.evaluate('p/a[contains(@href, "usernote.php")]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (element)
+        element.parentNode.className += ' gamefox-usernote';
+
+      element = doc.evaluate('div[@class="board"]/p/a[contains(@href, "ignorelist")]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (element)
+        element.parentNode.className += ' gamefox-ignorelist';
+    }
 
     /* Index (index.php) */
     if (GFlib.onPage(doc, 'index'))
@@ -67,24 +77,20 @@ var GameFOX =
       GFlib.setTitle(doc, 'Message Boards');
 
       // Get favorites
-      if (1) // pref?
+      if (boardWrap)
       {
-        var i, query;
-        var favorites = [];
-
-        var favResult = doc.evaluate('//div[@class="board"]/table/tbody/tr/td[1]/a',
-            doc, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-        var favLinks = [];
+        var i, query, favorites = [], favLinks = [];
+        var favResult = doc.evaluate('div[@class="board"]/table/tbody/tr/td[1]/a',
+            boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
         for (i = 0; i < favResult.snapshotLength; i++)
           favLinks[i] = favResult.snapshotItem(i);
 
+        // skip MBA
         for (i = 1; i < favLinks.length; i++)
         {
           query = GFutils.parseQueryString(favLinks[i].search);
           if (query['board'])
-          {
             favorites.push({'id':query['board'], 'name':favLinks[i].textContent});
-          }
         }
 
         GFlib.prefs.setCharPref('favorites.serialized', favorites.toSource());

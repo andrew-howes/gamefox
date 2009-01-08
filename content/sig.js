@@ -272,19 +272,17 @@ var GFsig =
     if (sig == null) // fetch sig
     {
       if (!doc) return false;
-      var boardname = doc.evaluate('//h1', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-        textContent.GFtrim();
-      var boardid = doc.location.search.match(/board=([0-9-]+)/)[1];
+      var boardname = GFutils.getBoardName(doc);
+      var boardid = GFutils.parseQueryString(doc.location.search)['board'];
       var account = GFutils.getAccountName(doc);
       var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
     }
-    if (newline == null) // fetch newline
-      newline = GFlib.prefs.getBoolPref('signature.newline');
-
     if (!sig.length)
       return '';
+
+    if (newline == null) // fetch newline
+      newline = GFlib.prefs.getBoolPref('signature.newline');
 
     // truncate at 2 lines
     sig = sig.split('\n');
