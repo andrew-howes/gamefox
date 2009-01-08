@@ -100,11 +100,11 @@ var GameFOX =
     /* Active Messages (myposts.php) */
     else if (GFlib.onPage(doc, 'myposts'))
     {
-      var topicsTable = doc.evaluate('//div[@class="board"]/table', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var topicsTable = boardWrap ? doc.evaluate('div[@class="board"]/table',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
       var rows;
 
-      if (topicsTable != null)
+      if (topicsTable)
       {
         // Double click action
         topicsTable.addEventListener('dblclick', GameFOX.topicDblclick, false);
@@ -115,9 +115,9 @@ var GameFOX =
         // Page jumper
         if (GFlib.prefs.getBoolPref('elements.aml.pagejumper'))
         {
-          var pageJumperTop = doc.evaluate('//div[@class="pages"]', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (pageJumperTop != null)
+          var pageJumperTop = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="pages"]',
+              boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          if (pageJumperTop)
           {
             var pageMatches = pageJumperTop.textContent.match(/Page ([0-9]+) of ([0-9]+)/);
             if (pageMatches)
@@ -268,34 +268,30 @@ var GameFOX =
     /* Posting and Preview (post.php) */
     else if (GFlib.onPage(doc, 'post'))
     {
+      var topictitle = doc.getElementsByName('topictitle')[0];
+      var message = doc.getElementsByName('message')[0];
+
       // Titles
-      if (doc.getElementsByName('topictitle')[0]) // new topic
+      if (topictitle) // new topic
       {
-        GFlib.setTitle(doc,
-            doc.evaluate('//h1', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).
-            singleNodeValue.textContent.GFtrim(),
-            'CT');
+        GFlib.setTitle(doc, GFutils.getBoardName(doc), 'CT');
       }
-      else if (doc.getElementsByName('message')[0]) // new post
+      else if (message) // new post
       {
-        GFlib.setTitle(doc,
-            doc.getElementsByName('message')[0].
-            parentNode.parentNode.getElementsByTagName('a')[0].textContent.GFtrim(),
-            'PM');
+        GFlib.setTitle(doc, message.parentNode.getElementsByTagName('a')[0]
+            .textContent.GFtrim(), 'PM');
       }
 
       // Signature
       if (GFlib.prefs.getBoolPref('signature.applyeverywhere')
           && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
       {
-        doc.getElementsByName('message')[0].value =
-          GFsig.format(null, null, doc);
+        message.value = GFsig.format(null, null, doc);
       }
 
       // HTML buttons
       if (GFquickpost.createHTMLButtonsPref())
       {
-        var message = doc.getElementsByName('message')[0];
         message.setSelectionRange(0, 0);
 
         message.parentNode.insertBefore(GFquickpost.createHTMLButtons(doc), message);
@@ -306,21 +302,20 @@ var GameFOX =
       if (GFlib.prefs.getBoolPref('elements.charcounts'))
       {
         // title count
-        if (doc.getElementsByName('topictitle')[0])
+        if (topictitle)
         {
           var titlecount = doc.createElement('span');
               titlecount.id = 'gamefox-title-count';
-          var titleInput = doc.getElementsByName('topictitle')[0];
-              titleInput.parentNode.insertBefore(titlecount,
-                  titleInput.nextSibling);
-              titleInput.parentNode.insertBefore(doc.createTextNode(' '),
-                  titleInput.nextSibling);
+          topictitle.parentNode.insertBefore(titlecount,
+              topictitle.nextSibling);
+          topictitle.parentNode.insertBefore(doc.createTextNode(' '),
+              topictitle.nextSibling);
 
           GFmessages.updateTitleCount(doc);
 
-          doc.getElementsByName('topictitle')[0].addEventListener('input',
+          topictitle.addEventListener('input',
               GFmessages.delayedUpdateTitleCount, false);
-          doc.getElementsByName('topictitle')[0].form.addEventListener('reset',
+          topictitle.form.addEventListener('reset',
               function(event) {setTimeout(GFmessages.updateTitleCount, 0, event)}, false);
         }
 
@@ -333,9 +328,9 @@ var GameFOX =
 
         GFmessages.updateMessageCount(doc);
 
-        doc.getElementsByName('message')[0].addEventListener('input',
+        message.addEventListener('input',
             GFmessages.delayedUpdateMessageCount, false);
-        doc.getElementsByName('message')[0].form.addEventListener('reset',
+        message.form.addEventListener('reset',
             function(event) {setTimeout(GFmessages.updateMessageCount, 0, event)}, false);
       }
 
@@ -356,34 +351,33 @@ var GameFOX =
       }
 
       // GFCode whitespace control
-      doc.getElementsByName('message')[0].form.addEventListener('submit',
+      message.form.addEventListener('submit',
           GFquickpost.removeGFCodeWhitespaceListener, false);
     }
 
     /* User Information (user.php) */
     else if (GFlib.onPage(doc, 'user'))
     {
-      GFlib.setTitle(doc, doc.getElementsByTagName('td')[1].
-            textContent.GFtrim(), 'U');
+      var username = doc.getElementsByTagName('td')[1];
+      if (username)
+        GFlib.setTitle(doc, username.textContent.GFtrim(), 'U');
     }
 
     /* Topic Lists */
     else if (GFlib.onPage(doc, 'topics'))
     {
-      var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
-          doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var userNav = boardWrap ? doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
       GFuserlist.loadGroups();
 
       var onTracked = GFlib.onPage(doc, 'tracked');
 
       // Title
-      GFlib.setTitle(doc, doc.evaluate('//h1', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.
-          textContent.GFtrim(), 'T');
+      GFlib.setTitle(doc, GFutils.getBoardName(doc), 'T');
 
       // Topic "QuickPost" link
       if (GFlib.prefs.getBoolPref('elements.quickpost.link')
-          && doc.evaluate('.//a[contains(@href, "post.php")]', userNav,
+          && doc.evaluate('a[contains(@href, "post.php")]', userNav,
             null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
       {
         var anchor = doc.createElement('a');
@@ -401,7 +395,7 @@ var GameFOX =
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
 
-      if (topicsTable != null)
+      if (topicsTable)
       {
         // Double click action
         topicsTable.addEventListener('dblclick', GameFOX.topicDblclick, false);
@@ -552,8 +546,8 @@ var GameFOX =
     /* Message Lists */
     else if (GFlib.onPage(doc, 'messages'))
     {
-      var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
-          doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var userNav = boardWrap ? doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
       var pageJumper = doc.evaluate('//div[@class="pagejumper"]', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (pageJumper)
@@ -589,9 +583,10 @@ var GameFOX =
       }
 
       // Tracking
-      var trackLink = doc.evaluate('./a[contains(@href, "track")]', userNav,
+      var trackLink = doc.evaluate('a[contains(@href, "track")]', userNav,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      trackLink.addEventListener('click', GFtracked.linkListener, false);
+      if (trackLink)
+        trackLink.addEventListener('click', GFtracked.linkListener, false);
 
       // Double click
       doc.evaluate('//table[@class="message"]', doc, null,
@@ -619,7 +614,7 @@ var GameFOX =
       var deletelinkCond = GFlib.prefs.getBoolPref('elements.deletelink') && !onArchive;
       var loggedInUser = userNav.getElementsByTagName('a')[0].textContent;
       loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
-      var topicOpen = doc.evaluate('.//a[contains(@href, "post.php")]', userNav,
+      var topicOpen = doc.evaluate('a[contains(@href, "post.php")]', userNav,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var firstPostNum = GFlib.prefs.getIntPref('msgSortOrder') == 2 ?
           (doc.gamefox.pages - 1) * GFlib.prefs.getIntPref('msgsPerPage') + td.length / 2 : 1;
@@ -871,7 +866,7 @@ var GameFOX =
       if (tc && pageJumper)
       {
         var tcParam = GFutils.tcParam(tc);
-        var pageJumperTop = doc.evaluate('//div[@class="pages"]', userNav.parentNode,
+        var pageJumperTop = doc.evaluate('div[@class="pages"]', userNav.parentNode,
             null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         var links = GFutils.mergeArray(pageJumperTop.getElementsByTagName('a'),
             pageJumper.getElementsByTagName('a'));
