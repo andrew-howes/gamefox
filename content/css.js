@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
