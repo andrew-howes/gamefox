@@ -1154,8 +1154,9 @@ var GameFOX =
     context || event.preventDefault();
 
     var doc = GFlib.getDocument(event);
-    var tdResult = doc.evaluate('//table[@class="message"]/tbody/tr/td', doc, null,
-        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    var boardWrap = doc.getElementById('board_wrap');
+    var tdResult = doc.evaluate('div[@class="board"]/table[@class="message"]/tbody/tr/td',
+        boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];
     for (var i = 0; i < tdResult.snapshotLength; i++)
       td[i] = tdResult.snapshotItem(i);
@@ -1179,19 +1180,12 @@ var GameFOX =
         {
           if (!newFocus)
             newFocus = td[i];
-          td[i].parentNode.style.removeProperty('display');
-          td[i].parentNode.removeAttribute('style');
-          if (!leftMsgData)
-          {
-            td[i + 1].parentNode.style.removeProperty('display');
-            td[i + 1].parentNode.removeAttribute('style');
-          }
         }
         else
         {
-          td[i].parentNode.style.setProperty('display', 'none', null);
+          td[i].parentNode.style.display = 'none';
           if (!leftMsgData)
-            td[i + 1].parentNode.style.setProperty('display', 'none', null);
+            td[i + 1].parentNode.style.display = 'none';
         }
       }
 
@@ -1204,11 +1198,9 @@ var GameFOX =
       {
         if (!/\bgamefox-removed\b/.test(td[i].parentNode.className))
         {
-          td[i].parentNode.style.removeProperty('display');
-          td[i].parentNode.removeAttribute('style');
+          td[i].parentNode.style.display = 'table-row';
           if (!leftMsgData)
-            td[i + 1].parentNode.style.removeProperty('display');
-            td[i + 1].parentNode.removeAttribute('style');
+            td[i + 1].parentNode.style.display = 'table-row';
         }
       }
 
@@ -1216,8 +1208,8 @@ var GameFOX =
       doc.gamefox.filtered = false;
     }
 
-    var filterResult = doc.evaluate('//a[@class="gamefox-filter-link"]', doc, null,
-        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    var filterResult = doc.evaluate('.//a[@class="gamefox-filter-link"]',
+        boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < filterResult.snapshotLength; i++)
       filterResult.snapshotItem(i).textContent = newText;
 
