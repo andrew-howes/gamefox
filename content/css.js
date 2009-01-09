@@ -40,6 +40,8 @@ var GFcss =
         ['bundled', 'ascii-art-font.css', 'ASCII art font',
               'Increases the font size of messages to make ASCII art look better.',
               '', false],
+        ['bundled', 'capitalized-message-links.css', 'Capitalized Message Links',
+              'Capitalizes the links in message headers.', '', false],
         ['bundled', 'ricapar.css', 'Classic',
               'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
               'GameFAQs stylesheets to use.', 'Ricapar', false],
