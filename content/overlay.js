@@ -879,6 +879,23 @@ var GameFOX =
         }
       }
 
+      // Board nav at the bottom of the page
+      if (1) // pref
+      {
+        var miniBoardNav = doc.createElement('div');
+        miniBoardNav.id = 'gamefox-board-nav';
+
+        for (var i = 0; i <= 2; i++)
+        {
+          miniBoardNav.appendChild(userNav.getElementsByTagName('a')[i]
+              .cloneNode(true));
+          if (i < 2)
+            miniBoardNav.appendChild(doc.createTextNode(' | '));
+        }
+
+        boardWrap.insertBefore(miniBoardNav, pageJumper);
+      }
+
       // QuickPost
       if (GFlib.prefs.getBoolPref('elements.quickpost.form') && topicOpen)
       {
