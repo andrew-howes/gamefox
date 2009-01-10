@@ -267,7 +267,7 @@ var GFlib =
     return ds;
   },
 
-  openOptionsDialog: function(firstRun, forceOpen)
+  openOptionsDialog: function(firstRun, notifications, forceOpen)
   {
     // Stolen from Adblock Plus
     var windowMediator = Cc['@mozilla.org/appshell/window-mediator;1']
@@ -293,8 +293,13 @@ var GFlib =
     }
     else
     {
+      var args = {
+        firstRun: firstRun,
+        notifications: notifications
+      };
+      args.wrappedJSObject = args;
       dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options.xul',
-          '_blank', 'chrome,centerscreen,toolbar', firstRun ? [] : null);
+          '_blank', 'chrome,centerscreen,toolbar', args);
     }
   },
 

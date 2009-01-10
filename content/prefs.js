@@ -100,6 +100,7 @@ var GFprefs =
 
   importPrefs: function(button)
   {
+    var manageMsg = document.getElementById('manageMsg');
     button.setAttribute('disabled', true);
 
     var strbundle = document.getElementById('manage-strings');
@@ -134,7 +135,8 @@ var GFprefs =
     }
     catch (e)
     {
-      GFlib.alert(strbundle.getString('invalidSyntax'));
+      manageMsg.appendNotification(strbundle.getString('invalidSyntax'), null,
+          null, manageMsg.PRIORITY_WARNING_HIGH);
       button.setAttribute('disabled', false);
       return;
     }
@@ -142,14 +144,18 @@ var GFprefs =
     for (var i in importedPrefs)
       this.setPrefValue(i, importedPrefs[i]);
 
-    GFlib.alert(strbundle.getString('importSuccess'));
     button.setAttribute('disabled', false);
 
-    this.resetOptionsDialog();
+    this.resetOptionsDialog(false,
+        {'manageMsg':
+          [{label: strbundle.getString('importSuccess'),
+           priority: manageMsg.PRIORITY_INFO_HIGH}]
+        });
   },
 
   exportPrefs: function(button)
   {
+    var manageMsg = document.getElementById('manageMsg');
     button.setAttribute('disabled', true);
 
     var strbundle = document.getElementById('manage-strings');
@@ -176,12 +182,14 @@ var GFprefs =
     foStream.write(outputData, outputData.length);
     foStream.close();
 
-    GFlib.alert(strbundle.getString('exportSuccess'));
+    manageMsg.appendNotification(strbundle.getString('exportSuccess'), null,
+        null, manageMsg.PRIORITY_INFO_HIGH);
     button.setAttribute('disabled', false);
   },
 
   resetPrefs: function(button)
   {
+    var manageMsg = document.getElementById('manageMsg');
     button.setAttribute('disabled', true);
 
     var strbundle = document.getElementById('manage-strings');
@@ -195,18 +203,21 @@ var GFprefs =
     this.clearUserPrefs();
     this.prefs.setCharPref('version', GFlib.version);
 
-    GFlib.alert(strbundle.getString('resetSuccess'));
     button.setAttribute('disabled', false);
 
     GFcss.init();
     GFcss.reload();
-    this.resetOptionsDialog(true);
+    this.resetOptionsDialog(true,
+        {'manageMsg':
+          [{label: strbundle.getString('resetSuccess'),
+            priority: manageMsg.PRIORITY_WARNING_HIGH}]
+        });
   },
 
-  resetOptionsDialog: function(firstRun)
+  resetOptionsDialog: function(firstRun, notifications)
   {
     window.close();
-    GFlib.openOptionsDialog(firstRun, true);
+    GFlib.openOptionsDialog(firstRun, notifications, true);
   },
 
   savePrefs: function()

@@ -308,14 +308,26 @@ var GFoptions =
     }
   },
 
-  firstRun: function()
+  init: function()
   {
-    if (window.arguments && window.arguments[0])
+    var args = window.arguments[0].wrappedJSObject;
+
+    if (args.firstRun)
     {
       GFuserlist.add();
       GFuserlist.populateLast();
       GFoptions.importBoardSettings();
       GFoptions.importSignature();
+    }
+
+    for (var i in args.notifications)
+    {
+      var notificationbox = document.getElementById(i);
+      for (var j = 0; j < args.notifications[i].length; j++)
+      {
+        notificationbox.appendNotification(args.notifications[i][j].label,
+            null, null, args.notifications[i][j].priority);
+      }
     }
   }
 };

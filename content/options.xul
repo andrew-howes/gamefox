@@ -32,7 +32,7 @@
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"
-    onload="GFoptions.restoreLastPane();GFoptions.firstRun();"
+    onload="GFoptions.restoreLastPane();GFoptions.init();"
     windowtype="gamefox:options"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
@@ -773,18 +773,20 @@
   <prefpane id="gamefox-manage-pane" label="&manage.label;" flex="1">
     <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
 
-    <groupbox>
-      <caption label="&manage.desc.label;"/>
+    <notificationbox id="manageMsg" flex="1">
+      <groupbox>
+        <caption label="&manage.desc.label;"/>
 
-      <description>&manage.desc.export;</description>
-      <description>&manage.desc.reset;</description>
-    </groupbox>
+        <description>&manage.desc.export;</description>
+        <description>&manage.desc.reset;</description>
+      </groupbox>
 
-    <hbox pack="center" style="margin-bottom:40px">
-      <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.label;" icon="open"/>
-      <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.label;" icon="save"/>
-      <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.label;" icon="clear"/>
-    </hbox>
+      <hbox pack="center" style="margin-bottom:40px">
+        <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.label;" icon="open"/>
+        <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.label;" icon="save"/>
+        <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.label;" icon="clear"/>
+      </hbox>
+    </notificationbox>
   </prefpane>
 
 </prefwindow>
