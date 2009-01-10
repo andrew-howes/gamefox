@@ -317,118 +317,118 @@
 <!-- BOARD SETTINGS -->
 
         <tabpanel orient="vertical" flex="1">
-          <notificationbox id="boardSettingsMsg"/>
+          <notificationbox id="boardSettingsMsg" flex="1">
+            <vbox>
+              <groupbox flex="1">
+                <caption label="&main.board.caption;"/>
+                <grid>
+                  <columns>
+                    <column/>
+                    <column flex="1"/>
+                  </columns>
+                  <rows>
+                    <row align="center">
+                      <label value="&main.board.tpp;"/>
+                      <menulist preference="gamefoxTpcsPerPage" id="topicpage" flex="1">
+                        <menupopup>
+                          <menuitem value="10" label="10"/>
+                          <menuitem value="20" label="20"/>
+                          <menuitem value="30" label="30"/>
+                          <menuitem value="40" label="40"/>
+                          <menuitem value="50" label="50"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+                    <row align="center">
+                      <label value="&main.board.tsort;"/>
+                      <menulist preference="gamefoxTpcSortOrder" id="topicsort" flex="1">
+                        <menupopup>
+                          <menuitem value="1" label="&main.board.tsort.fo;"/>
+                          <menuitem value="2" label="&main.board.tsort.fn;"/>
+                          <menuitem value="3" label="&main.board.tsort.lo;"/>
+                          <menuitem value="4" label="&main.board.tsort.ln;"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+                    <row align="center">
+                      <label value="&main.board.mpp;"/>
+                      <menulist preference="gamefoxMsgsPerPage" id="messagepage" flex="1">
+                        <menupopup>
+                          <menuitem value="10" label="10"/>
+                          <menuitem value="20" label="20"/>
+                          <menuitem value="30" label="30"/>
+                          <menuitem value="40" label="40"/>
+                          <menuitem value="50" label="50"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+                    <row align="center">
+                      <label value="&main.board.msort;"/>
+                      <menulist preference="gamefoxMsgSortOrder" id="messagesort" flex="1">
+                        <menupopup>
+                          <menuitem value="1" label="&main.board.msort.of;"/>
+                          <menuitem value="2" label="&main.board.msort.nf;"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+                    <row align="center">
+                      <label value="&main.board.timezone;"/>
+                      <menulist preference="gamefoxTimeZone" id="timezone" flex="1">
+                        <menupopup>
+                          <menuitem value="-720" label="GMT -12"/>
+                          <menuitem value="-660" label="GMT -11"/>
+                          <menuitem value="-600" label="GMT -10"/>
+                          <menuitem value="-540" label="GMT -9"/>
+                          <menuitem value="-480" label="GMT -8"/>
+                          <menuitem value="-420" label="GMT -7"/>
+                          <menuitem value="-360" label="GMT -6"/>
+                          <menuitem value="-300" label="GMT -5"/>
+                          <menuitem value="-240" label="GMT -4"/>
+                          <menuitem value="-210" label="GMT -3:30"/>
+                          <menuitem value="-180" label="GMT -3"/>
+                          <menuitem value="-120" label="GMT -2"/>
+                          <menuitem value="-60" label="GMT -1"/>
+                          <menuitem value="0" label="GMT +0"/>
+                          <menuitem value="60" label="GMT +1"/>
+                          <menuitem value="120" label="GMT +2"/>
+                          <menuitem value="180" label="GMT +3"/>
+                          <menuitem value="240" label="GMT +4"/>
+                          <menuitem value="300" label="GMT +5"/>
+                          <menuitem value="330" label="GMT +5:30"/>
+                          <menuitem value="360" label="GMT +6"/>
+                          <menuitem value="390" label="GMT +6:30"/>
+                          <menuitem value="420" label="GMT +7"/>
+                          <menuitem value="480" label="GMT +8"/>
+                          <menuitem value="540" label="GMT +9"/>
+                          <menuitem value="570" label="GMT +9:30"/>
+                          <menuitem value="600" label="GMT +10"/>
+                          <menuitem value="660" label="GMT +11"/>
+                          <menuitem value="720" label="GMT +12"/>
+                          <menuitem value="780" label="GMT +13"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+                    <row align="center">
+                      <label value="&main.board.msgdata;"/>
+                      <menulist preference="gamefoxMsgDisplay" id="userdisplay" flex="1">
+                        <menupopup>
+                          <menuitem value="0" label="&main.board.msgdata.left;"/>
+                          <menuitem value="1" label="&main.board.msgdata.above;"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+                  </rows>
+                </grid>
+                <hbox pack="end">
+                  <button id="gamefox-css-grab-bs" label="&main.board.grab;" icon="refresh"
+                    oncommand="GFoptions.importBoardSettings();"/>
+                  <button id="gamefox-css-apply-bs" label="&main.board.save;" icon="save"
+                    oncommand="GFoptions.exportBoardSettings();"/>
+                </hbox>
+              </groupbox>
 
-          <vbox>
-            <groupbox flex="1">
-              <caption label="&main.board.caption;"/>
-              <grid>
-                <columns>
-                  <column/>
-                  <column flex="1"/>
-                </columns>
-                <rows>
-                  <row align="center">
-                    <label value="&main.board.tpp;"/>
-                    <menulist preference="gamefoxTpcsPerPage" id="topicpage" flex="1">
-                      <menupopup>
-                        <menuitem value="10" label="10"/>
-                        <menuitem value="20" label="20"/>
-                        <menuitem value="30" label="30"/>
-                        <menuitem value="40" label="40"/>
-                        <menuitem value="50" label="50"/>
-                      </menupopup>
-                    </menulist>
-                  </row>
-                  <row align="center">
-                    <label value="&main.board.tsort;"/>
-                    <menulist preference="gamefoxTpcSortOrder" id="topicsort" flex="1">
-                      <menupopup>
-                        <menuitem value="1" label="&main.board.tsort.fo;"/>
-                        <menuitem value="2" label="&main.board.tsort.fn;"/>
-                        <menuitem value="3" label="&main.board.tsort.lo;"/>
-                        <menuitem value="4" label="&main.board.tsort.ln;"/>
-                      </menupopup>
-                    </menulist>
-                  </row>
-                  <row align="center">
-                    <label value="&main.board.mpp;"/>
-                    <menulist preference="gamefoxMsgsPerPage" id="messagepage" flex="1">
-                      <menupopup>
-                        <menuitem value="10" label="10"/>
-                        <menuitem value="20" label="20"/>
-                        <menuitem value="30" label="30"/>
-                        <menuitem value="40" label="40"/>
-                        <menuitem value="50" label="50"/>
-                      </menupopup>
-                    </menulist>
-                  </row>
-                  <row align="center">
-                    <label value="&main.board.msort;"/>
-                    <menulist preference="gamefoxMsgSortOrder" id="messagesort" flex="1">
-                      <menupopup>
-                        <menuitem value="1" label="&main.board.msort.of;"/>
-                        <menuitem value="2" label="&main.board.msort.nf;"/>
-                      </menupopup>
-                    </menulist>
-                  </row>
-                  <row align="center">
-                    <label value="&main.board.timezone;"/>
-                    <menulist preference="gamefoxTimeZone" id="timezone" flex="1">
-                      <menupopup>
-                        <menuitem value="-720" label="GMT -12"/>
-                        <menuitem value="-660" label="GMT -11"/>
-                        <menuitem value="-600" label="GMT -10"/>
-                        <menuitem value="-540" label="GMT -9"/>
-                        <menuitem value="-480" label="GMT -8"/>
-                        <menuitem value="-420" label="GMT -7"/>
-                        <menuitem value="-360" label="GMT -6"/>
-                        <menuitem value="-300" label="GMT -5"/>
-                        <menuitem value="-240" label="GMT -4"/>
-                        <menuitem value="-210" label="GMT -3:30"/>
-                        <menuitem value="-180" label="GMT -3"/>
-                        <menuitem value="-120" label="GMT -2"/>
-                        <menuitem value="-60" label="GMT -1"/>
-                        <menuitem value="0" label="GMT +0"/>
-                        <menuitem value="60" label="GMT +1"/>
-                        <menuitem value="120" label="GMT +2"/>
-                        <menuitem value="180" label="GMT +3"/>
-                        <menuitem value="240" label="GMT +4"/>
-                        <menuitem value="300" label="GMT +5"/>
-                        <menuitem value="330" label="GMT +5:30"/>
-                        <menuitem value="360" label="GMT +6"/>
-                        <menuitem value="390" label="GMT +6:30"/>
-                        <menuitem value="420" label="GMT +7"/>
-                        <menuitem value="480" label="GMT +8"/>
-                        <menuitem value="540" label="GMT +9"/>
-                        <menuitem value="570" label="GMT +9:30"/>
-                        <menuitem value="600" label="GMT +10"/>
-                        <menuitem value="660" label="GMT +11"/>
-                        <menuitem value="720" label="GMT +12"/>
-                        <menuitem value="780" label="GMT +13"/>
-                      </menupopup>
-                    </menulist>
-                  </row>
-                  <row align="center">
-                    <label value="&main.board.msgdata;"/>
-                    <menulist preference="gamefoxMsgDisplay" id="userdisplay" flex="1">
-                      <menupopup>
-                        <menuitem value="0" label="&main.board.msgdata.left;"/>
-                        <menuitem value="1" label="&main.board.msgdata.above;"/>
-                      </menupopup>
-                    </menulist>
-                  </row>
-                </rows>
-              </grid>
-              <hbox pack="end">
-                <button id="gamefox-css-grab-bs" label="&main.board.grab;" icon="refresh"
-                  oncommand="GFoptions.importBoardSettings();"/>
-                <button id="gamefox-css-apply-bs" label="&main.board.save;" icon="save"
-                  oncommand="GFoptions.exportBoardSettings();"/>
-              </hbox>
-            </groupbox>
-
-          </vbox>
+            </vbox>
+          </notificationbox>
         </tabpanel>
 
       </tabpanels>
@@ -551,44 +551,44 @@
       <tabpanels flex="1">
         <!-- CONTENT -->
         <tabpanel orient="vertical" flex="1">
-          <notificationbox id="signatureMsg"/>
+          <notificationbox id="signatureMsg" flex="1">
+            <groupbox>
+              <caption label="&signature.content.label;"/>
 
-          <groupbox>
-            <caption label="&signature.content.label;"/>
+              <hbox>
+                <menulist flex="1" id="sig-menu" oncommand="GFsig.menuCommand();">
+                  <menupopup>
+                    <menuitem value="" label="&signature.list.default;"/>
+                    <menuseparator/>
+                    <menuitem value="new" label="&signature.list.new;"/>
+                  </menupopup>
+                </menulist>
+                <button id="sig-delete" icon="remove" label="&signature.list.delete;"
+                  oncommand="GFsig.deleteSig();" disabled="true"/>
+              </hbox>
 
-            <hbox>
-              <menulist flex="1" id="sig-menu" oncommand="GFsig.menuCommand();">
-                <menupopup>
-                  <menuitem value="" label="&signature.list.default;"/>
-                  <menuseparator/>
-                  <menuitem value="new" label="&signature.list.new;"/>
-                </menupopup>
-              </menulist>
-              <button id="sig-delete" icon="remove" label="&signature.list.delete;"
-                oncommand="GFsig.deleteSig();" disabled="true"/>
-            </hbox>
+              <label id="sig-criteria-label" value="&signature.criteria.label;"/>
+              <groupbox id="sig-criteria">
+                <description>&signature.criteria.desc;</description>
+                <hbox align="center">
+                  <label value="&signature.criteria.accounts.label;"/>
+                  <textbox id="sig-criteria-accounts" oninput="GFsig.updatePref(this);" flex="1"/>
+                  <label value="&signature.criteria.boards.label;"/>
+                  <textbox id="sig-criteria-boards" oninput="GFsig.updatePref(this);" flex="1"/>
+                </hbox>
+              </groupbox>
 
-            <label id="sig-criteria-label" value="&signature.criteria.label;"/>
-            <groupbox id="sig-criteria">
-              <description>&signature.criteria.desc;</description>
-              <hbox align="center">
-                <label value="&signature.criteria.accounts.label;"/>
-                <textbox id="sig-criteria-accounts" oninput="GFsig.updatePref(this);" flex="1"/>
-                <label value="&signature.criteria.boards.label;"/>
-                <textbox id="sig-criteria-boards" oninput="GFsig.updatePref(this);" flex="1"/>
+              <hbox>
+                <label value="&signature.sig.label;" flex="1"/>
+                <hbox pack="end"><label id="sig-chars" value=""/></hbox>
+              </hbox>
+              <textbox id="sig-body" oninput="GFsig.updatePref(this);" rows="3" multiline="true" class="indent"/>
+              <hbox pack="end">
+                <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
+                  oncommand="GFoptions.importSignature();"/>
               </hbox>
             </groupbox>
-
-            <hbox>
-              <label value="&signature.sig.label;" flex="1"/>
-              <hbox pack="end"><label id="sig-chars" value=""/></hbox>
-            </hbox>
-            <textbox id="sig-body" oninput="GFsig.updatePref(this);" rows="3" multiline="true" class="indent"/>
-            <hbox pack="end">
-              <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
-                oncommand="GFoptions.importSignature();"/>
-            </hbox>
-          </groupbox>
+          </notificationbox>
         </tabpanel>
 
         <!-- OPTIONS -->
