@@ -135,8 +135,8 @@ var GFprefs =
     }
     catch (e)
     {
-      manageMsg.appendNotification(strbundle.getString('invalidSyntax'), null,
-          null, manageMsg.PRIORITY_WARNING_HIGH);
+      GFutils.showNotification(manageMsg, strbundle.getString('invalidSyntax'),
+          'warning');
       button.setAttribute('disabled', false);
       return;
     }
@@ -149,7 +149,7 @@ var GFprefs =
     this.resetOptionsDialog(false,
         {'manageMsg':
           [{label: strbundle.getString('importSuccess'),
-           priority: manageMsg.PRIORITY_INFO_HIGH}]
+           type: 'info'}]
         });
   },
 
@@ -182,8 +182,8 @@ var GFprefs =
     foStream.write(outputData, outputData.length);
     foStream.close();
 
-    manageMsg.appendNotification(strbundle.getString('exportSuccess'), null,
-        null, manageMsg.PRIORITY_INFO_HIGH);
+    GFutils.showNotification(manageMsg, strbundle.getString('exportSuccess'),
+        'info');
     button.setAttribute('disabled', false);
   },
 
@@ -210,7 +210,7 @@ var GFprefs =
     this.resetOptionsDialog(true,
         {'manageMsg':
           [{label: strbundle.getString('resetSuccess'),
-            priority: manageMsg.PRIORITY_WARNING_HIGH}]
+            type: 'warning'}]
         });
   },
 

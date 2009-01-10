@@ -36,9 +36,8 @@ var GFoptions =
         {
           GFlib.log('importBoardSettings: Bad things!');
 
-          boardSettingsMsg.appendNotification(
-              'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, boardSettingsMsg.PRIORITY_WARNING_LOW);
+          GFutils.showNotification(boardSettingsMsg,
+              'Something went wrong. Are you logged in to GameFAQs?', 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -54,9 +53,8 @@ var GFoptions =
         {
           GFlib.log('importBoardSettings: Unable to retrieve all settings.');
 
-          boardSettingsMsg.appendNotification(
-              'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, boardSettingsMsg.PRIORITY_WARNING_LOW);
+          GFutils.showNotification(boardSettingsMsg,
+              'Something went wrong. Are you logged in to GameFAQs?', 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -69,11 +67,9 @@ var GFoptions =
         document.getElementById('gamefoxTimeZone').value = timezone;
         document.getElementById('gamefoxMsgDisplay').value = userDisplay;
 
-        boardSettingsMsg.appendNotification(
+        GFutils.showNotification(boardSettingsMsg,
             'Your board display settings have been imported into GameFOX.',
-            'bs-import-success', null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
-        boardSettingsMsg.getNotificationWithValue('bs-import-success')
-          .type = 'info';
+            'info');
         button.setAttribute('disabled', false);
       }
     }
@@ -105,9 +101,8 @@ var GFoptions =
         {
           GFlib.log('exportBoardSettings: Bad things!');
 
-          boardSettingsMsg.appendNotification(
-              'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, boardSettingsMsg.PRIORITY_WARNING_LOW);
+          GFutils.showNotification(boardSettingsMsg,
+              'Something went wrong. Are you logged in to GameFAQs?', 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -117,9 +112,8 @@ var GFoptions =
         {
           GFlib.log("exportBoardSettings: Couldn't get user id.");
 
-          boardSettingsMsgs.appendNotification(
-              "Couldn't get your user ID. This shouldn't happen.", null,
-              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+          GFutils.showNotification(boardSettingsMsg,
+              "Couldn't get your user ID. This shouldn't happen.", 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -136,17 +130,15 @@ var GFoptions =
             {
               GFlib.log("exportBoardSettings: Update didn't work!");
 
-              boardSettingsMsg.appendNotification(
-                  "Didn't receive the expected response from the server. The update probably failed.",
-                  null, null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+              GFutils.showNotification(boardSettingsMsg,
+                  "Didn't receive the expected response from the server. The "
+                  + "update probably failed.", 'warning');
             }
             else
             {
-              boardSettingsMsg.appendNotification(
+              GFutils.showNotification(boardSettingsMsg,
                   'Your board display settings have been exported into GameFAQs.',
-                  'bs-export-success', null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
-              boardSettingsMsg.getNotificationWithValue('bs-export-success')
-                .type = 'info';
+                  'info');
             }
             button.setAttribute('disabled', false);
           }
@@ -188,9 +180,8 @@ var GFoptions =
         {
           GFlib.log('importSignature: Bad things!');
 
-          signatureMsg.appendNotification(
-              'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, signatureMsg.PRIORITY_WARNING_LOW);
+          GFutils.showNotification(signatureMsg,
+              'Something went wrong. Are you logged in to GameFAQs?', 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -200,10 +191,10 @@ var GFoptions =
         {
           GFlib.log("importSignature: Couldn't get sig");
 
-          signatureMsg.appendNotification(
+          GFutils.showNotification(signatureMsg,
               "Couldn't get your signature. This shouldn't happen. Maybe you have " +
               "one of those really old signature that displays bold and italics on " +
-              "the profile page?", null, null, signatureMsg.PRIORITY_WARNING_MEDIUM);
+              "the profile page?", 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -213,11 +204,8 @@ var GFoptions =
         // oninput isn't called
         GFsig.updatePref(document.getElementById('sig-body'));
 
-        signatureMsg.appendNotification(
-            'Your signature has been imported into GameFOX.',
-            'sig-import-success', null, signatureMsg.PRIORITY_WARNING_HIGH);
-        signatureMsg.getNotificationWithValue('sig-import-success')
-          .type = 'info';
+        GFutils.showNotification(signatureMsg,
+            'Your signature has been imported into GameFOX.', 'info');
         button.setAttribute('disabled', false);
       }
     };
@@ -331,8 +319,8 @@ var GFoptions =
       var notificationbox = document.getElementById(i);
       for (var j = 0; j < args.notifications[i].length; j++)
       {
-        notificationbox.appendNotification(args.notifications[i][j].label,
-            null, null, args.notifications[i][j].priority);
+        GFutils.showNotification(notificationbox,
+            args.notifications[i][j].label, args.notifications[i][j].type);
       }
     }
   }

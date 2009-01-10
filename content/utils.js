@@ -36,9 +36,8 @@ var GFutils =
         {
           GFlib.log('importSignature: Bad things!');
           if (notify)
-            signatureMsg.appendNotification(
-                'Something went wrong. Are you logged in to GameFAQs?', null,
-                null, signatureMsg.PRIORITY_WARNING_MEDIUM);
+            GFutils.showNotification(signatureMsg,
+                'Something went wrong. Are you logged in to GameFAQs?', 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -48,10 +47,10 @@ var GFutils =
         {
           GFlib.log("importSignature: Couldn't get sig");
           if (notify)
-            signatureMsg.appendNotification(
+            GFutils.showNotification(signatureMsg,
                 "Couldn't get your signature. This shouldn't happen. Maybe you have " +
                 "one of those really old signature that displays bold and italics on " +
-                "the profile page?", null, null, signatureMsg.PRIORITY_WARNING_HIGH);
+                "the profile page?", 'warning');
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -61,9 +60,8 @@ var GFutils =
         // oninput isn't called
         GFsig.updatePref(document.getElementById('sig-body'));
 
-        signatureMsg.appendNotification(
-            'Your signature has been imported into GameFOX.', null, null,
-            signatureMsg.PRIORITY_INFO_HIGH);
+        GFutils.showNotification(signatureMsg,
+            'Your signature has been imported into GameFOX.', 'info');
         button.setAttribute('disabled', false);
       }
     };
@@ -397,6 +395,16 @@ var GFutils =
     return str.
       replace(/&lt;(\/?)(b|i|em|strong|br|p)&gt;/gi, '&lt;$1$2<b></b>&gt;').
       replace(/&lt;(br|p) \/&gt;/gi, '&lt;$1 /<b></b>&gt;');
+  },
+
+  showNotification: function(msgBox, label, type)
+  {
+    if (msgBox.currentNotification)
+      var priority = msgBox.currentNotification.priority + 0.0001;
+    else
+      var priority = 1;
+    var notification = msgBox.appendNotification(label, null, null, priority);
+    notification.type = type;
   }
 };
 
