@@ -400,7 +400,7 @@ var GFutils =
   showNotification: function(msgBox, label, type)
   {
     if (msgBox.currentNotification)
-      var priority = msgBox.currentNotification.priority + 0.0001;
+      var priority = parseFloat(msgBox.currentNotification.priority) + 0.0001;
     else
       var priority = 1;
     var notification = msgBox.appendNotification(label, null, null, priority);
