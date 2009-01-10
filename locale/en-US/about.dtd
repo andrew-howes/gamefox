@@ -8,8 +8,8 @@
 <!ENTITY support.label "Support">
 <!ENTITY support.tooltip "Complain here!">
 
-<!ENTITY currentdevs.label "Current Developers">
-<!ENTITY previousdevs.label "Previous Developers">
+<!ENTITY currentDevs.label "Current Developers">
+<!ENTITY previousDevs.label "Previous Developers">
 <!ENTITY contributors.label "Contributors">
 
-<!ENTITY close "Close">
+<!ENTITY close.button "Close">

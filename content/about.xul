@@ -26,7 +26,7 @@
 <dialog
   id="gamefoxAbout"
   buttons="accept"
-  buttonlabelaccept="&close;"
+  buttonlabelaccept="&close.button;"
   title="&dialog.title;"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
@@ -50,10 +50,10 @@
     </hbox>
     <label id="version" value=""/>
 
-    <label class="subtitle" value="&currentdevs.label;:"/>
+    <label class="subtitle" value="&currentDevs.label;:"/>
     <vbox id="currentDeveloperBox" class="boxIndent"/>
 
-    <label class="subtitle" value="&previousdevs.label;:"/>
+    <label class="subtitle" value="&previousDevs.label;:"/>
     <vbox id="previousDeveloperBox" class="boxIndent"/>
 
     <label class="subtitle" value="&contributors.label;:"/>

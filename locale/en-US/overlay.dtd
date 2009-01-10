@@ -4,11 +4,11 @@
 <!ENTITY tools.accesskey "G">
 
 <!ENTITY menu.label "GameFOX">
-<!ENTITY menu.tagtopic.label "Tag Topic">
+<!ENTITY menu.tagTopic.label "Tag Topic">
 <!ENTITY menu.pages.label "Topic Pages">
 <!ENTITY menu.quote.label "Quote Message">
-<!ENTITY menu.usergroups.label "User Groups">
-<!ENTITY menu.breaktags.label "Break HTML Tags">
+<!ENTITY menu.userGroups.label "User Groups">
+<!ENTITY menu.breakTags.label "Break HTML Tags">
 
 <!ENTITY menu.sidebar.label "Sidebar">
 <!ENTITY menu.sidebar.accesskey "S">

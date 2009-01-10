@@ -47,7 +47,7 @@
     onclick="if (event.button == 1) GFtracked.treeAction(0);">
     <treecols>
       <treecol label="&tracked.label;" flex="1" primary="true"/>
-      <treecol label="&tagid.label;" id="gamefox-tracked-tagid" hidden="true"/>
+      <treecol id="gamefox-tracked-tagid" hidden="true"/>
     </treecols>
 
     <treechildren id="gamefox-tracked-rows"/>

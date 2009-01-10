@@ -1,19 +1,18 @@
 <!-- vim: set indentexpr=: -->
 
 <!ENTITY tags.label "Tags">
-<!ENTITY tagid.label "Tag ID">
 
-<!ENTITY deletepurged.label "delete purged">
-<!ENTITY deleteall.label "delete all">
+<!ENTITY deletePurged.label "delete purged">
+<!ENTITY deleteAll.label "delete all">
 
-<!ENTITY menu.newtab.accesskey "T">
-<!ENTITY menu.focusedtab.accesskey "F">
-<!ENTITY menu.newwindow.accesskey "W">
-<!ENTITY menu.deletetag.accesskey "D">
-<!ENTITY menu.deleteselected.accesskey "S">
+<!ENTITY menu.newTab.accesskey "T">
+<!ENTITY menu.focusedTab.accesskey "F">
+<!ENTITY menu.newWindow.accesskey "W">
+<!ENTITY menu.deleteTag.accesskey "D">
+<!ENTITY menu.deleteSelected.accesskey "S">
 
-<!ENTITY menu.newtab.label "Open in New Tab">
-<!ENTITY menu.focusedtab.label "Open in Focused Tab">
-<!ENTITY menu.newwindow.label "Open in New Window">
-<!ENTITY menu.deletetag.label "Delete Tag">
-<!ENTITY menu.deleteselected.label "Delete Selected">
+<!ENTITY menu.newTab.label "Open in New Tab">
+<!ENTITY menu.focusedTab.label "Open in Focused Tab">
+<!ENTITY menu.newWindow.label "Open in New Window">
+<!ENTITY menu.deleteTag.label "Delete Tag">
+<!ENTITY menu.deleteSelected.label "Delete Selected">

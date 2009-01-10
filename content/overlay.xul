@@ -79,7 +79,7 @@
     </menu>
 
     <!-- topic -->
-    <menuitem id="gamefox-context-tag" label="&menu.tagtopic.label;"
+    <menuitem id="gamefox-context-tag" label="&menu.tagTopic.label;"
       oncommand="GFtags.add(gContextMenu);"/>
     <menuitem id="gamefox-context-track" label=""
       oncommand="GFtracked.addFromContextMenu(gContextMenu);"/>
@@ -94,13 +94,13 @@
       oncommand="GameFOX.toggleFilter(gContextMenu, true);"/>
     <menuitem id="gamefox-context-delete" label=""
       oncommand="GFmessages.deletePost(gContextMenu, true);"/>
-    <menu id="gamefox-context-usergroups" label="&menu.usergroups.label;">
+    <menu id="gamefox-context-usergroups" label="&menu.userGroups.label;">
       <menupopup id="gamefox-context-usergroups-list"
         onpopupshowing="GFuserlist.fillMenu(gContextMenu);"/>
     </menu>
 
     <!-- textarea -->
-    <menuitem id="gamefox-context-break-tags" label="&menu.breaktags.label;"
+    <menuitem id="gamefox-context-break-tags" label="&menu.breakTags.label;"
       oncommand="GFquickpost.breakTagsFromContext(gContextMenu);"/>
   </popup>
 

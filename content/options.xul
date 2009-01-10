@@ -146,12 +146,12 @@
               <caption label="&general.label;"/>
               <hbox>
                 <vbox flex="1">
-                  <checkbox preference="elements-titlechange" label="&main.page.titlechange;"/>
-                  <checkbox preference="elements-titleprefix" label="&main.page.titleprefix;"/>
+                  <checkbox preference="elements-titlechange" label="&main.page.customTitles;"/>
+                  <checkbox preference="elements-titleprefix" label="&main.page.titlePrefixes;"/>
                 </vbox>
                 <vbox flex="1">
-                  <checkbox preference="elements-stopads" label="&main.page.stopads;"/>
-                  <checkbox preference="elements-favorites" label="&main.page.favorites;"/>
+                  <checkbox preference="elements-stopads" label="&main.page.blockAdServers;"/>
+                  <checkbox preference="elements-favorites" label="&main.page.favoritesMenu;"/>
                 </vbox>
               </hbox>
             </groupbox>
@@ -167,25 +167,25 @@
                   <groupbox>
                     <caption label="&main.page.topics.caption;"/>
                     <vbox>
-                      <checkbox preference="elements-lastpostlink" label="&main.page.topics.lastpostlink;"/>
-                      <checkbox preference="elements-tracked-boardlink" label="&main.page.topics.trackedlink;"/>
-                      <checkbox preference="elements-aml-marknewposts" label="&main.page.topics.marknewposts;"/>
-                      <checkbox preference="elements-aml-pagejumper" label="&main.page.topics.pagejumper;"/>
+                      <checkbox preference="elements-lastpostlink" label="&main.page.topics.lastPostLink;"/>
+                      <checkbox preference="elements-tracked-boardlink" label="&main.page.topics.trackedBoardLink;"/>
+                      <checkbox preference="elements-aml-marknewposts" label="&main.page.topics.labelNewPosts;"/>
+                      <checkbox preference="elements-aml-pagejumper" label="&main.page.topics.pageJumper;"/>
                     </vbox>
                   </groupbox>
 
                   <groupbox>
                     <caption label="&main.page.messages.caption;"/>
                     <vbox>
-                      <checkbox preference="elements-tag-link" label="&main.page.messages.taglink;"/>
-                      <checkbox preference="elements-boardnav" label="&main.page.messages.boardnav;"/>
+                      <checkbox preference="elements-tag-link" label="&main.page.messages.tagLink;"/>
+                      <checkbox preference="elements-boardnav" label="&main.page.messages.boardNav;"/>
                       <label value="&main.page.messages.headers;"/>
                       <hbox class="indent">
-                        <checkbox preference="elements-deletelink" label="&main.page.messages.deletelink;"/>
-                        <checkbox preference="elements-filterlink" label="&main.page.messages.filterlink;"/>
-                        <checkbox preference="elements-quotelink" label="&main.page.messages.quotelink;"/>
+                        <checkbox preference="elements-deletelink" label="&main.page.messages.deleteLink;"/>
+                        <checkbox preference="elements-filterlink" label="&main.page.messages.filterLink;"/>
+                        <checkbox preference="elements-quotelink" label="&main.page.messages.quoteLink;"/>
                       </hbox>
-                      <checkbox flex="1" preference="elements-msgnum" label="&main.page.messages.numbering;"/>
+                      <checkbox flex="1" preference="elements-msgnum" label="&main.page.messages.numberMessages;"/>
                       <hbox class="indent" align="baseline">
                         <menulist preference="elements-msgnum-style">
                           <menupopup>
@@ -197,7 +197,7 @@
                         </menulist>
                       </hbox>
                       <hbox align="center">
-                        <checkbox preference="elements-marktc" label="&main.page.messages.marktc;"/>
+                        <checkbox preference="elements-marktc" label="&main.page.messages.labelTc;"/>
                         <textbox preference="elements-marktc-marker" size="3"/>
                       </hbox>
                     </vbox>
@@ -210,11 +210,11 @@
               <caption label="&main.page.pages.caption;"/>
               <checkbox preference="elements-paging-auto" label="&main.page.pages.auto;"/>
               <hbox align="center">
-                <label value="&main.page.pages.where;"/>
+                <label value="&main.page.pages.location.label;"/>
                 <radiogroup orient="horizontal" preference="elements-paging-location">
-                  <radio value="1" label="&main.page.pages.where.right;" flex="1"/>
-                  <radio value="2" label="&main.page.pages.where.below;" flex="1"/>
-                  <radio value="0" label="&main.page.pages.where.newrow;" flex="1"/>
+                  <radio value="1" label="&main.page.pages.location.right;" flex="1"/>
+                  <radio value="2" label="&main.page.pages.location.below;" flex="1"/>
+                  <radio value="0" label="&main.page.pages.location.newRow;" flex="1"/>
                 </radiogroup>
               </hbox>
               <hbox align="center">
@@ -223,7 +223,7 @@
                   <label value="&main.page.pages.format.prefix;"/>
                   <textbox preference="elements-paging-prefix" size="5" flex="30"/>
                   <spacer flex="1"/>
-                  <label value="&main.page.pages.format.sep;"/>
+                  <label value="&main.page.pages.format.delimiter;"/>
                   <textbox preference="elements-paging-separator" size="1" flex="2"/>
                   <spacer flex="1"/>
                   <label value="&main.page.pages.format.suffix;"/>
@@ -242,18 +242,18 @@
             <groupbox>
               <caption label="&general.label;"/>
 
-              <checkbox preference="posting-postbutton" label="&main.posting.postbutton;"/>
-              <checkbox preference="posting-charcounts" label="&main.posting.charcounts;"/>
-              <label value="&main.posting.htmlbuttons.label;"/>
+              <checkbox preference="posting-postbutton" label="&main.posting.postButton;"/>
+              <checkbox preference="posting-charcounts" label="&main.posting.characterCounters;"/>
+              <label value="&main.posting.htmlButtons.label;"/>
               <hbox class="indent">
                 <checkbox preference="posting-htmlbuttons"
-                  label="&main.posting.htmlbuttons.standard;"/>
+                  label="&main.posting.htmlButtons.standard;"/>
                 <checkbox preference="posting-htmlbuttons-extended"
-                  label="&main.posting.htmlbuttons.extended;"/>
+                  label="&main.posting.htmlButtons.extended;"/>
                 <checkbox preference="posting-htmlbuttons-gfcode"
-                  label="&main.posting.htmlbuttons.gfcode;"/>
+                  label="&main.posting.htmlButtons.gfcode;"/>
                 <checkbox preference="posting-htmlbuttons-breaktags"
-                  label="&main.posting.htmlbuttons.breaktags;"/>
+                  label="&main.posting.htmlButtons.breakTags;"/>
               </hbox>
 
             </groupbox>
@@ -261,25 +261,25 @@
             <groupbox>
               <caption label="&main.posting.quickpost.caption;"/>
 
-              <checkbox preference="posting-link" label="&main.posting.quickpost.topics;"/>
-              <checkbox preference="posting-form" label="&main.posting.quickpost.messages;"/>
-              <checkbox preference="posting-otherbuttons" label="&main.posting.quickpost.otherbuttons;"/>
+              <checkbox preference="posting-link" label="&main.posting.quickpost.onTopicLists;"/>
+              <checkbox preference="posting-form" label="&main.posting.quickpost.onMessageLists;"/>
+              <checkbox preference="posting-otherbuttons" label="&main.posting.quickpost.extraButtons;"/>
               <checkbox preference="posting-resetconfirm"
-                label="&main.posting.quickpost.resetconfirm;"/>
+                label="&main.posting.quickpost.confirmReset;"/>
               <checkbox preference="posting-resetnewsig"
-                label="&main.posting.quickpost.resetnewsig;"/>
+                label="&main.posting.quickpost.newSigOnReset;"/>
 
-              <label value="&main.posting.quickpost.aftertopic;"/>
+              <label value="&main.posting.quickpost.afterTopic.label;"/>
               <radiogroup class="indent" orient="horizontal" preference="posting-aftertopic">
-                <radio value="0" label="&main.posting.quickpost.aftertopic.topic;"/>
-                <radio value="1" label="&main.posting.quickpost.aftertopic.board;"/>
+                <radio value="0" label="&main.posting.quickpost.afterTopic.toTopic;"/>
+                <radio value="1" label="&main.posting.quickpost.afterTopic.toBoard;"/>
               </radiogroup>
 
-              <label value="&main.posting.quickpost.aftermessage;"/>
+              <label value="&main.posting.quickpost.afterMessage.label;"/>
               <radiogroup class="indent" orient="horizontal" preference="posting-aftermessage">
-                <radio value="0" label="&main.posting.quickpost.aftermessage.lastpost;"/>
-                <radio value="1" label="&main.posting.quickpost.aftermessage.samepage;"/>
-                <radio value="2" label="&main.posting.quickpost.aftermessage.firstpage;"/>
+                <radio value="0" label="&main.posting.quickpost.afterMessage.toLastPost;"/>
+                <radio value="1" label="&main.posting.quickpost.aftermessage.toSamePage;"/>
+                <radio value="2" label="&main.posting.quickpost.aftermessage.toFirstPage;"/>
               </radiogroup>
 
             </groupbox>
@@ -291,25 +291,25 @@
         <tabpanel orient="vertical" flex="1">
           <vbox>
             <groupbox>
-              <caption label="Sections"/>
+              <caption label="&main.sidebar.caption;"/>
 
               <checkbox preference="sidebar-gamefaqsnav"
-                label="&main.sidebar.gamefaqsnav;"/>
+                label="&main.sidebar.navLinks;"/>
               <checkbox preference="sidebar-userlinks"
-                label="&main.sidebar.userlinks;"/>
+                label="&main.sidebar.userLinks;"/>
               <checkbox preference="sidebar-favorites"
-                label="&main.sidebar.favorites;"/>
+                label="&main.sidebar.favoriteList;"/>
               <checkbox preference="sidebar-search"
-                label="&main.sidebar.search;"/>
+                label="&main.sidebar.gameSearch;"/>
               <checkbox preference="sidebar-gotoboard"
-                label="&main.sidebar.gotoboard;"/>
+                label="&main.sidebar.goToBoardId;"/>
               <checkbox preference="sidebar-login"
-                label="&main.sidebar.login;"/>
+                label="&main.sidebar.loginForm;"/>
               <checkbox preference="sidebar-accounts"
-                label="&main.sidebar.accounts;"/>
-              <checkbox preference="sidebar-tags" label="&main.sidebar.tags;"/>
+                label="&main.sidebar.accountSwitcher;"/>
+              <checkbox preference="sidebar-tags" label="&main.sidebar.tagList;"/>
               <checkbox preference="sidebar-tracked"
-                label="&main.sidebar.tracked;"/>
+                label="&main.sidebar.trackedList;"/>
             </groupbox>
           </vbox>
         </tabpanel>
@@ -320,7 +320,7 @@
           <notificationbox id="boardSettingsMsg" flex="1">
             <vbox>
               <groupbox flex="1">
-                <caption label="&main.board.caption;"/>
+                <caption label="&main.boardSettings.caption;"/>
                 <grid>
                   <columns>
                     <column/>
@@ -328,7 +328,7 @@
                   </columns>
                   <rows>
                     <row align="center">
-                      <label value="&main.board.tpp;"/>
+                      <label value="&main.boardSettings.topicsPerPage.label;"/>
                       <menulist preference="gamefoxTpcsPerPage" id="topicpage" flex="1">
                         <menupopup>
                           <menuitem value="10" label="10"/>
@@ -340,18 +340,21 @@
                       </menulist>
                     </row>
                     <row align="center">
-                      <label value="&main.board.tsort;"/>
+                      <label value="&main.boardSettings.topicSort.label;"/>
                       <menulist preference="gamefoxTpcSortOrder" id="topicsort" flex="1">
                         <menupopup>
-                          <menuitem value="1" label="&main.board.tsort.fo;"/>
-                          <menuitem value="2" label="&main.board.tsort.fn;"/>
-                          <menuitem value="3" label="&main.board.tsort.lo;"/>
-                          <menuitem value="4" label="&main.board.tsort.ln;"/>
+                          <menuitem value="1" label="&main.boardSettings.topicSort.firstOldest;"/>
+                          <menuitem value="2"
+                            label="&main.boardSettings.topicSort.firstNewest;"/>
+                          <menuitem value="3"
+                            label="&main.boardSettings.topicSort.lastOldest;"/>
+                          <menuitem value="4"
+                            label="&main.boardSettings.topicSort.lastNewest;"/>
                         </menupopup>
                       </menulist>
                     </row>
                     <row align="center">
-                      <label value="&main.board.mpp;"/>
+                      <label value="&main.boardSettings.messagesPerPage.label;"/>
                       <menulist preference="gamefoxMsgsPerPage" id="messagepage" flex="1">
                         <menupopup>
                           <menuitem value="10" label="10"/>
@@ -363,16 +366,18 @@
                       </menulist>
                     </row>
                     <row align="center">
-                      <label value="&main.board.msort;"/>
+                      <label value="&main.boardSettings.messageSort.label;"/>
                       <menulist preference="gamefoxMsgSortOrder" id="messagesort" flex="1">
                         <menupopup>
-                          <menuitem value="1" label="&main.board.msort.of;"/>
-                          <menuitem value="2" label="&main.board.msort.nf;"/>
+                          <menuitem value="1"
+                            label="&main.boardSettings.messageSort.oldestFirst;"/>
+                          <menuitem value="2"
+                            label="&main.boardSettings.messageSort.newestFirst;"/>
                         </menupopup>
                       </menulist>
                     </row>
                     <row align="center">
-                      <label value="&main.board.timezone;"/>
+                      <label value="&main.boardSettings.timezone.label;"/>
                       <menulist preference="gamefoxTimeZone" id="timezone" flex="1">
                         <menupopup>
                           <menuitem value="-720" label="GMT -12"/>
@@ -409,20 +414,20 @@
                       </menulist>
                     </row>
                     <row align="center">
-                      <label value="&main.board.msgdata;"/>
+                      <label value="&main.boardSettings.messageDataDisplay.label;"/>
                       <menulist preference="gamefoxMsgDisplay" id="userdisplay" flex="1">
                         <menupopup>
-                          <menuitem value="0" label="&main.board.msgdata.left;"/>
-                          <menuitem value="1" label="&main.board.msgdata.above;"/>
+                          <menuitem value="0" label="&main.boardSettings.messageDataDisplay.label;"/>
+                          <menuitem value="1" label="&main.boardSettings.messageDataDisplay.above;"/>
                         </menupopup>
                       </menulist>
                     </row>
                   </rows>
                 </grid>
                 <hbox pack="end">
-                  <button id="gamefox-css-grab-bs" label="&main.board.grab;" icon="refresh"
+                  <button id="gamefox-css-grab-bs" label="&main.boardSettings.grab.button;" icon="refresh"
                     oncommand="GFoptions.importBoardSettings();"/>
-                  <button id="gamefox-css-apply-bs" label="&main.board.save;" icon="save"
+                  <button id="gamefox-css-apply-bs" label="&main.boardSettings.save.button;" icon="save"
                     oncommand="GFoptions.exportBoardSettings();"/>
                 </hbox>
               </groupbox>

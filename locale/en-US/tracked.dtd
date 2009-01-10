@@ -1,7 +1,6 @@
 <!-- vim: set indentexpr=: -->
 
 <!ENTITY tracked.label "Tracked Topics">
-<!ENTITY tagid.label "Tag ID">
 
 <!ENTITY menu.newTab.accesskey "T">
 <!ENTITY menu.focusedTab.accesskey "F">
