@@ -176,7 +176,7 @@ var GFlib =
 
   setTitle: function(doc, title, prefix, page)
   {
-    if (!GFlib.prefs.getBoolPref('elements.titlechange')) return false;
+    if (!GFlib.prefs.getBoolPref('elements.titlechange')) return;
     if (!GFlib.prefs.getBoolPref('elements.titleprefix')) prefix = null;
 
     doc.title = 'GameFAQs'

@@ -111,7 +111,7 @@ var GFsidebar =
   newTabLogin: function(event)
   {
     if (event.button != 1)
-      return false;
+      return;
 
     var form = event.target.parentNode;
     GFsidebar.redirectLogin(event);
