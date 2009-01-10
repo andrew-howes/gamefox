@@ -880,7 +880,7 @@ var GameFOX =
       }
 
       // Board nav at the bottom of the page
-      if (1) // pref
+      if (GFlib.prefs.getBoolPref('elements.boardnav') && !onDetail)
       {
         var miniBoardNav = doc.createElement('div');
         miniBoardNav.id = 'gamefox-board-nav';
@@ -1213,7 +1213,7 @@ var GameFOX =
     for (var i = 0; i < filterResult.snapshotLength; i++)
       filterResult.snapshotItem(i).textContent = newText;
 
-    doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus ? newFocus : msgComponents.header));
+    doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus || msgComponents.header));
   },
 
   toggleSidebar: function()

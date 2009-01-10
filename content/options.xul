@@ -65,6 +65,7 @@
       <preference id="elements-aml-pagejumper" name="gamefox.elements.aml.pagejumper" type="bool"/>
 
       <preference id="elements-tag-link" name="gamefox.elements.tag.link" type="bool"/>
+      <preference id="elements-boardnav" name="gamefox.elements.boardnav" type="bool"/>
       <preference id="elements-deletelink" name="gamefox.elements.deletelink" type="bool"/>
       <preference id="elements-filterlink" name="gamefox.elements.filterlink" type="bool"/>
       <preference id="elements-quotelink" name="gamefox.elements.quotelink" type="bool"/>
@@ -177,9 +178,13 @@
                     <caption label="&main.page.messages.caption;"/>
                     <vbox>
                       <checkbox preference="elements-tag-link" label="&main.page.messages.taglink;"/>
-                      <checkbox preference="elements-deletelink" label="&main.page.messages.deletelink;"/>
-                      <checkbox preference="elements-filterlink" label="&main.page.messages.filterlink;"/>
-                      <checkbox preference="elements-quotelink" label="&main.page.messages.quotelink;"/>
+                      <checkbox preference="elements-boardnav" label="&main.page.messages.boardnav;"/>
+                      <label value="&main.page.messages.headers;"/>
+                      <hbox class="indent">
+                        <checkbox preference="elements-deletelink" label="&main.page.messages.deletelink;"/>
+                        <checkbox preference="elements-filterlink" label="&main.page.messages.filterlink;"/>
+                        <checkbox preference="elements-quotelink" label="&main.page.messages.quotelink;"/>
+                      </hbox>
                       <checkbox flex="1" preference="elements-msgnum" label="&main.page.messages.numbering;"/>
                       <hbox class="indent" align="baseline">
                         <menulist preference="elements-msgnum-style">

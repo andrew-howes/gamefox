@@ -21,9 +21,11 @@
 <!ENTITY main.page.topics.pagejumper "Page jumper (Active Messages)">
 <!ENTITY main.page.messages.caption "Message Lists">
 <!ENTITY main.page.messages.taglink "&quot;Tag Topic&quot; link">
-<!ENTITY main.page.messages.deletelink "&quot;Delete&quot; and &quot;Close&quot; links">
-<!ENTITY main.page.messages.filterlink "&quot;Filter&quot; links">
-<!ENTITY main.page.messages.quotelink "&quot;Quote&quot; links">
+<!ENTITY main.page.messages.boardnav "Nav links at bottom of page">
+<!ENTITY main.page.messages.headers "Message header links:">
+<!ENTITY main.page.messages.deletelink "Delete/Close">
+<!ENTITY main.page.messages.filterlink "Filter">
+<!ENTITY main.page.messages.quotelink "Quote">
 <!ENTITY main.page.messages.numbering "Number messages">
 <!ENTITY main.page.messages.marktc "Label topic creator">
 <!ENTITY main.page.pages.caption "Topic Pagination">
