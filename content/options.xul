@@ -49,8 +49,8 @@
     <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
 
     <stringbundleset id="strbundles">
-      <stringbundle id="userlist-strings" src="chrome://gamefox/locale/userlist.properties"/>
-      <stringbundle id="manage-strings" src="chrome://gamefox/locale/manage-prefs.properties"/>
+      <stringbundle id="options-strings"
+        src="chrome://gamefox/locale/options.properties"/>
     </stringbundleset>
 
     <preferences>
