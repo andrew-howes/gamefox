@@ -19,9 +19,11 @@
 
 var GFutils =
 {
-  importBoardSettings: function(inOptions, button, noisy)
+  importBoardSettings: function(notify)
   {
-    if (button) button.setAttribute('disabled', true);
+    var boardSettingsMsg = document.getElementById('boardSettingsMsg');
+    var button = document.getElementById('gamefox-css-grab-bs');
+    button.disabled = true;
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
@@ -33,50 +35,44 @@ var GFutils =
         if (request.responseText.indexOf('Board Display Settings') == -1)
         {
           GFlib.log('importBoardSettings: Bad things!');
-          if (noisy)
-            GFlib.alert('Something went wrong. Are you logged in to gamefaqs.com?');
+          if (notify)
+            boardSettingsMsg.appendNotification(
+                'Something went wrong. Are you logged in to GameFAQs?', null,
+                null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
           if (button) button.setAttribute('disabled', false);
           return;
         }
 
-        var topicpage = GFutils.parseHTMLSelect(request.responseText, 'topicpage'),
-            topicsort = GFutils.parseHTMLSelect(request.responseText, 'topicsort'),
-            messagepage = GFutils.parseHTMLSelect(request.responseText, 'messagepage'),
-            messagesort = GFutils.parseHTMLSelect(request.responseText, 'messagesort'),
+        var topicPage = GFutils.parseHTMLSelect(request.responseText, 'topicpage'),
+            topicSort = GFutils.parseHTMLSelect(request.responseText, 'topicsort'),
+            messagePage = GFutils.parseHTMLSelect(request.responseText, 'messagepage'),
+            messageSort = GFutils.parseHTMLSelect(request.responseText, 'messagesort'),
             timezone = GFutils.parseHTMLSelect(request.responseText, 'timezone'),
-            userdisplay = GFutils.parseHTMLSelect(request.responseText, 'userdisplay');
-        if (topicpage == null || topicsort == null || messagepage == null
-            || messagesort == null || timezone == null || userdisplay == null)
+            userDisplay = GFutils.parseHTMLSelect(request.responseText, 'userdisplay');
+        if (topicPage == null || topicSort == null || messagePage == null
+            || messageSort == null || timezone == null || userDisplay == null)
         {
           GFlib.log('importBoardSettings: Unable to retrieve all settings.');
-          if (noisy)
-            GFlib.alert('Something went wrong. Are you logged in to gamefaqs.com?');
+          if (notify)
+            boardSettingsMsg.appendNotification(
+                'Something went wrong. Are you logged in to GameFAQs?', null,
+                null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
           if (button) button.setAttribute('disabled', false);
           return;
         }
 
         // TODO: validate settings from GameFAQs
-        if (inOptions)
-        {
-          document.getElementById('gamefoxTpcsPerPage').value = topicpage;
-          document.getElementById('gamefoxTpcSortOrder').value = topicsort;
-          document.getElementById('gamefoxMsgsPerPage').value = messagepage;
-          document.getElementById('gamefoxMsgSortOrder').value = messagesort;
-          document.getElementById('gamefoxTimeZone').value = timezone;
-          document.getElementById('gamefoxMsgDisplay').value = userdisplay;
-        }
-        else
-        {
-          var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-              Ci.nsIPrefService).getBranch('gamefox.');
-          prefs.setIntPref('tpcsPerPage', topicpage);
-          prefs.setIntPref('tpcSortOrder', topicsort);
-          prefs.setIntPref('msgsPerPage', messagepage);
-          prefs.setIntPref('msgSortOrder', messagesort);
-          prefs.setIntPref('timeZone', timezone);
-          prefs.setIntPref('msgDisplay', userdisplay);
-        }
+        document.getElementById('gamefoxTpcsPerPage').value = topicPage;
+        document.getElementById('gamefoxTpcSortOrder').value = topicSort;
+        document.getElementById('gamefoxMsgsPerPage').value = messagePage;
+        document.getElementById('gamefoxMsgSortOrder').value = messageSort;
+        document.getElementById('gamefoxTimeZone').value = timezone;
+        document.getElementById('gamefoxMsgDisplay').value = userDisplay;
 
+        if (notify)
+          boardSettingsMsg.appendNotification(
+              'Your board display settings have been imported into GameFOX.',
+              null, null, boardSettingsMsg.PRIORITY_INFO_HIGH);
         if (button) button.setAttribute('disabled', false);
       }
     }
@@ -84,9 +80,12 @@ var GFutils =
     request.send(null);
   },
 
-  exportBoardSettings: function(topicpage, topicsort, messagepage, messagesort, timezone, userdisplay, button, noisy)
+  exportBoardSettings: function(data, notify)
   {
-    if (button) button.setAttribute('disabled', true);
+    var boardSettingsMsg = document.getElementById('boardSettingsMsg');
+    var button = document.getElementById('gamefox-css-apply-bs');
+    button.disabled = true;
+
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
     var ds = GFlib.thirdPartyCookieFix(request);
@@ -97,8 +96,10 @@ var GFutils =
         if (request.responseText.indexOf('Board Display Settings') == -1)
         {
           GFlib.log('exportBoardSettings: Bad things!');
-          if (noisy)
-            GFlib.alert('Something went wrong. Are you logged in to gamefaqs.com?');
+          if (notify)
+            boardSettingsMsg.appendNotification(
+                'Something went wrong. Are you logged in to GameFAQs?', null,
+                null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -107,8 +108,10 @@ var GFutils =
         if (!action)
         {
           GFlib.log("exportBoardSettings: Couldn't get user id.");
-          if (noisy)
-            GFlib.alert("Couldn't get your user ID. This shouldn't happen.");
+          if (notify)
+            boardSettingsMsgs.appendNotification(
+                "Couldn't get your user ID. This shouldn't happen.", null,
+                null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
           if (button) button.setAttribute('disabled', false);
           return;
         }
@@ -124,13 +127,17 @@ var GFutils =
             if (postRequest.responseText.indexOf('Display settings updated') == -1)
             {
               GFlib.log("exportBoardSettings: Update didn't work!");
-              if (noisy)
-                GFlib.alert("Didn't receive the expected response from the server. The update probably failed.");
+              if (notify)
+                boardSettingsMsg.appendNotification(
+                    "Didn't receive the expected response from the server. The update probably failed.",
+                    null, null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
             }
             else
             {
-              if (noisy)
-                GFlib.alert("Your board display settings have been updated.");
+              if (notify)
+                boardSettingsMsg.appendNotification(
+                    'Your board display settings have been exported into GameFAQs.',
+                    null, null, boardSettingsMsg.PRIORITY_INFO_HIGH);
             }
             if (button) button.setAttribute('disabled', false);
           }
@@ -140,12 +147,12 @@ var GFutils =
 
         postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         postRequest.send(
-            'topicpage=' + topicpage + '&' +
-            'topicsort=' + topicsort + '&' +
-            'messagepage=' + messagepage + '&' +
-            'messagesort=' + messagesort + '&' +
-            'timezone=' + timezone + '&' +
-            'userdisplay=' + userdisplay + '&' +
+            'topicpage=' + data.topicPage + '&' +
+            'topicsort=' + data.topicSort + '&' +
+            'messagepage=' + data.messagePage + '&' +
+            'messagesort=' + data.messageSort + '&' +
+            'timezone=' + data.timezone + '&' +
+            'userdisplay=' + data.userDisplay + '&' +
             'key=' + key + '&' +
             'submit=1'
             );

@@ -21,19 +21,18 @@ var GFoptions =
 {
   importBoardSettings: function()
   {
-    GFutils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'), true);
+    GFutils.importBoardSettings(true);
   },
 
   exportBoardSettings: function()
   {
     GFutils.exportBoardSettings(
-        document.getElementById('topicpage').value,
-        document.getElementById('topicsort').value,
-        document.getElementById('messagepage').value,
-        document.getElementById('messagesort').value,
-        document.getElementById('timezone').value,
-        document.getElementById('userdisplay').value,
-        document.getElementById('gamefox-css-apply-bs'),
+        {topicPage: document.getElementById('topicpage').value,
+         topicSort: document.getElementById('topicsort').value,
+         messagePage: document.getElementById('messagepage').value,
+         messageSort: document.getElementById('messagesort').value,
+         timezone: document.getElementById('timezone').value,
+         userDisplay: document.getElementById('userdisplay').value},
         true
         );
   },

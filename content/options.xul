@@ -317,8 +317,9 @@
 <!-- BOARD SETTINGS -->
 
         <tabpanel orient="vertical" flex="1">
-          <vbox>
+          <notificationbox id="boardSettingsMsg"/>
 
+          <vbox>
             <groupbox flex="1">
               <caption label="&main.board.caption;"/>
               <grid>
