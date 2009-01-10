@@ -38,7 +38,7 @@ var GFoptions =
 
           boardSettingsMsg.appendNotification(
               'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+              null, boardSettingsMsg.PRIORITY_WARNING_LOW);
           button.setAttribute('disabled', false);
           return;
         }
@@ -56,7 +56,7 @@ var GFoptions =
 
           boardSettingsMsg.appendNotification(
               'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+              null, boardSettingsMsg.PRIORITY_WARNING_LOW);
           button.setAttribute('disabled', false);
           return;
         }
@@ -71,7 +71,9 @@ var GFoptions =
 
         boardSettingsMsg.appendNotification(
             'Your board display settings have been imported into GameFOX.',
-            null, null, boardSettingsMsg.PRIORITY_INFO_HIGH);
+            'bs-import-success', null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
+        boardSettingsMsg.getNotificationWithValue('bs-import-success')
+          .type = 'info';
         button.setAttribute('disabled', false);
       }
     }
@@ -105,7 +107,7 @@ var GFoptions =
 
           boardSettingsMsg.appendNotification(
               'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+              null, boardSettingsMsg.PRIORITY_WARNING_LOW);
           button.setAttribute('disabled', false);
           return;
         }
@@ -117,7 +119,7 @@ var GFoptions =
 
           boardSettingsMsgs.appendNotification(
               "Couldn't get your user ID. This shouldn't happen.", null,
-              null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
+              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
           button.setAttribute('disabled', false);
           return;
         }
@@ -136,13 +138,15 @@ var GFoptions =
 
               boardSettingsMsg.appendNotification(
                   "Didn't receive the expected response from the server. The update probably failed.",
-                  null, null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
+                  null, null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
             }
             else
             {
               boardSettingsMsg.appendNotification(
                   'Your board display settings have been exported into GameFAQs.',
-                  null, null, boardSettingsMsg.PRIORITY_INFO_HIGH);
+                  'bs-export-success', null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
+              boardSettingsMsg.getNotificationWithValue('bs-export-success')
+                .type = 'info';
             }
             button.setAttribute('disabled', false);
           }
@@ -186,7 +190,7 @@ var GFoptions =
 
           signatureMsg.appendNotification(
               'Something went wrong. Are you logged in to GameFAQs?', null,
-              null, signatureMsg.PRIORITY_WARNING_MEDIUM);
+              null, signatureMsg.PRIORITY_WARNING_LOW);
           button.setAttribute('disabled', false);
           return;
         }
@@ -199,7 +203,7 @@ var GFoptions =
           signatureMsg.appendNotification(
               "Couldn't get your signature. This shouldn't happen. Maybe you have " +
               "one of those really old signature that displays bold and italics on " +
-              "the profile page?", null, null, signatureMsg.PRIORITY_WARNING_HIGH);
+              "the profile page?", null, null, signatureMsg.PRIORITY_WARNING_MEDIUM);
           button.setAttribute('disabled', false);
           return;
         }
@@ -210,8 +214,10 @@ var GFoptions =
         GFsig.updatePref(document.getElementById('sig-body'));
 
         signatureMsg.appendNotification(
-            'Your signature has been imported into GameFOX.', null, null,
-            signatureMsg.PRIORITY_INFO_HIGH);
+            'Your signature has been imported into GameFOX.',
+            'sig-import-success', null, signatureMsg.PRIORITY_WARNING_HIGH);
+        signatureMsg.getNotificationWithValue('sig-import-success')
+          .type = 'info';
         button.setAttribute('disabled', false);
       }
     };
