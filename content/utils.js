@@ -349,11 +349,16 @@ var GFutils =
 
   showNotification: function(msgBox, label, type)
   {
+    var oldMessage = msgBox.getNotificationWithValue(label);
+    if (oldMessage && oldMessage.parentNode)
+      msgBox.removeNotification(oldMessage);
+
     if (msgBox.currentNotification)
       var priority = parseFloat(msgBox.currentNotification.priority) + 0.0001;
     else
       var priority = 1;
-    var notification = msgBox.appendNotification(label, null, null, priority);
+
+    var notification = msgBox.appendNotification(label, label, null, priority);
     notification.type = type;
   }
 };
