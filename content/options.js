@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008 Brian Marshall, Michael Ryan, Andrianto Effendy
+ * Copyright 2008, 2009 Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
  *
@@ -21,25 +21,202 @@ var GFoptions =
 {
   importBoardSettings: function()
   {
-    GFutils.importBoardSettings(true);
+    var boardSettingsMsg = document.getElementById('boardSettingsMsg');
+    var button = document.getElementById('gamefox-css-grab-bs');
+    button.disabled = true;
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
+    var ds = GFlib.thirdPartyCookieFix(request);
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        if (request.responseText.indexOf('Board Display Settings') == -1)
+        {
+          GFlib.log('importBoardSettings: Bad things!');
+
+          boardSettingsMsg.appendNotification(
+              'Something went wrong. Are you logged in to GameFAQs?', null,
+              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+          button.setAttribute('disabled', false);
+          return;
+        }
+
+        var topicPage = GFutils.parseHTMLSelect(request.responseText, 'topicpage'),
+            topicSort = GFutils.parseHTMLSelect(request.responseText, 'topicsort'),
+            messagePage = GFutils.parseHTMLSelect(request.responseText, 'messagepage'),
+            messageSort = GFutils.parseHTMLSelect(request.responseText, 'messagesort'),
+            timezone = GFutils.parseHTMLSelect(request.responseText, 'timezone'),
+            userDisplay = GFutils.parseHTMLSelect(request.responseText, 'userdisplay');
+        if (topicPage == null || topicSort == null || messagePage == null
+            || messageSort == null || timezone == null || userDisplay == null)
+        {
+          GFlib.log('importBoardSettings: Unable to retrieve all settings.');
+
+          boardSettingsMsg.appendNotification(
+              'Something went wrong. Are you logged in to GameFAQs?', null,
+              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+          button.setAttribute('disabled', false);
+          return;
+        }
+
+        // TODO: validate settings from GameFAQs
+        document.getElementById('gamefoxTpcsPerPage').value = topicPage;
+        document.getElementById('gamefoxTpcSortOrder').value = topicSort;
+        document.getElementById('gamefoxMsgsPerPage').value = messagePage;
+        document.getElementById('gamefoxMsgSortOrder').value = messageSort;
+        document.getElementById('gamefoxTimeZone').value = timezone;
+        document.getElementById('gamefoxMsgDisplay').value = userDisplay;
+
+        boardSettingsMsg.appendNotification(
+            'Your board display settings have been imported into GameFOX.',
+            null, null, boardSettingsMsg.PRIORITY_INFO_HIGH);
+        button.setAttribute('disabled', false);
+      }
+    }
+
+    request.send(null);
   },
 
   exportBoardSettings: function()
   {
-    GFutils.exportBoardSettings(
-        {topicPage: document.getElementById('topicpage').value,
-         topicSort: document.getElementById('topicsort').value,
-         messagePage: document.getElementById('messagepage').value,
-         messageSort: document.getElementById('messagesort').value,
-         timezone: document.getElementById('timezone').value,
-         userDisplay: document.getElementById('userdisplay').value},
-        true
-        );
+    data = {topicPage: document.getElementById('topicpage').value,
+            topicSort: document.getElementById('topicsort').value,
+            messagePage: document.getElementById('messagepage').value,
+            messageSort: document.getElementById('messagesort').value,
+            timezone: document.getElementById('timezone').value,
+           userDisplay: document.getElementById('userdisplay').value};
+
+    var boardSettingsMsg = document.getElementById('boardSettingsMsg');
+    var button = document.getElementById('gamefox-css-apply-bs');
+    button.disabled = true;
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
+    var ds = GFlib.thirdPartyCookieFix(request);
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        if (request.responseText.indexOf('Board Display Settings') == -1)
+        {
+          GFlib.log('exportBoardSettings: Bad things!');
+
+          boardSettingsMsg.appendNotification(
+              'Something went wrong. Are you logged in to GameFAQs?', null,
+              null, boardSettingsMsg.PRIORITY_WARNING_MEDIUM);
+          button.setAttribute('disabled', false);
+          return;
+        }
+
+        var action = request.responseText.match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
+        if (!action)
+        {
+          GFlib.log("exportBoardSettings: Couldn't get user id.");
+
+          boardSettingsMsgs.appendNotification(
+              "Couldn't get your user ID. This shouldn't happen.", null,
+              null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
+          button.setAttribute('disabled', false);
+          return;
+        }
+        action = action[1];
+
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', 'http://www.gamefaqs.com' + action);
+        var ds = GFlib.thirdPartyCookieFix(postRequest);
+        postRequest.onreadystatechange = function()
+        {
+          if (postRequest.readyState == 4)
+          {
+            if (postRequest.responseText.indexOf('Display settings updated') == -1)
+            {
+              GFlib.log("exportBoardSettings: Update didn't work!");
+
+              boardSettingsMsg.appendNotification(
+                  "Didn't receive the expected response from the server. The update probably failed.",
+                  null, null, boardSettingsMsg.PRIORITY_WARNING_HIGH);
+            }
+            else
+            {
+              boardSettingsMsg.appendNotification(
+                  'Your board display settings have been exported into GameFAQs.',
+                  null, null, boardSettingsMsg.PRIORITY_INFO_HIGH);
+            }
+            button.setAttribute('disabled', false);
+          }
+        }
+        var key = request.responseText.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i);
+        key = key[1];
+
+        postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        postRequest.send(
+            'topicpage=' + data.topicPage + '&' +
+            'topicsort=' + data.topicSort + '&' +
+            'messagepage=' + data.messagePage + '&' +
+            'messagesort=' + data.messageSort + '&' +
+            'timezone=' + data.timezone + '&' +
+            'userdisplay=' + data.userDisplay + '&' +
+            'key=' + key + '&' +
+            'submit=1'
+            );
+      }
+    };
+
+    request.send(null);
   },
 
   importSignature: function()
   {
-    GFutils.importSignature(true, document.getElementById('gamefox-css-grab-sig'), true);
+    var signatureMsg = document.getElementById('signatureMsg');
+    var button = document.getElementById('gamefox-css-grab-sig');
+    button.disabled = true;
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://www.gamefaqs.com/boards/sigquote.php');
+    var ds = GFlib.thirdPartyCookieFix(request);
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        if (request.responseText.indexOf('Board Signature and Quote') == -1)
+        {
+          GFlib.log('importSignature: Bad things!');
+
+          signatureMsg.appendNotification(
+              'Something went wrong. Are you logged in to GameFAQs?', null,
+              null, signatureMsg.PRIORITY_WARNING_MEDIUM);
+          button.setAttribute('disabled', false);
+          return;
+        }
+
+        var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
+        if (!sig)
+        {
+          GFlib.log("importSignature: Couldn't get sig");
+
+          signatureMsg.appendNotification(
+              "Couldn't get your signature. This shouldn't happen. Maybe you have " +
+              "one of those really old signature that displays bold and italics on " +
+              "the profile page?", null, null, signatureMsg.PRIORITY_WARNING_HIGH);
+          button.setAttribute('disabled', false);
+          return;
+        }
+        sig = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
+
+        document.getElementById('sig-body').value = sig;
+        // oninput isn't called
+        GFsig.updatePref(document.getElementById('sig-body'));
+
+        signatureMsg.appendNotification(
+            'Your signature has been imported into GameFOX.', null, null,
+            signatureMsg.PRIORITY_INFO_HIGH);
+        button.setAttribute('disabled', false);
+      }
+    };
+
+    request.send(null);
   },
 
   openCSSDirectory: function()
@@ -137,8 +314,8 @@ var GFoptions =
     {
       GFuserlist.add();
       GFuserlist.populateLast();
-      GFutils.importBoardSettings(true, document.getElementById('gamefox-css-grab-bs'));
-      GFutils.importSignature(true, document.getElementById('gamefox-css-grab-sig'));
+      GFoptions.importBoardSettings();
+      GFoptions.importSignature();
     }
   }
 };
