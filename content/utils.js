@@ -19,56 +19,6 @@
 
 var GFutils =
 {
-  importSignature: function(notify)
-  {
-    var signatureMsg = document.getElementById('signatureMsg');
-    var button = document.getElementById('gamefox-css-grab-sig');
-    button.disabled = true;
-
-    var request = new XMLHttpRequest();
-    request.open('GET', 'http://www.gamefaqs.com/boards/sigquote.php');
-    var ds = GFlib.thirdPartyCookieFix(request);
-    request.onreadystatechange = function()
-    {
-      if (request.readyState == 4)
-      {
-        if (request.responseText.indexOf('Board Signature and Quote') == -1)
-        {
-          GFlib.log('importSignature: Bad things!');
-          if (notify)
-            GFutils.showNotification(signatureMsg,
-                'Something went wrong. Are you logged in to GameFAQs?', 'warning');
-          button.setAttribute('disabled', false);
-          return;
-        }
-
-        var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
-        if (!sig)
-        {
-          GFlib.log("importSignature: Couldn't get sig");
-          if (notify)
-            GFutils.showNotification(signatureMsg,
-                "Couldn't get your signature. This shouldn't happen. Maybe you have " +
-                "one of those really old signature that displays bold and italics on " +
-                "the profile page?", 'warning');
-          if (button) button.setAttribute('disabled', false);
-          return;
-        }
-        sig = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
-
-        document.getElementById('sig-body').value = sig;
-        // oninput isn't called
-        GFsig.updatePref(document.getElementById('sig-body'));
-
-        GFutils.showNotification(signatureMsg,
-            'Your signature has been imported into GameFOX.', 'info');
-        button.setAttribute('disabled', false);
-      }
-    };
-
-    request.send(null);
-  },
-
   parseHTMLSelect: function(str, name)
   {
     var selectStart = str.search(new RegExp('<select\\b[^>]+?\\bname="' + name + '"[^>]*>'));
