@@ -607,7 +607,7 @@
             </radiogroup>
           </groupbox>
 
-          <groupbox style="margin-bottom:10px">
+          <groupbox style="margin-bottom:35px">
             <caption label="&signature.selection;"/>
             <radiogroup preference="sig-selection">
               <radio value="1" label="&signature.selection.first;"/>
