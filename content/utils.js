@@ -163,9 +163,11 @@ var GFutils =
     return true;
   },
 
-  importSignature: function(inOptions, button, noisy)
+  importSignature: function(notify)
   {
-    if (button) button.setAttribute('disabled', true);
+    var signatureMsg = document.getElementById('signatureMsg');
+    var button = document.getElementById('gamefox-css-grab-sig');
+    button.disabled = true;
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/sigquote.php');
@@ -177,9 +179,11 @@ var GFutils =
         if (request.responseText.indexOf('Board Signature and Quote') == -1)
         {
           GFlib.log('importSignature: Bad things!');
-          if (noisy)
-            GFlib.alert('Something went wrong. Are you logged in to www.gamefaqs.com?');
-          if (button) button.setAttribute('disabled', false);
+          if (notify)
+            signatureMsg.appendNotification(
+                'Something went wrong. Are you logged in to GameFAQs?', null,
+                null, signatureMsg.PRIORITY_WARNING_MEDIUM);
+          button.setAttribute('disabled', false);
           return;
         }
 
@@ -187,32 +191,24 @@ var GFutils =
         if (!sig)
         {
           GFlib.log("importSignature: Couldn't get sig");
-          if (noisy)
-            GFlib.alert("Couldn't get your signature. This shouldn't happen. Maybe you have " +
+          if (notify)
+            signatureMsg.appendNotification(
+                "Couldn't get your signature. This shouldn't happen. Maybe you have " +
                 "one of those really old signature that displays bold and italics on " +
-                "the profile page?");
+                "the profile page?", null, null, signatureMsg.PRIORITY_WARNING_HIGH);
           if (button) button.setAttribute('disabled', false);
           return;
         }
         sig = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
 
-        if (inOptions)
-        {
-          document.getElementById('sig-body').value = sig;
+        document.getElementById('sig-body').value = sig;
+        // oninput isn't called
+        GFsig.updatePref(document.getElementById('sig-body'));
 
-          // oninput isn't called
-          GFsig.updatePref(document.getElementById('sig-body'));
-        }
-        else
-        {
-          var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
-              Ci.nsIPrefService).getBranch('gamefox.');
-          var sigs = eval(GFutils.getString('signature.serialized', prefs));
-          sigs[0]['body'] = sig;
-          GFutils.setString('signature.serialized', sigs.toSource(), prefs);
-        }
-
-        if (button) button.setAttribute('disabled', false);
+        signatureMsg.appendNotification(
+            'Your signature has been imported into GameFOX.', null, null,
+            signatureMsg.PRIORITY_INFO_HIGH);
+        button.setAttribute('disabled', false);
       }
     };
 

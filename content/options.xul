@@ -551,6 +551,8 @@
       <tabpanels flex="1">
         <!-- CONTENT -->
         <tabpanel orient="vertical" flex="1">
+          <notificationbox id="signatureMsg"/>
+
           <groupbox>
             <caption label="&signature.content.label;"/>
 
