@@ -38,7 +38,7 @@ radio[pane=gamefox-topics-pane]
     -moz-image-region: rect(0px, 160px,  32px, 128px);
 }
 
-radio[pane=gamefox-users-pane]
+radio[pane=paneUsers]
 {
     -moz-image-region: rect(0px, 224px, 32px, 192px);
 }
