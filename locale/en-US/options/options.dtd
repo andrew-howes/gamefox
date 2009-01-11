@@ -3,6 +3,7 @@
 <!ENTITY title "GameFOX">
 <!ENTITY about.label "About">
 
+<!ENTITY paneQuoting.title "Quoting">
 <!ENTITY paneSignatures.title "Signatures">
 <!ENTITY paneMouse.title "Mouse">
 <!ENTITY paneUsers.title "Users">
@@ -105,18 +106,3 @@
 <!ENTITY style.import.button "Import Stylesheet">
 <!ENTITY style.reload.button "Reload Stylesheets">
 <!ENTITY style.openDir.button "Open CSS Directory">
-
-<!ENTITY quoting.title "Quoting">
-<!ENTITY quoting.header.label "Header">
-<!ENTITY quoting.includeUsername.label "Poster username">
-<!ENTITY quoting.includeDate.label "Post date">
-<!ENTITY quoting.includeNumber.label "Post number">
-<!ENTITY quoting.body.label "Body">
-<!ENTITY quoting.removeSig.label "Remove signature">
-<!ENTITY quoting.format.label "Format">
-<!ENTITY quoting.useGFCode.label "GFCode tags (&lt;i&gt;, &lt;p&gt; and &lt;strong&gt;)">
-<!ENTITY quoting.useClassic.label "Classic tags (&lt;b&gt; and &lt;i&gt;)">
-<!ENTITY quoting.headerBold.label "Bold header">
-<!ENTITY quoting.headerItalic.label "Italicize header">
-<!ENTITY quoting.bodyBold.label "Bold message">
-<!ENTITY quoting.bodyItalic.label "Italicize message">

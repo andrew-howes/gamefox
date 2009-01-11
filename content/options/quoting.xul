@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79:
+
+     Copyright 2005, 2006, 2007, 2008, 2009
+     Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
+
+     This file is part of GameFOX.
+
+     GameFOX is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License version 2
+     as published by the Free Software Foundation.
+
+     GameFOX is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/quoting.dtd">
+
+<overlay id="quotingPaneOverlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneQuoting">
+
+    <preferences>
+      <!-- Header -->
+      <preference id="header.username" name="gamefox.quote.header.username"
+        type="bool"/>
+      <preference id="header.date" name="gamefox.quote.header.date"
+        type="bool"/>
+      <preference id="header.messagenum" name="gamefox.quote.header.messagenum"
+        type="bool"/>
+
+      <!-- Body -->
+      <preference id="removesignature" name="gamefox.quote.removesignature"
+        type="bool"/>
+
+      <!-- Format -->
+      <preference id="style" name="gamefox.quote.style" type="string"/>
+      <preference id="header.bold" name="gamefox.quote.header.bold"
+        type="bool"/>
+      <preference id="header.italic" name="gamefox.quote.header.italic"
+        type="bool"/>
+      <preference id="message.bold" name="gamefox.quote.message.bold"
+        type="bool"/>
+      <preference id="message.italic" name="gamefox.quote.message.italic"
+        type="bool"/>
+    </preferences>
+
+    <groupbox align="start">
+      <caption label="&header.label;"/>
+
+      <checkbox label="&includeUsername.label;" flex="1"
+        preference="header.username"/>
+      <checkbox label="&includeDate.label;" flex="1"
+        preference="header.date"/>
+      <checkbox label="&includeNumber.label;" flex="1"
+        preference="header.messagenum"/>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&body.label;"/>
+
+      <checkbox label="&removeSig.label;"
+        preference="removesignature"/>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&format.label;"/>
+
+      <radiogroup preference="style">
+        <radio value="gfcode" label="&useGFCode.label;"/>
+        <radio value="normal" label="&useClassic.label;"/>
+
+        <hbox class="indent" orient="horizontal">
+          <vbox>
+            <checkbox label="&headerBold.label;" preference="header.bold"/>
+            <checkbox label="&headerItalic.label;" preference="header.italic"/>
+          </vbox>
+          <vbox>
+            <checkbox label="&bodyBold.label;" preference="message.bold"/>
+            <checkbox label="&bodyItalic.label;" preference="message.italic"/>
+          </vbox>
+        </hbox>
+      </radiogroup>
+    </groupbox>
+
+  </prefpane>
+
+</overlay>

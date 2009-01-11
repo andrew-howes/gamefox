@@ -18,7 +18,7 @@ radio[pane=gamefox-theme-pane]
     -moz-image-region: rect(0px, 64px,  32px, 32px);
 }
 
-radio[pane=gamefox-quote-pane]
+radio[pane=paneQuoting]
 {
     -moz-image-region: rect(0px, 96px,  32px, 64px);
 }

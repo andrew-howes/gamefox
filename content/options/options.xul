@@ -487,54 +487,8 @@
     </hbox>
  </prefpane>
 
-
-<!-- Q U O T I N G -->
-
-  <prefpane id="gamefox-quote-pane" label="&quoting.title;">
-    <preferences>
-      <preference id="header_italic"     name="gamefox.quote.header.italic"     type="bool"/>
-      <preference id="header_bold"       name="gamefox.quote.header.bold"       type="bool"/>
-      <preference id="header_date"       name="gamefox.quote.header.date"       type="bool"/>
-      <preference id="header_username"   name="gamefox.quote.header.username"   type="bool"/>
-      <preference id="header_messagenum" name="gamefox.quote.header.messagenum" type="bool"/>
-      <preference id="message_italic"    name="gamefox.quote.message.italic"    type="bool"/>
-      <preference id="message_bold"      name="gamefox.quote.message.bold"      type="bool"/>
-      <preference id="removesignature"   name="gamefox.quote.removesignature"   type="bool"/>
-      <preference id="style"             name="gamefox.quote.style"             type="string"/>
-    </preferences>
-
-    <groupbox align="start">
-      <caption label="&quoting.header.label;"/>
-      <checkbox preference="header_username" label="&quoting.includeUsername.label;" flex="1"/>
-      <checkbox preference="header_date" label="&quoting.includeDate.label;" flex="1"/>
-      <checkbox preference="header_messagenum" label="&quoting.includeNumber.label;" flex="1"/>
-    </groupbox>
-
-    <groupbox>
-      <caption label="&quoting.body.label;"/>
-      <checkbox preference="removesignature" label="&quoting.removeSig.label;"/>
-    </groupbox>
-
-    <groupbox>
-      <caption label="&quoting.format.label;"/>
-      <radiogroup preference="style">
-        <radio value="gfcode" label="&quoting.useGFCode.label;"/>
-        <radio value="normal" label="&quoting.useClassic.label;"/>
-        <hbox class="indent" orient="horizontal">
-          <vbox>
-            <checkbox preference="header_bold"   label="&quoting.headerBold.label;"/>
-            <checkbox preference="header_italic" label="&quoting.headerItalic.label;"/>
-          </vbox>
-          <vbox>
-            <checkbox preference="message_bold"   label="&quoting.bodyBold.label;"/>
-            <checkbox preference="message_italic" label="&quoting.bodyItalic.label;"/>
-          </vbox>
-        </hbox>
-      </radiogroup>
-    </groupbox>
-
-  </prefpane>
-
+  <prefpane id="paneQuoting" label="&paneQuoting.title;"
+    src="chrome://gamefox/content/options/quoting.xul"/>
   <prefpane id="paneSignatures" label="&paneSignatures.title;"
     src="chrome://gamefox/content/options/signatures.xul"/>
   <prefpane id="paneMouse" label="&paneMouse.title;"
