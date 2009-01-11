@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79:
+
+     Copyright 2005, 2006, 2007, 2008, 2009
+     Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
+
+     This file is part of GameFOX.
+
+     GameFOX is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License version 2
+     as published by the Free Software Foundation.
+
+     GameFOX is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/style.dtd">
+
+<overlay id="stylePaneOverlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneStyle"
+    onpaneload="GFcss.populate(document.getElementById('css-tree'));">
+
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/treeview.js"/>
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/css.js"/>
+
+    <preferences>
+      <preference id="disablegamefaqscss"
+        name="gamefox.theme.disablegamefaqscss" type="bool"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="&general.label;"/>
+
+      <checkbox label="&disableMainStyles.label;"
+        preference="disablegamefaqscss"/>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&tree.label;"/>
+
+      <description>&tree.desc;</description>
+      
+      <tree id="css-tree" rows="15" editable="true" seltype="single"
+        hidecolumnpicker="true" contextmenu="css-tree-contextmenu">
+        <treecols>
+          <treecol label="&name.label;" primary="true" flex="1"/>
+          <treecol label="&desc.label;" width="100"/>
+          <treecol label="&author.label;" width="100"/>
+          <treecol label="&enabled.label;" type="checkbox" editable="true"/>
+        </treecols>
+
+        <treechildren/>
+      </tree>
+      <menupopup id="css-tree-contextmenu"
+        onpopupshowing="GFcss.onpopupshowing();">
+        <menuitem label="&delete.label;"
+          oncommand="GFcss.removeWithTree();" id="css-remove"/>
+        <menuitem label="&edit.label;"
+          oncommand="GFcss.editWithTree();" id="css-edit"/>
+      </menupopup>
+    </groupbox>
+
+    <hbox pack="center">
+      <button label="&import.button;" icon="add"
+        oncommand="GFcss.userimport(GFcss.filepicker());"/>
+      <button label="&reload.button;" icon="refresh"
+        oncommand="GFcss.reload();"/>
+      <button label="&openDir.button;" icon="open"
+        oncommand="GFoptions.openCSSDirectory();"/>
+    </hbox>
+
+  </prefpane>
+
+</overlay>

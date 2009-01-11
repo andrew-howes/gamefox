@@ -3,6 +3,7 @@
 <!ENTITY title "GameFOX">
 <!ENTITY about.label "About">
 
+<!ENTITY paneStyle.title "Style">
 <!ENTITY paneQuoting.title "Quoting">
 <!ENTITY paneSignatures.title "Signatures">
 <!ENTITY paneMouse.title "Mouse">
@@ -92,17 +93,3 @@
 <!ENTITY main.boardSettings.messageDataDisplay.above "Above Message">
 <!ENTITY main.boardSettings.grab.button "Grab from GameFAQs">
 <!ENTITY main.boardSettings.save.button "Save to GameFAQs">
-
-<!ENTITY style.title "Style">
-<!ENTITY style.disableMainStyles.label "Disable main GameFAQs stylesheets">
-<!ENTITY style.tree.label "Stylesheets">
-<!ENTITY style.tree.desc "Double click or hover over the description (if any) of a stylesheet to read more.">
-<!ENTITY style.name.label "Name">
-<!ENTITY style.desc.label "Description">
-<!ENTITY style.author.label "Author">
-<!ENTITY style.enabled.label "Enabled">
-<!ENTITY style.delete.label "Delete">
-<!ENTITY style.edit.label "Edit">
-<!ENTITY style.import.button "Import Stylesheet">
-<!ENTITY style.reload.button "Reload Stylesheets">
-<!ENTITY style.openDir.button "Open CSS Directory">

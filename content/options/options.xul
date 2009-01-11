@@ -440,53 +440,8 @@
     </tabbox>
   </prefpane>
 
-
-<!-- S T Y L E -->
-
-  <prefpane id="gamefox-theme-pane" label="&style.title;"
-    onpaneload="GFcss.populate(document.getElementById('css-tree'));">
-    <script type="application/x-javascript" src="chrome://gamefox/content/treeview.js"/>
-    <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
-    <preferences>
-      <preference id="theme-disable_gamefaqs_css" name="gamefox.theme.disablegamefaqscss" type="bool"/>
-    </preferences>
-
-    <groupbox>
-      <caption label="&general.label;"/>
-      <checkbox preference="theme-disable_gamefaqs_css" label="&style.disableMainStyles.label;"/>
-    </groupbox>
-
-    <groupbox>
-      <caption label="&style.tree.label;"/>
-      <description>&style.tree.desc;</description>
-      <tree id="css-tree" rows="15" editable="true" seltype="single" hidecolumnpicker="true"
-        contextmenu="css-tree-contextmenu">
-        <treecols>
-          <treecol label="&style.name.label;" primary="true" flex="1"/>
-          <treecol label="&style.desc.label;" width="100"/>
-          <treecol label="&style.author.label;" width="100"/>
-          <treecol label="&style.enabled.label;" type="checkbox" editable="true"/>
-        </treecols>
-
-        <treechildren/>
-      </tree>
-      <menupopup id="css-tree-contextmenu"
-        onpopupshowing="GFcss.onpopupshowing();">
-        <menuitem label="&style.delete.label;"
-          oncommand="GFcss.removeWithTree();" id="css-remove"/>
-        <menuitem label="&style.edit.label;"
-          oncommand="GFcss.editWithTree();" id="css-edit"/>
-      </menupopup>
-    </groupbox>
-
-    <hbox pack="center">
-      <button oncommand="GFcss.userimport(GFcss.filepicker());" icon="add"
-        label="&style.import.button;"/>
-      <button oncommand="GFcss.reload();" icon="refresh" label="&style.reload.button;"/>
-      <button oncommand="GFoptions.openCSSDirectory();" icon="open" label="&style.openDir.button;"/>
-    </hbox>
- </prefpane>
-
+  <prefpane id="paneStyle" label="&paneStyle.title;"
+    src="chrome://gamefox/content/options/style.xul"/>
   <prefpane id="paneQuoting" label="&paneQuoting.title;"
     src="chrome://gamefox/content/options/quoting.xul"/>
   <prefpane id="paneSignatures" label="&paneSignatures.title;"

@@ -1,0 +1,20 @@
+<!-- vim: set indentexpr=: -->
+
+<!ENTITY general.label "General">
+
+<!ENTITY disableMainStyles.label "Disable main GameFAQs stylesheets">
+
+<!ENTITY tree.label "Stylesheets">
+<!ENTITY tree.desc "Double click or hover over the description (if any) of a stylesheet to read more.">
+
+<!ENTITY name.label "Name">
+<!ENTITY desc.label "Description">
+<!ENTITY author.label "Author">
+<!ENTITY enabled.label "Enabled">
+
+<!ENTITY delete.label "Delete">
+<!ENTITY edit.label "Edit">
+
+<!ENTITY import.button "Import Stylesheet">
+<!ENTITY reload.button "Reload Stylesheets">
+<!ENTITY openDir.button "Open CSS Directory">
