@@ -25,10 +25,10 @@
 <!DOCTYPE prefwindow SYSTEM "chrome://gamefox/locale/options/options.dtd">
 
 <prefwindow
-    title="&title;"
+    title="&prefWin.title;"
     id="gamefox-prefwindow"
     buttons="accept,cancel,extra2"
-    buttonlabelextra2="&about.label;..."
+    buttonlabelextra2="&about.button;..."
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"

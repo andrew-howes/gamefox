@@ -1,7 +1,8 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY title "GameFOX">
-<!ENTITY about.label "About">
+<!ENTITY prefWin.title "GameFOX">
+
+<!ENTITY about.button "About">
 
 <!ENTITY paneMain.title "Main">
 <!ENTITY paneStyle.title "Style">
