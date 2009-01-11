@@ -22,7 +22,7 @@
      along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<!DOCTYPE prefwindow SYSTEM "chrome://gamefox/locale/options.dtd">
+<!DOCTYPE prefwindow SYSTEM "chrome://gamefox/locale/options/options.dtd">
 
 <prefwindow
     title="&title;"
@@ -45,7 +45,7 @@
     <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
-    <script type="application/x-javascript" src="chrome://gamefox/content/options.js"/>
+    <script type="application/x-javascript" src="chrome://gamefox/content/options/options.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
 
     <stringbundleset id="strbundles">
@@ -773,25 +773,7 @@
     <vbox id="usergroups" style="height:320px;overflow:auto"/>
   </prefpane>
 
-<!-- M A N A G E -->
-
-  <prefpane id="gamefox-manage-pane" label="&manage.title;" flex="1">
-    <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
-
-    <notificationbox id="manageMsg" flex="1">
-      <groupbox>
-        <caption label="&manage.label;"/>
-
-        <description>&manage.export.desc;</description>
-        <description>&manage.reset.desc;</description>
-      </groupbox>
-
-      <hbox pack="center" style="margin-bottom:40px">
-        <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.button;" icon="open"/>
-        <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.button;" icon="save"/>
-        <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.button;" icon="clear"/>
-      </hbox>
-    </notificationbox>
-  </prefpane>
+  <prefpane id="paneManage" label="&paneManage.title;"
+    src="chrome://gamefox/content/options/manage.xul"/>
 
 </prefwindow>

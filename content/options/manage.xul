@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79:
+
+     Copyright 2008, 2009 Brian Marshall, Michael Ryan
+
+     This file is part of GameFOX.
+
+     GameFOX is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License version 2
+     as published by the Free Software Foundation.
+
+     GameFOX is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/manage.dtd">
+
+<overlay id="managePaneOverlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneManage">
+
+    <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
+
+    <notificationbox id="manageMsg" flex="1">
+      <groupbox>
+        <caption label="&manage.label;"/>
+
+        <description>&export.desc;</description>
+        <description>&reset.desc;</description>
+      </groupbox>
+
+      <hbox pack="center" style="margin-bottom:40px">
+        <button label="&import.button;" icon="open"
+          oncommand="GFprefs.importPrefs(event.target);"/>
+        <button label="&export.button;" icon="save"
+          oncommand="GFprefs.exportPrefs(event.target);"/>
+        <button label="&reset.button;" icon="clear"
+          oncommand="GFprefs.resetPrefs(event.target);"/>
+      </hbox>
+    </notificationbox>
+
+  </prefpane>
+
+</overlay>

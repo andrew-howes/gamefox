@@ -298,7 +298,7 @@ var GFlib =
         notifications: notifications
       };
       args.wrappedJSObject = args;
-      dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options.xul',
+      dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options/options.xul',
           '_blank', 'chrome,centerscreen,toolbar', args);
     }
   },

@@ -3,6 +3,8 @@
 <!ENTITY title "GameFOX">
 <!ENTITY about.label "About">
 
+<!ENTITY paneManage.title "Manage">
+
 <!ENTITY general.label "General">
 
 <!ENTITY main.label "Main">
@@ -179,11 +181,3 @@
 <!ENTITY users.messageGroups.label "Group names on message lists">
 <!ENTITY users.desc "Separate users with commas. List &quot;(tc)&quot; as a user (without quotes) to highlight the topic creator.">
 <!ENTITY users.addGroup.button "Add a Group">
-
-<!ENTITY manage.title "Manage">
-<!ENTITY manage.label "Manage Preferences">
-<!ENTITY manage.export.desc "All options, signatures and user groups can be exported, but stylesheets cannot. You can manually export stylesheets by using the Open CSS Directory button in the Style pane.">
-<!ENTITY manage.reset.desc "You cannot recover your preferences after they have been reset unless you have previously exported them.">
-<!ENTITY manage.import.button "Import Preferences">
-<!ENTITY manage.export.button "Export Preferences">
-<!ENTITY manage.reset.button "Reset Preferences">
