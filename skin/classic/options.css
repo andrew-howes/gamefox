@@ -23,7 +23,7 @@ radio[pane=gamefox-quote-pane]
     -moz-image-region: rect(0px, 96px,  32px, 64px);
 }
 
-radio[pane=gamefox-sig-pane]
+radio[pane=paneSignatures]
 {
     -moz-image-region: rect(0px, 128px,  32px, 96px);
 }

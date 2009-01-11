@@ -3,6 +3,7 @@
 <!ENTITY title "GameFOX">
 <!ENTITY about.label "About">
 
+<!ENTITY paneSignatures.title "Signatures">
 <!ENTITY paneMouse.title "Mouse">
 <!ENTITY paneUsers.title "Users">
 <!ENTITY paneTopics.title "Topics">
@@ -119,25 +120,3 @@
 <!ENTITY quoting.headerItalic.label "Italicize header">
 <!ENTITY quoting.bodyBold.label "Bold message">
 <!ENTITY quoting.bodyItalic.label "Italicize message">
-
-<!ENTITY signatures.title "Signatures">
-<!ENTITY signatures.contentTab.label "Content">
-<!ENTITY signatures.optionsTab.label "Options">
-<!ENTITY signature.defaultSig.label "Default signature">
-<!ENTITY signature.newSig.label "New signature">
-<!ENTITY signature.deleteSig.label "Delete">
-<!ENTITY signature.criteria.label "Criteria:">
-<!ENTITY signature.criteria.desc "Optional fields used to specify when this signature can be used. Separate accounts and boards with commas. You must use your universal account name. Both the board name and ID can be used.">
-<!ENTITY signature.accounts.label "Accounts:">
-<!ENTITY signature.boards.label "Boards:">
-<!ENTITY signature.sig.label "Signature:">
-<!ENTITY signature.grab.button "Grab from GameFAQs">
-<!ENTITY signature.onPostPage.label "Also use on standard GameFAQs post page">
-<!ENTITY signature.extraLineBreak.label "Insert an additional line break before the separator">
-<!ENTITY signature.addition.label "Addition Method">
-<!ENTITY signature.addAfter.label "Append signature after submitting or previewing the post">
-<!ENTITY signature.addBefore.label "Let the signature be there without hitting any goddamn button">
-<!ENTITY signature.selection.label "Selection Mode">
-<!ENTITY signature.firstSig.label "First signature, highest specificity">
-<!ENTITY signature.randomSig.label "Random signature, no specificity">
-<!ENTITY signature.bestRandomSig.label "Random signature, highest specificity">

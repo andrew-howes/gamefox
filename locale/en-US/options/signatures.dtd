@@ -1,0 +1,30 @@
+<!-- vim: set indentexpr=: -->
+
+<!ENTITY contentTab.label "Content">
+<!ENTITY optionsTab.label "Options">
+
+<!ENTITY general.label "General">
+
+<!ENTITY defaultSig.label "Default signature">
+<!ENTITY newSig.label "New signature">
+<!ENTITY deleteSig.label "Delete">
+
+<!ENTITY criteria.label "Criteria:">
+<!ENTITY criteria.desc "Optional fields used to specify when this signature can be used. Separate accounts and boards with commas. You must use your universal account name. Both the board name and ID can be used.">
+<!ENTITY accounts.label "Accounts:">
+<!ENTITY boards.label "Boards:">
+
+<!ENTITY sig.label "Signature:">
+<!ENTITY grab.button "Grab from GameFAQs">
+
+<!ENTITY onPostPage.label "Also use on standard GameFAQs post page">
+<!ENTITY extraLineBreak.label "Insert an additional line break before the separator">
+
+<!ENTITY addition.label "Addition Method">
+<!ENTITY addAfter.label "Append signature after submitting or previewing the post">
+<!ENTITY addBefore.label "Let the signature be there without hitting any goddamn button">
+
+<!ENTITY selection.label "Selection Mode">
+<!ENTITY firstSig.label "First signature, highest specificity">
+<!ENTITY randomSig.label "Random signature, no specificity">
+<!ENTITY bestRandomSig.label "Random signature, highest specificity">
