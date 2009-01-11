@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79:
+
+     Copyright 2005, 2006, 2007, 2008, 2009
+     Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
+
+     This file is part of GameFOX.
+
+     GameFOX is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License version 2
+     as published by the Free Software Foundation.
+
+     GameFOX is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/mouse.dtd">
+
+<overlay id="manageMouseOverlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneMouse">
+
+    <preferences>
+      <!-- Double click actions -->
+      <preference id="topic.dblclick" name="gamefox.topic.dblclick"
+        type="int"/>
+      <preference id="myposts.dblclick" name="gamefox.myposts.dblclick"
+        type="int"/>
+      <preference id="message.header.dblclick"
+        name="gamefox.message.header.dblclick" type="int"/>
+      <preference id="message.dblclick" name="gamefox.message.dblclick"
+        type="bool"/>
+
+      <!-- Main context menu -->
+      <preference id="context.pagelist" name="gamefox.context.pagelist"
+        type="bool"/>
+      <preference id="context.tag" name="gamefox.context.tag" type="bool"/>
+      <preference id="context.track" name="gamefox.context.track" type="bool"/>
+      <preference id="context.quote" name="gamefox.context.quote" type="bool"/>
+      <preference id="context.filter" name="gamefox.context.filter"
+        type="bool"/>
+      <preference id="context.delete" name="gamefox.context.delete"
+        type="bool"/>
+      <preference id="context.usergroups" name="gamefox.context.usergroups"
+        type="bool"/>
+      <preference id="context.breaktags" name="gamefox.context.breaktags"
+        type="bool"/>
+
+      <!-- Sub context menu -->
+      <preference id="context.sidebar" name="gamefox.context.sidebar"
+        type="bool"/>
+      <preference id="context.taglist" name="gamefox.context.taglist"
+        type="bool"/>
+      <preference id="context.accounts" name="gamefox.context.accounts"
+        type="bool"/>
+      <preference id="context.favorites" name="gamefox.context.favorites"
+        type="bool"/>
+
+      <!-- Tags context menu -->
+      <preference id="context.tag.myposts" name="gamefox.context.tag.myposts"
+        type="bool"/>
+      <preference id="context.tag.tracked" name="gamefox.context.tag.tracked"
+        type="bool"/>
+    </preferences>
+
+    <hbox>
+
+      <groupbox flex="1">
+        <caption label="&topicLists.label;"/>
+        <label value="&topicLists.desc;"/>
+
+        <radiogroup class="indent" orient="horizontal"
+          preference="topic.dblclick">
+          <vbox>
+            <radio value="0" label="&doNothing.label;"/>
+            <radio value="1" label="&showPageLinks.label;"/>
+            <radio value="4" label="&toLastPost.label;"/>
+            <radio value="2" label="&toLastPage.label;"/>
+            <radio value="3" label="&tagTopic.label;"/>
+          </vbox>
+        </radiogroup>
+      </groupbox>
+
+      <groupbox flex="1">
+        <caption label="&activeMessages.label;"/>
+        <label value="&activeMessages.desc;"/>
+
+        <radiogroup class="indent" orient="horizontal"
+          preference="myposts.dblclick">
+          <vbox>
+            <radio value="0" label="&doNothing.label;"/>
+            <radio value="1" label="&showPageLinks.label;"/>
+            <radio value="4" label="&toLastPost.label;"/>
+            <radio value="2" label="&toLastPage.label;"/>
+            <radio value="3" label="&tagTopic.label;"/>
+          </vbox>
+        </radiogroup>
+      </groupbox>
+    </hbox>
+
+    <groupbox>
+      <caption label="&messageLists.label;"/>
+      <label value="&messageLists.desc;"/>
+
+      <radiogroup class="indent" preference="message.header.dblclick">
+        <hbox>
+          <radio value="0" label="&doNothing.label;"/>
+          <radio value="1" label="&quickWhois.label;"/>
+        </hbox>
+        <hbox>
+          <radio value="2" label="&quoteMessage.label;"/>
+        </hbox>
+      </radiogroup>
+
+      <checkbox label="&doubleClickQuote.label;"
+        preference="message.dblclick"/>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&menu.label;"/>
+
+      <hbox>
+        <groupbox>
+          <caption label="&mainMenu.label;"/>
+
+          <hbox>
+            <vbox>
+              <checkbox label="&mainMenu.pages.label;"
+                preference="context.pagelist"/>
+              <checkbox label="&mainMenu.tagTopic.label;"
+                preference="context.tag"/>
+              <checkbox label="&mainMenu.trackTopic.label;"
+                preference="context.track"/>
+              <checkbox label="&mainMenu.quote.label;"
+                preference="context.quote"/>
+            </vbox>
+            <vbox>
+              <checkbox label="&mainMenu.filter.label;"
+                preference="context.filter"/>
+              <checkbox label="&mainMenu.delete.label;"
+                preference="context.delete"/>
+              <checkbox label="&mainMenu.userGroups.label;"
+                preference="context.usergroups"/>
+              <checkbox label="&mainMenu.breakTags.label;"
+                preference="context.breaktags"/>
+            </vbox>
+          </hbox>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&submenu.label;"/>
+
+          <hbox>
+            <vbox>
+              <checkbox label="&submenu.sidebar.label;"
+                preference="context.sidebar"/>
+              <checkbox label="&submenu.tagList.label;"
+                preference="context.taglist"/>
+            </vbox>
+            <vbox>
+              <checkbox label="&submenu.accounts.label;"
+                preference="context.accounts"/>
+              <checkbox label="&submenu.favorites.label;"
+                preference="context.favorites"/>
+            </vbox>
+          </hbox>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&tagMenu.label;"/>
+
+          <checkbox label="&tagMenu.activeMessages.label;"
+            preference="context.tag.myposts"/>
+          <checkbox label="&tagMenu.trackedTopics.label;"
+            preference="context.tag.tracked"/>
+        </groupbox>
+      </hbox>
+    </groupbox>
+
+  </prefpane>
+
+</overlay>

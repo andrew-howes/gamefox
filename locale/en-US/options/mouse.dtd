@@ -1,0 +1,40 @@
+<!-- vim: set indentexpr=: -->
+
+<!ENTITY topicLists.label "Topic Lists">
+<!ENTITY topicLists.desc "Double clicking on topic row action:">
+
+<!ENTITY doNothing.label "Do nothing">
+<!ENTITY showPageLinks.label "Show links to topic pages">
+<!ENTITY toLastPage.label "Go to last page">
+<!ENTITY toLastPost.label "Go to last post">
+<!ENTITY tagTopic.label "Tag topic">
+
+<!ENTITY activeMessages.label "Active Messages List">
+<!ENTITY activeMessages.desc "Double clicking on row action:">
+
+<!ENTITY messageLists.label "Message Lists">
+<!ENTITY messageLists.desc "Double clicking on message header action:">
+<!ENTITY quickWhois.label "QuickWhois (display the poster's user information)">
+<!ENTITY quoteMessage.label "Quote message">
+<!ENTITY doubleClickQuote.label "Quote by double clicking on the message">
+
+<!ENTITY menu.label "Context Menu">
+<!ENTITY mainMenu.label "Main">
+<!ENTITY mainMenu.pages.label "Pages">
+<!ENTITY mainMenu.tagTopic.label "Tag Topic">
+<!ENTITY mainMenu.trackTopic.label "Track Topic">
+<!ENTITY mainMenu.quote.label "Quote">
+<!ENTITY mainMenu.filter.label "Filter">
+<!ENTITY mainMenu.delete.label "Delete/Close">
+<!ENTITY mainMenu.userGroups.label "User Groups">
+<!ENTITY mainMenu.breakTags.label "Break HTML Tags">
+
+<!ENTITY submenu.label "Submenu">
+<!ENTITY submenu.sidebar.label "Sidebar">
+<!ENTITY submenu.tagList.label "Tag List">
+<!ENTITY submenu.accounts.label "Accounts">
+<!ENTITY submenu.favorites.label "Favorites">
+
+<!ENTITY tagMenu.label "Tags">
+<!ENTITY tagMenu.activeMessages.label "Active Messages">
+<!ENTITY tagMenu.trackedTopics.label "Tracked Topics">

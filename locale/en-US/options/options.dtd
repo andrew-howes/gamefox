@@ -3,9 +3,10 @@
 <!ENTITY title "GameFOX">
 <!ENTITY about.label "About">
 
-<!ENTITY paneManage.title "Manage">
+<!ENTITY paneMouse.title "Mouse">
 <!ENTITY paneUsers.title "Users">
 <!ENTITY paneTopics.title "Topics">
+<!ENTITY paneManage.title "Manage">
 
 <!ENTITY general.label "General">
 
@@ -140,37 +141,3 @@
 <!ENTITY signature.firstSig.label "First signature, highest specificity">
 <!ENTITY signature.randomSig.label "Random signature, no specificity">
 <!ENTITY signature.bestRandomSig.label "Random signature, highest specificity">
-
-<!ENTITY mouse.title "Mouse">
-<!ENTITY mouse.topicLists.label "Topic Lists">
-<!ENTITY mouse.topicLists.desc "Double clicking on topic row action:">
-<!ENTITY mouse.doNothing.label "Do nothing">
-<!ENTITY mouse.showPageLinks.label "Show links to topic pages">
-<!ENTITY mouse.toLastPage.label "Go to last page">
-<!ENTITY mouse.toLastPost.label "Go to last post">
-<!ENTITY mouse.tagTopic.label "Tag topic">
-<!ENTITY mouse.activeMessages.label "Active Messages List">
-<!ENTITY mouse.activeMessages.desc "Double clicking on row action:">
-<!ENTITY mouse.messageLists.label "Message Lists">
-<!ENTITY mouse.messageLists.desc "Double clicking on message header action:">
-<!ENTITY mouse.quickWhois.label "QuickWhois (display the poster's user information)">
-<!ENTITY mouse.quoteMessage.label "Quote message">
-<!ENTITY mouse.doubleClickQuote.label "Quote by double clicking on the message">
-<!ENTITY mouse.menu.label "Context Menu">
-<!ENTITY mouse.mainMenu.label "Main">
-<!ENTITY mouse.mainMenu.pages.label "Pages">
-<!ENTITY mouse.mainMenu.tagTopic.label "Tag Topic">
-<!ENTITY mouse.mainMenu.trackTopic.label "Track Topic">
-<!ENTITY mouse.mainMenu.quote.label "Quote">
-<!ENTITY mouse.mainMenu.filter.label "Filter">
-<!ENTITY mouse.mainMenu.delete.label "Delete/Close">
-<!ENTITY mouse.mainMenu.userGroups.label "User Groups">
-<!ENTITY mouse.mainMenu.breakTags.label "Break HTML Tags">
-<!ENTITY mouse.submenu.label "Submenu">
-<!ENTITY mouse.submenu.sidebar.label "Sidebar">
-<!ENTITY mouse.submenu.tagList.label "Tag List">
-<!ENTITY mouse.submenu.accounts.label "Accounts">
-<!ENTITY mouse.submenu.favorites.label "Favorites">
-<!ENTITY mouse.tagMenu.label "Tags">
-<!ENTITY mouse.tagMenu.activeMessages.label "Active Messages">
-<!ENTITY mouse.tagMenu.trackedTopics.label "Tracked Topics">
