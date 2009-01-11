@@ -61,12 +61,12 @@ var GFoptions =
         }
 
         // TODO: validate settings from GameFAQs
-        document.getElementById('gamefoxTpcsPerPage').value = topicPage;
-        document.getElementById('gamefoxTpcSortOrder').value = topicSort;
-        document.getElementById('gamefoxMsgsPerPage').value = messagePage;
-        document.getElementById('gamefoxMsgSortOrder').value = messageSort;
-        document.getElementById('gamefoxTimeZone').value = timezone;
-        document.getElementById('gamefoxMsgDisplay').value = userDisplay;
+        document.getElementById('tpcsPerPage').value = topicPage;
+        document.getElementById('tpcSortOrder').value = topicSort;
+        document.getElementById('msgsPerPage').value = messagePage;
+        document.getElementById('msgSortOrder').value = messageSort;
+        document.getElementById('timeZone').value = timezone;
+        document.getElementById('msgDisplay').value = userDisplay;
 
         GFutils.showNotification(boardSettingsMsg,
             strbundle.getString('bsImportSuccess'), 'info');

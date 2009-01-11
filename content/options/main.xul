@@ -490,9 +490,11 @@
 
                 <hbox pack="end">
                   <button id="gamefox-css-grab-bs"
-                    label="&grabSettings.button;" icon="refresh"/>
+                    label="&grabSettings.button;" icon="refresh"
+                    oncommand="GFoptions.importBoardSettings();"/>
                   <button id="gamefox-css-apply-bs"
-                    label="&saveSettings.button;" icon="save"/>
+                    label="&saveSettings.button;" icon="save"
+                    oncommand="GFoptions.exportBoardSettings();"/>
                 </hbox>
 
               </groupbox>
