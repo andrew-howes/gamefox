@@ -3,6 +3,7 @@
 <!ENTITY title "GameFOX">
 <!ENTITY about.label "About">
 
+<!ENTITY paneMain.title "Main">
 <!ENTITY paneStyle.title "Style">
 <!ENTITY paneQuoting.title "Quoting">
 <!ENTITY paneSignatures.title "Signatures">
@@ -10,86 +11,3 @@
 <!ENTITY paneUsers.title "Users">
 <!ENTITY paneTopics.title "Topics">
 <!ENTITY paneManage.title "Manage">
-
-<!ENTITY general.label "General">
-
-<!ENTITY main.label "Main">
-<!ENTITY main.tab.page "Page">
-<!ENTITY main.tab.posting "Posting">
-<!ENTITY main.tab.sidebar "Sidebar">
-<!ENTITY main.tab.board "Board Settings">
-<!ENTITY main.page.customTitles "Custom window titles">
-<!ENTITY main.page.titlePrefixes "Window title page prefixes">
-<!ENTITY main.page.blockAdServers "Block ad servers">
-<!ENTITY main.page.favoritesMenu "Add favorites menu">
-<!ENTITY main.page.topics.caption "Topic Lists">
-<!ENTITY main.page.topics.lastPostLink "Link to last post">
-<!ENTITY main.page.topics.trackedBoardLink "Link to boards (Tracked Topics)">
-<!ENTITY main.page.topics.labelNewPosts "Label new posts (Active Messages)">
-<!ENTITY main.page.topics.pageJumper "Page jumper (Active Messages)">
-<!ENTITY main.page.messages.caption "Message Lists">
-<!ENTITY main.page.messages.tagLink "&quot;Tag Topic&quot; link">
-<!ENTITY main.page.messages.boardNav "Nav links at bottom of page">
-<!ENTITY main.page.messages.headers "Message header links:">
-<!ENTITY main.page.messages.deleteLink "Delete/Close">
-<!ENTITY main.page.messages.filterLink "Filter">
-<!ENTITY main.page.messages.quoteLink "Quote">
-<!ENTITY main.page.messages.numberMessages "Number messages">
-<!ENTITY main.page.messages.labelTc "Label topic creator">
-<!ENTITY main.page.pages.caption "Topic Pagination">
-<!ENTITY main.page.pages.auto "Automatically add page numbers on topic list">
-<!ENTITY main.page.pages.location.label "Location:">
-<!ENTITY main.page.pages.location.right "Right of topic title">
-<!ENTITY main.page.pages.location.below "Below topic title">
-<!ENTITY main.page.pages.location.newRow "New row below topic title">
-<!ENTITY main.page.pages.format.label "Format:">
-<!ENTITY main.page.pages.format.prefix "Prefix:">
-<!ENTITY main.page.pages.format.delimiter "Delimiter:">
-<!ENTITY main.page.pages.format.suffix "Suffix:">
-<!ENTITY main.posting.postButton "&quot;Post Message&quot; (skip preview) button">
-<!ENTITY main.posting.characterCounters "Character counters">
-<!ENTITY main.posting.htmlButtons.label "HTML tag buttons:">
-<!ENTITY main.posting.htmlButtons.standard "Standard">
-<!ENTITY main.posting.htmlButtons.extended "Extended">
-<!ENTITY main.posting.htmlButtons.gfcode "GFCode">
-<!ENTITY main.posting.htmlButtons.breakTags "Break Tags">
-<!ENTITY main.posting.quickpost.caption "QuickPost">
-<!ENTITY main.posting.quickpost.onTopicLists "QuickPost link on topic lists">
-<!ENTITY main.posting.quickpost.onMessageLists "QuickPost form on message lists">
-<!ENTITY main.posting.quickpost.extraButtons "Preview and reset buttons">
-<!ENTITY main.posting.quickpost.confirmReset "Confirm resetting post">
-<!ENTITY main.posting.quickpost.newSigOnReset "Choose a new signature when resetting post">
-<!ENTITY main.posting.quickpost.afterTopic.label "After QuickPosting a topic:">
-<!ENTITY main.posting.quickpost.afterTopic.toTopic "Go to topic">
-<!ENTITY main.posting.quickpost.afterTopic.toBoard "Go to board">
-<!ENTITY main.posting.quickpost.afterMessage.label "After QuickPosting a message:">
-<!ENTITY main.posting.quickpost.afterMessage.toLastPost "Go to last post">
-<!ENTITY main.posting.quickpost.aftermessage.toSamePage "Go back to same page">
-<!ENTITY main.posting.quickpost.aftermessage.toFirstPage "Go to first page">
-<!ENTITY main.sidebar.caption "Sections">
-<!ENTITY main.sidebar.navLinks "Navigation links">
-<!ENTITY main.sidebar.userLinks "User links">
-<!ENTITY main.sidebar.favoriteList "Favorite boards list">
-<!ENTITY main.sidebar.gameSearch "Game search">
-<!ENTITY main.sidebar.goToBoardId "Go to board ID">
-<!ENTITY main.sidebar.loginForm "Login form">
-<!ENTITY main.sidebar.accountSwitcher "Account switcher">
-<!ENTITY main.sidebar.tagList "Tags list">
-<!ENTITY main.sidebar.trackedList "Tracked topics list">
-<!ENTITY main.boardSettings.caption "Board Settings">
-<!ENTITY main.boardSettings.topicsPerPage.label "Topics Per Page">
-<!ENTITY main.boardSettings.topicSort.label "Topic Sort">
-<!ENTITY main.boardSettings.topicSort.firstOldest "By First Post, Oldest First">
-<!ENTITY main.boardSettings.topicSort.firstNewest "By First Post, Newest First">
-<!ENTITY main.boardSettings.topicSort.lastOldest "By Last Post, Oldest First">
-<!ENTITY main.boardSettings.topicSort.lastNewest "By Last Post, Newest First">
-<!ENTITY main.boardSettings.messagesPerPage.label "Messages Per Page">
-<!ENTITY main.boardSettings.messageSort.label "Message Sort">
-<!ENTITY main.boardSettings.messageSort.oldestFirst "Oldest First">
-<!ENTITY main.boardSettings.messageSort.newestFirst "Newest First">
-<!ENTITY main.boardSettings.timezone.label "Time Zone">
-<!ENTITY main.boardSettings.messageDataDisplay.label "Message Poster Display">
-<!ENTITY main.boardSettings.messageDataDisplay.left "Left of Message">
-<!ENTITY main.boardSettings.messageDataDisplay.above "Above Message">
-<!ENTITY main.boardSettings.grab.button "Grab from GameFAQs">
-<!ENTITY main.boardSettings.save.button "Save to GameFAQs">

@@ -1,0 +1,509 @@
+<?xml version="1.0"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79:
+
+     Copyright 2005, 2006, 2007, 2008, 2009
+     Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
+
+     This file is part of GameFOX.
+
+     GameFOX is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License version 2
+     as published by the Free Software Foundation.
+
+     GameFOX is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/main.dtd">
+
+<overlay id="mainPaneOverlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneMain">
+
+    <preferences>
+      <!-- Page -->
+      <preference id="elements.titlechange" name="gamefox.elements.titlechange"
+        type="bool"/>
+      <preference id="elements.titleprefix" name="gamefox.elements.titleprefix"
+        type="bool"/>
+      <preference id="elements.stopads" name="gamefox.elements.stopads"
+        type="bool"/>
+      <preference id="elements.favorites" name="gamefox.elements.favorites"
+        type="bool"/>
+
+      <preference id="elements.topics.lastpostlink"
+        name="gamefox.elements.topics.lastpostlink" type="bool"/>
+      <preference id="elements.tracked.boardlink"
+        name="gamefox.elements.tracked.boardlink" type="bool"/>
+      <preference id="elements.aml.marknewposts"
+        name="gamefox.elements.aml.marknewposts" type="bool"/>
+      <preference id="elements.aml.pagejumper"
+        name="gamefox.elements.aml.pagejumper" type="bool"/>
+
+      <preference id="elements.tag.link" name="gamefox.elements.tag.link"
+        type="bool"/>
+      <preference id="elements.boardnav" name="gamefox.elements.boardnav"
+        type="bool"/>
+
+      <preference id="elements.deletelink" name="gamefox.elements.deletelink"
+        type="bool"/>
+      <preference id="elements.filterlink" name="gamefox.elements.filterlink"
+        type="bool"/>
+      <preference id="elements.quotelink" name="gamefox.elements.quotelink"
+        type="bool"/>
+
+      <preference id="elements.msgnum" name="gamefox.elements.msgnum"
+        type="bool"/>
+      <preference id="elements.msgnum.style"
+        name="gamefox.elements.msgnum.style" type="int"/>
+
+      <preference id="elements.marktc" name="gamefox.elements.marktc"
+        type="bool"/>
+      <preference id="elements.marktc.marker"
+        name="gamefox.elements.marktc.marker" type="string"/>
+
+      <preference id="paging.auto" name="gamefox.paging.auto" type="bool"/>
+      <preference id="paging.location" name="gamefox.paging.location"
+        type="int"/>
+      <preference id="paging.prefix" name="gamefox.paging.prefix"
+        type="string"/>
+      <preference id="paging.separator" name="gamefox.paging.separator"
+        type="string"/>
+      <preference id="paging.suffix" name="gamefox.paging.suffix"
+        type="string"/>
+
+      <!-- Posting -->
+      <preference id="elements.quickpost.button"
+        name="gamefox.elements.quickpost.button" type="bool"/>
+      <preference id="elements.charcounts" name="gamefox.elements.charcounts"
+        type="bool"/>
+
+      <preference id="elements.quickpost.htmlbuttons"
+        name="gamefox.elements.quickpost.htmlbuttons" type="bool"/>
+      <preference id="elements.quickpost.htmlbuttons.extended"
+        name="gamefox.elements.quickpost.htmlbuttons.extended" type="bool"/>
+      <preference id="elements.quickpost.htmlbuttons.gfcode"
+        name="gamefox.elements.quickpost.htmlbuttons.gfcode" type="bool"/>
+      <preference id="elements.quickpost.htmlbuttons.breaktags"
+        name="gamefox.elements.quickpost.htmlbuttons.breaktags" type="bool"/>
+
+      <preference id="elements.quickpost.link"
+        name="gamefox.elements.quickpost.link" type="bool"/>
+      <preference id="elements.quickpost.form"
+        name="gamefox.elements.quickpost.form" type="bool"/>
+      <preference id="elements.quickpost.otherbuttons"
+        name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
+      <preference id="elements.quickpost.resetconfirm"
+        name="gamefox.elements.quickpost.resetconfirm" type="bool"/>
+      <preference id="elements.quickpost.resetnewsig"
+        name="gamefox.elements.quickpost.resetnewsig" type="bool"/>
+
+      <preference id="elements.quickpost.aftertopic"
+        name="gamefox.elements.quickpost.aftertopic" type="int"/>
+      <preference id="elements.quickpost.aftermessage"
+        name="gamefox.elements.quickpost.aftermessage" type="int"/>
+
+      <!-- Sidebar -->
+      <preference id="sidebar.gamefaqsnav" name="gamefox.sidebar.gamefaqsnav"
+        type="bool"/>
+      <preference id="sidebar.userlinks" name="gamefox.sidebar.userlinks"
+        type="bool"/>
+      <preference id="sidebar.favorites" name="gamefox.sidebar.favorites"
+        type="bool"/>
+      <preference id="sidebar.search" name="gamefox.sidebar.search"
+        type="bool"/>
+      <preference id="sidebar.gotoboard" name="gamefox.sidebar.gotoboard"
+        type="bool"/>
+      <preference id="sidebar.login" name="gamefox.sidebar.login" type="bool"/>
+      <preference id="sidebar.accounts" name="gamefox.sidebar.accounts"
+        type="bool"/>
+      <preference id="sidebar.tags" name="gamefox.sidebar.tags" type="bool"/>
+      <preference id="sidebar.tracked" name="gamefox.sidebar.tracked"
+        type="bool"/>
+
+      <!-- Board Settings -->
+      <preference id="tpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
+      <preference id="tpcSortOrder" name="gamefox.tpcSortOrder" type="int"/>
+      <preference id="msgsPerPage" name="gamefox.msgsPerPage" type="int"/>
+      <preference id="msgSortOrder" name="gamefox.msgSortOrder" type="int"/>
+      <preference id="timeZone" name="gamefox.timeZone" type="int"/>
+      <preference id="msgDisplay" name="gamefox.msgDisplay" type="int"/>
+    </preferences>
+
+    <tabbox id="mainPrefs" flex="1">
+      <tabs id="tabsElement" tabGroup="main">
+        <tab id="pageTab" label="&pageTab.label;"/>
+        <tab id="postingTab" label="&postingTab.label;"/>
+        <tab id="sidebarTab" label="&sidebarTab.label;"/>
+        <tab id="boardSettingsTab" label="&boardSettingsTab.label;"/>
+      </tabs>
+
+      <tabpanels flex="1">
+
+        <!-- Page -->
+        <tabpanel orient="vertical" flex="1">
+
+          <vbox>
+            <groupbox>
+              <caption label="&general.label;"/>
+
+              <hbox>
+                <vbox flex="1">
+                  <checkbox label="&customTitles.label;"
+                    preference="elements.titlechange"/>
+                  <checkbox label="&titlePrefixes.label;"
+                    preference="elements.titleprefix"/>
+                </vbox>
+                <vbox flex="1">
+                  <checkbox label="&blockAdServers.label;"
+                    preference="elements.stopads"/>
+                  <checkbox label="&favoritesMenu.label;"
+                    preference="elements.favorites"/>
+                </vbox>
+              </hbox>
+            </groupbox>
+
+            <grid>
+              <columns>
+                <column flex="1"/>
+                <column flex="1"/>
+              </columns>
+              <rows>
+                <row>
+
+                  <groupbox>
+                    <caption label="&topicLists.label;"/>
+
+                    <vbox>
+                      <checkbox label="&lastPostLink.label;"
+                        preference="elements.topics.lastpostlink"/>
+                      <checkbox label="&trackedBoardLink.label;"
+                        preference="elements.tracked.boardlink"/>
+                      <checkbox label="&labelNewPosts.label;"
+                        preference="elements.aml.marknewposts"/>
+                      <checkbox label="&pageJumper.label;"
+                        preference="elements.aml.pagejumper"/>
+                    </vbox>
+                  </groupbox>
+
+                  <groupbox>
+                    <caption label="&messageLists.label;"/>
+
+                    <vbox>
+                      <checkbox label="&tagLink.label;"
+                        preference="elements.tag.link"/>
+                      <checkbox label="&boardNav.label;"
+                        preference="elements.boardnav"/>
+
+                      <label value="&messageHeaderLinks.label;"/>
+
+                      <hbox class="indent">
+                        <checkbox label="&deleteLink.label;"
+                          preference="elements.deletelink"/>
+                        <checkbox label="&filterLink.label;"
+                          preference="elements.filterlink"/>
+                        <checkbox label="&quoteLink.label;"
+                          preference="elements.quotelink"/>
+                      </hbox>
+
+                      <checkbox flex="1" label="&numberMessages.label;"
+                        preference="elements.msgnum"/>
+
+                      <hbox class="indent" align="baseline">
+                        <menulist preference="elements.msgnum.style">
+                          <menupopup>
+                            <menuitem value="0" label="message detail (link), #001"/>
+                            <menuitem value="1" label="#001, message detail (link)"/>
+                            <menuitem value="2" label="#001 (link)"/>
+                            <menuitem value="3" label="message #001 (link)"/>
+                          </menupopup>
+                        </menulist>
+                      </hbox>
+
+                      <hbox align="center">
+                        <checkbox label="&labelTc.label;"
+                          preference="elements.marktc"/>
+                        <textbox preference="elements.marktc.marker" size="3"/>
+                      </hbox>
+                    </vbox>
+                  </groupbox>
+                </row>
+              </rows>
+            </grid>
+
+            <groupbox>
+              <caption label="&topicPagination.label;"/>
+
+              <checkbox label="&autoPagination.label;"
+                preference="paging.auto"/>
+
+              <hbox align="center">
+                <label value="&location.label;"/>
+
+                <radiogroup orient="horizontal"
+                  preference="paging.location">
+                  <radio value="1" label="&locationRight.label;" flex="1"/>
+                  <radio value="2" label="&locationBelow.label;" flex="1"/>
+                  <radio value="0" label="&locationNewRow.label;" flex="1"/>
+                </radiogroup>
+              </hbox>
+
+              <hbox align="center">
+                <label value="&format.label;"/>
+
+                <spacer width="8px"/>
+
+                <label value="&prefix.label;"/>
+                <textbox preference="paging.prefix" size="5"
+                  flex="30"/>
+
+                <spacer flex="1"/>
+
+                <label value="&delimiter.label;"/>
+                <textbox preference="paging.separator" size="1"
+                  flex="2"/>
+
+                <spacer flex="1"/>
+
+                <label value="&suffix.label;"/>
+                <textbox preference="paging.suffix" size="4"
+                  flex="24"/>
+
+                <spacer width="8px"/>
+              </hbox>
+            </groupbox>
+
+          </vbox>
+        </tabpanel>
+
+        <!-- Posting -->
+        <tabpanel orient="vertical" flex="1">
+          <vbox>
+            <groupbox>
+              <caption label="&general.label;"/>
+
+              <checkbox label="&postButton.label;"
+                preference="elements.quickpost.button"/>
+              <checkbox label="&characterCounters.label;"
+                preference="elements.quickpost.charcounts"/>
+
+              <label value="&htmlButtons.label;"/>
+              <hbox class="indent">
+                <checkbox label="&standard.label;"
+                  preference="elements.quickpost.htmlbuttons"/>
+                <checkbox label="&extended.label;"
+                  preference="elements.quickpost.htmlbuttons.extended"/>
+                <checkbox label="&gfcode.label;"
+                  preference="elements.quickpost.htmlbuttons.gfcode"/>
+                <checkbox label="&breakTags.label;"
+                  preference="elements.quickpost.htmlbuttons.breaktags"/>
+              </hbox>
+            </groupbox>
+
+            <groupbox>
+              <caption label="&quickpost.label;"/>
+
+              <checkbox label="&onTopicLists.label;"
+                preference="elements.quickpost.link"/>
+              <checkbox label="&onMessageLists.label;"
+                preference="elements.quickpost.form"/>
+              <checkbox label="&previewAndReset.label;"
+                preference="elements.quickpost.otherbuttons"/>
+              <checkbox label="&confirmReset.label;"
+                preference="elements.quickpost.resetconfirm"/>
+              <checkbox label="&newSigOnReset.label;"
+                preference="elements.quickpost.resetnewsig"/>
+
+              <label value="&afterTopic.label;"/>
+              <radiogroup class="indent" orient="horizontal"
+                preference="elements.quickpost.aftertopic">
+                <radio value="0" label="&toTopic.label;"/>
+                <radio value="1" label="&toBoard.label;"/>
+              </radiogroup>
+
+              <label value="&afterMessage.label;"/>
+              <radiogroup class="indent" orient="horizontal"
+                preference="elements.quickpost.aftermessage">
+                <radio value="0" label="&toLastPost.label;"/>
+                <radio value="1" label="&toSamePage.label;"/>
+                <radio value="2" label="&toFirstPage.label;"/>
+              </radiogroup>
+
+            </groupbox>
+          </vbox>
+        </tabpanel>
+
+        <!-- Sidebar -->
+        <tabpanel orient="vertical" flex="1">
+          <vbox>
+            <groupbox>
+              <caption label="&sections.label;"/>
+
+              <checkbox label="&navLinks.label;"
+                preference="sidebar.gamefaqsnav"/>
+              <checkbox label="&userLinks.label;"
+                preference="sidebar.userlinks"/>
+              <checkbox label="&favoritesList.label;"
+                preference="sidebar.favorites"/>
+              <checkbox label="&gameSearch.label;"
+                preference="sidebar.search"/>
+              <checkbox label="&toBoardId.label;"
+                preference="sidebar.gotoboard"/>
+              <checkbox label="&loginForm.label;" preference="sidebar.login"/>
+              <checkbox label="&accountSwitcher.label;"
+                preference="sidebar.accounts"/>
+              <checkbox label="&tagsList.label;" preference="sidebar.tags"/>
+              <checkbox label="&trackedList.label;"
+                preference="sidebar.tracked"/>
+            </groupbox>
+          </vbox>
+        </tabpanel>
+
+        <!-- Board Settings -->
+        <tabpanel orient="vertical" flex="1">
+          <notificationbox id="boardSettingsMsg" flex="1">
+            <vbox>
+              <groupbox flex="1">
+                <caption label="&boardSettings.label;"/>
+
+                <grid>
+                  <columns>
+                    <column/>
+                    <column flex="1"/>
+                  </columns>
+                  <rows>
+
+                    <row align="center">
+                      <label value="&topicsPerPage.label;"/>
+
+                      <menulist preference="tpcsPerPage" id="topicpage"
+                        flex="1">
+                        <menupopup>
+                          <menuitem value="10" label="10"/>
+                          <menuitem value="20" label="20"/>
+                          <menuitem value="30" label="30"/>
+                          <menuitem value="40" label="40"/>
+                          <menuitem value="50" label="50"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+
+                    <row align="center">
+                      <label value="&topicSort.label;"/>
+
+                      <menulist preference="tpcSortOrder" id="topicsort"
+                        flex="1">
+                        <menupopup>
+                          <menuitem value="1" label="&firstOldest.label;"/>
+                          <menuitem value="2" label="&firstNewest.label;"/>
+                          <menuitem value="3" label="&lastOldest.label;"/>
+                          <menuitem value="4" label="&lastNewest.label;"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+
+                    <row align="center">
+                      <label value="&messagesPerPage.label;"/>
+
+                      <menulist preference="msgsPerPage" id="messagepage"
+                        flex="1">
+                        <menupopup>
+                          <menuitem value="10" label="10"/>
+                          <menuitem value="20" label="20"/>
+                          <menuitem value="30" label="30"/>
+                          <menuitem value="40" label="40"/>
+                          <menuitem value="50" label="50"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+
+                    <row align="center">
+                      <label value="&messageSort.label;"/>
+
+                      <menulist preference="msgSortOrder" id="messagesort"
+                        flex="1">
+                        <menupopup>
+                          <menuitem value="1" label="&oldestFirst.label;"/>
+                          <menuitem value="2" label="&newestFirst.label;"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+
+                    <row align="center">
+                      <label value="&timeZone.label;"/>
+                      <menulist preference="timeZone" id="timezone" flex="1">
+                        <menupopup>
+                          <menuitem value="-720" label="GMT -12"/>
+                          <menuitem value="-660" label="GMT -11"/>
+                          <menuitem value="-600" label="GMT -10"/>
+                          <menuitem value="-540" label="GMT -9"/>
+                          <menuitem value="-480" label="GMT -8"/>
+                          <menuitem value="-420" label="GMT -7"/>
+                          <menuitem value="-360" label="GMT -6"/>
+                          <menuitem value="-300" label="GMT -5"/>
+                          <menuitem value="-240" label="GMT -4"/>
+                          <menuitem value="-210" label="GMT -3:30"/>
+                          <menuitem value="-180" label="GMT -3"/>
+                          <menuitem value="-120" label="GMT -2"/>
+                          <menuitem value="-60" label="GMT -1"/>
+                          <menuitem value="0" label="GMT +0"/>
+                          <menuitem value="60" label="GMT +1"/>
+                          <menuitem value="120" label="GMT +2"/>
+                          <menuitem value="180" label="GMT +3"/>
+                          <menuitem value="240" label="GMT +4"/>
+                          <menuitem value="300" label="GMT +5"/>
+                          <menuitem value="330" label="GMT +5:30"/>
+                          <menuitem value="360" label="GMT +6"/>
+                          <menuitem value="390" label="GMT +6:30"/>
+                          <menuitem value="420" label="GMT +7"/>
+                          <menuitem value="480" label="GMT +8"/>
+                          <menuitem value="540" label="GMT +9"/>
+                          <menuitem value="570" label="GMT +9:30"/>
+                          <menuitem value="600" label="GMT +10"/>
+                          <menuitem value="660" label="GMT +11"/>
+                          <menuitem value="720" label="GMT +12"/>
+                          <menuitem value="780" label="GMT +13"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+
+                    <row align="center">
+                      <label value="&messageDataDisplay.label;"/>
+
+                      <menulist preference="msgDisplay" id="userdisplay"
+                        flex="1">
+                        <menupopup>
+                          <menuitem value="0" label="&leftOfMessage.label;"/>
+                          <menuitem value="1" label="&aboveMessage.label;"/>
+                        </menupopup>
+                      </menulist>
+                    </row>
+
+                  </rows>
+                </grid>
+
+                <hbox pack="end">
+                  <button id="gamefox-css-grab-bs"
+                    label="&grabSettings.button;" icon="refresh"/>
+                  <button id="gamefox-css-apply-bs"
+                    label="&saveSettings.button;" icon="save"/>
+                </hbox>
+
+              </groupbox>
+
+            </vbox>
+          </notificationbox>
+        </tabpanel>
+
+      </tabpanels>
+    </tabbox>
+
+  </prefpane>
+
+</overlay>

@@ -1,0 +1,113 @@
+<!-- vim: set indentexpr=: -->
+
+<!ENTITY pageTab.label "Page">
+<!ENTITY postingTab.label "Posting">
+<!ENTITY sidebarTab.label "Sidebar">
+<!ENTITY boardSettingsTab.label "Board Settings">
+
+<!ENTITY general.label "General">
+
+<!-- Page -->
+<!ENTITY customTitles.label "Custom window titles">
+<!ENTITY titlePrefixes.label "Window title page prefixes">
+<!ENTITY blockAdServers.label "Block ad servers">
+<!ENTITY favoritesMenu.label "Add favorites menu">
+
+<!ENTITY topicLists.label "Topic Lists">
+
+<!ENTITY lastPostLink.label "Link to last post">
+<!ENTITY trackedBoardLink.label "Link to boards (Tracked Topics)">
+<!ENTITY labelNewPosts.label "Label new posts (Active Messages)">
+<!ENTITY pageJumper.label "Page jumper (Active Messages)">
+
+<!ENTITY messageLists.label "Message Lists">
+
+<!ENTITY tagLink.label "Tag Topic link">
+<!ENTITY boardNav.label "Nav links at bottom of page">
+
+<!ENTITY messageHeaderLinks.label "Message header links:">
+<!ENTITY deleteLink.label "Delete/Close">
+<!ENTITY filterLink.label "Filter">
+<!ENTITY quoteLink.label "Quote">
+
+<!ENTITY numberMessages.label "Number messages">
+<!ENTITY labelTc.label "Label topic creator">
+
+<!ENTITY topicPagination.label "Topic Pagination">
+
+<!ENTITY autoPagination.label "Automatically add page jumpers on topic lists">
+
+<!ENTITY location.label "Location:">
+<!ENTITY locationRight.label "Right of topic title">
+<!ENTITY locationBelow.label "Below topic title">
+<!ENTITY locationNewRow.label "New row below topic title">
+
+<!ENTITY format.label "Format:">
+<!ENTITY prefix.label "Prefix:">
+<!ENTITY delimiter.label "Delimiter:">
+<!ENTITY suffix.label "Suffix:">
+
+<!-- Posting -->
+<!ENTITY postButton.label "Post Message button">
+<!ENTITY characterCounters.label "Character counters">
+
+<!ENTITY htmlButtons.label "HTML tag buttons:">
+<!ENTITY standard.label "Standard">
+<!ENTITY extended.label "Extended">
+<!ENTITY gfcode.label "GFCode">
+<!ENTITY breakTags.label "Break Tags">
+
+<!ENTITY quickpost.label "QuickPost">
+
+<!ENTITY onTopicLists.label "QuickPost link on topic lists">
+<!ENTITY onMessageLists.label "QuickPost form on message lists">
+<!ENTITY previewAndReset.label "Preview and reset buttons">
+<!ENTITY confirmReset.label "Confirm resetting post">
+<!ENTITY newSigOnReset.label "Choose a new signature when resetting post">
+
+<!ENTITY afterTopic.label "After QuickPosting a topic:">
+<!ENTITY toTopic.label "Go to topic">
+<!ENTITY toBoard.label "Go to board">
+<!ENTITY afterMessage.label "After QuickPosting a message:">
+<!ENTITY toLastPost.label "Go to last post">
+<!ENTITY toSamePage.label "Go back to same page">
+<!ENTITY toFirstPage.label "Go to first page">
+
+<!-- Sidebar -->
+<!ENTITY sections.label "Sections">
+
+<!ENTITY navLinks.label "Navigation links">
+<!ENTITY userLinks.label "User links">
+<!ENTITY favoritesList.label "Favorite boards list">
+<!ENTITY gameSearch.label "Game search">
+<!ENTITY toBoardId.label "Go to board ID">
+<!ENTITY loginForm.label "Login form">
+<!ENTITY accountSwitcher.label "Account switcher">
+<!ENTITY tagsList.label "Tags list">
+<!ENTITY trackedList.label "Tracked topics list">
+
+<!-- Board Settings -->
+<!ENTITY boardSettings.label "Board Settings">
+
+<!ENTITY topicsPerPage.label "Topics Per Page">
+
+<!ENTITY topicSort.label "Topic Sort">
+<!ENTITY firstOldest.label "By First Post, Oldest First">
+<!ENTITY firstNewest.label "By First Post, Newest First">
+<!ENTITY lastOldest.label "By Last Post, Oldest First">
+<!ENTITY lastNewest.label "By Last Post, Newest First">
+
+<!ENTITY messagesPerPage.label "Messages Per Page">
+
+<!ENTITY messageSort.label "Message Sort">
+<!ENTITY oldestFirst.label "Oldest First">
+<!ENTITY newestFirst.label "Newest First">
+
+<!ENTITY timeZone.label "Time Zone">
+
+<!ENTITY messageDataDisplay.label "Message Poster Display">
+<!ENTITY leftOfMessage.label "Left of Message">
+<!ENTITY aboveMessage.label "Above Message">
+
+<!ENTITY grabSettings.button "Grab from GameFAQs">
+<!ENTITY saveSettings.button "Save to GameFAQs">
