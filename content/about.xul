@@ -50,13 +50,13 @@
     </hbox>
     <label id="version" value=""/>
 
-    <label class="subtitle" value="&currentDevs.label;:"/>
+    <label class="subtitle" value="&currentDevs.label;"/>
     <vbox id="currentDeveloperBox" class="boxIndent"/>
 
-    <label class="subtitle" value="&previousDevs.label;:"/>
+    <label class="subtitle" value="&previousDevs.label;"/>
     <vbox id="previousDeveloperBox" class="boxIndent"/>
 
-    <label class="subtitle" value="&contributors.label;:"/>
+    <label class="subtitle" value="&contributors.label;"/>
     <vbox id="contributorBox" class="boxIndent"/>
   </vbox>
 

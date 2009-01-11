@@ -86,110 +86,104 @@
 <!ENTITY main.boardSettings.grab.button "Grab from GameFAQs">
 <!ENTITY main.boardSettings.save.button "Save to GameFAQs">
 
-<!ENTITY style.label "Style">
-<!ENTITY style.deschelp "Double click or hover over the description (if any) of a stylesheet to read more.">
-<!ENTITY style.disablegamefaqscss "Disable main GameFAQs stylesheets">
-<!ENTITY style.stylesheets.label "Stylesheets">
-<!ENTITY style.tree.name "Name">
-<!ENTITY style.tree.desc "Description">
-<!ENTITY style.tree.author "Author">
-<!ENTITY style.tree.enabled "Enabled">
-<!ENTITY style.tree.delete "Delete">
-<!ENTITY style.tree.edit "Edit">
-<!ENTITY style.import "Import Stylesheet">
-<!ENTITY style.reload "Reload Stylesheets">
-<!ENTITY style.edit "Open CSS Directory">
+<!ENTITY style.title "Style">
+<!ENTITY style.disableMainStyles.label "Disable main GameFAQs stylesheets">
+<!ENTITY style.tree.label "Stylesheets">
+<!ENTITY style.tree.desc "Double click or hover over the description (if any) of a stylesheet to read more.">
+<!ENTITY style.name.label "Name">
+<!ENTITY style.desc.label "Description">
+<!ENTITY style.author.label "Author">
+<!ENTITY style.enabled.label "Enabled">
+<!ENTITY style.delete.label "Delete">
+<!ENTITY style.edit.label "Edit">
+<!ENTITY style.import.button "Import Stylesheet">
+<!ENTITY style.reload.button "Reload Stylesheets">
+<!ENTITY style.openDir.button "Open CSS Directory">
 
-<!ENTITY quoting.label "Quoting">
-<!ENTITY quoting.header.caption "Header">
-<!ENTITY quoting.header.username "Poster username">
-<!ENTITY quoting.header.date "Post date">
-<!ENTITY quoting.header.num "Post number">
-<!ENTITY quoting.body.caption "Body">
-<!ENTITY quoting.body.removesig "Remove signature">
-<!ENTITY quoting.style.caption "Style">
-<!ENTITY quoting.style.gfcode.label "GFCode tags (&lt;i&gt;, &lt;p&gt; and &lt;strong&gt;)">
-<!ENTITY quoting.style.regular.label "Classic tags (&lt;b&gt; and &lt;i&gt;)">
-<!ENTITY quoting.style.boldheader "Bold header">
-<!ENTITY quoting.style.italicheader "Italicize header">
-<!ENTITY quoting.style.boldmessage "Bold message">
-<!ENTITY quoting.style.italicmessage "Italicize message">
+<!ENTITY quoting.title "Quoting">
+<!ENTITY quoting.header.label "Header">
+<!ENTITY quoting.includeUsername.label "Poster username">
+<!ENTITY quoting.includeDate.label "Post date">
+<!ENTITY quoting.includeNumber.label "Post number">
+<!ENTITY quoting.body.label "Body">
+<!ENTITY quoting.removeSig.label "Remove signature">
+<!ENTITY quoting.format.label "Format">
+<!ENTITY quoting.useGFCode.label "GFCode tags (&lt;i&gt;, &lt;p&gt; and &lt;strong&gt;)">
+<!ENTITY quoting.useClassic.label "Classic tags (&lt;b&gt; and &lt;i&gt;)">
+<!ENTITY quoting.headerBold.label "Bold header">
+<!ENTITY quoting.headerItalic.label "Italicize header">
+<!ENTITY quoting.bodyBold.label "Bold message">
+<!ENTITY quoting.bodyItalic.label "Italicize message">
 
-<!ENTITY signature.label "Signatures">
-<!ENTITY signature.content.label "Content">
-<!ENTITY signature.options.label "Options">
-<!ENTITY signature.list.default "Default signature">
-<!ENTITY signature.list.new "New signature">
-<!ENTITY signature.list.delete "Delete">
+<!ENTITY signatures.title "Signatures">
+<!ENTITY signatures.contentTab.label "Content">
+<!ENTITY signatures.optionsTab.label "Options">
+<!ENTITY signature.defaultSig.label "Default signature">
+<!ENTITY signature.newSig.label "New signature">
+<!ENTITY signature.deleteSig.label "Delete">
 <!ENTITY signature.criteria.label "Criteria:">
 <!ENTITY signature.criteria.desc "Optional fields used to specify when this signature can be used. Separate accounts and boards with commas. You must use your universal account name. Both the board name and ID can be used.">
-<!ENTITY signature.criteria.accounts.label "Accounts:">
-<!ENTITY signature.criteria.boards.label "Boards:">
+<!ENTITY signature.accounts.label "Accounts:">
+<!ENTITY signature.boards.label "Boards:">
 <!ENTITY signature.sig.label "Signature:">
-<!ENTITY signature.grab.label "Grab from GameFAQs">
-<!ENTITY signature.applyeverywhere.label "Also use on standard GameFAQs post page">
-<!ENTITY signature.newline.label "Insert an additional line break before the separator">
-<!ENTITY signature.addition "Addition Method">
-<!ENTITY signature.addafter "Append signature after submitting or previewing the post">
-<!ENTITY signature.addbefore "Let the signature be there without hitting any goddamn button">
-<!ENTITY signature.selection "Selection Mode">
-<!ENTITY signature.selection.first "First signature, highest specificity">
-<!ENTITY signature.selection.anyrandom "Random signature, no specificity">
-<!ENTITY signature.selection.bestrandom "Random signature, highest specificity">
+<!ENTITY signature.grab.button "Grab from GameFAQs">
+<!ENTITY signature.onPostPage.label "Also use on standard GameFAQs post page">
+<!ENTITY signature.extraLineBreak.label "Insert an additional line break before the separator">
+<!ENTITY signature.addition.label "Addition Method">
+<!ENTITY signature.addAfter.label "Append signature after submitting or previewing the post">
+<!ENTITY signature.addBefore.label "Let the signature be there without hitting any goddamn button">
+<!ENTITY signature.selection.label "Selection Mode">
+<!ENTITY signature.firstSig.label "First signature, highest specificity">
+<!ENTITY signature.randomSig.label "Random signature, no specificity">
+<!ENTITY signature.bestRandomSig.label "Random signature, highest specificity">
 
-<!ENTITY mouse.label "Mouse">
-<!ENTITY mouse.topics.caption "Topic Lists">
-<!ENTITY mouse.topics.label "Double clicking on topic row action:">
-<!ENTITY mouse.topics.radio.nothing "Do nothing">
-<!ENTITY mouse.topics.radio.paginate "Show links to topic pages">
-<!ENTITY mouse.topics.radio.lastpage "Go to last page">
-<!ENTITY mouse.topics.radio.lastpost "Go to last post">
-<!ENTITY mouse.topics.radio.tagtopic "Tag topic">
-<!ENTITY mouse.aml.caption "Active Messages List">
-<!ENTITY mouse.aml.label "Double clicking on row action:">
-<!ENTITY mouse.aml.radio.nothing "Do nothing">
-<!ENTITY mouse.aml.radio.paginate "Show links to topic pages">
-<!ENTITY mouse.aml.radio.lastpage "Go to last page">
-<!ENTITY mouse.aml.radio.lastpost "Go to last post">
-<!ENTITY mouse.aml.radio.tagtopic "Tag topic">
-<!ENTITY mouse.messages.caption "Message Lists">
-<!ENTITY mouse.messages.label "Double clicking on message header action:">
-<!ENTITY mouse.messages.radio.nothing "Do nothing">
-<!ENTITY mouse.messages.radio.quickwhois "QuickWhois: display the poster's user information">
-<!ENTITY mouse.messages.radio.quote "Quote message">
-<!ENTITY mouse.messages.dblclickquoting "Quote by double clicking on the message">
-<!ENTITY mouse.context.caption "Context Menu">
-<!ENTITY mouse.context.submenu "Submenu">
-<!ENTITY mouse.context.sidebar "Sidebar">
-<!ENTITY mouse.context.taglist "Tag List">
-<!ENTITY mouse.context.accounts "Accounts">
-<!ENTITY mouse.context.favorites "Favorites">
-<!ENTITY mouse.context.main "Main">
-<!ENTITY mouse.context.pages "Pages">
-<!ENTITY mouse.context.tagtopic "Tag Topic">
-<!ENTITY mouse.context.track "Track Topic">
-<!ENTITY mouse.context.quote "Quote">
-<!ENTITY mouse.context.filter "Filter">
-<!ENTITY mouse.context.delete "Delete/Close">
-<!ENTITY mouse.context.usergroups "User Groups">
-<!ENTITY mouse.context.breaktags "Break HTML Tags">
-<!ENTITY mouse.context.tags "Tags">
-<!ENTITY mouse.context.tags.aml "Active Messages">
-<!ENTITY mouse.context.tags.tracked "Tracked Topics">
+<!ENTITY mouse.title "Mouse">
+<!ENTITY mouse.topicLists.label "Topic Lists">
+<!ENTITY mouse.topicLists.desc "Double clicking on topic row action:">
+<!ENTITY mouse.doNothing.label "Do nothing">
+<!ENTITY mouse.showPageLinks.label "Show links to topic pages">
+<!ENTITY mouse.toLastPage.label "Go to last page">
+<!ENTITY mouse.toLastPost.label "Go to last post">
+<!ENTITY mouse.tagTopic.label "Tag topic">
+<!ENTITY mouse.activeMessages.label "Active Messages List">
+<!ENTITY mouse.activeMessages.desc "Double clicking on row action:">
+<!ENTITY mouse.messageLists.label "Message Lists">
+<!ENTITY mouse.messageLists.desc "Double clicking on message header action:">
+<!ENTITY mouse.quickWhois.label "QuickWhois (display the poster's user information)">
+<!ENTITY mouse.quoteMessage.label "Quote message">
+<!ENTITY mouse.doubleClickQuote.label "Quote by double clicking on the message">
+<!ENTITY mouse.menu.label "Context Menu">
+<!ENTITY mouse.mainMenu.label "Main">
+<!ENTITY mouse.mainMenu.pages.label "Pages">
+<!ENTITY mouse.mainMenu.tagTopic.label "Tag Topic">
+<!ENTITY mouse.mainMenu.trackTopic.label "Track Topic">
+<!ENTITY mouse.mainMenu.quote.label "Quote">
+<!ENTITY mouse.mainMenu.filter.label "Filter">
+<!ENTITY mouse.mainMenu.delete.label "Delete/Close">
+<!ENTITY mouse.mainMenu.userGroups.label "User Groups">
+<!ENTITY mouse.mainMenu.breakTags.label "Break HTML Tags">
+<!ENTITY mouse.submenu.label "Submenu">
+<!ENTITY mouse.submenu.sidebar.label "Sidebar">
+<!ENTITY mouse.submenu.tagList.label "Tag List">
+<!ENTITY mouse.submenu.accounts.label "Accounts">
+<!ENTITY mouse.submenu.favorites.label "Favorites">
+<!ENTITY mouse.tagMenu.label "Tags">
+<!ENTITY mouse.tagMenu.activeMessages.label "Active Messages">
+<!ENTITY mouse.tagMenu.trackedTopics.label "Tracked Topics">
 
-<!ENTITY topics.label "Topics">
+<!ENTITY topics.title "Topics">
 
-<!ENTITY users.label "Users">
+<!ENTITY users.title "Users">
 <!ENTITY users.options.label "Options">
-<!ENTITY users.options.topicgroups "Group names on topic lists">
-<!ENTITY users.options.msggroups "Group names on message lists">
-<!ENTITY users.add "Add a Group">
+<!ENTITY users.topicGroups.label "Group names on topic lists">
+<!ENTITY users.messageGroups.label "Group names on message lists">
 <!ENTITY users.desc "Separate users with commas. List &quot;(tc)&quot; as a user (without quotes) to highlight the topic creator.">
+<!ENTITY users.addGroup.button "Add a Group">
 
-<!ENTITY manage.label "Manage">
-<!ENTITY manage.desc.label "Manage Preferences">
-<!ENTITY manage.desc.export "All options, signatures and user groups can be exported, but stylesheets cannot. You can manually export stylesheets by using the Open CSS Directory button in the Style pane.">
-<!ENTITY manage.desc.reset "You cannot recover your preferences after they have been reset unless you have previously exported them.">
-<!ENTITY manage.import.label "Import Preferences">
-<!ENTITY manage.export.label "Export Preferences">
-<!ENTITY manage.reset.label "Reset Preferences">
+<!ENTITY manage.title "Manage">
+<!ENTITY manage.label "Manage Preferences">
+<!ENTITY manage.export.desc "All options, signatures and user groups can be exported, but stylesheets cannot. You can manually export stylesheets by using the Open CSS Directory button in the Style pane.">
+<!ENTITY manage.reset.desc "You cannot recover your preferences after they have been reset unless you have previously exported them.">
+<!ENTITY manage.import.button "Import Preferences">
+<!ENTITY manage.export.button "Export Preferences">
+<!ENTITY manage.reset.button "Reset Preferences">

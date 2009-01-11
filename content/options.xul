@@ -443,7 +443,7 @@
 
 <!-- S T Y L E -->
 
-  <prefpane id="gamefox-theme-pane" label="&style.label;"
+  <prefpane id="gamefox-theme-pane" label="&style.title;"
     onpaneload="GFcss.populate(document.getElementById('css-tree'));">
     <script type="application/x-javascript" src="chrome://gamefox/content/treeview.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/css.js"/>
@@ -453,44 +453,44 @@
 
     <groupbox>
       <caption label="&general.label;"/>
-      <checkbox preference="theme-disable_gamefaqs_css" label="&style.disablegamefaqscss;"/>
+      <checkbox preference="theme-disable_gamefaqs_css" label="&style.disableMainStyles.label;"/>
     </groupbox>
 
     <groupbox>
-      <caption label="&style.stylesheets.label;"/>
-      <description>&style.deschelp;</description>
+      <caption label="&style.tree.label;"/>
+      <description>&style.tree.desc;</description>
       <tree id="css-tree" rows="15" editable="true" seltype="single" hidecolumnpicker="true"
         contextmenu="css-tree-contextmenu">
         <treecols>
-          <treecol label="&style.tree.name;" primary="true" flex="1"/>
-          <treecol label="&style.tree.desc;" width="100"/>
-          <treecol label="&style.tree.author;" width="100"/>
-          <treecol label="&style.tree.enabled;" type="checkbox" editable="true"/>
+          <treecol label="&style.name.label;" primary="true" flex="1"/>
+          <treecol label="&style.desc.label;" width="100"/>
+          <treecol label="&style.author.label;" width="100"/>
+          <treecol label="&style.enabled.label;" type="checkbox" editable="true"/>
         </treecols>
 
         <treechildren/>
       </tree>
       <menupopup id="css-tree-contextmenu"
         onpopupshowing="GFcss.onpopupshowing();">
-        <menuitem label="&style.tree.delete;"
+        <menuitem label="&style.delete.label;"
           oncommand="GFcss.removeWithTree();" id="css-remove"/>
-        <menuitem label="&style.tree.edit;"
+        <menuitem label="&style.edit.label;"
           oncommand="GFcss.editWithTree();" id="css-edit"/>
       </menupopup>
     </groupbox>
 
     <hbox pack="center">
       <button oncommand="GFcss.userimport(GFcss.filepicker());" icon="add"
-        label="&style.import;"/>
-      <button oncommand="GFcss.reload();" icon="refresh" label="&style.reload;"/>
-      <button oncommand="GFoptions.openCSSDirectory();" icon="open" label="&style.edit;"/>
+        label="&style.import.button;"/>
+      <button oncommand="GFcss.reload();" icon="refresh" label="&style.reload.button;"/>
+      <button oncommand="GFoptions.openCSSDirectory();" icon="open" label="&style.openDir.button;"/>
     </hbox>
  </prefpane>
 
 
 <!-- Q U O T I N G -->
 
-  <prefpane id="gamefox-quote-pane" label="&quoting.label;">
+  <prefpane id="gamefox-quote-pane" label="&quoting.title;">
     <preferences>
       <preference id="header_italic"     name="gamefox.quote.header.italic"     type="bool"/>
       <preference id="header_bold"       name="gamefox.quote.header.bold"       type="bool"/>
@@ -504,30 +504,30 @@
     </preferences>
 
     <groupbox align="start">
-      <caption label="&quoting.header.caption;"/>
-      <checkbox preference="header_username" label="&quoting.header.username;" flex="1"/>
-      <checkbox preference="header_date" label="&quoting.header.date;" flex="1"/>
-      <checkbox preference="header_messagenum" label="&quoting.header.num;" flex="1"/>
+      <caption label="&quoting.header.label;"/>
+      <checkbox preference="header_username" label="&quoting.includeUsername.label;" flex="1"/>
+      <checkbox preference="header_date" label="&quoting.includeDate.label;" flex="1"/>
+      <checkbox preference="header_messagenum" label="&quoting.includeNumber.label;" flex="1"/>
     </groupbox>
 
     <groupbox>
-      <caption label="&quoting.body.caption;"/>
-      <checkbox preference="removesignature" label="&quoting.body.removesig;"/>
+      <caption label="&quoting.body.label;"/>
+      <checkbox preference="removesignature" label="&quoting.removeSig.label;"/>
     </groupbox>
 
     <groupbox>
-      <caption label="&quoting.style.caption;"/>
+      <caption label="&quoting.format.label;"/>
       <radiogroup preference="style">
-        <radio value="gfcode" label="&quoting.style.gfcode.label;"/>
-        <radio value="normal" label="&quoting.style.regular.label;"/>
+        <radio value="gfcode" label="&quoting.useGFCode.label;"/>
+        <radio value="normal" label="&quoting.useClassic.label;"/>
         <hbox class="indent" orient="horizontal">
           <vbox>
-            <checkbox preference="header_bold"   label="&quoting.style.boldheader;"/>
-            <checkbox preference="header_italic" label="&quoting.style.italicheader;"/>
+            <checkbox preference="header_bold"   label="&quoting.headerBold.label;"/>
+            <checkbox preference="header_italic" label="&quoting.headerItalic.label;"/>
           </vbox>
           <vbox>
-            <checkbox preference="message_bold"   label="&quoting.style.boldmessage;"/>
-            <checkbox preference="message_italic" label="&quoting.style.italicmessage;"/>
+            <checkbox preference="message_bold"   label="&quoting.bodyBold.label;"/>
+            <checkbox preference="message_italic" label="&quoting.bodyItalic.label;"/>
           </vbox>
         </hbox>
       </radiogroup>
@@ -538,7 +538,7 @@
 
 <!-- S I G N A T U R E -->
 
-  <prefpane id="gamefox-sig-pane" label="&signature.label;" onpaneload="GFsig.prepareOptionsPane();">
+  <prefpane id="gamefox-sig-pane" label="&signatures.title;" onpaneload="GFsig.prepareOptionsPane();">
     <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
     <preferences>
       <preference id="sig-newline" name="gamefox.signature.newline" type="bool"/>
@@ -549,8 +549,8 @@
 
     <tabbox id="sig-tabbox" flex="1">
       <tabs tabGroup="sig">
-        <tab id="sig-tab-content" label="&signature.content.label;"/>
-        <tab id="sig-tab-options" label="&signature.options.label;"/>
+        <tab id="sig-tab-content" label="&signatures.contentTab.label;"/>
+        <tab id="sig-tab-options" label="&signatures.optionsTab.label;"/>
       </tabs>
 
       <tabpanels flex="1">
@@ -558,17 +558,17 @@
         <tabpanel orient="vertical" flex="1">
           <notificationbox id="signatureMsg" flex="1">
             <groupbox>
-              <caption label="&signature.content.label;"/>
+              <caption label="&signatures.contentTab.label;"/>
 
               <hbox>
                 <menulist flex="1" id="sig-menu" oncommand="GFsig.menuCommand();">
                   <menupopup>
-                    <menuitem value="" label="&signature.list.default;"/>
+                    <menuitem value="" label="&signature.defaultSig.label;"/>
                     <menuseparator/>
-                    <menuitem value="new" label="&signature.list.new;"/>
+                    <menuitem value="new" label="&signature.newSig.label;"/>
                   </menupopup>
                 </menulist>
-                <button id="sig-delete" icon="remove" label="&signature.list.delete;"
+                <button id="sig-delete" icon="remove" label="&signature.deleteSig.label;"
                   oncommand="GFsig.deleteSig();" disabled="true"/>
               </hbox>
 
@@ -576,9 +576,9 @@
               <groupbox id="sig-criteria">
                 <description>&signature.criteria.desc;</description>
                 <hbox align="center">
-                  <label value="&signature.criteria.accounts.label;"/>
+                  <label value="&signature.accounts.label;"/>
                   <textbox id="sig-criteria-accounts" oninput="GFsig.updatePref(this);" flex="1"/>
-                  <label value="&signature.criteria.boards.label;"/>
+                  <label value="&signature.boards.label;"/>
                   <textbox id="sig-criteria-boards" oninput="GFsig.updatePref(this);" flex="1"/>
                 </hbox>
               </groupbox>
@@ -589,7 +589,7 @@
               </hbox>
               <textbox id="sig-body" oninput="GFsig.updatePref(this);" rows="3" multiline="true" class="indent"/>
               <hbox pack="end">
-                <button id="gamefox-css-grab-sig" label="&signature.grab.label;" icon="refresh"
+                <button id="gamefox-css-grab-sig" label="&signature.grab.button;" icon="refresh"
                   oncommand="GFoptions.importSignature();"/>
               </hbox>
             </groupbox>
@@ -600,24 +600,24 @@
         <tabpanel orient="vertical" flex="1">
           <groupbox>
             <caption label="&general.label;"/>
-            <checkbox preference="sig-applyeverywhere" label="&signature.applyeverywhere.label;"/>
-            <checkbox preference="sig-newline" label="&signature.newline.label;"/>
+            <checkbox preference="sig-applyeverywhere" label="&signature.onPostPage.label;"/>
+            <checkbox preference="sig-newline" label="&signature.extraLineBreak.label;"/>
           </groupbox>
 
           <groupbox>
-            <caption label="&signature.addition;"/>
+            <caption label="&signature.addition.label;"/>
             <radiogroup preference="sig-addition">
-              <radio value="1" label="&signature.addafter;"/>
-              <radio value="2" label="&signature.addbefore;"/>
+              <radio value="1" label="&signature.addAfter.label;"/>
+              <radio value="2" label="&signature.addBefore.label;"/>
             </radiogroup>
           </groupbox>
 
           <groupbox style="margin-bottom:40px">
-            <caption label="&signature.selection;"/>
+            <caption label="&signature.selection.label;"/>
             <radiogroup preference="sig-selection">
-              <radio value="1" label="&signature.selection.first;"/>
-              <radio value="2" label="&signature.selection.anyrandom;"/>
-              <radio value="3" label="&signature.selection.bestrandom;"/>
+              <radio value="1" label="&signature.firstSig.label;"/>
+              <radio value="2" label="&signature.randomSig.label;"/>
+              <radio value="3" label="&signature.bestRandomSig.label;"/>
             </radiogroup>
           </groupbox>
         </tabpanel>
@@ -628,7 +628,7 @@
 
 <!-- M O U S E -->
 
-  <prefpane id="gamefox-mouse-pane" label="&mouse.label;">
+  <prefpane id="gamefox-mouse-pane" label="&mouse.title;">
     <preferences>
       <preference id="gamefox-pref-topic-dblclick"   name="gamefox.topic.dblclick"   type="int"/>
       <preference id="gamefox-pref-message-dblclick" name="gamefox.message.dblclick" type="bool"/>
@@ -652,86 +652,86 @@
 
     <hbox>
       <groupbox flex="1">
-        <caption label="&mouse.topics.caption;"/>
-        <label value="&mouse.topics.label;"/>
+        <caption label="&mouse.topicLists.label;"/>
+        <label value="&mouse.topicLists.desc;"/>
         <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-topic-dblclick">
           <vbox>
-            <radio value="0" label="&mouse.topics.radio.nothing;"/>
-            <radio value="1" label="&mouse.topics.radio.paginate;"/>
-            <radio value="4" label="&mouse.topics.radio.lastpage;"/>
-            <radio value="2" label="&mouse.topics.radio.lastpost;"/>
-            <radio value="3" label="&mouse.topics.radio.tagtopic;"/>
+            <radio value="0" label="&mouse.doNothing.label;"/>
+            <radio value="1" label="&mouse.showPageLinks.label;"/>
+            <radio value="4" label="&mouse.toLastPost.label;"/>
+            <radio value="2" label="&mouse.toLastPage.label;"/>
+            <radio value="3" label="&mouse.tagTopic.label;"/>
           </vbox>
         </radiogroup>
       </groupbox>
 
       <groupbox flex="1">
-        <caption label="&mouse.aml.caption;"/>
-        <label value="&mouse.aml.label;"/>
+        <caption label="&mouse.activeMessages.label;"/>
+        <label value="&mouse.activeMessages.desc;"/>
         <radiogroup class="indent" orient="horizontal" preference="gamefox-pref-myposts-dblclick">
           <vbox>
-            <radio value="0" label="&mouse.aml.radio.nothing;"/>
-            <radio value="1" label="&mouse.aml.radio.paginate;"/>
-            <radio value="4" label="&mouse.aml.radio.lastpage;"/>
-            <radio value="2" label="&mouse.aml.radio.lastpost;"/>
-            <radio value="3" label="&mouse.aml.radio.tagtopic;"/>
+            <radio value="0" label="&mouse.doNothing.label;"/>
+            <radio value="1" label="&mouse.showPageLinks.label;"/>
+            <radio value="4" label="&mouse.toLastPost.label;"/>
+            <radio value="2" label="&mouse.toLastPage.label;"/>
+            <radio value="3" label="&mouse.tagTopic.label;"/>
           </vbox>
         </radiogroup>
       </groupbox>
     </hbox>
 
     <groupbox>
-      <caption label="&mouse.messages.caption;"/>
-      <label value="&mouse.messages.label;"/>
+      <caption label="&mouse.messageLists.label;"/>
+      <label value="&mouse.messageLists.desc;"/>
       <radiogroup class="indent" preference="gamefox-pref-message-header-dblclick">
         <hbox>
-          <radio value="0" label="&mouse.messages.radio.nothing;"/>
-          <radio value="1" label="&mouse.messages.radio.quickwhois;"/>
+          <radio value="0" label="&mouse.doNothing.label;"/>
+          <radio value="1" label="&mouse.quickWhois.label;"/>
         </hbox>
         <hbox>
-          <radio value="2" label="&mouse.messages.radio.quote;"/>
+          <radio value="2" label="&mouse.quoteMessage.label;"/>
         </hbox>
       </radiogroup>
-      <checkbox preference="gamefox-pref-message-dblclick" label="&mouse.messages.dblclickquoting;"/>
+      <checkbox preference="gamefox-pref-message-dblclick" label="&mouse.doubleClickQuote.label;"/>
     </groupbox>
 
     <groupbox>
-      <caption label="&mouse.context.caption;"/>
+      <caption label="&mouse.menu.label;"/>
       <hbox>
         <groupbox>
-          <caption label="&mouse.context.main;"/>
+          <caption label="&mouse.mainMenu.label;"/>
           <hbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-pagelist" label="&mouse.context.pages;"/>
-              <checkbox preference="gamefox-pref-context-tag" label="&mouse.context.tagtopic;"/>
-              <checkbox preference="gamefox-pref-context-track" label="&mouse.context.track;"/>
-              <checkbox preference="gamefox-pref-context-quote" label="&mouse.context.quote;"/>
+              <checkbox preference="gamefox-pref-context-pagelist" label="&mouse.mainMenu.pages.label;"/>
+              <checkbox preference="gamefox-pref-context-tag" label="&mouse.mainMenu.tagTopic.label;"/>
+              <checkbox preference="gamefox-pref-context-track" label="&mouse.mainMenu.trackTopic.label;"/>
+              <checkbox preference="gamefox-pref-context-quote" label="&mouse.mainMenu.quote.label;"/>
             </vbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-filter" label="&mouse.context.filter;"/>
-              <checkbox preference="gamefox-pref-context-delete" label="&mouse.context.delete;"/>
-              <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.context.usergroups;"/>
-              <checkbox preference="gamefox-pref-context-breaktags" label="&mouse.context.breaktags;"/>
+              <checkbox preference="gamefox-pref-context-filter" label="&mouse.mainMenu.filter.label;"/>
+              <checkbox preference="gamefox-pref-context-delete" label="&mouse.mainMenu.delete.label;"/>
+              <checkbox preference="gamefox-pref-context-usergroups" label="&mouse.mainMenu.userGroups.label;"/>
+              <checkbox preference="gamefox-pref-context-breaktags" label="&mouse.mainMenu.breakTags.label;"/>
             </vbox>
           </hbox>
         </groupbox>
         <groupbox>
-          <caption label="&mouse.context.submenu;"/>
+          <caption label="&mouse.submenu.label;"/>
           <hbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-sidebar" label="&mouse.context.sidebar;"/>
-              <checkbox preference="gamefox-pref-context-taglist" label="&mouse.context.taglist;"/>
+              <checkbox preference="gamefox-pref-context-sidebar" label="&mouse.submenu.sidebar.label;"/>
+              <checkbox preference="gamefox-pref-context-taglist" label="&mouse.submenu.tagList.label;"/>
             </vbox>
             <vbox>
-              <checkbox preference="gamefox-pref-context-accounts" label="&mouse.context.accounts;"/>
-              <checkbox preference="gamefox-pref-context-favorites" label="&mouse.context.favorites;"/>
+              <checkbox preference="gamefox-pref-context-accounts" label="&mouse.submenu.accounts.label;"/>
+              <checkbox preference="gamefox-pref-context-favorites" label="&mouse.submenu.favorites.label;"/>
             </vbox>
           </hbox>
         </groupbox>
         <groupbox>
-          <caption label="&mouse.context.tags;"/>
-          <checkbox preference="gamefox-pref-context-tag-myposts" label="&mouse.context.tags.aml;"/>
-          <checkbox preference="gamefox-pref-context-tag-tracked" label="&mouse.context.tags.tracked;"/>
+          <caption label="&mouse.tagMenu.label;"/>
+          <checkbox preference="gamefox-pref-context-tag-myposts" label="&mouse.tagMenu.activeMessages.label;"/>
+          <checkbox preference="gamefox-pref-context-tag-tracked" label="&mouse.tagMenu.trackedTopics.label;"/>
         </groupbox>
       </hbox>
     </groupbox>
@@ -741,7 +741,7 @@
 
 <!-- T O P I C S -->
 
-  <prefpane id="gamefox-topics-pane" label="&topics.label;" flex="1">
+  <prefpane id="gamefox-topics-pane" label="&topics.title;" flex="1">
     <hbox flex="1">
       <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul"
         flex="1" orient="vertical"/>
@@ -752,7 +752,7 @@
 
 <!-- U S E R S -->
 
-  <prefpane id="gamefox-users-pane" label="&users.label;" flex="1">
+  <prefpane id="gamefox-users-pane" label="&users.title;" flex="1">
     <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
 
     <preferences>
@@ -762,34 +762,34 @@
 
     <groupbox>
       <caption label="&users.options.label;"/>
-      <checkbox preference="userlist-topics-groupnames" label="&users.options.topicgroups;"/>
-      <checkbox preference="userlist-messages-groupnames" label="&users.options.msggroups;"/>
+      <checkbox preference="userlist-topics-groupnames" label="&users.topicGroups.label;"/>
+      <checkbox preference="userlist-messages-groupnames" label="&users.messageGroups.label;"/>
     </groupbox>
 
     <hbox align="center">
       <description flex="1">&users.desc;</description>
-      <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&users.add;" icon="add"/>
+      <button oncommand="GFuserlist.add(); GFuserlist.populateLast();" label="&users.addGroup.button;" icon="add"/>
     </hbox>
     <vbox id="usergroups" style="height:320px;overflow:auto"/>
   </prefpane>
 
 <!-- M A N A G E -->
 
-  <prefpane id="gamefox-manage-pane" label="&manage.label;" flex="1">
+  <prefpane id="gamefox-manage-pane" label="&manage.title;" flex="1">
     <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
 
     <notificationbox id="manageMsg" flex="1">
       <groupbox>
-        <caption label="&manage.desc.label;"/>
+        <caption label="&manage.label;"/>
 
-        <description>&manage.desc.export;</description>
-        <description>&manage.desc.reset;</description>
+        <description>&manage.export.desc;</description>
+        <description>&manage.reset.desc;</description>
       </groupbox>
 
       <hbox pack="center" style="margin-bottom:40px">
-        <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.label;" icon="open"/>
-        <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.label;" icon="save"/>
-        <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.label;" icon="clear"/>
+        <button oncommand="GFprefs.importPrefs(event.target);" label="&manage.import.button;" icon="open"/>
+        <button oncommand="GFprefs.exportPrefs(event.target);" label="&manage.export.button;" icon="save"/>
+        <button oncommand="GFprefs.resetPrefs(event.target);" label="&manage.reset.button;" icon="clear"/>
       </hbox>
     </notificationbox>
   </prefpane>
