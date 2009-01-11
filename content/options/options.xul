@@ -739,17 +739,8 @@
   </prefpane>
 
 
-<!-- T O P I C S -->
-
-  <prefpane id="gamefox-topics-pane" label="&topics.title;" flex="1">
-    <hbox flex="1">
-      <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul"
-        flex="1" orient="vertical"/>
-      <iframe id="gamefox-tracked-iframe"
-        src="chrome://gamefox/content/tracked.xul" flex="1" orient="vertical"/>
-    </hbox>
-  </prefpane>
-
+  <prefpane id="paneTopics" label="&paneTopics.title;"
+    src="chrome://gamefox/content/options/topics.xul"/>
   <prefpane id="paneUsers" label="&paneUsers.title;"
     src="chrome://gamefox/content/options/users.xul"/>
   <prefpane id="paneManage" label="&paneManage.title;"

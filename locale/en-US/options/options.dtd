@@ -5,6 +5,7 @@
 
 <!ENTITY paneManage.title "Manage">
 <!ENTITY paneUsers.title "Users">
+<!ENTITY paneTopics.title "Topics">
 
 <!ENTITY general.label "General">
 
@@ -173,5 +174,3 @@
 <!ENTITY mouse.tagMenu.label "Tags">
 <!ENTITY mouse.tagMenu.activeMessages.label "Active Messages">
 <!ENTITY mouse.tagMenu.trackedTopics.label "Tracked Topics">
-
-<!ENTITY topics.title "Topics">
