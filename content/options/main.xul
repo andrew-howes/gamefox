@@ -291,7 +291,7 @@
               <checkbox label="&postButton.label;"
                 preference="elements.quickpost.button"/>
               <checkbox label="&characterCounters.label;"
-                preference="elements.quickpost.charcounts"/>
+                preference="elements.charcounts"/>
 
               <label value="&htmlButtons.label;"/>
               <hbox class="indent">
