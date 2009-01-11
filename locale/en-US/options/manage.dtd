@@ -1,3 +1,5 @@
+<!-- vim: set indentexpr=: -->
+
 <!ENTITY manage.label "Manage Preferences">
 <!ENTITY export.desc "All options, signatures and user groups can be exported, but stylesheets cannot. You can manually export stylesheets by using the Open CSS Directory button in the Style pane.">
 <!ENTITY reset.desc "You cannot recover your preferences after they have been reset unless you have previously exported them.">

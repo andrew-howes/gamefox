@@ -1,3 +1,5 @@
+<!-- vim: set indentexpr=: -->
+
 <!ENTITY options.label "Options">
 <!ENTITY topicGroups.label "Group names on topic lists">
 <!ENTITY messageGroups.label "Group names on message lists">
