@@ -349,6 +349,10 @@ var GFoptions =
   {
     GFoptions.restoreLastPane();
 
+    if (!window.arguments)
+      // opened from Add-ons window
+      return;
+
     var args = window.arguments[0].wrappedJSObject;
 
     if (args.firstRun)
