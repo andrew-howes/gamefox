@@ -26,6 +26,11 @@
 
   <prefpane id="paneMain">
 
+    <stringbundleset id="main-strbundles">
+      <stringbundle id="main-strings"
+        src="chrome://gamefox/locale/options/main.properties"/>
+    </stringbundleset>
+
     <preferences>
       <!-- Page -->
       <preference id="elements.titlechange" name="gamefox.elements.titlechange"

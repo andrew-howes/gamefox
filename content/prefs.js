@@ -103,11 +103,11 @@ var GFprefs =
     var manageMsg = document.getElementById('manageMsg');
     button.setAttribute('disabled', true);
 
-    var strbundle = document.getElementById('options-strings');
+    var strbundle = document.getElementById('manage-strings');
 
     var filePicker = Cc['@mozilla.org/filepicker;1']
       .createInstance(Ci.nsIFilePicker);
-    filePicker.init(window, strbundle.getString('prefsImportFilePicker'),
+    filePicker.init(window, strbundle.getString('importFilePicker'),
         Ci.nsIFilePicker.modeOpen);
     filePicker.appendFilters(filePicker.filterAll);
     if (filePicker.show() != Ci.nsIFilePicker.returnOK)
@@ -136,7 +136,7 @@ var GFprefs =
     catch (e)
     {
       GFutils.showNotification(manageMsg,
-          strbundle.getString('prefsInvalidSyntax'), 'warning');
+          strbundle.getString('invalidSyntax'), 'warning');
       button.setAttribute('disabled', false);
       return;
     }
@@ -148,7 +148,7 @@ var GFprefs =
 
     this.resetOptionsDialog(false,
         {'manageMsg':
-          [{label: strbundle.getString('prefsImportSuccess'),
+          [{label: strbundle.getString('importSuccess'),
            type: 'info'}]
         });
   },
@@ -158,11 +158,11 @@ var GFprefs =
     var manageMsg = document.getElementById('manageMsg');
     button.setAttribute('disabled', true);
 
-    var strbundle = document.getElementById('options-strings');
+    var strbundle = document.getElementById('manage-strings');
 
     var filePicker = Cc['@mozilla.org/filepicker;1']
       .createInstance(Ci.nsIFilePicker);
-    filePicker.init(window, strbundle.getString('prefsExportFilePicker'),
+    filePicker.init(window, strbundle.getString('exportFilePicker'),
         Ci.nsIFilePicker.modeSave);
     filePicker.appendFilters(filePicker.filterAll);
     filePicker.defaultString = 'gamefox-prefs.txt';
@@ -183,7 +183,7 @@ var GFprefs =
     foStream.close();
 
     GFutils.showNotification(manageMsg,
-        strbundle.getString('prefsExportSuccess'), 'info');
+        strbundle.getString('exportSuccess'), 'info');
     button.setAttribute('disabled', false);
   },
 
@@ -192,9 +192,9 @@ var GFprefs =
     var manageMsg = document.getElementById('manageMsg');
     button.setAttribute('disabled', true);
 
-    var strbundle = document.getElementById('options-strings');
+    var strbundle = document.getElementById('manage-strings');
 
-    if (!GFlib.confirm(strbundle.getString('prefsResetConfirm')))
+    if (!GFlib.confirm(strbundle.getString('resetConfirm')))
     {
       button.setAttribute('disabled', false);
       return;
@@ -209,7 +209,7 @@ var GFprefs =
     GFcss.reload();
     this.resetOptionsDialog(true,
         {'manageMsg':
-          [{label: strbundle.getString('prefsResetSuccess'),
+          [{label: strbundle.getString('resetSuccess'),
             type: 'warning'}]
         });
   },

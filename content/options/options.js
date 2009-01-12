@@ -21,7 +21,7 @@ var GFoptions =
 {
   importBoardSettings: function()
   {
-    var strbundle = document.getElementById('options-strings');
+    var strbundle = document.getElementById('main-strings');
     var boardSettingsMsg = document.getElementById('boardSettingsMsg');
     var button = document.getElementById('gamefox-css-grab-bs');
     button.disabled = true;
@@ -38,7 +38,7 @@ var GFoptions =
           GFlib.log('importBoardSettings: Bad things!');
 
           GFutils.showNotification(boardSettingsMsg,
-              strbundle.getString('bsImportCheckIfLoggedIn'), 'warning');
+              strbundle.getString('bsImportNotLoggedIn'), 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -55,7 +55,7 @@ var GFoptions =
           GFlib.log('importBoardSettings: Unable to retrieve all settings.');
 
           GFutils.showNotification(boardSettingsMsg,
-              strbundle.getString('bsImportCheckIfLoggedIn'), 'warning');
+              strbundle.getString('bsImportNotLoggedIn'), 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -86,7 +86,7 @@ var GFoptions =
             timezone: document.getElementById('timezone').value,
            userDisplay: document.getElementById('userdisplay').value};
 
-    var strbundle = document.getElementById('options-strings');
+    var strbundle = document.getElementById('main-strings');
     var boardSettingsMsg = document.getElementById('boardSettingsMsg');
     var button = document.getElementById('gamefox-css-apply-bs');
     button.disabled = true;
@@ -103,7 +103,7 @@ var GFoptions =
           GFlib.log('exportBoardSettings: Bad things!');
 
           GFutils.showNotification(boardSettingsMsg,
-              strbundle.getString('bsExportCheckIfLoggedIn'), 'warning');
+              strbundle.getString('bsExportNotLoggedIn'), 'warning');
           button.setAttribute('disabled', false);
           return;
         }

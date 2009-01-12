@@ -28,6 +28,11 @@
     <script type="application/x-javascript"
       src="chrome://gamefox/content/userlist.js"/>
 
+    <stringbundleset id="users-strbundles">
+      <stringbundle id="users-strings"
+        src="chrome://gamefox/locale/options/users.properties"/>
+    </stringbundleset>
+
     <preferences>
       <preference id="topics.showgroupnames"
         name="gamefox.userlist.topics.showgroupnames" type="bool"/>

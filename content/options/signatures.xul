@@ -31,6 +31,11 @@
     <script type="application/x-javascript"
       src="chrome://gamefox/content/options/signatures.js"/>
 
+    <stringbundleset id="signatures-strbundles">
+      <stringbundle id="signatures-strings"
+        src="chrome://gamefox/locale/options/signatures.properties"/>
+    </stringbundleset>
+
     <preferences>
       <preference id="signature.newline" name="gamefox.signature.newline"
         type="bool"/>

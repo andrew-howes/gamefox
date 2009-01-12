@@ -150,7 +150,7 @@ var GFsigOptions =
 
   importSig: function()
   {
-    var strbundle = document.getElementById('options-strings');
+    var strbundle = document.getElementById('signatures-strings');
     var signatureMsg = document.getElementById('signatureMsg');
     var button = document.getElementById('gamefox-css-grab-sig');
     button.disabled = true;
@@ -167,7 +167,7 @@ var GFsigOptions =
           GFlib.log('importSignature: Bad things!');
 
           GFutils.showNotification(signatureMsg,
-              strbundle.getString('sigImportCheckIfLoggedIn'), 'warning');
+              strbundle.getString('importNotLoggedIn'), 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -178,7 +178,7 @@ var GFsigOptions =
           GFlib.log("importSignature: Couldn't get sig");
 
           GFutils.showNotification(signatureMsg,
-              strbundle.getString('sigImportOld'), 'warning');
+              strbundle.getString('importOld'), 'warning');
           button.setAttribute('disabled', false);
           return;
         }
@@ -189,7 +189,7 @@ var GFsigOptions =
         GFsigOptions.updatePref(document.getElementById('sig-body'));
 
         GFutils.showNotification(signatureMsg,
-            strbundle.getString('sigImportSuccess'), 'info');
+            strbundle.getString('importSuccess'), 'info');
         button.setAttribute('disabled', false);
       }
     };

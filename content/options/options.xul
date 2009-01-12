@@ -48,11 +48,6 @@
     <script type="application/x-javascript" src="chrome://gamefox/content/options/options.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
 
-    <stringbundleset id="strbundles">
-      <stringbundle id="options-strings"
-        src="chrome://gamefox/locale/options.properties"/>
-    </stringbundleset>
-
   </prefpane>
 
   <prefpane id="paneStyle" label="&paneStyle.title;"

@@ -27,6 +27,11 @@
 
     <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
 
+    <stringbundleset id="manage-strbundles">
+      <stringbundle id="manage-strings"
+        src="chrome://gamefox/locale/options/manage.properties"/>
+    </stringbundleset>
+
     <notificationbox id="manageMsg" flex="1">
       <groupbox>
         <caption label="&manage.label;"/>
