@@ -34,9 +34,7 @@ var GFquote =
     var msgNum = '#' + msgComponents.header.id.substr(1);
 
     // selection quoting
-    var parentWin = new XPCNativeWrapper(document.commandDispatcher.focusedWindow,
-        'document', 'getSelection()');
-    var selection = parentWin.getSelection();
+    var selection = document.commandDispatcher.focusedWindow.getSelection();
     // only use the selection if it's inside the clicked message and this
     // function is not triggered by a double-click
     if (allowSelection && /\S/.test(selection.toString()) &&
@@ -156,9 +154,8 @@ var GFquote =
     else // insert at cursor
     {
       var endPosition = quickpost.selectionStart + quote.length + 1;
-      quickpost.value = quickpost.value.substring(0, quickpost.selectionStart)
-        + quote + '\n'
-        + quickpost.value.substring(quickpost.selectionEnd, quickpost.value.length);
+      quickpost.value = quickpost.value.substr(0, quickpost.selectionStart)
+        + quote + '\n' + quickpost.value.substr(quickpost.selectionEnd);
     }
 
     // update the character count
