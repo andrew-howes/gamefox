@@ -297,9 +297,9 @@ var GFtracked =
     {
       if (request.readyState == 4)
       {
-        if (request.responseText.indexOf('now tracking') != -1)
+        if (GFtracked.trackResponse(request.responseText, 'tracktopic'))
           var result = 'start';
-        else if (request.responseText.indexOf('no longer tracking') != -1)
+        else if (GFtracked.trackResponse(request.responseText, 'stoptrack'))
           var result = 'stop';
         else
           var result = 'error';
@@ -368,9 +368,9 @@ var GFtracked =
     {
       if (request.readyState == 4)
       {
-        if (request.responseText.indexOf('now tracking') != -1)
+        if (GFtracked.trackResponse(request.responseText, 'tracktopic'))
           var result = 'start';
-        else if (request.responseText.indexOf('no longer tracking') != -1)
+        else if (GFtracked.trackResponse(request.responseText, 'stoptrack'))
           var result = 'stop';
         else
           var result = 'error';
@@ -483,5 +483,20 @@ var GFtracked =
       menuItem.label = strbundle.getString('hold');
     else
       menuItem.label = strbundle.getString('unhold');
+  },
+
+  trackResponse: function(str, action)
+  {
+    switch (action)
+    {
+      case 'tracktopic':
+        return str.indexOf('<div id="board_wrap">\n\n\n<p>You are now'
+            + ' tracking this topic.</p>') != -1;
+      case 'stoptrack':
+        return str.indexOf('<div id="board_wrap">\n\n\n<p>You are no'
+            + ' longer tracking this topic.</p>') != -1;
+    }
+
+    return false;
   }
 };
