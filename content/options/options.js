@@ -293,7 +293,7 @@ var GFoptions =
     if (navigator.platform.indexOf('Mac') == 0)
     {
       document.getElementById('gamefox-prefwindow').showPane(
-          document.getElementById('gamefox-page-pane'));
+          document.getElementById('paneMain'));
       return;
     }
 
@@ -301,12 +301,12 @@ var GFoptions =
     try
     {
       var lastTab = prefWindow.lastSelected;
-      prefWindow.showPane(document.getElementById('gamefox-page-pane'));
+      prefWindow.showPane(document.getElementById('paneMain'));
       prefWindow.showPane(document.getElementById(lastTab));
     }
     catch (e)
     {
-      prefWindow.showPane(document.getElementById('gamefox-page-pane'));
+      prefWindow.showPane(document.getElementById('paneMain'));
     }
 
     GFoptions.restoreLastTabs();
