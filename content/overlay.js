@@ -1218,7 +1218,10 @@ var GameFOX =
 
   toggleSidebar: function()
   {
-    toggleSidebar('viewGamefoxSidebar');
+    if (typeof toggleSidebar == 'function')
+      toggleSidebar('viewGamefoxSidebar');
+    else
+      GFlib.alert('This command does not work on your platform. If you are using SeaMonkey, try installing the xSidebar extension.');
   },
 
   showFavs: function()
