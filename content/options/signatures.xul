@@ -24,10 +24,12 @@
 <overlay id="manageSignaturesOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <prefpane id="paneSignatures" onpaneload="GFsig.prepareOptionsPane();">
+  <prefpane id="paneSignatures" onpaneload="GFsigOptions.init();">
 
     <script type="application/x-javascript"
       src="chrome://gamefox/content/sig.js"/>
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/options/signatures.js"/>
 
     <preferences>
       <preference id="signature.newline" name="gamefox.signature.newline"
@@ -56,7 +58,8 @@
               <caption label="&contentTab.label;"/>
 
               <hbox>
-                <menulist flex="1" id="sig-menu" oncommand="GFsig.menuCommand();">
+                <menulist flex="1" id="sig-menu"
+                  oncommand="GFsigOptions.changeSig();">
                   <menupopup>
                     <menuitem value="" label="&defaultSig.label;"/>
                     <menuseparator/>
@@ -64,7 +67,7 @@
                   </menupopup>
                 </menulist>
                 <button id="sig-delete" icon="remove" label="&deleteSig.label;"
-                  oncommand="GFsig.deleteSig();" disabled="true"/>
+                  oncommand="GFsigOptions.deleteSig();" disabled="true"/>
               </hbox>
 
               <label id="sig-criteria-label" value="&criteria.label;"/>
@@ -73,10 +76,10 @@
                 <hbox align="center">
                   <label value="&accounts.label;"/>
                   <textbox id="sig-criteria-accounts"
-                    oninput="GFsig.updatePref(this);" flex="1"/>
+                    oninput="GFsigOptions.updatePref(this);" flex="1"/>
                   <label value="&boards.label;"/>
                   <textbox id="sig-criteria-boards"
-                    oninput="GFsig.updatePref(this);" flex="1"/>
+                    oninput="GFsigOptions.updatePref(this);" flex="1"/>
                 </hbox>
               </groupbox>
 
@@ -85,12 +88,12 @@
                 <hbox pack="end"><label id="sig-chars" value=""/></hbox>
               </hbox>
               <textbox id="sig-body"
-                oninput="GFsig.updatePref(this);" rows="3" multiline="true"
+                oninput="GFsigOptions.updatePref(this);" rows="3" multiline="true"
                 class="indent"/>
               <hbox pack="end">
                 <button id="gamefox-css-grab-sig" label="&grab.button;"
                   icon="refresh"
-                  oncommand="GFoptions.importSignature();"/>
+                  oncommand="GFsigOptions.importSig();"/>
               </hbox>
             </groupbox>
           </notificationbox>

@@ -106,66 +106,6 @@ var GFsig =
     return eval(GFutils.getString('serialized', this.prefs))[id];
   },
 
-  prepareOptionsPane: function()
-  {
-    var menu = document.getElementById('sig-menu');
-    var sigs = eval(GFutils.getString('serialized', this.prefs));
-
-    // default sig is initially selected
-    this.hideCriteriaForm();
-    document.getElementById('sig-body').value = sigs[0]['body'];
-
-    // loop through sigs and add them to menulist
-    for (var i = 1; i < sigs.length; i++)
-    {
-      menu.insertItemAt(i, this.getCriteriaString(sigs[i]['accounts'],
-            sigs[i]['boards']) + this.formatSigPreview(sigs[i]['body']));
-    }
-
-    this.updateCharCounts();
-  },
-
-  // update forms
-  menuCommand: function()
-  {
-    var menu = document.getElementById('sig-menu');
-    var accounts = document.getElementById('sig-criteria-accounts');
-    var boards = document.getElementById('sig-criteria-boards');
-    var sig = document.getElementById('sig-body');
-
-    if (menu.selectedItem.value == 'new')
-    {
-      // create blank sig and select it
-      var index = this.add();
-      menu.insertItemAt(index, 'Global signature', '');
-      menu.selectedIndex = index;
-    }
-
-    if (menu.selectedIndex == 0)
-    {
-      // default sig has no accounts/boards and can't be deleted
-      this.hideCriteriaForm();
-      document.getElementById('sig-delete').disabled = true;
-
-      accounts.value = '';
-      boards.value = '';
-      sig.value = this.getSigById(0)['body'];
-    }
-    else
-    {
-      // other sigs have accounts/boards and can be deleted
-      this.showCriteriaForm();
-      document.getElementById('sig-delete').disabled = false;
-
-      var sigData = this.getSigById(menu.selectedIndex);
-      accounts.value = sigData['accounts'];
-      boards.value = sigData['boards'];
-      sig.value = sigData['body'];
-    }
-
-    this.updateCharCounts();
-  },
-
   add: function()
   {
     var sigs = eval(GFutils.getString('serialized', this.prefs));
@@ -173,28 +113,6 @@ var GFsig =
     GFutils.setString('serialized', sigs.toSource(), this.prefs);
 
     return sigs.length - 1;
-  },
-
-  // update sig while typing
-  updatePref: function(event)
-  {
-    var menu = document.getElementById('sig-menu');
-    var sigs = eval(GFutils.getString('serialized', this.prefs));
-    var idx = menu.selectedIndex;
-
-    switch (event.id)
-    {
-      case 'sig-criteria-accounts': sigs[idx]['accounts'] = event.value; break;
-      case 'sig-criteria-boards': sigs[idx]['boards'] = event.value; break;
-      case 'sig-body': sigs[idx]['body'] = event.value; break;
-    }
-    GFutils.setString('serialized', sigs.toSource(), this.prefs);
-
-    if (idx != 0) // don't set default
-      menu.selectedItem.label = this.getCriteriaString(sigs[idx]['accounts'],
-          sigs[idx]['boards']) + this.formatSigPreview(sigs[idx]['body']);
-
-    this.updateCharCounts();
   },
 
   getCriteriaString: function(accounts, boards)
@@ -206,41 +124,6 @@ var GFsig =
       case 2: return 'Boards: ' + boards;
       case 3: return 'Accounts: ' + accounts + ' + Boards: ' + boards;
     }
-  },
-
-  hideCriteriaForm: function()
-  {
-    document.getElementById('sig-criteria-label').style.setProperty(
-        'visibility', 'hidden', null);
-    document.getElementById('sig-criteria').style.setProperty('visibility',
-        'hidden', null);
-  },
-
-  showCriteriaForm: function()
-  {
-    document.getElementById('sig-criteria-label').style.setProperty(
-        'visibility', '', null);
-    document.getElementById('sig-criteria').style.setProperty('visibility',
-        '', null);
-  },
-
-  deleteSig: function()
-  {
-    var menu = document.getElementById('sig-menu');
-
-    // this should never happen
-    if (menu.selectedIndex == 0 || menu.selectedItem.value == 'new')
-      return;
-
-    // remove it
-    var sigs = eval(GFutils.getString('serialized', this.prefs));
-    sigs.splice(menu.selectedIndex, 1);
-    GFutils.setString('serialized', sigs.toSource(), this.prefs);
-    menu.removeItemAt(menu.selectedIndex);
-
-    // return to default signature
-    menu.selectedIndex = 0;
-    this.menuCommand();
   },
 
   matchBoard: function(boards, boardid, boardname)
