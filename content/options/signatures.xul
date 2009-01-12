@@ -41,9 +41,9 @@
         type="bool"/>
       <preference id="signature.applyeverywhere"
         name="gamefox.signature.applyeverywhere" type="bool"/>
-      <preference id="signature.addition" name="signature.addition"
+      <preference id="signature.addition" name="gamefox.signature.addition"
         type="int"/>
-      <preference id="signature.selection" name="signature.selection"
+      <preference id="signature.selection" name="gamefox.signature.selection"
         type="int"/>
     </preferences>
 
