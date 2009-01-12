@@ -48,15 +48,15 @@
   </toolbox>
 
   <popup id="gamefox-tags-contextmenu">
-    <menuitem accesskey="&menu.newTab.accesskey;" label="&menu.newTab.label;"
+    <menuitem accesskey="&newTab.accesskey;" label="&newTab.label;"
       oncommand="GFtags.doAction(1);"/>
-    <menuitem accesskey="&menu.focusedTab.accesskey;" label="&menu.focusedTab.label;"
+    <menuitem accesskey="&focusedTab.accesskey;" label="&focusedTab.label;"
       oncommand="GFtags.doAction(2);"/>
-    <menuitem accesskey="&menu.newWindow.accesskey;" label="&menu.newWindow.label;"
+    <menuitem accesskey="&newWindow.accesskey;" label="&newWindow.label;"
       oncommand="GFtags.doAction(3);"/>
-    <menuitem accesskey="&menu.deleteTag.accesskey;" label="&menu.deleteTag.label;"
+    <menuitem accesskey="&deleteTag.accesskey;" label="&deleteTag.label;"
       oncommand="GFtags.doAction(4);"/>
-    <menuitem accesskey="&menu.deleteSelected.accesskey;" label="&menu.deleteSelected.label;"
+    <menuitem accesskey="&deleteSelected.accesskey;" label="&deleteSelected.label;"
       oncommand="GFtags.removeSelected();"/>
   </popup>
 </page>

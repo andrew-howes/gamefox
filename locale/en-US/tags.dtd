@@ -2,17 +2,20 @@
 
 <!ENTITY tags.label "Tags">
 
+<!ENTITY newTab.label "Open in New Tab">
+<!ENTITY newTab.accesskey "T">
+
+<!ENTITY focusedTab.label "Open in Focused Tab">
+<!ENTITY focusedTab.accesskey "Open in Focused Tab">
+
+<!ENTITY newWindow.label "Open in New Window">
+<!ENTITY newWindow.accesskey "W">
+
+<!ENTITY deleteTag.label "Delete Tag">
+<!ENTITY deleteTag.accesskey "D">
+
+<!ENTITY deleteSelected.label "Delete Selected">
+<!ENTITY deleteSelected.accesskey "S">
+
 <!ENTITY deletePurged.label "delete purged">
 <!ENTITY deleteAll.label "delete all">
-
-<!ENTITY menu.newTab.accesskey "T">
-<!ENTITY menu.focusedTab.accesskey "F">
-<!ENTITY menu.newWindow.accesskey "W">
-<!ENTITY menu.deleteTag.accesskey "D">
-<!ENTITY menu.deleteSelected.accesskey "S">
-
-<!ENTITY menu.newTab.label "Open in New Tab">
-<!ENTITY menu.focusedTab.label "Open in Focused Tab">
-<!ENTITY menu.newWindow.label "Open in New Window">
-<!ENTITY menu.deleteTag.label "Delete Tag">
-<!ENTITY menu.deleteSelected.label "Delete Selected">

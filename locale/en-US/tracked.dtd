@@ -2,12 +2,14 @@
 
 <!ENTITY tracked.label "Tracked Topics">
 
-<!ENTITY menu.newTab.accesskey "T">
-<!ENTITY menu.focusedTab.accesskey "F">
-<!ENTITY menu.newWindow.accesskey "W">
-<!ENTITY menu.stopTracking.accesskey "S">
+<!ENTITY newTab.label "Open in New Tab">
+<!ENTITY newTab.accesskey "T">
 
-<!ENTITY menu.newTab.label "Open in New Tab">
-<!ENTITY menu.focusedTab.label "Open in Focused Tab">
-<!ENTITY menu.newWindow.label "Open in New Window">
-<!ENTITY menu.stopTracking.label "Stop Tracking">
+<!ENTITY focusedTab.label "Open in Focused Tab">
+<!ENTITY focusedTab.accesskey "F">
+
+<!ENTITY newWindow.label "Open in New Window">
+<!ENTITY newWindow.accesskey "W">
+
+<!ENTITY stopTracking.label "Stop Tracking">
+<!ENTITY stopTracking.accesskey "S">

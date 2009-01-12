@@ -61,16 +61,16 @@
 
   <popup id="gamefox-tracked-contextmenu"
     onpopupshowing="GFtracked.displayTreeMenu();">
-    <menuitem accesskey="&menu.newTab.accesskey;" label="&menu.newTab.label;"
+    <menuitem accesskey="&newTab.accesskey;" label="&newTab.label;"
       oncommand="GFtracked.treeAction(1);"/>
-    <menuitem accesskey="&menu.focusedTab.accesskey;"
-      label="&menu.focusedTab.label;" oncommand="GFtracked.treeAction(2);"/>
-    <menuitem accesskey="&menu.newWindow.accesskey;"
-      label="&menu.newWindow.label;" oncommand="GFtracked.treeAction(3);"/>
+    <menuitem accesskey="&focusedTab.accesskey;"
+      label="&focusedTab.label;" oncommand="GFtracked.treeAction(2);"/>
+    <menuitem accesskey="&newWindow.accesskey;"
+      label="&newWindow.label;" oncommand="GFtracked.treeAction(3);"/>
     <menuitem accesskey="" label="" oncommand="GFtracked.treeAction(4);"
       id="gamefox-tracked-contextmenu-hold"/>
-    <menuitem accesskey="&menu.stopTracking.accesskey;"
-      label="&menu.stopTracking.label;" oncommand="GFtracked.treeAction(5);"
+    <menuitem accesskey="&stopTracking.accesskey;"
+      label="&stopTracking.label;" oncommand="GFtracked.treeAction(5);"
       id="gamefox-tracked-contextmenu-stop"/>
   </popup>
 </page>
