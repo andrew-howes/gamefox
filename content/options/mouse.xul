@@ -69,119 +69,135 @@
         type="bool"/>
     </preferences>
 
-    <hbox>
+    <tabbox id="mousePrefs" flex="1">
+      <tabs id="tabsElement" tabGroup="mouse">
+        <tab id="pageTab" label="&pageTab.label;"/>
+        <tab id="contextTab" label="&contextTab.label;"/>
+      </tabs>
 
-      <groupbox flex="1">
-        <caption label="&topicLists.label;"/>
-        <label value="&topicLists.desc;"/>
+      <tabpanels flex="1">
 
-        <radiogroup class="indent" orient="horizontal"
-          preference="topic.dblclick">
-          <vbox>
-            <radio value="0" label="&doNothing.label;"/>
-            <radio value="1" label="&showPageLinks.label;"/>
-            <radio value="4" label="&toLastPost.label;"/>
-            <radio value="2" label="&toLastPage.label;"/>
-            <radio value="3" label="&tagTopic.label;"/>
-          </vbox>
-        </radiogroup>
-      </groupbox>
-
-      <groupbox flex="1">
-        <caption label="&activeMessages.label;"/>
-        <label value="&activeMessages.desc;"/>
-
-        <radiogroup class="indent" orient="horizontal"
-          preference="myposts.dblclick">
-          <vbox>
-            <radio value="0" label="&doNothing.label;"/>
-            <radio value="1" label="&showPageLinks.label;"/>
-            <radio value="4" label="&toLastPost.label;"/>
-            <radio value="2" label="&toLastPage.label;"/>
-            <radio value="3" label="&tagTopic.label;"/>
-          </vbox>
-        </radiogroup>
-      </groupbox>
-    </hbox>
-
-    <groupbox>
-      <caption label="&messageLists.label;"/>
-      <label value="&messageLists.desc;"/>
-
-      <radiogroup class="indent" preference="message.header.dblclick">
-        <hbox>
-          <radio value="0" label="&doNothing.label;"/>
-          <radio value="1" label="&quickWhois.label;"/>
-        </hbox>
-        <hbox>
-          <radio value="2" label="&quoteMessage.label;"/>
-        </hbox>
-      </radiogroup>
-
-      <checkbox label="&doubleClickQuote.label;"
-        preference="message.dblclick"/>
-    </groupbox>
-
-    <groupbox>
-      <caption label="&menu.label;"/>
-
-      <hbox>
-        <groupbox>
-          <caption label="&mainMenu.label;"/>
+        <!-- Page -->
+        <tabpanel orient="vertical" flex="1">
 
           <hbox>
-            <vbox>
-              <checkbox label="&mainMenu.pages.label;"
-                preference="context.pagelist"/>
-              <checkbox label="&mainMenu.tagTopic.label;"
-                preference="context.tag"/>
-              <checkbox label="&mainMenu.trackTopic.label;"
-                preference="context.track"/>
-              <checkbox label="&mainMenu.quote.label;"
-                preference="context.quote"/>
-            </vbox>
-            <vbox>
-              <checkbox label="&mainMenu.filter.label;"
-                preference="context.filter"/>
-              <checkbox label="&mainMenu.delete.label;"
-                preference="context.delete"/>
-              <checkbox label="&mainMenu.userGroups.label;"
-                preference="context.usergroups"/>
-              <checkbox label="&mainMenu.breakTags.label;"
-                preference="context.breaktags"/>
-            </vbox>
+
+            <groupbox flex="1">
+              <caption label="&topicLists.label;"/>
+              <label value="&topicLists.desc;"/>
+
+              <radiogroup class="indent" orient="horizontal"
+                preference="topic.dblclick">
+                <vbox>
+                  <radio value="0" label="&doNothing.label;"/>
+                  <radio value="1" label="&showPageLinks.label;"/>
+                  <radio value="4" label="&toLastPost.label;"/>
+                  <radio value="2" label="&toLastPage.label;"/>
+                  <radio value="3" label="&tagTopic.label;"/>
+                </vbox>
+              </radiogroup>
+            </groupbox>
+
+            <groupbox flex="1">
+              <caption label="&activeMessages.label;"/>
+              <label value="&activeMessages.desc;"/>
+
+              <radiogroup class="indent" orient="horizontal"
+                preference="myposts.dblclick">
+                <vbox>
+                  <radio value="0" label="&doNothing.label;"/>
+                  <radio value="1" label="&showPageLinks.label;"/>
+                  <radio value="4" label="&toLastPost.label;"/>
+                  <radio value="2" label="&toLastPage.label;"/>
+                  <radio value="3" label="&tagTopic.label;"/>
+                </vbox>
+              </radiogroup>
+            </groupbox>
           </hbox>
-        </groupbox>
 
-        <groupbox>
-          <caption label="&submenu.label;"/>
+          <groupbox>
+            <caption label="&messageLists.label;"/>
+            <label value="&messageLists.desc;"/>
 
-          <hbox>
-            <vbox>
-              <checkbox label="&submenu.sidebar.label;"
-                preference="context.sidebar"/>
-              <checkbox label="&submenu.tagList.label;"
-                preference="context.taglist"/>
-            </vbox>
-            <vbox>
-              <checkbox label="&submenu.accounts.label;"
-                preference="context.accounts"/>
-              <checkbox label="&submenu.favorites.label;"
-                preference="context.favorites"/>
-            </vbox>
-          </hbox>
-        </groupbox>
+            <radiogroup class="indent" preference="message.header.dblclick">
+              <vbox>
+                <radio value="0" label="&doNothing.label;"/>
+                <radio value="1" label="&quickWhois.label;"/>
+                <radio value="2" label="&quoteMessage.label;"/>
+              </vbox>
+            </radiogroup>
 
-        <groupbox>
-          <caption label="&tagMenu.label;"/>
+            <checkbox label="&doubleClickQuote.label;"
+              preference="message.dblclick"/>
+          </groupbox>
 
-          <checkbox label="&tagMenu.activeMessages.label;"
-            preference="context.tag.myposts"/>
-          <checkbox label="&tagMenu.trackedTopics.label;"
-            preference="context.tag.tracked"/>
-        </groupbox>
-      </hbox>
-    </groupbox>
+        </tabpanel>
+
+        <!-- Context Menu -->
+        <tabpanel orient="vertical" flex="1">
+
+          <groupbox>
+            <caption label="&menu.label;"/>
+
+              <groupbox>
+                <caption label="&mainMenu.label;"/>
+
+                <hbox>
+                  <vbox>
+                    <checkbox label="&mainMenu.pages.label;"
+                      preference="context.pagelist"/>
+                    <checkbox label="&mainMenu.tagTopic.label;"
+                      preference="context.tag"/>
+                    <checkbox label="&mainMenu.trackTopic.label;"
+                      preference="context.track"/>
+                    <checkbox label="&mainMenu.quote.label;"
+                      preference="context.quote"/>
+                  </vbox>
+                  <vbox>
+                    <checkbox label="&mainMenu.filter.label;"
+                      preference="context.filter"/>
+                    <checkbox label="&mainMenu.delete.label;"
+                      preference="context.delete"/>
+                    <checkbox label="&mainMenu.userGroups.label;"
+                      preference="context.usergroups"/>
+                    <checkbox label="&mainMenu.breakTags.label;"
+                      preference="context.breaktags"/>
+                  </vbox>
+                </hbox>
+              </groupbox>
+
+              <groupbox>
+                <caption label="&submenu.label;"/>
+
+                <hbox>
+                  <vbox>
+                    <checkbox label="&submenu.sidebar.label;"
+                      preference="context.sidebar"/>
+                    <checkbox label="&submenu.tagList.label;"
+                      preference="context.taglist"/>
+                  </vbox>
+                  <vbox>
+                    <checkbox label="&submenu.accounts.label;"
+                      preference="context.accounts"/>
+                    <checkbox label="&submenu.favorites.label;"
+                      preference="context.favorites"/>
+                  </vbox>
+                </hbox>
+              </groupbox>
+
+              <groupbox>
+                <caption label="&tagMenu.label;"/>
+
+                <checkbox label="&tagMenu.activeMessages.label;"
+                  preference="context.tag.myposts"/>
+                <checkbox label="&tagMenu.trackedTopics.label;"
+                  preference="context.tag.tracked"/>
+              </groupbox>
+            </groupbox>
+
+        </tabpanel>
+      </tabpanels>
+    </tabbox>
 
   </prefpane>
 
