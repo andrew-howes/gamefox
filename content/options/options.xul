@@ -34,7 +34,8 @@
     defaultButton="none"
     onload="GFoptions.loadAllOverlays();"
     windowtype="gamefox:options"
-    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    style="&prefWin.style;">
 
   <prefpane id="paneMain" label="&paneMain.title;"
     src="chrome://gamefox/content/options/main.xul">
