@@ -243,6 +243,51 @@ var GFoptions =
     }
   },
 
+  loadAllOverlays: function()
+  {
+    if (!this.overlayIdx)
+      this.overlayIdx = 0;
+
+    var prefpane = document.getElementsByTagName('prefpane')[this.overlayIdx];
+    if (!prefpane)
+    {
+      // end of the line
+      GFoptions.init();
+      return;
+    }
+
+    ++this.overlayIdx;
+
+    if (prefpane.loaded)
+    {
+      // this prefpane is already loaded, so skip it
+      GFoptions.loadAllOverlays();
+      return;
+    }
+
+    function OverlayLoadObserver(aPane)
+    {
+      this._pane = aPane;
+    }
+    OverlayLoadObserver.prototype = {
+      observe: function(aSubject, aTopic, aData)
+      {
+        this._pane.loaded = true;
+        document.getElementById('gamefox-prefwindow')
+          ._fireEvent('paneload', this._pane);
+
+        // This recursive call in the observer acts like a queue, since
+        // overlays do not like being loaded if any other overlay isn't
+        // finished loading.
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=330458
+        GFoptions.loadAllOverlays();
+      }
+    }
+
+    var obs = new OverlayLoadObserver(prefpane);
+    document.loadOverlay(prefpane.src, obs);
+  },
+
   restoreLastPane: function()
   {
     if (navigator.platform.indexOf('Mac') == 0)
@@ -302,6 +347,8 @@ var GFoptions =
 
   init: function()
   {
+    GFoptions.restoreLastPane();
+
     var args = window.arguments[0].wrappedJSObject;
 
     if (args.firstRun)
