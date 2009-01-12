@@ -26,10 +26,10 @@
 
     <hbox flex="1">
       <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul"
-        flex="1" orient="vertical" style="height: 400px;"/>
+        flex="1" orient="vertical" style="height: 35em;"/>
       <iframe id="gamefox-tracked-iframe"
         src="chrome://gamefox/content/tracked.xul" flex="1" orient="vertical"
-        style="height: 400px;"/>
+        style="height: 35em;"/>
     </hbox>
 
   </prefpane>
