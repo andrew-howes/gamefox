@@ -328,6 +328,12 @@ var GFoptions =
   preInit: function()
   {
     var prefwin = document.getElementById('gamefox-prefwindow');
-    prefwin.showPane(document.getElementById(prefwin.lastSelected));
+    var prefpane = document.getElementById(prefwin.lastSelected);
+
+    // reselect current pane
+    prefwin.showPane(prefpane);
+
+    // restore tabs just for this pane
+    GFoptions.restoreLastTabs();
   }
 };
