@@ -51,7 +51,7 @@
       
       <tree id="css-tree" editable="true" seltype="single"
         hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
-        style="height: 24em;">
+        style="height: 23.5em;">
         <treecols>
           <treecol label="&name.label;" primary="true" flex="1"/>
           <treecol label="&desc.label;" width="100"/>

@@ -323,5 +323,11 @@ var GFoptions =
             args.notifications[i][j].label, args.notifications[i][j].type);
       }
     }
+  },
+
+  preInit: function()
+  {
+    var prefwin = document.getElementById('gamefox-prefwindow');
+    prefwin.showPane(document.getElementById(prefwin.lastSelected));
   }
 };
