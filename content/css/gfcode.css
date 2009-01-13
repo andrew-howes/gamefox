@@ -49,9 +49,11 @@
         display: none !important;
     }
 
-    /* <em><p> - fixed-font block for code */
-    .message em > p {
-        font: medium monospace !important;
+    /* <em><p> - fixed-font block for code
+     * <em><i> - inline code */
+    .message em > p, .message em > i {
+        font-family: monospace !important;
+        font-style: normal !important;
         white-space: -moz-pre-wrap;
         white-space: pre-wrap;
     }

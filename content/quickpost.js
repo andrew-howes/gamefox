@@ -534,7 +534,8 @@ var GFquickpost =
     if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
       tags.push(
           'i,p', 'Quote', 'q',
-          'em,p', 'Code', 'd');
+          'em,p', 'Code', 'd',
+          'em,i', 'Inline Code', 'l');
 
     var accesskeyPrefix = GFutils.getAccesskeyPrefix();
 
