@@ -38,7 +38,7 @@
     style="&prefWin.style;">
 
   <prefpane id="paneMain" label="&paneMain.title;"
-    src="chrome://gamefox/content/options/main.xul">
+    src="chrome://gamefox/content/options/main.xul" flex="1">
 
     <!-- These have to be inside the first prefpane because of BMO bug #296418
          Luckily, the scripts seem to be applied to all of the other prefpanes too, so
@@ -52,18 +52,18 @@
   </prefpane>
 
   <prefpane id="paneStyle" label="&paneStyle.title;"
-    src="chrome://gamefox/content/options/style.xul"/>
+    src="chrome://gamefox/content/options/style.xul" flex="1"/>
   <prefpane id="paneQuoting" label="&paneQuoting.title;"
-    src="chrome://gamefox/content/options/quoting.xul"/>
+    src="chrome://gamefox/content/options/quoting.xul" flex="1"/>
   <prefpane id="paneSignatures" label="&paneSignatures.title;"
-    src="chrome://gamefox/content/options/signatures.xul"/>
+    src="chrome://gamefox/content/options/signatures.xul" flex="1"/>
   <prefpane id="paneMouse" label="&paneMouse.title;"
-    src="chrome://gamefox/content/options/mouse.xul"/>
+    src="chrome://gamefox/content/options/mouse.xul" flex="1"/>
   <prefpane id="paneTopics" label="&paneTopics.title;"
-    src="chrome://gamefox/content/options/topics.xul"/>
+    src="chrome://gamefox/content/options/topics.xul" flex="1"/>
   <prefpane id="paneUsers" label="&paneUsers.title;"
-    src="chrome://gamefox/content/options/users.xul"/>
+    src="chrome://gamefox/content/options/users.xul" flex="1"/>
   <prefpane id="paneManage" label="&paneManage.title;"
-    src="chrome://gamefox/content/options/manage.xul"/>
+    src="chrome://gamefox/content/options/manage.xul" flex="1"/>
 
 </prefwindow>

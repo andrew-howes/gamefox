@@ -124,7 +124,7 @@
             </radiogroup>
           </groupbox>
 
-          <groupbox style="margin-bottom:40px">
+          <groupbox>
             <caption label="&selection.label;"/>
 
             <radiogroup preference="signature.selection">
