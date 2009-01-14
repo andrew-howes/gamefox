@@ -26,6 +26,8 @@
   <prefpane id="paneManage">
 
     <script type="application/x-javascript" src="chrome://gamefox/content/prefs.js"/>
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/options/manage.js"/>
 
     <stringbundleset id="manage-strbundles">
       <stringbundle id="manage-strings"
@@ -42,11 +44,11 @@
 
       <hbox pack="center">
         <button label="&import.button;" icon="open"
-          oncommand="GFprefs.importPrefs(event.target);"/>
+          oncommand="GFmanageOptions.importPrefs(event.target);"/>
         <button label="&export.button;" icon="save"
-          oncommand="GFprefs.exportPrefs(event.target);"/>
+          oncommand="GFmanageOptions.exportPrefs(event.target);"/>
         <button label="&reset.button;" icon="clear"
-          oncommand="GFprefs.resetPrefs(event.target);"/>
+          oncommand="GFmanageOptions.resetPrefs(event.target);"/>
       </hbox>
     </notificationbox>
 
