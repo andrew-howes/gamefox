@@ -188,6 +188,14 @@
                     <vbox>
                       <checkbox label="&lastPostLink.label;"
                         preference="elements.topics.lastpostlink"/>
+
+                      <hbox>
+                        <checkbox label="&paginateTopics.label;"
+                          preference="paging.auto"/>
+                        <button label="&settings.label;..."
+                          oncommand="GFoptions.openPaginateDialog();"/>
+                      </hbox>
+
                       <checkbox label="&trackedBoardLink.label;"
                         preference="elements.tracked.boardlink"/>
                       <checkbox label="&labelNewPosts.label;"
@@ -241,48 +249,6 @@
                 </row>
               </rows>
             </grid>
-
-            <groupbox>
-              <caption label="&topicPagination.label;"/>
-
-              <checkbox label="&autoPagination.label;"
-                preference="paging.auto"/>
-
-              <hbox align="center">
-                <label value="&location.label;"/>
-
-                <radiogroup orient="horizontal"
-                  preference="paging.location">
-                  <radio value="1" label="&locationRight.label;" flex="1"/>
-                  <radio value="2" label="&locationBelow.label;" flex="1"/>
-                  <radio value="0" label="&locationNewRow.label;" flex="1"/>
-                </radiogroup>
-              </hbox>
-
-              <hbox align="center">
-                <label value="&format.label;"/>
-
-                <spacer width="8px"/>
-
-                <label value="&prefix.label;"/>
-                <textbox preference="paging.prefix" size="5"
-                  flex="30"/>
-
-                <spacer flex="1"/>
-
-                <label value="&delimiter.label;"/>
-                <textbox preference="paging.separator" size="1"
-                  flex="2"/>
-
-                <spacer flex="1"/>
-
-                <label value="&suffix.label;"/>
-                <textbox preference="paging.suffix" size="4"
-                  flex="24"/>
-
-                <spacer width="8px"/>
-              </hbox>
-            </groupbox>
 
           </vbox>
         </tabpanel>

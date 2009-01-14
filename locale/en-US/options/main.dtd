@@ -6,6 +6,7 @@
 <!ENTITY boardSettingsTab.label "Board Settings">
 
 <!ENTITY general.label "General">
+<!ENTITY settings.label "Settings">
 
 <!-- Page -->
 <!ENTITY customTitles.label "Custom window titles">
@@ -16,6 +17,7 @@
 <!ENTITY topicLists.label "Topic Lists">
 
 <!ENTITY lastPostLink.label "Link to last post">
+<!ENTITY paginateTopics.label "Links to topic pages">
 <!ENTITY trackedBoardLink.label "Link to boards (Tracked Topics)">
 <!ENTITY labelNewPosts.label "Label new posts (Active Messages)">
 <!ENTITY pageJumper.label "Page jumper (Active Messages)">
@@ -32,20 +34,6 @@
 
 <!ENTITY numberMessages.label "Number messages">
 <!ENTITY labelTc.label "Label topic creator">
-
-<!ENTITY topicPagination.label "Topic Pagination">
-
-<!ENTITY autoPagination.label "Automatically add page jumpers on topic lists">
-
-<!ENTITY location.label "Location:">
-<!ENTITY locationRight.label "Right of topic title">
-<!ENTITY locationBelow.label "Below topic title">
-<!ENTITY locationNewRow.label "New row below topic title">
-
-<!ENTITY format.label "Format:">
-<!ENTITY prefix.label "Prefix:">
-<!ENTITY delimiter.label "Delimiter:">
-<!ENTITY suffix.label "Suffix:">
 
 <!-- Posting -->
 <!ENTITY postButton.label "Post Message button">

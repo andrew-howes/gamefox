@@ -335,5 +335,12 @@ var GFoptions =
 
     // restore tabs just for this pane
     GFoptions.restoreLastTabs();
+  },
+
+  openPaginateDialog: function()
+  {
+    document.documentElement
+      .openSubDialog('chrome://gamefox/content/options/paginate.xul', '',
+          null);
   }
 };

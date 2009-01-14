@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79: -->
+
+<!DOCTYPE prefwindow SYSTEM "chrome://gamefox/locale/options/paginate.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/"?>
+
+<prefwindow id="AdvancedJSDialog" type="child"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            title="&paginate.title;">
+
+  <prefpane id="AdvancedJSDialogPane">
+
+    <preferences>
+      <preference id="paging.auto" name="gamefox.paging.auto" type="bool"/>
+      <preference id="paging.location" name="gamefox.paging.location"
+        type="int"/>
+      <preference id="paging.prefix" name="gamefox.paging.prefix"
+        type="string"/>
+      <preference id="paging.separator" name="gamefox.paging.separator"
+        type="string"/>
+      <preference id="paging.suffix" name="gamefox.paging.suffix"
+        type="string"/>
+    </preferences>
+    
+    <hbox align="center">
+      <label value="&location.label;"/>
+
+      <menulist preference="paging.location">
+        <menupopup>
+          <menuitem value="0" label="&locationRight.label;"/>
+          <menuitem value="2" label="&locationBelow.label;"/>
+          <menuitem value="0" label="&locationNewRow.label;"/>
+        </menupopup>
+      </menulist>
+    </hbox>
+
+    <hbox align="center">
+      <label value="&format.label;"/>
+
+      <spacer width="8px"/>
+
+      <label value="&prefix.label;"/>
+      <textbox preference="paging.prefix" size="5" flex="30"/>
+
+      <spacer flex="1"/>
+
+      <label value="&delimiter.label;"/>
+      <textbox preference="paging.separator" size="1" flex="2"/>
+
+      <spacer flex="1"/>
+
+      <label value="&suffix.label;"/>
+      <textbox preference="paging.suffix" size="4" flex="24"/>
+
+      <spacer width="8px"/>
+    </hbox>
+
+  </prefpane>
+</prefwindow>
