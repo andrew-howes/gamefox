@@ -1,7 +1,7 @@
 <!-- vim: set indentexpr=: -->
 
 <!ENTITY prefWin.title "GameFOX">
-<!ENTITY prefWin.style "width: 48em; min-height: 47em;">
+<!ENTITY prefWin.style "width: 48em; min-height: 44em;">
 
 <!ENTITY about.button "About">
 
