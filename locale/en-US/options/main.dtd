@@ -47,8 +47,8 @@
 
 <!ENTITY quickpost.label "QuickPost">
 
-<!ENTITY onTopicLists.label "QuickPost link on topic lists">
-<!ENTITY onMessageLists.label "QuickPost form on message lists">
+<!ENTITY onTopicLists.label "Topic QuickPost">
+<!ENTITY onMessageLists.label "Message QuickPost">
 <!ENTITY previewAndReset.label "Preview and reset buttons">
 <!ENTITY confirmReset.label "Confirm resetting post">
 <!ENTITY newSigOnReset.label "Choose a new signature when resetting post">

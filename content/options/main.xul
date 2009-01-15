@@ -73,16 +73,6 @@
       <preference id="elements.marktc.marker"
         name="gamefox.elements.marktc.marker" type="string"/>
 
-      <preference id="paging.auto" name="gamefox.paging.auto" type="bool"/>
-      <preference id="paging.location" name="gamefox.paging.location"
-        type="int"/>
-      <preference id="paging.prefix" name="gamefox.paging.prefix"
-        type="string"/>
-      <preference id="paging.separator" name="gamefox.paging.separator"
-        type="string"/>
-      <preference id="paging.suffix" name="gamefox.paging.suffix"
-        type="string"/>
-
       <!-- Posting -->
       <preference id="elements.quickpost.button"
         name="gamefox.elements.quickpost.button" type="bool"/>
@@ -265,25 +255,58 @@
                 preference="elements.charcounts"/>
 
               <label value="&htmlButtons.label;"/>
-              <hbox class="indent">
-                <checkbox label="&standard.label;"
-                  preference="elements.quickpost.htmlbuttons"/>
-                <checkbox label="&extended.label;"
-                  preference="elements.quickpost.htmlbuttons.extended"/>
-                <checkbox label="&gfcode.label;"
-                  preference="elements.quickpost.htmlbuttons.gfcode"/>
-                <checkbox label="&breakTags.label;"
-                  preference="elements.quickpost.htmlbuttons.breaktags"/>
-              </hbox>
+              <grid class="indent">
+                <columns>
+                  <column flex="1"/>
+                  <column flex="1"/>
+                  <column flex="1"/>
+                  <column flex="1"/>
+                </columns>
+                <rows>
+                  <row>
+                    <hbox>
+                      <checkbox label="&standard.label;"
+                        preference="elements.quickpost.htmlbuttons"/>
+                    </hbox>
+                    <hbox>
+                      <checkbox label="&extended.label;"
+                        preference="elements.quickpost.htmlbuttons.extended"/>
+                    </hbox>
+                    <hbox>
+                      <checkbox label="&gfcode.label;"
+                        preference="elements.quickpost.htmlbuttons.gfcode"/>
+                    </hbox>
+                    <hbox>
+                      <checkbox label="&breakTags.label;"
+                        preference="elements.quickpost.htmlbuttons.breaktags"/>
+                    </hbox>
+                  </row>
+                </rows>
+              </grid>
             </groupbox>
 
             <groupbox>
               <caption label="&quickpost.label;"/>
 
-              <checkbox label="&onTopicLists.label;"
-                preference="elements.quickpost.link"/>
-              <checkbox label="&onMessageLists.label;"
-                preference="elements.quickpost.form"/>
+              <grid>
+                <columns>
+                  <column flex="1"/>
+                  <column flex="1"/>
+                </columns>
+                <rows>
+                  <row>
+                    <hbox>
+                      <checkbox label="&onTopicLists.label;"
+                        preference="elements.quickpost.link"/>
+                    </hbox>
+                    <hbox>
+                      <checkbox label="&onMessageLists.label;"
+                        preference="elements.quickpost.form"/>
+                    </hbox>
+                  </row>
+                </rows>
+              </grid>
+
               <checkbox label="&previewAndReset.label;"
                 preference="elements.quickpost.otherbuttons"/>
               <checkbox label="&confirmReset.label;"
@@ -291,20 +314,26 @@
               <checkbox label="&newSigOnReset.label;"
                 preference="elements.quickpost.resetnewsig"/>
 
-              <label value="&afterTopic.label;"/>
-              <radiogroup class="indent" orient="horizontal"
-                preference="elements.quickpost.aftertopic">
-                <radio value="0" label="&toTopic.label;"/>
-                <radio value="1" label="&toBoard.label;"/>
-              </radiogroup>
+              <hbox align="center">
+                <label value="&afterTopic.label;"/>
+                <menulist preference="elements.quickpost.aftertopic">
+                  <menupopup>
+                    <menuitem label="&toTopic.label;" value="0"/>
+                    <menuitem label="&toBoard.label;" value="1"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
 
-              <label value="&afterMessage.label;"/>
-              <radiogroup class="indent" orient="horizontal"
-                preference="elements.quickpost.aftermessage">
-                <radio value="0" label="&toLastPost.label;"/>
-                <radio value="1" label="&toSamePage.label;"/>
-                <radio value="2" label="&toFirstPage.label;"/>
-              </radiogroup>
+              <hbox align="center">
+                <label value="&afterMessage.label;"/>
+                <menulist preference="elements.quickpost.aftermessage">
+                  <menupopup>
+                    <menuitem label="&toLastPost.label;" value="0"/>
+                    <menuitem label="&toSamePage.label;" value="1"/>
+                    <menuitem label="&toFirstPage.label;" value="2"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
 
             </groupbox>
           </vbox>

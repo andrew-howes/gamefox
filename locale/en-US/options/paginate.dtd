@@ -2,10 +2,10 @@
 
 <!ENTITY paginate.title "Topic Pagination">
 
-<!ENTITY location.label "Show links">
-<!ENTITY locationRight.label "to the right of the topic title">
-<!ENTITY locationBelow.label "below the topic title">
-<!ENTITY locationNewRow.label "in a new row below the topic title">
+<!ENTITY location.label "Show links:">
+<!ENTITY locationRight.label "Right of the topic title">
+<!ENTITY locationBelow.label "Below the topic title">
+<!ENTITY locationNewRow.label "In a new row below the topic title">
 
 <!ENTITY format.label "Format:">
 <!ENTITY prefix.label "Prefix:">
