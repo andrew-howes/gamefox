@@ -19,17 +19,36 @@
      along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/topics.dtd">
+
 <overlay id="topicsPaneOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <prefpane id="paneTopics">
 
-    <hbox flex="1">
-      <iframe id="gamefox-tags-iframe" src="chrome://gamefox/content/tags.xul"
-        flex="1" orient="vertical"/>
-      <iframe id="gamefox-tracked-iframe"
-        src="chrome://gamefox/content/tracked.xul" flex="1" orient="vertical"/>
-    </hbox>
+    <tabbox id="topicsPrefs" flex="1">
+      <tabs id="tabsElement" tabGroup="topics">
+        <tab id="trackedTab" label="&trackedTab.label;"/>
+        <tab id="tagsTab" label="&tagsTab.label;"/>
+      </tabs>
+
+      <tabpanels flex="1">
+
+        <tabpanel orient="vertical" flex="1">
+          <iframe id="gamefox-tracked-iframe"
+            src="chrome://gamefox/content/tracked.xul" flex="1"
+            orient="vertical"/>
+        </tabpanel>
+
+        <tabpanel orient="vertical" flex="1">
+          <iframe id="gamefox-tags-iframe"
+            src="chrome://gamefox/content/tags.xul" flex="1"
+            orient="vertical"/>
+        </tabpanel>
+
+      </tabpanels>
+
+    </tabbox>
 
   </prefpane>
 
