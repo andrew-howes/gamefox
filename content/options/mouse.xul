@@ -71,65 +71,54 @@
 
     <tabbox id="mousePrefs" flex="1">
       <tabs id="tabsElement" tabGroup="mouse">
-        <tab id="pageTab" label="&pageTab.label;"/>
+        <tab id="doubleClickTab" label="&doubleClickTab.label;"/>
         <tab id="contextTab" label="&contextTab.label;"/>
       </tabs>
 
       <tabpanels flex="1">
 
-        <!-- Page -->
+        <!-- Double Click -->
         <tabpanel orient="vertical" flex="1">
 
-          <hbox>
-
-            <groupbox flex="1">
-              <caption label="&topicLists.label;"/>
-              <label value="&topicLists.desc;"/>
-
-              <radiogroup class="indent" orient="horizontal"
-                preference="topic.dblclick">
-                <vbox>
-                  <radio value="0" label="&doNothing.label;"/>
-                  <radio value="1" label="&showPageLinks.label;"/>
-                  <radio value="4" label="&toLastPost.label;"/>
-                  <radio value="2" label="&toLastPage.label;"/>
-                  <radio value="3" label="&tagTopic.label;"/>
-                </vbox>
-              </radiogroup>
-            </groupbox>
-
-            <groupbox flex="1">
-              <caption label="&activeMessages.label;"/>
-              <label value="&activeMessages.desc;"/>
-
-              <radiogroup class="indent" orient="horizontal"
-                preference="myposts.dblclick">
-                <vbox>
-                  <radio value="0" label="&doNothing.label;"/>
-                  <radio value="1" label="&showPageLinks.label;"/>
-                  <radio value="4" label="&toLastPost.label;"/>
-                  <radio value="2" label="&toLastPage.label;"/>
-                  <radio value="3" label="&tagTopic.label;"/>
-                </vbox>
-              </radiogroup>
-            </groupbox>
+          <hbox align="center">
+            <label value="&topicLists.label;"/>
+            <menulist preference="topic.dblclick">
+              <menupopup>
+                <menuitem label="&doNothing.label;" value="0"/>
+                <menuitem label="&showPageLinks.label;" value="1"/>
+                <menuitem label="&toLastPost.label;" value="4"/>
+                <menuitem label="&toLastPage.label;" value="2"/>
+                <menuitem label="&tagTopic.label;" value="3"/>
+              </menupopup>
+            </menulist>
           </hbox>
 
-          <groupbox>
-            <caption label="&messageLists.label;"/>
-            <label value="&messageLists.desc;"/>
+          <hbox align="center">
+            <label value="&activeMessages.label;"/>
+            <menulist preference="myposts.dblclick">
+              <menupopup>
+                <menuitem label="&doNothing.label;" value="0"/>
+                <menuitem label="&showPageLinks.label;" value="1"/>
+                <menuitem label="&toLastPost.label;" value="4"/>
+                <menuitem label="&toLastPage.label;" value="2"/>
+                <menuitem label="&tagTopic.label;" value="3"/>
+              </menupopup>
+            </menulist>
+          </hbox>
 
-            <radiogroup class="indent" preference="message.header.dblclick">
-              <vbox>
-                <radio value="0" label="&doNothing.label;"/>
-                <radio value="1" label="&quickWhois.label;"/>
-                <radio value="2" label="&quoteMessage.label;"/>
-              </vbox>
-            </radiogroup>
+          <hbox align="center">
+            <label value="&messageLists.label;"/>
+            <menulist preference="message.header.dblclick">
+              <menupopup>
+                <menuitem label="&doNothing.label;" value="0"/>
+                <menuitem label="&quickWhois.label;" value="1"/>
+                <menuitem label="&quoteMessage.label;" value="2"/>
+              </menupopup>
+            </menulist>
+          </hbox>
 
-            <checkbox label="&doubleClickQuote.label;"
-              preference="message.dblclick"/>
-          </groupbox>
+          <checkbox label="&doubleClickQuote.label;"
+            preference="message.dblclick"/>
 
         </tabpanel>
 
@@ -137,63 +126,113 @@
         <tabpanel orient="vertical" flex="1">
 
           <groupbox>
-            <caption label="&menu.label;"/>
+            <caption label="&mainMenu.label;"/>
 
-              <groupbox>
-                <caption label="&mainMenu.label;"/>
-
-                <hbox>
-                  <vbox>
+            <grid>
+              <columns>
+                <column flex="1"/>
+                <column flex="1"/>
+                <column flex="1"/>
+                <column flex="1"/>
+              </columns>
+              <rows>
+                <row>
+                  <hbox>
                     <checkbox label="&mainMenu.pages.label;"
                       preference="context.pagelist"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&mainMenu.tagTopic.label;"
                       preference="context.tag"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&mainMenu.trackTopic.label;"
                       preference="context.track"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&mainMenu.quote.label;"
                       preference="context.quote"/>
-                  </vbox>
-                  <vbox>
+                  </hbox>
+                </row>
+                <row>
+                  <hbox>
                     <checkbox label="&mainMenu.filter.label;"
                       preference="context.filter"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&mainMenu.delete.label;"
                       preference="context.delete"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&mainMenu.userGroups.label;"
                       preference="context.usergroups"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&mainMenu.breakTags.label;"
                       preference="context.breaktags"/>
-                  </vbox>
-                </hbox>
-              </groupbox>
+                  </hbox>
+                </row>
+              </rows>
+            </grid>
+          </groupbox>
 
-              <groupbox>
-                <caption label="&submenu.label;"/>
+          <groupbox>
+            <caption label="&submenu.label;"/>
 
-                <hbox>
-                  <vbox>
+            <grid>
+              <columns>
+                <column flex="1"/>
+                <column flex="1"/>
+                <column flex="1"/>
+                <column flex="1"/>
+              </columns>
+              <rows>
+                <row>
+                  <hbox>
                     <checkbox label="&submenu.sidebar.label;"
                       preference="context.sidebar"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&submenu.tagList.label;"
                       preference="context.taglist"/>
-                  </vbox>
-                  <vbox>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&submenu.accounts.label;"
                       preference="context.accounts"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&submenu.favorites.label;"
                       preference="context.favorites"/>
-                  </vbox>
-                </hbox>
-              </groupbox>
+                  </hbox>
+                </row>
+              </rows>
+            </grid>
+          </groupbox>
 
-              <groupbox>
-                <caption label="&tagMenu.label;"/>
+          <groupbox>
+            <caption label="&tagMenu.label;"/>
 
-                <checkbox label="&tagMenu.activeMessages.label;"
-                  preference="context.tag.myposts"/>
-                <checkbox label="&tagMenu.trackedTopics.label;"
-                  preference="context.tag.tracked"/>
-              </groupbox>
-            </groupbox>
+            <grid>
+              <columns>
+                <column flex="1"/>
+                <column flex="1"/>
+                <column flex="1"/>
+                <column flex="1"/>
+              </columns>
+              <rows>
+                <row>
+                  <hbox>
+                    <checkbox label="&tagMenu.activeMessages.label;"
+                      preference="context.tag.myposts"/>
+                  </hbox>
+                  <hbox>
+                    <checkbox label="&tagMenu.trackedTopics.label;"
+                      preference="context.tag.tracked"/>
+                  </hbox>
+                </row>
+              </rows>
+            </grid>
+          </groupbox>
 
         </tabpanel>
       </tabpanels>

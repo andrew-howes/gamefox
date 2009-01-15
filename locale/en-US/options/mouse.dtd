@@ -1,10 +1,9 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY pageTab.label "Page">
+<!ENTITY doubleClickTab.label "Double Click">
 <!ENTITY contextTab.label "Context Menu">
 
-<!ENTITY topicLists.label "Topic Lists">
-<!ENTITY topicLists.desc "Double clicking on topic row action:">
+<!ENTITY topicLists.label "When double clicking on topic list row:">
 
 <!ENTITY doNothing.label "Do nothing">
 <!ENTITY showPageLinks.label "Show links to topic pages">
@@ -12,14 +11,13 @@
 <!ENTITY toLastPost.label "Go to last post">
 <!ENTITY tagTopic.label "Tag topic">
 
-<!ENTITY activeMessages.label "Active Messages List">
-<!ENTITY activeMessages.desc "Double clicking on row action:">
+<!ENTITY activeMessages.label "When double clicking on active message list row:">
 
-<!ENTITY messageLists.label "Message Lists">
-<!ENTITY messageLists.desc "Double clicking on message header action:">
-<!ENTITY quickWhois.label "QuickWhois (display the poster's user information)">
+<!ENTITY messageLists.label "When double clicking on message header:">
+<!ENTITY quickWhois.label "Show QuickWhois">
 <!ENTITY quoteMessage.label "Quote message">
-<!ENTITY doubleClickQuote.label "Quote by double clicking on the message">
+
+<!ENTITY doubleClickQuote.label "Double click to quote message">
 
 <!ENTITY menu.label "Context Menu">
 <!ENTITY mainMenu.label "Main">
