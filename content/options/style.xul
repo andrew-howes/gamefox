@@ -38,8 +38,6 @@
     </preferences>
 
     <groupbox>
-      <caption label="&general.label;"/>
-
       <checkbox label="&disableMainStyles.label;"
         preference="disablegamefaqscss"/>
     </groupbox>

@@ -3,8 +3,6 @@
 <!ENTITY contentTab.label "Content">
 <!ENTITY optionsTab.label "Options">
 
-<!ENTITY general.label "General">
-
 <!ENTITY defaultSig.label "Default signature">
 <!ENTITY newSig.label "New signature">
 <!ENTITY deleteSig.label "Delete">

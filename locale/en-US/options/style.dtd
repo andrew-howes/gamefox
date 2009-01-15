@@ -1,7 +1,5 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY general.label "General">
-
 <!ENTITY disableMainStyles.label "Disable main GameFAQs stylesheets">
 
 <!ENTITY tree.label "Stylesheets">

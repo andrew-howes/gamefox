@@ -36,8 +36,6 @@
 
     <notificationbox id="manageMsg" flex="1">
       <groupbox>
-        <caption label="&manage.label;"/>
-
         <description>&export.desc;</description>
         <description>&reset.desc;</description>
       </groupbox>

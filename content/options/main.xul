@@ -147,8 +147,6 @@
 
           <vbox>
             <groupbox>
-              <caption label="&general.label;"/>
-
               <hbox>
                 <vbox flex="1">
                   <checkbox label="&customTitles.label;"
@@ -248,8 +246,6 @@
         <tabpanel orient="vertical" flex="1">
           <vbox>
             <groupbox>
-              <caption label="&general.label;"/>
-
               <checkbox label="&postButton.label;"
                 preference="elements.quickpost.button"/>
               <checkbox label="&characterCounters.label;"
@@ -371,8 +367,6 @@
           <notificationbox id="boardSettingsMsg" flex="1">
             <vbox>
               <groupbox flex="1">
-                <caption label="&boardSettings.label;"/>
-
                 <grid>
                   <columns>
                     <column/>
