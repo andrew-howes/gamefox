@@ -28,7 +28,7 @@
 
       <menulist preference="paging.location">
         <menupopup>
-          <menuitem value="0" label="&locationRight.label;"/>
+          <menuitem value="1" label="&locationRight.label;"/>
           <menuitem value="2" label="&locationBelow.label;"/>
           <menuitem value="0" label="&locationNewRow.label;"/>
         </menupopup>
