@@ -329,7 +329,7 @@ var GFtracked =
   {
     this.read();
 
-    return this.list[board] && topic in this.list[board].topics;
+    return !!(this.list[board] && topic in this.list[board].topics);
   },
 
   addFromContextMenu: function(event)
