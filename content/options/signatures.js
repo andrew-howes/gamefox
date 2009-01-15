@@ -168,7 +168,7 @@ var GFsigOptions =
 
           GFutils.showNotification(signatureMsg,
               strbundle.getString('importNotLoggedIn'), 'warning');
-          button.setAttribute('disabled', false);
+          button.disabled = false;
           return;
         }
 
@@ -179,7 +179,7 @@ var GFsigOptions =
 
           GFutils.showNotification(signatureMsg,
               strbundle.getString('importOld'), 'warning');
-          button.setAttribute('disabled', false);
+          button.disabled = false;
           return;
         }
         sig = GFutils.convertNewlines(GFutils.specialCharsDecode(sig[1]));
@@ -190,7 +190,7 @@ var GFsigOptions =
 
         GFutils.showNotification(signatureMsg,
             strbundle.getString('importSuccess'), 'info');
-        button.setAttribute('disabled', false);
+        button.disabled = false;
       }
     };
 

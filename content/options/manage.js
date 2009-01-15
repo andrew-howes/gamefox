@@ -35,7 +35,7 @@ var GFmanageOptions =
   importPrefs: function(button)
   {
     var manageMsg = document.getElementById('manageMsg');
-    button.setAttribute('disabled', true);
+    button.disabled = true;
 
     var strbundle = document.getElementById('manage-strings');
 
@@ -46,7 +46,7 @@ var GFmanageOptions =
     filePicker.appendFilters(filePicker.filterAll);
     if (filePicker.show() != Ci.nsIFilePicker.returnOK)
     {
-      button.setAttribute('disabled', false);
+      button.disabled = false;
       return;
     }
 
@@ -71,14 +71,14 @@ var GFmanageOptions =
     {
       GFutils.showNotification(manageMsg,
           strbundle.getString('invalidSyntax'), 'warning');
-      button.setAttribute('disabled', false);
+      button.disabled = false;
       return;
     }
     GFprefs.clearUserPrefs();
     for (var i in importedPrefs)
       GFprefs.setPrefValue(i, importedPrefs[i]);
 
-    button.setAttribute('disabled', false);
+    button.disabled = false;
 
     this.resetOptionsDialog(false,
         {'manageMsg':
@@ -90,7 +90,7 @@ var GFmanageOptions =
   exportPrefs: function(button)
   {
     var manageMsg = document.getElementById('manageMsg');
-    button.setAttribute('disabled', true);
+    button.disabled = true;
 
     var strbundle = document.getElementById('manage-strings');
 
@@ -104,7 +104,7 @@ var GFmanageOptions =
     if (showValue != Ci.nsIFilePicker.returnOK
         && showValue != Ci.nsIFilePicker.returnReplace)
     {
-      button.setAttribute('disabled', false);
+      button.disabled = false;
       return;
     }
 
@@ -118,26 +118,26 @@ var GFmanageOptions =
 
     GFutils.showNotification(manageMsg,
         strbundle.getString('exportSuccess'), 'info');
-    button.setAttribute('disabled', false);
+    button.disabled = false;
   },
 
   resetPrefs: function(button)
   {
     var manageMsg = document.getElementById('manageMsg');
-    button.setAttribute('disabled', true);
+    button.disabled = true;
 
     var strbundle = document.getElementById('manage-strings');
 
     if (!GFlib.confirm(strbundle.getString('resetConfirm')))
     {
-      button.setAttribute('disabled', false);
+      button.disabled = false;
       return;
     }
 
     GFprefs.clearUserPrefs();
     GFlib.prefs.setCharPref('version', GFlib.version);
 
-    button.setAttribute('disabled', false);
+    button.disabled = false;
 
     GFcss.init();
     GFcss.reload();

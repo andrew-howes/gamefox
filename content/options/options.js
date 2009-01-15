@@ -39,7 +39,7 @@ var GFoptions =
 
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsImportNotLoggedIn'), 'warning');
-          button.setAttribute('disabled', false);
+          button.disabled = false;
           return;
         }
 
@@ -56,7 +56,7 @@ var GFoptions =
 
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsImportNotLoggedIn'), 'warning');
-          button.setAttribute('disabled', false);
+          button.disabled = false;
           return;
         }
 
@@ -70,7 +70,7 @@ var GFoptions =
 
         GFutils.showNotification(boardSettingsMsg,
             strbundle.getString('bsImportSuccess'), 'info');
-        button.setAttribute('disabled', false);
+        button.disabled = false;
       }
     }
 
@@ -104,7 +104,7 @@ var GFoptions =
 
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsExportNotLoggedIn'), 'warning');
-          button.setAttribute('disabled', false);
+          button.disabled = false;
           return;
         }
 
@@ -115,7 +115,7 @@ var GFoptions =
 
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsExportNoUserId'), 'warning');
-          button.setAttribute('disabled', false);
+          button.disabled = false;
           return;
         }
         action = action[1];
@@ -139,7 +139,7 @@ var GFoptions =
               GFutils.showNotification(boardSettingsMsg,
                   strbundle.getString('bsExportSuccess'), 'info');
             }
-            button.setAttribute('disabled', false);
+            button.disabled = false;
           }
         }
         var key = request.responseText.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i);

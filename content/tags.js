@@ -262,7 +262,7 @@ var GFtags =
 
         if (processedIDs == IDs)
         {
-          button.removeAttribute('disabled');
+          button.disabled = false;
 
           var msg;
 
@@ -410,7 +410,7 @@ var GFtags =
       {
         if (first)
         {
-          button.setAttribute('disabled', 'true');
+          button.disabled = true;
           first = false;
         }
         IDs++;
