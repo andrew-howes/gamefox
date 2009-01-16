@@ -1,5 +1,10 @@
 @-moz-document domain(gamefaqs.com)
 {
+    #gamefox-quickpost-normal
+    {
+        clear: both;
+    }
+
     #gamefox-quickpost-afloat
     {
         position: fixed;
