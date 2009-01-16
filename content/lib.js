@@ -299,7 +299,7 @@ var GFlib =
       };
       args.wrappedJSObject = args;
       dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options/options.xul',
-          '_blank', 'chrome,centerscreen,toolbar', args);
+          '_blank', 'chrome,centerscreen,toolbar,resizable', args);
     }
   },
 
