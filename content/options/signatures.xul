@@ -123,8 +123,8 @@
             <description id="selectionDesc" control="selection">&selectOrder.label;</description>
             <radiogroup id="selection" preference="signature.selection"
               orient="horizontal" aria-labelledby="selectionDesc">
-              <radio value="3" label="&random.label;"/>
-              <radio value="1" label="&sequential.label;"/>
+              <radio value="1" label="&random.label;"/>
+              <radio value="2" label="&sequential.label;"/>
             </radiogroup>
           </groupbox>
         </tabpanel>
