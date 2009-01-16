@@ -112,21 +112,19 @@
           </groupbox>
 
           <groupbox>
-            <caption label="&addition.label;"/>
+            <description id="additionDesc" control="addition">&appendAfter.label;</description>
 
-            <radiogroup preference="signature.addition">
-              <radio value="1" label="&addAfter.label;"/>
+            <radiogroup id="addition" preference="signature.addition"
+              orient="horizontal" aria-labelledby="additionDesc">
               <radio value="2" label="&addBefore.label;"/>
+              <radio value="1" label="&addAfter.label;"/>
             </radiogroup>
-          </groupbox>
 
-          <groupbox>
-            <caption label="&selection.label;"/>
-
-            <radiogroup preference="signature.selection">
-              <radio value="1" label="&firstSig.label;"/>
-              <radio value="2" label="&randomSig.label;"/>
-              <radio value="3" label="&bestRandomSig.label;"/>
+            <description id="selectionDesc" control="selection">&selectOrder.label;</description>
+            <radiogroup id="selection" preference="signature.selection"
+              orient="horizontal" aria-labelledby="selectionDesc">
+              <radio value="3" label="&random.label;"/>
+              <radio value="1" label="&sequential.label;"/>
             </radiogroup>
           </groupbox>
         </tabpanel>

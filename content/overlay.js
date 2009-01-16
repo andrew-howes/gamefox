@@ -1302,6 +1302,13 @@ function GameFOXLoader()
       GFutils.setString('signature.serialized', sigs.toSource());
     }
 
+    if (versionComparator.compare('0.6.10', lastversion) > 0)
+    {
+      // first signature (1) -> sequential (2)
+      // random {no | highest} specificity (2 | 3) -> random (1)
+      GFlib.prefs.setIntPref('signature.selection', 1);
+    }
+
     if (lastversion == '')
     {
       // first run

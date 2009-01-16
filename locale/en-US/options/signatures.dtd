@@ -18,11 +18,10 @@
 <!ENTITY onPostPage.label "Also use on standard GameFAQs post page">
 <!ENTITY extraLineBreak.label "Insert an additional line break before the separator">
 
-<!ENTITY addition.label "Addition Method">
-<!ENTITY addAfter.label "Append signature after submitting or previewing the post">
-<!ENTITY addBefore.label "Let the signature be there without hitting any goddamn button">
+<!ENTITY appendAfter.label "Append signature after:">
+<!ENTITY addBefore.label "Page has loaded">
+<!ENTITY addAfter.label "Post is submitted">
 
-<!ENTITY selection.label "Selection Mode">
-<!ENTITY firstSig.label "First signature, highest specificity">
-<!ENTITY randomSig.label "Random signature, no specificity">
-<!ENTITY bestRandomSig.label "Random signature, highest specificity">
+<!ENTITY selectOrder.label "Select a signature in order:">
+<!ENTITY random.label "Random">
+<!ENTITY sequential.label "Sequential">

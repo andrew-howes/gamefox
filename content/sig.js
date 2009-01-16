@@ -70,7 +70,7 @@ var GFsig =
 
     var sig;
     var selectionPref = this.prefs.getIntPref('selection');
-    if (selectionPref == 1 || selectionPref == 3)
+    if (selectionPref == 1)
     {
       // highest specificity
       var bestIndex;
@@ -81,19 +81,11 @@ var GFsig =
       else
         bestIndex = 2;
       if (selectionPref == 1)
-        sig = matches[bestIndex][0];
-      else // selectionPref == 3
         sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
+      else // selectionPref == 2
+        sig = matches[bestIndex][0];
     }
-    else // selectionPref == 2
-    {
-      // no specificity
-      var allMatches = new Array();
-      for (i = 0; i < matches.length; i++)
-        for (var j = 0; j < matches[i].length; j++)
-          allMatches.push(matches[i][j]);
-      sig = allMatches[Math.floor(Math.random() * allMatches.length)];
-    }
+    
     // default is only sig and is empty
     if (sig == undefined)
       sig = sigs[0];
