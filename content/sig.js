@@ -69,23 +69,12 @@ var GFsig =
       matches[2].push(sigs[0]);
 
     var sig;
-    var selectionPref = this.prefs.getIntPref('selection');
-    if (selectionPref == 1)
-    {
-      // highest specificity
-      var bestIndex;
-      if (matches[0].length)
-        bestIndex = 0;
-      else if (matches[1].length)
-        bestIndex = 1;
-      else
-        bestIndex = 2;
-      if (selectionPref == 1)
-        sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
-      else // selectionPref == 2
-        sig = matches[bestIndex][0];
-    }
-    
+    var bestIndex = matches[0].length ? 0 : matches[1].length ? 1 : 2;
+    if (this.prefs.getIntPref('selection') == 1) // random
+      sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
+    else // sequential
+      sig = matches[bestIndex][0];
+
     // default is only sig and is empty
     if (sig == undefined)
       sig = sigs[0];
