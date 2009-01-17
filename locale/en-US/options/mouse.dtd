@@ -32,7 +32,8 @@
 
 <!ENTITY submenu.label "Submenu">
 <!ENTITY submenu.sidebar.label "Sidebar">
-<!ENTITY submenu.tagList.label "Tag List">
+<!ENTITY submenu.tagList.label "Tags">
+<!ENTITY submenu.tracked.label "Tracked">
 <!ENTITY submenu.accounts.label "Accounts">
 <!ENTITY submenu.favorites.label "Favorites">
 

@@ -60,6 +60,12 @@
           <menupopup id="gamefox-tags-menu" onpopupshowing="GFtags.populate(1);"/>
         </menu>
 
+        <menu id="gamefox-tracked" label="&menu.tracked.label;"
+          accesskey="&menu.tracked.accesskey;">
+          <menupopup id="gamefox-tracked-menu"
+            onpopupshowing="GFtracked.populateMenu();"/>
+        </menu>
+
         <menu id="gamefox-accounts" label="&menu.accounts.label;"
           accesskey="&menu.accounts.accesskey;">
           <menupopup id="gamefox-accounts-menu" onpopupshowing="GFaccounts.populate();"/>
@@ -68,12 +74,6 @@
         <menu id="gamefox-favorites" label="&menu.favorites.label;"
           accesskey="&menu.favorites.accesskey;">
           <menupopup id="gamefox-favorites-menu" onpopupshowing="GameFOX.showFavs();"/>
-        </menu>
-
-        <menu id="gamefox-tracked" label="&menu.tracked.label;"
-          accesskey="&menu.tracked.accesskey;">
-          <menupopup id="gamefox-tracked-menu"
-            onpopupshowing="GFtracked.populateMenu();"/>
         </menu>
       </menupopup>
     </menu>

@@ -29,6 +29,8 @@ var GFcontext =
       getBoolPref('context.sidebar');
     document.getElementById('gamefox-tags').hidden = !GFlib.prefs.
       getBoolPref('context.taglist');
+    document.getElementById('gamefox-tracked').hidden = !GFlib.prefs.
+      getBoolPref('context.tracked');
     document.getElementById('gamefox-accounts').hidden = !GFlib.prefs.
       getBoolPref('context.accounts');
     document.getElementById('gamefox-favorites').hidden = !GFlib.prefs.

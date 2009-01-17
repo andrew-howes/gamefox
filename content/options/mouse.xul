@@ -57,6 +57,8 @@
         type="bool"/>
       <preference id="context.taglist" name="gamefox.context.taglist"
         type="bool"/>
+      <preference id="context.tracked" name="gamefox.context.tracked"
+        type="bool"/>
       <preference id="context.accounts" name="gamefox.context.accounts"
         type="bool"/>
       <preference id="context.favorites" name="gamefox.context.favorites"
@@ -195,6 +197,10 @@
                   <hbox>
                     <checkbox label="&submenu.tagList.label;"
                       preference="context.taglist"/>
+                  </hbox>
+                  <hbox>
+                    <checkbox label="&submenu.tracked.label;"
+                      preference="context.tracked"/>
                   </hbox>
                   <hbox>
                     <checkbox label="&submenu.accounts.label;"
