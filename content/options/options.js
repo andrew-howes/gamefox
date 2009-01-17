@@ -310,8 +310,12 @@ var GFoptions =
     {
       GFuserlist.add();
       GFuserlist.populateLast();
-      GFoptions.importBoardSettings();
-      GFsigOptions.importSig();
+
+      if (GFlib.isLoggedIn())
+      {
+        GFoptions.importBoardSettings();
+        GFsigOptions.importSig();
+      }
     }
 
     for (var i in args.notifications)
