@@ -579,7 +579,7 @@ var GFquickpost =
   removeGFCodeWhitespace: function(str)
   {
     return GFlib.prefs.getBoolPref('quote.controlwhitespace') ?
-      str.replace(/<\/p>\s*<\/i>\n{2}(?!\n)/g, '</p></i>\n') : str;
+      str.replace(/<\/p>\s*<\/(i|em)>\n{2}(?!\n)/g, '</p></$1>\n') : str;
   },
 
   removeGFCodeWhitespaceListener: function(event)
