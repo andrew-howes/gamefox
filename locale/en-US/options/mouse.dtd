@@ -17,7 +17,7 @@
 <!ENTITY quickWhois.label "Show QuickWhois">
 <!ENTITY quoteMessage.label "Quote message">
 
-<!ENTITY doubleClickQuote.label "Double click to quote message">
+<!ENTITY doubleClickQuote.label "Double click message body to quote message">
 
 <!ENTITY menu.label "Context Menu">
 <!ENTITY mainMenu.label "Main">
