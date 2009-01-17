@@ -493,6 +493,13 @@ var GFuserlist =
 
       list.appendChild(item);
     }
+
+    list.appendChild(document.createElement('menuseparator'));
+    item = document.createElement('menuitem');
+    item.setAttribute('label', 'Edit Groups');
+    item.setAttribute('oncommand',
+      'GFlib.openOptionsDialog(null, null, null, "paneUsers");');
+    list.appendChild(item);
   },
 
   menuCheckChange: function(event, username, group)

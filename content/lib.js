@@ -267,7 +267,7 @@ var GFlib =
     return ds;
   },
 
-  openOptionsDialog: function(firstRun, notifications, forceOpen)
+  openOptionsDialog: function(firstRun, notifications, forceOpen, pane)
   {
     // Stolen from Adblock Plus
     var windowMediator = Cc['@mozilla.org/appshell/window-mediator;1']
@@ -295,7 +295,8 @@ var GFlib =
     {
       var args = {
         firstRun: firstRun,
-        notifications: notifications
+        notifications: notifications,
+        pane: pane
       };
       args.wrappedJSObject = args;
       dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options/options.xul',

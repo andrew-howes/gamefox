@@ -327,6 +327,12 @@ var GFoptions =
             args.notifications[i][j].label, args.notifications[i][j].type);
       }
     }
+
+    if (args.pane)
+    {
+      var prefwin = document.getElementById('gamefox-prefwindow');
+      prefwin.showPane(document.getElementById(args.pane));
+    }
   },
 
   preInit: function()
@@ -334,10 +340,10 @@ var GFoptions =
     var prefwin = document.getElementById('gamefox-prefwindow');
     var prefpane = document.getElementById(prefwin.lastSelected);
 
-    // reselect current pane
+    // reselect this pane
     prefwin.showPane(prefpane);
 
-    // restore tabs just for this pane
+    // restore tabs for this pane
     GFoptions.restoreLastTabs();
   },
 
