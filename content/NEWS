@@ -8,6 +8,8 @@
     * Disable all tag-related preferences by default
     * Numerous performance improvements
     * New CSS: Capitalized Message Links
+    * Add board links above QuickPost on message lists
+    * Drop Firefox 1.5 support
 
 2008-12-26:
     * version 0.6.9
