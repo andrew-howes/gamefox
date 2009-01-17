@@ -109,6 +109,7 @@ pref("gamefox.context.usergroups", true);
 pref("gamefox.options.main.selectedtab", 0);
 pref("gamefox.options.signatures.selectedtab", 0);
 pref("gamefox.options.mouse.selectedtab", 0);
+pref("gamefox.options.topics.selectedtab", 0);
 
 pref("gamefox.version", "");
 pref("gamefox.nightlyChangeLog", true);
