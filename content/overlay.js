@@ -77,8 +77,22 @@ var GameFOX =
         element.parentNode.className += ' gamefox-ignorelist';
     }
 
+    /* sigquote.php */
+    if (GFlib.onPage(doc, 'sigquote'))
+    {
+      var button = doc.createElement('input');
+      button.type = 'button';
+      button.value = 'Update GameFOX Signature';
+      button.addEventListener('click', GFsig.updateFromGameFAQs, false);
+
+      var element = doc.getElementById('add').getElementsByTagName('input')[1]
+        .parentNode;
+      element.appendChild(doc.createTextNode(' '));
+      element.appendChild(button);
+    }
+
     /* Index (index.php) */
-    if (GFlib.onPage(doc, 'index'))
+    else if (GFlib.onPage(doc, 'index'))
     {
       GFlib.setTitle(doc, 'Message Boards');
 

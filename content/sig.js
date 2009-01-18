@@ -161,5 +161,19 @@ var GFsig =
       return '';
 
     return ' / ' + str.GFtrim().replace(/\s+/g, ' ');
+  },
+
+  updateFromGameFAQs: function(event)
+  {
+    var doc = GFlib.getDocument(event);
+
+    var sig = doc.getElementsByName('sig')[0].textContent;
+    var sigPref = eval(GFutils.getString('signature.serialized'));
+
+    sigPref[0].body = sig;
+
+    GFutils.setString('signature.serialized', sigPref.toSource());
+
+    GFlib.alert('Your GameFOX signature has been updated.');
   }
 };
