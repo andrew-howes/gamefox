@@ -50,9 +50,7 @@ var GameFOX =
     }
 
     // Save logged-in account name
-    var accountName = GFutils.getAccountName(doc);
-    if (accountName)
-      GFlib.prefs.setCharPref('accounts.current', accountName);
+    GFlib.prefs.setCharPref('accounts.current', GFutils.getAccountName(doc));
 
     if (!GFlib.onBoards(doc)) return false;
 
