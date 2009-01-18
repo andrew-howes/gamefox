@@ -43,7 +43,7 @@
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
     <stringbundleset id="strbundles">
-      <stringbundle id="context-strings"
+      <stringbundle id="strings"
         src="chrome://gamefox/locale/context.properties"/>
     </stringbundleset>
 

@@ -160,12 +160,13 @@ var GFtracked =
   {
     var item, topic;
     var trackedMenu = document.getElementById('gamefox-tracked-menu');
+    var strbundle = document.getElementById('strings');
 
     while (trackedMenu.hasChildNodes())
       trackedMenu.removeChild(trackedMenu.firstChild);
 
     item = document.createElement('menuitem');
-    item.setAttribute('label', 'Update');
+    item.setAttribute('label', strbundle.getString('updateTracked'));
     item.setAttribute('oncommand', 'GFtracked.updateList()');
     trackedMenu.appendChild(item);
 

@@ -413,6 +413,7 @@ var GFuserlist =
   {
     var doc = event.target.ownerDocument;
     var list = document.getElementById('gamefox-context-usergroups-list');
+    var strbundle = document.getElementById('strings');
 
     while (list.hasChildNodes())
       list.removeChild(list.firstChild);
@@ -496,7 +497,7 @@ var GFuserlist =
 
     list.appendChild(document.createElement('menuseparator'));
     item = document.createElement('menuitem');
-    item.setAttribute('label', 'Edit Groups');
+    item.setAttribute('label', strbundle.getString('editGroups'));
     item.setAttribute('oncommand',
       'GFlib.openOptionsDialog(null, null, null, "paneUsers");');
     list.appendChild(item);
