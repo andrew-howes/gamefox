@@ -115,22 +115,6 @@ var GFsig =
     return false;
   },
 
-  updateCharCounts: function()
-  {
-    var sigLength =
-      GFutils.specialCharsEncode(document.getElementById('sig-body').value).length;
-    var sigChars = document.getElementById('sig-chars');
-
-    sigChars.value = sigLength + ' characters';
-    if (sigLength > 160)
-    {
-      sigChars.value += '(!!)';
-      sigChars.style.setProperty('font-weight', 'bold', null);
-    }
-    else
-      sigChars.style.setProperty('font-weight', '', null);
-  },
-
   format: function(sig, newline, doc)
   {
     if (sig == null) // fetch sig
