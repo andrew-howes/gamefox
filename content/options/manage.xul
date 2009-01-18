@@ -40,7 +40,7 @@
         <description>&reset.desc;</description>
       </groupbox>
 
-      <hbox pack="center">
+      <hbox pack="center" style="margin-bottom: 40px;">
         <button label="&import.button;" icon="open"
           oncommand="GFmanageOptions.importPrefs(event.target);"/>
         <button label="&export.button;" icon="save"
