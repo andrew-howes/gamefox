@@ -30,8 +30,9 @@ var GFsigOptions =
 
     // loop through sigs and add them to menulist
     for (var i = 1; i < sigs.length; i++)
-      menu.insertItemAt(i, GFsig.getCriteriaString(sigs[i].accounts,
-            sigs[i].boards) + GFsig.formatSigPreview(sigs[i].body));
+      menu.insertItemAt(i,
+          GFsig.getCriteriaString(sigs[i].accounts, sigs[i].boards)
+          + GFsig.formatSigPreview(sigs[i].body));
     
     this.updateCharCounts();
   },
@@ -68,20 +69,22 @@ var GFsigOptions =
       sigChars.style.setProperty('font-weight', '', null);
   },
 
+  addSig: function()
+  {
+    var menu = document.getElementById('sig-menu');
+
+    var index = GFsig.add();
+    menu.insertItemAt(index, 'Signature', '');
+    menu.selectedIndex = index;
+    this.changeSig();
+  },
+
   changeSig: function()
   {
     var menu = document.getElementById('sig-menu');
     var accounts = document.getElementById('sig-criteria-accounts');
     var boards = document.getElementById('sig-criteria-boards');
     var sig = document.getElementById('sig-body');
-
-    if (menu.selectedItem.value == 'new')
-    {
-      // create blank sig and select it
-      var index = GFsig.add();
-      menu.insertItemAt(index, 'Global signature', '');
-      menu.selectedIndex = index;
-    }
 
     if (menu.selectedIndex == 0)
     {
@@ -111,20 +114,26 @@ var GFsigOptions =
   deleteSig: function()
   {
     var menu = document.getElementById('sig-menu');
+    var index = menu.selectedIndex;
 
-    // this should never happen
-    if (menu.selectedIndex == 0 || menu.selectedItem.value == 'new')
+    // the default sig should never be deleted
+    if (menu.selectedIndex == 0)
       return;
+
+    // switch to closest signature
+    var lastIndex = menu.getElementsByTagName('menupopup')[0]
+      .childNodes.length - 1;
+    if (index == lastIndex)
+      menu.selectedIndex = index - 1;
+    else
+      menu.selectedIndex = index + 1;
+    this.changeSig();
 
     // remove it
     var sigs = eval(GFutils.getString('signature.serialized'));
-    sigs.splice(menu.selectedIndex, 1);
+    sigs.splice(index, 1);
     GFutils.setString('signature.serialized', sigs.toSource());
-    menu.removeItemAt(menu.selectedIndex);
-
-    // return to default signature
-    menu.selectedIndex = 0;
-    this.changeSig();
+    menu.removeItemAt(index);
   },
 
   updatePref: function(event)
@@ -142,8 +151,9 @@ var GFsigOptions =
     GFutils.setString('signature.serialized', sigs.toSource());
 
     if (idx != 0) // don't set default
-      menu.selectedItem.label = GFsig.getCriteriaString(sigs[idx].accounts,
-          sigs[idx].boards) + GFsig.formatSigPreview(sigs[idx].body);
+      menu.selectedItem.label =
+        GFsig.getCriteriaString(sigs[idx].accounts, sigs[idx].boards)
+        + GFsig.formatSigPreview(sigs[idx].body);
 
     this.updateCharCounts();
   },

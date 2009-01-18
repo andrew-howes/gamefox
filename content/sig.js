@@ -100,7 +100,7 @@ var GFsig =
   {
     switch ((/\S/.test(accounts) ? 1 : 0) + (/\S/.test(boards) ? 2 : 0))
     {
-      case 0: return 'Global signature';
+      case 0: return 'Signature';
       case 1: return 'Accounts: ' + accounts;
       case 2: return 'Boards: ' + boards;
       case 3: return 'Accounts: ' + accounts + ' + Boards: ' + boards;

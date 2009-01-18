@@ -65,10 +65,10 @@
                   oncommand="GFsigOptions.changeSig();">
                   <menupopup>
                     <menuitem value="" label="&defaultSig.label;"/>
-                    <menuseparator/>
-                    <menuitem value="new" label="&newSig.label;"/>
                   </menupopup>
                 </menulist>
+                <button id="sig-add" icon="add" label="&addSig.label;"
+                  oncommand="GFsigOptions.addSig();"/>
                 <button id="sig-delete" icon="remove" label="&deleteSig.label;"
                   oncommand="GFsigOptions.deleteSig();" disabled="true"/>
               </hbox>
