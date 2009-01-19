@@ -31,6 +31,8 @@
       src="chrome://gamefox/content/treeview.js"/>
     <script type="application/x-javascript"
       src="chrome://gamefox/content/css.js"/>
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/options/style.js"/>
 
     <preferences>
       <preference id="disablegamefaqscss"
@@ -48,7 +50,8 @@
       <description>&tree.desc;</description>
       
       <tree id="css-tree" editable="true" seltype="single"
-        hidecolumnpicker="true" contextmenu="css-tree-contextmenu" flex="1">
+        hidecolumnpicker="true" contextmenu="css-tree-contextmenu" flex="1"
+        ondblclick="GFstyleOptions.showDesc(event);">
         <treecols>
           <treecol label="&name.label;" primary="true" flex="1"/>
           <treecol label="&desc.label;" width="100"/>

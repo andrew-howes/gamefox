@@ -286,11 +286,6 @@ var GFcss =
       if (this.isContainer(idx)) return false;
       if (column.index == 3) return true;
       if (this.visibleData[idx][0][5] == 'user') return true;
-
-      // description
-      if (column.index == 1 && this.visibleData[idx][0][1].length)
-        GFlib.alert(this.visibleData[idx][0][0] + '\n\n' +
-            this.visibleData[idx][0][1]);
     }
     this.treeView.setCellText = this.setCell;
     this.treeView.setCellValue = this.setCell;
