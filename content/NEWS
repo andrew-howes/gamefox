@@ -10,6 +10,16 @@
     * New CSS: Capitalized Message Links
     * Add board links above QuickPost on message lists
     * Drop Firefox 1.5 support
+    * Add menu item to open the Users options pane from the context menu
+      (right click message -> User Groups -> Edit Groups)
+    * Add "Update GameFOX Signature" button to the GameFAQs signature/quote
+      page
+    * Support double-click CSS descriptions in the Style options pane in
+      Firefox 2
+    * Update signature options interface:
+        - Move "new signature" menu item to an "Add" button
+        - Two simple selection modes: "random" (now default) and "first"
+        - "Save to GameFAQs" button to save your GameFOX signature to GameFAQs
 
 2008-12-26:
     * version 0.6.9

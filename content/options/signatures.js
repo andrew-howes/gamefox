@@ -158,7 +158,7 @@ var GFsigOptions =
 
   importSig: function()
   {
-    var strbundle = document.getElementById('signatures-strings');
+    var strbundle = document.getElementById('strings');
     var signatureMsg = document.getElementById('signatureMsg');
     var button = document.getElementById('gamefox-css-grab-sig');
     button.disabled = true;
@@ -199,6 +199,77 @@ var GFsigOptions =
         GFutils.showNotification(signatureMsg,
             strbundle.getString('importSuccess'), 'info');
         button.disabled = false;
+      }
+    };
+
+    request.send(null);
+  },
+
+  exportSig: function()
+  {
+    var strbundle = document.getElementById('strings');
+    var signatureMsg = document.getElementById('signatureMsg');
+    var button = document.getElementById('gamefox-css-save-sig');
+    button.disabled = true;
+
+    var request = new XMLHttpRequest();
+    request.open('GET', GFlib.domain + GFlib.path + 'sigquote.php');
+    var ds = GFlib.thirdPartyCookieFix(request);
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        if (request.responseText.indexOf('Board Signature and Quote') == -1)
+        {
+          GFutils.showNotification(signatureMsg,
+              strbundle.getString('exportNotLoggedIn'), 'warning');
+          button.disabled = false;
+          return;
+        }
+
+        var action = request.responseText
+          .match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
+        if (!action)
+        {
+          GFutils.showNotification(signatureMsg,
+              strbundle.getString('exportnoUserId'), 'warning');
+          button.disabled = false;
+          return;
+        }
+        action = action[1];
+
+        var postRequest = new XMLHttpRequest();
+        postRequest.open('POST', GFlib.domain + action);
+        var ds = GFlib.thirdPartyCookieFix(postRequest);
+        postRequest.onreadystatechange = function()
+        {
+          if (postRequest.readyState == 4)
+          {
+            if (postRequest.responseText.indexOf('Signature/quote updated') == -1)
+              GFutils.showNotification(signatureMsg,
+                  strbundle.getString('exportUnexpectedResponse'), 'warning');
+            else
+              GFutils.showNotification(signatureMsg,
+                  strbundle.getString('exportSuccess'), 'info');
+
+            button.disabled = false;
+          }
+        };
+
+        var sigText = document.getElementById('sig-body').value;
+        var quoteText = request.responseText
+          .match(/<textarea\b[^>]+?\bname="quote"[^>]*>([^<]*)<\/textarea>/i)[1];
+        var key = request.responseText
+          .match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i)[1];
+
+        postRequest.setRequestHeader('Content-Type',
+            'application/x-www-form-urlencoded');
+        postRequest.send(
+            'sig=' + sigText + '&' +
+            'quote=' + quoteText + '&' +
+            'key=' + key + '&' +
+            'submit=1'
+            );
       }
     };
 

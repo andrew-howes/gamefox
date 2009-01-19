@@ -14,6 +14,7 @@
 
 <!ENTITY sig.label "Signature:">
 <!ENTITY grab.button "Grab from GameFAQs">
+<!ENTITY save.button "Save to GameFAQs">
 
 <!ENTITY onPostPage.label "Also use on standard GameFAQs post page">
 <!ENTITY extraLineBreak.label "Insert an additional line break before the separator">
