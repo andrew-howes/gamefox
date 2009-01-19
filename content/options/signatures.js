@@ -73,7 +73,7 @@ var GFsigOptions =
   {
     var menu = document.getElementById('sig-menu');
 
-    var index = GFsig.add();
+    var index = GFsig.addSig();
     menu.insertItemAt(index, 'Signature', '');
     menu.selectedIndex = index;
     this.changeSig();
@@ -130,9 +130,7 @@ var GFsigOptions =
     this.changeSig();
 
     // remove it
-    var sigs = eval(GFutils.getString('signature.serialized'));
-    sigs.splice(index, 1);
-    GFutils.setString('signature.serialized', sigs.toSource());
+    GFsig.deleteSigById(index);
     menu.removeItemAt(index);
   },
 

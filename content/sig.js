@@ -19,16 +19,13 @@
 
 var GFsig =
 {
-  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
-             Ci.nsIPrefService).getBranch('gamefox.signature.'),
-
   getSigByCriteria: function(account, boardname, boardid)
   {
     account = account.toLowerCase();
     boardname = boardname.toLowerCase();
     var matches = new Array(new Array(), new Array(), new Array());
     var accounts, boards;
-    var sigs = eval(GFutils.getString('serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized'));
 
     // find matching sigs
     for (var i = 1; i < sigs.length; i++)
@@ -70,7 +67,7 @@ var GFsig =
 
     var sig;
     var bestIndex = matches[0].length ? 0 : matches[1].length ? 1 : 2;
-    if (this.prefs.getIntPref('selection') == 1) // random
+    if (GFlib.prefs.getIntPref('signature.selection') == 1) // random
       sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
     else // sequential
       sig = matches[bestIndex][0];
@@ -84,16 +81,23 @@ var GFsig =
 
   getSigById: function(id)
   {
-    return eval(GFutils.getString('serialized', this.prefs))[id];
+    return eval(GFutils.getString('signature.serialized'))[id];
   },
 
-  add: function()
+  addSig: function()
   {
-    var sigs = eval(GFutils.getString('serialized', this.prefs));
+    var sigs = eval(GFutils.getString('signature.serialized'));
     sigs.push({'accounts':'', 'boards':'', 'body':''});
-    GFutils.setString('serialized', sigs.toSource(), this.prefs);
+    GFutils.setString('signature.serialized', sigs.toSource());
 
     return sigs.length - 1;
+  },
+
+  deleteSigById: function(id)
+  {
+    var sigs = eval(GFutils.getString('signature.serialized'));
+    sigs.splice(id, 1);
+    GFutils.setString('signature.serialized', sigs.toSource());
   },
 
   getCriteriaString: function(accounts, boards)
