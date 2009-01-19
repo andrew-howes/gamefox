@@ -69,7 +69,7 @@ var GFsig =
     var bestIndex = matches[0].length ? 0 : matches[1].length ? 1 : 2;
     if (GFlib.prefs.getIntPref('signature.selection') == 1) // random
       sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
-    else // sequential
+    else // first
       sig = matches[bestIndex][0];
 
     // default is only sig and is empty

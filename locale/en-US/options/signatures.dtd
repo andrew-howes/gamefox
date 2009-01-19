@@ -24,4 +24,4 @@
 
 <!ENTITY selectOrder.label "Select a signature in order:">
 <!ENTITY random.label "Random">
-<!ENTITY sequential.label "Sequential">
+<!ENTITY first.label "First">
