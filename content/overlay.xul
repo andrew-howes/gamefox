@@ -47,8 +47,7 @@
         src="chrome://gamefox/locale/context.properties"/>
     </stringbundleset>
 
-    <menu id="gamefox-context-menu" class="menu-iconic" label="&menu.label;"
-      image="chrome://gamefox/skin/logo-tiny.png">
+    <menu id="gamefox-context-menu" label="&menu.label;">
       <menupopup id="gamefox-context-popup">
         <menuitem id="gamefox-toggle-sidebar" label="&menu.sidebar.label;"
           accesskey="&menu.sidebar.accesskey;" type="checkbox" command="cmd_gamefoxSidebar">
