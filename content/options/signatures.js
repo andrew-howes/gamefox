@@ -259,14 +259,15 @@ var GFsigOptions =
         var sigText = document.getElementById('sig-body').value;
         var quoteText = request.responseText
           .match(/<textarea\b[^>]+?\bname="quote"[^>]*>([^<]*)<\/textarea>/i)[1];
+        quoteText = GFutils.specialCharsDecode(quoteText);
         var key = request.responseText
           .match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]*)"[^>]*>/i)[1];
 
         postRequest.setRequestHeader('Content-Type',
             'application/x-www-form-urlencoded');
         postRequest.send(
-            'sig=' + sigText + '&' +
-            'quote=' + quoteText + '&' +
+            'sig=' + GFutils.URLEncode(sigText) + '&' +
+            'quote=' + GFutils.URLEncode(quoteText) + '&' +
             'key=' + key + '&' +
             'submit=1'
             );
