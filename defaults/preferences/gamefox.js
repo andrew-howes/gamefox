@@ -40,12 +40,12 @@ pref("gamefox.sidebar.accounts", true);
 pref("gamefox.sidebar.tags", false);
 pref("gamefox.sidebar.tracked", true);
 
-pref("gamefox.msgsPerPage", 50);
-pref("gamefox.tpcsPerPage", 50);
+pref("gamefox.msgsPerPage", 10);
+pref("gamefox.tpcsPerPage", 20);
 pref("gamefox.msgSortOrder", 1);
 pref("gamefox.tpcSortOrder", 4);
 pref("gamefox.msgDisplay", 0);
-pref("gamefox.timeZone", 0);
+pref("gamefox.timeZone", -480);
 
 pref("gamefox.quote.header.italic", true);
 pref("gamefox.quote.header.bold", true);
