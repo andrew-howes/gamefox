@@ -164,13 +164,14 @@ var GFsigOptions =
     button.disabled = true;
 
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://www.gamefaqs.com/boards/sigquote.php');
+    request.open('GET', GFlib.domain + GFlib.path + 'sigquote.php');
     var ds = GFlib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
       {
-        if (request.responseText.indexOf('Board Signature and Quote') == -1)
+        if (request.responseText
+            .indexOf('<h1>\n\tBoard Signature and Quote') == -1)
         {
           GFlib.log('importSignature: Bad things!');
 
@@ -180,7 +181,8 @@ var GFsigOptions =
           return;
         }
 
-        var sig = request.responseText.match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
+        var sig = request.responseText
+          .match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
         if (!sig)
         {
           GFlib.log("importSignature: Couldn't get sig");
@@ -219,7 +221,8 @@ var GFsigOptions =
     {
       if (request.readyState == 4)
       {
-        if (request.responseText.indexOf('Board Signature and Quote') == -1)
+        if (request.responseText
+            .indexOf('<h1>\n\tBoard Signature and Quote') == -1)
         {
           GFutils.showNotification(signatureMsg,
               strbundle.getString('exportNotLoggedIn'), 'warning');
@@ -245,9 +248,17 @@ var GFsigOptions =
         {
           if (postRequest.readyState == 4)
           {
-            if (postRequest.responseText.indexOf('Signature/quote updated') == -1)
-              GFutils.showNotification(signatureMsg,
-                  strbundle.getString('exportUnexpectedResponse'), 'warning');
+            if (postRequest.responseText
+                .indexOf('<p>Signature/quote updated</p>') == -1)
+            {
+              if (postRequest.responseText
+                  .indexOf('<p>Your signature contains') != -1)
+                GFutils.showNotification(signatureMsg,
+                    strbundle.getString('exportTooLong'), 'warning');
+              else
+                GFutils.showNotification(signatureMsg,
+                    strbundle.getString('exportUnexpectedResponse'), 'warning');
+            }
             else
               GFutils.showNotification(signatureMsg,
                   strbundle.getString('exportSuccess'), 'info');
