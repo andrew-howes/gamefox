@@ -10,6 +10,7 @@
 <!ENTITY toLastPage.label "Go to last page">
 <!ENTITY toLastPost.label "Go to last post">
 <!ENTITY tagTopic.label "Tag topic">
+<!ENTITY trackTopic.label "Track topic">
 
 <!ENTITY activeMessages.label "When double clicking on active message list row:">
 

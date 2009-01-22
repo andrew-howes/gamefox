@@ -996,6 +996,9 @@ var GameFOX =
       case 4:
         GameFOX.gotoLastPage(event);
         break;
+      case 5:
+        GFtracked.addFromContextMenu(event);
+        break;
     }
   },
 
