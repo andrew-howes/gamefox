@@ -35,8 +35,6 @@ var GFoptions =
       {
         if (request.responseText.indexOf('Board Display Settings') == -1)
         {
-          GFlib.log('importBoardSettings: Bad things!');
-
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsImportNotLoggedIn'), 'warning');
           button.disabled = false;
@@ -52,8 +50,6 @@ var GFoptions =
         if (topicPage == null || topicSort == null || messagePage == null
             || messageSort == null || timezone == null || userDisplay == null)
         {
-          GFlib.log('importBoardSettings: Unable to retrieve all settings.');
-
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsImportNotLoggedIn'), 'warning');
           button.disabled = false;
@@ -100,8 +96,6 @@ var GFoptions =
       {
         if (request.responseText.indexOf('Board Display Settings') == -1)
         {
-          GFlib.log('exportBoardSettings: Bad things!');
-
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsExportNotLoggedIn'), 'warning');
           button.disabled = false;
@@ -111,8 +105,6 @@ var GFoptions =
         var action = request.responseText.match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
         if (!action)
         {
-          GFlib.log("exportBoardSettings: Couldn't get user id.");
-
           GFutils.showNotification(boardSettingsMsg,
               strbundle.getString('bsExportNoUserId'), 'warning');
           button.disabled = false;
@@ -129,8 +121,6 @@ var GFoptions =
           {
             if (postRequest.responseText.indexOf('Display settings updated') == -1)
             {
-              GFlib.log("exportBoardSettings: Update didn't work!");
-
               GFutils.showNotification(boardSettingsMsg,
                   strbundle.getString('bsExportUnexpectedResponse'), 'warning');
             }

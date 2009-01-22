@@ -173,8 +173,6 @@ var GFsigOptions =
         if (request.responseText
             .indexOf('<h1>\n\tBoard Signature and Quote') == -1)
         {
-          GFlib.log('importSignature: Bad things!');
-
           GFutils.showNotification(signatureMsg,
               strbundle.getString('importNotLoggedIn'), 'warning');
           button.disabled = false;
@@ -185,8 +183,6 @@ var GFsigOptions =
           .match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
         if (!sig)
         {
-          GFlib.log("importSignature: Couldn't get sig");
-
           GFutils.showNotification(signatureMsg,
               strbundle.getString('importOld'), 'warning');
           button.disabled = false;
