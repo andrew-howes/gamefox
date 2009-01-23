@@ -176,7 +176,12 @@ var GFlib =
 
   setTitle: function(doc, title, prefix, page)
   {
-    if (!GFlib.prefs.getBoolPref('elements.titlechange')) return;
+    if (!GFlib.prefs.getBoolPref('elements.titlechange'))
+    {
+      // fix GameFAQs' double encoding of topic title
+      doc.title = GFutils.specialCharsDecode(doc.title);
+      return;
+    }
     if (!GFlib.prefs.getBoolPref('elements.titleprefix')) prefix = null;
 
     doc.title = 'GameFAQs'
