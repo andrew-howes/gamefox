@@ -23,6 +23,13 @@ a.gamefox-quote-link
 "Quote" links on message lists.
 
 <h2 id="div">div</h2>
+<h3 id="div+gamefox-board-nav">
+div#gamefox-board-nav
+<span class="new">New in 0.6.10</span>
+</h3>
+
+Contains user, board and topic list links at the bottom of the message list.
+
 <h3 id="div+gamefox-quickpost-afloat">div#gamefox-quickpost-afloat</h3>
 
 Contains the floating topic QuickPost.
@@ -31,7 +38,10 @@ Contains the floating topic QuickPost.
 
 Container `div` for genmessage.php QuickPost.
 
-<h3 id="div+gamefox-quickpost-title">div#gamefox-quickpost-title</h3>
+<h3 id="div+gamefox-quickpost-title">
+div#gamefox-quickpost-title
+<span class="removed">Removed in 0.6.7</span>
+</h3>
 
 Contains the title ("QuickPost") of QuickPost.
 
