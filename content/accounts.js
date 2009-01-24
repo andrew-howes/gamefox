@@ -289,8 +289,16 @@ var GFaccounts =
     var win = Cc['@mozilla.org/appshell/window-mediator;1']
         .getService(Ci.nsIWindowMediator)
         .getMostRecentWindow('navigator:browser');
+    var location = win.content.document.location;
+
     if (GFlib.onGF(win.content.document))
-      win.loadURI(win.content.document.location.href);
+    {
+      if (location.hash)
+        win.loadURI(location.href
+            .substr(0, location.href.indexOf(location.hash)));
+      else
+        win.loadURI(location.href);
+    }
     else
       win.loadURI('http://www.gamefaqs.com/boards/index.php');
   }
