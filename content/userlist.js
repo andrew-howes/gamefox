@@ -110,14 +110,14 @@ var GFuserlist =
     menupopup = document.createElement('menupopup');
 
     var typeSettings = new Array(
-        'users', 'Username is:',
-        'titleContains', 'Title contains:'
+        'users', 'usernameIs',
+        'titleContains', 'titleContains'
         );
     /***** menuitem *****/
     for (var i = 0; i < typeSettings.length; i += 2)
     {
       menuitem = document.createElement('menuitem');
-      menuitem.setAttribute('label', typeSettings[i + 1]);
+      menuitem.setAttribute('label', strbundle.getString(typeSettings[i + 1]));
       menuitem.setAttribute('value', typeSettings[i]);
       menupopup.appendChild(menuitem);
     }
