@@ -251,12 +251,16 @@ var GFuserlist =
 
     // set menulists
     var idx;
-    idx = {'remove':0, 'highlight':1, 'nothing':2};
+    idx = {'users':0, 'titleContains':1};
     groupbox.getElementsByTagName('menulist')[0]
+      .selectedIndex = idx[userlist.type];
+
+    idx = {'remove':0, 'highlight':1, 'nothing':2};
+    groupbox.getElementsByTagName('menulist')[1]
       .selectedIndex = idx[userlist.topics];
 
     idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
-    groupbox.getElementsByTagName('menulist')[1]
+    groupbox.getElementsByTagName('menulist')[2]
       .selectedIndex = idx[userlist.messages];
   },
 
