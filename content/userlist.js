@@ -548,6 +548,8 @@ var GFuserlist =
     var item, label, info;
     for (var i = 0; i < userlist.length; i++)
     {
+      if (userlist[i].type != 'users') continue;
+
       item = document.createElement('menuitem');
       item.setAttribute('type', 'checkbox');
       item.setAttribute('oncommand', 'GFuserlist.menuCheckChange(event, "' + username + '", ' + i + ');');
