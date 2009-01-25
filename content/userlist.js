@@ -182,7 +182,7 @@ var GFuserlist =
 
     for (var i = 0; i < userlist.length; i++)
       vbox.appendChild(this.makeGroupbox(
-          i, userlist[i]['name'], userlist[i]['color'], userlist[i]['users']));
+          i, userlist[i].name, userlist[i].color, userlist[i].users));
 
     // if called directly, will throw "TypeError: this.mColorBox has no properties"
     setTimeout(GFuserlist.setDefaultValues, 0);
@@ -199,7 +199,7 @@ var GFuserlist =
       groups[i].getElementsByTagName('colorpicker')[0]
         .color = userlist[i].color;
 
-      // set radiogroups
+      // set menulists
       var idx;
       idx = {'remove':0, 'highlight':1, 'nothing':2};
       groups[i].getElementsByTagName('menulist')[0]
@@ -218,19 +218,21 @@ var GFuserlist =
     userlist = userlist[id];
     var vbox = document.getElementById('usergroups');
     var groupbox = this.makeGroupbox(
-        id, userlist['name'], userlist['color'], userlist['users']);
+        id, userlist.name, userlist.color, userlist.users);
     vbox.appendChild(groupbox);
 
     // set colorpicker, mostly because of fx2
-    groupbox.getElementsByTagName('colorpicker')[0].color = userlist['color'];
+    groupbox.getElementsByTagName('colorpicker')[0].color = userlist.color;
 
-    // set radiogroups
+    // set menulists
     var idx;
-    idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
-    groupbox.getElementsByTagName('radiogroup')[0].selectedIndex = idx[userlist['messages']];
-
     idx = {'remove':0, 'highlight':1, 'nothing':2};
-    groupbox.getElementsByTagName('radiogroup')[1].selectedIndex = idx[userlist['topics']];
+    groupbox.getElementsByTagName('menulist')[0]
+      .selectedIndex = idx[userlist.topics];
+
+    idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
+    groupbox.getElementsByTagName('menulist')[1]
+      .selectedIndex = idx[userlist.messages];
   },
 
   updatePref: function(event)
@@ -283,7 +285,7 @@ var GFuserlist =
     // build the index
     for (var i = 0; i < userlist.length; i++)
     {
-      usernames = userlist[i]['users'].GFtrim().toLowerCase().split(/\s*,\s*/);
+      usernames = userlist[i].users.GFtrim().toLowerCase().split(/\s*,\s*/);
       for (var j = 0; j < usernames.length; j++)
       {
         username = usernames[j];
@@ -321,15 +323,15 @@ var GFuserlist =
       var groups = this.usernameIndex[username];
 
     // first group decides everything
-    var color = userlist[groups[0]]['color'];
-    var messages = userlist[groups[0]]['messages'];
-    var topics = userlist[groups[0]]['topics'];
+    var color = userlist[groups[0]].color;
+    var messages = userlist[groups[0]].messages;
+    var topics = userlist[groups[0]].topics;
 
     // list of all groups where the user is present
     var groupNames = '';
     for (var i = 0; i < groups.length; i++)
-      if (userlist[groups[i]]['name'].length)
-        groupNames += userlist[groups[i]]['name'] + ', ';
+      if (userlist[groups[i]].name.length)
+        groupNames += userlist[groups[i]].name + ', ';
 
     return [groupNames.substr(0, groupNames.length - 2), color, messages, topics, groups];
   },
@@ -340,9 +342,9 @@ var GFuserlist =
     var id = groupbox.id.substring(3);
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
 
-    if (userlist[id]['name'].length)
+    if (userlist[id].name.length)
     {
-      if (!GFlib.confirm('Really delete the group "' + userlist[id]['name'] + '"?'))
+      if (!GFlib.confirm('Really delete the group "' + userlist[id].name + '"?'))
         return;
     }
     else
@@ -467,24 +469,24 @@ var GFuserlist =
         item.setAttribute('checked', 'true');
 
       // label
-      label = userlist[i]['name'].length ? userlist[i]['name'] : 'Group #' + (i + 1);
+      label = userlist[i].name.length ? userlist[i].name : 'Group #' + (i + 1);
       info = '';
-      if (userlist[i]['messages'] == userlist[i]['topics'])
+      if (userlist[i].messages == userlist[i].topics)
       {
-        if (userlist[i]['messages'] != 'nothing')
-          info = userlist[i]['messages'] + ' messages/topics';
+        if (userlist[i].messages != 'nothing')
+          info = userlist[i].messages + ' messages/topics';
       }
       else
       {
-        if (userlist[i]['messages'] != 'nothing')
+        if (userlist[i].messages != 'nothing')
         {
-          info = userlist[i]['messages'] + ' messages';
+          info = userlist[i].messages + ' messages';
         }
-        if (userlist[i]['topics'] != 'nothing')
+        if (userlist[i].topics != 'nothing')
         {
           if (info.length)
             info += ', ';
-          info += userlist[i]['topics'] + ' topics';
+          info += userlist[i].topics + ' topics';
         }
       }
       if (info.length)
@@ -492,10 +494,10 @@ var GFuserlist =
       item.setAttribute('label', label);
 
       // highlight color
-      if (userlist[i]['messages'] == 'highlight' || userlist[i]['topics'] == 'highlight')
+      if (userlist[i].messages == 'highlight' || userlist[i].topics == 'highlight')
       {
         item.style.borderRightWidth = '10px';
-        item.style.borderRightColor = userlist[i]['color'];
+        item.style.borderRightColor = userlist[i].color;
       }
 
       list.appendChild(item);
@@ -515,18 +517,18 @@ var GFuserlist =
 
     if (event.target.getAttribute('checked')) // add to group
     {
-      if (/\S/.test(userlist[group]['users']))
-        userlist[group]['users'] += ', ' + username;
+      if (/\S/.test(userlist[group].users))
+        userlist[group].users += ', ' + username;
       else
-        userlist[group]['users'] = username;
+        userlist[group].users = username;
     }
     else // remove from group
     {
-      userlist[group]['users'] = userlist[group]['users'].replace
+      userlist[group].users = userlist[group].users.replace
         (new RegExp('(,\\s*' + username + '\\s*$|' +
                       '^\\s*' + username + '\\s*,\\s*|' +
                       '^\\s*' + username + '\\s*$)', 'gi'), '');
-      userlist[group]['users'] = userlist[group]['users'].replace
+      userlist[group].users = userlist[group].users.replace
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
@@ -552,8 +554,8 @@ var GFuserlist =
       textboxes = groups[i].getElementsByTagName('textbox');
       for (var j = 0; j < textboxes.length; j++)
         if (textboxes[j].className == 'ug-users' &&
-            textboxes[j].value != userlist[i]['users'])
-          textboxes[j].value = userlist[i]['users'];
+            textboxes[j].value != userlist[i].users)
+          textboxes[j].value = userlist[i].users;
     }
   }
 };
