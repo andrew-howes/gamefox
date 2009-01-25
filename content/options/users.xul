@@ -57,7 +57,7 @@
     </hbox>
 
     <!-- User Groups -->
-    <vbox id="usergroups" flex="1" style="overflow: auto;"/>
+    <vbox id="usergroups" style="height: 22em; overflow: auto;"/>
 
   </prefpane>
 
