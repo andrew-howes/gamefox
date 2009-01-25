@@ -515,8 +515,9 @@ var GameFOX =
         // gentopic.php
         else
         {
-          // User highlighting
+          // Highlighting
           var username = rows[i].getElementsByTagName('td')[2].textContent.GFtrim();
+          var title = rows[i].getElementsByTagName('td')[1].textContent.GFtrim();
           var hlinfo;
 
           if ((hlinfo = GFuserlist.searchUsername(username)) != false)

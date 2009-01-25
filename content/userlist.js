@@ -22,7 +22,7 @@ var GFuserlist =
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
 
-  add: function(name, color, users, messages, topics)
+  add: function(name, color, users, messages, topics, type)
   {
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
 
@@ -31,9 +31,10 @@ var GFuserlist =
     users = (typeof users == 'string') ? users : '';
     messages = (typeof messages == 'string') ? messages : 'highlight';
     topics = (typeof topics == 'string') ? topics : 'highlight';
+    type = (typeof type == 'string') ? type : 'users';
 
-    userlist.push({'name':name, 'color':color, 'users':users,
-        'messages':messages, 'topics':topics});
+    userlist.push({name:name, color:color, users:users,
+        messages:messages, topics:topics, type:type});
 
     GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
@@ -100,10 +101,30 @@ var GFuserlist =
     hbox = document.createElement('hbox');
     hbox.setAttribute('align', 'center');
 
-    /*** label ***/
-    label = document.createElement('label');
-    label.setAttribute('value', strbundle.getString('users'));
-    hbox.appendChild(label);
+    /*** menulist ***/
+    menulist = document.createElement('menulist');
+    menulist.setAttribute('class', 'ug-type');
+    menulist.addEventListener('command', this.updatePref, false);
+
+    /**** menupopup ****/
+    menupopup = document.createElement('menupopup');
+
+    var typeSettings = new Array(
+        'users', 'Username is:',
+        'titleContains', 'Title contains:'
+        );
+    /***** menuitem *****/
+    for (var i = 0; i < typeSettings.length; i += 2)
+    {
+      menuitem = document.createElement('menuitem');
+      menuitem.setAttribute('label', typeSettings[i + 1]);
+      menuitem.setAttribute('value', typeSettings[i]);
+      menupopup.appendChild(menuitem);
+    }
+
+    menulist.appendChild(menupopup);
+    hbox.appendChild(menulist);
+
     /*** textbox ***/
     textbox = document.createElement('textbox');
     textbox.setAttribute('class', 'ug-users');
@@ -201,12 +222,16 @@ var GFuserlist =
 
       // set menulists
       var idx;
-      idx = {'remove':0, 'highlight':1, 'nothing':2};
+      idx = {'users':0, 'titleContains':1};
       groups[i].getElementsByTagName('menulist')[0]
+        .selectedIndex = idx[userlist[i].type];
+
+      idx = {'remove':0, 'highlight':1, 'nothing':2};
+      groups[i].getElementsByTagName('menulist')[1]
         .selectedIndex = idx[userlist[i].topics];
 
       idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
-      groups[i].getElementsByTagName('menulist')[1]
+      groups[i].getElementsByTagName('menulist')[2]
         .selectedIndex = idx[userlist[i].messages];
     }
   },
@@ -278,27 +303,29 @@ var GFuserlist =
 
   loadGroups: function()
   {
-    var usernames, username;
+    var values, value, type;
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     this.usernameIndex = {};
 
     // build the index
     for (var i = 0; i < userlist.length; i++)
     {
-      usernames = userlist[i].users.GFtrim().toLowerCase().split(/\s*,\s*/);
-      for (var j = 0; j < usernames.length; j++)
+      type = userlist[i].type;
+      values = userlist[i].users.GFtrim().toLowerCase()
+        .split(/\s*,\s*/);
+      for (var j = 0; j < values.length; j++)
       {
-        username = usernames[j];
-        if (!username.length) continue;
+        value = values[j];
+        if (!value.length) continue;
 
-        if (this.usernameIndex[username])
+        if (this.usernameIndex[value])
         {
-          // don't add the same group twice, if the user is listed multiple times
-          if (this.usernameIndex[username].indexOf(i) == -1)
-            this.usernameIndex[username].push(i);
+          // don't add the same group twice, if the value is listed multiple times
+          if (this.usernameIndex[value].indexOf(i) == -1)
+            this.usernameIndex[value].push(i);
         }
         else
-          this.usernameIndex[username] = [i];
+          this.usernameIndex[value] = [i];
       }
     }
   },
