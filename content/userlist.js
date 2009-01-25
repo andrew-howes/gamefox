@@ -38,10 +38,12 @@ var GFuserlist =
     GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
+  // TODO: move this and other functions to options/ directory
   makeGroupbox: function(id, name, color, users)
   {
     var strbundle = document.getElementById('users-strings');
-    var groupbox, caption, hbox, textbox, separator, colorpicker, label, radiogroup, radio, button;
+    var groupbox, caption, hbox, textbox, separator, colorpicker, label,
+        button, menulist, menupopup, menuitem;
 
     /* groupbox */
     groupbox = document.createElement('groupbox');
@@ -112,62 +114,63 @@ var GFuserlist =
 
     groupbox.appendChild(hbox);
 
-    /** radiogroup **/
-    radiogroup = document.createElement('radiogroup');
-    radiogroup.setAttribute('align', 'start');
-    radiogroup.setAttribute('orient', 'horizontal');
-    radiogroup.setAttribute('pack', 'end');
-    radiogroup.setAttribute('class', 'ug-messages');
-    radiogroup.addEventListener('click', this.updatePref, false);
+    /** hbox **/
+    hbox = document.createElement('hbox');
+    hbox.setAttribute('align', 'center');
+    hbox.setAttribute('pack', 'end');
 
-    /*** radio ***/
-    radio = document.createElement('radio');
-    radio.setAttribute('label', strbundle.getString('collapseMessages'));
-    radio.setAttribute('value', 'collapse');
-    radiogroup.appendChild(radio);
-    /*** radio ***/
-    radio = document.createElement('radio');
-    radio.setAttribute('label', strbundle.getString('removeMessages'));
-    radio.setAttribute('value', 'remove');
-    radiogroup.appendChild(radio);
-    /*** radio ***/
-    radio = document.createElement('radio');
-    radio.setAttribute('label', strbundle.getString('highlightMessages'));
-    radio.setAttribute('value', 'highlight');
-    radiogroup.appendChild(radio);
-    /*** radio ***/
-    radio = document.createElement('radio');
-    radio.setAttribute('label', strbundle.getString('none'));
-    radio.setAttribute('value', 'nothing');
-    radiogroup.appendChild(radio);
+    /*** menulist ***/
+    menulist = document.createElement('menulist');
+    menulist.setAttribute('class', 'ug-topics');
+    menulist.addEventListener('command', this.updatePref, false);
 
-    groupbox.appendChild(radiogroup);
+    /**** menupopup ****/
+    menupopup = document.createElement('menupopup');
 
-    /** radiogroup **/
-    radiogroup = document.createElement('radiogroup');
-    radiogroup.setAttribute('align', 'start');
-    radiogroup.setAttribute('orient', 'horizontal');
-    radiogroup.setAttribute('pack', 'end');
-    radiogroup.setAttribute('class', 'ug-topics');
-    radiogroup.addEventListener('click', this.updatePref, false);
+    var tpcSettings = new Array(
+        'remove', 'removeTopics',
+        'highlight', 'highlightTopics',
+        'nothing', 'none'
+        );
+    /***** menuitem *****/
+    for (var i = 0; i < tpcSettings.length; i += 2)
+    {
+      menuitem = document.createElement('menuitem');
+      menuitem.setAttribute('label', strbundle.getString(tpcSettings[i + 1]));
+      menuitem.setAttribute('value', tpcSettings[i]);
+      menupopup.appendChild(menuitem);
+    }
 
-    /*** radio ***/
-    radio = document.createElement('radio');
-    radio.setAttribute('label', strbundle.getString('removeTopics'));
-    radio.setAttribute('value', 'remove');
-    radiogroup.appendChild(radio);
-    /*** radio ***/
-    radio = document.createElement('radio');
-    radio.setAttribute('label', strbundle.getString('highlightTopics'));
-    radio.setAttribute('value', 'highlight');
-    radiogroup.appendChild(radio);
-    /*** radio ***/
-    radio = document.createElement('radio');
-    radio.setAttribute('label', strbundle.getString('none'));
-    radio.setAttribute('value', 'nothing');
-    radiogroup.appendChild(radio);
+    menulist.appendChild(menupopup);
+    hbox.appendChild(menulist);
 
-    groupbox.appendChild(radiogroup);
+    /*** menulist ***/
+    menulist = document.createElement('menulist');
+    menulist.setAttribute('class', 'ug-messages');
+    menulist.addEventListener('command', this.updatePref, false);
+    
+    /**** menupopup ****/
+    menupopup = document.createElement('menupopup');
+
+    var msgSettings = new Array(
+        'collapse', 'collapseMessages',
+        'remove', 'removeMessages',
+        'highlight', 'highlightMessages',
+        'nothing', 'none'
+        );
+    /***** menuitem *****/
+    for (var i = 0; i < msgSettings.length; i += 2)
+    {
+      menuitem = document.createElement('menuitem');
+      menuitem.setAttribute('label', strbundle.getString(msgSettings[i + 1]));
+      menuitem.setAttribute('value', msgSettings[i]);
+      menupopup.appendChild(menuitem);
+    }
+
+    menulist.appendChild(menupopup);
+    hbox.appendChild(menulist);
+
+    groupbox.appendChild(hbox);
 
     return groupbox;
   },
@@ -193,15 +196,18 @@ var GFuserlist =
     for (var i = 0; i < groups.length; i++)
     {
       // set colorpicker, mostly because of fx2
-      groups[i].getElementsByTagName('colorpicker')[0].color = userlist[i]['color'];
+      groups[i].getElementsByTagName('colorpicker')[0]
+        .color = userlist[i].color;
 
       // set radiogroups
       var idx;
-      idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
-      groups[i].getElementsByTagName('radiogroup')[0].selectedIndex = idx[userlist[i]['messages']];
-
       idx = {'remove':0, 'highlight':1, 'nothing':2};
-      groups[i].getElementsByTagName('radiogroup')[1].selectedIndex = idx[userlist[i]['topics']];
+      groups[i].getElementsByTagName('menulist')[0]
+        .selectedIndex = idx[userlist[i].topics];
+
+      idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
+      groups[i].getElementsByTagName('menulist')[1]
+        .selectedIndex = idx[userlist[i].messages];
     }
   },
 
@@ -235,8 +241,8 @@ var GFuserlist =
       parentNode = parentNode.parentNode;
     var idx = parentNode.id.substring(3);
 
-    if (node.tagName == 'radio')
-      node = node.parentNode;
+    if (node.tagName == 'menuitem')
+      node = node.parentNode.parentNode;
 
     // get pref name
     var name = node.className.substring(3);
