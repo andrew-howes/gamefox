@@ -50,8 +50,8 @@
       <description>&tree.desc;</description>
       
       <tree id="css-tree" editable="true" seltype="single"
-        hidecolumnpicker="true" contextmenu="css-tree-contextmenu" flex="1"
-        ondblclick="GFstyleOptions.showDesc(event);">
+        hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
+        ondblclick="GFstyleOptions.showDesc(event);" style="height: 21em;">
         <treecols>
           <treecol label="&name.label;" primary="true" flex="1"/>
           <treecol label="&desc.label;" width="100"/>
