@@ -305,7 +305,7 @@ var GFuserlist =
   {
     var values, value, type;
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
-    this.usernameIndex = {};
+    this.index = {users:{}, titleContains:{}};
 
     // build the index
     for (var i = 0; i < userlist.length; i++)
@@ -318,36 +318,90 @@ var GFuserlist =
         value = values[j];
         if (!value.length) continue;
 
-        if (this.usernameIndex[value])
+        if (type == 'users')
         {
-          // don't add the same group twice, if the value is listed multiple times
-          if (this.usernameIndex[value].indexOf(i) == -1)
-            this.usernameIndex[value].push(i);
+          if (this.index[type][value])
+          {
+            // don't add the same group twice, if the value is listed multiple times
+            if (this.index[type][value].indexOf(i) == -1)
+              this.index[type][value].push(i);
+          }
+          else
+            this.index[type][value] = [i];
         }
-        else
-          this.usernameIndex[value] = [i];
+        else // type == titleContains
+        {
+          // the index for titleContains maps groups to values
+          if (this.index[type][i])
+            this.index[type][i].push(value);
+          else
+            this.index[type][i] = [value];
+        }
       }
     }
   },
 
+  search: function(username, title)
+  {
+    var index = this.index.titleContains;
+    if (!index) return false;
+
+    title = title.toLowerCase();
+
+    var groups = [];
+    for (var i in index)
+    {
+      for (var j = 0; j < index[i].length; j++)
+      {
+        if (title.indexOf(index[i][j]) != -1)
+          groups.push(i);
+      }
+    }
+
+    if (!groups[0])
+    {
+      // nothing in titleContains index, return users index instead
+      return this.searchUsername(username);
+    }
+
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+
+    var color = userlist[groups[0]].color;
+    var messages = userlist[groups[0]].messages;
+    var topics = userlist[groups[0]].topics;
+
+    var groupNames = '';
+    for (var i = 0; i < groups.length; i++)
+      if (userlist[groups[i]].name.length)
+        groupNames += userlist[groups[i]].name + ', ';
+
+    // Get group names from username search
+    var hlinfo = this.searchUsername(username);
+    if (hlinfo && hlinfo[0].length)
+      groupNames += hlinfo[0] + ', ';
+
+    return [groupNames.substr(0, groupNames.length - 2), color, messages,
+           topics, groups];
+  },
+
   searchUsername: function(username, tc)
   {
-    if (!this.usernameIndex) return false; // no index
+    var index = this.index.users;
+    if (!index) return false;
 
     username = username.GFtrim().toLowerCase();
     if (!username.length) return false;
 
-    if (!this.usernameIndex[username] && !(tc && this.usernameIndex['(tc)']))
+    if (!index[username] && !(tc && index['(tc)']))
       return false; // username isn't in any groups
 
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
-    if (tc && this.usernameIndex[username] && this.usernameIndex['(tc)'])
-      var groups = GFutils.mergeArray(this.usernameIndex[username],
-          this.usernameIndex['(tc)']);
-    else if (tc && this.usernameIndex['(tc)'])
-      var groups = this.usernameIndex['(tc)'];
+    if (tc && index[username] && index['(tc)'])
+      var groups = GFutils.mergeArray(index[username], index['(tc)']);
+    else if (tc && index['(tc)'])
+      var groups = index['(tc)'];
     else
-      var groups = this.usernameIndex[username];
+      var groups = index[username];
 
     // first group decides everything
     var color = userlist[groups[0]].color;
@@ -360,7 +414,8 @@ var GFuserlist =
       if (userlist[groups[i]].name.length)
         groupNames += userlist[groups[i]].name + ', ';
 
-    return [groupNames.substr(0, groupNames.length - 2), color, messages, topics, groups];
+    return [groupNames.substr(0, groupNames.length - 2), color, messages,
+           topics, groups];
   },
 
   removeWithButton: function(event)

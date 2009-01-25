@@ -520,7 +520,7 @@ var GameFOX =
           var title = rows[i].getElementsByTagName('td')[1].textContent.GFtrim();
           var hlinfo;
 
-          if ((hlinfo = GFuserlist.searchUsername(username)) != false)
+          if ((hlinfo = GFuserlist.search(username, title)) != false)
           {
             // list of groups
             if (GFlib.prefs.getBoolPref('userlist.topics.showgroupnames') &&
