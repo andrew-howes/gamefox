@@ -28,7 +28,7 @@
 <!ENTITY mainMenu.quote.label "Quote">
 <!ENTITY mainMenu.filter.label "Filter">
 <!ENTITY mainMenu.delete.label "Delete/Close">
-<!ENTITY mainMenu.userGroups.label "User Groups">
+<!ENTITY mainMenu.hlGroups.label "User Groups">
 <!ENTITY mainMenu.breakTags.label "Break HTML Tags">
 
 <!ENTITY submenu.label "Submenu">

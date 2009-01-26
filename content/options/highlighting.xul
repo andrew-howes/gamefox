@@ -18,19 +18,19 @@
      along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/users.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/highlighting.dtd">
 
-<overlay id="usersPaneOverlay"
+<overlay id="highlightingPaneOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <prefpane id="paneUsers" onpaneload="GFuserlist.prepareOptionsPane();">
+  <prefpane id="paneHighlighting" onpaneload="GFuserlist.prepareOptionsPane();">
 
     <script type="application/x-javascript"
       src="chrome://gamefox/content/userlist.js"/>
 
-    <stringbundleset id="users-strbundles">
-      <stringbundle id="users-strings"
-        src="chrome://gamefox/locale/options/users.properties"/>
+    <stringbundleset id="strbundles">
+      <stringbundle id="strings"
+        src="chrome://gamefox/locale/options/highlighting.properties"/>
     </stringbundleset>
 
     <preferences>
@@ -56,8 +56,8 @@
         oncommand="GFuserlist.add();GFuserlist.populateLast();"/>
     </hbox>
 
-    <!-- User Groups -->
-    <vbox id="usergroups" style="height: 22em; overflow: auto;"/>
+    <!-- Groups -->
+    <vbox id="groups" style="height: 22em; overflow: auto;"/>
 
   </prefpane>
 

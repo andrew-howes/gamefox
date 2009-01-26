@@ -61,8 +61,8 @@
     src="chrome://gamefox/content/options/mouse.xul" flex="1"/>
   <prefpane id="paneTopics" label="&paneTopics.title;"
     src="chrome://gamefox/content/options/topics.xul" flex="1"/>
-  <prefpane id="paneUsers" label="&paneUsers.title;"
-    src="chrome://gamefox/content/options/users.xul" flex="1"/>
+  <prefpane id="paneHighlighting" label="&paneHighlighting.title;"
+    src="chrome://gamefox/content/options/highlighting.xul" flex="1"/>
   <prefpane id="paneManage" label="&paneManage.title;"
     src="chrome://gamefox/content/options/manage.xul" flex="1"/>
 

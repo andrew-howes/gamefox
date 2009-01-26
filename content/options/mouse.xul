@@ -168,7 +168,7 @@
                       preference="context.delete"/>
                   </hbox>
                   <hbox>
-                    <checkbox label="&mainMenu.userGroups.label;"
+                    <checkbox label="&mainMenu.hlGroups.label;"
                       preference="context.usergroups"/>
                   </hbox>
                   <hbox>

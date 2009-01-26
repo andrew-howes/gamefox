@@ -3,5 +3,5 @@
 <!ENTITY options.label "Options">
 <!ENTITY topicGroups.label "Group names on topic lists">
 <!ENTITY messageGroups.label "Group names on message lists">
-<!ENTITY desc "Separate users with commas. List &quot;(tc)&quot; as a user (without quotes) to highlight the topic creator.">
+<!ENTITY desc "Separate values with commas. List &quot;(tc)&quot; as a user (without quotes) to highlight the topic creator.">
 <!ENTITY addGroup.button "Add a Group">

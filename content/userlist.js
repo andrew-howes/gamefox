@@ -42,7 +42,7 @@ var GFuserlist =
   // TODO: move this and other functions to options/ directory
   makeGroupbox: function(id, name, color, users)
   {
-    var strbundle = document.getElementById('users-strings');
+    var strbundle = document.getElementById('strings');
     var groupbox, caption, hbox, textbox, separator, colorpicker, label,
         button, menulist, menupopup, menuitem;
 
@@ -199,7 +199,7 @@ var GFuserlist =
   populate: function()
   {
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
-    var vbox = document.getElementById('usergroups');
+    var vbox = document.getElementById('groups');
 
     for (var i = 0; i < userlist.length; i++)
       vbox.appendChild(this.makeGroupbox(
@@ -212,7 +212,7 @@ var GFuserlist =
   setDefaultValues: function()
   {
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
-    var vbox = document.getElementById('usergroups');
+    var vbox = document.getElementById('groups');
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
     {
@@ -241,7 +241,7 @@ var GFuserlist =
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
     var id = userlist.length - 1;
     userlist = userlist[id];
-    var vbox = document.getElementById('usergroups');
+    var vbox = document.getElementById('groups');
     var groupbox = this.makeGroupbox(
         id, userlist.name, userlist.color, userlist.users);
     vbox.appendChild(groupbox);
@@ -444,7 +444,7 @@ var GFuserlist =
     // prefs will no longer match the groupboxes
     if (groupbox.parentNode)
     {
-      var vbox = document.getElementById('usergroups');
+      var vbox = document.getElementById('groups');
       vbox.removeChild(groupbox);
       var groups = vbox.getElementsByTagName('groupbox');
       for (var i = parseInt(id); i < groups.length; i++)
@@ -634,7 +634,8 @@ var GFuserlist =
   updateUsers: function()
   {
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
-    var groups = document.getElementById('usergroups').getElementsByTagName('groupbox');
+    var groups = document.getElementById('groups')
+      .getElementsByTagName('groupbox');
     var textboxes;
     for (var i = 0; i < groups.length; i++)
     {

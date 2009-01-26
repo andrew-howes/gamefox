@@ -9,5 +9,5 @@ radio[pane=paneQuoting] { -moz-image-region: rect(0px, 96px, 32px, 64px); }
 radio[pane=paneSignatures] { -moz-image-region: rect(0px, 128px, 32px, 96px); }
 radio[pane=paneMouse] { -moz-image-region: rect(0px, 192px, 32px, 160px); }
 radio[pane=paneTopics] { -moz-image-region: rect(0px, 160px, 32px, 128px); }
-radio[pane=paneUsers] { -moz-image-region: rect(0px, 224px, 32px, 192px); }
+radio[pane=paneHighlighting] { -moz-image-region: rect(0px, 224px, 32px, 192px); }
 radio[pane=paneManage] { -moz-image-region: rect(0px, 256px, 32px, 224px); }

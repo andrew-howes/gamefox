@@ -10,6 +10,6 @@
 <!ENTITY paneQuoting.title "Quoting">
 <!ENTITY paneSignatures.title "Signatures">
 <!ENTITY paneMouse.title "Mouse">
-<!ENTITY paneUsers.title "Users">
+<!ENTITY paneHighlighting.title "Highlighting">
 <!ENTITY paneTopics.title "Topics">
 <!ENTITY paneManage.title "Manage">
