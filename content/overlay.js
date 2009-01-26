@@ -1328,6 +1328,12 @@ function GameFOXLoader()
       // first signature (1) -> sequential (2)
       // random {no | highest} specificity (2 | 3) -> random (1)
       GFlib.prefs.setIntPref('signature.selection', 1);
+
+      // new option for highlighting
+      var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+      for (var i = 0; i < userlist.length; i++)
+        userlist[i].type = 'users';
+      GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
     }
 
     if (lastversion == '')
