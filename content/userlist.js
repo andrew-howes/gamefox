@@ -42,7 +42,7 @@ var GFuserlist =
   // TODO: move this and other functions to options/ directory
   makeGroupbox: function(id, name, color, users)
   {
-    var strbundle = document.getElementById('strings');
+    var strbundle = document.getElementById('highlighting-strings');
     var groupbox, caption, hbox, textbox, separator, colorpicker, label,
         button, menulist, menupopup, menuitem;
 
@@ -507,7 +507,7 @@ var GFuserlist =
   {
     var doc = event.target.ownerDocument;
     var list = document.getElementById('gamefox-context-usergroups-list');
-    var strbundle = document.getElementById('strings');
+    var strbundle = document.getElementById('highlighting-strings');
 
     while (list.hasChildNodes())
       list.removeChild(list.firstChild);

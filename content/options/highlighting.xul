@@ -28,8 +28,8 @@
     <script type="application/x-javascript"
       src="chrome://gamefox/content/userlist.js"/>
 
-    <stringbundleset id="strbundles">
-      <stringbundle id="strings"
+    <stringbundleset id="highlighting-strbundles">
+      <stringbundle id="highlighting-strings"
         src="chrome://gamefox/locale/options/highlighting.properties"/>
     </stringbundleset>
 
