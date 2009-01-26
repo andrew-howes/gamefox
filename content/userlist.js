@@ -507,7 +507,7 @@ var GFuserlist =
   {
     var doc = event.target.ownerDocument;
     var list = document.getElementById('gamefox-context-usergroups-list');
-    var strbundle = document.getElementById('highlighting-strings');
+    var strbundle = document.getElementById('strings');
 
     while (list.hasChildNodes())
       list.removeChild(list.firstChild);
