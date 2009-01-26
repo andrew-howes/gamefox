@@ -76,7 +76,7 @@ def main():
     for i in f:
         i = i.strip()
 
-        if len(i) > 2 and i[-1] == ":":
+        if len(i) > 2 and i[-1] == ":" and i[0] != "*":
             if section == 0:
                 section = 1
                 continue
@@ -84,7 +84,9 @@ def main():
                 break
         
         if len(i) and i[0:9] != "* version":
-            if i[0] == "*":
+            if i[0] == "-":
+                items.append("- " + i[2:])
+            elif i[0] == "*":
                 items.append(i[2:])
             else:
                 items[-1] = items[-1] + " " + i
