@@ -347,8 +347,8 @@ var GFuserlist =
 
   search: function(username, title)
   {
+    if (!this.index) return false;
     var index = this.index.titleContains;
-    if (!index) return false;
 
     title = title.toLowerCase();
 
@@ -390,8 +390,8 @@ var GFuserlist =
 
   searchUsername: function(username, tc)
   {
+    if (!this.index) return false;
     var index = this.index.users;
-    if (!index) return false;
 
     username = username.GFtrim().toLowerCase();
     if (!username.length) return false;
