@@ -151,7 +151,7 @@ var GFuserlist =
     var tpcSettings = new Array(
         'remove', 'removeTopics',
         'highlight', 'highlightTopics',
-        'nothing', 'none'
+        'nothing', 'noTopicAction'
         );
     /***** menuitem *****/
     for (var i = 0; i < tpcSettings.length; i += 2)
@@ -177,7 +177,7 @@ var GFuserlist =
         'collapse', 'collapseMessages',
         'remove', 'removeMessages',
         'highlight', 'highlightMessages',
-        'nothing', 'none'
+        'nothing', 'noMessageAction'
         );
     /***** menuitem *****/
     for (var i = 0; i < msgSettings.length; i += 2)
