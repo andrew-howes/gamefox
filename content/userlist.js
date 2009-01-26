@@ -595,7 +595,7 @@ var GFuserlist =
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('editGroups'));
     item.setAttribute('oncommand',
-      'GFlib.openOptionsDialog(null, null, null, "paneUsers");');
+      'GFlib.openOptionsDialog(null, null, null, "paneHighlighting");');
     list.appendChild(item);
   },
 
