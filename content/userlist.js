@@ -646,5 +646,10 @@ var GFuserlist =
             textboxes[j].value != userlist[i].users)
           textboxes[j].value = userlist[i].users;
     }
+  },
+
+  checkUsername: function(username)
+  {
+    return this.index.users[username] != null;
   }
 };
