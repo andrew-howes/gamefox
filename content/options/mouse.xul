@@ -88,8 +88,8 @@
               <menupopup>
                 <menuitem label="&doNothing.label;" value="0"/>
                 <menuitem label="&showPageLinks.label;" value="1"/>
-                <menuitem label="&toLastPost.label;" value="4"/>
-                <menuitem label="&toLastPage.label;" value="2"/>
+                <menuitem label="&toLastPage.label;" value="4"/>
+                <menuitem label="&toLastPost.label;" value="2"/>
                 <menuitem label="&tagTopic.label;" value="3"/>
                 <menuitem label="&trackTopic.label;" value="5"/>
               </menupopup>
@@ -102,8 +102,8 @@
               <menupopup>
                 <menuitem label="&doNothing.label;" value="0"/>
                 <menuitem label="&showPageLinks.label;" value="1"/>
-                <menuitem label="&toLastPost.label;" value="4"/>
-                <menuitem label="&toLastPage.label;" value="2"/>
+                <menuitem label="&toLastPage.label;" value="4"/>
+                <menuitem label="&toLastPost.label;" value="2"/>
                 <menuitem label="&tagTopic.label;" value="3"/>
                 <menuitem label="&trackTopic.label;" value="5"/>
               </menupopup>
@@ -117,6 +117,7 @@
                 <menuitem label="&doNothing.label;" value="0"/>
                 <menuitem label="&quickWhois.label;" value="1"/>
                 <menuitem label="&quoteMessage.label;" value="2"/>
+                <menuitem label="&filter.label;" value="3"/>
               </menupopup>
             </menulist>
           </hbox>

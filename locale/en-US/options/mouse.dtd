@@ -17,6 +17,7 @@
 <!ENTITY messageLists.label "When double clicking on message header:">
 <!ENTITY quickWhois.label "Show QuickWhois">
 <!ENTITY quoteMessage.label "Quote message">
+<!ENTITY filter.label "Filter">
 
 <!ENTITY doubleClickQuote.label "Double click message body to quote message">
 

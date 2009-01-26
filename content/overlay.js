@@ -969,6 +969,9 @@ var GameFOX =
         case 2:
           GFquote.quote(event);
           break;
+        case 3:
+          GameFOX.toggleFilter(event);
+          break;
       }
     }
     else if (dblclickMsg)
@@ -983,8 +986,6 @@ var GameFOX =
             'myposts') ? 'myposts' : 'topic') + '.dblclick');
     switch (switcher)
     {
-      case 0:
-        break;
       case 1:
         GameFOX.showPages(event);
         break;
