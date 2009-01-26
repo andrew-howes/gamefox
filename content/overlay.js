@@ -1333,7 +1333,8 @@ function GameFOXLoader()
       // new option for highlighting
       var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
       for (var i = 0; i < userlist.length; i++)
-        userlist[i].type = 'users';
+        if (!userlist[i].type)
+          userlist[i].type = 'users';
       GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
     }
 
