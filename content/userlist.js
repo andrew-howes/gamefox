@@ -234,6 +234,8 @@ var GFuserlist =
       idx = {collapse:0, remove:1, highlight:2, nothing:3};
       groups[i].getElementsByTagName('menulist')[2]
         .selectedIndex = idx[userlist[i].messages];
+
+      GFuserlist.disableMenulists(userlist[i].type, groups[i]);
     }
   },
 
@@ -276,6 +278,10 @@ var GFuserlist =
     if (node.tagName == 'menuitem')
       node = node.parentNode.parentNode;
 
+    var groupbox = node;
+    while (groupbox.tagName != 'groupbox')
+      groupbox = groupbox.parentNode;
+
     // get pref name
     var name = node.className.substring(3);
 
@@ -299,6 +305,9 @@ var GFuserlist =
           colors[i].value = value;
       }
     }
+
+    // disable options that don't apply
+    GFuserlist.disableMenulists(value, groupbox);
 
     // get and set pref
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
@@ -695,5 +704,25 @@ var GFuserlist =
   checkUsername: function(username)
   {
     return this.index.users[username] != null;
+  },
+
+  disableMenulists: function(type, groupbox)
+  {
+    var menulists = groupbox.getElementsByTagName('menulist');
+    if (type == 'titleContains')
+    {
+      menulists[1].disabled = false;
+      menulists[2].disabled = true;
+    }
+    else if (type == 'postContains')
+    {
+      menulists[1].disabled = true;
+      menulists[2].disabled = false;
+    }
+    else
+    {
+      menulists[1].disabled = false;
+      menulists[2].disabled = false;
+    }
   }
 };
