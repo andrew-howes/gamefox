@@ -93,7 +93,7 @@
               <textbox id="sig-body"
                 oninput="GFsigOptions.updatePref(this);" rows="3" multiline="true"
                 class="indent"/>
-              <hbox pack="end">
+              <hbox pack="end" style="margin-bottom: 25px;">
                 <button id="gamefox-css-grab-sig" label="&grab.button;"
                   icon="refresh" oncommand="GFsigOptions.importSig();"/>
                 <button id="gamefox-css-save-sig" label="&save.button;"
