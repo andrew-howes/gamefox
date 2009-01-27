@@ -106,7 +106,7 @@ var GFuserlistObserver =
 
   observe: function()
   {
-    GFuserlist.updateUsers();
+    GFhighlightingOptions.updateUsers();
   }
 };
 

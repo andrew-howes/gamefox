@@ -299,7 +299,7 @@ var GFoptions =
     if (args.firstRun)
     {
       GFuserlist.add();
-      GFuserlist.populateLast();
+      GFhighlightingOptions.populateLast();
 
       if (GFlib.isLoggedIn())
       {

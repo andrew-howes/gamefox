@@ -23,10 +23,12 @@
 <overlay id="highlightingPaneOverlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <prefpane id="paneHighlighting" onpaneload="GFuserlist.prepareOptionsPane();">
+  <prefpane id="paneHighlighting" onpaneload="GFhighlightingOptions.prepareOptionsPane();">
 
     <script type="application/x-javascript"
       src="chrome://gamefox/content/userlist.js"/>
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/options/highlighting.js"/>
 
     <stringbundleset id="highlighting-strbundles">
       <stringbundle id="highlighting-strings"
@@ -67,7 +69,7 @@
     <hbox align="center">
       <description flex="1">&desc;</description>
       <button label="&addGroup.button;" icon="add"
-        oncommand="GFuserlist.add();GFuserlist.populateLast();"/>
+        oncommand="GFuserlist.add();GFhighlightingOptions.populateLast();"/>
     </hbox>
 
     <!-- Groups -->
