@@ -375,7 +375,7 @@ var GFuserlist =
     if (!groups[0])
     {
       // nothing in postContains index, return users index instead
-      return this.searchUsername(username);
+      return this.searchUsername(username, tc);
     }
 
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
@@ -589,19 +589,12 @@ var GFuserlist =
     if (!activeGroups) activeGroups = [];
 
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
-    if (!userlist.length)
-    {
-      item = document.createElement('menuitem');
-      item.setAttribute('label', 'No groups');
-      item.setAttribute('disabled', 'true');
-      list.appendChild(item);
-      return;
-    }
 
-    var item, label, info;
+    var item, label, info, noGroups = true;
     for (var i = 0; i < userlist.length; i++)
     {
       if (userlist[i].type != 'users') continue;
+      noGroups = false;
 
       item = document.createElement('menuitem');
       item.setAttribute('type', 'checkbox');
@@ -641,6 +634,14 @@ var GFuserlist =
         item.style.borderRightColor = userlist[i].color;
       }
 
+      list.appendChild(item);
+    }
+
+    if (noGroups)
+    {
+      item = document.createElement('menuitem');
+      item.setAttribute('label', 'No groups');
+      item.setAttribute('disabled', 'true');
       list.appendChild(item);
     }
 
