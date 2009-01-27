@@ -111,7 +111,8 @@ var GFuserlist =
 
     var typeSettings = new Array(
         'users', 'usernameIs',
-        'titleContains', 'titleContains'
+        'titleContains', 'titleContains',
+        'postContains', 'postContains'
         );
     /***** menuitem *****/
     for (var i = 0; i < typeSettings.length; i += 2)
@@ -222,15 +223,15 @@ var GFuserlist =
 
       // set menulists
       var idx;
-      idx = {'users':0, 'titleContains':1};
+      idx = {users:0, titleContains:1, postContains:2};
       groups[i].getElementsByTagName('menulist')[0]
         .selectedIndex = idx[userlist[i].type];
 
-      idx = {'remove':0, 'highlight':1, 'nothing':2};
+      idx = {remove:0, highlight:1, nothing:2};
       groups[i].getElementsByTagName('menulist')[1]
         .selectedIndex = idx[userlist[i].topics];
 
-      idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
+      idx = {collapse:0, remove:1, highlight:2, nothing:3};
       groups[i].getElementsByTagName('menulist')[2]
         .selectedIndex = idx[userlist[i].messages];
     }
@@ -251,15 +252,15 @@ var GFuserlist =
 
     // set menulists
     var idx;
-    idx = {'users':0, 'titleContains':1};
+    idx = {users:0, titleContains:1, postContains:2};
     groupbox.getElementsByTagName('menulist')[0]
       .selectedIndex = idx[userlist.type];
 
-    idx = {'remove':0, 'highlight':1, 'nothing':2};
+    idx = {remove:0, highlight:1, nothing:2};
     groupbox.getElementsByTagName('menulist')[1]
       .selectedIndex = idx[userlist.topics];
 
-    idx = {'collapse':0, 'remove':1, 'highlight':2, 'nothing':3};
+    idx = {collapse:0, remove:1, highlight:2, nothing:3};
     groupbox.getElementsByTagName('menulist')[2]
       .selectedIndex = idx[userlist.messages];
   },
@@ -309,7 +310,7 @@ var GFuserlist =
   {
     var values, value, type;
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
-    this.index = {users:{}, titleContains:{}};
+    this.index = {users:{}, titleContains:{}, postContains:{}};
 
     // build the index
     for (var i = 0; i < userlist.length; i++)
@@ -345,7 +346,50 @@ var GFuserlist =
     }
   },
 
-  search: function(username, title)
+  searchPost: function(username, post, tc)
+  {
+    if (!this.index) return false;
+    var index = this.index.postContains;
+
+    post = post.toLowerCase();
+
+    var groups = [];
+    for (var i in index)
+    {
+      for (var j = 0; j < index[i].length; j++)
+      {
+        if (post.indexOf(index[i][j]) != -1)
+          groups.push(i);
+      }
+    }
+
+    if (!groups[0])
+    {
+      // nothing in postContains index, return users index instead
+      return this.searchUsername(username);
+    }
+
+    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+
+    var color = userlist[groups[0]].color;
+    var messages = userlist[groups[0]].messages;
+    var topics = userlist[groups[0]].topics;
+
+    var groupNames = '';
+    for (var i = 0; i < groups.length; i++)
+      if (userlist[groups[i]].name.length)
+        groupNames += userlist[groups[i]].name + ', ';
+
+    // Get group names from username search
+    var hlinfo = this.searchUsername(username, tc);
+    if (hlinfo && hlinfo[0].length)
+      groupNames += hlinfo[0] + ', ';
+
+    return [groupNames.substr(0, groupNames.length - 2), color, messages,
+           topics, groups];
+  },
+
+  searchTopic: function(username, title)
   {
     if (!this.index) return false;
     var index = this.index.titleContains;

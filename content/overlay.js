@@ -520,7 +520,7 @@ var GameFOX =
           var title = rows[i].getElementsByTagName('td')[1].textContent.GFtrim();
           var hlinfo;
 
-          if ((hlinfo = GFuserlist.search(username, title)) != false)
+          if ((hlinfo = GFuserlist.searchTopic(username, title)) != false)
           {
             // list of groups
             if (GFlib.prefs.getBoolPref('userlist.topics.showgroupnames') &&
@@ -647,6 +647,7 @@ var GameFOX =
         td[i].id = 'p' + msgnumString;
 
         var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
+        var postBody = td[i + 1].textContent;
 
         // Topic creator
         // TODO: Fix for newest first ordering
@@ -659,7 +660,8 @@ var GameFOX =
 
         // Message highlighting
         var hlinfo, groupname;
-        if ((hlinfo = GFuserlist.searchUsername(username, tc == username && !onDetail)) != false)
+        if ((hlinfo = GFuserlist.searchPost(username, postBody,
+                tc == username && !onDetail)) != false)
         {
           // add group names after username
           if (GFlib.prefs.getBoolPref('userlist.messages.showgroupnames') &&

@@ -20,7 +20,8 @@
         - Move "new signature" menu item to an "Add" button
         - Two simple selection modes: "random" (now default) and "first"
         - "Save to GameFAQs" button to save your GameFOX signature to GameFAQs
-    * Ability to highlight topics which have certain words in the title
+    * Ability to highlight topics or posts which have certain words in the
+      title or message
 
 2008-12-26:
     * version 0.6.9
