@@ -40,14 +40,28 @@
         name="gamefox.userlist.messages.showgroupnames" type="bool"/>
     </preferences>
 
-    <!-- Options -->
-    <groupbox>
-      <caption label="&options.label;"/>
-      <checkbox label="&topicGroups.label;"
-        preference="topics.showgroupnames"/>
-      <checkbox label="&messageGroups.label;"
-        preference="messages.showgroupnames"/>
-    </groupbox>
+    <!-- Group Name Options -->
+    <label control="groupNames">&showGroupNames.label;</label>
+    <grid  class="indent" id="groupNames" role="group">
+      <columns>
+        <column flex="1"/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row>
+          <hbox>
+            <checkbox label="&topicGroups.label;"
+              preference="topics.showgroupnames"/>
+          </hbox>
+          <hbox>
+            <checkbox label="&messageGroups.label;"
+              preference="messages.showgroupnames"/>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+
+    <separator/>
 
     <!-- Add -->
     <hbox align="center">

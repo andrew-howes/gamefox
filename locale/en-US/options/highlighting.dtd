@@ -1,7 +1,8 @@
 <!-- vim: set indentexpr=: -->
 
 <!ENTITY options.label "Options">
-<!ENTITY topicGroups.label "Group names on topic lists">
-<!ENTITY messageGroups.label "Group names on message lists">
+<!ENTITY showGroupNames.label "Show group names on:">
+<!ENTITY topicGroups.label "Topic lists">
+<!ENTITY messageGroups.label "Message lists">
 <!ENTITY desc "Separate values with commas. List &quot;(tc)&quot; as a user (without quotes) to highlight the topic creator.">
 <!ENTITY addGroup.button "Add a Group">
