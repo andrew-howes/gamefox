@@ -360,6 +360,21 @@ var GFutils =
 
     var notification = msgBox.appendNotification(label, label, null, priority);
     notification.type = type;
+  },
+
+  cloneObj: function(obj)
+  {
+    var newObj = (obj instanceof Array) ? [] : {};
+
+    for (i in obj)
+    {
+      if (obj[i] && typeof obj[i] == 'object')
+        newObj[i] = GFutils.cloneObj(obj[i]);
+      else
+        newObj[i] = obj[i];
+    }
+
+    return newObj;
   }
 };
 

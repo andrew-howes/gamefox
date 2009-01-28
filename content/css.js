@@ -259,7 +259,7 @@ var GFcss =
   {
     var css = eval(this.prefs.getCharPref('serialized'));
 
-    this.treeView = GFtreeview;
+    this.treeView = GFutils.cloneObj(GFtreeview);
     this.treeView.childData = {};
     this.treeView.visibleData = [];
     var categories = {'GameFOX':'gamefox', 'GameFAQs':'bundled', 'User':'user'};
