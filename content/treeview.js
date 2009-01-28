@@ -1,40 +1,40 @@
-var GFtreeview =
+function GFtreeview()
 {
-  childData : {},
-  visibleData : [],
+  this.childData = {};
+  this.visibleData = [];
 
-  treeBox: null,
-  selection: null,
+  this.treeBox = null;
+  this.selection = null;
 
-  get rowCount()                      { return this.visibleData.length; },
-  setTree: function(treeBox)          { this.treeBox = treeBox; },
-  getCellText: function (idx, column) { return this.visibleData[idx][0][column.index]; },
-  isContainer: function(idx)          { return this.visibleData[idx][1]; },
-  isContainerOpen: function(idx)      { return this.visibleData[idx][2]; },
-  isContainerEmpty: function(idx)     { return false; },
-  isSeparator: function(idx)          { return false; },
-  isSorted: function()                { return false; },
-  isEditable: function(idx, column)   { return false; },
+  this.__defineGetter__('rowCount', function() { return this.visibleData.length; });
+  this.setTree = function(treeBox)          { this.treeBox = treeBox; };
+  this.getCellText = function(idx, column)  { return this.visibleData[idx][0][column.index]; };
+  this.isContainer = function(idx)          { return this.visibleData[idx][1]; };
+  this.isContainerOpen = function(idx)      { return this.visibleData[idx][2]; };
+  this.isContainerEmpty = function(idx)     { return false; };
+  this.isSeparator = function(idx)          { return false; };
+  this.isSorted = function()                { return false; };
+  this.isEditable = function(idx, column)   { return false; };
 
-  getParentIndex: function(idx) {
+  this.getParentIndex = function(idx) {
     if (this.isContainer(idx)) return -1;
-    for (var t = idx - 1; t >= 0 ; t--) {
+    for (var t = idx - 1; t >= 0; t--) {
       if (this.isContainer(t)) return t;
     }
-  },
-  getLevel: function(idx) {
+  };
+  this.getLevel = function(idx) {
     if (this.isContainer(idx)) return 0;
     return 1;
-  },
-  hasNextSibling: function(idx, after) {
+  };
+  this.hasNextSibling = function(idx, after) {
     var thisLevel = this.getLevel(idx);
     for (var t = idx + 1; t < this.visibleData.length; t++) {
       var nextLevel = this.getLevel(t)
       if (nextLevel == thisLevel) return true;
       else if (nextLevel < thisLevel) return false;
     }
-  },
-  toggleOpenState: function(idx) {
+  };
+  this.toggleOpenState = function(idx) {
     var item = this.visibleData[idx];
     if (!item[1]) return;
 
@@ -64,19 +64,19 @@ var GFtreeview =
         this.treeBox.rowCountChanged(idx + 1, toinsert.length);
       }
     }
-  },
+  };
 
-  getImageSrc: function(idx, column) {},
-  getProgressMode : function(idx,column) {},
-  getCellValue: function(idx, column) { return this.visibleData[idx][0][column.index]; },
-  cycleHeader: function(col, elem) {},
-  selectionChanged: function() {},
-  cycleCell: function(idx, column) {},
-  performAction: function(action) {},
-  performActionOnCell: function(action, index, column) {},
-  getRowProperties: function(idx, column, prop) {},
-  getCellProperties: function(idx, column, prop) {},
-  getColumnProperties: function(column, element, prop) {},
-  setCellText: function(idx, column, value) { this.visibleData[idx][0][column.index] = value; },
-  setCellValue: function(idx, column, value) { this.visibleData[idx][0][column.index] = value; }
-};
+  this.getImageSrc = function(idx, column) {};
+  this.getProgressMode = function(idx,column) {};
+  this.getCellValue = function(idx, column) { return this.visibleData[idx][0][column.index]; };
+  this.cycleHeader = function(col, elem) {};
+  this.selectionChanged = function() {};
+  this.cycleCell = function(idx, column) {};
+  this.performAction = function(action) {};
+  this.performActionOnCell = function(action, index, column) {};
+  this.getRowProperties = function(idx, column, prop) {};
+  this.getCellProperties = function(idx, column, prop) {};
+  this.getColumnProperties = function(column, element, prop) {};
+  this.setCellText = function(idx, column, value) { this.visibleData[idx][0][column.index] = value; };
+  this.setCellValue = function(idx, column, value) { this.visibleData[idx][0][column.index] = value; };
+}
