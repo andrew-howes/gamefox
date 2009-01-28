@@ -1,14 +1,13 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY header.label "Header">
-<!ENTITY includeUsername.label "Poster username">
-<!ENTITY includeDate.label "Post date">
-<!ENTITY includeNumber.label "Post number">
+<!ENTITY quoteHeader.label "Include in quote header:">
+<!ENTITY username.label "Username">
+<!ENTITY date.label "Date">
+<!ENTITY number.label "Number">
 
-<!ENTITY body.label "Body">
 <!ENTITY removeSig.label "Remove signature">
 
-<!ENTITY format.label "Format">
+<!ENTITY quoteFormat.label "Format quote with:">
 <!ENTITY useGFCode.label "GFCode tags (&lt;i&gt;, &lt;p&gt; and &lt;strong&gt;)">
 <!ENTITY useClassic.label "Classic tags (&lt;b&gt; and &lt;i&gt;)">
 

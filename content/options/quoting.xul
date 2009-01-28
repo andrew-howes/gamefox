@@ -51,32 +51,41 @@
         type="bool"/>
     </preferences>
 
-    <groupbox align="start">
-      <caption label="&header.label;"/>
+    <label control="quoteHeader">&quoteHeader.label;</label>
+    <grid class="indent" id="quoteHeader" role="group">
+      <columns>
+        <column flex="1"/>
+        <column flex="1"/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row>
+          <hbox>
+            <checkbox label="&username.label;" preference="header.username"/>
+          </hbox>
+          <hbox>
+            <checkbox label="&date.label;" preference="header.date"/>
+          </hbox>
+          <hbox>
+            <checkbox label="&number.label;" preference="header.messagenum"/>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
 
-      <checkbox label="&includeUsername.label;" flex="1"
-        preference="header.username"/>
-      <checkbox label="&includeDate.label;" flex="1"
-        preference="header.date"/>
-      <checkbox label="&includeNumber.label;" flex="1"
-        preference="header.messagenum"/>
-    </groupbox>
+    <separator/>
 
-    <groupbox>
-      <caption label="&body.label;"/>
+    <checkbox label="&removeSig.label;" preference="removesignature"/>
 
-      <checkbox label="&removeSig.label;"
-        preference="removesignature"/>
-    </groupbox>
+    <separator/>
 
-    <groupbox>
-      <caption label="&format.label;"/>
-
+    <label control="quoteFormat">&quoteFormat.label;</label>
+    <vbox class="indent" id="quoteFormat" role="group">
       <radiogroup preference="style">
         <radio value="gfcode" label="&useGFCode.label;"/>
-        <radio value="normal" label="&useClassic.label;"/>
 
-        <hbox class="indent" orient="horizontal">
+        <radio value="normal" label="&useClassic.label;"/>
+        <hbox class="indent">
           <vbox>
             <checkbox label="&headerBold.label;" preference="header.bold"/>
             <checkbox label="&headerItalic.label;" preference="header.italic"/>
@@ -87,7 +96,7 @@
           </vbox>
         </hbox>
       </radiogroup>
-    </groupbox>
+    </vbox>
 
   </prefpane>
 
