@@ -195,58 +195,54 @@ var GFtracked =
 
   populateTree: function()
   {
-    var tree = document.getElementById('gamefox-tracked-rows');
+    var tree = document.getElementById('gamefox-tracked-tree');
+    if (!tree) return;
 
-    if (!tree)
-      return;
+    var lastIndex = tree.currentIndex;
 
-    while (tree.hasChildNodes())
-      tree.removeChild(tree.firstChild);
+    var treeview = new GFtreeview();
+    treeview.childData = {};
+    treeview.visibleData = [];
+
+    treeview.getRowProperties = function(index, properties)
+    {
+      // hold or deleted property to add the icon with CSS
+      var property = this.visibleData[index][0][2];
+      var atomService = Cc['@mozilla.org/atom-service;1']
+        .getService(Ci.nsIAtomService);
+      var atom = atomService.getAtom(property);
+      properties.AppendElement(atom);
+    };
 
     this.read();
-    for (board in this.list)
+    for (var board in this.list)
     {
-      var children = document.createElement('treechildren');
-      var item = document.createElement('treeitem');
-      var row = document.createElement('treerow');
-      var cell1 = document.createElement('treecell');
-      var cell2 = document.createElement('treecell');
-
-      item.setAttribute('container', 'true');
-      item.setAttribute('open', 'true');
-
-      cell1.setAttribute('label', this.list[board].name);
-      cell2.setAttribute('label', board);
-
-      row.appendChild(cell1);
-      row.appendChild(cell2);
-      item.appendChild(row);
+      treeview.visibleData.push(
+          [[board, this.list[board].name], true, false]
+          );
+      treeview.childData[board] = [];
 
       for (var topic in this.list[board].topics)
       {
-        var childItem = document.createElement('treeitem');
-        var row = document.createElement('treerow');
-        var cell1 = document.createElement('treecell');
-        var cell2 = document.createElement('treecell');
-
+        var property = '';
         if (this.list[board].topics[topic].deleted)
-          row.setAttribute('properties', 'deleted');
+          property = 'deleted';
         else if (this.list[board].topics[topic].hold)
-          row.setAttribute('properties', 'hold');
+          property = 'hold';
 
-        cell1.setAttribute('label', this.list[board].topics[topic].title);
-        cell2.setAttribute('label', board + ',' + topic);
-
-        row.appendChild(cell1);
-        row.appendChild(cell2);
-
-        childItem.appendChild(row);
-        children.appendChild(childItem);
+        treeview.childData[board].push([
+            board + ',' + topic, // tagid
+            this.list[board].topics[topic].title,
+            property
+            ]);
       }
-
-      item.appendChild(children);
-      tree.appendChild(item);
     }
+
+    tree.view = treeview;
+
+    // open all categories
+    for (var i = treeview.visibleData.length - 1; i >= 0; i--)
+      tree.view.toggleOpenState(i);
   },
 
   treeAction: function(type, dblclick)

@@ -55,7 +55,7 @@ function GFtreeview()
     else {
       item[2] = true;
 
-      var label = this.visibleData[idx][0];
+      var label = this.visibleData[idx][0][0];
       var toinsert = this.childData[label];
       if (toinsert) {
         for (var i = 0; i < toinsert.length; i++) {
