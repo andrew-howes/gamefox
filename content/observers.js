@@ -145,17 +145,19 @@ var GFtrackedTreeObserver =
         gTrackedWindow._view.visibleData.splice(i, 1);
         gTrackedWindow._tree.treeBoxObject.rowCountChanged(i + 1, -1);
       }
-
-      var property = '';
-      if (GFtracked.list[tagid[0]].topics[tagid[1]].deleted)
-        property = 'deleted';
-      else if (GFtracked.list[tagid[0]].topics[tagid[1]].hold)
-        property = 'hold';
-
-      if (property != gTrackedWindow._view.visibleData[i][0][2])
+      else
       {
-        gTrackedWindow._view.visibleData[i][0][2] = property;
-        gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
+        var property = '';
+        if (GFtracked.list[tagid[0]].topics[tagid[1]].deleted)
+          property = 'deleted';
+        else if (GFtracked.list[tagid[0]].topics[tagid[1]].hold)
+          property = 'hold';
+
+        if (property != gTrackedWindow._view.visibleData[i][0][2])
+        {
+          gTrackedWindow._view.visibleData[i][0][2] = property;
+          gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
+        }
       }
     };
 
