@@ -360,6 +360,18 @@ var GFutils =
 
     var notification = msgBox.appendNotification(label, label, null, priority);
     notification.type = type;
+  },
+
+  // Convert GameFAQs timestamps to a date object
+  strtotime: function(str)
+  {
+    var year = new Date().getFullYear();
+    var time = str.split(/(\/| |:|AM|PM)/);
+    // Convert to 24-hour scale
+    if (time[7] == 'PM' && time[4] < 12)
+      time[4] = parseInt(time[4]) + 12;
+
+    return new Date(year, time[0] - 1, time[2], time[4], time[6]);
   }
 };
 

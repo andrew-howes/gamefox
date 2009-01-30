@@ -193,93 +193,6 @@ var GFtracked =
     }
   },
 
-  populateTree: function()
-  {
-    var tree = document.getElementById('gamefox-tracked-tree');
-    if (!tree) return;
-
-    var lastIndex = tree.currentIndex;
-
-    var treeview = new GFtreeview();
-    treeview.childData = {};
-    treeview.visibleData = [];
-
-    treeview.getRowProperties = function(index, properties)
-    {
-      // hold or deleted property to add the icon with CSS
-      var property = this.visibleData[index][0][2];
-      var atomService = Cc['@mozilla.org/atom-service;1']
-        .getService(Ci.nsIAtomService);
-      var atom = atomService.getAtom(property);
-      properties.AppendElement(atom);
-    };
-
-    this.read();
-    for (var board in this.list)
-    {
-      treeview.visibleData.push(
-          [[board, this.list[board].name], true, false]
-          );
-      treeview.childData[board] = [];
-
-      for (var topic in this.list[board].topics)
-      {
-        var property = '';
-        if (this.list[board].topics[topic].deleted)
-          property = 'deleted';
-        else if (this.list[board].topics[topic].hold)
-          property = 'hold';
-
-        treeview.childData[board].push([
-            board + ',' + topic, // tagid
-            this.list[board].topics[topic].title,
-            property
-            ]);
-      }
-    }
-
-    tree.view = treeview;
-
-    // open all categories
-    for (var i = treeview.visibleData.length - 1; i >= 0; i--)
-      tree.view.toggleOpenState(i);
-  },
-
-  treeAction: function(type, dblclick)
-  {
-    var tree = document.getElementById('gamefox-tracked-tree');
-    var index = tree.view.selection.currentIndex;
-
-    if (index == -1 || (tree.view.isContainer(index) && dblclick))
-      return;
-
-    var tagID = tree.view.getCellText(index,
-        tree.columns.getNamedColumn('gamefox-tracked-tagid'));
-    var topic = tagID.split(',');
-
-    switch (type)
-    {
-      case 0:
-        GFlib.open(tagID, 0); // new tab
-        break;
-      case 1:
-        GFlib.open(tagID, 1); // new focused tab
-        break;
-      case 2:
-        GFlib.open(tagID, 2); // focused tab
-        break;
-      case 3:
-        GFlib.open(tagID, 3); // new window
-        break;
-      case 4:
-        GFtracked.holdTopic(topic[0], topic[1]);
-        break;
-      case 5:
-        GFtracked.deleteTopic(topic[0], topic[1]);
-        break;
-    }
-  },
-
   linkListener: function(event)
   {
     // Prevent the link from loading, make our own XMLHttpRequest to stop/start
@@ -441,45 +354,6 @@ var GFtracked =
 
       this.save();
     }
-  },
-
-  displayTreeMenu: function()
-  {
-    var tree = document.getElementById('gamefox-tracked-tree');
-    var index = tree.view.selection.currentIndex;
-
-    if (index == -1)
-      return;
-
-    GFtracked.read();
-
-    var tagID = tree.view.getCellText(index,
-        tree.columns.getNamedColumn('gamefox-tracked-tagid')).split(',');
-    var topic = GFtracked.list[tagID[0]].topics[tagID[1]];
-
-    if (!tagID[1]) // board
-    {
-      document.getElementById('gamefox-tracked-contextmenu-hold')
-        .hidden = true;
-      document.getElementById('gamefox-tracked-contextmenu-stop')
-        .hidden = true;
-      return;
-    }
-    else // topic
-    {
-      document.getElementById('gamefox-tracked-contextmenu-hold')
-        .hidden = false;
-      document.getElementById('gamefox-tracked-contextmenu-stop')
-        .hidden = false;
-    }
-
-    var menuItem = document.getElementById('gamefox-tracked-contextmenu-hold');
-    var strbundle = document.getElementById('strings');
-    menuItem.accessKey = strbundle.getString('holdAccessKey');
-    if (!topic.hold)
-      menuItem.label = strbundle.getString('hold');
-    else
-      menuItem.label = strbundle.getString('unhold');
   },
 
   trackResponse: function(str, action)

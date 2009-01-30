@@ -24,7 +24,7 @@
 
 <page id="gamefox-tracked-page"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  onload="GFtracked.populateTree(); GFtrackedTreeObserver.register();">
+  onload="gTrackedWindow.init(); GFtrackedTreeObserver.register();">
   <script type="application/x-javascript"
     src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript"
@@ -37,6 +37,8 @@
     src="chrome://gamefox/content/utils.js"/>
   <script type="application/x-javascript"
     src="chrome://gamefox/content/treeview.js"/>
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/trackedWindow.js"/>
 
   <stringbundleset id="strbundles">
     <stringbundle id="strings"
@@ -45,8 +47,8 @@
 
   <tree id="gamefox-tracked-tree" flex="1" hidecolumnpicker="true"
     contextmenu="gamefox-tracked-contextmenu"
-    ondblclick="if (event.button == 0) GFtracked.treeAction(1, true);"
-    onclick="if (event.button == 1) GFtracked.treeAction(0);">
+    ondblclick="if (event.button == 0) gTrackedWindow.action(1, true);"
+    onclick="if (event.button == 1) gTrackedWindow.action(0);">
     <treecols>
       <treecol id="gamefox-tracked-tagid" hidden="true"/>
       <treecol label="&tracked.label;" flex="1" primary="true"/>
@@ -62,17 +64,17 @@
   </toolbox>
 
   <popup id="gamefox-tracked-contextmenu"
-    onpopupshowing="GFtracked.displayTreeMenu();">
+    onpopupshowing="gTrackedWindow.displayMenu();">
     <menuitem accesskey="&newTab.accesskey;" label="&newTab.label;"
-      oncommand="GFtracked.treeAction(1);"/>
+      oncommand="gTrackedWindow.action(1);"/>
     <menuitem accesskey="&focusedTab.accesskey;"
-      label="&focusedTab.label;" oncommand="GFtracked.treeAction(2);"/>
+      label="&focusedTab.label;" oncommand="gTrackedWindow.action(2);"/>
     <menuitem accesskey="&newWindow.accesskey;"
-      label="&newWindow.label;" oncommand="GFtracked.treeAction(3);"/>
-    <menuitem accesskey="" label="" oncommand="GFtracked.treeAction(4);"
+      label="&newWindow.label;" oncommand="gTrackedWindow.action(3);"/>
+    <menuitem accesskey="" label="" oncommand="gTrackedWindow.action(4);"
       id="gamefox-tracked-contextmenu-hold"/>
     <menuitem accesskey="&stopTracking.accesskey;"
-      label="&stopTracking.label;" oncommand="GFtracked.treeAction(5);"
+      label="&stopTracking.label;" oncommand="gTrackedWindow.action(5);"
       id="gamefox-tracked-contextmenu-stop"/>
   </popup>
 </page>

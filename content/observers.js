@@ -129,6 +129,6 @@ var GFtrackedTreeObserver =
 
   observe: function()
   {
-    GFtracked.populateTree();
+    gTrackedWindow.init();
   }
 };
