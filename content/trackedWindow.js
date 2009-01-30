@@ -95,6 +95,17 @@ var gTrackedWindow =
 
     if (!ascending)
       this._view.visibleData.reverse();
+
+    this._view.selection.clearSelection();
+    this._tree.treeBoxObject.invalidate();
+  },
+
+  addTopic: function(tagid, title, property, lastPost)
+  {
+    this._view.visibleData.push([[tagid, title, property, lastPost], false, false]);
+
+    var oldRowCount = this._view.rowCount;
+    this._tree.treeBoxObject.rowCountChanged(oldRowCount + 1, 1);
   },
 
   action: function(type, dblclick)

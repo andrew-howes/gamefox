@@ -372,6 +372,21 @@ var GFutils =
       time[4] = parseInt(time[4]) + 12;
 
     return new Date(year, time[0] - 1, time[2], time[4], time[6]);
+  },
+
+  cloneObj: function(obj)
+  {
+    var newObj = (obj instanceof Array) ? [] : {};
+
+    for (i in obj)
+    {
+      if (obj[i] && typeof obj[i] == 'object')
+        newObj[i] = GFutils.cloneObj(obj[i]);
+      else
+        newObj[i] = obj[i];
+    }
+
+    return newObj;
   }
 };
 
