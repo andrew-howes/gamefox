@@ -132,7 +132,7 @@ var GFtrackedTreeObserver =
     var oldList = GFutils.cloneObj(GFtracked.list);
     GFtracked.read();
 
-    // Remove topics
+    // Remove topics and change properties
     for (var i = 0; i < gTrackedWindow._view.visibleData.length; i++)
     {
       var tagid = gTrackedWindow._view.visibleData[i][0][0].split(/,/);
@@ -144,6 +144,18 @@ var GFtrackedTreeObserver =
       {
         gTrackedWindow._view.visibleData.splice(i, 1);
         gTrackedWindow._tree.treeBoxObject.rowCountChanged(i + 1, -1);
+      }
+
+      var property = '';
+      if (GFtracked.list[tagid[0]].topics[tagid[1]].deleted)
+        property = 'deleted';
+      else if (GFtracked.list[tagid[0]].topics[tagid[1]].hold)
+        property = 'hold';
+
+      if (property != gTrackedWindow._view.visibleData[i][0][2])
+      {
+        gTrackedWindow._view.visibleData[i][0][2] = property;
+        gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
       }
     };
 
