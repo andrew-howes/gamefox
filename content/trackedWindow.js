@@ -70,7 +70,7 @@ var gTrackedWindow =
 
     this.sort('lastPost', false);
 
-    new GFobserver('tracked', this.update);
+    new GFobserver('tracked.list', this.update);
   },
 
   makeTopicObject: function(bid, tid, topic)
