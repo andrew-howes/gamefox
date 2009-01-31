@@ -294,7 +294,8 @@ var GFhighlightingOptions =
     }
 
     // disable options that don't apply
-    GFhighlightingOptions.disableMenulists(value, groupbox);
+    if (name == 'type')
+      GFhighlightingOptions.disableMenulists(value, groupbox);
 
     // get and set pref
     var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
