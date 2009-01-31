@@ -97,7 +97,7 @@ var GameFOX =
       GFlib.setTitle(doc, 'Message Boards');
 
       // Get favorites
-      if (boardWrap)
+      if (GFlib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
         var i, query, favorites = [], favLinks = [];
         var favResult = doc.evaluate('div[@class="board"]/table/tbody/tr/td[1]/a',
@@ -601,10 +601,13 @@ var GameFOX =
       }
 
       // Tracking
-      var trackLink = doc.evaluate('a[contains(@href, "track")]', userNav,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      if (trackLink)
-        trackLink.addEventListener('click', GFtracked.linkListener, false);
+      if (GFlib.prefs.getBoolPref('tracked.enabled'))
+      {
+        var trackLink = doc.evaluate('a[contains(@href, "track")]', userNav,
+            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (trackLink)
+          trackLink.addEventListener('click', GFtracked.linkListener, false);
+      }
 
       // Double click
       var messageTable = doc.evaluate('div[@class="board"]/table[@class="message"]',
@@ -1376,9 +1379,20 @@ function GameFOXLoader()
   }
 
   GFcss.reload();
-  if (GFlib.isLoggedIn())
+  if (!GFlib.prefs.getBoolPref('tracked.enabled'))
   {
-    GFtracked.updateList();
+    GFlib.prefs.clearUserPref('tracked.list');
+    GFlib.prefs.clearUserPref('tracked.rssUrl');
+    GFlib.prefs.clearUserPref('tracked.lastAccount');
+  }
+  else
+  {
+    if (GFlib.isLoggedIn())
+      GFtracked.updateList();
+  }
+  if (!GFlib.prefs.getBoolPref('favorites.enabled'))
+  {
+    GFlib.prefs.clearUserPref('favorites.serialized');
   }
 }
 

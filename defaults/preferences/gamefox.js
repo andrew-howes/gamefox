@@ -72,12 +72,14 @@ pref("gamefox.userlist.messages.showgroupnames", true);
 pref("gamefox.userlist.serialized", "[]");
 
 pref("gamefox.favorites.serialized", "[]");
+pref("gamefox.favorites.enabled", true);
 
 pref("gamefox.tags", "");
 
 pref("gamefox.tracked.list", "");
 pref("gamefox.tracked.rssUrl", "");
 pref("gamefox.tracked.lastAccount", "");
+pref("gamefox.tracked.enabled", true);
 
 pref("gamefox.accounts", "({})");
 pref("gamefox.accounts.current", "");
