@@ -35,6 +35,20 @@ var GFsigOptions =
           + GFsig.formatSigPreview(sigs[i].body));
     
     this.updateCharCounts();
+
+    // watch for external changes to sigs
+    new GFobserver('signature.serialized', this.observe);
+  },
+
+  observe: function()
+  {
+    var sigs = eval(GFutils.getString('signature.serialized'));
+    var menu = document.getElementById('sig-menu');
+    var textbox = document.getElementById('sig-body');
+    var sig = sigs[menu.selectedIndex].body;
+
+    if (textbox.value != sig)
+      textbox.value = sig;
   },
 
   hideCriteriaForm: function()
