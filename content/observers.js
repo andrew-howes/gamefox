@@ -29,7 +29,7 @@ function GFobserver(domain, observer)
   if (typeof observer == 'function')
   {
     this.observe = observer;
-    branch.addObserver(domain, observer, false);
+    branch.addObserver(domain, this, false);
     var obj = this;
   }
   else // typeof observer == 'object'
