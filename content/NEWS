@@ -10,8 +10,8 @@
     * New CSS: Capitalized Message Links
     * Add board links above QuickPost on message lists
     * Drop Firefox 1.5 support
-    * Add menu item to open the Users options pane from the context menu
-      (right click message -> User Groups -> Edit Groups)
+    * Add menu item to open the Highlighting options pane from the context menu
+      (right click message -> Highlighting Groups -> Edit Groups)
     * Add "Update GameFOX Signature" button to the GameFAQs signature/quote
       page
     * Support double-click CSS descriptions in the Style options pane in
