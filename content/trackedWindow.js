@@ -19,19 +19,35 @@
 
 var gTrackedWindow =
 {
-  _tree : null,
-  _view : null,
+  _tree   : null,
+  _view   : null,
+  _topics : null,
 
   init: function()
   {
     this._tree = document.getElementById('gamefox-tracked-tree');
-
     this._view = new GFtreeview();
+    this._topics = {};
 
-    this._view.getRowProperties = function(index, properties)
+    // Tree view
+    this._view.getCellText = function(idx, column)
+    {
+      if (column.index == 0) // tagid
+        return this.visibleData[idx].boardId + ',' + this.visibleData[idx].id;
+      if (column.index == 1) // name
+        return this.visibleData[idx].name;
+    };
+    this._view.isContainer = function(idx) { return false; };
+    this._view.isContainerOpen = function(idx) { return false; };
+    this._view.getRowProperties = function(idx, properties)
     {
       // hold or deleted property to add the icon with CSS
-      var property = this.visibleData[index][0][2];
+      var property = '';
+      if (this.visibleData[idx].deleted)
+        property = 'deleted';
+      else if (this.visibleData[idx].hold)
+        property = 'hold';
+
       var atomService = Cc['@mozilla.org/atom-service;1']
         .getService(Ci.nsIAtomService);
       var atom = atomService.getAtom(property);
@@ -44,18 +60,9 @@ var gTrackedWindow =
     {
       for (var topic in GFtracked.list[board].topics)
       {
-        var property = '';
-        if (GFtracked.list[board].topics[topic].deleted)
-          property = 'deleted';
-        else if (GFtracked.list[board].topics[topic].hold)
-          property = 'hold';
-
-        this._view.visibleData.push([[
-            board + ',' + topic, // tagid
-            GFtracked.list[board].topics[topic].title,
-            property,
-            GFtracked.list[board].topics[topic].lastPost
-            ], false, false]);
+        var topicObject = this.makeTopicObject(board, topic,
+            GFtracked.list[board].topics[topic]);
+        this.handleTopicAdded(topicObject);
       }
     }
 
@@ -66,39 +73,66 @@ var gTrackedWindow =
     new GFobserver('tracked', this.update);
   },
 
+  makeTopicObject: function(bid, tid, topic)
+  {
+    var t = { id        : tid,
+              boardId   : bid,
+              boardName : topic.board,
+              name      : topic.title,
+              age       : topic.age,
+              hold      : topic.hold,
+              deleted   : topic.deleted,
+              lastPost  : topic.lastPost,
+              msgs      : topic.msgs };
+    return t;
+  },
+
+  handleTopicAdded: function(topicObject)
+  {
+    var oldRowCount = this._view.rowCount;
+
+    this._view.visibleData.push(topicObject);
+    this._topics[topicObject.id] = topicObject;
+
+    this._tree.treeBoxObject.rowCountChanged(oldRowCount - 1, 1);
+  },
+
+  handleTopicRemoved: function(idx)
+  {
+    var topicObject = this._view.visibleData[idx];
+    delete this._topics[topicObject.id];
+
+    this._view.visibleData.splice(idx, 1);
+    this._tree.treeBoxObject.rowCountChanged(idx + 1, -1);
+  },
+
   update: function()
   {
-    var oldList = GFutils.cloneObj(GFtracked.list);
     GFtracked.read();
 
-    // Remove topics and change properties
+    // Remove and update topics
     for (var i = 0; i < gTrackedWindow._view.visibleData.length; i++)
     {
-      var tagid = gTrackedWindow._view.visibleData[i][0][0].split(/,/);
-          tagid[0] = parseInt(tagid[0]);
-          tagid[1] = parseInt(tagid[1]);
+      var boardId = gTrackedWindow._view.visibleData[i].boardId;
+      var topicId = gTrackedWindow._view.visibleData[i].id;
 
-      if (!GFtracked.list[tagid[0]] 
-          || !GFtracked.list[tagid[0]].topics[tagid[1]])
+      if (!GFtracked.list[boardId]
+          || !GFtracked.list[boardId].topics[topicId])
       {
-        gTrackedWindow._view.visibleData.splice(i, 1);
-        gTrackedWindow._tree.treeBoxObject.rowCountChanged(i + 1, -1);
+        gTrackedWindow.handleTopicRemoved(i);
+        --i;
       }
-      else
+      else // update
       {
-        var property = '';
-        if (GFtracked.list[tagid[0]].topics[tagid[1]].deleted)
-          property = 'deleted';
-        else if (GFtracked.list[tagid[0]].topics[tagid[1]].hold)
-          property = 'hold';
+        var topicObject = gTrackedWindow.makeTopicObject(boardId, topicId,
+            GFtracked.list[boardId].topics[topicId]);
 
-        if (property != gTrackedWindow._view.visibleData[i][0][2])
-        {
-          gTrackedWindow._view.visibleData[i][0][2] = property;
-          gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
-        }
+        gTrackedWindow._view.visibleData[i] = topicObject;
+        gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
+
+        gTrackedWindow._topics[topicId] = topicObject;
       }
-    };
+    }
 
     // Add topics
     for (var i in GFtracked.list)
@@ -106,12 +140,14 @@ var gTrackedWindow =
       for (var j in GFtracked.list[i].topics)
       {
         // topic already exists in tree
-        if (oldList[i] && oldList[i].topics[j]) continue;
+        if (gTrackedWindow._topics[j]) continue;
 
-        var topic = GFtracked.list[i].topics[j];
-        gTrackedWindow.addTopic(i + ',' + j, topic.title, '', topic.lastPost);
+        var topicObject = gTrackedWindow
+          .makeTopicObject(i, j, GFtracked.list[i].topics[j]);
+        gTrackedWindow.handleTopicAdded(topicObject);
       }
     }
+
     gTrackedWindow.sort('lastPost', false);
   },
 
@@ -121,7 +157,7 @@ var gTrackedWindow =
     {
       function sortByName(a, b)
       {
-        return a[0][1].toLowerCase().localeCompare(b[0][1].toLowerCase());
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
       }
       this._view.visibleData.sort(sortByName);
     }
@@ -132,8 +168,8 @@ var gTrackedWindow =
       var year = new Date().getFullYear();
       function sortByLastPost(a, b)
       {
-        var d1 = GFutils.strtotime(a[0][3]);
-        var d2 = GFutils.strtotime(b[0][3]);
+        var d1 = GFutils.strtotime(a.lastPost);
+        var d2 = GFutils.strtotime(b.lastPost);
 
         if (d1.getTime() < d2.getTime())
           return -1;
