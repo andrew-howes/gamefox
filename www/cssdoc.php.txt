@@ -106,7 +106,10 @@ Container for GameFOX action links applied to message headers.
 
 Contains topic pagination text.
 
-<h3 id="span_gamefox-signature">span.gamefox-signature</h3>
+<h3 id="span_gamefox-signature">
+span.gamefox-signature
+<span class="new">New in 0.6.10</span>
+</h3>
 
 Contains signatures in posts on the message list.
 
