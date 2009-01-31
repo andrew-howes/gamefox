@@ -35,9 +35,10 @@
 
 #gamefox-tags-rows::-moz-tree-row(leaf)
 {
-    background-color:  #FFFFFF;
+    background-color: #FFFFFF;
 }
 
+#gamefox-tags-rows::-moz-tree-row(selected, leaf),
 #gamefox-tags-rows::-moz-tree-row(selected, container)
 {
     background-color: #5BA1D4;
