@@ -1,72 +1,66 @@
 /* Tracked */
 #gamefox-tracked-rows::-moz-tree-row(hold)
 {
-    background: url('tracked-hold.png') no-repeat 1px;
+    background-image: url('tracked-hold.png');
+    background-repeat: no-repeat;
+    background-position: 1px;
 }
 
 #gamefox-tracked-rows::-moz-tree-row(deleted)
 {
-    background: url('tracked-deleted.png') no-repeat 1px;
+    background-image: url('tracked-deleted.png');
+    background-repeat: no-repeat;
+    background-position: 1px;
 }
 
-/* Tags and Tracked */
-#gamefox-tags-rows::-moz-tree-row(container),
-#gamefox-tracked-rows::-moz-tree-row(container)
+/* Tags */
+#gamefox-tags-rows::-moz-tree-row(container)
 {
     border-top: 1px solid #3585BF;
     border-bottom: 1px solid #3585BF;
     background-color: #3079AF;
 }
 
-#gamefox-tags-rows::-moz-tree-image(container, closed),
-#gamefox-tracked-rows::-moz-tree-image(container, closed)
+#gamefox-tags-rows::-moz-tree-image(container, closed)
 {
     list-style-image: url('folders.png');
     -moz-image-region: rect(0px, 16px,  16px, 0px);
 }
 
-#gamefox-tags-rows::-moz-tree-image(container, open),
-#gamefox-tracked-rows::-moz-tree-image(container, open)
+#gamefox-tags-rows::-moz-tree-image(container, open)
 {
     list-style-image: url('folders.png');
     -moz-image-region: rect(0px, 32px,  16px, 16px);
 }
 
-#gamefox-tags-rows::-moz-tree-row(leaf),
-#gamefox-tracked-rows::-moz-tree-row(leaf)
+#gamefox-tags-rows::-moz-tree-row(leaf)
 {
     background-color:  #FFFFFF;
 }
 
-#gamefox-tags-rows::-moz-tree-row(selected, container),
-#gamefox-tags-rows::-moz-tree-row(selected, leaf),
-#gamefox-tracked-rows::-moz-tree-row(selected, container),
-#gamefox-tracked-rows::-moz-tree-row(selected, leaf)
+#gamefox-tags-rows::-moz-tree-row(selected, container)
 {
     background-color: #5BA1D4;
 }
 
-#gamefox-tags-rows::-moz-tree-cell-text,
-#gamefox-tracked-rows::-moz-tree-cell-text
+#gamefox-tags-rows::-moz-tree-cell-text
 {
     color: #000000;
 }
 
-#gamefox-tags-rows::-moz-tree-cell-text(container),
-#gamefox-tracked-rows::-moz-tree-cell-text(container)
+#gamefox-tags-rows::-moz-tree-cell-text(container)
 {
     padding-left: 4px;
     font-weight: bold;
     color: #DDDDDD;
 }
 
-#gamefox-tags-rows::-moz-tree-cell-text(selected, container),
-#gamefox-tracked-rows::-moz-tree-cell-text(selected, container)
+#gamefox-tags-rows::-moz-tree-cell-text(selected, container)
 {
     color: #000000;
 }
 
-/* CSS */
+/* Checkboxes */
 treechildren::-moz-tree-checkbox
 {
     list-style-image: url('chrome://gamefox/skin/cbox-empty.png');
