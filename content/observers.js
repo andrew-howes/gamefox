@@ -17,162 +17,22 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFtagTreeObserver =
+function GFobserver(domain, func)
 {
-  register: function()
-  {
-    this.prefs = Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefService)
-        .getBranch('gamefox.');
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('tags', this, false);
-    window.addEventListener('unload', this.unregister, false);
-  },
+  // the event listener makes everything we need stay in memory, so it is not
+  // necessary to maintain an explicit reference to this object
+  var branch = Cc['@mozilla.org/preferences-service;1']
+    .getService(Ci.nsIPrefService)
+    .getBranch('gamefox.');
+  branch.QueryInterface(Ci.nsIPrefBranch2);
 
-  unregister: function()
-  {
-    GFtagTreeObserver.prefs.removeObserver('tags', GFtagTreeObserver);
-  },
+  this.observe = func;
 
-  observe: function()
-  {
-    GFtags.populate(2);
-  }
-};
+  branch.addObserver(domain, this, false);
 
-var GFsidebarAccountsObserver =
-{
-  register: function()
-  {
-    this.prefs = Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefService)
-        .getBranch('gamefox.');
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('accounts', this, false);
-    window.addEventListener('unload', this.unregister, false);
-  },
-
-  unregister: function()
-  {
-    GFsidebarAccountsObserver.prefs.removeObserver('accounts', GFsidebarAccountsObserver);
-  },
-
-  observe: function()
-  {
-    GFsidebar.populateAccounts();
-  }
-};
-
-var GFsidebarFavoritesObserver =
-{
-  register: function()
-  {
-    this.prefs = Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefService)
-        .getBranch('gamefox.');
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('favorites.serialized', this, false);
-    window.addEventListener('unload', this.unregister, false);
-  },
-
-  unregister: function()
-  {
-    GFsidebarFavoritesObserver.prefs.removeObserver('favorites.serialized', GFsidebarFavoritesObserver);
-  },
-
-  observe: function()
-  {
-    GFfavorites.populateFavorites(document,
-        document.getElementById('favorites-menu'));
-  }
-};
-
-var GFuserlistObserver =
-{
-  register: function()
-  {
-    this.prefs = Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefService)
-        .getBranch('gamefox.');
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('userlist.serialized', this, false);
-    window.addEventListener('unload', this.unregister, false);
-  },
-
-  unregister: function()
-  {
-    GFuserlistObserver.prefs.removeObserver('userlist.serialized', GFuserlistObserver);
-  },
-
-  observe: function()
-  {
-    GFhighlightingOptions.updateUsers();
-  }
-};
-
-var GFtrackedTreeObserver =
-{
-  register: function()
-  {
-    this.prefs = Cc['@mozilla.org/preferences-service;1']
-      .getService(Ci.nsIPrefService)
-      .getBranch('gamefox.');
-    this.prefs.QueryInterface(Ci.nsIPrefBranch2);
-    this.prefs.addObserver('tracked', this, false);
-    window.addEventListener('unload', this.unregister, false);
-  },
-
-  unregister: function()
-  {
-    GFtrackedTreeObserver.prefs.removeObserver('tracked', GFtrackedTreeObserver);
-  },
-
-  observe: function()
-  {
-    var oldList = GFutils.cloneObj(GFtracked.list);
-    GFtracked.read();
-
-    // Remove topics and change properties
-    for (var i = 0; i < gTrackedWindow._view.visibleData.length; i++)
-    {
-      var tagid = gTrackedWindow._view.visibleData[i][0][0].split(/,/);
-          tagid[0] = parseInt(tagid[0]);
-          tagid[1] = parseInt(tagid[1]);
-
-      if (!GFtracked.list[tagid[0]] 
-          || !GFtracked.list[tagid[0]].topics[tagid[1]])
+  var obj = this;
+  window.addEventListener('unload', function()
       {
-        gTrackedWindow._view.visibleData.splice(i, 1);
-        gTrackedWindow._tree.treeBoxObject.rowCountChanged(i + 1, -1);
-      }
-      else
-      {
-        var property = '';
-        if (GFtracked.list[tagid[0]].topics[tagid[1]].deleted)
-          property = 'deleted';
-        else if (GFtracked.list[tagid[0]].topics[tagid[1]].hold)
-          property = 'hold';
-
-        if (property != gTrackedWindow._view.visibleData[i][0][2])
-        {
-          gTrackedWindow._view.visibleData[i][0][2] = property;
-          gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
-        }
-      }
-    };
-
-    // Add topics
-    for (var i in GFtracked.list)
-    {
-      for (var j in GFtracked.list[i].topics)
-      {
-        // topic already exists in tree
-        if (oldList[i] && oldList[i].topics[j]) continue;
-
-        var topic = GFtracked.list[i].topics[j];
-        gTrackedWindow.addTopic(i + ',' + j, topic.title, '', topic.lastPost);
-      }
-    }
-    gTrackedWindow.sort('lastPost', false);
-  }
-};
+        branch.removeObserver(domain, obj);
+      }, false);
+}

@@ -20,8 +20,9 @@
 
 var GFsidebar =
 {
-  prefs: Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefService)
-           .getBranch('gamefox.sidebar.'),
+  prefs: Cc['@mozilla.org/preferences-service;1']
+    .getService(Ci.nsIPrefService)
+    .getBranch('gamefox.sidebar.'),
 
   onload: function()
   {
@@ -65,19 +66,23 @@ var GFsidebar =
 
     // accounts
     GFsidebar.populateAccounts();
-    GFsidebarAccountsObserver.register();
+    new GFobserver('accounts', GFsidebar.populateAccounts);
 
     // favorites
+    GFsidebar.updateFavorites();
+    new GFobserver('favorites.serialized', GFsidebar.updateFavorites);
+  },
+
+  updateFavorites: function()
+  {
     GFfavorites.populateFavorites(document,
         document.getElementById('favorites-menu'));
-    GFsidebarFavoritesObserver.register();
   },
 
   populateAccounts: function()
   {
     var accountList, username, item, firstAccount;
-    var currentAccount = Cc['@mozilla.org/preferences-service;1']
-      .getService(Ci.nsIPrefBranch).getCharPref('gamefox.accounts.current');
+    var currentAccount = GFlib.prefs.getCharPref('accounts.current');
 
     accountList = document.getElementById('accounts-menu');
     if (!accountList)

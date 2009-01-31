@@ -24,7 +24,7 @@
 
 <page id="gamefox-tracked-page"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  onload="gTrackedWindow.init(); GFtrackedTreeObserver.register();">
+  onload="gTrackedWindow.init();">
   <script type="application/x-javascript"
     src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript"

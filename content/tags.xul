@@ -24,7 +24,7 @@
 <!DOCTYPE page SYSTEM "chrome://gamefox/locale/tags.dtd">
 
 <page id="gamefox-tags-page" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  onload="GFtags.populate(2);GFtagTreeObserver.register();">
+  onload="GFtags.init();">
   <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>

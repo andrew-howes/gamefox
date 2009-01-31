@@ -44,6 +44,17 @@ var GFtags =
         .setCharPref('gamefox.tags', tags);
   },
 
+  init: function()
+  {
+    this.populateTree();
+    new GFobserver('tags', this.populateTree);
+  },
+
+  populateTree: function()
+  {
+    GFtags.populate(2);
+  },
+
   populate: function(method)
   {
     // context menu: method == 1

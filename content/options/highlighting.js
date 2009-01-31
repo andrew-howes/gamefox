@@ -24,7 +24,7 @@ var GFhighlightingOptions =
     this.populate();
 
     // watch for changes caused by menuCheckChange
-    GFuserlistObserver.register();
+    new GFobserver('userlist.serialized', this.updateUsers);
   },
 
   makeGroupbox: function(id, name, color, users)

@@ -62,6 +62,57 @@ var gTrackedWindow =
     this._tree.view = this._view;
 
     this.sort('lastPost', false);
+
+    new GFobserver('tracked', this.update);
+  },
+
+  update: function()
+  {
+    var oldList = GFutils.cloneObj(GFtracked.list);
+    GFtracked.read();
+
+    // Remove topics and change properties
+    for (var i = 0; i < gTrackedWindow._view.visibleData.length; i++)
+    {
+      var tagid = gTrackedWindow._view.visibleData[i][0][0].split(/,/);
+          tagid[0] = parseInt(tagid[0]);
+          tagid[1] = parseInt(tagid[1]);
+
+      if (!GFtracked.list[tagid[0]] 
+          || !GFtracked.list[tagid[0]].topics[tagid[1]])
+      {
+        gTrackedWindow._view.visibleData.splice(i, 1);
+        gTrackedWindow._tree.treeBoxObject.rowCountChanged(i + 1, -1);
+      }
+      else
+      {
+        var property = '';
+        if (GFtracked.list[tagid[0]].topics[tagid[1]].deleted)
+          property = 'deleted';
+        else if (GFtracked.list[tagid[0]].topics[tagid[1]].hold)
+          property = 'hold';
+
+        if (property != gTrackedWindow._view.visibleData[i][0][2])
+        {
+          gTrackedWindow._view.visibleData[i][0][2] = property;
+          gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
+        }
+      }
+    };
+
+    // Add topics
+    for (var i in GFtracked.list)
+    {
+      for (var j in GFtracked.list[i].topics)
+      {
+        // topic already exists in tree
+        if (oldList[i] && oldList[i].topics[j]) continue;
+
+        var topic = GFtracked.list[i].topics[j];
+        gTrackedWindow.addTopic(i + ',' + j, topic.title, '', topic.lastPost);
+      }
+    }
+    gTrackedWindow.sort('lastPost', false);
   },
 
   sort: function(property, ascending)
