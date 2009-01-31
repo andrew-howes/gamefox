@@ -171,7 +171,7 @@ var GFsig =
   {
     var doc = GFlib.getDocument(event);
 
-    var sig = doc.getElementsByName('sig')[0].textContent;
+    var sig = doc.getElementsByName('sig')[0].value;
     var sigPref = eval(GFutils.getString('signature.serialized'));
 
     sigPref[0].body = sig;
