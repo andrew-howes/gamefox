@@ -106,6 +106,10 @@ Container for GameFOX action links applied to message headers.
 
 Contains topic pagination text.
 
+<h3 id="span_gamefox-signature">span.gamefox-signature</h3>
+
+Contains signatures in posts on the message list.
+
 <h3 id="span_gamefox-status">span.gamefox-status</h3>
 
 Empty span element used for topic icons of a sticky or closed topic. (v0.6.7)
