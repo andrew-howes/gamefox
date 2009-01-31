@@ -45,6 +45,8 @@ var GFcss =
         ['bundled', 'ricapar.css', 'Classic',
               'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
               'GameFAQs stylesheets to use.', 'Ricapar', false],
+        ['bundled', 'hide-signatures.css', 'Hide Signatures',
+              'Hides signatures in posts and shows them again when hovered over.', '', false],
         ['bundled', 'status-default.css', 'Status icons (normal)',
               'Only show topic status icons for closed/sticky topics. This CSS ' +
               'conflicts with "Status icons (classic)".', '', false],

@@ -654,6 +654,10 @@ var GameFOX =
         if (msgnum == 1 && GFlib.prefs.getIntPref('msgSortOrder') == 1)
           tc = username;
 
+        // Element for sigs
+        td[i + 1].innerHTML = td[i + 1].innerHTML.replace(/---(<br>.*){0,2}\n$/,
+            '<span class="gamefox-signature">---$1</span>');
+
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
         msgLinks.className = 'gamefox-message-links';

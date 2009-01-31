@@ -1,0 +1,7 @@
+@-moz-document domain(gamefaqs.com)
+{
+    .gamefox-signature { font-size: 0; }
+    .gamefox-signature:before { content: '[hover to show signature]'; font-size: 11px; color: #888; }
+    .gamefox-signature:hover { font-size: inherit; display: block; }
+    .gamefox-signature:hover:before { content: ''; }
+}

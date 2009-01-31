@@ -22,6 +22,7 @@
         - "Save to GameFAQs" button to save your GameFOX signature to GameFAQs
     * Ability to highlight topics or posts which have certain words in the
       title or message
+    * New CSS: Hide Signatures
 
 2008-12-26:
     * version 0.6.9
