@@ -53,10 +53,17 @@
         hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
         ondblclick="GFstyleOptions.showDesc(event);" style="height: 21em;">
         <treecols>
-          <treecol label="&name.label;" primary="true" flex="1"/>
-          <treecol label="&desc.label;" width="100"/>
-          <treecol label="&author.label;" width="100"/>
-          <treecol label="&enabled.label;" type="checkbox" editable="true"/>
+          <treecol label="&name.label;" id="styleTreeName" primary="true" flex="1"
+            persist="width"/>
+          <splitter class="tree-splitter"/>
+          <treecol label="&desc.label;" id="styleTreeDesc" width="100"
+            persist="width"/>
+          <splitter class="tree-splitter"/>
+          <treecol label="&author.label;" id="styleTreeAuthor" width="100"
+            persist="width"/>
+          <splitter class="tree-splitter"/>
+          <treecol label="&enabled.label;" id="styleTreeEnabled" type="checkbox" editable="true"
+            persist="width"/>
         </treecols>
 
         <treechildren/>
