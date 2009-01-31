@@ -19,46 +19,59 @@
 
 var GFsigOptions =
 {
+  _menu    : null,
+  _textbox : null,
+  _sigs    : null,
+
   init: function()
   {
-    var menu = document.getElementById('sig-menu');
-    var sigs = eval(GFutils.getString('signature.serialized'));
+    this._menu = document.getElementById('sig-menu');
+    this._textbox = document.getElementById('sig-body');
+    this._read();
 
     // default sig is initially selected
-    this.hideCriteriaForm();
-    document.getElementById('sig-body').value = sigs[0].body;
+    this._hideCriteriaForm();
+    this._textbox.value = this._sigs[0].body;
 
     // loop through sigs and add them to menulist
-    for (var i = 1; i < sigs.length; i++)
-      menu.insertItemAt(i,
-          GFsig.getCriteriaString(sigs[i].accounts, sigs[i].boards)
-          + GFsig.formatSigPreview(sigs[i].body));
+    for (var i = 1; i < this._sigs.length; i++)
+      this._menu.insertItemAt(i,
+          GFsig.getCriteriaString(this._sigs[i].accounts, this._sigs[i].boards)
+          + GFsig.formatSigPreview(this._sigs[i].body));
     
-    this.updateCharCounts();
+    this._updateCharCounts();
 
     // watch for external changes to sigs
-    new GFobserver('signature.serialized', this.observe);
+    new GFobserver('signature.serialized', this);
   },
 
   observe: function()
   {
-    var sigs = eval(GFutils.getString('signature.serialized'));
-    var menu = document.getElementById('sig-menu');
-    var textbox = document.getElementById('sig-body');
-    var sig = sigs[menu.selectedIndex].body;
+    this._read();
+    var sig = this._sigs[this._menu.selectedIndex].body;
 
-    if (textbox.value != sig)
-      textbox.value = sig;
+    if (this._textbox.value != sig)
+      this._textbox.value = sig;
   },
 
-  hideCriteriaForm: function()
+  _read: function()
+  {
+    this._sigs = eval(GFutils.getString('signature.serialized'));
+  },
+
+  _save: function()
+  {
+    GFutils.setString('signature.serialized', this._sigs.toSource());
+  },
+
+  _hideCriteriaForm: function()
   {
     document.getElementById('sig-criteria-label').style
       .setProperty('visibility', 'hidden', null);
     document.getElementById('sig-criteria').style
       .setProperty('visibility', 'hidden', null);
   },
-  showCriteriaForm: function()
+  _showCriteriaForm: function()
   {
     document.getElementById('sig-criteria-label').style
       .setProperty('visibility', '', null);
@@ -66,11 +79,9 @@ var GFsigOptions =
       .setProperty('visibility', '', null);
   },
 
-  updateCharCounts: function()
+  _updateCharCounts: function()
   {
-    var sigLength =
-      GFutils.specialCharsEncode(document.getElementById('sig-body').value)
-      .length;
+    var sigLength = GFutils.specialCharsEncode(this._textbox.value).length;
     var sigChars = document.getElementById('sig-chars');
 
     sigChars.value = sigLength + ' characters';
@@ -85,89 +96,83 @@ var GFsigOptions =
 
   addSig: function()
   {
-    var menu = document.getElementById('sig-menu');
-
-    var index = GFsig.addSig();
-    menu.insertItemAt(index, 'Signature', '');
-    menu.selectedIndex = index;
+    var idx = GFsig.addSig();
+    this._menu.insertItemAt(idx, 'Signature', '');
+    this._menu.selectedIndex = idx;
     this.changeSig();
   },
 
   changeSig: function()
   {
-    var menu = document.getElementById('sig-menu');
     var accounts = document.getElementById('sig-criteria-accounts');
     var boards = document.getElementById('sig-criteria-boards');
-    var sig = document.getElementById('sig-body');
 
-    if (menu.selectedIndex == 0)
+    if (this._menu.selectedIndex == 0)
     {
       // default sig has no accounts/boards and can't be deleted
-      this.hideCriteriaForm();
+      this._hideCriteriaForm();
       document.getElementById('sig-delete').disabled = true;
 
       accounts.value = '';
       boards.value = '';
-      sig.value = GFsig.getSigById(0).body;
+      this._textbox.value = GFsig.getSigById(0).body;
     }
     else
     {
       // other sigs have accounts/boards and can be deleted
-      this.showCriteriaForm();
+      this._showCriteriaForm();
       document.getElementById('sig-delete').disabled = false;
 
-      var sigData = GFsig.getSigById(menu.selectedIndex);
+      var sigData = GFsig.getSigById(this._menu.selectedIndex);
       accounts.value = sigData.accounts;
       boards.value = sigData.boards;
-      sig.value = sigData.body;
+      this._textbox.value = sigData.body;
     }
 
-    this.updateCharCounts();
+    this._updateCharCounts();
   },
 
   deleteSig: function()
   {
-    var menu = document.getElementById('sig-menu');
-    var index = menu.selectedIndex;
+    var idx = this._menu.selectedIndex;
 
     // the default sig should never be deleted
-    if (menu.selectedIndex == 0)
+    if (this._menu.selectedIndex == 0)
       return;
 
     // switch to closest signature
-    var lastIndex = menu.getElementsByTagName('menupopup')[0]
+    var lastIndex = this._menu.getElementsByTagName('menupopup')[0]
       .childNodes.length - 1;
-    if (index == lastIndex)
-      menu.selectedIndex = index - 1;
+    if (idx == lastIndex)
+      this._menu.selectedIndex = idx - 1;
     else
-      menu.selectedIndex = index + 1;
+      this._menu.selectedIndex = idx + 1;
     this.changeSig();
 
     // remove it
-    GFsig.deleteSigById(index);
-    menu.removeItemAt(index);
+    GFsig.deleteSigById(idx);
+    this._menu.removeItemAt(idx);
   },
 
   updatePref: function(event)
   {
-    var menu = document.getElementById('sig-menu');
-    var sigs = eval(GFutils.getString('signature.serialized'));
-    var idx = menu.selectedIndex;
+    this._read();
+    var idx = this._menu.selectedIndex;
 
     switch (event.id)
     {
-      case 'sig-criteria-accounts': sigs[idx].accounts = event.value; break;
-      case 'sig-criteria-boards': sigs[idx].boards = event.value; break;
-      case 'sig-body': sigs[idx].body = event.value; break;
+      case 'sig-criteria-accounts': this._sigs[idx].accounts = event.value; break;
+      case 'sig-criteria-boards': this._sigs[idx].boards = event.value; break;
+      case 'sig-body': this._sigs[idx].body = event.value; break;
     }
-    GFutils.setString('signature.serialized', sigs.toSource());
+    this._save();
 
     if (idx != 0) // don't set default
-      menu.selectedItem.label =
-        GFsig.getCriteriaString(sigs[idx].accounts, sigs[idx].boards)
-        + GFsig.formatSigPreview(sigs[idx].body);
+      this._menu.selectedItem.label =
+        GFsig.getCriteriaString(this._sigs[idx].accounts, this._sigs[idx].boards)
+        + GFsig.formatSigPreview(this._sigs[idx].body);
 
-    this.updateCharCounts();
+    this._updateCharCounts();
   },
 
   importSig: function()

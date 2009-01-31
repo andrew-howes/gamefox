@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-function GFobserver(domain, func)
+function GFobserver(domain, observer)
 {
   // the event listener makes everything we need stay in memory, so it is not
   // necessary to maintain an explicit reference to this object
@@ -26,11 +26,18 @@ function GFobserver(domain, func)
     .getBranch('gamefox.');
   branch.QueryInterface(Ci.nsIPrefBranch2);
 
-  this.observe = func;
+  if (typeof observer == 'function')
+  {
+    this.observe = observer;
+    branch.addObserver(domain, observer, false);
+    var obj = this;
+  }
+  else // typeof observer == 'object'
+  {
+    branch.addObserver(domain, observer, false);
+    var obj = observer;
+  }
 
-  branch.addObserver(domain, this, false);
-
-  var obj = this;
   window.addEventListener('unload', function()
       {
         branch.removeObserver(domain, obj);
