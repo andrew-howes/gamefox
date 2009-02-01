@@ -25,8 +25,6 @@ var GFcss =
   init: function()
   {
     var defaults = [
-        ['gamefox', 'gamefox-ads.css', 'Ad blocking',
-              'Hides ads. Best used with "block ad servers" enabled.', '', true],
         ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar',
               'A classic style for the GameFOX sidebar.', '', false],
         ['gamefox', 'gamefox-essentials.css', 'Essentials',
@@ -37,6 +35,8 @@ var GFcss =
               'Makes QuickPost look pretty.', '', true],
         ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois',
               'Makes QuickWhois look pretty.', '', true],
+        ['bundled', 'gamefox-ads.css', 'Ad blocking',
+              'Hides ads. Best used with "block ad servers" enabled.', '', true],
         ['bundled', 'ascii-art-font.css', 'ASCII art font',
               'Increases the font size of messages to make ASCII art look better.',
               '', false],
