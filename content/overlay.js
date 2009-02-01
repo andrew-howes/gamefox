@@ -626,7 +626,7 @@ var GameFOX =
       var msgnumCond = !onDetail && GFlib.prefs.getBoolPref('elements.msgnum');
       var msgnumStyle = GFlib.prefs.getIntPref('elements.msgnum.style');
 
-      var tcCond = !onDetail && GFlib.prefs.getBoolPref('elements.marktc');
+      var tcMarkerCond = !onDetail && GFlib.prefs.getBoolPref('elements.marktc');
       var tcMarker = '\xA0' + GFutils.getString('elements.marktc.marker');
       var tc = doc.location.search.match(/\btc=([^&<>"]+)/);
       if (tc)
@@ -730,7 +730,7 @@ var GameFOX =
         }
 
         // Distinguish posts from the topic creator
-        if (tcCond && tc == username)
+        if (tcMarkerCond && tc == username)
         {
           var span = doc.createElement('span');
           span.className = 'gamefox-tc-label';
@@ -892,17 +892,21 @@ var GameFOX =
       doc.gamefox.msgnum = msgnum;
 
       // Add TC to page links
-      if (tc && pageJumper)
+      if (pageJumper)
       {
         var tcParam = GFutils.tcParam(tc);
-        var pageJumperTop = doc.evaluate('div[@class="pages"]', userNav.parentNode,
-            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        var links = GFutils.mergeArray(pageJumperTop.getElementsByTagName('a'),
-            pageJumper.getElementsByTagName('a'));
-        for (var i = 0; i < links.length; i++)
+        if (tcParam)
         {
-          if (links[i].search.indexOf('page') != -1)
-            links[i].search += tcParam;
+          var pageJumperTop = doc.evaluate('div[@class="pages"]', userNav.parentNode,
+              null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          var links = GFutils.mergeArray(
+              pageJumperTop ? pageJumperTop.getElementsByTagName('a') : [],
+              pageJumper.getElementsByTagName('a'));
+          for (var i = 0; i < links.length; i++)
+          {
+            if (links[i].search.indexOf('page') != -1)
+              links[i].search += tcParam;
+          }
         }
       }
 
