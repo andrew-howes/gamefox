@@ -628,7 +628,7 @@ var GameFOX =
 
       var tcCond = !onDetail && GFlib.prefs.getBoolPref('elements.marktc');
       var tcMarker = '\xA0' + GFutils.getString('elements.marktc.marker');
-      var tc = tcCond ? doc.location.search.match(/\btc=([^&<>"]+)/) : null;
+      var tc = doc.location.search.match(/\btc=([^&<>"]+)/);
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
 
