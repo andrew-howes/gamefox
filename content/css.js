@@ -25,7 +25,7 @@ var GFcss =
   init: function()
   {
     var defaults = [
-        ['gamefox', 'gamefox-sidebar.css', 'Classic Sidebar',
+        ['gamefox', 'gamefox-sidebar.css', 'Classic sidebar',
               'A classic style for the GameFOX sidebar.', '', false],
         ['gamefox', 'gamefox-essentials.css', 'Essentials',
               'Works with some of GameFOX\'s features. Should always be enabled.', '', true],
@@ -40,12 +40,12 @@ var GFcss =
         ['bundled', 'ascii-art-font.css', 'ASCII art font',
               'Increases the font size of messages to make ASCII art look better.',
               '', false],
-        ['bundled', 'capitalized-message-links.css', 'Capitalized Message Links',
+        ['bundled', 'capitalized-message-links.css', 'Capitalized message links',
               'Capitalizes the links in message headers.', '', false],
         ['bundled', 'ricapar.css', 'Classic',
               'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
               'GameFAQs stylesheets to use.', 'Ricapar', false],
-        ['bundled', 'hide-signatures.css', 'Hide Signatures',
+        ['bundled', 'hide-signatures.css', 'Hide signatures',
               'Hides signatures in posts and shows them again when hovered over.', '', false],
         ['bundled', 'status-default.css', 'Status icons (normal)',
               'Only show topic status icons for closed/sticky topics. This CSS ' +
