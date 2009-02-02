@@ -36,10 +36,6 @@
     </hbox>
 
     <hbox align="center">
-      <label value="&format.label;"/>
-
-      <spacer width="8px"/>
-
       <label value="&prefix.label;"/>
       <textbox preference="paging.prefix" size="5" flex="30"/>
 

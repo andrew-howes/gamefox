@@ -7,7 +7,6 @@
 <!ENTITY locationBelow.label "Below the topic title">
 <!ENTITY locationNewRow.label "In a new row below the topic title">
 
-<!ENTITY format.label "Format:">
 <!ENTITY prefix.label "Prefix:">
 <!ENTITY delimiter.label "Delimiter:">
 <!ENTITY suffix.label "Suffix:">
