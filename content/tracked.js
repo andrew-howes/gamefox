@@ -93,6 +93,8 @@ var GFtracked =
         {
           var ids = GFutils.parseQueryString(items[i].
               getElementsByTagName('link')[0].textContent);
+          var bid = ids.board;
+          var tid = ids.topic;
           var title = items[i].getElementsByTagName('title')[0].textContent;
 
           // keep hold status
@@ -107,7 +109,8 @@ var GFtracked =
             title: title.substr(0, title.lastIndexOf('-') - 2),
             age: title.substr(title.lastIndexOf('-') + 2),
             hold: hold,
-            deleted: false
+            deleted: false,
+            newPosts: false
           };
           var data = new Array(
               'Last Post', 'lastPost',
@@ -121,6 +124,12 @@ var GFtracked =
             topic[data[j + 1]] = (new RegExp(data[j] + ': ([^\\0]*?)\n')).
               exec(desc)[1].replace(/<br \/>/g, '').GFtrim();
           }
+
+          // check for new posts
+          if (GFtracked.list[bid] && GFtracked.list[bid].topics[tid]
+              && topic.lastPost != GFtracked.list[bid].topics[tid]
+                .lastPost)
+            topic.newPosts = true;
 
           if (!list[ids['board']])
             list[ids['board']] = {name: topic['board'], topics: {}};

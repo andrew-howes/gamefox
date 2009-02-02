@@ -43,7 +43,9 @@ var gTrackedWindow =
     {
       // hold or deleted property to add the icon with CSS
       var property = '';
-      if (this.visibleData[idx].deleted)
+      if (this.visibleData[idx].newPosts)
+        property = 'new';
+      else if (this.visibleData[idx].deleted)
         property = 'deleted';
       else if (this.visibleData[idx].hold)
         property = 'hold';
@@ -82,6 +84,7 @@ var gTrackedWindow =
               age       : topic.age,
               hold      : topic.hold,
               deleted   : topic.deleted,
+              newPosts  : topic.newPosts,
               lastPost  : topic.lastPost,
               msgs      : topic.msgs };
     return t;
