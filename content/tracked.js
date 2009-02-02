@@ -216,16 +216,11 @@ var GFtracked =
     {
       if (request.readyState == 4)
       {
-        if (GFtracked.trackResponse(request.responseText, 'tracktopic'))
-          var result = 'start';
-        else if (GFtracked.trackResponse(request.responseText, 'stoptrack'))
-          var result = 'stop';
-        else
-          var result = 'error';
+        var result = GFtracked.trackResponse(request.responseText);
 
-        if (result != 'error')
+        if (result[0])
         {
-          if (result == 'start')
+          if (result[1] == 'tracktopic')
           {
             link.textContent = 'Stop Tracking';
             link.href = link.href.replace(/tracktopic/, 'stoptrack');
@@ -238,7 +233,8 @@ var GFtracked =
           GFtracked.updateList();
         }
         else
-          GFlib.alert('An error occurred tracking or stopping tracking of this topic.');
+          GFlib.alert('An error occurred while tracking or untracking this '
+              + 'topic.\n\n' + result[1]);
       }
     }
     request.send(null);
@@ -287,20 +283,15 @@ var GFtracked =
     {
       if (request.readyState == 4)
       {
-        if (GFtracked.trackResponse(request.responseText, 'tracktopic'))
-          var result = 'start';
-        else if (GFtracked.trackResponse(request.responseText, 'stoptrack'))
-          var result = 'stop';
-        else
-          var result = 'error';
+        var result = GFtracked.trackResponse(request.responseText);
 
-        if (result != 'error')
+        if (result[0])
         {
           GFtracked.updateList();
 
           if (GFlib.onPage(doc, 'messages'))
           {
-            if (result == 'start')
+            if (result[1] == 'tracktopic')
             {
               trackLink.textContent = 'Stop Tracking';
               trackLink.href = trackLink.href.replace(/tracktopic/, 'stoptrack');
@@ -313,7 +304,8 @@ var GFtracked =
           }
         }
         else
-          GFlib.alert('An error occurred tracking or stopping tracking of this topic.');
+          GFlib.alert('An error occurred while tracking or untracking this '
+              + 'topic.\n\n' + result[1]);
       }
     }
     request.send(null);
@@ -365,18 +357,23 @@ var GFtracked =
     }
   },
 
-  trackResponse: function(str, action)
+  trackResponse: function(str)
   {
-    switch (action)
-    {
-      case 'tracktopic':
-        return str.indexOf('<div id="board_wrap">\n\n\n<p>You are now'
-            + ' tracking this topic.</p>') != -1;
-      case 'stoptrack':
-        return str.indexOf('<div id="board_wrap">\n\n\n<p>You are no'
-            + ' longer tracking this topic.</p>') != -1;
-    }
+    // archived topic
+    if (str.indexOf('Topic List</a>\n\t\t\t\t| Topic Archived') != -1)
+      return [false, 'This topic is archived.'];
 
-    return false;
+    // start tracking
+    if (str.indexOf('<div id="board_wrap">\n\n\n<p>You are now tracking this'
+          + ' topic.</p>') != -1)
+      return [true, 'tracktopic'];
+
+    // stop tracking
+    if (str.indexOf('<div id="board_wrap">\n\n\n<p>You are no longer tracking'
+          + ' this topic.</p>') != -1)
+      return [true, 'stoptrack'];
+
+    // generic error
+    return [false, ''];
   }
 };

@@ -110,19 +110,26 @@ var GFcontext =
     }
     else if (GFlib.onPage(doc, 'messages'))
     {
+      var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]'
+          + '/div[@class="user"]', doc.getElementById('board_wrap'), null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
       // Tag topic
       if (doc.getElementsByTagName('h1').length > 1)
         hideTag = false;
 
       // Track topic
-      hideTrack = false;
-      var topic = GFutils.parseQueryString(doc.location.search);
-      if (GFtracked.isTracked(topic['board'], topic['topic']))
-        document.getElementById('gamefox-context-track')
-          .label = strbundle.getString('stopTrack');
-      else
-        document.getElementById('gamefox-context-track')
-          .label = strbundle.getString('trackTopic');
+      if (userNav.innerHTML.indexOf('Topic Archived') == -1)
+      { // archived topics can't be tracked
+        hideTrack = false;
+        var topic = GFutils.parseQueryString(doc.location.search);
+        if (GFtracked.isTracked(topic['board'], topic['topic']))
+          document.getElementById('gamefox-context-track')
+            .label = strbundle.getString('stopTrack');
+        else
+          document.getElementById('gamefox-context-track')
+            .label = strbundle.getString('trackTopic');
+      }
 
       // Quoting, user groups, filtering and delete
       var msgComponents = GFutils.getMsgComponents(target, doc);
