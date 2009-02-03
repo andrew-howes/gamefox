@@ -85,15 +85,18 @@ var GFcontext =
         {
           hideTag = false;
 
-          hideTrack = false;
-          var topic = GFutils.parseQueryString(node.parentNode.cells[1].
-              getElementsByTagName('a')[0].href);
-          if (GFtracked.isTracked(topic['board'], topic['topic']))
-            document.getElementById('gamefox-context-track')
-              .label = strbundle.getString('stopTrack');
-          else
-            document.getElementById('gamefox-context-track')
-              .label = strbundle.getString('trackTopic');
+          if (node.parentNode.cells[0].innerHTML.indexOf('archived') == -1)
+          {
+            hideTrack = false;
+            var topic = GFutils.parseQueryString(node.parentNode.cells[1].
+                getElementsByTagName('a')[0].href);
+            if (GFtracked.isTracked(topic['board'], topic['topic']))
+              document.getElementById('gamefox-context-track')
+                .label = strbundle.getString('stopTrack');
+            else
+              document.getElementById('gamefox-context-track')
+                .label = strbundle.getString('trackTopic');
+          }
 
           hidePages = false;
 
