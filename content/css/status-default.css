@@ -21,6 +21,14 @@
     margin-right: 3px;
   }
 
+  .topic_archived-start
+  {
+    background-image: url(http://www.gamefaqs.com/images/default/topic_archived.gif);
+    width: 18px;
+    height: 19px;
+    margin-right: 3px;
+  }
+
   .sticky-start
   {
     background-image: url(http://www.gamefaqs.com/images/default/sticky.gif);
@@ -37,7 +45,7 @@
     margin-right: 3px;
   }
 
-  .topic_closed-end, .sticky-end, .sticky_closed-end
+  .topic_closed-end, .sticky-end, .sticky_closed-end, .topic_archived-end
   {
     display: none;
   }

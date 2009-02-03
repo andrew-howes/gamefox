@@ -13,7 +13,7 @@
     display: -moz-inline-box;
   }
 
-  .topic_closed-end, .sticky_closed-end
+  .topic_closed-end, .sticky_closed-end, .topic_archived-end
   {
     background-image: url(http://www.gamefaqs.com/images/closed.gif);
     width: 11px;
@@ -29,7 +29,7 @@
     margin-right: 3px;
   }
 
-  .topic_closed-start, .sticky-end
+  .topic_closed-start, .sticky-end, .topic_archived-start
   {
     display: none;
   }
