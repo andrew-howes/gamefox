@@ -363,13 +363,15 @@ var GFutils =
   },
 
   // Convert GameFAQs timestamps to a date object
-  strtotime: function(str)
+  strtotime: function(str, year)
   {
-    var year = new Date().getFullYear();
+    var year = year ? year : new Date().getFullYear();
     var time = str.split(/(\/| |:|AM|PM)/);
     // Convert to 24-hour scale
     if (time[7] == 'PM' && time[4] < 12)
       time[4] = parseInt(time[4]) + 12;
+    if (time[7] == 'AM' && time[4] == 12)
+      time[4] = 0;
 
     return new Date(year, time[0] - 1, time[2], time[4], time[6]);
   },

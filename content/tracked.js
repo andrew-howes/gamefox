@@ -84,6 +84,9 @@ var GFtracked =
     {
       if (request.readyState == 4)
       {
+        var year = new Date().getFullYear();
+        var prevLastPost = 0;
+
         var xmlobject = (new DOMParser()).parseFromString(request.
             responseText, 'text/xml');
         var items = xmlobject.getElementsByTagName('item');
@@ -124,6 +127,17 @@ var GFtracked =
             topic[data[j + 1]] = (new RegExp(data[j] + ': ([^\\0]*?)\n')).
               exec(desc)[1].replace(/<br \/>/g, '').GFtrim();
           }
+
+          // check for year change
+          if (prevLastPost != 0 &&
+              prevLastPost < GFutils.strtotime(topic.lastPost).getTime())
+          {
+            // this entry is more recent than the last entry, which should
+            // only happen when the year is different
+            --year;
+          }
+          prevLastPost = GFutils.strtotime(topic.lastPost).getTime();
+          topic.lastPostYear = year;
 
           // check for new posts
           if (GFtracked.list[bid] && GFtracked.list[bid].topics[tid]

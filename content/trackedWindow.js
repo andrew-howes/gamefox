@@ -77,16 +77,17 @@ var gTrackedWindow =
 
   makeTopicObject: function(bid, tid, topic)
   {
-    var t = { id        : tid,
-              boardId   : bid,
-              boardName : topic.board,
-              name      : topic.title,
-              age       : topic.age,
-              hold      : topic.hold,
-              deleted   : topic.deleted,
-              newPosts  : topic.newPosts,
-              lastPost  : topic.lastPost,
-              msgs      : topic.msgs };
+    var t = { id           : tid,
+              boardId      : bid,
+              boardName    : topic.board,
+              name         : topic.title,
+              age          : topic.age,
+              hold         : topic.hold,
+              deleted      : topic.deleted,
+              newPosts     : topic.newPosts,
+              lastPost     : topic.lastPost,
+              lastPostYear : topic.lastPostYear,
+              msgs         : topic.msgs };
     return t;
   },
 
@@ -166,13 +167,12 @@ var gTrackedWindow =
     }
     else if (property == 'lastPost')
     {
-      // We have to convert the last post timestamp provided by GameFAQs to
-      // something useful
-      var year = new Date().getFullYear();
       function sortByLastPost(a, b)
       {
-        var d1 = GFutils.strtotime(a.lastPost);
-        var d2 = GFutils.strtotime(b.lastPost);
+        // We have to convert the last post timestamp provided by GameFAQs to
+        // something useful
+        var d1 = GFutils.strtotime(a.lastPost, a.lastPostYear);
+        var d2 = GFutils.strtotime(b.lastPost, b.lastPostYear);
 
         if (d1.getTime() < d2.getTime())
           return -1;
