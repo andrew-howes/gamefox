@@ -119,8 +119,8 @@ var GFcontext =
         hideTag = false;
 
       // Track topic
-      if (userNav.innerHTML.indexOf('Topic Archived') == -1)
-      { // archived topics can't be tracked
+      if (userNav.innerHTML.indexOf('Track Topic') != -1)
+      {
         hideTrack = false;
         var topic = GFutils.parseQueryString(doc.location.search);
         if (GFtracked.isTracked(topic['board'], topic['topic']))
