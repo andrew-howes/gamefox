@@ -13,11 +13,20 @@
     display: -moz-inline-box;
   }
 
-  .topic_closed-end, .sticky_closed-end, .topic_archived-end
+  .topic_closed-end, .sticky_closed-end
   {
     background-image: url(http://www.gamefaqs.com/images/closed.gif);
     width: 11px;
     height: 13px;
+    margin-left: 3px;
+  }
+
+  .topic_archived-end
+  {
+    background-image: url("data:image/gif;base64,R0lGODlhCQALAIAAAJmZmQAAACH5B\
+    AAAAAAALAAAAAAJAAsAAAIVjI%2BgC6b3wmuRLYSdbZJ3LX2dlSEFADs%3D");
+    width: 9px;
+    height: 11px;
     margin-left: 3px;
   }
 
