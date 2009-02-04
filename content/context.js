@@ -116,13 +116,15 @@ var GFcontext =
       var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]'
           + '/div[@class="user"]', doc.getElementById('board_wrap'), null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      userNav = userNav ? userNav.textContent : '';
 
       // Tag topic
       if (doc.getElementsByTagName('h1').length > 1)
         hideTag = false;
 
       // Track topic
-      if (userNav.innerHTML.indexOf('Track Topic') != -1)
+      if (userNav.indexOf('Track Topic') != -1
+          || userNav.indexOf('Stop Tracking') != -1)
       {
         hideTrack = false;
         var topic = GFutils.parseQueryString(doc.location.search);
