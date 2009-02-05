@@ -7,7 +7,7 @@
     * Tracked topics are now integrated into GameFOX
     * Disable all tag-related preferences by default
     * Numerous performance improvements
-    * New CSS: Capitalized Message Links
+    * New CSS: Capitalized message links
     * Add board links above QuickPost on message lists
     * Drop Firefox 1.5 support
     * Add menu item to open the Highlighting options pane from the context menu
@@ -22,7 +22,8 @@
         - "Save to GameFAQs" button to save your GameFOX signature to GameFAQs
     * Ability to highlight topics or posts which have certain words in the
       title or message
-    * New CSS: Hide Signatures
+    * New CSS: Hide signatures
+    * New CSS: Message link icons
 
 2008-12-26:
     * version 0.6.9

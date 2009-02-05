@@ -36,9 +36,11 @@ var GFabout =
                            ['Toad King', 'Calvinjpwalker']]],
       contributors: ['contributorBox',
                     [['Ant P.', 'GFCode'],
+                     ['Awesumness', 'CSS'],
                      ['TakatoMatsuki', 'CSS'],
                      ['Ricapar', 'CSS'],
-                     ['Tango Desktop Project', 'icons']]]
+                     ['Tango Desktop Project', 'icons'],
+                     ['http://www.pinvoke.com/', 'icons']]]
     };
 
     for (var i in sections)

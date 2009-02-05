@@ -47,6 +47,10 @@ var GFcss =
               'GameFAQs stylesheets to use.', 'Ricapar', false],
         ['bundled', 'hide-signatures.css', 'Hide signatures',
               'Hides signatures in posts and shows them again when hovered over.', '', false],
+        ['bundled', 'message-link-icons.css', 'Message link icons',
+              'Converts links in the message header (message detail, delete, filter, quote)'
+                + ' to icons.\n\nIcons courtesy of http://www.pinvoke.com/',
+              'Awesumness', false],
         ['bundled', 'status-default.css', 'Status icons (normal)',
               'Only show topic status icons for closed/sticky topics. This CSS ' +
               'conflicts with "Status icons (classic)".', '', false],

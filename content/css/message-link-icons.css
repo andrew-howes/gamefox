@@ -1,0 +1,66 @@
+@-moz-document domain(www.gamefaqs.com){
+.message [id^="p"] a:not(.name){
+border:1px transparent solid !important;
+display:-moz-inline-box !important;
+display:inline-block !important;
+font-size:0 !important;
+height:16px !important;
+overflow:hidden !important;
+vertical-align:bottom !important;
+width:16px !important;
+background-position:center !important;
+background-repeat:no-repeat !important;
+}
+
+.gamefox-message-links{font-size:0;}
+
+.message [id^="p"] a[href^="/boards/detail.php?"]{background-image:url("data:image/png;base64,iVBO\
+Rw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAndJ\
+REFUeNqkk89rE0EUx99kd9PsZtJqUklS4i8am4otNSgiiKgoWLEqePNvsB68CnryLhQ8efHkVRSF3ksPFhQ0FkpbsfaHUdvUJt\
+md3e7Ozjpvk21TLx588N2d2X2f776ZN0uCIID%2FCTW8DL8BIDGAmCJnJAeEjMnBGalCO29VagaCQCYGP0D48iaAV8ZaBh0xau\
+jq3dMnC6WB%2FgM5mowbWGDT3GbzX9Yvfvi0dovZ3lOZN7mngghO9yQe3B4bLgdCUIdtA6odqYGjmVT%2F4XT%2B9eRsz%2B8t\
+BpFJrPU%2ByBkJZfzm6PFys2HSet0Ex3Hg%2BaNcKBw3GibYjNGrl4plvSs2jsyugfBvjAzlS81Gk5qmBbZth4oimlsWA8e2aa\
+k%2FXUJmZwmBz8%2F2ZWm2Xm%2FsQJ7nQenaS%2FB9AaqmyrsfPlcUBbp79meRkdNnrT0QvCCfG5jEpeqyXMYcePH4kGwIgTsP\
+q7JBrVRsOve4gczuJgoOnHNiOxzqpgNCEFA0PYR1XQc1buxpVUBUgsyugc%2FXaps2szyFKvEkKO1EhCmloCVSewxcx2XIdFYw\
+s7Jcu9BbOEi5XHMUlBqQTCYh%2FpfB%2BtrSOjIdXeCvVha%2BLsjDZcUT3aB1pUIhjMuI5ijPBWtjZXUemQ4DUXUZm6hMTVU8\
+12NagoIqdeXeMlwe%2FxaOUe62x%2BbfTVe4wyaQQZTgz4RfIfEigHb%2BumYM3s8PjhzLFk9kjH1pHZPY1qb9c3G2Vp37uOCx\
+uSfgTb0N3EUI2bYB7kVGqhdiR3IQO3UOSN%2BQdMy3T0UVgu%2BfQbyfBrH0C7dBakOyPDLApRhtqf%2F4g%2FFEWViYZMUfAQ\
+YAFXUwYJv2wUIAAAAASUVORK5CYII%3D") !important;}
+a.gamefox-filter-link{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQ\
+CAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAexJREFUeNqkVL9v2lAQPj%2BDsSXAtg\
+hDsrGwMjGUKWJopEpVyVIlyl5LzdKxQ5VsReqOqvRP6BKqTh3CP9CpqlS1Ekhd6GSIFBzA%2FDD9zvhRQxKWnvT58Pnuu7t391\
+AWiwX9jyT4UavVnnY6nd12u03j8VjabSFE1jAMSqfTs2w261uW5UOP8f672Wx%2BWhFAdlut1sVsNgsJRqMReZ5PrjskIZKUyW\
+TINE0mIsPQyXGev1yrgKVarTqNRuNiMBgg2ANuqd%2F3KJHQCFnJtu2QpF4%2Fe8VEawTT6fQD1ItCoUC9Xg%2BBfWQ1YfJI0w\
+zK5XKUz%2BfJsswwKAiC95JA8MN1XVatYrHooG8EacicQPlKqHU9Raqq0snJk9fw%2B%2BL7Pq0RRNJmklKp5Oi6HpKoqhJqPs\
+ijo8fn%2BP4Z%2BBmfgtiYSkhSLpdPUykmWFZzeLj%2FFvZL4MfmGMU9o2WSq0rl0RvbztPx8cE7vH8Evj%2B4B91ulw%2BS5v\
+O5tP%2BKO%2BHbN54Mj5m1oih3CbYJkzM4mJPEEv3bg3tE7nggDRw4HA7vthCXWHmTaOYjvi%2FQcs23E7Az74LMjL4nso0HDz\
+ESFcgABrJxGRrfAfwWKH0v8uESbph3VTFnjMpO8qUCdtgOPFt2pHyFjzzla%2BAPE8m%2Fgb8CDADoyccD3VeW2gAAAABJRU5E\
+rkJggg%3D%3D") !important;}
+a.gamefox-quote-link{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQC\
+AYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAkBJREFUeNqkU81rE0EUf7NJ0zShcWmaR\
+LTB2g8CJZX2IuIHitCLoaj05EF6axEE%2FwDxUsS7KCLxIggVvIiEXOolpYjGi7ZitY3RVDRmY%2FoV87HZ3ZnxTTbZhqKnPPj\
+tzM7M%2B73fvPeGcM6hHZOgTbOLT%2By6DSSkIgAyITCOSwOInuY%2BmoHYQnxFwe9Q8w5jAJP3qXVA2EinJ3Cx%2F9zsmUNjk\
+6PObp%2BfSHYHAAfODE0t5vPZ97EPmcVHS2pReYHnVy0FyHjY2dN%2F5cS1p9Nu2R8EQ8OYFYsZlTm6XJ6%2BwdPTfQdHJsJvo\
+ldd5c3vD3HrZz0HlMP58NTtiLtbDoJWAmBIwPR9MEndcm8wfOlWRPhYCiiDo94jYyHQylZUykqg6lmo6QoY9A8wpppZl5zQ0es\
+LCR%2BLwGBgq0fhDNVUoKymoGbkgHO6Vy7J0Zgx0PWC6dOi4EduPZkODA2MVqqfgXEd7JLrn2UjWCYlvZoWPlYf4M9C8tlcYlt\
+J5TrsMjhsnv%2BiWijlVuLPE8LHUoA13dgtZB%2B%2FfHCThk5dOH5sYuokMKMRkwOlhl7eyu9kll%2Bn1l4tvK2Vdp9IBDbqi\
+kQrXx6XYDhAYNAHXizpnZm78ZnojUi0RTkmCBTERyzpYvo3bMaWOXz6xUwCcS9hQ34Cs2eleTH%2FVoB7mQJPEoKZbbH4yt7bE\
+b7NThQZlb%2FkubeowoGldT6fWGNV0Z2N6DWE1jJqjXXWVCCS6UR0ITqty2N%2B63Uz3wLdB4a%2BJkE79leAAQD5kA4loJoEI\
+QAAAABJRU5ErkJggg%3D%3D") !important;}
+a.gamefox-delete-link{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQ\
+CAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAb5JREFUeNqkUzFLw0AU%2Fs5UsUUs2V\
+VcKkXcDnFSBJd2sUMREcShS12E0qEuHfMXBOcu%2FoWi4OLa0kEDgp2k0iWoSBxsE%2BN7l0uNVqcGXu%2Fufe%2F77st7qQiC\
+AJM8U5jwSfDPhRAQtBpAjhaLou4DTS9W9Btj3wfkPu4gR4C1d3oq%2FbAw9xvbrVTGMCVASdBt1n6tJm3bRrFald53YY73O6WS\
+7Ha72Dw8VJivBQQ3sSGEuoVsWYVyWXY6HWSzWVw2Gm0GNgoF2e%2F3kU6ncXt11abqOqWbR8QdCQShCyWyXSzK7sODIriui6de\
+D7PJJNzHR0WmnjT5yjGBYfg6SmQxk5HPjqNsGoaBN8dRZGpmc5qtawE1hSedmNEd5%2F3w9RWpqFO%2Br8S1Swz0fuw7CHTDVk\
+xTJj0Pc5SLgnOMBT%2Bn83OMdIu1QYURqfPy0uaIzowN%2FxqjF76%2FlY%2BRr4lI%2BTrHdUwkr0W8kW1qxBKt%2B6RaBVr3\
+phnwyudlyi%2F%2Fgy1prpqCEGKBzikJbK0BxzZw1gJuKPdB8cn9XSdsFTi5A87bIfZO3F4kMK%2BHEE3I0%2BHrhht6QAltnI\
+cyIO6bmPTv%2FCXAACPM0BMSi5H%2BAAAAAElFTkSuQmCC") !important;}
+
+.message [id^="p"] a:not(.name):hover{
+background-color:#aaa !important;
+background-color:rgba(0,0,0,.5) !important;
+border-color:-moz-use-text-color !important;
+-moz-border-radius:3px !important;
+}
+}
