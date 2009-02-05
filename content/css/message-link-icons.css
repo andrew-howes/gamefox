@@ -1,5 +1,5 @@
 @-moz-document domain(www.gamefaqs.com){
-.message [id^="p"] a:not(.name){
+.message [id^="p"] a:not(.name):not(.gamefox-message-detail-number){
 border:1px transparent solid !important;
 display:-moz-inline-box !important;
 display:inline-block !important;
@@ -11,21 +11,21 @@ width:16px !important;
 background-position:center !important;
 background-repeat:no-repeat !important;
 }
-
+.gamefox-message-detail-number:after{content: ' |';}
 .gamefox-message-links{font-size:0;}
 
-.message [id^="p"] a[href^="/boards/detail.php?"]{background-image:url("data:image/png;base64,iVBO\
-Rw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAndJ\
-REFUeNqkk89rE0EUx99kd9PsZtJqUklS4i8am4otNSgiiKgoWLEqePNvsB68CnryLhQ8efHkVRSF3ksPFhQ0FkpbsfaHUdvUJt\
-md3e7Ozjpvk21TLx588N2d2X2f776ZN0uCIID%2FCTW8DL8BIDGAmCJnJAeEjMnBGalCO29VagaCQCYGP0D48iaAV8ZaBh0xau\
-jq3dMnC6WB%2FgM5mowbWGDT3GbzX9Yvfvi0dovZ3lOZN7mngghO9yQe3B4bLgdCUIdtA6odqYGjmVT%2F4XT%2B9eRsz%2B8t\
-BpFJrPU%2ByBkJZfzm6PFys2HSet0Ex3Hg%2BaNcKBw3GibYjNGrl4plvSs2jsyugfBvjAzlS81Gk5qmBbZth4oimlsWA8e2aa\
-k%2FXUJmZwmBz8%2F2ZWm2Xm%2FsQJ7nQenaS%2FB9AaqmyrsfPlcUBbp79meRkdNnrT0QvCCfG5jEpeqyXMYcePH4kGwIgTsP\
-q7JBrVRsOve4gczuJgoOnHNiOxzqpgNCEFA0PYR1XQc1buxpVUBUgsyugc%2FXaps2szyFKvEkKO1EhCmloCVSewxcx2XIdFYw\
-s7Jcu9BbOEi5XHMUlBqQTCYh%2FpfB%2BtrSOjIdXeCvVha%2BLsjDZcUT3aB1pUIhjMuI5ijPBWtjZXUemQ4DUXUZm6hMTVU8\
-12NagoIqdeXeMlwe%2FxaOUe62x%2BbfTVe4wyaQQZTgz4RfIfEigHb%2BumYM3s8PjhzLFk9kjH1pHZPY1qb9c3G2Vp37uOCx\
-uSfgTb0N3EUI2bYB7kVGqhdiR3IQO3UOSN%2BQdMy3T0UVgu%2BfQbyfBrH0C7dBakOyPDLApRhtqf%2F4g%2FFEWViYZMUfAQ\
-YAFXUwYJv2wUIAAAAASUVORK5CYII%3D") !important;}
+.message [id^="p"] a[href^="/boards/detail.php?"]:not(.gamefox-message-detail-number)
+{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXR\
+FWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAndJREFUeNqkk89rE0EUx99kd9PsZtJqUklS4i8am4otNSgiiKgoW\
+LEqePNvsB68CnryLhQ8efHkVRSF3ksPFhQ0FkpbsfaHUdvUJtmd3e7Ozjpvk21TLx588N2d2X2f776ZN0uCIID%2FCTW8DL8BI\
+DGAmCJnJAeEjMnBGalCO29VagaCQCYGP0D48iaAV8ZaBh0xaujq3dMnC6WB%2FgM5mowbWGDT3GbzX9Yvfvi0dovZ3lOZN7mng\
+ghO9yQe3B4bLgdCUIdtA6odqYGjmVT%2F4XT%2B9eRsz%2B8tBpFJrPU%2ByBkJZfzm6PFys2HSet0Ex3Hg%2BaNcKBw3GibYj\
+NGrl4plvSs2jsyugfBvjAzlS81Gk5qmBbZth4oimlsWA8e2aak%2FXUJmZwmBz8%2F2ZWm2Xm%2FsQJ7nQenaS%2FB9Aaqmyrs\
+fPlcUBbp79meRkdNnrT0QvCCfG5jEpeqyXMYcePH4kGwIgTsPq7JBrVRsOve4gczuJgoOnHNiOxzqpgNCEFA0PYR1XQc1buxpV\
+UBUgsyugc%2FXaps2szyFKvEkKO1EhCmloCVSewxcx2XIdFYws7Jcu9BbOEi5XHMUlBqQTCYh%2FpfB%2BtrSOjIdXeCvVha%2\
+BLsjDZcUT3aB1pUIhjMuI5ijPBWtjZXUemQ4DUXUZm6hMTVU812NagoIqdeXeMlwe%2FxaOUe62x%2BbfTVe4wyaQQZTgz4RfI\
+fEigHb%2BumYM3s8PjhzLFk9kjH1pHZPY1qb9c3G2Vp37uOCxuSfgTb0N3EUI2bYB7kVGqhdiR3IQO3UOSN%2BQdMy3T0UVgu%\
+2BfQbyfBrH0C7dBakOyPDLApRhtqf%2F4g%2FFEWViYZMUfAQYAFXUwYJv2wUIAAAAASUVORK5CYII%3D") !important;}
 a.gamefox-filter-link{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQ\
 CAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAexJREFUeNqkVL9v2lAQPj%2BDsSXAtg\
 hDsrGwMjGUKWJopEpVyVIlyl5LzdKxQ5VsReqOqvRP6BKqTh3CP9CpqlS1Ekhd6GSIFBzA%2FDD9zvhRQxKWnvT58Pnuu7t391\
@@ -57,7 +57,7 @@ xTJj0Pc5SLgnOMBT%2Bn83OMdIu1QYURqfPy0uaIzowN%2FxqjF76%2FlY%2BRr4lI%2BTrHdUwkr0W8
 phnwyudlyi%2F%2Fgy1prpqCEGKBzikJbK0BxzZw1gJuKPdB8cn9XSdsFTi5A87bIfZO3F4kMK%2BHEE3I0%2BHrhht6QAltnI\
 cyIO6bmPTv%2FCXAACPM0BMSi5H%2BAAAAAElFTkSuQmCC") !important;}
 
-.message [id^="p"] a:not(.name):hover{
+.message [id^="p"] a:not(.name):not(.gamefox-message-detail-number):hover{
 background-color:#aaa !important;
 background-color:rgba(0,0,0,.5) !important;
 border-color:-moz-use-text-color !important;

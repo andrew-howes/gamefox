@@ -649,6 +649,7 @@ var GameFOX =
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[i].id = 'p' + msgnumString;
 
+        var detailLink = td[i].getElementsByTagName('a')[1];
         var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
         var postBody = td[i + 1].textContent;
 
@@ -847,7 +848,10 @@ var GameFOX =
                 }
               }
               else
-                td[i].getElementsByTagName('a')[1].innerHTML = '#' + msgnumString;
+              {
+                detailLink.className = 'gamefox-message-detail-number';
+                detailLink.innerHTML = '#' + msgnumString;
+              }
               break;
 
             case 3: // Mixed: message #001
@@ -866,7 +870,10 @@ var GameFOX =
                 }
               }
               else
-                td[i].getElementsByTagName('a')[1].innerHTML = 'message #' + msgnumString;
+              {
+                detailLink.className = 'gamefox-message-detail-number';
+                detailLink.innerHTML = 'message #' + msgnumString;
+              }
               break;
 
             default:
