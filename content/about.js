@@ -36,7 +36,7 @@ var GFabout =
                            ['Toad King', 'Calvinjpwalker']]],
       contributors: ['contributorBox',
                     [['Ant P.', 'GFCode'],
-                     ['Awesumness', 'CSS'],
+                     ['Poo Poo Butter', 'CSS'],
                      ['TakatoMatsuki', 'CSS'],
                      ['Ricapar', 'CSS'],
                      ['Tango Desktop Project', 'icons'],
