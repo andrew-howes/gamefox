@@ -1,27 +1,52 @@
-2009-01-xx:
+2009-02-xx:
     * version 0.6.10
+    * Links to specific posts (e.g., #p001) are now automatically changed to go
+      to the last post on the current page if the post number exceeds the
+      number of posts on the current page
+    * Nightly builds now show a changelog when updated
     * Disable custom window titles by default
     * Ten On A Diet CSS no longer uses external images
     * Fix topic creator highlighting beyond the first page when topic creator
       labeling is disabled
+    * The post on message detail is no longer highlighted when topic creator
+      highlighting is used
+    * A confirmation box is now shown when QuickPosting a message that only
+      contains a signature
     * Tracked topics are now integrated into GameFOX
     * Disable all tag-related preferences by default
+    * "Break HTML Tags" context menu item changes:
+        - Hidden when not on the boards
+        - Updates the character counter
+        - Shown on topic list
+    * A class is now added to the GameFAQs ignore message
     * Numerous performance improvements
-    * New CSS: Capitalized message links
+    * The "Delete Message" context menu item is now hidden in archived topics
     * Add board links above QuickPost on message lists
+    * A change in the implementation of filtering may break old stylesheets
+      that use tr[style] to detect highlighting
+    * New CSS: Capitalized message links
+    * Numerous changes to the options window
     * Drop Firefox 1.5 support
+    * GFCode now supports inline code (<em><i>)
+    * Fix issue that caused HTML buttons to be positioned incorrectly for some
+      users
+    * Fix issue that caused page links to not be visible for some users
     * Add menu item to open the Highlighting options pane from the context menu
       (right click message -> Highlighting Groups -> Edit Groups)
     * Add "Update GameFOX Signature" button to the GameFAQs signature/quote
       page
     * Support double-click CSS descriptions in the Style options pane in
       Firefox 2
+    * Remove GameFOX icon in context menu
     * Update signature options interface:
         - Move "new signature" menu item to an "Add" button
         - Two simple selection modes: "random" (now default) and "first"
         - "Save to GameFAQs" button to save your GameFOX signature to GameFAQs
+    * Fix doubled-encoded HTML entities in GameFAQs' page titles
+    * Fix account switching on pages that contain a hash in the URI
     * Ability to highlight topics or posts which have certain words in the
       title or message
+    * Add filtering as a double click action for message headers
     * New CSS: Hide signatures
     * New CSS: Message link icons
 
