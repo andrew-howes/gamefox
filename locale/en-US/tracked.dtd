@@ -2,11 +2,11 @@
 
 <!ENTITY tracked.label "Tracked Topics">
 
+<!ENTITY open.label "Open">
+<!ENTITY open.accesskey "O">
+
 <!ENTITY newTab.label "Open in New Tab">
 <!ENTITY newTab.accesskey "T">
-
-<!ENTITY focusedTab.label "Open in Focused Tab">
-<!ENTITY focusedTab.accesskey "F">
 
 <!ENTITY newWindow.label "Open in New Window">
 <!ENTITY newWindow.accesskey "W">

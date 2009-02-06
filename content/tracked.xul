@@ -47,8 +47,8 @@
 
   <tree id="gamefox-tracked-tree" flex="1" hidecolumnpicker="true"
     contextmenu="gamefox-tracked-contextmenu"
-    ondblclick="if (event.button == 0) gTrackedWindow.action(1, true);"
-    onclick="if (event.button == 1) gTrackedWindow.action(0);">
+    ondblclick="if (event.button == 0) gTrackedWindow.action(2, true);"
+    onclick="if (event.button == 1) gTrackedWindow.action(1);">
     <treecols>
       <treecol id="gamefox-tracked-tagid" hidden="true"/>
       <treecol label="&tracked.label;" flex="1" primary="true"/>
@@ -65,10 +65,10 @@
 
   <popup id="gamefox-tracked-contextmenu"
     onpopupshowing="gTrackedWindow.displayMenu();">
+    <menuitem accesskey="&open.accesskey;"
+      label="&open.label;" oncommand="gTrackedWindow.action(2);"/>
     <menuitem accesskey="&newTab.accesskey;" label="&newTab.label;"
       oncommand="gTrackedWindow.action(1);"/>
-    <menuitem accesskey="&focusedTab.accesskey;"
-      label="&focusedTab.label;" oncommand="gTrackedWindow.action(2);"/>
     <menuitem accesskey="&newWindow.accesskey;"
       label="&newWindow.label;" oncommand="gTrackedWindow.action(3);"/>
     <menuitem accesskey="" label="" oncommand="gTrackedWindow.action(4);"
