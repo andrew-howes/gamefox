@@ -1,0 +1,13 @@
+### Questions
+
+* [How do I open the options window?](#q1)
+
+### Answers
+
+#### How do I open the options window? {#q1}
+
+There are two ways to open the options window:
+
+1. Open the |Tools| menu and choose |GameFOX...|. This is the quickest way.
+2. Open the |Tools| menu and go to |Add-ons|. Find GameFOX in the add-on list
+and click the |Options| or |Preferences| button.
