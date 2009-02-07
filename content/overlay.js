@@ -431,22 +431,25 @@ var GameFOX =
 
       var skipNext = false;
       var alternateColor = false;
+      var statusCond = GFlib.prefs.getBoolPref('elements.statusspans');
 
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
         // Status spans
-        // TODO: maybe have pref for users who notice lag?
-        var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
-            .match(/\/images\/default\/([^\.]+)\.gif/)[1];
-        if (statusType != 'topic')
+        if (statusCond)
         {
-          var statusSpan = doc.createElement('span');
-          statusSpan.className = statusType + '-end gamefox-status';
-          rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild.nextSibling);
-          statusSpan = doc.createElement('span');
-          statusSpan.className = statusType + '-start gamefox-status';
-          rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild);
+          var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
+              .match(/\/images\/default\/([^\.]+)\.gif/)[1];
+          if (statusType != 'topic')
+          {
+            var statusSpan = doc.createElement('span');
+            statusSpan.className = statusType + '-end gamefox-status';
+            rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild.nextSibling);
+            statusSpan = doc.createElement('span');
+            statusSpan.className = statusType + '-start gamefox-status';
+            rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild);
+          }
         }
 
         // Last post link
@@ -642,6 +645,7 @@ var GameFOX =
       var filterCond = GFlib.prefs.getBoolPref('elements.filterlink') && !onDetail;
       var quotelinkCond = GFlib.prefs.getBoolPref('elements.quotelink') &&
         topicOpen && GFlib.prefs.getBoolPref('elements.quickpost.form');
+      var sigCond = GFlib.prefs.getBoolPref('elements.sigspans');
 
       for (var i = 0; i < td.length; i += 2)
       {
@@ -659,8 +663,9 @@ var GameFOX =
           tc = username;
 
         // Element for sigs
-        td[i + 1].innerHTML = td[i + 1].innerHTML.replace(/---(<br>.*){0,2}\n$/,
-            '<span class="gamefox-signature">---$1</span>');
+        if (sigCond)
+          td[i + 1].innerHTML = td[i + 1].innerHTML.replace(/---(<br>.*){0,2}\n$/,
+              '<span class="gamefox-signature">---$1</span>');
 
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
