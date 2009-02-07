@@ -11,7 +11,7 @@ width:16px !important;
 background-position:center !important;
 background-repeat:no-repeat !important;
 }
-.gamefox-message-detail-number:after{content: ' |';}
+.gamefox-message-detail-number:after{content: ' | ';}
 .gamefox-message-links{font-size:0;}
 .gamefox-message-links > br{display:none;}
 
