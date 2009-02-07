@@ -767,7 +767,7 @@ var GameFOX =
           if (deletelinkCond)
           {
             a.className = 'gamefox-delete-link';
-            a.href = td[i].getElementsByTagName('a')[1].href;
+            a.href = detailLink.href;
             a.addEventListener('click', GFmessages.deletePost, false);
 
             msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
@@ -816,11 +816,8 @@ var GameFOX =
         {
           switch (msgnumStyle)
           {
-            case 1: // Reversed: #001 | message detail
-              if (onArchive)
-                var element = msgLinks;
-              else
-                var element = td[i].getElementsByTagName('a')[1];
+            case 1: // #001 | [message detail]
+              var element = onArchive ? msgLinks : detailLink;
 
               td[i].insertBefore(doc.createTextNode('#' + msgnumString),
                   element);
@@ -832,20 +829,16 @@ var GameFOX =
 
               break;
 
-            case 2: // Number only: #001
+            case 2: // [#001]
               if (onArchive)
               {
                 var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
                 numElement.appendChild(doc.createTextNode('#' + msgnumString));
 
-                if (!msgLinks.hasChildNodes())
-                  td[i].appendChild(numElement);
-                else
-                {
-                  td[i].appendChild(leftMsgData ? doc.createElement('br') :
-                      doc.createTextNode(' | '));
-                  td[i].appendChild(numElement);
-                }
+                td[i].insertBefore(numElement, msgLinks);
+                if (msgLinks.hasChildNodes())
+                  td[i].insertBefore(leftMsgData ? doc.createElement('br') :
+                      doc.createTextNode(' | '), msgLinks);
               }
               else
               {
@@ -854,20 +847,16 @@ var GameFOX =
               }
               break;
 
-            case 3: // Mixed: message #001
+            case 3: // [message #001]
               if (onArchive)
               {
                 var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
                 numElement.appendChild(doc.createTextNode('message #' + msgnumString));
 
-                if (!msgLinks.hasChildNodes())
-                  td[i].appendChild(numElement);
-                else
-                {
-                  td[i].appendChild(leftMsgData ? doc.createElement('br') :
-                      doc.createTextNode(' | '));
-                  td[i].appendChild(numElement);
-                }
+                td[i].insertBefore(numElement, msgLinks);
+                if (msgLinks.hasChildNodes())
+                  td[i].insertBefore(leftMsgData ? doc.createElement('br') :
+                      doc.createTextNode(' | '), msgLinks);
               }
               else
               {
@@ -877,18 +866,17 @@ var GameFOX =
               break;
 
             default:
-            case 0: // Original: message detail | #001
+            case 0: // [message detail] | #001
               if (leftMsgData)
               {
                 if (!onArchive || msgLinks.hasChildNodes())
                   td[i].appendChild(doc.createElement('br'));
                 td[i].appendChild(doc.createTextNode('#' + msgnumString));
               }
+              else if (onArchive && !msgLinks.hasChildNodes())
+                td[i].appendChild(doc.createTextNode('#' + msgnumString));
               else
-                if (onArchive && !msgLinks.hasChildNodes())
-                  td[i].appendChild(doc.createTextNode('#' + msgnumString));
-                else
-                  td[i].appendChild(doc.createTextNode(' | #' + msgnumString));
+                td[i].appendChild(doc.createTextNode(' | #' + msgnumString));
 
               break;
           }
