@@ -810,7 +810,10 @@ var GameFOX =
         }
 
         // Append msgLinks
-        td[i].appendChild(msgLinks);
+        if (detailLink)
+          td[i].insertBefore(msgLinks, detailLink.nextSibling);
+        else
+          td[i].appendChild(msgLinks);
 
         // Message numbering
         if (msgnumCond)

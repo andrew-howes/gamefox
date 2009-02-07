@@ -1,11 +1,4 @@
 <h2 id="a">a</h2>
-<h3 id="a_gamefox-collapse-link">
-a.gamefox-collapse-link
-<span class="new">New in 0.6.10</span>
-</h3>
-
-"Show" and "Hide" links on message lists.
-
 <h3 id="a_gamefox-delete-link">a.gamefox-delete-link</h3>
 
 "Delete" and "Close" links on message lists. (v0.6.7)
@@ -13,6 +6,13 @@ a.gamefox-collapse-link
 <h3 id="a_gamefox-filter-link">a.gamefox-filter-link</h3>
 
 "Filter" links on message lists. (v0.6.7)
+
+<h3 id="a_gamefox-hide-post-link">
+a.gamefox-hide-post-link
+<span class="new">New in 0.6.10</span>
+</h3>
+
+"Hide" link for collapsed messages.
 
 <h3 id="a_gamefox-last-post-link">a.gamefox-last-post-link</h3>
 
@@ -28,6 +28,13 @@ a.gamefox-quote-link
 </h3>
 
 "Quote" links on message lists.
+
+<h3 id="a_gamefox-show-post-link">
+a.gamefox-show-post-link
+<span class="new">New in 0.6.10</span>
+</h3>
+
+"Show" link for collapsed messages.
 
 <h2 id="div">div</h2>
 <h3 id="div+gamefox-board-nav">
