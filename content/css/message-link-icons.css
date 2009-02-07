@@ -13,6 +13,7 @@ background-repeat:no-repeat !important;
 }
 .gamefox-message-detail-number:after{content: ' |';}
 .gamefox-message-links{font-size:0;}
+.gamefox-message-links > br{display:none;}
 
 .message [id^="p"] a[href^="/boards/detail.php?"]:not(.gamefox-message-detail-number)
 {background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXR\
