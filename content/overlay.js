@@ -700,9 +700,10 @@ var GameFOX =
             td[i + 1].style.setProperty('display', 'none', 'important');
 
             var a = doc.createElement('a');
-                a.setAttribute('href', '#');
-                a.appendChild(doc.createTextNode('show'));
-                a.addEventListener('click', GFuserlist.showPost, false);
+            a.appendChild(doc.createTextNode('show'));
+            a.className = 'gamefox-collapse-link';
+            a.href = '#';
+            a.addEventListener('click', GFuserlist.showPost, false);
 
             if (!onArchive || msgLinks.hasChildNodes())
               msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
