@@ -701,7 +701,7 @@ var GameFOX =
 
             var a = doc.createElement('a');
             a.appendChild(doc.createTextNode('show'));
-            a.className = 'gamefox-collapse-link';
+            a.className = 'gamefox-show-post-link';
             a.href = '#';
             a.addEventListener('click', GFuserlist.showPost, false);
 

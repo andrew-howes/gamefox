@@ -216,12 +216,14 @@ var GFuserlist =
         postMsg.style.removeProperty('font-size');
         postMsg.removeAttribute('style');
         buttonContainer.style.removeProperty('font-size');
+        button.className = 'gamefox-hide-post-link';
         button.textContent = 'hide';
       }
       else
       {
         postMsg.style.setProperty('font-size', '0pt', 'important');
         postMsg.style.setProperty('display', 'none', 'important');
+        button.className = 'gamefox-show-post-link';
         button.textContent = 'show';
       }
     }
@@ -233,12 +235,14 @@ var GFuserlist =
         postMsg.style.removeProperty('font-size');
         postMsg.style.removeProperty('display');
         postMsg.removeAttribute('style');
+        button.className = 'gamefox-hide-post-link';
         button.textContent = 'hide';
       }
       else
       {
         postMsg.style.setProperty('font-size', '0pt', 'important');
         postMsg.style.setProperty('display', 'none', 'important');
+        button.className = 'gamefox-show-post-link';
         button.textContent = 'show';
       }
     }
