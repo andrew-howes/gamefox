@@ -166,7 +166,7 @@ var GFoptions =
     }
     catch (e)
     {
-      GFlib.alert('This command does not work on your platform. You\'re probably using Firefox 2 and not using Windows.');
+      GFlib.alert('This command does not work on your platform. Try updating to the latest version of your browser.');
     }
   },
 
