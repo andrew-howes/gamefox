@@ -23,6 +23,10 @@
 <!DOCTYPE page SYSTEM "chrome://gamefox/locale/tracked.dtd">
 
 <page id="gamefox-tracked-page"
+  title="GameFAQs Tracked Topics"
+  width="500" height="400"
+  persist="screenX,screenY,width,height"
+  windowtype="gamefox:tracked"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   onload="gTrackedWindow.init();">
   <script type="application/x-javascript"

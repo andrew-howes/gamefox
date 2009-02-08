@@ -193,6 +193,11 @@ var GFtracked =
     item.setAttribute('oncommand', 'GFtracked.updateList()');
     trackedMenu.appendChild(item);
 
+    item = document.createElement('menuitem');
+    item.setAttribute('label', strbundle.getString('detach'));
+    item.setAttribute('oncommand', 'GFtracked.openWindow(this)');
+    trackedMenu.appendChild(item);
+
     this.read();
     var firstTopic = true;
     for (var i in this.list)
@@ -389,5 +394,11 @@ var GFtracked =
 
     // generic error
     return [false, ''];
+  },
+
+  openWindow: function(item)
+  {
+    window.openDialog('chrome://gamefox/content/tracked.xul', '_blank', '',
+        null);
   }
 };
