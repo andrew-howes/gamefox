@@ -19,8 +19,9 @@
 
 var GFcss =
 {
-  prefs: Cc['@mozilla.org/preferences-service;1'].getService(
-             Ci.nsIPrefService).getBranch('gamefox.theme.css.'),
+  prefs: Cc['@mozilla.org/preferences-service;1']
+    .getService(Ci.nsIPrefService)
+    .getBranch('gamefox.theme.css.'),
 
   init: function()
   {
@@ -93,59 +94,29 @@ var GFcss =
     }
   },
 
-  userimport: function(uri)
-  {
-    // TODO: make sure all errors result in alert
-    // TODO: if name conflict, option to overwrite or rename
-    if (!/\.(css|txt)$/.test(uri))
-    {
-      if (uri.length > 0)
-        GFlib.alert('Filename must end in .css or .txt');
-      return;
-    }
-
-    var filename = decodeURIComponent(uri.substr(uri.lastIndexOf('/') + 1));
-
-    if (!this.add('user', uri, filename, filename, '', '', true)) return;
-
-    this.populate(document.getElementById('css-tree'));
-    this.reload();
-  },
-
-  filepicker: function()
-  {
-    var filepicker = Cc['@mozilla.org/filepicker;1'].createInstance(
-        Ci.nsIFilePicker);
-    filepicker.init(window, 'Import Stylesheet', Ci.nsIFilePicker.modeOpen);
-    filepicker.appendFilter('Stylesheets (*.css; *.txt)', '*.css; *.txt');
-
-    if (filepicker.show() == Ci.nsIFilePicker.returnOK)
-      return filepicker.fileURL.spec;
-    return '';
-  },
-
   add: function(cat, uri, filename, title, desc, author, enabled, overwrite)
   {
     overwrite = (overwrite == null ? false : overwrite);
-    var file = Cc['@mozilla.org/file/local;1'].getService(
-        Ci.nsILocalFile);
-    var foStream = Cc['@mozilla.org/network/file-output-stream;1'].getService(
-        Ci.nsIFileOutputStream);
-    var siStream = Cc['@mozilla.org/scriptableinputstream;1'].getService(
-        Ci.nsIScriptableInputStream);
+    var file = Cc['@mozilla.org/file/local;1']
+      .getService(Ci.nsILocalFile);
+    var foStream = Cc['@mozilla.org/network/file-output-stream;1']
+      .getService(Ci.nsIFileOutputStream);
+    var siStream = Cc['@mozilla.org/scriptableinputstream;1']
+      .getService(Ci.nsIScriptableInputStream);
 
-    file.initWithPath(this.getDirectory());
+    file.initWithPath(this.getDirectoryPath());
     file.append(filename);
     if (overwrite == false && file.exists()) {
       filename = filename.replace(/\.(css|txt)$/, new Date().getTime() + '.$1');
-      file.initWithPath(this.getDirectory());
+      file.initWithPath(this.getDirectoryPath());
       file.append(filename);
     }
 
     try
     {
-      var channel = Cc['@mozilla.org/network/io-service;1'].getService(
-          Ci.nsIIOService).newChannel(uri, null, null);
+      var channel = Cc['@mozilla.org/network/io-service;1']
+        .getService(Ci.nsIIOService)
+        .newChannel(uri, null, null);
       var input = channel.open();
       siStream.init(input);
       var fileData = siStream.read(input.available());
@@ -197,31 +168,40 @@ var GFcss =
   {
     var directory = Cc['@mozilla.org/file/directory_service;1']
       .getService(Ci.nsIProperties)
-      .get('ProfD', Ci.nsIFile);
+      .get('ProfD', Ci.nsILocalFile);
 
-    try
+    directory.append('gamefox');
+    directory.append('css');
+
+    return directory;
+  },
+
+  getDirectoryPath: function()
+  {
+    var directory = this.getDirectory();
+
+    if (!directory.exists())
     {
-      directory.append('gamefox');
-      directory.append('css');
-
-      if (!directory.exists())
+      try
+      {
         directory.create(Ci.nsIFile.DIRECTORY_TYPE, 0755);
+      }
+      catch (e) // TODO: what are we catching here?
+      {
+        GFlib.alert('There was an error creating the CSS directory:\n' + e);
+        return false;
+      }
+    }
 
-      return directory.path;
-    }
-    catch (e)
-    {
-      GFlib.alert('There was an error creating the CSS directory:\n' + e);
-      return false;
-    }
+    return directory.path;
   },
 
   reload: function()
   {
-    var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
-        Ci.nsIStyleSheetService);
-    var file = Cc['@mozilla.org/file/local;1'].getService(
-        Ci.nsILocalFile);
+    var sss = Cc['@mozilla.org/content/style-sheet-service;1']
+      .getService(Ci.nsIStyleSheetService);
+    var file = Cc['@mozilla.org/file/local;1']
+      .getService(Ci.nsILocalFile);
     var css = eval(this.prefs.getCharPref('serialized'));
 
     for (var category in css)
@@ -230,10 +210,11 @@ var GFcss =
       {
         try
         {
-          file.initWithPath(this.getDirectory());
+          file.initWithPath(this.getDirectoryPath());
           file.append(filename);
-          var uri = Cc['@mozilla.org/network/io-service;1'].getService(
-              Ci.nsIIOService).newFileURI(file, null, null);
+          var uri = Cc['@mozilla.org/network/io-service;1']
+            .getService(Ci.nsIIOService)
+            .newFileURI(file, null, null);
 
           if (sss.sheetRegistered(uri, sss.USER_SHEET))
             sss.unregisterSheet(uri, sss.USER_SHEET);
@@ -246,107 +227,36 @@ var GFcss =
           if (category == 'user') // user stylesheet, remove it
           {
             this.remove(category, filename);
+            // TODO: do something with this
             if (document.getElementById('css-tree'))
-              this.populate(document.getElementById('css-tree'));
+              GFstyleOptions.populate();
           }
           else // gamefox stylesheet, restore it
           {
             if (this.add(category, 'chrome://gamefox/content/css/' + filename, filename,
                 css[category][filename]['title'], css[category][filename]['author'], true))
-              this.reload(); // oh no, a recursive function call!
-                             // it should be all right as this is only done if re-adding the sheet was successful
+              // recursive call - ok as this is only done if re-adding the sheet was successful
+              this.reload();
           }
         }
       }
     }
   },
 
-  populate: function(element)
-  {
-    var css = eval(this.prefs.getCharPref('serialized'));
-
-    this.treeView = new GFtreeview();
-    this.treeView.childData = {};
-    this.treeView.visibleData = [];
-    var categories = {'GameFOX':'gamefox', 'GameFAQs':'bundled', 'User':'user'};
-    for (var treeCat in categories)
-    {
-      this.treeView.visibleData.push([[treeCat], true, false]);
-      this.treeView.childData[treeCat] = [];
-      var prefCat = categories[treeCat];
-      for (var filename in css[prefCat])
-      {
-        this.treeView.childData[treeCat].push([
-          css[prefCat][filename]['title'],
-          css[prefCat][filename]['desc'],
-          css[prefCat][filename]['author'],
-          css[prefCat][filename]['enabled'],
-          filename, // stored in invisible column; uniquely identifies stylesheet
-          prefCat
-        ]);
-      }
-    }
-
-    this.treeView.isEditable = function(idx, column)
-    {
-      if (this.isContainer(idx)) return false;
-      if (column.index == 3) return true;
-      if (this.visibleData[idx][0][5] == 'user') return true;
-    }
-    this.treeView.setCellText = this.setCell;
-    this.treeView.setCellValue = this.setCell;
-
-    element.view = this.treeView;
-
-    this.treeView.selection.clearSelection();
-    this.treeView.selection.select(0);
-
-    // this is sort of a hack, I couldn't be bothered with finding out how to push data
-    // directly to treeView.visibleData when populating the tree
-    this.treeView.toggleOpenState(2);
-    this.treeView.toggleOpenState(1);
-    this.treeView.toggleOpenState(0);
-  },
-
-  onpopupshowing: function()
-  {
-    var disabled = GFcss.treeView.visibleData[GFcss.treeView.selection.currentIndex][0][5] != 'user';
-    document.getElementById('css-remove').setAttribute('disabled', disabled);
-    document.getElementById('css-edit').setAttribute('disabled', disabled);
-  },
-
-  setCell: function(idx, column, value)
-  {
-    this.visibleData[idx][0][column.index] = value;
-
-    var filename = this.visibleData[idx][0][4];
-    var category = this.visibleData[idx][0][5];
-    // Map column to associative array in pref
-    var map = new Array('title', 'desc', 'author', 'enabled');
-
-    var css = eval(GFcss.prefs.getCharPref('serialized'));
-    css[category][filename][map[column.index]] = value;
-    GFcss.prefs.setCharPref('serialized', css.toSource());
-
-    this.selection.clearSelection();
-    this.selection.select(idx);
-
-    GFcss.reload();
-  },
-
   remove: function(category, filename)
   {
-    var sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(
-        Ci.nsIStyleSheetService);
-    var file = Cc['@mozilla.org/file/local;1'].getService(
-        Ci.nsILocalFile);
+    var sss = Cc['@mozilla.org/content/style-sheet-service;1']
+      .getService(Ci.nsIStyleSheetService);
+    var file = Cc['@mozilla.org/file/local;1']
+      .getService(Ci.nsILocalFile);
     var css = eval(this.prefs.getCharPref('serialized'));
 
-    file.initWithPath(this.getDirectory());
+    file.initWithPath(this.getDirectoryPath());
     file.append(filename);
 
-    var uri = Cc['@mozilla.org/network/io-service;1'].getService(
-        Ci.nsIIOService).newFileURI(file, null, null);
+    var uri = Cc['@mozilla.org/network/io-service;1']
+      .getService(Ci.nsIIOService)
+      .newFileURI(file, null, null);
     try
     {
       sss.unregisterSheet(uri, sss.USER_SHEET);
@@ -361,44 +271,5 @@ var GFcss =
 
     delete css[category][filename];
     this.prefs.setCharPref('serialized', css.toSource());
-  },
-
-  removeWithTree: function()
-  {
-    var current = this.treeView.visibleData[this.treeView.selection.currentIndex][0];
-
-    if (!GFlib.confirm('Really delete "' + current[0] + '"?'))
-      return;
-
-    var filename = current[4];
-    var category = current[5];
-
-    // TODO: is this check necessary?
-    if (category != 'user')
-      return;
-
-    this.remove(category, filename);
-    this.populate(document.getElementById('css-tree'));
-  },
-
-  editWithTree: function()
-  {
-    var current = this.treeView.visibleData[this.treeView.selection.currentIndex][0];
-    var filename = current[4];
-
-    var file = Cc['@mozilla.org/file/local;1']
-      .getService(Ci.nsILocalFile);
-
-    file.initWithPath(this.getDirectory());
-    file.append(filename);
-
-    try
-    {
-      file.launch();
-    }
-    catch (e)
-    {
-      GFlib.alert('This command does not work on your platform. Try updating to the latest version of your browser.');
-    }
   }
 };

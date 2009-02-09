@@ -152,24 +152,6 @@ var GFoptions =
     request.send(null);
   },
 
-  openCSSDirectory: function()
-  {
-    var directory = Cc['@mozilla.org/file/directory_service;1']
-      .getService(Ci.nsIProperties)
-      .get('ProfD', Ci.nsILocalFile);
-    directory.append('gamefox');
-    directory.append('css');
-
-    try
-    {
-      directory.reveal();
-    }
-    catch (e)
-    {
-      GFlib.alert('This command does not work on your platform. Try updating to the latest version of your browser.');
-    }
-  },
-
   saveSelectedTab: function(tab)
   {
     var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
