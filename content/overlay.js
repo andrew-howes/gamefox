@@ -663,9 +663,11 @@ var GameFOX =
           tc = username;
 
         // Element for sigs
+        // TODO: a DOM approach or implementing a small HTML parser
         if (sigCond)
-          td[i + 1].innerHTML = td[i + 1].innerHTML.replace(/---(<br>.*){0,2}\n$/,
-              '<span class="gamefox-signature">---$1</span>');
+          td[i + 1].innerHTML = td[i + 1].innerHTML
+            .replace(/(---(?:<br>(?:[^<]|<(?!br))*){0,2})$/,
+              '<span class="gamefox-signature">$1</span>');
 
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
