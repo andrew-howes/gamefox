@@ -53,14 +53,13 @@ var GFquickpost =
         form.appendChild(titlecount);
         GFmessages.updateTitleCount(doc);
       }
+
+      form.appendChild(doc.createElement('br'));
     }
 
     // HTML buttons
     if (GFquickpost.createHTMLButtonsPref())
     {
-      if (newTopic)
-        form.appendChild(doc.createElement('br'));
-
       form.appendChild(GFquickpost.createHTMLButtons(doc));
 
       form.appendChild(doc.createElement('br'));
