@@ -11,7 +11,7 @@ start tracking them you will need to do so manually.
 
 #### Highlighting
 
-The user group feature has been rebranded to highlighting with some additional
+The user group feature has been rebranded to highlighting with new
 functionality. In addition to highlighting users, you can also highlight based
 on what words are in the topic title or message.
 
@@ -28,12 +28,12 @@ headers (detail, delete, filter, quote) to icons.
 Many performance improvements have been made for GameFOX to load quicker after
 opening a page.
 
-Links to your user page and the topic and board list have been added at the
+Links to your user page and the topic and board list have been added to the
 bottom of the message list above QuickPost.
 
 Custom GameFOX window titles have been disabled since GameFAQs' window titles
 now contain more information. They can be enabled again from the options.
-(Main > Page > Custom window titles)
+(Main | Page | Custom window titles)
 
 Firefox 1.5 support has been removed due to a change that broke compatibility.
 
