@@ -198,22 +198,17 @@ var GFlib =
     var IDs = tagID.split(',');
     var tagURI = GFlib.domain + GFlib.path;
 
-    if (IDs[1] == -1)
-    {
-      tagURI += 'myposts.php';
-    }
-    else if (IDs[1] == -2)
-    {
-      tagURI += 'tracked.php';
-    }
-    else
-    {
-      tagURI += (IDs[1] ? 'genmessage.php' : 'gentopic.php')
-                + '?board=' + IDs[0] + (IDs[1] ? '&topic=' + IDs[1]
-                + (IDs[2] && parseInt(IDs[2]) ? '&page=' + IDs[2]
-                + (IDs[3] ? IDs[3] : '') : '') : '');
-    }
+    tagURI += (IDs[1] ? 'genmessage.php' : 'gentopic.php')
+              + '?board=' + IDs[0] + (IDs[1] ? '&topic=' + IDs[1]
+              + (IDs[2] && parseInt(IDs[2]) ? '&page=' + IDs[2]
+              + (IDs[3] ? IDs[3] : '') : '') : '');
 
+    this.openPage(tagURI, openType);
+  },
+
+  openPage: function(url, openType)
+  {
+    // TODO: review this
     var win = Cc['@mozilla.org/appshell/window-mediator;1']
       .getService(Ci.nsIWindowMediator)
       .getMostRecentWindow('navigator:browser');
@@ -223,28 +218,28 @@ var GFlib =
       case 0: // new tab
         try
         {
-          win.getBrowser().addTab(tagURI);
+          win.getBrowser().addTab(url);
         }
         catch (e)
         {
-          win.loadURI(tagURI);
+          win.loadURI(url);
         }
         break;
       case 1: // new focused tab
         try
         {
-          win.delayedOpenTab(tagURI);
+          win.delayedOpenTab(url);
         }
         catch (e)
         {
-          win.loadURI(tagURI);
+          win.loadURI(url);
         }
         break;
       case 2: // focused tab
-        win.loadURI(tagURI);
+        win.loadURI(url);
         break;
       case 3: // new window
-        win.open(tagURI);
+        win.open(url);
         break;
     }
   },
