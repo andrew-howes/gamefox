@@ -204,5 +204,48 @@ var GFcontext =
       || !GFlib.prefs.getBoolPref('context.delete');
     document.getElementById('gamefox-context-break-tags').hidden = hideBreakTags
       || !GFlib.prefs.getBoolPref('context.breaktags');
+  },
+
+  populateFavorites: function()
+  {
+    var menu, favs, item, i;
+
+    menu = document.getElementById('gamefox-favorites-menu');
+    while (menu.hasChildNodes())
+      menu.removeChild(menu.firstChild);
+
+    favs = eval(GFlib.prefs.getCharPref('favorites.serialized'));
+
+    for (i = 0; i < favs.length; i++)
+    {
+      item = document.createElement('menuitem');
+      item.setAttribute('label', favs[i].name);
+      item.setAttribute('oncommand', 'GFlib.open("' + favs[i].id + '", 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + favs[i].id + '", 0)');
+      menu.appendChild(item);
+    }
+  },
+
+  populateMisc: function()
+  {
+    var menu, item;
+
+    menu = document.getElementById('gamefox-misc-menu');
+    while (menu.hasChildNodes())
+      menu.removeChild(menu.firstChild);
+
+    item = document.createElement('menuitem');
+    item.setAttribute('label', 'Active Messages');
+    item.setAttribute('accesskey', 'A');
+    item.setAttribute('oncommand', 'GFlib.open("' + 0 + ',' + -1 + '", 2)');
+    item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + 0 + ',' + -1 + '", 0)');
+    menu.appendChild(item);
+
+    item = document.createElement('menuitem');
+    item.setAttribute('label', 'Tracked Topics');
+    item.setAttribute('accesskey', 'T');
+    item.setAttribute('oncommand', 'GFlib.open("' + 0 + ',' + -2 + '", 2)');
+    item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + 0 + ',' + -2 + '", 0)');
+    menu.appendChild(item);
   }
 };

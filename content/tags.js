@@ -76,41 +76,10 @@ var GFtags =
 
     if (method == 1)
     {
-      // Active Message List and Tracked Topics links
-      var tagPrefs = Cc['@mozilla.org/preferences-service;1']
-          .getService(Ci.nsIPrefService)
-          .getBranch('gamefox.context.tag.');
-      var tagMyPosts = tagPrefs.getBoolPref('myposts');
-      var tagTracked = tagPrefs.getBoolPref('tracked');
-      if (tagMyPosts)
-      {
-        item = document.createElement('menuitem');
-        item.setAttribute('label', 'Active Message List');
-        item.setAttribute('accesskey', 'A');
-        item.setAttribute('oncommand', 'GFlib.open("' + 0 + ',' + -1 + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + 0 + ',' + -1 + '", 0)');
-        tagList.appendChild(item);
-      }
-      if (tagTracked)
-      {
-        item = document.createElement('menuitem');
-        item.setAttribute('label', 'Tracked Topics');
-        item.setAttribute('accesskey', 'T');
-        item.setAttribute('oncommand', 'GFlib.open("' + 0 + ',' + -2 + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + 0 + ',' + -2 + '", 0)');
-        tagList.appendChild(item);
-      }
-      var createSep = tagMyPosts || tagTracked;
-
       for (board in this.tags)
       {
         for (topic in this.tags[board].topics)
         {
-          if (createSep)
-          {
-            tagList.appendChild(document.createElement('menuseparator'));
-            createSep = false;
-          }
           item = document.createElement('menuitem');
           item.setAttribute('label', this.tags[board].topics[topic]);
           item.setAttribute('oncommand', 'GFlib.open("' + board + ',' + topic + '", 2)');

@@ -63,11 +63,7 @@
         type="bool"/>
       <preference id="context.favorites" name="gamefox.context.favorites"
         type="bool"/>
-
-      <!-- Tags context menu -->
-      <preference id="context.tag.myposts" name="gamefox.context.tag.myposts"
-        type="bool"/>
-      <preference id="context.tag.tracked" name="gamefox.context.tag.tracked"
+      <preference id="context.misc" name="gamefox.context.misc"
         type="bool"/>
     </preferences>
 
@@ -205,6 +201,8 @@
                     <checkbox label="&submenu.tracked.label;"
                       preference="context.tracked"/>
                   </hbox>
+                </row>
+                <row>
                   <hbox>
                     <checkbox label="&submenu.accounts.label;"
                       preference="context.accounts"/>
@@ -213,30 +211,9 @@
                     <checkbox label="&submenu.favorites.label;"
                       preference="context.favorites"/>
                   </hbox>
-                </row>
-              </rows>
-            </grid>
-          </groupbox>
-
-          <groupbox>
-            <caption label="&tagMenu.label;"/>
-
-            <grid>
-              <columns>
-                <column flex="1"/>
-                <column flex="1"/>
-                <column flex="1"/>
-                <column flex="1"/>
-              </columns>
-              <rows>
-                <row>
                   <hbox>
-                    <checkbox label="&tagMenu.activeMessages.label;"
-                      preference="context.tag.myposts"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&tagMenu.trackedTopics.label;"
-                      preference="context.tag.tracked"/>
+                    <checkbox label="&submenu.misc.label;"
+                      preference="context.misc"/>
                   </hbox>
                 </row>
               </rows>

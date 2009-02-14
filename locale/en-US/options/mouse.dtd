@@ -38,7 +38,4 @@
 <!ENTITY submenu.tracked.label "Tracked">
 <!ENTITY submenu.accounts.label "Accounts">
 <!ENTITY submenu.favorites.label "Favorites">
-
-<!ENTITY tagMenu.label "Tags">
-<!ENTITY tagMenu.activeMessages.label "Active Messages">
-<!ENTITY tagMenu.trackedTopics.label "Tracked Topics">
+<!ENTITY submenu.misc.label "Miscellaneous">

@@ -1276,29 +1276,6 @@ var GameFOX =
       GFlib.alert('This command does not work on your platform. If you are '
           + 'using SeaMonkey, try installing the xSidebar extension.');
     }
-  },
-
-  showFavs: function()
-  {
-    var favList, favs, item, i;
-
-    favList = document.getElementById('gamefox-favorites-menu');
-    if (!favList)
-      return;
-
-    while (favList.hasChildNodes())
-      favList.removeChild(favList.firstChild);
-
-    favs = eval(GFlib.prefs.getCharPref('favorites.serialized'));
-
-    for (i = 0; i < favs.length; i++)
-    {
-      item = document.createElement('menuitem');
-      item.setAttribute('label', favs[i].name);
-      item.setAttribute('oncommand', 'GFlib.open("' + favs[i].id + '", 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + favs[i].id + '", 0)');
-      favList.appendChild(item);
-    }
   }
 };
 
