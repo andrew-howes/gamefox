@@ -196,7 +196,7 @@ var GFcss =
     return directory.path;
   },
 
-  reload: function()
+  reload: function(inOptions)
   {
     var sss = Cc['@mozilla.org/content/style-sheet-service;1']
       .getService(Ci.nsIStyleSheetService);
@@ -227,8 +227,7 @@ var GFcss =
           if (category == 'user') // user stylesheet, remove it
           {
             this.remove(category, filename);
-            // TODO: do something with this
-            if (document.getElementById('css-tree'))
+            if (inOptions)
               GFstyleOptions.populate();
           }
           else // gamefox stylesheet, restore it
@@ -236,7 +235,7 @@ var GFcss =
             if (this.add(category, 'chrome://gamefox/content/css/' + filename, filename,
                 css[category][filename]['title'], css[category][filename]['author'], true))
               // recursive call - ok as this is only done if re-adding the sheet was successful
-              this.reload();
+              this.reload(inOptions);
           }
         }
       }

@@ -81,7 +81,7 @@
       <button label="&import.button;" icon="add"
         oncommand="GFstyleOptions.userimport(GFstyleOptions.filepicker());"/>
       <button label="&reload.button;" icon="refresh"
-        oncommand="GFcss.reload();"/>
+        oncommand="GFcss.reload(true);"/>
       <button label="&openDir.button;" icon="open"
         oncommand="GFstyleOptions.openDirectory();"/>
     </hbox>

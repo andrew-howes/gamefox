@@ -110,7 +110,7 @@ var GFstyleOptions =
     this.selection.clearSelection();
     this.selection.select(idx);
 
-    GFcss.reload();
+    GFcss.reload(true);
   },
 
   userimport: function(uri)
@@ -129,7 +129,7 @@ var GFstyleOptions =
     if (!GFcss.add('user', uri, filename, filename, '', '', true)) return;
 
     this.populate();
-    GFcss.reload();
+    GFcss.reload(true);
   },
 
   filepicker: function()
