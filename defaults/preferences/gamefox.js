@@ -18,6 +18,7 @@ pref("gamefox.elements.msgnum", true);
 pref("gamefox.elements.msgnum.style", 0);
 pref("gamefox.elements.tracked.boardlink", true);
 pref("gamefox.elements.charcounts", true);
+pref("gamefox.elements.charmap", true);
 pref("gamefox.elements.topics.lastpostlink", true);
 pref("gamefox.elements.marktc", true);
 pref("gamefox.elements.marktc.marker", "(tc)");

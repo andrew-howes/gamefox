@@ -79,6 +79,8 @@
         name="gamefox.elements.quickpost.button" type="bool"/>
       <preference id="elements.charcounts" name="gamefox.elements.charcounts"
         type="bool"/>
+      <preference id="elements.charmap" name="gamefox.elements.charmap"
+        type="bool"/>
 
       <preference id="elements.quickpost.htmlbuttons"
         name="gamefox.elements.quickpost.htmlbuttons" type="bool"/>
@@ -250,6 +252,8 @@
                 preference="elements.quickpost.button"/>
               <checkbox label="&characterCounters.label;"
                 preference="elements.charcounts"/>
+              <checkbox label="&characterMap.label;"
+                preference="elements.charmap"/>
 
               <label value="&htmlButtons.label;"/>
               <grid class="indent">

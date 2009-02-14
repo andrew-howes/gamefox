@@ -309,12 +309,19 @@ var GameFOX =
         message.value = GFsig.format(null, null, doc);
       }
 
+      message.setSelectionRange(0, 0);
+
       // HTML buttons
       if (GFquickpost.createHTMLButtonsPref())
       {
-        message.setSelectionRange(0, 0);
-
         message.parentNode.insertBefore(GFquickpost.createHTMLButtons(doc), message);
+        message.parentNode.insertBefore(doc.createElement('br'), message);
+      }
+
+      // Character map
+      if (GFlib.prefs.getBoolPref('elements.charmap'))
+      {
+        message.parentNode.insertBefore(GFquickpost.createCharacterMapButton(doc), message);
         message.parentNode.insertBefore(doc.createElement('br'), message);
       }
 
