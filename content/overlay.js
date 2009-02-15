@@ -694,7 +694,6 @@ var GameFOX =
             td[i].insertBefore(groupname,
                 td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
 
-            td[i].insertBefore(doc.createTextNode('\n'), groupname);
             if (leftMsgData)
               td[i].insertBefore(doc.createElement('br'), groupname);
             else

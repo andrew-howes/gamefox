@@ -30,8 +30,28 @@ var GFquote =
       return;
 
     var quoteMsg = msgComponents.body.innerHTML;
-    var quoteHead = msgComponents.header.textContent;
-    var msgNum = '#' + msgComponents.header.id.substr(1);
+    var postUser, postDate, postNum;
+
+    // postUser
+    postUser = msgComponents.header.getElementsByTagName('a')[0];
+    postUser = postUser ? postUser.textContent : '???';
+
+    // postDate
+    var node;
+    for (var i = 0; i < msgComponents.header.childNodes.length; i++)
+    {
+      node = msgComponents.header.childNodes[i];
+      if (node.nodeName == '#text')
+      {
+        postDate = /\|\s+Posted\s([^\|]+)\s\|/.exec(node.textContent);
+        if (postDate)
+          break;
+      }
+    }
+    postDate = postDate ? postDate[1].GFtrim() : '???';
+
+    // postNum
+    postNum = msgComponents.header.id.substr(1);
 
     // selection quoting
     var selection = document.commandDispatcher.focusedWindow.getSelection();
@@ -40,23 +60,15 @@ var GFquote =
     if (allowSelection && /\S/.test(selection.toString()) &&
         selection.containsNode(msgComponents.body, true))
     {
-      quoteMsg = GFutils.specialCharsEncode(selection.toString());
+      quoteMsg = GFutils.convertNewlines(GFutils.specialCharsEncode(selection.toString()));
     }
 
-    GFquote.format(event, quoteHead, quoteMsg, msgNum);
+    GFquote.format(event, quoteMsg, postUser, postDate, postNum);
   },
 
-  format: function(event, quoteHead, quoteMsg, msgNum)
+  format: function(event, quoteMsg, postUser, postDate, postNum)
   {
     var doc = event.target.ownerDocument;
-
-    /* Parse message header */
-    var head = quoteHead.replace(/\|/g, '').split(/\xA0|\n/);
-    for (var i = 0; i < head.length; i++)
-      head[i] = head[i].GFtrim();
-    var username = head[1];
-    var postdate = head[head.length - 3].replace('Posted ', '');
-    var postnum = msgNum;
 
     /* Parse message body */
     var body = quoteMsg.
@@ -67,7 +79,7 @@ var GFquote =
 
     // Get rid of signature
     if (GFlib.prefs.getBoolPref('quote.removesignature'))
-      body = body.replace(/---(\n.*\n?){0,2}$/, '');
+      body = body.replace(/---(\n.*){0,2}$/, '');
 
     // Break escaped tags
     body = GFutils.breakTags(body);
@@ -107,11 +119,11 @@ var GFquote =
     /* Prepare quote header */
     var qhead = '';
     if (GFlib.prefs.getBoolPref('quote.header.username'))
-      qhead += 'From: ' + username;
+      qhead += 'From: ' + postUser;
     if (GFlib.prefs.getBoolPref('quote.header.date'))
-      qhead += (qhead.length ? ' | ' : '') + 'Posted: ' + postdate;
+      qhead += (qhead.length ? ' | ' : '') + 'Posted: ' + postDate;
     if (GFlib.prefs.getBoolPref('quote.header.messagenum'))
-      qhead += (qhead.length ? ' | ' : '') + postnum;
+      qhead += (qhead.length ? ' | ' : '') + '#' + postNum;
 
     if (qhead.length && GFlib.prefs.getCharPref('quote.style') == 'normal')
     {
@@ -144,7 +156,7 @@ var GFquote =
 
     // try to insert at the cursor position, but only if the cursor isn't in
     // a stupid place like after the signature separator
-    var sigStart = quickpost.value.search(/---(\n.*\n?){0,2}$/);
+    var sigStart = quickpost.value.search(/---(\n.*){0,2}$/);
 
     if (sigStart != -1 && quickpost.selectionStart > sigStart) // insert at beginning
     {
