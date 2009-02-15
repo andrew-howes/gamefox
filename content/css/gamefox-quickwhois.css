@@ -9,13 +9,11 @@
         padding: 3px !important;
         overflow-x: auto;
         overflow-y: hidden;
-        display: none;
         color: #000;
         background-color: #eee;
         max-width: 80%;
         -moz-border-radius: 10px;
         border: #aaa 1px solid;
-        font-size: inherit !important;
         text-align: left;
     }
 

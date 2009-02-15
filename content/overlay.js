@@ -259,7 +259,6 @@ var GameFOX =
             {
               pageListParent = doc.createElement('tr');
               pageListParent.setAttribute('class', 'gamefox-pagelist');
-              pageListParent.style.display = 'table-row';
             }
             else
             {
@@ -492,7 +491,6 @@ var GameFOX =
             {
               pageListParent = doc.createElement('tr');
               pageListParent.setAttribute('class', 'gamefox-pagelist');
-              pageListParent.style.display = 'table-row';
             }
             else
             {
@@ -1095,8 +1093,7 @@ var GameFOX =
 
       if (pageList)
       {
-        pageList.style.display = pageList.style.display == 'none' ?
-            (pageList.tagName.toLowerCase() == 'tr' ? 'table-row' : '') : 'none';
+        pageList.style.display = pageList.style.display == 'none' ? '' : 'none';
       }
       else
       {
@@ -1109,7 +1106,6 @@ var GameFOX =
           {
             pageListParent = doc.createElement('tr');
             pageListParent.setAttribute('class', 'gamefox-pagelist');
-            pageListParent.style.display = 'table-row';
           }
           else
           {
@@ -1246,9 +1242,9 @@ var GameFOX =
       {
         if (!/\bgamefox-removed\b/.test(td[i].parentNode.className))
         {
-          td[i].parentNode.style.display = 'table-row';
+          td[i].parentNode.style.display = '';
           if (!leftMsgData)
-            td[i + 1].parentNode.style.display = 'table-row';
+            td[i + 1].parentNode.style.display = '';
         }
       }
 
