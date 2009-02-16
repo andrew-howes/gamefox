@@ -401,6 +401,11 @@ var GFquickpost =
                     doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
                       'board=' + query['board'] + '&topic=' + query['topic'];
                     break;
+
+                  case 3: // go to board
+                    doc.location = GFlib.domain + GFlib.path + 'gentopic.php?' +
+                      'board=' + query['board'];
+                    break;
                 }
               }
 

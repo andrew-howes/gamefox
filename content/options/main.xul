@@ -332,6 +332,7 @@
                     <menuitem label="&toLastPost.label;" value="0"/>
                     <menuitem label="&toSamePage.label;" value="1"/>
                     <menuitem label="&toFirstPage.label;" value="2"/>
+                    <menuitem label="&toBoard.label;" value="3"/>
                   </menupopup>
                 </menulist>
               </hbox>
