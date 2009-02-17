@@ -206,11 +206,6 @@ var GFquickpost =
     if (GFlib.prefs.getIntPref('signature.addition') == 1
         && !GFlib.onPage(doc, 'post'))
       message += GFsig.format(null, null, doc);
-    if (/^\s*---(\n|$)/.test(message) && !GFlib.confirm('Your message appears to only consist of a signature. Are you sure you want to post it?'))
-    {
-      event.target.removeAttribute('disabled');
-      return;
-    }
 
     var previewRequest = new XMLHttpRequest();
     previewRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
