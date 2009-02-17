@@ -139,14 +139,6 @@ Text displayed next to the username of the topic creator. (v0.6.7)
 
 Shows the character count for the title. (v0.6.5)
 
-<h3 id="span_topic_archived-end">span.topic_archived-end</h3>
-
-Empty span element used for topic icons of an archived topic. (v0.6.7)
-
-<h3 id="span_topic_archived-start">span.topic_archived-start</h3>
-
-Empty span element used for topic icons of an archived topic. (v0.6.7)
-
 <h3 id="span_sticky-end">span.sticky-end</h3>
 
 Empty span element used for topic icons of a sticky topic. (v0.6.7)
@@ -162,6 +154,14 @@ Empty span element used for topic icons of a sticky and closed topic. (v0.6.7)
 <h3 id="span_sticky_closed-start">span.sticky_closed-start</h3>
 
 Empty span element used for topic icons of a sticky and closed topic. (v0.6.7)
+
+<h3 id="span_topic_archived-end">span.topic_archived-end</h3>
+
+Empty span element used for topic icons of an archived topic. (v0.6.7)
+
+<h3 id="span_topic_archived-start">span.topic_archived-start</h3>
+
+Empty span element used for topic icons of an archived topic. (v0.6.7)
 
 <h3 id="span_topic_closed-end">span.topic_closed-end</h3>
 
