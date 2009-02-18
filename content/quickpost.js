@@ -192,6 +192,7 @@ var GFquickpost =
   {
     var doc = GFlib.getDocument(event);
     var query = GFutils.stripQueryString(doc.location.search);
+    var strbundle = document.getElementById('overlay-strings');
     // make sure we're not trying to post a message to a topic that was
     // deleted by the user due to the topic list being on detail.php
     if (GFlib.onPage(doc, 'topics'))
@@ -206,6 +207,28 @@ var GFquickpost =
     if (GFlib.prefs.getIntPref('signature.addition') == 1
         && !GFlib.onPage(doc, 'post'))
       message += GFsig.format(null, null, doc);
+
+    if (/^\s*---(\n|$)/.test(message)
+        && GFlib.prefs.getBoolPref('elements.quickpost.blankPostWarning'))
+    {
+      var promptService = Cc['@mozilla.org/embedcomp/prompt-service;1'].
+        getService(Ci.nsIPromptService);
+      var neverWarn = {value:false};
+      var flags = promptService.BUTTON_POS_0 * promptService.BUTTON_TITLE_YES +
+        promptService.BUTTON_POS_1 * promptService.BUTTON_TITLE_NO;
+      var button = promptService.confirmEx(null, 'GameFOX',
+          strbundle.getString('warnBlankPost'), flags, '', '', '',
+          strbundle.getString('neverWarnBlankPost'), neverWarn);
+
+      if (neverWarn.value == true)
+        GFlib.prefs.setBoolPref('elements.quickpost.blankPostWarning', false);
+
+      if (button == 1)
+      {
+        event.target.removeAttribute('disabled');
+        return;
+      }
+    }
 
     var previewRequest = new XMLHttpRequest();
     previewRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);

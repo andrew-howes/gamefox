@@ -252,7 +252,7 @@ var GFuserlist =
   {
     var doc = event.target.ownerDocument;
     var list = document.getElementById('gamefox-context-usergroups-list');
-    var strbundle = document.getElementById('strings');
+    var strbundle = document.getElementById('context-strings');
 
     while (list.hasChildNodes())
       list.removeChild(list.firstChild);

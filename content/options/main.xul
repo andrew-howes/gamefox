@@ -101,6 +101,8 @@
         name="gamefox.elements.quickpost.resetconfirm" type="bool"/>
       <preference id="elements.quickpost.resetnewsig"
         name="gamefox.elements.quickpost.resetnewsig" type="bool"/>
+      <preference id="elements.quickpost.blankPostWarning"
+        name="gamefox.elements.quickpost.blankPostWarning" type="bool"/>
 
       <preference id="elements.quickpost.aftertopic"
         name="gamefox.elements.quickpost.aftertopic" type="int"/>
@@ -314,6 +316,8 @@
                 preference="elements.quickpost.resetconfirm"/>
               <checkbox label="&newSigOnReset.label;"
                 preference="elements.quickpost.resetnewsig"/>
+              <checkbox label="&warnBlankPost.label;"
+                preference="elements.quickpost.blankPostWarning"/>
 
               <hbox align="center">
                 <label value="&afterTopic.label;"/>

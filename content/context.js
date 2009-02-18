@@ -23,7 +23,7 @@ var GFcontext =
   {
     var target = gContextMenu.target;
     var doc = target.ownerDocument;
-    var strbundle = document.getElementById('strings');
+    var strbundle = document.getElementById('context-strings');
 
     document.getElementById('gamefox-toggle-sidebar').hidden = !GFlib.prefs.
       getBoolPref('context.sidebar');

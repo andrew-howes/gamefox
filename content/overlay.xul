@@ -43,8 +43,10 @@
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">
     <stringbundleset id="strbundles">
-      <stringbundle id="strings"
+      <stringbundle id="context-strings"
         src="chrome://gamefox/locale/context.properties"/>
+      <stringbundle id="overlay-strings"
+        src="chrome://gamefox/locale/overlay.properties"/>
     </stringbundleset>
 
     <menu id="gamefox-context-menu" label="&menu.label;">

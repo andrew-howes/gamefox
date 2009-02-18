@@ -52,6 +52,7 @@
 <!ENTITY previewAndReset.label "Preview and reset buttons">
 <!ENTITY confirmReset.label "Confirm resetting post">
 <!ENTITY newSigOnReset.label "Choose a new signature when resetting post">
+<!ENTITY warnBlankPost.label "Warn me before making a blank post">
 
 <!ENTITY afterTopic.label "After QuickPosting a topic:">
 <!ENTITY toTopic.label "Go to topic">
