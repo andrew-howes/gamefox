@@ -198,8 +198,8 @@ var GFquickpost =
     if (GFlib.onPage(doc, 'topics'))
       query = query.replace(/&topic=[^&]*/g, '');
 
-    this.disabled = true;
-    this.blur();
+    event.target.disabled = true;
+    event.target.blur();
 
     var topicTitle = doc.getElementsByName('topictitle')[0];
     var message = GFquickpost.removeGFCodeWhitespace(
@@ -225,7 +225,7 @@ var GFquickpost =
 
       if (button == 1)
       {
-        this.removeAttribute('disabled');
+        event.target.removeAttribute('disabled');
         return;
       }
     }
@@ -304,7 +304,7 @@ var GFquickpost =
                   'without QuickPost, and if you think you\'ve found a bug ' +
                   'report it at Blood Money.');
           }
-          this.removeAttribute('disabled');
+          event.target.removeAttribute('disabled');
           return;
         }
         else
@@ -315,7 +315,7 @@ var GFquickpost =
               replace(/<P>/g, '\n\n');
             if (!GFlib.confirm(warning + 'Submit this post?'))
             {
-              this.removeAttribute('disabled');
+              event.target.removeAttribute('disabled');
               return;
             }
           }
@@ -352,7 +352,7 @@ var GFquickpost =
                         'without QuickPost, and if you think you\'ve found a bug ' +
                         'report it at Blood Money.');
                 }
-                this.removeAttribute('disabled');
+                event.target.removeAttribute('disabled');
                 return;
               }
 
@@ -612,7 +612,7 @@ var GFquickpost =
 
   removeGFCodeWhitespaceListener: function(event)
   {
-    var message = this.elements.namedItem('message');
+    var message = event.target.elements.namedItem('message');
     message.value = GFquickpost.removeGFCodeWhitespace(message.value);
   },
 
@@ -651,7 +651,7 @@ var GFquickpost =
 
   breakTagsFromContext: function(event)
   {
-    GFquickpost.breakTags(this);
+    GFquickpost.breakTags(event.target);
 
     if (GFlib.prefs.getBoolPref('elements.charcounts'))
       GFmessages.updateMessageCount(GFlib.getDocument(event));
@@ -733,7 +733,8 @@ var GFquickpost =
         tbody.appendChild(tr);
       }
 
-      this.parentNode.insertBefore(map, this.nextSibling.nextSibling);
+      var mapbutton = event.target;
+      mapbutton.parentNode.insertBefore(map, mapbutton.nextSibling.nextSibling);
     }
   },
 
@@ -742,7 +743,7 @@ var GFquickpost =
     event.preventDefault();
     var doc = GFlib.getDocument(event);
 
-    var character = this.textContent;
+    var character = event.target.textContent;
 
     var msg = doc.getElementsByName('message')[0];
     var endPosition = msg.selectionEnd + character.length;
