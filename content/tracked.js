@@ -183,7 +183,7 @@ var GFtracked =
   {
     var item, topic;
     var trackedMenu = document.getElementById('gamefox-tracked-menu');
-    var strbundle = document.getElementById('strings');
+    var strbundle = document.getElementById('context-strings');
 
     while (trackedMenu.hasChildNodes())
       trackedMenu.removeChild(trackedMenu.firstChild);
