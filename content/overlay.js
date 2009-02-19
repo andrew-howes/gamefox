@@ -668,14 +668,41 @@ var GameFOX =
           tc = username;
 
         // Element for sigs
-        // TODO: a DOM approach or implementing a small HTML parser
         if (sigCond)
-          td[i + 1].innerHTML = td[i + 1].innerHTML
-            .replace(/(---(?:<br>(?:[^<]|<(?!br))*){0,2})$/,
-              '<span class="gamefox-signature">$1</span>');
+        {
+          var msgNode = td[i + 1], dividerIndex = -1, brCount = 0;
+          for (var j = msgNode.childNodes.length - 1; j >= 0; j--)
+          {
+            var childNode = msgNode.childNodes[j];
+            if (childNode.nodeName == '#text')
+            {
+              if (childNode.data.GFtrim() == '---')
+                dividerIndex = j;
+            }
+            else if (childNode.nodeName == 'BR')
+            {
+              ++brCount;
+            }
+            else if (childNode.nodeType == Node.ELEMENT_NODE)
+            {
+              brCount += childNode.getElementsByTagName('br').length;
+            }
+            if (brCount > 2)
+              break;
+          }
+          if (dividerIndex != -1)
+          {
+            var span = doc.createElement('span');
+            span.className = 'gamefox-signature';
+            while (dividerIndex < msgNode.childNodes.length)
+              span.appendChild(msgNode.childNodes[dividerIndex]);
+            msgNode.appendChild(span);
+          }
+        }
 
         // Title for detail link (useful with message-link-icons.css)
-        detailLink.title = 'Detail';
+        if (detailLink)
+          detailLink.title = 'Detail';
 
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
