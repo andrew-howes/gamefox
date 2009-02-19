@@ -674,6 +674,9 @@ var GameFOX =
             .replace(/(---(?:<br>(?:[^<]|<(?!br))*){0,2})$/,
               '<span class="gamefox-signature">$1</span>');
 
+        // Title for detail link (useful with message-link-icons.css)
+        detailLink.title = 'Detail';
+
         // Element for GameFOX links
         var msgLinks = doc.createElement('span');
         msgLinks.className = 'gamefox-message-links';
@@ -765,7 +768,12 @@ var GameFOX =
           if (msgnum == firstPostNum && (td.length > 2 || pagenum > 0))
           {
             td[i].setAttribute('gfdeletetype', 'close');
-            deletelinkCond && a.appendChild(doc.createTextNode('close'));
+
+            if (deletelinkCond)
+            {
+              a.appendChild(doc.createTextNode('close'));
+              a.title = 'Close';
+            }
           }
           else
           {
@@ -773,7 +781,12 @@ var GameFOX =
               td[i].setAttribute('gfdeletetype', 'deletetopic');
             else
               td[i].setAttribute('gfdeletetype', 'deletepost');
-            deletelinkCond && a.appendChild(doc.createTextNode('delete'));
+
+            if (deletelinkCond)
+            {
+              a.appendChild(doc.createTextNode('delete'));
+              a.title = 'Delete';
+            }
           }
 
           if (deletelinkCond)
@@ -795,6 +808,7 @@ var GameFOX =
         {
           var a = doc.createElement('a');
           a.appendChild(doc.createTextNode('filter'));
+          a.title = 'Filter';
           a.className = 'gamefox-filter-link';
           a.href = '#';
           a.addEventListener('click', GameFOX.toggleFilter, false);
@@ -810,6 +824,7 @@ var GameFOX =
         {
           var a = doc.createElement('a');
           a.appendChild(doc.createTextNode('quote'));
+          a.title = 'Quote';
           a.className = 'gamefox-quote-link';
           a.href = '#';
           a.addEventListener('click', function(event){
@@ -1206,6 +1221,7 @@ var GameFOX =
     var leftMsgData = GFutils.getMsgDataDisplay(doc);
     var userTagName = GFlib.onPage(doc, 'archive') ? 'b' : 'a';
     var newText;
+    var newTitle;
     var newFocus;
 
     var msgComponents = GFutils.getMsgComponents(event.target, doc);
@@ -1233,6 +1249,7 @@ var GameFOX =
       }
 
       newText = 'unfilter';
+      newTitle = 'Unfilter';
       doc.gamefox.filtered = true;
     }
     else
@@ -1248,13 +1265,17 @@ var GameFOX =
       }
 
       newText = 'filter';
+      newTitle = 'Filter';
       doc.gamefox.filtered = false;
     }
 
     var filterResult = doc.evaluate('.//a[@class="gamefox-filter-link"]',
         boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < filterResult.snapshotLength; i++)
+    {
       filterResult.snapshotItem(i).textContent = newText;
+      filterResult.snapshotItem(i).title = newTitle;
+    }
 
     doc.defaultView.scrollTo(0, GFutils.getTopOffset(newFocus || msgComponents.header));
   },
