@@ -22,12 +22,9 @@ Used on topic lists in the "last post" column. (v0.6.6)
 
 Used on gentopic.php to activate the floating topic QuickPost.
 
-<h3 id="a_gamefox-quote-link">
-a.gamefox-quote-link
-<span class="new">New in 0.6.8</span>
-</h3>
+<h3 id="a_gamefox-quote-link">a.gamefox-quote-link</h3>
 
-"Quote" links on message lists.
+"Quote" links on message lists. (v0.6.8)
 
 <h3 id="a_gamefox-show-post-link">
 a.gamefox-show-post-link
@@ -98,23 +95,17 @@ Applied to system notification message. (v0.6.7)
 
 Contains group name(s) the adjacent username is a member of. (v0.6.5)
 
-<h3 id="span+gamefox-html-buttons">
-span#gamefox-html-buttons
-<span class="new">New in 0.6.8</span>
-</h3>
+<h3 id="span+gamefox-html-buttons">span#gamefox-html-buttons</h3>
 
-Container for HTML buttons.
+Container for HTML buttons. (v0.6.8)
 
 <h3 id="span+gamefox-message-count">span#gamefox-message-count</h3>
 
 Shows the character count for the message. (v0.6.5)
 
-<h3 id="span_gamefox-message-links">
-span.gamefox-message-links
-<span class="new">New in 0.6.8</span>
-</h3>
+<h3 id="span_gamefox-message-links">span.gamefox-message-links</h3>
 
-Container for GameFOX action links applied to message headers.
+Container for GameFOX action links applied to message headers. (v0.6.8)
 
 <h3 id="span_gamefox-pagelist">span.gamefox-pagelist</h3>
 
