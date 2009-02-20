@@ -226,28 +226,31 @@ var GFcontext =
     }
   },
 
-  populateMisc: function()
+  populateLinks: function()
   {
-    var menu, links, item, i;
+    var menu, links, item, i, baseUri;
 
-    menu = document.getElementById('gamefox-misc-menu');
+    menu = document.getElementById('gamefox-links-menu');
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
+    baseUri = GFlib.domain + GFlib.path;
     links = [
-      GFlib.domain + GFlib.path + 'myposts.php', 'Active Messages', 'A',
-      GFlib.domain + GFlib.path + 'index.php', 'Boards', 'B',
-      GFlib.domain + GFlib.path + 'tracked.php', 'Tracked Topics', 'T',
-      GFlib.domain + GFlib.path + 'user.php', 'User Profile', 'U'
+      'myposts.php', 'Active Messages', 'A',
+      'index.php', 'Boards', 'B',
+      'tracked.php', 'Tracked Topics', 'T',
+      'user.php', 'User Profile', 'U'
     ];
 
     for (i = 0; i < links.length; i += 3)
     {
+
       item = document.createElement('menuitem');
       item.setAttribute('label', links[i+1]);
       item.setAttribute('accesskey', links[i+2]);
-      item.setAttribute('oncommand', 'GFlib.openPage("' + links[i] + '", 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) GFlib.openPage("' + links[i] + '", 0)');
+      item.setAttribute('oncommand', 'GFlib.openPage("' + baseUri + links[i] + '", 2)');
+      item.setAttribute('onclick',
+          'if (event.button == 1) GFlib.openPage("' + baseUri + links[i] + '", 1)');
       menu.appendChild(item);
     }
   }

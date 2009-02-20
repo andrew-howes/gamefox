@@ -20,8 +20,8 @@
 <!ENTITY menu.accounts.accesskey "A">
 <!ENTITY menu.favorites.label "Favorites">
 <!ENTITY menu.favorites.accesskey "F">
-<!ENTITY menu.misc.label "Miscellaneous">
-<!ENTITY menu.misc.accesskey "M">
+<!ENTITY menu.links.label "Links">
+<!ENTITY menu.links.accesskey "L">
 
 <!ENTITY sidebar.title "GameFOX">
 

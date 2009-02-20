@@ -77,9 +77,9 @@
           <menupopup id="gamefox-favorites-menu" onpopupshowing="GFcontext.populateFavorites();"/>
         </menu>
 
-        <menu id="gamefox-misc" label="&menu.misc.label;"
-          accesskey="&menu.misc.accesskey;">
-          <menupopup id="gamefox-misc-menu" onpopupshowing="GFcontext.populateMisc();"/>
+        <menu id="gamefox-links" label="&menu.links.label;"
+          accesskey="&menu.links.accesskey;">
+          <menupopup id="gamefox-links-menu" onpopupshowing="GFcontext.populateLinks();"/>
         </menu>
       </menupopup>
     </menu>
