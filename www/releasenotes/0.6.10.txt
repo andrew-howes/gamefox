@@ -1,13 +1,25 @@
 ### About this version
 
-#### Tags
+#### Tagging
+
 Tracked topics have been integrated into GameFOX and all tag-related features
-have been disabled. Tagging is now deprecated and will eventually be removed.
-Until then, everything can be restored from the options.
+have been disabled. Tagging is now considered deprecated.
 
 If you have any tracked topics on GameFAQs, they will be automatically imported
 into GameFOX. Your tags are not converted to tracked topics, so if you want to
 start tracking them you will need to do so manually.
+
+You can access your tracked topics by going to Tools | GameFOX | Topics | Tags.
+
+##### Re-enabling tagging
+
+Re-enabling tagging can be done from the options (Tools | GameFOX). There are
+several options that must be toggled:
+
+* Main | Page | Tag Topic link
+* Main | Sidebar | Tags list
+* Mouse | Context Menu | Main | Tag Topic
+* Mouse | Context Menu | Submenu | Tags
 
 #### Highlighting
 
