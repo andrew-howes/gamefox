@@ -26,6 +26,8 @@ var GFcss =
   init: function()
   {
     var defaults = [
+        ['gamefox', 'gamefox-character-map.css', 'Character map',
+              'Makes the character map look pretty.', '', true],
         ['gamefox', 'gamefox-sidebar.css', 'Classic sidebar',
               'A classic style for the GameFOX sidebar.', '', false],
         ['gamefox', 'gamefox-essentials.css', 'Essentials',

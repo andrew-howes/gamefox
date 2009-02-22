@@ -57,17 +57,24 @@ var GFquickpost =
       form.appendChild(doc.createElement('br'));
     }
 
+    var buttons = doc.createElement('span');
+
     // HTML buttons
     if (GFquickpost.createHTMLButtonsPref())
-    {
-      form.appendChild(GFquickpost.createHTMLButtons(doc));
-      form.appendChild(doc.createElement('br'));
-    }
+      buttons.appendChild(GFquickpost.createHTMLButtons(doc));
 
-    // Character map
+    // Character map button
     if (GFlib.prefs.getBoolPref('elements.charmap'))
     {
-      form.appendChild(GFquickpost.createCharacterMapButton(doc));
+      if (buttons.hasChildNodes())
+        buttons.appendChild(doc.createTextNode(' | '));
+
+      buttons.appendChild(GFquickpost.createCharacterMapButton(doc));
+    }
+
+    if (buttons.hasChildNodes())
+    {
+      form.appendChild(buttons);
       form.appendChild(doc.createElement('br'));
     }
 
@@ -669,7 +676,7 @@ var GFquickpost =
   {
     var input = doc.createElement('input');
     input.type = 'submit';
-    input.value = 'Toggle Character Map';
+    input.value = 'Character Map';
     input.tabIndex = 4;
     input.addEventListener('click', GFquickpost.toggleCharacterMap, false);
     return input;
@@ -689,6 +696,10 @@ var GFquickpost =
     {
       map = doc.createElement('div');
       map.id = 'gamefox-character-map';
+      map.style.top = event.target.offsetTop
+        + doc.body.parentNode.offsetTop - 200 + 'px';
+      map.style.left = event.target.offsetLeft + event.target.clientWidth
+        + doc.body.parentNode.offsetLeft + 'px';
       var table = doc.createElement('table');
       map.appendChild(table);
       var tbody = doc.createElement('tbody');
@@ -734,7 +745,8 @@ var GFquickpost =
       }
 
       var mapbutton = event.target;
-      mapbutton.parentNode.insertBefore(map, mapbutton.nextSibling.nextSibling);
+      mapbutton.parentNode.parentNode.insertBefore(map,
+          mapbutton.parentNode.nextSibling.nextSibling);
     }
   },
 
