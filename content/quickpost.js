@@ -684,7 +684,11 @@ var GFquickpost =
     var map = doc.getElementById('gamefox-character-map');
     if (map)
     {
-      map.style.display = (map.style.display == 'none') ? 'block' : 'none';
+      map.style.display = map.style.display == 'none' ? '' : 'none';
+      map.style.top = event.target.offsetTop
+        + doc.body.parentNode.offsetTop - 200 + 'px';
+      map.style.left = event.target.offsetLeft + event.target.clientWidth
+        + doc.body.parentNode.offsetLeft + 'px';
     }
     else
     {
