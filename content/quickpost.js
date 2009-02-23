@@ -57,24 +57,10 @@ var GFquickpost =
       form.appendChild(doc.createElement('br'));
     }
 
-    var buttons = doc.createElement('span');
-
     // HTML buttons
     if (GFquickpost.createHTMLButtonsPref())
-      buttons.appendChild(GFquickpost.createHTMLButtons(doc));
-
-    // Character map button
-    if (GFlib.prefs.getBoolPref('elements.charmap'))
     {
-      if (buttons.hasChildNodes())
-        buttons.appendChild(doc.createTextNode(' | '));
-
-      buttons.appendChild(GFquickpost.createCharacterMapButton(doc));
-    }
-
-    if (buttons.hasChildNodes())
-    {
-      form.appendChild(buttons);
+      form.appendChild(GFquickpost.createHTMLButtons(doc));
       form.appendChild(doc.createElement('br'));
     }
 
@@ -552,7 +538,7 @@ var GFquickpost =
     var span = doc.createElement('span');
     span.id = 'gamefox-html-buttons';
 
-    var tags = new Array();
+    var tags = [];
     // Standard
     if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
       tags.push(
@@ -573,39 +559,56 @@ var GFquickpost =
           'em,i', 'Inline Code', 'l');
 
     var accesskeyPrefix = GFutils.getAccesskeyPrefix();
+    var button;
 
     for (var i = 0; i < tags.length; i += 3)
     {
-      var tagbutton = doc.createElement('input');
-      span.appendChild(tagbutton);
-      tagbutton.type = 'submit';
-      tagbutton.value = tags[i + 1];
-      tagbutton.name = tags[i];
-      tagbutton.title = '<' + tags[i].replace(/,/g, '><') +
+      if (i != 0)
+        span.appendChild(doc.createTextNode(' '));
+
+      button = doc.createElement('input');
+      button.type = 'submit';
+      button.value = tags[i + 1];
+      button.name = tags[i];
+      button.title = '<' + tags[i].replace(/,/g, '><') +
         (tags[i] == 'br' ? ' /' : '') + '> [' + accesskeyPrefix + tags[i + 2] + ']';
-      tagbutton.accessKey = tags[i + 2];
-      tagbutton.tabIndex = 4;
+      button.accessKey = tags[i + 2];
+      button.tabIndex = 4;
+      button.addEventListener('click', GFquickpost.insertTag, false);
 
-      tagbutton.addEventListener('click', GFquickpost.insertTag, false);
-
-      span.appendChild(doc.createTextNode(' '));
+      span.appendChild(button);
     }
 
-    // Break tags button
+    // Break tags
     if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags'))
     {
-      if (tags.length)
+      if (span.hasChildNodes())
         span.appendChild(doc.createTextNode(' | '));
 
-      var breaktags = doc.createElement('input');
-      span.appendChild(breaktags);
-      breaktags.type = 'submit';
-      breaktags.value = 'Break HTML Tags';
-      breaktags.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
-      breaktags.accessKey = 'r';
-      breaktags.tabIndex = 4;
+      button = doc.createElement('input');
+      button.type = 'submit';
+      button.value = 'Break HTML Tags';
+      button.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
+      button.accessKey = 'r';
+      button.tabIndex = 4;
+      button.addEventListener('click', GFquickpost.breakTagsFromButton, false);
 
-      breaktags.addEventListener('click', GFquickpost.breakTagsFromButton, false);
+      span.appendChild(button);
+    }
+
+    // Character map
+    if (GFlib.prefs.getBoolPref('elements.charmap'))
+    {
+      if (span.hasChildNodes())
+        span.appendChild(doc.createTextNode(' | '));
+
+      button = doc.createElement('input');
+      button.type = 'submit';
+      button.value = 'Character Map';
+      button.tabIndex = 4;
+      button.addEventListener('click', GFquickpost.toggleCharacterMap, false);
+
+      span.appendChild(button);
     }
 
     return span;
@@ -667,19 +670,10 @@ var GFquickpost =
   createHTMLButtonsPref: function()
   {
     return GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons')
+      || GFlib.prefs.getBoolPref('elements.charmap')
       || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
       || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode')
       || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags');
-  },
-
-  createCharacterMapButton: function(doc)
-  {
-    var input = doc.createElement('input');
-    input.type = 'submit';
-    input.value = 'Character Map';
-    input.tabIndex = 4;
-    input.addEventListener('click', GFquickpost.toggleCharacterMap, false);
-    return input;
   },
 
   toggleCharacterMap: function(event)
@@ -744,9 +738,9 @@ var GFquickpost =
         tbody.appendChild(tr);
       }
 
-      var mapbutton = event.target;
-      mapbutton.parentNode.parentNode.insertBefore(map,
-          mapbutton.parentNode.nextSibling.nextSibling);
+      var button = event.target;
+      button.parentNode.parentNode.insertBefore(map,
+          button.parentNode.nextSibling.nextSibling);
     }
   },
 

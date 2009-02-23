@@ -317,13 +317,6 @@ var GameFOX =
         message.parentNode.insertBefore(doc.createElement('br'), message);
       }
 
-      // Character map
-      if (GFlib.prefs.getBoolPref('elements.charmap'))
-      {
-        message.parentNode.insertBefore(GFquickpost.createCharacterMapButton(doc), message);
-        message.parentNode.insertBefore(doc.createElement('br'), message);
-      }
-
       // Character count
       if (GFlib.prefs.getBoolPref('elements.charcounts'))
       {
