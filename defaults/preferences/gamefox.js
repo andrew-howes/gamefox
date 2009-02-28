@@ -66,7 +66,7 @@ pref("gamefox.signature.serialized", "[{accounts:\"\", boards:\"\", body:\"\"}]"
 pref("gamefox.signature.newline", false);
 pref("gamefox.signature.applyeverywhere", true);
 pref("gamefox.signature.addition", 2);
-pref("gamefox.signature.selection", 1);
+pref("gamefox.signature.selectMostSpecific", true);
 
 pref("gamefox.theme.disablegamefaqscss", false);
 pref("gamefox.theme.css.serialized", "({gamefox:{}, bundled:{}, user:{}})");

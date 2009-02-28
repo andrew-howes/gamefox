@@ -16,13 +16,10 @@
 <!ENTITY grab.button "Grab from GameFAQs">
 <!ENTITY save.button "Save to GameFAQs">
 
-<!ENTITY onPostPage.label "Also use on standard GameFAQs post page">
+<!ENTITY onPostPage.label "Replace GameFAQs signature on standard post page">
 <!ENTITY extraLineBreak.label "Insert an additional line break before the separator">
+<!ENTITY selectMostSpecific.label "Select signatures with the most specific account and board settings">
 
 <!ENTITY appendAfter.label "Append signature after:">
 <!ENTITY addBefore.label "Page has loaded">
 <!ENTITY addAfter.label "Post is submitted">
-
-<!ENTITY selectOrder.label "Select a signature in order:">
-<!ENTITY random.label "Random">
-<!ENTITY first.label "First">

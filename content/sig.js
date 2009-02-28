@@ -66,11 +66,17 @@ var GFsig =
       matches[2].push(sigs[0]);
 
     var sig;
-    var bestIndex = matches[0].length ? 0 : matches[1].length ? 1 : 2;
-    if (GFlib.prefs.getIntPref('signature.selection') == 1) // random
+
+    if (GFlib.prefs.getBoolPref('signature.selectMostSpecific'))
+    {
+      var bestIndex = matches[0].length ? 0 : matches[1].length ? 1 : 2;
       sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
-    else // first
-      sig = matches[bestIndex][0];
+    }
+    else
+    {
+      var allMatches = GFutils.mergeArray(matches[0], matches[1], matches[2]);
+      sig = allMatches[Math.floor(Math.random() * allMatches.length)];
+    }
 
     // default is only sig and is empty
     if (sig == undefined)

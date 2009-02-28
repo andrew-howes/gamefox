@@ -41,9 +41,9 @@
         type="bool"/>
       <preference id="signature.applyeverywhere"
         name="gamefox.signature.applyeverywhere" type="bool"/>
+      <preference id="signature.selectMostSpecific"
+        name="gamefox.signature.selectMostSpecific" type="bool"/>
       <preference id="signature.addition" name="gamefox.signature.addition"
-        type="int"/>
-      <preference id="signature.selection" name="gamefox.signature.selection"
         type="int"/>
     </preferences>
 
@@ -110,6 +110,8 @@
               preference="signature.applyeverywhere"/>
             <checkbox label="&extraLineBreak.label;"
               preference="signature.newline"/>
+            <checkbox label="&selectMostSpecific.label;"
+              preference="signature.selectMostSpecific"/>
           </groupbox>
 
           <groupbox>
@@ -119,13 +121,6 @@
               orient="horizontal" aria-labelledby="additionDesc">
               <radio value="2" label="&addBefore.label;"/>
               <radio value="1" label="&addAfter.label;"/>
-            </radiogroup>
-
-            <description id="selectionDesc" control="selection">&selectOrder.label;</description>
-            <radiogroup id="selection" preference="signature.selection"
-              orient="horizontal" aria-labelledby="selectionDesc">
-              <radio value="1" label="&random.label;"/>
-              <radio value="2" label="&first.label;"/>
             </radiogroup>
           </groupbox>
         </tabpanel>
