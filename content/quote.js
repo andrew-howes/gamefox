@@ -74,7 +74,7 @@ var GFquote =
     var body = quoteMsg.
       replace(/<br\s*\/?>/gi, '\n').
       replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1').
-      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u)\b[^<>]*\/?>/gi, '').
+      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u|embed)\b[^<>]*\/?>/gi, '').
       GFtrim();
 
     // Get rid of signature
