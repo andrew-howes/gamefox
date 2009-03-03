@@ -102,7 +102,7 @@ pref("gamefox.context.breaktags", true);
 pref("gamefox.context.delete", true);
 pref("gamefox.context.favorites", true);
 pref("gamefox.context.filter", true);
-pref("gamefox.context.misc", true);
+pref("gamefox.context.links", true);
 pref("gamefox.context.pagelist", true);
 pref("gamefox.context.quote", true);
 pref("gamefox.context.sidebar", true);

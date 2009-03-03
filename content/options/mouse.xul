@@ -63,7 +63,7 @@
         type="bool"/>
       <preference id="context.favorites" name="gamefox.context.favorites"
         type="bool"/>
-      <preference id="context.misc" name="gamefox.context.misc"
+      <preference id="context.links" name="gamefox.context.links"
         type="bool"/>
     </preferences>
 
@@ -212,8 +212,8 @@
                       preference="context.favorites"/>
                   </hbox>
                   <hbox>
-                    <checkbox label="&submenu.misc.label;"
-                      preference="context.misc"/>
+                    <checkbox label="&submenu.links.label;"
+                      preference="context.links"/>
                   </hbox>
                 </row>
               </rows>

@@ -35,6 +35,8 @@ var GFcontext =
       getBoolPref('context.accounts');
     document.getElementById('gamefox-favorites').hidden = !GFlib.prefs.
       getBoolPref('context.favorites');
+    document.getElementById('gamefox-links').hidden = !GFlib.prefs.
+      getBoolPref('context.links');
 
     // Submenu
     var items = document.getElementById('gamefox-context-popup').childNodes;
