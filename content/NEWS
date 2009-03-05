@@ -1,5 +1,20 @@
-2009-02-xx:
+2009-03-xx:
     * version 0.6.11
+    * Add character map above the post message box
+    * New CSS: Character map - makes the character map appear in a popup
+    * Move the "Active Messages" and "Tracked Topics" context menu items out of
+      the "Tags" submenu and into a new "Links" submenu
+    * Fix a quoting bug that could cause part of the QuickWhois information to
+      appear in the quoted message header
+    * Sigs are now removed on all platforms when using selection quoting
+    * Add an option to go back to the board after QuickPosting a message
+    * Add an option to disable the "blank post" warning
+    * Add tooltip for message detail and other message header links
+    * Fix an issue with the signature-wrapping spans that would break other
+      extensions/scripts that add event listeners to elements in messages
+    * Strip quoted <embed> tags
+    * Remove the Random/First sig selection option and replace with an option
+      that toggles whether or not to use the most specific matching sigs
 
 2009-02-13:
     * version 0.6.10
