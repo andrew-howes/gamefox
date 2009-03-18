@@ -15,6 +15,7 @@
     * Strip quoted <embed> tags
     * Remove the Random/First sig selection option and replace with an option
       that toggles whether or not to use the most specific matching sigs
+    * New CSS: Basic9for10
 
 2009-02-13:
     * version 0.6.10

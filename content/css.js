@@ -43,6 +43,8 @@ var GFcss =
         ['bundled', 'ascii-art-font.css', 'ASCII art font',
               'Increases the font size of messages to make ASCII art look better.',
               '', false],
+        ['bundled', 'basic9for10.css', 'Basic9for10', 'A basic v9 style. Requires'
+                + ' the V9 style selected on GameFAQs.', 'TakatoMatsuki', false],
         ['bundled', 'capitalized-message-links.css', 'Capitalized message links',
               'Capitalizes the links in message headers.', '', false],
         ['bundled', 'ricapar.css', 'Classic',
