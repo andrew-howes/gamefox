@@ -58,9 +58,9 @@ col.status img, table.topics tr th:first-child img, table.topics tr:not(.gamefox
 
 
 /** GFCode **/ /** Code modified from GameFOX **/
-.message i > p, .message em > p {border: 1px #898989 solid !important; margin: 0 auto !important; padding: 3px !important; width: 96% !important; }
+.message i > p, .message em > p {border: 1px #898989 solid !important; margin: 0 auto !important; padding: 3px !important; width: 96% !important; -moz-border-radius: 0 !important;}
 .message i > p {font-style: normal !important; background:white !important; }
-.message i > p > strong:first-child { border: 0px !important; display: block !important; font-style: normal !important; font-weight: bold !important; padding: 3px !important; background:#6564FF !important; margin: -1px -1px 2px !important; color:white !important;}
+.message i > p > strong:first-child { border: 0px !important; display: block !important; font-style: normal !important; font-weight: bold !important; padding: 3px !important; background:#6564FF !important; margin: -1px -1px 2px !important; color:white !important; -moz-border-radius: 0 !important;}
 .message i > p > strong:first-child + br { display: none !important; }
 .message em > p, .message em > i { font-family: monospace !important;  font-style: normal !important; white-space: -moz-pre-wrap !important; white-space: pre-wrap !important; background:#EEEEEE !important;}
 .message p p p p { display: none !important; }
