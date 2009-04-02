@@ -415,6 +415,10 @@
         font-weight: bold;
     }
 
+    .foot {
+        text-align: center;
+    }
+
     .bracket .win {
         background: #8f8;
     }
