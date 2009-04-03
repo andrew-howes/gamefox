@@ -40,16 +40,7 @@
                         <Description>
                                 <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
                                 <em:minVersion>2.0a1pre</em:minVersion>
-                                <em:maxVersion>2.0a3pre</em:maxVersion>
-                        </Description>
-                </em:targetApplication>
-
-                <!-- Flock -->
-                <em:targetApplication>
-                        <Description>
-                                <em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
-                                <em:minVersion>1.0</em:minVersion>
-                                <em:maxVersion>1.2.*</em:maxVersion>
+                                <em:maxVersion>2.0b1pre</em:maxVersion>
                         </Description>
                 </em:targetApplication>
         </Description>
