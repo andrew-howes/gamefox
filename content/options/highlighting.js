@@ -17,14 +17,14 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFhighlightingOptions =
+var gamefox_options_highlighting =
 {
   prepareOptionsPane: function()
   {
     this.populate();
 
     // watch for changes caused by menuCheckChange
-    new GFobserver('userlist.serialized', this.updateUsers);
+    new gamefox_observer('userlist.serialized', this.updateUsers);
   },
 
   makeGroupbox: function(id, name, color, users)
@@ -186,7 +186,7 @@ var GFhighlightingOptions =
 
   populate: function()
   {
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var vbox = document.getElementById('groups');
 
     for (var i = 0; i < userlist.length; i++)
@@ -194,12 +194,12 @@ var GFhighlightingOptions =
           i, userlist[i].name, userlist[i].color, userlist[i].users));
 
     // if called directly, will throw "TypeError: this.mColorBox has no properties"
-    setTimeout(GFhighlightingOptions.setDefaultValues, 0);
+    setTimeout(gamefox_options_highlighting.setDefaultValues, 0);
   },
 
   setDefaultValues: function()
   {
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var vbox = document.getElementById('groups');
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
@@ -222,13 +222,13 @@ var GFhighlightingOptions =
       groups[i].getElementsByTagName('menulist')[2]
         .selectedIndex = idx[userlist[i].messages];
 
-      GFhighlightingOptions.disableMenulists(userlist[i].type, groups[i]);
+      gamefox_options_highlighting.disableMenulists(userlist[i].type, groups[i]);
     }
   },
 
   populateLast: function()
   {
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var id = userlist.length - 1;
     userlist = userlist[id];
     var vbox = document.getElementById('groups');
@@ -295,17 +295,17 @@ var GFhighlightingOptions =
 
     // disable options that don't apply
     if (name == 'type')
-      GFhighlightingOptions.disableMenulists(value, groupbox);
+      gamefox_options_highlighting.disableMenulists(value, groupbox);
 
     // get and set pref
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     userlist[idx][name] = value;
-    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   updateUsers: function()
   {
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var groups = document.getElementById('groups')
       .getElementsByTagName('groupbox');
     var textboxes;
@@ -324,16 +324,16 @@ var GFhighlightingOptions =
   {
     var groupbox = event.target.parentNode.parentNode;
     var id = groupbox.id.substring(3);
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
 
     if (userlist[id].name.length)
     {
-      if (!GFlib.confirm('Really delete the group "' + userlist[id].name + '"?'))
+      if (!gamefox_lib.confirm('Really delete the group "' + userlist[id].name + '"?'))
         return;
     }
     else
     {
-      if (!GFlib.confirm('Really delete group #' + (parseInt(id) + 1) + '?'))
+      if (!gamefox_lib.confirm('Really delete group #' + (parseInt(id) + 1) + '?'))
         return;
     }
 
@@ -353,7 +353,7 @@ var GFhighlightingOptions =
     }
 
     userlist.splice(id, 1);
-    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   disableMenulists: function(type, groupbox)

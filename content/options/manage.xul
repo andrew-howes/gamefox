@@ -42,11 +42,11 @@
 
       <hbox pack="center" style="margin-bottom: 45px;">
         <button label="&import.button;" icon="open"
-          oncommand="GFmanageOptions.importPrefs(event.target);"/>
+          oncommand="gamefox_options_manage.importPrefs(event.target);"/>
         <button label="&export.button;" icon="save"
-          oncommand="GFmanageOptions.exportPrefs(event.target);"/>
+          oncommand="gamefox_options_manage.exportPrefs(event.target);"/>
         <button label="&reset.button;" icon="clear"
-          oncommand="GFmanageOptions.resetPrefs(event.target);"/>
+          oncommand="gamefox_options_manage.resetPrefs(event.target);"/>
       </hbox>
     </notificationbox>
 

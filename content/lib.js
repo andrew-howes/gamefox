@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFlib =
+var gamefox_lib =
 {
   domain: 'http://www.gamefaqs.com',
   path: '/boards/',
@@ -91,7 +91,7 @@ var GFlib =
 
   onBoards: function(doc)
   {
-    return GFlib.onGF(doc) && /^\/boards(\/|$|\?)/.test(doc.location.pathname);
+    return gamefox_lib.onGF(doc) && /^\/boards(\/|$|\?)/.test(doc.location.pathname);
   },
 
   onPage: function(doc, page)
@@ -120,7 +120,7 @@ var GFlib =
         var div = doc.getElementById('board_wrap');
         if (div)
         {
-          if (GFlib.onPage(doc, 'tracked'))
+          if (gamefox_lib.onPage(doc, 'tracked'))
           {
             doc.gamefox.pageType = ['topics', 'tracked'];
             return true;
@@ -148,7 +148,7 @@ var GFlib =
         {
           var table = doc.evaluate('div[@class="board"]/table[@class="message"]',
               div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (table && !GFlib.onPage(doc, 'usernote'))
+          if (table && !gamefox_lib.onPage(doc, 'usernote'))
           {
             var boards = doc.evaluate('div[@class="board"]', div, null,
                 XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
@@ -176,13 +176,13 @@ var GFlib =
 
   setTitle: function(doc, title, prefix, page)
   {
-    if (!GFlib.prefs.getBoolPref('elements.titlechange'))
+    if (!gamefox_lib.prefs.getBoolPref('elements.titlechange'))
     {
       // fix GameFAQs' double encoding of topic title
-      doc.title = GFutils.specialCharsDecode(doc.title);
+      doc.title = gamefox_utils.specialCharsDecode(doc.title);
       return;
     }
-    if (!GFlib.prefs.getBoolPref('elements.titleprefix')) prefix = null;
+    if (!gamefox_lib.prefs.getBoolPref('elements.titleprefix')) prefix = null;
 
     doc.title = 'GameFAQs'
       + (prefix == null ? '' : ':' + prefix)
@@ -196,7 +196,7 @@ var GFlib =
   open: function(tagID, openType)
   {
     var IDs = tagID.split(',');
-    var tagURI = GFlib.domain + GFlib.path;
+    var tagURI = gamefox_lib.domain + gamefox_lib.path;
 
     tagURI += (IDs[1] ? 'genmessage.php' : 'gentopic.php')
               + '?board=' + IDs[0] + (IDs[1] ? '&topic=' + IDs[1]

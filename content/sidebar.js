@@ -18,39 +18,39 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFsidebar =
+var gamefox_sidebar =
 {
   onload: function()
   {
     // hide user disabled sections
-    GFsidebar.updateSections();
-    new GFobserver('sidebar', GFsidebar.updateSections);
+    gamefox_sidebar.updateSections();
+    new gamefox_observer('sidebar', gamefox_sidebar.updateSections);
 
     // link middle clicking
     var links = document.getElementsByTagName('a');
     for (var i = 0; i < links.length; i++)
       links[i].setAttribute('onmousedown', 'if (event.button == 1) ' +
-          'GFlib.newTab(this.href, 1)');
+          'gamefox_lib.newTab(this.href, 1)');
 
     // listeners
     document.getElementById('gamefaqs-login-form').addEventListener(
-        'submit', GFsidebar.redirectLogin, false);
+        'submit', gamefox_sidebar.redirectLogin, false);
     document.getElementById('gamefaqs-login-submit').addEventListener(
-        'mousedown', GFsidebar.newTabLogin, false);
+        'mousedown', gamefox_sidebar.newTabLogin, false);
     document.getElementById('accounts-add-link').addEventListener(
-        'click', GFsidebar.promptAccountsLogin, false);
+        'click', gamefox_sidebar.promptAccountsLogin, false);
     document.getElementById('accounts-rm-link').addEventListener(
-        'click', GFsidebar.promptAccountsRemove, false);
+        'click', gamefox_sidebar.promptAccountsRemove, false);
     document.getElementById('favorites-menu').addEventListener(
-        'mousedown', GFfavorites.selectFavorite, false);
+        'mousedown', gamefox_favorites.selectFavorite, false);
 
     // accounts
-    GFsidebar.populateAccounts();
-    new GFobserver('accounts', GFsidebar.populateAccounts);
+    gamefox_sidebar.populateAccounts();
+    new gamefox_observer('accounts', gamefox_sidebar.populateAccounts);
 
     // favorites
-    GFsidebar.updateFavorites();
-    new GFobserver('favorites.serialized', GFsidebar.updateFavorites);
+    gamefox_sidebar.updateFavorites();
+    new gamefox_observer('favorites.serialized', gamefox_sidebar.updateFavorites);
   },
 
   updateSections: function()
@@ -78,14 +78,14 @@ var GFsidebar =
 
   updateFavorites: function()
   {
-    GFfavorites.populateFavorites(document,
+    gamefox_favorites.populateFavorites(document,
         document.getElementById('favorites-menu'));
   },
 
   populateAccounts: function()
   {
     var accountList, username, item, firstAccount;
-    var currentAccount = GFlib.prefs.getCharPref('accounts.current');
+    var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
 
     accountList = document.getElementById('accounts-menu');
     if (!accountList)
@@ -94,11 +94,11 @@ var GFsidebar =
     while (accountList.hasChildNodes())
       accountList.removeChild(accountList.firstChild);
 
-    GFaccounts.read();
+    gamefox_accounts.read();
 
     document.getElementById('accounts-remove').style.display = 'none';
     firstAccount = true;
-    for (username in GFaccounts.accounts)
+    for (username in gamefox_accounts.accounts)
     {
       if (firstAccount)
       {
@@ -106,7 +106,7 @@ var GFsidebar =
         firstAccount = false;
       }
       item = document.createElement('a');
-      item.setAttribute('onclick', 'GFaccounts.switchAccount("' + username + '");return false');
+      item.setAttribute('onclick', 'gamefox_accounts.switchAccount("' + username + '");return false');
       item.appendChild(document.createTextNode(username +
             (username.toLowerCase() == currentAccount.toLowerCase() ?
              '*' : '')));
@@ -122,7 +122,7 @@ var GFsidebar =
       return;
 
     var form = event.target.parentNode;
-    GFsidebar.redirectLogin(event);
+    gamefox_sidebar.redirectLogin(event);
 
     var browserWindow = Cc['@mozilla.org/appshell/window-mediator;1'].
       getService(Ci.nsIWindowMediator).
@@ -137,31 +137,31 @@ var GFsidebar =
 
   redirectLogin: function(event)
   {
-    var sidebarDoc = GFlib.getDocument(event);
+    var sidebarDoc = gamefox_lib.getDocument(event);
 
     var doc = Cc['@mozilla.org/appshell/window-mediator;1'].
       getService(Ci.nsIWindowMediator).getMostRecentWindow(
           'navigator:browser').content.document;
     var path = sidebarDoc.getElementById('gamefaqs-login-path');
 
-    if (GFlib.onGF(doc))
+    if (gamefox_lib.onGF(doc))
       path.value = doc.location.href.replace(
           /&(action)=[^&]*(?=&|$)|\b(action)=[^&]*&/, '');
     else
-      path.value = GFlib.domain + GFlib.path + 'index.php';
+      path.value = gamefox_lib.domain + gamefox_lib.path + 'index.php';
   },
 
   promptAccountsLogin: function(event)
   {
     event.preventDefault();
-    GFaccounts.promptLogin();
+    gamefox_accounts.promptLogin();
   },
 
   promptAccountsRemove: function(event)
   {
     event.preventDefault();
-    GFaccounts.promptRemoveAccount();
+    gamefox_accounts.promptRemoveAccount();
   }
 };
 
-window.addEventListener('load', GFsidebar.onload, false);
+window.addEventListener('load', gamefox_sidebar.onload, false);

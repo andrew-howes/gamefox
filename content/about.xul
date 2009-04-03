@@ -42,10 +42,10 @@
       <label id="title" value="&caption.title;"/>
       <spacer flex="1"/>
       <label class="url-label important" value="&news.label;"
-        onclick="GFlib.newTab('chrome://gamefox/content/NEWS', event.button);"/>
+        onclick="gamefox_lib.newTab('chrome://gamefox/content/NEWS', event.button);"/>
       <label class="url-label important" value="&support.label;"
         tooltiptext="&support.tooltip;"
-        onclick="GFlib.newTab('http://www.gamefaqs.com/boards/gentopic.php?board=565885', event.button);"/>
+        onclick="gamefox_lib.newTab('http://www.gamefaqs.com/boards/gentopic.php?board=565885', event.button);"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
     <label id="version" value=""/>

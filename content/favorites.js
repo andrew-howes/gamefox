@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFfavorites =
+var gamefox_favorites =
 {
   populateFavorites: function(doc, favList)
   {
@@ -26,7 +26,7 @@ var GFfavorites =
     while (favList.hasChildNodes())
       favList.removeChild(favList.firstChild);
 
-    favs = eval(GFlib.prefs.getCharPref('favorites.serialized'));
+    favs = eval(gamefox_lib.prefs.getCharPref('favorites.serialized'));
 
     item = doc.createElement('option');
     item.value = 0;
@@ -45,6 +45,6 @@ var GFfavorites =
   {
     var node = event.target;
     if (node.nodeName.toLowerCase() == 'option' && node.value != 0)
-      GFlib.open(node.value, event.button == 1 ? 0 : 2);
+      gamefox_lib.open(node.value, event.button == 1 ? 0 : 2);
   }
 };

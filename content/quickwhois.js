@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFquickwhois =
+var gamefox_quickwhois =
 {
   quickWhois: function(event)
   {
@@ -50,7 +50,7 @@ var GFquickwhois =
 
     var request = new XMLHttpRequest();
     request.open('GET', node.getElementsByTagName('a')[0].href);
-    var ds = GFlib.thirdPartyCookieFix(request);
+    var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -83,7 +83,7 @@ var GFquickwhois =
               );
         for (var i = 0; i < profileFields.length; i += 2)
         {
-          if ((profileField = GFquickwhois.findInfo(profileFields[i], request.responseText))
+          if ((profileField = gamefox_quickwhois.findInfo(profileFields[i], request.responseText))
               != '')
           {
             if (profileFields[i] == 'Board User Level')
@@ -94,9 +94,9 @@ var GFquickwhois =
           }
         }
         div.innerHTML = profileFieldsHTML.replace(/<br\/>$/, '')
-          + GFquickwhois.findInfo('Contributor Page', request.responseText).
+          + gamefox_quickwhois.findInfo('Contributor Page', request.responseText).
           replace(/^</, '<br/><')
-          + GFquickwhois.findInfo('My Games', request.responseText).
+          + gamefox_quickwhois.findInfo('My Games', request.responseText).
           replace(/^</, '<br/><');
       }
     };
@@ -110,7 +110,7 @@ var GFquickwhois =
     var matches = pattern.exec(where);
 
     if (matches)
-      return matches[3].GFtrim();
+      return matches[3].gamefox_trim();
 
     return '';
   }

@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFutils =
+var gamefox_utils =
 {
   parseHTMLSelect: function(str, name)
   {
@@ -60,13 +60,13 @@ var GFutils =
 
   getString: function(pref, prefService)
   {
-    return (prefService == null ? GFlib.prefs : prefService).
+    return (prefService == null ? gamefox_lib.prefs : prefService).
       getComplexValue(pref, Ci.nsISupportsString).data;
   },
 
   setString: function(pref, str, prefService)
   {
-    prefService = (prefService == null) ? GFlib.prefs : prefService;
+    prefService = (prefService == null) ? gamefox_lib.prefs : prefService;
     var ustr = Cc['@mozilla.org/supports-string;1'].
       createInstance(Ci.nsISupportsString);
     ustr.data = str;
@@ -138,7 +138,7 @@ var GFutils =
       return false;
     }
 
-    var leftMsgData = GFutils.getMsgDataDisplay(doc);
+    var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
     var header, body;
     if ((!leftMsgData && tdNode.parentNode.className != 'even')
         || tdNode.className.indexOf('author') != -1)
@@ -173,7 +173,7 @@ var GFutils =
       var node = doc.evaluate('div[@class="msg"]', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
-        return node.textContent.replace('Welcome,', '').GFtrim();
+        return node.textContent.replace('Welcome,', '').gamefox_trim();
     }
     return '';
   },
@@ -189,7 +189,7 @@ var GFutils =
         || doc.evaluate('h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
-        return node.textContent.GFtrim();
+        return node.textContent.gamefox_trim();
     }
     return '';
   },
@@ -202,7 +202,7 @@ var GFutils =
       var node = doc.evaluate('div[@class="head"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
-        return node.textContent.GFtrim();
+        return node.textContent.gamefox_trim();
     }
     return '';
   },
@@ -225,7 +225,7 @@ var GFutils =
         '<p>', -6, '</p>', -6, '<p />', -6,
         '\n', 4
         ];
-    str = str.GFtrim().toLowerCase();
+    str = str.gamefox_trim().toLowerCase();
     var len = str.length;
     var pos;
     var count;
@@ -243,7 +243,7 @@ var GFutils =
   // encode topic title like GameFAQs does
   encodedTitleLength: function(str)
   {
-    return str.GFtrim().
+    return str.gamefox_trim().
       replace(/&/g, '&amp;').
       replace(/</g, '&lt;').
       replace(/>/g, '&gt;').length;
@@ -251,7 +251,7 @@ var GFutils =
 
   getLastPost: function(msgs, tc)
   {
-    var lastPage = Math.floor((msgs - 1) / GFlib.prefs.getIntPref('msgsPerPage'));
+    var lastPage = Math.floor((msgs - 1) / gamefox_lib.prefs.getIntPref('msgsPerPage'));
     var pageStr = lastPage ? '&page=' + lastPage + this.tcParam(tc) : '';
 
     var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
@@ -274,8 +274,8 @@ var GFutils =
 
   tcParam: function(tc)
   {
-    return tc && (GFlib.prefs.getBoolPref('elements.marktc')
-        || GFuserlist.checkUsername('(tc)')) ?
+    return tc && (gamefox_lib.prefs.getBoolPref('elements.marktc')
+        || gamefox_highlighting.checkUsername('(tc)')) ?
         '&tc=' + tc.replace(/ /g, '+') : '';
   },
 
@@ -383,7 +383,7 @@ var GFutils =
     for (i in obj)
     {
       if (obj[i] && typeof obj[i] == 'object')
-        newObj[i] = GFutils.cloneObj(obj[i]);
+        newObj[i] = gamefox_utils.cloneObj(obj[i]);
       else
         newObj[i] = obj[i];
     }
@@ -392,7 +392,7 @@ var GFutils =
   }
 };
 
-String.prototype.GFtrim = function()
+String.prototype.gamefox_trim = function()
 {
   var str = this.replace(/^\s\s*/, ''),
       ws = /\s/,

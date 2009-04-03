@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var gTrackedWindow =
+var gamefox_trackedWindow =
 {
   _tree   : null,
   _view   : null,
@@ -26,7 +26,7 @@ var gTrackedWindow =
   init: function()
   {
     this._tree = document.getElementById('gamefox-tracked-tree');
-    this._view = new GFtreeview();
+    this._view = new gamefox_treeview();
     this._topics = {};
 
     // Tree view
@@ -56,14 +56,14 @@ var gTrackedWindow =
       properties.AppendElement(atom);
     };
 
-    GFtracked.read();
+    gamefox_tracked.read();
     var topics = {}
-    for (var board in GFtracked.list)
+    for (var board in gamefox_tracked.list)
     {
-      for (var topic in GFtracked.list[board].topics)
+      for (var topic in gamefox_tracked.list[board].topics)
       {
         var topicObject = this.makeTopicObject(board, topic,
-            GFtracked.list[board].topics[topic]);
+            gamefox_tracked.list[board].topics[topic]);
         this.handleTopicAdded(topicObject);
       }
     }
@@ -72,7 +72,7 @@ var gTrackedWindow =
 
     this.sort('lastPost', false);
 
-    new GFobserver('tracked.list', this.update);
+    new gamefox_observer('tracked.list', this.update);
   },
 
   makeTopicObject: function(bid, tid, topic)
@@ -112,47 +112,47 @@ var gTrackedWindow =
 
   update: function()
   {
-    GFtracked.read();
+    gamefox_tracked.read();
 
     // Remove and update topics
-    for (var i = 0; i < gTrackedWindow._view.visibleData.length; i++)
+    for (var i = 0; i < gamefox_trackedWindow._view.visibleData.length; i++)
     {
-      var boardId = gTrackedWindow._view.visibleData[i].boardId;
-      var topicId = gTrackedWindow._view.visibleData[i].id;
+      var boardId = gamefox_trackedWindow._view.visibleData[i].boardId;
+      var topicId = gamefox_trackedWindow._view.visibleData[i].id;
 
-      if (!GFtracked.list[boardId]
-          || !GFtracked.list[boardId].topics[topicId])
+      if (!gamefox_tracked.list[boardId]
+          || !gamefox_tracked.list[boardId].topics[topicId])
       {
-        gTrackedWindow.handleTopicRemoved(i);
+        gamefox_trackedWindow.handleTopicRemoved(i);
         --i;
       }
       else // update
       {
-        var topicObject = gTrackedWindow.makeTopicObject(boardId, topicId,
-            GFtracked.list[boardId].topics[topicId]);
+        var topicObject = gamefox_trackedWindow.makeTopicObject(boardId, topicId,
+            gamefox_tracked.list[boardId].topics[topicId]);
 
-        gTrackedWindow._view.visibleData[i] = topicObject;
-        gTrackedWindow._tree.treeBoxObject.invalidateRow(i);
+        gamefox_trackedWindow._view.visibleData[i] = topicObject;
+        gamefox_trackedWindow._tree.treeBoxObject.invalidateRow(i);
 
-        gTrackedWindow._topics[topicId] = topicObject;
+        gamefox_trackedWindow._topics[topicId] = topicObject;
       }
     }
 
     // Add topics
-    for (var i in GFtracked.list)
+    for (var i in gamefox_tracked.list)
     {
-      for (var j in GFtracked.list[i].topics)
+      for (var j in gamefox_tracked.list[i].topics)
       {
         // topic already exists in tree
-        if (gTrackedWindow._topics[j]) continue;
+        if (gamefox_trackedWindow._topics[j]) continue;
 
-        var topicObject = gTrackedWindow
-          .makeTopicObject(i, j, GFtracked.list[i].topics[j]);
-        gTrackedWindow.handleTopicAdded(topicObject);
+        var topicObject = gamefox_trackedWindow
+          .makeTopicObject(i, j, gamefox_tracked.list[i].topics[j]);
+        gamefox_trackedWindow.handleTopicAdded(topicObject);
       }
     }
 
-    gTrackedWindow.sort('lastPost', false);
+    gamefox_trackedWindow.sort('lastPost', false);
   },
 
   sort: function(property, ascending)
@@ -171,8 +171,8 @@ var gTrackedWindow =
       {
         // We have to convert the last post timestamp provided by GameFAQs to
         // something useful
-        var d1 = GFutils.strtotime(a.lastPost, a.lastPostYear);
-        var d2 = GFutils.strtotime(b.lastPost, b.lastPostYear);
+        var d1 = gamefox_utils.strtotime(a.lastPost, a.lastPostYear);
+        var d2 = gamefox_utils.strtotime(b.lastPost, b.lastPostYear);
 
         if (d1.getTime() < d2.getTime())
           return -1;
@@ -213,22 +213,22 @@ var gTrackedWindow =
     switch (type)
     {
       case 0:
-        GFlib.open(tagID, 0); // new tab
+        gamefox_lib.open(tagID, 0); // new tab
         break;
       case 1:
-        GFlib.open(tagID, 1); // new focused tab
+        gamefox_lib.open(tagID, 1); // new focused tab
         break;
       case 2:
-        GFlib.open(tagID, 2); // focused tab
+        gamefox_lib.open(tagID, 2); // focused tab
         break;
       case 3:
-        GFlib.open(tagID, 3); // new window
+        gamefox_lib.open(tagID, 3); // new window
         break;
       case 4:
-        GFtracked.holdTopic(topic[0], topic[1]);
+        gamefox_tracked.holdTopic(topic[0], topic[1]);
         break;
       case 5:
-        GFtracked.deleteTopic(topic[0], topic[1]);
+        gamefox_tracked.deleteTopic(topic[0], topic[1]);
         break;
     }
   },
@@ -241,11 +241,11 @@ var gTrackedWindow =
     if (index == -1)
       return;
 
-    GFtracked.read();
+    gamefox_tracked.read();
 
     var tagID = tree.view.getCellText(index,
         tree.columns.getNamedColumn('gamefox-tracked-tagid')).split(',');
-    var topic = GFtracked.list[tagID[0]].topics[tagID[1]];
+    var topic = gamefox_tracked.list[tagID[0]].topics[tagID[1]];
 
     if (!tagID[1]) // board
     {

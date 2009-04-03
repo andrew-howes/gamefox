@@ -17,14 +17,14 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFuserlist =
+var gamefox_highlighting =
 {
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
 
   add: function(name, color, users, messages, topics, type)
   {
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
 
     name = (typeof name == 'string') ? name : '';
     color = (typeof color == 'string') ? color : '#CCFFFF';
@@ -36,20 +36,20 @@ var GFuserlist =
     userlist.push({name:name, color:color, users:users,
         messages:messages, topics:topics, type:type});
 
-    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   loadGroups: function()
   {
     var values, value, type;
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     this.index = {users:{}, titleContains:{}, postContains:{}};
 
     // build the index
     for (var i = 0; i < userlist.length; i++)
     {
       type = userlist[i].type;
-      values = userlist[i].users.GFtrim().toLowerCase()
+      values = userlist[i].users.gamefox_trim().toLowerCase()
         .split(/\s*,\s*/);
       for (var j = 0; j < values.length; j++)
       {
@@ -102,7 +102,7 @@ var GFuserlist =
       return this.searchUsername(username, tc);
     }
 
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
 
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
@@ -145,7 +145,7 @@ var GFuserlist =
       return this.searchUsername(username);
     }
 
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
 
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
@@ -170,15 +170,15 @@ var GFuserlist =
     if (!this.index) return false;
     var index = this.index.users;
 
-    username = username.GFtrim().toLowerCase();
+    username = username.gamefox_trim().toLowerCase();
     if (!username.length) return false;
 
     if (!index[username] && !(tc && index['(tc)']))
       return false; // username isn't in any groups
 
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     if (tc && index[username] && index['(tc)'])
-      var groups = GFutils.mergeArray(index[username], index['(tc)']);
+      var groups = gamefox_utils.mergeArray(index[username], index['(tc)']);
     else if (tc && index['(tc)'])
       var groups = index['(tc)'];
     else
@@ -208,7 +208,7 @@ var GFuserlist =
     var buttonContainer = button.offsetParent; // td
     var postMsg;
 
-    if (GFutils.getMsgDataDisplay(doc)) // left of message
+    if (gamefox_utils.getMsgDataDisplay(doc)) // left of message
     {
       postMsg = buttonContainer.parentNode.cells[1];
       if (postMsg.style.fontSize == '0pt')
@@ -262,16 +262,16 @@ var GFuserlist =
       node = node.parentNode;
 
     // get the username of the target, return if it's not valid
-    if (GFlib.onPage(doc, 'topics')) // topic list
+    if (gamefox_lib.onPage(doc, 'topics')) // topic list
     {
       node = node.parentNode.cells[2];
     }
     else
     {
-      node = GFutils.getMsgComponents(node, doc);
+      node = gamefox_utils.getMsgComponents(node, doc);
       if (!node) return;
 
-      node = node.header.getElementsByTagName(GFlib.onPage(doc, 'archive') ? 'b' : 'a')[0];
+      node = node.header.getElementsByTagName(gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a')[0];
     }
 
     var username = node.textContent;
@@ -280,7 +280,7 @@ var GFuserlist =
     var activeGroups = this.searchUsername(username)[4];
     if (!activeGroups) activeGroups = [];
 
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
 
     var item, label, info, noGroups = true;
     for (var i = 0; i < userlist.length; i++)
@@ -290,7 +290,7 @@ var GFuserlist =
 
       item = document.createElement('menuitem');
       item.setAttribute('type', 'checkbox');
-      item.setAttribute('oncommand', 'GFuserlist.menuCheckChange(event, "' + username + '", ' + i + ');');
+      item.setAttribute('oncommand', 'gamefox_highlighting.menuCheckChange(event, "' + username + '", ' + i + ');');
       if (activeGroups.indexOf(i) != -1)
         item.setAttribute('checked', 'true');
 
@@ -341,13 +341,13 @@ var GFuserlist =
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('editGroups'));
     item.setAttribute('oncommand',
-      'GFlib.openOptionsDialog(null, null, null, "paneHighlighting");');
+      'gamefox_lib.openOptionsDialog(null, null, null, "paneHighlighting");');
     list.appendChild(item);
   },
 
   menuCheckChange: function(event, username, group)
   {
-    var userlist = eval(GFlib.prefs.getCharPref('userlist.serialized'));
+    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
 
     if (event.target.getAttribute('checked')) // add to group
     {
@@ -366,7 +366,7 @@ var GFuserlist =
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
-    GFlib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   checkUsername: function(username)

@@ -25,7 +25,7 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <prefpane id="paneStyle"
-    onpaneload="GFstyleOptions.populate();">
+    onpaneload="gamefox_options_style.populate();">
 
     <script type="application/x-javascript"
       src="chrome://gamefox/content/treeview.js"/>
@@ -51,7 +51,7 @@
 
       <tree id="css-tree" editable="true" seltype="single"
         hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
-        ondblclick="GFstyleOptions.showDesc(event);" style="height: 21em;">
+        ondblclick="gamefox_options_style.showDesc(event);" style="height: 21em;">
         <treecols>
           <treecol label="&name.label;" id="styleTreeName" primary="true" flex="1"
             persist="width"/>
@@ -69,21 +69,21 @@
         <treechildren/>
       </tree>
       <menupopup id="css-tree-contextmenu"
-        onpopupshowing="GFstyleOptions.onpopupshowing();">
+        onpopupshowing="gamefox_options_style.onpopupshowing();">
         <menuitem label="&delete.label;"
-          oncommand="GFstyleOptions.removeWithTree();" id="css-remove"/>
+          oncommand="gamefox_options_style.removeWithTree();" id="css-remove"/>
         <menuitem label="&edit.label;"
-          oncommand="GFstyleOptions.editWithTree();" id="css-edit"/>
+          oncommand="gamefox_options_style.editWithTree();" id="css-edit"/>
       </menupopup>
     </groupbox>
 
     <hbox pack="center">
       <button label="&import.button;" icon="add"
-        oncommand="GFstyleOptions.userimport(GFstyleOptions.filepicker());"/>
+        oncommand="gamefox_options_style.userimport(gamefox_options_style.filepicker());"/>
       <button label="&reload.button;" icon="refresh"
-        oncommand="GFcss.reload(true);"/>
+        oncommand="gamefox_css.reload(true);"/>
       <button label="&openDir.button;" icon="open"
-        oncommand="GFstyleOptions.openDirectory();"/>
+        oncommand="gamefox_options_style.openDirectory();"/>
     </hbox>
 
   </prefpane>

@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFcontext =
+var gamefox_context =
 {
   displayMenu: function(event)
   {
@@ -25,17 +25,17 @@ var GFcontext =
     var doc = target.ownerDocument;
     var strbundle = document.getElementById('context-strings');
 
-    document.getElementById('gamefox-toggle-sidebar').hidden = !GFlib.prefs.
+    document.getElementById('gamefox-toggle-sidebar').hidden = !gamefox_lib.prefs.
       getBoolPref('context.sidebar');
-    document.getElementById('gamefox-tags').hidden = !GFlib.prefs.
+    document.getElementById('gamefox-tags').hidden = !gamefox_lib.prefs.
       getBoolPref('context.taglist');
-    document.getElementById('gamefox-tracked').hidden = !GFlib.prefs.
+    document.getElementById('gamefox-tracked').hidden = !gamefox_lib.prefs.
       getBoolPref('context.tracked');
-    document.getElementById('gamefox-accounts').hidden = !GFlib.prefs.
+    document.getElementById('gamefox-accounts').hidden = !gamefox_lib.prefs.
       getBoolPref('context.accounts');
-    document.getElementById('gamefox-favorites').hidden = !GFlib.prefs.
+    document.getElementById('gamefox-favorites').hidden = !gamefox_lib.prefs.
       getBoolPref('context.favorites');
-    document.getElementById('gamefox-links').hidden = !GFlib.prefs.
+    document.getElementById('gamefox-links').hidden = !gamefox_lib.prefs.
       getBoolPref('context.links');
 
     // Submenu
@@ -51,7 +51,7 @@ var GFcontext =
     }
     document.getElementById('gamefox-context-menu').hidden = hideMenu;
 
-    if (!GFlib.onBoards(doc))
+    if (!gamefox_lib.onBoards(doc))
     {
       document.getElementById('gamefox-context-quote').hidden = true;
       document.getElementById('gamefox-context-tag').hidden = true;
@@ -73,7 +73,7 @@ var GFcontext =
     var hideDelete = true;
     var hideBreakTags = true;
 
-    if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
+    if (gamefox_lib.onPage(doc, 'topics') || gamefox_lib.onPage(doc, 'myposts'))
     {
       // Tag topic, track topic, pages and user groups
       try
@@ -90,9 +90,9 @@ var GFcontext =
           if (node.parentNode.cells[0].innerHTML.indexOf('archived') == -1)
           {
             hideTrack = false;
-            var topic = GFutils.parseQueryString(node.parentNode.cells[1].
+            var topic = gamefox_utils.parseQueryString(node.parentNode.cells[1].
                 getElementsByTagName('a')[0].href);
-            if (GFtracked.isTracked(topic['board'], topic['topic']))
+            if (gamefox_tracked.isTracked(topic['board'], topic['topic']))
               document.getElementById('gamefox-context-track')
                 .label = strbundle.getString('stopTrack');
             else
@@ -102,7 +102,7 @@ var GFcontext =
 
           hidePages = false;
 
-          if (GFlib.onPage(doc, 'topics') && !GFlib.onPage(doc, 'tracked'))
+          if (gamefox_lib.onPage(doc, 'topics') && !gamefox_lib.onPage(doc, 'tracked'))
             hideUsergroups = false;
         }
       }
@@ -113,7 +113,7 @@ var GFcontext =
           && target.selectionStart != target.selectionEnd)
         hideBreakTags = false;
     }
-    else if (GFlib.onPage(doc, 'messages'))
+    else if (gamefox_lib.onPage(doc, 'messages'))
     {
       var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]'
           + '/div[@class="user"]', doc.getElementById('board_wrap'), null,
@@ -129,8 +129,8 @@ var GFcontext =
           || userNav.indexOf('Stop Tracking') != -1)
       {
         hideTrack = false;
-        var topic = GFutils.parseQueryString(doc.location.search);
-        if (GFtracked.isTracked(topic['board'], topic['topic']))
+        var topic = gamefox_utils.parseQueryString(doc.location.search);
+        if (gamefox_tracked.isTracked(topic['board'], topic['topic']))
           document.getElementById('gamefox-context-track')
             .label = strbundle.getString('stopTrack');
         else
@@ -139,7 +139,7 @@ var GFcontext =
       }
 
       // Quoting, user groups, filtering and delete
-      var msgComponents = GFutils.getMsgComponents(target, doc);
+      var msgComponents = gamefox_utils.getMsgComponents(target, doc);
       if (msgComponents)
       {
         var deleteType = msgComponents.header.getAttribute('gfdeletetype');
@@ -182,7 +182,7 @@ var GFcontext =
           && target.selectionStart != target.selectionEnd)
         hideBreakTags = false;
     }
-    else if (GFlib.onPage(doc, 'post'))
+    else if (gamefox_lib.onPage(doc, 'post'))
     {
       // Break tags
       if (target.nodeName == 'TEXTAREA'
@@ -191,21 +191,21 @@ var GFcontext =
     }
 
     document.getElementById('gamefox-context-quote').hidden = hideQuote
-      || !GFlib.prefs.getBoolPref('context.quote');
+      || !gamefox_lib.prefs.getBoolPref('context.quote');
     document.getElementById('gamefox-context-tag').hidden = hideTag
-      || !GFlib.prefs.getBoolPref('context.tag');
+      || !gamefox_lib.prefs.getBoolPref('context.tag');
     document.getElementById('gamefox-context-track').hidden = hideTrack
-      || !GFlib.prefs.getBoolPref('context.track');
+      || !gamefox_lib.prefs.getBoolPref('context.track');
     document.getElementById('gamefox-context-pages').hidden = hidePages
-      || !GFlib.prefs.getBoolPref('context.pagelist');
+      || !gamefox_lib.prefs.getBoolPref('context.pagelist');
     document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups
-      || !GFlib.prefs.getBoolPref('context.usergroups');
+      || !gamefox_lib.prefs.getBoolPref('context.usergroups');
     document.getElementById('gamefox-context-filter').hidden = hideFilter
-      || !GFlib.prefs.getBoolPref('context.filter');
+      || !gamefox_lib.prefs.getBoolPref('context.filter');
     document.getElementById('gamefox-context-delete').hidden = hideDelete
-      || !GFlib.prefs.getBoolPref('context.delete');
+      || !gamefox_lib.prefs.getBoolPref('context.delete');
     document.getElementById('gamefox-context-break-tags').hidden = hideBreakTags
-      || !GFlib.prefs.getBoolPref('context.breaktags');
+      || !gamefox_lib.prefs.getBoolPref('context.breaktags');
   },
 
   populateFavorites: function()
@@ -216,14 +216,14 @@ var GFcontext =
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
-    favs = eval(GFlib.prefs.getCharPref('favorites.serialized'));
+    favs = eval(gamefox_lib.prefs.getCharPref('favorites.serialized'));
 
     for (i = 0; i < favs.length; i++)
     {
       item = document.createElement('menuitem');
       item.setAttribute('label', favs[i].name);
-      item.setAttribute('oncommand', 'GFlib.open("' + favs[i].id + '", 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + favs[i].id + '", 0)');
+      item.setAttribute('oncommand', 'gamefox_lib.open("' + favs[i].id + '", 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open("' + favs[i].id + '", 0)');
       menu.appendChild(item);
     }
   },
@@ -236,7 +236,7 @@ var GFcontext =
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
-    baseUri = GFlib.domain + GFlib.path;
+    baseUri = gamefox_lib.domain + gamefox_lib.path;
     links = [
       'myposts.php', 'Active Messages', 'A',
       'index.php', 'Boards', 'B',
@@ -250,9 +250,9 @@ var GFcontext =
       item = document.createElement('menuitem');
       item.setAttribute('label', links[i+1]);
       item.setAttribute('accesskey', links[i+2]);
-      item.setAttribute('oncommand', 'GFlib.openPage("' + baseUri + links[i] + '", 2)');
+      item.setAttribute('oncommand', 'gamefox_lib.openPage("' + baseUri + links[i] + '", 2)');
       item.setAttribute('onclick',
-          'if (event.button == 1) GFlib.openPage("' + baseUri + links[i] + '", 1)');
+          'if (event.button == 1) gamefox_lib.openPage("' + baseUri + links[i] + '", 1)');
       menu.appendChild(item);
     }
   }

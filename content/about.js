@@ -17,14 +17,14 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFabout =
+var gamefox_about =
 {
   process: function()
   {
     var strbundle = document.getElementById('strings');
 
     document.getElementById('version').value =
-        strbundle.getString('version') + ' ' + GFlib.version;
+        strbundle.getString('version') + ' ' + gamefox_lib.version;
 
     var sections = {
       currentDevelopers: ['currentDeveloperBox',
@@ -57,4 +57,4 @@ var GFabout =
   }
 };
 
-window.addEventListener('load', GFabout.process, false);
+window.addEventListener('load', gamefox_about.process, false);

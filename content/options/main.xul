@@ -186,7 +186,7 @@
                         <checkbox label="&paginateTopics.label;"
                           preference="paging.auto"/>
                         <button label="&settings.label;..."
-                          oncommand="GFoptions.openPaginateDialog();"/>
+                          oncommand="gamefox_options.openPaginateDialog();"/>
                       </hbox>
 
                       <checkbox label="&trackedBoardLink.label;"
@@ -495,10 +495,10 @@
                 <hbox pack="end">
                   <button id="gamefox-css-grab-bs"
                     label="&grabSettings.button;" icon="refresh"
-                    oncommand="GFoptions.importBoardSettings();"/>
+                    oncommand="gamefox_options.importBoardSettings();"/>
                   <button id="gamefox-css-apply-bs"
                     label="&saveSettings.button;" icon="save"
-                    oncommand="GFoptions.exportBoardSettings();"/>
+                    oncommand="gamefox_options.exportBoardSettings();"/>
                 </hbox>
 
               </groupbox>

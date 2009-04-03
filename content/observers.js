@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-function GFobserver(domain, observer)
+function gamefox_observer(domain, observer)
 {
   // the event listener makes everything we need stay in memory, so it is not
   // necessary to maintain an explicit reference to this object

@@ -35,7 +35,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/quickwhois.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/accounts.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/userlist.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/highlighting.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/messages.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/favorites.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tracked.js"/>
@@ -58,56 +58,56 @@
 
         <menu id="gamefox-tags" label="&menu.tags.label;"
           accesskey="&menu.tags.accesskey;">
-          <menupopup id="gamefox-tags-menu" onpopupshowing="GFtags.populate(1);"/>
+          <menupopup id="gamefox-tags-menu" onpopupshowing="gamefox_tags.populate(1);"/>
         </menu>
 
         <menu id="gamefox-tracked" label="&menu.tracked.label;"
           accesskey="&menu.tracked.accesskey;">
           <menupopup id="gamefox-tracked-menu"
-            onpopupshowing="GFtracked.populateMenu();"/>
+            onpopupshowing="gamefox_tracked.populateMenu();"/>
         </menu>
 
         <menu id="gamefox-accounts" label="&menu.accounts.label;"
           accesskey="&menu.accounts.accesskey;">
-          <menupopup id="gamefox-accounts-menu" onpopupshowing="GFaccounts.populate();"/>
+          <menupopup id="gamefox-accounts-menu" onpopupshowing="gamefox_accounts.populate();"/>
         </menu>
 
         <menu id="gamefox-favorites" label="&menu.favorites.label;"
           accesskey="&menu.favorites.accesskey;">
-          <menupopup id="gamefox-favorites-menu" onpopupshowing="GFcontext.populateFavorites();"/>
+          <menupopup id="gamefox-favorites-menu" onpopupshowing="gamefox_context.populateFavorites();"/>
         </menu>
 
         <menu id="gamefox-links" label="&menu.links.label;"
           accesskey="&menu.links.accesskey;">
-          <menupopup id="gamefox-links-menu" onpopupshowing="GFcontext.populateLinks();"/>
+          <menupopup id="gamefox-links-menu" onpopupshowing="gamefox_context.populateLinks();"/>
         </menu>
       </menupopup>
     </menu>
 
     <!-- topic -->
     <menuitem id="gamefox-context-tag" label="&menu.tagTopic.label;"
-      oncommand="GFtags.add(gContextMenu);"/>
+      oncommand="gamefox_tags.add(gContextMenu);"/>
     <menuitem id="gamefox-context-track" label=""
-      oncommand="GFtracked.addFromContextMenu(gContextMenu);"/>
+      oncommand="gamefox_tracked.addFromContextMenu(gContextMenu);"/>
     <menu id="gamefox-context-pages" label="&menu.pages.label;">
       <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
     </menu>
 
     <!-- message -->
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
-      oncommand="GFquote.quote(gContextMenu, true);"/>
+      oncommand="gamefox_quote.quote(gContextMenu, true);"/>
     <menuitem id="gamefox-context-filter" label=""
       oncommand="GameFOX.toggleFilter(gContextMenu, true);"/>
     <menuitem id="gamefox-context-delete" label=""
-      oncommand="GFmessages.deletePost(gContextMenu, true);"/>
+      oncommand="gamefox_messages.deletePost(gContextMenu, true);"/>
     <menu id="gamefox-context-usergroups" label="&menu.hlGroups.label;">
       <menupopup id="gamefox-context-usergroups-list"
-        onpopupshowing="GFuserlist.fillMenu(gContextMenu);"/>
+        onpopupshowing="gamefox_highlighting.fillMenu(gContextMenu);"/>
     </menu>
 
     <!-- textarea -->
     <menuitem id="gamefox-context-break-tags" label="&menu.breakTags.label;"
-      oncommand="GFquickpost.breakTagsFromContext(gContextMenu);"/>
+      oncommand="gamefox_quickpost.breakTagsFromContext(gContextMenu);"/>
   </popup>
 
   <!-- firefox tools menu -->
@@ -123,13 +123,13 @@
 
   <!-- firefox commands -->
   <commandset id="mainCommandSet">
-    <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
-    <command id="cmd_gamefoxOptions" oncommand="GFlib.openOptionsDialog();"/>
+    <command id="cmd_gamefoxSidebar" oncommand="gamefox.toggleSidebar();"/>
+    <command id="cmd_gamefoxOptions" oncommand="gamefox_lib.openOptionsDialog();"/>
   </commandset>
   <!-- seamonkey commands -->
   <commandset id="commands">
-    <command id="cmd_gamefoxSidebar" oncommand="GameFOX.toggleSidebar();"/>
-    <command id="cmd_gamefoxOptions" oncommand="GFlib.openOptionsDialog();"/>
+    <command id="cmd_gamefoxSidebar" oncommand="gamefox.toggleSidebar();"/>
+    <command id="cmd_gamefoxOptions" oncommand="gamefox_lib.openOptionsDialog();"/>
   </commandset>
 
   <!-- firefox keys -->

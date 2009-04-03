@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFcss =
+var gamefox_css =
 {
   prefs: Cc['@mozilla.org/preferences-service;1']
     .getService(Ci.nsIPrefService)
@@ -91,7 +91,7 @@ var GFcss =
         }
         catch (e)
         {
-          GFlib.log('Old bundled stylesheet "' + j + '" removed.');
+          gamefox_lib.log('Old bundled stylesheet "' + j + '" removed.');
           this.remove(i, j);
         }
       }
@@ -129,7 +129,7 @@ var GFcss =
     }
     catch (e)
     {
-      GFlib.alert('There was an error importing the stylesheet:\n' + e);
+      gamefox_lib.alert('There was an error importing the stylesheet:\n' + e);
       return false;
     }
 
@@ -141,7 +141,7 @@ var GFcss =
     }
     catch (e)
     {
-      GFlib.alert('There was an error writing the stylesheet to its destination:\n' + e);
+      gamefox_lib.alert('There was an error writing the stylesheet to its destination:\n' + e);
       return false;
     }
 
@@ -192,7 +192,7 @@ var GFcss =
       }
       catch (e) // TODO: what are we catching here?
       {
-        GFlib.alert('There was an error creating the CSS directory:\n' + e);
+        gamefox_lib.alert('There was an error creating the CSS directory:\n' + e);
         return false;
       }
     }

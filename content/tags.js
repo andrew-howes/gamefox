@@ -18,7 +18,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFtags =
+var gamefox_tags =
 {
   tags: '',
 
@@ -47,12 +47,12 @@ var GFtags =
   init: function()
   {
     this.populateTree();
-    new GFobserver('tags', this.populateTree);
+    new gamefox_observer('tags', this.populateTree);
   },
 
   populateTree: function()
   {
-    GFtags.populate(2);
+    gamefox_tags.populate(2);
   },
 
   populate: function(method)
@@ -82,8 +82,8 @@ var GFtags =
         {
           item = document.createElement('menuitem');
           item.setAttribute('label', this.tags[board].topics[topic]);
-          item.setAttribute('oncommand', 'GFlib.open("' + board + ',' + topic + '", 2)');
-          item.setAttribute('onclick', 'if (event.button == 1) GFlib.open("' + board + ',' + topic + '", 0)');
+          item.setAttribute('oncommand', 'gamefox_lib.open("' + board + ',' + topic + '", 2)');
+          item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open("' + board + ',' + topic + '", 0)');
           tagList.appendChild(item);
         }
       }
@@ -138,16 +138,16 @@ var GFtags =
     switch (actID)
     {
       case 0:
-        GFlib.open(tagID, 0); // new tab
+        gamefox_lib.open(tagID, 0); // new tab
         break;
       case 1:
-        GFlib.open(tagID, 1); // new focused tab
+        gamefox_lib.open(tagID, 1); // new focused tab
         break;
       case 2:
-        GFlib.open(tagID, 2); // focused tab
+        gamefox_lib.open(tagID, 2); // focused tab
         break;
       case 3:
-        GFlib.open(tagID, 3); // new window
+        gamefox_lib.open(tagID, 3); // new window
         break;
       case 4:
         this.remove(tagID, tree.view.isContainer(index));
@@ -181,7 +181,7 @@ var GFtags =
 
   removeAll: function()
   {
-    if (GFlib.confirm('Are you sure you want to delete all your tags?'))
+    if (gamefox_lib.confirm('Are you sure you want to delete all your tags?'))
     {
       this.write('');
       this.populate(2);
@@ -248,7 +248,7 @@ var GFtags =
 
           if (remove.length)
           {
-            GFtags.remove(remove);
+            gamefox_tags.remove(remove);
             msg = 'Successfully deleted ' + remove.length + ' purged topics.\n\n';
           }
           else
@@ -267,15 +267,15 @@ var GFtags =
           if (err[errNumber.indexOf(302)])  msg += err[errNumber.indexOf(302)] + ' topics were skipped because no topic title was found. It\'s blasphemy! Alert the creator.\n';
           if (err[errNumber.indexOf(-404)]) msg += err[errNumber.indexOf(-404)]+ ' topics were skipped because the requested URL was not found. Alert the creator.\n';
 
-          GFlib.alert(msg);
+          gamefox_lib.alert(msg);
         }
       }
 
 
     /* removePurged: dispatchRequest: open request */
 
-      request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
-      var ds = GFlib.thirdPartyCookieFix(request);
+      request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
+      var ds = gamefox_lib.thirdPartyCookieFix(request);
 
     /* removePurged: dispatchRequest: request.onerror */
 
@@ -410,7 +410,7 @@ var GFtags =
 
     if (tagIDs.length <= 0)
     {
-      GFlib.alert('Nothing to delete.');
+      gamefox_lib.alert('Nothing to delete.');
       return;
     }
 
@@ -420,16 +420,16 @@ var GFtags =
     {
       IDs = element.split(',');
 
-      if (!IDs[1] && delFolder && typeof(GFtags.tags[IDs[0]].title) == 'string')
+      if (!IDs[1] && delFolder && typeof(gamefox_tags.tags[IDs[0]].title) == 'string')
       {
-        if (GFlib.confirm('Are you sure you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + GFtags.tags[IDs[0]].title))
+        if (gamefox_lib.confirm('Are you sure you want to delete this board and its topics?\n\nBoard ID: ' + IDs[0] + '\nBoard Name: ' + gamefox_tags.tags[IDs[0]].title))
         {
-          delete GFtags.tags[IDs[0]];
+          delete gamefox_tags.tags[IDs[0]];
         }
       }
-      else if (IDs[1] && typeof(GFtags.tags[IDs[0]].topics[IDs[1]]) == 'string')
+      else if (IDs[1] && typeof(gamefox_tags.tags[IDs[0]].topics[IDs[1]]) == 'string')
       {
-        delete GFtags.tags[IDs[0]].topics[IDs[1]];
+        delete gamefox_tags.tags[IDs[0]].topics[IDs[1]];
       }
     });
 
@@ -447,8 +447,8 @@ var GFtags =
     if (event.type == 'dblclick')
       event.preventDefault();
 
-    var onMyPosts = GFlib.onPage(doc, 'myposts');
-    var onTracked = GFlib.onPage(doc, 'tracked');
+    var onMyPosts = gamefox_lib.onPage(doc, 'myposts');
+    var onTracked = gamefox_lib.onPage(doc, 'tracked');
     var onTopicList = !onMyPosts
         && doc.evaluate('//div[@class="board_nav"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null
         && doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
@@ -466,17 +466,17 @@ var GFtags =
 
         var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
         queryStr = topicLink.href;
-        topicTitle = topicLink.textContent.GFtrim();
+        topicTitle = topicLink.textContent.gamefox_trim();
 
         if (onMyPosts)
         {
           boardTitle = node.parentNode.cells[0].innerHTML.
-            replace(/<\/?a\b[^>]*>/ig, '').GFtrim();
+            replace(/<\/?a\b[^>]*>/ig, '').gamefox_trim();
         }
         else if (onTracked)
         {
           boardTitle = node.parentNode.cells[2].innerHTML.
-            replace(/<\/?a\b[^>]*>/ig, '').GFtrim();
+            replace(/<\/?a\b[^>]*>/ig, '').gamefox_trim();
         }
       }
       catch (e) { return false; }
@@ -489,41 +489,41 @@ var GFtags =
     var h1s         = doc.getElementsByTagName('h1');
     if (!boardTitle)
     {
-      boardTitle = h1s[0].textContent.GFtrim();
+      boardTitle = h1s[0].textContent.gamefox_trim();
     }
     if (!topicTitle)
     {
-      topicTitle = h1s[1].textContent.GFtrim();
+      topicTitle = h1s[1].textContent.gamefox_trim();
     }
 
-    GFtags.read();
+    gamefox_tags.read();
 
-    if (boardID in GFtags.tags && topicID in GFtags.tags[boardID].topics)
+    if (boardID in gamefox_tags.tags && topicID in gamefox_tags.tags[boardID].topics)
     {
-      if (GFlib.confirm('You have already tagged this topic!\nDo you wish to un-tag it?'))
+      if (gamefox_lib.confirm('You have already tagged this topic!\nDo you wish to un-tag it?'))
       {
-        GFtags.remove(tagID);
+        gamefox_tags.remove(tagID);
         return false;
       }
 
       return true;
     }
 
-    if (boardID in GFtags.tags)
+    if (boardID in gamefox_tags.tags)
     {
       if (!onTracked)
       { // overwrite if not on tracked topics - fixes abbreviated board titles
         //   from tracked topics and changed board titles, if that happens
-        GFtags.tags[boardID].title = boardTitle;
+        gamefox_tags.tags[boardID].title = boardTitle;
       }
     }
     else
     {
-      GFtags.tags[boardID] = {title: boardTitle, topics: {}};
+      gamefox_tags.tags[boardID] = {title: boardTitle, topics: {}};
     }
-    GFtags.tags[boardID].topics[topicID] = topicTitle;
+    gamefox_tags.tags[boardID].topics[topicID] = topicTitle;
 
-    GFtags.write(GFtags.tags);
+    gamefox_tags.write(gamefox_tags.tags);
     return true;
   },
 
@@ -556,10 +556,10 @@ var GFtags =
   tagTopicEvent: function(event)
   {
     event.preventDefault();
-    if (GFtags.add(event))
+    if (gamefox_tags.add(event))
     {
-      event.target.removeEventListener('click', GFtags.tagTopicEvent, false);
-      event.target.addEventListener('click', GFtags.untagTopicEvent, false);
+      event.target.removeEventListener('click', gamefox_tags.tagTopicEvent, false);
+      event.target.addEventListener('click', gamefox_tags.untagTopicEvent, false);
       event.target.textContent = 'Untag Topic';
     }
   },
@@ -567,10 +567,10 @@ var GFtags =
   untagTopicEvent: function(event)
   {
     event.preventDefault();
-    GFtags.remove(event.target.hash.substr(1));
+    gamefox_tags.remove(event.target.hash.substr(1));
 
-    event.target.removeEventListener('click', GFtags.untagTopicEvent, false);
-    event.target.addEventListener('click', GFtags.tagTopicEvent, false);
+    event.target.removeEventListener('click', gamefox_tags.untagTopicEvent, false);
+    event.target.addEventListener('click', gamefox_tags.tagTopicEvent, false);
     event.target.textContent = 'Tag Topic';
   }
 };

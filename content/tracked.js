@@ -17,13 +17,13 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFtracked =
+var gamefox_tracked =
 {
   list: {},
 
   read: function()
   {
-    this.list = eval(GFlib.prefs.getCharPref('tracked.list'));
+    this.list = eval(gamefox_lib.prefs.getCharPref('tracked.list'));
 
     // this.list will be undefined if the pref value isn't an object
     if (!this.list)
@@ -32,26 +32,26 @@ var GFtracked =
 
   save: function()
   {
-    GFlib.prefs.setCharPref('tracked.list', this.list.toSource());
+    gamefox_lib.prefs.setCharPref('tracked.list', this.list.toSource());
   },
 
   updateList: function()
   {
-    if (!GFlib.isLoggedIn())
+    if (!gamefox_lib.isLoggedIn())
     {
-      GFlib.alert('Could not update your tracked topics because you aren\'t logged in.');
+      gamefox_lib.alert('Could not update your tracked topics because you aren\'t logged in.');
       return;
     }
 
     // Because of how the RSS feed works without cookies, we could have an
     // option to always update from a certain account. This won't work well for
     // removing or adding tracked topics though.
-    if (GFlib.prefs.getCharPref('tracked.lastAccount')
-        != GFlib.prefs.getCharPref('accounts.current'))
+    if (gamefox_lib.prefs.getCharPref('tracked.lastAccount')
+        != gamefox_lib.prefs.getCharPref('accounts.current'))
     { // cached url is out of date
       var request = new XMLHttpRequest();
       request.open('GET', 'http://www.gamefaqs.com/boards/tracked.php');
-      var ds = GFlib.thirdPartyCookieFix(request);
+      var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
@@ -60,11 +60,11 @@ var GFtracked =
             match(/<link rel="alternate"[^>]*href="([^"]+)" \/>/)[1];
 
           // cache it
-          GFlib.prefs.setCharPref('tracked.rssUrl', url);
-          GFlib.prefs.setCharPref('tracked.lastAccount',
-              GFlib.prefs.getCharPref('accounts.current'));
+          gamefox_lib.prefs.setCharPref('tracked.rssUrl', url);
+          gamefox_lib.prefs.setCharPref('tracked.lastAccount',
+              gamefox_lib.prefs.getCharPref('accounts.current'));
 
-          GFtracked.grabFromRSS(url);
+          gamefox_tracked.grabFromRSS(url);
         }
       }
       request.send(null);
@@ -72,7 +72,7 @@ var GFtracked =
     else
     {
       // use cached url
-      GFtracked.grabFromRSS(GFlib.prefs.getCharPref('tracked.rssUrl'));
+      gamefox_tracked.grabFromRSS(gamefox_lib.prefs.getCharPref('tracked.rssUrl'));
     }
   },
 
@@ -91,19 +91,19 @@ var GFtracked =
             responseText, 'text/xml');
         var items = xmlobject.getElementsByTagName('item');
         var list = {};
-        GFtracked.read();
+        gamefox_tracked.read();
         for (var i = 0; i < items.length; i++)
         {
-          var ids = GFutils.parseQueryString(items[i].
+          var ids = gamefox_utils.parseQueryString(items[i].
               getElementsByTagName('link')[0].textContent);
           var bid = ids.board;
           var tid = ids.topic;
           var title = items[i].getElementsByTagName('title')[0].textContent;
 
           // keep hold status
-          if (GFtracked.list[ids['board']]
-              && GFtracked.list[ids['board']].topics[ids['topic']]
-              && GFtracked.list[ids['board']].topics[ids['topic']].hold)
+          if (gamefox_tracked.list[ids['board']]
+              && gamefox_tracked.list[ids['board']].topics[ids['topic']]
+              && gamefox_tracked.list[ids['board']].topics[ids['topic']].hold)
             var hold = true;
           else
             var hold = false;
@@ -125,23 +125,23 @@ var GFtracked =
           for (var j = 0; j < data.length; j += 2)
           {
             topic[data[j + 1]] = (new RegExp(data[j] + ': ([^\\0]*?)\n')).
-              exec(desc)[1].replace(/<br \/>/g, '').GFtrim();
+              exec(desc)[1].replace(/<br \/>/g, '').gamefox_trim();
           }
 
           // check for year change
           if (prevLastPost != 0 &&
-              prevLastPost < GFutils.strtotime(topic.lastPost).getTime())
+              prevLastPost < gamefox_utils.strtotime(topic.lastPost).getTime())
           {
             // this entry is more recent than the last entry, which should
             // only happen when the year is different
             --year;
           }
-          prevLastPost = GFutils.strtotime(topic.lastPost).getTime();
+          prevLastPost = gamefox_utils.strtotime(topic.lastPost).getTime();
           topic.lastPostYear = year;
 
           // check for new posts
-          if (GFtracked.list[bid] && GFtracked.list[bid].topics[tid]
-              && topic.lastPost != GFtracked.list[bid].topics[tid]
+          if (gamefox_tracked.list[bid] && gamefox_tracked.list[bid].topics[tid]
+              && topic.lastPost != gamefox_tracked.list[bid].topics[tid]
                 .lastPost)
             topic.newPosts = true;
 
@@ -151,20 +151,20 @@ var GFtracked =
         }
 
         // check deleted topics
-        for (var i in GFtracked.list)
+        for (var i in gamefox_tracked.list)
         {
-          for (var j in GFtracked.list[i].topics)
+          for (var j in gamefox_tracked.list[i].topics)
           {
             if (list[i] && list[i].topics[j]) continue; // topic still exists
 
-            var topic = GFtracked.list[i].topics[j];
+            var topic = gamefox_tracked.list[i].topics[j];
 
             if (!topic.hold) continue; // topic isn't held
 
             if (!list[i])
             {
               // board has been removed from tracked list
-              list[i] = {name: GFtracked.list[i].name, topics: {}};
+              list[i] = {name: gamefox_tracked.list[i].name, topics: {}};
             }
 
             topic.deleted = true;
@@ -172,8 +172,8 @@ var GFtracked =
           }
         }
 
-        GFtracked.list = list;
-        GFtracked.save();
+        gamefox_tracked.list = list;
+        gamefox_tracked.save();
       }
     }
     request.send(null);
@@ -190,12 +190,12 @@ var GFtracked =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('updateTracked'));
-    item.setAttribute('oncommand', 'GFtracked.updateList()');
+    item.setAttribute('oncommand', 'gamefox_tracked.updateList()');
     trackedMenu.appendChild(item);
 
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('detach'));
-    item.setAttribute('oncommand', 'GFtracked.openWindow(this)');
+    item.setAttribute('oncommand', 'gamefox_tracked.openWindow(this)');
     trackedMenu.appendChild(item);
 
     this.read();
@@ -215,7 +215,7 @@ var GFtracked =
         item = document.createElement('menuitem');
         item.setAttribute('label', topic['title']);
         item.setAttribute('oncommand',
-            'GFlib.open("' + i + ',' + j + '", 2)');
+            'gamefox_lib.open("' + i + ',' + j + '", 2)');
         trackedMenu.appendChild(item);
       }
     }
@@ -229,13 +229,13 @@ var GFtracked =
 
     var request = new XMLHttpRequest();
     request.open('GET', this.href);
-    var ds = GFlib.thirdPartyCookieFix(request);
+    var ds = gamefox_lib.thirdPartyCookieFix(request);
     var link = this;
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
       {
-        var result = GFtracked.trackResponse(request.responseText);
+        var result = gamefox_tracked.trackResponse(request.responseText);
 
         if (result[0])
         {
@@ -249,10 +249,10 @@ var GFtracked =
             link.textContent = 'Track Topic';
             link.href = link.href.replace(/stoptrack/, 'tracktopic');
           }
-          GFtracked.updateList();
+          gamefox_tracked.updateList();
         }
         else
-          GFlib.alert('An error occurred while tracking or untracking this '
+          gamefox_lib.alert('An error occurred while tracking or untracking this '
               + 'topic.\n\n' + result[1]);
       }
     }
@@ -268,22 +268,22 @@ var GFtracked =
 
   addFromContextMenu: function(event)
   {
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
 
-    if (GFlib.onPage(doc, 'topics') || GFlib.onPage(doc, 'myposts'))
+    if (gamefox_lib.onPage(doc, 'topics') || gamefox_lib.onPage(doc, 'myposts'))
     {
       var node = event.target;
       while (node.nodeName != 'TD')
         node = node.parentNode;
 
-      var topic = GFutils.parseQueryString(node.parentNode.cells[1].
+      var topic = gamefox_utils.parseQueryString(node.parentNode.cells[1].
           getElementsByTagName('a')[0].href);
 
-      var untrack = GFtracked.isTracked(topic['board'], topic['topic']);
+      var untrack = gamefox_tracked.isTracked(topic['board'], topic['topic']);
     }
-    else if (GFlib.onPage(doc, 'messages'))
+    else if (gamefox_lib.onPage(doc, 'messages'))
     {
-      var topic = GFutils.parseQueryString(doc.location.search);
+      var topic = gamefox_utils.parseQueryString(doc.location.search);
 
       var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
           doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -294,21 +294,21 @@ var GFtracked =
     }
 
     var request = new XMLHttpRequest();
-    request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board='
+    request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board='
         + topic['board'] + '&topic=' + topic['topic'] + '&action=' +
         (untrack ? 'stoptrack' : 'tracktopic'));
-    var ds = GFlib.thirdPartyCookieFix(request);
+    var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
       {
-        var result = GFtracked.trackResponse(request.responseText);
+        var result = gamefox_tracked.trackResponse(request.responseText);
 
         if (result[0])
         {
-          GFtracked.updateList();
+          gamefox_tracked.updateList();
 
-          if (GFlib.onPage(doc, 'messages'))
+          if (gamefox_lib.onPage(doc, 'messages'))
           {
             if (result[1] == 'tracktopic')
             {
@@ -323,7 +323,7 @@ var GFtracked =
           }
         }
         else
-          GFlib.alert('An error occurred while tracking or untracking this '
+          gamefox_lib.alert('An error occurred while tracking or untracking this '
               + 'topic.\n\n' + result[1]);
       }
     }
@@ -350,17 +350,17 @@ var GFtracked =
     if (!topic.deleted)
     {
       var request = new XMLHttpRequest();
-      request.open('GET', GFlib.domain + GFlib.path + 'genmessage.php?board='
+      request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board='
           + boardId + '&topic=' + topicId + '&action=stoptrack');
-      var ds = GFlib.thirdPartyCookieFix(request);
+      var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
         {
           if (request.responseText.indexOf('no longer tracking') != -1)
-            GFtracked.updateList();
+            gamefox_tracked.updateList();
           else
-            GFlib.alert('An error occurred stopping tracking of this topic.');
+            gamefox_lib.alert('An error occurred stopping tracking of this topic.');
         }
       }
       request.send(null);

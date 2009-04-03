@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFquote =
+var gamefox_quote =
 {
   quote: function(event, allowSelection)
   {
@@ -25,7 +25,7 @@ var GFquote =
     if (!doc.getElementById('gamefox-message'))
       return;
 
-    var msgComponents = GFutils.getMsgComponents(event.target, doc);
+    var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
     if (!msgComponents)
       return;
 
@@ -48,7 +48,7 @@ var GFquote =
           break;
       }
     }
-    postDate = postDate ? postDate[1].GFtrim() : '???';
+    postDate = postDate ? postDate[1].gamefox_trim() : '???';
 
     // postNum
     postNum = msgComponents.header.id.substr(1);
@@ -60,10 +60,10 @@ var GFquote =
     if (allowSelection && /\S/.test(selection.toString()) &&
         selection.containsNode(msgComponents.body, true))
     {
-      quoteMsg = GFutils.convertNewlines(GFutils.specialCharsEncode(selection.toString()));
+      quoteMsg = gamefox_utils.convertNewlines(gamefox_utils.specialCharsEncode(selection.toString()));
     }
 
-    GFquote.format(event, quoteMsg, postUser, postDate, postNum);
+    gamefox_quote.format(event, quoteMsg, postUser, postDate, postNum);
   },
 
   format: function(event, quoteMsg, postUser, postDate, postNum)
@@ -75,14 +75,14 @@ var GFquote =
       replace(/<br\s*\/?>/gi, '\n').
       replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1').
       replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u|embed)\b[^<>]*\/?>/gi, '').
-      GFtrim();
+      gamefox_trim();
 
     // Get rid of signature
-    if (GFlib.prefs.getBoolPref('quote.removesignature'))
+    if (gamefox_lib.prefs.getBoolPref('quote.removesignature'))
       body = body.replace(/---(\n.*){0,2}$/, '');
 
     // Break escaped tags
-    body = GFutils.breakTags(body);
+    body = gamefox_utils.breakTags(body);
 
     bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;
@@ -114,31 +114,31 @@ var GFquote =
       bodyDOM.removeChild(p.snapshotItem(i));
     }
 
-    body = GFutils.specialCharsDecode(bodyDOM.innerHTML.GFtrim());
+    body = gamefox_utils.specialCharsDecode(bodyDOM.innerHTML.gamefox_trim());
 
     /* Prepare quote header */
     var qhead = '';
-    if (GFlib.prefs.getBoolPref('quote.header.username'))
+    if (gamefox_lib.prefs.getBoolPref('quote.header.username'))
       qhead += 'From: ' + postUser;
-    if (GFlib.prefs.getBoolPref('quote.header.date'))
+    if (gamefox_lib.prefs.getBoolPref('quote.header.date'))
       qhead += (qhead.length ? ' | ' : '') + 'Posted: ' + postDate;
-    if (GFlib.prefs.getBoolPref('quote.header.messagenum'))
+    if (gamefox_lib.prefs.getBoolPref('quote.header.messagenum'))
       qhead += (qhead.length ? ' | ' : '') + '#' + postNum;
 
-    if (qhead.length && GFlib.prefs.getCharPref('quote.style') == 'normal')
+    if (qhead.length && gamefox_lib.prefs.getCharPref('quote.style') == 'normal')
     {
-      if (GFlib.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
-      if (GFlib.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
+      if (gamefox_lib.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
+      if (gamefox_lib.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
       qhead += '\n';
     }
 
     var qbody, quote;
-    switch (GFlib.prefs.getCharPref('quote.style'))
+    switch (gamefox_lib.prefs.getCharPref('quote.style'))
     {
       case 'normal':
         qbody = body;
-        if (GFlib.prefs.getBoolPref('quote.message.italic')) qbody = '<i>' + qbody + '</i>';
-        if (GFlib.prefs.getBoolPref('quote.message.bold')) qbody = '<b>' + qbody + '</b>';
+        if (gamefox_lib.prefs.getBoolPref('quote.message.italic')) qbody = '<i>' + qbody + '</i>';
+        if (gamefox_lib.prefs.getBoolPref('quote.message.bold')) qbody = '<b>' + qbody + '</b>';
 
         quote = qhead + qbody + '\n';
         break;
@@ -171,8 +171,8 @@ var GFquote =
     }
 
     // update the character count
-    if (GFlib.prefs.getBoolPref('elements.charcounts'))
-      GFmessages.updateMessageCount(doc);
+    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
+      gamefox_messages.updateMessageCount(doc);
 
     quickpost.focus();
     // Move the caret to the end of the last quote

@@ -1,4 +1,4 @@
-function GFtreeview()
+function gamefox_treeview()
 {
   this.childData = {};
   this.visibleData = [];

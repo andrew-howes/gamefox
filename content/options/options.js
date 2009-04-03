@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFoptions =
+var gamefox_options =
 {
   importBoardSettings: function()
   {
@@ -28,29 +28,29 @@ var GFoptions =
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
-    var ds = GFlib.thirdPartyCookieFix(request);
+    var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
       {
         if (request.responseText.indexOf('Board Display Settings') == -1)
         {
-          GFutils.showNotification(boardSettingsMsg,
+          gamefox_utils.showNotification(boardSettingsMsg,
               strbundle.getString('bsImportNotLoggedIn'), 'warning');
           button.disabled = false;
           return;
         }
 
-        var topicPage = GFutils.parseHTMLSelect(request.responseText, 'topicpage'),
-            topicSort = GFutils.parseHTMLSelect(request.responseText, 'topicsort'),
-            messagePage = GFutils.parseHTMLSelect(request.responseText, 'messagepage'),
-            messageSort = GFutils.parseHTMLSelect(request.responseText, 'messagesort'),
-            timezone = GFutils.parseHTMLSelect(request.responseText, 'timezone'),
-            userDisplay = GFutils.parseHTMLSelect(request.responseText, 'userdisplay');
+        var topicPage = gamefox_utils.parseHTMLSelect(request.responseText, 'topicpage'),
+            topicSort = gamefox_utils.parseHTMLSelect(request.responseText, 'topicsort'),
+            messagePage = gamefox_utils.parseHTMLSelect(request.responseText, 'messagepage'),
+            messageSort = gamefox_utils.parseHTMLSelect(request.responseText, 'messagesort'),
+            timezone = gamefox_utils.parseHTMLSelect(request.responseText, 'timezone'),
+            userDisplay = gamefox_utils.parseHTMLSelect(request.responseText, 'userdisplay');
         if (topicPage == null || topicSort == null || messagePage == null
             || messageSort == null || timezone == null || userDisplay == null)
         {
-          GFutils.showNotification(boardSettingsMsg,
+          gamefox_utils.showNotification(boardSettingsMsg,
               strbundle.getString('bsImportNotLoggedIn'), 'warning');
           button.disabled = false;
           return;
@@ -64,7 +64,7 @@ var GFoptions =
         document.getElementById('timeZone').value = timezone;
         document.getElementById('msgDisplay').value = userDisplay;
 
-        GFutils.showNotification(boardSettingsMsg,
+        gamefox_utils.showNotification(boardSettingsMsg,
             strbundle.getString('bsImportSuccess'), 'info');
         button.disabled = false;
       }
@@ -89,14 +89,14 @@ var GFoptions =
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
-    var ds = GFlib.thirdPartyCookieFix(request);
+    var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
       {
         if (request.responseText.indexOf('Board Display Settings') == -1)
         {
-          GFutils.showNotification(boardSettingsMsg,
+          gamefox_utils.showNotification(boardSettingsMsg,
               strbundle.getString('bsExportNotLoggedIn'), 'warning');
           button.disabled = false;
           return;
@@ -105,7 +105,7 @@ var GFoptions =
         var action = request.responseText.match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
         if (!action)
         {
-          GFutils.showNotification(boardSettingsMsg,
+          gamefox_utils.showNotification(boardSettingsMsg,
               strbundle.getString('bsExportNoUserId'), 'warning');
           button.disabled = false;
           return;
@@ -114,19 +114,19 @@ var GFoptions =
 
         var postRequest = new XMLHttpRequest();
         postRequest.open('POST', 'http://www.gamefaqs.com' + action);
-        var ds = GFlib.thirdPartyCookieFix(postRequest);
+        var ds = gamefox_lib.thirdPartyCookieFix(postRequest);
         postRequest.onreadystatechange = function()
         {
           if (postRequest.readyState == 4)
           {
             if (postRequest.responseText.indexOf('Display settings updated') == -1)
             {
-              GFutils.showNotification(boardSettingsMsg,
+              gamefox_utils.showNotification(boardSettingsMsg,
                   strbundle.getString('bsExportUnexpectedResponse'), 'warning');
             }
             else
             {
-              GFutils.showNotification(boardSettingsMsg,
+              gamefox_utils.showNotification(boardSettingsMsg,
                   strbundle.getString('bsExportSuccess'), 'info');
             }
             button.disabled = false;
@@ -175,7 +175,7 @@ var GFoptions =
     if (!prefpane)
     {
       // end of the line
-      GFoptions.init();
+      gamefox_options.init();
       return;
     }
 
@@ -184,7 +184,7 @@ var GFoptions =
     if (prefpane.loaded)
     {
       // this prefpane is already loaded, so skip it
-      GFoptions.loadAllOverlays();
+      gamefox_options.loadAllOverlays();
       return;
     }
 
@@ -203,7 +203,7 @@ var GFoptions =
         // overlays do not like being loaded if any other overlay isn't
         // finished loading.
         // https://bugzilla.mozilla.org/show_bug.cgi?id=330458
-        GFoptions.loadAllOverlays();
+        gamefox_options.loadAllOverlays();
       }
     }
 
@@ -232,7 +232,7 @@ var GFoptions =
       prefWindow.showPane(document.getElementById('paneMain'));
     }
 
-    GFoptions.restoreLastTabs();
+    gamefox_options.restoreLastTabs();
   },
 
   restoreLastTabs: function()
@@ -264,13 +264,13 @@ var GFoptions =
         catch (e) {}
       }
 
-      tabs[i].setAttribute('onselect', 'GFoptions.saveSelectedTab(this)');
+      tabs[i].setAttribute('onselect', 'gamefox_options.saveSelectedTab(this)');
     }
   },
 
   init: function()
   {
-    GFoptions.restoreLastPane();
+    gamefox_options.restoreLastPane();
 
     if (!window.arguments)
       // opened from Add-ons window
@@ -280,13 +280,13 @@ var GFoptions =
 
     if (args.firstRun)
     {
-      GFuserlist.add();
-      GFhighlightingOptions.populateLast();
+      gamefox_highlighting.add();
+      gamefox_options_highlighting.populateLast();
 
-      if (GFlib.isLoggedIn())
+      if (gamefox_lib.isLoggedIn())
       {
-        GFoptions.importBoardSettings();
-        GFsigOptions.importSig();
+        gamefox_options.importBoardSettings();
+        gamefox_options_sig.importSig();
       }
     }
 
@@ -295,7 +295,7 @@ var GFoptions =
       var notificationbox = document.getElementById(i);
       for (var j = 0; j < args.notifications[i].length; j++)
       {
-        GFutils.showNotification(notificationbox,
+        gamefox_utils.showNotification(notificationbox,
             args.notifications[i][j].label, args.notifications[i][j].type);
       }
     }
@@ -316,7 +316,7 @@ var GFoptions =
     prefwin.showPane(prefpane);
 
     // restore tabs for this pane
-    GFoptions.restoreLastTabs();
+    gamefox_options.restoreLastTabs();
   },
 
   openPaginateDialog: function()

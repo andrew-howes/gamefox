@@ -24,15 +24,15 @@
 <!DOCTYPE page SYSTEM "chrome://gamefox/locale/tags.dtd">
 
 <page id="gamefox-tags-page" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  onload="GFtags.init();">
+  onload="gamefox_tags.init();">
   <script type="application/x-javascript" src="chrome://gamefox/content/defs.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
   <tree id="gamefox-tags-tree" flex="1" hidecolumnpicker="true"
     contextmenu="gamefox-tags-contextmenu" seltype="multiple"
-    ondblclick="if (event.button == 0) GFtags.doAction(1, true);"
-    onclick="if (event.button == 1) GFtags.doAction(0);">
+    ondblclick="if (event.button == 0) gamefox_tags.doAction(1, true);"
+    onclick="if (event.button == 1) gamefox_tags.doAction(0);">
     <treecols>
       <treecol label="&tags.label;" flex="1" primary="true"/>
       <treecol id="gamefox-tags-tagid" hidden="true"/>
@@ -41,22 +41,22 @@
   </tree>
   <toolbox>
     <toolbar id="gamefox-tags-toolbar">
-      <toolbarbutton label="&deletePurged.label;" oncommand="GFtags.removePurged();"
+      <toolbarbutton label="&deletePurged.label;" oncommand="gamefox_tags.removePurged();"
         id="gamefox-purge"/>
-      <toolbarbutton label="&deleteAll.label;" oncommand="GFtags.removeAll();"/>
+      <toolbarbutton label="&deleteAll.label;" oncommand="gamefox_tags.removeAll();"/>
     </toolbar>
   </toolbox>
 
   <popup id="gamefox-tags-contextmenu">
     <menuitem accesskey="&newTab.accesskey;" label="&newTab.label;"
-      oncommand="GFtags.doAction(1);"/>
+      oncommand="gamefox_tags.doAction(1);"/>
     <menuitem accesskey="&focusedTab.accesskey;" label="&focusedTab.label;"
-      oncommand="GFtags.doAction(2);"/>
+      oncommand="gamefox_tags.doAction(2);"/>
     <menuitem accesskey="&newWindow.accesskey;" label="&newWindow.label;"
-      oncommand="GFtags.doAction(3);"/>
+      oncommand="gamefox_tags.doAction(3);"/>
     <menuitem accesskey="&deleteTag.accesskey;" label="&deleteTag.label;"
-      oncommand="GFtags.doAction(4);"/>
+      oncommand="gamefox_tags.doAction(4);"/>
     <menuitem accesskey="&deleteSelected.accesskey;" label="&deleteSelected.label;"
-      oncommand="GFtags.removeSelected();"/>
+      oncommand="gamefox_tags.removeSelected();"/>
   </popup>
 </page>

@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFmanageOptions =
+var gamefox_options_manage =
 {
   savePrefs: function()
   {
@@ -29,7 +29,7 @@ var GFmanageOptions =
   resetOptionsDialog: function(firstRun, notifications)
   {
     window.close();
-    GFlib.openOptionsDialog(firstRun, notifications, true);
+    gamefox_lib.openOptionsDialog(firstRun, notifications, true);
   },
 
   importPrefs: function(button)
@@ -69,14 +69,14 @@ var GFmanageOptions =
     }
     catch (e)
     {
-      GFutils.showNotification(manageMsg,
+      gamefox_utils.showNotification(manageMsg,
           strbundle.getString('invalidSyntax'), 'warning');
       button.disabled = false;
       return;
     }
-    GFprefs.clearUserPrefs();
+    gamefox_prefs.clearUserPrefs();
     for (var i in importedPrefs)
-      GFprefs.setPrefValue(i, importedPrefs[i]);
+      gamefox_prefs.setPrefValue(i, importedPrefs[i]);
 
     button.disabled = false;
 
@@ -109,14 +109,14 @@ var GFmanageOptions =
     }
 
     this.savePrefs();
-    var outputData = GFprefs.getSerializedUserPrefs();
+    var outputData = gamefox_prefs.getSerializedUserPrefs();
     var foStream = Cc['@mozilla.org/network/file-output-stream;1']
       .createInstance(Ci.nsIFileOutputStream);
     foStream.init(filePicker.file, 0x02 | 0x08 | 0x20, 0664, 0);
     foStream.write(outputData, outputData.length);
     foStream.close();
 
-    GFutils.showNotification(manageMsg,
+    gamefox_utils.showNotification(manageMsg,
         strbundle.getString('exportSuccess'), 'info');
     button.disabled = false;
   },
@@ -128,19 +128,19 @@ var GFmanageOptions =
 
     var strbundle = document.getElementById('manage-strings');
 
-    if (!GFlib.confirm(strbundle.getString('resetConfirm')))
+    if (!gamefox_lib.confirm(strbundle.getString('resetConfirm')))
     {
       button.disabled = false;
       return;
     }
 
-    GFprefs.clearUserPrefs();
-    GFlib.prefs.setCharPref('version', GFlib.version);
+    gamefox_prefs.clearUserPrefs();
+    gamefox_lib.prefs.setCharPref('version', gamefox_lib.version);
 
     button.disabled = false;
 
-    GFcss.init();
-    GFcss.reload();
+    gamefox_css.init();
+    gamefox_css.reload();
     this.resetOptionsDialog(true,
         {'manageMsg':
           [{label: strbundle.getString('resetSuccess'),

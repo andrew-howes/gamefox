@@ -17,18 +17,18 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFquickpost =
+var gamefox_quickpost =
 {
   appendForm: function(doc, div, newTopic)
   {
-    var charCounts = GFlib.prefs.getBoolPref('elements.charcounts');
-    var accesskeyPrefix = GFutils.getAccesskeyPrefix();
+    var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
+    var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
 
     var form = doc.createElement('form');
     form.id = 'gamefox-quickpost-form';
-    form.action = 'post.php' + GFutils.stripQueryString(doc.location.search);
+    form.action = 'post.php' + gamefox_utils.stripQueryString(doc.location.search);
     form.method = 'post';
-    form.addEventListener('submit', GFquickpost.removeGFCodeWhitespaceListener,
+    form.addEventListener('submit', gamefox_quickpost.removeGFCodeWhitespaceListener,
         false);
     div.appendChild(form);
 
@@ -48,19 +48,19 @@ var GFquickpost =
       {
         var titlecount = doc.createElement('span');
         titlecount.id = 'gamefox-title-count';
-        topictitle.addEventListener('input', GFmessages.delayedUpdateTitleCount,
+        topictitle.addEventListener('input', gamefox_messages.delayedUpdateTitleCount,
             false);
         form.appendChild(titlecount);
-        GFmessages.updateTitleCount(doc);
+        gamefox_messages.updateTitleCount(doc);
       }
 
       form.appendChild(doc.createElement('br'));
     }
 
     // HTML buttons
-    if (GFquickpost.createHTMLButtonsPref())
+    if (gamefox_quickpost.createHTMLButtonsPref())
     {
-      form.appendChild(GFquickpost.createHTMLButtons(doc));
+      form.appendChild(gamefox_quickpost.createHTMLButtons(doc));
       form.appendChild(doc.createElement('br'));
     }
 
@@ -71,9 +71,9 @@ var GFquickpost =
     message.rows = 16;
     message.cols = 60;
     message.tabIndex = 2;
-    doc.gamefox.sig = GFsig.format(null, null, doc);
-    if (GFlib.prefs.getIntPref('signature.addition') == 1)
-      form.addEventListener('submit', GFquickpost.appendSig, false);
+    doc.gamefox.sig = gamefox_sig.format(null, null, doc);
+    if (gamefox_lib.prefs.getIntPref('signature.addition') == 1)
+      form.addEventListener('submit', gamefox_quickpost.appendSig, false);
     else
       message.value = doc.gamefox.sig;
     form.appendChild(message);
@@ -81,7 +81,7 @@ var GFquickpost =
 
     form.appendChild(doc.createElement('br'));
 
-    if (GFlib.prefs.getBoolPref('elements.quickpost.button'))
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
     {
       var postbutton = doc.createElement('input');
       postbutton.id = 'gamefox-quickpost-btn';
@@ -91,11 +91,11 @@ var GFquickpost =
       postbutton.title = 'Post Message [' + accesskeyPrefix + 'z]';
       postbutton.accessKey = 'z';
       postbutton.tabIndex = 3;
-      postbutton.addEventListener('click', GFquickpost.post, false);
+      postbutton.addEventListener('click', gamefox_quickpost.post, false);
       form.appendChild(postbutton);
     }
 
-    if (GFlib.prefs.getBoolPref('elements.quickpost.otherbuttons'))
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.otherbuttons'))
     {
       var previewbutton = doc.createElement('input');
       previewbutton.type = 'submit';
@@ -122,7 +122,7 @@ var GFquickpost =
       resetbutton.value = 'Reset';
       resetbutton.title = 'Reset [' + accesskeyPrefix + 'v]';
       resetbutton.accessKey = 'v';
-      resetbutton.addEventListener('click', GFquickpost.resetPost, false);
+      resetbutton.addEventListener('click', gamefox_quickpost.resetPost, false);
       resetbutton.tabIndex = 3;
       form.appendChild(doc.createTextNode(' '));
       form.appendChild(resetbutton);
@@ -135,7 +135,7 @@ var GFquickpost =
       hidebutton.type = 'button';
       hidebutton.value = 'Hide';
       hidebutton.tabIndex = 3;
-      hidebutton.addEventListener('click', GFquickpost.toggleVisibility, false);
+      hidebutton.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
       form.appendChild(doc.createTextNode(' '));
       form.appendChild(hidebutton);
     }
@@ -144,16 +144,16 @@ var GFquickpost =
     {
       var messagecount = doc.createElement('span');
       messagecount.id = 'gamefox-message-count';
-      message.addEventListener('input', GFmessages.delayedUpdateMessageCount,
+      message.addEventListener('input', gamefox_messages.delayedUpdateMessageCount,
           false);
       form.appendChild(messagecount);
-      GFmessages.updateMessageCount(doc);
+      gamefox_messages.updateMessageCount(doc);
     }
   },
 
   appendSig: function(event)
   {
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
     if (!doc.gamefox.sigAdded)
     {
       doc.getElementById('gamefox-message').value += doc.gamefox.sig;
@@ -163,7 +163,7 @@ var GFquickpost =
 
   toggleVisibility: function(event)
   {
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
     event.preventDefault();
 
     var qpDiv = doc.getElementById('gamefox-quickpost-afloat');
@@ -178,31 +178,31 @@ var GFquickpost =
     qpDiv.style.display = 'block';
 
     doc.getElementById('board_wrap').appendChild(qpDiv);
-    GFquickpost.appendForm(doc, qpDiv, true);
+    gamefox_quickpost.appendForm(doc, qpDiv, true);
   },
 
   post: function(event)
   {
-    var doc = GFlib.getDocument(event);
-    var query = GFutils.stripQueryString(doc.location.search);
+    var doc = gamefox_lib.getDocument(event);
+    var query = gamefox_utils.stripQueryString(doc.location.search);
     var strbundle = document.getElementById('overlay-strings');
     // make sure we're not trying to post a message to a topic that was
     // deleted by the user due to the topic list being on detail.php
-    if (GFlib.onPage(doc, 'topics'))
+    if (gamefox_lib.onPage(doc, 'topics'))
       query = query.replace(/&topic=[^&]*/g, '');
 
     event.target.disabled = true;
     event.target.blur();
 
     var topicTitle = doc.getElementsByName('topictitle')[0];
-    var message = GFquickpost.removeGFCodeWhitespace(
+    var message = gamefox_quickpost.removeGFCodeWhitespace(
         doc.getElementsByName('message')[0].value);
-    if (GFlib.prefs.getIntPref('signature.addition') == 1
-        && !GFlib.onPage(doc, 'post'))
-      message += GFsig.format(null, null, doc);
+    if (gamefox_lib.prefs.getIntPref('signature.addition') == 1
+        && !gamefox_lib.onPage(doc, 'post'))
+      message += gamefox_sig.format(null, null, doc);
 
     if (/^\s*---(\n|$)/.test(message)
-        && GFlib.prefs.getBoolPref('elements.quickpost.blankPostWarning'))
+        && gamefox_lib.prefs.getBoolPref('elements.quickpost.blankPostWarning'))
     {
       var promptService = Cc['@mozilla.org/embedcomp/prompt-service;1'].
         getService(Ci.nsIPromptService);
@@ -214,7 +214,7 @@ var GFquickpost =
           strbundle.getString('neverWarnBlankPost'), neverWarn);
 
       if (neverWarn.value == true)
-        GFlib.prefs.setBoolPref('elements.quickpost.blankPostWarning', false);
+        gamefox_lib.prefs.setBoolPref('elements.quickpost.blankPostWarning', false);
 
       if (button == 1)
       {
@@ -224,8 +224,8 @@ var GFquickpost =
     }
 
     var previewRequest = new XMLHttpRequest();
-    previewRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
-    var ds = GFlib.thirdPartyCookieFix(previewRequest);
+    previewRequest.open('POST', gamefox_lib.domain + gamefox_lib.path + 'post.php' + query);
+    var ds = gamefox_lib.thirdPartyCookieFix(previewRequest);
     previewRequest.onreadystatechange = function()
     {
       if (previewRequest.readyState == 4)
@@ -236,7 +236,7 @@ var GFquickpost =
         if (!postId || /^\s*0?\s*$/.test(postId[1]))
         { // error
           if (!/\S/.test(text))
-            GFlib.alert('Request timed out. Check your network connection and try again.');
+            gamefox_lib.alert('Request timed out. Check your network connection and try again.');
           else
           {
             var badWord = text.match(/<p>Banned word found: <b>([^<]+)<\/b>/i);
@@ -256,44 +256,44 @@ var GFquickpost =
             var maintenance = text.indexOf('<body') == -1 && text.indexOf('maintenance') != -1;
 
             if (badWord)
-              GFlib.alert('Your post includes the word "' + badWord[1] + '", which is a bad word. ' +
-                  'Didn\'t anyone ever tell you "' + badWord[1] + '" was a bad word?');
+              gamefox_lib.alert('Your post includes the word "' + badWord[1] + '", which is a bad ' +
+                  'word. Didn\'t anyone ever tell you "' + badWord[1] + '" was a bad word?');
             else if (tooBig)
-              GFlib.alert('Your post is too big! A message can only contain 4096 characters, ' +
+              gamefox_lib.alert('Your post is too big! A message can only contain 4096 characters, ' +
                   'but yours has ' + tooBig[1] + '.');
             else if (titleLength)
-              GFlib.alert('Your topic title must be between 5 and 80 characters in length.');
+              gamefox_lib.alert('Your topic title must be between 5 and 80 characters in length.');
             else if (allCapsTitle)
-              GFlib.alert('Turn off your caps lock and try typing your topic title again.');
+              gamefox_lib.alert('Turn off your caps lock and try typing your topic title again.');
             else if (allCapsMessage)
-              GFlib.alert('Turn off your caps lock and try typing your message again.');
+              gamefox_lib.alert('Turn off your caps lock and try typing your message again.');
             else if (noTopics)
-              GFlib.alert('You are not allowed to post topics here.');
+              gamefox_lib.alert('You are not allowed to post topics here.');
             else if (noMessages)
-              GFlib.alert('You are not allowed to post messages here.');
+              gamefox_lib.alert('You are not allowed to post messages here.');
             else if (longWordInTitle)
-              GFlib.alert('Your topic title contains a word over 25 characters in length. ' +
+              gamefox_lib.alert('Your topic title contains a word over 25 characters in length. ' +
                   'This makes CJayC unhappy because it stretches his 640x480 resolution ' +
                   'screen, so he doesn\'t allow it.');
             else if (longWordInMessage)
-              GFlib.alert('Your message contains a word over 80 characters in length. ' +
+              gamefox_lib.alert('Your message contains a word over 80 characters in length. ' +
                   'This makes CJayC unhappy because it stretches his 640x480 resolution ' +
                   'screen, so he doesn\'t allow it.');
             else if (blankMessage)
-              GFlib.alert('Maybe you should actually type something...');
+              gamefox_lib.alert('Maybe you should actually type something...');
             else if (badHTML)
-              GFlib.alert('Your HTML is not well-formed. Check for mismatched tags.');
+              gamefox_lib.alert('Your HTML is not well-formed. Check for mismatched tags.');
             else if (nonASCIITitle)
-              GFlib.alert('Topic titles cannot contain non-ASCII characters.');
+              gamefox_lib.alert('Topic titles cannot contain non-ASCII characters.');
             else if (closedTopic)
-              GFlib.alert('The topic was closed while you were typing your message. ' +
+              gamefox_lib.alert('The topic was closed while you were typing your message. ' +
                   'Type faster next time!');
             else if (deletedTopic)
-              GFlib.alert('The topic is gone! Damn moderators...');
+              gamefox_lib.alert('The topic is gone! Damn moderators...');
             else if (maintenance)
-              GFlib.alert('The site is temporarily down for maintenance.');
+              gamefox_lib.alert('The site is temporarily down for maintenance.');
             else
-              GFlib.alert('Something went wrong but I don\'t know what. Try posting ' +
+              gamefox_lib.alert('Something went wrong but I don\'t know what. Try posting ' +
                   'without QuickPost, and if you think you\'ve found a bug ' +
                   'report it at Blood Money.');
           }
@@ -306,7 +306,7 @@ var GFquickpost =
           {
             var warning = text.match(/message:<\/b><\/p>\s+(.*)/)[1].
               replace(/<P>/g, '\n\n');
-            if (!GFlib.confirm(warning + 'Submit this post?'))
+            if (!gamefox_lib.confirm(warning + 'Submit this post?'))
             {
               event.target.removeAttribute('disabled');
               return;
@@ -314,8 +314,8 @@ var GFquickpost =
           }
 
           var postRequest = new XMLHttpRequest();
-          postRequest.open('POST', GFlib.domain + GFlib.path + 'post.php' + query);
-          var ds = GFlib.thirdPartyCookieFix(postRequest);
+          postRequest.open('POST', gamefox_lib.domain + gamefox_lib.path + 'post.php' + query);
+          var ds = gamefox_lib.thirdPartyCookieFix(postRequest);
           postRequest.onreadystatechange = function()
           {
             if (postRequest.readyState == 4)
@@ -324,7 +324,7 @@ var GFquickpost =
               if (text.indexOf('<div class="head"><h1>Message Posted</h1></div>') == -1)
               { // error
                 if (!/\S/.test(text))
-                  GFlib.alert('Request timed out. Check your network connection and try again.');
+                  gamefox_lib.alert('Request timed out. Check your network connection and try again.');
                 else
                 {
                   var flooding = text.indexOf('Please wait and try your post again') != -1;
@@ -333,15 +333,15 @@ var GFquickpost =
                   var dupeTitle = text.indexOf('A topic with this title already exists') != -1;
 
                   if (flooding)
-                    GFlib.alert('You have hit one of the time-based posting limits (e.g., 2 posts per minute).');
+                    gamefox_lib.alert('You have hit one of the time-based posting limits (e.g., 2 posts per minute).');
                   else if (closedTopic)
-                    GFlib.alert('The topic was closed while you were typing your message. Type faster next time!');
+                    gamefox_lib.alert('The topic was closed while you were typing your message. Type faster next time!');
                   else if (deletedTopic)
-                    GFlib.alert('The topic is gone! Damn moderators...');
+                    gamefox_lib.alert('The topic is gone! Damn moderators...');
                   else if (dupeTitle)
-                    GFlib.alert('A topic with this title already exists. Choose another title.');
+                    gamefox_lib.alert('A topic with this title already exists. Choose another title.');
                   else
-                    GFlib.alert('Something went wrong but I don\'t know what. Try posting ' +
+                    gamefox_lib.alert('Something went wrong but I don\'t know what. Try posting ' +
                         'without QuickPost, and if you think you\'ve found a bug ' +
                         'report it at Blood Money.');
                 }
@@ -349,29 +349,29 @@ var GFquickpost =
                 return;
               }
 
-              query = GFutils.parseQueryString(query);
+              query = gamefox_utils.parseQueryString(query);
               if (topicTitle) // new topic
               {
-                switch (GFlib.prefs.getIntPref('elements.quickpost.aftertopic'))
+                switch (gamefox_lib.prefs.getIntPref('elements.quickpost.aftertopic'))
                 {
                   case 0: // go to topic
-                    doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
+                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
                       'board=' + query['board'] + '&topic=' +
                       text.match(/genmessage\.php\?board=(?:[0-9-]+)&topic=([0-9]+)/)[1];
                     break;
 
                   case 1: // go to board
-                    doc.location = GFlib.domain + GFlib.path + 'gentopic.php?' +
+                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?' +
                       'board=' + query['board'];
                     break;
                 }
               }
               else // new message
               {
-                switch (GFlib.prefs.getIntPref('elements.quickpost.aftermessage'))
+                switch (gamefox_lib.prefs.getIntPref('elements.quickpost.aftermessage'))
                 {
                   case 0: // go to last page/post
-                    var msgsPerPage = GFlib.prefs.getIntPref('msgsPerPage');
+                    var msgsPerPage = gamefox_lib.prefs.getIntPref('msgsPerPage');
                     var end;
 
                     if (doc.gamefox.pages * msgsPerPage == doc.gamefox.msgnum)
@@ -382,7 +382,7 @@ var GFquickpost =
                       end = ''; // first page
 
                     if (end.length)
-                      end += GFutils.tcParam(doc.gamefox.tc);
+                      end += gamefox_utils.tcParam(doc.gamefox.tc);
 
                     if (doc.gamefox.msgnum > (doc.gamefox.pages - 1) * msgsPerPage &&
                         doc.gamefox.pages * msgsPerPage != doc.gamefox.msgnum)
@@ -393,7 +393,7 @@ var GFquickpost =
                     else
                       end += '#last-post';
 
-                    doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
+                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
                       'board=' + query['board'] + '&topic=' + query['topic'] + end;
 
                     if ((query['page'] == (doc.gamefox.pages - 1) || doc.gamefox.pages == 1)
@@ -402,19 +402,19 @@ var GFquickpost =
                     break;
 
                   case 1: // go back to same page
-                    doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
+                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
                       'board=' + query['board'] + '&topic=' + query['topic'] +
                       (query['page'] ? '&page=' + query['page'] : '') +
-                      GFutils.tcParam(doc.gamefox.tc);
+                      gamefox_utils.tcParam(doc.gamefox.tc);
                     break;
 
                   case 2: // go to first page
-                    doc.location = GFlib.domain + GFlib.path + 'genmessage.php?' +
+                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
                       'board=' + query['board'] + '&topic=' + query['topic'];
                     break;
 
                   case 3: // go to board
-                    doc.location = GFlib.domain + GFlib.path + 'gentopic.php?' +
+                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?' +
                       'board=' + query['board'];
                     break;
                 }
@@ -436,8 +436,8 @@ var GFquickpost =
 
     previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     previewRequest.send(
-        (topicTitle ? 'topictitle=' + GFutils.URLEncode(topicTitle.value) + '&' : '') +
-        'message=' + GFutils.URLEncode(message) +
+        (topicTitle ? 'topictitle=' + gamefox_utils.URLEncode(topicTitle.value) + '&' : '') +
+        'message=' + gamefox_utils.URLEncode(message) +
         '&post=Preview+Message'
         );
   },
@@ -446,16 +446,16 @@ var GFquickpost =
   {
     event.preventDefault();
 
-    if (GFlib.prefs.getBoolPref('elements.quickpost.resetconfirm') &&
-        !GFlib.confirm('Are you sure? This will clear your entire post so far.'))
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.resetconfirm') &&
+        !gamefox_lib.confirm('Are you sure? This will clear your entire post so far.'))
       return;
 
-    var doc = GFlib.getDocument(event);
-    var charCounts = GFlib.prefs.getBoolPref('elements.charcounts');
+    var doc = gamefox_lib.getDocument(event);
+    var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
 
-    if (GFlib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
-      doc.gamefox.sig = GFsig.format(null, null, doc);
-    if (GFlib.prefs.getIntPref('signature.addition') == 1)
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
+      doc.gamefox.sig = gamefox_sig.format(null, null, doc);
+    if (gamefox_lib.prefs.getIntPref('signature.addition') == 1)
     {
       doc.getElementById('gamefox-message').value = '';
       doc.gamefox.sigAdded = false;
@@ -464,12 +464,12 @@ var GFquickpost =
       doc.getElementById('gamefox-message').value = doc.gamefox.sig;
 
     if (charCounts)
-      GFmessages.updateMessageCount(doc);
+      gamefox_messages.updateMessageCount(doc);
     if (doc.getElementById('gamefox-topic'))
     {
       doc.getElementById('gamefox-topic').value = '';
       if (charCounts)
-        GFmessages.updateTitleCount(doc);
+        gamefox_messages.updateTitleCount(doc);
     }
   },
 
@@ -500,11 +500,11 @@ var GFquickpost =
   insertTag: function(event)
   {
     event.preventDefault();
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
 
     var quickpost = doc.getElementsByName('message')[0];
-    var tagStrStart = GFquickpost.formatTag(this.name, false);
-    var tagStrEnd = GFquickpost.formatTag(this.name, true);
+    var tagStrStart = gamefox_quickpost.formatTag(this.name, false);
+    var tagStrEnd = gamefox_quickpost.formatTag(this.name, true);
 
     if (quickpost.selectionStart == quickpost.selectionEnd)
     {
@@ -529,8 +529,8 @@ var GFquickpost =
     quickpost.setSelectionRange(endPosition, endPosition);
     quickpost.focus();
 
-    if (GFlib.prefs.getBoolPref('elements.charcounts'))
-      GFmessages.updateMessageCount(doc);
+    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
+      gamefox_messages.updateMessageCount(doc);
   },
 
   createHTMLButtons: function(doc)
@@ -540,25 +540,25 @@ var GFquickpost =
 
     var tags = [];
     // Standard
-    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
       tags.push(
           'b', 'Bold', 'b',
           'i', 'Italics', 'i');
     // Extended
-    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended'))
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended'))
       tags.push(
           'em', 'Emphasis', 'e',
           'strong', 'Strong Emphasis', 's',
           'p', 'Paragraph', 'g',
           'br', 'Break', 'n');
     // GFCode
-    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
       tags.push(
           'i,p', 'Quote', 'q',
           'em,p', 'Code', 'd',
           'em,i', 'Inline Code', 'l');
 
-    var accesskeyPrefix = GFutils.getAccesskeyPrefix();
+    var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
     var button;
 
     for (var i = 0; i < tags.length; i += 3)
@@ -574,13 +574,13 @@ var GFquickpost =
         (tags[i] == 'br' ? ' /' : '') + '> [' + accesskeyPrefix + tags[i + 2] + ']';
       button.accessKey = tags[i + 2];
       button.tabIndex = 4;
-      button.addEventListener('click', GFquickpost.insertTag, false);
+      button.addEventListener('click', gamefox_quickpost.insertTag, false);
 
       span.appendChild(button);
     }
 
     // Break tags
-    if (GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags'))
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags'))
     {
       if (span.hasChildNodes())
         span.appendChild(doc.createTextNode(' | '));
@@ -591,13 +591,13 @@ var GFquickpost =
       button.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
       button.accessKey = 'r';
       button.tabIndex = 4;
-      button.addEventListener('click', GFquickpost.breakTagsFromButton, false);
+      button.addEventListener('click', gamefox_quickpost.breakTagsFromButton, false);
 
       span.appendChild(button);
     }
 
     // Character map
-    if (GFlib.prefs.getBoolPref('elements.charmap'))
+    if (gamefox_lib.prefs.getBoolPref('elements.charmap'))
     {
       if (span.hasChildNodes())
         span.appendChild(doc.createTextNode(' | '));
@@ -606,7 +606,7 @@ var GFquickpost =
       button.type = 'submit';
       button.value = 'Character Map';
       button.tabIndex = 4;
-      button.addEventListener('click', GFquickpost.toggleCharacterMap, false);
+      button.addEventListener('click', gamefox_quickpost.toggleCharacterMap, false);
 
       span.appendChild(button);
     }
@@ -616,20 +616,20 @@ var GFquickpost =
 
   removeGFCodeWhitespace: function(str)
   {
-    return GFlib.prefs.getBoolPref('quote.controlwhitespace') ?
+    return gamefox_lib.prefs.getBoolPref('quote.controlwhitespace') ?
       str.replace(/<\/p>\s*<\/(i|em)>\n{2}(?!\n)/g, '</p></$1>\n') : str;
   },
 
   removeGFCodeWhitespaceListener: function(event)
   {
     var message = event.target.elements.namedItem('message');
-    message.value = GFquickpost.removeGFCodeWhitespace(message.value);
+    message.value = gamefox_quickpost.removeGFCodeWhitespace(message.value);
   },
 
   breakTags: function(msg)
   {
-    var brokenStr = GFutils.specialCharsDecode(GFutils.breakTags(
-          GFutils.specialCharsEncode(msg.value.substring(msg.selectionStart,
+    var brokenStr = gamefox_utils.specialCharsDecode(gamefox_utils.breakTags(
+          gamefox_utils.specialCharsEncode(msg.value.substring(msg.selectionStart,
               msg.selectionEnd))));
 
     var endPosition = msg.selectionStart + brokenStr.length;
@@ -643,43 +643,43 @@ var GFquickpost =
   breakTagsFromButton: function(event)
   {
     event.preventDefault();
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
 
     var msg = doc.getElementsByName('message')[0];
     if (msg.selectionStart == msg.selectionEnd)
     {
-      GFlib.alert('You need to select some text containing HTML first.');
+      gamefox_lib.alert('You need to select some text containing HTML first.');
       return;
     }
 
-    GFquickpost.breakTags(msg);
+    gamefox_quickpost.breakTags(msg);
     msg.focus();
 
-    if (GFlib.prefs.getBoolPref('elements.charcounts'))
-      GFmessages.updateMessageCount(doc);
+    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
+      gamefox_messages.updateMessageCount(doc);
   },
 
   breakTagsFromContext: function(event)
   {
-    GFquickpost.breakTags(event.target);
+    gamefox_quickpost.breakTags(event.target);
 
-    if (GFlib.prefs.getBoolPref('elements.charcounts'))
-      GFmessages.updateMessageCount(GFlib.getDocument(event));
+    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
+      gamefox_messages.updateMessageCount(gamefox_lib.getDocument(event));
   },
 
   createHTMLButtonsPref: function()
   {
-    return GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons')
-      || GFlib.prefs.getBoolPref('elements.charmap')
-      || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
-      || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode')
-      || GFlib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags');
+    return gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons')
+      || gamefox_lib.prefs.getBoolPref('elements.charmap')
+      || gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
+      || gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode')
+      || gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags');
   },
 
   toggleCharacterMap: function(event)
   {
     event.preventDefault();
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
 
     var map = doc.getElementById('gamefox-character-map');
     if (map)
@@ -734,7 +734,7 @@ var GFquickpost =
             var a = doc.createElement('a');
             a.appendChild(doc.createTextNode(character));
             a.href = '#';
-            a.addEventListener('click', GFquickpost.addCharacter, false);
+            a.addEventListener('click', gamefox_quickpost.addCharacter, false);
             td.appendChild(a);
           }
           tr.appendChild(td);
@@ -751,7 +751,7 @@ var GFquickpost =
   addCharacter: function(event)
   {
     event.preventDefault();
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
 
     var character = event.target.textContent;
 
@@ -763,7 +763,7 @@ var GFquickpost =
     msg.setSelectionRange(endPosition, endPosition);
     msg.focus();
 
-    if (GFlib.prefs.getBoolPref('elements.charcounts'))
-      GFmessages.updateMessageCount(doc);
+    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
+      gamefox_messages.updateMessageCount(doc);
   }
 };

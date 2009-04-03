@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFmessages =
+var gamefox_messages =
 {
   updateDelay: 100,
 
@@ -26,14 +26,14 @@ var GFmessages =
     if (this.timeoutId)
       clearTimeout(this.timeoutId);
 
-    this.timeoutId = setTimeout(GFmessages.updateMessageCount,
-        GFmessages.updateDelay, event);
+    this.timeoutId = setTimeout(gamefox_messages.updateMessageCount,
+        gamefox_messages.updateDelay, event);
   },
 
   updateMessageCount: function(event)
   {
-    var doc = GFlib.getDocument(event);
-    var messageLength = GFutils.encodedMessageLength(
+    var doc = gamefox_lib.getDocument(event);
+    var messageLength = gamefox_utils.encodedMessageLength(
         doc.getElementsByName('message')[0].value);
 
     var messageCount = doc.getElementById('gamefox-message-count');
@@ -53,14 +53,14 @@ var GFmessages =
     if (this.timeoutId)
       clearTimeout(this.timeoutId);
 
-    this.timeoutId = setTimeout(GFmessages.updateTitleCount,
-        GFmessages.updateDelay, event);
+    this.timeoutId = setTimeout(gamefox_messages.updateTitleCount,
+        gamefox_messages.updateDelay, event);
   },
 
   updateTitleCount: function(event)
   {
-    var doc = GFlib.getDocument(event);
-    var titleLength = GFutils.encodedTitleLength(
+    var doc = gamefox_lib.getDocument(event);
+    var titleLength = gamefox_utils.encodedTitleLength(
         doc.getElementsByName('topictitle')[0].value);
 
     var titleCount = doc.getElementById('gamefox-title-count');
@@ -79,8 +79,8 @@ var GFmessages =
   {
     context || event.preventDefault();
 
-    var doc = GFlib.getDocument(event);
-    var msgComponents = GFutils.getMsgComponents(event.target, doc);
+    var doc = gamefox_lib.getDocument(event);
+    var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
     var deleteType = msgComponents.header.getAttribute('gfdeletetype');
 
     var closeTopic = deleteType == 'close';
@@ -96,14 +96,14 @@ var GFmessages =
     else
       return;
 
-    if (!GFlib.confirm(str)) return false;
+    if (!gamefox_lib.confirm(str)) return false;
 
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
     var uri = msgComponents.header.getElementsByTagName('a')[1].href;
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
-    var ds = GFlib.thirdPartyCookieFix(get);
+    var ds = gamefox_lib.thirdPartyCookieFix(get);
     get.onreadystatechange = function()
     {
       if (get.readyState == 4)
@@ -111,22 +111,22 @@ var GFmessages =
         if (get.responseText.indexOf('<h1>Delete this Message</h1>') == -1 &&
             get.responseText.indexOf('<h1>Close this Topic</h1>') == -1)
         {
-          GFlib.alert('No action is available.');
+          gamefox_lib.alert('No action is available.');
           return false;
         }
 
         var post = new XMLHttpRequest();
         post.open('POST', uri + '&action=' + (closeTopic ? 'closetopic' : 'delete'));
-        var ds = GFlib.thirdPartyCookieFix(post);
+        var ds = gamefox_lib.thirdPartyCookieFix(post);
         post.onreadystatechange = function()
         {
           if (post.readyState == 4)
           {
             if (post.responseText.indexOf('<title>401 Error') != -1)
-              GFlib.alert('Can\'t delete this message.');
+              gamefox_lib.alert('Can\'t delete this message.');
             else if (deleteTopic)
-              doc.location = GFlib.domain + GFlib.path + 'gentopic.php?board='
-                + GFutils.parseQueryString(doc.location.search)['board'];
+              doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?board='
+                + gamefox_utils.parseQueryString(doc.location.search)['board'];
             else
             {
               if (!closeTopic)

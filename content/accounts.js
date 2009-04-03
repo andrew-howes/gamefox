@@ -17,24 +17,24 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFaccounts =
+var gamefox_accounts =
 {
   accounts: '',
 
   read: function()
   {
-    this.accounts = eval(GFlib.prefs.getCharPref('accounts'));
+    this.accounts = eval(gamefox_lib.prefs.getCharPref('accounts'));
   },
 
   write: function(accounts)
   {
-    GFlib.prefs.setCharPref('accounts', accounts.toSource());
+    gamefox_lib.prefs.setCharPref('accounts', accounts.toSource());
   },
 
   populate: function()
   {
     var accountList, username, item, firstAccount;
-    var currentAccount = GFlib.prefs.getCharPref('accounts.current');
+    var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
 
     accountList = document.getElementById('gamefox-accounts-menu');
     if (!accountList)
@@ -47,7 +47,7 @@ var GFaccounts =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', 'Add account...');
-    item.setAttribute('oncommand', 'GFaccounts.promptLogin()');
+    item.setAttribute('oncommand', 'gamefox_accounts.promptLogin()');
     accountList.appendChild(item);
 
     firstAccount = true;
@@ -57,7 +57,7 @@ var GFaccounts =
       {
         item = document.createElement('menuitem');
         item.setAttribute('label', 'Remove account...');
-        item.setAttribute('oncommand', 'GFaccounts.promptRemoveAccount()');
+        item.setAttribute('oncommand', 'gamefox_accounts.promptRemoveAccount()');
         accountList.appendChild(item);
         accountList.appendChild(document.createElement('menuseparator'));
         firstAccount = false;
@@ -66,7 +66,7 @@ var GFaccounts =
       item.setAttribute('label', username + 
           (username.toLowerCase() == currentAccount.toLowerCase() ?
            '*' : ''));
-      item.setAttribute('oncommand', 'GFaccounts.switchAccount("' + username + '")');
+      item.setAttribute('oncommand', 'gamefox_accounts.switchAccount("' + username + '")');
       accountList.appendChild(item);
     }
   },
@@ -90,12 +90,12 @@ var GFaccounts =
 
     function fetchCtkCallback()
     {
-      GFaccounts.loadAccount(
+      gamefox_accounts.loadAccount(
           account.MDAAuth.content,
           account.skin != undefined ? account.skin.content : null,
           account.filesplit != undefined ? account.filesplit.content : null,
           expires);
-      GFaccounts.loadGameFAQs();
+      gamefox_accounts.loadGameFAQs();
     }
   },
 
@@ -172,7 +172,7 @@ var GFaccounts =
           .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username (or e-mail address) and password:', username, password, null, check);
       if (!result)
         return;
-      username = username.value.GFtrim();
+      username = username.value.gamefox_trim();
     }
     else
     {
@@ -202,7 +202,7 @@ var GFaccounts =
       var request = new XMLHttpRequest();
       // TODO: find a way to make page not redirect
       request.open('POST', 'http://www.gamefaqs.com/user/login.html?r=www.gamefaqs.com/images/default/rec.gif');
-      var ds = GFlib.thirdPartyCookieFix(request);
+      var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
@@ -210,35 +210,35 @@ var GFaccounts =
           if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1)
           {
             if (MDAAuth)
-              GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
-            GFaccounts.promptLogin(username, 'Login error! Maybe your password was incorrect? Try it again.');
+              gamefox_accounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
+            gamefox_accounts.promptLogin(username, 'Login error! Maybe your password was incorrect? Try it again.');
             return;
           }
 
-          var cookie = GFaccounts.getCookie('MDAAuth');
+          var cookie = gamefox_accounts.getCookie('MDAAuth');
           if (cookie == null)
           {
             if (MDAAuth)
-              GFaccounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
-            GFaccounts.promptLogin(username, 'Somebody ate the cookie! This means that something unexpected happened. Try it again.');
+              gamefox_accounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
+            gamefox_accounts.promptLogin(username, 'Somebody ate the cookie! This means that something unexpected happened. Try it again.');
             return;
           }
 
-          GFaccounts.read();
-          GFaccounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
-          if ((cookie = GFaccounts.getCookie('skin')) != null)
-            GFaccounts.accounts[username].skin = {content:cookie.content};
-          if ((cookie = GFaccounts.getCookie('filesplit')) != null)
-            GFaccounts.accounts[username].filesplit = {content:cookie.content};
-          GFaccounts.write(GFaccounts.accounts);
+          gamefox_accounts.read();
+          gamefox_accounts.accounts[username] = {MDAAuth:{content:cookie.content, expires:cookie.expires}};
+          if ((cookie = gamefox_accounts.getCookie('skin')) != null)
+            gamefox_accounts.accounts[username].skin = {content:cookie.content};
+          if ((cookie = gamefox_accounts.getCookie('filesplit')) != null)
+            gamefox_accounts.accounts[username].filesplit = {content:cookie.content};
+          gamefox_accounts.write(gamefox_accounts.accounts);
 
-          GFaccounts.loadGameFAQs();
+          gamefox_accounts.loadGameFAQs();
         }
       }
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       request.send(
-          'EMAILADDR=' + GFutils.URLEncode(username) +
-          '&PASSWORD=' + GFutils.URLEncode(password.value)
+          'EMAILADDR=' + gamefox_utils.URLEncode(username) +
+          '&PASSWORD=' + gamefox_utils.URLEncode(password.value)
           );
     }
   },
@@ -249,7 +249,7 @@ var GFaccounts =
     {
       var request = new XMLHttpRequest();
       request.open('HEAD', 'http://www.gamefaqs.com/');
-      var ds = GFlib.thirdPartyCookieFix(request);
+      var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
@@ -278,7 +278,7 @@ var GFaccounts =
     {
       delete this.accounts[items[selected.value]];
       this.write(this.accounts);
-      GFlib.alert('"' + items[selected.value] + '" has been removed.');
+      gamefox_lib.alert('"' + items[selected.value] + '" has been removed.');
       if (items.length > 1)
         this.promptRemoveAccount();
     }
@@ -291,7 +291,7 @@ var GFaccounts =
         .getMostRecentWindow('navigator:browser');
     var location = win.content.document.location;
 
-    if (GFlib.onGF(win.content.document))
+    if (gamefox_lib.onGF(win.content.document))
     {
       if (location.hash)
         win.loadURI(location.href

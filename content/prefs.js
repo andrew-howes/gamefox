@@ -22,7 +22,7 @@
 //   - getCharPref and setCharPref are used for all string prefs. This seems
 //     to work alright, but I'm not sure if it is the correct thing to do.
 
-var GFprefs =
+var gamefox_prefs =
 {
   prefs: Cc['@mozilla.org/preferences-service;1']
            .getService(Ci.nsIPrefService).getBranch('gamefox.'),

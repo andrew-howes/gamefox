@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFstyleOptions =
+var gamefox_options_style =
 {
   showDesc: function(event)
   {
@@ -35,14 +35,14 @@ var GFstyleOptions =
 
     var name = tree.view.getCellText(row.value, {index: 0});
     var desc = tree.view.getCellText(row.value, col.value);
-    GFlib.alert(name + ':\n' + desc);
+    gamefox_lib.alert(name + ':\n' + desc);
   },
 
   populate: function()
   {
-    var css = eval(GFcss.prefs.getCharPref('serialized'));
+    var css = eval(gamefox_css.prefs.getCharPref('serialized'));
 
-    this.treeView = new GFtreeview();
+    this.treeView = new gamefox_treeview();
     this.treeView.childData = {};
     this.treeView.visibleData = [];
     var categories = {'GameFOX':'gamefox', 'GameFAQs':'bundled', 'User':'user'};
@@ -82,7 +82,9 @@ var GFstyleOptions =
 
   onpopupshowing: function()
   {
-    var disabled = GFstyleOptions.treeView.visibleData[GFstyleOptions.treeView.selection.currentIndex][0][5] != 'user';
+    var disabled = gamefox_options_style.treeView
+      .visibleData[gamefox_options_style.treeView.selection.currentIndex]
+      [0][5] != 'user';
     document.getElementById('css-remove').setAttribute('disabled', disabled);
     document.getElementById('css-edit').setAttribute('disabled', disabled);
   },
@@ -103,14 +105,14 @@ var GFstyleOptions =
     // Map column to associative array in pref
     var map = new Array('title', 'desc', 'author', 'enabled');
 
-    var css = eval(GFcss.prefs.getCharPref('serialized'));
+    var css = eval(gamefox_css.prefs.getCharPref('serialized'));
     css[category][filename][map[column.index]] = value;
-    GFcss.prefs.setCharPref('serialized', css.toSource());
+    gamefox_css.prefs.setCharPref('serialized', css.toSource());
 
     this.selection.clearSelection();
     this.selection.select(idx);
 
-    GFcss.reload(true);
+    gamefox_css.reload(true);
   },
 
   userimport: function(uri)
@@ -120,16 +122,16 @@ var GFstyleOptions =
     if (!/\.(css|txt)$/.test(uri))
     {
       if (uri.length > 0)
-        GFlib.alert('Filename must end in .css or .txt');
+        gamefox_lib.alert('Filename must end in .css or .txt');
       return;
     }
 
     var filename = decodeURIComponent(uri.substr(uri.lastIndexOf('/') + 1));
 
-    if (!GFcss.add('user', uri, filename, filename, '', '', true)) return;
+    if (!gamefox_css.add('user', uri, filename, filename, '', '', true)) return;
 
     this.populate();
-    GFcss.reload(true);
+    gamefox_css.reload(true);
   },
 
   filepicker: function()
@@ -146,7 +148,7 @@ var GFstyleOptions =
 
   openDirectory: function()
   {
-    var directory = GFcss.getDirectory();
+    var directory = gamefox_css.getDirectory();
 
     try
     {
@@ -162,7 +164,7 @@ var GFstyleOptions =
   {
     var current = this.treeView.visibleData[this.treeView.selection.currentIndex][0];
 
-    if (!GFlib.confirm('Really delete "' + current[0] + '"?'))
+    if (!gamefox_lib.confirm('Really delete "' + current[0] + '"?'))
       return;
 
     var filename = current[4];
@@ -171,7 +173,7 @@ var GFstyleOptions =
     if (category != 'user')
       return;
 
-    GFcss.remove(category, filename);
+    gamefox_css.remove(category, filename);
     this.populate();
   },
 
@@ -183,7 +185,7 @@ var GFstyleOptions =
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
 
-    file.initWithPath(GFcss.getDirectoryPath());
+    file.initWithPath(gamefox_css.getDirectoryPath());
     file.append(filename);
 
     try
@@ -198,7 +200,7 @@ var GFstyleOptions =
 
   launchError: function()
   {
-    GFlib.alert('This command does not work on your platform. '
+    gamefox_lib.alert('This command does not work on your platform. '
         + 'Try updating to the latest version of your browser.');
   }
 };

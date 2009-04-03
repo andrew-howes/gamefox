@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var GFsig =
+var gamefox_sig =
 {
   getSigByCriteria: function(account, boardname, boardid)
   {
@@ -25,7 +25,7 @@ var GFsig =
     boardname = boardname.toLowerCase();
     var matches = new Array(new Array(), new Array(), new Array());
     var accounts, boards;
-    var sigs = eval(GFutils.getString('signature.serialized'));
+    var sigs = eval(gamefox_utils.getString('signature.serialized'));
 
     // find matching sigs
     for (var i = 1; i < sigs.length; i++)
@@ -33,8 +33,8 @@ var GFsig =
       // skip empty sigs
       if (!sigs[i]['body'].length) continue;
 
-      accounts = sigs[i]['accounts'].toLowerCase().GFtrim().split(/\s*,\s*/);
-      boards = sigs[i]['boards'].toLowerCase().GFtrim().split(/\s*,\s*/);
+      accounts = sigs[i]['accounts'].toLowerCase().gamefox_trim().split(/\s*,\s*/);
+      boards = sigs[i]['boards'].toLowerCase().gamefox_trim().split(/\s*,\s*/);
 
       // force the array length to 0
       if (accounts.join() == '') accounts = new Array();
@@ -67,14 +67,14 @@ var GFsig =
 
     var sig;
 
-    if (GFlib.prefs.getBoolPref('signature.selectMostSpecific'))
+    if (gamefox_lib.prefs.getBoolPref('signature.selectMostSpecific'))
     {
       var bestIndex = matches[0].length ? 0 : matches[1].length ? 1 : 2;
       sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
     }
     else
     {
-      var allMatches = GFutils.mergeArray(matches[0], matches[1], matches[2]);
+      var allMatches = gamefox_utils.mergeArray(matches[0], matches[1], matches[2]);
       sig = allMatches[Math.floor(Math.random() * allMatches.length)];
     }
 
@@ -87,23 +87,23 @@ var GFsig =
 
   getSigById: function(id)
   {
-    return eval(GFutils.getString('signature.serialized'))[id];
+    return eval(gamefox_utils.getString('signature.serialized'))[id];
   },
 
   addSig: function()
   {
-    var sigs = eval(GFutils.getString('signature.serialized'));
+    var sigs = eval(gamefox_utils.getString('signature.serialized'));
     sigs.push({'accounts':'', 'boards':'', 'body':''});
-    GFutils.setString('signature.serialized', sigs.toSource());
+    gamefox_utils.setString('signature.serialized', sigs.toSource());
 
     return sigs.length - 1;
   },
 
   deleteSigById: function(id)
   {
-    var sigs = eval(GFutils.getString('signature.serialized'));
+    var sigs = eval(gamefox_utils.getString('signature.serialized'));
     sigs.splice(id, 1);
-    GFutils.setString('signature.serialized', sigs.toSource());
+    gamefox_utils.setString('signature.serialized', sigs.toSource());
   },
 
   getCriteriaString: function(accounts, boards)
@@ -130,17 +130,17 @@ var GFsig =
     if (sig == null) // fetch sig
     {
       if (!doc) return false;
-      var boardname = GFutils.getBoardName(doc);
-      var boardid = GFutils.parseQueryString(doc.location.search)['board'];
-      var account = GFutils.getAccountName(doc);
-      var getSig = GFsig.getSigByCriteria(account, boardname, boardid);
+      var boardname = gamefox_utils.getBoardName(doc);
+      var boardid = gamefox_utils.parseQueryString(doc.location.search)['board'];
+      var account = gamefox_utils.getAccountName(doc);
+      var getSig = gamefox_sig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
     }
     if (!sig.length)
       return '';
 
     if (newline == null) // fetch newline
-      newline = GFlib.prefs.getBoolPref('signature.newline');
+      newline = gamefox_lib.prefs.getBoolPref('signature.newline');
 
     // truncate at 2 lines
     sig = sig.split('\n');
@@ -153,14 +153,14 @@ var GFsig =
     sig = sig.replace(/<\/?p>/g, '');
 
     // truncate at 160 characters
-    sig = GFutils.specialCharsEncode(sig).substr(0, 160);
+    sig = gamefox_utils.specialCharsEncode(sig).substr(0, 160);
 
     // remove truncated entities
     var amp = sig.lastIndexOf('&');
     if (sig.lastIndexOf(';') < amp)
       sig = sig.substr(0, amp);
 
-    sig = GFutils.specialCharsDecode(sig);
+    sig = gamefox_utils.specialCharsDecode(sig);
 
     return '\n' + (newline ? '\n' : '') + (sig != '' ? '---\n' + sig : '');
   },
@@ -170,20 +170,20 @@ var GFsig =
     if (!/\S/.test(str))
       return '';
 
-    return ' / ' + str.GFtrim().replace(/\s+/g, ' ');
+    return ' / ' + str.gamefox_trim().replace(/\s+/g, ' ');
   },
 
   updateFromGameFAQs: function(event)
   {
-    var doc = GFlib.getDocument(event);
+    var doc = gamefox_lib.getDocument(event);
 
     var sig = doc.getElementsByName('sig')[0].value;
-    var sigPref = eval(GFutils.getString('signature.serialized'));
+    var sigPref = eval(gamefox_utils.getString('signature.serialized'));
 
     sigPref[0].body = sig;
 
-    GFutils.setString('signature.serialized', sigPref.toSource());
+    gamefox_utils.setString('signature.serialized', sigPref.toSource());
 
-    GFlib.alert('Your GameFOX signature has been updated.');
+    gamefox_lib.alert('Your GameFOX signature has been updated.');
   }
 };
