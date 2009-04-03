@@ -1,0 +1,235 @@
+Version 0.5.5.10
+=====================================================================
+- Update GameFOX site settings for use with new GameFAQs settings
+  page
+- Update QuickWhois for new profiles
+- QuickPost now checks for errors after posting the message
+- Prevent long profile fields from stretching QuickWhois
+- QuickPost now catches short topic titles before sending the post
+  to the server
+- Add GameFOX Standard Default stylesheet with the old QuickPost look
+- Add "Grab From GameFAQs" button to retrieve signature from GameFAQs
+
+Version 0.5.5.9                                             2008-06-22
+======================================================================
+- Fix quick post issues in Firefox 2
+
+Version 0.5.5.8                                             2008-06-21
+======================================================================
+- (chrome/content/css/wide-layout.css): Allow board user navigation to
+  be properly aligned to the right
+- Update GameFOX board settings for use with new GameFAQs settings
+  page
+- Remove custom signature separator option
+- Add pre-signature field, option to add newline before signature
+- Truncate signatures at 2 lines. No other restrictions.
+
+Version 0.5.5.7                                             2008-06-17
+======================================================================
+- Made the quick post form pretty
+- Decode HTML entities when handling signatures and quotes
+- Update the double click action on the active messages list for the
+  new layout
+
+Version 0.5.5.6                                             2008-02-03
+======================================================================
+- Fixed user highlighting, since I apparently broke it last release.
+  Whoops!
+
+Version 0.5.5.5                                             2008-01-30
+======================================================================
+- Firefox 3: This extension now provides secure updates.
+- Linux: There are no longer any permission errors when adding CSS
+  to the profile
+- CSS developers: Highlighted posts now have a class
+  (gamefox-highlight-(one|two)) to apply styles to in the event that
+  your CSS breaks the integrated highlighter.
+
+Version 0.5.5.4                                        August 13, 2007
+======================================================================
+- Fixed quoting not working in /gfaqs9
+
+Version 0.5.5.3                                         August 5, 2007
+======================================================================
+- Fixed GameFOX not working correctly inside frames
+- Descriptive window titles (gamefox.elements.titlechange) applies to
+  frame container as well, but only for pages within the
+  boards.gamefaqs.com host
+- Fixed quoting in non-horizontal layout not removing QuickWhois
+  information properly
+- Removed alert box that appears when user trying to quote without
+  having the QuickPost form enabled
+- Updated GFCode tag support in quoting to use GFCode's quote header
+  tags
+- Updated Quoting Options page to reflect the updated quoting
+  mechanism
+- Reverted message numbering default style in horizontal layout to
+  the original: "message detail  #001"
++ Added preference to change the message numbering style
+  (Options|Page|Elements)
+
+Version 0.5.5.2                                          July 25, 2007
+======================================================================
+- Fixed memory leak problem when displaying QuickPost
+- Fixed Delete Purged (Tags) to conform to the new site response
+- Updated Ricapar's Classic Theme CSS and GameFOX Default for Standard
+  View CSS to conform to the recent ad changes
++ Assigned shortcut key for GameFOX Sidebar (Ctrl+Shift+Alt+G)
+- Changed Toggle GameFOX Sidebar context menu appearance
+
+Version 0.5.5.1                                         April 20, 2007
+======================================================================
+- Fixed issues with detail.php
+- msglistDblclick: ignore double-click on images
+- GameFOX Default CSSes: QuickWhois (".gamefox-quickwhois") can now be
+  read clearly in some themes like GFCSS by using !important flag on
+  some of the style rules;
+  (Affected styles: background-color, padding)
+- Front end: '+' in extension display name (GameFOX TK+) to reflect
+  the different (current) author, changed update location, and other
+  minor changes
+
+Version 0.5.5.0                                       January 24, 2007
+======================================================================
++ Reworked signature separator detection (for signature removal)
++ GFCode support for quoting (Options|Quoting)
++ gfaqs10: now detects page type based on page's structure
+- QuickPost box/link now only shows when you have the ability to post
+  (i.e. only if there's a post link)
+- Logging in through GameFOX Sidebar, if successful, will redirect you
+  to the currently opened GameFAQs page
++ Initial SeaMonkey support, credit to BenoitRen from MozillaZine
+  Forum for porting GameFOX to SeaMonkey
++ Active Message List and Tracked Topics links in GameFAQs Tags
+  context menu, customizable (Options|Mouse)
++ Sidebar: added Tracked Topics link
++ Clickable topic links in Tracked Topics (Options|Page|Elements)
++ Middle-click support (for opening a new tab) in GameFAQs Tags
+  context menu, Pages context menu, Tag List (including the board
+  titles), Sidebar links, Sidebar login button, and About dialog links
+- Fixed typo in the Options dialog (thanks to Blue_Mage86, no more
+  asterick and obelicks for you)
+- Fixed Apply Board Settings (Options|Page|Message Board) not working
+- Fixed QuickWhois not displaying user level
+- GameFOX Default CSSes: horizontal scrollbar in QuickWhois if content
+  overflows
+- Wide Default Layout CSS: message hiding support
+- Reverted QuickPost width to a slimmer size regarding issues with
+  small screens
+- Various tweaks
+
+Version 0.5.4.1.20061117(.1)                         November 18, 2006
+======================================================================
+- Fixed signature removal not working correctly
+
+Version 0.5.4.1.20061117                             November 17, 2006
+======================================================================
++ Tagged board can be opened from Tag List using "Open in ..."
+  context menu
++ Tagged board can be deleted from Tag List using "Delete Tag"
+  context menu
+- Fixed Delete Purged (Tags)
+- Fixed two things in Ricapar's Classic Theme CSS:
+  1. Redisplay Board Information in board list
+  2. Remove "From:" in message preview
+- Unicode (GameFAQs-compatible) character support for signature
+  separator (especially for Firefox 1.5 support)
+- Apply Site Settings (Options|Theme) now behaves as expected, cookie
+  for display style setting will be kept until the end of the next
+  year regardless of login expiration setting
+- Various tweaks
+
+Version 0.5.4.1.20061027                              October 27, 2006
+======================================================================
+- Code adjustment for New Posting Engine (10/25/2006)
+- Fixed user highlighting not dealing with spaces correctly
+- Changed topic highlighting table cells color from transparent to the
+  actual highlight color
++ Descriptive window titles (Options|Page|Elements) now also applies
+  to Post Message and Message Detail pages
++ Search Topics result page now behaves the same as topic list page
+
+Version 0.5.4.1.20061022                              October 22, 2006
+======================================================================
+- Fixed "Post Message" button position in preview.php
+- Apply Site Settings (Options|Theme) tweak
+
+Version 0.5.4.1.20061020                              October 20, 2006
+======================================================================
++ Full gfaqs9 support (thanks to Therum)
++ Enable "Post Message" button (Options|Page|Elements) now also
+  applies to Preview Message page (preview.php)
++ New QuickPost error message for timed out requests
+
+Version 0.5.4.1.20061019                              October 19, 2006
+======================================================================
++ Automatic topic pagination (Options|Page|Elements), customizable
++ Clickable topic links in Active Message List (Options|Page|Elements)
++ Double-click and right-click support in Active Message List
+  (Options|Mouse)
++ Customizable context menu items (Options|Mouse)
+- Changed topic highlighting table cells color to transparent, might
+  clash with this CSS rule:
+  .even > td[style]:last-child { <some style>; }
+- Changed font color of board titles in Tag List from solid black to
+  gray (#DDDDDD)
+- Improved internal CSS-pack version detection
+- GameFOX Default for Standard View CSS: incompatible style removal,
+  #footer detection, QuickPost font change
+- Updated Options dialog
+
+Version 0.5.4.1.20061016                              October 16, 2006
+======================================================================
+- Fixed a major bug: non-existent function call (String.trim)
+
+Version 0.5.4.1.20061014                              October 14, 2006
+======================================================================
+- Fixed message hiding/highlighting
+- Slimmer message hiding in horizontal layout
+- Fixed topic highlighting
+- Fixed quoting
+- Hides Quote context menu if not on a message area
+- Changed message numbering in horizontal layout: replaces
+  "message detail" with "#001"
+- Reverted message numbering in vertical layout to the original:
+  "message detail | #001"
++ Apply button (stateless) in Options dialog
++ Options dialog now remembers last selected tab
+- Context menu is displayed/hid correctly in non http(s) locations
+- Updated CSS selection list in Site Settings (Options|Theme)
+
+Version 0.5.4.1.061012                                October 12, 2006
+======================================================================
++ gfaqs9 links (Options|Page): converts links in Pages context menu,
+  Tags, Sidebar, and About dialog to gfaqs9 links if enabled
+- Fixed descriptive window titles
+- Fixed tag naming
++ Sidebar: added Wii and Feedback links
+- Sidebar: changed Tag List box width from auto to 100%
+- Hides Pages context menu if not on a topic row
+- Wider topic page links (topic pagination) by using hard space
+- Changed message numbering: replaces "message detail" with
+  "message #001"
+- Resets CSS combo box selection (Options|Theme) every time the list
+  is updated
++ Total item number in the CSS combo box (Options|Theme)
++ Reload CSS button (Options|Theme): useful for applying style changes
+  without having to restart the browser
++ About button in Options dialog
+- Updated About dialog, links are now opened in a new tab in the most
+  recent window
+
+Version 0.5.4.1.060928                              September 28, 2006
+======================================================================
+= Updates for New Boards Code (board=6&topic=30437810)
+- Fixed Pages context menu not listing pages correctly
+- Fixed topic pagination
+- Fixed last-page jumping
+- Fixed topic tagging
++ Internal changelog (this one)
+
+Version 0.5.4.1                               April/September 16, 2006
+======================================================================
+= Original Toad King version (which this extension is based on)
+
+zero_ant
