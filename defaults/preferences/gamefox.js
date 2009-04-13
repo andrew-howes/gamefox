@@ -51,7 +51,7 @@ pref("gamefox.tpcSortOrder", 4);
 pref("gamefox.msgDisplay", 0);
 pref("gamefox.timeZone", 0);
 
-pref("gamefox.quote.header.italic", true);
+pref("gamefox.quote.header.italic", false);
 pref("gamefox.quote.header.bold", true);
 pref("gamefox.quote.header.date", false);
 pref("gamefox.quote.header.username", true);
@@ -71,7 +71,7 @@ pref("gamefox.signature.selectMostSpecific", true);
 pref("gamefox.theme.disablegamefaqscss", false);
 pref("gamefox.theme.css.serialized", "({gamefox:{}, bundled:{}, user:{}})");
 
-pref("gamefox.userlist.topics.showgroupnames", true);
+pref("gamefox.userlist.topics.showgroupnames", false);
 pref("gamefox.userlist.messages.showgroupnames", true);
 pref("gamefox.userlist.serialized", "[]");
 
