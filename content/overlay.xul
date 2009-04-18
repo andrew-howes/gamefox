@@ -90,14 +90,14 @@
     <menuitem id="gamefox-context-track" label=""
       oncommand="gamefox_tracked.addFromContextMenu(gContextMenu);"/>
     <menu id="gamefox-context-pages" label="&menu.pages.label;">
-      <menupopup id="gamefox-pages-menu" onpopupshowing="GameFOX.showPages(gContextMenu);"/>
+      <menupopup id="gamefox-pages-menu" onpopupshowing="gamefox.showPages(gContextMenu);"/>
     </menu>
 
     <!-- message -->
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
       oncommand="gamefox_quote.quote(gContextMenu, true);"/>
     <menuitem id="gamefox-context-filter" label=""
-      oncommand="GameFOX.toggleFilter(gContextMenu, true);"/>
+      oncommand="gamefox.toggleFilter(gContextMenu, true);"/>
     <menuitem id="gamefox-context-delete" label=""
       oncommand="gamefox_messages.deletePost(gContextMenu, true);"/>
     <menu id="gamefox-context-usergroups" label="&menu.hlGroups.label;">
