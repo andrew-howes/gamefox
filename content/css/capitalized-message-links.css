@@ -1,4 +1,4 @@
- @-moz-document domain(www.gamefaqs.com) {
+ @-moz-document domain(gamefaqs.com) {
     .message a.name ~ a,
     .gamefox-message-links a {
         text-transform: capitalize;

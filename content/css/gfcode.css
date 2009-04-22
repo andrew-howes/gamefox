@@ -3,7 +3,7 @@
  * GFCode (GameFOX Implementation)
  * © 2004-2008, Special Ops
  */
-@-moz-document domain(www.gamefaqs.com) {
+@-moz-document domain(gamefaqs.com) {
     /* Common formatting for block elements */
     .message i > p, .message em > p {
         border: 1px #bbb solid !important;
