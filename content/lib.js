@@ -21,6 +21,7 @@ var gamefox_lib =
 {
   domain: 'http://www.gamefaqs.com',
   path: '/boards/',
+  cookieHost: '.gamefaqs.com',
 
   version: Cc['@mozilla.org/extensions/manager;1']
     .getService(Ci.nsIExtensionManager)
@@ -312,7 +313,7 @@ var gamefox_lib =
     for (var e = cookieMgr.enumerator; e.hasMoreElements();)
     {
       var cookie = e.getNext().QueryInterface(Ci.nsICookie);
-      if (cookie.host == '.gamefaqs.com' && cookie.name == 'MDAAuth')
+      if (cookie.host == gamefox_lib.cookieHost && cookie.name == 'MDAAuth')
         return true;
     }
 

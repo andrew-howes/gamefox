@@ -50,7 +50,7 @@ var gamefox_tracked =
         != gamefox_lib.prefs.getCharPref('accounts.current'))
     { // cached url is out of date
       var request = new XMLHttpRequest();
-      request.open('GET', 'http://www.gamefaqs.com/boards/tracked.php');
+      request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'tracked.php');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {

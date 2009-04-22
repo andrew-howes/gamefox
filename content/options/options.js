@@ -27,7 +27,7 @@ var gamefox_options =
     button.disabled = true;
 
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
+    request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'settings.php');
     var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
@@ -88,7 +88,7 @@ var gamefox_options =
     button.disabled = true;
 
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://www.gamefaqs.com/boards/settings.php');
+    request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'settings.php');
     var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
@@ -113,7 +113,7 @@ var gamefox_options =
         action = action[1];
 
         var postRequest = new XMLHttpRequest();
-        postRequest.open('POST', 'http://www.gamefaqs.com' + action);
+        postRequest.open('POST', gamefox_lib.domain + action);
         var ds = gamefox_lib.thirdPartyCookieFix(postRequest);
         postRequest.onreadystatechange = function()
         {

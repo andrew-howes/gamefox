@@ -107,9 +107,9 @@ var gamefox_accounts =
     while (e.hasMoreElements())
     {
       var cookie = e.getNext().QueryInterface(Ci.nsICookie);
-      if (cookie.host == '.gamefaqs.com' && cookie.name == name)
+      if (cookie.host == gamefox_lib.cookieHost && cookie.name == name)
       {
-        cookieMgr.remove('.gamefaqs.com', name, cookie.path, false);
+        cookieMgr.remove(gamefox_lib.cookieHost, name, cookie.path, false);
         return {content: cookie.value, expires: cookie.expires};
       }
     }
@@ -124,7 +124,7 @@ var gamefox_accounts =
     while (e.hasMoreElements())
     {
       var cookie = e.getNext().QueryInterface(Ci.nsICookie);
-      if (cookie.host == '.gamefaqs.com' && cookie.name == name)
+      if (cookie.host == gamefox_lib.cookieHost && cookie.name == name)
         return {content: cookie.value, expires: cookie.expires};
     }
     return null;
@@ -137,24 +137,24 @@ var gamefox_accounts =
     if (Cc['@mozilla.org/xre/app-info;1'].getService(Ci.nsIXULAppInfo)
         .platformVersion.indexOf('1.9') == 0) // Gecko 1.9 (Firefox 3)
     {
-      cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth,
+      cookieMgr2.add(gamefox_lib.cookieHost, '/', 'MDAAuth', MDAAuth,
           false, false, false, expires);
       if (skin != null)
-        cookieMgr2.add('.gamefaqs.com', '/', 'skin', skin,
+        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'skin', skin,
             false, false, false, expires);
       if (filesplit != null)
-        cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', filesplit,
+        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'filesplit', filesplit,
             false, false, false, expires);
     }
     else // Gecko 1.8 (Firefox 2)
     {
-      cookieMgr2.add('.gamefaqs.com', '/', 'MDAAuth', MDAAuth,
+      cookieMgr2.add(gamefox_lib.cookieHost, '/', 'MDAAuth', MDAAuth,
           false, false, expires);
       if (skin != null)
-        cookieMgr2.add('.gamefaqs.com', '/', 'skin', skin,
+        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'skin', skin,
             false, false, expires);
       if (filesplit != null)
-        cookieMgr2.add('.gamefaqs.com', '/', 'filesplit', filesplit,
+        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'filesplit', filesplit,
             false, false, expires);
     }
   },
@@ -201,7 +201,7 @@ var gamefox_accounts =
     {
       var request = new XMLHttpRequest();
       // TODO: find a way to make page not redirect
-      request.open('POST', 'http://www.gamefaqs.com/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
+      request.open('POST', gamefox_lib.domain + '/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
@@ -248,7 +248,7 @@ var gamefox_accounts =
     if (this.getCookie('ctk') == null)
     {
       var request = new XMLHttpRequest();
-      request.open('HEAD', 'http://www.gamefaqs.com/');
+      request.open('HEAD', gamefox_lib.domain + '/');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
@@ -300,6 +300,6 @@ var gamefox_accounts =
         win.loadURI(location.href);
     }
     else
-      win.loadURI('http://www.gamefaqs.com/boards/index.php');
+      win.loadURI(gamefox_lib.domain + gamefox_lib.path + 'index.php');
   }
 };

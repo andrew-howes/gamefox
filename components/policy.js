@@ -8,6 +8,7 @@ const nsISupports = Components.interfaces.nsISupports;
 const CLASS_ID = Components.ID('{2572941e-68cb-41a8-be97-cbb40611dcbc}');
 const CLASS_NAME = 'GameFOX content policy';
 const CONTRACT_ID = '@gamefox/contentpolicy;1';
+const host = 'www.gamefaqs.com';
 const adServers = new Array(
     '2mdn.net', 'advertising.com', 'atdmt.com', 'adimg.cnet.com',
     'mads.cnet.com', 'surveys.cnet.com', 'adlog.com.com', 'dw.com.com',
@@ -37,7 +38,7 @@ GFcontentPolicy.prototype =
   {
     try
     {
-      if (requestOrigin.host != 'www.gamefaqs.com')
+      if (requestOrigin.host != host)
         return nsIContentPolicy.ACCEPT;
 
       // ad servers
@@ -53,7 +54,7 @@ GFcontentPolicy.prototype =
 
       // stylesheets
       if (prefs.getBoolPref('theme.disablegamefaqscss') &&
-          contentLocation.host == 'www.gamefaqs.com' &&
+          contentLocation.host == host &&
           contentType == nsIContentPolicy.TYPE_STYLESHEET)
         return nsIContentPolicy.REJECT_REQUEST;
       else
