@@ -201,7 +201,7 @@ var gamefox_accounts =
     {
       var request = new XMLHttpRequest();
       // TODO: find a way to make page not redirect
-      request.open('POST', 'http://www.gamefaqs.com/user/login.html?r=www.gamefaqs.com/images/default/rec.gif');
+      request.open('POST', 'http://www.gamefaqs.com/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
