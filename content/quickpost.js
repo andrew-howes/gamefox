@@ -19,8 +19,14 @@
 
 var gamefox_quickpost =
 {
+  drag: { startX: 0, startY: 0, offsetX: 0, offsetY: 0, dragging: false },
+
   appendForm: function(doc, div, newTopic)
   {
+    // Set these manually here instead of in CSS for the drag script
+    div.style.left = window.innerWidth * 0.20 + 'px';
+    div.style.top = window.innerHeight * 0.30 + 'px';
+
     var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
     var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
 
@@ -148,6 +154,98 @@ var gamefox_quickpost =
           false);
       form.appendChild(messagecount);
       gamefox_messages.updateMessageCount(doc);
+    }
+
+    // Make the box draggable
+    doc.addEventListener('mousedown', gamefox_quickpost.onMouseDown, false);
+    doc.addEventListener('mouseup', gamefox_quickpost.onMouseUp, false);
+  },
+
+  onMouseDown: function(event)
+  {
+    if (!event.target)
+      return false;
+
+    var node = event.target;
+
+    if (node.nodeName == 'INPUT'
+        || node.nodeName == 'TEXTAREA')
+      // allow text selection in inputs
+      return false;
+
+    // get the right element
+    while (node.id != 'gamefox-quickpost-afloat')
+    {
+      node = node.parentNode;
+      if (!node)
+        return false;
+    }
+
+    var doc = gamefox_lib.getDocument(event);
+    var drag = gamefox_quickpost.drag;
+    if (event.button == 0 // left click
+        && node.id == 'gamefox-quickpost-afloat')
+    {
+      // grab the mouse position
+      drag.startX = event.clientX;
+      drag.startY = event.clientY;
+
+      // grab the clicked element's position
+      drag.offsetX = gamefox_utils.extractNumber(node.style.left);
+      drag.offsetY = gamefox_utils.extractNumber(node.style.top);
+
+      drag.dragging = true;
+
+      // prevent selection
+      doc.body.style.MozUserSelect = '-moz-none'; 
+      node.style.MozUserSelect = '-moz-none';
+
+      doc.body.focus();
+
+      // start moving
+      doc.addEventListener('mousemove', gamefox_quickpost.onMouseMove, false);
+
+      // this is also supposed to prevent selection but it doesn't work for me
+      return false;
+    }
+  },
+
+  onMouseMove: function(event)
+  {
+    var doc = gamefox_lib.getDocument(event);
+    var element = doc.getElementById('gamefox-quickpost-afloat');
+    var drag = gamefox_quickpost.drag;
+
+    element.style.left = (drag.offsetX + event.clientX - drag.startX) + 'px';
+    element.style.top = (drag.offsetY + event.clientY - drag.startY) + 'px';
+  },
+
+  onMouseUp: function(event)
+  {
+    // stop dragging
+    var doc = gamefox_lib.getDocument(event);
+    var drag = gamefox_quickpost.drag;
+    var element = doc.getElementById('gamefox-quickpost-afloat');
+    if (drag.dragging)
+    {
+      // Clean up
+      doc.removeEventListener('mousemove', gamefox_quickpost.onMouseMove, false);
+      doc.body.style.MozUserSelect = 'text';
+      element.style.MozUserSelect = 'text';
+      drag.dragging = false;
+
+      // Restore position if it's outside the window
+      var left = gamefox_utils.extractNumber(element.style.left);
+      if (left + element.offsetWidth < 50)
+        element.style.left = (50 - element.offsetWidth) + 'px';
+      else if (left > window.innerWidth - 50)
+        element.style.left = (window.innerWidth - 50) + 'px';
+
+      var top = gamefox_utils.extractNumber(element.style.top);
+      if (top + element.offsetHeight < 50)
+        element.style.top = (50 - element.offsetHeight) + 'px';
+      else if (top > window.innerHeight - 150) // window chrome makes this weird
+        element.style.top = (window.innerHeight - 150) + 'px';
     }
   },
 

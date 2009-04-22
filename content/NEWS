@@ -16,6 +16,8 @@
     * Remove the Random/First sig selection option and replace with an option
       that toggles whether or not to use the most specific matching sigs
     * New CSS: Basic9for10
+    * The floating QuickPost box on the topic list can now be moved across the
+      page by dragging it
 
 2009-02-13:
     * version 0.6.10

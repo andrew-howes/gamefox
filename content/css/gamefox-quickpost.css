@@ -8,8 +8,6 @@
     #gamefox-quickpost-afloat
     {
         position: fixed;
-        top: 30%;
-        left: 20%;
         z-index: 3;
         display: none;
         width: 75%;
