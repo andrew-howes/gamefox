@@ -36,7 +36,7 @@ var gamefox_highlighting =
     userlist.push({name:name, color:color, users:users,
         messages:messages, topics:topics, type:type});
 
-    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   loadGroups: function()
@@ -366,7 +366,7 @@ var gamefox_highlighting =
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
-    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   checkUsername: function(username)

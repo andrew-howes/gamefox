@@ -320,22 +320,33 @@ var gamefox_lib =
     return false;
   },
 
-  safeEval: function(pref)
+  safeEval: function(pref, noJSON)
   {
     // Thanks Toad King
+
+    if (!pref.length)
+      return false;
+
     var parsedPref = {};
 
     try
     {
-      if (false && Ci.nsIJSON)
+      if (!noJSON)
       {
-        var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
-        parsedPref = nativeJSON.decode(pref);
+        if (Ci.nsIJSON)
+        {
+          var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
+          parsedPref = nativeJSON.decode(pref);
+        }
+        else if (gamefox_json)
+        {
+          parsedPref = gamefox_json.fromString(pref);
+        }
       }
       else
       {
         var sandbox = new Components.utils.Sandbox('about:blank');
-        parsedPref = Components.utils.evalInSandbox(pref, sandbox);
+        parsedPref = Components.utils.evalInSandbox('(' + pref + ')', sandbox);
       }
     }
     catch (e) {}
@@ -363,5 +374,18 @@ var gamefox_lib =
       return false;
 
     return parsedPref;
+  },
+
+  toJSON: function(obj)
+  {
+    if (Ci.nsIJSON)
+    {
+      var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
+      return nativeJSON.encode(obj);
+    }
+    else
+    {
+      return gamefox_json.toString(obj);
+    }
   }
 };

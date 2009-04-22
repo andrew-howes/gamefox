@@ -28,7 +28,7 @@ var gamefox_accounts =
 
   write: function(accounts)
   {
-    gamefox_lib.prefs.setCharPref('accounts', accounts.toSource());
+    gamefox_lib.prefs.setCharPref('accounts', gamefox_lib.toJSON(accounts));
   },
 
   populate: function()

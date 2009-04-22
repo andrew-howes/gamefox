@@ -29,7 +29,7 @@ var gamefox_tags =
         .getCharPref('gamefox.tags');
 
     if (!/\S/.test(this.tags))
-      this.tags = '({})';
+      this.tags = '{}';
 
     this.tags = gamefox_lib.safeEval(this.tags);
   },
@@ -37,7 +37,7 @@ var gamefox_tags =
   write: function(tags)
   {
     if (typeof(tags) == 'object')
-      tags = tags.toSource();
+      tags = gamefox_lib.toJSON(tags);
 
     Cc['@mozilla.org/preferences-service;1']
         .getService(Ci.nsIPrefBranch)

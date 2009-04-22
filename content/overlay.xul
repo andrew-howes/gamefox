@@ -39,6 +39,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/messages.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/favorites.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tracked.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/json.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">

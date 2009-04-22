@@ -61,7 +61,7 @@ var gamefox_options_sig =
 
   _save: function()
   {
-    gamefox_utils.setString('signature.serialized', this._sigs.toSource());
+    gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(this._sigs));
   },
 
   _hideCriteriaForm: function()

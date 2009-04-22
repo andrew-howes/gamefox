@@ -164,7 +164,7 @@ var gamefox_css =
       'title': title, 'desc': desc, 'author': author, 'enabled': enabled
     };
 
-    this.prefs.setCharPref('serialized', css.toSource());
+    this.prefs.setCharPref('serialized', gamefox_lib.toJSON(css));
     return true;
   },
 
@@ -273,6 +273,6 @@ var gamefox_css =
     catch (e) {}
 
     delete css[category][filename];
-    this.prefs.setCharPref('serialized', css.toSource());
+    this.prefs.setCharPref('serialized', gamefox_lib.toJSON(css));
   }
 };

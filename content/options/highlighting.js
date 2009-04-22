@@ -300,7 +300,7 @@ var gamefox_options_highlighting =
     // get and set pref
     var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     userlist[idx][name] = value;
-    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   updateUsers: function()
@@ -353,7 +353,7 @@ var gamefox_options_highlighting =
     }
 
     userlist.splice(id, 1);
-    gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+    gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   disableMenulists: function(type, groupbox)

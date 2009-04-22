@@ -107,7 +107,7 @@ var gamefox_options_style =
 
     var css = gamefox_lib.safeEval(gamefox_css.prefs.getCharPref('serialized'));
     css[category][filename][map[column.index]] = value;
-    gamefox_css.prefs.setCharPref('serialized', css.toSource());
+    gamefox_css.prefs.setCharPref('serialized', gamefox_lib.toJSON(css));
 
     this.selection.clearSelection();
     this.selection.select(idx);

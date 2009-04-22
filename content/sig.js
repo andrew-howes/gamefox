@@ -94,7 +94,7 @@ var gamefox_sig =
   {
     var sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
     sigs.push({'accounts':'', 'boards':'', 'body':''});
-    gamefox_utils.setString('signature.serialized', sigs.toSource());
+    gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigs));
 
     return sigs.length - 1;
   },
@@ -103,7 +103,7 @@ var gamefox_sig =
   {
     var sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
     sigs.splice(id, 1);
-    gamefox_utils.setString('signature.serialized', sigs.toSource());
+    gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigs));
   },
 
   getCriteriaString: function(accounts, boards)
@@ -182,7 +182,7 @@ var gamefox_sig =
 
     sigPref[0].body = sig;
 
-    gamefox_utils.setString('signature.serialized', sigPref.toSource());
+    gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigPref));
 
     gamefox_lib.alert('Your GameFOX signature has been updated.');
   }

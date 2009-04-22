@@ -62,14 +62,14 @@ pref("gamefox.quote.removesignature", true);
 pref("gamefox.quote.style", "gfcode");
 pref("gamefox.quote.controlwhitespace", true);
 
-pref("gamefox.signature.serialized", "[{accounts:\"\", boards:\"\", body:\"\"}]");
+pref("gamefox.signature.serialized", "[{\"accounts\":\"\", \"boards\":\"\", \"body\":\"\"}]");
 pref("gamefox.signature.newline", false);
 pref("gamefox.signature.applyeverywhere", true);
 pref("gamefox.signature.addition", 2);
 pref("gamefox.signature.selectMostSpecific", true);
 
 pref("gamefox.theme.disablegamefaqscss", false);
-pref("gamefox.theme.css.serialized", "({gamefox:{}, bundled:{}, user:{}})");
+pref("gamefox.theme.css.serialized", "{\"gamefox\":{}, \"bundled\":{}, \"user\":{}}");
 
 pref("gamefox.userlist.topics.showgroupnames", false);
 pref("gamefox.userlist.messages.showgroupnames", true);
@@ -85,7 +85,7 @@ pref("gamefox.tracked.rssUrl", "");
 pref("gamefox.tracked.lastAccount", "");
 pref("gamefox.tracked.enabled", true);
 
-pref("gamefox.accounts", "({})");
+pref("gamefox.accounts", "{}");
 pref("gamefox.accounts.current", "");
 
 pref("gamefox.topic.dblclick", 0);

@@ -32,7 +32,7 @@ var gamefox_tracked =
 
   save: function()
   {
-    gamefox_lib.prefs.setCharPref('tracked.list', this.list.toSource());
+    gamefox_lib.prefs.setCharPref('tracked.list', gamefox_lib.toJSON(this.list));
   },
 
   updateList: function()

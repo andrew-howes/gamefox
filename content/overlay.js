@@ -113,7 +113,7 @@ var gamefox =
             favorites.push({'id':query['board'], 'name':favLinks[i].textContent});
         }
 
-        gamefox_lib.prefs.setCharPref('favorites.serialized', favorites.toSource());
+        gamefox_lib.prefs.setCharPref('favorites.serialized', gamefox_lib.toJSON(favorites));
       }
     }
 
@@ -1332,10 +1332,26 @@ function gamefox_loader()
   if (versionComparator.compare(version, lastversion) != 0 ||
       (version.indexOf('pre') != -1 && version.indexOf('pre') == version.length - 3))
   {
-    gamefox_css.init();
-
     /* compatibility crap
      * TODO: remove these after a while */
+
+    if (versionComparator.compare('0.6.11', lastversion) > 0)
+    {
+      // Convert prefs to JSON
+      var jsonPrefs = new Array('favorites.serialized', 'signature.serialized',
+          'theme.css.serialized', 'userlist.serialized', 'accounts', 'tags',
+          'tracked.list');
+      for (var i = 0; i < jsonPrefs.length; i++)
+      {
+        var prefText = gamefox_lib.prefs.getCharPref(jsonPrefs[i]);
+        if (gamefox_json.isMostlyHarmless(prefText))
+          continue; // already JSON
+
+        var prefObj = gamefox_lib.safeEval(prefText, true);
+        if (prefObj)
+          gamefox_lib.prefs.setCharPref(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
+      }
+    }
 
     if (versionComparator.compare('0.6.6', lastversion) > 0)
     {
@@ -1360,7 +1376,7 @@ function gamefox_loader()
           .replace(/(^|;)\s*life, the universe, and everything\s*($|;)/gi, '$1402$2')
           .replace(/;/g, ',');
       }
-      gamefox_utils.setString('signature.serialized', sigs.toSource());
+      gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigs));
     }
 
     if (versionComparator.compare('0.6.10', lastversion) > 0)
@@ -1374,7 +1390,7 @@ function gamefox_loader()
       for (var i = 0; i < userlist.length; i++)
         if (!userlist[i].type)
           userlist[i].type = 'users';
-      gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
+      gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
     }
 
     if (lastversion == '')
@@ -1406,6 +1422,7 @@ function gamefox_loader()
     }
 
     gamefox_lib.prefs.setCharPref('version', version);
+    gamefox_css.init();
   }
 
   gamefox_css.reload();
