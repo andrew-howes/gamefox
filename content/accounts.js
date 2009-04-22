@@ -23,7 +23,7 @@ var gamefox_accounts =
 
   read: function()
   {
-    this.accounts = eval(gamefox_lib.prefs.getCharPref('accounts'));
+    this.accounts = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('accounts'));
   },
 
   write: function(accounts)

@@ -186,7 +186,7 @@ var gamefox_options_highlighting =
 
   populate: function()
   {
-    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var vbox = document.getElementById('groups');
 
     for (var i = 0; i < userlist.length; i++)
@@ -199,7 +199,7 @@ var gamefox_options_highlighting =
 
   setDefaultValues: function()
   {
-    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var vbox = document.getElementById('groups');
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
@@ -228,7 +228,7 @@ var gamefox_options_highlighting =
 
   populateLast: function()
   {
-    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var id = userlist.length - 1;
     userlist = userlist[id];
     var vbox = document.getElementById('groups');
@@ -298,14 +298,14 @@ var gamefox_options_highlighting =
       gamefox_options_highlighting.disableMenulists(value, groupbox);
 
     // get and set pref
-    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     userlist[idx][name] = value;
     gamefox_lib.prefs.setCharPref('userlist.serialized', userlist.toSource());
   },
 
   updateUsers: function()
   {
-    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
     var groups = document.getElementById('groups')
       .getElementsByTagName('groupbox');
     var textboxes;
@@ -324,7 +324,7 @@ var gamefox_options_highlighting =
   {
     var groupbox = event.target.parentNode.parentNode;
     var id = groupbox.id.substring(3);
-    var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
 
     if (userlist[id].name.length)
     {

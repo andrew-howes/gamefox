@@ -77,7 +77,7 @@ var gamefox_css =
     }
 
     // Remove old stylesheets
-    var css = eval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
     for (i in {'gamefox':'', 'bundled':''})
     {
       for (j in css[i])
@@ -145,7 +145,7 @@ var gamefox_css =
       return false;
     }
 
-    var css = eval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
 
     // this loop does a few things:
     //  -force re-ordering when overwriting
@@ -206,7 +206,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = eval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
 
     for (var category in css)
     {
@@ -252,7 +252,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = eval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
 
     file.initWithPath(this.getDirectoryPath());
     file.append(filename);

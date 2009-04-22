@@ -56,7 +56,7 @@ var gamefox_options_sig =
 
   _read: function()
   {
-    this._sigs = eval(gamefox_utils.getString('signature.serialized'));
+    this._sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
   },
 
   _save: function()

@@ -65,7 +65,7 @@ var gamefox_options_manage =
 
     try
     {
-      var importedPrefs = eval(inputData);
+      var importedPrefs = gamefox_lib.safeEval(inputData);
     }
     catch (e)
     {

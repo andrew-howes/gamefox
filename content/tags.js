@@ -31,7 +31,7 @@ var gamefox_tags =
     if (!/\S/.test(this.tags))
       this.tags = '({})';
 
-    this.tags = eval(this.tags);
+    this.tags = gamefox_lib.safeEval(this.tags);
   },
 
   write: function(tags)

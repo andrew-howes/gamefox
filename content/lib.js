@@ -318,5 +318,50 @@ var gamefox_lib =
     }
 
     return false;
+  },
+
+  safeEval: function(pref)
+  {
+    // Thanks Toad King
+    var parsedPref = {};
+
+    try
+    {
+      if (false && Ci.nsIJSON)
+      {
+        var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
+        parsedPref = nativeJSON.decode(pref);
+      }
+      else
+      {
+        var sandbox = new Components.utils.Sandbox('about:blank');
+        parsedPref = Components.utils.evalInSandbox(pref, sandbox);
+      }
+    }
+    catch (e) {}
+
+    // Functions are bad
+    function check_obj(obj)
+    {
+      var safe = true;
+
+      for (var i in obj)
+      {
+        if (obj[i])
+        {
+          if (typeof obj[i] == 'object')
+            safe = check_obj(obj[i]);
+          else if (typeof obj[i] == 'function')
+            return false;
+        }
+      }
+
+      return safe;
+    };
+
+    if (!check_obj(parsedPref))
+      return false;
+
+    return parsedPref;
   }
 };

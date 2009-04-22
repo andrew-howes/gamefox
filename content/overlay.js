@@ -1351,7 +1351,7 @@ function gamefox_loader()
 
     if (versionComparator.compare('0.6.8', lastversion) > 0)
     {
-      var sigs = eval(gamefox_utils.getString('signature.serialized'));
+      var sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
       // delimiter changed from ; to ,
       for (var i = 1; i < sigs.length; i++)
       {
@@ -1370,7 +1370,7 @@ function gamefox_loader()
       gamefox_lib.prefs.setIntPref('signature.selection', 1);
 
       // new option for highlighting
-      var userlist = eval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+      var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
       for (var i = 0; i < userlist.length; i++)
         if (!userlist[i].type)
           userlist[i].type = 'users';

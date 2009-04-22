@@ -216,7 +216,7 @@ var gamefox_context =
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
-    favs = eval(gamefox_lib.prefs.getCharPref('favorites.serialized'));
+    favs = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('favorites.serialized'));
 
     for (i = 0; i < favs.length; i++)
     {

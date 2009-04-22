@@ -26,7 +26,7 @@ var gamefox_favorites =
     while (favList.hasChildNodes())
       favList.removeChild(favList.firstChild);
 
-    favs = eval(gamefox_lib.prefs.getCharPref('favorites.serialized'));
+    favs = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('favorites.serialized'));
 
     item = doc.createElement('option');
     item.value = 0;
