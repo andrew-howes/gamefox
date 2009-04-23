@@ -327,7 +327,7 @@ var gamefox_lib =
     if (!pref.length)
       return false;
 
-    var parsedPref = {};
+    var parsedPref = null;
 
     try
     {
@@ -349,7 +349,10 @@ var gamefox_lib =
         parsedPref = Components.utils.evalInSandbox('(' + pref + ')', sandbox);
       }
     }
-    catch (e) {}
+    catch (e)
+    {
+      gamefox_lib.log('Failed to evaluate JSON: ' + e + '\n' + pref.substr(0, 200));
+    }
 
     // Functions are bad
     function check_obj(obj)
