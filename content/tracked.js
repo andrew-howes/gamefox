@@ -43,11 +43,13 @@ var gamefox_tracked =
       return;
     }
 
+    var lastAccount = gamefox_lib.prefs.getCharPref('tracked.lastAccount');
+    var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
+
     // Because of how the RSS feed works without cookies, we could have an
     // option to always update from a certain account. This won't work well for
     // removing or adding tracked topics though.
-    if (gamefox_lib.prefs.getCharPref('tracked.lastAccount')
-        != gamefox_lib.prefs.getCharPref('accounts.current'))
+    if (!currentAccount.length || lastAccount != currentAccount)
     { // cached url is out of date
       var request = new XMLHttpRequest();
       request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'tracked.php');
@@ -60,9 +62,11 @@ var gamefox_tracked =
             match(/<link rel="alternate"[^>]*href="([^"]+)" \/>/)[1];
 
           // cache it
-          gamefox_lib.prefs.setCharPref('tracked.rssUrl', url);
-          gamefox_lib.prefs.setCharPref('tracked.lastAccount',
-              gamefox_lib.prefs.getCharPref('accounts.current'));
+          if (currentAccount.length)
+          {
+            gamefox_lib.prefs.setCharPref('tracked.rssUrl', url);
+            gamefox_lib.prefs.setCharPref('tracked.lastAccount', currentAccount);
+          }
 
           gamefox_tracked.grabFromRSS(url);
         }
