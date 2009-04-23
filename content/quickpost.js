@@ -784,7 +784,7 @@ var gamefox_quickpost =
     {
       map.style.display = map.style.display == 'none' ? '' : 'none';
       map.style.top = event.target.offsetTop
-        + doc.body.parentNode.offsetTop - 200 + 'px';
+        + doc.body.parentNode.offsetTop - map.offsetHeight + 'px';
       map.style.left = event.target.offsetLeft + event.target.clientWidth
         + doc.body.parentNode.offsetLeft + 'px';
     }
