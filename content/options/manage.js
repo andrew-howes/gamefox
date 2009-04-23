@@ -63,11 +63,13 @@ var gamefox_options_manage =
     siStream.close();
     fiStream.close();
 
-    try
-    {
+    if (!gamefox_json.isMostlyHarmless(inputData))
+      // Compat: Not JSON, probably prefs from an older version
+      var importedPrefs = gamefox_lib.safeEval(inputData, true);
+    else
       var importedPrefs = gamefox_lib.safeEval(inputData);
-    }
-    catch (e)
+
+    if (!importedPrefs)
     {
       gamefox_utils.showNotification(manageMsg,
           strbundle.getString('invalidSyntax'), 'warning');
@@ -76,7 +78,14 @@ var gamefox_options_manage =
     }
     gamefox_prefs.clearUserPrefs();
     for (var i in importedPrefs)
+    {
+      // Compat: Not JSON
+      if (/^(\(|\[)\{.*\}(\)|\])$/.test(importedPrefs[i])
+          && !gamefox_json.isMostlyHarmless(importedPrefs[i]))
+        importedPrefs[i] = gamefox_lib.toJSON(gamefox_lib.safeEval(importedPrefs[i], true));
+
       gamefox_prefs.setPrefValue(i, importedPrefs[i]);
+    }
 
     button.disabled = false;
 
@@ -99,7 +108,7 @@ var gamefox_options_manage =
     filePicker.init(window, strbundle.getString('exportFilePicker'),
         Ci.nsIFilePicker.modeSave);
     filePicker.appendFilters(filePicker.filterAll);
-    filePicker.defaultString = 'gamefox-prefs.txt';
+    filePicker.defaultString = 'gamefox-prefs.json';
     var showValue = filePicker.show();
     if (showValue != Ci.nsIFilePicker.returnOK
         && showValue != Ci.nsIFilePicker.returnReplace)

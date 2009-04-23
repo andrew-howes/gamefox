@@ -351,7 +351,7 @@ var gamefox_lib =
     }
     catch (e)
     {
-      gamefox_lib.log('Failed to evaluate JSON: ' + e + '\n' + pref.substr(0, 200));
+      gamefox_lib.log('Failed to evaluate JSON: ' + e);
     }
 
     // Functions are bad
