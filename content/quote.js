@@ -43,7 +43,7 @@ var gamefox_quote =
       node = msgComponents.header.childNodes[i];
       if (node.nodeName == '#text')
       {
-        postDate = /\|\s+Posted\s([^\|]+)\s\|/.exec(node.textContent);
+        postDate = /Posted\s([^\|]+)/.exec(node.textContent);
         if (postDate)
           break;
       }
