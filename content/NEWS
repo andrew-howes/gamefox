@@ -1,5 +1,8 @@
-2009-04-xx:
-    * version 0.6.12
+2009-04-23:
+    * version 0.6.11.1
+    * Back-up prefs before updating them to the new format
+    * Fix date in quote headers when using left of message data
+    * Fix bug that could cause prefs to be lost on update
 
 2009-04-23:
     * version 0.6.11

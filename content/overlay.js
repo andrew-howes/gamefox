@@ -1343,7 +1343,7 @@ function gamefox_loader()
           'tracked.list');
       for (var i = 0; i < jsonPrefs.length; i++)
       {
-        var prefText = gamefox_lib.prefs.getCharPref(jsonPrefs[i]);
+        var prefText = gamefox_utils.getString(jsonPrefs[i]);
         if (gamefox_json.isMostlyHarmless(prefText))
           continue; // already JSON
 
@@ -1351,9 +1351,9 @@ function gamefox_loader()
         if (prefObj)
         {
           // Back it up
-          gamefox_lib.prefs.setCharPref(jsonPrefs[i] + '.bak', prefText);
+          gamefox_utils.setString(jsonPrefs[i] + '.bak', prefText);
           // Update it
-          gamefox_lib.prefs.setCharPref(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
+          gamefox_utils.setString(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
         }
       }
     }
