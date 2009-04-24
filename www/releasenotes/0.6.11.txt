@@ -23,7 +23,7 @@ appear in the quoted message header
 * Add tooltip for message detail and other message header links
 * Fix an issue with the signature-wrapping spans that would break other
 extensions/scripts that add event listeners to elements in messages
-* Strip quoted <embed> tags
+* Strip quoted `<embed>` tags
 * Remove the Random/First sig selection option and replace with an option
 that toggles whether or not to use the most specific matching sigs
 * New CSS: Basic9for10
