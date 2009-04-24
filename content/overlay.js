@@ -1349,7 +1349,12 @@ function gamefox_loader()
 
         var prefObj = gamefox_lib.safeEval(prefText, true);
         if (prefObj)
+        {
+          // Back it up
+          gamefox_lib.prefs.setCharPref(jsonPrefs[i] + '.bak', prefText);
+          // Update it
           gamefox_lib.prefs.setCharPref(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
+        }
       }
     }
 
