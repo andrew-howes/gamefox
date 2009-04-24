@@ -113,7 +113,7 @@ var gamefox =
             favorites.push({'id':query['board'], 'name':favLinks[i].textContent});
         }
 
-        gamefox_lib.prefs.setCharPref('favorites.serialized', gamefox_lib.toJSON(favorites));
+        gamefox_utils.setString('favorites.serialized', gamefox_lib.toJSON(favorites));
       }
     }
 
@@ -1391,11 +1391,11 @@ function gamefox_loader()
       gamefox_lib.prefs.setIntPref('signature.selection', 1);
 
       // new option for highlighting
-      var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+      var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
       for (var i = 0; i < userlist.length; i++)
         if (!userlist[i].type)
           userlist[i].type = 'users';
-      gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
+      gamefox_utils.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
     }
 
     if (lastversion == '')

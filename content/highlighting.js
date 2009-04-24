@@ -24,7 +24,7 @@ var gamefox_highlighting =
 
   add: function(name, color, users, messages, topics, type)
   {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
 
     name = (typeof name == 'string') ? name : '';
     color = (typeof color == 'string') ? color : '#CCFFFF';
@@ -36,13 +36,13 @@ var gamefox_highlighting =
     userlist.push({name:name, color:color, users:users,
         messages:messages, topics:topics, type:type});
 
-    gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
+    gamefox_utils.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   loadGroups: function()
   {
     var values, value, type;
-    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
     this.index = {users:{}, titleContains:{}, postContains:{}};
 
     // build the index
@@ -102,7 +102,7 @@ var gamefox_highlighting =
       return this.searchUsername(username, tc);
     }
 
-    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
 
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
@@ -145,7 +145,7 @@ var gamefox_highlighting =
       return this.searchUsername(username);
     }
 
-    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
 
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
@@ -176,7 +176,7 @@ var gamefox_highlighting =
     if (!index[username] && !(tc && index['(tc)']))
       return false; // username isn't in any groups
 
-    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
     if (tc && index[username] && index['(tc)'])
       var groups = gamefox_utils.mergeArray(index[username], index['(tc)']);
     else if (tc && index['(tc)'])
@@ -280,7 +280,7 @@ var gamefox_highlighting =
     var activeGroups = this.searchUsername(username)[4];
     if (!activeGroups) activeGroups = [];
 
-    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
 
     var item, label, info, noGroups = true;
     for (var i = 0; i < userlist.length; i++)
@@ -347,7 +347,7 @@ var gamefox_highlighting =
 
   menuCheckChange: function(event, username, group)
   {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
 
     if (event.target.getAttribute('checked')) // add to group
     {
@@ -366,7 +366,7 @@ var gamefox_highlighting =
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
-    gamefox_lib.prefs.setCharPref('userlist.serialized', gamefox_lib.toJSON(userlist));
+    gamefox_utils.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   checkUsername: function(username)

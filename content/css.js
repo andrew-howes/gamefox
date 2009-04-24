@@ -19,10 +19,6 @@
 
 var gamefox_css =
 {
-  prefs: Cc['@mozilla.org/preferences-service;1']
-    .getService(Ci.nsIPrefService)
-    .getBranch('gamefox.theme.css.'),
-
   init: function()
   {
     var defaults = [
@@ -77,7 +73,7 @@ var gamefox_css =
     }
 
     // Remove old stylesheets
-    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
     for (i in {'gamefox':'', 'bundled':''})
     {
       for (j in css[i])
@@ -145,7 +141,7 @@ var gamefox_css =
       return false;
     }
 
-    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
 
     // this loop does a few things:
     //  -force re-ordering when overwriting
@@ -164,7 +160,7 @@ var gamefox_css =
       'title': title, 'desc': desc, 'author': author, 'enabled': enabled
     };
 
-    this.prefs.setCharPref('serialized', gamefox_lib.toJSON(css));
+    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
     return true;
   },
 
@@ -206,7 +202,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
 
     for (var category in css)
     {
@@ -252,7 +248,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = gamefox_lib.safeEval(this.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
 
     file.initWithPath(this.getDirectoryPath());
     file.append(filename);
@@ -273,6 +269,6 @@ var gamefox_css =
     catch (e) {}
 
     delete css[category][filename];
-    this.prefs.setCharPref('serialized', gamefox_lib.toJSON(css));
+    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
   }
 };
