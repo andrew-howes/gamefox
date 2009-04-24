@@ -1,3 +1,11 @@
+2009-04-xx:
+    * version 0.6.12
+
+2009-04-24:
+    * version 0.6.11.2
+    * Fix some broken prefs in Firefox 2
+    * Fix non-ASCII characters in some prefs
+
 2009-04-23:
     * version 0.6.11.1
     * Back-up prefs before updating them to the new format
