@@ -61,6 +61,8 @@ var gamefox =
 
     doc.gamefox = {};
 
+    // BETATODO: myposts and some other pages are now missing this
+    //   Admin says board_wrap is "depreciated", so we should use something else
     var boardWrap = doc.getElementById('board_wrap');
 
     // Apply classes to existing elements
@@ -377,7 +379,7 @@ var gamefox =
     /* User Information (user.php) */
     else if (gamefox_lib.onPage(doc, 'user'))
     {
-      var username = doc.getElementsByTagName('td')[1];
+      var username = doc.getElementsByTagName('td')[gamefox_beta ? 0 : 1];
       if (username)
         gamefox_lib.setTitle(doc, username.textContent.gamefox_trim(), 'U');
     }
@@ -410,7 +412,7 @@ var gamefox =
         userNav.appendChild(anchor);
       }
 
-      var topicsTable = doc.evaluate('div[@class="board"]/table[@class="topics"]',
+      var topicsTable = doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board topics"]' : 'div[@class="board"]/table[@class="topics"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
 
@@ -438,6 +440,7 @@ var gamefox =
         // Status spans
         if (statusCond)
         {
+          // BETATODO: fix CSS for myposts.php or add a class here
           var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
               .match(/\/images\/default\/([^\.]+)\.gif/)[1];
           if (statusType != 'topic')
@@ -611,7 +614,7 @@ var gamefox =
       }
 
       // Double click
-      var messageTable = doc.evaluate('div[@class="board"]/table[@class="message"]',
+      var messageTable = doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board message"]' : 'div[@class="board"]/table[@class="message"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       messageTable.addEventListener('dblclick', gamefox.msglistDblclick, false);
 
@@ -651,8 +654,10 @@ var gamefox =
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[i].id = 'p' + msgnumString;
 
-        var detailLink = td[i].getElementsByTagName('a')[1];
-        var username = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].textContent;
+        var profileLink = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0];
+        var username = profileLink.textContent;
+        var msgStats = profileLink.parentNode;
+        var detailLink = msgStats.getElementsByTagName('a')[1];
         var postBody = td[i + 1].textContent;
 
         // Topic creator
@@ -714,13 +719,12 @@ var gamefox =
             groupname.className = gamefox_highlighting.groupClassName;
             groupname.appendChild(doc.createTextNode(hlinfo[0]));
 
-            td[i].insertBefore(groupname,
-                td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
+            msgStats.insertBefore(groupname, profileLink.nextSibling);
 
             if (leftMsgData)
-              td[i].insertBefore(doc.createElement('br'), groupname);
+              msgStats.insertBefore(doc.createElement('br'), groupname);
             else
-              td[i].insertBefore(doc.createTextNode(' | '), groupname);
+              msgStats.insertBefore(doc.createTextNode(' | '), groupname);
           }
 
           if (hlinfo[2] == 'highlight')
@@ -771,9 +775,7 @@ var gamefox =
           var span = doc.createElement('span');
           span.className = 'gamefox-tc-label';
           span.appendChild(doc.createTextNode(tcMarker));
-
-          td[i].insertBefore(span,
-              td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0].nextSibling);
+          msgStats.insertBefore(span, profileLink.nextSibling);
         }
 
         // Add "delete" link
@@ -857,9 +859,9 @@ var gamefox =
 
         // Append msgLinks
         if (detailLink)
-          td[i].insertBefore(msgLinks, detailLink.nextSibling);
+          msgStats.insertBefore(msgLinks, detailLink.nextSibling);
         else
-          td[i].appendChild(msgLinks);
+          msgStats.appendChild(msgLinks);
 
         // Message numbering
         if (msgnumCond)
@@ -869,13 +871,13 @@ var gamefox =
             case 1: // #001 | [message detail]
               var element = onArchive ? msgLinks : detailLink;
 
-              td[i].insertBefore(doc.createTextNode('#' + msgnumString),
+              msgStats.insertBefore(doc.createTextNode('#' + msgnumString),
                   element);
 
               if (leftMsgData)
-                td[i].insertBefore(doc.createElement('br'), element)
+                msgStats.insertBefore(doc.createElement('br'), element)
               else if (!onArchive || msgLinks.hasChildNodes())
-                td[i].insertBefore(doc.createTextNode(' | '), element);
+                msgStats.insertBefore(doc.createTextNode(' | '), element);
 
               break;
 
@@ -885,9 +887,9 @@ var gamefox =
                 var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
                 numElement.appendChild(doc.createTextNode('#' + msgnumString));
 
-                td[i].insertBefore(numElement, msgLinks);
+                msgStats.insertBefore(numElement, msgLinks);
                 if (msgLinks.hasChildNodes())
-                  td[i].insertBefore(leftMsgData ? doc.createElement('br') :
+                  msgStats.insertBefore(leftMsgData ? doc.createElement('br') :
                       doc.createTextNode(' | '), msgLinks);
               }
               else
@@ -903,9 +905,9 @@ var gamefox =
                 var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
                 numElement.appendChild(doc.createTextNode('message #' + msgnumString));
 
-                td[i].insertBefore(numElement, msgLinks);
+                msgStats.insertBefore(numElement, msgLinks);
                 if (msgLinks.hasChildNodes())
-                  td[i].insertBefore(leftMsgData ? doc.createElement('br') :
+                  msgStats.insertBefore(leftMsgData ? doc.createElement('br') :
                       doc.createTextNode(' | '), msgLinks);
               }
               else
@@ -920,13 +922,13 @@ var gamefox =
               if (leftMsgData)
               {
                 if (!onArchive || msgLinks.hasChildNodes())
-                  td[i].appendChild(doc.createElement('br'));
-                td[i].appendChild(doc.createTextNode('#' + msgnumString));
+                  msgStats.appendChild(doc.createElement('br'));
+                msgStats.appendChild(doc.createTextNode('#' + msgnumString));
               }
               else if (onArchive && !msgLinks.hasChildNodes())
-                td[i].appendChild(doc.createTextNode('#' + msgnumString));
+                msgStats.appendChild(doc.createTextNode('#' + msgnumString));
               else
-                td[i].appendChild(doc.createTextNode(' | #' + msgnumString));
+                msgStats.appendChild(doc.createTextNode(' | #' + msgnumString));
 
               break;
           }

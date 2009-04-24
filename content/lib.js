@@ -17,9 +17,14 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var gamefox_beta = Cc['@mozilla.org/preferences-service;1']
+  .getService(Ci.nsIPrefService)
+  .getBranch('gamefox.')
+  .getBoolPref('beta11');
+
 var gamefox_lib =
 {
-  domain: 'http://www.gamefaqs.com',
+  domain: 'http://' + (gamefox_beta ? 'beta' : 'www') + '.gamefaqs.com',
   path: '/boards/',
   cookieHost: '.gamefaqs.com',
 
@@ -107,9 +112,9 @@ var gamefox_lib =
         var div = doc.getElementById('side_col');
         if (div)
         {
-          var h1 = doc.evaluate('div[@class="pod"]/div[@class="head"]/h1', div,
+          var bi = doc.evaluate('div[@class="pod"]/div[@class="head"]/h' + (gamefox_beta ? '2' : '1'), div,
               null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (h1 && h1.textContent == 'Board Information')
+          if (bi && bi.textContent == 'Board Information')
           {
             doc.gamefox.pageType = ['index'];
             return true;
@@ -126,13 +131,14 @@ var gamefox_lib =
             doc.gamefox.pageType = ['topics', 'tracked'];
             return true;
           }
-          var col = doc.evaluate('div[@class="board"]/table[@class="topics"]/colgroup/col[@class="status"]',
+          var col = doc.evaluate((gamefox_beta ? 'div[@class="body"]/table[@class="board ' : 'div[@class="board"]/table[@class="') + 'topics"]/colgroup/col[@class="status"]',
               div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (col)
           {
             doc.gamefox.pageType = ['topics'];
             return true;
           }
+          // TODO: iterate over all <p> nodes (fails case when deleting only topic on board)
           var notopics = doc.evaluate('p', div, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (notopics && notopics.textContent.indexOf('No topics are available') != -1)
@@ -147,7 +153,7 @@ var gamefox_lib =
         var div = doc.getElementById('board_wrap');
         if (div)
         {
-          var table = doc.evaluate('div[@class="board"]/table[@class="message"]',
+          var table = doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board message"]' : 'div[@class="board"]/table[@class="message"]',
               div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (table && !gamefox_lib.onPage(doc, 'usernote'))
           {
