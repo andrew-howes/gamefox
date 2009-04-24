@@ -24,9 +24,7 @@ var gamefox_tags =
 
   read: function()
   {
-    this.tags = Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefBranch)
-        .getCharPref('gamefox.tags');
+    this.tags = gamefox_utils.getString('tags');
 
     if (!/\S/.test(this.tags))
       this.tags = '{}';
@@ -39,9 +37,7 @@ var gamefox_tags =
     if (typeof(tags) == 'object')
       tags = gamefox_lib.toJSON(tags);
 
-    Cc['@mozilla.org/preferences-service;1']
-        .getService(Ci.nsIPrefBranch)
-        .setCharPref('gamefox.tags', tags);
+    gamefox_utils.setString('tags', tags);
   },
 
   init: function()

@@ -40,7 +40,7 @@ var gamefox_options_style =
 
   populate: function()
   {
-    var css = gamefox_lib.safeEval(gamefox_css.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
 
     this.treeView = new gamefox_treeview();
     this.treeView.childData = {};
@@ -105,9 +105,9 @@ var gamefox_options_style =
     // Map column to associative array in pref
     var map = new Array('title', 'desc', 'author', 'enabled');
 
-    var css = gamefox_lib.safeEval(gamefox_css.prefs.getCharPref('serialized'));
+    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
     css[category][filename][map[column.index]] = value;
-    gamefox_css.prefs.setCharPref('serialized', gamefox_lib.toJSON(css));
+    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
 
     this.selection.clearSelection();
     this.selection.select(idx);
