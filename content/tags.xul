@@ -29,6 +29,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/lib.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/json.js"/>
   <tree id="gamefox-tags-tree" flex="1" hidecolumnpicker="true"
     contextmenu="gamefox-tags-contextmenu" seltype="multiple"
     ondblclick="if (event.button == 0) gamefox_tags.doAction(1, true);"

@@ -43,6 +43,8 @@
     src="chrome://gamefox/content/treeview.js"/>
   <script type="application/x-javascript"
     src="chrome://gamefox/content/trackedWindow.js"/>
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/json.js"/>
 
   <stringbundleset id="strbundles">
     <stringbundle id="strings"
