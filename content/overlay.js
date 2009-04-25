@@ -295,26 +295,29 @@ var gamefox =
     /* Posting and Preview (post.php) */
     else if (gamefox_lib.onPage(doc, 'post'))
     {
-      // BETATODO: the textarea is now in a <p>, and the inputs are not!
-      // TODO: don't throw error when on "Message Posted" page
-      var topictitle = doc.getElementsByName('topictitle')[0];
       var message = doc.getElementsByName('message')[0];
+      if (!message)
+        return; // "Message Posted" page
+      var form = message.form;
+      var formElements = form.elements;
+      var topictitle = formElements.namedItem('topictitle');
+      var detailsDiv = gamefox_beta ? message.parentNode.parentNode : message.parentNode;
 
       // Titles
       if (topictitle) // new topic
       {
         gamefox_lib.setTitle(doc, gamefox_utils.getBoardName(doc), 'CT');
       }
-      else if (message) // new post
+      else // new post
       {
-        gamefox_lib.setTitle(doc, message.parentNode.getElementsByTagName('a')[0]
+        gamefox_lib.setTitle(doc, detailsDiv.getElementsByTagName('a')[0]
             .textContent.gamefox_trim(), 'PM');
       }
 
       // Signature
       if (gamefox_lib.prefs.getBoolPref('signature.applyeverywhere')
-          && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.body.innerHTML))
-      { // BETATODO: fix above regex
+          && !/\b(Error|Preview|Posted)<\/h(1|2)>/.test(doc.body.innerHTML))
+      { // BETATODO: remove "1"
         message.value = gamefox_sig.format(null, null, doc);
       }
 
@@ -323,8 +326,8 @@ var gamefox =
       // HTML buttons
       if (gamefox_quickpost.createHTMLButtonsPref())
       {
-        message.parentNode.insertBefore(gamefox_quickpost.createHTMLButtons(doc), message);
-        message.parentNode.insertBefore(doc.createElement('br'), message);
+        detailsDiv.insertBefore(gamefox_quickpost.createHTMLButtons(doc), gamefox_beta ? message.parentNode : message);
+        detailsDiv.insertBefore(doc.createElement('br'), gamefox_beta ? message.parentNode : message);
       }
 
       // Character count
@@ -334,7 +337,7 @@ var gamefox =
         if (topictitle)
         {
           var titlecount = doc.createElement('span');
-              titlecount.id = 'gamefox-title-count';
+          titlecount.id = 'gamefox-title-count';
           topictitle.parentNode.insertBefore(titlecount,
               topictitle.nextSibling);
           topictitle.parentNode.insertBefore(doc.createTextNode(' '),
@@ -344,22 +347,30 @@ var gamefox =
 
           topictitle.addEventListener('input',
               gamefox_messages.delayedUpdateTitleCount, false);
-          topictitle.form.addEventListener('reset',
+          form.addEventListener('reset',
               function(event) {setTimeout(gamefox_messages.updateTitleCount, 0, event)}, false);
         }
 
         // message count
         var msgcount = doc.createElement('span');
-            msgcount.id = 'gamefox-message-count';
-        var resetBtn = doc.getElementsByName('reset')[0];
-            resetBtn.parentNode.appendChild(doc.createTextNode(' '));
-            resetBtn.parentNode.appendChild(msgcount);
+        msgcount.id = 'gamefox-message-count';
+        if (gamefox_beta)
+        {
+          detailsDiv.appendChild(doc.createTextNode(' '));
+          detailsDiv.appendChild(msgcount);
+        }
+        else
+        {
+          var resetBtn = formElements.namedItem('reset');
+          resetBtn.parentNode.appendChild(doc.createTextNode(' '));
+          resetBtn.parentNode.appendChild(msgcount);
+        }
 
         gamefox_messages.updateMessageCount(doc);
 
         message.addEventListener('input',
             gamefox_messages.delayedUpdateMessageCount, false);
-        message.form.addEventListener('reset',
+        form.addEventListener('reset',
             function(event) {setTimeout(gamefox_messages.updateMessageCount, 0, event)}, false);
       }
 
@@ -367,20 +378,18 @@ var gamefox =
       if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
       {
         var button = doc.createElement('input');
-            button.setAttribute('id', 'gamefox-quickpost-btn');
-            button.setAttribute('type', 'button');
-            button.setAttribute('value', 'Post Message');
-            button.addEventListener('click', gamefox_quickpost.post, false);
+        button.id = 'gamefox-quickpost-btn';
+        button.type = 'button';
+        button.value = 'Post Message';
+        button.addEventListener('click', gamefox_quickpost.post, false);
 
-        var refChild = doc.getElementsByName('post');
-            refChild = (refChild[0].getAttribute('value') == 'Post Message' ?
-                refChild[1] : refChild[0]);
-            refChild.parentNode.insertBefore(button, refChild);
-            refChild.parentNode.insertBefore(doc.createTextNode(' '), refChild);
+        var previewBtn = formElements.namedItem('post');
+        previewBtn.parentNode.insertBefore(button, previewBtn);
+        previewBtn.parentNode.insertBefore(doc.createTextNode(' '), previewBtn);
       }
 
       // GFCode whitespace control
-      message.form.addEventListener('submit',
+      form.addEventListener('submit',
           gamefox_quickpost.removeGFCodeWhitespaceListener, false);
     }
 
