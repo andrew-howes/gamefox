@@ -1,8 +1,15 @@
 @-moz-document domain(gamefaqs.com)
 {
+    /* v10 */
     .ad, .adbox, .rubics_netxp1_main, .prWrap, #gne_nav, #sponsored_links, #mpu_wrap, #footer,
     iframe, img[alt="madison"], #content > div[style="text-align: center;"]
     {
         display: none !important;
+    }
+
+    /* v11 */
+    #sky_col_wrap .col_layout
+    {
+        padding: 0 10px !important;
     }
 }
