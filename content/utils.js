@@ -128,7 +128,7 @@ var gamefox_utils =
         if (node.nodeName.toLowerCase() == 'td')
           tdNode = node;
         else if (node.nodeName.toLowerCase() == 'table'
-                 && node.className == 'message')
+                 && node.className == (gamefox_beta ? 'board message' : 'message'))
           tableNode = node;
         node = node.parentNode;
       }

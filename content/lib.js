@@ -157,7 +157,7 @@ var gamefox_lib =
               div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (table && !gamefox_lib.onPage(doc, 'usernote'))
           {
-            var boards = doc.evaluate('div[@class="board"]', div, null,
+            var boards = doc.evaluate('div[@class="' + (gamefox_beta ? 'body' : 'board') + '"]', div, null,
                 XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
             if (boards.snapshotLength > 1)
               doc.gamefox.pageType = ['messages', 'detail'];

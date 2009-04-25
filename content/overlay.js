@@ -73,7 +73,7 @@ var gamefox =
       if (element)
         element.parentNode.className += ' gamefox-usernote';
 
-      element = doc.evaluate('div[@class="board"]/p/a[contains(@href, "ignorelist")]',
+      element = doc.evaluate('div[@class="' + (gamefox_beta ? 'body' : 'board') + '"]/p/a[contains(@href, "ignorelist")]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (element)
         element.parentNode.className += ' gamefox-ignorelist';
@@ -102,7 +102,7 @@ var gamefox =
       if (gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
         var i, query, favorites = [], favLinks = [];
-        var favResult = doc.evaluate('div[@class="board"]/table/tbody/tr/td[1]/a',
+        var favResult = doc.evaluate('div[@class="' + (gamefox_beta ? 'body' : 'board') + '"]/table/tbody/tr/td[1]/a',
             boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
         for (i = 0; i < favResult.snapshotLength; i++)
           favLinks[i] = favResult.snapshotItem(i);
@@ -122,7 +122,13 @@ var gamefox =
     /* Active Messages (myposts.php) */
     else if (gamefox_lib.onPage(doc, 'myposts'))
     {
-      var topicsTable = boardWrap ? doc.evaluate('div[@class="board"]/table',
+      if (gamefox_beta)
+      {
+        var mainCol = doc.getElementById('main_col');
+        boardWrap = mainCol ? doc.evaluate('div[@class="pod"]',
+            mainCol, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
+      }
+      var topicsTable = boardWrap ? doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board topics"]' : 'div[@class="board"]/table',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
       var rows;
 
@@ -289,6 +295,8 @@ var gamefox =
     /* Posting and Preview (post.php) */
     else if (gamefox_lib.onPage(doc, 'post'))
     {
+      // BETATODO: the textarea is now in a <p>, and the inputs are not!
+      // TODO: don't throw error when on "Message Posted" page
       var topictitle = doc.getElementsByName('topictitle')[0];
       var message = doc.getElementsByName('message')[0];
 
@@ -305,8 +313,8 @@ var gamefox =
 
       // Signature
       if (gamefox_lib.prefs.getBoolPref('signature.applyeverywhere')
-          && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.documentElement.innerHTML))
-      {
+          && !/\b(Error|Preview|Posted)<\/h1><\/div>/.test(doc.body.innerHTML))
+      { // BETATODO: fix above regex
         message.value = gamefox_sig.format(null, null, doc);
       }
 
