@@ -31,18 +31,20 @@ var gamefox_quickwhois =
     }
     catch (e) { return; }
 
-    // offsets are for stylesheets that put a border on html
-    var div = node.getElementsByTagName('div');
-    if (div.length > 0)
+    var div = doc.evaluate('div[@class="gamefox-quickwhois"]',
+        node, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
+    // offsets are for stylesheets that put a border on <html>
+    if (div)
     {
-      div[0].style.display = div[0].style.display == 'none' ? '' : 'none';
-      div[0].style.top = window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop + 'px';
-      div[0].style.left = window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft + 'px';
+      div.style.display = div.style.display == 'none' ? '' : 'none';
+      div.style.top = window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop + 'px';
+      div.style.left = window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft + 'px';
       return;
     }
 
     div = doc.createElement('div');
-    div.setAttribute('class', 'gamefox-quickwhois');
+    div.className = 'gamefox-quickwhois';
     div.style.top = window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop + 'px';
     div.style.left = window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft + 'px';
     div.innerHTML = 'Loading QuickWhois...';
