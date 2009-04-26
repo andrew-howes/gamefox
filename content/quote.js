@@ -34,13 +34,14 @@ var gamefox_quote =
 
     // postUser
     postUser = msgComponents.header.getElementsByTagName('a')[0];
+    var dateNodes = (postUser ? postUser.parentNode : msgComponents.header).childNodes;
     postUser = postUser ? postUser.textContent : '???';
 
     // postDate
     var node;
-    for (var i = 0; i < msgComponents.header.childNodes.length; i++)
+    for (var i = 0; i < dateNodes.length; i++)
     {
-      node = msgComponents.header.childNodes[i];
+      node = dateNodes[i];
       if (node.nodeName == '#text')
       {
         postDate = /Posted\s([^\|]+)/.exec(node.textContent);
