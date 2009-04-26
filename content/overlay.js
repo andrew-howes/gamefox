@@ -36,8 +36,10 @@ var gamefox =
     // Add favorites
     if (gamefox_lib.prefs.getBoolPref('elements.favorites'))
     {
-      var searchForm = doc.getElementById('search');
-      if (searchForm)
+      var element = doc.getElementById('searchbox');
+      if (element)
+        element = element.getElementsByTagName('form')[0];
+      if (element)
       {
         var favMenu = doc.createElement('select');
         favMenu.id = 'gamefox-favorites-menu';
@@ -45,7 +47,7 @@ var gamefox =
 
         gamefox_favorites.populateFavorites(doc, favMenu);
 
-        searchForm.parentNode.insertBefore(favMenu, searchForm.nextSibling);
+        element.parentNode.insertBefore(favMenu, element.nextSibling);
       }
     }
 
@@ -457,7 +459,8 @@ var gamefox =
         // Status spans
         if (statusCond)
         {
-          // BETATODO: fix CSS for myposts.php or add a class here
+          // BETATODO: add a class to some element on message lists so they can
+          //   be identified properly
           var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
               .match(/\/images\/default\/([^\.]+)\.gif/)[1];
           if (statusType != 'topic')
