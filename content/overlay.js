@@ -759,6 +759,7 @@ var gamefox =
 
             var a = doc.createElement('a');
             a.appendChild(doc.createTextNode('show'));
+            a.title = 'Show';
             a.className = 'gamefox-show-post-link';
             a.href = '#';
             a.addEventListener('click', gamefox_highlighting.showPost, false);

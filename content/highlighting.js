@@ -216,6 +216,7 @@ var gamefox_highlighting =
         postMsg.style.removeProperty('font-size');
         postMsg.removeAttribute('style');
         buttonContainer.style.removeProperty('font-size');
+        button.title = 'Hide';
         button.className = 'gamefox-hide-post-link';
         button.textContent = 'hide';
       }
@@ -223,6 +224,7 @@ var gamefox_highlighting =
       {
         postMsg.style.setProperty('font-size', '0pt', 'important');
         postMsg.style.setProperty('display', 'none', 'important');
+        button.title = 'Show';
         button.className = 'gamefox-show-post-link';
         button.textContent = 'show';
       }
@@ -235,6 +237,7 @@ var gamefox_highlighting =
         postMsg.style.removeProperty('font-size');
         postMsg.style.removeProperty('display');
         postMsg.removeAttribute('style');
+        button.title = 'Hide';
         button.className = 'gamefox-hide-post-link';
         button.textContent = 'hide';
       }
@@ -242,6 +245,7 @@ var gamefox_highlighting =
       {
         postMsg.style.setProperty('font-size', '0pt', 'important');
         postMsg.style.setProperty('display', 'none', 'important');
+        button.title = 'Show';
         button.className = 'gamefox-show-post-link';
         button.textContent = 'show';
       }
