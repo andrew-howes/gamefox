@@ -1252,7 +1252,7 @@ var gamefox =
 
     var doc = gamefox_lib.getDocument(event);
     var boardWrap = doc.getElementById('board_wrap');
-    var tdResult = doc.evaluate('div[@class="board"]/table[@class="message"]/tbody/tr/td',
+    var tdResult = doc.evaluate((gamefox_beta ? 'div[@class="body"]/table[@class="board ' : 'div[@class="board"]/table[@class="') + 'message"]/tbody/tr/td',
         boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];
     for (var i = 0; i < tdResult.snapshotLength; i++)
