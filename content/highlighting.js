@@ -319,13 +319,6 @@ var gamefox_highlighting =
         label += ' (' + info + ')';
       item.setAttribute('label', label);
 
-      // highlight color
-      if (userlist[i].messages == 'highlight' || userlist[i].topics == 'highlight')
-      {
-        item.style.borderRightWidth = '10px';
-        item.style.borderRightColor = userlist[i].color;
-      }
-
       list.appendChild(item);
     }
 
