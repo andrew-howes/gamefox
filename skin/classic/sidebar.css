@@ -27,6 +27,7 @@ h1
   background: #6564ff;
   padding: 2px;
   margin: 0 0 5px 0;
+  border-bottom: 1px solid #4140db;
 }
 h1 a
 {
@@ -38,9 +39,11 @@ h1 a
   clear: both;
   font-weight: bold;
   margin: 5px 0;
-  background: #636ab6;
+  background: #6564ff;
   color: #fff;
   padding: 2px;
+  border: 1px solid #4140db;
+  border-width: 1px 0;
 }
 .strip a
 {

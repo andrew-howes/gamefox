@@ -1,3 +1,4 @@
+/* Classic sidebar */
 @-moz-document url-prefix(chrome://gamefox/content/sidebar.xhtml)
 {
   body
@@ -12,6 +13,11 @@
   a:hover
   {
       color: #ff0 !important;
+  }
+
+  h1, .strip
+  {
+      border: 0 !important;
   }
 
   .strip
