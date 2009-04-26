@@ -161,7 +161,7 @@ var gamefox =
                  (query['user'] ? 'user=' + query['user'] + '&' : '');
 
               var pageJumper = doc.createElement('div');
-              pageJumper.className = 'pagejumper';
+              pageJumper.className = gamefox_beta ? 'pod pagejumper' : 'pagejumper';
 
               var pageUL = doc.createElement('ul');
               var pageLI, pageA;
@@ -593,7 +593,7 @@ var gamefox =
     {
       var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var pageJumper = doc.evaluate('div[@class="pagejumper"]',
+      var pageJumper = doc.evaluate(gamefox_beta ? 'div[@class="pod pagejumper"]' : 'div[@class="pagejumper"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (pageJumper)
       {
