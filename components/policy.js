@@ -15,7 +15,7 @@ const adServers = new Array(
     'mads.gamefaqs.com', 'pointroll.com', 'questionmarket.com', 'revsci.net',
     'serving-sys.com', 'tribalfusion.com', 'unicast.com', 'voicefive.com',
     'adserver.yahoo.com', 'yieldmanager.com', 'adlegend.com', 'insightexpressai.com',
-    'contextweb.com', 'mediaplex.com'
+    'contextweb.com', 'mediaplex.com', 'bwp.gamespot.com'
     );
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
               .getService(Components.interfaces.nsIPrefService)
