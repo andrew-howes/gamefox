@@ -121,8 +121,7 @@ var gamefox_context =
       userNav = userNav ? userNav.textContent : '';
 
       // Tag topic
-      if (doc.getElementsByTagName('h1').length > 1)
-        hideTag = false;
+      hideTag = false;
 
       // Track topic
       if (userNav.indexOf('Track Topic') != -1

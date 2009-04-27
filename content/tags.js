@@ -187,8 +187,20 @@ var gamefox_tags =
   removePurged: function()
   {
     this.read();
-    const errNumber  = [ -404, -1, 0, 302, 401, 403, 500, 503, 504, 555 ]
-    var err          = [    0,  0, 0,   0,   0,   0,   0,   0,   0,   0 ]
+    const errNumber  = [ -404, -1, 0, 302, 401, 403, 500, 503, 504, 555 ];
+    var err          = [    0,  0, 0,   0,   0,   0,   0,   0,   0,   0 ];
+    const errMsgs = [
+      'the requested URL was not found. Alert the creator',
+      'the purge process was aborted or encountered an error',
+      'the request timed out',
+      'no topic title was found. Alert the creator',
+      'of unauthorized access. You shouldn\'t get this error to begin with',
+      'of insufficient user privilege. Higher user level or permit is required',
+      'of internal or database error',
+      'the site is temporarily down for maintenance',
+      'the site complained getting too many connections',
+      'of an unknown or new error. You may safely assume that the problem came from GameFAQs alone'
+    ];
     var IDs          = 0;
     var processedIDs = 0;
     var button       = document.getElementById('gamefox-purge');
@@ -228,11 +240,7 @@ var gamefox_tags =
           case 503:  // Service Unavailable     // GamefAQs Error: maintenance...
           case 504:  // Service Unavailable +1  // GamefAQs Error: Too many connections
           case 555:  // Unknown Error
-            try
-            {
-              err[errNumber.indexOf(status)] += 1;
-            }
-            catch (e) {}
+            err[errNumber.indexOf(status)]++;
             break;
         }
 
@@ -252,16 +260,11 @@ var gamefox_tags =
             msg = 'No purged topics.\n\n';
           }
 
-          if (err[errNumber.indexOf(403)])  msg += err[errNumber.indexOf(403)] + ' topics were skipped because of insufficient user privilege. Higher user level or permit is required.\n';
-          if (err[errNumber.indexOf(401)])  msg += err[errNumber.indexOf(401)] + ' topics were skipped because of unauthorized access. You shouldn\'t get this error to begin with.\n';
-          if (err[errNumber.indexOf(503)])  msg += err[errNumber.indexOf(503)] + ' topics were skipped because the site is temporarily down for maintenance.\n';
-          if (err[errNumber.indexOf(504)])  msg += err[errNumber.indexOf(504)] + ' topics were skipped because the site complained getting too many connections.\n';
-          if (err[errNumber.indexOf(500)])  msg += err[errNumber.indexOf(500)] + ' topics were skipped because of internal or database error.\n';
-          if (err[errNumber.indexOf(555)])  msg += err[errNumber.indexOf(555)] + ' topics were skipped because of unknown or new error. You may safely assume that the problem came from GameFAQs alone.\n';
-          if (err[errNumber.indexOf(0)])    msg += err[errNumber.indexOf(0)]   + ' topics were skipped because request timed out.\n';
-          if (err[errNumber.indexOf(-1)])   msg += err[errNumber.indexOf(-1)]  + ' topics were skipped because the purge process was aborted or encountered an error.\n';
-          if (err[errNumber.indexOf(302)])  msg += err[errNumber.indexOf(302)] + ' topics were skipped because no topic title was found. It\'s blasphemy! Alert the creator.\n';
-          if (err[errNumber.indexOf(-404)]) msg += err[errNumber.indexOf(-404)]+ ' topics were skipped because the requested URL was not found. Alert the creator.\n';
+          for (var i = 0; i < err.length; i++)
+          {
+            if (err[i])
+              msg += err[i] + ' topics were skipped because ' + errMsgs[i] + '.\n';
+          }
 
           gamefox_lib.alert(msg);
         }
@@ -277,7 +280,6 @@ var gamefox_tags =
 
       request.onerror = function()
       {
-        //GFlib.alert('Whoops! I\'m Error.');
         if (!processed) processRespond(-1);
       };
 
@@ -357,14 +359,15 @@ var gamefox_tags =
             }
             else if (checkMessageBody)
             {
-              if (/<table\b[^>]*\bclass=['"]?messages?['"]?\b[^>]*>/i.test(request.responseText))
+              if (/<table\b[^>]*\bclass="(board )?message"[^>]*>/i.test(request.responseText))
               {
-                // Added: for GameFAQs' new deleted topic handling
                 processRespond(200);
               }
-              else processRespond(404);
+              else // not on message list - probably deleted
+                processRespond(404);
             }
-            else processRespond(555);
+            else
+              processRespond(555);
           }
         }
       };
@@ -437,60 +440,45 @@ var gamefox_tags =
   {
     var doc = event.target.ownerDocument;
     var queryStr = doc.location.search;
-    var boardTitle = false;
-    var topicTitle = false;
+    var boardTitle, topicTitle;
 
     if (event.type == 'dblclick')
       event.preventDefault();
 
     var onMyPosts = gamefox_lib.onPage(doc, 'myposts');
     var onTracked = gamefox_lib.onPage(doc, 'tracked');
-    var onTopicList = !onMyPosts
-        && doc.evaluate('//div[@class="board_nav"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null
-        && doc.evaluate('//table[@class="topics"]', doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
 
-    if (onTopicList || onMyPosts)
+    if (gamefox_lib.onPage(doc, 'topics') || onMyPosts)
     {
       try
       {
         var node = event.target;
 
         while (node.nodeName.toLowerCase() != 'td')
-        {
           node = node.parentNode;
-        }
 
         var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
         queryStr = topicLink.href;
         topicTitle = topicLink.textContent.gamefox_trim();
 
         if (onMyPosts)
-        {
-          boardTitle = node.parentNode.cells[0].innerHTML.
-            replace(/<\/?a\b[^>]*>/ig, '').gamefox_trim();
-        }
+          boardTitle = node.parentNode.cells[0].textContent.gamefox_trim();
         else if (onTracked)
-        {
-          boardTitle = node.parentNode.cells[2].innerHTML.
-            replace(/<\/?a\b[^>]*>/ig, '').gamefox_trim();
-        }
+          boardTitle = node.parentNode.cells[2].textContent.gamefox_trim();
       }
       catch (e) { return false; }
     }
 
-    var boardID     = queryStr.match(/\bboard=([0-9-]+)/)[1];
-    var topicID     = queryStr.match(/\btopic=([0-9]+)/)[1];
-    var tagID       = boardID + ',' + topicID;
+    var query = gamefox_utils.parseQueryString(queryStr);
+    var boardID = query.board, topicID = query.topic;
+    if (!boardID || !topicID)
+      return false;
+    var tagID = boardID + ',' + topicID;
 
-    var h1s         = doc.getElementsByTagName('h1');
     if (!boardTitle)
-    {
-      boardTitle = h1s[0].textContent.gamefox_trim();
-    }
+      boardTitle = gamefox_utils.getBoardName(doc);
     if (!topicTitle)
-    {
-      topicTitle = h1s[1].textContent.gamefox_trim();
-    }
+      topicTitle = gamefox_utils.getBoardWrapHeader(doc);
 
     gamefox_tags.read();
 
