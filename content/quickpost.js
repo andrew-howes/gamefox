@@ -169,8 +169,10 @@ var gamefox_quickpost =
     var node = event.target;
 
     if (node.nodeName == 'INPUT'
-        || node.nodeName == 'TEXTAREA')
-      // allow text selection in inputs
+        || node.nodeName == 'TEXTAREA' // allow text selection in inputs
+        || node.nodeName == 'A'
+        || node.nodeName == 'TD'
+        || node.id && node.id == 'gamefox-character-map')
       return false;
 
     // get the right element
