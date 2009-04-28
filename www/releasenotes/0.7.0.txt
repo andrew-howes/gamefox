@@ -1,0 +1,14 @@
+### About this version
+
+This release updates GameFOX for the GameFAQs redesign.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+
+### New in this release
+
+#### 0.7.0
+
+* v11 compatibility
