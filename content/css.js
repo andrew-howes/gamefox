@@ -39,8 +39,6 @@ var gamefox_css =
         ['bundled', 'ascii-art-font.css', 'ASCII art font',
               'Increases the font size of messages to make ASCII art look better.',
               '', false],
-        ['bundled', 'basic9for10.css', 'Basic9for10', 'A basic v9 style. Requires'
-                + ' the V9 style selected on GameFAQs.', 'TakatoMatsuki', false],
         ['bundled', 'capitalized-message-links.css', 'Capitalized message links',
               'Capitalizes the links in message headers.', '', false],
         ['bundled', 'ricapar.css', 'Classic',
@@ -59,9 +57,6 @@ var gamefox_css =
               'Only show topic status icons for closed/sticky topics - ' +
               'emulates the pre-2006 style of icons. This CSS ' +
               'conflicts with "Status icons (normal)".', '', false],
-        ['bundled', 'toad.css', 'Ten On A Diet',
-              'A wider, less padded style. ' +
-              'Works with the default GameFAQs skin.', 'TakatoMatsuki', false],
         ['bundled', 'wide-layout.css', 'Wide default',
               'Increases the width of the page to fill the whole window. ' +
               'Works with the default GameFAQs skin.', '', false]
