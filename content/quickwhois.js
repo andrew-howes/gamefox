@@ -107,15 +107,11 @@ var gamefox_quickwhois =
 
   findInfo: function(what, where)
   {
-    if (gamefox_beta)
-      var pattern = new RegExp('<th\\b[^>]*>' + what + '</th><td>([^\\0]*?)</td>', 'gi');
-    else
-      var pattern = new RegExp('<td\\b[^>]*>(\\s*<a\\b[^>]*>)?\\s*' + what +
-          '(\\s*</a>)?\\s*</td>\\s*<td\\b[^>]*>([^\\0]*?)</td>', 'gi');
+    var pattern = new RegExp('<th\\b[^>]*>' + what + '</th><td>([^\\0]*?)</td>', 'gi');
     var matches = pattern.exec(where);
 
     if (matches)
-      return matches[gamefox_beta ? 1 : 3].gamefox_trim();
+      return matches[1].gamefox_trim();
 
     return '';
   }

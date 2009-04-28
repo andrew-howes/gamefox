@@ -387,13 +387,11 @@ var gamefox_tracked =
       return [false, 'This topic is archived.'];
 
     // start tracking
-    if (str.indexOf('<div id="board_wrap"' + (gamefox_beta ? ' class="pod">'
-            : '>\n\n\n') + '<p>You are now tracking this topic.</p>') != -1)
+    if (str.indexOf('<div id="board_wrap" class="pod"><p>You are now tracking this topic.</p>') != -1)
       return [true, 'tracktopic'];
 
     // stop tracking
-    if (str.indexOf('<div id="board_wrap"' + (gamefox_beta ? ' class="pod">'
-            : '>\n\n\n') + '<p>You are no longer tracking this topic.</p>') != -1)
+    if (str.indexOf('<div id="board_wrap" class="pod"><p>You are no longer tracking this topic.</p>') != -1)
       return [true, 'stoptrack'];
 
     // generic error

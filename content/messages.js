@@ -108,8 +108,8 @@ var gamefox_messages =
     {
       if (get.readyState == 4)
       {
-        if (get.responseText.indexOf('>Delete this Message</h' + (gamefox_beta ? '2' : '1') + '>') == -1 &&
-            get.responseText.indexOf('>Close this Topic</h' + (gamefox_beta ? '2' : '1') + '>') == -1)
+        if (get.responseText.indexOf('>Delete this Message</h2>') == -1 &&
+            get.responseText.indexOf('>Close this Topic</h2>') == -1)
         {
           gamefox_lib.alert('No action is available.');
           return false;

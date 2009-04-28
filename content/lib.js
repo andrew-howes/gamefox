@@ -17,8 +17,6 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var gamefox_beta = true;
-
 var gamefox_lib =
 {
   domain: 'http://www.gamefaqs.com',
@@ -109,7 +107,7 @@ var gamefox_lib =
         var div = doc.getElementById('side_col');
         if (div)
         {
-          var bi = doc.evaluate('div[@class="pod"]/div[@class="head"]/h' + (gamefox_beta ? '2' : '1'), div,
+          var bi = doc.evaluate('div[@class="pod"]/div[@class="head"]/h2', div,
               null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (bi && bi.textContent == 'Board Information')
           {
@@ -128,7 +126,7 @@ var gamefox_lib =
             doc.gamefox.pageType = ['topics', 'tracked'];
             return true;
           }
-          var col = doc.evaluate((gamefox_beta ? 'div[@class="body"]/table[@class="board ' : 'div[@class="board"]/table[@class="') + 'topics"]/colgroup/col[@class="status"]',
+          var col = doc.evaluate('div[@class="body"]/table[@class="board topics"]/colgroup/col[@class="status"]',
               div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (col)
           {
@@ -150,11 +148,11 @@ var gamefox_lib =
         var div = doc.getElementById('board_wrap');
         if (div)
         {
-          var table = doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board message"]' : 'div[@class="board"]/table[@class="message"]',
+          var table = doc.evaluate('div[@class="body"]/table[@class="board message"]',
               div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (table && !gamefox_lib.onPage(doc, 'usernote'))
           {
-            var boards = doc.evaluate('div[@class="' + (gamefox_beta ? 'body' : 'board') + '"]', div, null,
+            var boards = doc.evaluate('div[@class="body"]', div, null,
                 XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
             if (boards.snapshotLength > 1)
               doc.gamefox.pageType = ['messages', 'detail'];

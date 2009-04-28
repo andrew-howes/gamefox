@@ -75,7 +75,7 @@ var gamefox =
       if (element)
         element.parentNode.className += ' gamefox-usernote';
 
-      element = doc.evaluate('div[@class="' + (gamefox_beta ? 'body' : 'board') + '"]/p/a[contains(@href, "ignorelist")]',
+      element = doc.evaluate('div[@class="body"]/p/a[contains(@href, "ignorelist")]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (element)
         element.parentNode.className += ' gamefox-ignorelist';
@@ -104,7 +104,7 @@ var gamefox =
       if (gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
         var i, query, favorites = [], favLinks = [];
-        var favResult = doc.evaluate('div[@class="' + (gamefox_beta ? 'body' : 'board') + '"]/table/tbody/tr/td[1]/a',
+        var favResult = doc.evaluate('div[@class="body"]/table/tbody/tr/td[1]/a',
             boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
         for (i = 0; i < favResult.snapshotLength; i++)
           favLinks[i] = favResult.snapshotItem(i);
@@ -124,13 +124,10 @@ var gamefox =
     /* Active Messages (myposts.php) */
     else if (gamefox_lib.onPage(doc, 'myposts'))
     {
-      if (gamefox_beta)
-      {
-        var mainCol = doc.getElementById('main_col');
-        boardWrap = mainCol ? doc.evaluate('div[@class="pod"]',
-            mainCol, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
-      }
-      var topicsTable = boardWrap ? doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board topics"]' : 'div[@class="board"]/table',
+      var mainCol = doc.getElementById('main_col');
+      boardWrap = mainCol ? doc.evaluate('div[@class="pod"]',
+          mainCol, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
+      var topicsTable = boardWrap ? doc.evaluate('div[@class="body"]/table[@class="board topics"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
       var rows;
 
@@ -161,7 +158,7 @@ var gamefox =
                  (query['user'] ? 'user=' + query['user'] + '&' : '');
 
               var pageJumper = doc.createElement('div');
-              pageJumper.className = gamefox_beta ? 'pod pagejumper' : 'pagejumper';
+              pageJumper.className = 'pod pagejumper';
 
               var pageUL = doc.createElement('ul');
               var pageLI, pageA;
@@ -303,7 +300,7 @@ var gamefox =
       var form = message.form;
       var formElements = form.elements;
       var topictitle = formElements.namedItem('topictitle');
-      var detailsDiv = gamefox_beta ? message.parentNode.parentNode : message.parentNode;
+      var detailsDiv = message.parentNode.parentNode;
 
       // Titles
       if (topictitle) // new topic
@@ -318,8 +315,8 @@ var gamefox =
 
       // Signature
       if (gamefox_lib.prefs.getBoolPref('signature.applyeverywhere')
-          && !/\b(Error|Preview|Posted)<\/h(1|2)>/.test(doc.body.innerHTML))
-      { // BETATODO: remove "1"
+          && !/\b(Error|Preview|Posted)<\/h2>/.test(doc.body.innerHTML))
+      {
         message.value = gamefox_sig.format(null, null, doc);
       }
 
@@ -328,8 +325,8 @@ var gamefox =
       // HTML buttons
       if (gamefox_quickpost.createHTMLButtonsPref())
       {
-        detailsDiv.insertBefore(gamefox_quickpost.createHTMLButtons(doc), gamefox_beta ? message.parentNode : message);
-        detailsDiv.insertBefore(doc.createElement('br'), gamefox_beta ? message.parentNode : message);
+        detailsDiv.insertBefore(gamefox_quickpost.createHTMLButtons(doc), message.parentNode);
+        detailsDiv.insertBefore(doc.createElement('br'), message.parentNode);
       }
 
       // Character count
@@ -356,17 +353,8 @@ var gamefox =
         // message count
         var msgcount = doc.createElement('span');
         msgcount.id = 'gamefox-message-count';
-        if (gamefox_beta)
-        {
-          detailsDiv.appendChild(doc.createTextNode(' '));
-          detailsDiv.appendChild(msgcount);
-        }
-        else
-        {
-          var resetBtn = formElements.namedItem('reset');
-          resetBtn.parentNode.appendChild(doc.createTextNode(' '));
-          resetBtn.parentNode.appendChild(msgcount);
-        }
+        detailsDiv.appendChild(doc.createTextNode(' '));
+        detailsDiv.appendChild(msgcount);
 
         gamefox_messages.updateMessageCount(doc);
 
@@ -398,7 +386,7 @@ var gamefox =
     /* User Information (user.php) */
     else if (gamefox_lib.onPage(doc, 'user'))
     {
-      var username = doc.getElementsByTagName('td')[gamefox_beta ? 0 : 1];
+      var username = doc.getElementsByTagName('td')[0];
       if (username)
         gamefox_lib.setTitle(doc, username.textContent.gamefox_trim(), 'U');
     }
@@ -431,7 +419,7 @@ var gamefox =
         userNav.appendChild(anchor);
       }
 
-      var topicsTable = doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board topics"]' : 'div[@class="board"]/table[@class="topics"]',
+      var topicsTable = doc.evaluate('div[@class="body"]/table[@class="board topics"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
 
@@ -593,7 +581,7 @@ var gamefox =
     {
       var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var pageJumper = doc.evaluate(gamefox_beta ? 'div[@class="pod pagejumper"]' : 'div[@class="pagejumper"]',
+      var pageJumper = doc.evaluate('div[@class="pod pagejumper"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (pageJumper)
       {
@@ -634,7 +622,7 @@ var gamefox =
       }
 
       // Double click
-      var messageTable = doc.evaluate(gamefox_beta ? 'div[@class="body"]/table[@class="board message"]' : 'div[@class="board"]/table[@class="message"]',
+      var messageTable = doc.evaluate('div[@class="body"]/table[@class="board message"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       messageTable.addEventListener('dblclick', gamefox.msglistDblclick, false);
 
@@ -1256,7 +1244,7 @@ var gamefox =
 
     var doc = gamefox_lib.getDocument(event);
     var boardWrap = doc.getElementById('board_wrap');
-    var tdResult = doc.evaluate((gamefox_beta ? 'div[@class="body"]/table[@class="board ' : 'div[@class="board"]/table[@class="') + 'message"]/tbody/tr/td',
+    var tdResult = doc.evaluate('div[@class="body"]/table[@class="board message"]/tbody/tr/td',
         boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];
     for (var i = 0; i < tdResult.snapshotLength; i++)

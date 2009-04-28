@@ -402,7 +402,7 @@ var gamefox_quickpost =
         }
         else
         {
-          if (text.indexOf(gamefox_beta ? '<div class="head"><h2 class="title">Post Warning</h2></div>' : '<div class="head"><h1>Post Warning</h1></div>') != -1)
+          if (text.indexOf('<div class="head"><h2 class="title">Post Warning</h2></div>') != -1)
           {
             var warning = text.match(/message:<\/b><\/p>(.*)You may go ahead/);
             warning = warning ? warning[1].replace(/<P>/g, '\n\n').gamefox_trim() :
@@ -422,7 +422,7 @@ var gamefox_quickpost =
             if (postRequest.readyState == 4)
             {
               var text = postRequest.responseText;
-              if (text.indexOf(gamefox_beta ? '<div class="head"><h2 class="title">Message Posted</h2></div>' : '<div class="head"><h1>Message Posted</h1></div>') == -1)
+              if (text.indexOf('<div class="head"><h2 class="title">Message Posted</h2></div>') == -1)
               { // error
                 if (!/\S/.test(text))
                   gamefox_lib.alert('Request timed out. Check your network connection and try again.');

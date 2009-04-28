@@ -128,7 +128,7 @@ var gamefox_utils =
         if (node.nodeName.toLowerCase() == 'td')
           tdNode = node;
         else if (node.nodeName.toLowerCase() == 'table'
-                 && node.className == (gamefox_beta ? 'board message' : 'message'))
+                 && node.className == 'board message')
           tableNode = node;
         node = node.parentNode;
       }
@@ -186,7 +186,7 @@ var gamefox_utils =
     {
       var node = doc.evaluate('div[@class="head"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-        || doc.evaluate((gamefox_beta ? 'div[@class="content_nav"]/' : '') + 'h1', div, null,
+        || doc.evaluate('div[@class="content_nav"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
         return node.textContent.gamefox_trim();
@@ -199,7 +199,7 @@ var gamefox_utils =
     var div = doc.getElementById('board_wrap');
     if (div)
     {
-      var node = doc.evaluate('div[@class="head"]/h' + (gamefox_beta ? '2' : '1'), div, null,
+      var node = doc.evaluate('div[@class="head"]/h2', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
         return node.textContent.gamefox_trim();
