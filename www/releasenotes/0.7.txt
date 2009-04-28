@@ -9,6 +9,4 @@ Questions, suggestions or complaints? Let us know at
 
 ### New in this release
 
-#### 0.7.0
-
 * v11 compatibility
