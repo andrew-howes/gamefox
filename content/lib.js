@@ -17,14 +17,11 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var gamefox_beta = Cc['@mozilla.org/preferences-service;1']
-  .getService(Ci.nsIPrefService)
-  .getBranch('gamefox.')
-  .getBoolPref('beta11');
+var gamefox_beta = true;
 
 var gamefox_lib =
 {
-  domain: 'http://' + (gamefox_beta ? 'beta' : 'www') + '.gamefaqs.com',
+  domain: 'http://www.gamefaqs.com',
   path: '/boards/',
   cookieHost: '.gamefaqs.com',
 

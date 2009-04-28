@@ -20,7 +20,7 @@ const adServers = new Array(
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
               .getService(Components.interfaces.nsIPrefService)
               .getBranch('gamefox.');
-const host = prefs.getBoolPref('beta11') ? 'beta.gamefaqs.com' : 'www.gamefaqs.com';
+const host = 'www.gamefaqs.com';
 
 /***********************************************************
 class definition

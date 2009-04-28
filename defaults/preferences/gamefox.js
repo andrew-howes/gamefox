@@ -118,4 +118,3 @@ pref("gamefox.options.topics.selectedtab", 0);
 
 pref("gamefox.version", "");
 pref("gamefox.nightlyChangeLog", true);
-pref("gamefox.beta11", false);
