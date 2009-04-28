@@ -1,4 +1,4 @@
-@-moz-document url-prefix(http://www.gamefaqs.com/boards), url-prefix(http://beta.gamefaqs.com/boards) {
+@-moz-document url-prefix(http://www.gamefaqs.com/boards) {
     /* display Board Information side pane at bottom of board list */
     #side_col_wrap > #side_col > div:first-child,
     #side_col > div:first-child {
@@ -25,7 +25,7 @@
     }
 }
 
-@-moz-document domain(www.gamefaqs.com), domain(beta.gamefaqs.com) {
+@-moz-document domain(www.gamefaqs.com) {
     /* Ads, etc */
     .ad,
     .rubics_netxp1_main,
