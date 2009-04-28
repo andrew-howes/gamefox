@@ -1,18 +1,21 @@
-@-moz-document url-prefix(http://www.gamefaqs.com/boards) {
+@-moz-document url-prefix(http://www.gamefaqs.com/boards), url-prefix(http://beta.gamefaqs.com/boards) {
     /* display Board Information side pane at bottom of board list */
-    #side_col_wrap > #side_col > div:first-child {
+    #side_col_wrap > #side_col > div:first-child,
+    #side_col > div:first-child {
         margin-left: auto;
         margin-right: auto;
         max-width: 850px;
     }
-    #side_col_wrap > #side_col > div:first-child h1 {
+    #side_col_wrap > #side_col > div:first-child h1
+    #side_col > div:first-child h2 {
         background: #fff;
         color: #000;
         font-size: 20px;
     }
 
     /* add title to gamespace */
-    .gamespace_nav:before {
+    .gamespace_nav:before,
+    ul.content_nav:before {
         content: 'Message Board';
         color: #fff;
         text-align: center;
@@ -22,7 +25,7 @@
     }
 }
 
-@-moz-document domain(www.gamefaqs.com) {
+@-moz-document domain(www.gamefaqs.com), domain(beta.gamefaqs.com) {
     /* Ads, etc */
     .ad,
     .rubics_netxp1_main,
@@ -50,7 +53,7 @@
         background: #fff !important;
     }
 
-    #container {
+    #masthead, #container {
         border-left: #66f 150px solid;
     }
 
@@ -98,6 +101,7 @@
     .pod .head h1 a,
     .crumbs a,
     .gamespace_nav a,
+    .content_nav a,
     .user a,
     #gamefox-board-nav a,
     .pages a,
@@ -111,7 +115,8 @@
     #platformlist a,
     #searchbox a,
     .crumbs a,
-    .gamespace_nav a {
+    .gamespace_nav a,
+    .content_nav a {
         text-decoration: none !important;
     }
 
@@ -123,6 +128,7 @@
     .pod .head h1 a:hover,
     .crumbs a:hover,
     .gamespace_nav a:hover,
+    .content_nav a:hover,
     .user a:hover,
     #gamefox-board-nav a:hover,
     .pages a:hover,
@@ -202,7 +208,8 @@
         display: none;
     }
 
-    .gamespace_nav {
+    .gamespace_nav,
+    ul.content_nav {
         background: #00f;
         padding: 2px 2px 2px 0;
         margin: 2px 0;
@@ -217,7 +224,8 @@
         font-weight: bold;
     }
 
-    .gamespace_nav ul {
+    .gamespace_nav ul,
+    ul.content_nav {
         margin: 0;
         padding: 0;
         font-size: 13px;
@@ -225,11 +233,13 @@
     }
 
     .gamespace_nav li,
+    ul.content_nav li,
     .pagejumper li {
         display: inline;
     }
 
-    .gamespace_nav li:not(:last-child):after {
+    .gamespace_nav li:not(:last-child):after,
+    ul.content_nav li:not(:last-child):after {
         content: ' | ';
         color: #fff;
         font-weight: bold;
@@ -313,7 +323,7 @@
 
     /* Page Content */
 
-    h1 {
+    h1, h2 {
         text-align: center;
         margin: 0;
         padding: 3px;
@@ -321,12 +331,14 @@
         font-style: italic;
     }
 
-    .crumbs + h1 { /* game boards */
+    .crumbs + h1,
+    .crumbs + h2 { /* game boards */
         font-size: 3em;
         padding: 0;
     }
 
-    #board_wrap .head h1 {
+    #board_wrap .head h1,
+    #board_wrap .head h2 {
         font-size: 16px;
         padding: 1px;
         font-style: normal;
@@ -361,6 +373,9 @@
     .message > tbody > tr > td:first-child:before {
         content: 'From: ';
         font-weight: bold;
+    }
+    div.msg_stats {
+        display: inline;
     }
 
     .message .even > td:last-child,
@@ -436,7 +451,9 @@
         background: #e0e0e0;
     }
 
+    form ol.fields,
     .topten ul,
+    .topten ol,
     .systems {
         list-style: none;
         margin: 0;
@@ -468,4 +485,10 @@
         position: absolute;
         margin-top: 4px !important;
     }
+
+    /* hide go button */
+    #platformlist .js form.jumper input.submit { display:none; }
+
+    /* override padding in gamefox-ads.css */
+    #content #sky_col_wrap .col_layout { padding: 0 !important; }
 }
