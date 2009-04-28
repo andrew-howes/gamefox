@@ -17,7 +17,7 @@ JAR_TXT_FILES = $(shell find -L content skin locale     \
                              -o -path '*.*html'         \
                              -o -path '*.dtd'           \
                              -o -path '*.properties'    \
-                             -o -path '*/NEWS'          \
+                             -o -path '*/NEWS*'         \
                         \)                              \
                 )
 JAR_BIN_FILES = $(shell find content skin               \
