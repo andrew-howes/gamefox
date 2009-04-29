@@ -1,3 +1,3 @@
 @-moz-document domain(www.gamefaqs.com) {
-    :focus { outline: thin dotted !important; }
+    a:focus { outline: thin dotted !important; }
 }
