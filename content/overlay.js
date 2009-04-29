@@ -736,10 +736,8 @@ var gamefox =
 
             msgStats.insertBefore(groupname, profileLink.nextSibling);
 
-            if (leftMsgData)
-              msgStats.insertBefore(doc.createElement('br'), groupname);
-            else
-              msgStats.insertBefore(doc.createTextNode(' | '), groupname);
+            msgStats.insertBefore(leftMsgData ? doc.createElement('br') :
+                doc.createTextNode(' | '), groupname);
           }
 
           if (hlinfo[2] == 'highlight')
@@ -851,9 +849,10 @@ var gamefox =
           a.href = '#';
           a.addEventListener('click', gamefox.toggleFilter, false);
 
-          if (!onArchive || msgLinks.hasChildNodes())
-            msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
-                doc.createElement('br') : doc.createTextNode(' | '));
+          if (!leftMsgData || msgLinks.hasChildNodes())
+            msgLinks.appendChild(doc.createTextNode(' | '));
+          else if (!onArchive)
+            msgLinks.appendChild(doc.createElement('br'));
           msgLinks.appendChild(a);
         }
 
@@ -886,27 +885,23 @@ var gamefox =
           {
             case 1: // #001 | [message detail]
               var element = onArchive ? msgLinks : detailLink;
-
-              msgStats.insertBefore(doc.createTextNode('#' + msgnumString),
-                  element);
-
-              if (leftMsgData)
-                msgStats.insertBefore(doc.createElement('br'), element)
-              else if (!onArchive || msgLinks.hasChildNodes())
-                msgStats.insertBefore(doc.createTextNode(' | '), element);
-
+              msgStats.insertBefore(doc.createTextNode((!leftMsgData &&
+                  onArchive ? ' | ' : '') + '#' + msgnumString + (!leftMsgData
+                  && !onArchive ? ' | ' : '')), element);
+              if (leftMsgData && msgLinks.hasChildNodes())
+                msgStats.insertBefore(doc.createElement('br'), element);
               break;
 
             case 2: // [#001]
               if (onArchive)
               {
+                if (!leftMsgData)
+                  msgStats.insertBefore(doc.createTextNode(' | '), msgLinks);
                 var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
                 numElement.appendChild(doc.createTextNode('#' + msgnumString));
-
                 msgStats.insertBefore(numElement, msgLinks);
-                if (msgLinks.hasChildNodes())
-                  msgStats.insertBefore(leftMsgData ? doc.createElement('br') :
-                      doc.createTextNode(' | '), msgLinks);
+                if (leftMsgData && msgLinks.hasChildNodes())
+                  msgStats.insertBefore(doc.createElement('br'), msgLinks);
               }
               else
               {
@@ -918,13 +913,13 @@ var gamefox =
             case 3: // [message #001]
               if (onArchive)
               {
+                if (!leftMsgData)
+                  msgStats.insertBefore(doc.createTextNode(' | '), msgLinks);
                 var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
                 numElement.appendChild(doc.createTextNode('message #' + msgnumString));
-
                 msgStats.insertBefore(numElement, msgLinks);
-                if (msgLinks.hasChildNodes())
-                  msgStats.insertBefore(leftMsgData ? doc.createElement('br') :
-                      doc.createTextNode(' | '), msgLinks);
+                if (leftMsgData && msgLinks.hasChildNodes())
+                  msgStats.insertBefore(doc.createElement('br'), msgLinks);
               }
               else
               {
@@ -941,11 +936,8 @@ var gamefox =
                   msgStats.appendChild(doc.createElement('br'));
                 msgStats.appendChild(doc.createTextNode('#' + msgnumString));
               }
-              else if (onArchive && !msgLinks.hasChildNodes())
-                msgStats.appendChild(doc.createTextNode('#' + msgnumString));
               else
                 msgStats.appendChild(doc.createTextNode(' | #' + msgnumString));
-
               break;
           }
         }
