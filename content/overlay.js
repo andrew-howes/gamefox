@@ -409,8 +409,8 @@ var gamefox =
             null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
       {
         var anchor = doc.createElement('a');
-            anchor.setAttribute('id', 'gamefox-quickpost-link');
-            anchor.setAttribute('href', '#');
+            anchor.id = 'gamefox-quickpost-link';
+            anchor.href = '#';
             anchor.appendChild(doc.createTextNode(gamefox_lib.prefs.
                   getCharPref('elements.quickpost.link.title')));
             anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
@@ -689,6 +689,13 @@ var gamefox =
             {
               ++brCount;
             }
+            else if (childNode.nodeName == 'DIV')
+            { // msg_body
+              msgNode = childNode;
+              j = msgNode.childNodes.length - 1;
+              dividerIndex = -1;
+              brCount = 0;
+            }
             else if (childNode.nodeType == Node.ELEMENT_NODE)
             {
               brCount += childNode.getElementsByTagName('br').length;
@@ -790,9 +797,9 @@ var gamefox =
         // Add "delete" link
         if (loggedInUser == username && !onArchive &&
             ((msgnum == firstPostNum && topicOpen) || msgnum != firstPostNum) &&
-            td[i + 1].textContent.gamefox_trim() != '[This message was deleted at ' +
+            postBody.gamefox_trim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
-            td[i + 1].textContent.gamefox_trim() != '[This message was deleted at ' +
+            postBody.gamefox_trim() != '[This message was deleted at ' +
             'the request of a moderator or administrator]')
         {
           var a = deletelinkCond ? doc.createElement('a') : null;
@@ -1251,9 +1258,7 @@ var gamefox =
       td[i] = tdResult.snapshotItem(i);
     var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
     var userTagName = gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a';
-    var newText;
-    var newTitle;
-    var newFocus;
+    var newText, newTitle, newFocus;
 
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
     if (!msgComponents)
