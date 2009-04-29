@@ -75,10 +75,12 @@ var gamefox_css =
       {
         try
         {
-          Cc['@mozilla.org/network/io-service;1']
+          var input = Cc['@mozilla.org/network/io-service;1']
             .getService(Ci.nsIIOService)
             .newChannel('chrome://gamefox/content/css/' + j, null, null)
-            .open().close();
+            .open(); // throws when not in jar
+          input.available(); // throws when in jar
+          input.close();
         }
         catch (e)
         {
