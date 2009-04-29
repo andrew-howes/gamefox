@@ -57,6 +57,7 @@ var gamefox_css =
               'Only show topic status icons for closed/sticky topics - ' +
               'emulates the pre-2006 style of icons. This CSS ' +
               'conflicts with "Status icons (normal)".', '', false],
+        ['bundled', 'tweaks.css', 'Tweaks', 'Tweaks for GameFAQs\' stylesheet.', '', true],
         ['bundled', 'wide-layout.css', 'Wide default',
               'Increases the width of the page to fill the whole window. ' +
               'Works with the default GameFAQs skin.', '', false]
