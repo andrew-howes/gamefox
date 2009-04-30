@@ -528,8 +528,8 @@ var gamefox =
         else
         {
           // Highlighting
-          var username = rows[i].getElementsByTagName('td')[2].textContent.gamefox_trim();
-          var title = rows[i].getElementsByTagName('td')[1].textContent.gamefox_trim();
+          var username = rows[i].cells[2].textContent.gamefox_trim();
+          var title = rows[i].cells[1].textContent.gamefox_trim();
           var hlinfo;
 
           if ((hlinfo = gamefox_highlighting.searchTopic(username, title)) != false)
