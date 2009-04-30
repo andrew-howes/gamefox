@@ -8,19 +8,11 @@ const nsISupports = Components.interfaces.nsISupports;
 const CLASS_ID = Components.ID('{2572941e-68cb-41a8-be97-cbb40611dcbc}');
 const CLASS_NAME = 'GameFOX content policy';
 const CONTRACT_ID = '@gamefox/contentpolicy;1';
-const adServers = new Array(
-    '2mdn.net', 'advertising.com', 'atdmt.com', 'adimg.cnet.com',
-    'mads.cnet.com', 'surveys.cnet.com', 'adlog.com.com', 'dw.com.com',
-    'i.i.com.com', 'doubleclick.net', 'eyewonder.com', 'bwp.gamefaqs.com',
-    'mads.gamefaqs.com', 'pointroll.com', 'questionmarket.com', 'revsci.net',
-    'serving-sys.com', 'tribalfusion.com', 'unicast.com', 'voicefive.com',
-    'adserver.yahoo.com', 'yieldmanager.com', 'adlegend.com', 'insightexpressai.com',
-    'contextweb.com', 'mediaplex.com', 'bwp.gamespot.com'
-    );
-const prefs = Components.classes['@mozilla.org/preferences-service;1']
-              .getService(Components.interfaces.nsIPrefService)
-              .getBranch('gamefox.');
+const adTest = /(2mdn\.net|adlegend\.com|advertising\.com|atdmt\.com|adimg\.cnet\.com|mads\.cnet\.com|surveys\.cnet\.com|adlog\.com\.com|dw\.com\.com|i\.i\.com\.com|contextweb\.com|doubleclick\.net|eyewonder\.com|bwp\.gamefaqs\.com|mads\.gamefaqs\.com|bwp\.gamespot\.com|insightexpressai\.com|mediaplex\.com|pointroll\.com|questionmarket\.com|revsci\.net|serving-sys\.com|tribalfusion\.com|unicast\.com|voicefive\.com|adserver\.yahoo\.com|yieldmanager\.com)$/;
 const host = 'www.gamefaqs.com';
+const prefs = Components.classes['@mozilla.org/preferences-service;1']
+  .getService(Components.interfaces.nsIPrefService)
+  .getBranch('gamefox.');
 
 /***********************************************************
 class definition
@@ -29,7 +21,7 @@ class definition
 function GFcontentPolicy()
 {
   this.wrappedJSObject = this;
-};
+}
 
 // definition
 GFcontentPolicy.prototype =
@@ -43,22 +35,18 @@ GFcontentPolicy.prototype =
 
       // ad servers
       if (prefs.getBoolPref('elements.stopads') &&
-          contentType != nsIContentPolicy.TYPE_DOCUMENT)
-      {
-        for (var i = 0; i < adServers.length; i++)
-        {
-          if (contentLocation.host.indexOf(adServers[i]) != -1)
-            return nsIContentPolicy.REJECT_REQUEST;
-        }
-      }
+          contentType != nsIContentPolicy.TYPE_DOCUMENT &&
+          contentLocation.host != host &&
+          adTest.test(contentLocation.host))
+        return nsIContentPolicy.REJECT_REQUEST;
 
       // stylesheets
       if (prefs.getBoolPref('theme.disablegamefaqscss') &&
-          contentLocation.host == host &&
-          contentType == nsIContentPolicy.TYPE_STYLESHEET)
+          contentType == nsIContentPolicy.TYPE_STYLESHEET &&
+          contentLocation.host == host)
         return nsIContentPolicy.REJECT_REQUEST;
-      else
-        return nsIContentPolicy.ACCEPT;
+
+      return nsIContentPolicy.ACCEPT;
     }
     catch (e)
     {
