@@ -51,7 +51,10 @@ var gamefox_options_sig =
     var sig = this._sigs[this._menu.selectedIndex].body;
 
     if (this._textbox.value != sig)
+    {
       this._textbox.value = sig;
+      this._updateCharCounts();
+    }
   },
 
   _read: function()
