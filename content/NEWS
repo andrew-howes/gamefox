@@ -1,5 +1,11 @@
-2009-04-xx:
+2009-05-xx:
     * version 0.7.1
+    * Fix removal of old stylesheets on update
+    * Fix horizontal scroll bar that was appearing for some people
+    * Fix QuickWhois for your own profile
+    * Fix signature importing and exporting in the options window
+    * Fix message header links in archived topics
+    * Fix new post label on the active messages list not disappearing
 
 2009-04-28:
     * version 0.7
