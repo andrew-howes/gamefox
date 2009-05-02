@@ -749,9 +749,10 @@ var gamefox =
             a.href = '#';
             a.addEventListener('click', gamefox_highlighting.showPost, false);
 
-            if (!onArchive || msgLinks.hasChildNodes())
-              msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
-                  doc.createElement('br') : doc.createTextNode(' | '));
+            if (!leftMsgData)
+              msgLinks.appendChild(doc.createTextNode(' | '));
+            else if (!onArchive)
+              msgLinks.appendChild(doc.createElement('br'));
             msgLinks.appendChild(a);
           }
           else if (hlinfo[2] == 'remove') // remove post
