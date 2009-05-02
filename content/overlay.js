@@ -1426,7 +1426,8 @@ function gamefox_loader()
       window.setTimeout(gamefox_lib.newTab, 10,
           'http://beyondboredom.net/projects/gamefox/nightlychanges.php', 0);
     }
-    else if (version.indexOf('pre') == -1 && lastversion != '')
+    else if (gamefox_lib.prefs.getBoolPref('showReleaseNotes')
+        && version.indexOf('pre') == -1 && lastversion != '')
     {
       // release notes for new stable release
       window.setTimeout(gamefox_lib.newTab, 10,
