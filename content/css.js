@@ -211,7 +211,7 @@ var gamefox_css =
           file.append(filename);
           var uri = Cc['@mozilla.org/network/io-service;1']
             .getService(Ci.nsIIOService)
-            .newFileURI(file, null, null);
+            .newFileURI(file);
 
           if (sss.sheetRegistered(uri, sss.USER_SHEET))
             sss.unregisterSheet(uri, sss.USER_SHEET);
@@ -252,7 +252,7 @@ var gamefox_css =
 
     var uri = Cc['@mozilla.org/network/io-service;1']
       .getService(Ci.nsIIOService)
-      .newFileURI(file, null, null);
+      .newFileURI(file);
     try
     {
       sss.unregisterSheet(uri, sss.USER_SHEET);
