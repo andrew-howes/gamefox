@@ -11,4 +11,10 @@
     {
         padding: 0 10px !important;
     }
+
+    /* fix top gutter with some ads */
+    #gutter_top {
+        background-position: center 0 !important;
+        padding-top: 14px !important;
+    }
 }
