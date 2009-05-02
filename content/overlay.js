@@ -197,6 +197,10 @@ var gamefox =
       }
 
       var skipNext = false;
+      var IOService = Cc['@mozilla.org/network/io-service;1']
+        .getService(Ci.nsIIOService);
+      var globalHistory = Cc['@mozilla.org/browser/global-history;2']
+        .getService(Ci.nsIGlobalHistory2);
 
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
@@ -221,24 +225,13 @@ var gamefox =
         if (gamefox_lib.prefs.getBoolPref('elements.aml.marknewposts'))
         {
           // don't mark row as new if the last post link is visited
-          var visited = false;
-          var link = rows[i].cells[3].getElementsByTagName('a')[0];
-          if (link)
-          {
-            var newLink = doc.createElement('a');
-            // make sure our test link gets the same CSS applied to it
-            newLink.href = 'about:blank'; // for :link rules
-            rows[i].cells[3].appendChild(newLink);
-            var newLinkStyle = doc.defaultView.getComputedStyle(newLink, null);
+          var link = IOService
+            .newURI(rows[i].cells[3].getElementsByTagName('a')[0].href, null,
+                null);
+          var visited = globalHistory.isVisited(link);
 
-            var linkStyle = doc.defaultView.getComputedStyle(link, null);
-
-            if (linkStyle.color != newLinkStyle.color)
-              visited = true;
-          }
-
-          if (rows[i].cells[3].textContent != rows[i].cells[4].textContent
-              && !visited)
+          if (!visited
+              && rows[i].cells[3].textContent != rows[i].cells[4].textContent)
           { // "last post" and "your last post" differ
             var span = doc.createElement('span');
                 span.className = 'gamefox-new-posts';
