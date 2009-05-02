@@ -225,10 +225,9 @@ var gamefox =
         if (gamefox_lib.prefs.getBoolPref('elements.aml.marknewposts'))
         {
           // don't mark row as new if the last post link is visited
-          var link = IOService
-            .newURI(rows[i].cells[3].getElementsByTagName('a')[0].href, null,
-                null);
-          var visited = globalHistory.isVisited(link);
+          var link = rows[i].cells[3].getElementsByTagName('a')[0];
+          var visited = link ? globalHistory.isVisited(IOService.newURI(
+              link.href, null, null)) : false;
 
           if (!visited
               && rows[i].cells[3].textContent != rows[i].cells[4].textContent)
