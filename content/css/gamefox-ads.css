@@ -1,19 +1,16 @@
 @-moz-document domain(gamefaqs.com)
 {
-    .ad, .adbox, .rubics_netxp1_main, .prWrap,
-    #sponsored_links, #mpu_wrap, #footer, #sky_col_wrap #side_col,
-    iframe, img[alt="madison"], #content > div[style="text-align: center;"]
-    {
+    #rbx_netxp1_parent, #sponsored_links, #footer, #sky_col_wrap #side_col,
+    .ad, iframe, img[alt="madison"] {
         display: none !important;
     }
 
-    #sky_col_wrap .col_layout
-    {
+    #sky_col_wrap .col_layout {
         padding: 0 10px !important;
     }
 
     /* fix top gutter with some ads */
-    #gutter_top {
+    .has_lead #gutter_top {
         background-position: center 0 !important;
         padding-top: 14px !important;
     }

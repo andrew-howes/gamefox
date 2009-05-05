@@ -1,12 +1,10 @@
 @-moz-document url-prefix(http://www.gamefaqs.com/boards) {
     /* display Board Information side pane at bottom of board list */
-    #side_col_wrap > #side_col > div:first-child,
     #side_col > div:first-child {
         margin-left: auto;
         margin-right: auto;
         max-width: 850px;
     }
-    #side_col_wrap > #side_col > div:first-child h1
     #side_col > div:first-child h2 {
         background: #fff;
         color: #000;
@@ -14,7 +12,6 @@
     }
 
     /* add title to gamespace */
-    .gamespace_nav:before,
     ul.content_nav:before {
         content: 'Message Board';
         color: #fff;
@@ -26,21 +23,9 @@
 }
 
 @-moz-document domain(www.gamefaqs.com) {
-    /* Ads, etc */
-    .ad,
-    .rubics_netxp1_main,
-    #gne_nav,
-    #logo,
-    #content + img,
-    #board_wrap + div,
-    #mpu_wrap,
-    #footer,
-    img[alt="madison"],
-    img[alt="advertisement"],
-    img[alt="Click Here"],
-    div[style="padding:10px 0px 0px 0px; float:left; clear:left;"],
-    div[style="text-align:center"],
-    iframe {
+    /* Ads, logo, gs */
+    #rbx_netxp1_parent, #sponsored_links, #footer, #logo,
+    .ad, .gs, iframe, img[alt="madison"] {
         display: none !important;
     }
 
@@ -94,13 +79,9 @@
     }
 
     th a,
-    #header a,
-    #quicknav a,
-    #platformlist a,
-    #searchbox a,
+    #masthead a,
     .pod .head h1 a,
     .crumbs a,
-    .gamespace_nav a,
     .content_nav a,
     .user a,
     #gamefox-board-nav a,
@@ -110,24 +91,16 @@
         font-weight: bold;
     }
 
-    #header a,
-    #quicknav a,
-    #platformlist a,
-    #searchbox a,
+    #masthead a,
     .crumbs a,
-    .gamespace_nav a,
     .content_nav a {
         text-decoration: none !important;
     }
 
     th a:hover,
-    #header a:hover,
-    #quicknav a:hover,
-    #platformlist a:hover,
-    #searchbox a:hover,
+    #masthead a:hover,
     .pod .head h1 a:hover,
     .crumbs a:hover,
-    .gamespace_nav a:hover,
     .content_nav a:hover,
     .user a:hover,
     #gamefox-board-nav a:hover,
@@ -208,7 +181,6 @@
         display: none;
     }
 
-    .gamespace_nav,
     ul.content_nav {
         background: #00f;
         padding: 2px 2px 2px 0;
@@ -224,7 +196,6 @@
         font-weight: bold;
     }
 
-    .gamespace_nav ul,
     ul.content_nav {
         margin: 0;
         padding: 0;
@@ -232,13 +203,11 @@
         text-align: center;
     }
 
-    .gamespace_nav li,
     ul.content_nav li,
     .pagejumper li {
         display: inline;
     }
 
-    .gamespace_nav li:not(:last-child):after,
     ul.content_nav li:not(:last-child):after {
         content: ' | ';
         color: #fff;
@@ -295,8 +264,7 @@
 
     /* Tables */
 
-    td,
-    th {
+    th, td {
         padding: 2px;
     }
 
@@ -331,13 +299,11 @@
         font-style: italic;
     }
 
-    .crumbs + h1,
-    .crumbs + h2 { /* game boards */
+    .crumbs + h1 { /* game boards */
         font-size: 3em;
         padding: 0;
     }
 
-    #board_wrap .head h1,
     #board_wrap .head h2 {
         font-size: 16px;
         padding: 1px;
@@ -357,10 +323,6 @@
         font-weight: bold;
         color: #fff;
         margin-bottom: 2px;
-    }
-
-    .gs {
-        display: none;
     }
 
     /* Messages */
@@ -409,15 +371,22 @@
         background: #d0d0ff;
     }
 
-    /* Whois */
-    table.userinfo tr.even td {
-        background: #e0e0e0;
-    }
+    /* Profile */
+    table.userinfo tr:not(.even) th,
     table.userinfo tr:not(.even) td {
         background: #fff;
     }
-    table.userinfo td:first-child {
-        font-weight: bold;
+    table.userinfo tr.even th,
+    table.userinfo tr.even td {
+        background: #e0e0e0;
+    }
+    table.userinfo th {
+        font-size: 9pt;
+        color: #000;
+        text-align: left;
+    }
+    table.userinfo th a {
+        color: #000 !important;
     }
 
     /* Poll and Contest Bracket */
@@ -487,8 +456,9 @@
     }
 
     /* hide go button */
-    #platformlist .js form.jumper input.submit { display:none; }
+    #platformlist .js form.jumper .submit { display: none; }
 
-    /* override padding in gamefox-ads.css */
+    /* override stuff in gamefox-ads.css */
     #content #sky_col_wrap .col_layout { padding: 0 !important; }
+    .has_lead #gutters #gutter_top { padding-top: 0 !important; }
 }
