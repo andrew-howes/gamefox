@@ -8,7 +8,7 @@ const nsISupports = Components.interfaces.nsISupports;
 const CLASS_ID = Components.ID('{2572941e-68cb-41a8-be97-cbb40611dcbc}');
 const CLASS_NAME = 'GameFOX content policy';
 const CONTRACT_ID = '@gamefox/contentpolicy;1';
-const adTest = /(2mdn\.net|adlegend\.com|advertising\.com|atdmt\.com|adimg\.cnet\.com|mads\.cnet\.com|surveys\.cnet\.com|adlog\.com\.com|dw\.com\.com|i\.i\.com\.com|contextweb\.com|doubleclick\.net|eyewonder\.com|adimg\.gamefaqs\.com|bwp\.gamefaqs\.com|mads\.gamefaqs\.com|bwp\.gamespot\.com|insightexpressai\.com|mediaplex\.com|pointroll\.com|questionmarket\.com|revsci\.net|serving-sys\.com|tribalfusion\.com|unicast\.com|voicefive\.com|adserver\.yahoo\.com|yieldmanager\.com)$/;
+const adTest = /(2mdn\.net|adlegend\.com|advertising\.com|atdmt\.com|adimg\.cnet\.com|mads\.cnet\.com|surveys\.cnet\.com|adlog\.com\.com|dw\.com\.com|i\.i\.com\.com|contextweb\.com|doubleclick\.net|eyewonder\.com|adimg\.gamefaqs\.com|bwp\.gamefaqs\.com|mads\.gamefaqs\.com|bwp\.gamespot\.com|insightexpressai\.com|mediaplex\.com|pointroll\.com|questionmarket\.com|revsci\.net|serving-sys\.com|specificclick\.net|tribalfusion\.com|unicast\.com|voicefive\.com|adserver\.yahoo\.com|yieldmanager\.com)$/;
 const host = 'www.gamefaqs.com';
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
   .getService(Components.interfaces.nsIPrefService)
@@ -74,11 +74,11 @@ class factory
 ***********************************************************/
 var GFcontentPolicyFactory =
 {
-  createInstance: function (aOuter, aIID)
+  createInstance: function(aOuter, aIID)
   {
     if (aOuter != null)
       throw Components.results.NS_ERROR_NO_AGGREGATION;
-    return (new GFcontentPolicy()).QueryInterface(aIID);
+    return new GFcontentPolicy().QueryInterface(aIID);
   }
 };
 
@@ -90,11 +90,11 @@ var GFcontentPolicyModule =
   registerSelf: function(aCompMgr, aFileSpec, aLocation, aType)
   {
     aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar)
-        .registerFactoryLocation(CLASS_ID, CLASS_NAME,
-            CONTRACT_ID, aFileSpec, aLocation, aType);
+      .registerFactoryLocation(CLASS_ID, CLASS_NAME,
+          CONTRACT_ID, aFileSpec, aLocation, aType);
 
     var catMgr = Components.classes['@mozilla.org/categorymanager;1']
-        .getService(Components.interfaces.nsICategoryManager);
+      .getService(Components.interfaces.nsICategoryManager);
     catMgr.deleteCategoryEntry('content-policy', CONTRACT_ID, true);
     catMgr.addCategoryEntry('content-policy', CONTRACT_ID, CONTRACT_ID, true,
         true);
@@ -103,11 +103,11 @@ var GFcontentPolicyModule =
   unregisterSelf: function(aCompMgr, aLocation, aType)
   {
     aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar)
-        .unregisterFactoryLocation(CLASS_ID, aLocation);
+      .unregisterFactoryLocation(CLASS_ID, aLocation);
 
     Components.classes['@mozilla.org/categorymanager;1']
-        .getService(Components.interfaces.nsICategoryManager)
-        .deleteCategoryEntry('content-policy', CONTRACT_ID, true);
+      .getService(Components.interfaces.nsICategoryManager)
+      .deleteCategoryEntry('content-policy', CONTRACT_ID, true);
   },
 
   getClassObject: function(aCompMgr, aCID, aIID)
@@ -121,10 +121,16 @@ var GFcontentPolicyModule =
     throw Components.results.NS_ERROR_NO_INTERFACE;
   },
 
-  canUnload: function(aCompMgr) { return true; }
+  canUnload: function(aCompMgr)
+  {
+    return true;
+  }
 };
 
 /***********************************************************
 module initialization
 ***********************************************************/
-function NSGetModule(aCompMgr, aFileSpec) { return GFcontentPolicyModule; }
+function NSGetModule(aCompMgr, aFileSpec)
+{
+  return GFcontentPolicyModule;
+}
