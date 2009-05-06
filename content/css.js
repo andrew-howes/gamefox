@@ -21,68 +21,66 @@ var gamefox_css =
 {
   init: function()
   {
-    var defaults = [
-        ['gamefox', 'gamefox-character-map.css', 'Character map',
-              'Makes the character map look pretty.', '', true],
-        ['gamefox', 'gamefox-sidebar.css', 'Classic sidebar',
-              'A classic style for the GameFOX sidebar.', '', false],
-        ['gamefox', 'gamefox-essentials.css', 'Essentials',
-              'Works with some of GameFOX\'s features. Should always be enabled.', '', true],
-        ['gamefox', 'gfcode.css', 'GFCode',
-              'Makes quotes look pretty.', 'Ant P.', true],
-        ['gamefox', 'gamefox-quickpost.css', 'QuickPost',
-              'Makes QuickPost look pretty.', '', true],
-        ['gamefox', 'gamefox-quickwhois.css', 'QuickWhois',
-              'Makes QuickWhois look pretty.', '', true],
-        ['bundled', 'gamefox-ads.css', 'Ad blocking',
-              'Hides ads. Best used with "block ad servers" enabled.', '', true],
-        ['bundled', 'ascii-art-font.css', 'ASCII art font',
-              'Increases the font size of messages to make ASCII art look better.',
-              '', false],
-        ['bundled', 'capitalized-message-links.css', 'Capitalized message links',
-              'Capitalizes the links in message headers.', '', false],
-        ['bundled', 'ricapar.css', 'Classic',
-              'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
-              'GameFAQs stylesheets to use.', 'Ricapar', false],
-        ['bundled', 'hide-signatures.css', 'Hide signatures',
-              'Hides signatures in posts and shows them again when hovered over.', '', false],
-        ['bundled', 'message-link-icons.css', 'Message link icons',
-              'Converts links in the message header (message detail, delete, filter, quote)'
-                + ' to icons.\n\nIcons courtesy of http://www.pinvoke.com/',
-              'Poo Poo Butter', false],
-        ['bundled', 'status-default.css', 'Status icons (normal)',
-              'Only show topic status icons for closed/sticky topics. This CSS ' +
-              'conflicts with "Status icons (classic)".', '', false],
-        ['bundled', 'status-classic.css', 'Status icons (classic)',
-              'Only show topic status icons for closed/sticky topics - ' +
-              'emulates the pre-2006 style of icons. This CSS ' +
-              'conflicts with "Status icons (normal)".', '', false],
-        ['bundled', 'wide-layout.css', 'Wide default',
-              'Increases the width of the page to fill the whole window. ' +
-              'Works with the default GameFAQs skin.', '', false]
-        ];
-    for (var i = 0; i < defaults.length; i++)
+    var defaults = {
+      gamefox: {
+        'gamefox-character-map.css': ['Character map',
+            'Makes the character map look pretty.', '', true],
+        'gamefox-sidebar.css': ['Classic sidebar',
+            'A classic style for the GameFOX sidebar.', '', false],
+        'gamefox-essentials.css': ['Essentials',
+            'Works with some of GameFOX\'s features. Should always be enabled.', '', true],
+        'gfcode.css': ['GFCode',
+            'Makes quotes look pretty.', 'Ant P.', true],
+        'gamefox-quickpost.css': ['QuickPost',
+            'Makes QuickPost look pretty.', '', true],
+        'gamefox-quickwhois.css': ['QuickWhois',
+            'Makes QuickWhois look pretty.', '', true]},
+      bundled: {
+        'gamefox-ads.css': ['Ad blocking',
+            'Hides ads. Best used with "block ad servers" enabled.', '', true],
+        'ascii-art-font.css': ['ASCII art font',
+            'Increases the font size of messages to make ASCII art look better.',
+            '', false],
+        'capitalized-message-links.css': ['Capitalized message links',
+            'Capitalizes the links in message headers.', '', false],
+        'ricapar.css': ['Classic',
+            'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
+            'GameFAQs stylesheets to use.', 'Ricapar', false],
+        'hide-signatures.css': ['Hide signatures',
+            'Hides signatures in posts and shows them again when hovered over.', '', false],
+        'message-link-icons.css': ['Message link icons',
+            'Converts links in the message header (message detail, delete, filter, quote)'
+              + ' to icons.\n\nIcons courtesy of http://www.pinvoke.com/',
+            'Poo Poo Butter', false],
+        'status-default.css': ['Status icons (normal)',
+            'Only show topic status icons for closed/sticky topics. This CSS ' +
+            'conflicts with "Status icons (classic)".', '', false],
+        'status-classic.css': ['Status icons (classic)',
+            'Only show topic status icons for closed/sticky topics - ' +
+            'emulates the pre-2006 style of icons. This CSS ' +
+            'conflicts with "Status icons (normal)".', '', false],
+        'wide-layout.css': ['Wide default',
+            'Increases the width of the page to fill the whole window. ' +
+            'Works with the default GameFAQs skin.', '', false]}
+    };
+
+    // (Re-)add bundled
+    for (var i in defaults)
     {
-      var j = defaults[i];
-      this.add(j[0], 'chrome://gamefox/content/css/' + j[1], j[1], j[2], j[3], j[4], j[5], true);
+      for (var j in defaults[i])
+      {
+        var k = defaults[i][j];
+        this.add(i, 'chrome://gamefox/content/css/' + j, j, k[0], k[1], k[2], k[3], true);
+      }
     }
 
-    // Remove old stylesheets
+    // Remove old bundled
     var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
-    for (i in {'gamefox':'', 'bundled':''})
+    for (i in defaults)
     {
       for (j in css[i])
       {
-        try
-        {
-          var input = Cc['@mozilla.org/network/io-service;1']
-            .getService(Ci.nsIIOService)
-            .newChannel('chrome://gamefox/content/css/' + j, null, null)
-            .open(); // throws when not in jar
-          input.available(); // throws when in jar
-          input.close();
-        }
-        catch (e)
+        if (!(j in defaults[i]))
         {
           gamefox_lib.log('Old bundled stylesheet "' + j + '" removed.');
           this.remove(i, j);
