@@ -17,13 +17,11 @@ const prefs = Components.classes['@mozilla.org/preferences-service;1']
 /***********************************************************
 class definition
 ***********************************************************/
-// constructor
 function GFcontentPolicy()
 {
   this.wrappedJSObject = this;
 }
 
-// definition
 GFcontentPolicy.prototype =
 {
   shouldLoad: function(contentType, contentLocation, requestOrigin, context, mimeTypeGuess, extra)
@@ -33,17 +31,13 @@ GFcontentPolicy.prototype =
       if (requestOrigin.host != host)
         return nsIContentPolicy.ACCEPT;
 
-      // ad servers
-      if (prefs.getBoolPref('elements.stopads') &&
-          contentType != nsIContentPolicy.TYPE_DOCUMENT &&
-          contentLocation.host != host &&
-          adTest.test(contentLocation.host))
-        return nsIContentPolicy.REJECT_REQUEST;
-
-      // stylesheets
-      if (prefs.getBoolPref('theme.disablegamefaqscss') &&
-          contentType == nsIContentPolicy.TYPE_STYLESHEET &&
-          contentLocation.host == host)
+      if ((prefs.getBoolPref('elements.stopads') &&
+           contentType != nsIContentPolicy.TYPE_DOCUMENT &&
+           contentLocation.host != host &&
+           adTest.test(contentLocation.host)) ||
+          (prefs.getBoolPref('theme.disablegamefaqscss') &&
+           contentType == nsIContentPolicy.TYPE_STYLESHEET &&
+           contentLocation.host == host))
         return nsIContentPolicy.REJECT_REQUEST;
 
       return nsIContentPolicy.ACCEPT;
@@ -87,11 +81,11 @@ module definition (xpcom registration)
 ***********************************************************/
 var GFcontentPolicyModule =
 {
-  registerSelf: function(aCompMgr, aFileSpec, aLocation, aType)
+  registerSelf: function(aCompMgr, aLocation, aLoaderStr, aType)
   {
     aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar)
-      .registerFactoryLocation(CLASS_ID, CLASS_NAME,
-          CONTRACT_ID, aFileSpec, aLocation, aType);
+      .registerFactoryLocation(CLASS_ID, CLASS_NAME, CONTRACT_ID,
+          aLocation, aLoaderStr, aType);
 
     var catMgr = Components.classes['@mozilla.org/categorymanager;1']
       .getService(Components.interfaces.nsICategoryManager);
@@ -100,7 +94,7 @@ var GFcontentPolicyModule =
         true);
   },
 
-  unregisterSelf: function(aCompMgr, aLocation, aType)
+  unregisterSelf: function(aCompMgr, aLocation, aLoaderStr)
   {
     aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar)
       .unregisterFactoryLocation(CLASS_ID, aLocation);
@@ -110,12 +104,12 @@ var GFcontentPolicyModule =
       .deleteCategoryEntry('content-policy', CONTRACT_ID, true);
   },
 
-  getClassObject: function(aCompMgr, aCID, aIID)
+  getClassObject: function(aCompMgr, aClass, aIID)
   {
     if (!aIID.equals(Components.interfaces.nsIFactory))
       throw Components.results.NS_ERROR_NOT_IMPLEMENTED;
 
-    if (aCID.equals(CLASS_ID))
+    if (aClass.equals(CLASS_ID))
       return GFcontentPolicyFactory;
 
     throw Components.results.NS_ERROR_NO_INTERFACE;
