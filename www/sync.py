@@ -72,7 +72,6 @@ if __name__ == "__main__":
     files = sync.list_changed_files()
     if not files:
         print "No files are out of date."
-        sys.exit()
     else:
         sync.upload(files)
 
