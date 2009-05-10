@@ -3,4 +3,5 @@ host = example.com
 port = 22 ;sftp
 user = someguy
 pass = somepassword
-dir  = public_html/gfox
+file_dir = public_html/gfox
+web_dir = public_html/projects/gamefox
