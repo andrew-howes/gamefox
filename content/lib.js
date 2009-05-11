@@ -53,6 +53,35 @@ var gamefox_lib =
       .confirm(null, 'GameFOX', msg);
   },
 
+  // Version number functions
+  isPre: function()
+  {
+    return this.version.indexOf('pre') != -1;
+  },
+
+  isNightly: function()
+  {
+    return this.isPre() && this.version.indexOf('pre') < this.version.length -3;
+  },
+
+  getNightlyVersion: function()
+  {
+    return this.version.substr(this.version.indexOf('pre') + 3);
+  },
+
+  getBaseVersion: function()
+  {
+    return this.version.substr(0, this.version.indexOf('pre') + 3);
+  },
+
+  getNightlyAge: function()
+  {
+    var timestamp = this.getNightlyVersion();
+    var nightlyDate = new Date(timestamp.substr(0, 4), (timestamp.substr(4, 2) - 1),
+        timestamp.substr(6, 2));
+    return Math.floor((new Date().getTime() - nightlyDate.getTime()) / (1000*60*60*24));
+  },
+
   getDocument: function(event)
   {
     if (event.target && event.target.ownerDocument)

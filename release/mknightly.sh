@@ -16,5 +16,5 @@ else
         -f ../$XPI > nightly.rdf || exit 1
 
     ./put.py ../$XPI nightly/gamefox-$BASEVERSION.xpi \
-        nightly.rdf nightly/$BASEVERSION.rdf || exit 1
+        nightly.rdf nightly/nightly.rdf || exit 1
 fi

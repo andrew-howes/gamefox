@@ -34,4 +34,9 @@
         text-align: right;
         padding-right: 2px !important;
     }
+
+    #gamefox-nightly-msg
+    {
+        font-weight: bold;
+    }
 }
