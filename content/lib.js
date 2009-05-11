@@ -290,7 +290,7 @@ var gamefox_lib =
   thirdPartyCookieFix: function(request)
   {
     // https://bugzilla.mozilla.org/show_bug.cgi?id=437174
-    var ds = Cc['@mozilla.org/webshell;1']
+    var ds = Cc['@mozilla.org/' + ('@mozilla.org/webshell;1' in Cc ? 'web' : 'doc') + 'shell;1']
       .createInstance(Ci.nsIDocShellTreeItem)
       .QueryInterface(Ci.nsIInterfaceRequestor);
     request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
