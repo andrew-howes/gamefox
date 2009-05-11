@@ -23,10 +23,6 @@ var gamefox_quickpost =
 
   appendForm: function(doc, div, newTopic)
   {
-    // Set these manually here instead of in CSS for the drag script
-    div.style.left = window.innerWidth * 0.20 + 'px';
-    div.style.top = window.innerHeight * 0.30 + 'px';
-
     var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
     var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
 
@@ -156,9 +152,17 @@ var gamefox_quickpost =
       gamefox_messages.updateMessageCount(doc);
     }
 
-    // Make the box draggable
-    doc.addEventListener('mousedown', gamefox_quickpost.onMouseDown, false);
-    doc.addEventListener('mouseup', gamefox_quickpost.onMouseUp, false);
+    // Dragging for floating QuickPost
+    if (newTopic)
+    {
+      // Set these manually here instead of in CSS for the drag script
+      div.style.left = window.innerWidth * 0.20 + 'px';
+      div.style.top = window.innerHeight * 0.30 + 'px';
+
+      // Make the box draggable
+      doc.addEventListener('mousedown', gamefox_quickpost.onMouseDown, false);
+      doc.addEventListener('mouseup', gamefox_quickpost.onMouseUp, false);
+    }
   },
 
   onMouseDown: function(event)
