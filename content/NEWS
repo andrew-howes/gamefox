@@ -3,6 +3,7 @@
     * Fix removal of old stylesheets on update
     * Fix horizontal scroll bar that was appearing for some people
     * Fix QuickWhois for your own profile
+    * Fix "Hide signatures" CSS with above message data
     * Fix signature importing and exporting in the options window
     * Fix message header links in archived topics
     * Fix new post label on the active messages list not disappearing
