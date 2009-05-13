@@ -58,7 +58,7 @@ var gamefox_quickwhois =
       if (request.readyState == 4)
       {
         var profileFieldsHTML = '';
-        var profileFields = new Array(
+        var profileFields = [
             'User ID', 'User ID',
             'Board User Level', 'User Level',
             'Account Created', 'Created At',
@@ -79,10 +79,11 @@ var gamefox_quickwhois =
             'Skype', 'Skype',
             'Steam', 'Steam',
             'xfire', 'Xfire',
+            'Twitter', 'Twitter',
             'Signature', 'Signature',
             'Quote', 'Quote',
             'Karma', 'Karma'
-              );
+        ];
         for (var i = 0; i < profileFields.length; i += 2)
         {
           if ((profileField = gamefox_quickwhois.findInfo(profileFields[i], request.responseText))
