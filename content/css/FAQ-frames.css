@@ -1,0 +1,26 @@
+/* turn the FAQ frames into a real GameFAQs style  - by selmiak */
+/* the default looks like trash...   or like gamespot, you tell */
+/* me what's worse ...                        www.selmiak.de.vu */
+
+@-moz-document domain(www.gamefaqs.com){
+#header {
+        background: #6564ff none repeat scroll 0 0 !important;
+        border-bottom: 2px solid #dfdfdf !important;
+        color: #fff !important;
+        }
+#header a {        
+          color: #fff !important;
+          }
+#footer {
+        background: #6564ff none repeat scroll 0 0 !important;
+        border-top: 2px solid #dfdfdf !important;
+        color: #fff !important;
+        }
+#footer a {        
+          color: #fff !important;
+          }
+#body a  {        
+          color: #185575 !important;
+          text-decoration: underline !important;
+          }
+}

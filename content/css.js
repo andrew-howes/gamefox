@@ -46,6 +46,8 @@ var gamefox_css =
         'ricapar.css': ['Classic',
             'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
             'GameFAQs stylesheets to use.', 'Ricapar et al.', false],
+        'FAQ-frames.css': ['FAQ frames', 'Styles the FAQ headers to look more like GameFAQs.',
+            'selmiak', false],
         'hide-signatures.css': ['Hide signatures',
             'Hides signatures in posts and shows them again when hovered over.', '', false],
         'message-link-icons.css': ['Message link icons',

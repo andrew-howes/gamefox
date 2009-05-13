@@ -39,6 +39,7 @@ var gamefox_about =
                      ['Poo Poo Butter', 'CSS'],
                      ['TakatoMatsuki', 'CSS'],
                      ['Ricapar', 'CSS'],
+                     ['selmiak', 'CSS'],
                      ['Tango Desktop Project', 'icons'],
                      ['http://www.pinvoke.com/', 'icons']]]
     };
