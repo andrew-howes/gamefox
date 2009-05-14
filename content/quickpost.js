@@ -355,9 +355,9 @@ var gamefox_quickpost =
       if (previewRequest.readyState == 4)
       {
         var text = previewRequest.responseText;
-        var postId = text.match(/\bname="post_id"[^>]+?\bvalue="([^"]*)"/);
+        var postId = text.match(/<input\b[^>]+?\bname="post_id"[^>]+?\bvalue="([^"]*)"/);
 
-        if (!postId || /^\s*0?\s*$/.test(postId[1]))
+        if (!postId)
         { // error
           if (!/\S/.test(text))
             gamefox_lib.alert('Request timed out. Check your network connection and try again.');
@@ -552,7 +552,7 @@ var gamefox_quickpost =
           postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           postRequest.send(
               'post_id=' + postId[1] +
-              '&uid=' + text.match(/\bname="uid"[^>]+?\bvalue="([^"]*)"/)[1] +
+              '&uid=' + text.match(/<input\b[^>]+?\bname="uid"[^>]+?\bvalue="([^"]*)"/)[1] +
               '&post=Post+Message'
               );
         }
