@@ -3,23 +3,23 @@
 /* me what's worse ...                        www.selmiak.de.vu */
 
 @-moz-document domain(www.gamefaqs.com){
-#header {
+body > #header {
         background: #6564ff none repeat scroll 0 0 !important;
         border-bottom: 2px solid #dfdfdf !important;
         color: #fff !important;
         }
-#header a {
+body > #header a {
           color: #fff !important;
           }
-#footer {
+body > #footer {
         background: #6564ff none repeat scroll 0 0 !important;
         border-top: 2px solid #dfdfdf !important;
         color: #fff !important;
         }
-#footer a {
+body > #footer a {
           color: #fff !important;
           }
-#body a  {
+body > #body a  {
           color: #185575 !important;
           text-decoration: underline !important;
           }

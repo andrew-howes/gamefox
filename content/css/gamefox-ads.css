@@ -1,7 +1,7 @@
 @-moz-document domain(gamefaqs.com)
 {
-    #rbx_netxp1_parent, #sponsored_links, #footer, #sky_col_wrap #side_col,
-    .ad, iframe, img[alt="madison"] {
+    #rbx_netxp1_parent, #sponsored_links, #container #footer,
+    #sky_col_wrap #side_col, .ad, iframe, img[alt="madison"] {
         display: none !important;
     }
 
