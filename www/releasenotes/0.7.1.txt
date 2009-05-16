@@ -1,0 +1,19 @@
+### About this version
+
+This release fixes problems caused by GameFOX 0.7 and the GameFAQs redesign.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+
+### New in this release
+
+* Fix removal of old stylesheets on update
+* Fix horizontal scroll bar that was appearing for some people
+* Fix QuickWhois for your own profile
+* Fix "Hide signatures" CSS with above message data
+* Fix signature importing and exporting in the options window
+* Fix message header links in archived topics
+* Fix new post label on the active messages list not disappearing
+* New CSS: FAQ frames
