@@ -1,6 +1,6 @@
 #### configuration
 
-VERSION		= 0.7.1pre
+VERSION		= 0.7.2pre
 NAME		= gamefox
 
 include Makefile.common

@@ -1,4 +1,7 @@
 2009-05-xx:
+    * version 0.7.2
+
+2009-05-17:
     * version 0.7.1
     * Fix removal of old stylesheets on update
     * Fix horizontal scroll bar that was appearing for some people
