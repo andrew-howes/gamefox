@@ -55,7 +55,7 @@ PERL = perl
 
 #### rules
 
-.PHONY: all help info jar xpi mozxpi install clean distclean nightly upnightly uprelease
+.PHONY: all help info jar xpi mozxpi install clean distclean nightly upnightly uprelease sync prepare
 all: help
 
 help:
@@ -73,6 +73,7 @@ help:
 	@echo "  make upnightly - upload a nightly snapshot and its update RDF"
 	@echo "  make uprelease - upload a new release and accompanying files"
 	@echo "  make sync      - synchronize the www git tree with the server"
+	@echo "  make prepare   - automatically update files for a release"
 
 info:
 	@echo    "version            ${VERSION}"
@@ -110,6 +111,11 @@ uprelease: ${XPI} ${MOZXPI}
 
 sync:
 	${Q}( cd www/ && ./sync.py )
+
+prepare:
+	${Q}${PERL} -pi -e "s,pre</em:version>,</em:version>," install.rdf
+	${Q}${PERL} -pi -e "s/pre//" Makefile
+	${Q}${PERL} -0777pi -e "s/^.*/$(shell date +%Y-%m-%d):/" content/NEWS
 
 #### xpi
 
