@@ -377,7 +377,7 @@ var gamefox_quickpost =
             var nonASCIITitle = text.indexOf('Topic titles cannot contain non-ASCII characters') != -1;
             var closedTopic = text.indexOf('This topic is closed') != -1;
             var deletedTopic = text.indexOf('This topic is no longer available') != -1;
-            var maintenance = text.indexOf('<body') == -1 && text.indexOf('maintenance') != -1;
+            var maintenance = previewRequest.status == 503;
 
             if (badWord)
               gamefox_lib.alert('Your post includes the word "' + badWord[1] + '", which is a bad ' +
