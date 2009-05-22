@@ -172,8 +172,8 @@ var gamefox_utils =
     {
       var node = doc.evaluate('div[@class="msg"]', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      if (node)
-        return node.textContent.replace('Welcome,', '').gamefox_trim();
+      if (node && node.firstChild)
+        return node.firstChild.textContent.replace('Welcome,', '').gamefox_trim();
     }
     return '';
   },

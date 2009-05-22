@@ -51,6 +51,23 @@ var gamefox =
       }
     }
 
+    // Add clock
+    if (gamefox_lib.prefs.getBoolPref('elements.clock'))
+    {
+      var div = doc.getElementById('loginbox');
+      if (div)
+      {
+        var node = doc.evaluate('div[@class="msg"]', div, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (node)
+        {
+          var dateSpan = doc.createElement('span');
+          dateSpan.appendChild(doc.createTextNode(' | ' + gamefox_lib.prefs.getCharPref('date')));
+          node.appendChild(dateSpan);
+        }
+      }
+    }
+
     // Save logged-in account name
     var loggedIn = gamefox_lib.isLoggedIn();
     var accountName = gamefox_utils.getAccountName(doc);
