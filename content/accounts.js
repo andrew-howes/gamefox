@@ -31,46 +31,6 @@ var gamefox_accounts =
     gamefox_utils.setString('accounts', gamefox_lib.toJSON(accounts));
   },
 
-  populate: function()
-  {
-    var accountList, username, item, firstAccount;
-    var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
-
-    accountList = document.getElementById('gamefox-accounts-menu');
-    if (!accountList)
-      return;
-
-    while (accountList.hasChildNodes())
-      accountList.removeChild(accountList.firstChild);
-
-    this.read();
-
-    item = document.createElement('menuitem');
-    item.setAttribute('label', 'Add account...');
-    item.setAttribute('oncommand', 'gamefox_accounts.promptLogin()');
-    accountList.appendChild(item);
-
-    firstAccount = true;
-    for (username in this.accounts)
-    {
-      if (firstAccount)
-      {
-        item = document.createElement('menuitem');
-        item.setAttribute('label', 'Remove account...');
-        item.setAttribute('oncommand', 'gamefox_accounts.promptRemoveAccount()');
-        accountList.appendChild(item);
-        accountList.appendChild(document.createElement('menuseparator'));
-        firstAccount = false;
-      }
-      item = document.createElement('menuitem');
-      item.setAttribute('label', username + 
-          (username.toLowerCase() == currentAccount.toLowerCase() ?
-           '*' : ''));
-      item.setAttribute('oncommand', 'gamefox_accounts.switchAccount("' + username + '")');
-      accountList.appendChild(item);
-    }
-  },
-
   switchAccount: function(username)
   {
     this.read();

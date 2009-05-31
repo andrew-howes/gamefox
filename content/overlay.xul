@@ -65,12 +65,12 @@
         <menu id="gamefox-tracked" label="&menu.tracked.label;"
           accesskey="&menu.tracked.accesskey;">
           <menupopup id="gamefox-tracked-menu"
-            onpopupshowing="gamefox_tracked.populateMenu();"/>
+            onpopupshowing="gamefox_context.populateTracked();"/>
         </menu>
 
         <menu id="gamefox-accounts" label="&menu.accounts.label;"
           accesskey="&menu.accounts.accesskey;">
-          <menupopup id="gamefox-accounts-menu" onpopupshowing="gamefox_accounts.populate();"/>
+          <menupopup id="gamefox-accounts-menu" onpopupshowing="gamefox_context.populateAccounts();"/>
         </menu>
 
         <menu id="gamefox-favorites" label="&menu.favorites.label;"

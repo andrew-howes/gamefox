@@ -207,6 +207,87 @@ var gamefox_context =
       || !gamefox_lib.prefs.getBoolPref('context.breaktags');
   },
 
+  populateTracked: function()
+  {
+    var item, topic;
+    var menu = document.getElementById('gamefox-tracked-menu');
+    var strbundle = document.getElementById('context-strings');
+
+    while (menu.hasChildNodes())
+      menu.removeChild(menu.firstChild);
+
+    item = document.createElement('menuitem');
+    item.setAttribute('label', strbundle.getString('updateTracked'));
+    item.setAttribute('oncommand', 'gamefox_tracked.updateList()');
+    menu.appendChild(item);
+
+    item = document.createElement('menuitem');
+    item.setAttribute('label', strbundle.getString('detach'));
+    item.setAttribute('oncommand', 'gamefox_tracked.openWindow()');
+    menu.appendChild(item);
+
+    gamefox_tracked.read();
+    var firstTopic = true;
+    for (var i in gamefox_tracked.list)
+    {
+      for (var j in gamefox_tracked.list[i].topics)
+      {
+        if (firstTopic)
+        {
+          menu.appendChild(document.createElement('menuseparator'));
+          firstTopic = false;
+        }
+
+        topic = gamefox_tracked.list[i].topics[j];
+
+        item = document.createElement('menuitem');
+        item.setAttribute('label', topic['title']);
+        item.setAttribute('oncommand',
+            'gamefox_lib.open("' + i + ',' + j + '", 2)');
+        item.setAttribute('onclick',
+            'if (event.button == 1) gamefox_lib.open("' + i + ',' + j + '", 0)');
+        menu.appendChild(item);
+      }
+    }
+  },
+
+  populateAccounts: function()
+  {
+    var menu, username, item, firstAccount;
+    var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
+
+    menu = document.getElementById('gamefox-accounts-menu');
+    while (menu.hasChildNodes())
+      menu.removeChild(menu.firstChild);
+
+    gamefox_accounts.read();
+
+    item = document.createElement('menuitem');
+    item.setAttribute('label', 'Add account...');
+    item.setAttribute('oncommand', 'gamefox_accounts.promptLogin()');
+    menu.appendChild(item);
+
+    firstAccount = true;
+    for (username in gamefox_accounts.accounts)
+    {
+      if (firstAccount)
+      {
+        item = document.createElement('menuitem');
+        item.setAttribute('label', 'Remove account...');
+        item.setAttribute('oncommand', 'gamefox_accounts.promptRemoveAccount()');
+        menu.appendChild(item);
+        menu.appendChild(document.createElement('menuseparator'));
+        firstAccount = false;
+      }
+      item = document.createElement('menuitem');
+      item.setAttribute('label', username +
+          (username.toLowerCase() == currentAccount.toLowerCase() ?
+           '*' : ''));
+      item.setAttribute('oncommand', 'gamefox_accounts.switchAccount("' + username + '")');
+      menu.appendChild(item);
+    }
+  },
+
   populateFavorites: function()
   {
     var menu, favs, item, i;
@@ -245,7 +326,6 @@ var gamefox_context =
 
     for (i = 0; i < links.length; i += 3)
     {
-
       item = document.createElement('menuitem');
       item.setAttribute('label', links[i+1]);
       item.setAttribute('accesskey', links[i+2]);

@@ -183,48 +183,6 @@ var gamefox_tracked =
     request.send(null);
   },
 
-  populateMenu: function()
-  {
-    var item, topic;
-    var trackedMenu = document.getElementById('gamefox-tracked-menu');
-    var strbundle = document.getElementById('context-strings');
-
-    while (trackedMenu.hasChildNodes())
-      trackedMenu.removeChild(trackedMenu.firstChild);
-
-    item = document.createElement('menuitem');
-    item.setAttribute('label', strbundle.getString('updateTracked'));
-    item.setAttribute('oncommand', 'gamefox_tracked.updateList()');
-    trackedMenu.appendChild(item);
-
-    item = document.createElement('menuitem');
-    item.setAttribute('label', strbundle.getString('detach'));
-    item.setAttribute('oncommand', 'gamefox_tracked.openWindow(this)');
-    trackedMenu.appendChild(item);
-
-    this.read();
-    var firstTopic = true;
-    for (var i in this.list)
-    {
-      for (var j in this.list[i].topics)
-      {
-        if (firstTopic)
-        {
-          trackedMenu.appendChild(document.createElement('menuseparator'));
-          firstTopic = false;
-        }
-
-        topic = this.list[i].topics[j];
-
-        item = document.createElement('menuitem');
-        item.setAttribute('label', topic['title']);
-        item.setAttribute('oncommand',
-            'gamefox_lib.open("' + i + ',' + j + '", 2)');
-        trackedMenu.appendChild(item);
-      }
-    }
-  },
-
   linkListener: function(event)
   {
     // Prevent the link from loading, make our own XMLHttpRequest to stop/start
@@ -398,7 +356,7 @@ var gamefox_tracked =
     return [false, ''];
   },
 
-  openWindow: function(item)
+  openWindow: function()
   {
     window.openDialog('chrome://gamefox/content/tracked.xul', '_blank', '',
         null);
