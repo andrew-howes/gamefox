@@ -474,6 +474,7 @@ var gamefox_quickpost =
                 return;
               }
 
+              event.target.removeAttribute('disabled');
               query = gamefox_utils.parseQueryString(query);
               if (topicTitle) // new topic
               {
@@ -544,8 +545,6 @@ var gamefox_quickpost =
                     break;
                 }
               }
-
-              return;
             }
           };
 
