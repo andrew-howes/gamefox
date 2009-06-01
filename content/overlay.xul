@@ -59,7 +59,7 @@
 
         <menu id="gamefox-tags" label="&menu.tags.label;"
           accesskey="&menu.tags.accesskey;">
-          <menupopup id="gamefox-tags-menu" onpopupshowing="gamefox_tags.populate(1);"/>
+          <menupopup id="gamefox-tags-menu" onpopupshowing="gamefox_context.populateTags();"/>
         </menu>
 
         <menu id="gamefox-tracked" label="&menu.tracked.label;"

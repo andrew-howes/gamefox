@@ -48,76 +48,46 @@ var gamefox_tags =
 
   populateTree: function()
   {
-    gamefox_tags.populate(2);
-  },
-
-  populate: function(method)
-  {
-    // context menu: method == 1
-    // tag tree: method == 2
     var tagList, board, topic, item, childItem, children, row, cell1, cell2;
 
-    if (method == 1)
-      tagList = document.getElementById('gamefox-tags-menu');
-    else
-      tagList = document.getElementById('gamefox-tags-rows');
-
-    if (!tagList)
-      return;
+    tagList = document.getElementById('gamefox-tags-rows');
 
     while (tagList.hasChildNodes())
       tagList.removeChild(tagList.firstChild);
 
-    this.read();
+    gamefox_tags.read();
 
-    if (method == 1)
+    for (board in gamefox_tags.tags)
     {
-      for (board in this.tags)
+      children = document.createElement('treechildren');
+      item     = document.createElement('treeitem');
+      row      = document.createElement('treerow');
+      cell1    = document.createElement('treecell');
+      cell2    = document.createElement('treecell');
+      item.setAttribute('container', 'true');
+      item.setAttribute('open', 'true');
+      cell1.setAttribute('label', gamefox_tags.tags[board].title);
+      cell2.setAttribute('label', board);
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      item.appendChild(row);
+
+      for (topic in gamefox_tags.tags[board].topics)
       {
-        for (topic in this.tags[board].topics)
-        {
-          item = document.createElement('menuitem');
-          item.setAttribute('label', this.tags[board].topics[topic]);
-          item.setAttribute('oncommand', 'gamefox_lib.open("' + board + ',' + topic + '", 2)');
-          item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open("' + board + ',' + topic + '", 0)');
-          tagList.appendChild(item);
-        }
-      }
-    }
-    else
-    {
-      for (board in this.tags)
-      {
-        children = document.createElement('treechildren');
-        item     = document.createElement('treeitem');
-        row      = document.createElement('treerow');
-        cell1    = document.createElement('treecell');
-        cell2    = document.createElement('treecell');
-        item.setAttribute('container', 'true');
-        item.setAttribute('open', 'true');
-        cell1.setAttribute('label', this.tags[board].title);
-        cell2.setAttribute('label', board);
+        childItem = document.createElement('treeitem');
+        row       = document.createElement('treerow');
+        cell1     = document.createElement('treecell');
+        cell2     = document.createElement('treecell');
+        cell1.setAttribute('label', gamefox_tags.tags[board].topics[topic]);
+        cell2.setAttribute('label', board + ',' + topic);
         row.appendChild(cell1);
         row.appendChild(cell2);
-        item.appendChild(row);
-
-        for (topic in this.tags[board].topics)
-        {
-          childItem = document.createElement('treeitem');
-          row       = document.createElement('treerow');
-          cell1     = document.createElement('treecell');
-          cell2     = document.createElement('treecell');
-          cell1.setAttribute('label', this.tags[board].topics[topic]);
-          cell2.setAttribute('label', board + ',' + topic);
-          row.appendChild(cell1);
-          row.appendChild(cell2);
-          childItem.appendChild(row);
-          children.appendChild(childItem);
-        }
-
-        item.appendChild(children);
-        tagList.appendChild(item);
+        childItem.appendChild(row);
+        children.appendChild(childItem);
       }
+
+      item.appendChild(children);
+      tagList.appendChild(item);
     }
   },
 
@@ -178,10 +148,7 @@ var gamefox_tags =
   removeAll: function()
   {
     if (gamefox_lib.confirm('Are you sure you want to delete all your tags?'))
-    {
       this.write('');
-      this.populate(2);
-    }
   },
 
   removePurged: function()
@@ -433,7 +400,6 @@ var gamefox_tags =
     });
 
     this.write(this.tags);
-    this.populate(2);
   },
 
   add: function(event)

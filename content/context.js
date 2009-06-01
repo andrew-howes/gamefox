@@ -207,6 +207,30 @@ var gamefox_context =
       || !gamefox_lib.prefs.getBoolPref('context.breaktags');
   },
 
+  populateTags: function()
+  {
+    var menu, board, topic, item;
+
+    menu = document.getElementById('gamefox-tags-menu');
+
+    while (menu.hasChildNodes())
+      menu.removeChild(menu.firstChild);
+
+    gamefox_tags.read();
+
+    for (board in gamefox_tags.tags)
+    {
+      for (topic in gamefox_tags.tags[board].topics)
+      {
+        item = document.createElement('menuitem');
+        item.setAttribute('label', gamefox_tags.tags[board].topics[topic]);
+        item.setAttribute('oncommand', 'gamefox_lib.open("' + board + ',' + topic + '", 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open("' + board + ',' + topic + '", 0)');
+        menu.appendChild(item);
+      }
+    }
+  },
+
   populateTracked: function()
   {
     var item, topic;
