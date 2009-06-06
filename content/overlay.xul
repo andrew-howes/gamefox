@@ -91,7 +91,8 @@
     <menuitem id="gamefox-context-track" label=""
       oncommand="gamefox_tracked.addFromContextMenu(gContextMenu);"/>
     <menu id="gamefox-context-pages" label="&menu.pages.label;">
-      <menupopup id="gamefox-pages-menu" onpopupshowing="gamefox.showPages(gContextMenu);"/>
+      <menupopup id="gamefox-pages-menu"
+        onpopupshowing="gamefox_context.populatePages(gContextMenu);"/>
     </menu>
 
     <!-- message -->
@@ -103,7 +104,7 @@
       oncommand="gamefox_messages.deletePost(gContextMenu, true);"/>
     <menu id="gamefox-context-usergroups" label="&menu.hlGroups.label;">
       <menupopup id="gamefox-context-usergroups-list"
-        onpopupshowing="gamefox_highlighting.fillMenu(gContextMenu);"/>
+        onpopupshowing="gamefox_context.populateUserGroups(gContextMenu);"/>
     </menu>
 
     <!-- textarea -->

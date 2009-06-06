@@ -208,6 +208,7 @@ var gamefox_highlighting =
     var buttonContainer = button.offsetParent; // td
     var postMsg;
 
+    // TODO: do we need to do this font-size stuff?
     if (gamefox_utils.getMsgDataDisplay(doc)) // left of message
     {
       postMsg = buttonContainer.parentNode.cells[1];
@@ -250,96 +251,6 @@ var gamefox_highlighting =
         button.textContent = 'show';
       }
     }
-  },
-
-  fillMenu: function(event)
-  {
-    var doc = event.target.ownerDocument;
-    var list = document.getElementById('gamefox-context-usergroups-list');
-    var strbundle = document.getElementById('context-strings');
-
-    while (list.hasChildNodes())
-      list.removeChild(list.firstChild);
-
-    var node = event.target;
-    while (node.nodeName != 'TD')
-      node = node.parentNode;
-
-    // get the username of the target, return if it's not valid
-    if (gamefox_lib.onPage(doc, 'topics')) // topic list
-    {
-      node = node.parentNode.cells[2];
-    }
-    else
-    {
-      node = gamefox_utils.getMsgComponents(node, doc);
-      if (!node) return;
-
-      node = node.header.getElementsByTagName(gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a')[0];
-    }
-
-    var username = node.textContent;
-
-    this.loadGroups();
-    var activeGroups = this.searchUsername(username)[4];
-    if (!activeGroups) activeGroups = [];
-
-    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
-
-    var item, label, info, noGroups = true;
-    for (var i = 0; i < userlist.length; i++)
-    {
-      if (userlist[i].type != 'users') continue;
-      noGroups = false;
-
-      item = document.createElement('menuitem');
-      item.setAttribute('type', 'checkbox');
-      item.setAttribute('oncommand', 'gamefox_highlighting.menuCheckChange(event, "' + username + '", ' + i + ');');
-      if (activeGroups.indexOf(i) != -1)
-        item.setAttribute('checked', 'true');
-
-      // label
-      label = userlist[i].name.length ? userlist[i].name : 'Group #' + (i + 1);
-      info = '';
-      if (userlist[i].messages == userlist[i].topics)
-      {
-        if (userlist[i].messages != 'nothing')
-          info = userlist[i].messages + ' messages/topics';
-      }
-      else
-      {
-        if (userlist[i].messages != 'nothing')
-        {
-          info = userlist[i].messages + ' messages';
-        }
-        if (userlist[i].topics != 'nothing')
-        {
-          if (info.length)
-            info += ', ';
-          info += userlist[i].topics + ' topics';
-        }
-      }
-      if (info.length)
-        label += ' (' + info + ')';
-      item.setAttribute('label', label);
-
-      list.appendChild(item);
-    }
-
-    if (noGroups)
-    {
-      item = document.createElement('menuitem');
-      item.setAttribute('label', 'No groups');
-      item.setAttribute('disabled', 'true');
-      list.appendChild(item);
-    }
-
-    list.appendChild(document.createElement('menuseparator'));
-    item = document.createElement('menuitem');
-    item.setAttribute('label', strbundle.getString('editGroups'));
-    item.setAttribute('oncommand',
-      'gamefox_lib.openOptionsDialog(null, null, null, "paneHighlighting");');
-    list.appendChild(item);
   },
 
   menuCheckChange: function(event, username, group)

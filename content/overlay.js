@@ -1120,77 +1120,54 @@ var gamefox =
 
       topiclink = node.cells[1].getElementsByTagName('a')[0].href;
       posts = node.cells[gamefox_lib.onPage(doc, 'myposts') ? 2 : 3].textContent;
-      tc = gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts') ? '' :
-          node.cells[2].firstChild.textContent.gamefox_trim();
+      tc = gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts')
+          ? '' : node.cells[2].firstChild.textContent.gamefox_trim();
     }
     catch (e)
     {
       return;
     }
 
-    if ('type' in event) // triggered from double-click event
+    var loc = gamefox_lib.prefs.getIntPref('paging.location');
+    node = node.cells[1];
+
+    if (loc == 0)
     {
-      var loc = gamefox_lib.prefs.getIntPref('paging.location');
-      node = node.cells[1];
-
-      if (loc == 0)
-      {
-        if (node.parentNode.nextSibling
-            && node.parentNode.nextSibling.className == 'gamefox-pagelist')
-          pageList = node.parentNode.nextSibling;
-      }
-      else
-      {
-        pageList = doc.evaluate('span[@class="gamefox-pagelist"]',
-            node, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      }
-
-      if (pageList)
-      {
-        pageList.style.display = pageList.style.display == 'none' ? '' : 'none';
-      }
-      else
-      {
-        pageList = gamefox.formatPagination(doc, topiclink, posts, tc);
-
-        if (pageList) // multiple pages
-        {
-          var pageListParent;
-          if (loc == 0)
-          {
-            pageListParent = doc.createElement('tr');
-            pageListParent.setAttribute('class', 'gamefox-pagelist');
-          }
-          else
-          {
-            pageListParent = node;
-          }
-
-          pageListParent.appendChild(pageList);
-
-          if (loc == 0)
-            node.parentNode.parentNode.insertBefore(pageListParent, node.parentNode.nextSibling);
-        }
-      }
+      if (node.parentNode.nextSibling
+          && node.parentNode.nextSibling.className == 'gamefox-pagelist')
+        pageList = node.parentNode.nextSibling;
     }
-    else // triggered from context menu
+    else
     {
-      pageList = document.getElementById('gamefox-pages-menu');
-      while (pageList.hasChildNodes())
-        pageList.removeChild(pageList.firstChild);
+      pageList = doc.evaluate('span[@class="gamefox-pagelist"]',
+          node, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    }
 
-      var boardID = topiclink.match(/\bboard=([0-9-]+)/)[1];
-      var topicID = topiclink.match(/\btopic=([0-9]+)/)[1];
-      var pages = Math.ceil(posts / gamefox_lib.prefs.getIntPref('msgsPerPage'));
-      var tcParam = gamefox_utils.tcParam(tc);
-      var item;
-      for (var i = 0; i < pages; i++)
+    if (pageList)
+    {
+      pageList.style.display = pageList.style.display == 'none' ? '' : 'none';
+    }
+    else
+    {
+      pageList = gamefox.formatPagination(doc, topiclink, posts, tc);
+
+      if (pageList) // multiple pages
       {
-        item = document.createElement('menuitem');
-        item.setAttribute('label', i+1);
-        item.setAttribute('oncommand', 'gamefox_lib.open("' + boardID + ',' + topicID + ',' + i + ',' + tcParam + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open("' + boardID + ',' + topicID + ',' + i + ',' + tcParam + '", 0)');
-        pageList.appendChild(item);
+        var pageListParent;
+        if (loc == 0)
+        {
+          pageListParent = doc.createElement('tr');
+          pageListParent.setAttribute('class', 'gamefox-pagelist');
+        }
+        else
+        {
+          pageListParent = node;
+        }
+
+        pageListParent.appendChild(pageList);
+
+        if (loc == 0)
+          node.parentNode.parentNode.insertBefore(pageListParent, node.parentNode.nextSibling);
       }
     }
   },

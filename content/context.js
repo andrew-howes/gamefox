@@ -212,20 +212,19 @@ var gamefox_context =
     var menu, board, topic, item;
 
     menu = document.getElementById('gamefox-tags-menu');
-
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
     gamefox_tags.read();
-
     for (board in gamefox_tags.tags)
     {
       for (topic in gamefox_tags.tags[board].topics)
       {
         item = document.createElement('menuitem');
+        item.setUserData('data', board + ',' + topic, null);
         item.setAttribute('label', gamefox_tags.tags[board].topics[topic]);
-        item.setAttribute('oncommand', 'gamefox_lib.open("' + board + ',' + topic + '", 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open("' + board + ',' + topic + '", 0)');
+        item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
         menu.appendChild(item);
       }
     }
@@ -233,10 +232,10 @@ var gamefox_context =
 
   populateTracked: function()
   {
-    var item, topic;
-    var menu = document.getElementById('gamefox-tracked-menu');
-    var strbundle = document.getElementById('context-strings');
+    var strbundle, menu, item, first, board, topic;
 
+    strbundle = document.getElementById('context-strings');
+    menu = document.getElementById('gamefox-tracked-menu');
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
@@ -251,25 +250,21 @@ var gamefox_context =
     menu.appendChild(item);
 
     gamefox_tracked.read();
-    var firstTopic = true;
-    for (var i in gamefox_tracked.list)
+    first = true;
+    for (board in gamefox_tracked.list)
     {
-      for (var j in gamefox_tracked.list[i].topics)
+      for (topic in gamefox_tracked.list[board].topics)
       {
-        if (firstTopic)
+        if (first)
         {
           menu.appendChild(document.createElement('menuseparator'));
-          firstTopic = false;
+          first = false;
         }
-
-        topic = gamefox_tracked.list[i].topics[j];
-
         item = document.createElement('menuitem');
-        item.setAttribute('label', topic['title']);
-        item.setAttribute('oncommand',
-            'gamefox_lib.open("' + i + ',' + j + '", 2)');
-        item.setAttribute('onclick',
-            'if (event.button == 1) gamefox_lib.open("' + i + ',' + j + '", 0)');
+        item.setUserData('data', board + ',' + topic, null);
+        item.setAttribute('label', gamefox_tracked.list[board].topics[topic].title);
+        item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
+        item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
         menu.appendChild(item);
       }
     }
@@ -277,68 +272,69 @@ var gamefox_context =
 
   populateAccounts: function()
   {
-    var menu, username, item, firstAccount;
-    var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
+    var strbundle, menu, item, currentAccount, first, username;
 
+    strbundle = document.getElementById('context-strings');
     menu = document.getElementById('gamefox-accounts-menu');
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
-    gamefox_accounts.read();
-
     item = document.createElement('menuitem');
-    item.setAttribute('label', 'Add account...');
+    item.setAttribute('label', strbundle.getString('addAccount'));
     item.setAttribute('oncommand', 'gamefox_accounts.promptLogin()');
     menu.appendChild(item);
 
-    firstAccount = true;
+    currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
+    gamefox_accounts.read();
+    first = true;
     for (username in gamefox_accounts.accounts)
     {
-      if (firstAccount)
+      if (first)
       {
         item = document.createElement('menuitem');
-        item.setAttribute('label', 'Remove account...');
+        item.setAttribute('label', strbundle.getString('removeAccount'));
         item.setAttribute('oncommand', 'gamefox_accounts.promptRemoveAccount()');
         menu.appendChild(item);
         menu.appendChild(document.createElement('menuseparator'));
-        firstAccount = false;
+        first = false;
       }
       item = document.createElement('menuitem');
+      item.setUserData('username', username, null);
       item.setAttribute('label', username +
           (username.toLowerCase() == currentAccount.toLowerCase() ?
            '*' : ''));
-      item.setAttribute('oncommand', 'gamefox_accounts.switchAccount("' + username + '")');
+      item.setAttribute('oncommand', 'gamefox_accounts.switchAccount(this.getUserData("username"))');
       menu.appendChild(item);
     }
   },
 
   populateFavorites: function()
   {
-    var menu, favs, item, i;
+    var menu, favs, i, item;
 
     menu = document.getElementById('gamefox-favorites-menu');
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
     favs = gamefox_lib.safeEval(gamefox_utils.getString('favorites.serialized'));
-
     for (i = 0; i < favs.length; i++)
     {
       item = document.createElement('menuitem');
+      item.setUserData('data', favs[i].id, null);
       item.setAttribute('label', favs[i].name);
-      item.setAttribute('oncommand', 'gamefox_lib.open("' + favs[i].id + '", 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open("' + favs[i].id + '", 0)');
+      item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
       menu.appendChild(item);
     }
   },
 
   populateLinks: function()
   {
-    var menu, links, item, i, baseUri;
+    var menu, baseUri, links, item, i;
 
     menu = document.getElementById('gamefox-links-menu');
-    while (menu.hasChildNodes())
-      menu.removeChild(menu.firstChild);
+    if (menu.hasChildNodes())
+      return;
 
     baseUri = gamefox_lib.domain + gamefox_lib.path;
     links = [
@@ -351,12 +347,147 @@ var gamefox_context =
     for (i = 0; i < links.length; i += 3)
     {
       item = document.createElement('menuitem');
+      item.value = baseUri + links[i];
+      item.setUserData('link', baseUri + links[i], null);
       item.setAttribute('label', links[i+1]);
       item.setAttribute('accesskey', links[i+2]);
-      item.setAttribute('oncommand', 'gamefox_lib.openPage("' + baseUri + links[i] + '", 2)');
-      item.setAttribute('onclick',
-          'if (event.button == 1) gamefox_lib.openPage("' + baseUri + links[i] + '", 1)');
+      item.setAttribute('oncommand', 'gamefox_lib.openPage(this.getUserData("link"), 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.openPage(this.getUserData("link"), 1)');
       menu.appendChild(item);
     }
+  },
+
+  populatePages: function(event)
+  {
+    var menu, node, doc, topiclink, posts, tc, board, topic, pages, tcParam,
+      i, item;
+
+    menu = document.getElementById('gamefox-pages-menu');
+    while (menu.hasChildNodes())
+      menu.removeChild(menu.firstChild);
+
+    node = event.target;
+    doc = node.ownerDocument;
+    try
+    {
+      while (node.nodeName.toLowerCase() != 'td')
+        node = node.parentNode;
+      node = node.parentNode; // topic row
+
+      topiclink = node.cells[1].getElementsByTagName('a')[0].href;
+      posts = node.cells[gamefox_lib.onPage(doc, 'myposts') ? 2 : 3].textContent;
+      tc = gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts')
+          ? '' : node.cells[2].firstChild.textContent.gamefox_trim();
+    }
+    catch (e)
+    {
+      return;
+    }
+
+    board = topiclink.match(/\bboard=([0-9-]+)/)[1];
+    topic = topiclink.match(/\btopic=([0-9]+)/)[1];
+    pages = Math.ceil(posts / gamefox_lib.prefs.getIntPref('msgsPerPage'));
+    tcParam = gamefox_utils.tcParam(tc);
+    for (i = 0; i < pages; i++)
+    {
+      item = document.createElement('menuitem');
+      item.setUserData('data', board + ',' + topic + ',' + i + ',' + tcParam, null);
+      item.setAttribute('label', i+1);
+      item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
+      menu.appendChild(item);
+    }
+  },
+
+  populateUserGroups: function(event)
+  {
+    var strbundle, menu, node, doc, username, activeGroups, userlist, noGroups,
+      i, item, label, info;
+
+    strbundle = document.getElementById('context-strings');
+    menu = document.getElementById('gamefox-context-usergroups-list');
+    while (menu.hasChildNodes())
+      menu.removeChild(menu.firstChild);
+
+    node = event.target;
+    while (node.nodeName != 'TD')
+      node = node.parentNode;
+
+    // get the username of the target
+    doc = event.target.ownerDocument;
+    if (gamefox_lib.onPage(doc, 'topics')) // topic list
+    {
+      node = node.parentNode.cells[2];
+    }
+    else // message list
+    {
+      node = gamefox_utils.getMsgComponents(node, doc);
+      if (!node) return;
+
+      node = node.header.getElementsByTagName(gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a')[0];
+    }
+    username = node.textContent;
+
+    gamefox_highlighting.loadGroups();
+    activeGroups = gamefox_highlighting.searchUsername(username)[4];
+    if (!activeGroups) activeGroups = [];
+
+    userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+
+    noGroups = true;
+    for (i = 0; i < userlist.length; i++)
+    {
+      if (userlist[i].type != 'users') continue;
+      noGroups = false;
+
+      item = document.createElement('menuitem');
+      item.setAttribute('type', 'checkbox');
+      item.setUserData('username', username, null);
+      item.setUserData('group', i, null);
+      item.setAttribute('oncommand', 'gamefox_highlighting.menuCheckChange(event, this.getUserData("username"), this.getUserData("group"))');
+      if (activeGroups.indexOf(i) != -1)
+        item.setAttribute('checked', 'true');
+
+      // label
+      // TODO: localize userlist[i].messages and userlist[i].topics
+      label = userlist[i].name.length ? userlist[i].name : strbundle.getFormattedString('groupNum', [i + 1]);
+      info = '';
+      if (userlist[i].messages == userlist[i].topics)
+      {
+        if (userlist[i].messages != 'nothing')
+          info = userlist[i].messages + ' ' + strbundle.getString('messages') + '/' + strbundle.getString('topics');
+      }
+      else
+      {
+        if (userlist[i].messages != 'nothing')
+          info = userlist[i].messages + ' ' + strbundle.getString('messages');
+        if (userlist[i].topics != 'nothing')
+        {
+          if (info.length)
+            info += ', ';
+          info += userlist[i].topics + ' ' + strbundle.getString('topics');
+        }
+      }
+      if (info.length)
+        label += ' (' + info + ')';
+      item.setAttribute('label', label);
+
+      menu.appendChild(item);
+    }
+
+    if (noGroups)
+    {
+      item = document.createElement('menuitem');
+      item.setAttribute('label', strbundle.getString('noGroups'));
+      item.setAttribute('disabled', 'true');
+      menu.appendChild(item);
+    }
+
+    menu.appendChild(document.createElement('menuseparator'));
+    item = document.createElement('menuitem');
+    item.setAttribute('label', strbundle.getString('editGroups'));
+    item.setAttribute('oncommand',
+      'gamefox_lib.openOptionsDialog(null, null, null, "paneHighlighting")');
+    menu.appendChild(item);
   }
 };
