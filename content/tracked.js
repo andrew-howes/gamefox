@@ -51,6 +51,8 @@ var gamefox_tracked =
     // removing or adding tracked topics though.
     if (!currentAccount.length || lastAccount != currentAccount)
     { // cached url is out of date
+      if (!gamefox_lib.thirdPartyCookiePreCheck())
+        return;
       var request = new XMLHttpRequest();
       request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'tracked.php');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
@@ -58,6 +60,7 @@ var gamefox_tracked =
       {
         if (request.readyState == 4)
         {
+          // TODO: validate - make sure it's actually there, no user=-1, etc
           var url = request.responseText.
             match(/<link rel="alternate"[^>]*href="([^"]+)" \/>/)[1];
 
@@ -306,6 +309,8 @@ var gamefox_tracked =
 
   deleteTopic: function(boardId, topicId)
   {
+    if (!gamefox_lib.thirdPartyCookiePreCheck())
+      return;
     this.read();
 
     var topic = this.list[boardId].topics[topicId];

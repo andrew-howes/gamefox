@@ -153,6 +153,8 @@ var gamefox_tags =
 
   removePurged: function()
   {
+    if (!gamefox_lib.thirdPartyCookiePreCheck())
+      return;
     this.read();
     const errNumber  = [ -404, -1, 0, 302, 401, 403, 500, 503, 504, 555 ];
     var err          = [    0,  0, 0,   0,   0,   0,   0,   0,   0,   0 ];

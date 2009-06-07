@@ -121,6 +121,8 @@ var gamefox_accounts =
 
   promptLogin: function(username, error)
   {
+    if (!gamefox_lib.thirdPartyCookiePreCheck())
+      return;
     var password = {value: ''};
     var check = {value: true};
     var result;
