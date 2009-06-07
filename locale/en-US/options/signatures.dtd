@@ -8,7 +8,9 @@
 <!ENTITY deleteSig.label "Delete">
 
 <!ENTITY criteria.label "Criteria:">
-<!ENTITY criteria.desc "Optional fields used to specify when this signature can be used. Separate accounts and boards with commas. You must use your universal account name. Both the board name and ID can be used.">
+<!ENTITY criteria.accounts.desc "List universal account names separated by commas.">
+<!ENTITY criteria.boards.desc "List board names or IDs separated by commas.">
+<!ENTITY criteria.blank.desc "These fields are optional. If they are blank, they will apply to every account or board.">
 <!ENTITY accounts.label "Accounts:">
 <!ENTITY boards.label "Boards:">
 
