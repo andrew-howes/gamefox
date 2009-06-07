@@ -299,7 +299,6 @@ var gamefox_lib =
     }
     request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
     // need to maintain a reference to this or it will get gc'd!
-    // TODO: make sure the above is actually true
     return ds;
   },
 
