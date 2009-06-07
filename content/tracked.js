@@ -60,18 +60,22 @@ var gamefox_tracked =
       {
         if (request.readyState == 4)
         {
-          // TODO: validate - make sure it's actually there, no user=-1, etc
-          var url = request.responseText.
-            match(/<link rel="alternate"[^>]*href="([^"]+)" \/>/)[1];
-
-          // cache it
-          if (currentAccount.length)
+          // TODO: don't hardcode - escape gamefox_lib.domain/path
+          var url = /<link rel="alternate"[^>]*href="(http:\/\/www\.gamefaqs\.com\/boards\/tracked\.xml\?user=\d+&key=[^"]+)" \/>/
+            .exec(request.responseText);
+          if (url)
           {
-            gamefox_lib.prefs.setCharPref('tracked.rssUrl', url);
-            gamefox_lib.prefs.setCharPref('tracked.lastAccount', currentAccount);
-          }
+            url = url[1];
 
-          gamefox_tracked.grabFromRSS(url);
+            // cache it
+            if (currentAccount.length)
+            {
+              gamefox_lib.prefs.setCharPref('tracked.rssUrl', url);
+              gamefox_lib.prefs.setCharPref('tracked.lastAccount', currentAccount);
+            }
+
+            gamefox_tracked.grabFromRSS(url);
+          }
         }
       }
       request.send(null);
