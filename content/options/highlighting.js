@@ -322,18 +322,19 @@ var gamefox_options_highlighting =
 
   removeWithButton: function(event)
   {
+    var strbundle = document.getElementById('highlighting-strings');
     var groupbox = event.target.parentNode.parentNode;
-    var id = groupbox.id.substring(3);
+    var id = parseInt(groupbox.id.substring(3));
     var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
 
     if (userlist[id].name.length)
     {
-      if (!gamefox_lib.confirm('Really delete the group "' + userlist[id].name + '"?'))
+      if (!gamefox_lib.confirm(strbundle.getFormattedString('confirmDeleteNamedGroup', [userlist[id].name])))
         return;
     }
     else
     {
-      if (!gamefox_lib.confirm('Really delete group #' + (parseInt(id) + 1) + '?'))
+      if (!gamefox_lib.confirm(strbundle.getFormattedString('confirmDeleteGroup', [id + 1])))
         return;
     }
 
@@ -345,10 +346,11 @@ var gamefox_options_highlighting =
       var vbox = document.getElementById('groups');
       vbox.removeChild(groupbox);
       var groups = vbox.getElementsByTagName('groupbox');
-      for (var i = parseInt(id); i < groups.length; i++)
+      for (var i = id; i < groups.length; i++)
       {
         groups[i].id = 'ug-' + i;
-        groups[i].getElementsByTagName('caption')[0].setAttribute('label', 'Group #' + (i + 1));
+        groups[i].getElementsByTagName('caption')[0].setAttribute('label',
+            strbundle.getFormattedString('groupNum', [i + 1]));
       }
     }
 
