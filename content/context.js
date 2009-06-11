@@ -347,7 +347,6 @@ var gamefox_context =
     for (i = 0; i < links.length; i += 3)
     {
       item = document.createElement('menuitem');
-      item.value = baseUri + links[i];
       item.setUserData('link', baseUri + links[i], null);
       item.setAttribute('label', links[i+1]);
       item.setAttribute('accesskey', links[i+2]);
