@@ -365,7 +365,7 @@ var gamefox_utils =
   // Convert GameFAQs timestamps to a date object
   strtotime: function(str, year)
   {
-    var year = year ? year : new Date().getFullYear();
+    year = year || new Date().getFullYear();
     var time = str.split(/(\/| |:|AM|PM)/);
     // Convert to 24-hour scale
     if (time[7] == 'PM' && time[4] < 12)
@@ -380,7 +380,7 @@ var gamefox_utils =
   {
     var newObj = (obj instanceof Array) ? [] : {};
 
-    for (i in obj)
+    for (var i in obj)
     {
       if (obj[i] && typeof obj[i] == 'object')
         newObj[i] = gamefox_utils.cloneObj(obj[i]);
