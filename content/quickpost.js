@@ -293,13 +293,12 @@ var gamefox_quickpost =
     var qpDiv = doc.getElementById('gamefox-quickpost-afloat');
     if (qpDiv)
     {
-      qpDiv.style.display = (qpDiv.style.display == 'none') ? 'block' : 'none';
+      qpDiv.style.display = qpDiv.style.display == 'none' ? '' : 'none';
       return;
     }
 
     qpDiv = doc.createElement('div');
     qpDiv.id = 'gamefox-quickpost-afloat';
-    qpDiv.style.display = 'block';
 
     doc.getElementById('board_wrap').appendChild(qpDiv);
     gamefox_quickpost.appendForm(doc, qpDiv, true);
