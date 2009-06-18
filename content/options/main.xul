@@ -185,7 +185,7 @@
                       <hbox>
                         <checkbox label="&paginateTopics.label;"
                           preference="paging.auto"/>
-                        <button label="&settings.label;..."
+                        <button label="&settings.label;…"
                           oncommand="gamefox_options.openPaginateDialog();"/>
                       </hbox>
 
