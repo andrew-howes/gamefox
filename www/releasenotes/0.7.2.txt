@@ -15,5 +15,7 @@ Questions, suggestions or complaints? Let us know at
 "gamefox.elements.clock" pref to true
 * Undisable "Post Message" button after successfully making a post
 * Enable middle-clicking for tracked topics list in the context menu
+* Fix a security issue
+* Compatiblity with Firefox 3.5
 * Fix a few third-party cookie issues for Firefox 3.5
 * New CSS: Remove signatures
