@@ -19,28 +19,17 @@
 
 var gamefox_options_style =
 {
-  showDesc: function(event)
+  css: {},
+
+  getDesc: function(cat, filename)
   {
-    var tree = document.getElementById('css-tree');
-    var tbo = tree.treeBoxObject;
-
-    // get the row, col and child element at the point
-    var row = {}, col = {}, child = {};
-    tbo.getCellAt(event.clientX, event.clientY, row, col, child);
-
-    var cat = tree.view.getCellText(row.value, {index: 5});
-    if (tree.view.isContainer(row.value) || col.value.index != 1
-        || cat == 'user')
-      return;
-
-    var name = tree.view.getCellText(row.value, {index: 0});
-    var desc = tree.view.getCellText(row.value, col.value);
-    gamefox_lib.alert(name + ':\n' + desc);
+    return this.css[cat][filename]['desc'];
   },
 
   populate: function()
   {
-    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    this.css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    var css = this.css;
 
     this.treeView = new gamefox_treeview();
     this.treeView.childData = {};
@@ -55,7 +44,6 @@ var gamefox_options_style =
       {
         this.treeView.childData[treeCat].push([
           css[prefCat][filename]['title'],
-          css[prefCat][filename]['desc'],
           css[prefCat][filename]['author'],
           css[prefCat][filename]['enabled'],
           filename, // stored in invisible column; uniquely identifies stylesheet
@@ -84,7 +72,7 @@ var gamefox_options_style =
   {
     var disabled = gamefox_options_style.treeView
       .visibleData[gamefox_options_style.treeView.selection.currentIndex]
-      [0][5] != 'user';
+      [0][4] != 'user';
     document.getElementById('css-remove').setAttribute('disabled', disabled);
     document.getElementById('css-edit').setAttribute('disabled', disabled);
   },
@@ -92,19 +80,27 @@ var gamefox_options_style =
   isEditable: function(idx, column)
   {
     if (this.isContainer(idx)) return false;
-    if (column.index == 3) return true;
-    if (this.visibleData[idx][0][5] == 'user') return true;
+    if (column.index == 2) return true;
+    if (this.visibleData[idx][0][4] == 'user') return true;
   },
 
   setCell: function(idx, column, value)
   {
-    this.visibleData[idx][0][column.index] = value;
+    this.selection.select(idx);
 
-    var filename = this.visibleData[idx][0][4];
-    var category = this.visibleData[idx][0][5];
+    var name = this.visibleData[idx][0][0];
+    var filename = this.visibleData[idx][0][3];
+    var category = this.visibleData[idx][0][4];
+    var desc = gamefox_options_style.getDesc(category, filename);
     // Map column to associative array in pref
-    var map = new Array('title', 'desc', 'author', 'enabled');
+    var map = new Array('title', 'author', 'enabled');
 
+    // Show description before enabling
+    if (map[column.index] == 'enabled' && value == 'true')
+      if (!gamefox_lib.confirm(name + ':\n' + desc + '\n\nEnable this stylesheet?'))
+        return;
+
+    this.visibleData[idx][0][column.index] = value;
     var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
     css[category][filename][map[column.index]] = value;
     gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
@@ -167,8 +163,8 @@ var gamefox_options_style =
     if (!gamefox_lib.confirm('Really delete "' + current[0] + '"?'))
       return;
 
-    var filename = current[4];
-    var category = current[5];
+    var filename = current[3];
+    var category = current[4];
 
     if (category != 'user')
       return;
@@ -180,7 +176,7 @@ var gamefox_options_style =
   editWithTree: function()
   {
     var current = this.treeView.visibleData[this.treeView.selection.currentIndex][0];
-    var filename = current[4];
+    var filename = current[3];
 
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
@@ -196,6 +192,18 @@ var gamefox_options_style =
     {
       this.launchError();
     }
+  },
+
+  about: function()
+  {
+    var current = this.treeView.visibleData[this.treeView.selection.currentIndex][0];
+
+    var name = current[0];
+    var filename = current[3];
+    var category = current[4];
+    var desc = this.getDesc(category, filename);
+
+    gamefox_lib.alert(name + ':\n' + desc);
   },
 
   launchError: function()

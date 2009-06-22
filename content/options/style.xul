@@ -47,19 +47,14 @@
     <groupbox flex="1">
       <caption label="&tree.label;"/>
 
-      <description>&tree.desc;</description>
-
       <tree id="css-tree" editable="true" seltype="single"
         hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
-        ondblclick="gamefox_options_style.showDesc(event);" style="height: 21em;">
+        style="height: 23em;">
         <treecols>
           <treecol label="&name.label;" id="styleTreeName" primary="true" flex="1"
             persist="width"/>
           <splitter class="tree-splitter"/>
-          <treecol label="&desc.label;" id="styleTreeDesc" width="100"
-            persist="width"/>
-          <splitter class="tree-splitter"/>
-          <treecol label="&author.label;" id="styleTreeAuthor" width="100"
+          <treecol label="&author.label;" id="styleTreeAuthor" width="150"
             persist="width"/>
           <splitter class="tree-splitter"/>
           <treecol label="&enabled.label;" id="styleTreeEnabled" type="checkbox" editable="true"
@@ -70,6 +65,8 @@
       </tree>
       <menupopup id="css-tree-contextmenu"
         onpopupshowing="gamefox_options_style.onpopupshowing();">
+        <menuitem label="&about.label;"
+          oncommand="gamefox_options_style.about();" id="css-about"/>
         <menuitem label="&delete.label;"
           oncommand="gamefox_options_style.removeWithTree();" id="css-remove"/>
         <menuitem label="&edit.label;"
