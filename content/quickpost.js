@@ -79,7 +79,11 @@ var gamefox_quickpost =
     else
       message.value = doc.gamefox.sig;
     form.appendChild(message);
-    message.setSelectionRange(0, 0);
+    try
+    {
+      message.setSelectionRange(0, 0);
+    }
+    catch (e) {}
 
     form.appendChild(doc.createElement('br'));
 
