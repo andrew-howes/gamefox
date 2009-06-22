@@ -141,6 +141,7 @@ var gamefox_css =
     }
 
     var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    var showDesc = cat != 'user';
 
     // this loop does a few things:
     //  -force re-ordering when overwriting
@@ -150,13 +151,15 @@ var gamefox_css =
     {
       if (css[i][filename])
       {
+        showDesc = css[i][filename]['showDesc'];
         enabled = css[i][filename]['enabled'];
         delete css[i][filename];
       }
     }
 
     css[cat][filename] = {
-      'title': title, 'desc': desc, 'author': author, 'enabled': enabled
+      'title': title, 'desc': desc, 'author': author, 'enabled': enabled,
+      'showDesc': showDesc
     };
 
     gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));

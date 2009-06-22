@@ -19,17 +19,31 @@
 
 var gamefox_options_style =
 {
-  css: {},
+  // TODO: These and similar functions might be useful elsewhere too
+  getCSSObj: function()
+  {
+    return gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+  },
+
+  setCSSObj: function(css)
+  {
+    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+  },
 
   getDesc: function(cat, filename)
   {
-    return this.css[cat][filename]['desc'];
+    var css = this.getCSSObj();
+
+    if (!css[cat][filename]['showDesc']
+        || css[cat][filename]['showDesc'] == false)
+      return false;
+
+    return css[cat][filename]['desc'];
   },
 
   populate: function()
   {
-    this.css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
-    var css = this.css;
+    var css = this.getCSSObj();
 
     this.treeView = new gamefox_treeview();
     this.treeView.childData = {};
@@ -96,14 +110,33 @@ var gamefox_options_style =
     var map = new Array('title', 'author', 'enabled');
 
     // Show description before enabling
-    if (map[column.index] == 'enabled' && value == 'true')
-      if (!gamefox_lib.confirm(name + ':\n' + desc + '\n\nEnable this stylesheet?'))
+    if (desc && map[column.index] == 'enabled' && value == 'true')
+    {
+      // TODO: move to gamefox_lib.confirmEx()?
+      var promptService = Cc['@mozilla.org/embedcomp/prompt-service;1']
+        .getService(Ci.nsIPromptService);
+      var showDesc = {value:true};
+      var flags = promptService.BUTTON_POS_0 * promptService.BUTTON_TITLE_YES +
+        promptService.BUTTON_POS_1 * promptService.BUTTON_TITLE_NO;
+      var button = promptService.confirmEx(null, 'GameFOX',
+          name + ':\n' + desc + '\n\nEnable this stylesheet?', flags, '', '', '',
+          'Show me this description the next time I enable this stylesheet', showDesc);
+
+      if (showDesc.value == false)
+      {
+        var css = gamefox_options_style.getCSSObj();
+        css[category][filename]['showDesc'] = false;
+        gamefox_options_style.setCSSObj(css);
+      }
+
+      if (button == 1)
         return;
+    }
 
     this.visibleData[idx][0][column.index] = value;
-    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    var css = gamefox_options_style.getCSSObj();
     css[category][filename][map[column.index]] = value;
-    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+    gamefox_options_style.setCSSObj(css);
 
     this.selection.clearSelection();
     this.selection.select(idx);
