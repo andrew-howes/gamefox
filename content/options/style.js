@@ -30,12 +30,12 @@ var gamefox_options_style =
     gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
   },
 
-  getDesc: function(cat, filename)
+  getDesc: function(cat, filename, about)
   {
     var css = this.getCSSObj();
 
-    if (!css[cat][filename]['showDesc']
-        || css[cat][filename]['showDesc'] == false)
+    if (!about && (!css[cat][filename]['showDesc']
+        || css[cat][filename]['showDesc'] == false))
       return false;
 
     return css[cat][filename]['desc'];
@@ -115,22 +115,21 @@ var gamefox_options_style =
       // TODO: move to gamefox_lib.confirmEx()?
       var promptService = Cc['@mozilla.org/embedcomp/prompt-service;1']
         .getService(Ci.nsIPromptService);
-      var showDesc = {value:true};
-      var flags = promptService.BUTTON_POS_0 * promptService.BUTTON_TITLE_YES +
-        promptService.BUTTON_POS_1 * promptService.BUTTON_TITLE_NO;
+      var showDesc = {value:false};
+      var flags = promptService.BUTTON_POS_0 * promptService.BUTTON_TITLE_IS_STRING +
+        promptService.BUTTON_POS_1 * promptService.BUTTON_TITLE_CANCEL;
       var button = promptService.confirmEx(null, 'GameFOX',
-          name + ':\n' + desc + '\n\nEnable this stylesheet?', flags, '', '', '',
+          name + ':\n' + desc, flags, 'Enable', '', '',
           'Show me this description the next time I enable this stylesheet', showDesc);
-
-      if (showDesc.value == false)
-      {
-        var css = gamefox_options_style.getCSSObj();
-        css[category][filename]['showDesc'] = false;
-        gamefox_options_style.setCSSObj(css);
-      }
 
       if (button == 1)
         return;
+      else
+      {
+        var css = gamefox_options_style.getCSSObj();
+        css[category][filename]['showDesc'] = showDesc.value;
+        gamefox_options_style.setCSSObj(css);
+      }
     }
 
     this.visibleData[idx][0][column.index] = value;
@@ -234,7 +233,7 @@ var gamefox_options_style =
     var name = current[0];
     var filename = current[3];
     var category = current[4];
-    var desc = this.getDesc(category, filename);
+    var desc = this.getDesc(category, filename, true);
 
     gamefox_lib.alert(name + ':\n' + desc);
   },
