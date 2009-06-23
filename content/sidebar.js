@@ -103,8 +103,8 @@ var gamefox_sidebar =
         first = false;
       }
       item = document.createElement('a');
-      item.setUserData('username', username, null);
-      item.setAttribute('onclick', 'gamefox_accounts.switchAccount(this.getUserData("username"));return false');
+      item.GFusername = username;
+      item.setAttribute('onclick', 'gamefox_accounts.switchAccount(this.GFusername);return false');
       item.appendChild(document.createTextNode(username +
             (username.toLowerCase() == currentAccount.toLowerCase() ?
              '*' : '')));
