@@ -34,6 +34,11 @@
     <script type="application/x-javascript"
       src="chrome://gamefox/content/options/style.js"/>
 
+    <stringbundleset id="style-strbundles">
+      <stringbundle id="style-strings"
+        src="chrome://gamefox/locale/options/style.properties"/>
+    </stringbundleset>
+
     <preferences>
       <preference id="disablegamefaqscss"
         name="gamefox.theme.disablegamefaqscss" type="bool"/>

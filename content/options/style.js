@@ -34,8 +34,8 @@ var gamefox_options_style =
   {
     var css = this.getCSSObj();
 
-    if (!about && (!css[cat][filename]['showDesc']
-        || css[cat][filename]['showDesc'] == false))
+    if (!about && ('showDesc' in css[cat][filename]
+          && css[cat][filename]['showDesc'] == false))
       return false;
 
     return css[cat][filename]['desc'];
@@ -100,6 +100,7 @@ var gamefox_options_style =
 
   setCell: function(idx, column, value)
   {
+    var strbundle = document.getElementById('style-strings');
     this.selection.select(idx);
 
     var name = this.visibleData[idx][0][0];
@@ -108,6 +109,7 @@ var gamefox_options_style =
     var desc = gamefox_options_style.getDesc(category, filename);
     // Map column to associative array in pref
     var map = new Array('title', 'author', 'enabled');
+    var css = gamefox_options_style.getCSSObj();
 
     // Show description before enabling
     if (desc && map[column.index] == 'enabled' && value == 'true')
@@ -115,26 +117,29 @@ var gamefox_options_style =
       // TODO: move to gamefox_lib.confirmEx()?
       var promptService = Cc['@mozilla.org/embedcomp/prompt-service;1']
         .getService(Ci.nsIPromptService);
-      var showDesc = {value:false};
+
+      var showDesc = {value:css[category][filename]['showDesc']};
+      if (!showDesc.value)
+        showDesc.value = false;
+
       var flags = promptService.BUTTON_POS_0 * promptService.BUTTON_TITLE_IS_STRING +
         promptService.BUTTON_POS_1 * promptService.BUTTON_TITLE_CANCEL;
       var button = promptService.confirmEx(null, 'GameFOX',
-          name + ':\n' + desc, flags, 'Enable', '', '',
-          'Show me this description the next time I enable this stylesheet', showDesc);
+          strbundle.getFormattedString('desc', [name, desc]), flags,
+          strbundle.getString('enable'), '', '',
+          strbundle.getString('showDesc'), showDesc);
 
       if (button == 1)
         return;
-      else
-      {
-        var css = gamefox_options_style.getCSSObj();
-        css[category][filename]['showDesc'] = showDesc.value;
-        gamefox_options_style.setCSSObj(css);
-      }
     }
 
+    // Update tree
     this.visibleData[idx][0][column.index] = value;
-    var css = gamefox_options_style.getCSSObj();
+
+    // Update pref
     css[category][filename][map[column.index]] = value;
+    if (showDesc)
+      css[category][filename]['showDesc'] = showDesc.value;
     gamefox_options_style.setCSSObj(css);
 
     this.selection.clearSelection();
