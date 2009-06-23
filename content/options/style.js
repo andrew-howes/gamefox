@@ -84,11 +84,12 @@ var gamefox_options_style =
 
   onpopupshowing: function()
   {
-    var disabled = gamefox_options_style.treeView
-      .visibleData[gamefox_options_style.treeView.selection.currentIndex]
-      [0][4] != 'user';
-    document.getElementById('css-remove').setAttribute('disabled', disabled);
-    document.getElementById('css-edit').setAttribute('disabled', disabled);
+    var row = gamefox_options_style.treeView
+      .visibleData[gamefox_options_style.treeView.selection.currentIndex][0];
+    document.getElementById('css-about').setAttribute('disabled',
+        row[4] == 'user' || row.length == 1); // tree category
+    document.getElementById('css-remove').setAttribute('disabled', row[4] != 'user');
+    document.getElementById('css-edit').setAttribute('disabled', row[4] != 'user');
   },
 
   isEditable: function(idx, column)

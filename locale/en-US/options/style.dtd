@@ -4,6 +4,8 @@
 
 <!ENTITY tree.label "Stylesheets">
 
+<!ENTITY rightClick.desc "Right click or enable a stylesheet to view its description.">
+
 <!ENTITY name.label "Name">
 <!ENTITY author.label "Author">
 <!ENTITY enabled.label "Enabled">
