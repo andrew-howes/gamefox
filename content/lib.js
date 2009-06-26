@@ -32,6 +32,21 @@ var gamefox_lib =
     .getService(Ci.nsIPrefService)
     .getBranch('gamefox.'),
 
+  getString: function(pref, prefService)
+  {
+    return (prefService || gamefox_lib.prefs)
+      .getComplexValue(pref, Ci.nsISupportsString).data;
+  },
+
+  setString: function(pref, str, prefService)
+  {
+    var ustr = Cc['@mozilla.org/supports-string;1']
+      .createInstance(Ci.nsISupportsString);
+    ustr.data = str;
+    (prefService || gamefox_lib.prefs)
+      .setComplexValue(pref, Ci.nsISupportsString, ustr);
+  },
+
   log: function(msg)
   {
     Cc['@mozilla.org/consoleservice;1']

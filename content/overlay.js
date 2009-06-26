@@ -134,7 +134,7 @@ var gamefox =
             favorites.push({'id':query['board'], 'name':favLinks[i].textContent});
         }
 
-        gamefox_utils.setString('favorites.serialized', gamefox_lib.toJSON(favorites));
+        gamefox_lib.setString('favorites.serialized', gamefox_lib.toJSON(favorites));
       }
     }
 
@@ -648,7 +648,7 @@ var gamefox =
       var msgnumStyle = gamefox_lib.prefs.getIntPref('elements.msgnum.style');
 
       var tcMarkerCond = !onDetail && gamefox_lib.prefs.getBoolPref('elements.marktc');
-      var tcMarker = '\xA0' + gamefox_utils.getString('elements.marktc.marker');
+      var tcMarker = '\xA0' + gamefox_lib.getString('elements.marktc.marker');
       var tc = doc.location.search.match(/\btc=([^&<>"]+)/);
       if (tc)
         tc = tc[1].replace(/\+/g, ' ');
@@ -1179,9 +1179,9 @@ var gamefox =
       return false;
 
     var loc = gamefox_lib.prefs.getIntPref('paging.location');
-    var prefix = gamefox_utils.getString('paging.prefix');
-    var sep = gamefox_utils.getString('paging.separator');
-    var suffix = gamefox_utils.getString('paging.suffix');
+    var prefix = gamefox_lib.getString('paging.prefix');
+    var sep = gamefox_lib.getString('paging.separator');
+    var suffix = gamefox_lib.getString('paging.suffix');
 
     var prefixHTML = doc.createElement('span');
     if (loc == 2)
@@ -1338,7 +1338,7 @@ function gamefox_loader()
           'tracked.list');
       for (var i = 0; i < jsonPrefs.length; i++)
       {
-        var prefText = gamefox_utils.getString(jsonPrefs[i]);
+        var prefText = gamefox_lib.getString(jsonPrefs[i]);
         if (gamefox_json.isMostlyHarmless(prefText))
           continue; // already JSON
 
@@ -1346,9 +1346,9 @@ function gamefox_loader()
         if (prefObj)
         {
           // Back it up
-          gamefox_utils.setString(jsonPrefs[i] + '.bak', prefText);
+          gamefox_lib.setString(jsonPrefs[i] + '.bak', prefText);
           // Update it
-          gamefox_utils.setString(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
+          gamefox_lib.setString(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
         }
       }
     }
@@ -1367,7 +1367,7 @@ function gamefox_loader()
 
     if (versionComparator.compare('0.6.8', lastversion) > 0)
     {
-      var sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
+      var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
       // delimiter changed from ; to ,
       for (var i = 1; i < sigs.length; i++)
       {
@@ -1376,7 +1376,7 @@ function gamefox_loader()
           .replace(/(^|;)\s*life, the universe, and everything\s*($|;)/gi, '$1402$2')
           .replace(/;/g, ',');
       }
-      gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigs));
+      gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigs));
     }
 
     if (versionComparator.compare('0.6.10', lastversion) > 0)
@@ -1386,11 +1386,11 @@ function gamefox_loader()
       gamefox_lib.prefs.setIntPref('signature.selection', 1);
 
       // new option for highlighting
-      var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+      var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
       for (var i = 0; i < userlist.length; i++)
         if (!userlist[i].type)
           userlist[i].type = 'users';
-      gamefox_utils.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
+      gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
     }
 
     if (lastversion == '')

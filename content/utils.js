@@ -58,21 +58,6 @@ var gamefox_utils =
       replace(/\r/g, '\n');
   },
 
-  getString: function(pref, prefService)
-  {
-    return (prefService == null ? gamefox_lib.prefs : prefService).
-      getComplexValue(pref, Ci.nsISupportsString).data;
-  },
-
-  setString: function(pref, str, prefService)
-  {
-    prefService = (prefService == null) ? gamefox_lib.prefs : prefService;
-    var ustr = Cc['@mozilla.org/supports-string;1'].
-      createInstance(Ci.nsISupportsString);
-    ustr.data = str;
-    prefService.setComplexValue(pref, Ci.nsISupportsString, ustr);
-  },
-
   URLEncode: function(str)
   {
     str = escape(str).

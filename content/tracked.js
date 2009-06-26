@@ -23,7 +23,7 @@ var gamefox_tracked =
 
   read: function()
   {
-    this.list = gamefox_lib.safeEval(gamefox_utils.getString('tracked.list'));
+    this.list = gamefox_lib.safeEval(gamefox_lib.getString('tracked.list'));
 
     // this.list will be undefined if the pref value isn't an object
     if (!this.list)
@@ -32,7 +32,7 @@ var gamefox_tracked =
 
   save: function()
   {
-    gamefox_utils.setString('tracked.list', gamefox_lib.toJSON(this.list));
+    gamefox_lib.setString('tracked.list', gamefox_lib.toJSON(this.list));
   },
 
   updateList: function()

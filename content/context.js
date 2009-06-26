@@ -316,7 +316,7 @@ var gamefox_context =
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
-    favs = gamefox_lib.safeEval(gamefox_utils.getString('favorites.serialized'));
+    favs = gamefox_lib.safeEval(gamefox_lib.getString('favorites.serialized'));
     for (i = 0; i < favs.length; i++)
     {
       item = document.createElement('menuitem');
@@ -431,7 +431,7 @@ var gamefox_context =
     activeGroups = gamefox_highlighting.searchUsername(username)[4];
     if (!activeGroups) activeGroups = [];
 
-    userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+    userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
 
     noGroups = true;
     for (i = 0; i < userlist.length; i++)

@@ -24,7 +24,7 @@ var gamefox_tags =
 
   read: function()
   {
-    this.tags = gamefox_utils.getString('tags');
+    this.tags = gamefox_lib.getString('tags');
 
     if (!/\S/.test(this.tags))
       this.tags = '{}';
@@ -37,7 +37,7 @@ var gamefox_tags =
     if (typeof(tags) == 'object')
       tags = gamefox_lib.toJSON(tags);
 
-    gamefox_utils.setString('tags', tags);
+    gamefox_lib.setString('tags', tags);
   },
 
   init: function()

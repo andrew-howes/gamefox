@@ -186,7 +186,7 @@ var gamefox_options_highlighting =
 
   populate: function()
   {
-    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
     var vbox = document.getElementById('groups');
 
     for (var i = 0; i < userlist.length; i++)
@@ -199,7 +199,7 @@ var gamefox_options_highlighting =
 
   setDefaultValues: function()
   {
-    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
     var vbox = document.getElementById('groups');
     var groups = vbox.getElementsByTagName('groupbox');
     for (var i = 0; i < groups.length; i++)
@@ -228,7 +228,7 @@ var gamefox_options_highlighting =
 
   populateLast: function()
   {
-    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
     var id = userlist.length - 1;
     userlist = userlist[id];
     var vbox = document.getElementById('groups');
@@ -298,14 +298,14 @@ var gamefox_options_highlighting =
       gamefox_options_highlighting.disableMenulists(value, groupbox);
 
     // get and set pref
-    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
     userlist[idx][name] = value;
-    gamefox_utils.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
+    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   updateUsers: function()
   {
-    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
     var groups = document.getElementById('groups')
       .getElementsByTagName('groupbox');
     var textboxes;
@@ -325,7 +325,7 @@ var gamefox_options_highlighting =
     var strbundle = document.getElementById('highlighting-strings');
     var groupbox = event.target.parentNode.parentNode;
     var id = parseInt(groupbox.id.substring(3));
-    var userlist = gamefox_lib.safeEval(gamefox_utils.getString('userlist.serialized'));
+    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
 
     if (userlist[id].name.length)
     {
@@ -355,7 +355,7 @@ var gamefox_options_highlighting =
     }
 
     userlist.splice(id, 1);
-    gamefox_utils.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
+    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
   },
 
   disableMenulists: function(type, groupbox)

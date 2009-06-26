@@ -22,12 +22,12 @@ var gamefox_options_style =
   // TODO: These and similar functions might be useful elsewhere too
   getCSSObj: function()
   {
-    return gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    return gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
   },
 
   setCSSObj: function(css)
   {
-    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+    gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
   },
 
   getDesc: function(cat, filename, about)

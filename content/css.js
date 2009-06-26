@@ -79,7 +79,7 @@ var gamefox_css =
     }
 
     // Remove old bundled
-    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
     for (i in defaults)
     {
       for (j in css[i])
@@ -140,7 +140,7 @@ var gamefox_css =
       return false;
     }
 
-    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
     var showDesc;
 
     // this loop does a few things:
@@ -168,7 +168,7 @@ var gamefox_css =
     if (showDesc)
       css[cat][filename]['showDesc'] = showDesc;
 
-    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+    gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
     return true;
   },
 
@@ -210,7 +210,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
 
     for (var category in css)
     {
@@ -256,7 +256,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = gamefox_lib.safeEval(gamefox_utils.getString('theme.css.serialized'));
+    var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
 
     file.initWithPath(this.getDirectoryPath());
     file.append(filename);
@@ -277,6 +277,6 @@ var gamefox_css =
     catch (e) {}
 
     delete css[category][filename];
-    gamefox_utils.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+    gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
   }
 };

@@ -25,7 +25,7 @@ var gamefox_sig =
     boardname = boardname.toLowerCase();
     var matches = new Array(new Array(), new Array(), new Array());
     var accounts, boards;
-    var sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
+    var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
 
     // find matching sigs
     for (var i = 1; i < sigs.length; i++)
@@ -87,23 +87,23 @@ var gamefox_sig =
 
   getSigById: function(id)
   {
-    return gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'))[id];
+    return gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'))[id];
   },
 
   addSig: function()
   {
-    var sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
+    var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
     sigs.push({'accounts':'', 'boards':'', 'body':''});
-    gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigs));
+    gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigs));
 
     return sigs.length - 1;
   },
 
   deleteSigById: function(id)
   {
-    var sigs = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
+    var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
     sigs.splice(id, 1);
-    gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigs));
+    gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigs));
   },
 
   getCriteriaString: function(accounts, boards)
@@ -178,11 +178,11 @@ var gamefox_sig =
     var doc = gamefox_lib.getDocument(event);
 
     var sig = doc.getElementsByName('sig')[0].value;
-    var sigPref = gamefox_lib.safeEval(gamefox_utils.getString('signature.serialized'));
+    var sigPref = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
 
     sigPref[0].body = sig;
 
-    gamefox_utils.setString('signature.serialized', gamefox_lib.toJSON(sigPref));
+    gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigPref));
 
     gamefox_lib.alert('Your GameFOX signature has been updated.');
   }
