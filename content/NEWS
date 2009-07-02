@@ -1,4 +1,7 @@
-2009-06-xx:
+2009-07-xx:
+    * version 0.7.4
+
+2009-07-02:
     * version 0.7.3
     * Fix topic QuickPost when GameFAQs' main stylesheets are disabled
     * Fix QuickPost buttons not appearing under some circumstances

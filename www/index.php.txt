@@ -4,9 +4,9 @@ provide a comprehensive environment for making GameFAQs perfect.
 
 ### Install ### {#download}
 
-<big>[GameFOX 0.7.2](/gfox/gamefox-0.7.2.xpi)</big> ([release notes](releasenotes/0.7.2.html))
+<big>[GameFOX 0.7.3](/gfox/gamefox-0.7.3.xpi)</big> ([release notes](releasenotes/0.7.3.html))
 
-Released 2009 June 21. Compatible with Firefox 2.0 - 3.5,
+Released 2009 July 2. Compatible with Firefox 2.0 - 3.5,
 SeaMonkey 2.0b1pre.
 
 ### Features ### {#features}
