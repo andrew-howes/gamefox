@@ -1,0 +1,21 @@
+### About this version
+
+A bug introduced in 0.7.2 that only affected Firefox 2 has been fixed. Two
+other bugs have also been fixed.
+
+Descriptions in the Style pane of the options window have been changed to
+appear when a stylesheet is first enabled or from the context menu. The
+"Description" column has been removed.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+
+### New in this release
+
+* Fix topic QuickPost when GameFAQs' main stylesheets are disabled
+* Fix QuickPost buttons not appearing under some circumstances
+* Change how descriptions in the Style pane of the options window are presented
+(now shown in a dialog box when enabling or from right click -> About)
+* Fix a problem with the context menu and sidebar in Firefox 2
