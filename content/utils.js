@@ -338,10 +338,8 @@ var gamefox_utils =
     if (oldMessage && oldMessage.parentNode)
       msgBox.removeNotification(oldMessage);
 
-    if (msgBox.currentNotification)
-      var priority = parseFloat(msgBox.currentNotification.priority) + 0.0001;
-    else
-      var priority = 1;
+    var priority = msgBox.currentNotification ?
+      msgBox.currentNotification.priority + 0.0001 : 1;
 
     var notification = msgBox.appendNotification(label, label, null, priority);
     notification.type = type;

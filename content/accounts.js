@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008 Michael Ryan, Brian Marshall
+ * Copyright 2008, 2009 Michael Ryan, Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -93,30 +93,15 @@ var gamefox_accounts =
   loadAccount: function(MDAAuth, skin, filesplit, expires)
   {
     var cookieMgr2 = Cc['@mozilla.org/cookiemanager;1']
-        .getService(Ci.nsICookieManager2);
-    if (Cc['@mozilla.org/xre/app-info;1'].getService(Ci.nsIXULAppInfo)
-        .platformVersion.indexOf('1.9') == 0) // Gecko 1.9 (Firefox 3)
-    {
-      cookieMgr2.add(gamefox_lib.cookieHost, '/', 'MDAAuth', MDAAuth,
+      .getService(Ci.nsICookieManager2);
+    cookieMgr2.add(gamefox_lib.cookieHost, '/', 'MDAAuth', MDAAuth,
+        false, false, false, expires);
+    if (skin != null)
+      cookieMgr2.add(gamefox_lib.cookieHost, '/', 'skin', skin,
           false, false, false, expires);
-      if (skin != null)
-        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'skin', skin,
-            false, false, false, expires);
-      if (filesplit != null)
-        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'filesplit', filesplit,
-            false, false, false, expires);
-    }
-    else // Gecko 1.8 (Firefox 2)
-    {
-      cookieMgr2.add(gamefox_lib.cookieHost, '/', 'MDAAuth', MDAAuth,
-          false, false, expires);
-      if (skin != null)
-        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'skin', skin,
-            false, false, expires);
-      if (filesplit != null)
-        cookieMgr2.add(gamefox_lib.cookieHost, '/', 'filesplit', filesplit,
-            false, false, expires);
-    }
+    if (filesplit != null)
+      cookieMgr2.add(gamefox_lib.cookieHost, '/', 'filesplit', filesplit,
+          false, false, false, expires);
   },
 
   promptLogin: function(username, error)

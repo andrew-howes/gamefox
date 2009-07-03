@@ -54,7 +54,6 @@
     .message em > p, .message em > i {
         font-family: monospace !important;
         font-style: normal !important;
-        white-space: -moz-pre-wrap;
         white-space: pre-wrap;
     }
 
