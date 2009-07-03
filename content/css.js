@@ -158,15 +158,9 @@ var gamefox_css =
     }
 
     css[cat][filename] = {
-      'title': title, 'desc': desc, 'author': author, 'enabled': enabled
+      'title': title, 'desc': desc, 'author': author, 'enabled': enabled,
+      'showDesc': 1 // 0 never show, 1 show once, 2 show always
     };
-
-    // showDesc is added this way so we can tell no preference (hasn't been
-    // enabled yet) apart from a positive preference (show the description
-    // again), which allows the description to by default only be shown the
-    // first time the CSS is enabled
-    if (showDesc != undefined)
-      css[cat][filename]['showDesc'] = showDesc;
 
     gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
     return true;

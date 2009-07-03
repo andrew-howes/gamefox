@@ -34,8 +34,7 @@ var gamefox_options_style =
   {
     var css = this.getCSSObj();
 
-    if (!about && ('showDesc' in css[cat][filename]
-          && css[cat][filename]['showDesc'] == false))
+    if (!about && css[cat][filename]['showDesc'] == 0)
       return false;
 
     return css[cat][filename]['desc'];
@@ -120,8 +119,10 @@ var gamefox_options_style =
         .getService(Ci.nsIPromptService);
 
       var showDesc = {value:css[category][filename]['showDesc']};
-      if (!showDesc.value)
+      if (showDesc.value == 1)
         showDesc.value = false;
+      else
+        showDesc.value = true;
 
       var flags = promptService.BUTTON_POS_0 * promptService.BUTTON_TITLE_IS_STRING +
         promptService.BUTTON_POS_1 * promptService.BUTTON_TITLE_CANCEL;
@@ -140,7 +141,7 @@ var gamefox_options_style =
     // Update pref
     css[category][filename][map[column.index]] = value;
     if (showDesc)
-      css[category][filename]['showDesc'] = showDesc.value;
+      css[category][filename]['showDesc'] = showDesc.value == false ? 0 : 2;
     gamefox_options_style.setCSSObj(css);
 
     gamefox_css.reload(true);
