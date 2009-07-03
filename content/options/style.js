@@ -143,9 +143,6 @@ var gamefox_options_style =
       css[category][filename]['showDesc'] = showDesc.value;
     gamefox_options_style.setCSSObj(css);
 
-    this.selection.clearSelection();
-    this.selection.select(idx);
-
     gamefox_css.reload(true);
   },
 
