@@ -1366,7 +1366,7 @@ function gamefox_loader()
           'chrome://gamefox/content/nightly.html', 0);
 
     // updated nightly install
-    else if (gamefox_lib.isPre() && gamefox_lib.isNightly()
+    else if (gamefox_lib.isNightly()
         && gamefox_lib.prefs.getBoolPref('nightlyChangeLog'))
       window.setTimeout(gamefox_lib.newTab, 10,
           'http://beyondboredom.net/projects/gamefox/nightlychanges.php', 0);

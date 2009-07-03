@@ -78,7 +78,7 @@ var gamefox_lib =
   isNightly: function(version)
   {
     version = version ? version : this.version;
-    return this.isPre() && version.indexOf('pre') < version.length -3;
+    return this.isPre(version) && version.indexOf('pre') < version.length - 3;
   },
 
   getNightlyVersion: function(version)
