@@ -69,24 +69,28 @@ var gamefox_lib =
   },
 
   // Version number functions
-  isPre: function()
+  isPre: function(version)
   {
-    return this.version.indexOf('pre') != -1;
+    version = version ? version : this.version;
+    return version.indexOf('pre') != -1;
   },
 
-  isNightly: function()
+  isNightly: function(version)
   {
-    return this.isPre() && this.version.indexOf('pre') < this.version.length -3;
+    version = version ? version : this.version;
+    return this.isPre() && version.indexOf('pre') < version.length -3;
   },
 
-  getNightlyVersion: function()
+  getNightlyVersion: function(version)
   {
-    return this.version.substr(this.version.indexOf('pre') + 3);
+    version = version ? version : this.version;
+    return version.substr(version.indexOf('pre') + 3);
   },
 
-  getBaseVersion: function()
+  getBaseVersion: function(version)
   {
-    return this.version.substr(0, this.version.indexOf('pre') + 3);
+    version = version ? version : this.version;
+    return version.substr(0, version.indexOf('pre') + 3);
   },
 
   getNightlyAge: function()

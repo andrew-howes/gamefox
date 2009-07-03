@@ -1325,10 +1325,13 @@ function gamefox_loader()
 
   // upgrade, downgrade, first run, or dev version
   if (versionComparator.compare(version, lastversion) != 0 ||
-      (version.indexOf('pre') != -1 && version.indexOf('pre') == version.length - 3))
+      (gamefox_lib.isPre() && !gamefox_lib.isNightly()))
   {
     /* compatibility crap
-     * TODO: remove these after a while */
+     * TODO: remove these after a while
+     * TODO: maybe provide some structure for these, since they're just a
+     * bunch of if statements that are hard to tell apart from the rest of the
+     * update code */
 
     if (versionComparator.compare('0.6.11', lastversion) > 0)
     {
@@ -1353,95 +1356,49 @@ function gamefox_loader()
       }
     }
 
-    if (versionComparator.compare('0.6.6', lastversion) > 0)
-    {
-      if (gamefox_lib.prefs.getCharPref('quote.style') == 'gfcode_body')
-        gamefox_lib.prefs.setCharPref('quote.style', 'gfcode');
-    }
-
-    if (versionComparator.compare('0.6.7', lastversion) > 0)
-    {
-      if (gamefox_lib.prefs.getCharPref('quote.style') == 'custom')
-        gamefox_lib.prefs.setCharPref('quote.style', 'gfcode');
-    }
-
-    if (versionComparator.compare('0.6.8', lastversion) > 0)
-    {
-      var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
-      // delimiter changed from ; to ,
-      for (var i = 1; i < sigs.length; i++)
-      {
-        sigs[i]['accounts'] = sigs[i]['accounts'].replace(/;/g, ',');
-        sigs[i]['boards'] = sigs[i]['boards']
-          .replace(/(^|;)\s*life, the universe, and everything\s*($|;)/gi, '$1402$2')
-          .replace(/;/g, ',');
-      }
-      gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigs));
-    }
-
-    if (versionComparator.compare('0.6.10', lastversion) > 0)
-    {
-      // first signature (1) -> sequential (2)
-      // random {no | highest} specificity (2 | 3) -> random (1)
-      gamefox_lib.prefs.setIntPref('signature.selection', 1);
-
-      // new option for highlighting
-      var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
-      for (var i = 0; i < userlist.length; i++)
-        if (!userlist[i].type)
-          userlist[i].type = 'users';
-      gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
-    }
-
+    // first run
     if (lastversion == '')
-    {
-      // first run
       window.setTimeout(gamefox_lib.openOptionsDialog, 10, true);
-    }
 
-    if (version.indexOf('pre') != -1 && lastversion.indexOf('pre') == -1)
-    {
-      // new nightly install
+    // new nightly/dev install
+    if (gamefox_lib.isPre() && !gamefox_lib.isPre(lastversion))
       window.setTimeout(gamefox_lib.newTab, 10,
           'chrome://gamefox/content/nightly.html', 0);
-    }
-    else if (version.indexOf('pre') != -1
-        && version.indexOf('pre') != version.length - 3
+
+    // updated nightly install
+    else if (gamefox_lib.isPre() && gamefox_lib.isNightly()
         && gamefox_lib.prefs.getBoolPref('nightlyChangeLog'))
-    {
-      // updated nightly install
       window.setTimeout(gamefox_lib.newTab, 10,
           'http://beyondboredom.net/projects/gamefox/nightlychanges.php', 0);
-    }
-    else if (gamefox_lib.prefs.getBoolPref('showReleaseNotes')
-        && version.indexOf('pre') == -1 && lastversion != '')
-    {
-      // release notes for new stable release
+
+    // release notes for new stable release
+    else if (!gamefox_lib.isPre() && lastversion != ''
+        && gamefox_lib.prefs.getBoolPref('showReleaseNotes'))
       window.setTimeout(gamefox_lib.newTab, 10,
           'http://beyondboredom.net/projects/gamefox/releasenotes/' + version +
               '.html', 0);
-    }
 
+    // update version and CSS
     gamefox_lib.prefs.setCharPref('version', version);
     gamefox_css.init();
   }
 
+  // load CSS
   gamefox_css.reload();
+
+  // disable or update tracked topics
   if (!gamefox_lib.prefs.getBoolPref('tracked.enabled'))
   {
     gamefox_lib.prefs.clearUserPref('tracked.list');
     gamefox_lib.prefs.clearUserPref('tracked.rssUrl');
     gamefox_lib.prefs.clearUserPref('tracked.lastAccount');
   }
-  else
-  {
-    if (gamefox_lib.isLoggedIn())
-      gamefox_tracked.updateList();
-  }
+  else if (gamefox_lib.isLoggedIn())
+    gamefox_tracked.updateList();
+
+  // disable favorites
   if (!gamefox_lib.prefs.getBoolPref('favorites.enabled'))
-  {
     gamefox_lib.prefs.clearUserPref('favorites.serialized');
-  }
 }
 
 window.addEventListener('load', gamefox_loader, false);
