@@ -21,8 +21,18 @@ var gamefox_date =
 {
   // http://www.opengroup.org/onlinepubs/007908799/xsh/strftime.html
   formats: {
-    topic:   ['%n/%e %i:%M%p'],
-    message: ['%n/%e/%Y %i:%M:%S %p'],
+    topic:   ['%n/%e %i:%M%p',
+              '%m/%d %I:%M%p',
+              '%m/%d %H:%M',
+              '%d/%m %I:%M%p',
+              '%d/%m %H:%M'],
+    message: ['%n/%e/%Y %i:%M:%S %p',
+              '%m/%d/%Y %I:%M:%S %p',
+              '%m/%d/%Y %H:%M:%S',
+              '%d/%m/%Y %I:%M:%S %p',
+              '%d/%m/%Y %H:%M:%S',
+              '%Y-%m-%d %I:%M:%S %p',
+              '%Y-%m-%d %H:%M:%S']
   },
 
   getFormat: function(type, id)
@@ -60,7 +70,7 @@ var gamefox_date =
 
   convertTo12H: function(hours)
   {
-    return hours > 12 ? hours - 12 : hours;
+    return hours > 12 ? hours - 12 : (hours == 0 ? 12 : hours);
   },
 
   parseFormat: function(dateStr, format)

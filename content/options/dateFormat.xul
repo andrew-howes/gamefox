@@ -33,7 +33,7 @@
 
       <hbox>
         <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset"
-          oncommand="gamefox_options_dateFormat.change(this);">
+          oncommand="gamefox_options_dateFormat.change(this);" width="250">
           <menupopup>
             <menuitem value="-1" label="&custom.label;"/>
           </menupopup>
@@ -48,7 +48,7 @@
       <caption label="&messageLists.label;"/>
 
       <hbox>
-        <menulist flex="1" id="messageFormatMenu"
+        <menulist flex="1" id="messageFormatMenu" width="250"
           preference="date.messagePreset"
           oncommand="gamefox_options_dateFormat.change(this);">
           <menupopup>
