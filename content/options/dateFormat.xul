@@ -32,14 +32,15 @@
       <caption label="&topicLists.label;"/>
 
       <hbox>
-        <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset">
+        <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset"
+          oncommand="gamefox_options_dateFormat.change(this);">
           <menupopup>
             <menuitem value="-1" label="&custom.label;"/>
           </menupopup>
         </menulist>
 
         <textbox id="topicFormatCustom" emptytext="&custom.emptytext;"
-          disabled="true"/>
+          disabled="true" preference="date.topicCustom"/>
       </hbox>
     </groupbox>
 
@@ -48,14 +49,15 @@
 
       <hbox>
         <menulist flex="1" id="messageFormatMenu"
-          preference="date.messagePreset">
+          preference="date.messagePreset"
+          oncommand="gamefox_options_dateFormat.change(this);">
           <menupopup>
             <menuitem value="-1" label="&custom.label;"/>
           </menupopup>
         </menulist>
 
         <textbox id="messageFormatCustom" emptytext="&custom.emptytext;"
-          disabled="true"/>
+          disabled="true" preference="date.messageCustom"/>
       </hbox>
     </groupbox>
 

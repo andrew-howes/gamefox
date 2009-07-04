@@ -43,6 +43,20 @@ var gamefox_options_dateFormat =
         if (j == formatPreset)
           formatMenu.selectedItem = item;
       }
+
+      // Activate custom format textbox
+      if (formatPreset == '-1')
+        document.getElementById(type + 'FormatCustom').disabled = false;
     }
+  },
+
+  change: function(menu)
+  {
+    var type = menu.id == 'topicFormatMenu' ? 'topic' : 'message';
+
+    if (menu.value == -1) // enable custom textbox
+      document.getElementById(type + 'FormatCustom').disabled = false;
+    else
+      document.getElementById(type + 'FormatCustom').disabled = true;
   }
 };
