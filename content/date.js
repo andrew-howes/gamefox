@@ -21,8 +21,8 @@ var gamefox_date =
 {
   // http://www.opengroup.org/onlinepubs/007908799/xsh/strftime.html
   formats: {
-    topic: ['%n/%e %i:%M%p'],
-    messg: [],
+    topic:   ['%n/%e %i:%M%p'],
+    message: ['%n/%e/%Y %i:%M:%S %p'],
   },
 
   getFormat: function(type, id)

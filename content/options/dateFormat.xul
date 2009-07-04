@@ -28,11 +28,36 @@
         type="string"/>
     </preferences>
 
-    <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset">
-      <menupopup>
-        <menuitem value="-1" label="Custom"/>
-      </menupopup>
-    </menulist>
+    <groupbox>
+      <caption label="Topic Lists"/>
+
+      <hbox>
+        <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset">
+          <menupopup>
+            <menuitem value="-1" label="Custom"/>
+          </menupopup>
+        </menulist>
+
+        <textbox id="topicFormatCustom" emptytext="Custom date format"
+          disabled="true"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="Message Lists"/>
+
+      <hbox>
+        <menulist flex="1" id="messageFormatMenu"
+          preference="date.messagePreset">
+          <menupopup>
+            <menuitem value="-1" label="Custom"/>
+          </menupopup>
+        </menulist>
+
+        <textbox id="messageFormatCustom" emptytext="Custom date format"
+          disabled="true"/>
+      </hbox>
+    </groupbox>
 
   </prefpane>
 </prefwindow>

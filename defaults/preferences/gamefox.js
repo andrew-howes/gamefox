@@ -91,9 +91,9 @@ pref("gamefox.accounts.current", "");
 
 pref("gamefox.date", "");
 pref("gamefox.date.enableFormat", false);
-pref("gamefox.date.topicPreset", 1);
+pref("gamefox.date.topicPreset", 0);
 pref("gamefox.date.topicCustom", "");
-pref("gamefox.date.messagePreset", 1);
+pref("gamefox.date.messagePreset", 0);
 pref("gamefox.date.messageCustom", "");
 
 pref("gamefox.topic.dblclick", 0);

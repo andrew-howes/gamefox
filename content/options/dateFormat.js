@@ -22,19 +22,27 @@ var gamefox_options_dateFormat =
   init: function()
   {
     // Populate menus with formats
-    var topicFormatMenu = document.getElementById('topicFormatMenu');
-    var topicFormats = gamefox_date.listFormats('topic');
-    var topicFormatPreset = document.getElementById('date.topicPreset').value;
-    for (var i = 0; i < topicFormats.length; i++)
-    {
-      var item = topicFormatMenu.insertItemAt(i,
-          gamefox_date.parseFormat(null, topicFormats[i]), i);
+    
+    var types = ['topic', 'message'];
+    var type, formatMenu, formats, formatPreset, item;
 
-      // For some reason, the preference attribute of the menulist won't select
-      // an item initially. Probably because they're being added with
-      // JavaScript?
-      if (i == topicFormatPreset)
-        topicFormatMenu.selectedItem = item;
+    for (var i = 0; i < types.length; i++)
+    {
+      type = types[i];
+      formatMenu = document.getElementById(type + 'FormatMenu');
+      formats = gamefox_date.listFormats(type);
+      formatPreset = document.getElementById('date.' + type + 'Preset').value;
+      for (var j = 0; j < formats.length; j++)
+      {
+        item = formatMenu.insertItemAt(j,
+            gamefox_date.parseFormat(null, formats[j]), j);
+
+        // For some reason, the preference attribute of the menulist won't select
+        // an item initially. Probably because they're being added with
+        // JavaScript?
+        if (j == formatPreset)
+          formatMenu.selectedItem = item;
+      }
     }
   }
 };
