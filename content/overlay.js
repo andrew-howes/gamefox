@@ -686,10 +686,26 @@ var gamefox =
         var detailLink = msgStats.getElementsByTagName('a')[1];
         var postBody = td[i + 1].textContent;
 
+        var postDateNode = msgStats.childNodes[leftMsgData ? 2 : 1];
+        var postDate = postDateNode.textContent.replace(/( \| )?(Posted )?/g, '');
+        td[i].setUserData('date', postDate, null); // for quoting
+
         // Topic creator
         // TODO: Fix for newest first ordering
         if (msgnum == 1 && gamefox_lib.prefs.getIntPref('msgSortOrder') == 1)
           tc = username;
+
+        // Date format
+        if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+        {
+          var format = gamefox_date.getFormat('message',
+              gamefox_lib.prefs.getIntPref('date.messagePreset'));
+
+          postDateNode.textContent = (leftMsgData ? '' : ' | ')
+            + 'Posted '
+            + gamefox_date.parseFormat(postDate, format)
+            + (leftMsgData ? '' : ' | ')
+        }
 
         // Element for sigs
         if (sigCond)

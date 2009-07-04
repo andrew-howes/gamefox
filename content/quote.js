@@ -34,22 +34,10 @@ var gamefox_quote =
 
     // postUser
     postUser = msgComponents.header.getElementsByTagName('a')[0];
-    var dateNodes = (postUser ? postUser.parentNode : msgComponents.header).childNodes;
     postUser = postUser ? postUser.textContent : '???';
 
     // postDate
-    var node;
-    for (var i = 0; i < dateNodes.length; i++)
-    {
-      node = dateNodes[i];
-      if (node.nodeName == '#text')
-      {
-        postDate = /Posted\s([^\|]+)/.exec(node.textContent);
-        if (postDate)
-          break;
-      }
-    }
-    postDate = postDate ? postDate[1].gamefox_trim() : '???';
+    postDate = msgComponents.header.getUserData('date');
 
     // postNum
     postNum = msgComponents.header.id.substr(1);
