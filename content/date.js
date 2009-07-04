@@ -21,7 +21,7 @@ var gamefox_date =
 {
   // http://www.opengroup.org/onlinepubs/007908799/xsh/strftime.html
   formats: {
-    topic: ['%D'],
+    topic: ['%n/%e %i:%M%p'],
     messg: [],
   },
 
@@ -55,9 +55,20 @@ var gamefox_date =
     }
   },
 
+  convertTo12H: function(hours)
+  {
+    return hours > 12 ? hours - 12 : hours;
+  },
+
   parseFormat: function(dateStr, format)
   {
-    return (dateStr ? new Date(dateStr) : new Date())
-      .toLocaleFormat(format);
+    var date = dateStr ? new Date(dateStr) : new Date();
+
+    // Custom conversions, since strftime isn't adequate
+    format = format.replace(/%e/g, date.getDate())
+                   .replace(/%n/g, date.getMonth() + 1)
+                   .replace(/%i/g, this.convertTo12H(date.getHours()));
+
+    return date.toLocaleFormat(format);
   }
 };
