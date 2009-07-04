@@ -12,6 +12,7 @@
 <!ENTITY titlePrefixes.label "Window title page prefixes">
 <!ENTITY blockAdServers.label "Block ad servers">
 <!ENTITY favoritesMenu.label "Add favorites menu">
+<!ENTITY dateFormat.label "Custom date format">
 
 <!ENTITY topicLists.label "Topic Lists">
 

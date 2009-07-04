@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79: -->
+
+<!DOCTYPE prefwindow SYSTEM "chrome://gamefox/locale/options/dateFormat.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/"?>
+
+<prefwindow id="dateFormatDialog" type="child"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            title="&dateFormat.title;">
+
+  <prefpane id="dateFormatDialog"
+    onpaneload="gamefox_options_dateFormat.init();">
+
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/date.js"/>
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/options/dateFormat.js"/>
+
+    <preferences>
+      <preference id="date.topicPreset" name="gamefox.date.topicPreset"
+        type="int"/>
+      <preference id="date.topicCustom" name="gamefox.date.topicCustom"
+        type="string"/>
+      <preference id="date.messagePreset" name="gamefox.date.messagePreset"
+        type="int"/>
+      <preference id="date.messageCustom" name="gamefox.date.messageCustom"
+        type="string"/>
+    </preferences>
+
+    <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset">
+      <menupopup>
+        <menuitem value="-1" label="Custom"/>
+      </menupopup>
+    </menulist>
+
+  </prefpane>
+</prefwindow>

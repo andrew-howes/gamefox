@@ -41,6 +41,8 @@
         type="bool"/>
       <preference id="elements.favorites" name="gamefox.elements.favorites"
         type="bool"/>
+      <preference id="date.enableFormat" name="gamefox.date.enableFormat"
+        type="bool"/>
 
       <preference id="elements.topics.lastpostlink"
         name="gamefox.elements.topics.lastpostlink" type="bool"/>
@@ -157,6 +159,12 @@
                     preference="elements.titlechange"/>
                   <checkbox label="&titlePrefixes.label;"
                     preference="elements.titleprefix"/>
+                  <hbox>
+                    <checkbox label="&dateFormat.label;"
+                      preference="date.enableFormat"/>
+                    <button label="&settings.label;…"
+                      oncommand="gamefox_options.openDateFormatDialog();"/>
+                  </hbox>
                 </vbox>
                 <vbox flex="1">
                   <checkbox label="&blockAdServers.label;"

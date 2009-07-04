@@ -171,8 +171,8 @@ var gamefox_trackedWindow =
       {
         // We have to convert the last post timestamp provided by GameFAQs to
         // something useful
-        var d1 = gamefox_utils.strtotime(a.lastPost, a.lastPostYear);
-        var d2 = gamefox_utils.strtotime(b.lastPost, b.lastPostYear);
+        var d1 = gamefox_date.strtotime(a.lastPost, a.lastPostYear);
+        var d2 = gamefox_date.strtotime(b.lastPost, b.lastPostYear);
 
         if (d1.getTime() < d2.getTime())
           return -1;

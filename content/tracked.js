@@ -141,13 +141,13 @@ var gamefox_tracked =
 
           // check for year change
           if (prevLastPost != 0 &&
-              prevLastPost < gamefox_utils.strtotime(topic.lastPost).getTime())
+              prevLastPost < gamefox_date.strtotime(topic.lastPost).getTime())
           {
             // this entry is more recent than the last entry, which should
             // only happen when the year is different
             --year;
           }
-          prevLastPost = gamefox_utils.strtotime(topic.lastPost).getTime();
+          prevLastPost = gamefox_date.strtotime(topic.lastPost).getTime();
           topic.lastPostYear = year;
 
           // check for new posts

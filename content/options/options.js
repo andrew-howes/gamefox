@@ -324,5 +324,12 @@ var gamefox_options =
     document.documentElement
       .openSubDialog('chrome://gamefox/content/options/paginate.xul', '',
           null);
+  },
+
+  openDateFormatDialog: function()
+  {
+    document.documentElement
+      .openSubDialog('chrome://gamefox/content/options/dateFormat.xul', '',
+          null);
   }
 };
