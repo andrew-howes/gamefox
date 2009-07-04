@@ -145,7 +145,7 @@ var gamefox_css =
 
     // this loop does a few things:
     //  -force re-ordering when overwriting
-    //  -don't change enabled status
+    //  -don't change enabled or showDesc
     //  -handle category changing
     for (var i in css)
     {
@@ -157,9 +157,13 @@ var gamefox_css =
       }
     }
 
+    // 0 never show, 1 show once, 2 show always
+    if (showDesc !== 0 && showDesc !== 1 && showDesc !== 2)
+      showDesc = 1;
+
     css[cat][filename] = {
       'title': title, 'desc': desc, 'author': author, 'enabled': enabled,
-      'showDesc': 1 // 0 never show, 1 show once, 2 show always
+      'showDesc': showDesc
     };
 
     gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
