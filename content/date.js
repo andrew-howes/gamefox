@@ -27,6 +27,9 @@ var gamefox_date =
 
   getFormat: function(type, id)
   {
+    if (id == -1)
+      return gamefox_lib.getString('date.' + type + 'Custom');
+
     return this.formats[type][id];
   },
 
@@ -39,7 +42,7 @@ var gamefox_date =
   {
     // see if Date() will take this date string
     var d = new Date(str);
-    if (d != "Invalid Date")
+    if (d != 'Invalid Date')
       return d;
     else // try to parse a topic date
     {
@@ -63,6 +66,8 @@ var gamefox_date =
   parseFormat: function(dateStr, format)
   {
     var date = dateStr ? new Date(dateStr) : new Date();
+    if (date == 'Invalid Date')
+      date = gamefox_date.strtotime(dateStr);
 
     // Custom conversions, since strftime isn't adequate
     format = format.replace(/%e/g, date.getDate())

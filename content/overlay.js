@@ -471,6 +471,15 @@ var gamefox =
           }
         }
 
+        // Date format
+        if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+        {
+          var format = gamefox_date.getFormat('topic',
+              gamefox_lib.prefs.getIntPref('date.topicPreset'));
+          rows[i].cells[4].textContent = gamefox_date.parseFormat(
+              rows[i].cells[4].textContent, format);
+        }
+
         // Last post link
         if (gamefox_lib.prefs.getBoolPref('elements.topics.lastpostlink'))
         {
