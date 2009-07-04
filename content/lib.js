@@ -397,15 +397,8 @@ var gamefox_lib =
     {
       if (!noJSON)
       {
-        if (Ci.nsIJSON)
-        {
-          var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
-          parsedPref = nativeJSON.decode(pref);
-        }
-        else if (gamefox_json)
-        {
-          parsedPref = gamefox_json.fromString(pref);
-        }
+        var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
+        parsedPref = nativeJSON.decode(pref);
       }
       else
       {
@@ -435,7 +428,7 @@ var gamefox_lib =
       }
 
       return safe;
-    };
+    }
 
     if (!check_obj(parsedPref))
       return false;
@@ -445,14 +438,7 @@ var gamefox_lib =
 
   toJSON: function(obj)
   {
-    if (Ci.nsIJSON)
-    {
-      var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
-      return nativeJSON.encode(obj);
-    }
-    else
-    {
-      return gamefox_json.toString(obj);
-    }
+    var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
+    return nativeJSON.encode(obj);
   }
 };
