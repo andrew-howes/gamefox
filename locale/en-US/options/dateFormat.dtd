@@ -1,3 +1,9 @@
 <!-- vim: set indentexpr=: -->
 
 <!ENTITY dateFormat.title "Date Formats">
+
+<!ENTITY custom.label "Custom">
+<!ENTITY custom.emptytext "Custom date format">
+
+<!ENTITY topicLists.label "Topic Lists">
+<!ENTITY messageLists.label "Message lists">

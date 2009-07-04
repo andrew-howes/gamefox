@@ -29,32 +29,32 @@
     </preferences>
 
     <groupbox>
-      <caption label="Topic Lists"/>
+      <caption label="&topicLists.label;"/>
 
       <hbox>
         <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset">
           <menupopup>
-            <menuitem value="-1" label="Custom"/>
+            <menuitem value="-1" label="&custom.label;"/>
           </menupopup>
         </menulist>
 
-        <textbox id="topicFormatCustom" emptytext="Custom date format"
+        <textbox id="topicFormatCustom" emptytext="&custom.emptytext;"
           disabled="true"/>
       </hbox>
     </groupbox>
 
     <groupbox>
-      <caption label="Message Lists"/>
+      <caption label="&messageLists.label;"/>
 
       <hbox>
         <menulist flex="1" id="messageFormatMenu"
           preference="date.messagePreset">
           <menupopup>
-            <menuitem value="-1" label="Custom"/>
+            <menuitem value="-1" label="&custom.label;"/>
           </menupopup>
         </menulist>
 
-        <textbox id="messageFormatCustom" emptytext="Custom date format"
+        <textbox id="messageFormatCustom" emptytext="&custom.emptytext;"
           disabled="true"/>
       </hbox>
     </groupbox>
