@@ -118,6 +118,7 @@ var gamefox_options_highlighting =
     textbox.setAttribute('class', 'ug-users');
     textbox.setAttribute('value', users);
     textbox.setAttribute('flex', '1');
+    textbox.setAttribute('newlines', 'replacewithcommas');
     textbox.addEventListener('input', this.updatePref, false);
     hbox.appendChild(textbox);
 

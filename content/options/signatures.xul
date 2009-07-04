@@ -80,10 +80,10 @@
                 <description>&criteria.blank.desc;</description>
                 <hbox align="center">
                   <label value="&accounts.label;"/>
-                  <textbox id="sig-criteria-accounts"
+                  <textbox id="sig-criteria-accounts" newlines="replacewithcommas"
                     oninput="gamefox_options_sig.updatePref(this);" flex="1"/>
                   <label value="&boards.label;"/>
-                  <textbox id="sig-criteria-boards"
+                  <textbox id="sig-criteria-boards" newlines="replacewithcommas"
                     oninput="gamefox_options_sig.updatePref(this);" flex="1"/>
                 </hbox>
               </groupbox>
