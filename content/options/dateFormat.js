@@ -58,5 +58,10 @@ var gamefox_options_dateFormat =
       document.getElementById(type + 'FormatCustom').disabled = false;
     else
       document.getElementById(type + 'FormatCustom').disabled = true;
+  },
+
+  help: function()
+  {
+    gamefox_lib.openPage('chrome://gamefox/content/strftime.html', 1);
   }
 };

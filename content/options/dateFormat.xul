@@ -4,14 +4,20 @@
 <!DOCTYPE prefwindow SYSTEM "chrome://gamefox/locale/options/dateFormat.dtd">
 
 <?xml-stylesheet href="chrome://global/skin/"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
 
 <prefwindow id="dateFormatDialog" type="child"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            xmlns:html="http://www.w3.org/1999/xhtml"
             title="&dateFormat.title;">
 
   <prefpane id="dateFormatDialog"
     onpaneload="gamefox_options_dateFormat.init();">
 
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/defs.js"/>
+    <script type="application/x-javascript"
+      src="chrome://gamefox/content/lib.js"/>
     <script type="application/x-javascript"
       src="chrome://gamefox/content/date.js"/>
     <script type="application/x-javascript"
@@ -41,6 +47,9 @@
 
         <textbox id="topicFormatCustom" emptytext="&custom.emptytext;"
           disabled="true" preference="date.topicCustom"/>
+
+        <html:a class="inline-link" href="#"
+          onclick="gamefox_options_dateFormat.help();">?</html:a>
       </hbox>
     </groupbox>
 
@@ -58,6 +67,9 @@
 
         <textbox id="messageFormatCustom" emptytext="&custom.emptytext;"
           disabled="true" preference="date.messageCustom"/>
+
+        <html:a class="inline-link" href="#"
+          onclick="gamefox_options_dateFormat.help();">?</html:a>
       </hbox>
     </groupbox>
 
