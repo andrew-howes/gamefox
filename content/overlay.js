@@ -136,6 +136,24 @@ var gamefox =
 
         gamefox_lib.setString('favorites.serialized', gamefox_lib.toJSON(favorites));
       }
+
+      // Date format board loop
+      // TODO: merge this with favorites loop
+      if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+      {
+        var rows = doc.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++)
+        {
+          if (rows[i].cells[3])
+          {
+            var format = gamefox_date.getFormat('topic',
+                gamefox_lib.prefs.getIntPref('date.topicPreset'));
+            rows[i].cells[3].textContent = gamefox_date.parseFormat(
+                rows[i].cells[3].textContent, format);
+          }
+        }
+      }
     }
 
     /* Active Messages (myposts.php) */
@@ -222,6 +240,17 @@ var gamefox =
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
+        // Date format
+        if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+        {
+          var format = gamefox_date.getFormat('topic',
+              gamefox_lib.prefs.getIntPref('date.topicPreset'));
+          rows[i].cells[3].textContent = gamefox_date.parseFormat(
+              rows[i].cells[3].textContent, format);
+          rows[i].cells[4].textContent = gamefox_date.parseFormat(
+              rows[i].cells[4].textContent, format);
+        }
+
         // Last post link
         if (gamefox_lib.prefs.getBoolPref('elements.topics.lastpostlink'))
         {
