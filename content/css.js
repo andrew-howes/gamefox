@@ -56,6 +56,10 @@ var gamefox_css =
             'Poo Poo Butter', false],
         'remove-signatures.css': ['Remove signatures',
             'Removes signatures in posts.', '', false],
+        'spotfaqs.css': ['SpotFAQs',
+            'Makes GameFAQs look like GameSpot.\n\nRequires the "Default" GameFAQs'
+              + ' skin to be used with the "Left of Message" poster display setting.',
+            'TakatoMatsuki', false],
         'status-default.css': ['Status icons (normal)',
             'Only show topic status icons for closed/sticky topics. This CSS ' +
             'conflicts with "Status icons (classic)".', '', false],

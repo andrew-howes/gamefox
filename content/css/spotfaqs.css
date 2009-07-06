@@ -1,0 +1,127 @@
+/** SpotFAQs for GameFOX - Makes GameFAQs look like GameSpot **/
+/** By TakatoMatsuki **/
+/** GameFOX Bundle Edition - Contains the FROG and SpotFAQs code **/
+
+@-moz-document domain("gamefaqs.com") {
+
+/** START OF FROG CODE **/
+
+/** Ads **/
+.ad, .gs, #container #footer, #sponsored_links, .rubics_netxp1_main {display:none !important;}
+
+/** Gutters **/
+#content {border:1px solid #999999 !important; margin:0 -1px !important;}
+.gutter {float:left !important; width:100% !important;}
+#gutters {background:url(http://www.gamefaqs.com/images/default/gutter_mid.gif) repeat-y center 0 !important;}
+#gutter_btm {background:url(http://www.gamefaqs.com/images/default/gutter_btm.gif) no-repeat center bottom !important; padding:0 0 20px !important;}
+#gutter_top {background:url(http://www.gamefaqs.com/images/default/gutter_top.gif) no-repeat center 0 !important; padding:14px 0 0 !important;}
+
+/** Tables **/
+table td {padding:3px !important;}
+
+/** Side_col removal **/
+#sky_col_wrap #side_col {display:none !important;}
+#sky_col_wrap .col_layout {padding:0px 10px 0px 10px !important;}
+
+/** FAQs **/
+body > #body {background:white !important;}
+
+/** END OF FROG CODE **/
+
+/** START OF SPOTFAQS CODE **/
+
+body, table {color:#CCCCCC !important;}
+
+table.board tr:not(.gamefox-highlight) td:not(.gamefox-highlight), table.board th, .searchtopics, .board_nav .body,#main_col .topten ol li.alt,table.bracket td.divh, tbody.even td, tbody.even th, tr.even:not(.gamefox-highlight) td:not(.gamefox-highlight), tr.even th, #content ul.systems li.even {background-color:#2F2F2F !important;}
+table.board tr.even:not(.gamefox-highlight) td:not(.gamefox-highlight), table.board tr.even th {background-color:#252525 !important;}
+#content .pod div.head {background-color:#CE600E !important; border-color:#1B1B1B !important; }
+#content thead th, #content tr.head th {background:#444444 !important; color:#CCCCCC !important;}
+
+a {color:#FFE538 !important;}
+
+/** Header **/
+#logo {background:url(http://image.com.com/gamespot/www/images/layout/logo_gs.gif) no-repeat scroll 0 -324px !important;}
+#loginbox {background:transparent !important;}
+#header, #searchbox, #quicknav, #quicknav a, #quicknav p, #platformlist, #masthead .mh_wrap {
+    background-image: url("data:image/gif;base64,R0lGODlhAgBeAeZ%2BAN%2Fd3%2FDu8Ovp6%2B3r7enn6fHv8\
+    d7c3u7s7uXj5ePh4%2Bfl5%2BDe4Pz7%2FO%2Fv78%2FPz9HP0cRSGc3Nzv3%2B%2FeLg4u7r7vn5%2BeTk5Ozr6%2FT09\
+    M1gGuXl5lNLU%2FLy8tBmGvHx8d7e3uTi5Oro6uHf4fb29u7u7ubm5v%2F%2B%2F9jY2dLT09DR0eXl5enp6e3t7fPy8%2\
+    Fn5%2BPj4%2BOjm6ExMTPT089vb279KGcdWGefn6NHR0dDQz9bW1tfX1vf3%2BNPT1NjY18RUGcbGxujo6cJQGcBNGeHf4\
+    MteGvv6%2B9TU1eLj4shYGclaGdLS0%2Bvr6sBLGeHh4MNQGdXV1cpbGeHi4d9mG%2BLi4s%2FP0ODg4MFOGcVUGd%2Ff3\
+    85kGtzc3Nra2s9kGvz9%2FODf4P5%2FDL5JGezt7b9JGa2trc1jGvv7%2B%2F38%2Fb5HGf%2F%2F%2F9BkGtFlGtnZ2fT\
+    z88xeGs7Pz9%2Ff3uzs7MpcGtBlGujo6N3d3fX09fDw8Orq6tvc2%2Bvr6%2BPj4%2BHh4efn57u7u%2F%2F%2F%2FwAAA\
+    CH5BAEAAH4ALAAAAAACAF4BAAf%2FgB99glh9hVV9iHt9U4x9en0WkX0qfSWWfXx9c5t9K313oH15fXClfSx9JKp9DX12r\
+    30esn0OfTExfrq7vL2%2Bv7poaCbEJhLHEmZmXV0Mzs9lZUVFFdUVLi4vLzs7I94jdXUyMmxsLS0c6RweHg3uDSQkLCxhY\
+    Rf3F0tLKytAQDY2SpTQQFCDChUWLBw5EiVKkyZDhnjx8ubNhw906GjRggfPjBlbtqxZc6LkiR49dOjIkePJEyNGePBAQRO\
+    FEiU3bqTYmQIHDgdAHbhxE6FoBCpUfvwYMwaY06dQo0qdSrWq1au7MGAwwNUAgK9gFywQIWLChARoE4AAgaAtAgVwjRUQm\
+    EsgRAgBeAUM2DuAAoUDgA8EGByggOECDx5s2IDVqtauXsF%2BFSuWrNm0atm6jasABgy6de%2Fm5dv3b2DChQ8nXtw46pc\
+    vatTIkdOhdoc0abhwyZKFDJkMwDO0aUOESJw4UKAkSYIESY0aV6748AGhOgQnToIEsWJFiBAmTGjQECMGDJgzZ6RIaU01E\
+    AA7") !important; background-color:transparent !important;}
+#platformlist {border-color:#161616 !important;}
+
+#loginbox .msg {color:#A34A00 !important; font-size:12px !important;}
+#loginbox .nav a {color:#4C4C4C !important; font-size:10px !important;}
+#loginbox .nav a:first-child {border-color:#4C4C4C !important;}
+
+#quicknav a, #searchbox a {color:#565656 !important;}
+#platformlist a, #platformlist b, #platformlist {color:white !important; font-weight:normal !important;}
+
+/** Gutters and Containers **/
+#container {background-image: url("data:image/gif;base64,R0lGODlhAQC7ALMAAC8vLygoKCwsLCYmJioqKi4uL\
+    iEhIS0tLSQkJCIiIv%2F%2F%2FwAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAABALsAAAQWUMlJq7046827%2F2AoVka\
+    CDAEhHAUARAA7") !important;}
+#content {border-color:#161616 !important; background-color:#2F2F2F !important;}
+#layout {width:980px !important;}
+#gutters {background-image:url(http://img.gamespot.com/gamespot/www/images/layout/gutters/all_dark.gif)!important;}
+#gutter_btm {background-image:url(http://img.gamespot.com/gamespot/www/images/layout/gutters/all_dark_btm.gif) !important;}
+#gutter_top {background-image:url(http://img.gamespot.com/gamespot/www/images/layout/gutters/all_dark_top.gif) !important;}
+#mpu_col_wrap, #side_col {background:transparent !important;}
+
+/** Background **/
+body {background-color: #2F2F2F  !important;}
+
+
+/** Topic Icons **/
+.topics td img[src*="/topic.gif"], .topics td img[src*="/topic_closed.gif"], .topics td img[src*="/sticky.gif"], .topics td img[src*="/sticky_closed.gif"] {padding-left:18px !important; padding-top:21px !important; width:0 !important; height:0 !important;}
+.topics td img[src*="/topic.gif"] {background:url(http://image.com.com/gamespot/shared/forum/topic_icons/topic_status/icon_post-2.gif) !important;}
+.topics td img[src*="/topic_closed.gif"] {background:url(http://image.com.com/gamespot/shared/forum/topic_icons/topic_status/icon_post-2-lock.gif) !important;}
+.topics td img[src*="/sticky.gif"] {background:url(http://image.com.com/gamespot/shared/forum/topic_icons/topic_status/icon_post-2-pin.gif) !important;}
+.topics td img[src*="/sticky_closed.gif"] {background:url(http://image.com.com/gamespot/shared/forum/topic_icons/topic_status/icon_post-2-lock-pin.gif) !important; padding-top:22px !important;}
+
+
+/** Pods **/
+.pod:not(#board_wrap) > .body {background-color:#1D1D1D !important;}
+
+/** Side Pods **/
+#side_col .pod {background-image: url("data:image/gif;base64,R0lGODlhLgEKAIABAB0dHf%2F%2F%2FyH5BAE\
+    AAAEALAAAAAAuAQoAAAJBhI%2Bpy%2B0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf%2B7woAh8SiLiA0Kpf\
+    MFDLZjEqnlueTis1qrQUAOw%3D%3D") !important;}
+#side_col .pod .body {background-color:#1D1D1D !important; border-color:#1D1D1D !important;}
+
+/** Content Nav **/
+div.content_nav {background:transparent !important;}
+ul.content_nav {background:#1D1D1D !important;}
+ul.content_nav li, ul.content_nav a, ul.content_nav b, ul.content_nav span {background:none !important;}
+ul.content_nav a {color:#FF7400 !important;}
+
+/** Headings **/
+#content > .head > h1, #content > .content_nav > h1, .today > .head > h1 {color:#FCDB00 !important;}
+
+/** Board Elements **/
+.board_nav .body, .pagejumper {background:#212121 !important;}
+.searchtopics {background:#444444 !important;}
+
+/** Poll of the Day **/
+table.poll div.bar {background:#FFCC00 !important;}
+
+/** Message List **/
+table.message td {border:0 !important; border-bottom:12px solid #2F2F2F !important;}
+table.message tr:not(#helloworld) td.author:not(.gamefox-highlight) {background-color:#131313 !important;}
+table.message tr td.author {background-image: url(http://image.com.com/gamespot/shared/forum/user_icons/GameSpot/gamespot.gif) !important; background-repeat:no-repeat !important; background-position: 14px 16px !important; padding-top:100px !important;}
+table.message tr td.author + td:not(#helloworld) {background:#1F1F1F !important;}
+
+/** END OF SPOTFAQS CODE **/
+
+}
+
+/** END OF CSS **/
