@@ -37,7 +37,7 @@
     <groupbox>
       <caption label="&topicLists.label;"/>
 
-      <hbox>
+      <hbox align="center">
         <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset"
           oncommand="gamefox_options_dateFormat.change(this);" width="250">
           <menupopup>
@@ -48,15 +48,15 @@
         <textbox id="topicFormatCustom" emptytext="&custom.emptytext;"
           disabled="true" preference="date.topicCustom"/>
 
-        <html:a class="inline-link" href="#"
-          onclick="gamefox_options_dateFormat.help();">?</html:a>
+        <label><html:a class="inline-link" href="#"
+            onclick="gamefox_options_dateFormat.help();">?</html:a></label>
       </hbox>
     </groupbox>
 
     <groupbox>
       <caption label="&messageLists.label;"/>
 
-      <hbox>
+      <hbox align="center">
         <menulist flex="1" id="messageFormatMenu" width="250"
           preference="date.messagePreset"
           oncommand="gamefox_options_dateFormat.change(this);">
@@ -68,8 +68,8 @@
         <textbox id="messageFormatCustom" emptytext="&custom.emptytext;"
           disabled="true" preference="date.messageCustom"/>
 
-        <html:a class="inline-link" href="#"
-          onclick="gamefox_options_dateFormat.help();">?</html:a>
+        <label><html:a class="inline-link" href="#"
+            onclick="gamefox_options_dateFormat.help();">?</html:a></label>
       </hbox>
     </groupbox>
 
