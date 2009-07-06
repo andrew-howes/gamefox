@@ -219,6 +219,20 @@ var gamefox_lib =
         }
         return false;
 
+      case 'boardlist':
+        var div = doc.getElementById('board_wrap');
+        if (div)
+        {
+          var table = doc.evaluate('div[@class="body"]/table[@class="board"]',
+              div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          if (table && !gamefox_lib.onPage(doc, 'index'))
+          {
+            doc.gamefox.pageType = ['boardlist'];
+            return true;
+          }
+        }
+        return false;
+
       default:
         return doc.location.pathname.indexOf('/boards/' + page + '.php') == 0;
     }

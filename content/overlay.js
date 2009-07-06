@@ -143,7 +143,7 @@ var gamefox =
       {
         var rows = doc.getElementsByTagName('tr');
 
-        for (var i = 0; i < rows.length; i++)
+        for (var i = 1; i < rows.length; i++)
         {
           if (rows[i].cells[3])
           {
@@ -152,6 +152,40 @@ var gamefox =
             rows[i].cells[3].textContent = gamefox_date.parseFormat(
                 rows[i].cells[3].textContent, format);
           }
+        }
+      }
+    }
+
+    /* Board Manager (bman.php) */
+    else if (gamefox_lib.onPage(doc, 'bman'))
+    {
+      var rows = doc.getElementsByTagName('tr');
+      
+      for (var i = 1; i < rows.length; i++)
+      {
+        if (rows[i].cells[3])
+        {
+          var format = gamefox_date.getFormat('topic',
+              gamefox_lib.prefs.getIntPref('date.topicPreset'));
+          rows[i].cells[3].textContent = gamefox_date.parseFormat(
+              rows[i].cells[3].textContent, format);
+        }
+      }
+    }
+
+    /* Board List (boardlist.php) */
+    else if (gamefox_lib.onPage(doc, 'boardlist'))
+    {
+      var rows = doc.getElementsByTagName('tr');
+      
+      for (var i = 1; i < rows.length; i++)
+      {
+        if (rows[i].cells[3])
+        {
+          var format = gamefox_date.getFormat('topic',
+              gamefox_lib.prefs.getIntPref('date.topicPreset'));
+          rows[i].cells[3].textContent = gamefox_date.parseFormat(
+              rows[i].cells[3].textContent, format);
         }
       }
     }
