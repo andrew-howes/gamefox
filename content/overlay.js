@@ -62,7 +62,12 @@ var gamefox =
         if (node)
         {
           var dateSpan = doc.createElement('span');
-          dateSpan.appendChild(doc.createTextNode(' | ' + gamefox_lib.prefs.getCharPref('date')));
+          var format = gamefox_date.getFormat('clock',
+              gamefox_lib.prefs.getIntPref('elements.clock.formatPreset'));
+          var date = gamefox_date.parseFormat(gamefox_lib.prefs.getCharPref('date'),
+              format);
+
+          dateSpan.appendChild(doc.createTextNode(' | ' + date));
           node.appendChild(dateSpan);
         }
       }
