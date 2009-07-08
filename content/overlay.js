@@ -62,13 +62,11 @@ var gamefox =
         if (node)
         {
           var dateSpan = doc.createElement('span');
-          var format = gamefox_date.getFormat('clock',
-              gamefox_lib.prefs.getIntPref('elements.clock.formatPreset'));
-          var date = gamefox_date.parseFormat(gamefox_lib.prefs.getCharPref('date'),
-              format);
-
-          dateSpan.appendChild(doc.createTextNode(' | ' + date));
+          dateSpan.setUserData('date',
+              new Date(gamefox_lib.prefs.getCharPref('date')).toString(), null);
           node.appendChild(dateSpan);
+
+          gamefox.updateClock(dateSpan);
         }
       }
     }
@@ -1400,6 +1398,21 @@ var gamefox =
       gamefox_lib.alert('This command does not work on your platform. If you are '
           + 'using SeaMonkey, try installing the xSidebar extension.');
     }
+  },
+
+  updateClock: function(dateSpan)
+  {
+    var format = gamefox_date.getFormat('clock',
+        gamefox_lib.prefs.getIntPref('elements.clock.formatPreset'));
+    var dateStr = dateSpan.getUserData('date');
+    var dateObj = new Date(dateStr);
+    var date = gamefox_date.parseFormat(dateStr, format);
+
+    dateSpan.textContent = ' | ' + date;
+
+    dateSpan.setUserData('date',
+        new Date(dateObj.getTime() + 1000).toString(), null);
+    window.setTimeout(gamefox.updateClock, 1000, dateSpan);
   }
 };
 
