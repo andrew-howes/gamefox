@@ -91,6 +91,13 @@ Applied to ignore list message.
 Applied to system notification message. (v0.6.7)
 
 <h2 id="span">span</h2>
+<h3 id="span_gamefox-clock">
+span.gamefox-clock
+<span class="new">New in 0.7.4</span>
+</h3>
+
+Contains clock.
+
 <h3 id="span_gamefox-groupname">span.gamefox-groupname</h3>
 
 Contains group name(s) the adjacent username is a member of. (v0.6.5)

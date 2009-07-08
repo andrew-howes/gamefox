@@ -62,11 +62,14 @@ var gamefox =
         if (node)
         {
           var dateSpan = doc.createElement('span');
-          dateSpan.setUserData('date',
+          dateSpan.id = 'gamefox-clock';
+          var dateNode = doc.createTextNode('');
+          dateNode.setUserData('date',
               new Date(gamefox_lib.prefs.getCharPref('date')).toString(), null);
+          dateSpan.appendChild(dateNode);
           node.appendChild(dateSpan);
 
-          gamefox.updateClock(dateSpan);
+          gamefox.updateClock(dateNode);
         }
       }
     }
@@ -163,7 +166,7 @@ var gamefox =
     else if (gamefox_lib.onPage(doc, 'bman'))
     {
       var rows = doc.getElementsByTagName('tr');
-      
+
       for (var i = 1; i < rows.length; i++)
       {
         if (rows[i].cells[3])
@@ -180,7 +183,7 @@ var gamefox =
     else if (gamefox_lib.onPage(doc, 'boardlist'))
     {
       var rows = doc.getElementsByTagName('tr');
-      
+
       for (var i = 1; i < rows.length; i++)
       {
         if (rows[i].cells[3])
@@ -1400,19 +1403,19 @@ var gamefox =
     }
   },
 
-  updateClock: function(dateSpan)
+  updateClock: function(dateNode)
   {
     var format = gamefox_date.getFormat('clock',
         gamefox_lib.prefs.getIntPref('elements.clock.formatPreset'));
-    var dateStr = dateSpan.getUserData('date');
+    var dateStr = dateNode.getUserData('date');
     var dateObj = new Date(dateStr);
     var date = gamefox_date.parseFormat(dateStr, format);
 
-    dateSpan.textContent = ' | ' + date;
+    dateNode.nodeValue = ' | ' + date;
 
-    dateSpan.setUserData('date',
+    dateNode.setUserData('date',
         new Date(dateObj.getTime() + 1000).toString(), null);
-    window.setTimeout(gamefox.updateClock, 1000, dateSpan);
+    window.setTimeout(gamefox.updateClock, 1000, dateNode);
   }
 };
 
