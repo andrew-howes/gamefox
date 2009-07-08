@@ -10,9 +10,10 @@
 <!-- Page -->
 <!ENTITY customTitles.label "Custom window titles">
 <!ENTITY titlePrefixes.label "Window title page prefixes">
+<!ENTITY dateFormat.label "Custom date format">
 <!ENTITY blockAdServers.label "Block ad servers">
 <!ENTITY favoritesMenu.label "Add favorites menu">
-<!ENTITY dateFormat.label "Custom date format">
+<!ENTITY clock.label "Add clock">
 
 <!ENTITY topicLists.label "Topic Lists">
 

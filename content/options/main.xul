@@ -37,11 +37,13 @@
         type="bool"/>
       <preference id="elements.titleprefix" name="gamefox.elements.titleprefix"
         type="bool"/>
+      <preference id="date.enableFormat" name="gamefox.date.enableFormat"
+        type="bool"/>
       <preference id="elements.stopads" name="gamefox.elements.stopads"
         type="bool"/>
       <preference id="elements.favorites" name="gamefox.elements.favorites"
         type="bool"/>
-      <preference id="date.enableFormat" name="gamefox.date.enableFormat"
+      <preference id="elements.clock" name="gamefox.elements.clock"
         type="bool"/>
 
       <preference id="elements.topics.lastpostlink"
@@ -171,6 +173,8 @@
                     preference="elements.stopads"/>
                   <checkbox label="&favoritesMenu.label;"
                     preference="elements.favorites"/>
+                  <checkbox label="&clock.label;"
+                    preference="elements.clock"/>
                 </vbox>
               </hbox>
             </groupbox>
