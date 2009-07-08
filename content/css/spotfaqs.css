@@ -40,10 +40,10 @@ table.board tr.even:not(.gamefox-highlight) td:not(.gamefox-highlight), table.bo
 a {color:#FFE538 !important;}
 
 /** Header **/
-#logo {background:url(http://image.com.com/gamespot/www/images/layout/logo_gs.gif) no-repeat scroll 0 -324px !important;}
-#loginbox {background:transparent !important;}
-#header, #searchbox, #quicknav, #quicknav a, #quicknav p, #platformlist, #masthead .mh_wrap {background-image: url(data:image/gif;base64,R0lGODlhAgBeAeZ+AN/d3/Du8Ovp6+3r7enn6fHv8d7c3u7s7uXj5ePh4+fl5+De4Pz7/O/v78/Pz9HP0cRSGc3Nzv3+/eLg4u7r7vn5+eTk5Ozr6/T09M1gGuXl5lNLU/Ly8tBmGvHx8d7e3uTi5Oro6uHf4fb29u7u7ubm5v/+/9jY2dLT09DR0eXl5enp6e3t7fPy8/n5+Pj4+Ojm6ExMTPT089vb279KGcdWGefn6NHR0dDQz9bW1tfX1vf3+NPT1NjY18RUGcbGxujo6cJQGcBNGeHf4MteGvv6+9TU1eLj4shYGclaGdLS0+vr6sBLGeHh4MNQGdXV1cpbGeHi4d9mG+Li4s/P0ODg4MFOGcVUGd/f385kGtzc3Nra2s9kGvz9/ODf4P5/DL5JGezt7b9JGa2trc1jGvv7+/38/b5HGf///9BkGtFlGtnZ2fTz88xeGs7Pz9/f3uzs7MpcGtBlGujo6N3d3fX09fDw8Orq6tvc2+vr6+Pj4+Hh4efn57u7u////wAAACH5BAEAAH4ALAAAAAACAF4BAAf/gB99glh9hVV9iHt9U4x9en0WkX0qfSWWfXx9c5t9K313oH15fXClfSx9JKp9DX12r30esn0OfTExfrq7vL2+v7poaCbEJhLHEmZmXV0Mzs9lZUVFFdUVLi4vLzs7I94jdXUyMmxsLS0c6RweHg3uDSQkLCxhYRf3F0tLKytAQDY2SpTQQFCDChUWLBw5EiVKkyZDhnjx8ubNhw906GjRggfPjBlbtqxZc6LkiR49dOjIkePJEyNGePBAQROFEiU3bqTYmQIHDgdAHbhxE6FoBCpUfvwYMwaY06dQo0qdSrWq1au7MGAwwNUAgK9gFywQIWLChARoE4AAgaAtAgVwjRUQmEsgRAgBeAUM2DuAAoUDgA8EGByggOECDx5s2IDVqtauXsF+FSuWrNm0atm6jasABgy6de/m5dv3b2DChQ8nXtw46pcvatTIkdOhdoc0abhwyZKFDJkMwDO0aUOESJw4UKAkSYIESY0aV6748AGhOgQnToIEsWJFiBAmTGjQECMGDJgzZ6RIaU01EAA7) !important; background-color:transparent !important;}
-#platformlist {border-color:#161616 !important;}
+#masthead #logo {background:url(http://image.com.com/gamespot/www/images/layout/logo_gs.gif) no-repeat scroll 0 -324px !important;}
+#masthead #loginbox {background:transparent !important;}
+#masthead #header, #masthead #searchbox, #masthead #quicknav, #masthead #quicknav a, #masthead #quicknav p, #masthead #platformlist, #masthead .mh_wrap {background-image: url(data:image/gif;base64,R0lGODlhAgBeAeZ+AN/d3/Du8Ovp6+3r7enn6fHv8d7c3u7s7uXj5ePh4+fl5+De4Pz7/O/v78/Pz9HP0cRSGc3Nzv3+/eLg4u7r7vn5+eTk5Ozr6/T09M1gGuXl5lNLU/Ly8tBmGvHx8d7e3uTi5Oro6uHf4fb29u7u7ubm5v/+/9jY2dLT09DR0eXl5enp6e3t7fPy8/n5+Pj4+Ojm6ExMTPT089vb279KGcdWGefn6NHR0dDQz9bW1tfX1vf3+NPT1NjY18RUGcbGxujo6cJQGcBNGeHf4MteGvv6+9TU1eLj4shYGclaGdLS0+vr6sBLGeHh4MNQGdXV1cpbGeHi4d9mG+Li4s/P0ODg4MFOGcVUGd/f385kGtzc3Nra2s9kGvz9/ODf4P5/DL5JGezt7b9JGa2trc1jGvv7+/38/b5HGf///9BkGtFlGtnZ2fTz88xeGs7Pz9/f3uzs7MpcGtBlGujo6N3d3fX09fDw8Orq6tvc2+vr6+Pj4+Hh4efn57u7u////wAAACH5BAEAAH4ALAAAAAACAF4BAAf/gB99glh9hVV9iHt9U4x9en0WkX0qfSWWfXx9c5t9K313oH15fXClfSx9JKp9DX12r30esn0OfTExfrq7vL2+v7poaCbEJhLHEmZmXV0Mzs9lZUVFFdUVLi4vLzs7I94jdXUyMmxsLS0c6RweHg3uDSQkLCxhYRf3F0tLKytAQDY2SpTQQFCDChUWLBw5EiVKkyZDhnjx8ubNhw906GjRggfPjBlbtqxZc6LkiR49dOjIkePJEyNGePBAQROFEiU3bqTYmQIHDgdAHbhxE6FoBCpUfvwYMwaY06dQo0qdSrWq1au7MGAwwNUAgK9gFywQIWLChARoE4AAgaAtAgVwjRUQmEsgRAgBeAUM2DuAAoUDgA8EGByggOECDx5s2IDVqtauXsF+FSuWrNm0atm6jasABgy6de/m5dv3b2DChQ8nXtw46pcvatTIkdOhdoc0abhwyZKFDJkMwDO0aUOESJw4UKAkSYIESY0aV6748AGhOgQnToIEsWJFiBAmTGjQECMGDJgzZ6RIaU01EAA7) !important; background-color:transparent !important;}
+#masthead #platformlist {border-color:#161616 !important;}
 
 #loginbox .msg {color:#A34A00 !important; font-size:12px !important;}
 #loginbox .nav a {color:#4C4C4C !important; font-size:10px !important;}
@@ -122,6 +122,9 @@ table.message tr td.author + td:not(#helloworld) {background:#1F1F1F !important;
 
 /** Quickpost [GameFOX] **/ 
 #gamefox-quickpost-afloat {background: #333333 !important; border-color:#666666 !important;}
+
+/** FAQ Pages **/
+body > #body {color:black !important;}
 
 /** END OF SPOTFAQS CODE **/
 
