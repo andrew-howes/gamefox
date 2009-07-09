@@ -89,7 +89,7 @@ pref("gamefox.tracked.enabled", true);
 pref("gamefox.accounts", "{}");
 pref("gamefox.accounts.current", "");
 
-pref("gamefox.date", "");
+pref("gamefox.dateOffset", 0);
 pref("gamefox.date.enableFormat", false);
 pref("gamefox.date.topicPreset", 0);
 pref("gamefox.date.topicCustom", "");

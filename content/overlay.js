@@ -64,8 +64,11 @@ var gamefox =
           var dateSpan = doc.createElement('span');
           dateSpan.id = 'gamefox-clock';
           var dateNode = doc.createTextNode('');
+
+          // Set date based on offset
           dateNode.setUserData('date',
-              new Date(gamefox_lib.prefs.getCharPref('date')).toString(), null);
+              new Date(Date.now() + gamefox_lib.prefs.getIntPref('dateOffset'))
+              .toString(), null);
           dateSpan.appendChild(dateNode);
           node.appendChild(dateSpan);
 
