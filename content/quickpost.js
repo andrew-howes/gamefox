@@ -630,6 +630,7 @@ var gamefox_quickpost =
     var doc = gamefox_lib.getDocument(event);
 
     var quickpost = doc.getElementsByName('message')[0];
+    var scrollTop = quickpost.scrollTop;
     var tagStrStart = gamefox_quickpost.formatTag(this.name, false);
     var tagStrEnd = gamefox_quickpost.formatTag(this.name, true);
 
@@ -655,6 +656,7 @@ var gamefox_quickpost =
 
     quickpost.setSelectionRange(endPosition, endPosition);
     quickpost.focus();
+    quickpost.scrollTop = scrollTop;
 
     if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
       gamefox_messages.updateMessageCount(doc);
