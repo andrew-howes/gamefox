@@ -1415,7 +1415,7 @@ var gamefox =
 
     dateNode.setUserData('date',
         new Date(dateObj.getTime() + 1000).toString(), null);
-    window.setTimeout(gamefox.updateClock, 1000, dateNode);
+    dateNode.ownerDocument.defaultView.setTimeout(gamefox.updateClock, 1000, dateNode);
   }
 };
 
