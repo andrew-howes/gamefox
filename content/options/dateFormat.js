@@ -23,7 +23,7 @@ var gamefox_options_dateFormat =
   {
     // Populate menus with formats
     
-    var types = ['topic', 'message'];
+    var types = ['topic', 'message', 'clock'];
     var type, formatMenu, formats, formatPreset, item;
 
     for (var i = 0; i < types.length; i++)
@@ -52,7 +52,12 @@ var gamefox_options_dateFormat =
 
   change: function(menu)
   {
-    var type = menu.id == 'topicFormatMenu' ? 'topic' : 'message';
+    switch (menu.id)
+    {
+      case 'topicFormatMenu': var type = 'topic'; break;
+      case 'messageFormatMenu': var type = 'message'; break;
+      case 'clockFormatMenu': var type = 'clock'; break;
+    }
 
     if (menu.value == -1) // enable custom textbox
       document.getElementById(type + 'FormatCustom').disabled = false;

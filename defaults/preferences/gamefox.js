@@ -26,7 +26,6 @@ pref("gamefox.elements.marktc.marker", "(tc)");
 pref("gamefox.elements.stopads", true);
 pref("gamefox.elements.favorites", false);
 pref("gamefox.elements.clock", false);
-pref("gamefox.elements.clock.formatPreset", 0);
 pref("gamefox.elements.aml.marknewposts", true);
 pref("gamefox.elements.aml.pagejumper", true);
 pref("gamefox.elements.deletelink", true);
@@ -96,6 +95,8 @@ pref("gamefox.date.topicPreset", 0);
 pref("gamefox.date.topicCustom", "");
 pref("gamefox.date.messagePreset", 0);
 pref("gamefox.date.messageCustom", "");
+pref("gamefox.date.clockPreset", 0);
+pref("gamefox.date.clockCustom", "");
 
 pref("gamefox.topic.dblclick", 0);
 pref("gamefox.message.dblclick", false);

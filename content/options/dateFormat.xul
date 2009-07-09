@@ -32,6 +32,10 @@
         type="int"/>
       <preference id="date.messageCustom" name="gamefox.date.messageCustom"
         type="string"/>
+      <preference id="date.clockPreset" name="gamefox.date.clockPreset"
+        type="int"/>
+      <preference id="date.clockCustom" name="gamefox.date.clockCustom"
+        type="string"/>
     </preferences>
 
     <groupbox>
@@ -67,6 +71,26 @@
 
         <textbox id="messageFormatCustom" emptytext="&custom.emptytext;"
           disabled="true" preference="date.messageCustom"/>
+
+        <label><html:a class="inline-link" href="#"
+            onclick="gamefox_options_dateFormat.help();">?</html:a></label>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&clock.label;"/>
+
+      <hbox align="center">
+        <menulist flex="1" id="clockFormatMenu" width="250"
+          preference="date.clockPreset"
+          oncommand="gamefox_options_dateFormat.change(this);">
+          <menupopup>
+            <menuitem value="-1" label="&custom.label;"/>
+          </menupopup>
+        </menulist>
+
+        <textbox id="clockFormatCustom" emptytext="&custom.emptytext;"
+          disabled="true" preference="date.clockCustom"/>
 
         <label><html:a class="inline-link" href="#"
             onclick="gamefox_options_dateFormat.help();">?</html:a></label>

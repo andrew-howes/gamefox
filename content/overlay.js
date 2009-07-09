@@ -1406,7 +1406,7 @@ var gamefox =
   updateClock: function(dateNode)
   {
     var format = gamefox_date.getFormat('clock',
-        gamefox_lib.prefs.getIntPref('elements.clock.formatPreset'));
+        gamefox_lib.prefs.getIntPref('date.clockPreset'));
     var dateStr = dateNode.getUserData('date');
     var dateObj = new Date(dateStr);
     var date = gamefox_date.parseFormat(dateStr, format);
