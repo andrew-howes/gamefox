@@ -26,7 +26,7 @@ var GFdateGetter =
         if (aSubject.getRequestHeader('Host') == host)
           prefs.setIntPref('dateOffset',
               new Date(aSubject.getResponseHeader('Date')).getTime()
-              - Date.now());
+              + 500 - Date.now());
       }
       catch (e) {}
     }

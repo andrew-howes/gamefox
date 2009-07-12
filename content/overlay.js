@@ -64,11 +64,6 @@ var gamefox =
           var dateSpan = doc.createElement('span');
           dateSpan.id = 'gamefox-clock';
           var dateNode = doc.createTextNode('');
-
-          // Set date based on offset
-          dateNode.setUserData('date',
-              new Date(Date.now() + gamefox_lib.prefs.getIntPref('dateOffset'))
-              .toString(), null);
           dateSpan.appendChild(dateNode);
           node.appendChild(dateSpan);
 
@@ -89,7 +84,7 @@ var gamefox =
 
     doc.gamefox = {};
 
-    // BETATODO: myposts and some other pages are now missing this
+    // TODO: myposts and some other pages are now missing this
     //   Admin says board_wrap is "depreciated", so we should use something else
     var boardWrap = doc.getElementById('board_wrap');
 
@@ -528,8 +523,8 @@ var gamefox =
         // Status spans
         if (statusCond)
         {
-          // BETATODO: add a class to some element on message lists so they can
-          //   be identified properly
+          // TODO: add a class to some element on message lists so they can be
+          //   identified properly
           var statusType = rows[i].cells[0].getElementsByTagName('img')[0].src
               .match(/\/images\/default\/([^\.]+)\.gif/)[1];
           if (statusType != 'topic')
@@ -1408,17 +1403,12 @@ var gamefox =
 
   updateClock: function(dateNode)
   {
-    var format = gamefox_date.getFormat('clock',
-        gamefox_lib.prefs.getIntPref('date.clockPreset'));
-    var dateStr = dateNode.getUserData('date');
-    var dateObj = new Date(dateStr);
-    var date = gamefox_date.parseFormat(dateStr, format);
-
-    dateNode.nodeValue = ' | ' + date;
-
-    dateNode.setUserData('date',
-        new Date(dateObj.getTime() + 1000).toString(), null);
-    dateNode.ownerDocument.defaultView.setTimeout(gamefox.updateClock, 1000, dateNode);
+    var ms = Date.now() + gamefox_lib.prefs.getIntPref('dateOffset');
+    dateNode.nodeValue = ' | ' + gamefox_date.parseFormat(ms,
+        gamefox_date.getFormat('clock', gamefox_lib.prefs.getIntPref('date.clockPreset')));
+    // 1025 so we don't get "misses" so often
+    dateNode.ownerDocument.defaultView.setTimeout(gamefox.updateClock,
+        1025 - ms % 1000, dateNode);
   }
 };
 
