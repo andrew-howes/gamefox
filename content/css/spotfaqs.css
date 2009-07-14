@@ -39,6 +39,9 @@ table.board tr.even:not(.gamefox-highlight) td:not(.gamefox-highlight), table.bo
 
 a {color:#FFE538 !important;}
 
+span[style="color: blue;"] {color:yellow !important;}
+span[style*="color: purple;"], a[style*="color: purple;"] {color:lightgreen !important;}
+
 /** Header **/
 #masthead #logo {background:url(http://image.com.com/gamespot/www/images/layout/logo_gs.gif) no-repeat scroll 0 -324px !important;}
 #masthead #loginbox {background:transparent !important;}
@@ -134,16 +137,26 @@ table.message tr td.author + td:not(#helloworld) {background:#1F1F1F !important;
 /** FAQ Pages **/
 body > #body {color:black !important;}
 
-/** Visited Links **/
-table.board a:visited {font-weight:normal !important; color:red !important;}
-span.sticky-start + a, span.sticky_closed-start + a {color:orange !important;}
-span.sticky-start + a:visited, span.sticky_closed-start + a:visited {font-weight:normal !important; color:darkorange !important;}
-
 /** System Pages **/
 .content_filter .wrap {background-image: url(data:image/gif;base64,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) !important;}
 h3.region {color:#BBBBBB !important;}
 ul.releases table tr:not(.even) td {background-color:#2f2f2f !important;}
 ul.releases table tr.even td:not(#helloworld) {background-color:#252525 !important;}
+
+/** Answers **/
+.qna_hub #side_col .header, .content_qna > .header {background:#CE600E !important; border-color:#1B1B1B !important; color:white !important;}
+.content_qna > .header h2 {color:white !important;}
+.qna_hub #side_col ul {background:#1D1D1D url(http://img406.imageshack.us/img406/6239/sidepodbottoma.gif) repeat-x scroll left bottom !important; padding:0 10px !important;}
+.qna_hub #side_col li {background:transparent url(http://img.gamespot.com/gamespot/www/images/dividers/h/dots_666.gif) repeat-x scroll left bottom !important;}
+.qna_hub #side_col li:last-child {background:none !important;}
+
+
+/** Visited Links **/
+table.board a:visited, div.board_nav .body a:visited {font-weight:normal !important; color:red !important;}
+span.sticky-start + a, span.sticky_closed-start + a {color:orange !important;}
+span.sticky-start + a:visited, span.sticky_closed-start + a:visited {font-weight:normal !important; color:darkorange !important;}
+
+
 
 /** END OF SPOTFAQS CODE **/
 
