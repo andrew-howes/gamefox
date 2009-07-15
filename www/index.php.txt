@@ -53,5 +53,5 @@ will alert us of any problems we haven't discovered yet.
 
 To start using the nightlies, [install the XPI file here](/gfox/nightly/). It
 is recommended that you stay up-to-date by using Firefox's add-on manager to
-find updates for GameFOX. You can [revert to the stable releases](#download)
+find updates for GameFOX. You can [revert to the stable releases](#install)
 at any time.
