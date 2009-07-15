@@ -204,57 +204,15 @@
     </tr>
 
     <tr>
-        <td>span.sticky-end</td>
-        <td>Empty element used by status icon stylesheets.</td>
-        <td>0.6.7</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.sticky-start</td>
-        <td>Empty element used by status icon stylesheets.</td>
-        <td>0.6.7</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.sticky_closed-end</td>
-        <td>Empty element used by status icon stylesheets.</td>
-        <td>0.6.7</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.sticky_closed-start</td>
-        <td>Empty element used by status icon stylesheets.</td>
-        <td>0.6.7</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.topic_archived-end</td>
-        <td>Empty element used by status icon stylesheets.</td>
-        <td>0.6.7</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.topic_archived-start</td>
-        <td>Empty element used by status icon stylesheets.</td>
-        <td>0.6.7</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.topic_closed-end</td>
-        <td>Empty element used by status icon stylesheets.</td>
-        <td>0.6.7</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.topic_closed-start</td>
-        <td>Empty element used by status icon stylesheets.</td>
+        <td>span.sticky-end
+            <br>span.sticky-start
+            <br>span.sticky_closed-end
+            <br>span.sticky_closed-start
+            <br>span.topic_archived-end
+            <br>span.topic_archived-start
+            <br>span.topic_closed-end
+            <br>span.topic_closed-start</td>
+        <td>Empty elements used by status icon stylesheets.</td>
         <td>0.6.7</td>
         <td>-</td>
     </tr>
