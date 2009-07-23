@@ -143,12 +143,53 @@ h3.region {color:#BBBBBB !important;}
 ul.releases table tr:not(.even) td {background-color:#2f2f2f !important;}
 ul.releases table tr.even td:not(#helloworld) {background-color:#252525 !important;}
 
+
 /** Answers **/
 .qna_hub #side_col .header, .content_qna > .header {background:#CE600E !important; border-color:#1B1B1B !important; color:white !important;}
 .content_qna > .header h2 {color:white !important;}
-.qna_hub #side_col ul {background:#1D1D1D url(http://img406.imageshack.us/img406/6239/sidepodbottoma.gif) repeat-x scroll left bottom !important; padding:0 10px !important;}
+.qna_hub #side_col ul {background:#1D1D1D url(data:image/gif;base64,R0lGODlhLgEKAIAAAC8vLx0dHSH5BAAAAAAALAAAAAAuAQoAAAJBjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+7wIAh8SiDiA0KpfMFDLZjEqnlueTis1qrQUAOw==) repeat-x scroll left bottom !important; padding:0 10px !important;}
 .qna_hub #side_col li {background:transparent url(http://img.gamespot.com/gamespot/www/images/dividers/h/dots_666.gif) repeat-x scroll left bottom !important;}
 .qna_hub #side_col li:last-child {background:none !important;}
+.qna_hub .content_qna.hub > .header {margin-bottom:0 !important;}
+.qna_hub .content_qna.hub > .body.intro {background:#4D4D4D !important; color:white !important; border:1px solid #1B1B1B !important; border-top:0 !important;}
+
+form.search_qna fieldset.searchbox, form.search_qna fieldset.checkbox {background:#1D1D1D !important; border:none !important;}
+form.search_qna fieldset.checkbox {height:auto !important;}
+form.search_qna input.submit_search {color:white !important; font-size:12px !important; background: url(data:image/gif;base64,R0lGODlhSAAYAMQAANlaANdeANhdANxZANZrANZiANZwAN1YANZjANZtANZkAOSTANZmANZsANZoANZpANZgALpkAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAABIABgAAAX/YCSOZGmeaKqu5+K+cCzPdG3fsLgYfO//wKBwSCz2dImkcslsOp/QqFSpa1iv2Kx2y+16v9cqeEwuk3WEtHrNbrvf8LhcrXvY7/i8fs/v+/93dYCDhIWEOg6JiouMjY6PkJGSioiTlpeYlzoMnJ2en6ChoqOkpZ2bpqmqq6o6Cq+wsbKztLW2t7iwOgi8vb6/wMHCw8TFvToFycrLzM3Oz9DR0so6ENbX2Nna29zd3t/X1eDj5OXkOgHp6uvs7e7v8PHy6joC9vf4+fr7/P3+//d0ABhIsKDBgwgTKlzIkKCOARAjSpxIsaLFixgzRtRxoKPHjyBDihxJsqRJjyxSBqpcyXJECAA7) !important; height:24px !important; width:72px !important; text-align:center !important; vertical-align:bottom !important; -moz-appearance:none !important; padding:0 !important;}
+
+.content_qna .module {background:transparent !important; border:0 !important;}
+.content_qna .module > .header, .content_qna .module > .head {background:#CE600E !important; border:1px solid #1B1B1B !important; color:white !important; line-height:16px !important; padding:6px 10px !important; margin:0 !important;}
+.content_qna .module > .header h3, .content_qna .module > .header h2, .content_qna .module > .head h2 {color:white !important; font-size:14px !important;}
+.content_qna .module > .body {background:#1D1D1D !important;}
+.content_qna .module > .divider {border:0 !important;}
+.content_qna .module .view_block {background:#2F2F2F !important; border:0 !important; font-size:12px !important;}
+
+.content_qna div.qna_table {padding:0 !important;}
+.content_qna table.qna_table {}
+.content_qna .qna_table th {background:#454545 !important; color:white !important; padding: 7px 10px !important;}
+.content_qna .qna_table td {background:#2F2F2F url(http://image.com.com/gamespot/www/images/dividers/h/dots_666.gif) repeat-x scroll left bottom !important; border:0 !important; padding:10px 10px !important; font-size:12px !important;}
+.content_qna .qna_table tr:last-child td {background-image:none !important;}
+
+.content_qna .question_pod {background:transparent !important;}
+.content_qna .question_pod > .header_small {background:#1D1D1D !important; padding:7px 10px !important; border:0 !important;}
+.content_qna .question_pod > .header_small h2, .content_qna .question_pod > .header_small span {color:#CCCCCC !important;}
+.content_qna .question_pod > .body {color:white !important; font-size:12px !important; padding-left:3px !important; padding-right:3px !important;}
+.content_qna .question_pod > .body .question_title {font-size:16px !important;}
+.content_qna .question_pod > .body .question_title + p {background:transparent url(http://image.com.com/gamespot/www/images/dividers/h/dots_666.gif) repeat-x scroll left top !important; padding-top:10px !important;}
+.content_qna .question_pod > .body .divider {border:0 !important; background:transparent url(http://image.com.com/gamespot/www/images/dividers/h/dots_666.gif) repeat-x scroll left top !important; margin:0 !important; padding:0 0 10px !important;}
+
+.content_qna .accepted_answer {background:#1D1D1D !important; padding:10px 12px !important;}
+.content_qna .accepted_answer .title_bar {border:0 !important; background:transparent url(http://image.com.com/gamespot/www/images/dividers/h/dots_666.gif) repeat-x scroll left bottom !important; padding:0 !important;}
+.content_qna .accepted_answer .title_bar h3 {color:#FFEB00 !important; font-size:14px !important; margin-bottom:2px !important;}
+.content_qna .accepted_answer .title_bar span {float:none !important; clear:both !important; padding-bottom:4px !important; color:#CCCCCC !important;}
+.content_qna .accepted_answer .body {padding:0 !important; padding-top:4px !important;}
+
+.content_qna .answers > .header_small {background:#CE600E !important; border-color:#1B1B1B !important; color:white !important; margin-bottom:0 !important; border:1px solid #1B1B1B !important;}
+.content_qna .answers > .header_small span {display:none !important;}
+.content_qna .answers > .answer_pod {background:transparent !important;}
+.content_qna .answers > .answer_pod .title_bar {background:#454545 !important; padding:7px 10px 7px 10px !important;}
+.content_qna .answers > .answer_pod .title_bar h3 {font-weight:normal !important;}
+.content_qna .answers > .answer_pod .body {background:transparent !important; color:white !important; font-size:12px !important;}
 
 
 /** Visited Links **/
