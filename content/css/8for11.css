@@ -1,0 +1,423 @@
+/** Eight For Eleven (8for11) for GameFOX - Makes the v11 GameFAQs look like v8 **/
+/** By TakatoMatsuki and Swordless Link **/
+/** GameFOX Bundle Edition**/
+
+@-moz-document domain("gamefaqs.com") {
+
+
+body {background:white url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAKMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCtRRRX6IcgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB7N4F/wCRNsP+2n/oxqKKK+Dxn+8VP8T/ADOqOyP/2Q==) repeat-y !important;}
+a:visited:not(#helloworld) {color:white !important;}
+a:active:not(#helloworld) {color:red !important;}
+a:hover:not(#helloworld) {color:yellow !important;}
+table {border-collapse:separate !important; border-spacing:2px !important; margin:0 !important;}
+
+/** Ads **/
+.ad_skin, .ad_super {display:none !important;}
+#sky_col_wrap #side_col {position:absolute !important; top:260px !important; left:0 !important; margin:0 !important; padding:0 !important;}
+#sky_col_wrap .col_layout {padding:0 !important;}
+#sponsored_links {margin:2px !important;}
+body.bwp {background:white !important;}
+
+/** Header **/
+#masthead:not(#helloworld) {background:#6666FF none repeat scroll 0 0 !important; height:100% !important; width:162px !important; display:block !important; float:left !important; font-family: arial,sans-serif !important;}
+#masthead #header, #masthead #searchbox, #masthead #quicknav, #masthead #platformlist, .mh_wrap {width:162px !important; height:auto !important; margin:0 !important; padding:0 !important; background:#6666FF !important;}
+#masthead a {color:white !important; font-size:12.8px !important; line-height:16px !important;}
+
+#masthead #header {position:absolute !important; top:20px !important; left:0 !important; z-index:3 !important; width:100% !important; display:block !important; z-index:5 !important; height:auto !important; background: url(http://www.gamefaqs.com/images/bar2001.gif) no-repeat #6666FF  !important; background-position: 0px -20px !important;}
+#masthead #header .mh_wrap {width:auto !important; display:block !important; padding:0 !important; margin-left:162px !important; height:auto !important; text-align:center !important; vertical-align:middle !important; z-index:5 !important; }
+#masthead #header #logo {display:none !important;}
+#masthead #header #loginbox {padding:0 !important; margin:0 !important; width:100% !important; display:block !important; background:#6666FF !important; vertical-align:top !important; text-align:center !important; height:auto !important; margin-top:5px !important; margin-bottom:1px !important;}
+#masthead #header #loginbox .msg, #masthead #header #loginbox .nav, #masthead #header #loginbox a {display:inline !important; float:none !important; margin:0px !important; padding:0 !important; clear:none !important; width:auto !important; font-size:13px !important; font-weight:normal !important; border:0 !important;}
+#masthead #header #loginbox .msg {margin-right:16px !important;}
+#masthead #header #loginbox a:not(.last) b {display:none !important;}
+#masthead #header #loginbox a:not(.last):before {content: "Log Out" !important; line-height:16px !important; font-size:13px !important;}
+#masthead #header #loginbox .nav a.last {border-left:0px solid white !important; padding-left:0px !important; text-transform:capitalize !important;}
+#masthead #header #loginbox .nav a.last:not(#helloworld):before {content:"| " !important; text-decoration:none !important; color:white !important;}
+
+#masthead #searchbox {position:absolute !important; top:173px !important; left:0px !important; z-index:5 !important;}
+#masthead #searchbox form {width:auto !important; float:none !important; }
+#masthead #searchbox li {margin:0 !important; padding:0 !important; float:none !important; display:inline !important;}
+#masthead #searchbox form span.name {display:none !important;}
+#masthead #searchbox form span.data {float:none !important; background:transparent !important; border:0 !important; padding:0 !important; margin:0 !important; vertical-align:middle !important; position:relative !important; left:1px !important;}
+#masthead #searchbox form input#searchtextbox {width:83px !important; padding:1px 0 !important; border:2px inset threedface !important; vertical-align:middle !important; font-size:13.3px !important; line-height:16px !important; float:none !important; font-family:MS Shell Dlg, arial, sans-serif !important;}
+#masthead #searchbox form li.platform {display:none !important;}
+#masthead #searchbox form li.submit {height:auto !important; vertical-align:top !important; position:relative !important; left:-2px !important; top:1px !important;}
+#masthead #searchbox form li.submit span {background:transparent !important; width:auto !important; margin:0 !important;  float:none !important; vertical-align:top!important;}
+#masthead #searchbox form li.submit button {background: buttonface !important; border:2px outset buttonface !important; color:buttontext !important; cursor:default !important; line-height:normal !important; padding:0 6px !important; width:40px !important; height:22px !important;  float:none !important;}
+#masthead #searchbox form li.submit button span {font-weight:normal !important; font-size:0px !important; width:100% !important;  float:none !important;}
+#masthead #searchbox form li.submit button span:before {content:"Go" !important;font-size:13.4px !important;line-height:20px !important; color:black !important; font-family:MS Shell Dlg, arial, sans-serif !important;}
+#masthead #searchbox #rbx_netxp1_parent {width:162px !important; margin:0 !important; padding:0 !important; white-space:normal !important; text-align:left !important; color:white !important; font-size:11px !important;}
+#masthead #searchbox #rbx_netxp1_parent a {font-size:11px !important;}
+#masthead #searchbox #rbx_netxp1_parent .xpromositename {color:white !important;}
+
+#masthead #quicknav p {margin:0 !important; padding:0 !important; width:auto !important; padding:1px !important; padding-top:2px !important; position:relative !important; z-index:10 !important; }
+#masthead #quicknav a {display:block !important; width:auto !important; padding:0 !important; margin:0 !important; background:transparent !important; clear:both !important; height:auto !important;}
+
+#masthead #platformlist {position:absolute !important; top:0 !important; left:0px !important; width:100% !important; display:block !important; height:27px !important; background: url(http://www.gamefaqs.com/images/bar2001.gif) no-repeat #6666FF !important; color:white !important; font-size:13px !important;}
+#masthead #platformlist .mh_wrap {width:auto !important; display:block !important; padding:0 !important; margin-left:162px !important; height:auto !important; text-align:center !important; vertical-align:middle !important;}
+#masthead #platformlist .nav {padding:0 !important; display:inline !important; float:none !important; height:auto !important; line-height:16px !important; vertical-align:middle !important;}
+#masthead #platformlist .nav b {display:none !important;}
+#masthead #platformlist .nav a {margin:0 !important;}
+#masthead #platformlist .nav a[href*="/systems.html"] {display:none !important;}
+#masthead #platformlist div.jumper {padding:0 !important; width:auto !important; float:none !important; display:inline !important; height:auto !important; line-height:16px !important; }
+#masthead #platformlist div.jumper form {width:auto !important; padding:0 !important; float:none !important; display:inline !important; height:auto !important; line-height:16px !important;}
+#masthead #platformlist div.jumper select {font-size:13px !important; line-height:16px !important; width:auto !important; padding:0 !important; height:auto !important; float:none !important; display:inline !important;}
+
+
+/** Footer **/
+#footer, #footer div, #footer p {background:white !important; border:0 !important; font-family: arial,sans-serif !important; color:black !important; margin:0 !important; padding:0 !important; font-size:10px !important;}
+#footer a {color:black !important;}
+#footer #sitenav, #footer #broadnav, #footer #todayoncnet, #footer #cbsi_f, #footer p, #footer form, #footer label, #footer .nav {width:auto !important; display:inline !important; float:none !important; clear:none !important; margin:0 !important; padding:0 !important;}
+
+
+/** Containers **/
+#container:not(#helloworld) {display:block !important; width:100% !important; font-family: arial,sans-serif !important; }
+#gutters {margin-left: 162px !important; margin-top:42px !important; z-index:-9000 !important;}
+#layout {width:100% !important; }
+.col_layout {padding-left:0 !important; }
+#full_col_wrap .col_layout {padding-right:0 !important;}
+#sky_col_wrap, #full_col_wrap {margin-top: 0 !important;}
+#side_col, #col_layout, #mpu_col_wrap, #side_col_wrap, #sky_col_wrap {background:white !important; }
+
+/** Pods **/
+.pod {background:white !important; padding:0 !important;}
+.pod .head {background:#8080FF !important; padding:0 !important; color:white !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important; padding:2px !important; border:2px solid white !important; border-bottom:0px !important;}
+.pod .head h2, .pod .head h1 {background:#8080FF !important; padding:0 !important; font-size:15.2px !important; font-style:italic !important; color:white !important;}
+.pod .body {font-size:12.8px !important; color:black !important;}
+.pod .body a:not(#helloworld), .pod .body a:visited:not(#helloworld), .pod .body a:hover:not(#helloworld),  .pod .body a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+.pod:not(#board_wrap) .pod:not(#board_wrap) {margin:0 !important;}
+.pod:not(#board_wrap) .pod:not(#board_wrap) + .pod:not(#board_wrap) > .head {border-top:0 !important;}
+
+#side_col .pod {border:1px outset grey !important;}
+#side_col .pod .head {border:1px inset grey !important; padding:1px !important;}
+#side_col .pod .body, #side_col .pod .foot {border:1px inset grey !important; padding:1px !important; background:white !important; color:black !important; font-size:12.8px !important;}
+#side_col .pod .body a:not(#helloworld), #side_col .pod .body a:visited:not(#helloworld), #side_col .pod .body a:hover:not(#helloworld), #side_col .pod .body a:active:not(#helloworld), #side_col .pod .foot a:not(#helloworld), #side_col .pod .foot a:visited:not(#helloworld), #side_col .pod .foot a:hover:not(#helloworld), #side_col .pod .foot a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+
+/** Top Ten Pods **/
+.topten .pod {border:1px outset grey !important;}
+.topten .pod .head {border:1px inset grey !important; padding:1px !important;}
+.topten .pod .body, .topten .pod .foot {border:1px inset grey !important; padding:1px !important; background:white !important; color:black !important; font-size:12.8px !important;}
+.topten .pod .body li {padding:1px !important; color:black !important; border:0 !important; font-size:12.8px !important; background:white !important;}
+.topten a:not(#helloworld), .topten a:visited:not(#helloworld), .topten a:hover:not(#helloworld), .topten a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+
+/** Home Page **/
+.today {margin:0 !important; padding:0 !important; background: url(data:image/gif;base64,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) no-repeat center top !important; border:1px solid white !important; border-top:0 !important; padding-top:68px !important;}
+.today .head {margin:0 !important; border:0 !important;}
+.today .head h1 {display:block !important; float:none !important; background:#0000FF !important; color:white !important; font-weight:bold !important; padding:1px !important; border:1px solid white !important; text-align:center !important; font-size:15.2px !important;}
+.today .head .date {display:block !important; float:none !important; background:#8080FF !important; color:white !important; font-weight:bold !important; padding:1px !important; border:1px solid white !important; text-align:center !important; font-size:15.2px !important;margin:0 !important; font-style:italic !important;}
+.today .body {color:black !important; font-size:12.8px !important; border:1px solid white !important; padding:1px !important;}
+.today .body a:not(#helloworld), .today .body a:visited:not(#helloworld), .today .body a:hover:not(#helloworld), .today .body a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+
+/** System Pages **/
+.content_filter, .content_filter .wrap, .content_filter .body {border:0 !important; padding:0 !important; margin:0 !important; background:white !important;}
+.content_filter .body {border:2px solid white !important; margin-bottom:8px !important;}
+.content_filter .type {display:block !important; float:none !important; background:#8080FF !important; color:white !important; font-weight:bold !important; padding:1px !important; border-top:4px solid white !important; border-bottom:4px solid white !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important;}
+.content_filter .alpha, .content_filter .genre {border:0 !important; margin:0 !important; padding:0 !important;}
+.content_filter a:not(#helloworld), .content_filter a:visited:not(#helloworld), .content_filter a:hover:not(#helloworld), .content_filter a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+
+
+/** Above Board Nav **/
+#content > .head, #content > .head > h1, #content > div.content_nav > h1, #content > .head a, #content > .head > h1 a, #content > div.content_nav > h1 a {margin:0 !important; padding:0 !important; border:0 !important; color:black !important; font-style:italic !important; font-weight:bold !important; font-size:32px !important; text-align:center !important;}
+#content > .head, #content > div.content_nav > h1 {padding-top:6px !important; margin-bottom:8px !important;}
+
+div.content_nav {margin:0 !important; padding:0 !important;}
+div.content_nav a {color:white !important;}
+div.content_nav .crumbs {padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; padding:1px !important; border:2px white solid !important; border-bottom:0px !important; background: #0000FF none repeat scroll 0 0 !important;}
+
+ul.content_nav, ul.content_nav li, ul.content_nav li a, ul.content_nav li b, ul.content_nav li span {display:inline !important; padding:0 !important; margin:0 !important; background:transparent !important; border:0 !important; float:none !important; line-height:13px !important;}
+ul.content_nav {display:block !important; padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:13px !important; font-weight:normal !important; padding:1px !important; border:2px white solid !important; border-bottom:0px !important; background: #0000FF none repeat scroll 0 0 !important; position:relative !important; top:0 !important; left:0 !important; height:1em !important; vertical-align:bottom !important; padding-top:1.4em !important; padding-bottom:3px !important;}
+ul.content_nav li:not(.hi) {padding-left:0px !important; padding-right:4px !important;}
+ul.content_nav li.hi {position:absolute !important; left:0 !important; top:0.2em !important; width:100% !important; text-align:center !important; font-size:1.2em !important;}
+ul.content_nav li:not(.hi):before {content: "|" !important; margin-right:4px !important;}
+ul.content_nav li:first-child:before {content:"" !important;}
+ul.content_nav li:first-child.hi + li:before {content: "" !important;}
+
+
+/** Board Nav **/
+.board_nav, .board_nav .body {height:auto !important;}
+.board_nav .user, .board_nav .pages {float:none !important; padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; padding:1px !important; border:2px white solid !important; border-bottom:0px !important;}
+.board_nav .user a:not(#helloworld), .board_nav .pages a:not(#helloworld), .board_nav .user a:hover:not(#helloworld), .board_nav .pages a:hover:not(#helloworld), .board_nav .user a:visited:not(#helloworld), .board_nav .pages a:visited:not(#helloworld), .board_nav .user a:active:not(#helloworld), .board_nav .pages a:active:not(#helloworld) {color:white !important; text-decoration:underline !important; font-weight:bold !important;}
+.board_nav .user a:visited:not(#helloworld), .board_nav .pages a:visited:not(#helloworld) {color:white !important;}
+.board_nav .user a:active:not(#helloworld), .board_nav .pages a:active:not(#helloworld) {color:red !important;}
+.board_nav .user a:hover:not(#helloworld), .board_nav .pages a:hover:not(#helloworld) {color:yellow !important;}
+.board_nav .user {background: #0000FF none repeat scroll 0 0 !important; }
+.board_nav .pages {background:#8080FF none repeat scroll 0 0 !important; font-style:italic !important;}
+
+/** Jump to Page and Search Topics **/
+.pagejumper {margin:0 !important; background:#8080FF !important; color:white !important; font-style:italic !important; font-weight:bold !important; text-align:center !important; font-size:15.2px !important; padding:1px !important; border:2px solid white !important; line-height:15.2px !important; border-top:0 !important;}
+.pagejumper ul {text-align:center !important; float:none !important; display:block !important; padding-top:2px !important; padding-bottom:2px !important;}
+.pagejumper li {border:0 !important; margin:0 !important; padding:0 !important; float:none !important; display:inline !important; border-right:1px solid white !important; padding-right:4px !important; padding-left:4px !important;}
+.pagejumper li:last-child {border:0 !important;}
+.pagejumper a {color:white !important; text-decoration:underline !important;}
+.searchtopics {margin:0 !important; padding:1px !important; background:white !important; text-align:left !important; float:none !important; font-size:12.8px !important; color:black !important; border:2px solid white !important; position:relative !important;}
+.searchtopics form, .searchtopics label, .searchtopics span,  .searchtopics button,  .searchtopics input {margin:0 !important; padding:0 !important; float:none !important; width:auto !important; display:inline !important; background:white !important; position:relative !important; font-size:13.33px !important;}
+.searchtopics form label {padding-right:4px !important;}
+.searchtopics form button {background: buttonface !important; border:2px outset buttonface !important; color:buttontext !important; cursor:default !important; line-height:normal !important; padding:0 6px !important; width:53px !important; height:22px !important; position:relative !important; top:3px !important;}
+.searchtopics form button span {background:transparent !important; font-weight:normal !important; width:100% !important;  float:none !important; position:relative !important; top:-4px !important; left:0px !important; color:black !important; font-size:13.33px !important; text-transform:capitalize !important; font-family:MS Shell Dlg, arial, sans-serif !important;}
+.searchtopics form span.data input {font-family:MS Shell Dlg, arial, sans-serif !important;}
+
+
+/** Tables **/
+table {border:0 !important;}
+table tr td, table tbody tr:not(.head) th {padding:1px !important; color:black !important; border:0 !important; font-size:12.8px !important;}
+table tr:not(.gamefox-highlight) td:not(.gamefox-highlight), table tbody tr:not(.head) th {background:#d0d0ff !important;}
+table tr:not(#helloworld) td a:not(#helloworld), table tr td a:visited:not(#helloworld), table tr td a:hover:not(#helloworld), table tr td a:active:not(#helloworld), table tbody tr:not(.head) th  a:not(#helloworld), table tbody tr:not(.head) th  a:visited:not(#helloworld), table tbody tr:not(.head) th  a:hover:not(#helloworld), table tbody tr:not(.head) th  a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+table thead th, table tr.head th {background:#8080FF none repeat scroll 0 0 !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important;}
+table tr.head:not(#helloworld) th a:not(#helloworld), table tr.head:not(#helloworld) th a:active:not(#helloworld), table tr.head:not(#helloworld) th a:visited:not(#helloworld), table tr.head:not(#helloworld) th a:hover:not(#helloworld) {color:white !important; font-weight:bold !important;}
+
+ul.systems {padding:0 !important; border:1px solid white !important;}
+ul.systems li {padding:1px !important; color:black !important; border:0 !important; font-size:12.8px !important; background:#d0d0ff !important; border:1px solid white !important;}
+ul.systems li a:not(#helloworld), ul.systems li a:visited:not(#helloworld), ul.systems li a:hover:not(#helloworld), ul.systems li a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+
+/** Boards **/
+#board_wrap > .head {color:black !important; background:none !important; margin:0 !important; padding:1px !important; text-align:center !important; font-style:normal !important;}
+#board_wrap > .head > .title {background:none !important; color:black !important; margin:0 !important; padding:0 !important; font-size:16px !important; font-weight:bold !important; font-style:normal !important;}
+#board_wrap > p {background:white !important; text-align:center !important; font-size:12.8px !important; border:2px solid white !important; padding:1px !important; margin:0 !important;}
+p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom:0 !important;}
+#board_wrap > p a:not(#helloworld), #board_wrap > p a:visited:not(#helloworld), #board_wrap > p a:hover:not(#helloworld), #board_wrap > p a:active:not(#helloworld)  {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+.board td.count {font-weight:normal !important;}
+
+/** Board List **/
+.board_hub table col.count {width:8% !important;}
+.board_hub table col.lastpost {width:15% !important;}
+.board_hub p.gamefox-usernote:not(#helloworld) {position:relative !important; top:2px !important;}
+.board_hub .col_layout {padding:0 !important;}
+.board_hub #main_col {width:100% !important; float:none !important;}
+.board_hub #board_wrap {margin-bottom:0 !important; margin-top:87px !important;}
+.board_hub #board_wrap > .head {display:none !important;}
+.board_hub .board thead th {background:#0000FF !important;}
+.board_hub .board:not(#helloworld) a:not(#helloworld), .board_hub .board a:visited:not(#helloworld), .board_hub .board a:active:not(#helloworld), .board_hub .board a:hover:not(#helloworld) {font-weight:bold !important;}
+.board_hub .board:first-child {position:relative !important; top:2px !important;}
+.board_hub .board:first-child tr td:first-child {font-size:0 !important;}
+.board_hub .board:first-child tr td:first-child a {font-size:12.8px !important;}
+.board_hub .board + .board thead th {background:#8080FF !important;}
+.board_hub #side_col {float:none !important; margin:0 !important; padding:0 !important; border:0 !important; width:100% !important;}
+.board_hub #side_col .pod {width:auto !important; border:1px solid white !important; border-top:0 !important;}
+.board_hub #side_col .head {background:#8080FF !important; border:0 !important; padding:2px 5px !important; border:1px solid white !important; border-top:0 !important;}
+.board_hub #side_col .body {background:#D0D0FF !important; border:1px solid white !important;}
+.board_hub #side_col .body p {margin:0 !important;}
+.board_hub #side_col p:not(:last-child) {position:absolute !important;}
+.board_hub #side_col p:first-child {top:123px !important; left:0px !important; color:white !important; display:block !important; margin:0 !important; width:100% !important; text-align:center !important; padding-top:3px !important; padding-bottom:3px !important; font-size:15.2px !important; font-weight:bold !important; background:#0000FF !important; outline-offset:-2px !important; outline:2px solid white !important;}
+.board_hub #side_col p:first-child a:not(#helloworld) {color:white !important; font-weight:bold !important; font-size:15.2px !important;}
+.board_hub #side_col p:first-child a:visited:not(#helloworld) {color:white !important; font-weight:bold !important; font-size:15.2px !important;}
+.board_hub #side_col p:first-child a:active:not(#helloworld) {color:red !important; font-weight:bold !important; font-size:15.2px !important;}
+.board_hub #side_col p:first-child a:hover:not(#helloworld) {color:yellow !important; font-weight:bold !important; font-size:15.2px !important;}
+.board_hub #side_col p:first-child + p {top:51px !important; }
+.board_hub #side_col p:first-child + p:before {content: "NOTICE: " !important; font-weight:bold !important;}
+.board_hub #side_col p:first-child + p a:not(#helloworld), .board_hub #side_col p:first-child + p a:visited:not(#helloworld), .board_hub #side_col p:first-child + p a:active:not(#helloworld), .board_hub #side_col p:first-child + p a:hover:not(#helloworld) {color:black !important;}
+.board_hub #side_col p:first-child + p + p {top:96px !important;}
+.board_hub #side_col p:nth-last-child(2) {top:96px !important;}
+.board_hub #side_col p:first-child + p + p b {font-weight:normal !important;}
+.board_hub #side_col p:nth-last-child(2) b {font-weight:normal !important;}
+.board_hub #side_col p:nth-last-child(1n) {display:none !important;}
+.board_hub #side_col p:first-child, .board_hub #side_col p:last-child, .board_hub #side_col p:first-child + p, .board_hub #side_col p:nth-last-child(2) {display:block !important;}
+.board_hub #side_col p:last-child:not(#hellworld) a:not(#hellworld) {font-weight:bold !important;}
+
+
+
+/** Topic List **/
+.board.topics col.author {width:15% !important;}
+.board.topics col.count {width:0.5% !important;}
+.board.topics col.lastpost {width:12% !important;}
+
+/** Message List **/
+.msg_stats:before {content: "From: " !important;}
+.board.message tr:not(.even):not(.gamefox-highlight) td:not(.gamefox-highlight) {background:#b0b0ff !important;}
+.board.message tr.even td {background:#d0d0ff !important;}
+.msg_stats:not(#helloworld) a[href*="/detail.php"]:not(#helloworld), .msg_stats a[href*="/detail.php"]:active:not(#helloworld), .msg_stats a[href*="/detail.php"]:visited:not(#helloworld), .msg_stats a[href*="/detail.php"]:hover:not(#helloworld) {font-size:0 !important; text-decoration:none !important;}
+.msg_stats a[href*="/detail.php"]:not(#helloworld):before {content:"Message Detail" !important; font-size:12.8px !important;line-height:12.8px !important;text-decoration:underline !important;}
+
+
+
+/** Answers **/
+.qna_hub a:not(#helloworld), .qna_hub a:hover:not(#helloworld), .qna_hub a:active:not(#helloworld), .qna_hub a:visited:not(#helloworld), .content_qna a:not(#helloworld), .content_qna a:hover:not(#helloworld), .content_qna a:active:not(#helloworld), .content_qna a:visited:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important; font-size:12.8px !important;}
+
+.content_qna > .header, .content_qna > .header h2 {margin:0 !important; padding:0 !important; border:0 !important; color:black !important; font-style:italic !important; font-weight:bold !important; font-size:32px !important; text-align:center !important; background:white !important; float:none !important;}
+.content_qna > .body.intro {margin:0 !important; padding:1px !important; font-size:12.8px !important; color:black !important; border:2px solid white !important;}
+
+.content_qna .module {margin:0 !important; padding:0 !important; border:0 !important; background:white !important; border:1px solid white !important;}
+.content_qna .module .header {background:#0000FF none repeat scroll 0 0 !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important; margin:0 !important; padding:1px !important; border:1px solid white !important; position:relative !important;}
+.content_qna .module .header h3, .content_qna .module .header h2 {color:white !important; font-size:15.2px !important; float:none !important;}
+.content_qna .module .header span {display:none !important;}
+.content_qna .module .head {background:#0000FF none repeat scroll 0 0 !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important; margin:0 !important; padding:1px !important; border:1px solid white !important; position:relative !important;}
+.content_qna .module .head .title {color:white !important; font-size:15.2px !important; float:none !important;}
+.content_qna .module .body {padding:0 !important;}
+.content_qna .module .body .view_block, .content_qna .module .split_text {background:#b0b0FF !important; text-align:center !important; border:1px solid white !important; color:black !important; padding:2px !important;}
+.content_qna .module .body .view_block a:not(#helloworld), .content_qna .module .split_text a:not(#helloworld) {font-size:11px !important;}
+.content_qna .module .split_text p {margin:0 !important;}
+
+.content_qna .question_pod {}
+.content_qna .question_pod .header_small {background:#b0b0ff !important; color:black !important; margin:0 !important; padding:1px !important; border:1px solid white !important;}
+.content_qna .question_pod .header_small h2, .content_qna .question_pod .header_small span {float:none !important; display:inline !important; color:black !important; font-size:12.8px !important; font-weight:normal !important;}
+.content_qna .question_pod .header_small h2:after {content:" - " !important;}
+.content_qna .question_pod .header_small span strong {font-weight:normal !important;}
+.content_qna .question_pod .body {margin:0 !important; background:#d0d0FF !important; border:1px solid white !important; padding:1px !important;}
+.content_qna .question_pod .body .question_title {font-size:12.8px !important; margin:0 !important; color:black !important; font-weight:bold !important;}
+.content_qna .question_pod .body p {font-size:12.8px !important; margin:0 !important; color:black !important; font-weight:normal !important;}
+.content_qna .question_pod .divider {display:none !important;}
+.content_qna .question_pod h4 {background:#b0b0ff !important; color:black !important; margin:0 !important; margin-left:-1px !important; margin-right:-1px !important; padding:1px !important; border:0 !important; border-top:2px solid white !important; border-bottom:2px solid white !important; color:black !important; font-size:12.8px !important; font-weight:normal !important;}
+.content_qna .question_status {margin:0 !important; padding:1px !important; border:1px solid white !important;  font-size:12.8px !important; background:yellow !important; color:black !important; text-align:center !important; border-bottom:0 !important;}
+.content_qna .question_status div {margin:0 !important; padding:0 !important; float:none !important;}
+
+
+.content_qna .accepted_answer {position:relative !important;}
+.content_qna .accepted_answer .title_bar {background:#b0b0ff !important; color:black !important; margin:0 !important; padding:1px !important; border:1px solid white !important;}
+.content_qna .accepted_answer .title_bar h3, .content_qna .accepted_answer .title_bar span {float:none !important; display:inline !important; color:black !important; font-size:12.8px !important; font-weight:normal !important;}
+.content_qna .accepted_answer .title_bar h3:after {content:" - " !important;}
+.content_qna .accepted_answer .body {margin:0 !important; padding:1px !important; border:1px solid white !important; font-size:12.8px !important; color:black !important; background:#d0d0FF !important; }
+.content_qna .accepted_answer .body p {width:100% !important; margin:0 !important; padding:0 !important;}
+.content_qna .accepted_answer .body div {position:absolute !important; top:2px !important; right:4px !important;}
+
+.content_qna .answers {margin:0 !important; border:1px solid white !important;}
+.content_qna .answers .header_small {background:#0000ff !important; color:white !important; margin:0 !important; padding:1px !important; border:1px solid white !important; text-align:center !important;}
+.content_qna .answers .header_small h2 {float:none !important; display:inline !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; text-align:center !important;}
+.content_qna .answers .header_small span {display:none !important;}
+.content_qna .answer_pod {position:relative !important;}
+.content_qna .answer_pod .title_bar {background:#b0b0ff !important; color:black !important; margin:0 !important; padding:1px !important; border:1px solid white !important;}
+.content_qna .answer_pod .title_bar h3 {float:none !important; display:inline !important; color:black !important; font-size:12.8px !important; font-weight:normal !important;}
+.content_qna .answer_pod .title_bar span {display:none !important;}
+.content_qna .answer_pod .body {margin:0 !important; padding:1px !important; border:1px solid white !important; font-size:12.8px !important; color:black !important; background:#d0d0FF !important;}
+.content_qna .answer_pod .body p {width:100% !important; margin:0 !important; padding:0 !important;}
+.content_qna .answer_pod .body .rating {position:absolute !important; top:0 !important; right:0 !important; background-image:url(data:image/gif;base64,R0lGODlhPwA8AJEDAP8AAAD/AAAAAP///yH5BAEAAAMALAAAAAA/ADwAAALhnI+py+0Po5y02ouz3kvwrwgeMhriKYLVWA5se8Cqw5Jmi87PGduu7NI1gKngj8QTdpI3UzOk7CydvRswmovVqtcoNVHEfb1LlBhJznTT7Lb7DY/L5/S6/c5Z14tVaza+RSUCQFgIoKcUaDRY+MfGdMZoeOhGtCV5yJTmGHYzSYgIYjkm0Mj3qNkZAyo3amTC2mp2poUnZYubq7vL2+v7CywUKguGZDYnEBAQSdSqzGw8/HGivOxz2rdZva166kiGwn3Z3Ja8/axYorlJXa0q6Hy+nD72Nkv7tCsdzN/vD1IAADs=) !important;}
+.content_qna .answer_pod .body div:not(.rating) {position:absolute !important; top:2px !important; right:4px !important;}
+.content_qna .answer_pod .body .rating a:not(#helloworld) {padding-top:2px !important; text-decoration:none !important;}
+.content_qna .answer_pod .body .rating a.up {padding-left:0px !important; padding-right:13px !important;}
+
+.content_qna div.qna_table {border:0 !important; margin:0 !important; padding:0 !important;}
+.content_qna table.qna_table th {background:#8080FF !important; color:white !important; text-align:center !important;}
+.content_qna table.qna_table tr.highlighted td, .content_qna table.qna_table tr.footer td {background:#b0b0FF !important;}
+.content_qna table.qna_table td.question span a:not(#helloworld) {font-weight:bold !important;}
+
+
+
+
+/** Answers Hub **/
+.qna_hub #side_col .header {background:#8080FF !important; padding:0 !important; color:white !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important; border:1px outset grey !important; border-bottom:0 !important;}
+.qna_hub #side_col .header h3 {background:#8080FF !important; padding:1px !important; font-size:15.2px !important; font-style:italic !important; color:white !important; float:none !important; border:1px inset grey !important;  border-bottom:0 !important;}
+.qna_hub #side_col ul {border:1px outset grey !important; padding:0px !important; background:white !important; color:black !important; font-size:12.8px !important;}
+.qna_hub #side_col ul li {border-left:1px inset grey !important; border-right:1px inset grey !important; background:white !important; padding:2px !important;}
+.qna_hub #side_col ul li:first-child {border-top:1px inset grey !important;}
+.qna_hub #side_col ul li:last-child {border-bottom:1px inset grey !important;}
+
+
+
+/** Topic List Icons **/
+.gamefox-status {vertical-align:top !important; margin-left:0 !important; margin-right:1px !important;}
+a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
+
+
+/** Quickpost **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
+#gamefox-quickpost-normal {width:auto !important; border:2px solid white !important; border-top:0 !important; border-right:3px solid white !important;}
+#gamefox-quickpost-normal #gamefox-quickpost-form:before {content:"Quickpost" !important; text-align: center !important; width: 100% !important; clear: both !important; display:block !important; background-color: #0000ff !important; color: #ffffff !important; font-weight: bold !important; font-size: 15px !important; padding:1px !important;}
+#gamefox-quickpost-form {text-align: center !important; width: 100% !important; clear: both !important;}
+#gamefox-message {width: 70% !important; border-left: 2px solid #0000ff !important; border-right: 2px solid #0000ff !important; font-size:12.8px !important; font-family: MS Shell Dlg,arial,sans-serif !important;}
+#gamefox-message-count, #gamefox-title-count {margin-left: 2em !important;}
+
+
+/** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
+.gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; -moz-border-radius: 10px !important; opacity: 0.90 !important;}
+
+
+/** Visited Links **/
+table.board:not(#helloworld) a:visited:not(#helloworld), .board_hub #side_col p:last-child:not(#helloworld) a:visited:not(#helloworld) {color:#0000AF !important;}
+
+
+/** Last Post **/
+table.board:not(#helloworld) a.gamefox-last-post-link:not(#helloworld) {color:black !important; text-decoration:none !important;}
+
+
+
+}
+
+
+/** Stuff for pages that don't play nice with other pages **/
+
+/** Board List **/
+@-moz-document url("http://www.gamefaqs.com/boards/index.php") {
+#layout {position:relative !important;}
+}
+
+/** Board Manager / Bman / Batman **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/bman") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Board Manager" !important;}
+#main_col > .pod > .head {display:none !important;}
+.board:first-child thead th {background:#0000FF !important;}
+.board:first-child td.actions {padding-left:2px !important; padding-right:2px !important;}
+.board:first-child tr td:first-child {font-size:0 !important;}
+.board:first-child tr td:first-child a {font-size:12.8px !important;}
+.board:first-child:not(#helloworld) a[href*="move=fav"]:not(#helloworld) {font-size:0px !important; text-decoration:none !important;}
+.board:first-child:not(#helloworld) a[href*="move=fav"]:not(#helloworld):after {content: "Favs" !important; font-size:12.8px !important; text-decoration:underline !important;}
+.board:last-child {position:relative !important; top:-2px !important;}
+.board tr td:first-child:not(#helloworld) a:not(#helloworld) {font-weight:bold !important;}
+}
+
+/** Topic List, Topic Search **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/gentopic"), url-prefix("http://www.gamefaqs.com/boards/search") {
+#board_wrap > .head {display:none !important;}
+}
+
+/** User Profiles **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/user.php") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "User Information" !important;}
+#main_col > .pod > .head {position:relative !important; top:22px !important;}
+#main_col > .pod > .board_nav {position:relative !important; top:-23px !important;}
+}
+
+/** Active Messages Posted **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/myposts") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Active Messages Posted" !important;}
+#main_col > .pod > .head {display:none !important;}
+}
+
+/** Karma **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/karma") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Karma Info" !important;}
+#main_col > .pod > .head {display:none !important;}
+}
+
+/** Modhist **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/modhist") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Moderated/Deleted Messages" !important;}
+#main_col > .pod > .head {display:none !important;}
+}
+
+/** Board Display Settings **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/settings") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Board Display Settings" !important;}
+#main_col > .pod > .head {display:none !important;}
+}
+
+/** Contact Info **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/contact") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Public Contact Information" !important;}
+#main_col > .pod > .head {display:none !important;}
+}
+
+/** Sig / Quote **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/sigquote") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Board Signature and Quote" !important;}
+#main_col > .pod > .head {display:none !important;}
+}
+
+/** Tracked Topics **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/tracked") {
+#main_col > .pod > .head {display:none !important;}
+}
+
+/** Ignore list **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/index.php?action=ignorelist") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important; content: "Ignored Users" !important;}
+#main_col > .pod > .head {display:none !important;}
+}
+
+
+/** END OF CSS **/
