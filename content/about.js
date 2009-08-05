@@ -37,6 +37,7 @@ var gamefox_about =
       contributors: ['contributorBox',
                     [['Ant P.', 'GFCode'],
                      ['Poo Poo Butter', 'CSS'],
+                     ['Swordless Link', 'CSS'],
                      ['TakatoMatsuki', 'CSS'],
                      ['Ricapar', 'CSS'],
                      ['selmiak', 'CSS'],
