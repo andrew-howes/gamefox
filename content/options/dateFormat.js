@@ -24,11 +24,12 @@ var gamefox_options_dateFormat =
     // Populate menus with formats
     
     var types = ['topic', 'message', 'clock'];
-    var type, formatMenu, formats, formatPreset, item;
+    var type, formatMenu, formats, formatPreset, item, customTextbox;
 
     for (var i = 0; i < types.length; i++)
     {
       type = types[i];
+      customTextbox = document.getElementById(type + 'FormatCustom');
       formatMenu = document.getElementById(type + 'FormatMenu');
       formats = gamefox_date.listFormats(type);
       formatPreset = document.getElementById('date.' + type + 'Preset').value;
@@ -46,23 +47,40 @@ var gamefox_options_dateFormat =
 
       // Activate custom format textbox
       if (formatPreset == '-1')
-        document.getElementById(type + 'FormatCustom').disabled = false;
+        customTextbox.disabled = false;
+
+      // Preview custom formats
+      this.previewCustom(customTextbox);
     }
   },
 
   change: function(menu)
   {
-    switch (menu.id)
-    {
-      case 'topicFormatMenu': var type = 'topic'; break;
-      case 'messageFormatMenu': var type = 'message'; break;
-      case 'clockFormatMenu': var type = 'clock'; break;
-    }
+    var type = this.idToType(menu.id);
 
     if (menu.value == -1) // enable custom textbox
       document.getElementById(type + 'FormatCustom').disabled = false;
     else
       document.getElementById(type + 'FormatCustom').disabled = true;
+  },
+
+  previewCustom: function(textbox)
+  {
+    var type = this.idToType(textbox.id);
+    var menu = document.getElementById(type + 'FormatMenu');
+    var item = menu.getItemAtIndex(menu.itemCount - 1);
+
+    // TODO l10n
+    if (!textbox.value.length)
+      item.label = 'Custom';
+    else
+      item.label = 'Custom - '
+        + gamefox_date.parseFormat(null, textbox.value);
+  },
+
+  idToType: function(menuId)
+  {
+    return menuId.substr(0, menuId.indexOf('F'));
   },
 
   help: function()

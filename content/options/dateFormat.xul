@@ -50,7 +50,8 @@
         </menulist>
 
         <textbox id="topicFormatCustom" emptytext="&custom.emptytext;"
-          disabled="true" preference="date.topicCustom"/>
+          disabled="true" preference="date.topicCustom"
+          oninput="gamefox_options_dateFormat.previewCustom(this);"/>
 
         <label><html:a class="inline-link" href="#"
             onclick="gamefox_options_dateFormat.help();">?</html:a></label>
@@ -70,7 +71,8 @@
         </menulist>
 
         <textbox id="messageFormatCustom" emptytext="&custom.emptytext;"
-          disabled="true" preference="date.messageCustom"/>
+          disabled="true" preference="date.messageCustom"
+          oninput="gamefox_options_dateFormat.previewCustom(this);"/>
 
         <label><html:a class="inline-link" href="#"
             onclick="gamefox_options_dateFormat.help();">?</html:a></label>
@@ -90,7 +92,8 @@
         </menulist>
 
         <textbox id="clockFormatCustom" emptytext="&custom.emptytext;"
-          disabled="true" preference="date.clockCustom"/>
+          disabled="true" preference="date.clockCustom"
+          oninput="gamefox_options_dateFormat.previewCustom(this);"/>
 
         <label><html:a class="inline-link" href="#"
             onclick="gamefox_options_dateFormat.help();">?</html:a></label>
