@@ -1,8 +1,5 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY doubleClickTab.label "Double Click">
-<!ENTITY contextTab.label "Context Menu">
-
 <!ENTITY topicLists.label "When double clicking on topic list row:">
 
 <!ENTITY doNothing.label "Do nothing">
@@ -20,22 +17,3 @@
 <!ENTITY filter.label "Filter messages">
 
 <!ENTITY doubleClickQuote.label "Double click message body to quote message">
-
-<!ENTITY menu.label "Context Menu">
-<!ENTITY mainMenu.label "Main">
-<!ENTITY mainMenu.pages.label "Pages">
-<!ENTITY mainMenu.tagTopic.label "Tag Topic">
-<!ENTITY mainMenu.trackTopic.label "Track Topic">
-<!ENTITY mainMenu.quote.label "Quote">
-<!ENTITY mainMenu.filter.label "Filter">
-<!ENTITY mainMenu.delete.label "Delete/Close">
-<!ENTITY mainMenu.hlGroups.label "User Groups">
-<!ENTITY mainMenu.breakTags.label "Break HTML Tags">
-
-<!ENTITY submenu.label "Submenu">
-<!ENTITY submenu.sidebar.label "Sidebar">
-<!ENTITY submenu.tagList.label "Tags">
-<!ENTITY submenu.tracked.label "Tracked">
-<!ENTITY submenu.accounts.label "Accounts">
-<!ENTITY submenu.favorites.label "Favorites">
-<!ENTITY submenu.links.label "Links">

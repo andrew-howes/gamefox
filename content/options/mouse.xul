@@ -27,7 +27,6 @@
   <prefpane id="paneMouse">
 
     <preferences>
-      <!-- Double click actions -->
       <preference id="topic.dblclick" name="gamefox.topic.dblclick"
         type="int"/>
       <preference id="myposts.dblclick" name="gamefox.myposts.dblclick"
@@ -36,193 +35,50 @@
         name="gamefox.message.header.dblclick" type="int"/>
       <preference id="message.dblclick" name="gamefox.message.dblclick"
         type="bool"/>
-
-      <!-- Main context menu -->
-      <preference id="context.pagelist" name="gamefox.context.pagelist"
-        type="bool"/>
-      <preference id="context.tag" name="gamefox.context.tag" type="bool"/>
-      <preference id="context.track" name="gamefox.context.track" type="bool"/>
-      <preference id="context.quote" name="gamefox.context.quote" type="bool"/>
-      <preference id="context.filter" name="gamefox.context.filter"
-        type="bool"/>
-      <preference id="context.delete" name="gamefox.context.delete"
-        type="bool"/>
-      <preference id="context.usergroups" name="gamefox.context.usergroups"
-        type="bool"/>
-      <preference id="context.breaktags" name="gamefox.context.breaktags"
-        type="bool"/>
-
-      <!-- Sub context menu -->
-      <preference id="context.sidebar" name="gamefox.context.sidebar"
-        type="bool"/>
-      <preference id="context.taglist" name="gamefox.context.taglist"
-        type="bool"/>
-      <preference id="context.tracked" name="gamefox.context.tracked"
-        type="bool"/>
-      <preference id="context.accounts" name="gamefox.context.accounts"
-        type="bool"/>
-      <preference id="context.favorites" name="gamefox.context.favorites"
-        type="bool"/>
-      <preference id="context.links" name="gamefox.context.links"
-        type="bool"/>
     </preferences>
 
-    <tabbox id="mousePrefs" flex="1">
-      <tabs id="tabsElement" tabGroup="mouse">
-        <tab id="doubleClickTab" label="&doubleClickTab.label;"/>
-        <tab id="contextTab" label="&contextTab.label;"/>
-      </tabs>
+    <hbox align="center">
+      <label value="&topicLists.label;"/>
+      <menulist preference="topic.dblclick">
+        <menupopup>
+          <menuitem label="&doNothing.label;" value="0"/>
+          <menuitem label="&showPageLinks.label;" value="1"/>
+          <menuitem label="&toLastPage.label;" value="4"/>
+          <menuitem label="&toLastPost.label;" value="2"/>
+          <menuitem label="&tagTopic.label;" value="3"/>
+          <menuitem label="&trackTopic.label;" value="5"/>
+        </menupopup>
+      </menulist>
+    </hbox>
 
-      <tabpanels flex="1">
+    <hbox align="center">
+      <label value="&activeMessages.label;"/>
+      <menulist preference="myposts.dblclick">
+        <menupopup>
+          <menuitem label="&doNothing.label;" value="0"/>
+          <menuitem label="&showPageLinks.label;" value="1"/>
+          <menuitem label="&toLastPage.label;" value="4"/>
+          <menuitem label="&toLastPost.label;" value="2"/>
+          <menuitem label="&tagTopic.label;" value="3"/>
+          <menuitem label="&trackTopic.label;" value="5"/>
+        </menupopup>
+      </menulist>
+    </hbox>
 
-        <!-- Double Click -->
-        <tabpanel orient="vertical" flex="1">
+    <hbox align="center">
+      <label value="&messageLists.label;"/>
+      <menulist preference="message.header.dblclick">
+        <menupopup>
+          <menuitem label="&doNothing.label;" value="0"/>
+          <menuitem label="&quickWhois.label;" value="1"/>
+          <menuitem label="&quoteMessage.label;" value="2"/>
+          <menuitem label="&filter.label;" value="3"/>
+        </menupopup>
+      </menulist>
+    </hbox>
 
-          <hbox align="center">
-            <label value="&topicLists.label;"/>
-            <menulist preference="topic.dblclick">
-              <menupopup>
-                <menuitem label="&doNothing.label;" value="0"/>
-                <menuitem label="&showPageLinks.label;" value="1"/>
-                <menuitem label="&toLastPage.label;" value="4"/>
-                <menuitem label="&toLastPost.label;" value="2"/>
-                <menuitem label="&tagTopic.label;" value="3"/>
-                <menuitem label="&trackTopic.label;" value="5"/>
-              </menupopup>
-            </menulist>
-          </hbox>
-
-          <hbox align="center">
-            <label value="&activeMessages.label;"/>
-            <menulist preference="myposts.dblclick">
-              <menupopup>
-                <menuitem label="&doNothing.label;" value="0"/>
-                <menuitem label="&showPageLinks.label;" value="1"/>
-                <menuitem label="&toLastPage.label;" value="4"/>
-                <menuitem label="&toLastPost.label;" value="2"/>
-                <menuitem label="&tagTopic.label;" value="3"/>
-                <menuitem label="&trackTopic.label;" value="5"/>
-              </menupopup>
-            </menulist>
-          </hbox>
-
-          <hbox align="center">
-            <label value="&messageLists.label;"/>
-            <menulist preference="message.header.dblclick">
-              <menupopup>
-                <menuitem label="&doNothing.label;" value="0"/>
-                <menuitem label="&quickWhois.label;" value="1"/>
-                <menuitem label="&quoteMessage.label;" value="2"/>
-                <menuitem label="&filter.label;" value="3"/>
-              </menupopup>
-            </menulist>
-          </hbox>
-
-          <checkbox label="&doubleClickQuote.label;"
-            preference="message.dblclick"/>
-
-        </tabpanel>
-
-        <!-- Context Menu -->
-        <tabpanel orient="vertical" flex="1">
-
-          <groupbox>
-            <caption label="&mainMenu.label;"/>
-
-            <grid>
-              <columns>
-                <column flex="1"/>
-                <column flex="1"/>
-                <column flex="1"/>
-                <column flex="1"/>
-              </columns>
-              <rows>
-                <row>
-                  <hbox>
-                    <checkbox label="&mainMenu.pages.label;"
-                      preference="context.pagelist"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&mainMenu.tagTopic.label;"
-                      preference="context.tag"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&mainMenu.trackTopic.label;"
-                      preference="context.track"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&mainMenu.quote.label;"
-                      preference="context.quote"/>
-                  </hbox>
-                </row>
-                <row>
-                  <hbox>
-                    <checkbox label="&mainMenu.filter.label;"
-                      preference="context.filter"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&mainMenu.delete.label;"
-                      preference="context.delete"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&mainMenu.hlGroups.label;"
-                      preference="context.usergroups"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&mainMenu.breakTags.label;"
-                      preference="context.breaktags"/>
-                  </hbox>
-                </row>
-              </rows>
-            </grid>
-          </groupbox>
-
-          <groupbox>
-            <caption label="&submenu.label;"/>
-
-            <grid>
-              <columns>
-                <column flex="1"/>
-                <column flex="1"/>
-                <column flex="1"/>
-                <column flex="1"/>
-              </columns>
-              <rows>
-                <row>
-                  <hbox>
-                    <checkbox label="&submenu.sidebar.label;"
-                      preference="context.sidebar"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&submenu.tagList.label;"
-                      preference="context.taglist"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&submenu.tracked.label;"
-                      preference="context.tracked"/>
-                  </hbox>
-                </row>
-                <row>
-                  <hbox>
-                    <checkbox label="&submenu.accounts.label;"
-                      preference="context.accounts"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&submenu.favorites.label;"
-                      preference="context.favorites"/>
-                  </hbox>
-                  <hbox>
-                    <checkbox label="&submenu.links.label;"
-                      preference="context.links"/>
-                  </hbox>
-                </row>
-              </rows>
-            </grid>
-          </groupbox>
-
-        </tabpanel>
-      </tabpanels>
-    </tabbox>
+    <checkbox label="&doubleClickQuote.label;"
+      preference="message.dblclick"/>
 
   </prefpane>
 

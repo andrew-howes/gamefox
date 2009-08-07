@@ -3,6 +3,7 @@
 <!ENTITY pageTab.label "Page">
 <!ENTITY postingTab.label "Posting">
 <!ENTITY sidebarTab.label "Sidebar">
+<!ENTITY contextTab.label "Context Menu">
 <!ENTITY boardSettingsTab.label "Board Settings">
 
 <!ENTITY settings.label "Settings">
@@ -76,6 +77,25 @@
 <!ENTITY accountSwitcher.label "Account switcher">
 <!ENTITY tagsList.label "Tags list">
 <!ENTITY trackedList.label "Tracked topics list">
+
+<!-- Context Menu -->
+<!ENTITY mainMenu.label "Main">
+<!ENTITY mainMenu.pages.label "Pages">
+<!ENTITY mainMenu.tagTopic.label "Tag Topic">
+<!ENTITY mainMenu.trackTopic.label "Track Topic">
+<!ENTITY mainMenu.quote.label "Quote">
+<!ENTITY mainMenu.filter.label "Filter">
+<!ENTITY mainMenu.delete.label "Delete/Close">
+<!ENTITY mainMenu.hlGroups.label "User Groups">
+<!ENTITY mainMenu.breakTags.label "Break HTML Tags">
+
+<!ENTITY submenu.label "Submenu">
+<!ENTITY submenu.sidebar.label "Sidebar">
+<!ENTITY submenu.tagList.label "Tags">
+<!ENTITY submenu.tracked.label "Tracked">
+<!ENTITY submenu.accounts.label "Accounts">
+<!ENTITY submenu.favorites.label "Favorites">
+<!ENTITY submenu.links.label "Links">
 
 <!-- Board Settings -->
 <!ENTITY boardSettings.label "Board Settings">
