@@ -58,6 +58,7 @@ var gamefox_quote =
   format: function(event, quoteMsg, postUser, postDate, postNum)
   {
     var doc = event.target.ownerDocument;
+    var quickpost = doc.getElementById('gamefox-message');
 
     /* Parse message body */
     var body = quoteMsg.
@@ -121,6 +122,11 @@ var gamefox_quote =
       qhead += '\n';
     }
 
+    // If the header is already in the message, don't repeat it
+    // Useful for quoting multiple selections
+    if (quickpost.value.indexOf(qhead) != -1)
+      qhead = '';
+
     var qbody, quote;
     switch (gamefox_lib.prefs.getCharPref('quote.style'))
     {
@@ -141,7 +147,6 @@ var gamefox_quote =
         quote = qhead + body + '</p></i>';
         break;
     }
-    var quickpost = doc.getElementById('gamefox-message');
 
     // try to insert at the cursor position, but only if the cursor isn't in
     // a stupid place like after the signature separator
