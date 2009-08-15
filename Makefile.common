@@ -76,10 +76,10 @@ help:
 	@echo "  make prepare   - automatically update files for a release"
 
 info:
-	@echo    "version            ${VERSION}"
-	@echo    "release file       ${XPI}"
-	@echo -e "jar files          $(shell echo ${JAR_FILES} | sed 's/ /\\n                   /g' )"
-	@echo -e "xpi files          $(shell echo ${XPI_FILES} | sed 's/ /\\n                   /g' )"
+	@echo "version            ${VERSION}"
+	@echo "release file       ${XPI}"
+	@echo "jar files          $(shell echo ${JAR_FILES} | sed 's/ /\\n                   /g' )"
+	@echo "xpi files          $(shell echo ${XPI_FILES} | sed 's/ /\\n                   /g' )"
 
 xpi: ${XPI}
 jar: ${JAR}
