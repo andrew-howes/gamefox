@@ -1,214 +1,132 @@
-# Heavily based on vimperator's makefile
+# Heavily based on vimperator's (now using liberator) makefile
 
 #### configuration
 
-TOP           = $(shell pwd)
-OS            = $(shell uname -s)
-BUILD_DATE    = $(shell date "+%Y-%m-%d %H:%M:%S")
-NIGHTLY_DATE  = $(shell date "+%Y%m%d")
-GIT_VERSION   = $(shell git describe)
+TOP             = $(shell pwd)
+OS              = $(shell uname -s)
+BUILD_DATE      = $(shell date "+%Y-%m-%d %H:%M:%S")
+NIGHTLY_DATE    = $(shell date "+%Y%m%d")
+GIT_VERSION     = $(shell git describe)
+DISTDIR		    = release/dist/${VERSION}
 
-JAR_TXT_FILES = $(shell find -L content skin locale     \
-                        -type f                         \
-                        -a \(                           \
-                                -path '*.js'            \
-                             -o -path '*.css'           \
-                             -o -path '*.xul'           \
-                             -o -path '*.*html'         \
-                             -o -path '*.dtd'           \
-                             -o -path '*.properties'    \
-                             -o -path '*/NEWS*'         \
-                        \)                              \
-                )
-JAR_BIN_FILES = $(shell find content skin               \
-                        -type f                         \
-                        -a \(                           \
-                                -path '*.png'           \
-                             -o -path '*.gif'           \
-                             -o -path '*.bz2'           \
-                        \)                              \
-                )
-JAR_FILES     = ${JAR_BIN_FILES} ${JAR_TXT_FILES}
-JAR_DIRS      = $(foreach f,${JAR_FILES},$(dir $f))
-JAR           = chrome/${NAME}.jar
+JAR_FILES       = content/NEWS
+JAR_DIRS        = content skin locale
+JAR_TEXTS       = js css xul html xhtml dtd properties
+JAR_BINS        = png gif
 
-XPI_TXT_FILES = install.rdf chrome.manifest COPYING defaults/preferences/gamefox.js \
-                components/policy.js components/dategetter.js
-XPI_BIN_FILES = ${JAR}
-XPI_FILES     = ${XPI_BIN_FILES} ${XPI_TXT_FILES}
-XPI_DIRS      = $(foreach f,${XPI_FILES},$(dir $f))
-XPI_NAME      = ${NAME}-${VERSION}.xpi
-XPI           = ${XPI_NAME}
-MOZXPI        = ${NAME}-${VERSION}_amo.xpi
-NIGHTLYXPI    = ${NAME}-${VERSION}${NIGHTLY_DATE}.xpi
+JAR             = chrome/$(NAME).jar
 
-BUILD_DIR     = build.${VERSION}.${OS}
-BUILD_JAR_DIR = ${BUILD_DIR}/jar
-BUILD_XPI_DIR = ${BUILD_DIR}/xpi
+XPI_FILES       = install.rdf COPYING
+XPI_DIRS        = defaults components chrome
+XPI_TEXTS       = js
+XPI_BINS        = jar
 
-BUILD_JAR_SUBDIRS = $(sort ${JAR_DIRS:%=${BUILD_JAR_DIR}/%})
-BUILD_XPI_SUBDIRS = $(sort ${XPI_DIRS:%=${BUILD_XPI_DIR}/%})
+XPI_NAME        = $(NAME)-$(VERSION)
+XPI_BASE        = release/xpi
+XPI_PATH        = $(XPI_BASE)/$(XPI_NAME)
+XPI             = $(XPI_PATH).xpi
 
-ZIP = zip
-SED = sed
-PERL = perl
+MOZXPI_PATH     = $(XPI_BASE)/$(XPI_NAME)_amo
+MOZXPI          = $(MOZXPI_PATH).xpi
+
+NIGHTLYXPI_PATH = $(XPI_BASE)/$(XPI_NAME)$(NIGHTLY_DATE)
+NIGHTLYXPI      = $(NIGHTLYXPI_PATH).xpi
+
+MAKE_JAR        = VERSION="$(VERSION)" DATE="$(BUILD_DATE)" GIT_VERSION="$(GIT_VERSION)" \
+                  NIGHTLY_DATE="$(NIGHTLY_DATE)" sh $(TOP)/common/make_jar.sh
+MAKE_DIST       = VERSION="$(VERSION)" XPI_NAME="$(XPI_NAME)" XPI="$(XPI)" \
+                  DISTDIR="$(DISTDIR)" MOZXPI="$(MOZXPI)" sh $(TOP)/common/make_dist.sh
+
+AWK = awk
+
+.SILENT:
 
 #### rules
 
-.PHONY: all help info jar xpi mozxpi install clean distclean nightly upnightly uprelease sync prepare
+TARGETS = all help info jar xpi mozxpi nightly clean distclean $(JAR) $(XPI) upnightly uprelease sync prepare
+$(TARGETS:%=\%.%):
+	echo MAKE $* $(@:$*.%=%)
+	$(MAKE) -C $* $(@:$*.%=%)
+
+.PHONY: $(TARGETS)
 all: help
 
 help:
-	@echo "${NAME} ${VERSION} build"
+	@echo "$(NAME) $(VERSION) build"
 	@echo "General targets:"
 	@echo "  make help      - display this help"
 	@echo "  make info      - show some info about the system"
-	@echo "  make jar       - build a JAR (${JAR})"
-	@echo "  make xpi       - build a XPI (${XPI_NAME})"
-	@echo "  make mozxpi    - build a XPI (${MOZXPI}) for AMO"
-	@echo "  make nightly   - build a nightly (${NIGHTLYXPI})"
+	@echo "  make jar       - build a JAR ($(JAR))"
+	@echo "  make xpi       - build a XPI ($(XPI))"
+	@echo "  make mozxpi    - build a XPI ($(MOZXPI)) for AMO"
+	@echo "  make nightly   - build a nightly ($(NIGHTLYXPI))"
 	@echo "  make clean     - clean up"
 	@echo "  make distclean - clean up more"
 	@echo "Maintainer targets:"
+	@echo "  make dist      - build a dist (stable release)"
+	@echo "Admin targets:"
 	@echo "  make upnightly - upload a nightly snapshot and its update RDF"
 	@echo "  make uprelease - upload a new release and accompanying files"
 	@echo "  make sync      - synchronize the www git tree with the server"
-	@echo "  make prepare   - automatically update files for a release"
 
 info:
-	@echo "version            ${VERSION}"
-	@echo "release file       ${XPI}"
-	@echo "jar files          $(shell echo ${JAR_FILES} | sed 's/ /\\n                   /g' )"
-	@echo "xpi files          $(shell echo ${XPI_FILES} | sed 's/ /\\n                   /g' )"
+	@echo "version            $(VERSION)"
+	@echo "release file       $(XPI)"
+	@echo "xpi files          $(XPI_FILES)"
 
-xpi: ${XPI}
-jar: ${JAR}
-
-mozxpi: ${MOZXPI}
-nightly: ${NIGHTLYXPI}
+xpi: $(XPI)
+mozxpi: $(MOZXPI)
+nightly: $(NIGHTLYXPI)
+jar: $(JAR)
 
 clean:
 	@echo "Cleanup..."
-	${Q}rm -f ${JAR} ${XPI} ${MOZXPI} ${NIGHTLYXPI}
-	${Q}find . -name '*~' -exec rm -f {} \;
+	rm -f $(JAR) $(XPI) $(MOZXPI) $(NIGHTLYXPI)
+	find . -name '*~' -exec rm -f {} \;
 
 distclean: clean
 	@echo "More cleanup..."
-	${Q}rm -rf ${BUILD_DIR}
+	rm -rf $(BUILD_DIR)
 
-upnightly: ${NIGHTLYXPI}
-	${Q}( cd release/ && ./mknightly.sh ${NIGHTLYXPI} ${VERSION}${NIGHTLY_DATE} ${VERSION} )
+upnightly: $(NIGHTLYXPI)
+	( cd release/ && ./mknightly.sh $(NIGHTLYXPI) $(VERSION)$(NIGHTLY_DATE) $(VERSION) )
 
-uprelease: ${XPI} ${MOZXPI}
-	${Q}( cd release/ && ./mkrelease.py -x ${XPI_NAME} \
-		--hash "sha1:$(shell sha1sum ${XPI} |cut -d ' ' -f 1)" \
-		${VERSION} > release.rdf )
-	${Q}( cd release/ && ./mknews.py ${VERSION} > ${VERSION}.xhtml )
-	${Q}( cd release/ && ./put.py ../${XPI} ${XPI_NAME} ${VERSION}.xhtml news/${VERSION}.xhtml)
-	${Q}( rm -f release/${VERSION}.xhtml )
-	@echo
-	@echo "Sign ./release/release.rdf with McCoy and upload."
+dist: $(XPI) $(MOZXPI)
+	$(MAKE_DIST)
 
 sync:
 	${Q}( cd www/ && ./sync.py )
 
-prepare:
-	${Q}${PERL} -pi -e "s,pre</em:version>,</em:version>," install.rdf
-	${Q}${PERL} -pi -e "s/pre//" Makefile
-	${Q}${PERL} -0777pi -e "s/^.*/$(shell date +%Y-%m-%d):/" content/NEWS
-
 #### xpi
 
-${BUILD_XPI_SUBDIRS}:
-	${Q}mkdir -p $@
-
-${XPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
+$(XPI): $(JAR)
 	@echo "Building XPI..."
-	${Q}mkdir -p $(dir ${XPI})
-	${Q}for f in ${XPI_BIN_FILES} ; do \
-		cp $$f ${BUILD_XPI_DIR}/$$f ; \
-	    done
-	${Q}for f in ${XPI_TXT_FILES} ; do \
-		${SED} -e "s,###VERSION###,${VERSION},g" \
-		       -e "s,###GIT_VERSION###,${GIT_VERSION},g" \
-		       -e "s,###DATE###,${BUILD_DATE},g" \
-		       < $$f > ${BUILD_XPI_DIR}/$$f ; \
-		( diff -q $$f ${BUILD_XPI_DIR}/$$f 1>/dev/null ) || \
-		( echo "modified: $$f" ; \
-		  diff -u $$f ${BUILD_XPI_DIR}/$$f | grep '^[-+][^-+]' ) ; \
-	    done
-	${Q}${PERL} -pe 's,\s(skin|content|locale)/, jar:${JAR}!/\1/,' \
-	           < chrome.manifest > ${BUILD_XPI_DIR}/chrome.manifest
-	${Q}( cd ${BUILD_XPI_DIR} && ${ZIP} -r9 ${TOP}/${XPI} ${XPI_FILES} )
+	mkdir -p $(XPI_PATH)
+	$(AWK) -v 'name=$(NAME)' -f $(TOP)/common/process_manifest.awk $(TOP)/chrome.manifest \
+		>$(XPI_PATH)/chrome.manifest
+	$(MAKE_JAR) xpi "$(XPI)" "$(XPI_DIRS)" "$(XPI_TEXTS)" "$(XPI_BINS)" "$(XPI_FILES)"
 	@echo "SUCCESS: $@"
 
-${MOZXPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
+$(MOZXPI): $(JAR)
 	@echo "Building XPI for Mozilla Addons..."
-	${Q}mkdir -p $(dir ${MOZXPI})
-	${Q}for f in ${XPI_BIN_FILES} ; do \
-		cp $$f ${BUILD_XPI_DIR}/$$f ; \
-	    done
-	${Q}for f in ${XPI_TXT_FILES} ; do \
-		${SED} -e "s,###VERSION###,${VERSION},g" \
-		       -e "s,###GIT_VERSION###,${GIT_VERSION},g" \
-		       -e "s,###DATE###,${BUILD_DATE},g" \
-			   -e "s,<em:updateURL>.*</em:updateURL>,,g" \
-			   -e "s,<em:updateKey>.*</em:updateKey>,,g" \
-		       < $$f > ${BUILD_XPI_DIR}/$$f ; \
-		( diff -q $$f ${BUILD_XPI_DIR}/$$f 1>/dev/null ) || \
-		( echo "modified: $$f" ; \
-		  diff -u $$f ${BUILD_XPI_DIR}/$$f | grep '^[-+][^-+]' ) ; \
-	    done
-	${Q}${PERL} -pe 's,\s(skin|content|locale)/, jar:${JAR}!/\1/,' \
-	           < chrome.manifest > ${BUILD_XPI_DIR}/chrome.manifest
-	${Q}( cd ${BUILD_XPI_DIR} && ${ZIP} -r9 ${TOP}/${MOZXPI} ${XPI_FILES} )
+	mkdir -p $(MOZXPI_PATH)
+	$(AWK) -v 'name=$(NAME)' -f $(TOP)/common/process_manifest.awk $(TOP)/chrome.manifest \
+		>$(MOZXPI_PATH)/chrome.manifest
+	$(MAKE_JAR) mozxpi "$(MOZXPI)" "$(XPI_DIRS)" "$(XPI_TEXTS)" "$(XPI_BINS)" "$(XPI_FILES)"
 	@echo "SUCCESS: $@"
 
-${NIGHTLYXPI}: ${BUILD_XPI_SUBDIRS} ${XPI_FILES}
+$(NIGHTLYXPI): $(JAR)
 	@echo "Building nightly XPI..."
-	${Q}mkdir -p $(dir ${NIGHTLYXPI})
-	${Q}for f in ${XPI_BIN_FILES} ; do \
-		cp $$f ${BUILD_XPI_DIR}/$$f ; \
-	    done
-	${Q}for f in ${XPI_TXT_FILES} ; do \
-		${SED} -e "s,###VERSION###,${VERSION},g" \
-		       -e "s,###GIT_VERSION###,${GIT_VERSION},g" \
-		       -e "s,###DATE###,${BUILD_DATE},g" \
-			   -e "s,<em:version>\([0-9.]\+\)pre</em:version>,<em:version>\1pre${NIGHTLY_DATE}</em:version>,g" \
-			   -e "s,<em:updateURL>.*</em:updateURL>,<em:updateURL>http://beyondboredom.net/gfox/nightly/nightly.rdf</em:updateURL>,g" \
-			   -e "s,<em:updateKey>.*</em:updateKey>,<em:updateKey>MIGfMA0GCSqGSIb3DQEB\
-AQUAA4GNADCBiQKBgQC7eAy22UWonorb/WB+eeDeE6eMDgRB9gjRt4LGzoOB+jgxc1ZkOMuLwbU599zu+GvW038T\
-LCyUgpvEC6Nh5NoOryFCKbPNM/Hun+GPITbSl59ZqpRj9mFie5ASlPnU3xI+FG5czTJLsBSAZF6pfhnCNzfcVD9mH\
-gvy+qXLl73fXQIDAQAB</em:updateKey>,g" \
-		       < $$f > ${BUILD_XPI_DIR}/$$f ; \
-		( diff -q $$f ${BUILD_XPI_DIR}/$$f 1>/dev/null ) || \
-		( echo "modified: $$f" ; \
-		  diff -u $$f ${BUILD_XPI_DIR}/$$f | grep '^[-+][^-+]' ) ; \
-	    done
-	${Q}${PERL} -pe 's,\s(skin|content|locale)/, jar:${JAR}!/\1/,' \
-	           < chrome.manifest > ${BUILD_XPI_DIR}/chrome.manifest
-	${Q}( cd ${BUILD_XPI_DIR} && ${ZIP} -r9 ${TOP}/${NIGHTLYXPI} ${XPI_FILES} )
+	mkdir -p $(NIGHTLYXPI_PATH)
+	$(AWK) -v 'name=$(NAME)' -f $(TOP)/common/process_manifest.awk $(TOP)/chrome.manifest \
+		>$(NIGHTLYXPI_PATH)/chrome.manifest
+	$(MAKE_JAR) nightly "$(NIGHTLYXPI)" "$(XPI_DIRS)" "$(XPI_TEXTS)" "$(XPI_BINS)" "$(XPI_FILES)"
 	@echo "SUCCESS: $@"
 
 
 #### jar
 
-${BUILD_JAR_SUBDIRS}:
-	${Q}mkdir -p $@
-
-${JAR}: ${BUILD_JAR_SUBDIRS} ${JAR_FILES}
+${JAR}:
 	@echo "Building JAR..."
-	${Q}mkdir -p $(dir ${JAR})
-	${Q}for f in ${JAR_BIN_FILES} ; do \
-		cp $$f ${BUILD_JAR_DIR}/$$f ; \
-	    done
-	${Q}for f in ${JAR_TXT_FILES} ; do \
-		${SED} -e "s,###VERSION###,${VERSION},g" \
-		       -e "s,###DATE###,${BUILD_DATE},g" \
-		       < $$f > ${BUILD_JAR_DIR}/$$f ; \
-		( diff -q $$f ${BUILD_JAR_DIR}/$$f 1>/dev/null ) || \
-		( echo "modified: $$f" ; \
-		  diff -u $$f ${BUILD_JAR_DIR}/$$f | grep '^[-+][^-+]' ) ; \
-	    done
-	${Q}( cd ${BUILD_JAR_DIR} && ${ZIP} -r0 ${TOP}/${JAR} ${JAR_FILES} )
+	$(MAKE_JAR) jar "$(JAR)" "$(JAR_DIRS)" "$(JAR_TEXTS)" "$(JAR_BINS)" "$(JAR_FILES)"
 	@echo "SUCCESS: $@"

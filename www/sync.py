@@ -38,7 +38,7 @@ class sync:
     def upload(self, files):
         # connect
         config = ConfigParser.ConfigParser()
-        config.read("../etc/server.conf")
+        config.read("../common/server.conf")
 
         transport = paramiko.Transport((config.get("server", "host"),
             int(config.get("server", "port"))))
