@@ -22,7 +22,7 @@ XPI_TEXTS       = js
 XPI_BINS        = jar
 
 XPI_NAME        = $(NAME)-$(VERSION)
-XPI_BASE        = release/xpi
+XPI_BASE        = .
 XPI_PATH        = $(XPI_BASE)/$(XPI_NAME)
 XPI             = $(XPI_PATH).xpi
 
