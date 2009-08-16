@@ -39,8 +39,6 @@ MAKE_DIST       = VERSION="$(VERSION)" XPI_NAME="$(XPI_NAME)" XPI="$(XPI)" \
 
 AWK = awk
 
-.SILENT:
-
 #### rules
 
 TARGETS = all help info jar xpi mozxpi nightly clean distclean $(JAR) $(XPI) upnightly uprelease sync prepare
