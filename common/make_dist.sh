@@ -17,7 +17,7 @@ if [ ! -z `echo $VERSION | grep pre` ]; then
     exit 1
 fi
 
-cd releasef
+cd release
 ./mkrelease.py -x "$XPI_NAME.xpi" \
     --hash "sha1:$(sha1sum $top/$XPI |cut -d ' ' -f 1)" \
     $VERSION > release.rdf
