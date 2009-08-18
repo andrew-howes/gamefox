@@ -27,6 +27,10 @@ var gamefox_sig =
     var accounts, boards;
     var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
 
+    // check if sigs array is valid
+    if (!sigs || !sigs[0])
+      return {boards: '', accounts: '', body: ''};
+
     // find matching sigs
     for (var i = 1; i < sigs.length; i++)
     {

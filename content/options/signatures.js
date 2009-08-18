@@ -59,7 +59,14 @@ var gamefox_options_sig =
 
   _read: function()
   {
+    var strbundle = document.getElementById('strings');
+    var signatureMsg = document.getElementById('signatureMsg');
     this._sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
+
+    // check if sigs array is valid
+    if (!this._sigs || !this._sigs[0])
+      gamefox_utils.showNotification(signatureMsg,
+          strbundle.getString('loadError'), 'critical');
   },
 
   _save: function()
