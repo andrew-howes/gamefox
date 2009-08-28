@@ -22,14 +22,13 @@ XPI_TEXTS       = js
 XPI_BINS        = jar
 
 XPI_NAME        = $(NAME)-$(VERSION)
-XPI_BASE        = .
-XPI_PATH        = $(XPI_BASE)/$(XPI_NAME)
+XPI_PATH        = $(XPI_NAME)
 XPI             = $(XPI_PATH).xpi
 
-MOZXPI_PATH     = $(XPI_BASE)/$(XPI_NAME)_amo
+MOZXPI_PATH     = $(XPI_NAME)_amo
 MOZXPI          = $(MOZXPI_PATH).xpi
 
-NIGHTLYXPI_PATH = $(XPI_BASE)/$(XPI_NAME)$(NIGHTLY_DATE)
+NIGHTLYXPI_PATH = $(XPI_NAME)$(NIGHTLY_DATE)
 NIGHTLYXPI      = $(NIGHTLYXPI_PATH).xpi
 
 MAKE_JAR        = VERSION="$(VERSION)" DATE="$(BUILD_DATE)" GIT_VERSION="$(GIT_VERSION)" \
