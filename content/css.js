@@ -39,8 +39,7 @@ var gamefox_css =
         '8for11.css': ['8for11', 'Make GameFAQs look like v8 (pre-2004).\n\n'
               + 'GameFAQs must be using the V10 style.\n'
               + 'Message Poster Display must be Above Message (Main -> Board Settings)\n'
-              + '"Status icons (classic)" and "Capitalized message links" stylesheets '
-              + 'are recommended',
+              + 'The "Status icons (classic)" stylesheet is recommended.',
             'TakatoMatsuki, Swordless Link', false],
         'gamefox-ads.css': ['Ad blocking',
             'Hides ads. Best used with "block ad servers" enabled.', '', true],

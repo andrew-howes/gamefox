@@ -5,11 +5,11 @@
 @-moz-document domain("gamefaqs.com") {
 
 
-body {background:white url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAKMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCtRRRX6IcgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB7N4F/wCRNsP+2n/oxqKKK+Dxn+8VP8T/ADOqOyP/2Q==) repeat-y !important;}
+body {background:white url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAKMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCtRRRX6IcgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB7N4F/wCRNsP+2n/oxqKKK+Dxn+8VP8T/ADOqOyP/2Q==) repeat-y !important; }
 a:visited:not(#helloworld) {color:white !important;}
 a:active:not(#helloworld) {color:red !important;}
 a:hover:not(#helloworld) {color:yellow !important;}
-table {border-collapse:separate !important; border-spacing:2px !important; margin:0 !important;}
+table {border-collapse:separate !important; border-spacing:2px !important; margin:0 !important; overflow:scroll !important;}
 
 /** Ads **/
 .ad_skin, .ad_super {display:none !important;}
@@ -23,7 +23,7 @@ body.bwp {background:white !important;}
 #masthead #header, #masthead #searchbox, #masthead #quicknav, #masthead #platformlist, .mh_wrap {width:162px !important; height:auto !important; margin:0 !important; padding:0 !important; background:#6666FF !important;}
 #masthead a {color:white !important; font-size:12.8px !important; line-height:16px !important;}
 
-#masthead #header {position:absolute !important; top:20px !important; left:0 !important; z-index:3 !important; width:100% !important; display:block !important; z-index:5 !important; height:auto !important; background: url(http://www.gamefaqs.com/images/bar2001.gif) no-repeat #6666FF  !important; background-position: 0px -20px !important;}
+#masthead #header {position:absolute !important; top:20px !important; left:0 !important; z-index:3 !important; width:100% !important; display:block !important; z-index:5 !important; height:auto !important; background: url(http://img171.imageshack.us/img171/6664/bar2001.gif) no-repeat #6666FF  !important; background-position: 0px -20px !important;}
 #masthead #header .mh_wrap {width:auto !important; display:block !important; padding:0 !important; margin-left:162px !important; height:auto !important; text-align:center !important; vertical-align:middle !important; z-index:5 !important; }
 #masthead #header #logo {display:none !important;}
 #masthead #header #loginbox {padding:0 !important; margin:0 !important; width:100% !important; display:block !important; background:#6666FF !important; vertical-align:top !important; text-align:center !important; height:auto !important; margin-top:5px !important; margin-bottom:1px !important;}
@@ -53,7 +53,7 @@ body.bwp {background:white !important;}
 #masthead #quicknav p {margin:0 !important; padding:0 !important; width:auto !important; padding:1px !important; padding-top:2px !important; position:relative !important; z-index:10 !important; }
 #masthead #quicknav a {display:block !important; width:auto !important; padding:0 !important; margin:0 !important; background:transparent !important; clear:both !important; height:auto !important;}
 
-#masthead #platformlist {position:absolute !important; top:0 !important; left:0px !important; width:100% !important; display:block !important; height:27px !important; background: url(http://www.gamefaqs.com/images/bar2001.gif) no-repeat #6666FF !important; color:white !important; font-size:13px !important;}
+#masthead #platformlist {position:absolute !important; top:0 !important; left:0px !important; width:100% !important; display:block !important; height:27px !important; background: url(http://img171.imageshack.us/img171/6664/bar2001.gif) no-repeat #6666FF !important; color:white !important; font-size:13px !important;}
 #masthead #platformlist .mh_wrap {width:auto !important; display:block !important; padding:0 !important; margin-left:162px !important; height:auto !important; text-align:center !important; vertical-align:middle !important;}
 #masthead #platformlist .nav {padding:0 !important; display:inline !important; float:none !important; height:auto !important; line-height:16px !important; vertical-align:middle !important;}
 #masthead #platformlist .nav b {display:none !important;}
@@ -79,11 +79,12 @@ body.bwp {background:white !important;}
 #sky_col_wrap, #full_col_wrap {margin-top: 0 !important;}
 #side_col, #col_layout, #mpu_col_wrap, #side_col_wrap, #sky_col_wrap {background:white !important; }
 
+
 /** Pods **/
-.pod {background:white !important; padding:0 !important;}
+.pod {background:white !important; padding:0 !important; overflow: visible !important;}
 .pod .head {background:#8080FF !important; padding:0 !important; color:white !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important; padding:2px !important; border:2px solid white !important; border-bottom:0px !important;}
 .pod .head h2, .pod .head h1 {background:#8080FF !important; padding:0 !important; font-size:15.2px !important; font-style:italic !important; color:white !important;}
-.pod .body {font-size:12.8px !important; color:black !important;}
+.pod .body {font-size:12.8px !important; color:black !important; overflow: visible !important;}
 .pod .body a:not(#helloworld), .pod .body a:visited:not(#helloworld), .pod .body a:hover:not(#helloworld),  .pod .body a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
 .pod:not(#board_wrap) .pod:not(#board_wrap) {margin:0 !important;}
 .pod:not(#board_wrap) .pod:not(#board_wrap) + .pod:not(#board_wrap) > .head {border-top:0 !important;}
@@ -144,7 +145,7 @@ ul.content_nav li:first-child.hi + li:before {content: "" !important;}
 .board_nav .pages {background:#8080FF none repeat scroll 0 0 !important; font-style:italic !important;}
 
 /** Jump to Page and Search Topics **/
-.pagejumper {margin:0 !important; background:#8080FF !important; color:white !important; font-style:italic !important; font-weight:bold !important; text-align:center !important; font-size:15.2px !important; padding:1px !important; border:2px solid white !important; line-height:15.2px !important; border-top:0 !important;}
+.pagejumper {margin:0 !important; background:#8080FF !important; color:white !important; font-style:italic !important; font-weight:bold !important; text-align:center !important; font-size:15.2px !important; padding:0px !important; line-height:15.2px !important; border-top:0 !important; width:100% !important; padding-top:3px !important; padding-bottom:3px !important; outline:white solid 2px !important; outline-offset:-2px !important;}
 .pagejumper ul {text-align:center !important; float:none !important; display:block !important; padding-top:2px !important; padding-bottom:2px !important;}
 .pagejumper li {border:0 !important; margin:0 !important; padding:0 !important; float:none !important; display:inline !important; border-right:1px solid white !important; padding-right:4px !important; padding-left:4px !important;}
 .pagejumper li:last-child {border:0 !important;}
@@ -158,7 +159,7 @@ ul.content_nav li:first-child.hi + li:before {content: "" !important;}
 
 
 /** Tables **/
-table {border:0 !important;}
+table {border:0 !important; table-layout:auto !important;}
 table tr td, table tbody tr:not(.head) th {padding:1px !important; color:black !important; border:0 !important; font-size:12.8px !important;}
 table tr:not(.gamefox-highlight) td:not(.gamefox-highlight), table tbody tr:not(.head) th {background:#d0d0ff !important;}
 table tr:not(#helloworld) td a:not(#helloworld), table tr td a:visited:not(#helloworld), table tr td a:hover:not(#helloworld), table tr td a:active:not(#helloworld), table tbody tr:not(.head) th  a:not(#helloworld), table tbody tr:not(.head) th  a:visited:not(#helloworld), table tbody tr:not(.head) th  a:hover:not(#helloworld), table tbody tr:not(.head) th  a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
@@ -211,7 +212,7 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 .board_hub #side_col p:nth-last-child(2) b {font-weight:normal !important;}
 .board_hub #side_col p:nth-last-child(1n) {display:none !important;}
 .board_hub #side_col p:first-child, .board_hub #side_col p:last-child, .board_hub #side_col p:first-child + p, .board_hub #side_col p:nth-last-child(2) {display:block !important;}
-.board_hub #side_col p:last-child:not(#hellworld) a:not(#hellworld) {font-weight:bold !important;}
+.board_hub #side_col p:last-child:not(#helloworld) a:not(#helloworld) {font-weight:bold !important;}
 
 
 
@@ -224,8 +225,7 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 .msg_stats:before {content: "From: " !important;}
 .board.message tr:not(.even):not(.gamefox-highlight) td:not(.gamefox-highlight) {background:#b0b0ff !important;}
 .board.message tr.even td {background:#d0d0ff !important;}
-.msg_stats:not(#helloworld) a[href*="/detail.php"]:not(#helloworld), .msg_stats a[href*="/detail.php"]:active:not(#helloworld), .msg_stats a[href*="/detail.php"]:visited:not(#helloworld), .msg_stats a[href*="/detail.php"]:hover:not(#helloworld) {font-size:0 !important; text-decoration:none !important;}
-.msg_stats a[href*="/detail.php"]:not(#helloworld):before {content:"Message Detail" !important; font-size:12.8px !important;line-height:12.8px !important;text-decoration:underline !important;}
+.message a.name ~ a, .gamefox-message-links a {text-transform: capitalize !important;}
 
 
 
@@ -290,7 +290,6 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 
 
 
-
 /** Answers Hub **/
 .qna_hub #side_col .header {background:#8080FF !important; padding:0 !important; color:white !important; text-align:center !important; font-size:15.2px !important; font-style:italic !important; border:1px outset grey !important; border-bottom:0 !important;}
 .qna_hub #side_col .header h3 {background:#8080FF !important; padding:1px !important; font-size:15.2px !important; font-style:italic !important; color:white !important; float:none !important; border:1px inset grey !important;  border-bottom:0 !important;}
@@ -301,6 +300,14 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 
 
 
+/** GameFOX Extra Usernav Bar **/
+#gamefox-board-nav {display:block !important; background:#0000FF !important; color:white !important; font-size:15.2px !important; margin:0 !important; padding:1px !important; text-align:center !important; border-left:2px white solid !important; border-right:2px white solid !important;}
+#gamefox-board-nav a:not(#helloworld), #gamefox-board-nav a:hover:not(#helloworld), #gamefox-board-nav a:visited:not(#helloworld), #gamefox-board-nav a:active:not(#helloworld) {color:white !important; text-decoration:underline !important; font-weight:bold !important;}
+#gamefox-board-nav a:visited:not(#helloworld) {color:white !important;}
+#gamefox-board-nav a:active:not(#helloworld) {color:red !important;}
+#gamefox-board-nav a:hover:not(#helloworld) {color:yellow !important;}
+
+
 /** Topic List Icons **/
 .gamefox-status {vertical-align:top !important; margin-left:0 !important; margin-right:1px !important;}
 a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
@@ -308,7 +315,7 @@ a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
 
 /** Quickpost **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
 #gamefox-quickpost-normal {width:auto !important; border:2px solid white !important; border-top:0 !important; border-right:3px solid white !important;}
-#gamefox-quickpost-normal #gamefox-quickpost-form:before {content:"Quickpost" !important; text-align: center !important; width: 100% !important; clear: both !important; display:block !important; background-color: #0000ff !important; color: #ffffff !important; font-weight: bold !important; font-size: 15px !important; padding:1px !important;}
+#gamefox-quickpost-normal #gamefox-quickpost-form:before {content:"QuickPost" !important; text-align: center !important; width: 100% !important; clear: both !important; display:block !important; background-color: #0000ff !important; color: #ffffff !important; font-weight: bold !important; font-size: 15px !important; padding:1px !important;}
 #gamefox-quickpost-form {text-align: center !important; width: 100% !important; clear: both !important;}
 #gamefox-message {width: 70% !important; border-left: 2px solid #0000ff !important; border-right: 2px solid #0000ff !important; font-size:12.8px !important; font-family: MS Shell Dlg,arial,sans-serif !important;}
 #gamefox-message-count, #gamefox-title-count {margin-left: 2em !important;}
@@ -316,6 +323,12 @@ a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
 
 /** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
 .gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; -moz-border-radius: 10px !important; opacity: 0.90 !important;}
+
+/** Character Map **/ /** Based off CSS included with GameFOX **/
+#gamefox-character-map {position: absolute !important; overflow: auto !important; height: 200px !important; width: 400px !important; border: #aaa 1px solid !important; background: #eee !important; left:50% !important;}
+#gamefox-character-map table {border-collapse:collapse !important;}
+#gamefox-character-map td {background: transparent !important; padding: 0 !important; border: #aaa 1px solid !important;}
+#gamefox-character-map:not(#helloworld) a:not(#helloworld) {display: block !important; padding: 10px 5px !important; background: #fff !important; text-align: center !important; text-decoration:none !important;}
 
 
 /** Visited Links **/
@@ -325,9 +338,9 @@ table.board:not(#helloworld) a:visited:not(#helloworld), .board_hub #side_col p:
 /** Last Post **/
 table.board:not(#helloworld) a.gamefox-last-post-link:not(#helloworld) {color:black !important; text-decoration:none !important;}
 
-
-
 }
+
+
 
 
 /** Stuff for pages that don't play nice with other pages **/
@@ -417,6 +430,41 @@ table.board:not(#helloworld) a.gamefox-last-post-link:not(#helloworld) {color:bl
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Ignored Users" !important;}
 #main_col > .pod > .head {display:none !important;}
+}
+
+/** Board Categories **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=") {
+#content > .head > h1 {font-size:0 !important;}
+#content > .head > h1:after {font-size:32px !important;}
+#main_col > .pod > .head {display:none !important;}
+table.board + table.board {position:relative !important; top:-2px !important;}
+div.body > table.board:first-child tbody tr.head {display:none !important;}
+table.board:not(#helloworld) a:not(#helloworld) {font-weight:bold !important;}
+}
+
+/** Board Categories: System Boards **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=3") {
+#content > .head > h1:after {content: "System Boards" !important;}
+}
+
+/** Board Categories: Site Boards **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=4") {
+#content > .head > h1:after {content: "Site Boards" !important;}
+}
+
+/** Board Categories: Special Interest Boards **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=5") {
+#content > .head > h1:after {content: "Special Interest Boards" !important;}
+}
+
+/** Board Categories: Regional Boards **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=6") {
+#content > .head > h1:after {content: "Regional Boards" !important;}
+}
+
+/** Board Categories: Social Boards **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=7") {
+#content > .head > h1:after {content: "Social Boards" !important;}
 }
 
 
