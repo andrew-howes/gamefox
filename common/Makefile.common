@@ -32,17 +32,17 @@ MOZXPI          = $(MOZXPI_PATH).xpi
 NIGHTLYXPI_PATH = $(XPI_NAME)$(NIGHTLY_DATE)
 NIGHTLYXPI      = $(NIGHTLYXPI_PATH).xpi
 
-MAKE_JAR        = VERSION="$(VERSION)" DATE="$(BUILD_DATE)" GIT_VERSION="$(GIT_VERSION)" \
-                  NIGHTLY_DATE="$(NIGHTLY_DATE)" sh $(TOP)/common/make_jar.sh
-MAKE_DIST       = VERSION="$(VERSION)" XPI_NAME="$(XPI_NAME)" XPI="$(XPI)" \
-                  DISTDIR="$(DISTDIR)" VERSIONFILE="$(VERSIONFILE)" MOZXPI="$(MOZXPI)" \
-                  sh $(TOP)/common/make_dist.sh
+VARS            = VERSION="$(VERSION)" DATE="$(BUILD_DATE)" GIT_VERSION="$(GIT_VERSION)"
+MAKE_JAR        = $(VARS) NIGHTLY_DATE="$(NIGHTLY_DATE)" sh $(TOP)/common/make_jar.sh
+MAKE_DIST       = $(VARS) DISTDIR="$(DISTDIR)" VERSIONFILE="$(VERSIONFILE)" MOZXPI="$(MOZXPI)" \
+                  XPI="$(XPI)" sh $(TOP)/common/make_dist.sh
+MAKE_RELEASE    = $(VARS) VERSIONFILE="$(VERSIONFILE)" sh $(TOP)/common/make_release.sh
 
 AWK = awk
 
 #### rules
 
-TARGETS = all help info jar xpi mozxpi nightly clean distclean $(JAR) $(XPI) upnightly uprelease sync prepare
+TARGETS = all help info jar xpi mozxpi nightly clean distclean $(JAR) $(XPI) upnightly sync prepare release
 $(TARGETS:%=\%.%):
 	echo MAKE $* $(@:$*.%=%)
 	$(MAKE) -C $* $(@:$*.%=%)
@@ -65,7 +65,7 @@ help:
 	@echo "  make dist      - build a dist (stable release)"
 	@echo "Admin targets:"
 	@echo "  make upnightly - upload a nightly snapshot and its update RDF"
-	@echo "  make uprelease - upload a new release and accompanying files"
+	@echo "  make release   - make a release from a dist"
 	@echo "  make sync      - synchronize the www git tree with the server"
 
 info:
@@ -94,7 +94,10 @@ dist: $(XPI) $(MOZXPI)
 	$(MAKE_DIST)
 
 sync:
-	${Q}( cd www/ && ./sync.py )
+	( cd www/ && ./sync.py )
+
+release:
+	$(MAKE_RELEASE)
 
 #### xpi
 

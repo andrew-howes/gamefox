@@ -5,6 +5,7 @@ import ConfigParser
 import paramiko
 
 config = ConfigParser.ConfigParser()
+# TODO: This relative path is fragile
 config.read("../common/server.conf")
 
 transport = paramiko.Transport((config.get("server", "host"),
