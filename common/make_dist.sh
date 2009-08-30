@@ -24,7 +24,7 @@ cd release
 ./mknews.py $VERSION > news.xhtml
 cd ..
 
-mkdir $DISTDIR
+mkdir -p $DISTDIR
 cp release/release.rdf release/news.xhtml $XPI \
     $DISTDIR
 
