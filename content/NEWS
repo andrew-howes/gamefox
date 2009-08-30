@@ -1,7 +1,7 @@
 2009-08-xx:
     * version 0.7.4
     * Drop Firefox 2 compatibility
-    * Custom date formats - change GameFAQs' dates to match your locale
+    * Custom date formats
     * New CSS: SpotFAQs
     * Improve the GameFAQs clock and add it to the options window
     * New CSS: 8for11
