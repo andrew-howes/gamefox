@@ -7,7 +7,8 @@ OS              = $(shell uname -s)
 BUILD_DATE      = $(shell date "+%Y-%m-%d %H:%M:%S")
 NIGHTLY_DATE    = $(shell date "+%Y%m%d")
 GIT_VERSION     = $(shell git describe)
-DISTDIR		    = release/dist/${VERSION}
+DISTDIR         = release/dist/$(VERSION)
+VERSIONFILE     = release/dist/version
 
 JAR_FILES       = content/NEWS
 JAR_DIRS        = content skin locale
@@ -34,7 +35,8 @@ NIGHTLYXPI      = $(NIGHTLYXPI_PATH).xpi
 MAKE_JAR        = VERSION="$(VERSION)" DATE="$(BUILD_DATE)" GIT_VERSION="$(GIT_VERSION)" \
                   NIGHTLY_DATE="$(NIGHTLY_DATE)" sh $(TOP)/common/make_jar.sh
 MAKE_DIST       = VERSION="$(VERSION)" XPI_NAME="$(XPI_NAME)" XPI="$(XPI)" \
-                  DISTDIR="$(DISTDIR)" MOZXPI="$(MOZXPI)" sh $(TOP)/common/make_dist.sh
+                  DISTDIR="$(DISTDIR)" VERSIONFILE="$(VERSIONFILE)" MOZXPI="$(MOZXPI)" \
+                  sh $(TOP)/common/make_dist.sh
 
 AWK = awk
 
@@ -123,7 +125,7 @@ $(NIGHTLYXPI): $(JAR)
 
 #### jar
 
-${JAR}:
+$(JAR):
 	@echo "Building JAR..."
 	$(MAKE_JAR) jar "$(JAR)" "$(JAR_DIRS)" "$(JAR_TEXTS)" "$(JAR_BINS)" "$(JAR_FILES)"
 	@echo "SUCCESS: $@"

@@ -27,9 +27,12 @@ cd ..
 mkdir -p $DISTDIR
 cp release/release.rdf release/news.xhtml $XPI \
     $DISTDIR
+echo $VERSION > $VERSIONFILE
 
 echo "Release files are now in $DISTDIR. You should inspect them"
 echo "first, then 'git add' the directory, commit and push."
+echo
+echo "Make sure $VERSIONFILE is also committed."
 echo
 echo "An XPI for AMO has also been built at $MOZXPI."
 echo "You should upload that to AMO as well."
