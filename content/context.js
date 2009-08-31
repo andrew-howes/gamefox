@@ -317,10 +317,10 @@ var gamefox_context =
       menu.removeChild(menu.firstChild);
 
     favs = gamefox_lib.safeEval(gamefox_lib.getString('favorites.serialized'));
-    for (i = 0; i < favs.length; i++)
+    for (i in favs)
     {
       item = document.createElement('menuitem');
-      item.setUserData('data', favs[i].id, null);
+      item.setUserData('data', i, null);
       item.setAttribute('label', favs[i].name);
       item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
       item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
