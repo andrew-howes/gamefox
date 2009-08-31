@@ -124,7 +124,7 @@ var gamefox =
       // Get favorites
       if (gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
-        var i, query, favorites = [], favLinks = [];
+        var i, query, favorites = {}, favLinks = [];
         var favResult = doc.evaluate('div[@class="body"]/table/tbody/tr/td[1]/a',
             boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
         for (i = 0; i < favResult.snapshotLength; i++)
@@ -135,7 +135,7 @@ var gamefox =
         {
           query = gamefox_utils.parseQueryString(favLinks[i].search);
           if (query['board'])
-            favorites.push({'id':query['board'], 'name':favLinks[i].textContent});
+            favorites[query['board']] = {name:favLinks[i].textContent};
         }
 
         gamefox_lib.setString('favorites.serialized', gamefox_lib.toJSON(favorites));

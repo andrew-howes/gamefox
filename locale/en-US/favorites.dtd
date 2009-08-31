@@ -1,0 +1,12 @@
+<!-- vim: set indentexpr=: -->
+
+<!ENTITY favorites.label "Favorite Boards">
+
+<!ENTITY open.label "Open">
+<!ENTITY open.accesskey "O">
+
+<!ENTITY newTab.label "Open in New Tab">
+<!ENTITY newTab.accesskey "T">
+
+<!ENTITY newWindow.label "Open in New Window">
+<!ENTITY newWindow.accesskey "W">

@@ -19,6 +19,17 @@
 
 var gamefox_favorites =
 {
+  list: {},
+
+  read: function()
+  {
+      this.list = gamefox_lib.safeEval(gamefox_lib.getString('favorites.serialized'));
+
+      // this.list will be undefined if the pref value isn't an object
+      if (!this.list)
+          this.list = {};
+  },
+
   populateFavorites: function(doc, favList)
   {
     var favs, item, i;
@@ -32,10 +43,10 @@ var gamefox_favorites =
     item.value = 0;
     item.appendChild(doc.createTextNode('Select board...'));
     favList.appendChild(item);
-    for (i = 0; i < favs.length; i++)
+    for (var i in favs)
     {
       item = doc.createElement('option');
-      item.value = favs[i].id;
+      item.value = i;
       item.appendChild(doc.createTextNode(favs[i].name));
       favList.appendChild(item);
     }

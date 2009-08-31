@@ -41,16 +41,10 @@ var gamefox_sidebar =
         'click', gamefox_sidebar.promptAccountsLogin, false);
     document.getElementById('accounts-rm-link').addEventListener(
         'click', gamefox_sidebar.promptAccountsRemove, false);
-    document.getElementById('favorites-menu').addEventListener(
-        'mousedown', gamefox_favorites.selectFavorite, false);
 
     // accounts
     gamefox_sidebar.populateAccounts();
     new gamefox_observer('accounts', gamefox_sidebar.populateAccounts);
-
-    // favorites
-    gamefox_sidebar.updateFavorites();
-    new gamefox_observer('favorites.serialized', gamefox_sidebar.updateFavorites);
   },
 
   updateSections: function()
@@ -74,12 +68,6 @@ var gamefox_sidebar =
       document.getElementById(sections[i+1]).style.display =
         prefs.getBoolPref(sections[i]) ? '' : 'none';
     }
-  },
-
-  updateFavorites: function()
-  {
-    gamefox_favorites.populateFavorites(document,
-        document.getElementById('favorites-menu'));
   },
 
   populateAccounts: function()

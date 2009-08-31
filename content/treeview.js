@@ -23,7 +23,8 @@ function gamefox_treeview()
     }
   };
   this.getLevel = function(idx) {
-    if (this.isContainer(idx)) return 0;
+    var parentIndex = this.getParentIndex(idx);
+    if (parentIndex == null || parentIndex == -1) return 0;
     return 1;
   };
   this.hasNextSibling = function(idx, after) {
