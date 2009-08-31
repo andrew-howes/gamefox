@@ -20,6 +20,7 @@ RDF_NAME=$(basename $RDF)
 SPOCK=$top/release/spock
 MCCOY=$top/release/mccoy.default
 PUT=$top/release/put.py
+CLEANUP=$top/release/cleanup_old_release.py
 
 if [ ! -d $SPOCK ]; then
     echo "You need the spock binary in `readlink -f $SPOCK`" 1>&2
@@ -38,4 +39,8 @@ $SPOCK/spock $RDF \
 
 (cd release && $PUT $XPI $XPI_NAME  $NEWS news/$NEWS_VER  $SIGNED_RDF $RDF_NAME)
 
+# Clean up old release and nightly XPIs
+(cd release && $CLEANUP $XPI_NAME)
+
+# Mark this release as done
 echo $DISTVERSION > $LASTVERSIONFILE
