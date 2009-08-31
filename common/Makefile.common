@@ -36,13 +36,17 @@ VARS            = VERSION="$(VERSION)" DATE="$(BUILD_DATE)" GIT_VERSION="$(GIT_V
 MAKE_JAR        = $(VARS) NIGHTLY_DATE="$(NIGHTLY_DATE)" sh $(TOP)/common/make_jar.sh
 MAKE_DIST       = $(VARS) DISTDIR="$(DISTDIR)" VERSIONFILE="$(VERSIONFILE)" MOZXPI="$(MOZXPI)" \
                   XPI="$(XPI)" sh $(TOP)/common/make_dist.sh
-MAKE_RELEASE    = $(VARS) VERSIONFILE="$(VERSIONFILE)" sh $(TOP)/common/make_release.sh
+MAKE_RELEASE    = $(VARS) VERSIONFILE="$(VERSIONFILE)" LASTVERSIONFILE="$(VERSIONFILE).last" \
+                  sh $(TOP)/common/make_release.sh
+SCAN_DIST       = $(VARS) VERSIONFILE="$(VERSIONFILE)" LASTVERSIONFILE="$(VERSIONFILE).last" \
+                  sh $(TOP)/common/scan_dist.sh
 
 AWK = awk
 
 #### rules
 
-TARGETS = all help info jar xpi mozxpi nightly clean distclean $(JAR) $(XPI) upnightly sync prepare release
+TARGETS = all help info jar xpi mozxpi nightly clean distclean $(JAR) $(XPI) \
+          upnightly sync prepare release scandist
 $(TARGETS:%=\%.%):
 	echo MAKE $* $(@:$*.%=%)
 	$(MAKE) -C $* $(@:$*.%=%)
@@ -66,6 +70,7 @@ help:
 	@echo "Admin targets:"
 	@echo "  make upnightly - upload a nightly snapshot and its update RDF"
 	@echo "  make release   - make a release from a dist"
+	@echo "  make scandist  - check if a new dist is waiting to be released"
 	@echo "  make sync      - synchronize the www git tree with the server"
 
 info:
@@ -98,6 +103,9 @@ sync:
 
 release:
 	$(MAKE_RELEASE)
+
+scandist:
+	@$(SCAN_DIST)
 
 #### xpi
 

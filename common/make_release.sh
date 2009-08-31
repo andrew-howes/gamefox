@@ -37,3 +37,5 @@ $SPOCK/spock $RDF \
     -f $XPI > $SIGNED_RDF
 
 (cd release && $PUT $XPI $XPI_NAME  $NEWS news/$NEWS_VER  $SIGNED_RDF $RDF_NAME)
+
+echo $DISTVERSION > $LASTVERSIONFILE
