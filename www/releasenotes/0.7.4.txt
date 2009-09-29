@@ -1,0 +1,33 @@
+### About this version
+
+GameFOX can now change the date formats on GameFAQs. There are several presets
+for different locales (including 24 hour time and DD/MM/YYYY and YYYY-MM-DD dates),
+and a custom setting that lets you change the format to anything.
+
+The GameFAQs clock has been improved, with support for a custom date format. It
+can be enabled by checking Tools | GameFOX | Main | Page | Add clock.
+
+Two new GameFAQs themes have been added: SpotFAQs and 8for11. You can view their
+descriptions and enable them from the Style options (Tools | GameFOX | Style).
+
+Firefox 2 compatibility has been removed. Only Firefox 3 and newer are supported.
+
+The toolbar icons for the GameFOX options and sidebar are now different from each
+other.
+
+Favorites in the GameFOX sidebar are now in a list box instead of a drop down menu.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+
+### New in this release
+
+* Drop Firefox 2 compatibility
+* Custom date formats
+* New CSS: SpotFAQs
+* Improve the GameFAQs clock and add it to the options window
+* New CSS: 8for11
+* Different icons for the sidebar and options toolbar buttons
+* Replace the favorites drop down menu in the sidebar with a list box
