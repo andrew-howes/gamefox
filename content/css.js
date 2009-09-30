@@ -54,7 +54,9 @@ var gamefox_css =
         'FAQ-frames.css': ['FAQ frames', 'Styles the FAQ headers to look more like GameFAQs.',
             'selmiak', false],
         'hide-signatures.css': ['Hide signatures',
-            'Hides signatures in posts and shows them again when hovered over.', '', false],
+            'Hides signatures in posts and shows them again when hovered over.\n\n'
+              + '(Due to a bug in Firefox, this CSS does not work in Firefox 3.5. '
+              + 'It will be fixed in Firefox 3.6.)', '', false],
         'message-link-icons.css': ['Message link icons',
             'Converts links in the message header (message detail, delete, filter, quote)'
               + ' to icons.\n\nIcons courtesy of http://www.pinvoke.com/',
