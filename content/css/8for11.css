@@ -192,6 +192,7 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 .board_hub .board:first-child {position:relative !important; top:2px !important;}
 .board_hub .board:first-child tr td:first-child {font-size:0 !important;}
 .board_hub .board:first-child tr td:first-child a {font-size:12.8px !important;}
+.board_hub .board:first-child tr td:first-child b {font-size:12.8px !important;}
 .board_hub .board + .board thead th {background:#8080FF !important;}
 .board_hub #side_col {float:none !important; margin:0 !important; padding:0 !important; border:0 !important; width:100% !important;}
 .board_hub #side_col .pod {width:auto !important; border:1px solid white !important; border-top:0 !important;}
