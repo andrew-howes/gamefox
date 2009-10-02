@@ -8,7 +8,7 @@
 <!ENTITY menu.pages.label "Topic Pages">
 <!ENTITY menu.quote.label "Quote Message">
 <!ENTITY menu.hlGroups.label "Highlighting Groups">
-<!ENTITY menu.breakTags.label "Break HTML Tags">
+<!ENTITY menu.breakTags.label "Break HTML">
 
 <!ENTITY menu.sidebar.label "Sidebar">
 <!ENTITY menu.sidebar.accesskey "S">

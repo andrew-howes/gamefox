@@ -46,7 +46,7 @@
 <!ENTITY standard.label "Standard">
 <!ENTITY extended.label "Extended">
 <!ENTITY gfcode.label "GFCode">
-<!ENTITY breakTags.label "Break Tags">
+<!ENTITY breakTags.label "Break HTML">
 
 <!ENTITY quickpost.label "QuickPost">
 
@@ -87,7 +87,7 @@
 <!ENTITY mainMenu.filter.label "Filter">
 <!ENTITY mainMenu.delete.label "Delete/Close">
 <!ENTITY mainMenu.hlGroups.label "User Groups">
-<!ENTITY mainMenu.breakTags.label "Break HTML Tags">
+<!ENTITY mainMenu.breakTags.label "Break HTML">
 
 <!ENTITY submenu.label "Submenu">
 <!ENTITY submenu.sidebar.label "Sidebar">

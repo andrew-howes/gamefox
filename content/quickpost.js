@@ -716,7 +716,7 @@ var gamefox_quickpost =
 
       button = doc.createElement('input');
       button.type = 'submit';
-      button.value = 'Break HTML Tags';
+      button.value = 'Break HTML';
       button.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
       button.accessKey = 'r';
       button.tabIndex = 4;
