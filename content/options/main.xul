@@ -166,6 +166,7 @@
       <preference id="msgSortOrder" name="gamefox.msgSortOrder" type="int"/>
       <preference id="timeZone" name="gamefox.timeZone" type="int"/>
       <preference id="msgDisplay" name="gamefox.msgDisplay" type="int"/>
+      <preference id="catShow" name="gamefox.catShow" type="bool"/>
     </preferences>
 
     <tabbox id="mainPrefs" flex="1">
@@ -579,6 +580,7 @@
 
                     <row align="center">
                       <label value="&timeZone.label;"/>
+
                       <menulist preference="timeZone" id="timezone" flex="1">
                         <menupopup>
                           <menuitem value="-720" label="GMT -12"/>
@@ -625,6 +627,12 @@
                           <menuitem value="1" label="&aboveMessage.label;"/>
                         </menupopup>
                       </menulist>
+                    </row>
+
+                    <row align="center">
+                      <label value="&catShow.label;"/>
+
+                      <checkbox preference="catShow" id="catshow"/>
                     </row>
 
                   </rows>

@@ -120,5 +120,7 @@
 <!ENTITY leftOfMessage.label "Left of Message">
 <!ENTITY aboveMessage.label "Above Message">
 
+<!ENTITY catShow.label "Show Category List">
+
 <!ENTITY grabSettings.button "Grab from GameFAQs">
 <!ENTITY saveSettings.button "Save to GameFAQs">

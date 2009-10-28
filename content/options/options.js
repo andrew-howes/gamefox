@@ -46,7 +46,8 @@ var gamefox_options =
             messagePage = gamefox_utils.parseHTMLSelect(request.responseText, 'messagepage'),
             messageSort = gamefox_utils.parseHTMLSelect(request.responseText, 'messagesort'),
             timezone = gamefox_utils.parseHTMLSelect(request.responseText, 'timezone'),
-            userDisplay = gamefox_utils.parseHTMLSelect(request.responseText, 'userdisplay');
+            userDisplay = gamefox_utils.parseHTMLSelect(request.responseText, 'userdisplay'),
+            catShow = /<input type="checkbox" name="catshow" checked/.test(request.responseText);
         if (topicPage == null || topicSort == null || messagePage == null
             || messageSort == null || timezone == null || userDisplay == null)
         {
@@ -63,6 +64,7 @@ var gamefox_options =
         document.getElementById('msgSortOrder').value = messageSort;
         document.getElementById('timeZone').value = timezone;
         document.getElementById('msgDisplay').value = userDisplay;
+        document.getElementById('catShow').value = catShow;
 
         gamefox_utils.showNotification(boardSettingsMsg,
             strbundle.getString('bsImportSuccess'), 'info');
@@ -80,7 +82,8 @@ var gamefox_options =
             messagePage: document.getElementById('messagepage').value,
             messageSort: document.getElementById('messagesort').value,
             timezone: document.getElementById('timezone').value,
-           userDisplay: document.getElementById('userdisplay').value};
+            userDisplay: document.getElementById('userdisplay').value,
+            catShow: document.getElementById('catshow').checked};
 
     var strbundle = document.getElementById('main-strings');
     var boardSettingsMsg = document.getElementById('boardSettingsMsg');
@@ -143,6 +146,7 @@ var gamefox_options =
             'messagesort=' + data.messageSort + '&' +
             'timezone=' + data.timezone + '&' +
             'userdisplay=' + data.userDisplay + '&' +
+            (data.catShow ? 'catshow=1&' : '') +
             'key=' + key + '&' +
             'submit=1'
             );

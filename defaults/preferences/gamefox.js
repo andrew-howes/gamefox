@@ -51,6 +51,7 @@ pref("gamefox.msgSortOrder", 1);
 pref("gamefox.tpcSortOrder", 4);
 pref("gamefox.msgDisplay", 0);
 pref("gamefox.timeZone", 0);
+pref("gamefox.catShow", true);
 
 pref("gamefox.quote.header.italic", false);
 pref("gamefox.quote.header.bold", true);
