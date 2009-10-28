@@ -146,7 +146,7 @@ var gamefox_options =
             'messagesort=' + data.messageSort + '&' +
             'timezone=' + data.timezone + '&' +
             'userdisplay=' + data.userDisplay + '&' +
-            (data.catShow ? 'catshow=1&' : '') +
+            (data.catShow ? 'catshow=on&' : '') +
             'key=' + key + '&' +
             'submit=1'
             );

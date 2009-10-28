@@ -630,9 +630,8 @@
                     </row>
 
                     <row align="center">
-                      <label value="&catShow.label;"/>
-
-                      <checkbox preference="catShow" id="catshow"/>
+                      <checkbox label="&catShow.label;"
+                        preference="catShow" id="catshow"/>
                     </row>
 
                   </rows>
