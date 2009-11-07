@@ -684,8 +684,7 @@ var gamefox_quickpost =
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
       tags.push(
           'i,p', 'Quote', 'q',
-          'em,p', 'Code', 'd',
-          'em,i', 'Inline Code', 'l');
+          'em,p', 'Code', 'd');
 
     var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
     var button;

@@ -7,6 +7,7 @@
     * New CSS: 8for11
     * Different icons for the sidebar and options toolbar buttons
     * Replace the favorites drop down menu in the sidebar with a list box
+    * Remove inline code tags (block level code is still there)
 
 2009-07-02:
     * version 0.7.3

@@ -128,7 +128,7 @@ table.message tr td.author + td:not(#helloworld) {background:#1F1F1F !important;
 .message i > p {font-style: normal !important; background: #333333 !important;}
 .message i > p > strong:first-child {border-bottom: 1px #666666 solid !important; display: block !important; font-style: italic !important; font-weight: normal !important; margin: -8px -8px 8px !important; padding: 8px !important; -moz-border-radius: 0 !important; background: #444444 !important;}
 .message i > p > strong:first-child + br {display: none !important;}
-.message em > p, .message em > i {font-family: monospace !important; font-style: normal !important; white-space: pre-wrap !important;}
+.message em > p {font-family: monospace !important; font-style: normal !important; white-space: pre-wrap !important;}
 .message p p p p {display: none !important;}
 
 /** Quickpost [GameFOX] **/ 
