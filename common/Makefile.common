@@ -45,7 +45,7 @@ AWK = awk
 
 #### rules
 
-TARGETS = all help info jar xpi mozxpi nightly clean distclean $(JAR) $(XPI) \
+TARGETS = all help info jar xpi mozxpi nightly clean $(JAR) $(XPI) \
           upnightly sync prepare release scandist
 $(TARGETS:%=\%.%):
 	echo MAKE $* $(@:$*.%=%)
@@ -64,7 +64,6 @@ help:
 	@echo "  make mozxpi    - build a XPI ($(MOZXPI)) for AMO"
 	@echo "  make nightly   - build a nightly ($(NIGHTLYXPI))"
 	@echo "  make clean     - clean up"
-	@echo "  make distclean - clean up more"
 	@echo "Maintainer targets:"
 	@echo "  make dist      - build a dist (stable release)"
 	@echo "Admin targets:"
@@ -87,10 +86,6 @@ clean:
 	@echo "Cleanup..."
 	rm -f $(JAR) $(XPI) $(MOZXPI) $(NIGHTLYXPI)
 	find . -name '*~' -exec rm -f {} \;
-
-distclean: clean
-	@echo "More cleanup..."
-	rm -rf $(BUILD_DIR)
 
 upnightly: $(NIGHTLYXPI)
 	( cd release/ && ./mknightly.sh $(NIGHTLYXPI) $(VERSION)$(NIGHTLY_DATE) $(VERSION) )
