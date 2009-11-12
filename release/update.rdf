@@ -16,7 +16,7 @@
                             <RDF:Description>
                                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                                 <em:minVersion>3.0</em:minVersion>
-                                <em:maxVersion>3.5.*</em:maxVersion>
+                                <em:maxVersion>3.6.*</em:maxVersion>
 
                                 <em:updateLink></em:updateLink>
                                 <em:updateHash></em:updateHash>
@@ -27,8 +27,8 @@
                         <em:targetApplication>
                             <RDF:Description>
                                 <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
-                                <em:minVersion>2.0a1pre</em:minVersion>
-                                <em:maxVersion>2.0b2pre</em:maxVersion>
+                                <em:minVersion>2.0</em:minVersion>
+                                <em:maxVersion>2.0.*</em:maxVersion>
 
                                 <em:updateLink></em:updateLink>
                                 <em:updateHash></em:updateHash>

@@ -9,6 +9,7 @@
     * Replace the favorites drop down menu in the sidebar with a list box
     * Add "Show Category List" board setting
     * Remove inline code tags (block level code is still there)
+    * Compatibility with Firefox 3.6 and SeaMonkey 2.0
 
 2009-07-02:
     * version 0.7.3
