@@ -1,4 +1,5 @@
 /common/server.conf
+/release/dist/
 /release/mccoy.*
 /release/spock
 /release/nightly.rdf

@@ -36,8 +36,8 @@ VARS            = VERSION="$(VERSION)" DATE="$(BUILD_DATE)" GIT_VERSION="$(GIT_V
 MAKE_JAR        = $(VARS) NIGHTLY_DATE="$(NIGHTLY_DATE)" sh $(TOP)/common/make_jar.sh
 MAKE_DIST       = $(VARS) DISTDIR="$(DISTDIR)" VERSIONFILE="$(VERSIONFILE)" MOZXPI="$(MOZXPI)" \
                   XPI="$(XPI)" sh $(TOP)/common/make_dist.sh
-MAKE_RELEASE    = $(VARS) VERSIONFILE="$(VERSIONFILE)" LASTVERSIONFILE="$(VERSIONFILE).last" \
-                  sh $(TOP)/common/make_release.sh
+UPLOAD          = $(VARS) VERSIONFILE="$(VERSIONFILE)" LASTVERSIONFILE="$(VERSIONFILE).last" \
+                  sh $(TOP)/common/upload.sh
 SCAN_DIST       = $(VARS) VERSIONFILE="$(VERSIONFILE)" LASTVERSIONFILE="$(VERSIONFILE).last" \
                   sh $(TOP)/common/scan_dist.sh
 
@@ -46,7 +46,7 @@ AWK = awk
 #### rules
 
 TARGETS = all help info jar xpi mozxpi nightly clean $(JAR) $(XPI) \
-          upnightly sync prepare release scandist
+          upnightly sync prepare upload scandist
 $(TARGETS:%=\%.%):
 	echo MAKE $* $(@:$*.%=%)
 	$(MAKE) -C $* $(@:$*.%=%)
@@ -66,10 +66,9 @@ help:
 	@echo "  make clean     - clean up"
 	@echo "Maintainer targets:"
 	@echo "  make dist      - build a dist (stable release)"
+	@echo "  make upload    - upload a distribution"
 	@echo "Admin targets:"
 	@echo "  make upnightly - upload a nightly snapshot and its update RDF"
-	@echo "  make release   - make a release from a dist"
-	@echo "  make scandist  - check if a new dist is waiting to be released"
 	@echo "  make sync      - synchronize the www git tree with the server"
 
 info:
@@ -96,8 +95,8 @@ dist: $(XPI) $(MOZXPI)
 sync:
 	( cd www/ && ./sync.py )
 
-release:
-	$(MAKE_RELEASE)
+upload:
+	$(UPLOAD)
 
 scandist:
 	@$(SCAN_DIST)

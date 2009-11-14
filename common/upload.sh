@@ -30,6 +30,14 @@ elif [ ! -d $MCCOY ]; then
     exit 1
 fi
 
+echo
+read -p "To upload version $DISTVERSION, type Yes. " REPLY
+if [ ! "$REPLY" = "Yes" ]; then
+    echo "Abort."
+    exit 1
+fi
+
+echo "Signing update RDF..."
 # TODO: This is duplicated in mknightly.sh
 $SPOCK/spock $RDF \
     -i urn:mozilla:extension:{6dd0bdba-0a02-429e-b595-87a7dfdca7a1} \
@@ -37,10 +45,9 @@ $SPOCK/spock $RDF \
     -u http://beyondboredom.net/gfox/gamefox-$DISTVERSION.xpi \
     -f $XPI > $SIGNED_RDF
 
+echo "Uploading..."
 (cd release && $PUT $XPI $XPI_NAME  $NEWS news/$NEWS_VER  $SIGNED_RDF $RDF_NAME)
 
 # Clean up old release and nightly XPIs
+echo "Cleaning up old versions..."
 (cd release && $CLEANUP $XPI_NAME)
-
-# Mark this release as done
-echo $DISTVERSION > $LASTVERSIONFILE
