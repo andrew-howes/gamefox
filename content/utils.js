@@ -241,7 +241,10 @@ var gamefox_utils =
 
     var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
 
-    return [pageStr, lastPostNum];
+    if (msgs == 1)
+      return ['', ''];
+    else
+      return [pageStr, '#p' + lastPostNum];
   },
 
   mergeArray: function()

@@ -299,7 +299,7 @@ var gamefox =
 
           var a = doc.createElement('a');
               a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
-                lastPost[0] + '#p' + lastPost[1];
+                lastPost[0] + lastPost[1];
               a.textContent = text;
               a.className = 'gamefox-last-post-link';
           rows[i].cells[3].appendChild(a);
@@ -558,7 +558,7 @@ var gamefox =
 
           var a = doc.createElement('a');
               a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
-                lastPost[0] + '#p' + lastPost[1];
+                lastPost[0] + lastPost[1];
               a.textContent = text;
               a.className = 'gamefox-last-post-link';
           rows[i].cells[4].appendChild(a);
@@ -1192,7 +1192,7 @@ var gamefox =
             : node.cells[2].firstChild.textContent);
 
       var uri = node.cells[1].getElementsByTagName('a')[0].href + lastPost[0] +
-          (gotoLastPost ? '#p' + lastPost[1] : '');
+          (gotoLastPost ? lastPost[1] : '');
       doc.location.href = uri;
     }
     catch (e) {}
