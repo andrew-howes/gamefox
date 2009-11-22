@@ -37,7 +37,7 @@ var gamefox_accounts =
     var account = this.accounts[username];
     var expires = account.MDAAuth.expires;
 
-    if (new Date().getTime() < expires * 1000)
+    if (Date.now() < expires * 1000)
     {
       this.removeCookie('skin');
       this.removeCookie('filesplit');

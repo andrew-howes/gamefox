@@ -98,7 +98,7 @@ var gamefox_lib =
     var timestamp = this.getNightlyVersion();
     var nightlyDate = new Date(timestamp.substr(0, 4), (timestamp.substr(4, 2) - 1),
         timestamp.substr(6, 2));
-    return Math.floor((new Date().getTime() - nightlyDate.getTime()) / (1000*60*60*24));
+    return Math.floor((Date.now() - nightlyDate.getTime()) / (1000*60*60*24));
   },
 
   getDocument: function(event)

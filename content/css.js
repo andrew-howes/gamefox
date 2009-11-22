@@ -117,7 +117,7 @@ var gamefox_css =
     file.initWithPath(this.getDirectoryPath());
     file.append(filename);
     if (overwrite == false && file.exists()) {
-      filename = filename.replace(/\.(css|txt)$/, new Date().getTime() + '.$1');
+      filename = filename.replace(/\.(css|txt)$/, Date.now() + '.$1');
       file.initWithPath(this.getDirectoryPath());
       file.append(filename);
     }
