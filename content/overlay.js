@@ -771,7 +771,7 @@ var gamefox =
           postDateNode.textContent = (leftMsgData ? '' : ' | ')
             + 'Posted '
             + gamefox_date.parseFormat(postDate, format)
-            + (leftMsgData ? '' : ' | ')
+            + (leftMsgData || onArchive ? '' : ' | ')
         }
 
         // Element for sigs
