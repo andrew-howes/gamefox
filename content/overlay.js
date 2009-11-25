@@ -679,8 +679,8 @@ var gamefox =
       }
       gamefox_highlighting.loadGroups();
 
-      var pagenum = doc.location.search.match(/\bpage=([0-9]+)/);
-          pagenum = pagenum ? parseInt(pagenum[1]) : 0;
+      var topicParams = gamefox_utils.parseQueryString(doc.location.search);
+      var pagenum = topicParams.page ? parseInt(topicParams.page) : 0;
       var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
       var onArchive = gamefox_lib.onPage(doc, 'archive');
       var onDetail = gamefox_lib.onPage(doc, 'detail');
@@ -1082,6 +1082,26 @@ var gamefox =
         }
 
         boardWrap.insertBefore(miniBoardNav, pageJumper);
+      }
+
+      // Link post nums in quotes
+      // Based on barbarianbob's initial code.
+      // http://www.gamefaqs.com/boards/genmessage.php?board=565885&topic=52347416
+      if (gamefox_lib.prefs.getBoolPref('elements.postidQuoteLinks'))
+      {
+        var quotes = doc.evaluate('//div[@class="msg_body"]//i/p/strong', doc,
+            null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+        var quote;
+        for (var i = 0; i < quotes.snapshotLength; i++)
+        {
+          quote = quotes.snapshotItem(i);
+          quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/, function(z, num){
+              return '<a href="' + gamefox_utils.linkToTopic(topicParams.board,
+            topicParams.topic, Math.floor((num - 1) /
+                gamefox_lib.prefs.getIntPref('msgsPerPage')), tc, num)
+              + '">#' + num + '</a>';
+              });
+        }
       }
 
       // QuickPost

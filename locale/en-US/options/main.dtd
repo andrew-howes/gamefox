@@ -37,6 +37,8 @@
 <!ENTITY numberMessages.label "Number messages">
 <!ENTITY labelTc.label "Label topic creator">
 
+<!ENTITY postidQuoteLinks.label "Link post numbers in quotes">
+
 <!-- Posting -->
 <!ENTITY postButton.label "Post Message button">
 <!ENTITY characterCounters.label "Character counters">

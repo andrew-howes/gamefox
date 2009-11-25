@@ -78,6 +78,9 @@
       <preference id="elements.marktc.marker"
         name="gamefox.elements.marktc.marker" type="string"/>
 
+      <preference id="elements.postidQuoteLinks"
+        name="gamefox.elements.postidQuoteLinks" type="bool"/>
+
       <!-- Posting -->
       <preference id="elements.quickpost.button"
         name="gamefox.elements.quickpost.button" type="bool"/>
@@ -279,6 +282,9 @@
                           preference="elements.marktc"/>
                         <textbox preference="elements.marktc.marker" size="3"/>
                       </hbox>
+
+                      <checkbox label="&postidQuoteLinks.label;"
+                        preference="elements.postidQuoteLinks"/>
                     </vbox>
                   </groupbox>
                 </row>

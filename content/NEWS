@@ -2,6 +2,7 @@
     * version 0.7.5
     * Replace SpotFAQs with a smaller CSS that complements the SpotFAQs skin
       on GameFAQs (SpotFAQs extras)
+    * Link post number in quote headers to the quoted post
 
 2009-11-14:
     * version 0.7.4
