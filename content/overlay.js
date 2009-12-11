@@ -1089,7 +1089,7 @@ var gamefox =
       // http://www.gamefaqs.com/boards/genmessage.php?board=565885&topic=52347416
       if (gamefox_lib.prefs.getBoolPref('elements.postidQuoteLinks'))
       {
-        var quotes = doc.evaluate('//div[@class="msg_body"]//i/p/strong', doc,
+        var quotes = doc.evaluate('//table[contains(@class, "board")]//i/p/strong', doc,
             null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
         var quote;
         for (var i = 0; i < quotes.snapshotLength; i++)
