@@ -10,7 +10,7 @@ GIT_VERSION     = $(shell git describe)
 DISTDIR         = release/dist/$(VERSION)
 VERSIONFILE     = release/dist/version
 
-JAR_FILES       = content/NEWS
+JAR_FILES       = content/NEWS content/NEWS-old
 JAR_DIRS        = content skin locale
 JAR_TEXTS       = js css xul html xhtml dtd properties
 JAR_BINS        = png gif
