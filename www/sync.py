@@ -58,7 +58,7 @@ class sync:
                 print "Uploaded file:", file[0]
             except IOError:
                 # TODO: Automatically create missing directories
-                sys.stderr.write("Failed to upload file:" + file[0])
+                sys.stderr.write("Failed to upload file:" + file[0] + "\n")
 
         sftp.close()
         transport.close()
