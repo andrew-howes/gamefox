@@ -53,6 +53,9 @@ var gamefox_css =
             'GameFAQs stylesheets to use.', 'Ricapar et al.', false],
         'FAQ-frames.css': ['FAQ frames', 'Styles the FAQ headers to look more like GameFAQs.',
             'selmiak', false],
+        'gfpastel-2010.css': ['GFPastel 2010',
+            'A modern stylesheet in pastel blues and purples. Disable main ' +
+            'GameFAQs stylesheets to use.', 'spynae', false],
         'hide-signatures.css': ['Hide signatures',
             'Hides signatures in posts and shows them again when hovered over.\n\n'
               + '(Due to a bug in Firefox, this CSS does not work in Firefox 3.5. '

@@ -41,6 +41,7 @@ var gamefox_about =
                      ['TakatoMatsuki', 'CSS'],
                      ['Ricapar', 'CSS'],
                      ['selmiak', 'CSS'],
+                     ['spynae', 'CSS'],
                      ['Tango Desktop Project', 'icons'],
                      ['http://www.pinvoke.com/', 'icons']]]
     };

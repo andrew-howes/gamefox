@@ -1,0 +1,719 @@
+@charset 'UTF-8';
+/* GFPastel 2010.01.GameFOX
+ * CCBYNCSA spynae [tl;dr, give credit where credit is due, this is free]
+ * Special version for bundle with GameFOX.
+ */
+@-moz-document domain(gamefaqs.com) {
+/* First things first */
+  html {
+    background-color: #D5C5FF;
+    background: #A8F 
+    -moz-repeating-linear-gradient(top left -45deg, rgba(255,255,255,.8) 1px, rgba(255,255,255,.5) 2px, rgba(255,255,255,.8) 3px, rgba(255,255,255,.5) 4px, rgba(255,255,255,.8) 5px);
+    color: #333;
+    font: .81em 'Liberation Sans', 'Helvetica', sans-serif;
+    margin: 0;
+    min-height: 100%;
+    padding: 0;
+    }
+  body {
+    margin: 0;
+    padding: 0;
+    }
+/* Okay, header stuff. */
+  #masthead {
+    margin: 0 1em;
+    width: 800px;
+      max-width: 85%;
+    }
+  /* Headers throughout the page */
+  div#logo a, h1, h2, h3 {
+    color: #497299;
+    clear: left;
+    font-family: 'Liberation Serif', serif;
+    font-style: italic;
+    font-weight: bold;
+    margin: 0;
+    text-decoration: none;
+    }
+  h1 {
+    border-bottom: 3px double #5B8FBF;
+    margin-bottom: -1px; /* No way around it; some H2s aren't under an H1 */
+    }
+  h2, .pod > .head h1 {
+    background: rgba(109,161,208,.6);
+    border: 1px solid #6DA1D0;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    font-family: 'Liberation Sans', 'Helvetica', sans-serif;
+    font-size: 1.5em;
+    font-style: normal;
+    padding: .2em;
+    }
+  h3 {
+    background: rgba(177,177,219,.6);
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 0 0 .5em .5em;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    font-style: normal;
+    font-family: 'Liberation Sans', 'Helvetica', sans-serif;
+    padding: .2em;
+    }
+  h1 a, h2 a, h3 a {
+    color: #497299 !important;
+    }
+  /* GameFAQs header */
+  #logo {
+    background: rgba(177,177,219,.6);
+    border: 1px solid #6DA1D0;
+    border-top: 0;
+    border-left: 0;
+    -moz-border-radius: 0 0 1em 0;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    margin-left: -1em; /* To move it against the corner of the page */
+    margin-bottom: 0;
+    padding: .2em;
+    z-index: 2;
+    }
+  div#logo a {
+    font-size: 2.5em;
+    color: #5B8FBF;
+    }
+  /* The loginbox durp */
+  #loginbox {
+    background: rgba(177,177,219,.5);
+    -moz-border-radius: 1em;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    border: 1px solid #6DA1D0;
+    font-size: small;
+    padding: .5em;
+    position: absolute;
+      top: 1.5em;
+      right: 15%;
+    z-index: 5;
+    }
+  #loginbox a b {
+    font-weight: normal;
+    }
+  #masthead ol li {
+    display: inline-block;
+    }
+  #masthead ol, #masthead ol li {
+    margin: 0;
+    padding: 0;
+    }
+  /* Fix for when logged out */
+  #loginbox li.email {
+    display: block;
+    }
+  /* Search box */
+  #searchbox {
+    background: rgba(219,219,219,.3);
+    border: 1px solid #6DA1D0;
+    border-top: 0;
+    -moz-border-radius: 0 0 1em 0;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    margin-bottom: 0;
+    margin-right: 2em;
+    margin-top: 0;
+    padding: .5em;
+    }
+  #rbx_netxp1_parent {
+    font-size: x-small;
+    text-align: right;
+    }
+  /* Quicknav & Platformlist */
+  #quicknav, #platformlist {
+    background: rgba(219,219,219,.3);
+    border: 1px solid #6DA1D0;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    margin-right: 3em;
+    }
+  #quicknav {
+    background: rgba(109,161,208,.6);
+    border-width: 0 1px;
+    line-height: 2em;
+    }
+  #quicknav p, #quicknav p a {
+    margin: 0;
+    padding: 0;
+    }
+  #quicknav p a {
+    border-right: 1px solid #6DA1D0;
+    color: #497299;
+    display: inline-block;
+    height: 2em;
+    margin-right: -4px;
+    padding: 0 4px;
+    }
+  #quicknav p a:hover {
+    background: rgba(219,219,219,.4);
+    }
+  #platformlist {
+    color: #497299;
+    -moz-border-radius: 0 0 1em 1em;
+    padding: .5em;
+    }
+  #platformlist .jumper {
+    text-align: right;
+    }
+  /* Header link behavior */
+  #masthead a {
+    color: #44A;
+    font-weight: normal;
+    text-decoration: none;
+    }
+  #masthead a:hover {
+    text-decoration: underline;
+    }
+  #masthead 
+/* Moving along to the content */
+  /* Links! */
+  #content a:link {
+    color: #44A;
+    }
+  #content a:visited {
+    color: #87E;
+    }
+  #content a:hover,
+  #content a:focus {
+    color: #444;
+    }
+  /* Gratouitous amounts of wrappers of which I will deal with few */
+  #content {
+    background-color: rgba(255,255,255,.6);
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 1em;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    margin: 2em 3em;
+    padding: .5em;
+    width: auto;
+      min-width: 80%;
+      max-width: 95%; 
+    } /* Min- and max-width taken from GFCSS Azurec, as well as the
+       * proceeding section because I am a faggot and don't think there's any
+       * other way to go about doing this.  Columns on the board list and home
+       * page. */
+#mpu_col_wrap {
+    overflow: hidden;
+}
+
+#mpu_col_wrap #main_col {
+    width: 64%;
+    float: left;
+}
+
+#mpu_col_wrap #side_col {
+    width: 33%;
+    min-width: 150px;
+    float: right;
+}
+  /* That's out of the way. Let's continue. */
+  /* Tables and stuff. A lot of the widths will prob. be from Azurec. If you
+   * haven't noticed, I'm mostly following the order of that stylesheet, to 
+   * double-check I get everything. I want to do this right, right off the bat.
+   */
+  table {
+    border-spacing: 0;
+    width: 100%;
+    }
+  col.count {
+    width: 5em;
+    }
+  col.lastpost {
+    width: 10em;
+    }
+  th {
+    background: #AAAAC7;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    color: #F7F7FF;
+    padding: .2em;
+    text-align: left !important;
+    }
+  th a {
+    color: inherit !important;
+    }
+  td {
+    padding: .2em;
+    }
+  table:not(.message) tr:nth-of-type(2n-1),
+  table:not(.message) tr {
+    background: rgba(225,225,255,.2);
+    }
+  table:not(.message) tr:nth-of-type(2n) {
+    background: rgba(225,225,255,.8);
+    }
+  /* Alternating row colors Firefox 3.0 support */
+  table:not(.message) tr {
+    background: rgba(225,225,255,.2);
+    }
+  table:not(.message) tr.even {
+    background: rgba(225,225,255,.8);
+    }
+  /* Various lists
+   * System » Genre » Subgenre » Subsubgenre */
+  .crumbs {
+    background: rgba(177,177,219,.6);
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 1em 0 1em 0;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    float: left;
+    margin-left: -.6em;
+    margin-top: -.6em;
+    padding: .3em;
+    }
+  .crumbs a { font-size: smaller; }
+  /* Home Data FAQs Cheats Images My Games Answers Board */
+  ul.content_nav {
+    background: rgba(177,177,219,.6);
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    float: left;
+    line-height: 2em;
+    list-style: none;
+    margin: 0;
+      margin-bottom: 1em;
+      margin-left: 1em;
+    padding: 0;
+    }
+  ul.content_nav li {
+    display: inline-block;
+    padding: 0;
+    }
+  ul.content_nav li + li {
+    border-left: 1px solid #6DA1D0;
+    }
+  ul.content_nav li a {
+    display: block;
+    padding: 0 .25em;
+    text-decoration: none;
+    }
+  ul.content_nav li a b {
+    font-weight: normal;
+    }
+  ul.content_nav li a:hover {
+    background: rgba(177,177,219,.6);
+    text-decoration: underline;
+    }
+  ul.content_nav li:first-child a {
+    -moz-border-radius-bottomleft: 1em;
+    }
+  ul.content_nav li:last-child a {
+    -moz-border-radius-bottomright: 1em;
+    }
+  /* Homepage lists */
+  /*.features*/
+  .gs ul {
+    list-style: none !important;
+    margin: 0 1em;
+    padding: 0;
+    }
+  .gs li:first-child h3 {
+    border-top: 0;
+    }
+  .gs h3 + p {
+    background: rgba(219,219,255,.5);
+    border: 1px solid #6DA1D0;
+      border-top: 0;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    margin: 0 1em;
+      margin-bottom: 1em;
+    padding: .2em;
+    }
+  .gs:not(.features) li:first-child ~ li {
+    list-style: circle inside;
+    background: rgba(219,219,255,.5);
+    border: solid #6DA1D0;
+      border-width: 0 1px;
+    margin: 0 1em;
+    padding: .2em;
+    }
+  .gs:not(.features) li:first-child + li {
+    border-top-width: 1px;
+    -moz-border-radius: 1em 1em 0 0;
+    }
+  .gs:not(.features) li:last-child {
+    border-bottom-width: 1px !important;
+    -moz-border-radius: 0 0 1em 1em;
+    }
+  .gs.features ul {
+    background: rgba(219,219,255,.5);
+    border: 1px solid #6DA1D0;
+      border-top: 0;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    }
+  .gs.features h3 {
+    -moz-border-radius: 0;
+    margin: 0 -1px .2em -1px;
+    }
+  /* Top 10 Games/FAQs & PotD */
+  div.body ol {
+    list-style: none;
+    }
+  .poll h3 {
+    border-top: 0;
+    }
+  #polloftheday ol {
+    background: rgba(219,219,255,.5);
+    border: 1px solid #6DA1D0;
+      border-top: 0;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    margin: 0 1em;
+      margin-bottom: 1em;
+    padding: .2em;
+    }
+  #polloftheday ol li, .pod ol, .pod li {
+    margin: 0;
+    padding: 0;
+    }
+  div.topten .pod_wrap {
+    float: left;
+    width: 45%;
+    }
+  div.topten .pod_wrap h2 {
+    clear: none !important;
+    }
+  /* Upcoming Releases */
+  ul.releases {
+    margin: 0;
+      margin-right: 1em;
+    list-style: none;
+    }
+  ul.releases li {
+    padding: 0;
+    margin: 0;
+    }
+/* Topic list
+   * It is time for me to do what has to be me to help my brother defeat the 
+   * enemys
+   * User and Page nav */
+  table {
+    clear: both;
+    }
+  .user {
+    float: left;
+    }
+  .pages {
+    float: right;
+    }
+  .user, .pages {
+    background: rgba(109,161,208,.6);
+    border: 1px solid #6DA1D0;
+      border-top: 0;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    color: #497299;
+    margin-bottom: .3em;
+    padding: .3em;
+    }
+  .user a, .pages a {
+    color: inherit !important;
+    }
+  /* Topic search */
+  .searchtopics {
+    background: #AAAAC7;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    color: #F7F7FF;
+    clear: both;
+    font-weight: bold;
+    padding: .2em;
+    text-align: center;
+    }
+  /* Page Jumper */
+  .pagejumper ul {
+    background: rgba(109,161,208,.6);
+    border: 1px solid #6DA1D0;
+      border-top: 0px;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    list-style: none;
+    margin: 0;
+    padding: .3em;
+    }
+  .body + .pagejumper ul {
+    border-top: 1px solid #6DA1D0;
+    }
+  .pagejumper ul li {
+    display: inline;
+    }
+  .pagejumper ul li + li:before {
+    content: " | ";
+    }
+  /* Rid of the papers */
+  img[src="/images/default/topic.gif"] {
+    display: none;
+    }
+  /* System Notification/Split Board */
+  div#board_wrap p {
+    clear: both;
+    }
+  /* Now for the fun part
+   * Message lists
+   * Above Message */
+  .message tr, .message td {
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    }
+  .msg_stats {
+    background: rgba(177,177,219,.9);
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 1em 1em 0 0;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    padding: .3em;
+    }
+  .msg_stats:before {
+    content: "From: ";
+    font-weight: bold;
+    }
+  .msg_body {
+    background: rgba(219,219,219,.3);
+    border: 1px solid #6DA1D0;
+      border-top: 0;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    margin-bottom: .3em;
+    padding: .3em;
+    max-width: 100%;
+    }
+  .message tr:last-child > td:only-child .msg_body {
+    -moz-border-radius: 0;
+    margin-bottom: 0;
+    }
+  /* Left of Message */
+  col.author {
+    width: 16em;
+    }
+  td.author {
+    background: #AAAAC7;
+    border-left: 1px solid #6DA1D0;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    color: #F7F7FF;
+    padding: .2em;
+    }
+  td.author a.name {
+    background: #6DA1D0;
+    color: #497299;
+    display: block;
+    font-weight: bold;
+    margin: -.2em;
+      margin-bottom: 0;
+    padding: .2em;
+    text-align: right;
+    }
+  #content td.author a.name:visited { color: #497299; }
+  #content td.author a.name:hover   { color: #333;    }
+  td.author a:not(.name) {
+    color: inherit !important;
+    font-weight: bold;
+    }
+  td.author + td {
+    border-right: 1px solid #6DA1D0;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    padding: .2em;
+    }
+  .message tr:nth-of-type(2n) td.author + td {
+    background: #E7E7FF;
+    }
+  .message tr:nth-of-type(2n-1) td.author + td {
+    background: #FFF;
+    }
+  /* Left of Message Firefox 3.0 support */
+  .message tr td.author + td {
+    background: #FFF;
+    }
+  tr.even td.author + td {
+    background: #E7E7FF;
+    }
+  /* Fix Left of Message while not affecting Above Message */
+  .message tr:first-child td:not(:only-child) {
+    border-top: 1px solid #6DA1D0;
+    }
+  .message tr:last-child td:not(:only-child) {
+    border-bottom: 1px solid #6DA1D0;
+    }
+  /* Things nobody cares about */
+  #footer, iframe, .ad { display: none; }
+  /* GFCode */
+  .message i > p, .message em > p {
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 10px;
+    padding: .3em;
+    }
+  /* Quoting: <i><p> */
+  .message i > p {
+    background: #DBDBEE;
+    -moz-box-shadow: 0 0 .3em #6DA1D0;
+    }
+    /* Quote header: <i><p><strong> */
+    .message i > p > strong:first-child {
+      background: #AAAAC7;
+      border: 1px solid #6DA1D0;
+      border-radius: .7em .7em 0 0;
+        -moz-border-radius: .7em .7em 0 0;
+        -khtml-border-top-left-radius: .7em;
+        -khtml-border-top-right-radius: .7em;
+      color: #F7F7FF;
+      display: block;
+      margin: -4px;
+        margin-bottom: 0;
+      padding: 3px;
+      }
+    .message i > p > strong:first-child + br {
+      display: none;
+      }
+    /* Links in quote headers */
+    .message i > p > strong:first-child > a {
+      color: inherit !important;
+      }
+  /* Code: <em><p> */
+  .message em > p {
+    background: #FFF;
+    font-family: monospace;
+    font-size: 1.1em;
+    font-style: normal;
+    white-space: pre-wrap;
+    }
+  /* GameSpot fallout reduction */
+  .message p:empty {
+    display: none;
+    }
+/* GameFOX */
+  /* Board Nav */
+  #gamefox-board-nav {
+    background: rgba(109,161,208,.6);
+    border: 1px solid #6DA1D0;
+      border-top: 0;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    margin: 0;
+    padding: .2em;
+    }
+  /* Message Highlighting
+   * Above Message */
+  td.gamefox-highlight:only-child {
+    -moz-border-radius: 1em 1em 0 0;
+    }
+  td.gamefox-highlight .msg_stats {
+    background: rgba(255,255,255,.5);
+    text-shadow: 0px 0px 2px #fff;
+    }
+  /* Left of Message */
+  tr:nth-of-type(2n-1) td.author.gamefox-highlight {
+    background-image: -moz-repeating-linear-gradient(top left 45deg, rgba(255,255,255,.6) 1px, rgba(255,255,255,.3) 2px, rgba(255,255,255,.6) 3px, rgba(255,255,255,.3) 4px, rgba(255,255,255,.6) 5px);
+    text-shadow: 0px 0px 3px #000;
+    }
+  tr:nth-of-type(2n) td.author.gamefox-highlight {
+    background-image: -moz-repeating-linear-gradient(top left -45deg, rgba(255,255,255,.6) 1px, rgba(255,255,255,.3) 2px, rgba(255,255,255,.6) 3px, rgba(255,255,255,.3) 4px, rgba(255,255,255,.6) 5px);
+    text-shadow: 0px 0px 3px #000;
+    }
+  td.author.gamefox-highlight a.name {
+    background: rgba(255,255,255,.8);
+    text-shadow: none;
+    }
+  /* Topic Highlighting */
+  .topics tr.gamefox-highlight {
+    -moz-box-shadow: 0 0 .3em #6DA1D0;
+    }
+  .topics tr.gamefox-highlight td {
+    background: rgba(255,255,255,.5) !important;
+    text-shadow: 0px 0px 2px #fff;
+    }
+/* Elsewhere... */
+  /* Poll results */
+  .poll .bar {
+    background-color: #CCCCe8;
+    display: inline-block;
+    -moz-border-radius: .2em;
+    }
+  /* FAQs */
+  div#header > .lefttext, div#header > .righttext {
+    background: rgba(177,177,219,.6);
+    display: inline-block;
+    margin: 0;
+    padding: .5em;
+    padding-bottom: 2em;
+    }
+  div#header > .lefttext {
+    margin-right: -.3em;
+    }
+  #body > pre {
+    background: rgba(255,255,255,.5);
+    padding: 1em;
+    }
+  /* Game > Home */
+  img.boxshot {
+    float: left;
+    margin: 3px;
+    }
+  /* Game > Cheats */
+  ul.cheats {
+    list-style: none;
+    margin: 0 1em;
+    padding: 0;
+    }
+  ul.cheats li:first-child h3 {
+    border-top: 0;
+    }
+  ul.cheats li:first-child ~ li h3 {
+    -moz-border-radius: 0;
+    }
+/************ OPTIONS ************/
+/** Centered Header **/
+/**
+  #masthead {
+    margin: 0 auto;
+    }
+  #masthead #logo {
+    border-left: 1px solid #6DA1D0;
+    border-radius: 0 0 0 1em;
+      -moz-border-radius-bottomleft: 1em;
+      -khtml-border-bottom-left-radius: 1em;
+    margin-left: 0;
+    }
+  #masthead #searchbox, #masthead #quicknav, #masthead #platformlist {
+    margin-left: 2em;
+    }
+  #masthead #loginbox {
+    right: 10%;
+    }
+**/
+/** 800x600 Resolution **/
+/**
+  div#masthead div#loginbox {
+    right: 1.5em;
+    }
+  div.user {
+    border-radius: 0 0 1em 0;
+      -moz-border-radius-bottomleft: 0;
+      -khtml-border-bottom-left-radius: 0;
+    clear: right;
+    }
+  div.pages {
+    clear: left;
+    float: left;
+    margin-top: -.3em;
+    }
+**/
+  /** Centered Header + 800x600 Resolution **/
+  /**
+    #gamefox-clock {
+      display: block;
+      text-align: right;
+      }
+  **/
+/** Solid colors [Arguably how I should have done this in the first place ] **/
+/**
+  html:root { background-image: none; background-color: #D5C5FF; }
+  div#content { background-color: #F7F4FF; }
+  table:not(.message) tr:not(.gamefox-highlight) td,
+  table.message td.author + td { background-color: #F3F0FF; }
+  table:not(.message) tr.even:not(.gamefox-highlight) td,
+  table.message tr.even td.author + td { background-color: #E5E5FF }
+  table.message td:not(.gamefox-highlight) div.msg_stats { 
+    background-color: #B8B7DF; }
+  table.message div.msg_body { background-color: #EFEDF4; }
+**/
+/* Fin */
+}
