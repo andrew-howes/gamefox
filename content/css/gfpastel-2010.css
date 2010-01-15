@@ -493,9 +493,10 @@
     color: #F7F7FF;
     padding: .2em;
     }
-  td.author a.name {
+  td.author a.name,
+  td.author > b:first-child /*Archived*/{
     background: #6DA1D0;
-    color: #497299;
+    color: #3D5F80;
     display: block;
     font-weight: bold;
     margin: -.2em;
@@ -503,11 +504,16 @@
     padding: .2em;
     text-align: right;
     }
-  #content td.author a.name:visited { color: #497299; }
-  #content td.author a.name:hover   { color: #333;    }
+  #content td.author > b:first-child /*Archived*/{ color: #333;    }
+  #content td.author a.name:visited     { color: #497299; }
+  #content td.author a.name:hover       { color: #333;    }
   td.author a:not(.name) {
     color: inherit !important;
     font-weight: bold;
+    }
+  td.author a.name + br,
+  td.author > b:first-child + br /*Archived*/ {
+    display: none;
     }
   td.author + td {
     border-right: 1px solid #6DA1D0;
@@ -619,6 +625,28 @@
   .topics tr.gamefox-highlight td {
     background: rgba(255,255,255,.5) !important;
     text-shadow: 0px 0px 2px #fff;
+    }
+  /* Left of Message TC/Group Labels */
+  td.author .gamefox-tc-label, 
+  td.author .gamefox-groupname {
+    background: #6DA1D0;
+    color: #333;
+    display: block;
+    margin: 0 -.2em;
+    padding: 0 .2em;
+    text-align: right;
+    }
+  td.author .gamefox-tc-label {
+    padding-bottom: .2em;
+    }
+    /* While highlighted */
+    td.author.gamefox-highlight .gamefox-tc-label,
+    td.author.gamefox-highlight .gamefox-groupname {
+      background: rgba(255,255,255,.8);
+      text-shadow: none;
+      }
+  td.author [class^="gamefox"]:not([class$="links"]) + br { /* :3 */
+    display: none;
     }
 /* Elsewhere... */
   /* Poll results */
