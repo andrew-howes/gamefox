@@ -354,7 +354,7 @@
   .poll h3 {
     border-top: 0;
     }
-  #polloftheday ol {
+  .body.poll {
     background: rgba(219,219,255,.5);
     border: 1px solid #6DA1D0;
       border-top: 0;
