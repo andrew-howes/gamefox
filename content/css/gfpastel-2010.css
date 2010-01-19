@@ -385,6 +385,12 @@
     padding: 0;
     margin: 0;
     }
+  ul.releases li:first-child h3 {
+    border-top-width: 0px;
+    }
+  ul.releases h3 {
+    -moz-border-radius: 0;
+    }
 /* Topic list
    * It is time for me to do what has to be me to help my brother defeat the 
    * enemys
@@ -685,7 +691,39 @@
     border-top: 0;
     }
   ul.cheats li:first-child ~ li h3 {
-    -moz-border-radius: 0;
+    border-radius: 0;
+      -moz-border-radius: 0;
+      -khtml-border-radius: 0;
+    }
+  .head + .body .item:first-of-type .details h3 {
+    border-top-width: 0;
+    }
+  /* Character Battle Bracket */
+  table.bracket {
+    border-collapse: collapse;
+    }
+  table.bracket tr:nth-of-type(2n-1) td:nth-of-type(2n-1),
+  table.bracket tr:nth-of-type(2n) td:nth-of-type(2n) {
+    background: #E7E7FF;
+    }
+  table.bracket tr:nth-of-type(2n) td:nth-of-type(2n-1),
+  table.bracket tr:nth-of-type(2n-1) td:nth-of-type(2n) {
+    background: #FFF;
+    }
+  table.bracket td.divh {
+    background-color: #AAAAC7 !important;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    color: #F7F7FF;
+    font-weight: bold;
+    }
+  table.bracket td:not(.divh) {
+    border: 1px solid #6DA1D0;
+    }
+  table.bracket .correct {
+    background: #8F8;
+    }
+  table.bracket .incorrect {
+    background: #F88;
     }
 /************ OPTIONS ************/
 /** Centered Header **/
@@ -734,7 +772,17 @@
 /** Solid colors [Arguably how I should have done this in the first place ] **/
 /**
   html:root { background-image: none; background-color: #D5C5FF; }
+  #masthead #logo { background-color: #BFB8E9; }
+  #masthead #loginbox { background-color: #BBB8E2; }
+  #masthead #searchbox, #masthead #platformlist { background-color: #DCD3F4 }
+  #masthead #quicknav { background-color: #9EB9E3; }
+  #masthead #quicknav p > a:hover { background-color: #B4C3DF; }
   div#content { background-color: #F7F4FF; }
+  #content .crumbs, #content ul.content_nav, #content h3 { background: #CCCAE9;}
+  #content ul.content_nav li a:hover { background: #BBBAE0; }
+  #content h2, #content .user, #content .pages, #content #gamefox-board-nav,
+  #content .pagejumper ul {
+    background-color: #A3C1E3; }
   table:not(.message) tr:not(.gamefox-highlight) td,
   table.message td.author + td { background-color: #F3F0FF; }
   table:not(.message) tr.even:not(.gamefox-highlight) td,
