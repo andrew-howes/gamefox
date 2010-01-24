@@ -472,7 +472,7 @@ var gamefox =
     {
       var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      gamefox_highlighting.loadGroups();
+      var userlist = gamefox_highlighting.loadGroups();
 
       var onTracked = gamefox_lib.onPage(doc, 'tracked');
 
@@ -617,7 +617,7 @@ var gamefox =
           var title = rows[i].cells[1].textContent.gamefox_trim();
           var hlinfo;
 
-          if ((hlinfo = gamefox_highlighting.searchTopic(username, title)) != false)
+          if ((hlinfo = gamefox_highlighting.searchTopic(username, title, userlist)) != false)
           {
             // list of groups
             if (gamefox_lib.prefs.getBoolPref('userlist.topics.showgroupnames') &&
@@ -677,7 +677,7 @@ var gamefox =
       {
         doc.gamefox.pages = 1;
       }
-      gamefox_highlighting.loadGroups();
+      var userlist = gamefox_highlighting.loadGroups();
 
       var topicParams = gamefox_utils.parseQueryString(doc.location.search);
       var pagenum = topicParams.page ? parseInt(topicParams.page) : 0;
@@ -825,7 +825,7 @@ var gamefox =
         // Message highlighting
         var hlinfo, groupname;
         if ((hlinfo = gamefox_highlighting.searchPost(username, postBody,
-                tc == username && !onDetail)) != false)
+                tc == username && !onDetail, userlist)) != false)
         {
           // add group names after username
           if (gamefox_lib.prefs.getBoolPref('userlist.messages.showgroupnames') &&

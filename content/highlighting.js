@@ -77,9 +77,12 @@ var gamefox_highlighting =
         }
       }
     }
+
+    // recent value of userlist.serialized
+    return userlist;
   },
 
-  searchPost: function(username, post, tc)
+  searchPost: function(username, post, tc, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.postContains;
@@ -100,10 +103,10 @@ var gamefox_highlighting =
     if (!groups[0])
     {
       // nothing in postContains index, return users index instead
-      return this.searchUsername(username, tc);
+      return this.searchUsername(username, tc, providedUserlist);
     }
 
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
 
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
@@ -115,7 +118,7 @@ var gamefox_highlighting =
         groupNames += userlist[groups[i]].name + ', ';
 
     // Get group names from username search
-    var hlinfo = this.searchUsername(username, tc);
+    var hlinfo = this.searchUsername(username, tc, userlist);
     if (hlinfo && hlinfo[0].length)
       groupNames += hlinfo[0] + ', ';
 
@@ -123,7 +126,7 @@ var gamefox_highlighting =
            topics, groups];
   },
 
-  searchTopic: function(username, title)
+  searchTopic: function(username, title, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.titleContains;
@@ -144,10 +147,10 @@ var gamefox_highlighting =
     if (!groups[0])
     {
       // nothing in titleContains index, return users index instead
-      return this.searchUsername(username);
+      return this.searchUsername(username, false, providedUserlist);
     }
 
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
 
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
@@ -159,7 +162,7 @@ var gamefox_highlighting =
         groupNames += userlist[groups[i]].name + ', ';
 
     // Get group names from username search
-    var hlinfo = this.searchUsername(username);
+    var hlinfo = this.searchUsername(username, false, userlist);
     if (hlinfo && hlinfo[0].length)
       groupNames += hlinfo[0] + ', ';
 
@@ -167,7 +170,7 @@ var gamefox_highlighting =
            topics, groups];
   },
 
-  searchUsername: function(username, tc)
+  searchUsername: function(username, tc, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.users;
@@ -178,7 +181,7 @@ var gamefox_highlighting =
     if (!index[username] && !(tc && index['(tc)']))
       return false; // username isn't in any groups
 
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
     if (tc && index[username] && index['(tc)'])
       var groups = gamefox_utils.mergeArray(index[username], index['(tc)']);
     else if (tc && index['(tc)'])

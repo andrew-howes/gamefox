@@ -427,11 +427,9 @@ var gamefox_context =
     }
     username = node.textContent;
 
-    gamefox_highlighting.loadGroups();
-    activeGroups = gamefox_highlighting.searchUsername(username)[4];
+    userlist = gamefox_highlighting.loadGroups();
+    activeGroups = gamefox_highlighting.searchUsername(username, false, userlist)[4];
     if (!activeGroups) activeGroups = [];
-
-    userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
 
     noGroups = true;
     for (i = 0; i < userlist.length; i++)
