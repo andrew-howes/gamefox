@@ -67,9 +67,9 @@ var gamefox_highlighting =
           else
             this.index[type][value] = [i];
         }
-        else // type == titleContains
+        else // type == titleContains|postContains
         {
-          // the index for titleContains maps groups to values
+          // the index for titleContains/postContains maps groups to values
           if (this.index[type][i])
             this.index[type][i].push(value);
           else
@@ -93,6 +93,7 @@ var gamefox_highlighting =
       {
         if (post.indexOf(index[i][j]) != -1)
           groups.push(i);
+          break;
       }
     }
 
@@ -136,6 +137,7 @@ var gamefox_highlighting =
       {
         if (title.indexOf(index[i][j]) != -1)
           groups.push(i);
+          break;
       }
     }
 
