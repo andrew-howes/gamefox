@@ -108,6 +108,12 @@ var gamefox_highlighting =
 
     var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
 
+    // also get groups from username search
+    var hlinfo = this.searchUsername(username, tc, userlist);
+    if (hlinfo && hlinfo[4])
+      groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(groups, hlinfo[4]);
+
+    // first group decides everything
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
     var topics = userlist[groups[0]].topics;
@@ -116,11 +122,6 @@ var gamefox_highlighting =
     for (var i = 0; i < groups.length; i++)
       if (userlist[groups[i]].name.length)
         groupNames += userlist[groups[i]].name + ', ';
-
-    // Get group names from username search
-    var hlinfo = this.searchUsername(username, tc, userlist);
-    if (hlinfo && hlinfo[0].length)
-      groupNames += hlinfo[0] + ', ';
 
     return [groupNames.substr(0, groupNames.length - 2), color, messages,
            topics, groups];
@@ -152,6 +153,12 @@ var gamefox_highlighting =
 
     var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
 
+    // also get groups from username search
+    var hlinfo = this.searchUsername(username, false, userlist);
+    if (hlinfo && hlinfo[4])
+      groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(groups, hlinfo[4]);
+
+    // first group decides everything
     var color = userlist[groups[0]].color;
     var messages = userlist[groups[0]].messages;
     var topics = userlist[groups[0]].topics;
@@ -160,11 +167,6 @@ var gamefox_highlighting =
     for (var i = 0; i < groups.length; i++)
       if (userlist[groups[i]].name.length)
         groupNames += userlist[groups[i]].name + ', ';
-
-    // Get group names from username search
-    var hlinfo = this.searchUsername(username, false, userlist);
-    if (hlinfo && hlinfo[0].length)
-      groupNames += hlinfo[0] + ', ';
 
     return [groupNames.substr(0, groupNames.length - 2), color, messages,
            topics, groups];
