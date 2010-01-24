@@ -183,7 +183,7 @@ var gamefox_highlighting =
 
     var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
     if (tc && index[username] && index['(tc)'])
-      var groups = gamefox_utils.mergeArray(index[username], index['(tc)']);
+      var groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(index[username], index['(tc)']);
     else if (tc && index['(tc)'])
       var groups = index['(tc)'];
     else

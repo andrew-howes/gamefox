@@ -257,6 +257,17 @@ var gamefox_utils =
     return arr;
   },
 
+  // merge, sort and remove duplicates
+  mergeArrayOfNumbersAsSortedSet: function()
+  {
+    var arr = new Array();
+    for (var i = 0; i < arguments.length; i++)
+      arr = arr.concat(arguments[i]);
+    arr.sort(function(a, b) a - b);
+    var set = arr.filter(function(element, index, array) !index || element != array[index - 1]);
+    return set;
+  },
+
   tcParam: function(tc)
   {
     return tc && (gamefox_lib.prefs.getBoolPref('elements.marktc')
