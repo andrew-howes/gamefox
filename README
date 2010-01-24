@@ -1,0 +1,52 @@
+Requirements
+============
+
+Packages needed to build, sign and upload (on Debian lenny):
+
+* zip
+* ruby
+* libxslt-ruby
+* libnss3-1d
+* python-paramiko
+* ... and dependencies
+
+Spock (http://hyperstruct.net/projects/spock) must be installed in
+release/spock. The McCoy profile must be in release/mccoy.default.
+
+Configuration
+=============
+
+To upload to the server, copy common/server.conf.example to common/server.conf
+and edit the file to match the correct settings.
+
+Uploading a release
+===================
+
+You must first build a distribution which contains the XPI, news and unsigned
+release files. To do so, type
+
+    make dist VERSION=x.y.z
+
+where VERSION is the version of the release. This should be the current
+version in git without the "pre". For example, you should use VERSION=0.7.5
+if the git version is 0.7.5pre.
+
+After inspecting and testing the distribution, upload it by typing
+
+    make upload
+
+This automatically does the following:
+
+1. Uploads the XPI to $(file_dir)
+2. Uploads the news to $(file_dir)/news
+3. Moves the XPI of the previous version to $(file_dir)/oldxpi
+4. Signs the update RDF file and uploads it
+5. Deletes the current nightly XPI
+
+Finally, you should upload the *_amo.xpi file in the root of the git tree to
+addons.mozilla.org.
+
+Configuring a nightly build server
+==================================
+
+To be written.
