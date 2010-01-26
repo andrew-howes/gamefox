@@ -21,6 +21,13 @@ and edit the file to match the correct settings.
 
 SSH keys and local file operations are not supported yet.
 
+Preparing for a release
+=======================
+
+Release notes need to be written. Use one of the files in www/releasenotes
+as a template. The server will automatically add them to the website and
+keep them updated from the git repository.
+
 Uploading a release
 ===================
 
@@ -39,11 +46,40 @@ After inspecting and testing the distribution, upload it by typing
 
 This automatically does the following:
 
-1. Uploads the XPI to $(file_dir)
-2. Uploads the news to $(file_dir)/news
-3. Moves the XPI of the previous version to $(file_dir)/oldxpi
-4. Signs the update RDF file and uploads it
-5. Deletes the current nightly XPI
+    1. Uploads the XPI to $(file_dir)
+    2. Uploads the news to $(file_dir)/news
+    3. Moves the XPI of the previous version to $(file_dir)/oldxpi
+    4. Signs the update RDF file and uploads it
+    5. Deletes the current nightly XPI
+
+What to do after a release
+==========================
+
+First, you should tag the git repo with the latest version number. Then you
+should bump the version number in:
+
+    Makefile
+    content/NEWS
+    install.rdf
+    www/index.php.txt (including date and version compatibility)
+
+and commit+push the changes.
+
+Make a release topic on Blood Money. The title should be "[release] GameFOX
+x.y.z", and conform to this template:
+
+    <b>Download:</b>
+
+    http://link_to_xpi
+
+    <b>Release notes:</b>
+
+    [content of "about this version" section of release notes]
+
+    <b>News:</b>
+
+    [content of "new in this release" section of release notes (or from
+    content/NEWS]
 
 Finally, you should upload the *_amo.xpi file in the root of the git tree to
 addons.mozilla.org.
