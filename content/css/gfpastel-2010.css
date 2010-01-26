@@ -164,7 +164,6 @@
   #masthead a:hover {
     text-decoration: underline;
     }
-  #masthead 
 /* Moving along to the content */
   /* Links! */
   #content a:link {
@@ -301,7 +300,6 @@
     -moz-border-radius-bottomright: 1em;
     }
   /* Homepage lists */
-  /*.features*/
   .gs ul {
     list-style: none !important;
     margin: 0 1em;
@@ -563,10 +561,6 @@
     .message i > p > strong:first-child {
       background: #AAAAC7;
       border: 1px solid #6DA1D0;
-      border-radius: .7em .7em 0 0;
-        -moz-border-radius: .7em .7em 0 0;
-        -khtml-border-top-left-radius: .7em;
-        -khtml-border-top-right-radius: .7em;
       color: #F7F7FF;
       display: block;
       margin: -4px;
@@ -592,6 +586,19 @@
   .message p:empty {
     display: none;
     }
+  .message td table {
+    border-spacing: 0 !important;
+    }
+  .message td table td {
+    border: 1px solid #6DA1D0;
+    }
+  .message td table tr:first-child td {
+    background: #AAAAC7;
+    color: #F7F7FF;
+    }
+  .message td table tr + tr td {
+    background: #DBDBEE;
+    }
 /* GameFOX */
   /* Board Nav */
   #gamefox-board-nav {
@@ -601,6 +608,13 @@
     -moz-box-shadow: 0 0 1em #6DA1D0;
     margin: 0;
     padding: .2em;
+    }
+  /* What's that?  Is it a yellow strip?  It's a moderated message!  You better
+   * check it, you gotta check it!  Or you'll lose your precious karma!  Your
+   * precious karma, your precious karma, you'll lose your precious karma... */
+  p.gamefox-usernote {
+    background: #FF0;
+    clear: both;
     }
   /* Message Highlighting
    * Above Message */
@@ -691,9 +705,7 @@
     border-top: 0;
     }
   ul.cheats li:first-child ~ li h3 {
-    border-radius: 0;
-      -moz-border-radius: 0;
-      -khtml-border-radius: 0;
+    -moz-border-radius: 0;
     }
   .head + .body .item:first-of-type .details h3 {
     border-top-width: 0;
@@ -790,6 +802,30 @@
   table.message td:not(.gamefox-highlight) div.msg_stats { 
     background-color: #B8B7DF; }
   table.message div.msg_body { background-color: #EFEDF4; }
+**/
+/** Full-width header **/
+/**
+  div#masthead {
+    margin: 0;
+    width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+  div#masthead div#header ~ div[id] {
+    margin-left: 1em;
+    }
+  div#masthead div#header div#logo {
+    border-right-width: 0;
+    -moz-border-radius: 0;
+    -moz-box-shadow: 0 0 0;
+    margin: 0;
+    }
+  div#masthead div#header div#loginbox {
+    border-top-width: 0;
+    -moz-border-radius: 0 0 1em 1em;
+    top: 0;
+    right: 1em;
+    }
 **/
 /* Fin */
 }
