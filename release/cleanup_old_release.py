@@ -5,14 +5,21 @@ import os
 import ConfigParser
 import paramiko
 
-config = ConfigParser.ConfigParser()
+config = ConfigParser.RawConfigParser()
 # TODO: This relative path is fragile
 config.read("../common/server.conf")
 
 transport = paramiko.Transport((config.get("server", "host"),
         int(config.get("server", "port"))))
-transport.connect(username = config.get("server", "user"),
-        password = config.get("server", "pass"))
+
+if config.has_option("server", "keyfile"):
+    transport.start_client()
+    transport.auth_publickey(config.get("server", "user"),
+            paramiko.RSAKey.from_private_key_file(
+                config.get("server", "keyfile")))
+else:
+    transport.connect(username = config.get("server", "user"),
+            password = config.get("server", "pass"))
 
 sftp = paramiko.SFTPClient.from_transport(transport)
 sftp.chdir(config.get("server", "file_dir"))

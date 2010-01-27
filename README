@@ -19,7 +19,7 @@ Configuration
 To upload to the server, copy common/server.conf.example to common/server.conf
 and edit the file to match the correct settings.
 
-SSH keys and local file operations are not supported yet.
+SSH is required. Local file operations are not supported yet.
 
 Preparing for a release
 =======================
