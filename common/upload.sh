@@ -4,6 +4,8 @@ set -e
 
 top=$(pwd)
 
+GIT_TIMESTAMP_FILE=$top/.git/objects
+
 DISTVERSION=$(cat $VERSIONFILE)
 DISTDIR=$top/$(dirname $VERSIONFILE)/$DISTVERSION
 
@@ -31,6 +33,11 @@ elif [ ! -d $MCCOY ]; then
 fi
 
 echo
+if [ -e $GIT_TIMESTAMP_FILE ]; then
+    echo "The git repository was last updated: `stat -c %y $GIT_TIMESTAMP_FILE`"
+fi
+echo "The release XPI was built: `stat -c %y $XPI`"
+
 read -p "To upload version $DISTVERSION, type Yes. " REPLY
 if [ ! "$REPLY" = "Yes" ]; then
     echo "Abort."
