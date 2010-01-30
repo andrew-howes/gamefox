@@ -27,4 +27,4 @@ Questions, suggestions or complaints? Let us know at
 on GameFAQs (SpotFAQs extras)
 * Link post number in quote headers to the quoted post
 * New CSS: GFPastel 2010
-* Fix higlighting group priority
+* Fix highlighting group priority
