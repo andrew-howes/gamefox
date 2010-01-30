@@ -1,0 +1,30 @@
+### About this version
+
+[SpotFAQs](http://www.takatocss.co.cc/spotfaqs.xml) is replaced with SpotFAQs extras.
+This replacement CSS is designed to be used with the SpotFAQs skin on GameFAQs
+for styling GameFOX features.
+
+Post number in quote header is now clickable.
+It links to the quoted post in the same topic.
+
+New GameFAQs theme:
+[GFPastel 2010](http://www.gamefaqs.com/boards/genmessage.php?board=565885&topic=53000033)
+by spynae.
+You can view its description and enable it from the Style options (Tools |
+GameFOX | Style).
+
+Highlighting now properly obeys the highlighting group ranks.
+Priority will be given to the first matching group.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+
+### New in this release
+
+* Replace SpotFAQs with a smaller CSS that complements the SpotFAQs skin
+on GameFAQs (SpotFAQs extras)
+* Link post number in quote headers to the quoted post
+* New CSS: GFPastel 2010
+* Fix higlighting group priority
