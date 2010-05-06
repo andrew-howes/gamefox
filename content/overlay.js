@@ -1324,7 +1324,7 @@ var gamefox =
     for (var i = 0; i < pages; i++)
     {
       a = doc.createElement('a');
-      a.href = topiclink + (i ? '&page=' + i + tcParam : '');
+      a.href = topiclink + (i ? '?page=' + i + tcParam : '');
       a.appendChild(doc.createTextNode(i + 1));
 
       pageHTML.appendChild(a);

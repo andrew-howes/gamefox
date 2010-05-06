@@ -252,7 +252,7 @@ var gamefox_utils =
     if (msgs == 1)
       return ['', ''];
     var lastPage = Math.floor((msgs - 1) / gamefox_lib.prefs.getIntPref('msgsPerPage'));
-    var pageStr = lastPage ? '&page=' + lastPage + this.tcParam(tc) : '';
+    var pageStr = lastPage ? '?page=' + lastPage + this.tcParam(tc) : '';
     var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
     return [pageStr, '#p' + lastPostNum];
   },
