@@ -1,5 +1,8 @@
 ### About this version
 
+Many things broke when the URLs changed. QuickPost and a few other things are fixed;
+many other things are not. Use at your own risk!
+
 [SpotFAQs](http://www.takatocss.co.cc/spotfaqs.xml) is replaced with SpotFAQs extras.
 This replacement CSS is designed to be used with the SpotFAQs skin on GameFAQs
 for styling GameFOX features.
@@ -28,4 +31,4 @@ on GameFAQs (SpotFAQs extras)
 * Link post number in quote headers to the quoted post
 * New CSS: GFPastel 2010
 * Fix highlighting group priority
-* Fix stuff that broke when the urls changed
+* Fix some stuff that broke when the URLs changed
