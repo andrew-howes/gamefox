@@ -1,8 +1,7 @@
 /** Eight For Eleven (8for11) - Makes the v11 GameFAQs look like v8 **/
 /** By TakatoMatsuki and Swordless Link **/
 
-/** Build number 2010-01-12-19-46 **/
-
+/** Build number 2010-05-06-10-59 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -225,6 +224,7 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 .board.topics col.author {width:15% !important;}
 .board.topics col.count {width:0.5% !important;}
 .board.topics col.lastpost {width:12% !important;}
+#sky_col_wrap > .col_layout #main_col.col > #board_wrap > .head {display:none !important;}
 
 /** Message List **/
 .msg_stats:before {content: "From: " !important;}
@@ -366,7 +366,7 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 /** Stuff for pages that don't play nice with other pages **/
 
 /** Board List **/
-@-moz-document url("http://www.gamefaqs.com/boards/index.php") {
+@-moz-document url("http://www.gamefaqs.com/boards") {
 #layout {position:relative !important;}
 }
 
@@ -383,11 +383,6 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 .board:first-child:not(#helloworld) a[href*="move=fav"]:not(#helloworld):after {content: "Favs" !important; font-size:12.8px !important; text-decoration:underline !important;}
 .board:last-child {position:relative !important; top:-2px !important;}
 .board tr td:first-child:not(#helloworld) a:not(#helloworld) {font-weight:bold !important;}
-}
-
-/** Topic List, Topic Search **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/gentopic"), url-prefix("http://www.gamefaqs.com/boards/search") {
-#board_wrap > .head {display:none !important;}
 }
 
 /** User Profiles **/
