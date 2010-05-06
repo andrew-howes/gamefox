@@ -1,5 +1,5 @@
 @charset 'UTF-8';
-/* GFPastel 2010.01.GameFOX
+/* GFPastel 2010.04.GameFOX
  * CCBYNCSA spynae [tl;dr, give credit where credit is due, this is free]
  * Special version for bundle with GameFOX.
  */
@@ -188,7 +188,7 @@
       min-width: 80%;
       max-width: 95%; 
     } /* Min- and max-width taken from GFCSS Azurec, as well as the
-       * proceeding section because I am a faggot and don't think there's any
+       * proceeding section because I don't think there's any
        * other way to go about doing this.  Columns on the board list and home
        * page. */
 #mpu_col_wrap {
@@ -227,6 +227,10 @@
     padding: .2em;
     text-align: left !important;
     }
+  tbody th:only-child {
+    border-top: 1px solid #6DA1D0;
+    border-bottom: 1px solid #6DA1D0;
+    }
   th a {
     color: inherit !important;
     }
@@ -240,13 +244,34 @@
   table:not(.message) tr:nth-of-type(2n) {
     background: rgba(225,225,255,.8);
     }
+  table:not(.message) td:first-child, 
+  table:not(.message) th:first-child {
+    border-left: 1px solid #6DA1D0;
+    }
+  table:not(.message) td:last-child, 
+  table:not(.message) th:last-child {
+    border-right: 1px solid #6DA1D0;
+    }
+  table:not(.message) tr:first-child > * {
+    border-top: 1px solid #6DA1D0;
+    }
+    .head + .body > table:not(.message) thead tr:first-child > *,
+    table:not(.message) thead + tbody tr:first-child > * {
+      border-top-width: 0px;
+      }
+  table:not(.message) tr:last-child > * {
+    border-bottom: 1px solid #6DA1D0;
+    }
   /* Alternating row colors Firefox 3.0 support */
+  /* Removed. Uncomment it if you need it. */
+  /*
   table:not(.message) tr {
     background: rgba(225,225,255,.2);
     }
   table:not(.message) tr.even {
     background: rgba(225,225,255,.8);
     }
+  */
   /* Various lists
    * System » Genre » Subgenre » Subsubgenre */
   .crumbs {
@@ -299,7 +324,10 @@
   ul.content_nav li:last-child a {
     -moz-border-radius-bottomright: 1em;
     }
-  /* Homepage lists */
+  /* Homepage things */
+  .date {
+    margin-top: 1px;
+    }
   .gs ul {
     list-style: none !important;
     margin: 0 1em;
@@ -348,9 +376,12 @@
   /* Top 10 Games/FAQs & PotD */
   div.body ol {
     list-style: none;
+    padding: .2em;
     }
-  .poll h3 {
-    border-top: 0;
+  .body.poll h3 {
+    border-width: 0;
+      border-bottom-width: 1px;
+    -moz-border-radius: 0;
     }
   .body.poll {
     background: rgba(219,219,255,.5);
@@ -360,11 +391,16 @@
     -moz-box-shadow: 0 0 .5em #6DA1D0;
     margin: 0 1em;
       margin-bottom: 1em;
-    padding: .2em;
     }
   #polloftheday ol li, .pod ol, .pod li {
     margin: 0;
     padding: 0;
+    }
+  table.poll tr:first-child > * {
+    border-top-width: 0;
+    }
+  p + table.poll tr:first-child > * {
+    border-top-width: 1px;
     }
   div.topten .pod_wrap {
     float: left;
@@ -372,6 +408,9 @@
     }
   div.topten .pod_wrap h2 {
     clear: none !important;
+    }
+  div.topten .pod_wrap + .pod_wrap h2 {
+    border-left-width: 0;
     }
   /* Upcoming Releases */
   ul.releases {
@@ -386,8 +425,31 @@
   ul.releases li:first-child h3 {
     border-top-width: 0px;
     }
-  ul.releases h3 {
+  ul.releases h3.region {
+    border-width: 0 1px;
     -moz-border-radius: 0;
+    }
+  /* Game Home/Data/FAQs/Cheats */
+  .pod > .head + .body > .details > table.ratings tbody tr:first-child > *,
+  .pod > .head + .body > table.credits tbody tr:first-child > *,
+  .pod > .head + .body > div.item:first-of-type > div.details > h3,
+  .pod > .head + .body > table.contrib tbody tr:first-child > *,
+  ul.cheats li:first-child h3,
+  .pod.review > .head + .body > .details > h3 {
+    border-top-width: 0;
+    }
+  .pod > .head + .body > .details > table.ratings tbody tr:last-child > *,
+  .pod > .head + .body > table.release tbody tr:last-child > *,
+  .pod > .head + .body > table.credits tbody tr:last-child > *,
+  .pod > .head + .body > table.contrib tbody tr:last-child > * {
+    border-bottom-width: 0;
+    }
+  ul.cheats li:first-child ~ li h3 {
+    -moz-border-radius: 0;
+    }
+  img.boxshot {
+    float: left;
+    margin: 3px;
     }
 /* Topic list
    * It is time for me to do what has to be me to help my brother defeat the 
@@ -418,6 +480,8 @@
   /* Topic search */
   .searchtopics {
     background: #AAAAC7;
+    border: 1px solid #6DA1D0;
+      border-top-width: 0px;
     -moz-box-shadow: 0 0 .5em #6DA1D0;
     color: #F7F7FF;
     clear: both;
@@ -436,9 +500,6 @@
     margin: 0;
     padding: .3em;
     }
-  .body + .pagejumper ul {
-    border-top: 1px solid #6DA1D0;
-    }
   .pagejumper ul li {
     display: inline;
     }
@@ -446,7 +507,7 @@
     content: " | ";
     }
   /* Rid of the papers */
-  img[src="/images/default/topic.gif"] {
+  img[src$="/images/default/topic.gif"] {
     display: none;
     }
   /* System Notification/Split Board */
@@ -456,23 +517,23 @@
   /* Now for the fun part
    * Message lists
    * Above Message */
-  .message tr, .message td {
+  td:only-child .message tr, .message td {
     margin: 0;
     padding: 0;
     vertical-align: top;
     }
-  .msg_stats {
+  td:only-child .msg_stats, .preview .details > p, .preview .details form > p {
     background: rgba(177,177,219,.9);
     border: 1px solid #6DA1D0;
     -moz-border-radius: 1em 1em 0 0;
     -moz-box-shadow: 0 0 1em #6DA1D0;
     padding: .3em;
     }
-  .msg_stats:before {
+  td:only-child .msg_stats:before {
     content: "From: ";
     font-weight: bold;
     }
-  .msg_body {
+  td:only-child .msg_body {
     background: rgba(219,219,219,.3);
     border: 1px solid #6DA1D0;
       border-top: 0;
@@ -496,6 +557,9 @@
     -moz-box-shadow: 0 0 .5em #6DA1D0;
     color: #F7F7FF;
     padding: .2em;
+    }
+  .message tr:first-child td.author, .message tr:first-child td.author + td {
+    border-top: 1px solid #6DA1D0;
     }
   td.author a.name,
   td.author > b:first-child /*Archived*/{
@@ -524,28 +588,19 @@
     -moz-box-shadow: 0 0 .5em #6DA1D0;
     padding: .2em;
     }
-  .message tr:nth-of-type(2n) td.author + td {
-    background: #E7E7FF;
-    }
-  .message tr:nth-of-type(2n-1) td.author + td {
-    background: #FFF;
-    }
-  /* Left of Message Firefox 3.0 support */
   .message tr td.author + td {
     background: #FFF;
     }
   tr.even td.author + td {
     background: #E7E7FF;
     }
-  /* Fix Left of Message while not affecting Above Message */
-  .message tr:first-child td:not(:only-child) {
-    border-top: 1px solid #6DA1D0;
-    }
-  .message tr:last-child td:not(:only-child) {
-    border-bottom: 1px solid #6DA1D0;
+  /* Moderation Details */
+  .body > table.board.message + .pod > .head > h2,
+  .head + .body > table.board.message td {
+    border-top-width: 0px;
     }
   /* Message Preview */
-  .preview p {
+  .preview .details > p, .preview .details form > p {
     background: rgba(177,177,219,.9);
     border: 1px solid #6DA1D0;
     -moz-border-radius: 1em 1em 0 0;
@@ -577,6 +632,22 @@
     margin: 0 1em 0 1em;
     padding: .2em;
     }
+  /* Manage Account */
+  .head + .body > form > table.userinfo tr:first-child td {
+    border-top-width: 0px;
+    }
+  .head + .body > p + form > table.userinfo tr:first-child td {
+    border-top-width: 1px;
+    }
+  table.contrib tr:first-child > th {
+    border-top-width: 0px;
+    }
+  .head + .body > table.userinfo tr:first-child td {
+    border-top-width: 0px;
+    }
+  .head + .body > table.userinfo tr:last-child td {
+    border-bottom-width: 0px;
+    }
   /* Things nobody cares about */
   #footer, iframe, .ad { display: none; }
   /* GFCode */
@@ -594,9 +665,10 @@
     .message i > p > strong:first-child {
       background: #AAAAC7;
       border: 1px solid #6DA1D0;
+      -moz-border-radius: 10px 10px 0 0;
       color: #F7F7FF;
       display: block;
-      margin: -4px;
+      margin: -5px;
         margin-bottom: 0;
       padding: 3px;
       }
@@ -622,15 +694,13 @@
   .message td table {
     border-spacing: 0 !important;
     }
-  .message td table td {
-    border: 1px solid #6DA1D0;
-    }
   .message td table tr:first-child td {
     background: #AAAAC7;
     color: #F7F7FF;
     }
   .message td table tr + tr td {
     background: #DBDBEE;
+    border-top-width: 0px;
     }
 /* GameFOX */
   /* Board Nav */
@@ -647,7 +717,16 @@
    * precious karma, your precious karma, you'll lose your precious karma... */
   p.gamefox-usernote {
     background: #FF0;
-    clear: both;
+    border: 1px solid #f00;
+    margin: 0;
+      margin-top: 1px;
+    padding: .2em;
+    }
+  p.gamefox-usernote::after {
+    content: "  (Disclaimer: This isn\'t necessarily a bad thing.)";
+    display: inline;
+    font-size: smaller;
+    white-space: pre-wrap;
     }
   /* Message Highlighting
    * Above Message */
@@ -667,7 +746,8 @@
     background-image: -moz-repeating-linear-gradient(top left -45deg, rgba(255,255,255,.6) 1px, rgba(255,255,255,.3) 2px, rgba(255,255,255,.6) 3px, rgba(255,255,255,.3) 4px, rgba(255,255,255,.6) 5px);
     text-shadow: 0px 0px 3px #000;
     }
-  td.author.gamefox-highlight a.name {
+  td.author.gamefox-highlight a.name,
+  td.author.gamefox-highlight > b:first-child {
     background: rgba(255,255,255,.8);
     text-shadow: none;
     }
@@ -722,26 +802,6 @@
   #body > pre {
     background: rgba(255,255,255,.5);
     padding: 1em;
-    }
-  /* Game > Home */
-  img.boxshot {
-    float: left;
-    margin: 3px;
-    }
-  /* Game > Cheats */
-  ul.cheats {
-    list-style: none;
-    margin: 0 1em;
-    padding: 0;
-    }
-  ul.cheats li:first-child h3 {
-    border-top: 0;
-    }
-  ul.cheats li:first-child ~ li h3 {
-    -moz-border-radius: 0;
-    }
-  .head + .body .item:first-of-type .details h3 {
-    border-top-width: 0;
     }
   /* Character Battle Bracket */
   table.bracket {
