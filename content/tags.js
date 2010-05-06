@@ -407,7 +407,6 @@ var gamefox_tags =
   add: function(event)
   {
     var doc = event.target.ownerDocument;
-    var queryStr = doc.location.search;
     var boardTitle, topicTitle;
 
     if (event.type == 'dblclick')
@@ -437,11 +436,8 @@ var gamefox_tags =
       catch (e) { return false; }
     }
 
-    var query = gamefox_utils.parseQueryString(queryStr);
-    var boardID = query.board, topicID = query.topic;
-    if (!boardID || !topicID)
-      return false;
-    var tagID = boardID + ',' + topicID;
+    var tagID = event.target.hash.substr(1);
+    var boardID = tagID.split(',')[0], topicID = tagID.split(',')[1];
 
     if (!boardTitle)
       boardTitle = gamefox_utils.getBoardName(doc);
@@ -482,9 +478,12 @@ var gamefox_tags =
   tagTopicLink: function(doc)
   {
     this.read();
-    var queryStr = doc.location.search;
-    var boardID = queryStr.match(/\bboard=([0-9-]+)/)[1];
-    var topicID = queryStr.match(/\btopic=([0-9]+)/)[1];
+    var path = doc.location.pathname;
+    var IDs = path.match(/boards\/(-?[0-9]+)[^\/]+\/([0-9]+)/);
+    if (IDs)
+      var boardID = IDs[1], topicID = IDs[2];
+    else
+      var boardID = 0, topicID = 0;
     var tagID = boardID + ',' + topicID;
 
     var a = doc.createElement('a');
@@ -514,6 +513,8 @@ var gamefox_tags =
       event.target.addEventListener('click', gamefox_tags.untagTopicEvent, false);
       event.target.textContent = 'Untag Topic';
     }
+    else
+      gamefox_lib.alert('An error occurred while tagging the topic.');
   },
 
   untagTopicEvent: function(event)
