@@ -679,6 +679,8 @@ var gamefox =
       }
       var userlist = gamefox_highlighting.loadGroups();
 
+      var boardId = gamefox_utils.getBoardId(doc.location.pathname);
+      var topicId = gamefox_utils.getTopicId(doc.location.pathname);
       var topicParams = gamefox_utils.parseQueryString(doc.location.search);
       var pagenum = topicParams.page ? parseInt(topicParams.page) : 0;
       var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
@@ -1096,10 +1098,10 @@ var gamefox =
         {
           quote = quotes.snapshotItem(i);
           quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/, function(z, num){
-              return '<a href="' + gamefox_utils.linkToTopic(topicParams.board,
-            topicParams.topic, Math.floor((num - 1) /
-                gamefox_lib.prefs.getIntPref('msgsPerPage')), tc, num)
-              + '">#' + num + '</a>';
+              return '<a href="' + gamefox_utils.linkToTopic(boardId,
+                  topicId, Math.floor((num - 1) /
+                    gamefox_lib.prefs.getIntPref('msgsPerPage')), tc, num)
+                + '">#' + num + '</a>';
               });
         }
       }
