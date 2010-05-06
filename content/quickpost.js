@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009 Brian Marshall, Michael Ryan, Andrianto Effendy
+ * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
  *
@@ -28,7 +28,11 @@ var gamefox_quickpost =
 
     var form = doc.createElement('form');
     form.id = 'gamefox-quickpost-form';
-    form.action = 'post.php' + gamefox_utils.stripQueryString(doc.location.search);
+    var boardId = gamefox_utils.getBoardId(doc);
+    var topicId = gamefox_utils.getTopicId(doc);
+    // TODO: preview button for new topics broken if user just deleted a topic
+    form.action = '/boards/post.php?board=' + boardId
+        + (topicId != 0 ? '&topic=' + topicId : '');
     form.method = 'post';
     form.addEventListener('submit', gamefox_quickpost.removeGFCodeWhitespaceListener,
         false);
@@ -310,18 +314,21 @@ var gamefox_quickpost =
 
   post: function(event)
   {
-    var doc = gamefox_lib.getDocument(event);
-    var query = gamefox_utils.stripQueryString(doc.location.search);
-    var strbundle = document.getElementById('overlay-strings');
-    // make sure we're not trying to post a message to a topic that was
-    // deleted by the user due to the topic list being on detail.php
-    if (gamefox_lib.onPage(doc, 'topics'))
-      query = query.replace(/&topic=[^&]*/g, '');
-
     event.target.disabled = true;
     event.target.blur();
 
+    var doc = gamefox_lib.getDocument(event);
+    var queryObj = gamefox_utils.parseQueryString(doc.location.search);
+    var strbundle = document.getElementById('overlay-strings');
+
+    // post.php still uses the traditional query parameters
+    var boardId = queryObj['board'] || gamefox_utils.getBoardId(doc);
+    var topicId = queryObj['topic'] || gamefox_utils.getTopicId(doc);
+
     var topicTitle = doc.getElementsByName('topictitle')[0];
+    var postMessageUrl = gamefox_lib.domain + gamefox_lib.path
+        + 'post.php?board=' + boardId
+        + (!topicTitle ? '&topic=' + topicId : '');
     var message = gamefox_quickpost.removeGFCodeWhitespace(
         doc.getElementsByName('message')[0].value);
     if (gamefox_lib.prefs.getIntPref('signature.addition') == 1
@@ -351,7 +358,7 @@ var gamefox_quickpost =
     }
 
     var previewRequest = new XMLHttpRequest();
-    previewRequest.open('POST', gamefox_lib.domain + gamefox_lib.path + 'post.php' + query);
+    previewRequest.open('POST', postMessageUrl);
     var ds = gamefox_lib.thirdPartyCookieFix(previewRequest);
     previewRequest.onreadystatechange = function()
     {
@@ -442,7 +449,7 @@ var gamefox_quickpost =
           }
 
           var postRequest = new XMLHttpRequest();
-          postRequest.open('POST', gamefox_lib.domain + gamefox_lib.path + 'post.php' + query);
+          postRequest.open('POST', postMessageUrl);
           var ds = gamefox_lib.thirdPartyCookieFix(postRequest);
           postRequest.onreadystatechange = function()
           {
@@ -478,20 +485,19 @@ var gamefox_quickpost =
               }
 
               event.target.removeAttribute('disabled');
-              query = gamefox_utils.parseQueryString(query);
               if (topicTitle) // new topic
               {
                 switch (gamefox_lib.prefs.getIntPref('elements.quickpost.aftertopic'))
                 {
                   case 0: // go to topic
                     doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + query['board'] + '&topic=' +
-                      text.match(/genmessage\.php\?board=(?:[0-9-]+)&topic=([0-9]+)/)[1];
+                      'board=' + boardId + '&topic=' +
+                      text.match(/\/boards\/[^\/]+\/(\d+)/)[1];
                     break;
 
                   case 1: // go to board
                     doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?' +
-                      'board=' + query['board'];
+                      'board=' + boardId;
                     break;
                 }
               }
@@ -523,28 +529,28 @@ var gamefox_quickpost =
                       end += '#last-post';
 
                     doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + query['board'] + '&topic=' + query['topic'] + end;
+                      'board=' + boardId + '&topic=' + topicId + end;
 
-                    if ((query['page'] == (doc.gamefox.pages - 1) || doc.gamefox.pages == 1)
+                    if ((queryObj['page'] == (doc.gamefox.pages - 1) || doc.gamefox.pages == 1)
                         && doc.location.hash.length)
                       doc.location.reload(); // hash changes don't reload the page
                     break;
 
                   case 1: // go back to same page
                     doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + query['board'] + '&topic=' + query['topic'] +
-                      (query['page'] ? '&page=' + query['page'] : '') +
+                      'board=' + boardId + '&topic=' + topicId +
+                      (queryObj['page'] ? '&page=' + queryObj['page'] : '') +
                       gamefox_utils.tcParam(doc.gamefox.tc);
                     break;
 
                   case 2: // go to first page
                     doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + query['board'] + '&topic=' + query['topic'];
+                      'board=' + boardId + '&topic=' + topicId;
                     break;
 
                   case 3: // go to board
                     doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?' +
-                      'board=' + query['board'];
+                      'board=' + boardId;
                     break;
                 }
               }

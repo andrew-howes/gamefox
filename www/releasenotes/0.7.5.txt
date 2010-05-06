@@ -28,3 +28,4 @@ on GameFAQs (SpotFAQs extras)
 * Link post number in quote headers to the quoted post
 * New CSS: GFPastel 2010
 * Fix highlighting group priority
+* Fix stuff that broke when the urls changed

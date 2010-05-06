@@ -94,6 +94,18 @@ var gamefox_utils =
     return str.replace(/&(action|message|search)=[^&]*/g, '');
   },
 
+  getBoardId: function(doc)
+  {
+    var match = doc.location.pathname.match(/^\/boards\/(\d+)/);
+    return match ? match[1] : 0;
+  },
+
+  getTopicId: function(doc)
+  {
+    var match = doc.location.pathname.match(/^\/boards\/[^\/]+\/(\d+)/);
+    return match ? match[1] : 0;
+  },
+
   getMsgDataDisplay: function(doc)
   {
     var leftMsgData;
