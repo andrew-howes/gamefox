@@ -28,8 +28,8 @@ var gamefox_quickpost =
 
     var form = doc.createElement('form');
     form.id = 'gamefox-quickpost-form';
-    var boardId = gamefox_utils.getBoardId(doc);
-    var topicId = gamefox_utils.getTopicId(doc);
+    var boardId = gamefox_utils.getBoardId(doc.location.pathname);
+    var topicId = gamefox_utils.getTopicId(doc.location.pathname);
     // TODO: preview button for new topics broken if user just deleted a topic
     form.action = '/boards/post.php?board=' + boardId
         + (topicId != 0 ? '&topic=' + topicId : '');
@@ -322,8 +322,8 @@ var gamefox_quickpost =
     var strbundle = document.getElementById('overlay-strings');
 
     // post.php still uses the traditional query parameters
-    var boardId = queryObj['board'] || gamefox_utils.getBoardId(doc);
-    var topicId = queryObj['topic'] || gamefox_utils.getTopicId(doc);
+    var boardId = queryObj['board'] || gamefox_utils.getBoardId(doc.location.pathname);
+    var topicId = queryObj['topic'] || gamefox_utils.getTopicId(doc.location.pathname);
 
     var topicTitle = doc.getElementsByName('topictitle')[0];
     var postMessageUrl = gamefox_lib.domain + gamefox_lib.path
