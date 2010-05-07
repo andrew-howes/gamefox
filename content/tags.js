@@ -408,6 +408,7 @@ var gamefox_tags =
   {
     var doc = event.target.ownerDocument;
     var boardTitle, topicTitle;
+    var strbundle = document.getElementById('overlay-strings');
 
     if (event.type == 'dblclick')
       event.preventDefault();
@@ -417,6 +418,7 @@ var gamefox_tags =
 
     if (gamefox_lib.onPage(doc, 'topics') || onMyPosts)
     {
+      // From context menu
       try
       {
         var node = event.target;
@@ -425,7 +427,11 @@ var gamefox_tags =
           node = node.parentNode;
 
         var topicLink = node.parentNode.cells[1].getElementsByTagName('a')[0];
-        queryStr = topicLink.href;
+
+        var params = gamefox_utils.parseBoardLink(topicLink.href);
+        var boardID = params['board'], topicID = params['topic'];
+        var tagID = boardID + ',' + topicID;
+
         topicTitle = topicLink.textContent.gamefox_trim();
 
         if (onMyPosts)
@@ -433,11 +439,27 @@ var gamefox_tags =
         else if (onTracked)
           boardTitle = node.parentNode.cells[2].textContent.gamefox_trim();
       }
-      catch (e) { return false; }
+      catch (e) {
+        gamefox_lib.alert(strbundle.getString('tagError'));
+        return false;
+      }
     }
 
-    var tagID = event.target.hash.substr(1);
-    var boardID = tagID.split(',')[0], topicID = tagID.split(',')[1];
+    if (!tagID)
+    {
+      if (event.target.hash) // tag topic link
+      {
+        var tagID = event.target.hash.substr(1);
+        var boardID = tagID.split(',')[0], topicID = tagID.split(',')[1];
+      }
+      else // context menu
+      {
+        var path = doc.location.pathname;
+        var params = gamefox_utils.parseBoardLink(path);
+        var boardID = params['board'], topicID = params['topic'];
+        var tagID = boardID + ',' + topicID;
+      }
+    }
 
     if (!boardTitle)
       boardTitle = gamefox_utils.getBoardName(doc);
@@ -479,9 +501,9 @@ var gamefox_tags =
   {
     this.read();
     var path = doc.location.pathname;
-    var IDs = path.match(/boards\/(-?[0-9]+)[^\/]+\/([0-9]+)/);
+    var IDs = gamefox_utils.parseBoardLink(path);
     if (IDs)
-      var boardID = IDs[1], topicID = IDs[2];
+      var boardID = IDs['board'], topicID = IDs['topic'];
     else
       var boardID = 0, topicID = 0;
     var tagID = boardID + ',' + topicID;
@@ -506,6 +528,8 @@ var gamefox_tags =
 
   tagTopicEvent: function(event)
   {
+    var strbundle = document.getElementById('overlay-strings');
+
     event.preventDefault();
     if (gamefox_tags.add(event))
     {
@@ -514,7 +538,7 @@ var gamefox_tags =
       event.target.textContent = 'Untag Topic';
     }
     else
-      gamefox_lib.alert('An error occurred while tagging the topic.');
+      gamefox_lib.alert(strbundle.getString('tagError'));
   },
 
   untagTopicEvent: function(event)

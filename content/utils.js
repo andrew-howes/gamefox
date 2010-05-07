@@ -398,6 +398,16 @@ var gamefox_utils =
       + (page ? '?page=' + page : '')
       + (tc ? (page != 0 ? '&tc=' + tc : '') : '')
       + (post ? '#p' + post : '');
+  },
+
+  parseBoardLink: function(link)
+  {
+    var params = link.match(/boards\/(-?[0-9]+)([^\/]+)?\/([0-9]+)/);
+
+    if (!params) // regex didn't match
+      return false;
+
+    return { 'board': params[1], 'name': params[2].substr(1), 'topic': params[3] };
   }
 };
 

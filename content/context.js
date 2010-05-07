@@ -90,7 +90,7 @@ var gamefox_context =
           if (node.parentNode.cells[0].innerHTML.indexOf('archived') == -1)
           {
             hideTrack = false;
-            var topic = gamefox_utils.parseQueryString(node.parentNode.cells[1].
+            var topic = gamefox_utils.parseBoardLink(node.parentNode.cells[1].
                 getElementsByTagName('a')[0].href);
             if (gamefox_tracked.isTracked(topic['board'], topic['topic']))
               document.getElementById('gamefox-context-track')
@@ -383,8 +383,8 @@ var gamefox_context =
       return;
     }
 
-    board = topiclink.match(/\bboard=([0-9-]+)/)[1];
-    topic = topiclink.match(/\btopic=([0-9]+)/)[1];
+    var params = gamefox_utils.parseBoardLink(topiclink);
+    var board = params['board'], topic = params['topic'];
     pages = Math.ceil(posts / gamefox_lib.prefs.getIntPref('msgsPerPage'));
     tcParam = gamefox_utils.tcParam(tc);
     for (i = 0; i < pages; i++)

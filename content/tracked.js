@@ -105,7 +105,7 @@ var gamefox_tracked =
         gamefox_tracked.read();
         for (var i = 0; i < items.length; i++)
         {
-          var ids = gamefox_utils.parseQueryString(items[i].
+          var ids = gamefox_utils.parseBoardLink(items[i].
               getElementsByTagName('link')[0].textContent);
           var bid = ids.board;
           var tid = ids.topic;
@@ -245,14 +245,14 @@ var gamefox_tracked =
       while (node.nodeName != 'TD')
         node = node.parentNode;
 
-      var topic = gamefox_utils.parseQueryString(node.parentNode.cells[1].
+      var topic = gamefox_utils.parseBoardLink(node.parentNode.cells[1].
           getElementsByTagName('a')[0].href);
 
       var untrack = gamefox_tracked.isTracked(topic['board'], topic['topic']);
     }
     else if (gamefox_lib.onPage(doc, 'messages'))
     {
-      var topic = gamefox_utils.parseQueryString(doc.location.search);
+      var topic = gamefox_utils.parseBoardLink(doc.location.pathname);
 
       var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
           doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -263,9 +263,8 @@ var gamefox_tracked =
     }
 
     var request = new XMLHttpRequest();
-    request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board='
-        + topic['board'] + '&topic=' + topic['topic'] + '&action=' +
-        (untrack ? 'stoptrack' : 'tracktopic'));
+    request.open('GET', gamefox_utils.linkToTopic(topic['board'], topic['topic'])
+        + '?action=' + (untrack ? 'stoptrack' : 'tracktopic'));
     var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
