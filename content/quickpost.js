@@ -164,17 +164,14 @@ var gamefox_quickpost =
     {
       var nightlyMsg = doc.createElement('span');
       nightlyMsg.id = 'gamefox-nightly-msg';
-      nightlyMsg.appendChild(doc.createTextNode('GameFOX nightly build (pre-release)'));
+      
+      var gamefoxLink = doc.createElement('a');
+      gamefoxLink.textContent = 'GameFOX';
+      gamefoxLink.href = 'http://beyondboredom.net/projects/gamefox/';
+      nightlyMsg.appendChild(gamefoxLink);
 
-      var age = gamefox_lib.getNightlyAge();
-      if (age > 1)
-      {
-        nightlyMsg.appendChild(doc.createTextNode(' - '));
-        var projectLink = doc.createElement('a');
-        projectLink.href = 'http://beyondboredom.net/projects/gamefox/';
-        projectLink.appendChild(doc.createTextNode(age + ' days out-of-date'));
-        nightlyMsg.appendChild(projectLink);
-      }
+      nightlyMsg.appendChild(doc.createTextNode(' development release'
+            + ' - ' + gamefox_lib.getNightlyDate()));
 
       form.appendChild(doc.createElement('br'));
       form.appendChild(nightlyMsg);

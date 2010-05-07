@@ -101,6 +101,13 @@ var gamefox_lib =
     return Math.floor((Date.now() - nightlyDate.getTime()) / (1000*60*60*24));
   },
 
+  getNightlyDate: function()
+  {
+    var nv = gamefox_lib.getNightlyVersion();
+    return new Date(nv.substr(0, 4), (nv.substr(4, 2) - 1), nv.substr(6, 2))
+        .toLocaleFormat('%Y %b %d');
+  },
+
   getDocument: function(event)
   {
     if (event.target && event.target.ownerDocument)
