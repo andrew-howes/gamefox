@@ -1100,7 +1100,7 @@ var gamefox =
           quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/, function(z, num){
               return '<a href="' + gamefox_utils.linkToTopic(boardId,
                   topicId, Math.floor((num - 1) /
-                    gamefox_lib.prefs.getIntPref('msgsPerPage')), tc, num)
+                    gamefox_lib.prefs.getIntPref('msgsPerPage')), tc, num, doc)
                 + '">#' + num + '</a>';
               });
         }

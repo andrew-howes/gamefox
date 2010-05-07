@@ -391,10 +391,18 @@ var gamefox_utils =
     return n == null || isNaN(n) ? 0 : n;
   },
 
-  linkToTopic: function(board, topic, page, tc, post)
+  linkToTopic: function(board, topic, page, tc, post, doc)
   {
+    if (doc)
+    {
+      var params = gamefox_utils.parseBoardLink(doc.location.pathname);
+      if (params['board'] == board) // we know the board name from the current URL
+        var name = params['name'];
+    }
+
     return gamefox_lib.domain + gamefox_lib.path
-      + board + '-/' + topic
+      + board + '-' + (name ? name : '')
+      + '/' + topic
       + (page ? '?page=' + page : '')
       + (tc ? (page != 0 ? '&tc=' + tc : '') : '')
       + (post ? '#p' + post : '');
