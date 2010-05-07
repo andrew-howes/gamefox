@@ -402,7 +402,7 @@ var gamefox_utils =
 
     return gamefox_lib.domain + gamefox_lib.path
       + board + '-' + (name ? name : '')
-      + '/' + topic
+      + (topic ? ('/' + topic) : '')
       + (page ? '?page=' + page : '')
       + (tc ? (page != 0 ? '&tc=' + tc : '') : '')
       + (post ? '#p' + post : '');

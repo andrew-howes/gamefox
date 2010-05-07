@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008 Brian Marshall, Michael Ryan, Andrianto Effendy
+ * Copyright 2008, 2010 Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
  *
@@ -116,7 +116,7 @@ var gamefox_messages =
         }
 
         var post = new XMLHttpRequest();
-        post.open('POST', uri + '&action=' + (closeTopic ? 'closetopic' : 'delete'));
+        post.open('POST', uri + '?action=' + (closeTopic ? 'closetopic' : 'delete'));
         var ds = gamefox_lib.thirdPartyCookieFix(post);
         post.onreadystatechange = function()
         {
@@ -125,8 +125,9 @@ var gamefox_messages =
             if (post.responseText.indexOf('<title>401 Error') != -1)
               gamefox_lib.alert('Can\'t delete this message.');
             else if (deleteTopic)
-              doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?board='
-                + gamefox_utils.parseQueryString(doc.location.search)['board'];
+              doc.location = gamefox_utils.linkToTopic(
+                  gamefox_utils.parseBoardLink(doc.location.pathname)['board'],
+                  null, null, null, null, doc);
             else
             {
               if (!closeTopic)
