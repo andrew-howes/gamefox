@@ -5,6 +5,7 @@
     * Fix tagging and tracking features
     * Fix topic closing and post and topic deletion
     * Fix quoting and highlighting of mods and admins
+    * Fix message link icons CSS
 
 2010-05-05:
     * version 0.7.5

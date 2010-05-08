@@ -15,7 +15,7 @@ background-repeat:no-repeat !important;
 .gamefox-message-links{font-size:0;}
 .gamefox-message-links > br{display:none;}
 
-.message [id^="p"] a[href^="/boards/detail.php?"]:not(.gamefox-message-detail-number)
+.message [id^="p"] a[title="Detail"]:not(.gamefox-message-detail-number)
 {background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXR\
 FWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAndJREFUeNqkk89rE0EUx99kd9PsZtJqUklS4i8am4otNSgiiKgoW\
 LEqePNvsB68CnryLhQ8efHkVRSF3ksPFhQ0FkpbsfaHUdvUJtmd3e7Ozjpvk21TLx588N2d2X2f776ZN0uCIID%2FCTW8DL8BI\
