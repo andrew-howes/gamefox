@@ -416,6 +416,12 @@ var gamefox_utils =
       return false;
 
     return { 'board': params[1], 'name': params[2].substr(1), 'topic': params[3] };
+  },
+
+  // Strips admin and mod labels from usernames
+  cleanUsername: function(username)
+  {
+    return username.replace(/ \((A|M)\)/, '');
   }
 };
 

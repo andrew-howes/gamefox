@@ -423,12 +423,14 @@ var gamefox_context =
       node = gamefox_utils.getMsgComponents(node, doc);
       if (!node) return;
 
-      node = node.header.getElementsByTagName(gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a')[0];
+      node = node.header.getElementsByTagName(
+          gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a')[0];
     }
-    username = node.textContent;
+    username = gamefox_utils.cleanUsername(node.textContent);
 
     userlist = gamefox_highlighting.loadGroups();
-    activeGroups = gamefox_highlighting.searchUsername(username, false, userlist)[4];
+    activeGroups = gamefox_highlighting
+      .searchUsername(username, false, userlist)[4];
     if (!activeGroups) activeGroups = [];
 
     noGroups = true;

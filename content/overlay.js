@@ -613,7 +613,8 @@ var gamefox =
         else
         {
           // Highlighting
-          var username = rows[i].cells[2].textContent.gamefox_trim();
+          var username = gamefox_utils
+            .cleanUsername(rows[i].cells[2].textContent.gamefox_trim());
           var title = rows[i].cells[1].textContent.gamefox_trim();
           var hlinfo;
 
@@ -756,7 +757,11 @@ var gamefox =
         var postBody = td[i + 1].textContent;
 
         var postDateNode = msgStats.childNodes[leftMsgData ? 2 : 1];
-        var postDate = postDateNode.textContent.replace(/( \| )?(Posted )?/g, '');
+        if (leftMsgData
+            && postDateNode.textContent.indexOf('Posted') == -1) // mod/admin here
+          postDateNode = msgStats.childNodes[4];
+        var postDate = postDateNode.textContent
+          .replace(/( \((Moderator|Admin)\))?( \| )?(Posted )?/g, '');
         td[i].setUserData('date', postDate, null); // for quoting
 
         // Topic creator
