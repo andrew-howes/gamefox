@@ -404,7 +404,7 @@ var gamefox_utils =
       + board + '-' + (name ? name : '')
       + (topic ? ('/' + topic) : '')
       + (page ? '?page=' + page : '')
-      + (tc ? (page != 0 ? '&tc=' + tc : '') : '')
+      + (tc ? (page != 0 ? gamefox_utils.tcParam(tc) : '') : '')
       + (post ? '#p' + post : '');
   },
 
