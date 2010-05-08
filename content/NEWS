@@ -6,6 +6,7 @@
     * Fix topic closing and post and topic deletion
     * Fix quoting and highlighting of mods and admins
     * Fix message link icons CSS
+    * Fix board links on the tracked topics page
 
 2010-05-05:
     * version 0.7.5
