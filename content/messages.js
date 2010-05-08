@@ -127,7 +127,7 @@ var gamefox_messages =
             else if (deleteTopic)
               doc.location = gamefox_utils.linkToTopic(
                   gamefox_utils.parseBoardLink(doc.location.pathname)['board'],
-                  null, null, null, null, doc);
+                  null, null, null, null, doc.location.pathname);
             else
             {
               if (!closeTopic)

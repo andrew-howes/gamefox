@@ -602,10 +602,14 @@ var gamefox =
           // Board linkification
           if (gamefox_lib.prefs.getBoolPref('elements.tracked.boardlink'))
           {
-            rows[i].cells[2].innerHTML = '<a href="' + rows[i].cells[1].
-              getElementsByTagName('a')[0].getAttribute('href').replace(
-                  /message(?=\.)/, 'topic').replace(/(&topic=[0-9]+|\btopic=[0-9]+&)/, '') + '">' +
-              rows[i].cells[2].textContent.gamefox_trim() + '</a>';
+            var topicLink = rows[i].cells[1].getElementsByTagName('a')[0]
+              .getAttribute('href');
+            var topicParams = gamefox_utils.parseBoardLink(topicLink);
+
+            rows[i].cells[2].innerHTML = '<a href="' + gamefox_utils
+              .linkToTopic(topicParams['board'], null, null, null, null,
+                  topicLink) + '">' + rows[i].cells[2].textContent.gamefox_trim()
+                    + '</a>';
           }
         }
 
@@ -1105,7 +1109,8 @@ var gamefox =
           quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/, function(z, num){
               return '<a href="' + gamefox_utils.linkToTopic(boardId,
                   topicId, Math.floor((num - 1) /
-                    gamefox_lib.prefs.getIntPref('msgsPerPage')), tc, num, doc)
+                    gamefox_lib.prefs.getIntPref('msgsPerPage')),
+                  tc, num, doc.location.pathname)
                 + '">#' + num + '</a>';
               });
         }
