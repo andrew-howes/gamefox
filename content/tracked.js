@@ -320,8 +320,8 @@ var gamefox_tracked =
     if (!topic.deleted)
     {
       var request = new XMLHttpRequest();
-      request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board='
-          + boardId + '&topic=' + topicId + '&action=stoptrack');
+      request.open('GET', gamefox_utils.linkToTopic(boardId, topicId)
+          + '?action=stoptrack');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
       {
@@ -330,7 +330,7 @@ var gamefox_tracked =
           if (request.responseText.indexOf('no longer tracking') != -1)
             gamefox_tracked.updateList();
           else
-            gamefox_lib.alert('An error occurred stopping tracking of this topic.');
+            gamefox_lib.alert('An error occurred untracking this topic.');
         }
       }
       request.send(null);
