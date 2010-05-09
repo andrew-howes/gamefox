@@ -1,0 +1,18 @@
+### About this version
+
+Many more fixes have been made for GameFAQs' new URL scheme.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+
+### New in this release
+
+* Update GFPastel 2010
+* Fix last post and pagination links
+* Fix tagging and tracking features
+* Fix topic closing and post and topic deletion
+* Fix quoting and highlighting of mods and admins
+* Fix message link icons CSS
+* Fix board links on the tracked topics page
