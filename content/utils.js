@@ -400,12 +400,27 @@ var gamefox_utils =
         var name = params['name'];
     }
 
+    if (post)
+    {
+      if (post == 'last')
+        post = '#last-post';
+      else
+      {
+        post = post.toString();
+
+        if (post.charAt(0) != '0') // not zero-padded
+          post = ('000'.substr(post.length)) + post;
+
+        post = '#p' + post;
+      }
+    }
+
     return gamefox_lib.domain + gamefox_lib.path
       + board + '-' + (name ? name : '')
       + (topic ? ('/' + topic) : '')
       + (page ? '?page=' + page : '')
       + (tc ? (page != 0 ? gamefox_utils.tcParam(tc) : '') : '')
-      + (post ? '#p' + post : '');
+      + (post ? post : '');
   },
 
   parseBoardLink: function(link)

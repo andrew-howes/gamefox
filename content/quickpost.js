@@ -484,17 +484,18 @@ var gamefox_quickpost =
               event.target.removeAttribute('disabled');
               if (topicTitle) // new topic
               {
+                var topicLink = text.match(/\/boards\/[^\/]+\/(\d+)/);
+
                 switch (gamefox_lib.prefs.getIntPref('elements.quickpost.aftertopic'))
                 {
                   case 0: // go to topic
-                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + boardId + '&topic=' +
-                      text.match(/\/boards\/[^\/]+\/(\d+)/)[1];
+                    doc.location = gamefox_utils.linkToTopic(boardId,
+                        topicLink[1], null, null, null, topicLink[0]);
                     break;
 
                   case 1: // go to board
-                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?' +
-                      'board=' + boardId;
+                    doc.location = gamefox_utils.linkToTopic(boardId, null,
+                        null, null, null, topicLink[0]);
                     break;
                 }
               }
@@ -504,29 +505,28 @@ var gamefox_quickpost =
                 {
                   case 0: // go to last page/post
                     var msgsPerPage = gamefox_lib.prefs.getIntPref('msgsPerPage');
-                    var end;
+                    var params = {};
 
                     if (doc.gamefox.pages * msgsPerPage == doc.gamefox.msgnum)
-                      end = '&page=' + doc.gamefox.pages; // next page
+                      params['page'] = doc.gamefox.pages; // next page
                     else if (doc.gamefox.pages > 1)
-                      end = '&page=' + (doc.gamefox.pages - 1); // last page
-                    else
-                      end = ''; // first page
+                      params['page'] = doc.gamefox.pages - 1; // last page
+                    // else first page
 
-                    if (end.length)
-                      end += gamefox_utils.tcParam(doc.gamefox.tc);
+                    if (params['page'])
+                      params['tc'] = doc.gamefox.tc;
 
                     if (doc.gamefox.msgnum > (doc.gamefox.pages - 1) * msgsPerPage &&
                         doc.gamefox.pages * msgsPerPage != doc.gamefox.msgnum)
                     { // on last page
-                      var postnumStr = (doc.gamefox.msgnum + 1).toString();
-                      end += '#p' + ('000'.substr(postnumStr.length)) + postnumStr;
+                      params['post'] = (doc.gamefox.msgnum + 1).toString();
                     }
                     else
-                      end += '#last-post';
+                      params['post'] = 'last';
 
-                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + boardId + '&topic=' + topicId + end;
+                    doc.location = gamefox_utils.linkToTopic(boardId, topicId,
+                        params['page'], params['tc'], params['post'],
+                        doc.location.pathname);
 
                     if ((queryObj['page'] == (doc.gamefox.pages - 1) || doc.gamefox.pages == 1)
                         && doc.location.hash.length)
@@ -534,20 +534,19 @@ var gamefox_quickpost =
                     break;
 
                   case 1: // go back to same page
-                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + boardId + '&topic=' + topicId +
-                      (queryObj['page'] ? '&page=' + queryObj['page'] : '') +
-                      gamefox_utils.tcParam(doc.gamefox.tc);
+                    doc.location = gamefox_utils.linkToTopic(boardId, topicId,
+                        queryObj['page'], doc.gamefox.tc, null,
+                        doc.location.pathname);
                     break;
 
                   case 2: // go to first page
-                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?' +
-                      'board=' + boardId + '&topic=' + topicId;
+                    doc.location = gamefox_utils.linkToTopic(boardId, topicId,
+                        null, null, null, doc.location.pathname);
                     break;
 
                   case 3: // go to board
-                    doc.location = gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?' +
-                      'board=' + boardId;
+                    doc.location = gamefox_utils.linkToTopic(boardId, null,
+                        null, null, null, doc.location.pathname);
                     break;
                 }
               }
