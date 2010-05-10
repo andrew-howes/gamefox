@@ -535,8 +535,8 @@ var gamefox_quickpost =
 
                   case 1: // go back to same page
                     doc.location = gamefox_utils.linkToTopic(boardId, topicId,
-                        queryObj['page'], doc.gamefox.tc, null,
-                        doc.location.pathname);
+                        queryObj['page'], queryObj['page'] ? doc.gamefox.tc :
+                        null, null, doc.location.pathname);
                     break;
 
                   case 2: // go to first page
