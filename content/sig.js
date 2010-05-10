@@ -135,7 +135,7 @@ var gamefox_sig =
     {
       if (!doc) return false;
       var boardname = gamefox_utils.getBoardName(doc);
-      var boardid = gamefox_utils.parseQueryString(doc.location.search)['board'];
+      var boardid = gamefox_utils.getBoardId(doc.location.pathname);
       var account = gamefox_utils.getAccountName(doc);
       var getSig = gamefox_sig.getSigByCriteria(account, boardname, boardid);
       sig = getSig['body'];
