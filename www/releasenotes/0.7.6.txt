@@ -2,10 +2,12 @@
 
 Many more fixes have been made for GameFAQs' new URL scheme.
 
+spynae's GFPastel 2010 stylesheet has also been updated.
+
 ### Feedback
 
 Questions, suggestions or complaints? Let us know at
-[Blood Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885).
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money).
 
 ### New in this release
 
