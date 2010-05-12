@@ -37,8 +37,8 @@ var gamefox_sig =
       // skip empty sigs
       if (!sigs[i]['body'].length) continue;
 
-      accounts = sigs[i]['accounts'].toLowerCase().gamefox_trim().split(/\s*,\s*/);
-      boards = sigs[i]['boards'].toLowerCase().gamefox_trim().split(/\s*,\s*/);
+      accounts = gamefox_utils.trim(sigs[i]['accounts'].toLowerCase()).split(/\s*,\s*/);
+      boards = gamefox_utils.trim(sigs[i]['boards'].toLowerCase()).split(/\s*,\s*/);
 
       // force the array length to 0
       if (accounts.join() == '') accounts = new Array();
@@ -174,7 +174,7 @@ var gamefox_sig =
     if (!/\S/.test(str))
       return '';
 
-    return ' / ' + str.gamefox_trim().replace(/\s+/g, ' ');
+    return ' / ' + gamefox_utils.trim(str).replace(/\s+/g, ' ');
   },
 
   updateFromGameFAQs: function(event)

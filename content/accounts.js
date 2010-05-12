@@ -119,7 +119,7 @@ var gamefox_accounts =
           .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username (or e-mail address) and password:', username, password, null, check);
       if (!result)
         return;
-      username = username.value.gamefox_trim();
+      username = gamefox_utils.trim(username.value);
     }
     else
     {

@@ -112,7 +112,7 @@ var gamefox_quickwhois =
     var matches = pattern.exec(where);
 
     if (matches)
-      return matches[1].gamefox_trim();
+      return gamefox_utils.trim(matches[1]);
 
     return '';
   }

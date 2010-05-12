@@ -376,7 +376,7 @@ var gamefox_context =
       topiclink = node.cells[1].getElementsByTagName('a')[0].href;
       posts = node.cells[gamefox_lib.onPage(doc, 'myposts') ? 2 : 3].textContent;
       tc = gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts')
-          ? '' : node.cells[2].firstChild.textContent.gamefox_trim();
+          ? '' : gamefox_utils.trim(node.cells[2].firstChild.textContent);
     }
     catch (e)
     {
