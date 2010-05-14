@@ -432,12 +432,12 @@ var gamefox_tags =
         var boardID = params['board'], topicID = params['topic'];
         var tagID = boardID + ',' + topicID;
 
-        topicTitle = gamefox_utils.trim(topicLink.textContent);
+        topicTitle = topicLink.textContent.trim();
 
         if (onMyPosts)
-          boardTitle = gamefox_utils.trim(node.parentNode.cells[0].textContent);
+          boardTitle = node.parentNode.cells[0].textContent.trim();
         else if (onTracked)
-          boardTitle = gamefox_utils.trim(node.parentNode.cells[2].textContent);
+          boardTitle = node.parentNode.cells[2].textContent.trim();
       }
       catch (e) {
         gamefox_lib.alert(strbundle.getString('tagError'));

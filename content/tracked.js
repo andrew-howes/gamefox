@@ -135,9 +135,9 @@ var gamefox_tracked =
             textContent;
           for (var j = 0; j < data.length; j += 2)
           {
-            topic[data[j + 1]] = gamefox_utils.trim(
+            topic[data[j + 1]] =
                 (new RegExp(data[j] + ': ([^\\0]*?)\n')).
-                exec(desc)[1].replace(/<br \/>/g, ''));
+                exec(desc)[1].replace(/<br \/>/g, '').trim();
           }
 
           // check for year change

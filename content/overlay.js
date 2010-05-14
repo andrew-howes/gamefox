@@ -385,8 +385,8 @@ var gamefox =
       }
       else // new post
       {
-        gamefox_lib.setTitle(doc, gamefox_utils.trim(detailsDiv
-              .getElementsByTagName('a')[0].textContent), 'PM');
+        gamefox_lib.setTitle(doc, detailsDiv.getElementsByTagName('a')[0]
+            .textContent.trim(), 'PM');
       }
 
       // Signature
@@ -464,7 +464,7 @@ var gamefox =
     {
       var username = doc.getElementsByTagName('td')[0];
       if (username)
-        gamefox_lib.setTitle(doc, gamefox_utils.trim(username.textContent), 'U');
+        gamefox_lib.setTitle(doc, username.textContent.trim(), 'U');
     }
 
     /* Topic Lists */
@@ -608,7 +608,7 @@ var gamefox =
 
             rows[i].cells[2].innerHTML = '<a href="' + gamefox_utils
               .linkToTopic(topicParams['board'], null, null, null, null,
-                  topicLink) + '">' + gamefox_utils.trim(rows[i].cells[2].textContent)
+                  topicLink) + '">' + rows[i].cells[2].textContent.trim()
                     + '</a>';
           }
         }
@@ -618,8 +618,8 @@ var gamefox =
         {
           // Highlighting
           var username = gamefox_utils
-            .cleanUsername(gamefox_utils.trim(rows[i].cells[2].textContent));
-          var title = gamefox_utils.trim(rows[i].cells[1].textContent);
+            .cleanUsername(rows[i].cells[2].textContent.trim());
+          var title = rows[i].cells[1].textContent.trim();
           var hlinfo;
 
           if ((hlinfo = gamefox_highlighting.searchTopic(username, title, userlist)) != false)
@@ -794,7 +794,7 @@ var gamefox =
             var childNode = msgNode.childNodes[j];
             if (childNode.nodeName == '#text')
             {
-              if (gamefox_utils.trim(childNode.data) == '---')
+              if (childNode.data.trim() == '---')
                 dividerIndex = j;
             }
             else if (childNode.nodeName == 'BR')
@@ -908,9 +908,9 @@ var gamefox =
         // Add "delete" link
         if (loggedInUser == username && !onArchive &&
             ((msgnum == firstPostNum && topicOpen) || msgnum != firstPostNum) &&
-            gamefox_utils.trim(postBody) != '[This message was deleted at ' +
+            postBody.trim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
-            gamefox_utils.trim(postBody) != '[This message was deleted at ' +
+            postBody.trim() != '[This message was deleted at ' +
             'the request of a moderator or administrator]')
         {
           var a = deletelinkCond ? doc.createElement('a') : null;
@@ -1245,7 +1245,7 @@ var gamefox =
       topiclink = node.cells[1].getElementsByTagName('a')[0].href;
       posts = node.cells[gamefox_lib.onPage(doc, 'myposts') ? 2 : 3].textContent;
       tc = gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts')
-          ? '' : gamefox_utils.trim(node.cells[2].firstChild.textContent);
+          ? '' : node.cells[2].firstChild.textContent.trim();
     }
     catch (e)
     {

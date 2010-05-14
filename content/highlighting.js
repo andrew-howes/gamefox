@@ -50,8 +50,7 @@ var gamefox_highlighting =
     for (var i = 0; i < userlist.length; i++)
     {
       type = userlist[i].type;
-      values = gamefox_utils.trim(userlist[i].users).toLowerCase()
-        .split(/\s*,\s*/);
+      values = userlist[i].users.trim().toLowerCase().split(/\s*,\s*/);
       for (var j = 0; j < values.length; j++)
       {
         value = values[j];
@@ -178,7 +177,7 @@ var gamefox_highlighting =
     if (!this.index) return false;
     var index = this.index.users;
 
-    username = gamefox_utils.trim(username).toLowerCase();
+    username = username.trim().toLowerCase();
     if (!username.length) return false;
 
     if (!index[username] && !(tc && index['(tc)']))

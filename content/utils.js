@@ -171,7 +171,7 @@ var gamefox_utils =
       var node = doc.evaluate('div[@class="msg"]', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node && node.firstChild)
-        return gamefox_utils.trim(node.firstChild.textContent.replace('Welcome,', ''));
+        return node.firstChild.textContent.replace('Welcome,', '').trim();
     }
     return '';
   },
@@ -187,7 +187,7 @@ var gamefox_utils =
         || doc.evaluate('div[@class="content_nav"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
-        return gamefox_utils.trim(node.textContent);
+        return node.textContent.trim();
     }
     return '';
   },
@@ -200,7 +200,7 @@ var gamefox_utils =
       var node = doc.evaluate('div[@class="head"]/h2', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
-        return gamefox_utils.trim(node.textContent);
+        return node.textContent.trim();
     }
     return '';
   },
@@ -223,7 +223,7 @@ var gamefox_utils =
         '<p>', -6, '</p>', -6, '<p />', -6,
         '\n', 4
         ];
-    str = gamefox_utils.trim(str).toLowerCase();
+    str = str.trim().toLowerCase();
     var len = str.length;
     var pos;
     var count;
@@ -241,7 +241,7 @@ var gamefox_utils =
   // encode topic title like GameFAQs does
   encodedTitleLength: function(str)
   {
-    return gamefox_utils.trim(str).
+    return str.trim().
       replace(/&/g, '&amp;').
       replace(/</g, '&lt;').
       replace(/>/g, '&gt;').length;
@@ -437,13 +437,5 @@ var gamefox_utils =
   cleanUsername: function(username)
   {
     return username.replace(/ \((A|M)\)/, '');
-  },
-
-  trim: function(str)
-  {
-    str = str.replace(/^\s\s*/, '');
-    var ws = /\s/, i = str.length;
-    while (ws.test(str.charAt(--i)));
-    return str.slice(0, i + 1);
   }
 };

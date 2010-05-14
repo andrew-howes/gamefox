@@ -61,11 +61,11 @@ var gamefox_quote =
     var quickpost = doc.getElementById('gamefox-message');
 
     /* Parse message body */
-    var body = gamefox_utils.trim(quoteMsg.
+    var body = quoteMsg.
       replace(/<br\s*\/?>/gi, '\n').
       replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1').
       replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u|embed)\b[^<>]*\/?>/gi,
-        ''));
+        '').trim();
 
     // Get rid of signature
     if (gamefox_lib.prefs.getBoolPref('quote.removesignature'))
@@ -104,7 +104,7 @@ var gamefox_quote =
       bodyDOM.removeChild(p.snapshotItem(i));
     }
 
-    body = gamefox_utils.specialCharsDecode(gamefox_utils.trim(bodyDOM.innerHTML));
+    body = gamefox_utils.specialCharsDecode(bodyDOM.innerHTML.trim());
 
     /* Prepare quote header */
     var qhead = '';

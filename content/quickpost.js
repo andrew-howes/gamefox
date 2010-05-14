@@ -436,7 +436,7 @@ var gamefox_quickpost =
           if (text.indexOf('<div class="head"><h2 class="title">Post Warning</h2></div>') != -1)
           {
             var warning = text.match(/message:<\/b><\/p>(.*)You may go ahead/);
-            warning = warning ? gamefox_utils.trim(warning[1].replace(/<P>/g, '\n\n')) :
+            warning = warning ? warning[1].replace(/<P>/g, '\n\n').trim() :
               'Your post contains a word that may be bad.';
             if (!gamefox_lib.confirm(warning + '\n\nSubmit this post?'))
             {
