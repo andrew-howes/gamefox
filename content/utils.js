@@ -96,14 +96,14 @@ var gamefox_utils =
 
   getBoardId: function(str)
   {
-    var match = str.match(/^\/boards\/(\d+)/);
-    return match ? match[1] : 0;
+    var params = gamefox_utils.parseBoardLink(str);
+    return params ? params['board'] : 0;
   },
 
   getTopicId: function(str)
   {
-    var match = str.match(/^\/boards\/[^\/]+\/(\d+)/);
-    return match ? match[1] : 0;
+    var params = gamefox_utils.parseBoardLink(str);
+    return params ? params['topic'] : 0;
   },
 
   getMsgDataDisplay: function(doc)
@@ -425,12 +425,12 @@ var gamefox_utils =
 
   parseBoardLink: function(link)
   {
-    var params = link.match(/boards\/(-?[0-9]+)([^\/]+)?\/([0-9]+)/);
+    var params = link.match(/boards\/(-?\d+)([^\/]+)?(\/\d+)?/);
 
     if (!params) // regex didn't match
       return false;
-
-    return { 'board': params[1], 'name': params[2].substr(1), 'topic': params[3] };
+    return { 'board': params[1], 'name': params[2].substr(1),
+      'topic': params[3].substr(1) };
   },
 
   // Strips admin and mod labels from usernames
