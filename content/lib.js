@@ -247,12 +247,7 @@ var gamefox_lib =
 
   setTitle: function(doc, title, prefix, page)
   {
-    if (!gamefox_lib.prefs.getBoolPref('elements.titlechange'))
-    {
-      // fix GameFAQs' double encoding of topic title
-      doc.title = gamefox_utils.specialCharsDecode(doc.title);
-      return;
-    }
+    if (!gamefox_lib.prefs.getBoolPref('elements.titlechange')) return;
     if (!gamefox_lib.prefs.getBoolPref('elements.titleprefix')) prefix = null;
 
     doc.title = 'GameFAQs'
