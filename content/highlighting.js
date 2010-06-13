@@ -95,8 +95,10 @@ var gamefox_highlighting =
       for (var j = 0; j < index[i].length; j++)
       {
         if (post.indexOf(index[i][j]) != -1)
+        {
           groups.push(i);
           break;
+        }
       }
     }
 
@@ -140,8 +142,10 @@ var gamefox_highlighting =
       for (var j = 0; j < index[i].length; j++)
       {
         if (title.indexOf(index[i][j]) != -1)
+        {
           groups.push(i);
           break;
+        }
       }
     }
 
