@@ -1,5 +1,5 @@
 @charset 'UTF-8';
-/* GFPastel 2010.04.GameFOX
+/* GFPastel 2010.05.GameFOX
  * CCBYNCSA spynae [tl;dr, give credit where credit is due, this is free]
  * Special version for bundle with GameFOX.
  */
@@ -262,16 +262,6 @@
   table:not(.message) tr:last-child > * {
     border-bottom: 1px solid #6DA1D0;
     }
-  /* Alternating row colors Firefox 3.0 support */
-  /* Removed. Uncomment it if you need it. */
-  /*
-  table:not(.message) tr {
-    background: rgba(225,225,255,.2);
-    }
-  table:not(.message) tr.even {
-    background: rgba(225,225,255,.8);
-    }
-  */
   /* Various lists
    * System » Genre » Subgenre » Subsubgenre */
   .crumbs {
@@ -295,8 +285,7 @@
     line-height: 2em;
     list-style: none;
     margin: 0;
-      margin-bottom: 1em;
-      margin-left: 1em;
+      margin-bottom: .3em;
     padding: 0;
     }
   ul.content_nav li {
@@ -562,7 +551,7 @@
     border-top: 1px solid #6DA1D0;
     }
   td.author a.name,
-  td.author > b:first-child /*Archived*/{
+  td.author b:first-child /*Archived*/{
     background: #6DA1D0;
     color: #3D5F80;
     display: block;
@@ -572,7 +561,7 @@
     padding: .2em;
     text-align: right;
     }
-  #content td.author > b:first-child /*Archived*/{ color: #333;    }
+  #content td.author b:first-child /*Archived*/{ color: #333;    }
   #content td.author a.name:visited     { color: #497299; }
   #content td.author a.name:hover       { color: #333;    }
   td.author a:not(.name) {
@@ -580,7 +569,7 @@
     font-weight: bold;
     }
   td.author a.name + br,
-  td.author > b:first-child + br /*Archived*/ {
+  td.author b:first-child + br /*Archived*/ {
     display: none;
     }
   td.author + td {
@@ -747,7 +736,7 @@
     text-shadow: 0px 0px 3px #000;
     }
   td.author.gamefox-highlight a.name,
-  td.author.gamefox-highlight > b:first-child {
+  td.author.gamefox-highlight b:first-child {
     background: rgba(255,255,255,.8);
     text-shadow: none;
     }
