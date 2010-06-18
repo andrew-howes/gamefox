@@ -1,5 +1,5 @@
 @charset 'UTF-8';
-/* GFPastel 2010.05.GameFOX
+/* GFPastel 2010.06.GameFOX
  * CCBYNCSA spynae [tl;dr, give credit where credit is due, this is free]
  * Special version for bundle with GameFOX.
  */
@@ -106,7 +106,7 @@
     }
   /* Search box */
   #searchbox {
-    background: rgba(219,219,219,.3);
+    background: rgba(255,255,255,.6);
     border: 1px solid #6DA1D0;
     border-top: 0;
     -moz-border-radius: 0 0 1em 0;
@@ -122,7 +122,7 @@
     }
   /* Quicknav & Platformlist */
   #quicknav, #platformlist {
-    background: rgba(219,219,219,.3);
+    background: rgba(255,255,255,.6);
     border: 1px solid #6DA1D0;
     -moz-box-shadow: 0 0 .5em #6DA1D0;
     margin-right: 3em;
@@ -551,7 +551,7 @@
     border-top: 1px solid #6DA1D0;
     }
   td.author a.name,
-  td.author b:first-child /*Archived*/{
+  td.author .msg_stats_left > b:first-child {
     background: #6DA1D0;
     color: #3D5F80;
     display: block;
@@ -561,7 +561,7 @@
     padding: .2em;
     text-align: right;
     }
-  #content td.author b:first-child /*Archived*/{ color: #333;    }
+  #content td.author .msg_stats_left > b:first-child { color: #333;    }
   #content td.author a.name:visited     { color: #497299; }
   #content td.author a.name:hover       { color: #333;    }
   td.author a:not(.name) {
@@ -569,7 +569,7 @@
     font-weight: bold;
     }
   td.author a.name + br,
-  td.author b:first-child + br /*Archived*/ {
+  td.author .msg_stats_left > b:first-child + br {
     display: none;
     }
   td.author + td {
@@ -736,7 +736,7 @@
     text-shadow: 0px 0px 3px #000;
     }
   td.author.gamefox-highlight a.name,
-  td.author.gamefox-highlight b:first-child {
+  td.author.gamefox-highlight .msg_stats_left > b:first-child {
     background: rgba(255,255,255,.8);
     text-shadow: none;
     }
