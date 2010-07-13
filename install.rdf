@@ -6,7 +6,7 @@
                 <em:name>GameFOX</em:name>
                 <em:version>0.7.8pre</em:version>
                 <em:description>Enhances the GameFAQs message boards.</em:description>
-                <em:creator>Abdullah A</em:creator>
+                <em:creator></em:creator>
                 <em:extension>true</em:extension>
                 <em:homepageURL>http://beyondboredom.net/projects/gamefox/</em:homepageURL>
                 <em:optionsURL>chrome://gamefox/content/options/options.xul</em:optionsURL>
@@ -16,6 +16,7 @@
                 <em:updateURL>http://beyondboredom.net/gfox/release.rdf</em:updateURL>
                 <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHm0PO+/NnblC4Bm1sPDFsGkuMZ0IHmY6c3h202KzugcFUduk9SC0tZ2QoPKkuz7aOvonfGFnxgHzZxlJ3K/5np/p2R8ExGTYHV7vppxzfXxpjqvlA0UrJVXc2+4O9eVo56B7R7AQhWhpg5pYUvM7f1XXK6S00P0Upng8LUYAISwIDAQAB</em:updateKey>
 
+                <em:developer>Abdullah A (ultimategamer00)</em:developer>
                 <em:developer>Toad King (Calvinjpwalker)</em:developer>
                 <em:developer>Andrianto Effendy (ZeroAnt)</em:developer>
                 <em:developer>Brian Marshall (Karamthulhu)</em:developer>
@@ -36,7 +37,7 @@
                         <Description>
                                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                                 <em:minVersion>3.5</em:minVersion>
-                                <em:maxVersion>3.6.*</em:maxVersion>
+                                <em:maxVersion>4.0b2pre</em:maxVersion>
                         </Description>
                 </em:targetApplication>
 

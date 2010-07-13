@@ -23,11 +23,6 @@ var gamefox_lib =
   path: '/boards/',
   cookieHost: '.gamefaqs.com',
 
-  version: Cc['@mozilla.org/extensions/manager;1']
-    .getService(Ci.nsIExtensionManager)
-    .getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}')
-    .version,
-
   prefs: Cc['@mozilla.org/preferences-service;1']
     .getService(Ci.nsIPrefService)
     .getBranch('gamefox.'),
@@ -458,3 +453,5 @@ var gamefox_lib =
     return nativeJSON.encode(obj);
   }
 };
+
+gamefox_lib.version = gamefox_lib.prefs.getCharPref('version');

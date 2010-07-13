@@ -1452,8 +1452,39 @@ function gamefox_loader()
   document.getElementById('contentAreaContextMenu').addEventListener(
       'popupshowing', gamefox_context.displayMenu, false);
 
-  var lastversion = gamefox_lib.prefs.getCharPref('version');
-  var version = gamefox_lib.version;
+  try
+  {
+    Cu.import('resource://gre/modules/AddonManager.jsm');
+    AddonManager.getAddonByID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}',
+        gamefox_update);
+  }
+  catch (e if e.result === Cr.NS_ERROR_FILE_NOT_FOUND)
+  {
+    gamefox_update({ version: Cc['@mozilla.org/extensions/manager;1']
+        .getService(Ci.nsIExtensionManager)
+        .getItemForID('{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}')
+        .version });
+  }
+
+  // disable or update tracked topics
+  if (!gamefox_lib.prefs.getBoolPref('tracked.enabled'))
+  {
+    gamefox_lib.prefs.clearUserPref('tracked.list');
+    gamefox_lib.prefs.clearUserPref('tracked.rssUrl');
+    gamefox_lib.prefs.clearUserPref('tracked.lastAccount');
+  }
+  else if (gamefox_lib.isLoggedIn())
+    gamefox_tracked.updateList();
+
+  // disable favorites
+  if (!gamefox_lib.prefs.getBoolPref('favorites.enabled'))
+    gamefox_lib.prefs.clearUserPref('favorites.serialized');
+}
+
+function gamefox_update(addon)
+{
+  var lastversion = gamefox_lib.version;
+  var version = addon.version;
   var versionComparator = Cc['@mozilla.org/xpcom/version-comparator;1'].
     getService(Ci.nsIVersionComparator);
 
@@ -1461,11 +1492,12 @@ function gamefox_loader()
   if (versionComparator.compare(version, lastversion) != 0 ||
       (gamefox_lib.isPre() && !gamefox_lib.isNightly()))
   {
-    /* compatibility crap
-     * TODO: remove these after a while
-     * TODO: maybe provide some structure for these, since they're just a
-     * bunch of if statements that are hard to tell apart from the rest of the
-     * update code */
+    // Version-specific upgrade code
+    //
+    // TODO: remove these after a while
+    // TODO: maybe provide some structure for these, since they're just a
+    //       bunch of if statements that are hard to tell apart from the
+    //       rest of the update code
 
     if (versionComparator.compare('0.6.11', lastversion) > 0)
     {
@@ -1510,29 +1542,16 @@ function gamefox_loader()
         && gamefox_lib.prefs.getBoolPref('showReleaseNotes'))
       window.setTimeout(gamefox_lib.newTab, 10,
           'http://beyondboredom.net/projects/gamefox/releasenotes/' + version +
-              '.html', 0);
+          '.html', 0);
 
     // update version and CSS
     gamefox_lib.prefs.setCharPref('version', version);
+    gamefox_lib.version = version;
     gamefox_css.init();
   }
 
   // load CSS
   gamefox_css.reload();
-
-  // disable or update tracked topics
-  if (!gamefox_lib.prefs.getBoolPref('tracked.enabled'))
-  {
-    gamefox_lib.prefs.clearUserPref('tracked.list');
-    gamefox_lib.prefs.clearUserPref('tracked.rssUrl');
-    gamefox_lib.prefs.clearUserPref('tracked.lastAccount');
-  }
-  else if (gamefox_lib.isLoggedIn())
-    gamefox_tracked.updateList();
-
-  // disable favorites
-  if (!gamefox_lib.prefs.getBoolPref('favorites.enabled'))
-    gamefox_lib.prefs.clearUserPref('favorites.serialized');
 }
 
 window.addEventListener('load', gamefox_loader, false);
