@@ -83,11 +83,15 @@ var gamefox_quickpost =
     else
       message.value = doc.gamefox.sig;
     form.appendChild(message);
-    try
-    {
-      message.setSelectionRange(0, 0);
-    }
-    catch (e) {}
+    var focusQuickPostListener = function() {
+      try
+      {
+        this.setSelectionRange(0, 0);
+      }
+      catch (e) {}
+      this.removeEventListener('focus', focusQuickPostListener, false);
+    };
+    message.addEventListener('focus', focusQuickPostListener, false);
 
     form.appendChild(doc.createElement('br'));
 
