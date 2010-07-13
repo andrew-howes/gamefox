@@ -430,7 +430,7 @@ var gamefox_utils =
     if (!params) // regex didn't match
       return false;
     return { 'board': params[1], 'name': params[2].substr(1),
-      'topic': params[3].substr(1) };
+      'topic': (params[3] ? params[3].substr(1) : null) };
   },
 
   // Strips admin and mod labels from usernames
