@@ -2,6 +2,9 @@
     * version 0.7.8
     * Remove compatibility with Firefox 3.0
     * Fix QuickPost on Brilliant
+    * Fix bug with topic and post matching highlighting groups
+    * Update GFPastel 2010
+    * Add compatibility with Firefox 4.0
 
 2010-05-12:
     * version 0.7.7
