@@ -4,4 +4,12 @@ style     chrome://global/content/customizeToolbar.xul chrome://gamefox/skin/too
 overlay   chrome://browser/content/browser.xul chrome://gamefox/content/overlay.xul
 overlay   chrome://navigator/content/navigator.xul chrome://gamefox/content/overlay.xul
 
+component {c1f33b60-3c10-11de-8a39-0800200c9a66} components/dategetter.js
+contract @gamefox/dategetter;1 {c1f33b60-3c10-11de-8a39-0800200c9a66}
+category profile-after-change GFdateGetter @gamefox/dategetter;1
+
+component {2572941e-68cb-41a8-be97-cbb40611dcbc} components/policy.js
+contract @gamefox/contentpolicy;1 {2572941e-68cb-41a8-be97-cbb40611dcbc}
+category content-policy GFcontentPolicy @gamefox/contentpolicy;1
+
 locale    gamefox en-US locale/en-US/
