@@ -161,15 +161,6 @@
         type="bool"/>
       <preference id="context.links" name="gamefox.context.links"
         type="bool"/>
-
-      <!-- Board Settings -->
-      <preference id="tpcsPerPage" name="gamefox.tpcsPerPage" type="int"/>
-      <preference id="tpcSortOrder" name="gamefox.tpcSortOrder" type="int"/>
-      <preference id="msgsPerPage" name="gamefox.msgsPerPage" type="int"/>
-      <preference id="msgSortOrder" name="gamefox.msgSortOrder" type="int"/>
-      <preference id="timeZone" name="gamefox.timeZone" type="int"/>
-      <preference id="msgDisplay" name="gamefox.msgDisplay" type="int"/>
-      <preference id="catShow" name="gamefox.catShow" type="bool"/>
     </preferences>
 
     <tabbox id="mainPrefs" flex="1">
@@ -178,7 +169,6 @@
         <tab id="postingTab" label="&postingTab.label;"/>
         <tab id="sidebarTab" label="&sidebarTab.label;"/>
         <tab id="contextTab" label="&contextTab.label;"/>
-        <tab id="boardSettingsTab" label="&boardSettingsTab.label;"/>
       </tabs>
 
       <tabpanels flex="1">
@@ -514,148 +504,6 @@
               </rows>
             </grid>
           </groupbox>
-        </tabpanel>
-
-        <!-- Board Settings -->
-        <tabpanel orient="vertical" flex="1">
-          <notificationbox id="boardSettingsMsg" flex="1">
-            <vbox>
-              <groupbox flex="1">
-                <grid>
-                  <columns>
-                    <column/>
-                    <column flex="1"/>
-                  </columns>
-                  <rows>
-
-                    <row align="center">
-                      <label value="&topicsPerPage.label;"/>
-
-                      <menulist preference="tpcsPerPage" id="topicpage"
-                        flex="1">
-                        <menupopup>
-                          <menuitem value="10" label="10"/>
-                          <menuitem value="20" label="20"/>
-                          <menuitem value="30" label="30"/>
-                          <menuitem value="40" label="40"/>
-                          <menuitem value="50" label="50"/>
-                        </menupopup>
-                      </menulist>
-                    </row>
-
-                    <row align="center">
-                      <label value="&topicSort.label;"/>
-
-                      <menulist preference="tpcSortOrder" id="topicsort"
-                        flex="1">
-                        <menupopup>
-                          <menuitem value="1" label="&firstOldest.label;"/>
-                          <menuitem value="2" label="&firstNewest.label;"/>
-                          <menuitem value="3" label="&lastOldest.label;"/>
-                          <menuitem value="4" label="&lastNewest.label;"/>
-                        </menupopup>
-                      </menulist>
-                    </row>
-
-                    <row align="center">
-                      <label value="&messagesPerPage.label;"/>
-
-                      <menulist preference="msgsPerPage" id="messagepage"
-                        flex="1">
-                        <menupopup>
-                          <menuitem value="10" label="10"/>
-                          <menuitem value="20" label="20"/>
-                          <menuitem value="30" label="30"/>
-                          <menuitem value="40" label="40"/>
-                          <menuitem value="50" label="50"/>
-                        </menupopup>
-                      </menulist>
-                    </row>
-
-                    <row align="center">
-                      <label value="&messageSort.label;"/>
-
-                      <menulist preference="msgSortOrder" id="messagesort"
-                        flex="1">
-                        <menupopup>
-                          <menuitem value="1" label="&oldestFirst.label;"/>
-                          <menuitem value="2" label="&newestFirst.label;"/>
-                        </menupopup>
-                      </menulist>
-                    </row>
-
-                    <row align="center">
-                      <label value="&timeZone.label;"/>
-
-                      <menulist preference="timeZone" id="timezone" flex="1">
-                        <menupopup>
-                          <menuitem value="-720" label="GMT -12"/>
-                          <menuitem value="-660" label="GMT -11"/>
-                          <menuitem value="-600" label="GMT -10"/>
-                          <menuitem value="-540" label="GMT -9"/>
-                          <menuitem value="-480" label="GMT -8"/>
-                          <menuitem value="-420" label="GMT -7"/>
-                          <menuitem value="-360" label="GMT -6"/>
-                          <menuitem value="-300" label="GMT -5"/>
-                          <menuitem value="-240" label="GMT -4"/>
-                          <menuitem value="-210" label="GMT -3:30"/>
-                          <menuitem value="-180" label="GMT -3"/>
-                          <menuitem value="-120" label="GMT -2"/>
-                          <menuitem value="-60" label="GMT -1"/>
-                          <menuitem value="0" label="GMT +0"/>
-                          <menuitem value="60" label="GMT +1"/>
-                          <menuitem value="120" label="GMT +2"/>
-                          <menuitem value="180" label="GMT +3"/>
-                          <menuitem value="240" label="GMT +4"/>
-                          <menuitem value="300" label="GMT +5"/>
-                          <menuitem value="330" label="GMT +5:30"/>
-                          <menuitem value="360" label="GMT +6"/>
-                          <menuitem value="390" label="GMT +6:30"/>
-                          <menuitem value="420" label="GMT +7"/>
-                          <menuitem value="480" label="GMT +8"/>
-                          <menuitem value="540" label="GMT +9"/>
-                          <menuitem value="570" label="GMT +9:30"/>
-                          <menuitem value="600" label="GMT +10"/>
-                          <menuitem value="660" label="GMT +11"/>
-                          <menuitem value="720" label="GMT +12"/>
-                          <menuitem value="780" label="GMT +13"/>
-                        </menupopup>
-                      </menulist>
-                    </row>
-
-                    <row align="center">
-                      <label value="&messageDataDisplay.label;"/>
-
-                      <menulist preference="msgDisplay" id="userdisplay"
-                        flex="1">
-                        <menupopup>
-                          <menuitem value="0" label="&leftOfMessage.label;"/>
-                          <menuitem value="1" label="&aboveMessage.label;"/>
-                        </menupopup>
-                      </menulist>
-                    </row>
-
-                    <row align="center">
-                      <checkbox label="&catShow.label;"
-                        preference="catShow" id="catshow"/>
-                    </row>
-
-                  </rows>
-                </grid>
-
-                <hbox pack="end">
-                  <button id="gamefox-css-grab-bs"
-                    label="&grabSettings.button;" icon="refresh"
-                    oncommand="gamefox_options.importBoardSettings();"/>
-                  <button id="gamefox-css-apply-bs"
-                    label="&saveSettings.button;" icon="save"
-                    oncommand="gamefox_options.exportBoardSettings();"/>
-                </hbox>
-
-              </groupbox>
-
-            </vbox>
-          </notificationbox>
         </tabpanel>
 
       </tabpanels>

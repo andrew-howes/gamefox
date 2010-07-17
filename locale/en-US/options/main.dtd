@@ -98,31 +98,3 @@
 <!ENTITY submenu.accounts.label "Accounts">
 <!ENTITY submenu.favorites.label "Favorites">
 <!ENTITY submenu.links.label "Links">
-
-<!-- Board Settings -->
-<!ENTITY boardSettings.label "Board Settings">
-
-<!ENTITY topicsPerPage.label "Topics Per Page">
-
-<!ENTITY topicSort.label "Topic Sort">
-<!ENTITY firstOldest.label "By First Post, Oldest First">
-<!ENTITY firstNewest.label "By First Post, Newest First">
-<!ENTITY lastOldest.label "By Last Post, Oldest First">
-<!ENTITY lastNewest.label "By Last Post, Newest First">
-
-<!ENTITY messagesPerPage.label "Messages Per Page">
-
-<!ENTITY messageSort.label "Message Sort">
-<!ENTITY oldestFirst.label "Oldest First">
-<!ENTITY newestFirst.label "Newest First">
-
-<!ENTITY timeZone.label "Time Zone">
-
-<!ENTITY messageDataDisplay.label "Message Poster Display">
-<!ENTITY leftOfMessage.label "Left of Message">
-<!ENTITY aboveMessage.label "Above Message">
-
-<!ENTITY catShow.label "Show Category List">
-
-<!ENTITY grabSettings.button "Grab from GameFAQs">
-<!ENTITY saveSettings.button "Save to GameFAQs">

@@ -725,6 +725,10 @@ var gamefox =
       for (var i = 0; i < tdResult.snapshotLength; i++)
         td[i] = tdResult.snapshotItem(i);
 
+      // Update posts per page setting if not on the last page
+      if ((pagenum + 1) < doc.gamefox.pages)
+        gamefox_lib.prefs.setIntPref('msgsPerPage', (td.length / 2));
+
       var alternateColor = false;
       var msgnum = pagenum * gamefox_lib.prefs.getIntPref('msgsPerPage');
       var msgnumCond = !onDetail && gamefox_lib.prefs.getBoolPref('elements.msgnum');
@@ -741,8 +745,6 @@ var gamefox =
       loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
       var topicOpen = !!doc.evaluate('a[contains(@href, "post.php")]', userNav,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var firstPostNum = gamefox_lib.prefs.getIntPref('msgSortOrder') == 2 ?
-          (doc.gamefox.pages - 1) * gamefox_lib.prefs.getIntPref('msgsPerPage') + td.length / 2 : 1;
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
       var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink') &&
         topicOpen && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
@@ -769,8 +771,7 @@ var gamefox =
         td[i].setUserData('date', postDate, null); // for quoting
 
         // Topic creator
-        // TODO: Fix for newest first ordering
-        if (msgnum == 1 && gamefox_lib.prefs.getIntPref('msgSortOrder') == 1)
+        if (msgnum == 1)
           tc = username;
 
         // Date format
@@ -907,14 +908,14 @@ var gamefox =
 
         // Add "delete" link
         if (loggedInUser == username && !onArchive &&
-            ((msgnum == firstPostNum && topicOpen) || msgnum != firstPostNum) &&
+            ((msgnum == 1 && topicOpen) || msgnum != 1) &&
             postBody.trim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
             postBody.trim() != '[This message was deleted at ' +
             'the request of a moderator or administrator]')
         {
           var a = deletelinkCond ? doc.createElement('a') : null;
-          if (msgnum == firstPostNum && (td.length > 2 || pagenum > 0))
+          if (msgnum == 1 && (td.length > 2 || pagenum > 0))
           {
             td[i].setAttribute('gfdeletetype', 'close');
 
@@ -926,7 +927,7 @@ var gamefox =
           }
           else
           {
-            if (msgnum == firstPostNum)
+            if (msgnum == 1)
               td[i].setAttribute('gfdeletetype', 'deletetopic');
             else
               td[i].setAttribute('gfdeletetype', 'deletepost');
