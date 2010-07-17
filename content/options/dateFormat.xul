@@ -7,9 +7,11 @@
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
 
 <prefwindow id="dateFormatDialog" type="child"
-            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-            xmlns:html="http://www.w3.org/1999/xhtml"
-            title="&dateFormat.title;">
+  buttons="accept,cancel,help"
+  ondialoghelp="gamefox_options_dateFormat.help();"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  title="&dateFormat.title;">
 
   <prefpane id="dateFormatDialog"
     onpaneload="gamefox_options_dateFormat.init();">
@@ -49,12 +51,9 @@
           </menupopup>
         </menulist>
 
-        <textbox id="topicFormatCustom" emptytext="&custom.emptytext;"
+        <textbox id="topicFormatCustom" emptytext="&custom.label;"
           disabled="true" preference="date.topicCustom"
           oninput="gamefox_options_dateFormat.previewCustom(this);"/>
-
-        <label><html:a class="inline-link" href="#"
-            onclick="gamefox_options_dateFormat.help();">?</html:a></label>
       </hbox>
     </groupbox>
 
@@ -70,12 +69,9 @@
           </menupopup>
         </menulist>
 
-        <textbox id="messageFormatCustom" emptytext="&custom.emptytext;"
+        <textbox id="messageFormatCustom" emptytext="&custom.label;"
           disabled="true" preference="date.messageCustom"
           oninput="gamefox_options_dateFormat.previewCustom(this);"/>
-
-        <label><html:a class="inline-link" href="#"
-            onclick="gamefox_options_dateFormat.help();">?</html:a></label>
       </hbox>
     </groupbox>
 
@@ -91,12 +87,9 @@
           </menupopup>
         </menulist>
 
-        <textbox id="clockFormatCustom" emptytext="&custom.emptytext;"
+        <textbox id="clockFormatCustom" emptytext="&custom.label;"
           disabled="true" preference="date.clockCustom"
           oninput="gamefox_options_dateFormat.previewCustom(this);"/>
-
-        <label><html:a class="inline-link" href="#"
-            onclick="gamefox_options_dateFormat.help();">?</html:a></label>
       </hbox>
     </groupbox>
 
