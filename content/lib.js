@@ -63,46 +63,6 @@ var gamefox_lib =
       .confirm(null, 'GameFOX', msg);
   },
 
-  // Version number functions
-  isPre: function(version)
-  {
-    version = version ? version : this.version;
-    return version.indexOf('pre') != -1;
-  },
-
-  isNightly: function(version)
-  {
-    version = version ? version : this.version;
-    return this.isPre(version) && version.indexOf('pre') < version.length - 3;
-  },
-
-  getNightlyVersion: function(version)
-  {
-    version = version ? version : this.version;
-    return version.substr(version.indexOf('pre') + 3);
-  },
-
-  getBaseVersion: function(version)
-  {
-    version = version ? version : this.version;
-    return version.substr(0, version.indexOf('pre') + 3);
-  },
-
-  getNightlyAge: function()
-  {
-    var timestamp = this.getNightlyVersion();
-    var nightlyDate = new Date(timestamp.substr(0, 4), (timestamp.substr(4, 2) - 1),
-        timestamp.substr(6, 2));
-    return Math.floor((Date.now() - nightlyDate.getTime()) / (1000*60*60*24));
-  },
-
-  getNightlyDate: function()
-  {
-    var nv = gamefox_lib.getNightlyVersion();
-    return new Date(nv.substr(0, 4), (nv.substr(4, 2) - 1), nv.substr(6, 2))
-        .toLocaleFormat('%Y %b %d');
-  },
-
   getDocument: function(event)
   {
     if (event.target && event.target.ownerDocument)
@@ -454,4 +414,34 @@ var gamefox_lib =
   }
 };
 
-gamefox_lib.version = gamefox_lib.prefs.getCharPref('version');
+gamefox_lib.version =
+{
+  _version: gamefox_lib.prefs.getCharPref('version'),
+  toString: function() { return this._version; },
+  get indexOf() { return this._version.indexOf },
+
+  isPre: function(v)
+  {
+    return (v ? v : this._version).indexOf('pre') != -1;
+  },
+
+  isNightly: function(v)
+  {
+    v = v ? v : this._version;
+    return this.isPre(v) && v.indexOf('pre') < v.length - 3;
+  },
+
+  getNDate: function(v)
+  {
+    if (!this.isNightly()) return;
+    v = v ? v : this._version;
+    return v.substr(v.indexOf('pre') + 3);
+  },
+
+  getNFormattedDate: function()
+  {
+    var d = this.getNDate();
+    return new Date(d.substr(0, 4), (d.substr(4, 2) - 1), d.substr(6, 2))
+      .toLocaleFormat('%Y %b %d');
+  }
+};
