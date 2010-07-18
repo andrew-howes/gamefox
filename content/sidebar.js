@@ -27,10 +27,14 @@ var gamefox_sidebar =
     new gamefox_observer('sidebar', gamefox_sidebar.updateSections);
 
     // link middle clicking
+    // disable dotted outline after loading link
     var links = document.getElementsByTagName('a');
     for (var i = 0; i < links.length; i++)
+    {
       links[i].setAttribute('onmousedown', 'if (event.button == 1) ' +
           'gamefox_lib.newTab(this.href, 1)');
+      links[i].addEventListener('click', function() { this.blur(); }, false);
+    }
 
     // listeners
     document.getElementById('gamefaqs-login-form').addEventListener(
