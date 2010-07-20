@@ -422,19 +422,19 @@ gamefox_lib.version =
 
   isPre: function(v)
   {
-    return (v ? v : this._version).indexOf('pre') != -1;
+    return (v || this._version).indexOf('pre') != -1;
   },
 
   isNightly: function(v)
   {
-    v = v ? v : this._version;
+    v = v || this._version;
     return this.isPre(v) && v.indexOf('pre') < v.length - 3;
   },
 
   getNDate: function(v)
   {
     if (!this.isNightly()) return;
-    v = v ? v : this._version;
+    v = v || this._version;
     return v.substr(v.indexOf('pre') + 3);
   },
 
