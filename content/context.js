@@ -401,14 +401,16 @@ var gamefox_context =
 
     var params = gamefox_utils.parseBoardLink(topiclink);
     var board = params['board'], topic = params['topic'];
-    tcParam = gamefox_utils.tcParam(tc);
     for (i = 0; i < pages; i++)
     {
       item = document.createElement('menuitem');
-      item.setUserData('data', board + ',' + topic + ',' + i + ',' + tcParam, null);
+      item.setUserData('data', gamefox_utils.linkToTopic(board, topic, i, tc,
+            null, topiclink), null);
       item.setAttribute('label', (i + 1) + (i == thisPage ? '*' : ''));
-      item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
+      item.setAttribute('oncommand',
+          'gamefox_lib.openPage(this.getUserData("data"), 2)');
+      item.setAttribute('onclick', 'if (event.button == 1)' +
+          'gamefox_lib.openPage(this.getUserData("data"), 0)');
       menu.appendChild(item);
     }
   },
