@@ -120,6 +120,9 @@ var gamefox_context =
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       userNav = userNav ? userNav.textContent : '';
 
+      // Topic pages
+      hidePages = false;
+
       // Tag topic
       hideTag = false;
 
@@ -359,7 +362,7 @@ var gamefox_context =
   populatePages: function(event)
   {
     var menu, node, doc, topiclink, posts, tc, board, topic, pages, tcParam,
-      i, item;
+      i, item, thisPage;
 
     menu = document.getElementById('gamefox-pages-menu');
     while (menu.hasChildNodes())
@@ -367,31 +370,43 @@ var gamefox_context =
 
     node = event.target;
     doc = node.ownerDocument;
-    try
-    {
-      while (node.nodeName.toLowerCase() != 'td')
-        node = node.parentNode;
-      node = node.parentNode; // topic row
 
-      topiclink = node.cells[1].getElementsByTagName('a')[0].href;
-      posts = node.cells[gamefox_lib.onPage(doc, 'myposts') ? 2 : 3].textContent;
-      tc = gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts')
-          ? '' : node.cells[2].firstChild.textContent.trim();
-    }
-    catch (e)
+    if (gamefox_lib.onPage(doc, 'topics') || gamefox_lib.onPage(doc, 'myposts'))
     {
-      return;
+      try
+      {
+        while (node.nodeName.toLowerCase() != 'td')
+          node = node.parentNode;
+        node = node.parentNode; // topic row
+
+        topiclink = node.cells[1].getElementsByTagName('a')[0].href;
+        posts = node.cells[gamefox_lib.onPage(doc, 'myposts') ? 2 : 3].textContent;
+        pages = Math.ceil(posts / gamefox_lib.prefs.getIntPref('msgsPerPage'));
+        tc = gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts')
+          ? '' : node.cells[2].firstChild.textContent.trim();
+        thisPage = -1;
+      }
+      catch (e)
+      {
+        return;
+      }
+    }
+    else
+    { // on message list
+      topiclink = doc.location.href;
+      pages = doc.gamefox.pages;
+      tc = doc.gamefox.tc;
+      thisPage = doc.gamefox.thisPage;
     }
 
     var params = gamefox_utils.parseBoardLink(topiclink);
     var board = params['board'], topic = params['topic'];
-    pages = Math.ceil(posts / gamefox_lib.prefs.getIntPref('msgsPerPage'));
     tcParam = gamefox_utils.tcParam(tc);
     for (i = 0; i < pages; i++)
     {
       item = document.createElement('menuitem');
       item.setUserData('data', board + ',' + topic + ',' + i + ',' + tcParam, null);
-      item.setAttribute('label', i+1);
+      item.setAttribute('label', (i + 1) + (i == thisPage ? '*' : ''));
       item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
       item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
       menu.appendChild(item);

@@ -692,6 +692,8 @@ var gamefox =
       var onArchive = gamefox_lib.onPage(doc, 'archive');
       var onDetail = gamefox_lib.onPage(doc, 'detail');
 
+      doc.gamefox.thisPage = pagenum;
+
       // Title
       gamefox_lib.setTitle(doc, gamefox_utils.getBoardWrapHeader(doc),
           'M' + (onDetail ? 'D' : ''),
