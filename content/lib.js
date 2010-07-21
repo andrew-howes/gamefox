@@ -310,6 +310,8 @@ var gamefox_lib =
       .getService(Ci.nsIWindowMediator);
     var windowWatcher = Cc['@mozilla.org/embedcomp/window-watcher;1']
       .getService(Ci.nsIWindowWatcher);
+    var prefs = Cc['@mozilla.org/preferences-service;1']
+      .getService(Ci.nsIPrefService);
 
     var dlg = windowMediator.getMostRecentWindow('gamefox:options');
 
@@ -335,8 +337,21 @@ var gamefox_lib =
         pane: pane
       };
       args.wrappedJSObject = args;
+
+      var features;
+      try
+      {
+        var instantApply =
+          prefs.getBoolPref('browser.preferences.instantApply');
+        features = 'chrome,titlebar,toolbar,centerscreen' + (instantApply ?
+            ',dialog=no' : ',modal');
+      }
+      catch (e)
+      {
+        features = 'chrome,titlebar,toolbar,centerscreen,modal';
+      }
       dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options/options.xul',
-          '_blank', 'chrome,centerscreen,toolbar,resizable', args);
+          '_blank', features, args);
     }
   },
 
