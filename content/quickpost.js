@@ -164,7 +164,7 @@ var gamefox_quickpost =
       gamefox_messages.updateMessageCount(doc);
     }
 
-    if (gamefox_lib.version.isNightly())
+    if (gamefox_lib.isNightly())
     {
       var nightlyMsg = doc.createElement('span');
       nightlyMsg.id = 'gamefox-nightly-msg';
@@ -175,7 +175,7 @@ var gamefox_quickpost =
       nightlyMsg.appendChild(gamefoxLink);
 
       nightlyMsg.appendChild(doc.createTextNode(' development release'
-            + ' - ' + gamefox_lib.version.getNFormattedDate()));
+            + ' - ' + gamefox_lib.getNightlyFormattedDate()));
 
       form.appendChild(doc.createElement('br'));
       form.appendChild(nightlyMsg);

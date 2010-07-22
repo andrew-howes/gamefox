@@ -27,6 +27,35 @@ var gamefox_lib =
     .getService(Ci.nsIPrefService)
     .getBranch('gamefox.'),
 
+  isDev: function(v)
+  {
+    if (v == undefined)
+      v = this.version;
+    return v.indexOf('pre') != -1;
+  },
+
+  isNightly: function(v)
+  {
+    if (v == undefined)
+      v = this.version;
+    return this.isDev(v) && v.indexOf('pre') < v.length - 3;
+  },
+
+  getNightlyDate: function(v)
+  {
+    if (!this.isNightly()) return;
+    if (v == undefined)
+      v = this.version;
+    return v.substr(v.indexOf('pre') + 3);
+  },
+
+  getNightlyFormattedDate: function()
+  {
+    var d = this.getNightlyDate();
+    return new Date(d.substr(0, 4), (d.substr(4, 2) - 1), d.substr(6, 2))
+      .toLocaleFormat('%Y %b %d');
+  },
+
   getString: function(pref, prefService)
   {
     return (prefService || gamefox_lib.prefs)
@@ -429,34 +458,4 @@ var gamefox_lib =
   }
 };
 
-gamefox_lib.version =
-{
-  _version: gamefox_lib.prefs.getCharPref('version'),
-  toString: function() { return this._version; },
-  get indexOf() { return this._version.indexOf },
-
-  isPre: function(v)
-  {
-    return (v || this._version).indexOf('pre') != -1;
-  },
-
-  isNightly: function(v)
-  {
-    v = v || this._version;
-    return this.isPre(v) && v.indexOf('pre') < v.length - 3;
-  },
-
-  getNDate: function(v)
-  {
-    if (!this.isNightly()) return;
-    v = v || this._version;
-    return v.substr(v.indexOf('pre') + 3);
-  },
-
-  getNFormattedDate: function()
-  {
-    var d = this.getNDate();
-    return new Date(d.substr(0, 4), (d.substr(4, 2) - 1), d.substr(6, 2))
-      .toLocaleFormat('%Y %b %d');
-  }
-};
+gamefox_lib.version = gamefox_lib.prefs.getCharPref('version');

@@ -1488,12 +1488,14 @@ function gamefox_update(addon)
 {
   var lastversion = gamefox_lib.version;
   var version = addon.version;
+  gamefox_lib.prefs.setCharPref('version', version);
+  gamefox_lib.version = version;
   var versionComparator = Cc['@mozilla.org/xpcom/version-comparator;1'].
     getService(Ci.nsIVersionComparator);
 
   // upgrade, downgrade, first run, or dev version
   if (versionComparator.compare(version, lastversion) != 0 ||
-      (gamefox_lib.version.isPre() && !gamefox_lib.version.isNightly()))
+      (gamefox_lib.isDev() && !gamefox_lib.isNightly()))
   {
     // Version-specific upgrade code
     //
@@ -1530,30 +1532,26 @@ function gamefox_update(addon)
       window.setTimeout(gamefox_lib.openOptionsDialog, 10, true);
 
     // new nightly/dev install
-    if (gamefox_lib.version.isPre() && !gamefox_lib.version.isPre(lastversion))
+    if (gamefox_lib.isDev() && !gamefox_lib.isDev(lastversion))
       window.setTimeout(gamefox_lib.newTab, 10,
           'chrome://gamefox/content/nightly.html', 0);
 
     // updated nightly install
-    else if (gamefox_lib.version.isNightly()
+    else if (gamefox_lib.isNightly()
         && gamefox_lib.prefs.getBoolPref('nightlyChangeLog'))
       window.setTimeout(gamefox_lib.newTab, 10,
           'http://beyondboredom.net/projects/gamefox/nightlychanges.php', 0);
 
     // release notes for new stable release
-    else if (!gamefox_lib.version.isPre() && lastversion != ''
+    else if (!gamefox_lib.isDev() && lastversion != ''
         && gamefox_lib.prefs.getBoolPref('showReleaseNotes'))
       window.setTimeout(gamefox_lib.newTab, 10,
           'http://beyondboredom.net/projects/gamefox/releasenotes/' + version +
           '.html', 0);
 
-    // update version and CSS
-    gamefox_lib.prefs.setCharPref('version', version);
-    gamefox_lib.version._version = version;
     gamefox_css.init();
   }
 
-  // load CSS
   gamefox_css.reload();
 }
 
