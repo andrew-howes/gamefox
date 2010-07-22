@@ -145,14 +145,8 @@ var gamefox_options =
 
     var args = window.arguments[0].wrappedJSObject;
 
-    if (args.firstRun)
-    {
-      gamefox_highlighting.add();
-      gamefox_options_highlighting.populateLast();
-
-      if (gamefox_lib.isLoggedIn())
-        gamefox_options_sig.importSig();
-    }
+    if (args.firstRun && gamefox_lib.isLoggedIn())
+      gamefox_options_sig.importSig();
 
     for (var i in args.notifications)
     {

@@ -51,9 +51,7 @@ var gamefox_options_highlighting =
     var groups = this.read();
     var listbox = document.getElementById('grouplist');
 
-    // Though unlikely, it's possible using an older version of GameFOX or by
-    // manually editing the pref to have no groups, which the interface can't
-    // handle anymore.
+    // Always make sure we have at least one group
     if (!groups.length)
     {
       gamefox_highlighting.add();
