@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- vim: set et sw=2 ts=2 sts=2 tw=79:
 
-     Copyright 2008, 2009 Brian Marshall, Michael Ryan
+     Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
 
      This file is part of GameFOX.
 
@@ -65,15 +65,80 @@
 
     <separator/>
 
-    <!-- Add -->
-    <hbox align="center">
-      <description flex="1">&desc;</description>
-      <button label="&addGroup.button;" icon="add"
-        oncommand="gamefox_highlighting.add();gamefox_options_highlighting.populateLast();"/>
-    </hbox>
-
     <!-- Groups -->
-    <vbox id="groups" style="height: 22em; overflow: auto;"/>
+    <hbox flex="1">
+      <hbox>
+        <vbox>
+          <button label="&addGroup.button;" icon="add"
+            oncommand="gamefox_highlighting.add();"/>
+          <listbox id="grouplist" width="130" flex="1"
+            onselect="gamefox_options_highlighting.loadGroup(this);"/>
+        </vbox>
+        <vbox pack="center">
+          <toolbarbutton id="move-up" tooltiptext="&moveUp.tooltip;"
+            oncommand="gamefox_options_highlighting.move(0);"/>
+          <toolbarbutton id="move-down" tooltiptext="&moveDown.tooltip;"
+            oncommand="gamefox_options_highlighting.move(1);"/>
+        </vbox>
+      </hbox>
+
+      <groupbox flex="1">
+        <hbox align="center">
+          <textbox id="name" emptytext="&groupName.emptytext;"
+            oninput="gamefox_options_highlighting.updatePref(this);"/>
+
+          <separator flex="1"/>
+
+          <colorpicker id="color" type="button"
+            onchange="gamefox_options_highlighting.updatePref(this);"/>
+          <textbox id="colorHex" size="6" maxlength="7"
+            oninput="gamefox_options_highlighting.updatePref(this);"/>
+
+          <separator flex="1"/>
+
+          <button id="delete" label="&delete.label;" icon="remove"
+            oncommand="gamefox_options_highlighting.delete();"/>
+        </hbox>
+
+        <vbox>
+          <hbox>
+            <menulist id="type" sizetopopup="always"
+              oncommand="gamefox_options_highlighting.updatePref(this);">
+              <menupopup>
+                <menuitem value="users" label="&usersType.label;"/>
+                <menuitem value="titleContains"
+                  label="&titleContainsType.label;"/>
+                <menuitem value="postContains" label="&postContainsType.label;"/>
+              </menupopup>
+            </menulist>
+          </hbox>
+
+          <textbox id="values" flex="1" multiline="true" rows="4"
+            emptytext="&values.emptytext;"
+            oninput="gamefox_options_highlighting.updatePref(this);"/>
+        </vbox>
+
+        <hbox pack="end">
+          <menulist id="topicAction" sizetopopup="always"
+            oncommand="gamefox_options_highlighting.updatePref(this);">
+            <menupopup>
+              <menuitem value="highlight" label="&highlightTopics.label;"/>
+              <menuitem value="remove" label="&removeTopics.label;"/>
+              <menuitem value="nothing" label="&noTopicAction.label;"/>
+            </menupopup>
+          </menulist>
+          <menulist id="messageAction" sizetopopup="always"
+            oncommand="gamefox_options_highlighting.updatePref(this);">
+            <menupopup>
+              <menuitem value="highlight" label="&highlightMessages.label;"/>
+              <menuitem value="remove" label="&removeMessages.label;"/>
+              <menuitem value="collapse" label="&collapseMessages.label;"/>
+              <menuitem value="nothing" label="&noMessageAction.label;"/>
+            </menupopup>
+          </menulist>
+        </hbox>
+      </groupbox>
+    </hbox>
 
   </prefpane>
 

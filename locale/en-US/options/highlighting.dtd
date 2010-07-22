@@ -4,5 +4,26 @@
 <!ENTITY showGroupNames.label "Show group names on:">
 <!ENTITY topicGroups.label "Topic lists">
 <!ENTITY messageGroups.label "Message lists">
-<!ENTITY desc "Separate values with commas. List &quot;(tc)&quot; as a user (without quotes) to highlight the topic creator.">
 <!ENTITY addGroup.button "Add a Group">
+
+<!ENTITY moveUp.tooltip "Move group up">
+<!ENTITY moveDown.tooltip "Move group down">
+
+<!ENTITY groupName.emptytext "Group Name">
+
+<!ENTITY delete.label "Delete">
+
+<!ENTITY usersType.label "Username is:">
+<!ENTITY titleContainsType.label "Title contains:">
+<!ENTITY postContainsType.label "Post contains:">
+
+<!ENTITY values.emptytext "Separate usernames or keywords with commas or newlines.">
+
+<!ENTITY highlightTopics.label "Highlight topics">
+<!ENTITY removeTopics.label "Remove topics">
+<!ENTITY noTopicAction.label "No topic action">
+
+<!ENTITY highlightMessages.label "Highlight messages">
+<!ENTITY removeMessages.label "Remove messages">
+<!ENTITY collapseMessages.label "Collapse messages">
+<!ENTITY noMessageAction.label "No message action">

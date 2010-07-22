@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -19,363 +19,222 @@
 
 var gamefox_options_highlighting =
 {
+  menulistMap: {
+    type: { users: 0, titleContains: 1, postContains: 2 },
+    topicAction: { highlight: 0, remove: 1, nothing: 2 },
+    messageAction: { highlight: 0, remove: 1, collapse: 2, nothing: 3 }
+  },
+
+  read: function()
+  {
+    return gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+  },
+
+  write: function(groups)
+  {
+    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(groups));
+  },
+
   prepareOptionsPane: function()
   {
     this.populate();
 
-    // watch for changes caused by menuCheckChange
-    new gamefox_observer('userlist.serialized', this.updateUsers);
-  },
+    // OS-specific arrow icons
+    document.getElementById('paneHighlighting').setAttribute('platform',
+        window.navigator.platform);
 
-  makeGroupbox: function(id, name, color, users)
-  {
-    var strbundle = document.getElementById('highlighting-strings');
-    var groupbox, caption, hbox, textbox, separator, colorpicker, label,
-        button, menulist, menupopup, menuitem;
-
-    /* groupbox */
-    groupbox = document.createElement('groupbox');
-    groupbox.id = 'ug-' + id;
-
-    /** caption **/
-    caption = document.createElement('caption');
-    caption.setAttribute('label',
-        strbundle.getFormattedString('groupNum', [id + 1]));
-    groupbox.appendChild(caption);
-
-    /** hbox **/
-    hbox = document.createElement('hbox');
-    hbox.setAttribute('align', 'center');
-
-    /*** textbox ***/
-    textbox = document.createElement('textbox');
-    textbox.setAttribute('emptytext', strbundle.getString('groupName'));
-    textbox.setAttribute('class', 'ug-name');
-    textbox.setAttribute('value', name);
-    textbox.addEventListener('input', this.updatePref, false);
-    hbox.appendChild(textbox);
-    /*** separator ***/
-    separator = document.createElement('separator');
-    separator.setAttribute('flex', '1');
-    hbox.appendChild(separator);
-    /*** colorpicker ***/
-    colorpicker = document.createElement('colorpicker');
-    colorpicker.setAttribute('type', 'button');
-    colorpicker.setAttribute('class', 'ug-color');
-    colorpicker.setAttribute('color', color);
-    colorpicker.addEventListener('change', this.updatePref, false);
-    hbox.appendChild(colorpicker);
-    /*** textbox ***/
-    textbox = document.createElement('textbox');
-    textbox.setAttribute('size', '6');
-    textbox.setAttribute('class', 'ug-color');
-    textbox.setAttribute('value', color);
-    textbox.addEventListener('input', this.updatePref, false);
-    hbox.appendChild(textbox);
-    /*** separator **/
-    separator = document.createElement('separator');
-    separator.setAttribute('flex', '1');
-    hbox.appendChild(separator);
-    /*** button ***/
-    button = document.createElement('button');
-    button.setAttribute('label', strbundle.getString('delete'));
-    button.setAttribute('icon', 'remove');
-    button.addEventListener('command', this.removeWithButton, false);
-    hbox.appendChild(button);
-    groupbox.appendChild(hbox);
-
-    /** hbox **/
-    hbox = document.createElement('hbox');
-    hbox.setAttribute('align', 'center');
-
-    /*** menulist ***/
-    menulist = document.createElement('menulist');
-    menulist.setAttribute('class', 'ug-type');
-    menulist.addEventListener('command', this.updatePref, false);
-
-    /**** menupopup ****/
-    menupopup = document.createElement('menupopup');
-
-    var typeSettings = new Array(
-        'users', 'usernameIs',
-        'titleContains', 'titleContains',
-        'postContains', 'postContains'
-        );
-    /***** menuitem *****/
-    for (var i = 0; i < typeSettings.length; i += 2)
-    {
-      menuitem = document.createElement('menuitem');
-      menuitem.setAttribute('label', strbundle.getString(typeSettings[i + 1]));
-      menuitem.setAttribute('value', typeSettings[i]);
-      menupopup.appendChild(menuitem);
-    }
-
-    menulist.appendChild(menupopup);
-    hbox.appendChild(menulist);
-
-    /*** textbox ***/
-    textbox = document.createElement('textbox');
-    textbox.setAttribute('class', 'ug-users');
-    textbox.setAttribute('value', users);
-    textbox.setAttribute('flex', '1');
-    textbox.setAttribute('newlines', 'replacewithcommas');
-    textbox.addEventListener('input', this.updatePref, false);
-    hbox.appendChild(textbox);
-
-    groupbox.appendChild(hbox);
-
-    /** hbox **/
-    hbox = document.createElement('hbox');
-    hbox.setAttribute('align', 'center');
-    hbox.setAttribute('pack', 'end');
-
-    /*** menulist ***/
-    menulist = document.createElement('menulist');
-    menulist.setAttribute('class', 'ug-topics');
-    menulist.addEventListener('command', this.updatePref, false);
-
-    /**** menupopup ****/
-    menupopup = document.createElement('menupopup');
-
-    var tpcSettings = new Array(
-        'remove', 'removeTopics',
-        'highlight', 'highlightTopics',
-        'nothing', 'noTopicAction'
-        );
-    /***** menuitem *****/
-    for (var i = 0; i < tpcSettings.length; i += 2)
-    {
-      menuitem = document.createElement('menuitem');
-      menuitem.setAttribute('label', strbundle.getString(tpcSettings[i + 1]));
-      menuitem.setAttribute('value', tpcSettings[i]);
-      menupopup.appendChild(menuitem);
-    }
-
-    menulist.appendChild(menupopup);
-    hbox.appendChild(menulist);
-
-    /*** menulist ***/
-    menulist = document.createElement('menulist');
-    menulist.setAttribute('class', 'ug-messages');
-    menulist.addEventListener('command', this.updatePref, false);
-    
-    /**** menupopup ****/
-    menupopup = document.createElement('menupopup');
-
-    var msgSettings = new Array(
-        'collapse', 'collapseMessages',
-        'remove', 'removeMessages',
-        'highlight', 'highlightMessages',
-        'nothing', 'noMessageAction'
-        );
-    /***** menuitem *****/
-    for (var i = 0; i < msgSettings.length; i += 2)
-    {
-      menuitem = document.createElement('menuitem');
-      menuitem.setAttribute('label', strbundle.getString(msgSettings[i + 1]));
-      menuitem.setAttribute('value', msgSettings[i]);
-      menupopup.appendChild(menuitem);
-    }
-
-    menulist.appendChild(menupopup);
-    hbox.appendChild(menulist);
-
-    groupbox.appendChild(hbox);
-
-    return groupbox;
+    new gamefox_observer('userlist.serialized', this.watchPref);
   },
 
   populate: function()
   {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
-    var vbox = document.getElementById('groups');
+    var groups = this.read();
+    var listbox = document.getElementById('grouplist');
 
-    for (var i = 0; i < userlist.length; i++)
-      vbox.appendChild(this.makeGroupbox(
-          i, userlist[i].name, userlist[i].color, userlist[i].users));
-
-    // if called directly, will throw "TypeError: this.mColorBox has no properties"
-    setTimeout(gamefox_options_highlighting.setDefaultValues, 0);
-  },
-
-  setDefaultValues: function()
-  {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
-    var vbox = document.getElementById('groups');
-    var groups = vbox.getElementsByTagName('groupbox');
-    for (var i = 0; i < groups.length; i++)
+    // Though unlikely, it's possible using an older version of GameFOX or by
+    // manually editing the pref to have no groups, which the interface can't
+    // handle anymore.
+    if (!groups.length)
     {
-      // set colorpicker, mostly because of fx2
-      groups[i].getElementsByTagName('colorpicker')[0]
-        .color = userlist[i].color;
-
-      // set menulists
-      var idx;
-      idx = {users:0, titleContains:1, postContains:2};
-      groups[i].getElementsByTagName('menulist')[0]
-        .selectedIndex = idx[userlist[i].type];
-
-      idx = {remove:0, highlight:1, nothing:2};
-      groups[i].getElementsByTagName('menulist')[1]
-        .selectedIndex = idx[userlist[i].topics];
-
-      idx = {collapse:0, remove:1, highlight:2, nothing:3};
-      groups[i].getElementsByTagName('menulist')[2]
-        .selectedIndex = idx[userlist[i].messages];
-
-      gamefox_options_highlighting.disableMenulists(userlist[i].type, groups[i]);
+      gamefox_highlighting.add();
+      groups = this.read();
     }
-  },
 
-  populateLast: function()
-  {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
-    var id = userlist.length - 1;
-    userlist = userlist[id];
-    var vbox = document.getElementById('groups');
-    var groupbox = this.makeGroupbox(
-        id, userlist.name, userlist.color, userlist.users);
-    vbox.appendChild(groupbox);
+    for (var i = 0; i < groups.length; i++)
+      listbox.appendItem(groups[i].name || 'Group #' + (i + 1));
 
-    // set colorpicker, mostly because of fx2
-    groupbox.getElementsByTagName('colorpicker')[0].color = userlist.color;
-
-    // set menulists
-    var idx;
-    idx = {users:0, titleContains:1, postContains:2};
-    groupbox.getElementsByTagName('menulist')[0]
-      .selectedIndex = idx[userlist.type];
-
-    idx = {remove:0, highlight:1, nothing:2};
-    groupbox.getElementsByTagName('menulist')[1]
-      .selectedIndex = idx[userlist.topics];
-
-    idx = {collapse:0, remove:1, highlight:2, nothing:3};
-    groupbox.getElementsByTagName('menulist')[2]
-      .selectedIndex = idx[userlist.messages];
+    // If selectItem is called directly, it permanently prevents the first list
+    // item from being selected. WTF?
+    setTimeout(function() {
+        var listbox = document.getElementById('grouplist');
+        listbox.selectItem(listbox.getItemAtIndex(0));
+        }, 0);
   },
 
   updatePref: function(event)
   {
-    // get user group index
-    var node = parentNode = event.target;
-    while (parentNode.id.indexOf('ug') == -1)
-      parentNode = parentNode.parentNode;
-    var idx = parentNode.id.substring(3);
+    var groups = this.read();
+    var i = document.getElementById('grouplist').selectedIndex;
 
-    if (node.tagName == 'menuitem')
-      node = node.parentNode.parentNode;
-
-    var groupbox = node;
-    while (groupbox.tagName != 'groupbox')
-      groupbox = groupbox.parentNode;
-
-    // get pref name
-    var name = node.className.substring(3);
-
-    // get value
-    if (node.tagName == 'colorpicker')
-      var value = node.color;
-    else
-      var value = node.value;
-
-    // color has 2 elements to update
-    if (name == 'color')
+    switch (event.id)
     {
-      var colors = parentNode.getElementsByTagName('*');
-      for (var i = 0; i < colors.length; i++)
-      {
-        if (colors[i].className != 'ug-color') continue;
+      case 'name':
+        groups[i].name = event.value;
+        break;
+      case 'color':
+        groups[i].color = event.color;
+        break;
+      case 'colorHex':
+        groups[i].color = event.value;
+        break;
+      case 'type':
+        groups[i].type = event.selectedItem.value;
 
-        if (colors[i].tagName == 'colorpicker')
-          colors[i].color = value;
-        else
-          colors[i].value = value;
-      }
+        document.getElementById('topicAction').disabled = (groups[i].type ==
+            'postContains');
+        document.getElementById('messageAction').disabled = (groups[i].type
+            == 'titleContains');
+
+        break;
+      case 'values':
+        groups[i].users = event.value;
+        break;
+      case 'topicAction':
+        groups[i].topics = event.selectedItem.value;
+        break;
+      case 'messageAction':
+        groups[i].messages = event.selectedItem.value;
+        break;
     }
 
-    // disable options that don't apply
-    if (name == 'type')
-      gamefox_options_highlighting.disableMenulists(value, groupbox);
-
-    // get and set pref
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
-    userlist[idx][name] = value;
-    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
+    this.write(groups);
   },
 
-  updateUsers: function()
-  {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
-    var groups = document.getElementById('groups')
-      .getElementsByTagName('groupbox');
-    var textboxes;
-    for (var i = 0; i < groups.length; i++)
-    {
-      // only update the list of users
-      textboxes = groups[i].getElementsByTagName('textbox');
-      for (var j = 0; j < textboxes.length; j++)
-        if (textboxes[j].className == 'ug-users' &&
-            textboxes[j].value != userlist[i].users)
-          textboxes[j].value = userlist[i].users;
-    }
-  },
-
-  removeWithButton: function(event)
+  delete: function()
   {
     var strbundle = document.getElementById('highlighting-strings');
-    var groupbox = event.target.parentNode.parentNode;
-    var id = parseInt(groupbox.id.substring(3));
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    var groups = this.read();
+    var i = document.getElementById('grouplist').selectedIndex;
 
-    if (userlist[id].name.length)
+    if (groups[i].name.length)
     {
-      if (!gamefox_lib.confirm(strbundle.getFormattedString('confirmDeleteNamedGroup', [userlist[id].name])))
+      if (!gamefox_lib.confirm(strbundle.getFormattedString(
+              'confirmDeleteNamedGroup', [groups[i].name])))
         return;
     }
     else
     {
-      if (!gamefox_lib.confirm(strbundle.getFormattedString('confirmDeleteGroup', [id + 1])))
+      if (!gamefox_lib.confirm(strbundle.getFormattedString(
+              'confirmDeleteGroup', [i + 1])))
         return;
     }
 
-    // in case user hits button twice; however, bad things can still happen
-    // if the user leaves one of the confirms open and adds/deletes, since the
-    // prefs will no longer match the groupboxes
-    if (groupbox.parentNode)
-    {
-      var vbox = document.getElementById('groups');
-      vbox.removeChild(groupbox);
-      var groups = vbox.getElementsByTagName('groupbox');
-      for (var i = id; i < groups.length; i++)
-      {
-        groups[i].id = 'ug-' + i;
-        groups[i].getElementsByTagName('caption')[0].setAttribute('label',
-            strbundle.getFormattedString('groupNum', [i + 1]));
-      }
-    }
+    groups.splice(i, 1);
 
-    userlist.splice(id, 1);
-    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
+    var listbox = document.getElementById('grouplist');
+    listbox.removeItemAt(i);
+    if (groups[i])
+      listbox.selectedIndex = i;
+    else
+      listbox.selectedIndex = i - 1;
+
+    this.write(groups);
   },
 
-  disableMenulists: function(type, groupbox)
+  loadGroup: function(listbox)
   {
-    var menulists = groupbox.getElementsByTagName('menulist');
-    if (type == 'titleContains')
+    // Check for no selection - happens temporarily after a group is removed
+    if (!listbox.selectedItem)
+      return;
+
+    var groups = this.read();
+    var i = listbox.selectedIndex;
+
+    // Disable delete button if this is the only group
+    document.getElementById('delete').disabled = (listbox.itemCount == 1);
+
+    // Disable arrow button if this is the first/last group
+    document.getElementById('move-up').disabled = (i == 0);
+    document.getElementById('move-down').disabled = ((i + 1) ==
+        listbox.itemCount);
+
+    // Load group settings
+    document.getElementById('name').value = groups[i].name;
+    document.getElementById('color').color = groups[i].color;
+    document.getElementById('colorHex').value = groups[i].color;
+    document.getElementById('type').selectedIndex = this.menulistMap
+      .type[groups[i].type];
+    document.getElementById('values').value = groups[i].users;
+    document.getElementById('topicAction').selectedIndex = this.menulistMap
+      .topicAction[groups[i].topics];
+    document.getElementById('messageAction').selectedIndex = this.menulistMap
+      .messageAction[groups[i].messages];
+  },
+
+  watchPref: function()
+  {
+    var groups = gamefox_options_highlighting.read();
+    var i = document.getElementById('grouplist').selectedIndex;
+    var map = gamefox_options_highlighting.menulistMap;
+
+    // This function is called every time the userlist pref is updated, but we
+    // don't know if the currently selected group has been updated or, if it
+    // has, which setting of the group was updated
+
+    var name = document.getElementById('name');
+    if (name.value != groups[i].name)
+      name.value = groups[i].name;
+
+    var color = document.getElementById('color');
+    if (color.color != groups[i].color)
+      color.color = groups[i].color;
+
+    var colorHex = document.getElementById('colorHex');
+    if (colorHex.value != groups[i].color)
+      colorHex.value = groups[i].color;
+
+    var type = document.getElementById('type');
+    if (type.selectedIndex != map.type[groups[i].type])
+      type.selectedIndex = map.type[groups[i].type];
+
+    var values = document.getElementById('values');
+    if (values.value != groups[i].users)
+      values.value = groups[i].users;
+
+    var topicAction = document.getElementById('topicAction');
+    if (topicAction.selectedIndex != map.topicAction[groups[i].topics])
+      topicAction.selectedIndex = map.topicAction[groups[i].topics];
+
+    var messageAction = document.getElementById('messageAction');
+    if (messageAction.selectedIndex != map.messageAction[groups[i].messages])
+      messageAction.selectedIndex = map.messageAction[groups[i].messages];
+
+    // Update listbox
+    var listbox = document.getElementById('grouplist');
+    var item;
+    for (var i = 0; i < groups.length; i++)
     {
-      menulists[1].disabled = false;
-      menulists[2].disabled = true;
+      if (i >= listbox.itemCount) // new group
+        listbox.selectItem(listbox.appendItem('Group #' + (i + 1)));
+      else // update name
+        listbox.getItemAtIndex(i).label = groups[i].name || 'Group #' + (i + 1);
     }
-    else if (type == 'postContains')
-    {
-      menulists[1].disabled = true;
-      menulists[2].disabled = false;
-    }
-    else
-    {
-      menulists[1].disabled = false;
-      menulists[2].disabled = false;
-    }
+  },
+
+  move: function(direction)
+  {
+    var groups = this.read();
+    var listbox = document.getElementById('grouplist');
+    var i = listbox.selectedIndex;
+    var j = direction == 0 ? (i - 1) : (i + 1); // 0 : up :: 1 : down
+
+    var swap1 = groups[i];
+    var swap2 = groups[j];
+    groups[i] = swap2;
+    groups[j] = swap1;
+
+    listbox.selectedIndex = j;
+
+    this.write(groups);
   }
-}
+};

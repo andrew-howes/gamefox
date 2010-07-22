@@ -50,7 +50,7 @@ var gamefox_highlighting =
     for (var i = 0; i < userlist.length; i++)
     {
       type = userlist[i].type;
-      values = userlist[i].users.trim().toLowerCase().split(/\s*,\s*/);
+      values = userlist[i].users.trim().toLowerCase().split(/\s*[,\n]\s*/m);
       for (var j = 0; j < values.length; j++)
       {
         value = values[j];
