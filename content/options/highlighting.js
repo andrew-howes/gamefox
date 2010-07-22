@@ -172,8 +172,22 @@ var gamefox_options_highlighting =
   watchPref: function()
   {
     var groups = gamefox_options_highlighting.read();
-    var i = document.getElementById('grouplist').selectedIndex;
     var map = gamefox_options_highlighting.menulistMap;
+
+    // Update listbox
+    var listbox = document.getElementById('grouplist');
+    var item;
+    for (var i = 0; i < groups.length; i++)
+    {
+      if (i >= listbox.itemCount) // new group
+        listbox.selectItem(listbox.appendItem('Group #' + (i + 1)));
+      else // update name
+        listbox.getItemAtIndex(i).label = groups[i].name || 'Group #' + (i + 1);
+    }
+
+    var i = document.getElementById('grouplist').selectedIndex;
+    if (i == -1)
+      return; // no selection, can't update group options
 
     // This function is called every time the userlist pref is updated, but we
     // don't know if the currently selected group has been updated or, if it
@@ -206,17 +220,6 @@ var gamefox_options_highlighting =
     var messageAction = document.getElementById('messageAction');
     if (messageAction.selectedIndex != map.messageAction[groups[i].messages])
       messageAction.selectedIndex = map.messageAction[groups[i].messages];
-
-    // Update listbox
-    var listbox = document.getElementById('grouplist');
-    var item;
-    for (var i = 0; i < groups.length; i++)
-    {
-      if (i >= listbox.itemCount) // new group
-        listbox.selectItem(listbox.appendItem('Group #' + (i + 1)));
-      else // update name
-        listbox.getItemAtIndex(i).label = groups[i].name || 'Group #' + (i + 1);
-    }
   },
 
   move: function(direction)
@@ -231,8 +234,8 @@ var gamefox_options_highlighting =
     groups[i] = swap2;
     groups[j] = swap1;
 
-    listbox.selectedIndex = j;
-
+    listbox.selectedIndex = -1;
     this.write(groups);
+    listbox.selectedIndex = j;
   }
 };
