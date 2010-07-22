@@ -53,8 +53,7 @@ it:
 ### Nightly snapshots ### {#nightly}
 
 Nightly snapshots are builds of the latest development code automatically
-generated every night at 3 AM. They should be used to test experimental
-features.
+generated every night. They can be used to test experimental features.
 
 These versions receive minimal testing, so **things will probably be broken.**
 Please report any problems you find on [Blood
