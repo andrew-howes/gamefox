@@ -27,6 +27,16 @@ var gamefox_lib =
     .getService(Ci.nsIPrefService)
     .getBranch('gamefox.'),
 
+  get version()
+  {
+    return this.prefs.getCharPref('version');
+  },
+
+  set version(v)
+  {
+    this.prefs.setCharPref('version', v);
+  },
+
   isDev: function(v)
   {
     if (v == undefined)
@@ -457,5 +467,3 @@ var gamefox_lib =
     return nativeJSON.encode(obj);
   }
 };
-
-gamefox_lib.version = gamefox_lib.prefs.getCharPref('version');

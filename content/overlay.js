@@ -1488,7 +1488,6 @@ function gamefox_update(addon)
 {
   var lastversion = gamefox_lib.version;
   var version = addon.version;
-  gamefox_lib.prefs.setCharPref('version', version);
   gamefox_lib.version = version;
   var versionComparator = Cc['@mozilla.org/xpcom/version-comparator;1'].
     getService(Ci.nsIVersionComparator);

@@ -143,8 +143,9 @@ var gamefox_options_manage =
       return;
     }
 
+    var version = gamefox_lib.version;
     gamefox_prefs.clearUserPrefs();
-    gamefox_lib.prefs.setCharPref('version', gamefox_lib.version);
+    gamefox_lib.version = version;
 
     button.disabled = false;
 
