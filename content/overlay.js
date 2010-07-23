@@ -766,12 +766,12 @@ var gamefox =
 
         var postDateNode = msgStats.childNodes[leftMsgData ? 2 : 1];
         if (leftMsgData
-            && postDateNode.textContent.indexOf('Posted') == -1) // mod/admin here
-          postDateNode = msgStats.childNodes[4];
+            && postDateNode.textContent.indexOf('Posted') == -1)
+          postDateNode = msgStats.childNodes[4]; // mod/admin/vip here
         var postDate = postDateNode.textContent
-          .replace(/( \((Moderator|Admin)\))?( \| )?(Posted )?/g, '');
+          .replace(/( \((Moderator|Admin|VIP)\))?( \| )?(Posted )?/g, '');
         td[i].setUserData('date', postDate, null); // for quoting
-        // needed to preserve mod/admin tag
+        // needed to preserve mod/admin/vip tag
         if (!leftMsgData && postDateNode.textContent.indexOf('(') != -1)
           var userStatus = postDateNode.textContent.split(/\s*\|/)[0];
         else
