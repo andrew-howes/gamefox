@@ -771,6 +771,11 @@ var gamefox =
         var postDate = postDateNode.textContent
           .replace(/( \((Moderator|Admin)\))?( \| )?(Posted )?/g, '');
         td[i].setUserData('date', postDate, null); // for quoting
+        // needed to preserve mod/admin tag
+        if (!leftMsgData && postDateNode.textContent.indexOf('(') != -1)
+          var userStatus = postDateNode.textContent.split(/\s*\|/)[0];
+        else
+          var userStatus = '';
 
         // Topic creator
         if (msgnum == 1)
@@ -782,7 +787,7 @@ var gamefox =
           var format = gamefox_date.getFormat('message',
               gamefox_lib.prefs.getIntPref('date.messagePreset'));
 
-          postDateNode.textContent = (leftMsgData ? '' : ' | ')
+          postDateNode.textContent = (leftMsgData ? '' : userStatus + ' | ')
             + 'Posted '
             + gamefox_date.parseFormat(postDate, format)
             + (leftMsgData || onArchive ? '' : ' | ')
