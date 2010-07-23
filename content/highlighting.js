@@ -23,10 +23,22 @@ var gamefox_highlighting =
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
 
+  read: function()
+  {
+    return gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+  },
+
+  write: function(groups)
+  {
+    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(groups));
+  },
+
   add: function(name, color, users, messages, topics, type)
   {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    var userlist = this.read();
 
+    // TODO: We don't need these arguments anymore - they were only used to
+    // upgrade from pre-unlimited highlighting groups
     name = (typeof name == 'string') ? name : '';
     color = (typeof color == 'string') ? color : '#CCFFFF';
     users = (typeof users == 'string') ? users : '';
@@ -37,13 +49,13 @@ var gamefox_highlighting =
     userlist.push({name:name, color:color, users:users,
         messages:messages, topics:topics, type:type});
 
-    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
+    this.write(userlist);
   },
 
   loadGroups: function()
   {
     var values, value, type;
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    var userlist = this.read();
     this.index = {users:{}, titleContains:{}, postContains:{}};
 
     // build the index
@@ -108,7 +120,7 @@ var gamefox_highlighting =
       return this.searchUsername(username, tc, providedUserlist);
     }
 
-    var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
+    var userlist = providedUserlist == null ? this.read() : providedUserlist;
 
     // also get groups from username search
     var hlinfo = this.searchUsername(username, tc, userlist);
@@ -155,7 +167,7 @@ var gamefox_highlighting =
       return this.searchUsername(username, false, providedUserlist);
     }
 
-    var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
+    var userlist = providedUserlist == null ? this.read() : providedUserlist;
 
     // also get groups from username search
     var hlinfo = this.searchUsername(username, false, userlist);
@@ -187,7 +199,7 @@ var gamefox_highlighting =
     if (!index[username] && !(tc && index['(tc)']))
       return false; // username isn't in any groups
 
-    var userlist = providedUserlist == null ? gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized')) : providedUserlist;
+    var userlist = providedUserlist == null ? this.read() : providedUserlist;
     if (tc && index[username] && index['(tc)'])
       var groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(index[username], index['(tc)']);
     else if (tc && index['(tc)'])
@@ -266,7 +278,7 @@ var gamefox_highlighting =
 
   menuCheckChange: function(event, username, group)
   {
-    var userlist = gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    var userlist = this.read();
 
     if (event.target.getAttribute('checked')) // add to group
     {
@@ -285,7 +297,7 @@ var gamefox_highlighting =
         (new RegExp(',\\s*' + username + '\\s*,', 'gi'), ',');
     }
 
-    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(userlist));
+    this.write(userlist);
   },
 
   checkUsername: function(username)

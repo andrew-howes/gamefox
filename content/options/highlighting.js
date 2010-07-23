@@ -25,16 +25,6 @@ var gamefox_options_highlighting =
     messageAction: { highlight: 0, remove: 1, collapse: 2, nothing: 3 }
   },
 
-  read: function()
-  {
-    return gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
-  },
-
-  write: function(groups)
-  {
-    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(groups));
-  },
-
   prepareOptionsPane: function()
   {
     this.populate();
@@ -48,7 +38,7 @@ var gamefox_options_highlighting =
 
   populate: function()
   {
-    var groups = this.read();
+    var groups = gamefox_highlighting.read();
     var listbox = document.getElementById('grouplist');
 
     // Always make sure we have at least one group
@@ -71,7 +61,7 @@ var gamefox_options_highlighting =
 
   updatePref: function(event)
   {
-    var groups = this.read();
+    var groups = gamefox_highlighting.read();
     var i = document.getElementById('grouplist').selectedIndex;
 
     switch (event.id)
@@ -105,13 +95,13 @@ var gamefox_options_highlighting =
         break;
     }
 
-    this.write(groups);
+    gamefox_highlighting.write(groups);
   },
 
   delete: function()
   {
     var strbundle = document.getElementById('highlighting-strings');
-    var groups = this.read();
+    var groups = gamefox_highlighting.read();
     var i = document.getElementById('grouplist').selectedIndex;
 
     if (groups[i].name.length)
@@ -136,7 +126,7 @@ var gamefox_options_highlighting =
     else
       listbox.selectedIndex = i - 1;
 
-    this.write(groups);
+    gamefox_highlighting.write(groups);
   },
 
   loadGroup: function(listbox)
@@ -145,7 +135,7 @@ var gamefox_options_highlighting =
     if (!listbox.selectedItem)
       return;
 
-    var groups = this.read();
+    var groups = gamefox_highlighting.read();
     var i = listbox.selectedIndex;
 
     // Disable delete button if this is the only group
@@ -171,7 +161,7 @@ var gamefox_options_highlighting =
 
   watchPref: function()
   {
-    var groups = gamefox_options_highlighting.read();
+    var groups = gamefox_highlighting.read();
     var map = gamefox_options_highlighting.menulistMap;
 
     // Update listbox
@@ -224,7 +214,7 @@ var gamefox_options_highlighting =
 
   move: function(direction)
   {
-    var groups = this.read();
+    var groups = gamefox_highlighting.read();
     var listbox = document.getElementById('grouplist');
     var i = listbox.selectedIndex;
     var j = direction == 0 ? (i - 1) : (i + 1); // 0 : up :: 1 : down
@@ -235,7 +225,7 @@ var gamefox_options_highlighting =
     groups[j] = swap1;
 
     listbox.selectedIndex = -1;
-    this.write(groups);
+    gamefox_highlighting.write(groups);
     listbox.selectedIndex = j;
   }
 };
