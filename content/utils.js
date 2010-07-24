@@ -433,9 +433,9 @@ var gamefox_utils =
       'topic': (params[3] ? params[3].substr(1) : null) };
   },
 
-  // Strips admin and mod labels from usernames
+  // Strips admin/mod/vip tags from usernames on the topic list
   cleanUsername: function(username)
   {
-    return username.replace(/ \((A|M)\)/, '');
+    return username.replace(/ \((A|M|V)\)/, '');
   }
 };
