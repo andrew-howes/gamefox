@@ -45,7 +45,7 @@ var gamefox_options_highlighting =
     if (!groups.length)
     {
       gamefox_highlighting.add();
-      groups = this.read();
+      groups = gamefox_highlighting.read();
     }
 
     for (var i = 0; i < groups.length; i++)
