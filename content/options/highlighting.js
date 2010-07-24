@@ -87,6 +87,16 @@ var gamefox_options_highlighting =
       case 'values':
         groups[i].users = event.value;
         break;
+      case 'include-admins':
+      case 'include-mods':
+      case 'include-vips':
+      case 'include-tc':
+        var includeType = event.id.substr(8);
+        if (event.checked)
+          groups[i].include.push(includeType);
+        else
+          groups[i].include.splice(groups[i].include.indexOf(includeType), 1);
+        break;
       case 'topicAction':
         groups[i].topics = event.selectedItem.value;
         break;
@@ -153,6 +163,11 @@ var gamefox_options_highlighting =
     document.getElementById('type').selectedIndex = this.menulistMap
       .type[groups[i].type];
     document.getElementById('values').value = groups[i].users;
+    ['admins', 'mods', 'vips', 'tc'].forEach(function(element, index, array) {
+        var checkbox = document.getElementById('include-' + element);
+        var included = groups[i].include.indexOf(element) != -1;
+        checkbox.checked = included;
+        });
     document.getElementById('topicAction').selectedIndex = this.menulistMap
       .topicAction[groups[i].topics];
     document.getElementById('messageAction').selectedIndex = this.menulistMap
@@ -202,6 +217,12 @@ var gamefox_options_highlighting =
     var values = document.getElementById('values');
     if (values.value != groups[i].users)
       values.value = groups[i].users;
+
+    ['admins', 'mods', 'vips', 'tc'].forEach(function(element, index, array) {
+        var checkbox = document.getElementById('include-' + element);
+        var included = groups[i].include.indexOf(element) != -1;
+        if (checkbox.checked != included) checkbox.checked = included;
+        });
 
     var topicAction = document.getElementById('topicAction');
     if (topicAction.selectedIndex != map.topicAction[groups[i].topics])

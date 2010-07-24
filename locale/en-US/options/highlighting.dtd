@@ -19,6 +19,12 @@
 
 <!ENTITY values.emptytext "Separate usernames or keywords with commas or newlines.">
 
+<!ENTITY include.label "Include:">
+<!ENTITY admins.label "Administrators">
+<!ENTITY mods.label "Moderators">
+<!ENTITY vips.label "VIPs">
+<!ENTITY tc.label "Topic creator">
+
 <!ENTITY highlightTopics.label "Highlight topics">
 <!ENTITY removeTopics.label "Remove topics">
 <!ENTITY noTopicAction.label "No topic action">

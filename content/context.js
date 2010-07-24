@@ -447,7 +447,7 @@ var gamefox_context =
 
     userlist = gamefox_highlighting.loadGroups();
     activeGroups = gamefox_highlighting
-      .searchUsername(username, false, userlist)[4];
+      .searchUsername(username, false, null, userlist)[4];
     if (!activeGroups) activeGroups = [];
 
     noGroups = true;

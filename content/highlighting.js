@@ -47,22 +47,24 @@ var gamefox_highlighting =
     type = (typeof type == 'string') ? type : 'users';
 
     userlist.push({name:name, color:color, users:users,
-        messages:messages, topics:topics, type:type});
+        messages:messages, topics:topics, type:type, include: []});
 
     this.write(userlist);
   },
 
   loadGroups: function()
   {
-    var values, value, type;
+    var values, value, type, included;
     var userlist = this.read();
-    this.index = {users:{}, titleContains:{}, postContains:{}};
+    this.index = {users:{}, titleContains:{}, postContains:{}, status:
+      {admins: [], mods: [], vips: [], tc: []}};
 
     // build the index
     for (var i = 0; i < userlist.length; i++)
     {
       type = userlist[i].type;
       values = userlist[i].users.trim().toLowerCase().split(/\s*[,\n]\s*/m);
+      included = userlist[i].include;
       for (var j = 0; j < values.length; j++)
       {
         value = values[j];
@@ -88,18 +90,27 @@ var gamefox_highlighting =
             this.index[type][i] = [value];
         }
       }
+
+      for (var j = 0; j < included.length; j++)
+        this.index.status[included[j]].push(i);
     }
 
     // recent value of userlist.serialized
     return userlist;
   },
 
-  searchPost: function(username, post, tc, providedUserlist)
+  // TODO: Consolidate the search functions? Lots of duplicated code
+
+  searchPost: function(username, post, tc, status, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.postContains;
 
     post = post.toLowerCase();
+    if (tc && status)
+      status = [status, 'tc'];
+    else if (tc)
+      status = 'tc';
 
     var groups = [];
     for (var i in index)
@@ -117,13 +128,13 @@ var gamefox_highlighting =
     if (!groups[0])
     {
       // nothing in postContains index, return users index instead
-      return this.searchUsername(username, tc, providedUserlist);
+      return this.searchUsername(username, tc, status, providedUserlist);
     }
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
 
     // also get groups from username search
-    var hlinfo = this.searchUsername(username, tc, userlist);
+    var hlinfo = this.searchUsername(username, tc, status, userlist);
     if (hlinfo && hlinfo[4])
       groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(groups, hlinfo[4]);
 
@@ -141,7 +152,7 @@ var gamefox_highlighting =
            topics, groups];
   },
 
-  searchTopic: function(username, title, providedUserlist)
+  searchTopic: function(username, title, status, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.titleContains;
@@ -164,13 +175,13 @@ var gamefox_highlighting =
     if (!groups[0])
     {
       // nothing in titleContains index, return users index instead
-      return this.searchUsername(username, false, providedUserlist);
+      return this.searchUsername(username, false, status, providedUserlist);
     }
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
 
     // also get groups from username search
-    var hlinfo = this.searchUsername(username, false, userlist);
+    var hlinfo = this.searchUsername(username, false, status, userlist);
     if (hlinfo && hlinfo[4])
       groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(groups, hlinfo[4]);
 
@@ -188,7 +199,7 @@ var gamefox_highlighting =
            topics, groups];
   },
 
-  searchUsername: function(username, tc, providedUserlist)
+  searchUsername: function(username, tc, status, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.users;
@@ -197,7 +208,7 @@ var gamefox_highlighting =
     if (!username.length) return false;
 
     if (!index[username] && !(tc && index['(tc)']))
-      return false; // username isn't in any groups
+      return this.searchStatus(status); // username isn't in any groups
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
     if (tc && index[username] && index['(tc)'])
@@ -206,6 +217,14 @@ var gamefox_highlighting =
       var groups = index['(tc)'];
     else
       var groups = index[username];
+
+    if (status)
+    {
+      var statusGroups = this.searchStatus(status);
+      if (statusGroups)
+        groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(statusGroups[4],
+            groups)
+    }
 
     // first group decides everything
     var color = userlist[groups[0]].color;
@@ -218,6 +237,44 @@ var gamefox_highlighting =
       if (userlist[groups[i]].name.length)
         groupNames += userlist[groups[i]].name + ', ';
 
+    return [groupNames.substr(0, groupNames.length - 2), color, messages,
+           topics, groups];
+  },
+
+  searchStatus: function(status, providedUserlist)
+  {
+    if (!this.index) return false;
+    var index = this.index.status;
+
+    status = status.trim();
+    if (status == '(A)' || status == '(Admin)')
+      status = 'admins';
+    else if (status == '(M)' || status == '(Moderator)')
+      status = 'mods';
+    else if (status == '(V)' || status == '(VIP)')
+      status = 'vips';
+
+    var userlist = providedUserlist == null ? this.read() : providedUserlist;
+    var groups = [];
+    if (status instanceof Array) // tc can be combined with any other status
+      for (var i = 0; i < status.length; i++)
+        groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(index[status[i]], groups);
+    else
+      groups = index[status];
+
+    if (!groups || !groups.length) return false;
+
+    // first group decides everything
+    var color = userlist[groups[0]].color;
+    var messages = userlist[groups[0]].messages;
+    var topics = userlist[groups[0]].topics;
+
+    // list group names
+    var groupNames = '';
+    for (var i = 0; i < groups.length; i++)
+      if (userlist[groups[i]].name.length)
+        groupNames += userlist[groups[i]].name + ', ';
+    
     return [groupNames.substr(0, groupNames.length - 2), color, messages,
            topics, groups];
   },

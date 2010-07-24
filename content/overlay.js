@@ -619,10 +619,13 @@ var gamefox =
           // Highlighting
           var username = gamefox_utils
             .cleanUsername(rows[i].cells[2].textContent.trim());
+          var userStatus = rows[i].cells[2].textContent.replace(username,
+              '').trim();
           var title = rows[i].cells[1].textContent.trim();
           var hlinfo;
 
-          if ((hlinfo = gamefox_highlighting.searchTopic(username, title, userlist)) != false)
+          if ((hlinfo = gamefox_highlighting.searchTopic(username, title,
+                  userStatus, userlist)) != false)
           {
             // list of groups
             if (gamefox_lib.prefs.getBoolPref('userlist.topics.showgroupnames') &&
@@ -844,7 +847,7 @@ var gamefox =
         // Message highlighting
         var hlinfo, groupname;
         if ((hlinfo = gamefox_highlighting.searchPost(username, postBody,
-                tc == username && !onDetail, userlist)) != false)
+                tc == username && !onDetail, userStatus, userlist)) != false)
         {
           // add group names after username
           if (gamefox_lib.prefs.getBoolPref('userlist.messages.showgroupnames') &&
@@ -1529,6 +1532,15 @@ function gamefox_update(addon)
           gamefox_lib.setString(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
         }
       }
+    }
+
+    if (versionComparator.compare('0.7.8', lastversion) > 0)
+    {
+      // New "include" property for highlighting groups
+      var groups = gamefox_highlighting.read();
+      for (var i = 0; i < groups.length; i++)
+        if (!groups[i].include) groups[i].include = [];
+      gamefox_highlighting.write(groups);
     }
 
     // first run

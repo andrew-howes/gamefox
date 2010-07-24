@@ -116,6 +116,32 @@
           <textbox id="values" flex="1" multiline="true" rows="4"
             emptytext="&values.emptytext;"
             oninput="gamefox_options_highlighting.updatePref(this);"/>
+
+          <hbox align="baseline">
+            <label value="&include.label;"/>
+
+            <grid>
+              <columns>
+                <column/>
+                <column/>
+                <column/>
+              </columns>
+              <rows>
+                <row>
+                  <checkbox id="include-admins" label="&admins.label;"
+                    oncommand="gamefox_options_highlighting.updatePref(this);"/>
+                  <checkbox id="include-mods" label="&mods.label;"
+                    oncommand="gamefox_options_highlighting.updatePref(this);"/>
+                  <checkbox id="include-vips" label="&vips.label;"
+                    oncommand="gamefox_options_highlighting.updatePref(this);"/>
+                </row>
+                <row>
+                  <checkbox id="include-tc" label="&tc.label;"
+                    oncommand="gamefox_options_highlighting.updatePref(this);"/>
+                </row>
+              </rows>
+            </grid>
+          </hbox>
         </vbox>
 
         <hbox pack="end">
