@@ -767,10 +767,16 @@ var gamefox =
         var detailLink = msgStats.getElementsByTagName('a')[1];
         var postBody = td[i + 1].textContent;
 
-        var postDateNode = msgStats.childNodes[leftMsgData ? 2 : 1];
-        if (leftMsgData
-            && postDateNode.textContent.indexOf('Posted') == -1)
-          postDateNode = msgStats.childNodes[4]; // mod/admin/vip here
+        for (var j = 0; j < msgStats.childNodes.length; j++)
+        {
+          // check if this is the post date node
+          if (msgStats.childNodes[j].textContent.indexOf('Posted') != -1
+              && !/[^PostedAM0-9\-\:\/\| ]/.test(msgStats.childNodes[j].textContent))
+          {
+            var postDateNode = msgStats.childNodes[j];
+            break;
+          }
+        }
         var postDate = postDateNode.textContent
           .replace(/( \((Moderator|Admin|VIP)\))?( \| )?(Posted )?/g, '');
         td[i].setUserData('date', postDate, null); // for quoting
