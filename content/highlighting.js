@@ -257,7 +257,7 @@ var gamefox_highlighting =
 
   searchStatus: function(status, providedUserlist)
   {
-    if (!this.index) return false;
+    if (!status || !this.index) return false;
     var index = this.index.status;
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
