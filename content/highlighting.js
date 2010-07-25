@@ -241,26 +241,33 @@ var gamefox_highlighting =
            topics, groups];
   },
 
+  convertStatus: function(status)
+  {
+    status = status.trim();
+
+    if (status == '(A)' || status == '(Admin)')
+      return 'admins';
+    if (status == '(M)' || status == '(Moderator)')
+      return 'mods';
+    if (status == '(V)' || status == '(VIP)')
+      return 'vips';
+
+    return status;
+  },
+
   searchStatus: function(status, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.status;
 
-    status = status.trim();
-    if (status == '(A)' || status == '(Admin)')
-      status = 'admins';
-    else if (status == '(M)' || status == '(Moderator)')
-      status = 'mods';
-    else if (status == '(V)' || status == '(VIP)')
-      status = 'vips';
-
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
     var groups = [];
     if (status instanceof Array) // tc can be combined with any other status
       for (var i = 0; i < status.length; i++)
-        groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(index[status[i]], groups);
+        groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(
+            index[this.convertStatus(status[i])], groups);
     else
-      groups = index[status];
+      groups = index[this.convertStatus(status)];
 
     if (!groups || !groups.length) return false;
 
