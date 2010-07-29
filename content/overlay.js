@@ -959,7 +959,7 @@ var gamefox =
           if (deletelinkCond)
           {
             a.className = 'gamefox-delete-link';
-            a.href = detailLink.href;
+            a.href = '#';
             a.addEventListener('click', gamefox_messages.deletePost, false);
 
             msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
