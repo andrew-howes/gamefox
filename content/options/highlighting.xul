@@ -84,7 +84,7 @@
 
       <groupbox flex="1">
         <hbox align="center">
-          <textbox id="name" emptytext="&groupName.emptytext;"
+          <textbox id="name" emptytext="&groupName.emptytext;" size="15"
             oninput="gamefox_options_highlighting.updatePref(this);"/>
 
           <separator flex="1"/>
