@@ -61,13 +61,9 @@ var gamefox =
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (node)
         {
-          var dateSpan = doc.createElement('span');
-          dateSpan.id = 'gamefox-clock';
-          var dateNode = doc.createTextNode('');
-          dateSpan.appendChild(dateNode);
-          node.appendChild(dateSpan);
-
-          gamefox.updateClock(dateNode);
+          var dateNode = gamefox_utils.createDateNode(doc);
+          node.appendChild(dateNode);
+          gamefox.updateClock(dateNode.childNodes[0]);
         }
       }
     }

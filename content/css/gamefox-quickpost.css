@@ -9,8 +9,8 @@
     {
         position: fixed;
         z-index: 3;
-        width: 75%;
-        max-width: 725px;
+        width: 90%;
+        max-width: 750px;
         border: #aaa 1px solid;
         background: #eee;
         padding: 5px !important;
@@ -30,6 +30,6 @@
 
     #gamefox-message-count, #gamefox-title-count
     {
-        margin-left: 2em;
+        margin-left: 1em;
     }
 }

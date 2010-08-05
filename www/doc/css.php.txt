@@ -133,10 +133,18 @@
         <td>-</td>
     </tr>
 
-    <tr>
-        <td>span.gamefox-clock</td>
+    <tr class="removed">
+        <td>span#gamefox-clock</td>
         <td>Contains current GameFAQs time.</td>
         <td>0.7.4</td>
+        <td>0.7.8</td>
+    </tr>
+
+    <tr>
+        <td>span.gamefox-clock</td>
+        <td>Contains current GameFAQs time. Added to the loginbox and
+            QuickPost.</td>
+        <td>0.7.8</td>
         <td>-</td>
     </tr>
 

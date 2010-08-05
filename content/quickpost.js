@@ -24,6 +24,7 @@ var gamefox_quickpost =
   appendForm: function(doc, div, newTopic)
   {
     var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
+    var clock = gamefox_lib.prefs.getBoolPref('elements.clock');
     var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
 
     var form = doc.createElement('form');
@@ -164,6 +165,13 @@ var gamefox_quickpost =
       gamefox_messages.updateMessageCount(doc);
     }
 
+    if (clock)
+    {
+      var dateNode = gamefox_utils.createDateNode(doc);
+      form.appendChild(dateNode);
+      gamefox.updateClock(dateNode.childNodes[0]);
+    }
+
     if (gamefox_lib.isNightly())
     {
       var nightlyMsg = doc.createElement('span');
@@ -185,7 +193,7 @@ var gamefox_quickpost =
     if (newTopic)
     {
       // Set these manually here instead of in CSS for the drag script
-      div.style.left = window.innerWidth * 0.20 + 'px';
+      div.style.left = window.innerWidth * 0.05 + 'px';
       div.style.top = window.innerHeight * 0.30 + 'px';
 
       // Make the box draggable
