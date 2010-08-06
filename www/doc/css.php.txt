@@ -184,6 +184,13 @@
     </tr>
 
     <tr>
+        <td>span.gamefox-post-date</td>
+        <td>Contains the timestamp of each post on the message list.</td>
+        <td>0.7.8</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>span.gamefox-signature</td>
         <td>Signature container on message list.</td>
         <td>0.6.10</td>

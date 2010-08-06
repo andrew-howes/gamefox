@@ -783,6 +783,20 @@ var gamefox =
         else
           var userStatus = '';
 
+        // Create post date element
+        var postDateElement = doc.createElement('span');
+        postDateElement.className = 'gamefox-post-date';
+        if (leftMsgData)
+          postDateElement.appendChild(doc.createTextNode('Posted ' +
+                postDate));
+        else
+          postDateElement.appendChild(doc.createTextNode(' | Posted ' +
+                postDate + ' | '));
+        msgStats.replaceChild(postDateElement, postDateNode);
+        
+        msgStats.insertBefore(doc.createTextNode(userStatus),
+            postDateElement);
+
         // Topic creator
         if (msgnum == 1)
           tc = username;
@@ -793,7 +807,7 @@ var gamefox =
           var format = gamefox_date.getFormat('message',
               gamefox_lib.prefs.getIntPref('date.messagePreset'));
 
-          postDateNode.textContent = (leftMsgData ? '' : userStatus + ' | ')
+          postDateElement.textContent = (leftMsgData ? '' : ' | ')
             + 'Posted '
             + gamefox_date.parseFormat(postDate, format)
             + (leftMsgData || onArchive ? '' : ' | ')
@@ -852,7 +866,7 @@ var gamefox =
         if ((hlinfo = gamefox_highlighting.searchPost(username, postBody,
                 tc == username && !onDetail, userStatus, userlist)) != false)
         {
-          // add group names after username
+          // add group names before post date
           if (gamefox_lib.prefs.getBoolPref('userlist.messages.showgroupnames') &&
               hlinfo[0].length)
           {
@@ -860,10 +874,12 @@ var gamefox =
             groupname.className = gamefox_highlighting.groupClassName;
             groupname.appendChild(doc.createTextNode(hlinfo[0]));
 
-            msgStats.insertBefore(groupname, profileLink.nextSibling);
+            msgStats.insertBefore(groupname, postDateElement);
 
-            msgStats.insertBefore(leftMsgData ? doc.createElement('br') :
-                doc.createTextNode(' | '), groupname);
+            if (leftMsgData)
+              msgStats.insertBefore(doc.createElement('br'), postDateElement);
+            else
+              msgStats.insertBefore(doc.createTextNode(' | '), groupname);
           }
 
           if (hlinfo[2] == 'highlight')
