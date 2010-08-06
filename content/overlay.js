@@ -780,7 +780,13 @@ var gamefox =
         // needed to preserve mod/admin/vip tag
         if (!leftMsgData && postDateNode.textContent.indexOf('(') != -1)
           var userStatus = postDateNode.textContent.split(/\s*\|/)[0];
-        else
+        else if (leftMsgData)
+        {
+          var userStatusNode = postDateNode.previousSibling.previousSibling;
+          if (userStatusNode.textContent.indexOf('(') != -1)
+            var userStatus = userStatusNode.textContent;
+        }
+        if (!userStatus)
           var userStatus = '';
 
         // Create post date element
@@ -793,9 +799,10 @@ var gamefox =
           postDateElement.appendChild(doc.createTextNode(' | Posted ' +
                 postDate + ' | '));
         msgStats.replaceChild(postDateElement, postDateNode);
-        
-        msgStats.insertBefore(doc.createTextNode(userStatus),
-            postDateElement);
+
+        if (!leftMsgData)
+          msgStats.insertBefore(doc.createTextNode(userStatus),
+              postDateElement);
 
         // Topic creator
         if (msgnum == 1)
