@@ -785,8 +785,10 @@ var gamefox =
           var userStatusNode = postDateNode.previousSibling.previousSibling;
           if (userStatusNode.textContent.indexOf('(') != -1)
             var userStatus = userStatusNode.textContent;
+          else
+            var userStatus = '';
         }
-        if (!userStatus)
+        else
           var userStatus = '';
 
         // Create post date element
