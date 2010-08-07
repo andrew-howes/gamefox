@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009 Brian Marshall, Michael Ryan, Andrianto Effendy
+ * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
  *
@@ -78,30 +78,6 @@ var gamefox_options =
     document.loadOverlay(prefpane.src, obs);
   },
 
-  restoreLastPane: function()
-  {
-    if (navigator.platform.indexOf('Mac') == 0)
-    {
-      document.getElementById('gamefox-prefwindow').showPane(
-          document.getElementById('paneMain'));
-      return;
-    }
-
-    var prefWindow = document.getElementById('gamefox-prefwindow');
-    try
-    {
-      var lastTab = prefWindow.lastSelected;
-      prefWindow.showPane(document.getElementById('paneMain'));
-      prefWindow.showPane(document.getElementById(lastTab));
-    }
-    catch (e)
-    {
-      prefWindow.showPane(document.getElementById('paneMain'));
-    }
-
-    gamefox_options.restoreLastTabs();
-  },
-
   restoreLastTabs: function()
   {
     var prefs = Cc['@mozilla.org/preferences-service;1'].getService(
@@ -137,7 +113,7 @@ var gamefox_options =
 
   init: function()
   {
-    gamefox_options.restoreLastPane();
+    gamefox_options.restoreLastTabs();
 
     if (!window.arguments)
       // opened from Add-ons window
@@ -163,18 +139,6 @@ var gamefox_options =
       var prefwin = document.getElementById('gamefox-prefwindow');
       prefwin.showPane(document.getElementById(args.pane));
     }
-  },
-
-  preInit: function()
-  {
-    var prefwin = document.getElementById('gamefox-prefwindow');
-    var prefpane = document.getElementById(prefwin.lastSelected);
-
-    // reselect this pane
-    prefwin.showPane(prefpane);
-
-    // restore tabs for this pane
-    gamefox_options.restoreLastTabs();
   },
 
   openPaginateDialog: function()

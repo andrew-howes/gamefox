@@ -33,7 +33,7 @@
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
       'gamefox-about-dialog', 'centerscreen,chrome');"
     defaultButton="none"
-    onload="gamefox_options.preInit(); gamefox_options.loadAllOverlays();"
+    onload="gamefox_options.loadAllOverlays();"
     windowtype="gamefox:options"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     style="&prefWin.style;">
