@@ -36,7 +36,7 @@
 .url-label
 {
     text-decoration: underline;
-    color: #0000ff;
+    color: -moz-nativehyperlinktext;
     cursor: pointer;
 }
 
