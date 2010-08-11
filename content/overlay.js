@@ -1569,6 +1569,12 @@ function gamefox_update(addon)
       for (var i = 0; i < groups.length; i++)
         if (!groups[i].include) groups[i].include = [];
       gamefox_highlighting.write(groups);
+
+      // New stylesheet category
+      var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
+      if (!css.themes)
+        css.themes = {};
+      gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
     }
 
     // first run

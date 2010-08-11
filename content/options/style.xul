@@ -61,7 +61,7 @@
           <treecol label="&name.label;" id="styleTreeName" primary="true" flex="1"
             persist="width"/>
           <splitter class="tree-splitter"/>
-          <treecol label="&author.label;" id="styleTreeAuthor" width="200"
+          <treecol label="&author.label;" id="styleTreeAuthor" width="220"
             persist="width"/>
           <splitter class="tree-splitter"/>
           <treecol label="&enabled.label;" id="styleTreeEnabled" type="checkbox" editable="true"

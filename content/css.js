@@ -35,12 +35,26 @@ var gamefox_css =
             'Makes QuickPost look pretty.', '', true],
         'gamefox-quickwhois.css': ['QuickWhois',
             'Makes QuickWhois look pretty.', '', true]},
-      bundled: {
+      themes: {
         '8for11.css': ['8for11', 'Make GameFAQs look like v8 (pre-2004).\n\n'
               + 'GameFAQs must be using the V10 style.\n'
               + 'Message Poster Display must be Above Message (Main -> Board Settings)\n'
               + 'The "Status icons (classic)" stylesheet is recommended.',
             'TakatoMatsuki, Swordless Link', false],
+        'ricapar.css': ['Classic',
+            'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
+            'GameFAQs stylesheets to use.', 'Ricapar et al.', false],
+        'gfpastel-2010.css': ['GFPastel 2010',
+            'A modern stylesheet in pastel blues and purples. Disable main ' +
+            'GameFAQs stylesheets to use.', 'spynae', false],
+        'spotfaqs-extras.css': ['SpotFAQs extras',
+            'Designed to be used with the SpotFAQs skin on GameFAQs.\n'
+              + 'Styles GameFOX features.',
+            'TakatoMatsuki', false],
+        'wide-layout.css': ['Wide default',
+            'Increases the width of the page to fill the whole window. ' +
+            'Works with the default GameFAQs skin.', '', false]},
+      bundled: {
         'gamefox-ads.css': ['Ad blocking',
             'Hides ads. Best used with "block ad servers" enabled.', '', true],
         'ascii-art-font.css': ['ASCII art font',
@@ -48,14 +62,8 @@ var gamefox_css =
             '', false],
         'capitalized-message-links.css': ['Capitalized message links',
             'Capitalizes the links in message headers.', '', false],
-        'ricapar.css': ['Classic',
-            'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
-            'GameFAQs stylesheets to use.', 'Ricapar et al.', false],
         'FAQ-frames.css': ['FAQ frames', 'Styles the FAQ headers to look more like GameFAQs.',
             'selmiak', false],
-        'gfpastel-2010.css': ['GFPastel 2010',
-            'A modern stylesheet in pastel blues and purples. Disable main ' +
-            'GameFAQs stylesheets to use.', 'spynae', false],
         'hide-signatures.css': ['Hide signatures',
             'Hides signatures in posts and shows them again when hovered over.\n\n'
               + '(Requires Firefox 3.6 or newer.)', '', false],
@@ -65,20 +73,13 @@ var gamefox_css =
             'Poo Poo Butter', false],
         'remove-signatures.css': ['Remove signatures',
             'Removes signatures in posts.', '', false],
-        'spotfaqs-extras.css': ['SpotFAQs extras',
-            'Designed to be used with the SpotFAQs skin on GameFAQs.\n'
-              + 'Styles GameFOX features.',
-            'TakatoMatsuki', false],
         'status-default.css': ['Status icons (normal)',
             'Only show topic status icons for closed/sticky topics. This CSS ' +
             'conflicts with "Status icons (classic)".', '', false],
         'status-classic.css': ['Status icons (classic)',
             'Only show topic status icons for closed/sticky topics - ' +
             'emulates the pre-2006 style of icons. This CSS ' +
-            'conflicts with "Status icons (normal)".', '', false],
-        'wide-layout.css': ['Wide default',
-            'Increases the width of the page to fill the whole window. ' +
-            'Works with the default GameFAQs skin.', '', false]}
+            'conflicts with "Status icons (normal)".', '', false]}
     };
 
     // (Re-)add bundled

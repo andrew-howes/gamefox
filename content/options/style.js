@@ -47,7 +47,8 @@ var gamefox_options_style =
     this.treeView = new gamefox_treeview();
     this.treeView.childData = {};
     this.treeView.visibleData = [];
-    var categories = {'GameFOX':'gamefox', 'GameFAQs':'bundled', 'User':'user'};
+    var categories = { Themes: 'themes', Other: 'bundled', GameFOX: 'gamefox',
+      User: 'user' };
     for (var treeCat in categories)
     {
       this.treeView.visibleData.push([[treeCat], true, false]);
@@ -76,9 +77,8 @@ var gamefox_options_style =
 
     // this is sort of a hack, I couldn't be bothered with finding out how to push data
     // directly to treeView.visibleData when populating the tree
-    this.treeView.toggleOpenState(2);
-    this.treeView.toggleOpenState(1);
-    this.treeView.toggleOpenState(0);
+    for (var i = 3; i >= 0; i--)
+      this.treeView.toggleOpenState(i);
   },
 
   onpopupshowing: function()
