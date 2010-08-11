@@ -5,6 +5,7 @@
     * Fix bug with topic and post matching highlighting groups
     * Update GFPastel 2010
     * Add compatibility with Firefox 4.0
+    * Remove Board Settings from the options window
     * Add topic pages to context menu on message lists
     * New highlighting interface
     * Add ability to highlight all admins, mods or VIPs
