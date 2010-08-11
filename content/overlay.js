@@ -799,7 +799,7 @@ var gamefox =
                 postDate));
         else
           postDateElement.appendChild(doc.createTextNode(' | Posted ' +
-                postDate + ' | '));
+                postDate + (onArchive ? '' : ' | ')));
         msgStats.replaceChild(postDateElement, postDateNode);
 
         if (!leftMsgData)
