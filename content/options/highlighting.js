@@ -82,7 +82,6 @@ var gamefox_options_highlighting =
             'postContains');
         document.getElementById('messageAction').disabled = (groups[i].type
             == 'titleContains');
-
         break;
       case 'values':
         groups[i].users = event.value;
@@ -172,6 +171,12 @@ var gamefox_options_highlighting =
       .topicAction[groups[i].topics];
     document.getElementById('messageAction').selectedIndex = this.menulistMap
       .messageAction[groups[i].messages];
+
+    // Disable action menulists depending on group type
+    document.getElementById('topicAction').disabled = (groups[i].type ==
+        'postContains');
+    document.getElementById('messageAction').disabled = (groups[i].type
+        == 'titleContains');
   },
 
   watchPref: function()
