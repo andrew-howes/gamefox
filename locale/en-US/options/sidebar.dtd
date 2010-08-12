@@ -1,6 +1,6 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY prefWin.title "Sidebar Preferences">
+<!ENTITY prefWin.title "GameFOX Sidebar">
 <!ENTITY prefWin.style "width: 20em;">
 
 <!ENTITY sections.label "Sidebar Sections">
