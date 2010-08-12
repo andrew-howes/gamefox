@@ -1,19 +1,20 @@
-#gamefox-button-sidebar
-{
-  list-style-image: url("chrome://gamefox/skin/btn-sidebar-large.png");
-  }
-
-#gamefox-button-options
-{
-  list-style-image: url("chrome://gamefox/skin/btn-options-large.png");
+/* vim: set et sw=2 ts=2 sts=2 tw=79: */
+#gamefox-button-options, #gamefox-button-sidebar {
+    list-style-image: url("chrome://gamefox/skin/toolbar.png");
 }
 
-toolbar[iconsize="small"] #gamefox-button-sidebar
-{
-  list-style-image: url("chrome://gamefox/skin/btn-sidebar-small.png");
-  }
+#gamefox-button-options {
+    -moz-image-region: rect(0px, 24px, 24px, 0px);
+}
 
-toolbar[iconsize="small"] #gamefox-button-options
-{
-  list-style-image: url("chrome://gamefox/skin/btn-options-small.png");
+#gamefox-button-sidebar {
+    -moz-image-region: rect(0px, 48px, 24px, 24px);
+}
+
+toolbar[iconsize="small"] #gamefox-button-options {
+    -moz-image-region: rect(24px, 16px, 40px, 0px);
+}
+
+toolbar[iconsize="small"] #gamefox-button-sidebar {
+    -moz-image-region: rect(24px, 32px, 40px, 16px);
 }
