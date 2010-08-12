@@ -1,0 +1,16 @@
+<!-- vim: set indentexpr=: -->
+
+<!ENTITY prefWin.title "Sidebar Preferences">
+<!ENTITY prefWin.style "width: 20em;">
+
+<!ENTITY sections.label "Sidebar Sections">
+
+<!ENTITY navLinks.label "Navigation links">
+<!ENTITY userLinks.label "User links">
+<!ENTITY gameSearch.label "Game search">
+<!ENTITY toBoardId.label "Go to board ID">
+<!ENTITY loginForm.label "Login form">
+<!ENTITY accountSwitcher.label "Account switcher">
+<!ENTITY favoritesList.label "Favorite boards list">
+<!ENTITY tagsList.label "Tags list">
+<!ENTITY trackedList.label "Tracked topics list">

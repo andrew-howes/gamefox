@@ -11,6 +11,8 @@
     * Add ability to highlight all admins, mods or VIPs
     * Add the GameFAQs clock to QuickPost
     * Redesign toolbar icons
+    * Move sidebar options to separate window (accessed from "configure
+      sidebar" link at the bottom of the sidebar)
 
 2010-05-12:
     * version 0.7.7

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!-- vim: set et sw=2 ts=2 sts=2 tw=79:
+
+     Copyright 2005, 2006, 2007, 2008, 2009, 2010
+     Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
+
+     This file is part of GameFOX.
+
+     GameFOX is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License version 2
+     as published by the Free Software Foundation.
+
+     GameFOX is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/sidebar.dtd">
+
+<prefwindow
+  title="&prefWin.title;"
+  style="&prefWin.style;"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <prefpane>
+    <preferences>
+      <preference id="sidebar.gamefaqsnav" name="gamefox.sidebar.gamefaqsnav"
+        type="bool"/>
+      <preference id="sidebar.userlinks" name="gamefox.sidebar.userlinks"
+        type="bool"/>
+      <preference id="sidebar.search" name="gamefox.sidebar.search"
+        type="bool"/>
+      <preference id="sidebar.gotoboard" name="gamefox.sidebar.gotoboard"
+        type="bool"/>
+      <preference id="sidebar.login" name="gamefox.sidebar.login" type="bool"/>
+      <preference id="sidebar.accounts" name="gamefox.sidebar.accounts"
+        type="bool"/>
+      <preference id="sidebar.favorites" name="gamefox.sidebar.favorites"
+        type="bool"/>
+      <preference id="sidebar.tags" name="gamefox.sidebar.tags" type="bool"/>
+      <preference id="sidebar.tracked" name="gamefox.sidebar.tracked"
+        type="bool"/>
+    </preferences>
+
+    <vbox>
+      <groupbox>
+        <caption label="&sections.label;"/>
+
+        <checkbox label="&navLinks.label;" preference="sidebar.gamefaqsnav"/>
+        <checkbox label="&userLinks.label;" preference="sidebar.userlinks"/>
+        <checkbox label="&gameSearch.label;" preference="sidebar.search"/>
+        <checkbox label="&toBoardId.label;" preference="sidebar.gotoboard"/>
+        <checkbox label="&loginForm.label;" preference="sidebar.login"/>
+        <checkbox label="&accountSwitcher.label;"
+          preference="sidebar.accounts"/>
+        <checkbox label="&favoritesList.label;"
+          preference="sidebar.favorites"/>
+        <checkbox label="&tagsList.label;" preference="sidebar.tags"/>
+        <checkbox label="&trackedList.label;" preference="sidebar.tracked"/>
+      </groupbox>
+    </vbox>
+  </prefpane>
+</prefwindow>

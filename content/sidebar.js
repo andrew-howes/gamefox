@@ -45,6 +45,8 @@ var gamefox_sidebar =
         'click', gamefox_sidebar.promptAccountsLogin, false);
     document.getElementById('accounts-rm-link').addEventListener(
         'click', gamefox_sidebar.promptAccountsRemove, false);
+    document.getElementById('configure-link').addEventListener(
+        'click', gamefox_sidebar.openPrefWindow, false);
 
     // accounts
     gamefox_sidebar.populateAccounts();
@@ -142,6 +144,12 @@ var gamefox_sidebar =
   {
     event.preventDefault();
     gamefox_accounts.promptRemoveAccount();
+  },
+
+  openPrefWindow: function(event)
+  {
+    event.preventDefault();
+    window.openDialog(event.target.href, '_blank', '', null);
   }
 };
 
