@@ -155,8 +155,8 @@ var gamefox_tracked =
 
           // check for new posts
           if (gamefox_tracked.list[bid] && gamefox_tracked.list[bid].topics[tid]
-              && topic.lastPost != gamefox_tracked.list[bid].topics[tid]
-                .lastPost)
+              && topic.msgs != gamefox_tracked.list[bid].topics[tid]
+                .msgs)
             topic.newPosts = true;
 
           if (!list[ids['board']])
