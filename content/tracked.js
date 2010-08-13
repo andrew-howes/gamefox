@@ -369,7 +369,7 @@ var gamefox_tracked =
 
   openWindow: function()
   {
-    window.openDialog('chrome://gamefox/content/tracked.xul', '_blank', '',
-        null);
+    window.openDialog('chrome://gamefox/content/tracked.xul', '_blank',
+        'dialog=no', null);
   }
 };
