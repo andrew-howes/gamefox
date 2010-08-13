@@ -767,7 +767,7 @@ var gamefox =
         {
           // check if this is the post date node
           if (msgStats.childNodes[j].textContent.indexOf('Posted') != -1
-              && /Posted [0-9\/\: ]+ (A|P)M/.test(msgStats.childNodes[j]
+              && /Posted:? [0-9\/\: ]+ (A|P)M/.test(msgStats.childNodes[j]
                 .textContent))
           {
             var postDateNode = msgStats.childNodes[j];
@@ -775,7 +775,7 @@ var gamefox =
           }
         }
         var postDate = postDateNode.textContent
-          .replace(/( \((Moderator|Admin|VIP)\))?( \| )?(Posted )?/g, '');
+          .replace(/( \((Moderator|Admin|VIP)\))?( \| )?(Posted:? )?/g, '');
         td[i].setUserData('date', postDate, null); // for quoting
         // needed to preserve mod/admin/vip tag
         if (!leftMsgData && postDateNode.textContent.indexOf('(') != -1)
@@ -794,6 +794,8 @@ var gamefox =
         // Create post date element
         var postDateElement = doc.createElement('span');
         postDateElement.className = 'gamefox-post-date';
+        // XXX: message detail uses "Posted:" instead of "Posted", but we
+        // replace that
         if (leftMsgData)
           postDateElement.appendChild(doc.createTextNode('Posted ' +
                 postDate));
