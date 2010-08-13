@@ -110,6 +110,7 @@ var gamefox_tracked =
           var bid = ids.board;
           var tid = ids.topic;
           var title = items[i].getElementsByTagName('title')[0].textContent;
+          var link = items[i].getElementsByTagName('link')[0].textContent;
 
           // keep hold status
           if (gamefox_tracked.list[ids['board']]
@@ -121,6 +122,7 @@ var gamefox_tracked =
 
           var topic = {
             title: title.substr(0, title.lastIndexOf('-') - 2),
+            link: link,
             age: title.substr(title.lastIndexOf('-') + 2),
             hold: hold,
             deleted: false,

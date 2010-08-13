@@ -32,9 +32,11 @@ var gamefox_trackedWindow =
     // Tree view
     this._view.getCellText = function(idx, column)
     {
-      if (column.index == 0) // tagid
+      if (column.index == 0) // ids
         return this.visibleData[idx].boardId + ',' + this.visibleData[idx].id;
-      if (column.index == 1) // name
+      if (column.index == 1) // link
+        return gamefox_lib.domain + this.visibleData[idx].link;
+      if (column.index == 2) // name
         return this.visibleData[idx].name;
     };
     this._view.isContainer = function(idx) { return false; };
@@ -80,6 +82,7 @@ var gamefox_trackedWindow =
     var t = { id           : tid,
               boardId      : bid,
               boardName    : topic.board,
+              link         : topic.link,
               name         : topic.title,
               age          : topic.age,
               hold         : topic.hold,
@@ -206,29 +209,30 @@ var gamefox_trackedWindow =
     if (index == -1 || (tree.view.isContainer(index) && dblclick))
       return;
 
-    var tagID = tree.view.getCellText(index,
-        tree.columns.getNamedColumn('gamefox-tracked-tagid'));
-    var topic = tagID.split(',');
+    var ids = tree.view.getCellText(index,
+        tree.columns.getNamedColumn('gamefox-tracked-ids')).split(',');
+    var link = tree.view.getCellText(index,
+        tree.columns.getNamedColumn('gamefox-tracked-link'));
 
     switch (type)
     {
       case 0:
-        gamefox_lib.open(tagID, 0); // new tab
+        gamefox_lib.openPage(link, 0); // new tab
         break;
       case 1:
-        gamefox_lib.open(tagID, 1); // new focused tab
+        gamefox_lib.openPage(link, 1); // new focused tab
         break;
       case 2:
-        gamefox_lib.open(tagID, 2); // focused tab
+        gamefox_lib.openPage(link, 2); // focused tab
         break;
       case 3:
-        gamefox_lib.open(tagID, 3); // new window
+        gamefox_lib.openPage(link, 3); // new window
         break;
       case 4:
-        gamefox_tracked.holdTopic(topic[0], topic[1]);
+        gamefox_tracked.holdTopic(ids[0], ids[1]);
         break;
       case 5:
-        gamefox_tracked.deleteTopic(topic[0], topic[1]);
+        gamefox_tracked.deleteTopic(ids[0], ids[1]);
         break;
     }
   },
@@ -243,11 +247,11 @@ var gamefox_trackedWindow =
 
     gamefox_tracked.read();
 
-    var tagID = tree.view.getCellText(index,
-        tree.columns.getNamedColumn('gamefox-tracked-tagid')).split(',');
-    var topic = gamefox_tracked.list[tagID[0]].topics[tagID[1]];
+    var ids = tree.view.getCellText(index,
+        tree.columns.getNamedColumn('gamefox-tracked-ids')).split(',');
+    var topic = gamefox_tracked.list[ids[0]].topics[ids[1]];
 
-    if (!tagID[1]) // board
+    if (!ids[1]) // board
     {
       document.getElementById('gamefox-tracked-contextmenu-hold')
         .hidden = true;
