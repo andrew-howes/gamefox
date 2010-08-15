@@ -193,8 +193,10 @@ var gamefox_quickpost =
     if (newTopic)
     {
       // Set these manually here instead of in CSS for the drag script
-      div.style.left = window.innerWidth * 0.05 + 'px';
-      div.style.top = window.innerHeight * 0.30 + 'px';
+      div.style.left = (doc.defaultView.innerWidth - div.clientWidth) / 2
+        + 'px';
+      div.style.top = doc.defaultView.innerHeight / 1.7 - div.clientHeight / 2
+        + 'px';
 
       // Make the box draggable
       doc.addEventListener('mousedown', gamefox_quickpost.onMouseDown, false);
