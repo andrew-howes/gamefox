@@ -105,23 +105,20 @@ var gamefox_tracked =
         gamefox_tracked.read();
         for (var i = 0; i < items.length; i++)
         {
-          var ids = gamefox_utils.parseBoardLink(items[i].
-              getElementsByTagName('link')[0].textContent);
-          var bid = ids.board;
-          var tid = ids.topic;
           var title = items[i].getElementsByTagName('title')[0].textContent;
           var link = items[i].getElementsByTagName('link')[0].textContent;
+          var ids = gamefox_utils.parseBoardLink(link);
 
           // keep hold status
-          if (gamefox_tracked.list[ids['board']]
-              && gamefox_tracked.list[ids['board']].topics[ids['topic']]
-              && gamefox_tracked.list[ids['board']].topics[ids['topic']].hold)
+          if (gamefox_tracked.list[ids['topic']] &&
+              gamefox_tracked.list[ids['topic']].hold)
             var hold = true;
           else
             var hold = false;
 
           var topic = {
             title: title.substr(0, title.lastIndexOf('-') - 2),
+            boardId: ids.board,
             link: link,
             age: title.substr(title.lastIndexOf('-') + 2),
             hold: hold,
@@ -131,7 +128,7 @@ var gamefox_tracked =
           var data = new Array(
               'Last Post', 'lastPost',
               'Messages', 'msgs',
-              'Board', 'board'
+              'Board', 'boardName'
               );
           var desc = items[i].getElementsByTagName('description')[0].
             textContent;
@@ -154,36 +151,23 @@ var gamefox_tracked =
           topic.lastPostYear = year;
 
           // check for new posts
-          if (gamefox_tracked.list[bid] && gamefox_tracked.list[bid].topics[tid]
-              && topic.msgs != gamefox_tracked.list[bid].topics[tid]
-                .msgs)
+          if (gamefox_tracked.list[ids['topic']]
+              && topic.msgs != gamefox_tracked.list[ids['topic']].msgs)
             topic.newPosts = true;
 
-          if (!list[ids['board']])
-            list[ids['board']] = {name: topic['board'], topics: {}};
-          list[ids['board']]['topics'][ids['topic']] = topic;
+          list[ids['topic']] = topic;
         }
 
         // check deleted topics
         for (var i in gamefox_tracked.list)
         {
-          for (var j in gamefox_tracked.list[i].topics)
-          {
-            if (list[i] && list[i].topics[j]) continue; // topic still exists
+          var topic = gamefox_tracked.list[i];
 
-            var topic = gamefox_tracked.list[i].topics[j];
+          if (topic) continue; // topic still exists
+          if (!topic.hold) continue; // topic isn't held
 
-            if (!topic.hold) continue; // topic isn't held
-
-            if (!list[i])
-            {
-              // board has been removed from tracked list
-              list[i] = {name: gamefox_tracked.list[i].name, topics: {}};
-            }
-
-            topic.deleted = true;
-            list[i].topics[j] = topic;
-          }
+          topic.deleted = true;
+          list[i] = topic;
         }
 
         gamefox_tracked.list = list;
@@ -231,11 +215,11 @@ var gamefox_tracked =
     request.send(null);
   },
 
-  isTracked: function(board, topic)
+  isTracked: function(topicId)
   {
     this.read();
 
-    return !!(this.list[board] && topic in this.list[board].topics);
+    return !!(topicId in this.list);
   },
 
   addFromContextMenu: function(event)
@@ -248,14 +232,14 @@ var gamefox_tracked =
       while (node.nodeName != 'TD')
         node = node.parentNode;
 
-      var topic = gamefox_utils.parseBoardLink(node.parentNode.cells[1].
+      var ids = gamefox_utils.parseBoardLink(node.parentNode.cells[1].
           getElementsByTagName('a')[0].href);
 
-      var untrack = gamefox_tracked.isTracked(topic['board'], topic['topic']);
+      var untrack = gamefox_tracked.isTracked(ids['topic']);
     }
     else if (gamefox_lib.onPage(doc, 'messages'))
     {
-      var topic = gamefox_utils.parseBoardLink(doc.location.pathname);
+      var ids = gamefox_utils.parseBoardLink(doc.location.pathname);
 
       var userNav = doc.evaluate('//div[@class="board_nav"]//div[@class="user"]',
           doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -266,7 +250,7 @@ var gamefox_tracked =
     }
 
     var request = new XMLHttpRequest();
-    request.open('GET', gamefox_utils.linkToTopic(topic['board'], topic['topic'])
+    request.open('GET', gamefox_utils.linkToTopic(ids['board'], ids['topic'])
         + '?action=' + (untrack ? 'stoptrack' : 'tracktopic'));
     var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
@@ -301,29 +285,29 @@ var gamefox_tracked =
     request.send(null);
   },
 
-  holdTopic: function(board, topic)
+  holdTopic: function(topicId)
   {
     this.read();
 
-    if (!this.list[board].topics[topic])
+    if (!this.list[topicId])
       return;
 
-    this.list[board].topics[topic].hold = !this.list[board].topics[topic].hold;
+    this.list[topicId].hold = !this.list[topicId].hold;
 
     this.save();
   },
 
-  deleteTopic: function(boardId, topicId)
+  deleteTopic: function(topicId)
   {
     if (!gamefox_lib.thirdPartyCookiePreCheck())
       return;
     this.read();
 
-    var topic = this.list[boardId].topics[topicId];
+    var topic = this.list[topicId];
     if (!topic.deleted)
     {
       var request = new XMLHttpRequest();
-      request.open('GET', gamefox_utils.linkToTopic(boardId, topicId)
+      request.open('GET', gamefox_utils.linkToTopic(topic.boardId, topicId)
           + '?action=stoptrack');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()
@@ -340,11 +324,7 @@ var gamefox_tracked =
     }
     else
     {
-      delete this.list[boardId].topics[topicId];
-
-      if (!this.list[boardId].topics.__count__)
-        delete this.list[boardId]; // board is empty
-
+      delete this.list[topicId];
       this.save();
     }
   },

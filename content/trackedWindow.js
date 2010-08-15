@@ -60,14 +60,11 @@ var gamefox_trackedWindow =
 
     gamefox_tracked.read();
     var topics = {}
-    for (var board in gamefox_tracked.list)
+    for (var topicId in gamefox_tracked.list)
     {
-      for (var topic in gamefox_tracked.list[board].topics)
-      {
-        var topicObject = this.makeTopicObject(board, topic,
-            gamefox_tracked.list[board].topics[topic]);
-        this.handleTopicAdded(topicObject);
-      }
+      var topicObject = this.makeTopicObject(topicId, gamefox_tracked
+          .list[topicId]);
+      this.handleTopicAdded(topicObject);
     }
 
     this._tree.view = this._view;
@@ -77,11 +74,11 @@ var gamefox_trackedWindow =
     new gamefox_observer('tracked.list', this.update);
   },
 
-  makeTopicObject: function(bid, tid, topic)
+  makeTopicObject: function(topicId, topic)
   {
-    var t = { id           : tid,
-              boardId      : bid,
-              boardName    : topic.board,
+    var t = { id           : topicId,
+              boardId      : topic.boardId,
+              boardName    : topic.boardName,
               link         : topic.link,
               name         : topic.title,
               age          : topic.age,
@@ -123,16 +120,15 @@ var gamefox_trackedWindow =
       var boardId = gamefox_trackedWindow._view.visibleData[i].boardId;
       var topicId = gamefox_trackedWindow._view.visibleData[i].id;
 
-      if (!gamefox_tracked.list[boardId]
-          || !gamefox_tracked.list[boardId].topics[topicId])
+      if (!gamefox_tracked.list[topicId])
       {
         gamefox_trackedWindow.handleTopicRemoved(i);
         --i;
       }
       else // update
       {
-        var topicObject = gamefox_trackedWindow.makeTopicObject(boardId, topicId,
-            gamefox_tracked.list[boardId].topics[topicId]);
+        var topicObject = gamefox_trackedWindow.makeTopicObject(topicId,
+            gamefox_tracked.list[topicId]);
 
         gamefox_trackedWindow._view.visibleData[i] = topicObject;
         gamefox_trackedWindow._tree.treeBoxObject.invalidateRow(i);
@@ -142,17 +138,14 @@ var gamefox_trackedWindow =
     }
 
     // Add topics
-    for (var i in gamefox_tracked.list)
+    for (var topicId in gamefox_tracked.list)
     {
-      for (var j in gamefox_tracked.list[i].topics)
-      {
-        // topic already exists in tree
-        if (gamefox_trackedWindow._topics[j]) continue;
+      // topic already exists in tree
+      if (gamefox_trackedWindow._topics[topicId]) continue;
 
-        var topicObject = gamefox_trackedWindow
-          .makeTopicObject(i, j, gamefox_tracked.list[i].topics[j]);
-        gamefox_trackedWindow.handleTopicAdded(topicObject);
-      }
+      var topicObject = gamefox_trackedWindow.makeTopicObject(topicId,
+          gamefox_tracked.list[topicId]);
+      gamefox_trackedWindow.handleTopicAdded(topicObject);
     }
 
     gamefox_trackedWindow.sort('lastPost', false);
@@ -229,10 +222,10 @@ var gamefox_trackedWindow =
         gamefox_lib.openPage(link, 3); // new window
         break;
       case 4:
-        gamefox_tracked.holdTopic(ids[0], ids[1]);
+        gamefox_tracked.holdTopic(ids[1]);
         break;
       case 5:
-        gamefox_tracked.deleteTopic(ids[0], ids[1]);
+        gamefox_tracked.deleteTopic(ids[1]);
         break;
     }
   },
@@ -249,23 +242,12 @@ var gamefox_trackedWindow =
 
     var ids = tree.view.getCellText(index,
         tree.columns.getNamedColumn('gamefox-tracked-ids')).split(',');
-    var topic = gamefox_tracked.list[ids[0]].topics[ids[1]];
+    var topic = gamefox_tracked.list[ids[1]];
 
-    if (!ids[1]) // board
-    {
-      document.getElementById('gamefox-tracked-contextmenu-hold')
-        .hidden = true;
-      document.getElementById('gamefox-tracked-contextmenu-stop')
-        .hidden = true;
-      return;
-    }
-    else // topic
-    {
-      document.getElementById('gamefox-tracked-contextmenu-hold')
-        .hidden = false;
-      document.getElementById('gamefox-tracked-contextmenu-stop')
-        .hidden = false;
-    }
+    document.getElementById('gamefox-tracked-contextmenu-hold')
+      .hidden = false;
+    document.getElementById('gamefox-tracked-contextmenu-stop')
+      .hidden = false;
 
     var menuItem = document.getElementById('gamefox-tracked-contextmenu-hold');
     var strbundle = document.getElementById('strings');

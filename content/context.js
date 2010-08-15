@@ -90,9 +90,9 @@ var gamefox_context =
           if (node.parentNode.cells[0].innerHTML.indexOf('archived') == -1)
           {
             hideTrack = false;
-            var topic = gamefox_utils.parseBoardLink(node.parentNode.cells[1].
+            var ids = gamefox_utils.parseBoardLink(node.parentNode.cells[1].
                 getElementsByTagName('a')[0].href);
-            if (gamefox_tracked.isTracked(topic['board'], topic['topic']))
+            if (gamefox_tracked.isTracked(ids['topic']))
               document.getElementById('gamefox-context-track')
                 .label = strbundle.getString('stopTrack');
             else
@@ -131,8 +131,8 @@ var gamefox_context =
           || userNav.indexOf('Stop Tracking') != -1)
       {
         hideTrack = false;
-        var topic = gamefox_utils.parseQueryString(doc.location.search);
-        if (gamefox_tracked.isTracked(topic['board'], topic['topic']))
+        var ids = gamefox_utils.parseQueryString(doc.location.search);
+        if (gamefox_tracked.isTracked(ids['topic']))
           document.getElementById('gamefox-context-track')
             .label = strbundle.getString('stopTrack');
         else
@@ -254,26 +254,24 @@ var gamefox_context =
 
     gamefox_tracked.read();
     first = true;
-    for (board in gamefox_tracked.list)
+    for (topicId in gamefox_tracked.list)
     {
-      for (topic in gamefox_tracked.list[board].topics)
+      if (first)
       {
-        if (first)
-        {
-          menu.appendChild(document.createElement('menuseparator'));
-          first = false;
-        }
-        topicObj = gamefox_tracked.list[board].topics[topic];
-
-        item = document.createElement('menuitem');
-        item.setUserData('data', gamefox_lib.domain + topicObj.link, null);
-        item.setAttribute('label', topicObj.title);
-        item.setAttribute('oncommand', 'gamefox_lib'
-            + '.openPage(this.getUserData("data"), 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib'
-            + '.openPage(this.getUserData("data"), 0)');
-        menu.appendChild(item);
+        menu.appendChild(document.createElement('menuseparator'));
+        first = false;
       }
+
+      topicObj = gamefox_tracked.list[topicId];
+
+      item = document.createElement('menuitem');
+      item.setUserData('data', gamefox_lib.domain + topicObj.link, null);
+      item.setAttribute('label', topicObj.title);
+      item.setAttribute('oncommand', 'gamefox_lib'
+          + '.openPage(this.getUserData("data"), 2)');
+      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib'
+          + '.openPage(this.getUserData("data"), 0)');
+      menu.appendChild(item);
     }
   },
 
