@@ -465,5 +465,17 @@ var gamefox_lib =
   {
     var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
     return nativeJSON.encode(obj);
+  },
+
+  getAllWindows: function()
+  {
+    var windows = new Array();
+    var e = Cc['@mozilla.org/appshell/window-mediator;1']
+      .getService(Ci.nsIWindowMediator).getEnumerator('navigator:browser');
+
+    while (e.hasMoreElements())
+      windows.push(e.getNext());
+
+    return windows;
   }
 };

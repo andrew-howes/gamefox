@@ -1493,6 +1493,10 @@ function gamefox_loader()
   document.getElementById('contentAreaContextMenu').addEventListener(
       'popupshowing', gamefox_context.displayMenu, false);
 
+  // Is this app startup or just a new window?
+  if (gamefox_lib.getAllWindows().length != 1)
+    return;
+
   try
   {
     Cu.import('resource://gre/modules/AddonManager.jsm');
