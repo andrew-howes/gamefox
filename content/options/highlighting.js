@@ -89,6 +89,7 @@ var gamefox_options_highlighting =
       case 'include-admins':
       case 'include-mods':
       case 'include-vips':
+      case 'include-tracked':
       case 'include-tc':
         var includeType = event.id.substr(8);
         if (event.checked)
@@ -162,7 +163,7 @@ var gamefox_options_highlighting =
     document.getElementById('type').selectedIndex = this.menulistMap
       .type[groups[i].type];
     document.getElementById('values').value = groups[i].users;
-    ['admins', 'mods', 'vips', 'tc'].forEach(function(element, index, array) {
+    gamefox_highlighting.extraTypes.forEach(function(element, index, array) {
         var checkbox = document.getElementById('include-' + element);
         var included = groups[i].include.indexOf(element) != -1;
         checkbox.checked = included;
@@ -223,7 +224,7 @@ var gamefox_options_highlighting =
     if (values.value != groups[i].users)
       values.value = groups[i].users;
 
-    ['admins', 'mods', 'vips', 'tc'].forEach(function(element, index, array) {
+    gamefox_highlighting.extraTypes.forEach(function(element, index, array) {
         var checkbox = document.getElementById('include-' + element);
         var included = groups[i].include.indexOf(element) != -1;
         if (checkbox.checked != included) checkbox.checked = included;

@@ -22,6 +22,7 @@ var gamefox_highlighting =
 {
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
+  extraTypes: ['admins', 'mods', 'vips', 'tc', 'tracked'],
 
   read: function()
   {
@@ -56,8 +57,9 @@ var gamefox_highlighting =
   {
     var values, value, type, included;
     var userlist = this.read();
-    this.index = {users:{}, titleContains:{}, postContains:{}, status:
-      {admins: [], mods: [], vips: [], tc: []}};
+    this.index = {users:{}, titleContains:{}, postContains:{}, status: {}};
+    for (var i = 0; i < gamefox_highlighting.extraTypes.length; i++)
+      this.index.status[gamefox_highlighting.extraTypes[i]] = [];
 
     // build the index
     for (var i = 0; i < userlist.length; i++)
@@ -152,10 +154,13 @@ var gamefox_highlighting =
            topics, groups];
   },
 
-  searchTopic: function(username, title, status, providedUserlist)
+  searchTopic: function(username, topicId, title, status, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.titleContains;
+
+    if (gamefox_tracked.isTracked(topicId))
+      status = status ? [status, 'tracked'] : 'tracked';
 
     title = title.toLowerCase();
 
@@ -262,7 +267,9 @@ var gamefox_highlighting =
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
     var groups = [];
-    if (status instanceof Array) // tc can be combined with any other status
+
+    // tc and tracked can be combined with any other status
+    if (status instanceof Array)
       for (var i = 0; i < status.length; i++)
         groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(
             index[this.convertStatus(status[i])], groups);

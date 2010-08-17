@@ -516,6 +516,11 @@ var gamefox =
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
       {
+        // XXX Lots of references to rows[i].cells[n], including repeated calls
+        // to getElementsByTagName('a'). Would be nice to abstract the cell
+        // numbers to their purpose (like cells.username or cells.lastPost or
+        // something). (bm 2010-08)
+
         // Status spans
         if (statusCond)
         {
@@ -618,10 +623,12 @@ var gamefox =
           var userStatus = rows[i].cells[2].textContent.replace(username,
               '').trim();
           var title = rows[i].cells[1].textContent.trim();
+          var topicId = gamefox_utils.getTopicId(rows[i].cells[1]
+              .getElementsByTagName('a')[0].href);
           var hlinfo;
 
-          if ((hlinfo = gamefox_highlighting.searchTopic(username, title,
-                  userStatus, userlist)) != false)
+          if ((hlinfo = gamefox_highlighting.searchTopic(username, topicId,
+                  title, userStatus, userlist)) != false)
           {
             // list of groups
             if (gamefox_lib.prefs.getBoolPref('userlist.topics.showgroupnames') &&

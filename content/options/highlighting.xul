@@ -136,6 +136,8 @@
                     oncommand="gamefox_options_highlighting.updatePref(this);"/>
                 </row>
                 <row>
+                  <checkbox id="include-tracked" label="&tracked.label;"
+                    oncommand="gamefox_options_highlighting.updatePref(this);"/>
                   <checkbox id="include-tc" label="&tc.label;"
                     oncommand="gamefox_options_highlighting.updatePref(this);"/>
                 </row>

@@ -24,6 +24,7 @@
 <!ENTITY mods.label "Moderators">
 <!ENTITY vips.label "VIPs">
 <!ENTITY tc.label "Topic creator">
+<!ENTITY tracked.label "Tracked topics">
 
 <!ENTITY highlightTopics.label "Highlight topics">
 <!ENTITY removeTopics.label "Remove topics">
