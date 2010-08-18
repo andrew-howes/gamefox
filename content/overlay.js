@@ -733,9 +733,20 @@ var gamefox =
       for (var i = 0; i < tdResult.snapshotLength; i++)
         td[i] = tdResult.snapshotItem(i);
 
+      var ignoreMsg = doc.evaluate('div[@class="body"]/p', boardWrap, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var ignoreCount = 0;
+      if (ignoreMsg)
+      {
+        var ignoreMatch = ignoreMsg.textContent.match(/([0-9]+) message/);
+        if (ignoreMatch)
+          ignoreCount = parseInt(ignoreMatch[1]);
+      }
+
       // Update posts per page setting if not on the last page
       if ((pagenum + 1) < doc.gamefox.pages)
-        gamefox_lib.prefs.setIntPref('msgsPerPage', (td.length / 2));
+        gamefox_lib.prefs.setIntPref('msgsPerPage', td.length / 2
+            + ignoreCount);
 
       var alternateColor = false;
       var msgnum = pagenum * gamefox_lib.prefs.getIntPref('msgsPerPage');
