@@ -236,8 +236,8 @@ var gamefox_quickpost =
       drag.startY = event.clientY;
 
       // grab the clicked element's position
-      drag.offsetX = gamefox_utils.extractNumber(node.style.left);
-      drag.offsetY = gamefox_utils.extractNumber(node.style.top);
+      drag.offsetX = parseInt(node.style.left);
+      drag.offsetY = parseInt(node.style.top);
 
       drag.dragging = true;
 
@@ -280,13 +280,13 @@ var gamefox_quickpost =
       drag.dragging = false;
 
       // Restore position if it's outside the window
-      var left = gamefox_utils.extractNumber(element.style.left);
+      var left = parseInt(element.style.left);
       if (left + element.offsetWidth < 50)
         element.style.left = (50 - element.offsetWidth) + 'px';
       else if (left > window.innerWidth - 50)
         element.style.left = (window.innerWidth - 50) + 'px';
 
-      var top = gamefox_utils.extractNumber(element.style.top);
+      var top = parseInt(element.style.top);
       if (top + element.offsetHeight < 50)
         element.style.top = (50 - element.offsetHeight) + 'px';
       else if (top > window.innerHeight - 150) // window chrome makes this weird

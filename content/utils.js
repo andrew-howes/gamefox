@@ -371,13 +371,6 @@ var gamefox_utils =
     return newObj;
   },
 
-  extractNumber: function(value)
-  {
-    var n = parseInt(value);
-
-    return n == null || isNaN(n) ? 0 : n;
-  },
-
   linkToTopic: function(board, topic, page, tc, post, link)
   {
     if (link)
