@@ -14,6 +14,7 @@
     * Move sidebar options to separate window (accessed from "configure
       sidebar" link at the bottom of the sidebar)
     * Fix custom date format in message detail
+    * Notification for new posts in tracked topics
 
 2010-05-12:
     * version 0.7.7

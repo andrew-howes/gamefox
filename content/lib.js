@@ -27,6 +27,8 @@ var gamefox_lib =
     .getService(Ci.nsIPrefService)
     .getBranch('gamefox.'),
 
+  timer: Cc['@mozilla.org/timer;1'].createInstance(Ci.nsITimer),
+
   get version()
   {
     return this.prefs.getCharPref('version');

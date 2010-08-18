@@ -35,6 +35,14 @@ var gamefox_tracked =
     gamefox_lib.setString('tracked.list', gamefox_lib.toJSON(this.list));
   },
 
+  accountChanged: function()
+  {
+    var lastAccount = gamefox_lib.prefs.getCharPref('tracked.lastAccount');
+    var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
+
+    return !currentAccount.length || lastAccount != currentAccount;
+  },
+
   updateList: function()
   {
     if (!gamefox_lib.isLoggedIn())
@@ -43,13 +51,12 @@ var gamefox_tracked =
       return;
     }
 
-    var lastAccount = gamefox_lib.prefs.getCharPref('tracked.lastAccount');
     var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
 
     // Because of how the RSS feed works without cookies, we could have an
     // option to always update from a certain account. This won't work well for
     // removing or adding tracked topics though.
-    if (!currentAccount.length || lastAccount != currentAccount)
+    if (gamefox_tracked.accountChanged())
     { // cached url is out of date
       if (!gamefox_lib.thirdPartyCookiePreCheck())
         return;
@@ -150,9 +157,10 @@ var gamefox_tracked =
           prevLastPost = gamefox_date.strtotime(topic.lastPost).getTime();
           topic.lastPostYear = year;
 
-          // check for new posts
+          // check for new posts and preserve previous newPosts status
           if (gamefox_tracked.list[ids['topic']]
-              && topic.msgs != gamefox_tracked.list[ids['topic']].msgs)
+              && (topic.msgs != gamefox_tracked.list[ids['topic']].msgs
+                  || gamefox_tracked.list[ids['topic']].newPosts))
             topic.newPosts = true;
 
           list[ids['topic']] = topic;
@@ -172,6 +180,8 @@ var gamefox_tracked =
 
         gamefox_tracked.list = list;
         gamefox_tracked.save();
+        gamefox_lib.prefs.setIntPref('tracked.lastUpdate',
+            Math.floor(Date.now() / 1000));
       }
     }
     request.send(null);
@@ -351,5 +361,59 @@ var gamefox_tracked =
   {
     window.openDialog('chrome://gamefox/content/tracked.xul', '_blank',
         'dialog=no', null);
+  },
+
+  listUpdatedTopics: function()
+  {
+    this.read();
+
+    var topics = [];
+    for (topicId in this.list)
+      if (this.list[topicId].newPosts)
+        topics.push(topicId);
+
+    return topics;
+  },
+
+  markTopicAsRead: function(topicId, msgs)
+  {
+    this.read();
+
+    if (!this.list[topicId])
+      return;
+
+    this.list[topicId].newPosts = false;
+    this.list[topicId].msgs = msgs;
+
+    this.save();
+  },
+
+  markAllAsRead: function()
+  {
+    this.read();
+
+    for (var topicId in this.list)
+      this.list[topicId].newPosts = false;
+
+    this.save();
+  },
+
+  timedUpdate: function()
+  {
+    if (!gamefox_lib.prefs.getBoolPref('tracked.notify'))
+      return;
+
+    var lastUpdate = gamefox_lib.prefs.getIntPref('tracked.lastUpdate');
+    var lastVisit = gamefox_lib.prefs.getIntPref('lastVisit');
+    var now = Date.now() / 1000;
+    var interval = Math.max(
+        gamefox_lib.prefs.getIntPref('tracked.updateInterval'), 300);
+
+    gamefox_tracked.read();
+
+    if ((now - interval >= lastUpdate && now - 1800 < lastVisit
+          && gamefox_lib.isLoggedIn() && gamefox_tracked.list.__count__ != 0)
+        || gamefox_tracked.accountChanged())
+      gamefox_tracked.updateList();
   }
 };

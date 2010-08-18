@@ -80,6 +80,9 @@ var gamefox =
 
     doc.gamefox = {};
 
+    // Update last visit time
+    gamefox_lib.prefs.setIntPref('lastVisit', Math.floor(Date.now() / 1000));
+
     // TODO: myposts and some other pages are now missing this
     //   Admin says board_wrap is "depreciated", so we should use something else
     var boardWrap = doc.getElementById('board_wrap');
@@ -1118,6 +1121,10 @@ var gamefox =
       doc.gamefox.tc = tc;
       doc.gamefox.msgnum = msgnum;
 
+      // Mark as read if on the last page
+      if (doc.gamefox.pages == pagenum + 1)
+        gamefox_tracked.markTopicAsRead(topicId, msgnum + ignoreCount);
+
       // Add TC to page links
       if (pageJumper)
       {
@@ -1196,6 +1203,60 @@ var gamefox =
           doc.location.hash = '#p' + msgnumString;
         else
           doc.location.hash = doc.location.hash;
+      }
+    }
+
+    /* Show updated tracked topics notification */
+    if (gamefox_lib.prefs.getBoolPref('tracked.notify'))
+    {
+      var updatedTopics = gamefox_tracked.listUpdatedTopics();
+      if (updatedTopics.length)
+      {
+        var msg = 'You are tracking ' + updatedTopics.length + ' topic'
+          + (updatedTopics.length == 1 ? '' : 's') + ' with unread posts: ';
+
+        var note = doc.createElement('div');
+        note.id = 'gamefox-tracked-note';
+        note.appendChild(doc.createTextNode(msg));
+
+        var topicLink, topicObj;
+        for (var i = 0; i < updatedTopics.length; i++)
+        {
+          topicObj = gamefox_tracked.list[updatedTopics[i]];
+
+          topicLink = doc.createElement('a');
+          topicLink.href = topicObj.link;
+          topicLink.appendChild(doc.createTextNode(topicObj.title));
+          note.appendChild(topicLink);
+
+          if ((i + 1) < updatedTopics.length)
+          {
+            note.appendChild(doc.createTextNode(' —— '));
+
+            if (i == 6)
+            {
+              note.appendChild(doc.createTextNode('and '
+                    + (updatedTopics.length - i - 1) + ' more'));
+              break;
+            }
+          }
+        }
+
+        var contentDiv = doc.getElementById('content');
+        contentDiv.insertBefore(note, contentDiv.firstChild);
+
+        var dismissLink = doc.createElement('a');
+        dismissLink.id = 'gamefox-tracked-note-dismiss';
+        dismissLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            contentDiv.removeChild(note);
+            gamefox_tracked.markAllAsRead();
+            }, false);
+        dismissLink.href = '#';
+        dismissLink.title = 'Hide this notification';
+        dismissLink.appendChild(doc.createTextNode('×'));
+        dismissLink.style.lineHeight = note.clientHeight + 'px';
+        note.insertBefore(dismissLink, note.firstChild);
       }
     }
   },
@@ -1511,6 +1572,13 @@ function gamefox_loader()
   document.getElementById('contentAreaContextMenu').addEventListener(
       'popupshowing', gamefox_context.displayMenu, false);
 
+  var trackedEnabled = gamefox_lib.prefs.getBoolPref('tracked.enabled');
+  var favoritesEnabled = gamefox_lib.prefs.getBoolPref('favorites.enabled');
+
+  if (trackedEnabled)
+    gamefox_lib.timer.initWithCallback({ notify: gamefox_tracked.timedUpdate },
+        30000, Ci.nsITimer.TYPE_REPEATING_SLACK);
+
   // Is this app startup or just a new window?
   if (gamefox_lib.getAllWindows().length != 1)
     return;
@@ -1540,7 +1608,7 @@ function gamefox_loader()
     gamefox_tracked.updateList();
 
   // disable favorites
-  if (!gamefox_lib.prefs.getBoolPref('favorites.enabled'))
+  if (!favoritesEnabled)
     gamefox_lib.prefs.clearUserPref('favorites.serialized');
 }
 

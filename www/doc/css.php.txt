@@ -57,6 +57,13 @@
     </tr>
 
     <tr>
+        <td>a#gamefox-tracked-note-dismiss</td>
+        <td>"X" link that closes div#gamefox-tracked-note.</td>
+        <td>0.7.8</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>div#gamefox-board-nav</td>
         <td>Contains user, board and topic list links at the bottom of the message list.</td>
         <td>0.6.10</td>
@@ -88,6 +95,13 @@
         <td>div.gamefox-quickwhois</td>
         <td>QuickWhois container.</td>
         <td>-</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
+        <td>div#gamefox-tracked-note</td>
+        <td>Notification for new posts in tracked topics.</td>
+        <td>0.7.8</td>
         <td>-</td>
     </tr>
 

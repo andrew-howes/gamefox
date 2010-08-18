@@ -81,11 +81,16 @@ pref("gamefox.tracked.list", "");
 pref("gamefox.tracked.rssUrl", "");
 pref("gamefox.tracked.lastAccount", "");
 pref("gamefox.tracked.enabled", true);
+pref("gamefox.tracked.lastUpdate", 0);
+pref("gamefox.tracked.updateInterval", 300);
+pref("gamefox.tracked.notify", true);
 
 pref("gamefox.accounts", "{}");
 pref("gamefox.accounts.current", "");
 
 pref("gamefox.dateOffset", 0);
+pref("gamefox.lastVisit", 0);
+
 pref("gamefox.date.enableFormat", false);
 pref("gamefox.date.topicPreset", 0);
 pref("gamefox.date.topicCustom", "");
