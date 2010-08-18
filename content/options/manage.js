@@ -71,7 +71,7 @@ var gamefox_options_manage =
 
     if (!importedPrefs)
     {
-      gamefox_utils.showNotification(manageMsg,
+      gamefox_options.showNotification(manageMsg,
           strbundle.getString('invalidSyntax'), 'warning');
       button.disabled = false;
       return;
@@ -125,7 +125,7 @@ var gamefox_options_manage =
     foStream.write(outputData, outputData.length);
     foStream.close();
 
-    gamefox_utils.showNotification(manageMsg,
+    gamefox_options.showNotification(manageMsg,
         strbundle.getString('exportSuccess'), 'info');
     button.disabled = false;
   },

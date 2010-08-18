@@ -129,7 +129,7 @@ var gamefox_options =
       var notificationbox = document.getElementById(i);
       for (var j = 0; j < args.notifications[i].length; j++)
       {
-        gamefox_utils.showNotification(notificationbox,
+        gamefox_options.showNotification(notificationbox,
             args.notifications[i][j].label, args.notifications[i][j].type);
       }
     }
@@ -153,5 +153,18 @@ var gamefox_options =
     document.documentElement
       .openSubDialog('chrome://gamefox/content/options/dateFormat.xul', '',
           null);
+  },
+
+  showNotification: function(msgBox, label, type)
+  {
+    var oldMessage = msgBox.getNotificationWithValue(label);
+    if (oldMessage && oldMessage.parentNode)
+      msgBox.removeNotification(oldMessage);
+
+    var priority = msgBox.currentNotification ?
+      msgBox.currentNotification.priority + 0.0001 : 1;
+
+    var notification = msgBox.appendNotification(label, label, null, priority);
+    notification.type = type;
   }
 };

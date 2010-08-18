@@ -65,7 +65,7 @@ var gamefox_options_sig =
 
     // check if sigs array is valid
     if (!this._sigs || !this._sigs[0])
-      gamefox_utils.showNotification(signatureMsg,
+      gamefox_options.showNotification(signatureMsg,
           strbundle.getString('loadError'), 'critical');
   },
 
@@ -202,7 +202,7 @@ var gamefox_options_sig =
         if (request.responseText
             .indexOf('>Signature and Quote</h2>') == -1)
         {
-          gamefox_utils.showNotification(signatureMsg,
+          gamefox_options.showNotification(signatureMsg,
               strbundle.getString('importNotLoggedIn'), 'warning');
           button.disabled = false;
           return;
@@ -212,7 +212,7 @@ var gamefox_options_sig =
           .match(/<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
         if (!sig)
         {
-          gamefox_utils.showNotification(signatureMsg,
+          gamefox_options.showNotification(signatureMsg,
               strbundle.getString('importOld'), 'warning');
           button.disabled = false;
           return;
@@ -223,7 +223,7 @@ var gamefox_options_sig =
         // oninput isn't called
         gamefox_options_sig.updatePref(document.getElementById('sig-body'));
 
-        gamefox_utils.showNotification(signatureMsg,
+        gamefox_options.showNotification(signatureMsg,
             strbundle.getString('importSuccess'), 'info');
         button.disabled = false;
       }
@@ -249,7 +249,7 @@ var gamefox_options_sig =
         if (request.responseText
             .indexOf('>Signature and Quote</h2>') == -1)
         {
-          gamefox_utils.showNotification(signatureMsg,
+          gamefox_options.showNotification(signatureMsg,
               strbundle.getString('exportNotLoggedIn'), 'warning');
           button.disabled = false;
           return;
@@ -259,7 +259,7 @@ var gamefox_options_sig =
           .match(/<form\b[^>]+?\bid="add"[^>]+?\baction="([^"]*)">/);
         if (!action)
         {
-          gamefox_utils.showNotification(signatureMsg,
+          gamefox_options.showNotification(signatureMsg,
               strbundle.getString('exportnoUserId'), 'warning');
           button.disabled = false;
           return;
@@ -278,14 +278,14 @@ var gamefox_options_sig =
             {
               if (postRequest.responseText
                   .indexOf('<p>Your signature contains') != -1)
-                gamefox_utils.showNotification(signatureMsg,
+                gamefox_options.showNotification(signatureMsg,
                     strbundle.getString('exportTooLong'), 'warning');
               else
-                gamefox_utils.showNotification(signatureMsg,
+                gamefox_options.showNotification(signatureMsg,
                     strbundle.getString('exportUnexpectedResponse'), 'warning');
             }
             else
-              gamefox_utils.showNotification(signatureMsg,
+              gamefox_options.showNotification(signatureMsg,
                   strbundle.getString('exportSuccess'), 'info');
 
             button.disabled = false;

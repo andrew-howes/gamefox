@@ -356,19 +356,6 @@ var gamefox_utils =
       replace(/&lt;(br|p) \/&gt;/gi, '&lt;$1 /<b></b>&gt;');
   },
 
-  showNotification: function(msgBox, label, type)
-  {
-    var oldMessage = msgBox.getNotificationWithValue(label);
-    if (oldMessage && oldMessage.parentNode)
-      msgBox.removeNotification(oldMessage);
-
-    var priority = msgBox.currentNotification ?
-      msgBox.currentNotification.priority + 0.0001 : 1;
-
-    var notification = msgBox.appendNotification(label, label, null, priority);
-    notification.type = type;
-  },
-
   cloneObj: function(obj)
   {
     var newObj = (obj instanceof Array) ? [] : {};
