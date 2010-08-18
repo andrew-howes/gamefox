@@ -283,14 +283,14 @@ var gamefox_quickpost =
       var left = parseInt(element.style.left);
       if (left + element.offsetWidth < 50)
         element.style.left = (50 - element.offsetWidth) + 'px';
-      else if (left > window.innerWidth - 50)
-        element.style.left = (window.innerWidth - 50) + 'px';
+      else if (left > doc.defaultView.innerWidth - 50)
+        element.style.left = (doc.defaultView.innerWidth - 50) + 'px';
 
       var top = parseInt(element.style.top);
       if (top + element.offsetHeight < 50)
         element.style.top = (50 - element.offsetHeight) + 'px';
-      else if (top > window.innerHeight - 150) // window chrome makes this weird
-        element.style.top = (window.innerHeight - 150) + 'px';
+      else if (top > doc.defaultView.innerHeight - 50)
+        element.style.top = (doc.defaultView.innerHeight - 50) + 'px';
     }
   },
 
