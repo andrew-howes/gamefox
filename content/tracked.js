@@ -400,7 +400,8 @@ var gamefox_tracked =
 
   timedUpdate: function()
   {
-    if (!gamefox_lib.prefs.getBoolPref('tracked.notify'))
+    if (!gamefox_lib.prefs.getBoolPref('tracked.notify')
+        || !gamefox_lib.isLoggedIn())
       return;
 
     var lastUpdate = gamefox_lib.prefs.getIntPref('tracked.lastUpdate');
@@ -412,7 +413,7 @@ var gamefox_tracked =
     gamefox_tracked.read();
 
     if ((now - interval >= lastUpdate && now - 1800 < lastVisit
-          && gamefox_lib.isLoggedIn() && gamefox_tracked.list.__count__ != 0)
+          && gamefox_tracked.list.__count__ != 0)
         || gamefox_tracked.accountChanged())
       gamefox_tracked.updateList();
   }
