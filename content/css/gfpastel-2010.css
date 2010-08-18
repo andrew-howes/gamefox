@@ -1,5 +1,5 @@
 @charset 'UTF-8';
-/* GFPastel 2010.06.GameFOX
+/* GFPastel 2010.08.GameFOX
  * CCBYNCSA spynae [tl;dr, give credit where credit is due, this is free]
  * Special version for bundle with GameFOX.
  */
@@ -547,8 +547,11 @@
     color: #F7F7FF;
     padding: .2em;
     }
-  .message tr:first-child td.author, .message tr:first-child td.author + td {
+  .message tr:first-child td:not(:only-child) {
     border-top: 1px solid #6DA1D0;
+    }
+  .message tr:last-child td:not(:only-child) {
+    border-bottom: 1px solid #6DA1D0;
     }
   td.author a.name,
   td.author .msg_stats_left > b:first-child {
@@ -698,9 +701,13 @@
     border: 1px solid #6DA1D0;
       border-top: 0;
     -moz-box-shadow: 0 0 1em #6DA1D0;
+    color: #497299;
     margin: 0;
     padding: .2em;
     }
+    #gamefox-board-nav > a {
+      color: inherit !important;
+      }
   /* What's that?  Is it a yellow strip?  It's a moderated message!  You better
    * check it, you gotta check it!  Or you'll lose your precious karma!  Your
    * precious karma, your precious karma, you'll lose your precious karma... */
@@ -767,9 +774,31 @@
       background: rgba(255,255,255,.8);
       text-shadow: none;
       }
-  td.author [class^="gamefox"]:not([class$="links"]) + br { /* :3 */
+  td.author [class^="gamefox"]:not([class$="links"]):not(.gamefox-post-date) 
+    + br { /* :3 */
     display: none;
     }
+  /* QuickPost GameFOX Clock */
+  #gamefox-quickpost-afloat .gamefox-clock {
+    display: block;
+    text-align: right;
+    }
+  /* Tracked Topic 'unread posts' Notification */
+  #gamefox-tracked-note {
+    /*background: rgba(109,161,208,.6);*/
+    background: rgba(255,255,255,.8);
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 1em 1em 0 0;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    /*color: #497299;*/
+    margin: -.6em -.6em 0 -.6em !important;
+    padding: .3em !important;
+    }
+    div#gamefox-tracked-note + div.content_nav > div.crumbs {
+      border-top-width: 0;
+      -moz-border-radius: 0 0 1em 0;
+      margin-top: 0;
+      }
 /* Elsewhere... */
   /* Poll results */
   .poll .bar {
