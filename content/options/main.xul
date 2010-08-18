@@ -48,6 +48,8 @@
         type="bool"/>
       <preference id="elements.clock" name="gamefox.elements.clock"
         type="bool"/>
+      <preference id="tracked.notify" name="gamefox.tracked.notify"
+        type="bool"/>
 
       <preference id="elements.topics.lastpostlink"
         name="gamefox.elements.topics.lastpostlink" type="bool"/>
@@ -175,6 +177,8 @@
                     <button label="&settings.label;…"
                       oncommand="gamefox_options.openDateFormatDialog();"/>
                   </hbox>
+                  <checkbox label="&trackingNote.label;"
+                    preference="tracked.notify"/>
                 </vbox>
                 <vbox flex="1">
                   <checkbox label="&blockAdServers.label;"
