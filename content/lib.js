@@ -411,6 +411,13 @@ var gamefox_lib =
     return false;
   },
 
+  isSafeJSON: function(string) {
+    const maybeHarmful = /[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/;
+    const jsonStrings = /"(\\.|[^"\\\n\r])*"/g;
+    
+    return !maybeHarmful.test(string.replace(jsonStrings, ""));
+  },
+
   safeEval: function(pref, noJSON)
   {
     // Thanks Toad King

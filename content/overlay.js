@@ -1640,7 +1640,7 @@ function gamefox_update(addon)
       for (var i = 0; i < jsonPrefs.length; i++)
       {
         var prefText = gamefox_lib.getString(jsonPrefs[i]);
-        if (gamefox_json.isMostlyHarmless(prefText))
+        if (gamefox_lib.isSafeJSON(prefText))
           continue; // already JSON
 
         var prefObj = gamefox_lib.safeEval(prefText, true);

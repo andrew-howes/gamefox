@@ -39,7 +39,6 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/messages.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/favorites.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tracked.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/json.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/date.js"/>
 
   <!-- common context menu -->

@@ -63,7 +63,7 @@ var gamefox_options_manage =
     siStream.close();
     fiStream.close();
 
-    if (!gamefox_json.isMostlyHarmless(inputData))
+    if (!gamefox_lib.isSafeJSON(inputData))
       // Compat: Not JSON, probably prefs from an older version
       var importedPrefs = gamefox_lib.safeEval(inputData, true);
     else
@@ -81,7 +81,7 @@ var gamefox_options_manage =
     {
       // Compat: Not JSON
       if (/^(\(|\[)\{.*\}(\)|\])$/.test(importedPrefs[i])
-          && !gamefox_json.isMostlyHarmless(importedPrefs[i]))
+          && !gamefox_lib.isSafeJSON(importedPrefs[i]))
         importedPrefs[i] = gamefox_lib.toJSON(gamefox_lib.safeEval(importedPrefs[i], true));
 
       gamefox_prefs.setPrefValue(i, importedPrefs[i]);

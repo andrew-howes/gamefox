@@ -49,7 +49,6 @@
     <script type="application/x-javascript" src="chrome://gamefox/content/utils.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/options/options.js"/>
     <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
-    <script type="application/x-javascript" src="chrome://gamefox/content/json.js"/>
 
   </prefpane>
 
