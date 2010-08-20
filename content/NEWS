@@ -15,6 +15,7 @@
       sidebar" link at the bottom of the sidebar)
     * Fix custom date format in message detail
     * Notification for new posts in tracked topics
+    * Fix topic list link on boards that contain "track" in the title
 
 2010-05-12:
     * version 0.7.7

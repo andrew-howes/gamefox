@@ -718,7 +718,7 @@ var gamefox =
       // Tracking
       if (gamefox_lib.prefs.getBoolPref('tracked.enabled'))
       {
-        var trackLink = doc.evaluate('a[contains(@href, "track")]', userNav,
+        var trackLink = doc.evaluate('a[contains(., "Track")]', userNav,
             null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (trackLink)
           trackLink.addEventListener('click', gamefox_tracked.linkListener, false);
