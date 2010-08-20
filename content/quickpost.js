@@ -169,7 +169,7 @@ var gamefox_quickpost =
     {
       var dateNode = gamefox_utils.createDateNode(doc);
       form.appendChild(dateNode);
-      gamefox.updateClock(dateNode.childNodes[0]);
+      gamefox_page.updateClock(dateNode.childNodes[0]);
     }
 
     if (gamefox_lib.isNightly())

@@ -19,6 +19,7 @@
 
 var gamefox_lib =
 {
+  extensionID: '{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}',
   domain: 'http://www.gamefaqs.com',
   path: '/boards/',
   cookieHost: '.gamefaqs.com',
