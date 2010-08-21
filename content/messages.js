@@ -125,7 +125,7 @@ var gamefox_messages =
             if (post.responseText.indexOf('<title>401 Error') != -1)
               gamefox_lib.alert('Can\'t delete this message.');
             else if (deleteTopic)
-              doc.location = gamefox_utils.linkToTopic(
+              doc.location = gamefox_utils.newURI(
                   gamefox_utils.parseBoardLink(doc.location.pathname)['board'],
                   null, null, null, null, doc.location.pathname);
             else

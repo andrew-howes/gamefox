@@ -371,7 +371,7 @@ var gamefox_utils =
     return newObj;
   },
 
-  linkToTopic: function(board, topic, page, tc, post, link)
+  newURI: function(board, topic, page, tc, post, link)
   {
     if (link)
     {

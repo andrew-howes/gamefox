@@ -260,7 +260,7 @@ var gamefox_tracked =
     }
 
     var request = new XMLHttpRequest();
-    request.open('GET', gamefox_utils.linkToTopic(ids['board'], ids['topic'])
+    request.open('GET', gamefox_utils.newURI(ids['board'], ids['topic'])
         + '?action=' + (untrack ? 'stoptrack' : 'tracktopic'));
     var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
@@ -317,7 +317,7 @@ var gamefox_tracked =
     if (!topic.deleted)
     {
       var request = new XMLHttpRequest();
-      request.open('GET', gamefox_utils.linkToTopic(topic.boardId, topicId)
+      request.open('GET', gamefox_utils.newURI(topic.boardId, topicId)
           + '?action=stoptrack');
       var ds = gamefox_lib.thirdPartyCookieFix(request);
       request.onreadystatechange = function()

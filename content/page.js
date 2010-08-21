@@ -615,7 +615,7 @@ var gamefox_page =
             var topicParams = gamefox_utils.parseBoardLink(topicLink);
 
             rows[i].cells[2].innerHTML = '<a href="' + gamefox_utils
-              .linkToTopic(topicParams['board'], null, null, null, null,
+              .newURI(topicParams['board'], null, null, null, null,
                   topicLink) + '">' + rows[i].cells[2].textContent.trim()
                     + '</a>';
           }
@@ -1178,8 +1178,8 @@ var gamefox_page =
         {
           quote = quotes.snapshotItem(i);
           quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/, function(z, num){
-              return '<a href="' + gamefox_utils.linkToTopic(boardId,
-                  topicId, Math.floor((num - 1) /
+              return '<a href="' + gamefox_utils.newURI(boardId, topicId,
+                  Math.floor((num - 1) /
                     gamefox_lib.prefs.getIntPref('msgsPerPage')),
                   tc, num, doc.location.pathname)
                 + '">#' + num + '</a>';

@@ -505,13 +505,13 @@ var gamefox_quickpost =
                 switch (gamefox_lib.prefs.getIntPref('elements.quickpost.aftertopic'))
                 {
                   case 0: // go to topic
-                    doc.location = gamefox_utils.linkToTopic(boardId,
-                        topicLink[1], null, null, null, topicLink[0]);
+                    doc.location = gamefox_utils.newURI(boardId, topicLink[1],
+                        null, null, null, topicLink[0]);
                     break;
 
                   case 1: // go to board
-                    doc.location = gamefox_utils.linkToTopic(boardId, null,
-                        null, null, null, topicLink[0]);
+                    doc.location = gamefox_utils.newURI(boardId, null, null,
+                        null, null, topicLink[0]);
                     break;
                 }
               }
@@ -540,7 +540,7 @@ var gamefox_quickpost =
                     else
                       params['post'] = 'last';
 
-                    doc.location = gamefox_utils.linkToTopic(boardId, topicId,
+                    doc.location = gamefox_utils.newURI(boardId, topicId,
                         params['page'], params['tc'], params['post'],
                         doc.location.pathname);
 
@@ -550,19 +550,19 @@ var gamefox_quickpost =
                     break;
 
                   case 1: // go back to same page
-                    doc.location = gamefox_utils.linkToTopic(boardId, topicId,
+                    doc.location = gamefox_utils.newURI(boardId, topicId,
                         queryObj['page'], queryObj['page'] ? doc.gamefox.tc :
                         null, null, doc.location.pathname);
                     break;
 
                   case 2: // go to first page
-                    doc.location = gamefox_utils.linkToTopic(boardId, topicId,
+                    doc.location = gamefox_utils.newURI(boardId, topicId,
                         null, null, null, doc.location.pathname);
                     break;
 
                   case 3: // go to board
-                    doc.location = gamefox_utils.linkToTopic(boardId, null,
-                        null, null, null, doc.location.pathname);
+                    doc.location = gamefox_utils.newURI(boardId, null, null,
+                        null, null, doc.location.pathname);
                     break;
                 }
               }
