@@ -487,5 +487,20 @@ var gamefox_lib =
       windows.push(e.getNext());
 
     return windows;
+  },
+
+  toggleSidebar: function()
+  {
+    if (typeof toggleSidebar == 'function')
+    {
+      toggleSidebar('viewGamefoxSidebar');
+    }
+    else
+    {
+      document.getElementById('gamefox-toggle-sidebar')
+        .removeAttribute('checked');
+      gamefox_lib.alert('This command does not work on your platform. If you '
+          + 'are using SeaMonkey, try installing the xSidebar extension.');
+    }
   }
 };

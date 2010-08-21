@@ -100,7 +100,7 @@
     <menuitem id="gamefox-context-quote" label="&menu.quote.label;"
       oncommand="gamefox_quote.quote(gContextMenu, true);"/>
     <menuitem id="gamefox-context-filter" label=""
-      oncommand="gamefox.toggleFilter(gContextMenu, true);"/>
+      oncommand="gamefox_page.toggleFilter(gContextMenu, true);"/>
     <menuitem id="gamefox-context-delete" label=""
       oncommand="gamefox_messages.deletePost(gContextMenu, true);"/>
     <menu id="gamefox-context-usergroups" label="&menu.hlGroups.label;">
@@ -126,12 +126,12 @@
 
   <!-- firefox commands -->
   <commandset id="mainCommandSet">
-    <command id="cmd_gamefoxSidebar" oncommand="gamefox.toggleSidebar();"/>
+    <command id="cmd_gamefoxSidebar" oncommand="gamefox_lib.toggleSidebar();"/>
     <command id="cmd_gamefoxOptions" oncommand="gamefox_lib.openOptionsDialog();"/>
   </commandset>
   <!-- seamonkey commands -->
   <commandset id="commands">
-    <command id="cmd_gamefoxSidebar" oncommand="gamefox.toggleSidebar();"/>
+    <command id="cmd_gamefoxSidebar" oncommand="gamefox_lib.toggleSidebar();"/>
     <command id="cmd_gamefoxOptions" oncommand="gamefox_lib.openOptionsDialog();"/>
   </commandset>
 

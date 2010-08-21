@@ -1544,20 +1544,6 @@ var gamefox_page =
     doc.defaultView.scrollTo(0, gamefox_utils.getTopOffset(newFocus || msgComponents.header));
   },
 
-  toggleSidebar: function()
-  {
-    if (typeof toggleSidebar == 'function')
-    {
-      toggleSidebar('viewGamefoxSidebar');
-    }
-    else
-    {
-      document.getElementById('gamefox-toggle-sidebar').removeAttribute('checked');
-      gamefox_lib.alert('This command does not work on your platform. If you are '
-          + 'using SeaMonkey, try installing the xSidebar extension.');
-    }
-  },
-
   updateClock: function(dateNode)
   {
     var ms = Date.now() + gamefox_lib.prefs.getIntPref('dateOffset');
