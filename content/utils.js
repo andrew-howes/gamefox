@@ -417,14 +417,5 @@ var gamefox_utils =
   cleanUsername: function(username)
   {
     return username.replace(/ \((A|M|V)\)/, '');
-  },
-
-  createDateNode: function(doc)
-  {
-    var span = doc.createElement('span');
-    span.className = 'gamefox-clock';
-    span.appendChild(doc.createTextNode(''));
-
-    return span;
   }
 };

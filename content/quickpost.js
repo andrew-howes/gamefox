@@ -167,7 +167,9 @@ var gamefox_quickpost =
 
     if (clock)
     {
-      var dateNode = gamefox_utils.createDateNode(doc);
+      var dateNode = doc.createElement('span');
+      dateNode.className = 'gamefox-clock';
+      dateNode.appendChild(doc.createTextNode(''));
       form.appendChild(dateNode);
       gamefox_page.updateClock(dateNode.childNodes[0]);
     }
