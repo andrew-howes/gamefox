@@ -41,7 +41,7 @@ var gamefox_favorites =
 
     item = doc.createElement('option');
     item.value = 0;
-    item.appendChild(doc.createTextNode('Select board...'));
+    item.appendChild(doc.createTextNode('Favorite Boards'));
     favList.appendChild(item);
     for (var i in favs)
     {

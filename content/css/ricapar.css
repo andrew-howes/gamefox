@@ -449,12 +449,6 @@
         text-align: center;
     }
 
-    /* Favorites */
-    #gamefox-favorites-menu {
-        position: absolute;
-        margin-top: 4px !important;
-    }
-
     /* hide go button */
     #platformlist .js form.jumper .submit { display: none; }
 

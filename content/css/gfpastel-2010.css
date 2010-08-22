@@ -155,6 +155,9 @@
   #platformlist .jumper {
     text-align: right;
     }
+  #platformlist form.jumper {
+    display: inline;
+    }
   /* Header link behavior */
   #masthead a {
     color: #44A;

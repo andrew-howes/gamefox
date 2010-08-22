@@ -20,14 +20,6 @@
         font-style: italic;
     }
 
-    /* supposed to line up with platform jumper menu below it */
-    #gamefox-favorites-menu
-    {
-        float: right;
-        margin-top: 8px;
-        width: 140px;
-    }
-
     #gamefox-board-nav
     {
         clear: both;
