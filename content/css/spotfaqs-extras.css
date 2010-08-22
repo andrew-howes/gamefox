@@ -2,6 +2,7 @@
 /** By TakatoMatsuki **/
 
 /** Build 2009-11-22-20-12 **/
+/** Updated 2010-08-21 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -28,6 +29,10 @@ table td {padding:3px !important;}
 #content {border-color:#161616 !important; background-color:#2F2F2F !important;}
 #gutter_btm {background-image:url(http://img.gamespot.com/gamespot/www/images/layout/gutters/all_dark_btm.gif) !important;}
 #mpu_col_wrap, #side_col {background:transparent !important;}
+
+/** Tracking Notification */
+#gamefox-tracked-note {background:#1d1d1d; margin:5px !important; padding:5px !important; border:0;}
+#gamefox-tracked-note-dismiss {color:inherit !important; margin:-5px -5px -5px 5px;}
 
 /** Message List **/
 table.message tr td.author {padding-top:100px !important;}
