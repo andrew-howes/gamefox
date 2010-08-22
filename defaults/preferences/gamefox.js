@@ -66,7 +66,7 @@ pref("gamefox.signature.addition", 2);
 pref("gamefox.signature.selectMostSpecific", true);
 
 pref("gamefox.theme.disablegamefaqscss", false);
-pref("gamefox.theme.css.serialized", "{\"themes\":{}, \"bundled\":{}, \"gamefox\":{}, \"user\":{}}");
+pref("gamefox.theme.css.serialized", "{\"gamefox\":{}, \"bundled\":{}, \"user\":{}, \"themes\":{}}");
 
 pref("gamefox.userlist.topics.showgroupnames", false);
 pref("gamefox.userlist.messages.showgroupnames", true);
