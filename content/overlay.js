@@ -83,7 +83,10 @@ var gamefox =
 
       // first run
       if (lastVersion == '')
+      {
+        gamefox.importMsgsPerPage();
         window.setTimeout(gamefox_lib.openOptionsDialog, 10, true);
+      }
 
       // new nightly/dev install
       if (gamefox_lib.isDev() && !gamefox_lib.isDev(lastVersion))
@@ -150,6 +153,29 @@ var gamefox =
         css.themes = {};
       gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
     }
+  },
+
+  importMsgsPerPage: function()
+  {
+    var request = new XMLHttpRequest();
+    request.open('GET', gamefox_lib.domain + gamefox_lib.path
+        + 'settings.php');
+    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    request.onreadystatechange = function()
+    {
+      if (request.readyState == 4)
+      {
+        if (request.responseText.indexOf('Board Display Settings') == -1)
+          return; // not logged in
+
+        var msgsPerPage = gamefox_utils.parseHTMLSelect(request.responseText,
+            'messagepage');
+        if (msgsPerPage)
+          gamefox_lib.prefs.setIntPref('msgsPerPage', msgsPerPage);
+      }
+    }
+
+    request.send(null);
   }
 };
 
