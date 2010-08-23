@@ -2,6 +2,8 @@
 
 <!ENTITY dateFormat.title "Date Formats">
 
+<!ENTITY help.label "Help">
+
 <!ENTITY custom.label "Custom">
 
 <!ENTITY topicLists.label "Topic Lists">

@@ -305,6 +305,8 @@ var gamefox_lib =
         win.open(url);
         break;
     }
+
+    win.focus();
   },
 
   newTab: function(url, focus)
@@ -392,8 +394,9 @@ var gamefox_lib =
       {
         features = 'chrome,titlebar,toolbar,centerscreen,modal';
       }
-      dlg = windowWatcher.openWindow(null, 'chrome://gamefox/content/options/options.xul',
-          '_blank', features, args);
+      dlg = windowWatcher.openWindow(window,
+          'chrome://gamefox/content/options/options.xul', '_blank', features,
+          args);
     }
   },
 

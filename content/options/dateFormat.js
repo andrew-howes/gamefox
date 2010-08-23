@@ -85,6 +85,11 @@ var gamefox_options_dateFormat =
 
   help: function()
   {
-    gamefox_lib.openPage('chrome://gamefox/content/strftime.html', 1);
+    var prefs = Cc['@mozilla.org/preferences-service;1']
+      .getService(Ci.nsIPrefService);
+    var instantApply = prefs.getBoolPref('browser.preferences.instantApply');
+
+    gamefox_lib.openPage('chrome://gamefox/content/strftime.html',
+        instantApply ? 1 : 3);
   }
 };

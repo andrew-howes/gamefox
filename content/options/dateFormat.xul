@@ -23,12 +23,17 @@
 <?xml-stylesheet href="chrome://global/skin/"?>
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
 
+<!-- XXX Help button doesn't appear on Windows, using extra2 as a workaround
+     -->
 <prefwindow id="dateFormatDialog" type="child"
-  buttons="accept,cancel,help"
-  ondialoghelp="gamefox_options_dateFormat.help();"
+  buttons="accept,cancel,extra2"
+  buttonlabelextra2="&help.label;"
+  buttoniconextra2="help"
+  ondialogextra2="gamefox_options_dateFormat.help();"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html="http://www.w3.org/1999/xhtml"
-  title="&dateFormat.title;">
+  title="&dateFormat.title;"
+  style="width: 38em;">
 
   <prefpane id="dateFormatDialog"
     onpaneload="gamefox_options_dateFormat.init();">
@@ -61,15 +66,16 @@
       <caption label="&topicLists.label;"/>
 
       <hbox align="center">
-        <menulist flex="1" id="topicFormatMenu" preference="date.topicPreset"
-          oncommand="gamefox_options_dateFormat.change(this);" width="250">
+        <menulist id="topicFormatMenu" preference="date.topicPreset"
+          style="width: 18em;"
+          oncommand="gamefox_options_dateFormat.change(this);">
           <menupopup>
             <menuitem value="-1" label="&custom.label;"/>
           </menupopup>
         </menulist>
 
         <textbox id="topicFormatCustom" emptytext="&custom.label;"
-          disabled="true" preference="date.topicCustom"
+          disabled="true" preference="date.topicCustom" flex="1"
           oninput="gamefox_options_dateFormat.previewCustom(this);"/>
       </hbox>
     </groupbox>
@@ -78,7 +84,7 @@
       <caption label="&messageLists.label;"/>
 
       <hbox align="center">
-        <menulist flex="1" id="messageFormatMenu" width="250"
+        <menulist id="messageFormatMenu" style="width: 18em;"
           preference="date.messagePreset"
           oncommand="gamefox_options_dateFormat.change(this);">
           <menupopup>
@@ -87,7 +93,7 @@
         </menulist>
 
         <textbox id="messageFormatCustom" emptytext="&custom.label;"
-          disabled="true" preference="date.messageCustom"
+          disabled="true" preference="date.messageCustom" flex="1"
           oninput="gamefox_options_dateFormat.previewCustom(this);"/>
       </hbox>
     </groupbox>
@@ -96,7 +102,7 @@
       <caption label="&clock.label;"/>
 
       <hbox align="center">
-        <menulist flex="1" id="clockFormatMenu" width="250"
+        <menulist id="clockFormatMenu" style="width: 18em;"
           preference="date.clockPreset"
           oncommand="gamefox_options_dateFormat.change(this);">
           <menupopup>
@@ -105,7 +111,7 @@
         </menulist>
 
         <textbox id="clockFormatCustom" emptytext="&custom.label;"
-          disabled="true" preference="date.clockCustom"
+          disabled="true" preference="date.clockCustom" flex="1"
           oninput="gamefox_options_dateFormat.previewCustom(this);"/>
       </hbox>
     </groupbox>

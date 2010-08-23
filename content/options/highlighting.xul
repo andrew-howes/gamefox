@@ -71,7 +71,7 @@
         <vbox>
           <button label="&addGroup.button;" icon="add"
             oncommand="gamefox_highlighting.add();"/>
-          <listbox id="grouplist" width="130" flex="1"
+          <listbox id="grouplist" flex="1" style="width: 11em;"
             onselect="gamefox_options_highlighting.loadGroup(this);"/>
         </vbox>
         <vbox pack="center">
@@ -84,7 +84,8 @@
 
       <groupbox flex="1">
         <hbox align="center">
-          <textbox id="name" emptytext="&groupName.emptytext;" size="15"
+          <textbox id="name" emptytext="&groupName.emptytext;"
+            style="width: 11em;"
             oninput="gamefox_options_highlighting.updatePref(this);"/>
 
           <separator flex="1"/>
