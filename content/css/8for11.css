@@ -76,6 +76,7 @@ body.bwp {background:white !important;}
 /** Containers **/
 #container:not(#helloworld) {display:block !important; width:100% !important; font-family: arial,sans-serif !important; }
 #gutters {margin-left: 162px !important; margin-top:42px !important; z-index:-9000 !important;}
+.has_lead #gutter_top {padding-top:0 !important; /* override gamefox-ads.css */}
 #layout {width:100% !important; }
 .col_layout {padding-left:0 !important; }
 #full_col_wrap .col_layout {padding-right:0 !important;}
@@ -95,7 +96,7 @@ body.bwp {background:white !important;}
 #side_col .pod {border:1px outset grey !important;}
 #side_col .pod .head {border:1px inset grey !important; padding:1px !important;}
 #side_col .pod .body, #side_col .pod .foot {border:1px inset grey !important; padding:1px !important; background:white !important; color:black !important; font-size:12.8px !important;}
-#side_col .pod .body a:not(#helloworld), #side_col .pod .body a:visited:not(#helloworld), #side_col .pod .body a:hover:not(#helloworld), #side_col .pod .body a:active:not(#helloworld), #side_col .pod .foot a:not(#helloworld), #side_col .pod .foot a:visited:not(#helloworld), #side_col .pod .foot a:hover:not(#helloworld), #side_col .pod .foot a:active:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+#side_col .pod .body a:not(#helloworld), #side_col .pod .body a:visited:not(#helloworld), #side_col .pod .body a:hover:not(#helloworld), #side_col .pod .body a:active:not(#helloworld), #side_col .pod .foot a:not(#helloworld), #side_col .pod .foot a:visited:not(#helloworld), #side_col .pod .foot a:hover:not(#helloworld), #side_col .pod .foot a:active:not(#helloworld), #gamefox-tracked-note a, #gamefox-tracked-note a:visited, #gamefox-tracked-note a:hover {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
 
 /** Top Ten Pods **/
 .topten .pod {border:1px outset grey !important;}
@@ -123,6 +124,8 @@ body.bwp {background:white !important;}
 /** Above Board Nav **/
 #content > .head, #content > .head > h1, #content > div.content_nav > h1, #content > .head a, #content > .head > h1 a, #content > div.content_nav > h1 a {margin:0 !important; padding:0 !important; border:0 !important; color:black !important; font-style:italic !important; font-weight:bold !important; font-size:32px !important; text-align:center !important;}
 #content > .head, #content > div.content_nav > h1 {padding-top:6px !important; margin-bottom:8px !important;}
+
+#gamefox-tracked-note {margin:2px 2px 1px !important; border:0; font-size:12.8px; background:#ffffaa;}
 
 div.content_nav {margin:0 !important; padding:0 !important;}
 div.content_nav a {color:white !important;}
@@ -369,6 +372,9 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 /** Board List **/
 @-moz-document url("http://www.gamefaqs.com/boards") {
 #layout {position:relative !important;}
+#gamefox-tracked-note {position:relative; top: 145px;}
+#content > .head {position:absolute; top:0; left:0; right:0;}
+.board_hub {margin-top: 55px !important;}
 }
 
 /** Board Manager / Bman / Batman **/
