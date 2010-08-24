@@ -440,9 +440,10 @@ var gamefox_quickpost =
             else if (maintenance)
               gamefox_lib.alert('The site is temporarily down for maintenance.');
             else
-              gamefox_lib.alert('Something went wrong but I don\'t know what. Try posting ' +
-                  'without QuickPost, and if you think you\'ve found a bug ' +
-                  'report it at Blood Money.');
+              gamefox_lib.alert('Whoops! Something unexpected happened. ' +
+                  'This probably means that your message was not posted ' +
+                  '(but it\'s possible it was). Please visit the Blood ' +
+                  'Money board if you continue to get this error.');
           }
           event.target.removeAttribute('disabled');
           return;
@@ -489,9 +490,11 @@ var gamefox_quickpost =
                   else if (dupeTitle)
                     gamefox_lib.alert('A topic with this title already exists. Choose another title.');
                   else
-                    gamefox_lib.alert('Something went wrong but I don\'t know what. Try posting ' +
-                        'without QuickPost, and if you think you\'ve found a bug ' +
-                        'report it at Blood Money.');
+                    gamefox_lib.alert('Whoops! Something unexpected ' +
+                        'happened. This probably means that your message ' +
+                        'was not posted (but it\'s possible it was). Please ' +
+                        'visit the Blood Money board if you continue to get ' +
+                        'this error.');
                 }
                 event.target.removeAttribute('disabled');
                 return;
