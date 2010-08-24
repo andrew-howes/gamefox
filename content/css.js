@@ -25,8 +25,6 @@ var gamefox_css =
       gamefox: {
         'gamefox-character-map.css': ['Character map',
             'Makes the character map look pretty.', '', true],
-        'gamefox-sidebar.css': ['Classic sidebar',
-            'A classic style for the GameFOX sidebar.', '', false],
         'gamefox-essentials.css': ['Essentials',
             'Applies only to GameFOX features. Should always be enabled.', '', true],
         'gfcode.css': ['GFCode',
@@ -62,6 +60,8 @@ var gamefox_css =
             '', false],
         'capitalized-message-links.css': ['Capitalized message links',
             'Capitalizes the links in message headers.', '', false],
+        'gamefox-sidebar.css': ['Classic GameFOX sidebar',
+            'A classic theme for the GameFOX sidebar.', '', false],
         'FAQ-frames.css': ['FAQ frames', 'Styles the FAQ headers to look more like GameFAQs.',
             'selmiak', false],
         'hide-signatures.css': ['Hide signatures',

@@ -75,10 +75,9 @@ var gamefox_options_style =
     this.treeView.selection.clearSelection();
     this.treeView.selection.select(0);
 
-    // this is sort of a hack, I couldn't be bothered with finding out how to push data
-    // directly to treeView.visibleData when populating the tree
+    // expand all categories except GameFOX
     for (var i = 3; i >= 0; i--)
-      this.treeView.toggleOpenState(i);
+      if (i != 2) this.treeView.toggleOpenState(i);
   },
 
   onpopupshowing: function()
