@@ -175,7 +175,7 @@
                     <checkbox label="&dateFormat.label;"
                       preference="date.enableFormat"/>
                     <button label="&settings.label;…"
-                      oncommand="gamefox_options.openDateFormatDialog();"/>
+                      oncommand="gamefox_options_main.openDateFormatDialog();"/>
                   </hbox>
                   <checkbox label="&trackingNote.label;"
                     preference="tracked.notify"/>
@@ -210,7 +210,7 @@
                         <checkbox label="&paginateTopics.label;"
                           preference="paging.auto"/>
                         <button label="&settings.label;…"
-                          oncommand="gamefox_options.openPaginateDialog();"/>
+                          oncommand="gamefox_options_main.openPaginateDialog();"/>
                       </hbox>
 
                       <checkbox label="&trackedBoardLink.label;"

@@ -29,5 +29,19 @@ var gamefox_options_main =
     var titleChangePref = document.getElementById('elements.titlechange');
     document.getElementById('elements.titleprefix-checkbox').disabled =
       !titleChangePref.value;
+  },
+  
+  openPaginateDialog: function()
+  {
+    document.documentElement
+      .openSubDialog('chrome://gamefox/content/options/paginate.xul', '',
+          null);
+  },
+
+  openDateFormatDialog: function()
+  {
+    document.documentElement
+      .openSubDialog('chrome://gamefox/content/options/dateFormat.xul', '',
+          null);
   }
 };
