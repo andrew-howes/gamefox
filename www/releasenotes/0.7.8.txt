@@ -9,9 +9,9 @@ clicking the "X" will mark all topics as read.
 
 ![Tracking notification](images/0.7.8/trackingnote.png)
 
-The highlighting options have an entirely new interface. The textbox is larger,
-making it easier to maintain large lists. A new feature was added allowing
-highlighting of all admins, mods, VIPs and tracked topics.
+Highlighting now has an entirely new interface. The textbox is larger, making
+it easier to maintain large lists. A new feature lets you highlight all admins,
+mods, VIPs or tracked topics.
 
 ![Highlighting interface](images/0.7.8/highlighting.png)
 
