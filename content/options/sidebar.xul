@@ -23,6 +23,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://gamefox/locale/options/sidebar.dtd">
 
 <prefwindow
+  id="gamefox-sidebar-prefs"
   title="&prefWin.title;"
   style="&prefWin.style;"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
