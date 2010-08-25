@@ -1,8 +1,7 @@
-/** SpotFAQs Companion CSS - Cleans up SpotFAQs and uses the extra benefits of Firefox and GameFOX **/
+/** SpotFAQs extras - Cleans up SpotFAQs and uses the extra benefits of Firefox and GameFOX **/
 /** By TakatoMatsuki **/
 
-/** Build 2009-11-22-20-12 **/
-/** Updated 2010-08-21 **/
+/** Build 2010-08-25-21-49 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -30,10 +29,6 @@ table td {padding:3px !important;}
 #gutter_btm {background-image:url(http://img.gamespot.com/gamespot/www/images/layout/gutters/all_dark_btm.gif) !important;}
 #mpu_col_wrap, #side_col {background:transparent !important;}
 
-/** Tracking Notification */
-#gamefox-tracked-note {background:#1d1d1d; margin:5px !important; padding:5px !important; border:0;}
-#gamefox-tracked-note-dismiss {color:inherit !important; margin:-5px -5px -5px 5px;}
-
 /** Message List **/
 table.message tr td.author {padding-top:100px !important;}
 table.message tr td.author + td {padding:10px !important;}
@@ -57,6 +52,10 @@ table.message tr td.author + td {padding:10px !important;}
 
 /** Quickpost [GameFOX] **/ 
 #gamefox-quickpost-afloat {background: #333333 !important; border-color:#666666 !important;}
+
+/** Tracking Notification [GameFOX] **/
+#gamefox-tracked-note {background:#1d1d1d !important; margin:5px !important; padding:5px !important; border:0 !important;}
+#gamefox-tracked-note-dismiss {color:inherit !important; margin:-5px -5px -5px 5px !important;}
 
 
 /** Answers **/
