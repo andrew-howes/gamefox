@@ -92,7 +92,7 @@
 
           <colorpicker id="color" type="button"
             onchange="gamefox_options_highlighting.updatePref(this);"/>
-          <textbox id="colorHex" size="6" maxlength="7"
+          <textbox id="colorHex" size="7" maxlength="7"
             oninput="gamefox_options_highlighting.updatePref(this);"/>
 
           <separator flex="1"/>
