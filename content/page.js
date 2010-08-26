@@ -1262,8 +1262,9 @@ var gamefox_page =
         dismissLink.href = '#';
         dismissLink.title = 'Hide this notification';
         dismissLink.appendChild(doc.createTextNode('×'));
-        dismissLink.style.lineHeight = note.clientHeight + 'px';
         note.insertBefore(dismissLink, note.firstChild);
+
+        dismissLink.style.lineHeight = note.clientHeight + 'px';
       }
     }
   },
