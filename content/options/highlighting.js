@@ -63,6 +63,7 @@ var gamefox_options_highlighting =
   {
     var groups = gamefox_highlighting.read();
     var i = document.getElementById('grouplist').selectedIndex;
+    var updateActions = false;
 
     switch (event.id)
     {
@@ -77,11 +78,7 @@ var gamefox_options_highlighting =
         break;
       case 'type':
         groups[i].type = event.selectedItem.value;
-
-        document.getElementById('topicAction').disabled = (groups[i].type ==
-            'postContains');
-        document.getElementById('messageAction').disabled = (groups[i].type
-            == 'titleContains');
+        updateActions = true;
         break;
       case 'values':
         groups[i].users = event.value;
@@ -96,6 +93,8 @@ var gamefox_options_highlighting =
           groups[i].include.push(includeType);
         else
           groups[i].include.splice(groups[i].include.indexOf(includeType), 1);
+
+        updateActions = true;
         break;
       case 'topicAction':
         groups[i].topics = event.selectedItem.value;
@@ -103,6 +102,16 @@ var gamefox_options_highlighting =
       case 'messageAction':
         groups[i].messages = event.selectedItem.value;
         break;
+    }
+
+    if (updateActions)
+    {
+      var actions = this.getAvailableActions(groups[i].type,
+          groups[i].include);
+      document.getElementById('topicAction').disabled = actions
+        .indexOf('topics') == -1;
+      document.getElementById('messageAction').disabled = actions
+        .indexOf('messages') == -1;
     }
 
     gamefox_highlighting.write(groups);
@@ -174,10 +183,11 @@ var gamefox_options_highlighting =
       .messageAction[groups[i].messages];
 
     // Disable action menulists depending on group type
-    document.getElementById('topicAction').disabled = (groups[i].type ==
-        'postContains');
-    document.getElementById('messageAction').disabled = (groups[i].type
-        == 'titleContains');
+    var actions = this.getAvailableActions(groups[i].type, groups[i].include);
+    document.getElementById('topicAction').disabled = actions
+      .indexOf('topics') == -1;
+    document.getElementById('messageAction').disabled = actions
+      .indexOf('messages') == -1;
   },
 
   watchPref: function()
@@ -254,5 +264,25 @@ var gamefox_options_highlighting =
     listbox.selectedIndex = -1;
     gamefox_highlighting.write(groups);
     listbox.selectedIndex = j;
+  },
+
+  getAvailableActions: function(type, include)
+  {
+    if (type == 'users'
+        || include.indexOf('admins') != -1
+        || include.indexOf('mods') != -1
+        || include.indexOf('vips') != -1)
+      return ['topics', 'messages'];
+
+    var actions = [];
+    if (['users', 'titleContains'].indexOf(type) != -1
+        || include.indexOf('tracked') != -1)
+      actions.push('topics');
+
+    if (['users', 'postContains'].indexOf(type) != -1
+        || include.indexOf('tc') != -1)
+      actions.push('messages');
+
+    return actions;
   }
 };
