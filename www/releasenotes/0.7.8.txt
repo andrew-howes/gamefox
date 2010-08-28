@@ -63,3 +63,4 @@ link at the bottom of the sidebar)
 * Notification for new posts in tracked topics
 * Fix topic list link on boards that contain "track" in the title
 * Move favorites menu to platform bar
+* Fix ad blocking with sponsored poll of the day

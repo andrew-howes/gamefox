@@ -17,6 +17,7 @@
     * Notification for new posts in tracked topics
     * Fix topic list link on boards that contain "track" in the title
     * Move favorites menu to platform bar
+    * Fix ad blocking with sponsored poll of the day
 
 2010-05-12:
     * version 0.7.7

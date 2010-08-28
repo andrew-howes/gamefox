@@ -25,12 +25,41 @@ var gamefox_page =
     var doc = gamefox_lib.getDocument(event);
     if (!gamefox_lib.onGF(doc)) return false;
 
-    // Disable style elements
+    // Disable ads
     if (gamefox_lib.prefs.getBoolPref('elements.stopads'))
     {
+      // Style elements
       var styles = doc.getElementsByTagName('style');
       for (var i = 0; i < styles.length; i++)
         styles[i].disabled = true;
+
+      // Skinned home page
+      doc.body.className = '';
+
+      // Poll of the Day
+      var poll = doc.evaluate('//div[@class="body poll"]', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (poll)
+      {
+        if (poll.style.background.indexOf('promo') != -1)
+        {
+          poll.style.background = '';
+          poll.removeChild(poll.firstChild);
+        }
+
+        if (poll.getElementsByTagName('h2').length == 0)
+        {
+          var pollHead = doc.createElement('div');
+          pollHead.className = 'head';
+
+          var pollTitle = doc.createElement('h2');
+          pollTitle.className = 'title';
+          pollTitle.appendChild(doc.createTextNode('Poll of the Day'));
+          pollHead.appendChild(pollTitle);
+
+          poll.parentNode.insertBefore(pollHead, poll);
+        }
+      }
     }
 
     // Add favorites
