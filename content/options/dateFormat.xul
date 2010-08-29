@@ -35,7 +35,7 @@
   title="&dateFormat.title;"
   style="width: 38em;">
 
-  <prefpane id="dateFormatDialog"
+  <prefpane id="dateFormatPane"
     onpaneload="gamefox_options_dateFormat.init();">
 
     <script type="application/x-javascript"

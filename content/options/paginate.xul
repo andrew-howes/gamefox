@@ -23,11 +23,11 @@
 
 <?xml-stylesheet href="chrome://global/skin/"?>
 
-<prefwindow id="AdvancedJSDialog" type="child"
+<prefwindow id="paginateDialog" type="child"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="&paginate.title;">
 
-  <prefpane id="AdvancedJSDialogPane">
+  <prefpane id="paginateDialogPane">
 
     <preferences>
       <preference id="paging.auto" name="gamefox.paging.auto" type="bool"/>
