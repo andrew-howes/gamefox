@@ -58,6 +58,7 @@ pref("gamefox.quote.message.bold", false);
 pref("gamefox.quote.removesignature", true);
 pref("gamefox.quote.style", "gfcode");
 pref("gamefox.quote.controlwhitespace", true);
+pref("gamefox.quote.focusQuickPost", true);
 
 pref("gamefox.signature.serialized", "[{\"accounts\":\"\", \"boards\":\"\", \"body\":\"\"}]");
 pref("gamefox.signature.newline", false);

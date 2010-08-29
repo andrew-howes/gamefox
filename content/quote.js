@@ -168,7 +168,10 @@ var gamefox_quote =
     if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
       gamefox_messages.updateMessageCount(doc);
 
-    quickpost.focus();
+    if (gamefox_lib.prefs.getBoolPref('quote.focusQuickPost'))
+      quickpost.focus();
+    else
+      event.target.blur();
     // Move the caret to the end of the last quote
     quickpost.setSelectionRange(endPosition, endPosition);
   }
