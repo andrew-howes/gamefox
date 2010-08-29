@@ -48,7 +48,7 @@ var gamefox_options_style =
     this.treeView.childData = {};
     this.treeView.visibleData = [];
     var categories = { Themes: 'themes', Other: 'bundled', GameFOX: 'gamefox',
-      User: 'user' };
+      Imported: 'user' };
     for (var treeCat in categories)
     {
       this.treeView.visibleData.push([[treeCat], true, false]);
