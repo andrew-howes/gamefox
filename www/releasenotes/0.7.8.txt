@@ -29,6 +29,7 @@ Different topic pages can be loaded from the context menu of the topic itself.
 ![Topic pages](images/0.7.8/topicpages.png)
 
 The GameFAQs clock has been added to QuickPost to make it easier to time posts.
+(This must be enabled from Tools | GameFOX | Main | Page | Add clock.)
 
 ![GameFAQs clock for QuickPost](images/0.7.8/clock.png)
 
