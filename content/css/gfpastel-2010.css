@@ -328,7 +328,8 @@
   .gs li:first-child h3 {
     border-top: 0;
     }
-  .gs h3 + p {
+  div.gs div.details > h3 + p,
+  div.gs h3 + p {
     background: rgba(219,219,255,.5);
     border: 1px solid #6DA1D0;
       border-top: 0;
@@ -436,12 +437,54 @@
   .pod > .head + .body > table.contrib tbody tr:last-child > * {
     border-bottom-width: 0;
     }
+  ul.cheats {
+    list-style-type: none;
+    margin: 0 1em;
+    padding: 0;
+    }
+  ul.cheats li {
+    margin: 0;
+    padding: 0;
+    }
   ul.cheats li:first-child ~ li h3 {
     -moz-border-radius: 0;
     }
   img.boxshot {
     float: left;
     margin: 3px;
+    }
+  ul.cheats li:first-child ~ li h3 {
+    -moz-border-radius: 0;
+    }
+  div.rating {
+    margin-bottom: .3em;
+    }
+  div.rating a {
+    border: 1px solid #6DA1D0;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    display: inline-block;
+    padding: .2em;
+    width: 2em;
+    }
+  div.rating a.up {
+    background: rgba(200,255,200,.8);
+    -moz-border-radius: 1em 0 0 1em;
+    }
+  div.rating a.down {
+    background: rgba(255,200,200,.8);
+    -moz-border-radius: 0 1em 1em 0;
+    border-left-width: 0;
+    }
+  #recommend a {
+    color: #44A;
+    text-decoration: underline;
+    }
+  #recommend a:hover {
+    color: #444;
+    }
+  .details p, .body p:not(.deck) {
+    margin: 0;
+    padding: .3em;
     }
 /* Topic list
    * It is time for me to do what has to be me to help my brother defeat the 
@@ -488,6 +531,7 @@
       border-top: 0px;
     -moz-border-radius: 0 0 1em 1em;
     -moz-box-shadow: 0 0 1em #6DA1D0;
+    color: #497299;
     list-style: none;
     margin: 0;
     padding: .3em;
@@ -498,6 +542,12 @@
   .pagejumper ul li + li:before {
     content: " | ";
     }
+    .pagejumper ul > li > a {
+      color: inherit !important;
+      }
+    .pagejumper ul > li > a:visited {
+      opacity: .6;
+      }
   /* Rid of the papers */
   img[src$="/images/default/topic.gif"] {
     display: none;
