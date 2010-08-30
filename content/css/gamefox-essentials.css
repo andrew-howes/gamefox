@@ -49,4 +49,9 @@
         margin: -3px -3px -3px 3px;
         float: right;
     }
+
+    #gamefox-favorites-menu
+    {
+        margin-right: 5px;
+    }
 }
