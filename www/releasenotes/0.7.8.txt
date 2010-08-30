@@ -1,5 +1,7 @@
 ### About this version
 
+The Poll of the Day sponsorship image is now removed by GameFOX.
+
 Firefox 4.0 support is new in this release. In addition, Firefox 3.0
 compatibility has been dropped. Firefox 3.5 and 3.6 are still compatible.
 
