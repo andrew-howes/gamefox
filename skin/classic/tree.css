@@ -8,6 +8,11 @@
 #gamefox-tracked-rows::-moz-tree-row(deleted) { background-image: url('tracked-deleted.png'); }
 #gamefox-tracked-rows::-moz-tree-row(new) { background-image: url('tracked-new.png'); }
 
+#gamefox-tracked-rows::-moz-tree-cell
+{
+    padding-left: 6px;
+}
+
 /* Tags */
 #gamefox-tags-rows::-moz-tree-row(container)
 {
