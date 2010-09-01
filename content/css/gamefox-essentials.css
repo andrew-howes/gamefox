@@ -44,7 +44,6 @@
     {
         color: #000 !important;
         font-size: 1.5em;
-        line-height: 10em; /* set to height of #gamefox-tracked-note in JS */
         padding: 0 5px;
         margin: -3px -3px -3px 3px;
         float: right;
