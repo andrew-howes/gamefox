@@ -171,7 +171,7 @@ var gamefox_tracked =
         {
           var topic = gamefox_tracked.list[i];
 
-          if (topic) continue; // topic still exists
+          if (list[i]) continue; // topic still exists
           if (!topic.hold) continue; // topic isn't held
 
           topic.deleted = true;
