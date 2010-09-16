@@ -9,13 +9,17 @@ A notification appears at the top of the page when a topic you are tracking has
 unread posts. Opening the last page of the topic will mark it as read, and
 clicking the "X" will mark all topics as read.
 
-![Tracking notification](images/0.7.8/trackingnote.png)
+<p class="image"><a href="images/0.7.8/trackingnote.png">
+<img src="images/0.7.8/trackingnote_small.png" alt="Tracking notification">
+</a></p>
 
 Highlighting now has an entirely new interface. The textbox is larger, making
 it easier to maintain large lists. A new feature lets you highlight all admins,
 mods, VIPs or tracked topics.
 
-![Highlighting interface](images/0.7.8/highlighting.png)
+<p class="image"><a href="images/0.7.8/highlighting.png">
+<img src="images/0.7.8/highlighting_small.png" alt="Highlighting interface">
+</a></p>
 
 A bug affecting highlighting groups of the type "title contains" and "post
 contains" has been fixed.
@@ -26,21 +30,29 @@ The "Board Settings" tab has been removed from the options window.
 
 Different topic pages can be loaded from the context menu of the topic itself.
 
-![Topic pages](images/0.7.8/topicpages.png)
+<p class="image"><a href="images/0.7.8/topicpages.png">
+<img src="images/0.7.8/topicpages_small.png" alt="Topic pages">
+</a></p>
 
 The GameFAQs clock has been added to QuickPost to make it easier to time posts.
 (This must be enabled from Tools | GameFOX | Main | Page | Add clock.)
 
-![GameFAQs clock for QuickPost](images/0.7.8/clock.png)
+<p class="image"><a href="images/0.7.8/clock.png">
+<img src="images/0.7.8/clock_small.png" alt="GameFAQs clock for QuickPost">
+</a></p>
 
 In the toolbar, GameFOX's icons have been redesigned.
 
-![Toolbar icons](images/0.7.8/toolbar.png)
+<p class="image">
+<img src="images/0.7.8/toolbar.png" alt="Toolbar icons">
+</p>
 
 Sidebar options have been moved from the main options window into a separate
 window opened from the sidebar itself.
 
-![Sidebar preferences](images/0.7.8/sidebar.png)
+<p class="image">
+<img src="images/0.7.8/sidebar.png" alt="Sidebar preferences">
+</p>
 
 ### Feedback
 
