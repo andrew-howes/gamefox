@@ -30,9 +30,9 @@ The "Board Settings" tab has been removed from the options window.
 
 Different topic pages can be loaded from the context menu of the topic itself.
 
-<p class="image"><a href="images/0.7.8/topicpages.png">
-<img src="images/0.7.8/topicpages_small.png" alt="Topic pages">
-</a></p>
+<p class="image">
+<img src="images/0.7.8/topicpages.png" alt="Topic pages">
+</p>
 
 The GameFAQs clock has been added to QuickPost to make it easier to time posts.
 (This must be enabled from Tools | GameFOX | Main | Page | Add clock.)
