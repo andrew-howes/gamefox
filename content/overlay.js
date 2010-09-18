@@ -33,9 +33,7 @@ var gamefox =
           { notify: gamefox_tracked.timedUpdate }, 30000,
           Ci.nsITimer.TYPE_REPEATING_SLACK);
 
-    // Is this app startup or just a new window?
-    if (gamefox_lib.getAllWindows().length == 1)
-      gamefox.startup();
+    gamefox.startup();
   },
 
   startup: function()
@@ -60,7 +58,7 @@ var gamefox =
       gamefox_lib.prefs.clearUserPref('tracked.lastAccount');
     }
     else if (gamefox_lib.isLoggedIn())
-      gamefox_tracked.updateList();
+      gamefox_tracked.timedUpdate();
 
     // disable favorites
     if (!gamefox_lib.prefs.getBoolPref('favorites.enabled'))
