@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009 Brian Marshall, Andrianto Effendy, Michael Ryan
+ * Copyright 2008, 2009, 2010 Brian Marshall, Andrianto Effendy, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -69,7 +69,7 @@ var gamefox_quote =
 
     // Get rid of signature
     if (gamefox_lib.prefs.getBoolPref('quote.removesignature'))
-      body = body.replace(/---(\n.*){0,2}$/, '');
+      body = body.replace(/(^|\n) *--- *(\n.*){0,2}$/, '');
 
     // Break escaped tags
     body = gamefox_utils.breakTags(body);
