@@ -782,11 +782,6 @@ var gamefox_page =
           ignoreCount = parseInt(ignoreMatch[1]);
       }
 
-      // Update posts per page setting if not on the last page
-      if ((pagenum + 1) < doc.gamefox.pages)
-        gamefox_lib.prefs.setIntPref('msgsPerPage', td.length / 2
-            + ignoreCount);
-
       var alternateColor = false;
       var msgnum = pagenum * gamefox_lib.prefs.getIntPref('msgsPerPage');
       var msgnumCond = !onDetail && gamefox_lib.prefs.getBoolPref('elements.msgnum');

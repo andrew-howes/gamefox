@@ -1,5 +1,6 @@
 2010-09-xx:
     * version 0.7.9
+    * Fix problems with topic pagination, last post links and message numbering
 
 2010-09-01:
     * version 0.7.8

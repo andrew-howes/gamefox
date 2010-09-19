@@ -15,6 +15,7 @@
 <!ENTITY favoritesMenu.label "Add favorites menu">
 <!ENTITY clock.label "Add clock">
 <!ENTITY trackingNote.label "Show tracked topics with unread posts">
+<!ENTITY msgsPerPage.label "Messages per page:">
 
 <!ENTITY topicLists.label "Topic Lists">
 
