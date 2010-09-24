@@ -47,7 +47,7 @@ var gamefox_page =
           poll.removeChild(poll.firstChild);
         }
 
-        if (poll.getElementsByTagName('h2').length == 0)
+        if (poll.parentNode.getElementsByTagName('h2').length == 0)
         {
           var pollHead = doc.createElement('div');
           pollHead.className = 'head';
