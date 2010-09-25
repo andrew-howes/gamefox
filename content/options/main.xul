@@ -190,7 +190,7 @@
                     preference="elements.clock"/>
                   <hbox align="center">
                     <label value="&msgsPerPage.label;"/>
-                    <menulist preference="msgsPerPage">
+                    <menulist preference="msgsPerPage" sizetopopup="always">
                       <menupopup>
                         <menuitem value="10" label="10"/>
                         <menuitem value="20" label="20"/>
