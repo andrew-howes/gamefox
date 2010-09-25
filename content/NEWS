@@ -5,6 +5,7 @@
       for some people
     * Fix problems with topic pagination, last post links and message numbering
     * Fix double headers appearing on the poll of the day
+    * Add option to disable scrolling to QuickPost after quoting
 
 2010-09-01:
     * version 0.7.8

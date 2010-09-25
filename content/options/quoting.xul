@@ -35,8 +35,10 @@
       <preference id="header.messagenum" name="gamefox.quote.header.messagenum"
         type="bool"/>
 
-      <!-- Body -->
+      <!-- General -->
       <preference id="removesignature" name="gamefox.quote.removesignature"
+        type="bool"/>
+      <preference id="focusQuickPost" name="gamefox.quote.focusQuickPost"
         type="bool"/>
 
       <!-- Format -->
@@ -76,6 +78,7 @@
     <separator/>
 
     <checkbox label="&removeSig.label;" preference="removesignature"/>
+    <checkbox label="&focusQuickPost.label;" preference="focusQuickPost"/>
 
     <separator/>
 

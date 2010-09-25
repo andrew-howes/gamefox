@@ -6,6 +6,7 @@
 <!ENTITY number.label "Number">
 
 <!ENTITY removeSig.label "Remove signature">
+<!ENTITY focusQuickPost.label "Automatically scroll to QuickPost after quoting">
 
 <!ENTITY quoteFormat.label "Format quote with:">
 <!ENTITY useGFCode.label "GFCode tags (&lt;i&gt;, &lt;p&gt; and &lt;strong&gt;)">
