@@ -29,7 +29,7 @@ var gamefox_page =
     if (gamefox_lib.prefs.getBoolPref('elements.stopads'))
     {
       // Style elements
-      var styles = doc.getElementsByTagName('style');
+      var styles = doc.body.getElementsByTagName('style');
       for (var i = 0; i < styles.length; i++)
         styles[i].disabled = true;
 
