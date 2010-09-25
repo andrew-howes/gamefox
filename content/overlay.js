@@ -137,7 +137,10 @@ var gamefox =
     }
 
     /* 0.7.8 */
-    if (comparator.compare('0.7.8', version) > 0)
+    // Also run for 0.7.9 in case gamefox.startup() was never called for some
+    // people (see commit a1f7f84)
+    if (comparator.compare('0.7.8', version) > 0
+        || comparator.compare('0.7.9', version) > 0)
     {
       // New "include" property for highlighting groups
       var groups = gamefox_highlighting.read();
@@ -150,6 +153,13 @@ var gamefox =
       if (!css.themes)
         css.themes = {};
       gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+    }
+
+    /* 0.7.9 */
+    if (comparator.compare('0.7.9', version) > 0)
+    {
+      // Fix incorrect msgsPerPage prefs caused by 0.7.8
+      gamefox.importMsgsPerPage();
     }
   },
 
