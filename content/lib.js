@@ -365,13 +365,7 @@ var gamefox_lib =
       {
         dlg.focus();
       }
-      catch (e)
-      {
-        // There must be some modal dialog open
-        dlg = windowMediator.getMostRecentWindow('gamefox:options');
-        if (dlg)
-          dlg.focus();
-      }
+      catch (e) { } // a modal dialog is blocking us
     }
     else
     {
@@ -382,21 +376,9 @@ var gamefox_lib =
       };
       args.wrappedJSObject = args;
 
-      var features;
-      try
-      {
-        var instantApply =
-          prefs.getBoolPref('browser.preferences.instantApply');
-        features = 'chrome,titlebar,toolbar,centerscreen' + (instantApply ?
-            ',dialog=no' : ',modal');
-      }
-      catch (e)
-      {
-        features = 'chrome,titlebar,toolbar,centerscreen,modal';
-      }
       dlg = windowWatcher.openWindow(window,
-          'chrome://gamefox/content/options/options.xul', '_blank', features,
-          args);
+          'chrome://gamefox/content/options/options.xul', '_blank',
+          'chrome,titlebar,toolbar,centerscreen,dialog=no', args);
     }
   },
 
