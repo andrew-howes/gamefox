@@ -513,9 +513,11 @@ var gamefox_page =
       gamefox_lib.setTitle(doc, gamefox_utils.getBoardName(doc), 'T');
 
       // Topic "QuickPost" link
+      var newTopicLink;
       if (gamefox_lib.prefs.getBoolPref('elements.quickpost.link')
-          && doc.evaluate('a[contains(@href, "post.php")]', userNav,
-            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
+          && (newTopicLink = doc.evaluate('a[contains(@href, "post.php")]',
+              userNav, null,
+              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue))
       {
         var anchor = doc.createElement('a');
             anchor.id = 'gamefox-quickpost-link';
@@ -524,8 +526,9 @@ var gamefox_page =
                   getCharPref('elements.quickpost.link.title')));
             anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
 
-        userNav.appendChild(doc.createTextNode(' | '));
-        userNav.appendChild(anchor);
+        userNav.insertBefore(anchor, newTopicLink.nextSibling);
+        userNav.insertBefore(doc.createTextNode(' | '), newTopicLink
+            .nextSibling);
       }
 
       var topicsTable = doc.evaluate('div[@class="body"]/table[@class="board topics"]',
