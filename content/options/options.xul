@@ -31,7 +31,7 @@
     buttons="accept,cancel,extra2"
     buttonlabelextra2="&about.button;…"
     ondialogextra2="window.openDialog('chrome://gamefox/content/about.xul',
-      'gamefox-about-dialog', 'centerscreen,chrome');"
+      'gamefox-about-dialog', 'centerscreen,chrome,modal');"
     defaultButton="none"
     onload="gamefox_options.loadAllOverlays();"
     windowtype="gamefox:options"
