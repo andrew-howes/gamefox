@@ -95,13 +95,13 @@ var gamefox =
       else if (gamefox_lib.isNightly()
           && gamefox_lib.prefs.getBoolPref('nightlyChangeLog'))
         window.setTimeout(gamefox_lib.newTab, 10,
-            'http://beyondboredom.net/projects/gamefox/nightlychanges.php', 0);
+            'http://beyondboredom.net/gamefox/nightlychanges.php', 0);
 
       // release notes for new stable release
       else if (!gamefox_lib.isDev() && lastVersion != ''
           && gamefox_lib.prefs.getBoolPref('showReleaseNotes'))
         window.setTimeout(gamefox_lib.newTab, 10,
-            'http://beyondboredom.net/projects/gamefox/releasenotes/' + version +
+            'http://beyondboredom.net/gamefox/releasenotes/' + version +
             '.html', 0);
 
       gamefox_css.init();

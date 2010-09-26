@@ -6,4 +6,4 @@ pass = somepassword
 ;uncomment to enable key auth
 ;keyfile = /home/someguy/.ssh/id_rsa
 file_dir = public_html/gfox
-web_dir = public_html/projects/gamefox
+web_dir = public_html/gamefox

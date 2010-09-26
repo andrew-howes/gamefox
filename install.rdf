@@ -8,7 +8,7 @@
                 <em:description>Enhances the GameFAQs message boards.</em:description>
                 <em:creator></em:creator>
                 <em:extension>true</em:extension>
-                <em:homepageURL>http://beyondboredom.net/projects/gamefox/</em:homepageURL>
+                <em:homepageURL>http://beyondboredom.net/gamefox/</em:homepageURL>
                 <em:optionsURL>chrome://gamefox/content/options/options.xul</em:optionsURL>
                 <em:iconURL>chrome://gamefox/skin/logo-small.png</em:iconURL>
                 <em:aboutURL>chrome://gamefox/content/about.xul</em:aboutURL>

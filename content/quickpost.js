@@ -181,7 +181,7 @@ var gamefox_quickpost =
       
       var gamefoxLink = doc.createElement('a');
       gamefoxLink.textContent = 'GameFOX';
-      gamefoxLink.href = 'http://beyondboredom.net/projects/gamefox/';
+      gamefoxLink.href = 'http://beyondboredom.net/gamefox/';
       nightlyMsg.appendChild(gamefoxLink);
 
       nightlyMsg.appendChild(doc.createTextNode(' development release'
