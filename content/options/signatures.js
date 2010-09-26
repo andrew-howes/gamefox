@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -189,6 +189,14 @@ var gamefox_options_sig =
   {
     var strbundle = document.getElementById('strings');
     var signatureMsg = document.getElementById('signatureMsg');
+
+    if (!gamefox_lib.isLoggedIn())
+    {
+      gamefox_options.showNotification(signatureMsg,
+          strbundle.getString('importNotLoggedIn'), 'warning');
+      return;
+    }
+
     var button = document.getElementById('gamefox-css-grab-sig');
     button.disabled = true;
 

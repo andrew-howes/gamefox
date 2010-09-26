@@ -121,7 +121,7 @@ var gamefox_options =
 
     var args = window.arguments[0].wrappedJSObject;
 
-    if (args.firstRun && gamefox_lib.isLoggedIn())
+    if (args.firstRun)
       gamefox_options_sig.importSig();
 
     for (var i in args.notifications)
