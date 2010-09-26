@@ -10,7 +10,7 @@
 <!ENTITY criteria.label "Criteria:">
 <!ENTITY criteria.accounts.desc "List universal account names separated by commas.">
 <!ENTITY criteria.boards.desc "List board names or IDs separated by commas.">
-<!ENTITY criteria.blank.desc "These fields are optional. If they are blank, they will apply to every account or board.">
+<!ENTITY criteria.blank.desc "These fields are optional. If blank, they will apply to every account or board.">
 <!ENTITY accounts.label "Accounts:">
 <!ENTITY boards.label "Boards:">
 
