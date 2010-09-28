@@ -9,7 +9,7 @@
     * The options window no longer blocks focus to the Firefox window on
       Windows
     * Move the topic list QuickPost link next to the New Topic link to prevent
-      accidental clicks on Remove/Add to Favorites
+      accidental clicks on Add to/Remove Favorites
 
 2010-09-01:
     * version 0.7.8
