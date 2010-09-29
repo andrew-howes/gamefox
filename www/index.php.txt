@@ -3,10 +3,10 @@ browsing of the [GameFAQs message boards](http://www.gamefaqs.com/boards).
 
 ### Install ### {#install}
 
-<big>[GameFOX 0.7.8](/gfox/gamefox-0.7.8.xpi)</big>
-([release notes](releasenotes/0.7.8.html))
+<big>[GameFOX 0.7.9](/gfox/gamefox-0.7.9.xpi)</big>
+([release notes](releasenotes/0.7.9.html))
 
-Released 2010 September 1. Compatible with Firefox 3.5 - 4.0b6pre, SeaMonkey
+Released 2010 September 28. Compatible with Firefox 3.5 - 4.0b7pre, SeaMonkey
 2.0.
 
 ### Features ### {#features}
