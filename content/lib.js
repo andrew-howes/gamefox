@@ -20,9 +20,15 @@
 var gamefox_lib =
 {
   extensionID: '{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}',
-  domain: 'http://www.gamefaqs.com',
+  get domain()
+  {
+    return this.useBeta ? 'http://beta.gamefaqs.com' :
+      'http://www.gamefaqs.com';
+  },
   path: '/boards/',
   cookieHost: '.gamefaqs.com',
+  get useBeta() { return this.prefs.getBoolPref('useBeta'); },
+  set useBeta(val) { this.prefs.setBoolPref('useBeta', val); },
 
   prefs: Cc['@mozilla.org/preferences-service;1']
     .getService(Ci.nsIPrefService)
@@ -142,6 +148,18 @@ var gamefox_lib =
     }
   },
 
+  onBeta: function(doc)
+  {
+    try
+    {
+      return /^beta\.gamefaqs\.com$/.test(doc.domain);
+    }
+    catch (e)
+    {
+      return false;
+    }
+  },
+
   onBoards: function(doc)
   {
     return gamefox_lib.onGF(doc) && /^\/boards(\/|$|\?)/.test(doc.location.pathname);
@@ -200,8 +218,9 @@ var gamefox_lib =
         var div = doc.getElementById('board_wrap');
         if (div)
         {
-          var table = doc.evaluate('div[@class="body"]/table[@class="board message"]',
-              div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          var table = doc.evaluate('//div[@class="body"]/' +
+              'table[@class="board message"]', div, null,
+              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (table && !gamefox_lib.onPage(doc, 'usernote'))
           {
             var boards = doc.evaluate('div[@class="body"]', div, null,
@@ -211,9 +230,20 @@ var gamefox_lib =
             else
             {
               // TODO: maybe check for user profile links instead
-              var user = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
-                  div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-              if (user && user.textContent.indexOf('Topic Archived') != -1)
+              var user;
+              if (gamefox_lib.onBeta(doc))
+                user = doc.evaluate('//div[@class="user_panel"]'
+                    + '/div[@class="u_search"]/div[@class="links"]',
+                    doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+                  .singleNodeValue;
+              else
+                user = doc.evaluate('div[@class="board_nav"]'
+                    + '/div[@class="body"]/div[@class="user"]',
+                    div, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
+                    null).singleNodeValue;
+
+              if (user && user.textContent.indexOf(gamefox_lib.onBeta(doc) ?
+                    'Topic archived' : 'Topic Archived') != -1)
                 doc.gamefox.pageType = ['messages', 'archive'];
               else
                 doc.gamefox.pageType = ['messages'];

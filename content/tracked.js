@@ -207,7 +207,8 @@ var gamefox_tracked =
         {
           if (result[1] == 'tracktopic')
           {
-            link.textContent = 'Stop Tracking';
+            link.textContent = gamefox_lib.onBeta(gamefox_lib
+                .getDocument(event)) ? 'Stop tracking' : 'Stop Tracking';
             link.href = link.href.replace(/tracktopic/, 'stoptrack');
           }
           else
@@ -346,11 +347,11 @@ var gamefox_tracked =
       return [false, 'This topic is archived.'];
 
     // start tracking
-    if (str.indexOf('<div id="board_wrap" class="pod"><p>You are now tracking this topic.</p>') != -1)
+    if (str.indexOf('?action=stoptrack">') != -1)
       return [true, 'tracktopic'];
 
     // stop tracking
-    if (str.indexOf('<div id="board_wrap" class="pod"><p>You are no longer tracking this topic.</p>') != -1)
+    if (str.indexOf('?action=tracktopic">') != -1)
       return [true, 'stoptrack'];
 
     // generic error

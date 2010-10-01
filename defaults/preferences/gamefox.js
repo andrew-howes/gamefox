@@ -132,3 +132,4 @@ pref("gamefox.nightlyChangeLog", true);
 pref("gamefox.showReleaseNotes", true);
 
 pref("gamefox.version", "");
+pref("gamefox.useBeta", false);

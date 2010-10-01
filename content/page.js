@@ -113,6 +113,10 @@ var gamefox_page =
 
     doc.gamefox = {};
 
+    // Check for beta
+    var onBeta = gamefox_lib.onBeta(doc); // local variable for this document
+    gamefox_lib.useBeta = onBeta;
+
     // Update last visit time
     gamefox_lib.prefs.setIntPref('lastVisit', Math.floor(Date.now() / 1000));
 
@@ -503,8 +507,13 @@ var gamefox_page =
     /* Topic Lists */
     else if (gamefox_lib.onPage(doc, 'topics'))
     {
-      var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (onBeta)
+        var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      else
+        var userNav = doc.evaluate('div[@class="board_nav"]' +
+            '/div[@class="body"]/div[@class="user"]', boardWrap, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var userlist = gamefox_highlighting.loadGroups();
 
       var onTracked = gamefox_lib.onPage(doc, 'tracked');
@@ -515,8 +524,8 @@ var gamefox_page =
       // Topic "QuickPost" link
       var newTopicLink;
       if (gamefox_lib.prefs.getBoolPref('elements.quickpost.link')
-          && (newTopicLink = doc.evaluate('a[contains(@href, "post.php")]',
-              userNav, null,
+          && (newTopicLink = doc.evaluate('//a[contains(@href, "post.php")]',
+              userNav || userPanel, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue))
       {
         var anchor = doc.createElement('a');
@@ -526,9 +535,18 @@ var gamefox_page =
                   getCharPref('elements.quickpost.link.title')));
             anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
 
-        userNav.insertBefore(anchor, newTopicLink.nextSibling);
-        userNav.insertBefore(doc.createTextNode(' | '), newTopicLink
-            .nextSibling);
+        if (onBeta)
+        {
+          newTopicLink.parentNode.appendChild(doc.createTextNode(' ('));
+          newTopicLink.parentNode.appendChild(anchor);
+          newTopicLink.parentNode.appendChild(doc.createTextNode(')'));
+        }
+        else
+        {
+          userNav.insertBefore(anchor, newTopicLink.nextSibling);
+          userNav.insertBefore(doc.createTextNode(' | '), newTopicLink
+              .nextSibling);
+        }
       }
 
       var topicsTable = doc.evaluate('div[@class="body"]/table[@class="board topics"]',
@@ -716,10 +734,16 @@ var gamefox_page =
     /* Message Lists */
     else if (gamefox_lib.onPage(doc, 'messages'))
     {
-      var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="user"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var pageJumper = doc.evaluate('div[@class="pod pagejumper"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (onBeta)
+        var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      else
+        var userNav = doc.evaluate('div[@class="board_nav"]'
+            + '/div[@class="body"]/div[@class="user"]', boardWrap, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var pageJumper = doc.evaluate('//div[@class="pod pagejumper"]',
+          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+        .singleNodeValue;
       if (pageJumper)
       {
         var pageJumperItems = pageJumper.getElementsByTagName('li');
@@ -749,21 +773,31 @@ var gamefox_page =
       // "Tag Topic" link
       if (gamefox_lib.prefs.getBoolPref('elements.tag.link'))
       {
-        userNav.appendChild(doc.createTextNode(' | '));
-        userNav.appendChild(gamefox_tags.tagTopicLink(doc));
+        if (onBeta)
+        {
+          var li = doc.createElement('li');
+          li.appendChild(gamefox_tags.tagTopicLink(doc));
+          userPanel.getElementsByTagName('ul')[0].appendChild(li);
+        }
+        else
+        {
+          userNav.appendChild(doc.createTextNode(' | '));
+          userNav.appendChild(gamefox_tags.tagTopicLink(doc));
+        }
       }
 
       // Tracking
       if (gamefox_lib.prefs.getBoolPref('tracked.enabled'))
       {
-        var trackLink = doc.evaluate('a[contains(., "Track")]', userNav,
-            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var trackLink = doc.evaluate('//a[contains(translate(., "T", "t"), '
+          + '"track")]', userNav || userPanel, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (trackLink)
           trackLink.addEventListener('click', gamefox_tracked.linkListener, false);
       }
 
       // Double click
-      var messageTable = doc.evaluate('div[@class="body"]/table[@class="board message"]',
+      var messageTable = doc.evaluate('//div[@class="body"]/table[@class="board message"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       messageTable.addEventListener('dblclick', gamefox_page.msglistDblclick,
           false);
@@ -797,10 +831,12 @@ var gamefox_page =
         tc = tc[1].replace(/\+/g, ' ');
 
       var deletelinkCond = gamefox_lib.prefs.getBoolPref('elements.deletelink');
-      var loggedInUser = userNav.getElementsByTagName('a')[0].textContent;
+      var loggedInUser = (userNav || userPanel).getElementsByTagName('a')[0]
+        .textContent;
       loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
-      var topicOpen = !!doc.evaluate('a[contains(@href, "post.php")]', userNav,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var topicOpen = !!doc.evaluate('//a[contains(@href, "post.php")]',
+          userNav || userPanel, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
+          null).singleNodeValue;
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
       var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink') &&
         topicOpen && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
@@ -1184,11 +1220,14 @@ var gamefox_page =
         var miniBoardNav = doc.createElement('div');
         miniBoardNav.id = 'gamefox-board-nav';
 
-        for (var i = 0; i <= 2; i++)
+        for (var i = 0; i <= (onBeta && !onArchive ? 4 : 2); i++)
         {
-          miniBoardNav.appendChild(userNav.getElementsByTagName('a')[i]
-              .cloneNode(true));
-          if (i < 2)
+          if (onBeta && !onArchive && (i == 1 || i == 2))
+            continue;
+
+          miniBoardNav.appendChild((userNav || userPanel)
+              .getElementsByTagName('a')[i].cloneNode(true));
+          if (i < (onBeta && !onArchive ? 4 : 2))
             miniBoardNav.appendChild(doc.createTextNode(' | '));
         }
 

@@ -22,7 +22,8 @@ Components.utils.import('resource://gre/modules/XPCOMUtils.jsm');
 const nsIContentPolicy = Components.interfaces.nsIContentPolicy;
 const nsISupports = Components.interfaces.nsISupports;
 const adTest = /(2mdn\.net|adlegend\.com|advertising\.com|atdmt\.com|adimg\.cnet\.com|mads\.cnet\.com|surveys\.cnet\.com|adlog\.com\.com|dw\.com\.com|i\.i\.com\.com|contextweb\.com|doubleclick\.net|eyewonder\.com|adimg\.gamefaqs\.com|bwp\.gamefaqs\.com|mads\.gamefaqs\.com|bwp\.gamespot\.com|insightexpressai\.com|mediaplex\.com|pointroll\.com|questionmarket\.com|revsci\.net|scorecardresearch\.com|serving-sys\.com|specificclick\.net|tribalfusion\.com|turn\.com|unicast\.com|voicefive\.com|adserver\.yahoo\.com|yieldmanager\.com)$/;
-const host = 'www.gamefaqs.com';
+const wwwHost = 'www.gamefaqs.com';
+const betaHost = 'beta.gamefaqs.com';
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
   .getService(Components.interfaces.nsIPrefService)
   .getBranch('gamefox.');
@@ -42,6 +43,8 @@ GFcontentPolicy.prototype =
   {
     try
     {
+      var host = requestOrigin.host == betaHost ? betaHost : wwwHost;
+
       if (requestOrigin.host != host)
         return nsIContentPolicy.ACCEPT;
 
