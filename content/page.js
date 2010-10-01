@@ -1201,8 +1201,16 @@ var gamefox_page =
         var tcParam = gamefox_utils.tcParam(tc);
         if (tcParam)
         {
-          var pageJumperTop = doc.evaluate('div[@class="pages"]', userNav.parentNode,
-              null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          var pageJumperTop;
+          if (onBeta)
+            pageJumperTop = doc.evaluate('div[@class="u_pagenav"]', userPanel,
+                null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+              .singleNodeValue;
+          else
+            pageJumperTop = doc.evaluate('div[@class="pages"]',
+                userNav.parentNode, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
+                null).singleNodeValue;
+
           var links = gamefox_utils.mergeArray(
               pageJumperTop ? pageJumperTop.getElementsByTagName('a') : [],
               pageJumper.getElementsByTagName('a'));
@@ -1231,7 +1239,12 @@ var gamefox_page =
             miniBoardNav.appendChild(doc.createTextNode(' | '));
         }
 
-        boardWrap.insertBefore(miniBoardNav, pageJumper);
+        if (pageJumper)
+          pageJumper.parentNode.insertBefore(miniBoardNav, pageJumper);
+        else if (onBeta)
+          boardWrap.firstChild.appendChild(miniBoardNav);
+        else
+          boardWrap.appendChild(miniBoardNav);
       }
 
       // Link post nums in quotes
