@@ -1239,10 +1239,9 @@ var gamefox_page =
             continue;
 
           miniBoardNav.appendChild(boardNavLinks[i].cloneNode(true));
-
-          if (i < boardNavLinks.length - 2)
-            miniBoardNav.appendChild(doc.createTextNode(' | '));
+          miniBoardNav.appendChild(doc.createTextNode(' | '));
         }
+        miniBoardNav.removeChild(miniBoardNav.lastChild);
 
         if (pageJumper)
           pageJumper.parentNode.insertBefore(miniBoardNav, pageJumper);
