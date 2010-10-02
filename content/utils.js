@@ -182,9 +182,9 @@ var gamefox_utils =
     var div = doc.getElementById('content');
     if (div)
     {
-      var node = doc.evaluate('div[@class="head"]/h1', div, null,
+      var node = doc.evaluate('//div[@class="head"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-        || doc.evaluate('div[@class="content_nav"]/h1', div, null,
+        || doc.evaluate('//div[@class="content_nav"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
         return node.textContent.trim();
@@ -197,7 +197,7 @@ var gamefox_utils =
     var div = doc.getElementById('board_wrap');
     if (div)
     {
-      var node = doc.evaluate('div[@class="head"]/h2', div, null,
+      var node = doc.evaluate('//div[@class="head"]/h2', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
         return node.textContent.trim();
