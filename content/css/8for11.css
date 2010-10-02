@@ -1,7 +1,7 @@
 /** Eight For Eleven (8for11) - Makes the v11 GameFAQs look like v8 **/
 /** By TakatoMatsuki and Swordless Link **/
 
-/** Build number 2010-10-01-19-36 **/
+/** Build number 2010-10-02-13-44 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -13,14 +13,12 @@ a:hover:not(#helloworld) {color:yellow !important;}
 table {border-collapse:separate !important; border-spacing:2px !important; margin:0 !important; overflow:scroll !important;}
 
 /** Ads **/
-.ad_skin, .ad_super, .ad_mpu {display:none !important;}
+.ad_skin, .ad_super {display:none !important;}
 #sky_col_wrap #side_col {position:absolute !important; top:260px !important; left:0 !important; margin:0 !important; padding:0 !important;}
 #sky_col_wrap .col_layout:not(#helloworld) {padding:0 !important;}
 #sponsored_links {margin:2px !important;}
 body.bwp {background:white !important;}
 .site_tracking {display:none !important;}
-
-
 
 /** Header **/
 #masthead:not(#helloworld) {background:#6666FF none repeat scroll 0 0 !important; height:100% !important; width:162px !important; display:block !important; float:left !important; font-family: arial,sans-serif !important;}
@@ -82,11 +80,8 @@ body.bwp {background:white !important;}
 #layout {width:100% !important; }
 .col_layout {padding-left:0 !important; }
 #full_col_wrap .col_layout {padding-right:0 !important;}
-#sky_col_wrap, #full_col_wrap, #mpu_col_wrap:not(.board_hub) {margin-top: 0 !important;}
-#mpu_col_wrap {padding-bottom:0 !important;}
+#sky_col_wrap, #full_col_wrap, #mpu_col_wrap {margin-top: 0 !important;}
 #side_col, #col_layout, #mpu_col_wrap, #side_col_wrap, #sky_col_wrap {background:white !important; }
-#side_col {padding-top:0 !important;}
-
 
 
 /** Pods **/
@@ -137,13 +132,11 @@ body.bwp {background:white !important;}
 #related_games li {border:1px inset grey !important; padding:8px !important;}
 
 
-/** Above Board Nav / Above User Panel **/
-#content > .head, #content > .head > h1, #content > #mpu_col_wrap #main_col > .head, #content > #mpu_col_wrap #main_col > .head > h1, div.content_nav > h1, #content > .head a, #content > .head > h1 a, #content > #mpu_col_wrap #main_col > .head a, #content > #mpu_col_wrap #main_col > .head > h1 a, div.content_nav > h1 a {margin:0 !important; padding:0 !important; border:0 !important; color:black !important; font-style:italic !important; font-weight:bold !important; font-size:32px !important; text-align:center !important;}
-#content > .head, #content > #mpu_col_wrap #main_col > .head, div.content_nav > h1 {padding-top:6px !important; margin-bottom:8px !important;}
-#content > #mpu_col_wrap #main_col > .head {margin-right:-320px !important;}
+/** Above Board Nav **/
+#content > .head, #content > .head > h1, #main_col > .head, #main_col > .head > h1, div.content_nav > h1, #content > .head a, #content > .head > h1 a, #main_col > .head a, #main_col > .head > h1 a, div.content_nav > h1 a {margin:0 !important; padding:0 !important; border:0 !important; color:black !important; font-style:italic !important; font-weight:bold !important; font-size:32px !important; text-align:center !important;}
+#content > .head, #main_col > .head, div.content_nav > h1 {padding-top:6px !important; margin-bottom:8px !important;}
 
 div.content_nav {margin:0 !important; padding:0 !important;}
-#content > #mpu_col_wrap div.content_nav {margin-right:-320px !important;}
 div.content_nav a {color:white !important;}
 div.content_nav .crumbs {padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; padding:1px !important; border:2px white solid !important; border-bottom:0px !important; background: #0000FF none repeat scroll 0 0 !important;}
 
@@ -156,7 +149,7 @@ ul.content_nav li:first-child:before {content:"" !important;}
 ul.content_nav li:first-child.hi + li:before {content: "" !important;}
 
 
-/** Board Nav **/ /** This will be removed when the GFAQs Beta changes go live **/
+/** Board Nav **/
 .board_nav, .board_nav .body {height:auto !important;}
 .board_nav .user, .board_nav .pages {float:none !important; padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; padding:1px !important; border:2px white solid !important; border-bottom:0px !important;}
 .board_nav .user a:not(#helloworld), .board_nav .pages a:not(#helloworld), .board_nav .user a:hover:not(#helloworld), .board_nav .pages a:hover:not(#helloworld), .board_nav .user a:visited:not(#helloworld), .board_nav .pages a:visited:not(#helloworld), .board_nav .user a:active:not(#helloworld), .board_nav .pages a:active:not(#helloworld) {color:white !important; text-decoration:underline !important; font-weight:bold !important;}
@@ -165,35 +158,6 @@ ul.content_nav li:first-child.hi + li:before {content: "" !important;}
 .board_nav .user a:hover:not(#helloworld), .board_nav .pages a:hover:not(#helloworld) {color:yellow !important;}
 .board_nav .user {background: #0000FF none repeat scroll 0 0 !important; }
 .board_nav .pages {background:#8080FF none repeat scroll 0 0 !important; font-style:italic !important;}
-
-
-/** User Panel **/ /** Replaces the "Board Nav" section above **/
-.nav_pod {margin-right:-320px !important;}
-.nav_pod {text-align:center !important;background: #0000FF !important; border:2px solid white !important; border-bottom:0 !important; padding-top:1px !important;}
-.nav_pod .bottom, .nav_pod .body strong {display:none !important;}
-.nav_pod a, .nav_pod .body a:not(#helloworld) {color:white !important; text-decoration:underline !important; font-weight:bold !important;}
-.nav_pod a:visited, .nav_pod .body a:visited:not(#helloworld) {color:white !important; font-weight:bold !important;}
-.nav_pod a:active, .nav_pod .body a:active:not(#helloworld) {color:red !important; font-weight:bold !important;}
-.nav_pod a:hover, .nav_pod .body a:hover:not(#helloworld) {color:yellow !important; font-weight:bold !important;}
-
-.nav_pod .body, .nav_pod .body span {background:#0000FF !important; height:auto !important; margin:0 !important; padding:0 !important; display:inline !important; font-size:15.2px !important; font-weight:bold !important; border:0 !important;}
-
-.nav_pod .u_search {border:0 !important; background:none !important; padding:0 !important; display:inline !important;}
-.nav_pod .u_search .links {display:inline !important; float:none !important; padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; padding:1px !important;  border-bottom:0px !important; background: #0000FF !important; }
-.nav_pod .u_search .links ul {padding:0 !important; display:inline !important;}
-.nav_pod .u_search .links li {display:inline !important; padding:0 !important;}
-.nav_pod .u_search .links li:after, .nav_pod .u_search .links li:first-child:before {content: " | " !important;}
-
-
-.nav_pod .u_pagenav {float:none !important; padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; padding:1px !important;border:0px !important; background:#8080FF !important; font-style:italic !important; border-top:2px white solid !important; margin-top:1px !important; overflow:hidden !important;}
-
-.nav_pod form, .nav_pod form span, .nav_pod form input, .nav_pod form button {float:none !important; height:auto !important; width:auto !important; margin:0 !important; padding:0 !important; display:inline !important; border:0 !important; text-align:left !important; background:none !important; font-size:inherit !important; line-height:inherit !important; outline:none !important; font-weight:normal !important; position:relative !important; left:0 !important; top:0 !important; color:white !important; font-weight:bold !important; }
-.nav_pod form {display:inline !important; font-size:12.8px !important; line-height:1em !important; margin-left:0px !important; }
-.nav_pod form input {font-size:12.8px !important; line-height:12.8px !important; width:120px !important; -moz-appearance:none !important; height:1em !important; background:white !important; color:black !important; font-weight:normal !important;}
-.nav_pod form button {font-size:11px !important; line-height:1em !important; -moz-appearance:none !important; }
-.nav_pod form .searchbtn, .nav_pod form .searchbtn_wrap, .nav_pod form button {cursor:default !important; }
-
-
 
 /** Jump to Page and Search Topics **/
 .pagejumper {margin:0 !important; background:#8080FF !important; color:white !important; font-style:italic !important; font-weight:bold !important; text-align:center !important; font-size:15.2px !important; padding:0px !important; line-height:15.2px !important; border-top:0 !important; width:100% !important; padding-top:3px !important; padding-bottom:3px !important; outline:white solid 2px !important; outline-offset:-2px !important; margin-top:-2px !important;}
@@ -277,8 +241,6 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 #sky_col_wrap > .col_layout #main_col.col > #board_wrap > .head {display:none !important;}
 
 /** Message List **/
-#board_wrap > .pod > .head {color:black !important; background:none !important; margin:0 !important; padding:1px !important; text-align:center !important; font-style:normal !important;}
-#board_wrap > .pod > .head > .title {background:none !important; color:black !important; margin:0 !important; padding:0 !important; font-size:16px !important; font-weight:bold !important; font-style:normal !important;}
 .msg_stats:before {content: "From: " !important;}
 .board.message tr:not(.even):not(.gamefox-highlight) td:not(.gamefox-highlight) {background:#b0b0ff !important;}
 .board.message tr.even td {background:#d0d0ff !important;}

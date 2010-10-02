@@ -35,8 +35,13 @@ var gamefox_css =
             'Makes QuickWhois look pretty.', '', true]},
       themes: {
         '8for11.css': ['8for11', 'Make GameFAQs look like v8 (pre-2004).\n\n'
-              + 'GameFAQs must be using the V10 style.\n'
-              + 'Message Poster Display must be Above Message (Main -> Board Settings)\n'
+              + 'Use the following settings:\n\n'
+              + 'http://www.gamefaqs.com/user/site.html\n'
+              + 'Site Display Style: V10\n\n'
+              + 'http://www.gamefaqs.com/boards/settings.php\n'
+              + 'Message Poster Display: Above Message\n'
+              + 'Topic List Display: Ad in topic list\n'
+              + 'Message List Display: Ad in message list\n\n'
               + 'The "Status icons (classic)" stylesheet is recommended.',
             'TakatoMatsuki, Swordless Link', false],
         'ricapar.css': ['Classic',
