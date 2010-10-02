@@ -577,7 +577,15 @@ var gamefox_page =
         // something). (bm 2010-08)
 
         if (rows[i].cells.length == 1)
-          continue; // this is an ad row
+        {
+          // this is an ad row
+          if (gamefox_lib.prefs.getBoolPref('elements.stopads'))
+          {
+            rows[i].parentNode.removeChild(rows[i]);
+            i--;
+          }
+          continue;
+        }
 
         // Status spans
         if (statusCond)
@@ -843,8 +851,11 @@ var gamefox_page =
       {
         if (/\bad\b/.test(td[i].firstChild.className))
         {
+          // this is an ad row
+          if (gamefox_lib.prefs.getBoolPref('elements.stopads'))
+            td[i].parentNode.parentNode.removeChild(td[i].parentNode);
           i--;
-          continue; // this is an ad row
+          continue;
         }
 
         ++msgnum;
