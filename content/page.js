@@ -1231,22 +1231,16 @@ var gamefox_page =
         var miniBoardNav = doc.createElement('div');
         miniBoardNav.id = 'gamefox-board-nav';
 
-        var indexEnd, indexSkip;
-        if (userPanel && !onArchive)
+        var boardNavLinks = (userNav || userPanel).getElementsByTagName('a');
+        for (var i = 0; i < boardNavLinks.length; i++)
         {
-          indexEnd = 4;
-          indexSkip = [1, 2];
-        }
-        else
-          indexEnd = 2;
-        for (var i = 0; i <= indexEnd; i++)
-        {
-          if (indexSkip && indexSkip.indexOf(i) != -1)
+          if (!/([0-9]{1,2}\)|Topic List|Board List)/.test(boardNavLinks[i]
+                .textContent))
             continue;
 
-          miniBoardNav.appendChild((userNav || userPanel)
-              .getElementsByTagName('a')[i].cloneNode(true));
-          if (i < indexEnd)
+          miniBoardNav.appendChild(boardNavLinks[i].cloneNode(true));
+
+          if (i < boardNavLinks.length - 2)
             miniBoardNav.appendChild(doc.createTextNode(' | '));
         }
 
