@@ -1,5 +1,5 @@
 @charset 'UTF-8';
-/* GFPastel 2010.08.GameFOX
+/* GFPastel 2010.10.GameFOX
  * CCBYNCSA spynae [tl;dr, give credit where credit is due, this is free]
  * Special version for bundle with GameFOX.
  */
@@ -194,16 +194,16 @@
        * proceeding section because I don't think there's any
        * other way to go about doing this.  Columns on the board list and home
        * page. */
-#mpu_col_wrap {
+#mpu_col_wrap:nth-last-child(2) {
     overflow: hidden;
 }
 
-#mpu_col_wrap #main_col {
+#mpu_col_wrap:nth-last-child(2) #main_col {
     width: 64%;
     float: left;
 }
 
-#mpu_col_wrap #side_col {
+#mpu_col_wrap:nth-last-child(2) #side_col {
     width: 33%;
     min-width: 150px;
     float: right;
@@ -556,9 +556,75 @@
   div#board_wrap p {
     clear: both;
     }
+  /* You are ignoring x message(s)/topic(s) from users on this page */
+  #board_wrap table + p {
+    background: rgba(255, 255, 255, .3);
+    border: 1px solid #6DA1D0;
+      border-top-width: 0;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    color: rgba(51,51,51,.3);
+    }
+    #board_wrap table + p > a:link { color: rgba(68, 68, 170, .3); }
+    #board_wrap table + p > a:hover { color: rgba(68, 68, 68, .3); }
+    #board_wrap table + p > a:visited { color: rgba(136, 119, 238, .3); }
+  /* GameFAQs V12 Beta */
+  #mpu_col_wrap div.content_nav div.crumbs {
+    border-top-width: 1px;
+    border-left-width: 1px;
+    -moz-border-radius: 1em;
+    font-size: .7em;
+    margin: 0;
+    }
+  #mpu_col_wrap div.content_nav div.crumbs a {
+    font-size: 1em;
+    }
+  div.user_panel > div.body:first-child,
+  div.user_panel > div.u_search > div.links > ul,
+  div.user_panel > div.u_pagenav {
+    background: rgba(109,161,208,.6);
+    border: 1px solid #6DA1D0;
+      border-top: 0;
+    -moz-border-radius: 0 0 1em 1em;
+    -moz-box-shadow: 0 0 1em #6DA1D0;
+    color: #497299;
+    margin-bottom: .3em;
+    padding: .3em;
+    }
+  div.user_panel > div.body:first-child,
+  div.user_panel > div.u_pagenav { float: left; }
+  div.user_panel > div.u_search > div.links > ul {float: right; margin-top: 0; }
+  div.user_panel > div.u_search > div.links > ul > li {
+    display: inline;
+    text-transform: capitalize;
+    }
+  div.user_panel > div.u_search > div.links > ul > li + li::before {
+    content: " | ";
+    display: inline;
+    }
+  div.user_panel > div.u_search > form {
+    background: #AAAAC7;
+    border: 1px solid #6DA1D0;
+    -moz-border-radius: 1em 1em 1em 0;
+    -moz-box-shadow: 0 0 .5em #6DA1D0;
+    color: #F7F7FF;
+    clear: both;
+    padding: .2em;
+    text-align: center;
+    }
+  div.user_panel a {
+    color: inherit !important;
+    }
+  div.content_nav + div.pod.nav_pod > div.user_panel {
+    border-top: 3px double #6DA1D0;
+    clear: left;
+    }
   /* Now for the fun part
-   * Message lists
-   * Above Message */
+   * Message lists */
+  /* GameFAQs V12 Beta */
+  div.head + div.body > table.board.message {
+    margin-top: .3em;
+    }
+  /* Above Message */
   td:only-child .message tr, .message td {
     margin: 0;
     padding: 0;
@@ -695,6 +761,7 @@
     }
   /* Things nobody cares about */
   #footer, iframe, .ad { display: none; }
+  body .has_lead #gutter_top { padding-top: 0px !important; }
   /* GFCode */
   .message i > p, .message em > p {
     border: 1px solid #6DA1D0;
