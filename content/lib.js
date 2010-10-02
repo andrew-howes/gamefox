@@ -406,7 +406,7 @@ var gamefox_lib =
 
       dlg = windowWatcher.openWindow(window,
           'chrome://gamefox/content/options/options.xul', '_blank',
-          'chrome,titlebar,toolbar,centerscreen,dialog=no', args);
+          'chrome,titlebar,toolbar,centerscreen,resizable,dialog=no', args);
     }
   },
 
