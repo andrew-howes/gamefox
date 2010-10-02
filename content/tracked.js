@@ -207,8 +207,8 @@ var gamefox_tracked =
         {
           if (result[1] == 'tracktopic')
           {
-            link.textContent = gamefox_lib.onBeta(gamefox_lib
-                .getDocument(event)) ? 'Stop tracking' : 'Stop Tracking';
+            link.textContent = link.parentNode.nodeName == 'LI' ?
+              'Stop tracking' : 'Stop Tracking';
             link.href = link.href.replace(/tracktopic/, 'stoptrack');
           }
           else

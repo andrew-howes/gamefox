@@ -14,4 +14,9 @@
         background-position: center 0 !important;
         padding-top: 14px !important;
     }
+
+    /* ads in the topic list */
+    table.topics td[colspan="5"] {
+        display: none !important;
+    }
 }

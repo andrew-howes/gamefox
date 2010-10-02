@@ -113,9 +113,7 @@ var gamefox_page =
 
     doc.gamefox = {};
 
-    // Check for beta
-    var onBeta = gamefox_lib.onBeta(doc); // local variable for this document
-    gamefox_lib.useBeta = onBeta;
+    gamefox_lib.useBeta = gamefox_lib.onBeta(doc);
 
     // Update last visit time
     gamefox_lib.prefs.setIntPref('lastVisit', Math.floor(Date.now() / 1000));
@@ -507,13 +505,11 @@ var gamefox_page =
     /* Topic Lists */
     else if (gamefox_lib.onPage(doc, 'topics'))
     {
-      if (onBeta)
-        var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      else
-        var userNav = doc.evaluate('div[@class="board_nav"]' +
-            '/div[@class="body"]/div[@class="user"]', boardWrap, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var userNav = doc.evaluate('div[@class="board_nav"]' +
+          '/div[@class="body"]/div[@class="user"]', boardWrap, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var userlist = gamefox_highlighting.loadGroups();
 
       var onTracked = gamefox_lib.onPage(doc, 'tracked');
@@ -535,7 +531,7 @@ var gamefox_page =
                   getCharPref('elements.quickpost.link.title')));
             anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
 
-        if (onBeta)
+        if (userPanel)
         {
           newTopicLink.parentNode.appendChild(doc.createTextNode(' ('));
           newTopicLink.parentNode.appendChild(anchor);
@@ -579,6 +575,9 @@ var gamefox_page =
         // to getElementsByTagName('a'). Would be nice to abstract the cell
         // numbers to their purpose (like cells.username or cells.lastPost or
         // something). (bm 2010-08)
+
+        if (rows[i].cells.length == 1)
+          continue; // this is an ad row
 
         // Status spans
         if (statusCond)
@@ -734,13 +733,11 @@ var gamefox_page =
     /* Message Lists */
     else if (gamefox_lib.onPage(doc, 'messages'))
     {
-      if (onBeta)
-        var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      else
-        var userNav = doc.evaluate('div[@class="board_nav"]'
-            + '/div[@class="body"]/div[@class="user"]', boardWrap, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var userNav = doc.evaluate('div[@class="board_nav"]'
+          + '/div[@class="body"]/div[@class="user"]', boardWrap, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var pageJumper = doc.evaluate('//div[@class="pod pagejumper"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
         .singleNodeValue;
@@ -773,7 +770,7 @@ var gamefox_page =
       // "Tag Topic" link
       if (gamefox_lib.prefs.getBoolPref('elements.tag.link'))
       {
-        if (onBeta)
+        if (userPanel)
         {
           var li = doc.createElement('li');
           li.appendChild(gamefox_tags.tagTopicLink(doc));
@@ -844,6 +841,12 @@ var gamefox_page =
 
       for (var i = 0; i < td.length; i += 2)
       {
+        if (/\bad\b/.test(td[i].firstChild.className))
+        {
+          i--;
+          continue; // this is an ad row
+        }
+
         ++msgnum;
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[i].id = 'p' + msgnumString;
@@ -1202,7 +1205,7 @@ var gamefox_page =
         if (tcParam)
         {
           var pageJumperTop;
-          if (onBeta)
+          if (userPanel)
             pageJumperTop = doc.evaluate('div[@class="u_pagenav"]', userPanel,
                 null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
               .singleNodeValue;
@@ -1228,20 +1231,28 @@ var gamefox_page =
         var miniBoardNav = doc.createElement('div');
         miniBoardNav.id = 'gamefox-board-nav';
 
-        for (var i = 0; i <= (onBeta && !onArchive ? 4 : 2); i++)
+        var indexEnd, indexSkip;
+        if (userPanel && !onArchive)
         {
-          if (onBeta && !onArchive && (i == 1 || i == 2))
+          indexEnd = 4;
+          indexSkip = [1, 2];
+        }
+        else
+          indexEnd = 2;
+        for (var i = 0; i <= indexEnd; i++)
+        {
+          if (indexSkip && indexSkip.indexOf(i) != -1)
             continue;
 
           miniBoardNav.appendChild((userNav || userPanel)
               .getElementsByTagName('a')[i].cloneNode(true));
-          if (i < (onBeta && !onArchive ? 4 : 2))
+          if (i < indexEnd)
             miniBoardNav.appendChild(doc.createTextNode(' | '));
         }
 
         if (pageJumper)
           pageJumper.parentNode.insertBefore(miniBoardNav, pageJumper);
-        else if (onBeta)
+        else if (userPanel)
           boardWrap.firstChild.appendChild(miniBoardNav);
         else
           boardWrap.appendChild(miniBoardNav);

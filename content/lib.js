@@ -230,19 +230,17 @@ var gamefox_lib =
             else
             {
               // TODO: maybe check for user profile links instead
-              var user;
-              if (gamefox_lib.onBeta(doc))
-                user = doc.evaluate('//div[@class="user_panel"]'
-                    + '/div[@class="u_search"]/div[@class="links"]',
-                    doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-                  .singleNodeValue;
-              else
-                user = doc.evaluate('div[@class="board_nav"]'
-                    + '/div[@class="body"]/div[@class="user"]',
-                    div, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-                    null).singleNodeValue;
+              var userPanel = doc.evaluate('//div[@class="user_panel"]'
+                  + '/div[@class="u_search"]/div[@class="links"]',
+                  doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+                .singleNodeValue;
+              var userNav = doc.evaluate('div[@class="board_nav"]'
+                  + '/div[@class="body"]/div[@class="user"]',
+                  div, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
+                  null).singleNodeValue;
+              var user = userPanel || userNav;
 
-              if (user && user.textContent.indexOf(gamefox_lib.onBeta(doc) ?
+              if (user && user.textContent.indexOf(userPanel ?
                     'Topic archived' : 'Topic Archived') != -1)
                 doc.gamefox.pageType = ['messages', 'archive'];
               else
