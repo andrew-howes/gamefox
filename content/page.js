@@ -1257,7 +1257,7 @@ var gamefox_page =
         if (pageJumper)
           pageJumper.parentNode.insertBefore(miniBoardNav, pageJumper);
         else if (userPanel)
-          boardWrap.firstChild.appendChild(miniBoardNav);
+          boardWrap.getElementsByTagName('div')[0].appendChild(miniBoardNav);
         else
           boardWrap.appendChild(miniBoardNav);
       }
