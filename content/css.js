@@ -45,8 +45,13 @@ var gamefox_css =
               + 'The "Status icons (classic)" stylesheet is recommended.',
             'TakatoMatsuki, Swordless Link', false],
         'ricapar.css': ['Classic',
-            'Emulates the 2001-2004 style of GameFAQs. Disable main ' +
-            'GameFAQs stylesheets to use.', 'Ricapar et al.', false],
+            'Emulates the 2001-2004 style of GameFAQs. Disable main '
+              + 'GameFAQs stylesheets to use.\n\n'
+              + 'Use the following settings at '
+              + 'http://www.gamefaqs.com/boards/settings.php:\n'
+              + 'Topic List Display: Ad in topic list\n'
+              + 'Message List Display: Ad in message list', 'Ricapar et al.',
+            false],
         'gfpastel-2010.css': ['GFPastel 2010',
             'A modern stylesheet in pastel blues and purples. Disable main ' +
             'GameFAQs stylesheets to use.', 'spynae', false],

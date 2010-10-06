@@ -199,7 +199,7 @@
 }
 
 #mpu_col_wrap:nth-last-child(2) #main_col {
-    width: 64%;
+    width: 66%;
     float: left;
 }
 
@@ -568,6 +568,7 @@
     #board_wrap table + p > a:hover { color: rgba(68, 68, 68, .3); }
     #board_wrap table + p > a:visited { color: rgba(136, 119, 238, .3); }
   /* GameFAQs V12 Beta */
+  /* Ad Placement: In Header */
   #mpu_col_wrap div.content_nav div.crumbs {
     border-top-width: 1px;
     border-left-width: 1px;
@@ -617,6 +618,35 @@
   div.content_nav + div.pod.nav_pod > div.user_panel {
     border-top: 3px double #6DA1D0;
     clear: left;
+    }
+  /* Ad Placement: In Right Column */
+  div#related_games div.fboards {
+    border: 1px solid #6DA1D0;
+      border-top-width: 0;
+    }
+  div#related_games div.fboards ul,
+  div#related_games div.fboards ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    }
+  div#related_games div.fboards ul li a {
+    display: block;
+    padding: .2em;
+    }
+  div#related_games div.fboards ul li:nth-of-type(odd) {
+    background: rgba(225,225,255,.8);
+    }
+  div#related_games div.fboards ul li:nth-of-type(even) {
+    background: rgba(225,225,255,.2);
+    }
+  div#related_games div.fboards ul li h3 {
+    border-left-width: 0;
+    border-right-width: 0;
+    -moz-border-radius: 0;
+    }
+  div#related_games div.fboards ul li:first-child h3 {
+    border-top-width: 0;
     }
   /* Now for the fun part
    * Message lists */
@@ -914,7 +944,8 @@
     margin: -.6em -.6em 0 -.6em !important;
     padding: .3em !important;
     }
-    div#gamefox-tracked-note + div.content_nav > div.crumbs {
+    div#gamefox-tracked-note + div.content_nav > div.crumbs,
+    div#gamefox-tracked-note + div#full_col_wrap div.crumbs {
       border-top-width: 0;
       -moz-border-radius: 0 0 1em 0;
       margin-top: 0;

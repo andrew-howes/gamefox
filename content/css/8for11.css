@@ -1,7 +1,7 @@
 /** Eight For Eleven (8for11) - Makes the v11 GameFAQs look like v8 **/
 /** By TakatoMatsuki and Swordless Link **/
 
-/** Build number 2010-10-02-13-44 **/
+/** Build number 2010-10-03-23-43 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -80,7 +80,7 @@ body.bwp {background:white !important;}
 #layout {width:100% !important; }
 .col_layout {padding-left:0 !important; }
 #full_col_wrap .col_layout {padding-right:0 !important;}
-#sky_col_wrap, #full_col_wrap, #mpu_col_wrap {margin-top: 0 !important;}
+#sky_col_wrap, #full_col_wrap, #mpu_col_wrap:not(.board_hub) {margin-top: 0 !important;}
 #side_col, #col_layout, #mpu_col_wrap, #side_col_wrap, #sky_col_wrap {background:white !important; }
 
 
@@ -194,7 +194,7 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 .board td.count {font-weight:normal !important;}
 
 /** Board List **/
-.board_hub {margin-top: 57px !important;}
+.board_hub {margin-top: 56px !important;}
 .board_hub table col.count {width:8% !important;}
 .board_hub table col.lastpost {width:15% !important;}
 .board_hub p.gamefox-usernote:not(#helloworld) {position:relative !important; top:2px !important;}
@@ -376,6 +376,17 @@ body > div#body {background:white !important;}
 body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px !important; padding: 8px 0 0 8px !important;}
 
 
+/** Notice to users using incorrect settings, on Topic List and Message List **/
+.user_panel .body {background:yellow !important; margin:2px !important; padding:4px !important; margin-bottom:8px !important; height:auto !important;}
+.user_panel .body span {font-size:12.8px !important; padding:0 !important; background:none !important; float:none !important; height:auto !important;}
+.user_panel .body span strong {display:none !important;}
+.user_panel .body span a:not(#helloworld):not(#helloworld) {font-size:0 !important; text-decoration:none !important;}
+.user_panel .body span:before {content: "[8for11 Notice] - GameFAQs recently updated, and you need to check your settings to make 8for11 work properly. Please go to your " !important;}
+.user_panel .body span a:before {content: "profile page (click here)" !important; font-size:12.8px !important; text-decoration:underline !important; }
+.user_panel .body span a:hover:before {color:red !important;}
+.user_panel .body span:after {content: ", and click \"Board Display Settings\". " !important;}
+
+
 
 
 }
@@ -386,14 +397,14 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 /** Stuff for pages that don't play nice with other pages **/
 
 /** Board List **/
-@-moz-document url("http://www.gamefaqs.com/boards") {
+@-moz-document url("http://www.gamefaqs.com/boards"), url("http://beta.gamefaqs.com/boards") {
 #layout {position:relative !important;}
 #gamefox-tracked-note {position:relative !important; top: 145px !important;}
 #content > .head {position:absolute !important; top:0 !important; left:0 !important; right:0 !important;}
 }
 
 /** Board Manager / Bman / Batman **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/bman") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/bman"), url-prefix("http://beta.gamefaqs.com/boards/bman") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Board Manager" !important;}
 #main_col > .pod > .head {display:none !important;}
@@ -408,7 +419,7 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 }
 
 /** User Profiles **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/user.php") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/user.php"), url-prefix("http://beta.gamefaqs.com/boards/user.php") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "User Information" !important;}
 #main_col > .pod > .head {position:relative !important; top:22px !important;}
@@ -416,7 +427,7 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 }
 
 /** Active Messages Posted **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/myposts") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/myposts"), url-prefix("http://beta.gamefaqs.com/boards/myposts") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Active Messages Posted" !important;}
 #main_col > .pod > .head {display:none !important;}
@@ -424,47 +435,56 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 }
 
 /** Karma **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/karma") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/karma"), url-prefix("http://beta.gamefaqs.com/boards/karma") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Karma Info" !important;}
 #main_col > .pod > .head {display:none !important;}
 }
 
 /** Modhist **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/modhist") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/modhist"), url-prefix("http://beta.gamefaqs.com/boards/modhist") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Moderated/Deleted Messages" !important;}
 #main_col > .pod > .head {display:none !important;}
 }
 
+/** Site Settings **/
+@-moz-document url-prefix("http://www.gamefaqs.com/user/site.html"), url-prefix("http://beta.gamefaqs.com/user/site.html") {
+table.contrib:nth-child(3) tr:first-child td:nth-child(2):after {content:"8for11 uses \"V10\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
+}
+
 /** Board Display Settings **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/settings") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/settings"), url-prefix("http://beta.gamefaqs.com/boards/settings") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Board Display Settings" !important;}
 #main_col > .pod > .head {display:none !important;}
+table.userinfo tr:nth-last-child(4) td:nth-child(2):after {content:"8for11 uses \"Ad in topic list\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
+table.userinfo tr:nth-last-child(3) td:nth-child(2):after {content:"8for11 uses \"Ad in message list\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
+table.userinfo tr:nth-child(6) td:nth-child(2):after {content:"8for11 uses \"Above Message\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
+table.userinfo tr:nth-child(5) td:nth-child(2):after {display:none !important;}
 }
 
 /** Contact Info **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/contact") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/contact"), url-prefix("http://beta.gamefaqs.com/boards/contact") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Public Contact Information" !important;}
 #main_col > .pod > .head {display:none !important;}
 }
 
 /** Sig / Quote **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/sigquote") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/sigquote"), url-prefix("http://beta.gamefaqs.com/boards/sigquote") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Board Signature and Quote" !important;}
 #main_col > .pod > .head {display:none !important;}
 }
 
 /** Tracked Topics **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/tracked") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/tracked"), url-prefix("http://beta.gamefaqs.com/boards/tracked") {
 #main_col > .pod > .head {display:none !important;}
 }
 
 /** Ignore list **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/index.php?action=ignorelist") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/ignore"), url-prefix("http://beta.gamefaqs.com/boards/ignore") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Ignored Users" !important;}
 #main_col > .pod > .head {display:none !important;}
@@ -472,14 +492,14 @@ body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px
 }
 
 /** Sysnote **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/usernote.php") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/usernote.php"), url-prefix("http://beta.gamefaqs.com/boards/usernote.php") {
 #content > .head {display:none !important;}
 #main_col > .pod > .head {margin: 0 !important; padding:0 !important; margin-bottom:8px !important; padding-top:6px !important; border:0 !important;  background-color:white !important;  background-color:white !important; }
 #main_col > .pod > .head h2 {font-size:32px !important; color:black !important; background-color:white !important;}
 }
 
 /** Board Categories **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category="), url-prefix("http://beta.gamefaqs.com/boards/boardlist.php?category=") {
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important;}
 #main_col > .pod > .head {display:none !important;}
@@ -489,28 +509,33 @@ table.board:not(#helloworld) a:not(#helloworld) {font-weight:bold !important;}
 }
 
 /** Board Categories: System Boards **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=3") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=3"), url-prefix("http://beta.gamefaqs.com/boards/boardlist.php?category=3") {
 #content > .head > h1:after {content: "System Boards" !important;}
 }
 
 /** Board Categories: Site Boards **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=4") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=4"), url-prefix("http://beta.gamefaqs.com/boards/boardlist.php?category=4") {
 #content > .head > h1:after {content: "Site Boards" !important;}
 }
 
 /** Board Categories: Special Interest Boards **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=5") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=5"), url-prefix("http://beta.gamefaqs.com/boards/boardlist.php?category=5") {
 #content > .head > h1:after {content: "Special Interest Boards" !important;}
 }
 
 /** Board Categories: Regional Boards **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=6") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=6"), url-prefix("http://beta.gamefaqs.com/boards/boardlist.php?category=6") {
 #content > .head > h1:after {content: "Regional Boards" !important;}
 }
 
 /** Board Categories: Social Boards **/
-@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=7") {
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=7"), url-prefix("http://beta.gamefaqs.com/boards/boardlist.php?category=7") {
 #content > .head > h1:after {content: "Social Boards" !important;}
+}
+
+/** Board Categories: Private Boards **/
+@-moz-document url-prefix("http://www.gamefaqs.com/boards/boardlist.php?category=20"), url-prefix("http://beta.gamefaqs.com/boards/boardlist.php?category=20") {
+#content > .head > h1:after {content: "Private Boards" !important;}
 }
 
 
