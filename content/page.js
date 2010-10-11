@@ -1581,8 +1581,9 @@ var gamefox_page =
 
     var doc = gamefox_lib.getDocument(event);
     var boardWrap = doc.getElementById('board_wrap');
-    var tdResult = doc.evaluate('div[@class="body"]/table[@class="board message"]/tbody/tr/td',
-        boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    var tdResult = doc.evaluate('//div[@class="body"]/'
+        + 'table[@class="board message"]/tbody/tr/td', boardWrap, null,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];
     for (var i = 0; i < tdResult.snapshotLength; i++)
       td[i] = tdResult.snapshotItem(i);
