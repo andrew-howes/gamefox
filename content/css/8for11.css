@@ -1,10 +1,9 @@
 /** Eight For Eleven (8for11) - Makes the v11 GameFAQs look like v8 **/
 /** By TakatoMatsuki and Swordless Link **/
 
-/** Build number 2010-10-03-23-43 **/
+/** Build number 2010-10-14-23-21 **/
 
 @-moz-document domain("gamefaqs.com") {
-
 
 body {background:white url(http://www.gamefaqs.com/images/customcss/8for11/sidebar.jpg) repeat-y !important;}
 a:visited:not(#helloworld) {color:white !important;}
@@ -36,7 +35,7 @@ body.bwp {background:white !important;}
 #masthead #header #loginbox .nav a.last {border-left:0px solid white !important; padding-left:0px !important; text-transform:capitalize !important;}
 #masthead #header #loginbox .nav a.last:not(#helloworld):before {content:"| " !important; text-decoration:none !important; color:white !important;}
 
-#masthead #searchbox {position:absolute !important; top:173px !important; left:0px !important; z-index:5 !important;}
+#masthead #searchbox {position:absolute !important; top:189px /**173**/ !important; left:0px !important; z-index:5 !important;}
 #masthead #searchbox form {width:auto !important; float:none !important; }
 #masthead #searchbox li {margin:0 !important; padding:0 !important; float:none !important; display:inline !important;}
 #masthead #searchbox form span.name {display:none !important;}
@@ -140,6 +139,7 @@ div.content_nav {margin:0 !important; padding:0 !important;}
 div.content_nav a {color:white !important;}
 div.content_nav .crumbs {padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:15.2px !important; font-weight:bold !important; padding:1px !important; border:2px white solid !important; border-bottom:0px !important; background: #0000FF none repeat scroll 0 0 !important;}
 
+ul.content_nav {width:auto !important;}
 ul.content_nav, ul.content_nav li, ul.content_nav li a, ul.content_nav li b, ul.content_nav li span {display:inline !important; padding:0 !important; margin:0 !important; background:transparent !important; border:0 !important; float:none !important; line-height:13px !important;}
 ul.content_nav {display:block !important; padding:0 !important; margin:0 !important; text-align:center !important; color:white !important; font-size:13px !important; font-weight:normal !important; padding:1px !important; border:2px white solid !important; border-bottom:0px !important; background: #0000FF none repeat scroll 0 0 !important; position:relative !important; top:0 !important; left:0 !important; height:1em !important; vertical-align:bottom !important; padding-top:1.4em !important; padding-bottom:3px !important;}
 ul.content_nav li:not(.hi) {padding-left:0px !important; padding-right:4px !important;}
@@ -254,7 +254,6 @@ table td.author a {font-size:12.8px !important;}
 table td.author br {display:none !important;}
 table td.author + td:not(#helloworld) {float:left !important; clear:both !important; width:100% !important; background:#d0d0ff !important;}
 
-
 /** Answers **/
 .qna_hub a:not(#helloworld), .qna_hub a:hover:not(#helloworld), .qna_hub a:active:not(#helloworld), .qna_hub a:visited:not(#helloworld), .content_qna a:not(#helloworld), .content_qna a:hover:not(#helloworld), .content_qna a:active:not(#helloworld), .content_qna a:visited:not(#helloworld) {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important; font-size:12.8px !important;}
 
@@ -325,6 +324,15 @@ table td.author + td:not(#helloworld) {float:left !important; clear:both !import
 .qna_hub #side_col ul li:first-child {border-top:1px inset grey !important;}
 .qna_hub #side_col ul li:last-child {border-bottom:1px inset grey !important;}
 
+
+
+/** Quotes and Code blocks (GameFAQs and GFCode) **/ /** Modified from GameFOX GFCode CSS **/
+.message i > p, .message em > p, .message .fquote {border: 2px #f0f0ff solid !important; margin: 0 auto !important; padding: 1px !important; width: 96% !important; -moz-border-radius: 0px !important; background: #dfdfff !important; color:black !important; font-size:12.8px !important;}
+/**<i><p> Quote**/ .message i > p, .message .fquote {font-style: normal !important; background:  #dfdfff !important;}
+/**<i><p><strong> Header**/ .message i > p > strong:first-child {border:0 !important; border-bottom: 2px #f0f0ff solid !important; display: block !important; font-style: normal !important; font-weight: normal !important; margin: -1px !important; margin-bottom:0 !important;padding: 1px !important; -moz-border-radius: 0 !important; background: #bfbfff !important; }
+.message i > p > strong:first-child + br, .message .fquote + br {display: none !important;}
+/**<em><p> Code**/ .message em > p {font-family: monospace !important; font-style: normal !important; white-space: pre-wrap !important; background:#f0f0ff !important;}
+.message p p p p {display: none !important;}
 
 
 /** GameFOX Extra Usernav Bar **/
