@@ -2,6 +2,8 @@
     * version 0.7.11
     * Fix post filtering with "ad in header" setting
     * Update 8for11 CSS
+    * Fix adding users to highlighting groups from the topic list when group
+      names are shown
 
 2010-10-06:
     * version 0.7.10

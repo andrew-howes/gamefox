@@ -435,7 +435,7 @@ var gamefox_context =
     doc = event.target.ownerDocument;
     if (gamefox_lib.onPage(doc, 'topics')) // topic list
     {
-      node = node.parentNode.cells[2];
+      node = node.parentNode.cells[2].firstChild;
     }
     else // message list
     {
