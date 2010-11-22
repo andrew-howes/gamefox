@@ -1359,8 +1359,14 @@ var gamefox_page =
         note.insertBefore(dismissLink, note.firstChild);
 
         var setHeight = function() {
-          dismissLink.style.lineHeight = '10em'; // trigger any wordwrap first
-          dismissLink.style.lineHeight = note.clientHeight + 'px';
+          // Don't adjust the line height unless the link is floated, because
+          // it messes up the height of the tracking notification element
+          if (doc.defaultView.getComputedStyle(dismissLink, null)
+              .getPropertyValue('float') != 'none')
+          {
+            dismissLink.style.lineHeight = '10em'; // trigger any wordwrap first
+            dismissLink.style.lineHeight = note.clientHeight + 'px';
+          }
         };
         setHeight();
         window.addEventListener('resize', setHeight, false);
