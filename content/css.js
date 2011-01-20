@@ -55,6 +55,9 @@ var gamefox_css =
         'gfpastel-2010.css': ['GFPastel 2010',
             'A modern stylesheet in pastel blues and purples. Disable main ' +
             'GameFAQs stylesheets to use.', 'spynae', false],
+        'progfaqs.css': ['ProgFAQs',
+            'A progressive, low contrast theme for GameFAQs. Disable main ' +
+            ' GameFAQs stylesheets to use.', 'spynae', false],
         'spotfaqs-extras.css': ['SpotFAQs extras',
             'Designed to be used with the SpotFAQs skin on GameFAQs.\n'
               + 'Styles GameFOX features.',
