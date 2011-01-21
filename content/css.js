@@ -55,6 +55,12 @@ var gamefox_css =
         'gfpastel-2010.css': ['GFPastel 2010',
             'A modern stylesheet in pastel blues and purples. Disable main ' +
             'GameFAQs stylesheets to use.', 'spynae', false],
+        'ninestalgia.css': ['Ninestalgia',
+            'The unforgettable v9 theme.\n\n'
+              + 'Set the following at '
+              + 'http://www.gamefaqs.com/boards/settings.php:\n'
+              + 'Message Poster Display: Above Message', 'TakatoMatsuki',
+            false],
         'progfaqs.css': ['ProgFAQs',
             'A progressive, low contrast theme for GameFAQs. Disable main ' +
             ' GameFAQs stylesheets to use.', 'spynae', false],
