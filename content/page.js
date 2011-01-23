@@ -427,7 +427,8 @@ var gamefox_page =
 
       // Signature
       if (gamefox_lib.prefs.getBoolPref('signature.applyeverywhere')
-          && !/\b(Error|Posted)<\/h2>/.test(doc.body.innerHTML))
+          && !/\b(Posted)<\/h2>/.test(doc.body.innerHTML)
+          && !gamefox_utils.parseQueryString(doc.location.search)['message'])
       {
         detailsDiv.removeChild(formElements.namedItem('custom_sig'));
 

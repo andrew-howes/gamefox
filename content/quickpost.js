@@ -345,10 +345,9 @@ var gamefox_quickpost =
         + 'post.php?board=' + boardId
         + (!topicTitle ? '&topic=' + topicId : '');
     var message = gamefox_quickpost.removeGFCodeWhitespace(
-        doc.getElementsByName('message')[0].value);
-    if (gamefox_lib.prefs.getIntPref('signature.addition') == 1
-        && !gamefox_lib.onPage(doc, 'post'))
-      message += gamefox_sig.format(null, null, doc);
+        doc.getElementsByName('messagetext')[0].value);
+    var sig = gamefox_sig.format(doc.getElementsByName('custom_sig')[0]
+        .value);
 
     if (/^\s*---(\n|$)/.test(message)
         && gamefox_lib.prefs.getBoolPref('elements.quickpost.blankPostWarning'))
@@ -587,7 +586,8 @@ var gamefox_quickpost =
     previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     previewRequest.send(
         (topicTitle ? 'topictitle=' + gamefox_utils.URLEncode(topicTitle.value) + '&' : '') +
-        'message=' + gamefox_utils.URLEncode(message) +
+        'messagetext=' + gamefox_utils.URLEncode(message) +
+        '&custom_sig=' + gamefox_utils.URLEncode(sig) +
         '&post=Preview+Message'
         );
   },
