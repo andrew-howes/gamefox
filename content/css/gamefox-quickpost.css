@@ -22,7 +22,7 @@
         width: 70%;
     }
 
-    #gamefox-message
+    #gamefox-message, #gamefox-quickpost-signature textarea
     {
         width: 95%;
         max-width: 730px;

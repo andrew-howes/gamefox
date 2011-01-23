@@ -37,14 +37,10 @@
     </stringbundleset>
 
     <preferences>
-      <preference id="signature.newline" name="gamefox.signature.newline"
-        type="bool"/>
       <preference id="signature.applyeverywhere"
         name="gamefox.signature.applyeverywhere" type="bool"/>
       <preference id="signature.selectMostSpecific"
         name="gamefox.signature.selectMostSpecific" type="bool"/>
-      <preference id="signature.addition" name="gamefox.signature.addition"
-        type="int"/>
     </preferences>
 
     <tabbox id="signaturesPrefs" flex="1">
@@ -110,20 +106,8 @@
           <groupbox>
             <checkbox label="&onPostPage.label;"
               preference="signature.applyeverywhere"/>
-            <checkbox label="&extraLineBreak.label;"
-              preference="signature.newline"/>
             <checkbox label="&selectMostSpecific.label;"
               preference="signature.selectMostSpecific"/>
-          </groupbox>
-
-          <groupbox>
-            <description id="additionDesc" control="addition">&appendAfter.label;</description>
-
-            <radiogroup id="addition" preference="signature.addition"
-              orient="horizontal" aria-labelledby="additionDesc">
-              <radio value="2" label="&addBefore.label;"/>
-              <radio value="1" label="&addAfter.label;"/>
-            </radiogroup>
           </groupbox>
         </tabpanel>
       </tabpanels>

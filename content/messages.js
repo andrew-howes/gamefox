@@ -34,7 +34,7 @@ var gamefox_messages =
   {
     var doc = gamefox_lib.getDocument(event);
     var messageLength = gamefox_utils.encodedMessageLength(
-        doc.getElementsByName('message')[0].value);
+        doc.getElementsByName('messagetext')[0].value);
 
     var messageCount = doc.getElementById('gamefox-message-count');
     messageCount.innerHTML = messageLength + ' / 4096 characters';

@@ -37,6 +37,7 @@ var gamefox_quickpost =
     form.method = 'post';
     form.addEventListener('submit', gamefox_quickpost.removeGFCodeWhitespaceListener,
         false);
+    form.addEventListener('submit', gamefox_quickpost.cleanSig, false);
     div.appendChild(form);
 
     if (newTopic)
@@ -71,18 +72,14 @@ var gamefox_quickpost =
       form.appendChild(doc.createElement('br'));
     }
 
+    // Message
     var message = doc.createElement('textarea');
     message.id = 'gamefox-message';
-    message.name = 'message';
+    message.name = 'messagetext';
     message.wrap = 'virtual';
     message.rows = 16;
     message.cols = 60;
     message.tabIndex = 2;
-    doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-    if (gamefox_lib.prefs.getIntPref('signature.addition') == 1)
-      form.addEventListener('submit', gamefox_quickpost.appendSig, false);
-    else
-      message.value = doc.gamefox.sig;
     form.appendChild(message);
     var focusQuickPostListener = function() {
       try
@@ -95,6 +92,11 @@ var gamefox_quickpost =
     message.addEventListener('focus', focusQuickPostListener, false);
 
     form.appendChild(doc.createElement('br'));
+
+    // Signature
+    doc.gamefox.sig = gamefox_sig.format(null, null, doc);
+
+    form.appendChild(gamefox_quickpost.createSigBox(doc, form));
 
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
     {
@@ -602,14 +604,11 @@ var gamefox_quickpost =
     var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
 
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
-      doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-    if (gamefox_lib.prefs.getIntPref('signature.addition') == 1)
     {
-      doc.getElementById('gamefox-message').value = '';
-      doc.gamefox.sigAdded = false;
-    }
-    else
-      doc.getElementById('gamefox-message').value = doc.gamefox.sig;
+      doc.gamefox.sig = gamefox_sig.format(null, null, doc);
+      doc.getElementById('gamefox-quickpost-signature').textContent = doc
+        .gamefox.sig;
+    } 
 
     if (charCounts)
       gamefox_messages.updateMessageCount(doc);
@@ -771,7 +770,7 @@ var gamefox_quickpost =
 
   removeGFCodeWhitespaceListener: function(event)
   {
-    var message = event.target.elements.namedItem('message');
+    var message = event.target.elements.namedItem('messagetext');
     message.value = gamefox_quickpost.removeGFCodeWhitespace(message.value);
   },
 
@@ -914,5 +913,29 @@ var gamefox_quickpost =
 
     if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
       gamefox_messages.updateMessageCount(doc);
+  },
+
+  createSigBox: function(doc)
+  {
+    var sigBox = doc.createElement('span');
+    sigBox.id = 'gamefox-quickpost-signature';
+    sigBox.textContent = 'Signature:';
+    sigBox.appendChild(doc.createElement('br'));
+
+    var sigText = doc.createElement('textarea');
+    sigText.name = 'custom_sig';
+    sigText.rows = 2;
+    sigText.value = doc.gamefox.sig;
+    
+    sigBox.appendChild(sigText);
+    sigBox.appendChild(doc.createElement('br'));
+
+    return sigBox;
+  },
+
+  cleanSig: function(event)
+  {
+    var sig = event.target.elements.namedItem('custom_sig');
+    sig.value = gamefox_sig.format(sig.value);
   }
 };

@@ -19,9 +19,4 @@
 <!ENTITY save.button "Save to GameFAQs">
 
 <!ENTITY onPostPage.label "Replace GameFAQs signature on standard post page">
-<!ENTITY extraLineBreak.label "Insert an additional line break before the separator">
 <!ENTITY selectMostSpecific.label "Select signatures with the most specific account and board settings">
-
-<!ENTITY appendAfter.label "Append signature after:">
-<!ENTITY addBefore.label "Page has loaded">
-<!ENTITY addAfter.label "Post is submitted">

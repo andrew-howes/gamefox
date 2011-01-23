@@ -61,9 +61,8 @@ pref("gamefox.quote.controlwhitespace", true);
 pref("gamefox.quote.focusQuickPost", true);
 
 pref("gamefox.signature.serialized", "[{\"accounts\":\"\", \"boards\":\"\", \"body\":\"\"}]");
-pref("gamefox.signature.newline", false);
+pref("gamefox.signature.newline", false); // not currently supported
 pref("gamefox.signature.applyeverywhere", true);
-pref("gamefox.signature.addition", 2);
 pref("gamefox.signature.selectMostSpecific", true);
 
 pref("gamefox.theme.disablegamefaqscss", false);

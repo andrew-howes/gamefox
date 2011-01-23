@@ -164,9 +164,7 @@ var gamefox_sig =
     if (sig.lastIndexOf(';') < amp)
       sig = sig.substr(0, amp);
 
-    sig = gamefox_utils.specialCharsDecode(sig);
-
-    return '\n' + (newline ? '\n' : '') + (sig != '' ? '---\n' + sig : '');
+    return gamefox_utils.specialCharsDecode(sig);
   },
 
   formatSigPreview: function(str)
