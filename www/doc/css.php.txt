@@ -205,6 +205,13 @@
     </tr>
 
     <tr>
+        <td>span#gamefox-quickpost-signature</td>
+        <td>Contains the textarea used to edit the signature for the post.</td>
+        <td>0.7.11</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>span.gamefox-signature</td>
         <td>Signature container on message list.</td>
         <td>0.6.10</td>
