@@ -11,7 +11,6 @@ pref("gamefox.elements.quickpost.aftertopic", 0);
 pref("gamefox.elements.quickpost.aftermessage", 0);
 pref("gamefox.elements.quickpost.resetconfirm", true);
 pref("gamefox.elements.quickpost.resetnewsig", false);
-pref("gamefox.elements.quickpost.blankPostWarning", true);
 pref("gamefox.elements.tag.link", false);
 pref("gamefox.elements.titlechange", false);
 pref("gamefox.elements.titleprefix", true);

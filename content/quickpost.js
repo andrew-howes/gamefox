@@ -349,28 +349,6 @@ var gamefox_quickpost =
     var sig = gamefox_sig.format(doc.getElementsByName('custom_sig')[0]
         .value);
 
-    if (/^\s*---(\n|$)/.test(message)
-        && gamefox_lib.prefs.getBoolPref('elements.quickpost.blankPostWarning'))
-    {
-      var promptService = Cc['@mozilla.org/embedcomp/prompt-service;1'].
-        getService(Ci.nsIPromptService);
-      var neverWarn = {value:false};
-      var flags = promptService.BUTTON_POS_0 * promptService.BUTTON_TITLE_YES +
-        promptService.BUTTON_POS_1 * promptService.BUTTON_TITLE_NO;
-      var button = promptService.confirmEx(null, 'GameFOX',
-          strbundle.getString('warnBlankPost'), flags, '', '', '',
-          strbundle.getString('neverWarnBlankPost'), neverWarn);
-
-      if (neverWarn.value == true)
-        gamefox_lib.prefs.setBoolPref('elements.quickpost.blankPostWarning', false);
-
-      if (button == 1)
-      {
-        event.target.removeAttribute('disabled');
-        return;
-      }
-    }
-
     var previewRequest = new XMLHttpRequest();
     previewRequest.open('POST', postMessageUrl);
     var ds = gamefox_lib.thirdPartyCookieFix(previewRequest);
@@ -396,7 +374,7 @@ var gamefox_quickpost =
             var noMessages = text.indexOf('You are not authorized to post messages on this board') != -1;
             var longWordInTitle = text.indexOf('Your topic title contains a single word over 25 characters') != -1;
             var longWordInMessage = text.indexOf('Your message contains a single word over 80 characters') != -1;
-            var blankMessage = text.indexOf('Messages cannot be blank') != -1;
+            var blankMessage = text.indexOf('Your post was blank') != -1;
             var badHTML = text.indexOf('Your HTML is not well-formed') != -1;
             var nonASCIITitle = text.indexOf('Topic titles cannot contain non-ASCII characters') != -1;
             var closedTopic = text.indexOf('This topic is closed') != -1;
