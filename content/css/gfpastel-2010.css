@@ -1,5 +1,5 @@
 @charset 'UTF-8';
-/* GFPastel 2010.10.GameFOX
+/* GFPastel 2010.12.GameFOX
  * CCBYNCSA spynae [tl;dr, give credit where credit is due, this is free]
  * Special version for bundle with GameFOX.
  */
@@ -7,15 +7,71 @@
 /* First things first */
   html {
     background-color: #D5C5FF;
-    background: #A8F 
-    -moz-repeating-linear-gradient(top left -45deg, rgba(255,255,255,.8) 1px, rgba(255,255,255,.5) 2px, rgba(255,255,255,.8) 3px, rgba(255,255,255,.5) 4px, rgba(255,255,255,.8) 5px);
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAA\
+AAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMFQAxFXbGPBwAAAAZdEVYdENv\
+bW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAEWUlEQVR42u1dPW8UMRB9Pm0bKQU/IA2ILlEK\
+RMf+APpceRRJQ5HUNFE6JBpKBMUlHV3yExZREy4VCiBxBR1ISQVIID2Km9Md0S63H16v7Z0nWdrk\
+dtf2eL48Y3sBhUKhCAZGSfAvSK4D2AKwKf+6ADAxxlw3fO8QwKH8eWSMea3ULke4A5LfOMNvkm9J\
+phbee8oFTovuG3hChCHJD1KGLde1QfKY5JTkk5xbHgO4JdcJgPtL0tIElwB+Sbn0nStLcY+lukYk\
+/0hdVzm/52HfEiOMpGwU3Zd4MiZz7oEj7vkBYA3AJOe3idiQOb6LHWlmrI2ZAjhui8vGJMcNnk+X\
+9XJZ7rGosg5IHpK8l/P7Q5LvRTI+yb3rBX0Y+6Ji0iaGrunzHtHAOscbm5wHYE7kTERU0SHHjEh+\
+kTJSitTDIEA1kbb4/nHXdsGml5UVXIeEE5VRtxI29t2ZGOgwKRR9MMix9FVVVkRcsNsXjncp7UnN\
+Br3DLDi3FwmBw44ykNzugmirApB1OdenKEMtG2KMOe9AJaSYpUAPl7j5Jl4CuB2ytCaICMaYO1UG\
+XZ7JfIoyJJ4SNo8orRHNVvIoSFsU83zEhi0aNKh8KLnwp21n+RQLoheGo2WFCEn+DDn/YVNibaSi\
+V9kQDUd3YItUZSkUCkWcrnLbbdHwe3WEHZ7xYSWHxb5sS6S7PU/NhYiLS5gFHWKIWa+7Dnd3aYOq\
+1j2IiEGeS+TgTOdFHYQYct65jJFSuftBPptvwgl5QExMUqeOgkKhUCj6HGWou1BuLLPvRyESuULb\
+nSfo6q46CTmTWLrtBatfohH/tK9rgV1IiELnSOE6AVWCqYmFRqTR61uHtjWJhDO9YIr/1J8VXOt8\
+oeb7/Vvy5PKAGN+8O5erNKuorBSLI+qAFSv01LZYHpBYCFq1/aL6Tm48dwRgB7OzvDJfJKSSYbI9\
+kF368nJgpR5aWdeXDxm6UC5kXz/PW6l7oEvVRWeheHlNvbrOJobGmHOSayR3jTGvStw/RVd7L/ou\
+dX3ua6ehE52jKBQKtQs6D+kbw5D86NXxTGqo8UxlWW1Ar2ng7HsmjW1Ix7uRXJ27uwPgrpQdl31M\
+2rIBIa9uhPvvmSzo36bquznANnIaLvIibdThZcLPRk4j1LxIWVWv+RB3eCDF7TxkBbKCa9fvcA5j\
+zFGnNiT2qcGc68sSOkq3tw9zrcQ3rgsh9LLUxsx2n5IGjQkWmhhTKBRqnLvxspS4nnlZbfrgapwd\
+SYikPHdXEdcFgX2XxCZubxXi7SFi6C7bZsRbFynZl5LmfZ67iqQVRaDn95A8DG6m7hBbAPaXORrA\
+G5ITH+xiEghXlw5BlLh3UwZjLhUpgK8AJg0citzrOupdT3KY4XPOp4+qDM4UujK/kZd1KmczXsm1\
+N16XqdCRIRYbH1+U8SR89D7EgG+J6gKACwATY8x1aJxVea92X/YFRhk6UVQ36nX2ahd5IgqFQqFQ\
+KCzjL5nWlAKnSrsWAAAAAElFTkSuQmCC);
+    background-repeat: repeat;
+    /*background: #A8F 
+    -moz-repeating-linear-gradient(top left -45deg, rgba(255,255,255,.8) 1px, rgba(255,255,255,.5) 2px, rgba(255,255,255,.8) 3px, rgba(255,255,255,.5) 4px, rgba(255,255,255,.8) 5px);*/
     color: #333;
     font: .81em 'Liberation Sans', 'Helvetica', sans-serif;
+    height: 100%;
     margin: 0;
-    min-height: 100%;
     padding: 0;
     }
   body {
+    background: url(data:image/png;base64,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) bottom repeat-x !important;
+    min-height: 100%;
     margin: 0;
     padding: 0;
     }
@@ -61,19 +117,21 @@
     color: #497299 !important;
     }
   /* GameFAQs header */
-  #logo {
+  #header {
     background: rgba(177,177,219,.6);
     border: 1px solid #6DA1D0;
     border-top: 0;
     border-left: 0;
     -moz-border-radius: 0 0 1em 0;
     -moz-box-shadow: 0 0 1em #6DA1D0;
-    margin-left: -1em; /* To move it against the corner of the page */
     margin-bottom: 0;
+    overflow: hidden;
     padding: .2em;
     z-index: 2;
     }
   div#logo a {
+    display: block;
+    float: left;
     font-size: 2.5em;
     color: #5B8FBF;
     }
@@ -180,12 +238,13 @@
     color: #444;
     }
   /* Gratouitous amounts of wrappers of which I will deal with few */
+  #container { padding-bottom: 2em; }
   #content {
     background-color: rgba(255,255,255,.6);
     border: 1px solid #6DA1D0;
     -moz-border-radius: 1em;
     -moz-box-shadow: 0 0 .5em #6DA1D0;
-    margin: 2em 3em;
+    margin: 2em 3em 0 3em;
     padding: .5em;
     width: auto;
       min-width: 80%;
@@ -511,6 +570,13 @@
     }
   .user a, .pages a {
     color: inherit !important;
+    }
+  /* Author column */ 
+  .topics col.author {
+    background: rgba(136, 119, 238, .2);
+    }
+  .topics td:first-child + td + td {
+    color: #246;
     }
   /* Topic search */
   .searchtopics {
@@ -958,19 +1024,23 @@
     -moz-border-radius: .2em;
     }
   /* FAQs */
-  div#header > .lefttext, div#header > .righttext {
-    background: rgba(177,177,219,.6);
-    display: inline-block;
-    margin: 0;
-    padding: .5em;
-    padding-bottom: 2em;
-    }
-  div#header > .lefttext {
-    margin-right: -.3em;
+  body > #header {
+    margin-right: 1em;
     }
   #body > pre {
-    background: rgba(255,255,255,.5);
-    padding: 1em;
+    background-color: rgba(255,255,255,.6);
+    border: 1px solid #6DA1D0;
+    -khtml-border-radius: 1em;
+    -khtml-box-shadow: 0 0 .5em #6DA1D0;
+    font-size: 1.1em;
+    margin: 2em 3em 0 3em;
+    padding: .5em;
+    width: auto;
+      min-width: 80%;
+      max-width: 95%; 
+    }
+  body > #body {
+    padding-bottom: 2em;
     }
   /* Character Battle Bracket */
   table.bracket {
@@ -1066,28 +1136,54 @@
   table.message div.msg_body { background-color: #EFEDF4; }
 **/
 /** Full-width header **/
-/**
+/**/
   div#masthead {
     margin: 0;
+    overflow: hidden;
+    padding-bottom: 1em;
     width: 100%;
       max-width: 100%;
       min-width: 100%;
     }
+  div#content {
+    margin-top: 1em;
+    }
   div#masthead div#header ~ div[id] {
     margin-left: 1em;
     }
-  div#masthead div#header div#logo {
+  div#masthead div#header {
     border-right-width: 0;
     -moz-border-radius: 0;
-    -moz-box-shadow: 0 0 0;
     margin: 0;
     }
   div#masthead div#header div#loginbox {
     border-top-width: 0;
     -moz-border-radius: 0 0 1em 1em;
-    top: 0;
-    right: 1em;
+    float: right;
+    margin-right: 1em;
+    margin-top: -.5em;
+    position: static;
     }
-**/
+  div#masthead div#searchbox {
+    overflow: hidden;
+    }
+  div#masthead div#searchbox form {
+    float: left;
+    }
+  div#masthead div#searchbox div#rbx_netxp1_parent {
+    float: right;
+    margin-top: .6em;
+    }
+  div#masthead div#platformlist {
+    overflow: hidden;
+    }
+  div#masthead div#platformlist div.nav {
+    float: left;
+    margin-top: .3em;
+    }
+  div#masthead div#platformlist div#sys {
+    float: right;
+    }
+/**/
 /* Fin */
 }
