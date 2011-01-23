@@ -847,15 +847,18 @@ var gamefox_page =
         tc = tc[1].replace(/\+/g, ' ');
 
       var deletelinkCond = gamefox_lib.prefs.getBoolPref('elements.deletelink');
-      var loggedInUser = (userNav || userPanel).getElementsByTagName('a')[0]
+      var loggedInAs = (userNav || userPanel).getElementsByTagName('a')[0]
         .textContent;
-      loggedInUser = loggedInUser.substr(0, loggedInUser.indexOf('(') - 1);
+      var loggedInUser = loggedInAs.substr(0, loggedInAs.indexOf('(') - 1);
+      var loggedInLevel = loggedInAs.substr(loggedInAs.indexOf(')') - 2, 2);
       var topicOpen = !!doc.evaluate('//a[contains(@href, "post.php")]',
           userNav || userPanel, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
           null).singleNodeValue;
+      var canQuickPost = (topicOpen || loggedInLevel >= 50) &&
+        gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
-      var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink') &&
-        topicOpen && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
+      var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink')
+        && canQuickPost;
       var sigCond = gamefox_lib.prefs.getBoolPref('elements.sigspans');
 
       for (var i = 0; i < td.length; i += 2)
@@ -1295,7 +1298,7 @@ var gamefox_page =
       }
 
       // QuickPost
-      if (gamefox_lib.prefs.getBoolPref('elements.quickpost.form') && topicOpen)
+      if (canQuickPost)
       {
         var qpDiv = doc.createElement('div');
             qpDiv.id = 'gamefox-quickpost-normal';
