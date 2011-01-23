@@ -897,7 +897,11 @@ var gamefox_quickpost =
   {
     var sigBox = doc.createElement('span');
     sigBox.id = 'gamefox-quickpost-signature';
-    sigBox.textContent = 'Signature:';
+
+    var span = doc.createElement('span');
+    span.textContent = 'Signature:';
+    sigBox.appendChild(span);
+
     sigBox.appendChild(doc.createElement('br'));
 
     var sigText = doc.createElement('textarea');
