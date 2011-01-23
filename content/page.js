@@ -405,13 +405,14 @@ var gamefox_page =
     /* Posting and Preview (post.php) */
     else if (gamefox_lib.onPage(doc, 'post'))
     {
-      var message = doc.getElementsByName('message')[0];
+      var message = doc.getElementsByName('messagetext')[0];
       if (!message)
         return; // "Message Posted" page
       var form = message.form;
       var formElements = form.elements;
       var topictitle = formElements.namedItem('topictitle');
       var detailsDiv = message.parentNode.parentNode;
+      var previewBtn = formElements.namedItem('post');
 
       // Titles
       if (topictitle) // new topic
@@ -426,9 +427,19 @@ var gamefox_page =
 
       // Signature
       if (gamefox_lib.prefs.getBoolPref('signature.applyeverywhere')
-          && !/\b(Error|Preview|Posted)<\/h2>/.test(doc.body.innerHTML))
+          && !/\b(Error|Posted)<\/h2>/.test(doc.body.innerHTML))
       {
-        message.value = gamefox_sig.format(null, null, doc);
+        detailsDiv.removeChild(formElements.namedItem('custom_sig'));
+
+        // Do this twice to remove the signature info text and the <br>
+        message.parentNode.parentNode.removeChild(message.parentNode
+            .nextSibling);
+        message.parentNode.parentNode.removeChild(message.parentNode
+            .nextSibling);
+
+        doc.gamefox.sig = gamefox_sig.format(null, null, doc);
+        var sigBox = gamefox_quickpost.createSigBox(doc);
+        previewBtn.parentNode.insertBefore(sigBox, previewBtn);
       }
 
       message.setSelectionRange(0, 0);
@@ -484,7 +495,6 @@ var gamefox_page =
         button.value = 'Post Message';
         button.addEventListener('click', gamefox_quickpost.post, false);
 
-        var previewBtn = formElements.namedItem('post');
         previewBtn.parentNode.insertBefore(button, previewBtn);
         previewBtn.parentNode.insertBefore(doc.createTextNode(' '), previewBtn);
       }

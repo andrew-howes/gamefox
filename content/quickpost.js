@@ -96,7 +96,7 @@ var gamefox_quickpost =
     // Signature
     doc.gamefox.sig = gamefox_sig.format(null, null, doc);
 
-    form.appendChild(gamefox_quickpost.createSigBox(doc, form));
+    form.appendChild(gamefox_quickpost.createSigBox(doc));
 
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
     {
@@ -924,9 +924,9 @@ var gamefox_quickpost =
 
     var sigText = doc.createElement('textarea');
     sigText.name = 'custom_sig';
-    sigText.rows = 2;
+
     sigText.value = doc.gamefox.sig;
-    
+
     sigBox.appendChild(sigText);
     sigBox.appendChild(doc.createElement('br'));
 
