@@ -330,11 +330,13 @@ var gamefox_quickpost =
     // post.php still uses the traditional query parameters
     var boardId = queryObj['board'] || gamefox_utils.getBoardId(doc.location.pathname);
     var topicId = queryObj['topic'] || gamefox_utils.getTopicId(doc.location.pathname);
+    var msgId = queryObj['message'];
 
     var topicTitle = doc.getElementsByName('topictitle')[0];
     var postMessageUrl = gamefox_lib.domain + gamefox_lib.path
         + 'post.php?board=' + boardId
-        + (!topicTitle ? '&topic=' + topicId : '');
+        + (!topicTitle ? '&topic=' + topicId : '')
+        + (msgId ? '&message=' + msgId : '');
     var message = gamefox_quickpost.removeGFCodeWhitespace(
         doc.getElementsByName('messagetext')[0].value);
     var sig = gamefox_sig.format(doc.getElementsByName('custom_sig')[0]
