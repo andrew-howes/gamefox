@@ -356,8 +356,6 @@
                 preference="elements.quickpost.resetconfirm"/>
               <checkbox label="&newSigOnReset.label;"
                 preference="elements.quickpost.resetnewsig"/>
-              <checkbox label="&warnBlankPost.label;"
-                preference="elements.quickpost.blankPostWarning"/>
 
               <hbox align="center">
                 <label value="&afterTopic.label;"/>
