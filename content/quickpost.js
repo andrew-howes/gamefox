@@ -897,6 +897,8 @@ var gamefox_quickpost =
 
     var sigText = doc.createElement('textarea');
     sigText.name = 'custom_sig';
+    sigText.rows = 2;
+    sigText.cols = 100;
 
     sigText.value = doc.gamefox.sig;
 
