@@ -81,15 +81,6 @@ var gamefox_quickpost =
     message.cols = 60;
     message.tabIndex = 2;
     form.appendChild(message);
-    var focusQuickPostListener = function() {
-      try
-      {
-        this.setSelectionRange(0, 0);
-      }
-      catch (e) {}
-      this.removeEventListener('focus', focusQuickPostListener, false);
-    };
-    message.addEventListener('focus', focusQuickPostListener, false);
 
     form.appendChild(doc.createElement('br'));
 
@@ -627,7 +618,7 @@ var gamefox_quickpost =
     event.preventDefault();
     var doc = gamefox_lib.getDocument(event);
 
-    var quickpost = doc.getElementsByName('message')[0];
+    var quickpost = doc.getElementsByName('messagetext')[0];
     var scrollTop = quickpost.scrollTop;
     var tagStrStart = gamefox_quickpost.formatTag(this.name, false);
     var tagStrEnd = gamefox_quickpost.formatTag(this.name, true);
@@ -771,7 +762,7 @@ var gamefox_quickpost =
     event.preventDefault();
     var doc = gamefox_lib.getDocument(event);
 
-    var msg = doc.getElementsByName('message')[0];
+    var msg = doc.getElementsByName('messagetext')[0];
     if (msg.selectionStart == msg.selectionEnd)
     {
       gamefox_lib.alert('You need to select some text containing HTML first.');
@@ -881,7 +872,7 @@ var gamefox_quickpost =
 
     var character = event.target.textContent;
 
-    var msg = doc.getElementsByName('message')[0];
+    var msg = doc.getElementsByName('messagetext')[0];
     var endPosition = msg.selectionEnd + character.length;
     msg.value = msg.value.substr(0, msg.selectionEnd)
       + character
