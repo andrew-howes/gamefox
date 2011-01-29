@@ -879,9 +879,7 @@ var gamefox_page =
         if (onArchive)
           var profileLink = td[i].getElementsByTagName('b')[0];
         else
-          var profileLink = doc.evaluate('.//a[contains(@href, "user.php")]',
-              td[i], null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-            .singleNodeValue;
+          var profileLink = td[i].querySelector('a.name');
         var username = profileLink.textContent;
         var msgStats = profileLink.parentNode;
         var detailLink = doc.evaluate('./a[contains(., "detail")]', msgStats,
