@@ -439,7 +439,7 @@ var gamefox_page =
             .nextSibling);
 
         doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-        var sigBox = gamefox_quickpost.createSigBox(doc);
+        var sigBox = gamefox_quickpost.createSigBox(doc, true);
         previewBtn.parentNode.insertBefore(sigBox, previewBtn);
       }
 

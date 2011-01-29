@@ -886,10 +886,11 @@ var gamefox_quickpost =
       gamefox_messages.updateMessageCount(doc);
   },
 
-  createSigBox: function(doc)
+  createSigBox: function(doc, postPage)
   {
     var sigBox = doc.createElement('span');
-    sigBox.id = 'gamefox-quickpost-signature';
+    sigBox.id = postPage ? 'gamefox-post-signature' :
+      'gamefox-quickpost-signature';
 
     var span = doc.createElement('span');
     span.textContent = 'Signature:';

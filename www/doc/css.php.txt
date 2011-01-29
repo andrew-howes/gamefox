@@ -205,8 +205,16 @@
     </tr>
 
     <tr>
+        <td>span#gamefox-post-signature</td>
+        <td>Contains the textarea used to edit the signature on the standard
+            GameFAQs post page (post.php).</td>
+        <td>0.7.11</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>span#gamefox-quickpost-signature</td>
-        <td>Contains the textarea used to edit the signature for the post.</td>
+        <td>Contains the textarea used to edit the signature for QuickPost.</td>
         <td>0.7.11</td>
         <td>-</td>
     </tr>

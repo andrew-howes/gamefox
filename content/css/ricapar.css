@@ -439,8 +439,8 @@
         text-align: center;
     }
 
-    #gamefox-message {
-        max-width: 700px;
+    #gamefox-message, #gamefox-quickpost-signature textarea {
+        max-width: 700px !important;
     }
 
     /* User Notification */

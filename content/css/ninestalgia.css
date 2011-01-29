@@ -345,7 +345,7 @@ table.topics tbody tr td:first-child + td {border-left:7px solid white !importan
 #gamefox-quickpost-form, #gamefox-quickpost-form:before {text-align: center !important; width: 100% !important; clear: both !important;}
 #gamefox-quickpost-form:before {content: "Quickpost" !important; display:block !important; background-color: #6564FF !important; color: #ffffff !important; font: bold 16px verdana, helvetica, sans-serif !important; padding:2px !important;}
 #gamefox-quickpost-afloat {position: fixed !important; top: 30% !important; left: 20% !important; width: 70% !important; z-index: 3 !important; border: 2px solid #6564FF !important; color: #000000 !important; background-color: #DFDFDF !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90 !important;}
-#gamefox-message, #gamefox-topic {width: 70% !important;}
+#gamefox-message, #gamefox-topic, #gamefox-quickpost-signature textarea {width: 70% !important;}
 
 /** GameFOX Character Map **/ /** Modified from GameFOX **/ /**GF**/
 #gamefox-character-map {position: absolute !important; overflow: auto !important; height: 200px !important; width: 400px !important; border: #898989 1px solid !important; background: #DFDFDF !important;}
