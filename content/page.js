@@ -876,10 +876,16 @@ var gamefox_page =
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
         td[i].id = 'p' + msgnumString;
 
-        var profileLink = td[i].getElementsByTagName(onArchive ? 'b' : 'a')[0];
+        if (onArchive)
+          var profileLink = td[i].getElementsByTagName('b')[0];
+        else
+          var profileLink = doc.evaluate('.//a[contains(@href, "user.php")]',
+              td[i], null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+            .singleNodeValue;
         var username = profileLink.textContent;
         var msgStats = profileLink.parentNode;
-        var detailLink = msgStats.getElementsByTagName('a')[1];
+        var detailLink = doc.evaluate('./a[contains(., "detail")]', msgStats,
+            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         var postBody = td[i + 1].textContent;
 
         for (var j = 0; j < msgStats.childNodes.length; j++)
@@ -919,7 +925,7 @@ var gamefox_page =
           postDateElement.appendChild(doc.createTextNode('Posted ' +
                 postDate));
         else
-          postDateElement.appendChild(doc.createTextNode(' | Posted ' +
+          postDateElement.appendChild(doc.createTextNode('Posted ' +
                 postDate + (onArchive ? '' : ' | ')));
         msgStats.replaceChild(postDateElement, postDateNode);
 
@@ -937,8 +943,7 @@ var gamefox_page =
           var format = gamefox_date.getFormat('message',
               gamefox_lib.prefs.getIntPref('date.messagePreset'));
 
-          postDateElement.textContent = (leftMsgData ? '' : ' | ')
-            + 'Posted '
+          postDateElement.textContent = 'Posted '
             + gamefox_date.parseFormat(postDate, format)
             + (leftMsgData || onArchive ? '' : ' | ')
         }
