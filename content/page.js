@@ -886,6 +886,11 @@ var gamefox_page =
             null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         var postBody = td[i + 1].textContent;
 
+        // Remove GameFAQs post numbering
+        if (gamefox_lib.prefs.getBoolPref('elements.msgnum')
+            && msgStats.firstChild.textContent.charAt(0) == '#')
+          msgStats.removeChild(msgStats.firstChild);
+
         for (var j = 0; j < msgStats.childNodes.length; j++)
         {
           // check if this is the post date node
