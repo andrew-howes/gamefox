@@ -966,7 +966,7 @@ var gamefox_quickpost =
       if (keyRequest.readyState == 4)
       {
         var key = keyRequest.responseText
-          .match(/<input type="hidden" name="key" value="([a-z0-9]+)">/);
+          .match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]+)"/);
 
         if (key)
         {
