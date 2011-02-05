@@ -127,6 +127,9 @@ pref("gamefox.options.mouse.selectedtab", 0);
 pref("gamefox.options.topics.selectedtab", 0);
 
 pref("gamefox.keys", "{}");
+pref("gamefox.keys.throttle.start", 0);
+pref("gamefox.keys.throttle.count", 0);
+pref("gamefox.keys.throttle.disabledUntil", 0);
 
 pref("gamefox.nightlyChangeLog", true);
 pref("gamefox.showReleaseNotes", true);

@@ -950,6 +950,12 @@ var gamefox_quickpost =
         || !gamefox_lib.isLoggedIn())
       return; // already up to date, or not logged in
 
+    var now = Math.floor(Date.now() / 1000);
+    var disabledUntil = gamefox_lib.prefs
+      .getIntPref('keys.throttle.disabledUntil');
+    if (disabledUntil > now) // throttled
+      return;
+
     var uri = gamefox_lib.domain + gamefox_lib.path + 'post.php?board=2';
     var keyRequest = new XMLHttpRequest();
     keyRequest.open('GET', uri);
@@ -967,6 +973,33 @@ var gamefox_quickpost =
               .getCharPref('keys'));
           keys[account] = { key: key[1], ctk: ctk };
           gamefox_lib.prefs.setCharPref('keys', gamefox_lib.toJSON(keys));
+        }
+        else
+        { // Throttle unsuccessful attempts to prevent spamming GameFAQs with
+          // HTTP requests
+          var throttleCount = gamefox_lib.prefs
+            .getIntPref('keys.throttle.count');
+          var throttleStart = gamefox_lib.prefs
+            .getIntPref('keys.throttle.start');
+
+          if (throttleStart < now - 3600) // reset after an hour
+            throttleStart = 0;
+          else if (throttleCount >= 10) // more than 10 failed requests/hr
+          {
+            gamefox_lib.prefs.setIntPref('keys.throttle.disabledUntil',
+                now + 36000); // disable for 10 hours
+          }
+
+          if (!throttleCount || !throttleStart)
+          {
+            throttleCount = 0;
+            throttleStart = now;
+          }
+
+          ++throttleCount;
+
+          gamefox_lib.prefs.setIntPref('keys.throttle.count', throttleCount);
+          gamefox_lib.prefs.setIntPref('keys.throttle.start', throttleStart);
         }
       }
     }
