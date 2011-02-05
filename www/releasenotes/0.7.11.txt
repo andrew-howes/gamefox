@@ -1,9 +1,12 @@
 ### About this version
 
-GameFOX works with the recent GameFAQs message board updates.
+GameFOX works with the recent GameFAQs message board updates. Any account can
+use QuickPost, regardless of user level.
 
 Two new themes, ProgFAQs and Ninestalgia, have been added. 8for11 and GFPastel
 2010 have been updated, as well.
+
+Several other bugs have been fixed.
 
 ### Feedback
 
