@@ -522,7 +522,7 @@ var gamefox_quickpost =
                     { // on last page
                       params['post'] = (doc.gamefox.msgnum + 1).toString();
                     }
-                    else
+                    else if (!msgId) // don't do this when editing
                       params['post'] = 'last';
 
                     doc.location = gamefox_utils.newURI(boardId, topicId,
