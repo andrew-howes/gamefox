@@ -944,11 +944,11 @@ var gamefox_quickpost =
   updatePostKey: function()
   {
     var ctk = gamefox_lib.getCookie('ctk');
-    if (gamefox_quickpost.readPostKey().ctk == ctk
+    var account = gamefox_lib.prefs.getCharPref('accounts.current');
+
+    if (gamefox_quickpost.readPostKey().ctk == ctk || !account
         || !gamefox_lib.isLoggedIn())
       return; // already up to date, or not logged in
-
-    var account = gamefox_lib.prefs.getCharPref('accounts.current');
 
     var uri = gamefox_lib.domain + gamefox_lib.path + 'post.php?board=2';
     var keyRequest = new XMLHttpRequest();
