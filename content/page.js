@@ -886,9 +886,18 @@ var gamefox_page =
         var postBody = td[i + 1].textContent;
 
         // Remove GameFAQs post numbering
-        if (gamefox_lib.prefs.getBoolPref('elements.msgnum')
-            && msgStats.firstChild.textContent.charAt(0) == '#')
-          msgStats.removeChild(msgStats.firstChild);
+        if (gamefox_lib.prefs.getBoolPref('elements.msgnum'))
+        {
+          if (leftMsgData && msgStats.childNodes[1].textContent.charAt(0) ==
+              '#')
+          {
+            // Do this twice to remove the <br>
+            msgStats.removeChild(msgStats.childNodes[1]);
+            msgStats.removeChild(msgStats.childNodes[1]);
+          }
+          else if (msgStats.childNodes[0].textContent.charAt(0) == '#')
+            msgStats.removeChild(msgStats.childNodes[0]);
+        }
 
         for (var j = 0; j < msgStats.childNodes.length; j++)
         {
