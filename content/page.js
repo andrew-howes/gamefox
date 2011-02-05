@@ -1082,7 +1082,7 @@ var gamefox_page =
             'the request of a moderator or administrator]')
         {
           var a = deletelinkCond ? doc.createElement('a') : null;
-          if (msgnum == 1 && (td.length > 2 || pagenum > 0))
+          if (msgnum == 1 && (td.length >= 4 || pagenum > 0))
           {
             td[i].setAttribute('gfdeletetype', 'close');
 

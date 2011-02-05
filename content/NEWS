@@ -9,6 +9,8 @@
     * Support for GameFAQs' new posting system
     * Show QuickPost for mods in closed topics
     * Update GFPastel 2010 CSS
+    * Fix "close" link being shown instead of "delete" for topics with no
+      replies
 
 2010-10-06:
     * version 0.7.10
