@@ -1310,6 +1310,11 @@ var gamefox_page =
         var qpDiv = doc.createElement('div');
             qpDiv.id = 'gamefox-quickpost-normal';
 
+        // Remove GameFAQs' quick post form
+        var postForm = boardWrap.getElementsByTagName('form')[0];
+        if (postForm)
+          postForm.parentNode.removeChild(postForm);
+
         boardWrap.appendChild(qpDiv);
         gamefox_quickpost.appendForm(doc, qpDiv, false);
       }
