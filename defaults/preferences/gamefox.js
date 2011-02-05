@@ -126,6 +126,8 @@ pref("gamefox.options.signatures.selectedtab", 0);
 pref("gamefox.options.mouse.selectedtab", 0);
 pref("gamefox.options.topics.selectedtab", 0);
 
+pref("gamefox.keys", "{}");
+
 pref("gamefox.nightlyChangeLog", true);
 pref("gamefox.showReleaseNotes", true);
 

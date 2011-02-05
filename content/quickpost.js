@@ -72,6 +72,13 @@ var gamefox_quickpost =
       form.appendChild(doc.createElement('br'));
     }
 
+    // Post key
+    var key = doc.createElement('input');
+    key.type = 'hidden';
+    key.name = 'key';
+    key.value = gamefox_quickpost.readPostKey().key;
+    form.appendChild(key);
+
     // Message
     var message = doc.createElement('textarea');
     message.id = 'gamefox-message';
@@ -337,6 +344,7 @@ var gamefox_quickpost =
         + 'post.php?board=' + boardId
         + (!topicTitle ? '&topic=' + topicId : '')
         + (msgId ? '&message=' + msgId : '');
+    var key = doc.getElementsByName('key')[0].value;
     var message = gamefox_quickpost.removeGFCodeWhitespace(
         doc.getElementsByName('messagetext')[0].value);
     var sig = gamefox_sig.format(doc.getElementsByName('custom_sig')[0]
@@ -548,6 +556,7 @@ var gamefox_quickpost =
           postRequest.send(
               'post_id=' + postId[1] +
               '&uid=' + text.match(/<input\b[^>]+?\bname="uid"[^>]+?\bvalue="([^"]*)"/)[1] +
+              '&key=' + key +
               '&post=Post+Message'
               );
         }
@@ -559,6 +568,7 @@ var gamefox_quickpost =
         (topicTitle ? 'topictitle=' + gamefox_utils.URLEncode(topicTitle.value) + '&' : '') +
         'messagetext=' + gamefox_utils.URLEncode(message) +
         '&custom_sig=' + gamefox_utils.URLEncode(sig) +
+        '&key=' + key +
         '&post=Preview+Message'
         );
   },
@@ -915,5 +925,52 @@ var gamefox_quickpost =
   {
     var sig = event.target.elements.namedItem('custom_sig');
     sig.value = gamefox_sig.format(sig.value);
+  },
+
+  readPostKey: function()
+  {
+    var account = gamefox_lib.prefs.getCharPref('accounts.current');
+    if (!account)
+      return false;
+
+    var keys = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('keys'));
+    if (!keys[account])
+      return false;
+
+    return keys[account];
+  },
+
+  updatePostKey: function()
+  {
+    var ctk = gamefox_lib.getCookie('ctk');
+    if (gamefox_quickpost.readPostKey().ctk == ctk
+        || !gamefox_lib.isLoggedIn())
+      return; // already up to date, or not logged in
+
+    var account = gamefox_lib.prefs.getCharPref('accounts.current');
+
+    var uri = gamefox_lib.domain + gamefox_lib.path + 'post.php?board=2';
+    var keyRequest = new XMLHttpRequest();
+    keyRequest.open('GET', uri);
+    var ds = gamefox_lib.thirdPartyCookieFix(keyRequest);
+    keyRequest.onreadystatechange = function()
+    {
+      if (keyRequest.readyState == 4)
+      {
+        var key = keyRequest.responseText
+          .match(/<input type="hidden" name="key" value="([a-z0-9]+)">/);
+
+        if (key)
+        {
+          var keys = gamefox_lib.safeEval(gamefox_lib.prefs
+              .getCharPref('keys'));
+          keys[account] = { key: key[1], ctk: ctk };
+          gamefox_lib.prefs.setCharPref('keys', gamefox_lib.toJSON(keys));
+        }
+      }
+    }
+
+    keyRequest.send();
   }
 };
+gamefox_quickpost.updatePostKey();

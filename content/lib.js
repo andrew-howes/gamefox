@@ -412,17 +412,7 @@ var gamefox_lib =
 
   isLoggedIn: function()
   {
-    var cookieMgr = Cc['@mozilla.org/cookiemanager;1']
-      .getService(Ci.nsICookieManager);
-
-    for (var e = cookieMgr.enumerator; e.hasMoreElements();)
-    {
-      var cookie = e.getNext().QueryInterface(Ci.nsICookie);
-      if (cookie.host == gamefox_lib.cookieHost && cookie.name == 'MDAAuth')
-        return true;
-    }
-
-    return false;
+    return !!gamefox_lib.getCookie('MDAAuth');
   },
 
   isSafeJSON: function(string) {
@@ -503,5 +493,20 @@ var gamefox_lib =
       gamefox_lib.alert('This command does not work on your platform. If you '
           + 'are using SeaMonkey, try installing the xSidebar extension.');
     }
+  },
+
+  getCookie: function(name)
+  {
+    var cookieMgr = Cc['@mozilla.org/cookiemanager;1']
+      .getService(Ci.nsICookieManager);
+
+    for (var e = cookieMgr.enumerator; e.hasMoreElements();)
+    {
+      var cookie = e.getNext().QueryInterface(Ci.nsICookie);
+      if (cookie.host == gamefox_lib.cookieHost && cookie.name == name)
+        return cookie.value;
+    }
+
+    return false;
   }
 };
