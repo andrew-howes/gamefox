@@ -1,5 +1,5 @@
 @-moz-document domain(www.gamefaqs.com){
-.message [id^="p"] a:not(.name):not(.gamefox-message-detail-number){
+.message [id^="p"] a:not(.name):not(.gamefox-message-detail-number):not(:empty){
 border:1px transparent solid !important;
 display:-moz-inline-box !important;
 display:inline-block !important;
