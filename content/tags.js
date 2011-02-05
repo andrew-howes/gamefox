@@ -43,7 +43,7 @@ var gamefox_tags =
   init: function()
   {
     this.populateTree();
-    new gamefox_observer('tags', this.populateTree);
+    new gamefox_pref_observer('tags', this.populateTree);
   },
 
   populateTree: function()

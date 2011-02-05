@@ -42,7 +42,7 @@ var gamefox_options_sig =
     this._updateCharCounts();
 
     // watch for external changes to sigs
-    new gamefox_observer('signature.serialized', this);
+    new gamefox_pref_observer('signature.serialized', this);
   },
 
   observe: function()

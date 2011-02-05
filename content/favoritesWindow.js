@@ -51,7 +51,7 @@ var gamefox_favoritesWindow =
 
     this._tree.view = this._view;
 
-    new gamefox_observer('favorites.serialized', this.update);
+    new gamefox_pref_observer('favorites.serialized', this.update);
   },
 
   makeBoardObject: function(id, name)

@@ -972,6 +972,24 @@ var gamefox_quickpost =
     }
 
     keyRequest.send();
+  },
+
+  keyObserver: function(subject, topic)
+  {
+    if (!gamefox_lib.isTopBrowserWindow())
+      return;
+
+    if (topic) // pref change
+    {
+      gamefox_quickpost.updatePostKey();
+      return;
+    }
+
+    let cookie = subject.QueryInterface(Ci.nsICookie);
+    if (cookie.host == gamefox_lib.cookieHost && cookie.name == 'ctk')
+    {
+      if (gamefox_lib.getCookie('ctk'))
+        gamefox_quickpost.updatePostKey();
+    }
   }
 };
-gamefox_quickpost.updatePostKey();

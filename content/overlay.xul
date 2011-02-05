@@ -41,6 +41,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/favorites.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tracked.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/date.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/observers.js"/>
 
   <!-- common context menu -->
   <popup id="contentAreaContextMenu">

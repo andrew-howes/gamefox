@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009 Michael Ryan, Brian Marshall
+ * Copyright 2008, 2009, 2011 Michael Ryan, Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-function gamefox_observer(domain, observer)
+function gamefox_pref_observer(domain, observer)
 {
   // the event listener makes everything we need stay in memory, so it is not
   // necessary to maintain an explicit reference to this object
@@ -42,4 +42,24 @@ function gamefox_observer(domain, observer)
       {
         branch.removeObserver(domain, obj);
       }, false);
+}
+
+function gamefox_cookie_observer(observer)
+{
+  var os = Cc['@mozilla.org/observer-service;1'].getService(Ci
+      .nsIObserverService);
+
+  this.register = function()
+  {
+    os.addObserver(this, 'cookie-changed', false);
+  };
+  this.unregster = function()
+  {
+    if (os) os.removeObserver(this, 'cookie-changed');
+  };
+  this.observe = function(subject, topic, data)
+  {
+    if (topic == 'cookie-changed')
+      observer(subject);
+  };
 }

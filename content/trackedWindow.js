@@ -71,7 +71,7 @@ var gamefox_trackedWindow =
 
     this.sort('lastPost', false);
 
-    new gamefox_observer('tracked.list', this.update);
+    new gamefox_pref_observer('tracked.list', this.update);
   },
 
   makeTopicObject: function(topicId, topic)

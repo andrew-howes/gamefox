@@ -24,7 +24,7 @@ var gamefox_sidebar =
   {
     // hide user disabled sections
     gamefox_sidebar.updateSections();
-    new gamefox_observer('sidebar', gamefox_sidebar.updateSections);
+    new gamefox_pref_observer('sidebar', gamefox_sidebar.updateSections);
 
     // link middle clicking
     // disable dotted outline after loading link
@@ -50,7 +50,7 @@ var gamefox_sidebar =
 
     // accounts
     gamefox_sidebar.populateAccounts();
-    new gamefox_observer('accounts', gamefox_sidebar.populateAccounts);
+    new gamefox_pref_observer('accounts', gamefox_sidebar.populateAccounts);
   },
 
   updateSections: function()

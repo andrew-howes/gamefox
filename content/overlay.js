@@ -63,6 +63,14 @@ var gamefox =
     // disable favorites
     if (!gamefox_lib.prefs.getBoolPref('favorites.enabled'))
       gamefox_lib.prefs.clearUserPref('favorites.serialized');
+
+    // post key
+    gamefox_quickpost.updatePostKey();
+    var postKeyObserver = new gamefox_cookie_observer(gamefox_quickpost
+        .keyObserver);
+    postKeyObserver.register();
+    new gamefox_pref_observer('accounts.current', gamefox_quickpost
+        .keyObserver);
   },
 
   update: function(addon)

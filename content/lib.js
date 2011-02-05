@@ -509,5 +509,14 @@ var gamefox_lib =
     }
 
     return false;
+  },
+
+  isTopBrowserWindow: function()
+  {
+    // Used to ensure that only one browser window handles an observer
+    var win = Cc['@mozilla.org/appshell/window-mediator;1']
+      .getService(Ci.nsIWindowMediator)
+      .getMostRecentWindow('navigator:browser');
+    return (win == window);
   }
 };

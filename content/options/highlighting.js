@@ -33,7 +33,7 @@ var gamefox_options_highlighting =
     document.getElementById('paneHighlighting').setAttribute('platform',
         window.navigator.platform);
 
-    new gamefox_observer('userlist.serialized', this.watchPref);
+    new gamefox_pref_observer('userlist.serialized', this.watchPref);
   },
 
   populate: function()
