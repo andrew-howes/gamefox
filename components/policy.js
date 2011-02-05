@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Michael Ryan, Brian Marshall
+ * Copyright 2008, 2009, 2010, 2011 Michael Ryan, Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -21,7 +21,17 @@ Components.utils.import('resource://gre/modules/XPCOMUtils.jsm');
 
 const nsIContentPolicy = Components.interfaces.nsIContentPolicy;
 const nsISupports = Components.interfaces.nsISupports;
-const adTest = /(2mdn\.net|adlegend\.com|advertising\.com|atdmt\.com|offers-service\.cbsinteractive\.com|adimg\.cnet\.com|mads\.cnet\.com|surveys\.cnet\.com|adlog\.com\.com|dw\.com\.com|i\.i\.com\.com|contextweb\.com|doubleclick\.net|eyewonder\.com|adimg\.gamefaqs\.com|bwp\.gamefaqs\.com|mads\.gamefaqs\.com|bwp\.gamespot\.com|insightexpressai\.com|mediaplex\.com|pointroll\.com|questionmarket\.com|revsci\.net|scorecardresearch\.com|serving-sys\.com|specificclick\.net|tribalfusion\.com|turn\.com|unicast\.com|voicefive\.com|adserver\.yahoo\.com|yieldmanager\.com)$/;
+const adTest = new RegExp('(' +
+    '2mdn\.net|adlegend\.com|advertising\.com|atdmt\.com|' +
+    'offers-service\.cbsinteractive\.com|adimg\.cnet\.com|mads\.cnet\.com|' +
+    'surveys\.cnet\.com|adlog\.com\.com|dw\.com\.com|i\.i\.com\.com|' +
+    'contextweb\.com|doubleclick\.net|eyewonder\.com|adimg\.gamefaqs\.com|' +
+    'bwp\.gamefaqs\.com|mads\.gamefaqs\.com|bwp\.gamespot\.com|' +
+    'insightexpressai\.com|interpolls.com|mediaplex\.com|pointroll\.com|' +
+    'questionmarket\.com|revsci\.net|scorecardresearch\.com|' +
+    'serving-sys\.com|specificclick\.net|tribalfusion\.com|turn\.com|' +
+    'unicast\.com|voicefive\.com|adserver\.yahoo\.com|yieldmanager\.com' +
+    ')$');
 const wwwHost = 'www.gamefaqs.com';
 const betaHost = 'beta.gamefaqs.com';
 const prefs = Components.classes['@mozilla.org/preferences-service;1']
