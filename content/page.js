@@ -1016,7 +1016,8 @@ var gamefox_page =
             if (leftMsgData)
               msgStats.insertBefore(doc.createElement('br'), postDateElement);
             else
-              msgStats.insertBefore(doc.createTextNode(' | '), groupname);
+              msgStats.insertBefore(doc.createTextNode(' | '), groupname
+                  .nextSibling);
           }
 
           if (hlinfo[2] == 'highlight')
