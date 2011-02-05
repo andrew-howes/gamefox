@@ -704,7 +704,7 @@ var gamefox_quickpost =
       button.title = '<' + tags[i].replace(/,/g, '><') +
         (tags[i] == 'br' ? ' /' : '') + '> [' + accesskeyPrefix + tags[i + 2] + ']';
       button.accessKey = tags[i + 2];
-      button.tabIndex = 4;
+      button.tabIndex = 5;
       button.addEventListener('click', gamefox_quickpost.insertTag, false);
 
       span.appendChild(button);
@@ -721,7 +721,7 @@ var gamefox_quickpost =
       button.value = 'Break HTML';
       button.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
       button.accessKey = 'r';
-      button.tabIndex = 4;
+      button.tabIndex = 5;
       button.addEventListener('click', gamefox_quickpost.breakTagsFromButton, false);
 
       span.appendChild(button);
@@ -736,7 +736,7 @@ var gamefox_quickpost =
       button = doc.createElement('input');
       button.type = 'submit';
       button.value = 'Character Map';
-      button.tabIndex = 4;
+      button.tabIndex = 5;
       button.addEventListener('click', gamefox_quickpost.toggleCharacterMap, false);
 
       span.appendChild(button);
@@ -914,6 +914,7 @@ var gamefox_quickpost =
     sigText.name = 'custom_sig';
     sigText.rows = 2;
     sigText.cols = 100;
+    sigText.tabIndex = 4;
 
     sigText.value = doc.gamefox.sig;
 
