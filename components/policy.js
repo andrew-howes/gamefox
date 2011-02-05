@@ -22,13 +22,13 @@ Components.utils.import('resource://gre/modules/XPCOMUtils.jsm');
 const nsIContentPolicy = Components.interfaces.nsIContentPolicy;
 const nsISupports = Components.interfaces.nsISupports;
 const adTest = new RegExp('(' +
-    '2mdn\.net|adlegend\.com|advertising\.com|atdmt\.com|' +
+    '2mdn\.net|adlegend\.com|admeld.com|advertising\.com|atdmt\.com|' +
     'offers-service\.cbsinteractive\.com|adimg\.cnet\.com|mads\.cnet\.com|' +
     'surveys\.cnet\.com|adlog\.com\.com|dw\.com\.com|i\.i\.com\.com|' +
     'contextweb\.com|doubleclick\.net|eyewonder\.com|adimg\.gamefaqs\.com|' +
     'bwp\.gamefaqs\.com|mads\.gamefaqs\.com|bwp\.gamespot\.com|' +
-    'insightexpressai\.com|interpolls.com|mediaplex\.com|pointroll\.com|' +
-    'questionmarket\.com|revsci\.net|scorecardresearch\.com|' +
+    'imrworldwide.com|insightexpressai\.com|interpolls.com|mediaplex\.com|' +
+    'pointroll\.com|questionmarket\.com|revsci\.net|scorecardresearch\.com|' +
     'serving-sys\.com|specificclick\.net|tribalfusion\.com|turn\.com|' +
     'unicast\.com|voicefive\.com|adserver\.yahoo\.com|yieldmanager\.com' +
     ')$');
