@@ -882,8 +882,7 @@ var gamefox_page =
           var profileLink = td[i].querySelector('a.name');
         var username = profileLink.textContent;
         var msgStats = profileLink.parentNode;
-        var detailLink = doc.evaluate('./a[contains(., "detail")]', msgStats,
-            null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var detailLink = msgStats.getElementsByTagName('a')[2];
         var postBody = td[i + 1].textContent;
 
         // Remove GameFAQs post numbering

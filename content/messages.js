@@ -100,7 +100,7 @@ var gamefox_messages =
     if (!gamefox_lib.confirm(str)) return false;
 
     var doc = gamefox_lib.getDocument(event);
-    var uri = msgComponents.header.getElementsByTagName('a')[1].href;
+    var uri = msgComponents.header.getElementsByTagName('a')[2].href;
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
