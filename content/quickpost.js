@@ -360,6 +360,7 @@ var gamefox_quickpost =
       {
         var text = previewRequest.responseText;
         var postId = text.match(/<input\b[^>]+?\bname="post_id"[^>]+?\bvalue="([^"]*)"/);
+        var responseKey = text.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]+)"/);
 
         if (!postId)
         { // error
@@ -420,6 +421,17 @@ var gamefox_quickpost =
               gamefox_lib.alert('The topic is gone! Damn moderators...');
             else if (maintenance)
               gamefox_lib.alert('The site is temporarily down for maintenance.');
+            else if (!responseKey)
+              gamefox_lib.alert('A GameFOX error has occurred: cannot find key');
+            else if (!key || key != responseKey)
+            {
+              gamefox_quickpost.setPostKey(responseKey[1]);
+              doc.getElementsByName('key')[0].value = responseKey[1];
+
+              gamefox_lib.alert('A GameFOX error has occurred: '
+                  + (!key ? 'missing key' : 'key mismatch') + '\n\n'
+                  + 'Retrying may fix this issue.');
+            }
             else
               gamefox_lib.alert('Whoops! Something unexpected happened. ' +
                   'This probably means that your message was not posted ' +
@@ -934,15 +946,31 @@ var gamefox_quickpost =
 
   readPostKey: function()
   {
+    var blank = {key: '', ctk: ''};
+
     var account = gamefox_lib.prefs.getCharPref('accounts.current');
     if (!account)
-      return false;
+      return blank;
 
     var keys = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('keys'));
     if (!keys[account])
-      return false;
+      return blank;
 
     return keys[account];
+  },
+
+  setPostKey: function(key)
+  {
+    var ctk = gamefox_lib.getCookie('ctk');
+    var account = gamefox_lib.prefs.getCharPref('accounts.current');
+    if (!ctk || !account || !key)
+      return false;
+
+    var keys = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('keys'));
+    keys[account] = { key: key, ctk: ctk };
+    gamefox_lib.prefs.setCharPref('keys', gamefox_lib.toJSON(keys));
+
+    return true;
   },
 
   updatePostKey: function()
