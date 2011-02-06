@@ -1091,7 +1091,7 @@ var gamefox_page =
             'the request of a moderator or administrator]')
         {
           // Edit
-          if (gamefox_date.parseFormat(postDate, '%s') >
+          if (loggedInLevel >= 30 && gamefox_date.parseFormat(postDate, '%s') >
               Date.now() / 1000 - 3600)
           {
             var editUri = 'post.php?board=' + boardId + '&topic=' + topicId
