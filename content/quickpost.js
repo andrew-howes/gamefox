@@ -484,11 +484,16 @@ var gamefox_quickpost =
                   else if (dupeTitle)
                     gamefox_lib.alert('A topic with this title already exists. Choose another title.');
                   else
+                  {
+                    gamefox_lib.log('Unknown QuickPost error on post request');
+                    gamefox_lib.log('QuickPost response text:\n\n' + text, 3);
+
                     gamefox_lib.alert('Whoops! Something unexpected ' +
                         'happened. This probably means that your message ' +
                         'was not posted (but it\'s possible it was). Please ' +
                         'visit the Blood Money board if you continue to get ' +
                         'this error.');
+                  }
                 }
                 event.target.removeAttribute('disabled');
                 return;
@@ -980,13 +985,21 @@ var gamefox_quickpost =
 
     if (gamefox_quickpost.readPostKey().ctk == ctk || !account
         || !gamefox_lib.isLoggedIn())
-      return; // already up to date, or not logged in
+    {
+      gamefox_lib.log('Not updating post key: already up to date or not logged'
+          + ' in', 2);
+      return;
+    }
 
     var now = Math.floor(Date.now() / 1000);
     var disabledUntil = gamefox_lib.prefs
       .getIntPref('keys.throttle.disabledUntil');
-    if (disabledUntil > now) // throttled
+    if (disabledUntil > now)
+    {
+      gamefox_lib.log('Not updating post key: throttled until ' + new
+          Date(disabledUntil * 1000));
       return;
+    }
 
     var uri = gamefox_lib.domain + gamefox_lib.path + 'post.php?board=2';
     var keyRequest = new XMLHttpRequest();
@@ -1032,6 +1045,10 @@ var gamefox_quickpost =
 
           gamefox_lib.prefs.setIntPref('keys.throttle.count', throttleCount);
           gamefox_lib.prefs.setIntPref('keys.throttle.start', throttleStart);
+
+          gamefox_lib.log('Failed to update post key');
+          gamefox_lib.log('Post key response text:\n\n' + keyRequest
+              .responseText, 3);
         }
       }
     }

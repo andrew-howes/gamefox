@@ -91,11 +91,18 @@ var gamefox_lib =
       .setComplexValue(pref, Ci.nsISupportsString, ustr);
   },
 
-  log: function(msg)
+  log: function(msg, verbosity)
   {
+    if (!verbosity)
+      verbosity = 1;
+
+    var maxVerbosity = gamefox_lib.prefs.getIntPref('logging.verbosity');
+    if (verbosity > maxVerbosity)
+      return;
+
     Cc['@mozilla.org/consoleservice;1']
       .getService(Ci.nsIConsoleService)
-      .logStringMessage('GameFOX: ' + msg);
+      .logStringMessage('GameFOX [' + verbosity + ']: ' + msg);
   },
 
   alert: function(msg)

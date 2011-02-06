@@ -133,6 +133,8 @@ pref("gamefox.keys.throttle.start", 0);
 pref("gamefox.keys.throttle.count", 0);
 pref("gamefox.keys.throttle.disabledUntil", 0);
 
+pref("gamefox.logging.verbosity", 1);
+
 pref("gamefox.nightlyChangeLog", true);
 pref("gamefox.showReleaseNotes", true);
 
