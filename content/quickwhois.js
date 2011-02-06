@@ -51,7 +51,7 @@ var gamefox_quickwhois =
     node.appendChild(div);
 
     var request = new XMLHttpRequest();
-    request.open('GET', node.getElementsByTagName('a')[0].href);
+    request.open('GET', node.querySelector('a.name').href);
     var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {

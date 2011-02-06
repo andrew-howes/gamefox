@@ -1,6 +1,6 @@
 2011-02-xx:
     * version 0.7.12
-    * Fix quoting and filtering with left message data
+    * Fix quoting, filtering and QuickWhois with left message data
     * Fix "edit" link with message link icons stylesheet
     * Update 8for11 CSS
     * Fix QuickPost reset button
