@@ -1,7 +1,7 @@
 /** Eight For Eleven (8for11) - Makes the v11 GameFAQs look like v8 **/
 /** By TakatoMatsuki and Swordless Link **/
 
-/** Build number 2011-02-06-14-56 **/
+/** Build number 2011-02-06-19-27 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -380,8 +380,14 @@ table.board:not(#helloworld) a:visited:not(#helloworld), .board_hub #side_col p:
 table.board:not(#helloworld) a.gamefox-last-post-link:not(#helloworld) {color:black !important; text-decoration:none !important;}
 
 /** FAQs **/
-body > div#body {background:white !important;}
-body > pre:only-child {background-color: white !important; margin: -8px 0 0 -8px !important; padding: 8px 0 0 8px !important;}
+body > div#header, body > div#footer {background:#6666FF !important; color:white !important; border-color:#6666FF !important;}
+body > div#header a, body > div#footer a {color:white !important; font-weight:bold !important; text-decoration:none !important;}
+body > div#body, body > div#variable, body > div#fixedwidth {background:white !important; color:black !important;}
+body > div#body a, body > div#variable a, body > div#fixedwidth a {color:#0000FF !important;}
+body > div#body a:hover, body > div#variable a:hover, body > div#fixedwidth a:hover {color:red !important;}
+#content > #sky_col_wrap > .body > #recommend > a:hover, #content > #sky_col_wrap > .pagenum > a:hover, #content > #sky_col_wrap > .ffaq a:hover  {color:red !important;}
+
+
 
 
 /** Notice to users using incorrect settings, on Topic List and Message List **/
