@@ -1657,7 +1657,7 @@ var gamefox_page =
     for (var i = 0; i < tdResult.snapshotLength; i++)
       td[i] = tdResult.snapshotItem(i);
     var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
-    var userTagName = gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a';
+    var userSelector = gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a.name';
     var newText, newTitle, newFocus;
 
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
@@ -1666,12 +1666,12 @@ var gamefox_page =
 
     if (!doc.gamefox.filtered)
     {
-      var username = msgComponents.header.
-        getElementsByTagName(userTagName)[0].textContent;
+      var username = msgComponents.header.querySelector(userSelector)
+        .textContent;
 
       for (var i = 0; i < td.length; i += 2)
       {
-        if (td[i].getElementsByTagName(userTagName)[0].textContent == username)
+        if (td[i].querySelector(userSelector).textContent == username)
         {
           if (!newFocus)
             newFocus = td[i];

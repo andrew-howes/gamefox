@@ -33,7 +33,7 @@ var gamefox_quote =
     var postUser, postDate, postNum;
 
     // postUser
-    postUser = msgComponents.header.getElementsByTagName('a')[0];
+    postUser = msgComponents.header.querySelector('a.name');
     postUser = postUser ? postUser.textContent : '???';
 
     // postDate
