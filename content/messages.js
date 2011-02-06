@@ -143,5 +143,16 @@ var gamefox_messages =
       }
     }
     get.send(null);
+  },
+
+  edit: function(event, context)
+  {
+    context || event.preventDefault();
+
+    var doc = gamefox_lib.getDocument(event);
+    var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
+    var editLink = msgComponents.header.getAttribute('gfedit');
+
+    doc.location = gamefox_lib.domain + gamefox_lib.path + editLink;
   }
 };

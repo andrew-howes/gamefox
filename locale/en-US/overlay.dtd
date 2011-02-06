@@ -7,6 +7,7 @@
 <!ENTITY menu.tagTopic.label "Tag Topic">
 <!ENTITY menu.pages.label "Topic Pages">
 <!ENTITY menu.quote.label "Quote Message">
+<!ENTITY menu.edit.label "Edit Message">
 <!ENTITY menu.hlGroups.label "Highlighting Groups">
 <!ENTITY menu.breakTags.label "Break HTML">
 

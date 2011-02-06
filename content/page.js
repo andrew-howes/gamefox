@@ -847,6 +847,7 @@ var gamefox_page =
         tc = tc[1].replace(/\+/g, ' ');
 
       var deletelinkCond = gamefox_lib.prefs.getBoolPref('elements.deletelink');
+      var editlinkCond = gamefox_lib.prefs.getBoolPref('elements.editlink');
       var loggedInAs = (userNav || userPanel).getElementsByTagName('a')[0]
         .textContent;
       var loggedInUser = loggedInAs.substr(0, loggedInAs.indexOf('(') - 1);
@@ -1082,48 +1083,74 @@ var gamefox_page =
           msgStats.insertBefore(span, profileLink.nextSibling);
         }
 
-        // Add "delete" link
+        // Add delete and edit links
         if (loggedInUser == username && !onArchive &&
-            ((msgnum == 1 && topicOpen) || msgnum != 1) &&
             postBody.trim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
             postBody.trim() != '[This message was deleted at ' +
             'the request of a moderator or administrator]')
         {
-          var a = deletelinkCond ? doc.createElement('a') : null;
-          if (msgnum == 1 && (td.length >= 4 || pagenum > 0))
+          // Edit
+          if (gamefox_date.parseFormat(postDate, '%s') >
+              Date.now() / 1000 - 3600)
           {
-            td[i].setAttribute('gfdeletetype', 'close');
+            var editUri = 'post.php?board=' + boardId + '&topic=' + topicId
+              + '&message=' + gamefox_utils.parseBoardLink(detailLink
+                  .href)['message'];
+            td[i].setAttribute('gfedit', editUri);
 
-            if (deletelinkCond)
+            if (editlinkCond)
             {
-              a.appendChild(doc.createTextNode('close'));
-              a.title = 'Close';
+              var a = doc.createElement('a');
+              a.appendChild(doc.createTextNode('edit'));
+              a.title = 'Edit';
+              a.className = 'gamefox-edit-link';
+              a.href = gamefox_lib.path + editUri;
+
+              msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
+                  doc.createElement('br') : doc.createTextNode(' | '));
+              msgLinks.appendChild(a);
             }
           }
-          else
+
+          // Delete
+          if ((msgnum == 1 && topicOpen) || msgnum != -1)
           {
-            if (msgnum == 1)
-              td[i].setAttribute('gfdeletetype', 'deletetopic');
+            var a = deletelinkCond ? doc.createElement('a') : null;
+            if (msgnum == 1 && (td.length >= 4 || pagenum > 0))
+            {
+              td[i].setAttribute('gfdeletetype', 'close');
+
+              if (deletelinkCond)
+              {
+                a.appendChild(doc.createTextNode('close'));
+                a.title = 'Close';
+              }
+            }
             else
-              td[i].setAttribute('gfdeletetype', 'deletepost');
+            {
+              if (msgnum == 1)
+                td[i].setAttribute('gfdeletetype', 'deletetopic');
+              else
+                td[i].setAttribute('gfdeletetype', 'deletepost');
+
+              if (deletelinkCond)
+              {
+                a.appendChild(doc.createTextNode('delete'));
+                a.title = 'Delete';
+              }
+            }
 
             if (deletelinkCond)
             {
-              a.appendChild(doc.createTextNode('delete'));
-              a.title = 'Delete';
+              a.className = 'gamefox-delete-link';
+              a.href = '#';
+              a.addEventListener('click', gamefox_messages.deletePost, false);
+
+              msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
+                  doc.createElement('br') : doc.createTextNode(' | '));
+              msgLinks.appendChild(a);
             }
-          }
-
-          if (deletelinkCond)
-          {
-            a.className = 'gamefox-delete-link';
-            a.href = '#';
-            a.addEventListener('click', gamefox_messages.deletePost, false);
-
-            msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
-                doc.createElement('br') : doc.createTextNode(' | '));
-            msgLinks.appendChild(a);
           }
         }
         else

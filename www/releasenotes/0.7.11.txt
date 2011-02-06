@@ -26,3 +26,4 @@ names are shown
 * Update GFPastel 2010 CSS
 * Fix "close" link being shown instead of "delete" for topics with no
 replies
+* Add "edit" link to messages

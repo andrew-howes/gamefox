@@ -71,6 +71,7 @@ var gamefox_context =
     var hideUsergroups = true;
     var hideFilter = true;
     var hideDelete = true;
+    var hideEdit = true;
     var hideBreakTags = true;
 
     if (gamefox_lib.onPage(doc, 'topics') || gamefox_lib.onPage(doc, 'myposts'))
@@ -140,11 +141,12 @@ var gamefox_context =
             .label = strbundle.getString('trackTopic');
       }
 
-      // Quoting, user groups, filtering and delete
+      // Quote, user groups, filter, delete, edit
       var msgComponents = gamefox_utils.getMsgComponents(target, doc);
       if (msgComponents)
       {
         var deleteType = msgComponents.header.getAttribute('gfdeletetype');
+        var canEdit = msgComponents.header.getAttribute('gfedit');
 
         if (doc.getElementById('gamefox-message'))
           hideQuote = false;
@@ -177,6 +179,9 @@ var gamefox_context =
           document.getElementById('gamefox-context-delete')
             .label = strbundle.getString('closeTopic');
         }
+
+        if (canEdit)
+          hideEdit = false;
       }
 
       // Break tags
@@ -206,6 +211,8 @@ var gamefox_context =
       || !gamefox_lib.prefs.getBoolPref('context.filter');
     document.getElementById('gamefox-context-delete').hidden = hideDelete
       || !gamefox_lib.prefs.getBoolPref('context.delete');
+    document.getElementById('gamefox-context-edit').hidden = hideEdit
+      || !gamefox_lib.prefs.getBoolPref('context.edit');
     document.getElementById('gamefox-context-break-tags').hidden = hideBreakTags
       || !gamefox_lib.prefs.getBoolPref('context.breaktags');
   },

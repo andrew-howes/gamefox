@@ -405,12 +405,13 @@ var gamefox_utils =
 
   parseBoardLink: function(link)
   {
-    var params = link.match(/boards\/(-?\d+)([^\/]+)?(\/\d+)?/);
+    var params = link.match(/boards\/(-?\d+)([^\/]+)?(\/\d+)?(\/\d+)?/);
 
     if (!params) // regex didn't match
       return false;
     return { 'board': params[1], 'name': params[2].substr(1),
-      'topic': (params[3] ? params[3].substr(1) : null) };
+      'topic': (params[3] ? params[3].substr(1) : null),
+      'message': (params[4] ? params[4].substr(1) : null) };
   },
 
   // Strips admin/mod/vip tags from usernames on the topic list

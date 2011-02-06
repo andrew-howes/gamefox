@@ -67,6 +67,8 @@
       <preference id="elements.boardnav" name="gamefox.elements.boardnav"
         type="bool"/>
 
+      <preference id="elements.editlink" name="gamefox.elements.editlink"
+        type="bool"/>
       <preference id="elements.deletelink" name="gamefox.elements.deletelink"
         type="bool"/>
       <preference id="elements.filterlink" name="gamefox.elements.filterlink"
@@ -132,6 +134,7 @@
         type="bool"/>
       <preference id="context.delete" name="gamefox.context.delete"
         type="bool"/>
+      <preference id="context.edit" name="gamefox.context.edit" type="bool"/>
       <preference id="context.usergroups" name="gamefox.context.usergroups"
         type="bool"/>
       <preference id="context.breaktags" name="gamefox.context.breaktags"
@@ -247,6 +250,8 @@
                       <label value="&messageHeaderLinks.label;"/>
 
                       <hbox class="indent">
+                        <checkbox label="&editLink.label;"
+                          preference="elements.editlink"/>
                         <checkbox label="&deleteLink.label;"
                           preference="elements.deletelink"/>
                         <checkbox label="&filterLink.label;"
@@ -424,9 +429,15 @@
                       preference="context.delete"/>
                   </hbox>
                   <hbox>
+                    <checkbox label="&mainMenu.edit.label;"
+                      preference="context.edit"/>
+                  </hbox>
+                  <hbox>
                     <checkbox label="&mainMenu.hlGroups.label;"
                       preference="context.usergroups"/>
                   </hbox>
+                </row>
+                <row>
                   <hbox>
                     <checkbox label="&mainMenu.breakTags.label;"
                       preference="context.breaktags"/>
