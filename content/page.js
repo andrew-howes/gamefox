@@ -1091,8 +1091,9 @@ var gamefox_page =
             'the request of a moderator or administrator]')
         {
           // Edit
-          if (loggedInLevel >= 30 && gamefox_date.strtotime(postDate).getTime()
-              > Date.now() - 3600000) // 3600000 ms = 3600 s = 1 h
+          if (topicOpen && loggedInLevel >= 30
+              && gamefox_date.strtotime(postDate).getTime() > Date.now()
+                 - 3600000) // 3600000 ms = 3600 s = 1 h
           {
             var editUri = 'post.php?board=' + boardId + '&topic=' + topicId
               + '&message=' + gamefox_utils.parseBoardLink(detailLink
@@ -1113,48 +1114,37 @@ var gamefox_page =
             }
           }
 
-          // Delete
-          if ((msgnum == 1 && topicOpen) || msgnum != -1)
+          // Delete/close
+          var deleteType = [];
+
+          if (msgnum == 1 && td.length >= 4 && topicOpen)
+            deleteType = ['close', 'close'];
+          else if (msgnum == 1 && td.length < 4)
+            deleteType = ['deletetopic', 'delete'];
+          else if (msgnum != 1)
+            deleteType = ['deletepost', 'delete'];
+
+          if (deleteType.length)
           {
-            var a = deletelinkCond ? doc.createElement('a') : null;
-            if (msgnum == 1 && (td.length >= 4 || pagenum > 0))
-            {
-              td[i].setAttribute('gfdeletetype', 'close');
-
-              if (deletelinkCond)
-              {
-                a.appendChild(doc.createTextNode('close'));
-                a.title = 'Close';
-              }
-            }
-            else
-            {
-              if (msgnum == 1)
-                td[i].setAttribute('gfdeletetype', 'deletetopic');
-              else
-                td[i].setAttribute('gfdeletetype', 'deletepost');
-
-              if (deletelinkCond)
-              {
-                a.appendChild(doc.createTextNode('delete'));
-                a.title = 'Delete';
-              }
-            }
+            td[i].setAttribute('gfdeletetype', deleteType[0]);
 
             if (deletelinkCond)
             {
-              a.className = 'gamefox-delete-link';
-              a.href = '#';
-              a.addEventListener('click', gamefox_messages.deletePost, false);
+              var link = doc.createElement('a');
+              link.className = 'gamefox-delete-link';
+              link.href = '#';
+              link.appendChild(doc.createTextNode(deleteType[1]));
+              link.title = deleteType[1].charAt(0).toUpperCase()
+                + deleteType[1].slice(1);
+              link.addEventListener('click', gamefox_messages.deletePost,
+                  false);
 
               msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
                   doc.createElement('br') : doc.createTextNode(' | '));
-              msgLinks.appendChild(a);
+              msgLinks.appendChild(link);
             }
           }
         }
-        else
-          td[i].setAttribute('gfdeletetype', 'none');
 
         // Filtering
         if (filterCond)
