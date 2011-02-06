@@ -1,0 +1,25 @@
+### About this version
+
+Several bugs found in 0.7.11 have been fixed. Quoting, filtering and QuickWhois
+now work for people with two-column message lists. The reset button now works
+properly. QuickPost has been updated to hopefully work for some people who are
+experiencing errors.
+
+The "edit" link now has an icon with the message link icons CSS. 8for11 has
+also been updated.
+
+See also: [GameFOX 0.7.11 release notes](0.7.11.html)
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money).
+
+### Changelog
+
+* Fix quoting, filtering and QuickWhois with left message data
+* Fix "edit" link with message link icons stylesheet
+* Update 8for11 CSS
+* Fix QuickPost reset button
+* More robust QuickPost which may fix the bugs affecting some people
+* Fix QuickPost appearing on message detail pages for mods
