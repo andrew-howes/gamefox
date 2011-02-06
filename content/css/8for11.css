@@ -1,7 +1,7 @@
 /** Eight For Eleven (8for11) - Makes the v11 GameFAQs look like v8 **/
 /** By TakatoMatsuki and Swordless Link **/
 
-/** Build number 2010-10-14-23-21 **/
+/** Build number 2011-02-06-14-56 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -466,10 +466,9 @@ table.contrib:nth-child(3) tr:first-child td:nth-child(2):after {content:"8for11
 #content > .head > h1 {font-size:0 !important;}
 #content > .head > h1:after {font-size:32px !important; content: "Board Display Settings" !important;}
 #main_col > .pod > .head {display:none !important;}
-table.userinfo tr:nth-last-child(4) td:nth-child(2):after {content:"8for11 uses \"Ad in topic list\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
-table.userinfo tr:nth-last-child(3) td:nth-child(2):after {content:"8for11 uses \"Ad in message list\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
+table.userinfo tr:nth-child(7) td:nth-child(2):after {content:"8for11 uses \"Ad in topic list\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
+table.userinfo tr:nth-child(8) td:nth-child(2):after {content:"8for11 uses \"Ad in message list\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
 table.userinfo tr:nth-child(6) td:nth-child(2):after {content:"8for11 uses \"Above Message\"" !important; color:white !important; background:black !important; margin-left:8px !important; padding:1px !important;}
-table.userinfo tr:nth-child(5) td:nth-child(2):after {display:none !important;}
 }
 
 /** Contact Info **/
@@ -546,6 +545,10 @@ table.board:not(#helloworld) a:not(#helloworld) {font-weight:bold !important;}
 #content > .head > h1:after {content: "Private Boards" !important;}
 }
 
+/** Images - Remove BG **/
+@-moz-document url-prefix("http://www.gamefaqs.com/images/") {
+body {background:white !important;}
+}
 
 
 /** END OF CSS **/
