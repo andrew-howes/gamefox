@@ -912,22 +912,10 @@ var gamefox_page =
             break;
           }
         }
-        var postDate = postDateNode.textContent
-          .replace(/( \((Moderator|Admin|VIP)\))?( \| )?(Posted:? )?/g, '');
+        var postDate = postDateNode.textContent.replace(/(Posted:? )?/g, '')
+          .replace('(edited)', '').replace(' |', '');
         td[i].setUserData('date', postDate, null); // for quoting
-        // needed to preserve mod/admin/vip tag
-        if (!leftMsgData && postDateNode.textContent.indexOf('(') != -1)
-          var userStatus = postDateNode.textContent.split(/\s*\|/)[0];
-        else if (leftMsgData)
-        {
-          var userStatusNode = postDateNode.previousSibling.previousSibling;
-          if (userStatusNode.textContent.indexOf('(') != -1)
-            var userStatus = userStatusNode.textContent;
-          else
-            var userStatus = '';
-        }
-        else
-          var userStatus = '';
+        var isEdited = postDateNode.textContent.indexOf('(edited)') != -1;
 
         // Create post date element
         var postDateElement = doc.createElement('span');
@@ -942,9 +930,14 @@ var gamefox_page =
                 postDate + (onArchive ? '' : ' | ')));
         msgStats.replaceChild(postDateElement, postDateNode);
 
-        if (!leftMsgData)
-          msgStats.insertBefore(doc.createTextNode(userStatus),
-              postDateElement);
+        if (onArchive && isEdited)
+          msgStats.insertBefore(doc.createTextNode(' | (edited)'),
+              postDateNode.nextSibling);
+
+        // User status
+        var userStatus = msgStats.childNodes[leftMsgData ? 3 : 1].textContent
+          .replace('|', '');
+        userStatus = userStatus.indexOf('(') != -1 ? userStatus : '';
 
         // Topic creator
         if (msgnum == 1)

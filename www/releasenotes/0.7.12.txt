@@ -23,3 +23,4 @@ Questions, suggestions or complaints? Let us know at
 * Fix QuickPost reset button
 * More robust QuickPost which may fix the bugs affecting some people
 * Fix QuickPost appearing on message detail pages for mods
+* Fix highlighting of VIPs/mods/admins
