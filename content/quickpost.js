@@ -586,11 +586,13 @@ var gamefox_quickpost =
     var doc = gamefox_lib.getDocument(event);
     var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
 
+    doc.getElementById('gamefox-message').value = '';
+
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
     {
       doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-      doc.getElementById('gamefox-quickpost-signature').textContent = doc
-        .gamefox.sig;
+      doc.getElementById('gamefox-quickpost-signature').
+        querySelector('textarea').value = doc.gamefox.sig;
     } 
 
     if (charCounts)
