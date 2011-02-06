@@ -36,7 +36,7 @@
 <!ENTITY filterLink.label "Filter">
 <!ENTITY quoteLink.label "Quote">
 
-<!ENTITY numberMessages.label "Number messages">
+<!ENTITY postNumbers.label "Post numbers">
 <!ENTITY labelTc.label "Label topic creator">
 
 <!ENTITY postidQuoteLinks.label "Link post numbers in quotes">

@@ -256,22 +256,26 @@
                           preference="elements.deletelink"/>
                         <checkbox label="&filterLink.label;"
                           preference="elements.filterlink"/>
+                      </hbox>
+                      <hbox class="indent">
                         <checkbox label="&quoteLink.label;"
                           preference="elements.quotelink"/>
                       </hbox>
 
-                      <checkbox flex="1" label="&numberMessages.label;"
-                        preference="elements.msgnum"/>
+                      <hbox>
+                        <checkbox label="&postNumbers.label;"
+                          preference="elements.msgnum"/>
 
-                      <hbox class="indent" align="baseline">
-                        <menulist preference="elements.msgnum.style">
-                          <menupopup>
-                            <menuitem value="0" label="message detail (link), #001"/>
-                            <menuitem value="1" label="#001, message detail (link)"/>
-                            <menuitem value="2" label="#001 (link)"/>
-                            <menuitem value="3" label="message #001 (link)"/>
-                          </menupopup>
-                        </menulist>
+                        <hbox align="baseline">
+                          <menulist preference="elements.msgnum.style">
+                            <menupopup>
+                              <menuitem value="0" label="detail (link), #001"/>
+                              <menuitem value="1" label="#001, detail (link)"/>
+                              <menuitem value="2" label="#001 (link)"/>
+                              <menuitem value="3" label="message #001 (link)"/>
+                            </menupopup>
+                          </menulist>
+                        </hbox>
                       </hbox>
 
                       <hbox align="center">
