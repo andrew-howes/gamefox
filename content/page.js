@@ -856,6 +856,7 @@ var gamefox_page =
           userNav || userPanel, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
           null).singleNodeValue;
       var canQuickPost = (topicOpen || loggedInLevel >= 50) && !onDetail
+        && !onArchive
         && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
       var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink')
