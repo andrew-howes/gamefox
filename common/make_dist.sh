@@ -18,7 +18,7 @@ if [ ! -z `echo $VERSION | grep pre` ]; then
 fi
 
 cd release
-./mkrelease.py -x "$XPI_NAME.xpi" \
+./mkrelease.py -x "$XPI" \
     --hash "sha1:$(sha1sum $top/$XPI |cut -d ' ' -f 1)" \
     $VERSION > release.rdf
 ./mknews.py $VERSION > news.xhtml
