@@ -1083,7 +1083,7 @@ var gamefox_page =
         }
 
         // Add delete and edit links
-        if (loggedInUser == username && !onArchive &&
+        if (loggedInUser == username && !onArchive && !onDetail &&
             postBody.trim() != '[This message was deleted at ' +
             'the request of the original poster]' &&
             postBody.trim() != '[This message was deleted at ' +
