@@ -836,9 +836,9 @@ var gamefox_page =
       }
 
       // Quick post key
-      var postKey = doc.getElementsByName('key');
+      var postKey = doc.getElementsByName('key')[0];
       if (postKey)
-        gamefox_quickpost.setPostKey(postKey[0].value);
+        gamefox_quickpost.setPostKey(postKey.value);
 
       var alternateColor = false;
       var msgnum = pagenum * gamefox_lib.prefs.getIntPref('msgsPerPage');
