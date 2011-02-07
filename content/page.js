@@ -439,8 +439,8 @@ var gamefox_page =
             .nextSibling);
 
         doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-        var sigBox = gamefox_quickpost.createSigBox(doc, true);
-        previewBtn.parentNode.insertBefore(sigBox, previewBtn);
+        var sigField = gamefox_quickpost.createSigField(doc, true);
+        previewBtn.parentNode.insertBefore(sigField, previewBtn);
       }
 
       message.setSelectionRange(0, 0);

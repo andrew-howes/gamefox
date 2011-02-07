@@ -95,7 +95,7 @@ var gamefox_quickpost =
     // Signature
     doc.gamefox.sig = gamefox_sig.format(null, null, doc);
 
-    form.appendChild(gamefox_quickpost.createSigBox(doc));
+    form.appendChild(gamefox_quickpost.createSigField(doc));
 
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
     {
@@ -608,8 +608,7 @@ var gamefox_quickpost =
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
     {
       doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-      doc.getElementById('gamefox-quickpost-signature').
-        querySelector('textarea').value = doc.gamefox.sig;
+      doc.getElementsByName('custom_sig')[0].value = doc.gamefox.sig;
     } 
 
     if (charCounts)
@@ -917,30 +916,40 @@ var gamefox_quickpost =
       gamefox_messages.updateMessageCount(doc);
   },
 
-  createSigBox: function(doc, postPage)
+  createSigField: function(doc, postPage)
   {
-    var sigBox = doc.createElement('span');
-    sigBox.id = postPage ? 'gamefox-post-signature' :
-      'gamefox-quickpost-signature';
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.sig'))
+    {
+      var sigField = doc.createElement('span');
+      sigField.id = postPage ? 'gamefox-post-signature' :
+        'gamefox-quickpost-signature';
 
-    var span = doc.createElement('span');
-    span.textContent = 'Signature:';
-    sigBox.appendChild(span);
+      var span = doc.createElement('span');
+      span.textContent = 'Signature:';
+      sigField.appendChild(span);
 
-    sigBox.appendChild(doc.createElement('br'));
+      sigField.appendChild(doc.createElement('br'));
 
-    var sigText = doc.createElement('textarea');
-    sigText.name = 'custom_sig';
-    sigText.rows = 2;
-    sigText.cols = 100;
-    sigText.tabIndex = 4;
+      var sigText = doc.createElement('textarea');
+      sigText.name = 'custom_sig';
+      sigText.rows = 2;
+      sigText.cols = 100;
+      sigText.tabIndex = 4;
 
-    sigText.value = doc.gamefox.sig;
+      sigText.value = doc.gamefox.sig;
 
-    sigBox.appendChild(sigText);
-    sigBox.appendChild(doc.createElement('br'));
+      sigField.appendChild(sigText);
+      sigField.appendChild(doc.createElement('br'));
+    }
+    else
+    {
+      var sigField = doc.createElement('input');
+      sigField.name = 'custom_sig';
+      sigField.type = 'hidden';
+      sigField.value = doc.gamefox.sig;
+    }
 
-    return sigBox;
+    return sigField;
   },
 
   cleanSig: function(event)

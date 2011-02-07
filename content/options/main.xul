@@ -106,6 +106,9 @@
       <preference id="elements.quickpost.htmlbuttons.breaktags"
         name="gamefox.elements.quickpost.htmlbuttons.breaktags" type="bool"/>
 
+      <preference id="elements.quickpost.sig"
+        name="gamefox.elements.quickpost.sig" type="bool"/>
+
       <preference id="elements.quickpost.link"
         name="gamefox.elements.quickpost.link" type="bool"/>
       <preference id="elements.quickpost.form"
@@ -335,6 +338,9 @@
                   </row>
                 </rows>
               </grid>
+
+              <checkbox label="&sigTextbox.label;"
+                preference="elements.quickpost.sig"/>
             </groupbox>
 
             <groupbox>

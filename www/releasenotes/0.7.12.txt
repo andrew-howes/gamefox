@@ -24,3 +24,4 @@ Questions, suggestions or complaints? Let us know at
 * More robust QuickPost which may fix the bugs affecting some people
 * Fix QuickPost appearing on message detail pages for mods
 * Fix highlighting of VIPs/mods/admins
+* Add option to hide the signature textbox
