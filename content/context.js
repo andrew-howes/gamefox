@@ -449,8 +449,8 @@ var gamefox_context =
       node = gamefox_utils.getMsgComponents(node, doc);
       if (!node) return;
 
-      node = node.header.getElementsByTagName(
-          gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a')[0];
+      node = node.header.querySelector(gamefox_lib.onPage(doc, 'archive') ? 'b'
+          : 'a.name');
     }
     username = gamefox_utils.cleanUsername(node.textContent);
 

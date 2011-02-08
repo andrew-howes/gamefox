@@ -1,5 +1,7 @@
 0000-00-00:
     * version 0.7.13
+    * Fix adding/removing users from highlighting groups with two-column
+      message lists
 
 2011-02-06:
     * version 0.7.12
