@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -60,6 +60,7 @@ var gamefox_context =
       document.getElementById('gamefox-context-usergroups').hidden = true;
       document.getElementById('gamefox-context-filter').hidden = true;
       document.getElementById('gamefox-context-delete').hidden = true;
+      document.getElementById('gamefox-context-edit').hidden = true;
       document.getElementById('gamefox-context-break-tags').hidden = true;
       return;
     }
