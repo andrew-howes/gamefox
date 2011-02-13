@@ -28,8 +28,7 @@
         padding: 3px;
     }
 
-    #gamefox-message, #gamefox-quickpost-normal #gamefox-quickpost-signature textarea,
-    #gamefox-quickpost-afloat #gamefox-quickpost-signature textarea
+    #gamefox-message, #gamefox-quickpost-signature textarea
     {
         width: 95%;
         max-width: 730px;
