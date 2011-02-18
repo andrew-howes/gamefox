@@ -385,8 +385,8 @@ var gamefox_quickpost =
             var maintenance = previewRequest.status == 503;
 
             if (badWord)
-              gamefox_lib.alert('Your post includes the word "' + badWord[1] + '", which is a bad ' +
-                  'word. Didn\'t anyone ever tell you "' + badWord[1] + '" was a bad word?');
+              gamefox_lib.alert('GameFAQs has found a banned word in your '
+                  + 'post:\n' + badWord[1]);
             else if (tooBig)
               gamefox_lib.alert('Your post is too big! A message can only contain 4096 characters, ' +
                   'but yours has ' + tooBig[1] + '.');
