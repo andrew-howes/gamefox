@@ -322,7 +322,7 @@ var gamefox_quickpost =
     qpDiv = doc.createElement('div');
     qpDiv.id = 'gamefox-quickpost-afloat';
 
-    doc.getElementById('board_wrap').appendChild(qpDiv);
+    doc.getElementsByClassName('board_wrap')[0].appendChild(qpDiv);
     gamefox_quickpost.appendForm(doc, qpDiv, true);
   },
 

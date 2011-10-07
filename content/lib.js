@@ -196,7 +196,7 @@ var gamefox_lib =
         return false;
 
       case 'topics':
-        var div = doc.getElementById('board_wrap');
+        var div = doc.getElementsByClassName('board_wrap')[0];
         if (div)
         {
           if (gamefox_lib.onPage(doc, 'tracked'))
@@ -223,7 +223,7 @@ var gamefox_lib =
         return false;
 
       case 'messages':
-        var div = doc.getElementById('board_wrap');
+        var div = doc.getElementsByClassName('board_wrap')[0];
         if (div)
         {
           var table = doc.evaluate('//div[@class="body"]/' +

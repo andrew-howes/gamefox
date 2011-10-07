@@ -31,7 +31,6 @@ pref("gamefox.elements.aml.pagejumper", true);
 pref("gamefox.elements.deletelink", true);
 pref("gamefox.elements.editlink", true);
 pref("gamefox.elements.filterlink", true);
-pref("gamefox.elements.quotelink", true);
 pref("gamefox.elements.boardnav", true);
 pref("gamefox.elements.statusspans", true);
 pref("gamefox.elements.sigspans", true);

@@ -120,7 +120,9 @@ var gamefox_page =
 
     // TODO: myposts and some other pages are now missing this
     //   Admin says board_wrap is "depreciated", so we should use something else
-    var boardWrap = doc.getElementById('board_wrap');
+    var boardWrap = doc.getElementsByClassName('board_wrap')[0];
+    // boardWrap has been moved, so some elements are no longer contained in it
+    var contentDiv = doc.getElementById('content');
 
     // Apply classes to existing elements
     if (boardWrap)
@@ -518,8 +520,8 @@ var gamefox_page =
     {
       var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var userNav = doc.evaluate('div[@class="board_nav"]' +
-          '/div[@class="body"]/div[@class="user"]', boardWrap, null,
+      var userNav = doc.evaluate('//div[@class="board_nav"]' +
+          '/div[@class="body"]/div[@class="user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var userlist = gamefox_highlighting.loadGroups();
 
@@ -754,8 +756,8 @@ var gamefox_page =
     {
       var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var userNav = doc.evaluate('div[@class="board_nav"]'
-          + '/div[@class="body"]/div[@class="user"]', boardWrap, null,
+      var userNav = doc.evaluate('//div[@class="board_nav"]'
+          + '/div[@class="body"]/div[@class="user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var pageJumper = doc.evaluate('//div[@class="pod pagejumper"]',
           boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
@@ -864,8 +866,7 @@ var gamefox_page =
         && !onArchive
         && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
-      var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink')
-        && canQuickPost;
+      var quotelinkCond = canQuickPost;
       var sigCond = gamefox_lib.prefs.getBoolPref('elements.sigspans');
 
       for (var i = 0; i < td.length; i += 2)
@@ -1165,17 +1166,13 @@ var gamefox_page =
         // Quoting
         if (quotelinkCond)
         {
-          var a = doc.createElement('a');
-          a.appendChild(doc.createTextNode('quote'));
+          // Borrow GameFAQs' quote link
+          var a = doc.evaluate('a[contains(@href, "quote=")]', msgStats, null,
+              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           a.title = 'Quote';
-          a.className = 'gamefox-quote-link';
           a.href = '#';
           a.addEventListener('click', function(event){
-              gamefox_quote.quote(event, true); event.preventDefault();}, false);
-
-          msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
-              doc.createElement('br') : doc.createTextNode(' | '));
-          msgLinks.appendChild(a);
+            gamefox_quote.quote(event, true); event.preventDefault();}, false);
         }
 
         // Append msgLinks
@@ -1337,7 +1334,7 @@ var gamefox_page =
             qpDiv.id = 'gamefox-quickpost-normal';
 
         // Remove GameFAQs' quick post form
-        var postForm = boardWrap.getElementsByTagName('form')[0];
+        var postForm = contentDiv.getElementsByTagName('form')[0];
         if (postForm)
           postForm.parentNode.removeChild(postForm);
 
@@ -1638,7 +1635,7 @@ var gamefox_page =
     context || event.preventDefault();
 
     var doc = gamefox_lib.getDocument(event);
-    var boardWrap = doc.getElementById('board_wrap');
+    var boardWrap = doc.getElementsByClassName('board_wrap')[0];
     var tdResult = doc.evaluate('//div[@class="body"]/'
         + 'table[@class="board message"]/tbody/tr/td', boardWrap, null,
         XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
