@@ -1,12 +1,8 @@
 @-moz-document domain(gamefaqs.com)
 {
     #rbx_netxp1_parent, #sponsored_links, #container #footer,
-    #sky_col_wrap #side_col, .ad, iframe, img[alt="madison"] {
+    .ad, iframe, img[alt="madison"] {
         display: none !important;
-    }
-
-    #sky_col_wrap .col_layout {
-        padding: 0 10px !important;
     }
 
     /* fix top gutter with some ads */

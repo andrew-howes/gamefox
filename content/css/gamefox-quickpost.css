@@ -38,4 +38,14 @@
     {
         margin-left: 1em;
     }
+
+    /* Hide the GameFAQs "Post without Preview" button on post page */
+    #gamefox-quickpost-btn ~ input[value="Post without Preview"] {
+        display: none;
+    }
+
+    /* Make the textareas wider on post page */
+    form[action^="/boards/post.php?"] .details textarea {
+        width: 100% !important;
+    }
 }
