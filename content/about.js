@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -27,23 +27,29 @@ var gamefox_about =
         strbundle.getString('version') + ' ' + gamefox_lib.version;
 
     var sections = {
-      currentDevelopers: ['currentDeveloperBox',
-                         [['Andrianto Effendy', 'ZeroAnt'],
-                          ['Brian Marshall', 'Karamthulhu'],
-                          ['Michael Ryan', 'RockMFR 5']]],
+      currentDevelopers:  ['currentDeveloperBox',
+                          [
+                            ['Brian Marshall', 'Karamthulhu']
+                          ]],
       previousDevelopers: ['previousDeveloperBox',
-                          [['Abdullah A', 'ultimategamer00'],
-                           ['Toad King', 'Calvinjpwalker']]],
-      contributors: ['contributorBox',
-                    [['Ant P.', 'GFCode'],
-                     ['Poo Poo Butter', 'CSS'],
-                     ['Swordless Link', 'CSS'],
-                     ['TakatoMatsuki', 'CSS'],
-                     ['Ricapar', 'CSS'],
-                     ['selmiak', 'CSS'],
-                     ['spynae', 'CSS'],
-                     ['Tango Desktop Project', 'icons'],
-                     ['http://www.pinvoke.com/', 'icons']]]
+                          [
+                            ['Abdullah A', 'ultimategamer00'],
+                            ['Toad King', 'Calvinjpwalker'],
+                            ['Andrianto Effendy', 'ZeroAnt'],
+                            ['Michael Ryan', 'RockMFR 5']
+                          ]],
+      contributors:       ['contributorBox',
+                          [
+                            ['Ant P.', 'GFCode'],
+                            ['Poo Poo Butter', 'CSS'],
+                            ['Swordless Link', 'CSS'],
+                            ['TakatoMatsuki', 'CSS'],
+                            ['Ricapar', 'CSS'],
+                            ['selmiak', 'CSS'],
+                            ['spynae', 'CSS'],
+                            ['Tango Desktop Project', 'icons'],
+                            ['http://www.pinvoke.com/', 'icons']
+                          ]]
     };
 
     for (var i in sections)

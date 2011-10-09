@@ -39,11 +39,7 @@ Released 2011 February 6. Compatible with Firefox 3.5 - 4.0, SeaMonkey
 
 ### Development ### {#dev}
 
-Current developers:
-
-* Andrianto Effendy (ZeroAnt)
-* Brian Marshall (Karamthulhu)
-* Michael Ryan (RockMFR 5)
+The current developer is Brian Marshall (Karamthulhu on GameFAQs).
 
 We use [Git](http://git.or.cz/) as our version control system. You can browse
 the repository with a [web interface](http://repo.or.cz/w/gamefox.git) or clone
