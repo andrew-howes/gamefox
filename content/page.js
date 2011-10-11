@@ -1166,13 +1166,26 @@ var gamefox_page =
         // Quoting
         if (quotelinkCond)
         {
-          // Borrow GameFAQs' quote link
+          // Remove GameFAQs' quote link
           var a = doc.evaluate('a[contains(@href, "quote=")]', msgStats, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          a.previousSibling.textContent = ''; // remove extra "|"
+          a.parentNode.removeChild(a);
+
+          // Create our own
+          a = doc.createElement('a');
+          a.className = 'gamefox-quote-link';
+          a.textContent = 'quote';
           a.title = 'Quote';
           a.href = '#';
           a.addEventListener('click', function(event){
             gamefox_quote.quote(event, true); event.preventDefault();}, false);
+
+          if (!leftMsgData || msgLinks.hasChildNodes())
+            msgLinks.appendChild(doc.createTextNode(' | '));
+          else if (!onArchive)
+            msgLinks.appendChild(doc.createElement('br'));
+          msgLinks.appendChild(a);
         }
 
         // Append msgLinks
