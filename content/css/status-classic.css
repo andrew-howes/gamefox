@@ -1,8 +1,8 @@
 @-moz-document domain(gamefaqs.com)
 {
-  #board_wrap col.status,
-  #board_wrap table.topics tr th:first-child,
-  #board_wrap table.topics tr:not(.gamefox-pagelist) td:first-child
+  .board_wrap col.status,
+  .board_wrap table.topics tr th:first-child,
+  .board_wrap table.topics tr:not(.gamefox-pagelist) td:first-child
   {
     display: none;
   }
