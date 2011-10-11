@@ -194,7 +194,7 @@ var gamefox_utils =
 
   getBoardWrapHeader: function(doc)
   {
-    var div = doc.getElementById('board_wrap');
+    var div = doc.getElementsByClassName('board_wrap')[0];
     if (div)
     {
       var node = doc.evaluate('//div[@class="head"]/h2', div, null,

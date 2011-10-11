@@ -178,6 +178,8 @@ var gamefox_lib =
     if (doc.gamefox.pageType)
       return doc.gamefox.pageType.indexOf(page) != -1;
 
+    var contentDiv = doc.getElementById('content');
+
     // pageType is an array because of overlapping pages, e.g. message detail and messages
     switch (page)
     {
@@ -196,7 +198,7 @@ var gamefox_lib =
         return false;
 
       case 'topics':
-        var div = doc.getElementsByClassName('board_wrap')[0];
+        var div = contentDiv.getElementsByClassName('board_wrap')[0];
         if (div)
         {
           if (gamefox_lib.onPage(doc, 'tracked'))
@@ -223,7 +225,7 @@ var gamefox_lib =
         return false;
 
       case 'messages':
-        var div = doc.getElementsByClassName('board_wrap')[0];
+        var div = contentDiv.getElementsByClassName('board_wrap')[0];
         if (div)
         {
           var table = doc.evaluate('//div[@class="body"]/' +
@@ -260,7 +262,7 @@ var gamefox_lib =
         return false;
 
       case 'boardlist':
-        var div = doc.getElementById('board_wrap');
+        var div = contentDiv.getElementsByClassName('board_wrap')[0];
         if (div)
         {
           var table = doc.evaluate('div[@class="body"]/table[@class="board"]',

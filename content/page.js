@@ -118,11 +118,12 @@ var gamefox_page =
     // Update last visit time
     gamefox_lib.prefs.setIntPref('lastVisit', Math.floor(Date.now() / 1000));
 
-    // TODO: myposts and some other pages are now missing this
-    //   Admin says board_wrap is "depreciated", so we should use something else
-    var boardWrap = doc.getElementsByClassName('board_wrap')[0];
     // boardWrap has been moved, so some elements are no longer contained in it
     var contentDiv = doc.getElementById('content');
+
+    // TODO: myposts and some other pages are now missing this
+    //   Admin says board_wrap is "depreciated", so we should use something else
+    var boardWrap = contentDiv.getElementsByClassName('board_wrap')[0];
 
     // Apply classes to existing elements
     if (boardWrap)
