@@ -117,8 +117,8 @@ var gamefox_context =
     }
     else if (gamefox_lib.onPage(doc, 'messages'))
     {
-      var userNav = doc.evaluate('div[@class="board_nav"]/div[@class="body"]'
-          + '/div[@class="user"]', doc.getElementById('board_wrap'), null,
+      var userNav = doc.evaluate('//div[@class="board_nav"]/div[@class="body"]'
+          + '/div[@class="user"]', doc.getElementById('content'), null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       userNav = userNav ? userNav.textContent : '';
 
