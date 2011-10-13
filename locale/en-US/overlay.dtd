@@ -26,7 +26,7 @@
 
 <!ENTITY sidebar.title "GameFOX">
 
-<!ENTITY toolbar.options.label "GameFOX Options">
-<!ENTITY toolbar.options.tooltip "GameFOX Options">
+<!ENTITY toolbar.label "GameFOX">
+<!ENTITY toolbar.tooltip "GameFOX">
 <!ENTITY toolbar.sidebar.label "GameFOX Sidebar">
 <!ENTITY toolbar.sidebar.tooltip "GameFOX Sidebar">

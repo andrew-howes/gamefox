@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2005, 2006, 2007, 2008, 2009, 2010
+ * Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011
  * Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
@@ -91,6 +91,7 @@ var gamefox =
       if (lastVersion == '')
       {
         gamefox.importMsgsPerPage();
+        gamefox.addToolbarButton();
         window.setTimeout(gamefox_lib.openOptionsDialog, 10, true);
       }
 
@@ -169,6 +170,10 @@ var gamefox =
       // Fix incorrect msgsPerPage prefs caused by 0.7.8
       gamefox.importMsgsPerPage();
     }
+
+    /* 0.8 */
+    if (comparator.compare('0.8', version) > 0)
+      gamefox.addToolbarButton();
   },
 
   importMsgsPerPage: function()
@@ -192,6 +197,22 @@ var gamefox =
     }
 
     request.send(null);
+  },
+
+  addToolbarButton: function()
+  {
+    if (Cc['@mozilla.org/xre/app-info;1'].getService(Ci.nsIXULAppInfo)
+        .ID == '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}')
+      return; // Don't add the button for SeaMonkey
+
+    var navBar = document.getElementById('nav-bar');
+    if (navBar.currentSet.indexOf(',gamefox-button-options') != -1)
+      return;
+
+    var newSet = navBar.currentSet + ',gamefox-button-options';
+    navBar.currentSet = newSet;
+    navBar.setAttribute('currentset', newSet);
+    document.persist('nav-bar', 'currentset');
   }
 };
 

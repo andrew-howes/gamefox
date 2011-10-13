@@ -177,7 +177,7 @@
   <!-- firefox toolbar -->
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="gamefox-button-options" class="toolbarbutton-1"
-      label="&toolbar.options.label;" tooltiptext="&toolbar.options.tooltip;"
+      label="&toolbar.label;" tooltiptext="&toolbar.tooltip;"
       command="cmd_gamefoxOptions"/>
     <toolbarbutton id="gamefox-button-sidebar" class="toolbarbutton-1"
       label="&toolbar.sidebar.label;" tooltiptext="&toolbar.sidebar.tooltip;"
