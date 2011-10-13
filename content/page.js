@@ -162,8 +162,8 @@ var gamefox_page =
       if (gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
         var i, boardId, favorites = {}, favLinks = [];
-        var favResult = doc.evaluate('div[@class="body"]/table/tbody/tr/td[1]/a',
-            boardWrap, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+        var favResult = doc.evaluate('table[1]/tbody/tr/td[1]/a', boardWrap,
+            null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
         for (i = 0; i < favResult.snapshotLength; i++)
           favLinks[i] = favResult.snapshotItem(i);
 
