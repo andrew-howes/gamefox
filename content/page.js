@@ -234,11 +234,9 @@ var gamefox_page =
     /* Active Messages (myposts.php) */
     else if (gamefox_lib.onPage(doc, 'myposts'))
     {
-      var mainCol = doc.getElementById('main_col');
-      boardWrap = mainCol ? doc.evaluate('div[@class="pod"]',
-          mainCol, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
-      var topicsTable = boardWrap ? doc.evaluate('div[@class="body"]/table[@class="board topics"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue : null;
+      var topicsTable = doc.evaluate(
+          '//div[@class="body"]/table[@class="board topics"]', contentDiv,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
 
       if (topicsTable)
@@ -253,8 +251,10 @@ var gamefox_page =
         // Page jumper
         if (gamefox_lib.prefs.getBoolPref('elements.aml.pagejumper'))
         {
-          var pageJumperTop = doc.evaluate('div[@class="board_nav"]/div[@class="body"]/div[@class="pages"]',
-              boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+          var pageJumperTop = doc.evaluate(
+              '//div[@class="board_nav"]/div[@class="body"]/div[@class="pages"]',
+              contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+            .singleNodeValue;
           if (pageJumperTop)
           {
             var pageMatches = pageJumperTop.textContent.match(/Page ([0-9]+) of ([0-9]+)/);
