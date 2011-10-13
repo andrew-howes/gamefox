@@ -6,6 +6,7 @@
     * Compatibility with latest version of GameFAQs
     * Add and remove several themes to match updates to GameFAQs' own theme
       list
+    * New CSS: Remove side column
 
 2011-02-06:
     * version 0.7.12

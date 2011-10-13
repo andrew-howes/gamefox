@@ -1,0 +1,5 @@
+@-moz-document url-prefix(http://www.gamefaqs.com/boards/user.php),
+               url-prefix(http://www.gamefaqs.com/boards/myposts.php) {
+    #side_col { display: none !important; }
+    .col_layout { padding: 0 10px !important; }
+}

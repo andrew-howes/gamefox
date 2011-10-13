@@ -111,6 +111,9 @@ var gamefox_css =
             'Converts links in the message header (message detail, delete, filter, quote)'
               + ' to icons.\n\nIcons courtesy of http://www.pinvoke.com/',
             'Poo Poo Butter', false],
+        'remove-side-column.css': ['Remove side column',
+            'Removes the side column containing your favorite boards from the '
+              + 'User Info and Active Messages pages.', '', false],
         'remove-signatures.css': ['Remove signatures',
             'Removes signatures in posts.', '', false],
         'status-default.css': ['Status icons (normal)',
