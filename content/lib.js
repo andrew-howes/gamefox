@@ -358,6 +358,8 @@ var gamefox_lib =
     var tab = browser.addTab(url);
     if (focus == 0)
       browser.selectedTab = tab;
+
+    browser.ownerDocument.defaultView.focus();
   },
 
   thirdPartyCookieFix: function(request)
