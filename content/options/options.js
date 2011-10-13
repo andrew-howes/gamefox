@@ -124,7 +124,7 @@ var gamefox_options =
         gamefox_lib.newTab(this.href, event.button);
         this.blur();
         event.preventDefault();
-      });
+      }, false);
     }
 
     if (!window.arguments)
