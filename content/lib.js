@@ -189,7 +189,8 @@ var gamefox_lib =
         {
           var bi = doc.evaluate('div[@class="pod"]/div[@class="head"]/h2', div,
               null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (bi && bi.textContent == 'Board Information')
+          if (bi && bi.textContent == 'Board Information'
+              && !gamefox_lib.onPage(doc, 'tracked'))
           {
             doc.gamefox.pageType = ['index'];
             return true;

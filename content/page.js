@@ -533,7 +533,8 @@ var gamefox_page =
 
       // Topic "QuickPost" link
       var newTopicLink;
-      if (gamefox_lib.prefs.getBoolPref('elements.quickpost.link')
+      if (!onTracked
+          && gamefox_lib.prefs.getBoolPref('elements.quickpost.link')
           && (newTopicLink = doc.evaluate('//a[contains(@href, "post.php")]',
               userNav || userPanel, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue))
