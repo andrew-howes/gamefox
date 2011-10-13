@@ -2,9 +2,10 @@
     * version 0.8
     * Fix adding/removing users from highlighting groups with two-column
       message lists
-    * Update 8for11 CSS
     * Support for Firefox 10
     * Compatibility with latest version of GameFAQs
+    * Add and remove several themes to match updates to GameFAQs' own theme
+      list
 
 2011-02-06:
     * version 0.7.12

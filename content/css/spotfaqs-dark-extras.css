@@ -1,7 +1,7 @@
-/** SpotFAQs extras - Cleans up SpotFAQs and uses the extra benefits of Firefox and GameFOX **/
+/** SpotFAQs Dark Extras **/
 /** By TakatoMatsuki **/
 
-/** Build 2010-08-25-21-49 **/
+/** Build 2011-04-08-20-01 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -11,31 +11,15 @@
 /** Gutters **/
 #gutter_btm {background: no-repeat center bottom !important; padding:0 0 20px !important;}
 
-/** Tables **/
-table td {padding:3px !important;}
-
-/** Side_col removal **/
-#sky_col_wrap #side_col {display:none !important;}
-#sky_col_wrap .col_layout {padding:0px 10px 0px 10px !important;}
-
-
-
-
-/** Header **/
-#login .fields .submit input {-moz-appearance:none!important; border:1px solid #BA6401 !important; color:#FFF !important; background:url(http://img.gamespot.com/gamespot/www/images/form/button.gif) !important;}
 
 /** Gutters and Containers **/
 #content {border-color:#161616 !important; background-color:#2F2F2F !important;}
 #gutter_btm {background-image:url(http://img.gamespot.com/gamespot/www/images/layout/gutters/all_dark_btm.gif) !important;}
 #mpu_col_wrap, #side_col {background:transparent !important;}
 
-/** Message List **/
-table.message tr td.author {padding-top:100px !important;}
-table.message tr td.author + td {padding:10px !important;}
-
-
-/** Quickwhois [GameFOX] **/
-.gamefox-quickwhois {background:#131313 !important; color:#CCCCCC !important;}
+/** Quickwhois [GameFOX] **/ /** Contains some GameFOX code **/
+.gamefox-quickwhois {position: absolute !important; z-index: 3 !important; padding: 3px !important; overflow-x: auto !important; overflow-y: hidden !important;  color:#CCCCCC !important; background:#131313 !important; max-width: 80% !important; border-radius: 10px !important; border: #aaa 1px solid !important; text-align: left !important;}
+.author .gamefox-quickwhois {font-size: 1.1em !important;}
 
 /** Character Map [GameFOX] **/ /** Contains some GameFOX code **/
 #gamefox-character-map {position: absolute !important; overflow: auto !important; height: 200px !important; width: 400px !important; border: #aaa 1px solid !important; background: #1D1D1D !important;}
@@ -43,9 +27,9 @@ table.message tr td.author + td {padding:10px !important;}
 #gamefox-character-map a {display: block !important; padding: 10px 5px !important; background: #2F2F2F !important; text-align: center !important;}
 
 /** GFCode [GameFOX] **/ /** Contains some GameFOX code **/
-.message i > p, .message em > p {border: 1px #666666 solid !important; margin: 0 auto !important; padding: 8px !important; width: 90% !important; -moz-border-radius: 0px !important; background:#131313 !important;}
+.message i > p, .message em > p {border: 1px #666666 solid !important; margin: 0 auto !important; padding: 8px !important; width: 90% !important; -moz-border-radius: 0px !important; -webkit-border-radius:0px !important; border-radius:0 !important; background:#131313 !important;}
 .message i > p {font-style: normal !important; background: #333333 !important;}
-.message i > p > strong:first-child {border-bottom: 1px #666666 solid !important; display: block !important; font-style: italic !important; font-weight: normal !important; margin: -8px -8px 8px !important; padding: 8px !important; -moz-border-radius: 0 !important; background: #444444 !important;}
+.message i > p > strong:first-child {border-bottom: 1px #666666 solid !important; display: block !important; font-style: italic !important; font-weight: normal !important; margin: -8px -8px 8px !important; padding: 8px !important; -moz-border-radius: 0 !important; -webkit-border-radius: 0 !important; border-radius: 0 !important; background: #444444 !important;}
 .message i > p > strong:first-child + br {display: none !important;}
 .message em > p {font-family: monospace !important; font-style: normal !important; white-space: pre-wrap !important;}
 .message p p p p {display: none !important;}
@@ -57,16 +41,13 @@ table.message tr td.author + td {padding:10px !important;}
 #gamefox-tracked-note {background:#1d1d1d !important; margin:5px !important; padding:5px !important; border:0 !important;}
 #gamefox-tracked-note-dismiss {color:inherit !important; margin:-5px -5px -5px 5px !important;}
 
-
 /** Answers **/
 .content_qna .qna_table td {padding:10px 10px !important; }
 
 
 /** Visited Links **/
-table.board a:visited, div.board_nav .body a:visited {font-weight:normal !important; color:red !important;}
 span.sticky-start + a, span.sticky_closed-start + a {color:orange !important;}
 span.sticky-start + a:visited, span.sticky_closed-start + a:visited {font-weight:normal !important; color:darkorange !important;}
-
 
 }
 

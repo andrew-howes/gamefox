@@ -1,0 +1,93 @@
+/** Ninestalgia Extras **/
+/** By TakatoMatsuki **/
+
+/** Build 2011-04-04-19-16 **/
+
+@-moz-document domain("gamefaqs.com") {
+
+
+/** Header **/
+#searchbox form li.search_term #searchtextbox {-moz-appearance:textfield !important; -webkit-appearance:textfield !important;  border:2px inset threedface !important;}
+
+
+/** Board Nav, Pagejumper **/
+#gamefox-board-nav {padding:0 !important; margin:4px 0 !important; font-weight:normal !important;}
+#gamefox-board-nav a {}
+
+
+/** Topic List **/
+table.topics a.gamefox-last-post-link {font-weight:normal !important;}
+
+
+/** GFCode / GameFOX Quotes **/ /** Modified from GameFOX GFCode CSS **/ 
+/* Common formatting for block elements */
+.message i > p, .message em > p {border: 1px #898989 solid !important; margin: 0 auto !important; padding: 3px !important; width: 96% !important; -moz-border-radius: 0px !important; -webkit-border-radius: 0px !important; background: none !important;}
+/* <i><p> - blockquote */
+.message i > p {font-style: normal !important; background: white !important;}
+/* <i><p><strong> - blockquote header */
+.message i > p > strong:first-child { border: 0px !important; display: block !important; font-style: normal !important; font-weight: bold !important;margin: -1px -1px 2px !important;  padding: 3px !important; -moz-border-radius: 0 !important; -webkit-border-radius: 0px !important; background: #6564FF !important; font-size:11px !important; color:white !important;}
+.message i > p > strong:first-child a {color:white !important;}
+/* remove linebreak after quote header since it's already display:block */
+.message i > p > strong:first-child + br {display: none !important;}
+/* <em><p> - fixed-font block for code */
+.message em > p {font-family: monospace !important; font-style: normal !important; white-space: pre-wrap !important; background:#EEEEEE !important;}
+/* Prevent users from seeing disruptive levels of nesting */
+.message p p p p {display: none !important;}
+
+
+/** Topic List Icons **/ /** Copy and modification of GameFOX Status Icons (Classic) **/ 
+#board_wrap col.status, #board_wrap table.topics tr th:first-child, #board_wrap table.topics tr:not(.gamefox-pagelist) td:first-child {display: none;}
+.gamefox-status {vertical-align: middle; display: inline-box; display: -moz-inline-box; display: -webkit-inline-box;}
+.topic_closed-end, .sticky_closed-end {background-image: url(http://www.gamefaqs.com/images/closed.gif); width: 11px; height: 13px; margin-left: 3px;}
+.topic_archived-end {background-image: url("data:image/gif;base64,R0lGODlhCQALAIAAAJmZmQAAACH5B\
+    AAAAAAALAAAAAAJAAsAAAIVjI%2BgC6b3wmuRLYSdbZJ3LX2dlSEFADs%3D"); width: 9px; height: 11px; margin-left: 3px;}
+.sticky-start, .sticky_closed-start {background-image: url(http://www.gamefaqs.com/images/sticky.gif); width: 11px; height: 13px; margin-right: 3px;}
+.topic_closed-start, .sticky-end, .topic_archived-start {display: none;}
+
+.gamefox-status {vertical-align:top !important; margin-left:0 !important; margin-right:1px !important;}
+a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
+table.topics tbody tr td:first-child + td {border-left:7px solid white !important;}
+
+
+/** Quickpost **/ /** Modified from CSS from GameFOX 0.5.5.0 **/
+#gamefox-quickpost-form, #gamefox-quickpost-form:before {text-align: center !important; width: 100% !important; clear: both !important;}
+#gamefox-quickpost-form:before {content: "QuickPost" !important; display:block !important; background-color: #6564FF !important; color: #ffffff !important; font: bold 16px verdana, helvetica, sans-serif !important; padding:2px !important;}
+#gamefox-quickpost-afloat {position: fixed !important; top: 30% !important; left: 20% !important; width: 70% !important; z-index: 3 !important; border: 2px solid #6564FF !important; color: #000000 !important; background-color: #DFDFDF !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90 !important;}
+#gamefox-message, #gamefox-topic, #gamefox-quickpost-signature textarea, #gamefox-quickpost-signature span {width: 70% !important; max-width:70% !important;} 
+#gamefox-quickpost-signature span {text-align:left !important; display:block !important; color:transparent !important;}
+#gamefox-quickpost-form #gamefox-quickpost-signature span {margin:0 auto !important; }
+#gamefox-quickpost-signature span:before {content:"---" !important; color:#00004F !important;}
+#gamefox-quickpost-signature span + br {display:none !important;}
+
+/** GameFOX Character Map **/ /** Modified from GameFOX **/
+#gamefox-character-map {position: absolute !important; overflow: auto !important; height: 200px !important; width: 400px !important; border: #898989 1px solid !important; background: #DFDFDF !important;}
+#gamefox-character-map table {border:0 !important; table-layout:fixed !important; border-collapse:collapse !important;}
+#gamefox-character-map td { background: transparent !important; padding: 0 !important; border: #898989 1px solid !important;}
+#gamefox-character-map a {display: block !important; padding: 5px 5px !important; background: #fff !important; text-align: center !important;}
+
+/** Topic Page List (GameFOX) **/ /** Modified from CSS from GameFOX 0.5.5.0 **/
+tr.gamefox-pagelist {display: table-row !important;}
+tr.gamefox-pagelist > td {background-color: #ffffff !important; border-top: 1px solid #00004F !important;text-align: center !important; font-weight: bold !important;}
+tr.gamefox-pagelist + tr > td {border-bottom:1px solid #00004F !important;}
+
+/** Sysnote **/
+p.gamefox-usernote {color:red !important;}
+
+/** Tracked Notice **/
+#gamefox-tracked-note {color:red !important; margin:0 !important; margin-top:7px !important; padding:0 !important; border:0 !important; background:none !important;}
+#gamefox-tracked-note-dismiss {color:black !important; font-size:1.5em !important; padding:0 5px !important; margin:-3px 3px -3px -3px !important; float:left !important;}
+
+/** Ad Removal **/ /** Copied from GameFOX **/
+#rbx_netxp1_parent, #sponsored_links, #sky_col_wrap #side_col, .ad, iframe, img[alt="madison"] {display: none !important;}
+#sky_col_wrap .col_layout { padding: 0 10px !important;}
+.has_lead #gutter_top {background-position: center 0 !important; padding-top: 0px !important;}
+
+/** FAQs Pages Fix **/
+body > #header, body > #footer {background:black !important; height:auto !important;}
+body > #header a, body > #footer a {color:#FF6600 !important;}
+body > div#body > pre {color:black !important;}
+body > #footer {border-top:2px solid #FF6600 !important;}
+
+}
+
+/** END OF CSS **/

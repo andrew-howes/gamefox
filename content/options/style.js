@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -47,8 +47,8 @@ var gamefox_options_style =
     this.treeView = new gamefox_treeview();
     this.treeView.childData = {};
     this.treeView.visibleData = [];
-    var categories = { Themes: 'themes', Other: 'bundled', GameFOX: 'gamefox',
-      Imported: 'user' };
+    var categories = { Themes: 'themes', 'GameFAQs Theme Extras': 'extras',
+      Other: 'bundled', GameFOX: 'gamefox', Imported: 'user' };
     for (var treeCat in categories)
     {
       this.treeView.visibleData.push([[treeCat], true, false]);
@@ -77,7 +77,7 @@ var gamefox_options_style =
 
     // expand all categories except GameFOX
     for (var i = 3; i >= 0; i--)
-      if (i != 2) this.treeView.toggleOpenState(i);
+      if (i != 3) this.treeView.toggleOpenState(i);
   },
 
   onpopupshowing: function()

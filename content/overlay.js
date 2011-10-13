@@ -173,7 +173,16 @@ var gamefox =
 
     /* 0.8 */
     if (comparator.compare('0.8', version) > 0)
+    {
       gamefox.addToolbarButton();
+
+      // New CSS category: extras
+      var css = gamefox_lib.safeEval(gamefox_lib.getString(
+            'theme.css.serialized'));
+      if (!css.extras)
+        css.extras = {};
+      gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+    }
   },
 
   importMsgsPerPage: function()

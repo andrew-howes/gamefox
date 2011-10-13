@@ -1,0 +1,173 @@
+/** GameFAX Extras **/
+/** By TakatoMatsuki **/
+
+/** Build 2011-04-10-14-58, using RetroClassic Extras build 2011-04-07-19-35 **/
+
+@-moz-document domain("gamefaqs.com") {
+
+/** Ads **/
+.ad_skin, .ad_super {display:none !important;}
+#sky_col_wrap #side_col {position:absolute !important; top:260px !important; left:0 !important; margin:0 !important; padding:0 !important;}
+#sky_col_wrap .col_layout:not(#helloworld) {padding:0 !important;}
+#sponsored_links {margin:2px !important;}
+body.bwp {background:white !important;}
+.site_tracking {display:none !important;}
+
+/** Header **/
+#masthead #searchbox form input#searchtextbox {border:2px inset threedface !important;}
+#masthead #searchbox form li.submit button {background: buttonface !important; border:2px outset buttonface !important; color:buttontext !important; width:40px !important; height:22px !important; }
+
+
+/** Containers **/
+.has_lead #gutter_top {padding-top:0 !important;}  /* override gamefox-ads.css */
+#layout {width:100% !important; }
+.col_layout {padding-left:0 !important; }
+#full_col_wrap .col_layout {padding-right:0 !important;}
+#sky_col_wrap, #full_col_wrap, #mpu_col_wrap:not(.board_hub) {margin-top: 0 !important;}
+#side_col, #col_layout, #mpu_col_wrap, #side_col_wrap, #sky_col_wrap {background:white !important; }
+#layout {position:relative !important;}
+
+/** Jump to Page and Search Topics **/
+.pagejumper {}
+.pagejumper li { border-right:1px solid white !important;}
+.pagejumper li:last-child {border:0 !important;}
+
+.searchtopics form button {background: buttonface !important; border:2px outset buttonface !important; color:buttontext !important; width:53px !important; }
+.searchtopics form button span {left:0px !important;font-size:13.33px !important; text-transform:capitalize !important; font-family:MS Shell Dlg, arial, sans-serif !important;}
+.searchtopics form span.data input {font-family:MS Shell Dlg, arial, sans-serif !important;}
+
+
+/** Boards **/
+p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom:0 !important;}
+
+/** Board List **/
+.board_hub table col.count {width:8% !important;}
+.board_hub table col.lastpost {width:15% !important;}
+.board_hub p.gamefox-usernote:not(#helloworld) {position:relative !important; top:2px !important;}
+.board_hub .col_layout {padding:0 !important;}
+.board_hub #main_col {width:100% !important; float:none !important;}
+.board_hub #board_wrap {margin-bottom:0 !important; margin-top:89px !important;}
+.board_hub #board_wrap > .head {display:none !important;}
+.board_hub .board thead th {background:#0000FF !important;}
+
+.board_hub .board:first-child {position:relative !important; top:0px !important; padding-top:5px !important;}
+.board_hub .board:first-child tr td:first-child {font-size:0 !important;}
+.board_hub .board:first-child tr td:first-child a {font-size:12.8px !important;}
+.board_hub .board:first-child tr td:first-child b {font-size:12.8px !important;}
+.board_hub .board + .board thead th {background:#8080FF !important;}
+.board_hub #side_col {float:none !important; margin:0 !important; padding:0 !important; border:0 !important; width:100% !important;}
+.board_hub #side_col .pod {width:auto !important; border:1px solid white !important; border-top:0 !important; margin-top:-2px !important;}
+.board_hub #side_col .head {background:#8080FF !important; border:0 !important; padding:2px 5px !important; border:1px solid white !important; border-top:0 !important;}
+.board_hub #side_col .body {background:#D0D0FF !important; border:1px solid white !important;}
+.board_hub #side_col .body p {margin:0 !important;}
+.board_hub #side_col p:not(:last-child) {position:absolute !important;}
+.board_hub #side_col p:first-child {top:123px !important; left:0px !important; color:white !important; display:block !important; margin:0 !important; width:100% !important; text-align:center !important; padding-top:3px !important; padding-bottom:3px !important; font-size:15.2px !important; font-weight:bold !important; background:#0000FF !important; outline-offset:-2px !important; outline:2px solid white !important;}
+.board_hub #side_col p:first-child a {color:white !important; font-weight:bold !important; font-size:15.2px !important;}
+.board_hub #side_col p:first-child a:hover {color:yellow !important; font-weight:bold !important; font-size:15.2px !important;}
+.board_hub #side_col p:first-child + p {top:51px !important; }
+.board_hub #side_col p:first-child + p:before {content: "NOTICE: " !important; font-weight:bold !important;}
+.board_hub #side_col p:nth-last-child(2) {top:96px !important;}
+.board_hub #side_col p:nth-last-child(2) b {font-weight:normal !important;}
+.board_hub #side_col p:nth-last-child(1n) {display:none !important;}
+.board_hub #side_col p:first-child, .board_hub #side_col p:last-child, .board_hub #side_col p:first-child + p, .board_hub #side_col p:nth-last-child(2) {display:block !important;}
+.board_hub #side_col p:last-child:not(#helloworld) a:not(#helloworld) {font-weight:bold !important;}
+
+/** Message List **/
+.msg_stats:before {content: "From: " !important;}
+.message a.name ~ a, .gamefox-message-links a {text-transform: capitalize !important;}
+
+/** Left of Message styled Tables **/
+table td.author:before {content: "From: " !important;}
+
+
+/** Quotes and Code blocks (GameFAQs and GFCode) **/ /** Modified from GameFOX GFCode CSS **/
+.message i > p, .message em > p, .message .fquote {border: 2px #f0f0ff solid !important; margin: 0 auto !important; padding: 1px !important; width: 96% !important; border-radius: 0px !important; -moz-border-radius: 0px !important; -webkit-border-radius: 0px !important; background: #dfdfff !important; color:black !important; font-size:12.8px !important;}
+/**<i><p> Quote**/ .message i > p, .message .fquote {font-style: normal !important; background:  #dfdfff !important;}
+/**<i><p><strong> Header**/ .message i > p > strong:first-child {border:0 !important; border-bottom: 2px #f0f0ff solid !important; display: block !important; font-style: normal !important; font-weight: normal !important; margin: -1px !important; margin-bottom:0 !important;padding: 1px !important; border-radius: 0 !important; -moz-border-radius: 0 !important; -webkit-border-radius: 0 !important; background: #bfbfff !important; }
+.message i > p > strong:first-child + br, .message .fquote + br {display: none !important;}
+/**<em><p> Code**/ .message em > p {font-family: monospace !important; font-style: normal !important; white-space: pre-wrap !important; background:#f0f0ff !important;}
+.message p p p p {display: none !important;}
+
+
+/** GameFOX Extra Usernav Bar **/
+#gamefox-board-nav {background:#0000FF !important; color:white !important; font-size:15.2px !important; margin:0 !important; padding:1px !important; text-align:center !important; border-left:2px white solid !important; border-right:2px white solid !important; border-bottom:1px solid white !important;}
+#gamefox-board-nav a {color:white !important;}
+#gamefox-board-nav a:visited {color:white !important;}
+#gamefox-board-nav a:hover {color:yellow !important;}
+
+
+/** Topic List Icons **/
+.gamefox-status {vertical-align:top !important; margin-left:0 !important; margin-right:1px !important;}
+a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
+
+
+/** Quickpost **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
+#gamefox-quickpost-normal {width:auto !important; border:2px solid white !important; border-top:0 !important; border-right:3px solid white !important;}
+#gamefox-quickpost-normal #gamefox-quickpost-form:before {content:"QuickPost" !important; text-align: center !important; width: 100% !important; clear: both !important; display:block !important; background-color: #0000ff !important; color: #ffffff !important; font-weight: bold !important; font-size: 15px !important; padding:1px !important; border-top:1px solid white !important;}
+#gamefox-quickpost-form {text-align: center !important; width: 100% !important; clear: both !important;}
+#gamefox-message, #gamefox-quickpost-signature textarea {width: 70% !important; border-left: 2px solid #0000ff !important; border-right: 2px solid #0000ff !important; font-size:12.8px !important; font-family: MS Shell Dlg,arial,sans-serif !important;}
+#gamefox-message-count, #gamefox-title-count {margin-left: 2em !important;}
+
+
+/** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
+.gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90 !important;}
+
+/** Character Map **/ /** Based off CSS included with GameFOX **/
+#gamefox-character-map {position: absolute !important; overflow: auto !important; height: 200px !important; width: 400px !important; border: #aaa 1px solid !important; background: #eee !important; left:50% !important;}
+#gamefox-character-map table {border-collapse:collapse !important;}
+#gamefox-character-map td {background: transparent !important; padding: 0 !important; border: #aaa 1px solid !important;}
+#gamefox-character-map:not(#helloworld) a:not(#helloworld) {display: block !important; padding: 10px 5px !important; background: #fff !important; text-align: center !important; text-decoration:none !important;}
+
+/** GameFOX - Tracked Note **/
+#gamefox-tracked-note {background:#FFFFAA !important; text-align:center !important; font-size:12.8px !important; border:2px solid white !important; padding:1px !important; margin:0 !important; border-bottom:0 !important;}
+#gamefox-tracked-note a, #gamefox-tracked-note a:visited, #gamefox-tracked-note a:hover {color:#00004F !important; text-decoration:underline !important; font-weight:normal !important;}
+#gamefox-tracked-note #gamefox-tracked-note-dismiss {text-decoration:none !important; margin-top:0 !important;}
+
+
+/** Last Post **/
+table.board:not(#helloworld) a.gamefox-last-post-link:not(#helloworld) {color:black !important; text-decoration:none !important;}
+
+/** FAQs **/
+body > div#header, body > div#footer {background:#6666FF !important; color:white !important; border-color:#6666FF !important;}
+body > div#header a, body > div#footer a {color:white !important; font-weight:bold !important; text-decoration:none !important;}
+body > div#body, body > div#variable, body > div#fixedwidth {background:white !important; color:black !important;}
+body > div#body a, body > div#variable a, body > div#fixedwidth a {color:#0000FF !important;}
+body > div#body a:hover, body > div#variable a:hover, body > div#fixedwidth a:hover, #content > #sky_col_wrap > .body > #recommend > a:hover, #content > #sky_col_wrap > .pagenum > a:hover, #content > #sky_col_wrap > .ffaq a:hover {color:red !important;}
+body > div#body a:visited, body > div#variable a:visited, body > div#fixedwidth a:visited, #content > #sky_col_wrap > .body > #recommend > a:visited, #content > #sky_col_wrap > .pagenum > a:visited, #content > #sky_col_wrap > .ffaq a:visited {color:#000088 !important;}
+
+
+
+/** End RetroClassic Extras Section **/
+
+
+/** Board List **/
+.board_hub .board thead th {background:black !important;}
+.board_hub .board + .board thead th {background:#70BC1F !important;}
+.board_hub #side_col .head {background:#70BC1F !important;}
+.board_hub #side_col .body {background:#C7E59D !important;}
+.board_hub #side_col p:first-child {background:black !important;}
+
+/** Quotes and Code blocks (GameFAQs and GFCode) **/ /** Modified from GameFOX GFCode CSS **/
+.message i > p, .message em > p, .message .fquote {border-color:#f0fff0 !important; background: #dfffdf !important;}
+/**<i><p> Quote**/ .message i > p, .message .fquote {background:  #dfffdf !important;}
+/**<i><p><strong> Header**/ .message i > p > strong:first-child {border-bottom-color: #f0fff0 !important; background: #bfffbf !important;}
+/**<em><p> Code**/ .message em > p {background:#f0fff0 !important;}
+
+/** GameFOX Extra Usernav Bar **/
+#gamefox-board-nav {background:black !important;}
+
+/** Quickpost **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
+#gamefox-quickpost-normal #gamefox-quickpost-form:before {background-color: #70BC1F !important; }
+#gamefox-message, #gamefox-quickpost-signature textarea {border-left-color:#70BC1F !important; border-right-color: #70BC1F !important;}
+
+
+/** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
+.gamefox-quickwhois {border-color: #70BC1F !important; }
+
+
+
+
+}
+
+
+/** END OF CSS **/

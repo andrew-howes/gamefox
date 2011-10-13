@@ -34,43 +34,64 @@ var gamefox_css =
         'gamefox-quickwhois.css': ['QuickWhois',
             'Makes QuickWhois look pretty.', '', true]},
       themes: {
-        '8for11.css': ['8for11', 'Make GameFAQs look like v8 (pre-2004).\n\n'
-              + 'Use the following settings:\n\n'
-              + 'http://www.gamefaqs.com/user/site.html\n'
-              + 'Site Display Style: V10\n\n'
-              + 'http://www.gamefaqs.com/boards/settings.php\n'
-              + 'Message Poster Display: Above Message\n'
-              + 'Topic List Display: Ad in topic list\n'
-              + 'Message List Display: Ad in message list\n\n'
-              + 'The "Status icons (classic)" stylesheet is recommended.',
-            'TakatoMatsuki, Swordless Link', false],
-        'ricapar.css': ['Classic',
-            'Emulates the 2001-2004 style of GameFAQs. Disable main '
-              + 'GameFAQs stylesheets to use.\n\n'
-              + 'Use the following settings at '
-              + 'http://www.gamefaqs.com/boards/settings.php:\n'
-              + 'Topic List Display: Ad in topic list\n'
-              + 'Message List Display: Ad in message list', 'Ricapar et al.',
-            false],
         'gfpastel-2010.css': ['GFPastel 2010',
             'A modern stylesheet in pastel blues and purples. Disable main ' +
             'GameFAQs stylesheets to use.', 'spynae', false],
-        'ninestalgia.css': ['Ninestalgia',
-            'The unforgettable v9 theme.\n\n'
-              + 'Set the following at '
-              + 'http://www.gamefaqs.com/boards/settings.php:\n'
-              + 'Message Poster Display: Above Message', 'TakatoMatsuki',
-            false],
         'progfaqs.css': ['ProgFAQs',
             'A progressive, low contrast theme for GameFAQs. Disable main ' +
-            ' GameFAQs stylesheets to use.', 'spynae', false],
-        'spotfaqs-extras.css': ['SpotFAQs extras',
-            'Designed to be used with the SpotFAQs skin on GameFAQs.\n'
-              + 'Styles GameFOX features.',
-            'TakatoMatsuki', false],
+            'GameFAQs stylesheets to use.', 'spynae', false],
         'wide-layout.css': ['Wide default',
             'Increases the width of the page to fill the whole window. ' +
             'Works with the default GameFAQs skin.', '', false]},
+      extras: {
+        'gamefax-extras.css': ['GameFAX RetroClassic',
+            'A companion for the GameFAX RetroClassic theme on GameFAQs (this '
+              + 'must be enabled in your account settings). "Message Poster '
+              + 'Display" should also be set to "Above Message" in your '
+              + 'GameFAQs settings.\n\n'
+              + 'This style only improves certain features with the GameFAX '
+              + 'RetroClassic theme - it is not a full theme in itself.',
+            'TakatoMatsuki', false],
+        'ninestalgia-extras.css': ['Ninestalgia',
+            'A companion for the Ninestalgia theme on GameFAQs (this must be '
+              + 'enabled in your account settings). "Message Poster Display" '
+              + 'should also be set to "Above Message" in your GameFAQs '
+              + 'settings.\n\n'
+              + 'This style only improves certain features with the '
+              + 'Ninestalgia theme - it is not a full theme in itself.',
+            'TakatoMatsuki', false],
+        'ninestalgia-pink-extras.css': ['Ninestalgia Pink',
+            'A companion for the Ninestalgia Pink theme on GameFAQs (this must'
+              + ' be enabled in your account settings). "Message Poster '
+              + 'Display" should also be set to "Above Message" in your '
+              + 'GameFAQs settings.\n\n'
+              + 'This style only improves certain features with the '
+              + 'Ninestalgia Pink theme - it is not a full theme in itself.',
+            'TakatoMatsuki', false],
+        'retroclassic-extras.css': ['RetroClassic',
+            'A companion for the RetroClassic theme on GameFAQs (this must be '
+              + 'enabled in your account settings). "Message Poster Display" '
+              + 'should also be set to "Above Message" in your GameFAQs '
+              + 'settings.\n\n'
+              + 'This style only improves certain features with the '
+              + 'RetroClassic theme - it is not a full theme in itself.',
+            'TakatoMatsuki', false],
+        'spotfaqs-dark-extras.css': ['SpotFAQs Dark',
+            'A companion for the SpotFAQs Dark theme on GameFAQs (this must be'
+              + ' enabled in your account settings). "Message Poster Display" '
+              + 'should also be set to "Left of Message" in your GameFAQs '
+              + 'settings.\n\n'
+              + 'This style only improves certain features with the '
+              + 'SpotFAQs Dark theme - it is not a full theme in itself.',
+            'TakatoMatsuki', false],
+        'spotfaqs-light-extras.css': ['SpotFAQs Light',
+            'A companion for the SpotFAQs Light theme on GameFAQs (this must '
+              + 'be enabled in your account settings). "Message Poster '
+              + 'Display" should also be set to "Left of Message" in your '
+              + 'GameFAQs settings.\n\n'
+              + 'This style only improves certain features with the '
+              + 'SpotFAQs Light theme - it is not a full theme in itself.',
+            'TakatoMatsuki', false]},
       bundled: {
         'gamefox-ads.css': ['Ad blocking',
             'Hides ads. Best used with "block ad servers" enabled.', '', true],
