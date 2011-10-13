@@ -1,6 +1,7 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan, Andrianto Effendy
+ * Copyright 2008, 2009, 2010, 2011
+ * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
  *
@@ -114,6 +115,17 @@ var gamefox_options =
   init: function()
   {
     gamefox_options.restoreLastTabs();
+
+    // Set listeners on links
+    var links = document.getElementsByTagName('html:a');
+    for (var i = 0; i < links.length; i++)
+    {
+      links[i].addEventListener('click', function(event) {
+        gamefox_lib.newTab(this.href, event.button);
+        this.blur();
+        event.preventDefault();
+      });
+    }
 
     if (!window.arguments)
       // opened from Add-ons window

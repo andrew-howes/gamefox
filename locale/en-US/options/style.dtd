@@ -14,6 +14,9 @@
 <!ENTITY delete.label "Delete">
 <!ENTITY edit.label "Edit">
 
+<!ENTITY gfThemeSettings.label "GameFAQs Theme Settings">
+<!ENTITY gfDisplaySettings.label "GameFAQs Display Settings">
+
 <!ENTITY import.button "Import Stylesheet">
 <!ENTITY reload.button "Reload Stylesheets">
 <!ENTITY openDir.button "Open CSS Directory">
