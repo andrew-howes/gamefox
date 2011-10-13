@@ -76,7 +76,7 @@ var gamefox_options_style =
     this.treeView.selection.select(0);
 
     // expand all categories except GameFOX
-    for (var i = 3; i >= 0; i--)
+    for (var i = 4; i >= 0; i--)
       if (i != 3) this.treeView.toggleOpenState(i);
   },
 
