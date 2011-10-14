@@ -2,7 +2,7 @@
     * version 0.8
     * Fix adding/removing users from highlighting groups with two-column
       message lists
-    * Support for Firefox 10
+    * Support for Firefox 10 and SeaMonkey 2.4
     * Compatibility with latest version of GameFAQs
     * Add and remove several themes to match updates to GameFAQs' own theme
       list
