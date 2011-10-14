@@ -1,4 +1,7 @@
 0000-00-00:
+    * version 0.8.1
+
+2011-10-14:
     * version 0.8
     * Fix adding/removing users from highlighting groups with two-column
       message lists
