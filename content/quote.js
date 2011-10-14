@@ -1,6 +1,7 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Andrianto Effendy, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011
+ * Brian Marshall, Andrianto Effendy, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -40,7 +41,8 @@ var gamefox_quote =
     postDate = msgComponents.header.getUserData('date');
 
     // postNum
-    postNum = msgComponents.header.id.substr(1);
+    postNum = '000'.substring(msgComponents.id.toString().length) +
+      msgComponents.id;
 
     // selection quoting
     var selection = document.commandDispatcher.focusedWindow.getSelection();

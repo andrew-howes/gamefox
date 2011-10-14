@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010
+ * Copyright 2008, 2009, 2010, 2011
  * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
@@ -160,7 +160,12 @@ var gamefox_utils =
         header = tdNode.parentNode.cells[0];
     }
 
-    return { header: header, body: body, original: tdNode };
+    // Get post id
+    var postId = (doc.evaluate('div[@class="msg_stats"]/a[@name]', header,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue ||
+        {}).name;
+
+    return { id: postId, header: header, body: body, original: tdNode };
   },
 
   getAccountName: function(doc)
@@ -253,8 +258,7 @@ var gamefox_utils =
       return ['', ''];
     var lastPage = Math.floor((msgs - 1) / gamefox_lib.prefs.getIntPref('msgsPerPage'));
     var pageStr = lastPage ? '?page=' + lastPage + this.tcParam(tc) : '';
-    var lastPostNum = '000'.substr(msgs.toString().length) + msgs;
-    return [pageStr, '#p' + lastPostNum];
+    return [pageStr, '#' + msgs];
   },
 
   mergeArray: function()
@@ -386,12 +390,9 @@ var gamefox_utils =
         post = '#last-post';
       else
       {
-        post = post.toString();
-
-        if (post.charAt(0) != '0') // not zero-padded
-          post = ('000'.substr(post.length)) + post;
-
-        post = '#p' + post;
+        // parseInt to make sure the post num is not zero-padded (since input
+        // can vary)
+        post = '#' + parseInt(post, 10);
       }
     }
 

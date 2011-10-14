@@ -884,7 +884,6 @@ var gamefox_page =
 
         ++msgnum;
         var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
-        td[i].id = 'p' + msgnumString;
 
         if (onArchive)
           var profileLink = td[i].getElementsByTagName('b')[0];
@@ -1357,18 +1356,11 @@ var gamefox_page =
         gamefox_quickpost.appendForm(doc, qpDiv, false);
       }
 
-      // post ids are generated after the page is loaded
-      // this is at the bottom because firefox 2 doesn't re-center the page after
-      // QuickPost is added
-      if (doc.location.hash.length)
-      {
-        if (doc.location.hash == '#last-post'
-            || (doc.location.hash.substr(2) > msgnumString
-              && /#p[0-9]{3}/.test(doc.location.hash)))
-          doc.location.hash = '#p' + msgnumString;
-        else
-          doc.location.hash = doc.location.hash;
-      }
+      // Redirect #last-post or re-align scroll position
+      if (doc.location.hash == '#last-post')
+        doc.location.hash = '#' + msgnum;
+      else if (doc.location.hash.length)
+        doc.location.hash = doc.location.hash;
     }
 
     /* Show updated tracked topics notification */

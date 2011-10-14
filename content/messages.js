@@ -132,7 +132,7 @@ var gamefox_messages =
             else
             {
               if (!closeTopic)
-                doc.location.hash = '#' + msgComponents.header.id;
+                doc.location.hash = '#' + msgComponents.id;
               doc.location.reload();
             }
           }
