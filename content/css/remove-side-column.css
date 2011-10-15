@@ -1,5 +1,10 @@
-@-moz-document url-prefix(http://www.gamefaqs.com/boards/user.php),
-               url-prefix(http://www.gamefaqs.com/boards/myposts.php) {
+@-moz-document url-prefix(http://www.gamefaqs.com/boards/bman.php),
+               url-prefix(http://www.gamefaqs.com/boards/contact.php),
+               url-prefix(http://www.gamefaqs.com/boards/ignore.php),
+               url-prefix(http://www.gamefaqs.com/boards/modhist.php),
+               url-prefix(http://www.gamefaqs.com/boards/myposts.php),
+               url-prefix(http://www.gamefaqs.com/boards/settings.php),
+               url-prefix(http://www.gamefaqs.com/boards/user.php) {
     #side_col { display: none !important; }
     .col_layout { padding: 0 10px !important; }
 }
