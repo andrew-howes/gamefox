@@ -1352,7 +1352,7 @@ var gamefox_page =
         if (postForm)
           postForm.parentNode.removeChild(postForm);
 
-        boardWrap.appendChild(qpDiv);
+        boardWrap.parentNode.appendChild(qpDiv);
         gamefox_quickpost.appendForm(doc, qpDiv, false);
       }
 
