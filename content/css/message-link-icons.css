@@ -1,5 +1,5 @@
 @-moz-document domain(www.gamefaqs.com){
-.message [id^="p"] a:not(.name):not(.gamefox-message-detail-number):not(:empty){
+div[class^=msg_stats] a:not(.name):not(.gamefox-message-detail-number):not(:empty){
 border:1px transparent solid !important;
 display:-moz-inline-box !important;
 display:inline-block !important;
@@ -15,7 +15,7 @@ background-repeat:no-repeat !important;
 .gamefox-message-links{font-size:0;}
 .gamefox-message-links > br{display:none;}
 
-.message [id^="p"] a[title="Detail"]:not(.gamefox-message-detail-number)
+div[class^=msg_stats] a[title="Detail"]:not(.gamefox-message-detail-number)
 {background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXR\
 FWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAndJREFUeNqkk89rE0EUx99kd9PsZtJqUklS4i8am4otNSgiiKgoW\
 LEqePNvsB68CnryLhQ8efHkVRSF3ksPFhQ0FkpbsfaHUdvUJtmd3e7Ozjpvk21TLx588N2d2X2f776ZN0uCIID%2FCTW8DL8BI\
@@ -89,7 +89,7 @@ QGexsjhjXrjjIYO1cx6JR5HQNKWf8%2FgRQLvLq67Z%2BAIfwOGNIw%2FOjp5f%2BHtniCbV4NtPnq9R
 MgAwMoJKUY1BgqGXiAJBIIVGSUWrfwhlRZpcbnLTf%2BP7%2F%2BluETWOILwy0gbAeynoEM4AQ5AIhZsMTa02Rvxi3vvzLMXH\
 fg%2Fzk0OVAofwYIMACF0LhPPmZXZgAAAABJRU5ErkJggg%3D%3D") !important;}
 
-.message [id^="p"] a:not(.name):not(.gamefox-message-detail-number):hover{
+div[class^=msg_stats] a:not(.name):not(.gamefox-message-detail-number):hover{
 background-color:rgba(0,0,0,.5) !important;
 border-color:-moz-use-text-color !important;
 -moz-border-radius:3px !important;
