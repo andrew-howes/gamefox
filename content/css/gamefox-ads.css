@@ -11,3 +11,8 @@
         padding-top: 14px !important;
     }
 }
+
+@-moz-document url-prefix(http://www.gamefaqs.com/boards/post.php) {
+    #side_col { display: none !important; }
+    .col_layout { padding: 0 10px !important; }
+}
