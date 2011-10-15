@@ -1170,8 +1170,12 @@ var gamefox_page =
           // Remove GameFAQs' quote link
           var a = doc.evaluate('a[contains(@href, "quote=")]', msgStats, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          a.parentNode.removeChild(a.previousSibling) // remove extra | or <br>
-          a.parentNode.removeChild(a);
+          if (a)
+          {
+            // remove extra | or <br>
+            a.parentNode.removeChild(a.previousSibling)
+            a.parentNode.removeChild(a);
+          }
 
           // Create our own
           a = doc.createElement('a');

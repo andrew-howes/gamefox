@@ -2,6 +2,7 @@
     * version 0.8.2
     * Fix message link icons CSS
     * Make the "remove side column" CSS work on more pages
+    * Fix bug preventing GameFOX from working on message lists for some people
 
 2011-10-14:
     * version 0.8.1
