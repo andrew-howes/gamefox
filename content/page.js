@@ -868,7 +868,8 @@ var gamefox_page =
         && !onArchive
         && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
-      var quotelinkCond = canQuickPost;
+      var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink')
+        && canQuickPost;
       var sigCond = gamefox_lib.prefs.getBoolPref('elements.sigspans');
 
       for (var i = 0; i < td.length; i += 2)
@@ -1165,7 +1166,7 @@ var gamefox_page =
         }
 
         // Quoting
-        if (quotelinkCond)
+        if (canQuickPost)
         {
           // Remove GameFAQs' quote link
           var a = doc.evaluate('a[contains(@href, "quote=")]', msgStats, null,
@@ -1176,7 +1177,10 @@ var gamefox_page =
             a.parentNode.removeChild(a.previousSibling)
             a.parentNode.removeChild(a);
           }
+        }
 
+        if (quotelinkCond)
+        {
           // Create our own
           a = doc.createElement('a');
           a.className = 'gamefox-quote-link';

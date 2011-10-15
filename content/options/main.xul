@@ -73,6 +73,8 @@
         type="bool"/>
       <preference id="elements.filterlink" name="gamefox.elements.filterlink"
         type="bool"/>
+      <preference id="elements.quotelink" name="gamefox.elements.quotelink"
+        type="bool"/>
 
       <preference id="elements.msgnum" name="gamefox.elements.msgnum"
         type="bool"/>
@@ -257,6 +259,10 @@
                           preference="elements.deletelink"/>
                         <checkbox label="&filterLink.label;"
                           preference="elements.filterlink"/>
+                      </hbox>
+                      <hbox class="indent">
+                        <checkbox label="&quoteLink.label;"
+                          preference="elements.quotelink"/>
                       </hbox>
 
                       <hbox>
