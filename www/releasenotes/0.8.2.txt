@@ -1,0 +1,14 @@
+### Changelog
+
+* Fix message link icons CSS
+* Make the "remove side column" CSS work on more pages
+* Fix bug preventing GameFOX from working on message lists for some people
+* Re-add option to toggle the quote link
+* Re-add Ricapar's Classic CSS
+
+[Release notes for versions 0.8 and 0.8.1](0.8.1.html) are also available.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money).
