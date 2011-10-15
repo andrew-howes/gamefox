@@ -1,0 +1,30 @@
+### About this version
+
+Version 0.8.1 fixes quoting with two-column message lists.
+
+GameFOX is now fully compatible with the latest versions of both GameFAQs and
+Firefox.
+
+Several styles have been added which serve as companions to GameFAQs themes. If
+you're using a custom GameFAQs theme in your account settings, you should check
+the Style options to see if there's a matching companion to improve things.
+
+### Feedback
+
+Questions, suggestions or complaints? Let us know at
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money).
+
+### Changelog
+
+#### 0.8.1
+
+* Fix quoting with two-column message lists
+
+#### 0.8
+
+* Fix adding/removing users from highlighting groups with two-column message
+lists
+* Support for Firefox 10 and SeaMonkey 2.4
+* Compatibility with latest version of GameFAQs
+* Add and remove several themes to match updates to GameFAQs' own theme list
+* New CSS: Remove side column

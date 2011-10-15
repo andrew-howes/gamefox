@@ -1,5 +1,6 @@
 0000-00-00:
     * version 0.8.1
+    * Fix quoting with two-column message lists
 
 2011-10-14:
     * version 0.8

@@ -161,9 +161,10 @@ var gamefox_utils =
     }
 
     // Get post id
-    var postId = (doc.evaluate('div[@class="msg_stats"]/a[@name]', header,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue ||
-        {}).name;
+    var postId = (doc.evaluate(
+          'div[@class="msg_stats' + (leftMsgData ? '_left':'') + '"]/a[@name]',
+          header, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+        .singleNodeValue || {}).name;
 
     return { id: postId, header: header, body: body, original: tdNode };
   },
