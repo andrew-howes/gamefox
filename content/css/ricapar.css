@@ -1,0 +1,466 @@
+@-moz-document url-prefix(http://www.gamefaqs.com/boards) {
+    /* display Board Information side pane at bottom of board list */
+    #side_col > div:first-child {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 850px;
+    }
+    #side_col > div:first-child h2 {
+        background: #fff;
+        color: #000;
+        font-size: 20px;
+    }
+
+    /* add title to gamespace */
+    ul.content_nav:before {
+        content: 'Message Board';
+        color: #fff;
+        text-align: center;
+        font-size: 13pt;
+        font-weight: bold;
+        display: block;
+    }
+}
+
+@-moz-document domain(www.gamefaqs.com) {
+    /* Ads, logo, gs */
+    #rbx_netxp1_parent, #sponsored_links, #footer, #logo,
+    .ad, .gs, iframe, img[alt="madison"] {
+        display: none !important;
+    }
+
+    /* Basic Stuff */
+
+    body {
+        margin: 0;
+        font-family: arial, sans-serif;
+        font-size: 9pt;
+        background: #fff !important;
+    }
+
+    #masthead, #container {
+        border-left: #66f 150px solid;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    input {
+        font-family: arial;
+        font-size: 9pt;
+        font-weight: normal;
+    }
+
+    .body .details, .body p {
+        padding: 5px;
+    }
+    .body .details p {
+        padding: 5px 0 !important;
+    }
+
+    .pod {
+        clear: both;
+    }
+
+    /* Links */
+
+    a {
+        color: #00004f !important;
+        text-decoration: underline !important;
+    }
+
+    table td a:visited {
+        color: #0000af !important;
+    }
+
+    th a,
+    #masthead a,
+    .pod .head h1 a,
+    .crumbs a,
+    .content_nav a,
+    .user a,
+    #gamefox-board-nav a,
+    .pages a,
+    .pagejumper a {
+        color: #fff !important;
+        font-weight: bold;
+    }
+
+    #masthead a,
+    .crumbs a,
+    .content_nav a {
+        text-decoration: none !important;
+    }
+
+    th a:hover,
+    #masthead a:hover,
+    .pod .head h1 a:hover,
+    .crumbs a:hover,
+    .content_nav a:hover,
+    .user a:hover,
+    #gamefox-board-nav a:hover,
+    .pages a:hover,
+    .pagejumper a:hover {
+        color: #ff0 !important;
+        text-decoration: underline !important;
+    }
+
+    /* Header */
+
+    #header {
+        background: #66f;
+        color: #fff;
+        text-align: center;
+        padding-top: 2px;
+        font-size: 1.1em;
+    }
+    #header a {
+        margin-left: 5px;
+        text-transform: capitalize;
+    }
+    #header div {
+        display: inline;
+    }
+    #header .nav {
+        margin-left: 15px;
+    }
+
+    #platformlist {
+        background: #66f;
+        color: #fff;
+        text-align: center;
+        padding-bottom: 2px;
+    }
+    #platformlist a {
+        margin: 0 2px;
+    }
+    #platformlist div, #platformlist form {
+        display: inline;
+    }
+    #platformlist b {
+        display: none;
+    }
+
+    #quicknav {
+        position: absolute;
+        top: 3px;
+        left: 0;
+        background: #66f url(http://www.gamefaqs.com/shared/bar2001.gif) no-repeat top left;
+        padding: 50px 2px 2px 0;
+        width: 148px;
+    }
+    #quicknav a {
+        font-size: 1.1em;
+        margin-left: 1px;
+        display: block;
+    }
+
+    #searchbox {
+        padding: 2px;
+        position: absolute;
+        top: 179px;
+        left: -1px;
+        z-index: 5;
+    }
+    #searchbox a {
+        font-size: 1.1em;
+        display: block;
+    }
+    #searchbox button {
+        text-transform: capitalize;
+    }
+    #searchbox input {
+        width: 90px;
+    }
+    #searchbox form select {
+        display: none;
+    }
+
+    .crumbs {
+        background: #00f;
+        padding: 2px;
+        color: #fff;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    ul.content_nav {
+        background: #00f;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    ul.content_nav li,
+    .pagejumper li {
+        display: inline;
+    }
+
+    ul.content_nav li:not(:last-child):after {
+        content: ' | ';
+        color: #fff;
+        font-weight: bold;
+    }
+
+    /* Hide the extra content_nav links */
+    ul.content_nav_dd {
+        display: none;
+    }
+
+    /* User Bar */
+
+    .user,
+    #gamefox-board-nav,
+    .pages,
+    .pagejumper {
+        display: block;
+        padding: 2px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #fff;
+        background: #00f;
+        text-align: center;
+        margin: 2px 2px 0 2px;
+    }
+    #gamefox-board-nav {
+        margin: 0 2px 2px 2px;
+    }
+
+    .pages,
+    .pagejumper {
+        font-style: italic;
+        background: #8080ff;
+    }
+
+    .pagejumper {
+        margin: 2px;
+        margin-top: 0;
+    }
+
+    .searchtopics {
+        margin: 1em;
+        text-align: center;
+    }
+
+    .searchtopics a {
+        display: none;
+    }
+
+    .pagejumper ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .pagejumper li:not(:last-child):after {
+        content: ' | ';
+    }
+
+    /* Tables */
+
+    th, td {
+        padding: 2px;
+    }
+
+    th,
+    .today .head h1,
+    .pod .head h1,
+    .box_body h1 {
+        background: #8080ff;
+        font-size: 15px;
+        color: #fff;
+    }
+
+    table:not(.topics) tbody .head:first-child th {
+        background: #00f;
+    }
+
+    .topics th {
+        font-style: italic;
+    }
+
+    table:not(.message) tr:not(.gamefox-highlight) td {
+        background: #d0d0ff;
+    }
+
+    /* Page Content */
+
+    h1, h2 {
+        text-align: center;
+        margin: 0;
+        padding: 3px;
+        font-size: 28px;
+        font-style: italic;
+    }
+
+    .crumbs + h1 { /* game boards */
+        font-size: 3em;
+        padding: 0;
+    }
+
+    #board_wrap .head h2 {
+        font-size: 16px;
+        padding: 1px;
+        font-style: normal;
+    }
+
+    .split {
+        text-align: center;
+    }
+
+    /* Main Page */
+
+    .today .date {
+        background: #00f;
+        font-size: 1.2em;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 2px;
+    }
+
+    /* Messages */
+
+    .message tr:not(.even) > td:not([style]):first-child,
+    .message tr.even > .author:not([style]) {
+        background: #b0b0ff;
+    }
+
+    .message > tbody > tr > td:first-child:before {
+        content: 'From: ';
+        font-weight: bold;
+    }
+    div.msg_stats {
+        display: inline;
+    }
+
+    .message .even > td:last-child,
+    .message tr:not(.even) > .author + td:not([style]):last-child,
+    .author + td {
+        background: #d0d0ff;
+    }
+
+    .message .even > td:last-child:before {
+        content: '';
+    }
+
+    .message a.name ~ a,
+    .gamefox-message-links a {
+        text-transform: capitalize;
+    }
+
+    .message td {
+        vertical-align: top;
+    }
+
+    .author {
+        width: 15%;
+    }
+
+    /* Posting */
+    .preview .message tr:only-child > td:only-child:before {
+        content: '';
+    }
+    .preview .message tr:only-child > td:only-child {
+        background: #d0d0ff;
+    }
+
+    /* Profile */
+    table.userinfo tr:not(.even) th,
+    table.userinfo tr:not(.even) td {
+        background: #fff;
+    }
+    table.userinfo tr.even th,
+    table.userinfo tr.even td {
+        background: #e0e0e0;
+    }
+    table.userinfo th {
+        font-size: 9pt;
+        color: #000;
+        text-align: left;
+    }
+    table.userinfo th a {
+        color: #000 !important;
+    }
+
+    /* Poll and Contest Bracket */
+
+    div.bar {
+        background: #00f;
+    }
+
+    td.divh {
+        font-weight: bold;
+    }
+
+    .foot {
+        text-align: center;
+    }
+
+    .bracket .win {
+        background: #8f8;
+    }
+
+    .bracket .lose {
+        background: #f88;
+    }
+
+    .bracket .part {
+        background: #ff8;
+    }
+
+    /* Lists */
+    .systems .even {
+        background: #e0e0e0;
+    }
+
+    form ol.fields,
+    .topten ul,
+    .topten ol,
+    .systems {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .topten ul,
+    .systems li {
+        padding: 2px;
+    }
+
+    /* QuickPost */
+    #gamefox-quickpost-form {
+        text-align: center;
+    }
+
+    #gamefox-message, #gamefox-quickpost-signature textarea {
+        max-width: 700px !important;
+    }
+
+    /* User Notification */
+    .gamefox-usernote {
+        background-color: #ff0;
+        text-align: center;
+    }
+
+    /* hide go button */
+    #platformlist .js form.jumper .submit { display: none; }
+
+    /* override stuff in gamefox-ads.css */
+    #content #sky_col_wrap .col_layout { padding: 0 !important; }
+    .has_lead #gutters #gutter_top { padding-top: 0 !important; }
+
+    /* Tracking Notification */
+    #gamefox-tracked-note {
+        background: #ffffaa;
+        border: 0;
+        margin: 2px !important;
+        padding: 4px !important;
+    }
+}

@@ -34,6 +34,14 @@ var gamefox_css =
         'gamefox-quickwhois.css': ['QuickWhois',
             'Makes QuickWhois look pretty.', '', true]},
       themes: {
+        'ricapar.css': ['Classic',
+            'Emulates the 2001-2004 style of GameFAQs. Disable main '
+              + 'GameFAQs stylesheets to use.\n\n'
+              + 'Use the following settings at '
+              + 'http://www.gamefaqs.com/boards/settings.php:\n'
+              + 'Topic List Display: Ad in topic list\n'
+              + 'Message List Display: Ad in message list', 'Ricapar et al.',
+            false],
         'gfpastel-2010.css': ['GFPastel 2010',
             'A modern stylesheet in pastel blues and purples. Disable main ' +
             'GameFAQs stylesheets to use.', 'spynae', false],
