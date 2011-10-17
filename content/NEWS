@@ -1,5 +1,7 @@
 0000-00-00:
     * version 0.8.3
+    * Fix features on message detail page (including highlighting and custom
+      date formats)
 
 2011-10-15:
     * version 0.8.2

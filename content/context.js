@@ -117,6 +117,8 @@ var gamefox_context =
     }
     else if (gamefox_lib.onPage(doc, 'messages'))
     {
+      var onDetail = gamefox_lib.onPage(doc, 'detail');
+
       var userNav = doc.evaluate('//div[@class="board_nav"]/div[@class="body"]'
           + '/div[@class="user"]', doc.getElementById('content'), null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -154,13 +156,18 @@ var gamefox_context =
 
         hideUsergroups = false;
 
-        hideFilter = false;
-        if (!doc.gamefox.filtered)
-          document.getElementById('gamefox-context-filter')
-            .label = strbundle.getString('filter');
+        if (onDetail)
+          hideFiler = true;
         else
-          document.getElementById('gamefox-context-filter')
-            .label = strbundle.getString('unfilter');
+        {
+          hideFilter = false;
+          if (!doc.gamefox.filtered)
+            document.getElementById('gamefox-context-filter')
+              .label = strbundle.getString('filter');
+          else
+            document.getElementById('gamefox-context-filter')
+              .label = strbundle.getString('unfilter');
+        }
 
         if (deleteType == 'deletetopic')
         {

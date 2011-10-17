@@ -198,16 +198,17 @@ var gamefox_utils =
     return '';
   },
 
-  getBoardWrapHeader: function(doc)
+  getPageHeader: function(doc)
   {
-    var div = doc.getElementsByClassName('board_wrap')[0];
-    if (div)
+    var contentDiv = doc.getElementById('content');
+    if (contentDiv)
     {
-      var node = doc.evaluate('//div[@class="head"]/h2', div, null,
+      var header = doc.evaluate('//div[@class="head"]/h2', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      if (node)
-        return node.textContent.trim();
+      if (header)
+        return header.textContent.trim();
     }
+
     return '';
   },
 

@@ -762,7 +762,7 @@ var gamefox_page =
           + '/div[@class="body"]/div[@class="user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var pageJumper = doc.evaluate('//div[@class="pod pagejumper"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+          contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
         .singleNodeValue;
       if (pageJumper)
       {
@@ -786,7 +786,7 @@ var gamefox_page =
       doc.gamefox.thisPage = pagenum;
 
       // Title
-      gamefox_lib.setTitle(doc, gamefox_utils.getBoardWrapHeader(doc),
+      gamefox_lib.setTitle(doc, gamefox_utils.getPageHeader(doc),
           'M' + (onDetail ? 'D' : ''),
           (pagenum ? (pagenum + 1) : null));
 
@@ -817,8 +817,9 @@ var gamefox_page =
       }
 
       // Double click
-      var messageTable = doc.evaluate('//div[@class="body"]/table[@class="board message"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var messageTable = doc.evaluate(
+          '//div[@class="body"]/table[@class="board message"]', contentDiv,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       messageTable.addEventListener('dblclick', gamefox_page.msglistDblclick,
           false);
 
@@ -829,8 +830,9 @@ var gamefox_page =
       for (var i = 0; i < tdResult.snapshotLength; i++)
         td[i] = tdResult.snapshotItem(i);
 
-      var ignoreMsg = doc.evaluate('div[@class="body"]/p', boardWrap, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (boardWrap)
+        var ignoreMsg = doc.evaluate('div[@class="body"]/p', boardWrap, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var ignoreCount = 0;
       if (ignoreMsg)
       {
@@ -948,7 +950,7 @@ var gamefox_page =
         userStatus = userStatus.indexOf('(') != -1 ? userStatus : '';
 
         // Topic creator
-        if (msgnum == 1)
+        if (msgnum == 1 && !onDetail)
           tc = username;
 
         // Date format

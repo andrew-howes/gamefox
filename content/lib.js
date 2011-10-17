@@ -226,39 +226,36 @@ var gamefox_lib =
         return false;
 
       case 'messages':
-        var div = contentDiv.getElementsByClassName('board_wrap')[0];
-        if (div)
+        var table = doc.evaluate('//div[@class="body"]/' +
+            'table[@class="board message"]', contentDiv, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if (table && !gamefox_lib.onPage(doc, 'usernote'))
         {
-          var table = doc.evaluate('//div[@class="body"]/' +
-              'table[@class="board message"]', div, null,
-              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (table && !gamefox_lib.onPage(doc, 'usernote'))
+          var boards = doc.evaluate(
+              '//div[@class="col_layout"]/div[@class="body"]', contentDiv,
+              null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+          if (boards.snapshotLength > 1)
+            doc.gamefox.pageType = ['messages', 'detail'];
+          else
           {
-            var boards = doc.evaluate('div[@class="body"]', div, null,
-                XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-            if (boards.snapshotLength > 1)
-              doc.gamefox.pageType = ['messages', 'detail'];
-            else
-            {
-              // TODO: maybe check for user profile links instead
-              var userPanel = doc.evaluate('//div[@class="user_panel"]'
-                  + '/div[@class="u_search"]/div[@class="links"]',
-                  doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-                .singleNodeValue;
-              var userNav = doc.evaluate('//div[@class="board_nav"]'
-                  + '/div[@class="body"]/div[@class="user"]',
-                  doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-                  null).singleNodeValue;
-              var user = userPanel || userNav;
+            // TODO: maybe check for user profile links instead
+            var userPanel = doc.evaluate('//div[@class="user_panel"]'
+                + '/div[@class="u_search"]/div[@class="links"]',
+                doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+              .singleNodeValue;
+            var userNav = doc.evaluate('//div[@class="board_nav"]'
+                + '/div[@class="body"]/div[@class="user"]',
+                doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
+                null).singleNodeValue;
+            var user = userPanel || userNav;
 
-              if (user && user.textContent.indexOf(userPanel ?
-                    'Topic archived' : 'Topic Archived') != -1)
-                doc.gamefox.pageType = ['messages', 'archive'];
-              else
-                doc.gamefox.pageType = ['messages'];
-            }
-            return true;
+            if (user && user.textContent.indexOf(userPanel ?
+                  'Topic archived' : 'Topic Archived') != -1)
+              doc.gamefox.pageType = ['messages', 'archive'];
+            else
+              doc.gamefox.pageType = ['messages'];
           }
+          return true;
         }
         return false;
 
