@@ -135,7 +135,7 @@ var gamefox_context =
           || userNav.indexOf('Stop Tracking') != -1)
       {
         hideTrack = false;
-        var ids = gamefox_utils.parseQueryString(doc.location.search);
+        var ids = gamefox_utils.parseBoardLink(doc.location.href);
         if (gamefox_tracked.isTracked(ids['topic']))
           document.getElementById('gamefox-context-track')
             .label = strbundle.getString('stopTrack');
