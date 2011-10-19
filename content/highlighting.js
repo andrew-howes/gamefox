@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010
+ * Copyright 2008, 2009, 2010, 2011
  * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
@@ -74,7 +74,7 @@ var gamefox_highlighting =
 
         if (type == 'users')
         {
-          if (this.index[type][value])
+          if (this.index[type].hasOwnProperty(value))
           {
             // don't add the same group twice, if the value is listed multiple times
             if (this.index[type][value].indexOf(i) == -1)
@@ -212,11 +212,11 @@ var gamefox_highlighting =
     username = username.trim().toLowerCase();
     if (!username.length) return false;
 
-    if (!index[username] && !(tc && index['(tc)']))
+    if (!index.hasOwnProperty(username) && !(tc && index['(tc)']))
       return this.searchStatus(status); // username isn't in any groups
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
-    if (tc && index[username] && index['(tc)'])
+    if (tc && index.hasOwnProperty(username) && index['(tc)'])
       var groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(index[username], index['(tc)']);
     else if (tc && index['(tc)'])
       var groups = index['(tc)'];
