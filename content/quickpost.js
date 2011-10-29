@@ -464,7 +464,10 @@ var gamefox_quickpost =
             {
               var text = postRequest.responseText;
               if (text.indexOf('<div class="head"><h2 class="title">Message Posted</h2></div>') == -1
-                  && text.indexOf('<table class="board message"') == -1)
+                  && text.indexOf('<table class="board message"') == -1
+                  // GameFAQs bug puts us on a nonexistent page when the last
+                  // post of a page is made
+                  && text.indexOf('<div class="details"><p>No messages') == -1)
               { // error
                 if (!/\S/.test(text))
                   gamefox_lib.alert('Request timed out. Check your network connection and try again.');
