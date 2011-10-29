@@ -334,10 +334,12 @@ var gamefox_page =
           var link = rows[i].cells[3].getElementsByTagName('a')[0];
           var visited = link ? globalHistory.isVisited(IOService.newURI(
               link.href, null, null)) : false;
+          var lastPost = gamefox_date.strtotime(rows[i].cells[3].textContent);
+          var yourLastPost = gamefox_date.strtotime(rows[i].cells[4]
+              .textContent);
 
-          if (!visited
-              && rows[i].cells[3].textContent != rows[i].cells[4].textContent)
-          { // "last post" and "your last post" differ
+          if (!visited && lastPost.getTime() > yourLastPost.getTime())
+          {
             var span = doc.createElement('span');
                 span.className = 'gamefox-new-posts';
                 span.style.setProperty('font-weight', 'bold', null);
