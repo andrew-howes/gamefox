@@ -8,6 +8,9 @@
 * Re-add option to toggle the quote link
 * Re-add Ricapar's Classic CSS
 
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
 ### Older versions
 
 #### GameFOX 0.8.1 (2011-10-14) {#0.8.1}
