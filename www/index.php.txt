@@ -1,5 +1,6 @@
-GameFOX is a Firefox extension with a diverse feature set that improves
-browsing of the [GameFAQs message boards](http://www.gamefaqs.com/boards).
+GameFOX is a Firefox extension with a diverse feature set that enhances the
+[GameFAQs message boards](http://www.gamefaqs.com/boards).
+
 
 ### Install ### {#install}
 
@@ -10,29 +11,16 @@ browsing of the [GameFAQs message boards](http://www.gamefaqs.com/boards).
 Released 2011 October 15. Compatible with Firefox 3.5 - 10.0a1, SeaMonkey 2.0 -
 2.4.
 
-### Features ### {#features}
+### About ### {#about}
 
-<dl>
-    <dt>QuickPost</dt>
-    <dd>Write your message and post it without leaving the message list.</dd>
+GameFOX adds several new features, such as quick account switching and multiple
+randomized signatures. Existing features are improved on, with a more powerful
+quick post, faster quoting, very configurable highlighting, and many other
+conveniences. Additionally, it provides tweaks such as a configurable date and
+time format for international users.
 
-    <dt>Quoting</dt>
-    <dd>Save time replying with the quote feature. Quoted posts appear in a box
-        to visually separate them from the rest of the message.</dd>
-
-    <dt>Highlighting and ignoring</dt>
-    <dd>Highlight or ignore posts and topics based on usernames or
-        keywords.</dd>
-
-    <dt>Multiple signatures</dt>
-    <dd>Boast several signatures that are randomly selected, and set different
-    signatures for certain accounts or boards.</dd>
-
-    <dt>Account switching</dt>
-    <dd>Log in to a different account with a single click.</dd>
-</dl>
-
-...and many more.
+See our [Firefox add-on
+page](https://addons.mozilla.org/en-US/firefox/addon/gamefox/) for screenshots.
 
 ### Documentation ### {#doc}
 
@@ -42,7 +30,7 @@ Released 2011 October 15. Compatible with Firefox 3.5 - 10.0a1, SeaMonkey 2.0 -
 
 The current developer is Brian Marshall (Karamthulhu on GameFAQs).
 
-We use [Git](http://git.or.cz/) as our version control system. You can browse
+We use [Git](http://git-scm.com/) as our version control system. You can browse
 the repository with a [web interface](http://repo.or.cz/w/gamefox.git) or clone
 it:
 
@@ -55,8 +43,8 @@ generated every night. They can be used to test experimental features.
 
 These versions receive minimal testing, so **things will probably be broken.**
 Please report any problems you find on [Blood
-Money](http://www.gamefaqs.com/boards/gentopic.php?board=565885). It's likely
-that we haven't noticed it yet!
+Money](http://www.gamefaqs.com/boards/565885-blood-money). It's likely that we
+haven't noticed it yet!
 
 To start using the nightlies, [install the XPI file here](/gfox/nightly/). It
 is recommended that you stay up-to-date by using Firefox's add-on manager to
