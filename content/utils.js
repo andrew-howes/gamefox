@@ -421,5 +421,11 @@ var gamefox_utils =
   cleanUsername: function(username)
   {
     return username.replace(/ \((A|M|V)\)/, '');
+  },
+
+  parseFormInput: function(name, str)
+  {
+    return str.match(new RegExp(
+          '<input\\b[^>]+?\\bname="' + name + '"[^>]+?\\bvalue="([^"]+)"')) || [];
   }
 };

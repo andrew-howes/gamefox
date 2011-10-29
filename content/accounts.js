@@ -144,7 +144,7 @@ var gamefox_accounts =
 
     this.fetchCtk(fetchCtkCallback);
 
-    function fetchCtkCallback()
+    function fetchCtkCallback(lastTry)
     {
       var request = new XMLHttpRequest();
       // TODO: find a way to make page not redirect
@@ -156,9 +156,33 @@ var gamefox_accounts =
         {
           if (request.responseText.indexOf('<title>Login Error - GameFAQs</title>') != -1)
           {
+            // Update login key
+            var oldKey = gamefox_lib.prefs.getCharPref('loginKey');
+            var newKey = gamefox_utils.parseFormInput('key',
+                request.responseText)[1];
+            gamefox_lib.prefs.setCharPref('loginKey', newKey);
+
+            // Try again if the key sent was incorrect
+            if (!lastTry && oldKey != newKey)
+            {
+              fetchCtkCallback(true);
+              return;
+            }
+
             if (MDAAuth)
               gamefox_accounts.loadAccount(MDAAuth.content, skin, filesplit, MDAAuth.expires);
             gamefox_accounts.promptLogin(username, 'Login error! Maybe your password was incorrect? Try it again.');
+            return;
+          }
+
+          if (request.responseText.indexOf(
+                '<title>User Login - CAPTCHA Required - GameFAQs</title>')
+              != -1)
+          {
+            gamefox_lib.alert('There have been multiple unsuccessful login ' +
+                'attempts from your current IP address or against the ' +
+                'account you are attempting to log in to. Please log in ' +
+                'manually instead of using the GameFOX account manager.');
             return;
           }
 
@@ -184,7 +208,9 @@ var gamefox_accounts =
       }
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       request.send(
-          'EMAILADDR=' + gamefox_utils.URLEncode(username) +
+          'key=' + gamefox_utils.URLEncode(gamefox_lib.prefs
+            .getCharPref('loginKey')) +
+          '&EMAILADDR=' + gamefox_utils.URLEncode(username) +
           '&PASSWORD=' + gamefox_utils.URLEncode(password.value)
           );
     }
