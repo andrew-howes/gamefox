@@ -153,13 +153,14 @@ var gamefox_page =
       element.appendChild(button);
     }
 
-    /* Index (index.php) */
+    /* Index (index.php) and board lists (boardlist.php) */
     else if (gamefox_lib.onPage(doc, 'index'))
     {
       gamefox_lib.setTitle(doc, 'Message Boards');
 
       // Get favorites
-      if (gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
+      if (!gamefox_lib.onPage(doc, 'boardlist') &&
+          gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
         var i, boardId, favorites = {}, favLinks = [];
         var favResult = doc.evaluate('table[1]/tbody/tr/td[1]/a', boardWrap,
@@ -199,23 +200,6 @@ var gamefox_page =
 
     /* Board Manager (bman.php) */
     else if (gamefox_lib.onPage(doc, 'bman'))
-    {
-      var rows = doc.getElementsByTagName('tr');
-
-      for (var i = 1; i < rows.length; i++)
-      {
-        if (rows[i].cells[3])
-        {
-          var format = gamefox_date.getFormat('topic',
-              gamefox_lib.prefs.getIntPref('date.topicPreset'));
-          rows[i].cells[3].textContent = gamefox_date.parseFormat(
-              rows[i].cells[3].textContent, format);
-        }
-      }
-    }
-
-    /* Board List (boardlist.php) */
-    else if (gamefox_lib.onPage(doc, 'boardlist'))
     {
       var rows = doc.getElementsByTagName('tr');
 

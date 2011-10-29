@@ -192,7 +192,8 @@ var gamefox_lib =
           if (bi && bi.textContent == 'Board Information'
               && !gamefox_lib.onPage(doc, 'tracked'))
           {
-            doc.gamefox.pageType = ['index'];
+            doc.gamefox.pageType = gamefox_lib.onPage(doc, 'boardlist') ?
+              ['index', 'boardlist'] : ['index'];
             return true;
           }
         }
@@ -256,20 +257,6 @@ var gamefox_lib =
               doc.gamefox.pageType = ['messages'];
           }
           return true;
-        }
-        return false;
-
-      case 'boardlist':
-        var div = contentDiv.getElementsByClassName('board_wrap')[0];
-        if (div)
-        {
-          var table = doc.evaluate('div[@class="body"]/table[@class="board"]',
-              div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (table && !gamefox_lib.onPage(doc, 'index'))
-          {
-            doc.gamefox.pageType = ['boardlist'];
-            return true;
-          }
         }
         return false;
 

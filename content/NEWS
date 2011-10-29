@@ -4,6 +4,7 @@
       date formats)
     * Fix bug triggered by certain usernames that stopped GameFOX from working
     * Fix adding or updating accounts with the account manager
+    * Fix GameFOX favorites being overwritten with board lists
 
 2011-10-15:
     * version 0.8.2
