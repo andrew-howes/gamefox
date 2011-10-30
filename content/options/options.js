@@ -108,7 +108,9 @@ var gamefox_options =
         catch (e) {}
       }
 
-      tabs[i].setAttribute('onselect', 'gamefox_options.saveSelectedTab(this)');
+      tabs[i].addEventListener('select', function() {
+        gamefox_options.saveSelectedTab(this);
+      }, false);
     }
   },
 

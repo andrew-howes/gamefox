@@ -241,8 +241,13 @@ var gamefox_context =
         item = document.createElement('menuitem');
         item.setUserData('data', board + ',' + topic, null);
         item.setAttribute('label', gamefox_tags.tags[board].topics[topic]);
-        item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
-        item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
+        item.addEventListener('command', function() {
+          gamefox_lib.open(this.getUserData('data'), 2);
+        }, false);
+        item.addEventListener('click', function(event) {
+          if (event.button == 1)
+            gamefox_lib.open(this.getUserData('data'), 0);
+        }, false);
         menu.appendChild(item);
       }
     }
@@ -259,12 +264,16 @@ var gamefox_context =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('updateTracked'));
-    item.setAttribute('oncommand', 'gamefox_tracked.updateList()');
+    item.addEventListener('command', function() {
+      gamefox_tracked.updateList();
+    }, false);
     menu.appendChild(item);
 
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('detach'));
-    item.setAttribute('oncommand', 'gamefox_tracked.openWindow()');
+    item.addEventListener('command', function() {
+      gamefox_tracked.openWindow();
+    }, false);
     menu.appendChild(item);
 
     gamefox_tracked.read();
@@ -282,10 +291,13 @@ var gamefox_context =
       item = document.createElement('menuitem');
       item.setUserData('data', gamefox_lib.domain + topicObj.link, null);
       item.setAttribute('label', topicObj.title);
-      item.setAttribute('oncommand', 'gamefox_lib'
-          + '.openPage(this.getUserData("data"), 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib'
-          + '.openPage(this.getUserData("data"), 0)');
+      item.addEventListener('command', function() {
+        gamefox_lib.openPage(this.getUserData('data'), 2);
+      }, false);
+      item.addEventListener('click', function(event) {
+        if (event.button == 1)
+          gamefox_lib.openPage(this.getUserData('data'), 0);
+      }, false);
       menu.appendChild(item);
     }
   },
@@ -301,7 +313,9 @@ var gamefox_context =
 
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('addAccount'));
-    item.setAttribute('oncommand', 'gamefox_accounts.promptLogin()');
+    item.addEventListener('command', function() {
+      gamefox_accounts.promptLogin();
+    }, false);
     menu.appendChild(item);
 
     currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
@@ -313,7 +327,9 @@ var gamefox_context =
       {
         item = document.createElement('menuitem');
         item.setAttribute('label', strbundle.getString('removeAccount'));
-        item.setAttribute('oncommand', 'gamefox_accounts.promptRemoveAccount()');
+        item.addEventListener('command', function() {
+          gamefox_accounts.promptRemoveAccount();
+        }, false);
         menu.appendChild(item);
         menu.appendChild(document.createElement('menuseparator'));
         first = false;
@@ -323,7 +339,9 @@ var gamefox_context =
       item.setAttribute('label', username +
           (username.toLowerCase() == currentAccount.toLowerCase() ?
            '*' : ''));
-      item.setAttribute('oncommand', 'gamefox_accounts.switchAccount(this.getUserData("username"))');
+      item.addEventListener('command', function() {
+        gamefox_accounts.switchAccount(this.getUserData('username'));
+      }, false);
       menu.appendChild(item);
     }
   },
@@ -342,8 +360,13 @@ var gamefox_context =
       item = document.createElement('menuitem');
       item.setUserData('data', i, null);
       item.setAttribute('label', favs[i].name);
-      item.setAttribute('oncommand', 'gamefox_lib.open(this.getUserData("data"), 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.open(this.getUserData("data"), 0)');
+      item.addEventListener('command', function() {
+        gamefox_lib.open(this.getUserData('data'), 2);
+      }, false);
+      item.addEventListener('click', function(event) {
+        if (event.button == 1)
+          gamefox_lib.open(this.getUserData('data'), 0);
+      }, false);
       menu.appendChild(item);
     }
   },
@@ -370,8 +393,13 @@ var gamefox_context =
       item.setUserData('link', baseUri + links[i], null);
       item.setAttribute('label', links[i+1]);
       item.setAttribute('accesskey', links[i+2]);
-      item.setAttribute('oncommand', 'gamefox_lib.openPage(this.getUserData("link"), 2)');
-      item.setAttribute('onclick', 'if (event.button == 1) gamefox_lib.openPage(this.getUserData("link"), 1)');
+      item.addEventListener('command', function() {
+        gamefox_lib.openPage(this.getUserData('link'), 2);
+      }, false);
+      item.addEventListener('click', function(event) {
+        if (event.button == 1)
+          gamefox_lib.openPage(this.getUserData('link'), 1);
+      }, false);
       menu.appendChild(item);
     }
   },
@@ -424,10 +452,13 @@ var gamefox_context =
       item.setUserData('data', gamefox_utils.newURI(board, topic, i, tc, null,
             topiclink), null);
       item.setAttribute('label', (i + 1) + (i == thisPage ? '*' : ''));
-      item.setAttribute('oncommand',
-          'gamefox_lib.openPage(this.getUserData("data"), 2)');
-      item.setAttribute('onclick', 'if (event.button == 1)' +
-          'gamefox_lib.openPage(this.getUserData("data"), 0)');
+      item.addEventListener('command', function() {
+        gamefox_lib.openPage(this.getUserData('data'), 2);
+      }, false);
+      item.addEventListener('click', function(event) {
+        if (event.button == 1)
+          gamefox_lib.openPage(this.getUserData('data'), 0);
+      }, false);
       menu.appendChild(item);
     }
   },
@@ -477,7 +508,10 @@ var gamefox_context =
       item.setAttribute('type', 'checkbox');
       item.setUserData('username', username, null);
       item.setUserData('group', i, null);
-      item.setAttribute('oncommand', 'gamefox_highlighting.menuCheckChange(event, this.getUserData("username"), this.getUserData("group"))');
+      item.addEventListener('command', function(event) {
+        gamefox_highlighting.menuCheckChange(event,
+          this.getUserData('username'), this.getUserData('group'));
+      }, false);
       if (activeGroups.indexOf(i) != -1)
         item.setAttribute('checked', 'true');
 
@@ -519,8 +553,9 @@ var gamefox_context =
     menu.appendChild(document.createElement('menuseparator'));
     item = document.createElement('menuitem');
     item.setAttribute('label', strbundle.getString('editGroups'));
-    item.setAttribute('oncommand',
-      'gamefox_lib.openOptionsDialog(null, null, null, "paneHighlighting")');
+    item.addEventListener('command', function() {
+      gamefox_lib.openOptionsDialog(null, null, null, 'paneHighlighting');
+    }, false);
     menu.appendChild(item);
   }
 };
