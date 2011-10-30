@@ -459,7 +459,9 @@ var gamefox_page =
           topictitle.addEventListener('input',
               gamefox_messages.delayedUpdateTitleCount, false);
           form.addEventListener('reset',
-              function(event) {setTimeout(gamefox_messages.updateTitleCount, 0, event)}, false);
+              function(event) { setTimeout(function() {
+                gamefox_messages.updateTitleCount(event);
+              }, 0); }, false);
         }
 
         // message count
@@ -473,7 +475,9 @@ var gamefox_page =
         message.addEventListener('input',
             gamefox_messages.delayedUpdateMessageCount, false);
         form.addEventListener('reset',
-            function(event) {setTimeout(gamefox_messages.updateMessageCount, 0, event)}, false);
+            function(event) { setTimeout(function() {
+              gamefox_messages.updateMessageCount(event);
+            }, 0); }, false);
       }
 
       // "Post Message" button

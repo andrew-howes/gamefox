@@ -92,25 +92,31 @@ var gamefox =
       {
         gamefox.importMsgsPerPage();
         gamefox.addToolbarButton();
-        window.setTimeout(gamefox_lib.openOptionsDialog, 10, true);
+        window.setTimeout(function() { gamefox_lib.openOptionsDialog(true); },
+            10);
       }
 
       // new nightly/dev install
       if (gamefox_lib.isDev() && !gamefox_lib.isDev(lastVersion))
-        window.setTimeout(gamefox_lib.newTab, 10,
-            'chrome://gamefox/content/nightly.html', 0);
+        window.setTimeout(function() {
+          gamefox_lib.newTab('chrome://gamefox/content/nightly.html', 0);
+        }, 10);
 
       // updated nightly install
       else if (gamefox_lib.isNightly()
           && gamefox_lib.prefs.getBoolPref('nightlyChangeLog'))
-        window.setTimeout(gamefox_lib.newTab, 10,
+        window.setTimeout(function() {
+          gamefox_lib.newTab(
             'http://beyondboredom.net/gamefox/nightlychanges.php', 0);
+        }, 10);
 
       // change log for new stable release
       else if (!gamefox_lib.isDev() && lastVersion != ''
           && gamefox_lib.prefs.getBoolPref('showReleaseNotes'))
-        window.setTimeout(gamefox_lib.newTab, 10,
+        window.setTimeout(function() {
+          gamefox_lib.newTab(
             'http://beyondboredom.net/gamefox/changes?version=' + version, 0);
+        }, 10);
 
       gamefox_css.init();
     }

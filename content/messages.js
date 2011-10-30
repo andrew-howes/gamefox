@@ -27,8 +27,9 @@ var gamefox_messages =
     if (this.timeoutId)
       clearTimeout(this.timeoutId);
 
-    this.timeoutId = setTimeout(gamefox_messages.updateMessageCount,
-        gamefox_messages.updateDelay, event);
+    this.timeoutId = setTimeout(
+        function() { gamefox_messages.updateMessageCount(event); },
+        gamefox_messages.updateDelay);
   },
 
   updateMessageCount: function(event)
@@ -54,8 +55,9 @@ var gamefox_messages =
     if (this.timeoutId)
       clearTimeout(this.timeoutId);
 
-    this.timeoutId = setTimeout(gamefox_messages.updateTitleCount,
-        gamefox_messages.updateDelay, event);
+    this.timeoutId = setTimeout(
+        function() { gamefox_messages.updateTitleCount(event); },
+        gamefox_messages.updateDelay);
   },
 
   updateTitleCount: function(event)
