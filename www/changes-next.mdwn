@@ -1,0 +1,39 @@
+### Latest version
+
+#### GameFOX 0.8.3 {#0.8.3}
+
+* Fix features on message detail page (including highlighting and custom date
+formats)
+* Fix bug triggered by certain usernames that stopped GameFOX from working
+* Fix adding or updating accounts with the account manager
+* Fix GameFOX favorites being overwritten with board lists
+* Fix QuickPost error when making the last post of a page
+* Fix the new post indicator showing on the active messages list after editing a
+post
+
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
+### Older versions
+
+#### GameFOX 0.8.2 (2011-10-15) {#0.8.2}
+
+* Fix message link icons CSS
+* Make the "remove side column" CSS work on more pages
+* Fix bug preventing GameFOX from working on message lists for some people
+* Re-add option to toggle the quote link
+* Re-add Ricapar's Classic CSS
+
+#### GameFOX 0.8.1 (2011-10-14) {#0.8.1}
+
+* Fix quoting with two-column message lists
+* Fix QuickPost appearing above page links
+
+#### GameFOX 0.8 (2011-10-14) {#0.8}
+
+* Fix adding/removing users from highlighting groups with two-column message
+lists
+* Support for Firefox 10 and SeaMonkey 2.4
+* Compatibility with latest version of GameFAQs
+* Add and remove several themes to match updates to GameFAQs' own theme list
+* New CSS: Remove side column

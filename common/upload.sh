@@ -19,6 +19,9 @@ RDF=$DISTDIR/release.rdf
 SIGNED_RDF=$DISTDIR/signed.rdf
 RDF_NAME=$(basename $RDF)
 
+CHANGES=changes.mdwn
+CHANGES_NEXT=$top/www/changes-next.mdwn
+
 SPOCK=$top/release/spock
 MCCOY=$top/release/mccoy.default
 PUT=$top/release/put.py
@@ -54,6 +57,9 @@ $SPOCK/spock $RDF \
 
 echo "Uploading..."
 (cd release && $PUT $XPI $XPI_NAME  $NEWS news/$NEWS_VER  $SIGNED_RDF $RDF_NAME)
+
+echo "Updating change log..."
+(cd release && $PUT --web $CHANGES_NEXT $CHANGES)
 
 # Clean up old release and nightly XPIs
 echo "Cleaning up old versions..."

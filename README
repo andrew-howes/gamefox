@@ -24,9 +24,8 @@ SSH is required. Local file operations are not supported yet.
 Preparing for a release
 =======================
 
-Release notes need to be written. Use one of the files in www/releasenotes
-as a template. The server will automatically add them to the website and
-keep them updated from the git repository.
+The web change log needs to be written. Use www/changes-next.mdwn as a staging
+area for the next version.
 
 Uploading a release
 ===================
@@ -48,9 +47,11 @@ This automatically does the following:
 
     1. Uploads the XPI to $(file_dir)
     2. Uploads the news to $(file_dir)/news
-    3. Moves the XPI of the previous version to $(file_dir)/oldxpi
-    4. Signs the update RDF file and uploads it
-    5. Deletes the current nightly XPI
+    3. Signs the update RDF file and uploads it
+    4. Replaces the current changes.mdwn file on the server with the contents of
+       changes-next.mdwn
+    5. Moves the XPI of the previous version to $(file_dir)/oldxpi
+    6. Deletes the current nightly XPI
 
 What to do after a release
 ==========================
@@ -63,7 +64,10 @@ should bump the version number in:
     install.rdf
     www/index.php.txt (including date and version compatibility)
 
-and commit+push the changes.
+You should also add the release date to the latest version in
+www/changes-next.mdwn, then copy it to www/changes.mdwn.
+
+Commit and push the updates above.
 
 Make a release topic on Blood Money. The title should be "[release] GameFOX
 x.y.z", and conform to this template:
@@ -72,14 +76,10 @@ x.y.z", and conform to this template:
 
     http://link_to_xpi
 
-    <b>Release notes:</b>
+    <b>Changes:</b>
 
-    [content of "about this version" section of release notes]
-
-    <b>News:</b>
-
-    [content of "new in this release" section of release notes (or from
-    content/NEWS]
+    [changes for the latest version from content/NEWS or
+     www/changes(-next).mdwn]
 
 Finally, you should upload the *_amo.xpi file in the root of the git tree to
 addons.mozilla.org.
