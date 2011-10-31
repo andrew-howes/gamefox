@@ -1,6 +1,6 @@
 #### configuration
 
-VERSION		= 0.8.3pre
+VERSION		= 0.8.4pre
 NAME		= gamefox
 
 include common/Makefile.common

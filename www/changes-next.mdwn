@@ -1,6 +1,6 @@
 ### Latest version
 
-#### GameFOX 0.8.3 {#0.8.3}
+#### GameFOX 0.8.3 (2011-10-31) {#0.8.3}
 
 * Fix features on message detail page (including highlighting and custom date
 formats)
