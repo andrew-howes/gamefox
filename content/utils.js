@@ -188,9 +188,9 @@ var gamefox_utils =
     var div = doc.getElementById('content');
     if (div)
     {
-      var node = doc.evaluate('//div[@class="head"]/h1', div, null,
+      var node = doc.evaluate('.//div[@class="head"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-        || doc.evaluate('//div[@class="content_nav"]/h1', div, null,
+        || doc.evaluate('.//div[@class="content_nav"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (node)
         return node.textContent.trim();
@@ -203,7 +203,7 @@ var gamefox_utils =
     var contentDiv = doc.getElementById('content');
     if (contentDiv)
     {
-      var header = doc.evaluate('//div[@class="head"]/h2', contentDiv, null,
+      var header = doc.evaluate('.//div[@class="head"]/h2', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       if (header)
         return header.textContent.trim();

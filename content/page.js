@@ -219,7 +219,7 @@ var gamefox_page =
     else if (gamefox_lib.onPage(doc, 'myposts'))
     {
       var topicsTable = doc.evaluate(
-          '//div[@class="body"]/table[@class="board topics"]', contentDiv,
+          './/div[@class="body"]/table[@class="board topics"]', contentDiv,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
 
@@ -236,9 +236,9 @@ var gamefox_page =
         if (gamefox_lib.prefs.getBoolPref('elements.aml.pagejumper'))
         {
           var pageJumperTop = doc.evaluate(
-              '//div[@class="board_nav"]/div[@class="body"]/div[@class="pages"]',
-              contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-            .singleNodeValue;
+              './/div[@class="board_nav"]/div[@class="body"]' +
+              '/div[@class="pages"]', contentDiv, null,
+              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           if (pageJumperTop)
           {
             var pageMatches = pageJumperTop.textContent.match(/Page ([0-9]+) of ([0-9]+)/);
@@ -511,7 +511,7 @@ var gamefox_page =
     {
       var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var userNav = doc.evaluate('//div[@class="board_nav"]' +
+      var userNav = doc.evaluate('.//div[@class="board_nav"]' +
           '/div[@class="body"]/div[@class="user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var userlist = gamefox_highlighting.loadGroups();
@@ -525,7 +525,7 @@ var gamefox_page =
       var newTopicLink;
       if (!onTracked
           && gamefox_lib.prefs.getBoolPref('elements.quickpost.link')
-          && (newTopicLink = doc.evaluate('//a[contains(@href, "post.php")]',
+          && (newTopicLink = doc.evaluate('.//a[contains(@href, "post.php")]',
               userNav || userPanel, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue))
       {
@@ -748,10 +748,10 @@ var gamefox_page =
     {
       var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var userNav = doc.evaluate('//div[@class="board_nav"]'
+      var userNav = doc.evaluate('.//div[@class="board_nav"]'
           + '/div[@class="body"]/div[@class="user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var pageJumper = doc.evaluate('//div[@class="pod pagejumper"]',
+      var pageJumper = doc.evaluate('.//div[@class="pod pagejumper"]',
           contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
         .singleNodeValue;
       if (pageJumper)
@@ -799,7 +799,7 @@ var gamefox_page =
       // Tracking
       if (gamefox_lib.prefs.getBoolPref('tracked.enabled'))
       {
-        var trackLink = doc.evaluate('//a[contains(translate(., "T", "t"), '
+        var trackLink = doc.evaluate('.//a[contains(translate(., "T", "t"), '
           + '"track")]', userNav || userPanel, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (trackLink)
@@ -808,7 +808,7 @@ var gamefox_page =
 
       // Double click
       var messageTable = doc.evaluate(
-          '//div[@class="body"]/table[@class="board message"]', contentDiv,
+          './/div[@class="body"]/table[@class="board message"]', contentDiv,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       messageTable.addEventListener('dblclick', gamefox_page.msglistDblclick,
           false);
@@ -853,7 +853,7 @@ var gamefox_page =
         .textContent;
       var loggedInUser = loggedInAs.substr(0, loggedInAs.indexOf('(') - 1);
       var loggedInLevel = loggedInAs.substr(loggedInAs.indexOf(')') - 2, 2);
-      var topicOpen = !!doc.evaluate('//a[contains(@href, "post.php")]',
+      var topicOpen = !!doc.evaluate('.//a[contains(@href, "post.php")]',
           userNav || userPanel, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
           null).singleNodeValue;
       var canQuickPost = (topicOpen || loggedInLevel >= 50) && !onDetail
@@ -1643,7 +1643,7 @@ var gamefox_page =
 
     var doc = gamefox_lib.getDocument(event);
     var boardWrap = doc.getElementsByClassName('board_wrap')[0];
-    var tdResult = doc.evaluate('//div[@class="body"]/'
+    var tdResult = doc.evaluate('.//div[@class="body"]/'
         + 'table[@class="board message"]/tbody/tr/td', boardWrap, null,
         XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];

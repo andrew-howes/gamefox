@@ -119,8 +119,9 @@ var gamefox_context =
     {
       var onDetail = gamefox_lib.onPage(doc, 'detail');
 
-      var userNav = doc.evaluate('//div[@class="board_nav"]/div[@class="body"]'
-          + '/div[@class="user"]', doc.getElementById('content'), null,
+      var userNav = doc.evaluate('.//div[@class="board_nav"]'
+          + '/div[@class="body"]/div[@class="user"]',
+          doc.getElementById('content'), null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       userNav = userNav ? userNav.textContent : '';
 

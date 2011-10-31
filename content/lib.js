@@ -227,13 +227,13 @@ var gamefox_lib =
         return false;
 
       case 'messages':
-        var table = doc.evaluate('//div[@class="body"]/' +
+        var table = doc.evaluate('.//div[@class="body"]/' +
             'table[@class="board message"]', contentDiv, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (table && !gamefox_lib.onPage(doc, 'usernote'))
         {
           var boards = doc.evaluate(
-              '//div[@class="col_layout"]/div[@class="body"]', contentDiv,
+              './/div[@class="col_layout"]/div[@class="body"]', contentDiv,
               null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
           if (boards.snapshotLength > 1)
             doc.gamefox.pageType = ['messages', 'detail'];
