@@ -2,7 +2,12 @@
 
 import sys
 import ConfigParser
-import paramiko
+
+# TODO: Remove this when paramiko is updated on the build server
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    import paramiko
 
 config = ConfigParser.RawConfigParser()
 # TODO: This relative path is fragile
