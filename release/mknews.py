@@ -6,20 +6,19 @@ import time
 
 class NewsGenerator:
     def __init__(self, release, news):
-        self.__dom = minidom.getDOMImplementation().createDocument(None, "html", None)
+        impl = minidom.getDOMImplementation()
+        self.__dom = impl.createDocument(None, "html",
+                impl.createDocumentType("html", "", ""))
         doc = self.__dom
 
-        doc.documentElement.setAttribute("xmlns", "http://www.w3.org/1999/xhtml")
+        doc.documentElement.setAttribute("xmlns",
+                "http://www.w3.org/1999/xhtml")
 
-        doc.documentElement.appendChild(doc.createTextNode("\n    "))
         head = doc.createElement("head")
-        head.appendChild(doc.createTextNode("\n        "))
         title = doc.createElement("title")
         title.appendChild(doc.createTextNode(release))
         head.appendChild(title)
-        head.appendChild(doc.createTextNode("\n    "))
         doc.documentElement.appendChild(head)
-        doc.documentElement.appendChild(doc.createTextNode("\n    "))
 
         body = doc.createElement("body")
 
@@ -27,22 +26,17 @@ class NewsGenerator:
         now = time.localtime()
         h2.appendChild(doc.createTextNode("%d-%02d-%02d" %
             (now[0], now[1], now[2])))
-        body.appendChild(doc.createTextNode("\n        "))
         body.appendChild(h2)
 
-        body.appendChild(doc.createTextNode("\n\n        "))
         for i in news:
             p = doc.createElement("p")
             p.appendChild(doc.createTextNode(i))
             body.appendChild(p)
-            body.appendChild(doc.createTextNode("\n        "))
 
-        body.appendChild(doc.createTextNode("\n    "))
         doc.documentElement.appendChild(body)
-        doc.documentElement.appendChild(doc.createTextNode("\n"))
 
     def printXML(self):
-        print self.__dom.toxml()
+        print self.__dom.toprettyxml(indent="    ", encoding="utf-8")
 
 def main():
     try:
