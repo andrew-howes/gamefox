@@ -45,7 +45,8 @@
         onclick="gamefox_lib.newTab('chrome://gamefox/content/NEWS', event.button);"/>
       <label class="url-label important" value="&support.label;"
         tooltiptext="&support.tooltip;"
-        onclick="gamefox_lib.newTab(gamefox_lib.domain + gamefox_lib.path + 'gentopic.php?board=565885', event.button);"/>
+        onclick="gamefox_lib.newTab(gamefox_lib.domain + gamefox_lib.path +
+          '565885-blood-money', event.button);"/>
       <image src="chrome://gamefox/skin/logo-small.png"/>
     </hbox>
     <label id="version" value=""/>
