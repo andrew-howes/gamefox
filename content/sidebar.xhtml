@@ -21,8 +21,14 @@
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <head>
+  <xul:stringbundleset id="strbundles">
+    <xul:stringbundle id="overlay-strings"
+      src="chrome://gamefox/locale/overlay.properties"/>
+  </xul:stringbundleset>
+
   <title>GameFOX Sidebar</title>
   <base href="http://www.gamefaqs.com/" target="_main"/>
   <script type="application/x-javascript"
@@ -104,11 +110,9 @@
     <h2>Login (Email/Pass)</h2>
 
     <form method="post" action="/user/login.html" id="gamefaqs-login-form">
-      <input type="hidden" name="path" id="gamefaqs-login-path"
-        value="/boards/index.php"/>
       <input type="text" name="EMAILADDR" maxlength="90"/>
       <input type="password" name="PASSWORD" maxlength="20"/>
-      <input type="submit" value="Login" id="gamefaqs-login-submit"/>
+      <input type="submit" value="Login"/>
     </form>
 
     <h2>

@@ -1,6 +1,8 @@
 0000-00-00:
     * version 0.8.4
-    * Add Vita and Wii U to the GameFOX sidebar links
+    * GameFOX sidebar:
+        - Add Vita and Wii U to platform links
+        - Fix login form
 
 2011-10-31:
     * version 0.8.3

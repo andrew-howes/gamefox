@@ -40,9 +40,7 @@ var gamefox_sidebar =
 
     // listeners
     document.getElementById('gamefaqs-login-form').addEventListener(
-        'submit', gamefox_sidebar.redirectLogin, false);
-    document.getElementById('gamefaqs-login-submit').addEventListener(
-        'mousedown', gamefox_sidebar.newTabLogin, false);
+        'submit', gamefox_sidebar.login, false);
     document.getElementById('accounts-add-link').addEventListener(
         'click', gamefox_sidebar.promptAccountsLogin, false);
     document.getElementById('accounts-rm-link').addEventListener(
@@ -111,19 +109,26 @@ var gamefox_sidebar =
     }
   },
 
-  newTabLogin: function(event)
+  login: function(event)
   {
-    if (event.button != 1)
-      return;
+    event.preventDefault();
 
-    gamefox_sidebar.redirectLogin();
+    var form = event.target;
+    var username = form.elements.namedItem('EMAILADDR');
+    var password = form.elements.namedItem('PASSWORD');
 
-    Cc['@mozilla.org/appshell/window-mediator;1']
-      .getService(Ci.nsIWindowMediator)
-      .getMostRecentWindow('navigator:browser')
-      .BrowserOpenTab();
-
-    event.target.parentNode.submit();
+    gamefox_accounts.login(username.value, password.value,
+        function(result, msg)
+        {
+          if (result == 'SUCCESS')
+          {
+            username.value = '';
+            password.value = '';
+            username.focus();
+          }
+          else
+            gamefox_lib.alert(msg);
+        });
   },
 
   redirectLogin: function()
