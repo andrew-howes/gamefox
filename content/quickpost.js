@@ -332,267 +332,110 @@ var gamefox_quickpost =
     event.target.blur();
 
     var doc = gamefox_lib.getDocument(event);
-    var queryObj = gamefox_utils.parseQueryString(doc.location.search);
-    var strbundle = document.getElementById('overlay-strings');
 
-    // post.php still uses the traditional query parameters
-    var boardId = queryObj['board'] || gamefox_utils.getBoardId(doc.location.pathname);
-    var topicId = queryObj['topic'] || gamefox_utils.getTopicId(doc.location.pathname);
-    var msgId = queryObj['message'];
-
-    var topicTitle = doc.getElementsByName('topictitle')[0];
-    var postMessageUrl = gamefox_lib.domain + gamefox_lib.path
-        + 'post.php?board=' + boardId
-        + (!topicTitle ? '&topic=' + topicId : '')
-        + (msgId ? '&message=' + msgId : '');
+    var topicTitle = (doc.getElementsByName('topictitle')[0] || {}).value;
     var key = doc.getElementsByName('key')[0].value;
     var message = gamefox_quickpost.removeGFCodeWhitespace(
         doc.getElementsByName('messagetext')[0].value);
     var sig = gamefox_sig.format(doc.getElementsByName('custom_sig')[0]
         .value);
+    var params = gamefox_utils.parseBoardLink(doc.location.pathname) ||
+      gamefox_utils.parseQueryString(doc.location.search); // post.php
 
-    var previewRequest = new XMLHttpRequest();
-    previewRequest.open('POST', postMessageUrl);
-    var ds = gamefox_lib.thirdPartyCookieFix(previewRequest);
-    previewRequest.onreadystatechange = function()
-    {
-      if (previewRequest.readyState == 4)
-      {
-        var text = previewRequest.responseText;
-        var postId = text.match(/<input\b[^>]+?\bname="post_id"[^>]+?\bvalue="([^"]*)"/);
-        var responseKey = text.match(/<input\b[^>]+?\bname="key"[^>]+?\bvalue="([^"]+)"/);
+    gamefox_messages.post(topicTitle, message, sig, key, params,
+        function(result, msg, data) {
+          if (result == 'SUCCESS')
+          {
+            event.target.removeAttribute('disabled');
 
-        if (!postId)
-        { // error
-          if (!/\S/.test(text))
-            gamefox_lib.alert('Request timed out. Check your network connection and try again.');
+            // Redirect after posting
+            if (topicTitle) // new topic
+            {
+              var topicLink = data;
+
+              switch (gamefox_lib.prefs
+                .getIntPref('elements.quickpost.aftertopic'))
+              {
+                case 0: // go to topic
+                  doc.location = gamefox_utils.newURI(params['board'],
+                    topicLink[1], null, null, null, topicLink[0]);
+                  break;
+
+                case 1: // go to board
+                  doc.location = gamefox_utils.newURI(params['board'], null,
+                    null, null, null, topicLink[0]);
+                  break;
+              }
+            }
+            else // new post
+            {
+              switch (gamefox_lib.prefs
+                  .getIntPref('elements.quickpost.aftermessage'))
+              {
+                case 0: // go to last page/post
+                  var msgsPerPage = gamefox_lib.prefs
+                    .getIntPref('msgsPerPage');
+                  var pages = doc.gamefox.pages;
+                  var msgs = doc.gamefox.msgnum;
+
+                  if (pages * msgsPerPage > msgs &&
+                      (pages - 1) * msgsPerPage < msgs)
+                  { // We're on the last page and staying on it
+                    doc.location.hash = doc.gamefox.msgnum + 1;
+                    doc.location.reload();
+                  }
+                  else if (pages * msgsPerPage == msgs)
+                  { // This post is creating a new page (last page is full)
+                    doc.location = gamefox_utils.newURI(params['board'],
+                        params['topic'], pages, doc.gamefox.tc, msgs + 1,
+                        doc.location.pathname);
+                  }
+                  else
+                  { // Load last page
+                    if (gamefox_lib.onPage(doc, 'post'))
+                    {
+                      var topicLink = doc.evaluate('//div[@class="details"]' +
+                          '//b/following-sibling::a', doc, null,
+                          XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+                        .singleNodeValue;
+
+                      doc.location = gamefox_utils.newURI(params['board'],
+                          params['topic'], 0, '', '', topicLink.href);
+                    }
+                    else
+                      doc.location = gamefox_utils.newURI(params['board'],
+                          params['topic'], pages - 1, doc.gamefox.tc, 'last',
+                          doc.location.pathname);
+                  }
+
+                  break;
+
+                case 1: // go back to same page
+                  doc.location = gamefox_utils.newURI(params['board'],
+                      params['topic'], gamefox_utils
+                        .parseQueryString(doc.location.search)['page'],
+                      doc.gamefox.tc, null, doc.location.pathname);
+                  break;
+
+                case 2: // go to first page
+                  doc.location = gamefox_utils.newURI(params['board'],
+                      params['topic'], null, null, null,
+                      doc.location.pathname);
+                  break;
+
+                case 3: // go to board
+                  doc.location = gamefox_utils.newURI(params['board'], null,
+                      null, null, null, doc.location.pathname);
+                  break;
+              }
+            }
+          }
           else
           {
-            var badWord = text.match(/<p>Banned word found: <b>([^<]+)<\/b>/i);
-            var tooBig = text.match(/4096 characters\. Your message is ([0-9]+) characters/);
-            var titleLength = text.indexOf('Topic titles must be between 5 and 80 characters') != -1;
-            var allCapsTitle = text.indexOf('Topic titles cannot be in all uppercase') != -1;
-            var allCapsMessage = text.indexOf('Messages cannot be in all uppercase') != -1;
-            var noTopics = text.indexOf('You are not authorized to create topics on this board') != -1;
-            var noMessages = text.indexOf('You are not authorized to post messages on this board') != -1;
-            var longWordInTitle = text.indexOf('Your topic title contains a single word over 25 characters') != -1;
-            var longWordInMessage = text.indexOf('Your message contains a single word over 80 characters') != -1;
-            var blankMessage = text.indexOf('Your post was blank') != -1;
-            var badHTML = text.indexOf('Your HTML is not well-formed') != -1;
-            var nonASCIITitle = text.indexOf('Topic titles cannot contain non-ASCII characters') != -1;
-            var closedTopic = text.indexOf('This topic is closed') != -1;
-            var deletedTopic = text.indexOf('This topic is no longer available') != -1;
-            var maintenance = previewRequest.status == 503;
-
-            if (badWord)
-              gamefox_lib.alert('GameFAQs has found a banned word in your '
-                  + 'post:\n' + badWord[1]);
-            else if (tooBig)
-              gamefox_lib.alert('Your post is too big! A message can only contain 4096 characters, ' +
-                  'but yours has ' + tooBig[1] + '.');
-            else if (titleLength)
-              gamefox_lib.alert('Your topic title must be between 5 and 80 characters in length.');
-            else if (allCapsTitle)
-              gamefox_lib.alert('Turn off your caps lock and try typing your topic title again.');
-            else if (allCapsMessage)
-              gamefox_lib.alert('Turn off your caps lock and try typing your message again.');
-            else if (noTopics)
-              gamefox_lib.alert('You are not allowed to post topics here.');
-            else if (noMessages)
-              gamefox_lib.alert('You are not allowed to post messages here.');
-            else if (longWordInTitle)
-              gamefox_lib.alert('Your topic title contains a word over 25 characters in length. ' +
-                  'This makes CJayC unhappy because it stretches his 640x480 resolution ' +
-                  'screen, so he doesn\'t allow it.');
-            else if (longWordInMessage)
-              gamefox_lib.alert('Your message contains a word over 80 characters in length. ' +
-                  'This makes CJayC unhappy because it stretches his 640x480 resolution ' +
-                  'screen, so he doesn\'t allow it.');
-            else if (blankMessage)
-              gamefox_lib.alert('Maybe you should actually type something...');
-            else if (badHTML)
-              gamefox_lib.alert('Your HTML is not well-formed. Check for mismatched tags.');
-            else if (nonASCIITitle)
-              gamefox_lib.alert('Topic titles cannot contain non-ASCII characters.');
-            else if (closedTopic)
-              gamefox_lib.alert('The topic was closed while you were typing your message. ' +
-                  'Type faster next time!');
-            else if (deletedTopic)
-              gamefox_lib.alert('The topic is gone! Damn moderators...');
-            else if (maintenance)
-              gamefox_lib.alert('The site is temporarily down for maintenance.');
-            else if (!responseKey)
-              gamefox_lib.alert('A GameFOX error has occurred: cannot find key');
-            else if (!key || key != responseKey)
-            {
-              gamefox_quickpost.setPostKey(responseKey[1]);
-              doc.getElementsByName('key')[0].value = responseKey[1];
-
-              gamefox_lib.alert('A GameFOX error has occurred: '
-                  + (!key ? 'missing key' : 'key mismatch') + '\n\n'
-                  + 'Retrying may fix this issue.');
-            }
-            else
-              gamefox_lib.alert('Whoops! Something unexpected happened. ' +
-                  'This probably means that your message was not posted ' +
-                  '(but it\'s possible it was). Please visit the Blood ' +
-                  'Money board if you continue to get this error.');
+            if (msg) gamefox_lib.alert(msg);
+            event.target.removeAttribute('disabled');
           }
-          event.target.removeAttribute('disabled');
-          return;
-        }
-        else
-        {
-          if (text.indexOf('<div class="head"><h2 class="title">Post Warning</h2></div>') != -1)
-          {
-            var warning = text.match(/message:<\/b><\/p>(.*)You may go ahead/);
-            warning = warning ? warning[1].replace(/<P>/g, '\n\n').trim() :
-              'Your post contains a word that may be bad.';
-            if (!gamefox_lib.confirm(warning + '\n\nSubmit this post?'))
-            {
-              event.target.removeAttribute('disabled');
-              return;
-            }
-          }
-
-          var postRequest = new XMLHttpRequest();
-          postRequest.open('POST', postMessageUrl);
-          var ds = gamefox_lib.thirdPartyCookieFix(postRequest);
-          postRequest.onreadystatechange = function()
-          {
-            if (postRequest.readyState == 4)
-            {
-              var text = postRequest.responseText;
-              if (text.indexOf('<div class="head"><h2 class="title">Message Posted</h2></div>') == -1
-                  && text.indexOf('<table class="board message"') == -1
-                  // GameFAQs bug puts us on a nonexistent page when the last
-                  // post of a page is made
-                  && text.indexOf('<div class="details"><p>No messages') == -1)
-              { // error
-                if (!/\S/.test(text))
-                  gamefox_lib.alert('Request timed out. Check your network connection and try again.');
-                else
-                {
-                  var flooding = text.indexOf('Please wait and try your post again') != -1;
-                  var closedTopic = text.indexOf('This topic is closed') != -1;
-                  var deletedTopic = text.indexOf('This topic is no longer available') != -1;
-                  var dupeTitle = text.indexOf('A topic with this title already exists') != -1;
-
-                  if (flooding)
-                    gamefox_lib.alert('You have hit one of the time-based posting limits (e.g., 2 posts per minute).');
-                  else if (closedTopic)
-                    gamefox_lib.alert('The topic was closed while you were typing your message. Type faster next time!');
-                  else if (deletedTopic)
-                    gamefox_lib.alert('The topic is gone! Damn moderators...');
-                  else if (dupeTitle)
-                    gamefox_lib.alert('A topic with this title already exists. Choose another title.');
-                  else
-                  {
-                    gamefox_lib.log('Unknown QuickPost error on post request');
-                    gamefox_lib.log('QuickPost response text:\n\n' + text, 3);
-
-                    gamefox_lib.alert('Whoops! Something unexpected ' +
-                        'happened. This probably means that your message ' +
-                        'was not posted (but it\'s possible it was). Please ' +
-                        'visit the Blood Money board if you continue to get ' +
-                        'this error.');
-                  }
-                }
-                event.target.removeAttribute('disabled');
-                return;
-              }
-
-              event.target.removeAttribute('disabled');
-              if (topicTitle) // new topic
-              {
-                var topicLink = text.match(/\/boards\/[^\/]+\/(\d+)/);
-
-                switch (gamefox_lib.prefs.getIntPref('elements.quickpost.aftertopic'))
-                {
-                  case 0: // go to topic
-                    doc.location = gamefox_utils.newURI(boardId, topicLink[1],
-                        null, null, null, topicLink[0]);
-                    break;
-
-                  case 1: // go to board
-                    doc.location = gamefox_utils.newURI(boardId, null, null,
-                        null, null, topicLink[0]);
-                    break;
-                }
-              }
-              else // new message
-              {
-                switch (gamefox_lib.prefs.getIntPref('elements.quickpost.aftermessage'))
-                {
-                  case 0: // go to last page/post
-                    var msgsPerPage = gamefox_lib.prefs.getIntPref('msgsPerPage');
-                    var params = {};
-
-                    if (doc.gamefox.pages * msgsPerPage == doc.gamefox.msgnum)
-                      params['page'] = doc.gamefox.pages; // next page
-                    else if (doc.gamefox.pages > 1)
-                      params['page'] = doc.gamefox.pages - 1; // last page
-                    // else first page
-
-                    if (params['page'])
-                      params['tc'] = doc.gamefox.tc;
-
-                    if (doc.gamefox.msgnum > (doc.gamefox.pages - 1) * msgsPerPage &&
-                        doc.gamefox.pages * msgsPerPage != doc.gamefox.msgnum)
-                    { // on last page
-                      params['post'] = (doc.gamefox.msgnum + 1).toString();
-                    }
-                    else if (!msgId) // don't do this when editing
-                      params['post'] = 'last';
-
-                    doc.location = gamefox_utils.newURI(boardId, topicId,
-                        params['page'], params['tc'], params['post'],
-                        doc.location.pathname);
-
-                    if ((queryObj['page'] == (doc.gamefox.pages - 1) || doc.gamefox.pages == 1)
-                        && doc.location.hash.length)
-                      doc.location.reload(); // hash changes don't reload the page
-                    break;
-
-                  case 1: // go back to same page
-                    doc.location = gamefox_utils.newURI(boardId, topicId,
-                        queryObj['page'], queryObj['page'] ? doc.gamefox.tc :
-                        null, null, doc.location.pathname);
-                    break;
-
-                  case 2: // go to first page
-                    doc.location = gamefox_utils.newURI(boardId, topicId,
-                        null, null, null, doc.location.pathname);
-                    break;
-
-                  case 3: // go to board
-                    doc.location = gamefox_utils.newURI(boardId, null, null,
-                        null, null, doc.location.pathname);
-                    break;
-                }
-              }
-            }
-          };
-
-          postRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          postRequest.send(
-              'post_id=' + postId[1] +
-              '&uid=' + text.match(/<input\b[^>]+?\bname="uid"[^>]+?\bvalue="([^"]*)"/)[1] +
-              '&key=' + key +
-              '&post=Post+Message'
-              );
-        }
-      }
-    };
-
-    previewRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    previewRequest.send(
-        (topicTitle ? 'topictitle=' + gamefox_utils.URLEncode(topicTitle.value) + '&' : '') +
-        'messagetext=' + gamefox_utils.URLEncode(message) +
-        '&custom_sig=' + gamefox_utils.URLEncode(sig) +
-        '&key=' + key +
-        '&post=Preview+Message'
-        );
+        });
   },
 
   resetPost: function(event)
