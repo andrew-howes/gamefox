@@ -261,7 +261,7 @@ var gamefox_accounts =
           // Update login key
           var oldKey = gamefox_lib.prefs.getCharPref('loginKey');
           var newKey = gamefox_utils.parseFormInput('key',
-              request.responseText)[1];
+              request.responseText);
 
           // Try again if the key sent was incorrect
           if (!lastTry && newKey && oldKey != newKey)

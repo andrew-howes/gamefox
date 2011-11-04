@@ -180,9 +180,9 @@ var gamefox_messages =
       if (preview.readyState != 4) return;
 
       var text = preview.responseText;
-      var postId = gamefox_utils.parseFormInput('post_id', text)[1];
-      var uid = gamefox_utils.parseFormInput('uid', text)[1];
-      var responseKey = gamefox_utils.parseFormInput('key', text)[1];
+      var postId = gamefox_utils.parseFormInput('post_id', text);
+      var uid = gamefox_utils.parseFormInput('uid', text);
+      var responseKey = gamefox_utils.parseFormInput('key', text);
 
       if (!postId) // error
       {

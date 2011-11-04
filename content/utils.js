@@ -425,7 +425,8 @@ var gamefox_utils =
 
   parseFormInput: function(name, str)
   {
-    return str.match(new RegExp(
-          '<input\\b[^>]+?\\bname="' + name + '"[^>]+?\\bvalue="([^"]+)"')) || [];
+    return (str.match(new RegExp(
+          '<input\\b[^>]+?\\bname="' + name + '"[^>]+?\\bvalue="([^"]+)"')) ||
+        [])[1];
   }
 };
