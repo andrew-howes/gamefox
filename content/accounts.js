@@ -235,6 +235,11 @@ var gamefox_accounts =
   {
     var strbundle = document.getElementById('overlay-strings');
 
+    if (!callback)
+      callback = function(result, msg) {
+        if (msg) gamefox_lib.alert(msg);
+      };
+
     // Log out of the current account (if any) before logging in
     if (!cookies)
     {
@@ -271,35 +276,21 @@ var gamefox_accounts =
             return;
           }
 
-          if (callback)
-            callback('E_BAD_LOGIN', strbundle.getString('badLogin'));
-          else
-            gamefox_lib.alert(strbundle.getString('badLogin'));
+          callback('E_BAD_LOGIN', strbundle.getString('badLogin'));
         }
         else if (request.responseText.indexOf(
               '<title>User Login - CAPTCHA Required - GameFAQs</title>')
             != -1)
-        {
-          if (callback)
-            callback('E_MANUAL_LOGIN', strbundle
-                .getString('manualLoginRequired'));
-          else
-            gamefox_lib.alert(strbundle.getString('manualLoginRequired'));
-        }
+          callback('E_MANUAL_LOGIN', strbundle
+              .getString('manualLoginRequired'));
         else
         {
           // No recognized error, but let's do a sanity check
           if (gamefox_accounts.getCookie('MDAAuth') == null)
-          {
-            if (callback)
-              callback('E_OM_NOM_NOM', strbundle.getString('cookieEaten'));
-            else
-              gamefox_lib.alert(strbundle.getString('cookieEaten'));
-          }
+            callback('E_OM_NOM_NOM', strbundle.getString('cookieEaten'));
           else
           {
-            if (callback)
-              callback('SUCCESS');
+            callback('SUCCESS');
 
             gamefox_accounts.loadGameFAQs();
             return; // Don't clean up - we have new cookies
@@ -314,7 +305,8 @@ var gamefox_accounts =
       }
     }
 
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    request.setRequestHeader('Content-Type',
+        'application/x-www-form-urlencoded');
     request.send(
         'key=' + gamefox_utils.URLEncode(gamefox_lib.prefs
           .getCharPref('loginKey')) +
