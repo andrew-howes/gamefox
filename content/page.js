@@ -474,6 +474,8 @@ var gamefox_page =
 
         message.addEventListener('input',
             gamefox_messages.delayedUpdateMessageCount, false);
+        formElements.namedItem('custom_sig').addEventListener('input',
+            gamefox_messages.delayedUpdateMessageCount, false);
         form.addEventListener('reset',
             function(event) { setTimeout(function() {
               gamefox_messages.updateMessageCount(event);

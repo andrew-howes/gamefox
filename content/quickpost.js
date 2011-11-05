@@ -160,8 +160,10 @@ var gamefox_quickpost =
     {
       var messagecount = doc.createElement('span');
       messagecount.id = 'gamefox-message-count';
-      message.addEventListener('input', gamefox_messages.delayedUpdateMessageCount,
-          false);
+      message.addEventListener('input',
+          gamefox_messages.delayedUpdateMessageCount, false);
+      form.elements.namedItem('custom_sig').addEventListener('input',
+          gamefox_messages.delayedUpdateMessageCount, false);
       form.appendChild(messagecount);
       gamefox_messages.updateMessageCount(doc);
     }

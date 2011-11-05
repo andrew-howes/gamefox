@@ -4,6 +4,8 @@
         - Add Vita and Wii U to platform links
         - Fix login form
     * Fix quoting bug when the Disconnect extension is installed
+    * Include the signature in the character count (to be consistent with
+      GameFAQs)
 
 2011-10-31:
     * version 0.8.3
