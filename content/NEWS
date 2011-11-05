@@ -3,6 +3,7 @@
     * GameFOX sidebar:
         - Add Vita and Wii U to platform links
         - Fix login form
+    * Fix quoting bug when the Disconnect extension is installed
 
 2011-10-31:
     * version 0.8.3

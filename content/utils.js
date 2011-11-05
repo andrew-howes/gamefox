@@ -109,8 +109,9 @@ var gamefox_utils =
   getMsgDataDisplay: function(doc)
   {
     var leftMsgData;
-    try { leftMsgData = !(doc.getElementsByTagName('tr')[0].
-        getElementsByTagName('td').length == 1); }
+    try { leftMsgData = !(doc.getElementById('content')
+        .getElementsByTagName('tr')[0].getElementsByTagName('td')
+        .length == 1); }
     catch (e) { leftMsgData = false; }
 
     return leftMsgData;
