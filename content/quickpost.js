@@ -496,9 +496,9 @@ var gamefox_quickpost =
   insertTag: function(event)
   {
     event.preventDefault();
-    var doc = gamefox_lib.getDocument(event);
 
-    var quickpost = doc.getElementsByName('messagetext')[0];
+    var form = event.target.form;
+    var quickpost = form.elements.namedItem('messagetext');
     var scrollTop = quickpost.scrollTop;
     var tagStrStart = gamefox_quickpost.formatTag(this.name, false);
     var tagStrEnd = gamefox_quickpost.formatTag(this.name, true);
@@ -527,8 +527,9 @@ var gamefox_quickpost =
     quickpost.focus();
     quickpost.scrollTop = scrollTop;
 
+    // TODO: Update for edit forms
     if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
-      gamefox_messages.updateMessageCount(doc);
+      gamefox_messages.updateMessageCount(gamefox_lib.getDocument(event));
   },
 
   createHTMLButtons: function(doc)

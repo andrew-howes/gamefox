@@ -6,6 +6,8 @@
     * Fix quoting bug when the Disconnect extension is installed
     * Include the signature in the character count (to be consistent with
       GameFAQs)
+    * Quick editing! Edit your posts on the message list without leaving the
+      page
 
 2011-10-31:
     * version 0.8.3

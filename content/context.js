@@ -150,7 +150,7 @@ var gamefox_context =
       if (msgComponents)
       {
         var deleteType = msgComponents.header.getAttribute('gfdeletetype');
-        var canEdit = msgComponents.header.getAttribute('gfedit');
+        var canEdit = msgComponents.header.getAttribute('gamefox:edituri');
 
         if (doc.getElementById('gamefox-message'))
           hideQuote = false;

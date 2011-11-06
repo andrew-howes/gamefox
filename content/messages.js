@@ -154,9 +154,135 @@ var gamefox_messages =
 
     var doc = gamefox_lib.getDocument(event);
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
-    var editLink = msgComponents.header.getAttribute('gfedit');
+    var msgBody = msgComponents.body.firstChild;
 
-    doc.location = gamefox_lib.domain + gamefox_lib.path + editLink;
+    if (msgBody.getAttribute('gamefox:editing') == 'true')
+    {
+      gamefox_messages.cancelEdit(event);
+      return;
+    }
+
+    var uri = msgComponents.header.getAttribute('gamefox:edituri');
+
+    var get = new XMLHttpRequest();
+    get.open('GET', uri);
+    var ds = gamefox_lib.thirdPartyCookieFix(get);
+    get.onreadystatechange = function()
+    {
+      if (get.readyState == 4)
+      {
+        var msg = get.responseText
+          .match(/name="messagetext">([\S\s]*?)<\/textarea>/m);
+        if (!msg)
+        {
+          gamefox_lib.alert('You can\'t edit this post anymore.');
+          return;
+        }
+
+        msg = gamefox_utils.specialCharsDecode(msg[1]);
+
+        var key = gamefox_utils.parseFormInput('key', get.responseText);
+
+        var height = msgBody.clientHeight;
+        msgBody.setUserData('gamefox_originalPost', msgBody.innerHTML, null);
+        msgBody.innerHTML = '';
+        msgBody.setAttribute('gamefox:editing', 'true');
+
+        var editForm = doc.createElement('form');
+        editForm.id = 'gamefox-edit';
+        editForm.method = 'post';
+        editForm.action = uri;
+
+        if (gamefox_quickpost.createHTMLButtonsPref())
+        {
+          editForm.appendChild(gamefox_quickpost.createHTMLButtons(doc));
+          editForm.appendChild(doc.createElement('br'));
+        }
+
+        var keyField = doc.createElement('input');
+        keyField.name = 'key';
+        keyField.type = 'hidden';
+        keyField.value = key;
+        editForm.appendChild(keyField);
+
+        var editBox = doc.createElement('textarea');
+        editBox.name = 'messagetext';
+        editBox.style.height = height + 'px';
+        editBox.style.width = '100%';
+        editBox.appendChild(doc.createTextNode(msg));
+        editForm.appendChild(editBox);
+
+        var saveBtn = doc.createElement('input');
+        saveBtn.value = 'Save';
+        saveBtn.type = 'submit';
+        saveBtn.addEventListener('click', gamefox_messages.saveEdit, false);
+        editForm.appendChild(saveBtn);
+
+        editForm.appendChild(doc.createTextNode(' '));
+
+        var previewBtn = doc.createElement('input');
+        previewBtn.name = 'post';
+        previewBtn.value = 'Preview Message';
+        previewBtn.type = 'submit';
+        editForm.appendChild(previewBtn);
+
+        editForm.appendChild(doc.createTextNode(' '));
+
+        var previewSpellBtn = doc.createElement('input');
+        previewSpellBtn.name = 'post';
+        previewSpellBtn.value = 'Preview and Spellcheck Message';
+        previewSpellBtn.type = 'submit';
+        editForm.appendChild(previewSpellBtn);
+
+        editForm.appendChild(doc.createTextNode(' '));
+
+        var cancelBtn = doc.createElement('input');
+        cancelBtn.value = 'Cancel';
+        cancelBtn.type = 'submit';
+        cancelBtn.addEventListener('click', gamefox_messages.cancelEdit,
+            false);
+        editForm.appendChild(cancelBtn);
+
+        msgBody.appendChild(editForm);
+        editBox.focus();
+      }
+    };
+    get.send(null);
+  },
+
+  cancelEdit: function(event)
+  {
+    var doc = gamefox_lib.getDocument(event);
+    var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
+    var msgBody = msgComponents.body.firstChild;
+
+    msgBody.innerHTML = msgBody.getUserData('gamefox_originalPost');
+    msgBody.setAttribute('gamefox:editing', 'false');
+  },
+
+  saveEdit: function(event)
+  {
+    event.preventDefault();
+
+    var doc = gamefox_lib.getDocument(event);
+    var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
+    var msgHeader = msgComponents.header;
+    var msgBody = msgComponents.body.firstChild;
+    var editForm = msgBody.firstChild;
+
+    var editURI = msgHeader.getAttribute('gamefox:edituri');
+    var editKey = editForm.elements.namedItem('key').value;
+
+    gamefox_messages.post('', editForm.elements.namedItem('messagetext').value,
+        '', editKey, gamefox_utils.parseQueryString(editURI),
+        function(result, msg, data) {
+          if (msg) gamefox_lib.alert(msg);
+          else if (result == 'SUCCESS')
+          {
+            doc.location.hash = msgComponents.id;
+            doc.location.reload();
+          }
+        });
   },
 
   post: function(title, message, sig, key, params, callback)
@@ -275,7 +401,7 @@ var gamefox_messages =
     preview.send(
         (title ? 'topictitle=' + gamefox_utils.URLEncode(title) + '&' : '') +
         'messagetext=' + gamefox_utils.URLEncode(message) + '&' +
-        'custom_sig=' + gamefox_utils.URLEncode(sig) + '&' +
+        (sig ? 'custom_sig=' + gamefox_utils.URLEncode(sig) + '&' : '') +
         'key=' + key + '&' +
         'post=Preview+Message'
         );

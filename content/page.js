@@ -1091,10 +1091,11 @@ var gamefox_page =
               && gamefox_date.strtotime(postDate).getTime() > Date.now()
                  - 3600000) // 3600000 ms = 3600 s = 1 h
           {
-            var editUri = 'post.php?board=' + boardId + '&topic=' + topicId
+            var editURI = gamefox_lib.domain + gamefox_lib.path
+              + 'post.php?board=' + boardId + '&topic=' + topicId
               + '&message=' + gamefox_utils.parseBoardLink(detailLink
                   .href)['message'];
-            td[i].setAttribute('gfedit', editUri);
+            td[i].setAttribute('gamefox:edituri', editURI);
 
             if (editlinkCond)
             {
@@ -1102,7 +1103,8 @@ var gamefox_page =
               a.appendChild(doc.createTextNode('edit'));
               a.title = 'Edit';
               a.className = 'gamefox-edit-link';
-              a.href = gamefox_lib.path + editUri;
+              a.href = '#';
+              a.addEventListener('click', gamefox_messages.edit, false);
 
               msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
                   doc.createElement('br') : doc.createTextNode(' | '));
