@@ -8,6 +8,7 @@
     margin-top: -200px !important;
     width: 400px;
     box-shadow: 0 0 10px #555;
+    -moz-box-shadow: 0 0 10px #555;
     background: #eee;
 }
 .gamefox-character-map td
@@ -25,9 +26,9 @@
     text-align: center;
     font-weight: normal !important;
 }
-.gamefox-character-map a:visited
+.gamefox-character-map a, .gamefox-character-map a:visited
 {
-    color: inherit !important;
+    color: #333 !important;
 }
 .gamefox-character-map a:hover
 {

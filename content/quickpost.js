@@ -734,7 +734,8 @@ var gamefox_quickpost =
         tbody.appendChild(tr);
       }
 
-      form.insertBefore(map, form.firstChild);
+      event.target.parentNode.parentNode.insertBefore(map,
+          event.target.parentNode);
     }
   },
 
