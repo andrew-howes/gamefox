@@ -37,7 +37,11 @@ var gamefox_quickwhois =
         window.setTimeout(function() { qw.style.opacity = '1'; }, 10);
       }
       else
+      {
         qw.style.opacity = '0';
+        if (qw.style.MozTransition === undefined) // no CSS3 transition support
+          qw.style.display = 'none';
+      }
 
       return;
     }
