@@ -3,8 +3,6 @@
     .gamefox-quickwhois
     {
         position: absolute;
-        top: 0;
-        left: 0;
         z-index: 3;
         padding: 3px !important;
         overflow-x: auto;
@@ -27,6 +25,7 @@
     {
         padding: 0 !important;
         border: 0 !important;
+        font-size: inherit !important;
     }
     .gamefox-quickwhois td:first-child
     {
@@ -34,7 +33,7 @@
         padding-right: 5px !important;
         color: #555;
     }
-    .gamefox-quickwhois a
+    .gamefox-quickwhois td a
     {
         font-weight: normal !important;
     }

@@ -438,5 +438,17 @@ var gamefox_utils =
     } while (node.tagName != tagName.toUpperCase() && node.parentNode);
 
     return node;
+  },
+
+  getPos: function(element)
+  {
+    var x = y = 0;
+
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+    } while (element = element.offsetParent);
+
+    return [x, y];
   }
 };

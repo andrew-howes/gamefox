@@ -19,24 +19,46 @@
 
 var gamefox_quickwhois =
 {
-  quickWhois: function(event)
+  toggle: function(event, hover, dblClick)
   {
     var doc = gamefox_lib.getDocument(event);
-    var pos = gamefox_quickwhois.getPos(event);
-    var row = gamefox_utils.findParent('td', event.target);
-    var qw = doc.evaluate('div[@class="gamefox-quickwhois"]', row, null,
-        XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    var msgStats = gamefox_utils.findParent('td', event.target).firstChild;
+    var name = msgStats.querySelector('a.name');
+    var qw = doc.evaluate('div[contains(@class, "gamefox-quickwhois")]',
+        msgStats, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+      .singleNodeValue;
+
+    var className = 'gamefox-quickwhois';
+    var pos;
+    if (hover)
+    {
+      pos = gamefox_utils.getPos(name);
+      pos[0] -= 3;
+      pos[1] -= 3;
+      className += ' gamefox-quickwhois-hover';
+    }
+    else
+      pos = gamefox_quickwhois.getPos(event);
 
     if (qw)
     {
-      if (qw.style.display == 'none')
+      var qwHover = qw.classList.contains('gamefox-quickwhois-hover');
+
+      if (qw.style.opacity == '0')
       {
+        // Only show QuickWhois when hovering over .name
+        if (hover && event.target.className != 'name')
+          return;
+
+        qw.className = className;
         qw.style.display = 'block';
-        qw.style.top = pos[0] + 'px';
-        qw.style.left = pos[1] + 'px';
-        window.setTimeout(function() { qw.style.opacity = '1'; }, 10);
+        qw.style.left = pos[0] + 'px';
+        qw.style.top = pos[1] + 'px';
+        window.setTimeout(function() { qw.style.opacity = '1'; }, 20);
       }
-      else
+      // Don't allow double clicking to close a hover-activated QuickWhois,
+      // and vice versa
+      else if ((qwHover && hover) || (!qwHover && dblClick))
       {
         qw.style.opacity = '0';
         if (qw.style.MozTransition === undefined) // no CSS3 transition support
@@ -47,24 +69,40 @@ var gamefox_quickwhois =
     }
 
     qw = doc.createElement('div');
-    qw.className = 'gamefox-quickwhois';
-    qw.style.top = pos[0] + 'px';
-    qw.style.left = pos[1] + 'px';
-    qw.textContent = 'Loading QuickWhois...';
+    qw.className = className;
+    qw.style.left = pos[0] + 'px';
+    qw.style.top = pos[1] + 'px';
+
+    var a = doc.createElement('a');
+    a.className = 'name';
+    a.href = name.href;
+    a.textContent = name.textContent;
+    qw.appendChild(a);
+
+    qw.appendChild(doc.createTextNode(' (Loading profile...)'));
+
     qw.addEventListener('transitionend', function() {
       if (qw.style.opacity == '0') qw.style.display = 'none'; }, false);
-    row.appendChild(qw);
-    window.setTimeout(function() { qw.style.opacity = '1'; }, 10);
+
+    if (hover)
+      qw.addEventListener('mouseout', function(event) {
+        if (event.relatedTarget.className != qw.className &&
+            gamefox_utils.findParent('div', event.relatedTarget).className !=
+            qw.className)
+          gamefox_quickwhois.toggle(event, true);
+      }, false);
+
+    msgStats.appendChild(qw);
+    window.setTimeout(function() { qw.style.opacity = '1'; }, 20);
 
     var request = new XMLHttpRequest();
-    request.open('GET', row.querySelector('a.name').href);
+    request.open('GET', name.href);
     var ds = gamefox_lib.thirdPartyCookieFix(request);
     request.onreadystatechange = function()
     {
       if (request.readyState != 4) return;
 
-      qw.textContent = '';
-      var table = doc.createElement('table');
+      qw.removeChild(qw.childNodes[1]);
 
       var text = request.responseText;
       var profileFieldsHTML = '';
@@ -97,6 +135,7 @@ var gamefox_quickwhois =
         'My Games Page'
       ];
       var field, tr, td;
+      var table = doc.createElement('table');
 
       for (var i = 0; i < fields.length; i++)
       {
@@ -142,8 +181,8 @@ var gamefox_quickwhois =
 
     // offsets are for stylesheets that put a border on <html>
     return [
-      window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop,
-      window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft
+      window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft,
+      window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop
     ];
   }
 };

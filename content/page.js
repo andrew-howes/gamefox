@@ -903,6 +903,24 @@ var gamefox_page =
             msgStats.removeChild(msgStats.childNodes[0]);
         }
 
+        // Add profile link mouseover event listener for QuickWhois
+        if (!onArchive)
+        {
+          profileLink.addEventListener('mouseover', function(event) {
+            event.target.gamefox_QWTimerId = window.setTimeout(function() {
+              event.target.gamefox_QWTimerId = null;
+              gamefox_quickwhois.toggle(event, true); }, 1000);
+          }, false);
+
+          profileLink.addEventListener('mouseout', function(event) {
+            if (typeof event.target.gamefox_QWTimerId == 'number')
+            {
+              clearTimeout(event.target.gamefox_QWTimerId);
+              event.target.gamefox_QWTimerId = null;
+            }
+          }, false);
+        }
+
         for (var j = 0; j < msgStats.childNodes.length; j++)
         {
           // check if this is the post date node
@@ -1459,7 +1477,7 @@ var gamefox_page =
       {
         case 1:
           if (!gamefox_lib.onPage(doc, 'archive'))
-            gamefox_quickwhois.quickWhois(event);
+            gamefox_quickwhois.toggle(event, null, true);
           break;
         case 2:
           gamefox_quote.quote(event);
