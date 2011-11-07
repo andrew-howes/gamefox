@@ -37,6 +37,7 @@
     .gamefox-message-count, #gamefox-title-count
     {
         margin-left: 1em;
+        font-size: 0.9em !important;
     }
 
     /* Hide the GameFAQs "Post without Preview" button on post page */
