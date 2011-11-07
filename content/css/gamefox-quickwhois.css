@@ -11,10 +11,31 @@
         overflow-y: hidden;
         color: #000;
         background-color: #eee;
-        max-width: 80%;
-        -moz-border-radius: 10px;
-        border: #aaa 1px solid;
+        max-width: 70%;
+        -moz-border-radius: 5px;
+        box-shadow: 0 0 10px #555;
         text-align: left;
+        opacity: 0;
+        -moz-transition: opacity .3s;
+    }
+    .gamefox-quickwhois table
+    {
+        width: auto !important;
+    }
+    .gamefox-quickwhois td
+    {
+        padding: 0 !important;
+        border: 0 !important;
+    }
+    .gamefox-quickwhois td:first-child
+    {
+        text-align: right;
+        padding-right: 5px !important;
+        color: #555;
+    }
+    .gamefox-quickwhois a
+    {
+        font-weight: normal !important;
     }
 
     .author .gamefox-quickwhois /* for left of message data */
