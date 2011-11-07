@@ -17,3 +17,4 @@
 <!ENTITY filter.label "Filter messages">
 
 <!ENTITY doubleClickQuote.label "Double click message body to quote message">
+<!ENTITY hoverQuickWhois.label "Show QuickWhois when hovering over a username link">

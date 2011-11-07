@@ -904,7 +904,8 @@ var gamefox_page =
         }
 
         // Add profile link mouseover event listener for QuickWhois
-        if (!onArchive)
+        if (!onArchive && gamefox_lib.prefs
+            .getBoolPref('mouse.quickwhoisHover'))
         {
           profileLink.addEventListener('mouseover', function(event) {
             event.target.gamefox_QWTimerId = window.setTimeout(function() {
