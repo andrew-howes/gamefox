@@ -28,27 +28,33 @@ var gamefox_messages =
       clearTimeout(this.timeoutId);
 
     this.timeoutId = setTimeout(
-        function() { gamefox_messages.updateMessageCount(event); },
+        function() { gamefox_messages.updateMessageCount(event.target); },
         gamefox_messages.updateDelay);
   },
 
-  updateMessageCount: function(event)
+  updateMessageCount: function(element)
   {
-    var doc = gamefox_lib.getDocument(event);
-    var messageLength = gamefox_utils.encodedMessageLength(
-        doc.getElementsByName('messagetext')[0].value.trim() + '\n---\n' +
-        doc.getElementsByName('custom_sig')[0].value.trim());
+    var doc = gamefox_lib.getDocument(element);
+    var form = element.nodeName == 'FORM' ? element :
+      gamefox_utils.findParent('form', element);
+    var count = form.getElementsByClassName('gamefox-message-count')[0];
 
-    var messageCount = doc.getElementById('gamefox-message-count');
-    messageCount.innerHTML = messageLength + ' / 4096 characters';
+    if (!count) return;
 
-    if (messageLength > 4096)
+    var str = form.elements.namedItem('messagetext').value.trim();
+    if (form.elements.namedItem('custom_sig'))
+      str += '\n---\n' + form.elements.namedItem('custom_sig').value.trim();
+    var length = gamefox_utils.encodedMessageLength(str);
+
+    count.innerHTML = length + ' / 4096 characters';
+
+    if (length > 4096)
     {
-      messageCount.innerHTML += '(!!)';
-      messageCount.style.setProperty('font-weight', 'bold', '');
+      count.innerHTML += '(!!)';
+      count.style.setProperty('font-weight', 'bold', '');
     }
     else
-      messageCount.style.setProperty('font-weight', '', '');
+      count.style.setProperty('font-weight', '', '');
   },
 
   delayedUpdateTitleCount: function(event)
@@ -242,6 +248,16 @@ var gamefox_messages =
         cancelBtn.addEventListener('click', gamefox_messages.cancelEdit,
             false);
         editForm.appendChild(cancelBtn);
+
+        if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
+        {
+          var msgCount = doc.createElement('span');
+          msgCount.className = 'gamefox-message-count';
+          editBox.addEventListener('input',
+              gamefox_messages.delayedUpdateMessageCount, false);
+          editForm.appendChild(msgCount);
+          gamefox_messages.updateMessageCount(editForm);
+        }
 
         msgBody.appendChild(editForm);
         editBox.focus();

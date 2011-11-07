@@ -34,7 +34,7 @@
         max-width: 730px;
     }
 
-    #gamefox-message-count, #gamefox-title-count
+    .gamefox-message-count, #gamefox-title-count
     {
         margin-left: 1em;
     }

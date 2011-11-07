@@ -466,11 +466,11 @@ var gamefox_page =
 
         // message count
         var msgcount = doc.createElement('span');
-        msgcount.id = 'gamefox-message-count';
+        msgcount.className = 'gamefox-message-count';
         detailsDiv.appendChild(doc.createTextNode(' '));
         detailsDiv.appendChild(msgcount);
 
-        gamefox_messages.updateMessageCount(doc);
+        gamefox_messages.updateMessageCount(detailsDiv);
 
         message.addEventListener('input',
             gamefox_messages.delayedUpdateMessageCount, false);

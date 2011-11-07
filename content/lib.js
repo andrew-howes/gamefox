@@ -119,14 +119,16 @@ var gamefox_lib =
       .confirm(null, 'GameFOX', msg);
   },
 
-  getDocument: function(event)
+  getDocument: function(obj)
   {
-    if (event.target && event.target.ownerDocument)
-      return event.target.ownerDocument;
-    else if (event.originalTarget)
-      return event.originalTarget;
+    if (obj.target && obj.target.ownerDocument)
+      return obj.target.ownerDocument;
+    else if (obj.originalTarget)
+      return obj.originalTarget;
+    else if (obj.ownerDocument)
+      return obj.ownerDocument;
     else
-      return event;
+      return obj;
   },
 
   /*

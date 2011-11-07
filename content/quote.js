@@ -167,8 +167,7 @@ var gamefox_quote =
     }
 
     // update the character count
-    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
-      gamefox_messages.updateMessageCount(doc);
+    gamefox_messages.updateMessageCount(quickpost);
 
     if (gamefox_lib.prefs.getBoolPref('quote.focusQuickPost'))
       quickpost.focus();

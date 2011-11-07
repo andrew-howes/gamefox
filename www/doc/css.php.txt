@@ -190,10 +190,17 @@
         <td>-</td>
     </tr>
 
-    <tr>
+    <tr class="removed">
         <td>span#gamefox-message-count</td>
         <td>Message character counter container.</td>
         <td>0.6.5</td>
+        <td>0.8.4</td>
+    </tr>
+
+    <tr>
+        <td>span.gamefox-message-count</td>
+        <td>Message character counter container.</td>
+        <td>0.8.4</td>
         <td>-</td>
     </tr>
 

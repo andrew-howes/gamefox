@@ -429,5 +429,14 @@ var gamefox_utils =
     return (str.match(new RegExp(
           '<input\\b[^>]+?\\bname="' + name + '"[^>]+?\\bvalue="([^"]+)"')) ||
         [])[1];
+  },
+
+  findParent: function(tagName, node)
+  {
+    do {
+      node = node.parentNode;
+    } while (node.tagName != tagName.toUpperCase() && node.parentNode);
+
+    return node;
   }
 };

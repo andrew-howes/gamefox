@@ -159,13 +159,13 @@ var gamefox_quickpost =
     if (charCounts)
     {
       var messagecount = doc.createElement('span');
-      messagecount.id = 'gamefox-message-count';
+      messagecount.className = 'gamefox-message-count';
       message.addEventListener('input',
           gamefox_messages.delayedUpdateMessageCount, false);
       form.elements.namedItem('custom_sig').addEventListener('input',
           gamefox_messages.delayedUpdateMessageCount, false);
       form.appendChild(messagecount);
-      gamefox_messages.updateMessageCount(doc);
+      gamefox_messages.updateMessageCount(form);
     }
 
     if (clock)
@@ -460,7 +460,7 @@ var gamefox_quickpost =
     } 
 
     if (charCounts)
-      gamefox_messages.updateMessageCount(doc);
+      gamefox_messages.updateMessageCount(event.target);
     if (doc.getElementById('gamefox-topic'))
     {
       doc.getElementById('gamefox-topic').value = '';
@@ -527,9 +527,7 @@ var gamefox_quickpost =
     quickpost.focus();
     quickpost.scrollTop = scrollTop;
 
-    // TODO: Update for edit forms
-    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
-      gamefox_messages.updateMessageCount(gamefox_lib.getDocument(event));
+    gamefox_messages.updateMessageCount(form);
   },
 
   createHTMLButtons: function(doc)
@@ -654,15 +652,13 @@ var gamefox_quickpost =
     msg.focus();
 
     if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
-      gamefox_messages.updateMessageCount(doc);
+      gamefox_messages.updateMessageCount(msg);
   },
 
   breakTagsFromContext: function(event)
   {
     gamefox_quickpost.breakTags(event.target);
-
-    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
-      gamefox_messages.updateMessageCount(gamefox_lib.getDocument(event));
+    gamefox_messages.updateMessageCount(event.target);
   },
 
   createHTMLButtonsPref: function()
@@ -743,12 +739,7 @@ var gamefox_quickpost =
   {
     event.preventDefault();
 
-    var node = event.target;
-    do {
-      node = node.parentNode;
-    } while (node.tagName != 'FORM');
-    var form = node;
-
+    var form = gamefox_utils.findParent('form', event.target);
     var character = event.target.textContent;
     var msg = form.elements.namedItem('messagetext');
     var endPosition = msg.selectionEnd + character.length;
@@ -759,8 +750,7 @@ var gamefox_quickpost =
     msg.setSelectionRange(endPosition, endPosition);
     msg.focus();
 
-    if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
-      gamefox_messages.updateMessageCount(doc);
+    gamefox_messages.updateMessageCount(form);
   },
 
   createSigField: function(doc, postPage)
