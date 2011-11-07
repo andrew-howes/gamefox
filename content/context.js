@@ -21,9 +21,13 @@ var gamefox_context =
 {
   displayMenu: function(event)
   {
-    var target = gContextMenu.target;
-    var doc = target.ownerDocument;
     var strbundle = document.getElementById('context-strings');
+    var target = gContextMenu.target;
+    // gContextMenu.target is undefined when right clicking on a submit input
+    // (maybe other elements too), so falling back to the XUL document here at
+    // least ensures that the context menu is clean instead of throwing an
+    // exception
+    var doc = target ? target.ownerDocument : document;
 
     document.getElementById('gamefox-toggle-sidebar').hidden = !gamefox_lib.prefs.
       getBoolPref('context.sidebar');
