@@ -70,6 +70,20 @@
         <td>-</td>
     </tr>
 
+    <tr class="removed">
+        <td>div#gamefox-character-map</td>
+        <td>Contains the character map for QuickPost.</td>
+        <td>0.6.11</td>
+        <td>0.8.4</td>
+    </tr>
+
+    <tr>
+        <td>div.gamefox-character-map</td>
+        <td>Contains the character map for QuickPost and quick editing.</td>
+        <td>0.8.4</td>
+        <td>-</td>
+    </tr>
+
     <tr>
         <td>div#gamefox-quickpost-afloat</td>
         <td>Floating (topic) QuickPost container.</td>

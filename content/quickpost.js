@@ -677,25 +677,19 @@ var gamefox_quickpost =
   toggleCharacterMap: function(event)
   {
     event.preventDefault();
-    var doc = gamefox_lib.getDocument(event);
 
-    var map = doc.getElementById('gamefox-character-map');
+    var doc = gamefox_lib.getDocument(event);
+    var form = event.target.form;
+
+    var map = form.getElementsByClassName('gamefox-character-map')[0];
     if (map)
-    {
       map.style.display = map.style.display == 'none' ? '' : 'none';
-      map.style.top = event.target.offsetTop
-        + doc.body.parentNode.offsetTop - map.offsetHeight + 'px';
-      map.style.left = event.target.offsetLeft + event.target.clientWidth
-        + doc.body.parentNode.offsetLeft + 'px';
-    }
     else
     {
       map = doc.createElement('div');
-      map.id = 'gamefox-character-map';
-      map.style.top = event.target.offsetTop
-        + doc.body.parentNode.offsetTop - 200 + 'px';
-      map.style.left = event.target.offsetLeft + event.target.clientWidth
-        + doc.body.parentNode.offsetLeft + 'px';
+      map.className = 'gamefox-character-map';
+      map.style.marginLeft = event.target.parentNode.offsetWidth + 'px';
+
       var table = doc.createElement('table');
       map.appendChild(table);
       var tbody = doc.createElement('tbody');
@@ -740,21 +734,24 @@ var gamefox_quickpost =
         tbody.appendChild(tr);
       }
 
-      var button = event.target;
-      button.parentNode.parentNode.insertBefore(map,
-          button.parentNode.nextSibling.nextSibling);
+      form.insertBefore(map, form.firstChild);
     }
   },
 
   addCharacter: function(event)
   {
     event.preventDefault();
-    var doc = gamefox_lib.getDocument(event);
+
+    var node = event.target;
+    do {
+      node = node.parentNode;
+    } while (node.tagName != 'FORM');
+    var form = node;
 
     var character = event.target.textContent;
-
-    var msg = doc.getElementsByName('messagetext')[0];
+    var msg = form.elements.namedItem('messagetext');
     var endPosition = msg.selectionEnd + character.length;
+
     msg.value = msg.value.substr(0, msg.selectionEnd)
       + character
       + msg.value.substr(msg.selectionEnd);

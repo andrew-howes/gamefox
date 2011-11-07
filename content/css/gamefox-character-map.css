@@ -1,25 +1,39 @@
 @-moz-document domain(gamefaqs.com)
 {
-#gamefox-character-map
+.gamefox-character-map
 {
     position: absolute;
     overflow: auto;
-    height: 200px;
+    height: 199px;
+    margin-top: -200px !important;
     width: 400px;
-    border: #aaa 1px solid;
+    box-shadow: 0 0 10px #555;
     background: #eee;
 }
-#gamefox-character-map td
+.gamefox-character-map td
 {
     background: transparent !important;
     padding: 0 !important;
-    border: #aaa 1px solid;
+    border: #aaa 1px solid !important;
+    font-size: 12px !important;
 }
-#gamefox-character-map a
+.gamefox-character-map a
 {
     display: block;
-    padding: 10px 5px;
+    padding: 9px 5px;
     background: #fff;
     text-align: center;
+    font-weight: normal !important;
+}
+.gamefox-character-map a:visited
+{
+    color: inherit !important;
+}
+.gamefox-character-map a:hover
+{
+    text-decoration: none !important;
+    background: #eee;
+    border: #aaa 1px solid;
+    padding: 8px 5px;
 }
 }
