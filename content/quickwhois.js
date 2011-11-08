@@ -84,13 +84,12 @@ var gamefox_quickwhois =
     qw.addEventListener('transitionend', function() {
       if (qw.style.opacity == '0') qw.style.display = 'none'; }, false);
 
-    if (hover)
-      qw.addEventListener('mouseout', function(event) {
-        if (event.relatedTarget.className != qw.className &&
-            gamefox_utils.findParent('div', event.relatedTarget).className !=
-            qw.className)
-          gamefox_quickwhois.toggle(event, true);
-      }, false);
+    qw.addEventListener('mouseout', function(event) {
+      if (event.relatedTarget.className != qw.className &&
+        gamefox_utils.findParent('div', event.relatedTarget).className !=
+        qw.className)
+        gamefox_quickwhois.toggle(event, true);
+    }, false);
 
     msgStats.appendChild(qw);
     window.setTimeout(function() { qw.style.opacity = '1'; }, 20);
