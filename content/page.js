@@ -1472,7 +1472,7 @@ var gamefox_page =
     if (!msgComponents)
       return;
 
-    if (msgComponents.header == msgComponents.original)
+    if (msgComponents.header.parentNode == msgComponents.original)
     {
       switch (dblclickHead)
       {
