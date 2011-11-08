@@ -120,6 +120,13 @@
     </tr>
 
     <tr>
+        <td>form.gamefox-edit</td>
+        <td>Quick editing form.</td>
+        <td>0.8.4</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>form#gamefox-quickpost-form</td>
         <td>QuickPost form.</td>
         <td>-</td>
@@ -183,10 +190,17 @@
         <td>-</td>
     </tr>
 
-    <tr>
+    <tr class="removed">
         <td>span#gamefox-html-buttons</td>
         <td>QuickPost HTML buttons container.</td>
         <td>0.6.8</td>
+        <td>0.8.4</td>
+    </tr>
+
+    <tr>
+        <td>span.gamefox-html-buttons</td>
+        <td>HTML tag (and character map) buttons for posting.</td>
+        <td>0.8.4</td>
         <td>-</td>
     </tr>
 

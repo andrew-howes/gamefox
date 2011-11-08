@@ -533,7 +533,7 @@ var gamefox_quickpost =
   createHTMLButtons: function(doc)
   {
     var span = doc.createElement('span');
-    span.id = 'gamefox-html-buttons';
+    span.className = 'gamefox-html-buttons';
 
     var tags = [];
     // Standard

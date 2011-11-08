@@ -195,7 +195,7 @@ var gamefox_messages =
         msgBody.setAttribute('gamefox:editing', 'true');
 
         var editForm = doc.createElement('form');
-        editForm.id = 'gamefox-edit';
+        editForm.className = 'gamefox-edit';
         editForm.method = 'post';
         editForm.action = uri;
 
