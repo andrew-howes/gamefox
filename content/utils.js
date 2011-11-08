@@ -167,7 +167,7 @@ var gamefox_utils =
           header, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
         .singleNodeValue || {}).name;
 
-    return { id: postId, header: header, body: body.firstChild,
+    return { id: postId, header: header.firstChild, body: body.firstChild,
       original: tdNode };
   },
 

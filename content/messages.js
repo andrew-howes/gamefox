@@ -91,7 +91,7 @@ var gamefox_messages =
 
     var doc = gamefox_lib.getDocument(event);
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
-    var deleteType = msgComponents.header.getAttribute('gfdeletetype');
+    var deleteType = msgComponents.header.getUserData('gamefox_deleteType');
 
     var closeTopic = deleteType == 'close';
     var deletePost = deleteType == 'deletepost';
@@ -168,7 +168,7 @@ var gamefox_messages =
       return;
     }
 
-    var uri = msgComponents.header.getAttribute('gamefox:edituri');
+    var uri = msgComponents.header.getUserData('gamefox_editURI');
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
@@ -284,7 +284,7 @@ var gamefox_messages =
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
     var editForm = msgComponents.body.firstChild;
 
-    var editURI = msgComponents.header.getAttribute('gamefox:edituri');
+    var editURI = msgComponents.header.getUserData('gamefox_editURI');
     var editKey = editForm.elements.namedItem('key').value;
 
     gamefox_messages.post('', editForm.elements.namedItem('messagetext').value,

@@ -151,10 +151,11 @@ var gamefox_context =
 
       // Quote, user groups, filter, delete, edit
       var msgComponents = gamefox_utils.getMsgComponents(target, doc);
+      var msgHeader = msgComponents.header;
       if (msgComponents)
       {
-        var deleteType = msgComponents.header.getAttribute('gfdeletetype');
-        var canEdit = msgComponents.header.getAttribute('gamefox:edituri');
+        var deleteType = msgHeader.getUserData('gamefox_deleteType');
+        var canEdit = msgHeader.getUserData('gamefox_editURI');
 
         if (doc.getElementById('gamefox-message'))
           hideQuote = false;

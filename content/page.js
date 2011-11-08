@@ -935,7 +935,7 @@ var gamefox_page =
         }
         var postDate = postDateNode.textContent.replace(/(Posted:? )?/g, '')
           .replace('(edited)', '').replace(' |', '');
-        td[i].setUserData('date', postDate, null); // for quoting
+        msgStats.setUserData('gamefox_date', postDate, null); // for quoting
         var isEdited = postDateNode.textContent.indexOf('(edited)') != -1;
 
         // Create post date element
@@ -1114,7 +1114,7 @@ var gamefox_page =
               + 'post.php?board=' + boardId + '&topic=' + topicId
               + '&message=' + gamefox_utils.parseBoardLink(detailLink
                   .href)['message'];
-            td[i].setAttribute('gamefox:edituri', editURI);
+            msgStats.setUserData('gamefox_editURI', editURI, null);
 
             if (editlinkCond)
             {
@@ -1143,7 +1143,7 @@ var gamefox_page =
 
           if (deleteType.length)
           {
-            td[i].setAttribute('gfdeletetype', deleteType[0]);
+            msgStats.setUserData('gamefox_deleteType', deleteType[0], null);
 
             if (deletelinkCond)
             {

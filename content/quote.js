@@ -40,7 +40,7 @@ var gamefox_quote =
     postUser = postUser ? postUser.textContent : '???';
 
     // postDate
-    postDate = msgComponents.header.getUserData('date');
+    postDate = msgComponents.header.getUserData('gamefox_date');
 
     // postNum
     postNum = '000'.substring(msgComponents.id.toString().length) +
