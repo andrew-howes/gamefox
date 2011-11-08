@@ -446,7 +446,9 @@ var gamefox_utils =
     var x = y = 0;
 
     do {
-      x += element.offsetLeft;
+      // clientLeft check is needed for themes like Ninestalgia
+      x += element.clientLeft > element.offsetLeft ?
+        (element.clientLeft + element.offsetLeft) : element.offsetLeft;
       y += element.offsetTop;
     } while (element = element.offsetParent);
 

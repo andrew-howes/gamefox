@@ -20,6 +20,7 @@
     .gamefox-quickwhois table
     {
         width: auto !important;
+        border-collapse: collapse !important;
     }
     .gamefox-quickwhois td
     {
