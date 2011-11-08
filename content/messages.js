@@ -30,6 +30,10 @@ var gamefox_messages =
     this.timeoutId = setTimeout(
         function() { gamefox_messages.updateMessageCount(event.target); },
         gamefox_messages.updateDelay);
+
+    // Auto-expand quick edit textarea
+    if (event.target.form.className == 'gamefox-edit')
+      event.target.style.height = event.target.scrollHeight + 'px';
   },
 
   updateMessageCount: function(element)
@@ -38,12 +42,14 @@ var gamefox_messages =
     var form = element.nodeName == 'FORM' ? element :
       gamefox_utils.findParent('form', element);
     var count = form.getElementsByClassName('gamefox-message-count')[0];
+    var message = form.elements.namedItem('messagetext');
+    var sig = form.elements.namedItem('custom_sig');
 
     if (!count) return;
 
-    var str = form.elements.namedItem('messagetext').value.trim();
-    if (form.elements.namedItem('custom_sig'))
-      str += '\n---\n' + form.elements.namedItem('custom_sig').value.trim();
+    var str = message.value.trim();
+    if (sig)
+      str += '\n---\n' + sig.value.trim();
     var length = gamefox_utils.encodedMessageLength(str);
 
     count.innerHTML = length + ' / 4096 characters';
@@ -55,6 +61,14 @@ var gamefox_messages =
     }
     else
       count.style.setProperty('font-weight', '', '');
+
+    // Auto-contract quick edit textarea (separate from auto-expand to prevent
+    // lag)
+    if (form.className == 'gamefox-edit')
+      window.setTimeout(function() {
+        message.style.height = 'auto';
+        message.style.height = message.scrollHeight + 'px';
+      }, 10);
   },
 
   delayedUpdateTitleCount: function(event)
@@ -189,7 +203,6 @@ var gamefox_messages =
 
         var key = gamefox_utils.parseFormInput('key', get.responseText);
 
-        var height = msgBody.clientHeight;
         msgBody.setUserData('gamefox_editing', true, null);
         msgBody.setUserData('gamefox_originalPost', msgBody.innerHTML, null);
         msgBody.innerHTML = '';
@@ -213,7 +226,6 @@ var gamefox_messages =
 
         var editBox = doc.createElement('textarea');
         editBox.name = 'messagetext';
-        editBox.style.height = height + 'px';
         editBox.style.width = '100%';
         editBox.appendChild(doc.createTextNode(msg));
         editForm.appendChild(editBox);
