@@ -30,7 +30,9 @@ var gamefox_quote =
     if (!msgComponents)
       return;
 
-    var quoteMsg = msgComponents.body.innerHTML;
+    var quoteMsg = msgComponents.body.getUserData('gamefox_editing') === true ?
+      msgComponents.body.getUserData('gamefox_originalPost') :
+      msgComponents.body.innerHTML;
     var postUser, postDate, postNum;
 
     // postUser
@@ -51,7 +53,8 @@ var gamefox_quote =
     if (allowSelection && /\S/.test(selection.toString()) &&
         selection.containsNode(msgComponents.body, true))
     {
-      quoteMsg = gamefox_utils.convertNewlines(gamefox_utils.specialCharsEncode(selection.toString()));
+      quoteMsg = gamefox_utils.convertNewlines(gamefox_utils
+          .specialCharsEncode(selection.toString()));
     }
 
     gamefox_quote.format(event, quoteMsg, postUser, postDate, postNum);

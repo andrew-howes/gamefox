@@ -160,9 +160,9 @@ var gamefox_messages =
 
     var doc = gamefox_lib.getDocument(event);
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
-    var msgBody = msgComponents.body.firstChild;
+    var msgBody = msgComponents.body;
 
-    if (msgBody.getAttribute('gamefox:editing') == 'true')
+    if (msgBody.getUserData('gamefox_editing') === true)
     {
       gamefox_messages.cancelEdit(event);
       return;
@@ -190,9 +190,9 @@ var gamefox_messages =
         var key = gamefox_utils.parseFormInput('key', get.responseText);
 
         var height = msgBody.clientHeight;
+        msgBody.setUserData('gamefox_editing', true, null);
         msgBody.setUserData('gamefox_originalPost', msgBody.innerHTML, null);
         msgBody.innerHTML = '';
-        msgBody.setAttribute('gamefox:editing', 'true');
 
         var editForm = doc.createElement('form');
         editForm.className = 'gamefox-edit';
@@ -270,10 +270,10 @@ var gamefox_messages =
   {
     var doc = gamefox_lib.getDocument(event);
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
-    var msgBody = msgComponents.body.firstChild;
+    var msgBody = msgComponents.body;
 
     msgBody.innerHTML = msgBody.getUserData('gamefox_originalPost');
-    msgBody.setAttribute('gamefox:editing', 'false');
+    msgBody.setUserData('gamefox_editing', false, null);
   },
 
   saveEdit: function(event)
@@ -282,11 +282,9 @@ var gamefox_messages =
 
     var doc = gamefox_lib.getDocument(event);
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
-    var msgHeader = msgComponents.header;
-    var msgBody = msgComponents.body.firstChild;
-    var editForm = msgBody.firstChild;
+    var editForm = msgComponents.body.firstChild;
 
-    var editURI = msgHeader.getAttribute('gamefox:edituri');
+    var editURI = msgComponents.header.getAttribute('gamefox:edituri');
     var editKey = editForm.elements.namedItem('key').value;
 
     gamefox_messages.post('', editForm.elements.namedItem('messagetext').value,
