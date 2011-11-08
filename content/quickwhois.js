@@ -153,11 +153,9 @@ var gamefox_quickwhois =
 
           td = doc.createElement('td');
           if (fields[i] == 'E-Mail')
-            td.innerHTML = '<a href="mailto:' + gamefox_utils.URLEncode(field)
-              + '">' + field + '</a>';
+            gamefox_quickwhois.linkifyField(td, field, 'mailto:');
           else if (fields[i] == 'Web Site')
-            td.innerHTML = '<a href="' + gamefox_utils
-              .specialCharsEncode(field) + '">' + field + '</a>';
+            gamefox_quickwhois.linkifyField(td, field);
           else
             td.innerHTML = field;
           tr.appendChild(td);
@@ -188,5 +186,20 @@ var gamefox_quickwhois =
       window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft,
       window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop
     ];
+  },
+
+  linkifyField: function(node, field, prefix)
+  {
+    var doc = gamefox_lib.getDocument(node);
+    var a;
+    var lines = field.split('<br />');
+    for (var i = 0; i < lines.length; i++)
+    {
+      a = doc.createElement('a');
+      a.href = (prefix ? prefix : '') + lines[i];
+      a.textContent = lines[i];
+      node.appendChild(a);
+      node.appendChild(doc.createElement('br'));
+    }
   }
 };

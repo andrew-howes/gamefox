@@ -33,6 +33,7 @@
         text-align: right;
         padding-right: 5px !important;
         color: #555;
+        white-space: nowrap;
     }
     .gamefox-quickwhois td a
     {
