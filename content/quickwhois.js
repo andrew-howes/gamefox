@@ -137,6 +137,11 @@ var gamefox_quickwhois =
       var field, tr, td;
       var table = doc.createElement('table');
 
+      // Work around themes that style tr:first-child
+      tr = doc.createElement('tr');
+      tr.style.setProperty('display', 'none', 'important');
+      table.appendChild(tr);
+
       for (var i = 0; i < fields.length; i++)
       {
         if (field = gamefox_quickwhois.findInfo(fields[i], text))
