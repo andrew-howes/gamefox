@@ -53,4 +53,19 @@
     {
         margin-right: 5px;
     }
+
+    .gamefox-edit-list-container
+    {
+        display: inline-block;
+    }
+    .msg_stats .gamefox-edit-list
+    {
+        position: absolute;
+        margin-top: -14px;
+        margin-left: -1px;
+    }
+    .msg_stats_left .gamefox-edit-list
+    {
+        width: 100%;
+    }
 }

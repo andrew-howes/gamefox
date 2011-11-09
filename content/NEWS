@@ -10,6 +10,8 @@
       page
     * Show user profiles in a box after hovering over username links
       (QuickWhois)
+    * Edit history viewer on the message list: switch between different
+      revisions of a post without leaving the page
 
 2011-10-31:
     * version 0.8.3

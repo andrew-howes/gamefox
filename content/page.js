@@ -922,21 +922,54 @@ var gamefox_page =
           }, false);
         }
 
+        var isEdited = false;
+        var editTextNode = null;
         for (var j = 0; j < msgStats.childNodes.length; j++)
         {
           // check if this is the post date node
           if (msgStats.childNodes[j].textContent.indexOf('Posted') != -1
               && /Posted:? [0-9\/\: ]+ (A|P)M/.test(msgStats.childNodes[j]
                 .textContent))
-          {
             var postDateNode = msgStats.childNodes[j];
-            break;
+
+          // check for "(edited)" node
+          if (msgStats.childNodes[j].textContent.indexOf('(edited)') != -1)
+          {
+            isEdited = true;
+            editTextNode = msgStats.childNodes[j];
           }
         }
+
+        // Add edit viewer dropdown menu
+        if (editTextNode)
+        {
+          editTextNode.textContent = leftMsgData ? '' : ' | ';
+
+          var editListContainer = doc.createElement('span');
+          editListContainer.className = 'gamefox-edit-list-container';
+
+          var editList = doc.createElement('select');
+          editList.className = 'gamefox-edit-list';
+          editList.addEventListener('click', gamefox_messages.fetchEdits,
+              false);
+
+          var editListText = doc.createElement('option');
+          editListText.textContent = '(edited)';
+          editList.appendChild(editListText);
+
+          editListContainer.appendChild(editList);
+
+          msgStats.insertBefore(editListContainer, editTextNode.nextSibling);
+
+          if (!leftMsgData)
+            window.setTimeout(function() {
+              editListContainer.style.width = editList.offsetWidth + 'px';
+            }, 10);
+        }
+
         var postDate = postDateNode.textContent.replace(/(Posted:? )?/g, '')
           .replace('(edited)', '').replace(' |', '');
         msgStats.setUserData('gamefox_date', postDate, null); // for quoting
-        var isEdited = postDateNode.textContent.indexOf('(edited)') != -1;
 
         // Create post date element
         var postDateElement = doc.createElement('span');
@@ -1272,12 +1305,16 @@ var gamefox_page =
             case 0: // [message detail] | #001
               if (leftMsgData)
               {
+                msgStats.insertBefore(doc.createTextNode('#' + msgnumString),
+                    msgLinks.nextSibling);
                 if (!onArchive || msgLinks.hasChildNodes())
-                  msgStats.appendChild(doc.createElement('br'));
-                msgStats.appendChild(doc.createTextNode('#' + msgnumString));
+                  msgStats.insertBefore(doc.createElement('br'),
+                      msgLinks.nextSibling);
               }
               else
-                msgStats.appendChild(doc.createTextNode(' | #' + msgnumString));
+                msgStats.insertBefore(doc.createTextNode(' | #' +
+                      msgnumString), editTextNode ? editTextNode :
+                    msgLinks.nextSibling);
               break;
           }
         }

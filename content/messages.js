@@ -477,5 +477,60 @@ var gamefox_messages =
     }
     else
       return false;
+  },
+
+  fetchEdits: function(event)
+  {
+    var doc = gamefox_lib.getDocument(event);
+    var select = event.target;
+
+    if (select.tagName != 'SELECT' || select.getUserData('state') == 'loading')
+      return;
+
+    select.setUserData('state', 'loading', null);
+
+    select.remove(0);
+    var option = doc.createElement('option');
+    option.textContent = 'Loading edit history...';
+    select.add(option, null);
+
+    var uri = select.parentNode.parentNode.getElementsByTagName('a')[2].href;
+    var req = new XMLHttpRequest();
+    req.open('GET', uri);
+    var ds = gamefox_lib.thirdPartyCookieFix(req);
+    req.onreadystatechange = function()
+    {
+      if (req.readyState != 4) return;
+
+      select.remove(0);
+
+      var pattern = '<td class="author">[\\s\\S]*?Posted: (.*)?\\s*</td>\\s*' +
+        '<td>(.*)?</td>';
+      var edits = req.responseText.match(new RegExp(pattern, 'g'));
+
+      // The latest edit is actually the first match, but subsequent matches
+      // are in ascending order
+      edits.push(edits.shift());
+      edits.reverse();
+
+      var matches, option, editNum;
+      for (var i = 0; i < edits.length; i++)
+      {
+        editNum = edits.length - i - 1;
+        matches = edits[i].match(new RegExp(pattern));
+
+        option = doc.createElement('option');
+        option.textContent = (editNum == 0 ? 'original' : 'edit #' + editNum) +
+          ': ' + matches[1];
+        option.setUserData('content', matches[2], null);
+        select.add(option, null);
+      }
+
+      select.addEventListener('change', function() {
+        gamefox_utils.getMsgComponents(select, doc).body.innerHTML = select.
+          options[select.selectedIndex].getUserData('content');
+      }, false);
+    }
+    req.send(null);
   }
 };
