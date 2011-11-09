@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2009 Brian Marshall
+ * Copyright 2009, 2011 Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -47,6 +47,9 @@ var gamefox_date =
     if (id == -1)
       return gamefox_lib.getString('date.' + type + 'Custom');
 
+    if (id == null)
+      id = gamefox_lib.prefs.getIntPref('date.' + type + 'Preset');
+
     return this.formats[type][id];
   },
 
@@ -82,6 +85,9 @@ var gamefox_date =
 
   parseFormat: function(dateStr, format)
   {
+    if (!gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+      return dateStr;
+
     var date = dateStr ? new Date(dateStr) : new Date();
     if (date == 'Invalid Date')
       date = gamefox_date.strtotime(dateStr);

@@ -521,7 +521,8 @@ var gamefox_messages =
 
         option = doc.createElement('option');
         option.textContent = (editNum == 0 ? 'original' : 'edit #' + editNum) +
-          ': ' + matches[1];
+          ': ' + gamefox_date.parseFormat(matches[1],
+              gamefox_date.getFormat('message'));
         option.setUserData('content', matches[2], null);
         select.add(option, null);
       }

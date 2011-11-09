@@ -189,8 +189,7 @@ var gamefox_page =
         {
           if (rows[i].cells[3])
           {
-            var format = gamefox_date.getFormat('topic',
-                gamefox_lib.prefs.getIntPref('date.topicPreset'));
+            var format = gamefox_date.getFormat('topic');
             rows[i].cells[3].textContent = gamefox_date.parseFormat(
                 rows[i].cells[3].textContent, format);
           }
@@ -207,8 +206,7 @@ var gamefox_page =
       {
         if (rows[i].cells[3])
         {
-          var format = gamefox_date.getFormat('topic',
-              gamefox_lib.prefs.getIntPref('date.topicPreset'));
+          var format = gamefox_date.getFormat('topic');
           rows[i].cells[3].textContent = gamefox_date.parseFormat(
               rows[i].cells[3].textContent, format);
         }
@@ -303,8 +301,7 @@ var gamefox_page =
         // Date format
         if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
         {
-          var format = gamefox_date.getFormat('topic',
-              gamefox_lib.prefs.getIntPref('date.topicPreset'));
+          var format = gamefox_date.getFormat('topic');
           rows[i].cells[3].textContent = gamefox_date.parseFormat(
               rows[i].cells[3].textContent, format);
           rows[i].cells[4].textContent = gamefox_date.parseFormat(
@@ -615,8 +612,7 @@ var gamefox_page =
         // Date format
         if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
         {
-          var format = gamefox_date.getFormat('topic',
-              gamefox_lib.prefs.getIntPref('date.topicPreset'));
+          var format = gamefox_date.getFormat('topic');
           rows[i].cells[4].textContent = gamefox_date.parseFormat(
               rows[i].cells[4].textContent, format);
         }
@@ -1000,8 +996,7 @@ var gamefox_page =
         // Date format
         if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
         {
-          var format = gamefox_date.getFormat('message',
-              gamefox_lib.prefs.getIntPref('date.messagePreset'));
+          var format = gamefox_date.getFormat('message');
 
           postDateElement.textContent = 'Posted '
             + gamefox_date.parseFormat(postDate, format)
@@ -1773,7 +1768,7 @@ var gamefox_page =
   {
     var ms = Date.now() + gamefox_lib.prefs.getIntPref('dateOffset');
     dateNode.nodeValue = ' | ' + gamefox_date.parseFormat(ms,
-        gamefox_date.getFormat('clock', gamefox_lib.prefs.getIntPref('date.clockPreset')));
+        gamefox_date.getFormat('clock'));
     // 1025 so we don't get "misses" so often
     dateNode.ownerDocument.defaultView.setTimeout(gamefox_page.updateClock,
         1025 - ms % 1000, dateNode);
