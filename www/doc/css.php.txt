@@ -184,6 +184,14 @@
     </tr>
 
     <tr>
+        <td>span.gamefox-edit-list</td>
+        <td>Contains the &lt;select&gt; element that lists the edit history
+            of a post.</td>
+        <td>0.8.4</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>span.gamefox-groupname</td>
         <td>List of group names for a highlighted message.</td>
         <td>0.6.5</td>

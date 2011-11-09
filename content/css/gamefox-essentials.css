@@ -54,17 +54,17 @@
         margin-right: 5px;
     }
 
-    .gamefox-edit-list-container
+    .gamefox-edit-list
     {
         display: inline-block;
     }
-    .msg_stats .gamefox-edit-list
+    .msg_stats .gamefox-edit-list select
     {
         position: absolute;
         margin-top: -14px;
         margin-left: -1px;
     }
-    .msg_stats_left .gamefox-edit-list
+    .msg_stats_left .gamefox-edit-list select
     {
         width: 100%;
     }

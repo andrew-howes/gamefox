@@ -947,10 +947,9 @@ var gamefox_page =
           editTextNode.textContent = leftMsgData ? '' : ' | ';
 
           var editListContainer = doc.createElement('span');
-          editListContainer.className = 'gamefox-edit-list-container';
+          editListContainer.className = 'gamefox-edit-list';
 
           var editList = doc.createElement('select');
-          editList.className = 'gamefox-edit-list';
           editList.addEventListener('click', gamefox_messages.fetchEdits,
               false);
 
