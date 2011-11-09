@@ -88,6 +88,8 @@
 
       <preference id="elements.postidQuoteLinks"
         name="gamefox.elements.postidQuoteLinks" type="bool"/>
+      <preference id="elements.editHistory" name="gamefox.elements.editHistory"
+        type="bool"/>
 
       <!-- Posting -->
       <preference id="elements.quickpost.button"
@@ -289,6 +291,8 @@
 
                       <checkbox label="&postidQuoteLinks.label;"
                         preference="elements.postidQuoteLinks"/>
+                      <checkbox label="&editHistory.label;"
+                        preference="elements.editHistory"/>
                     </vbox>
                   </groupbox>
                 </row>

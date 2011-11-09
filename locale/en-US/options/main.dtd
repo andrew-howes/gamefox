@@ -40,6 +40,7 @@
 <!ENTITY labelTc.label "Label topic creator">
 
 <!ENTITY postidQuoteLinks.label "Link post numbers in quotes">
+<!ENTITY editHistory.label "Edit history menu">
 
 <!-- Posting -->
 <!ENTITY postButton.label "Post Message button">

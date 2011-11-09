@@ -36,6 +36,7 @@ pref("gamefox.elements.boardnav", true);
 pref("gamefox.elements.statusspans", true);
 pref("gamefox.elements.sigspans", true);
 pref("gamefox.elements.postidQuoteLinks", true);
+pref("gamefox.elements.editHistory", true);
 
 pref("gamefox.sidebar.gamefaqsnav", true);
 pref("gamefox.sidebar.userlinks", true);

@@ -941,7 +941,8 @@ var gamefox_page =
         }
 
         // Add edit viewer dropdown menu
-        if (editTextNode)
+        if (gamefox_lib.prefs.getBoolPref('elements.editHistory') &&
+            editTextNode)
         {
           editTextNode.textContent = leftMsgData ? '' : ' | ';
 
