@@ -443,14 +443,11 @@ var gamefox_utils =
 
   getPos: function(element)
   {
-    var x = y = 0;
+    var doc = gamefox_lib.getDocument(element);
+    var rect = element.getBoundingClientRect();
 
-    do {
-      // clientLeft check is needed for themes like Ninestalgia
-      x += element.clientLeft > element.offsetLeft ?
-        (element.clientLeft + element.offsetLeft) : element.offsetLeft;
-      y += element.offsetTop;
-    } while (element = element.offsetParent);
+    var x = Math.round(rect.left + doc.defaultView.scrollX);
+    var y = Math.round(rect.top + doc.defaultView.scrollY);
 
     return [x, y];
   }
