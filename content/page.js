@@ -932,7 +932,8 @@ var gamefox_page =
           if (msgStats.childNodes[j].textContent.indexOf('(edited)') != -1)
           {
             isEdited = true;
-            editTextNode = msgStats.childNodes[j];
+            if (!onArchive)
+              editTextNode = msgStats.childNodes[j];
           }
         }
 
