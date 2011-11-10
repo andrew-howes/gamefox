@@ -349,4 +349,16 @@
         <td>-</td>
         <td>-</td>
     </tr>
+
+    <tr>
+        <td>.gamefox-edit-view-header
+            <br>.gamefox-edit-view-body</td>
+        <td>Applied to the post header and body when an older version of the
+            post is loaded via the edit history menu. With two column message
+            lists (left message info), the classes are on &lt;td&gt; elements.
+            On single column message lists (above message info), they are on
+            &lt;tr&gt; elements.</td>
+        <td>0.8.4</td>
+        <td>-</td>
+   </tr>
 </table>

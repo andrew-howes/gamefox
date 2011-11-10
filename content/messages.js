@@ -536,8 +536,30 @@ var gamefox_messages =
       }
 
       var viewEdit = function() {
-        gamefox_utils.getMsgComponents(select, doc).body.innerHTML = select.
-          options[select.selectedIndex].getUserData('content');
+        var classNames = ['gamefox-edit-view-header', 'gamefox-edit-view-body'];
+        var msgComponents = gamefox_utils.getMsgComponents(select, doc);
+
+        msgComponents.body.innerHTML = select.options[select.selectedIndex]
+          .getUserData('content');
+
+        var headerRow = msgComponents.header.parentNode;
+        var bodyRow = msgComponents.body.parentNode;
+        if (!msgComponents.leftMsgData)
+        {
+          headerRow = headerRow.parentNode;
+          bodyRow = bodyRow.parentNode;
+        }
+
+        if (select.selectedIndex != 0)
+        {
+          headerRow.classList.add(classNames[0]);
+          bodyRow.classList.add(classNames[1]);
+        }
+        else
+        {
+          headerRow.classList.remove(classNames[0]);
+          bodyRow.classList.remove(classNames[1]);
+        }
       };
       select.addEventListener('change', viewEdit, false);
       select.addEventListener('keyup', viewEdit, false);

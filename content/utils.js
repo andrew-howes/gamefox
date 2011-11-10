@@ -168,7 +168,7 @@ var gamefox_utils =
         .singleNodeValue || {}).name;
 
     return { id: postId, header: header.firstChild, body: body.firstChild,
-      original: tdNode };
+      original: tdNode, leftMsgData: leftMsgData };
   },
 
   getAccountName: function(doc)
