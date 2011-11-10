@@ -1520,10 +1520,9 @@ var gamefox_page =
           break;
       }
     }
-    else if (dblclickMsg)
-    {
+    else if (dblclickMsg &&
+        !msgComponents.body.getUserData('gamefox_editing'))
       gamefox_quote.quote(event);
-    }
   },
 
   topicDblclick: function(event)
