@@ -535,10 +535,12 @@ var gamefox_messages =
         select.add(option, null);
       }
 
-      select.addEventListener('change', function() {
+      var viewEdit = function() {
         gamefox_utils.getMsgComponents(select, doc).body.innerHTML = select.
           options[select.selectedIndex].getUserData('content');
-      }, false);
+      };
+      select.addEventListener('change', viewEdit, false);
+      select.addEventListener('keyup', viewEdit, false);
     }
     req.send(null);
   }
