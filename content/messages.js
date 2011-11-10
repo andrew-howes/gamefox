@@ -513,17 +513,25 @@ var gamefox_messages =
       edits.push(edits.shift());
       edits.reverse();
 
-      var matches, option, editNum;
+      var matches, option, editNum, date, content;
       for (var i = 0; i < edits.length; i++)
       {
         editNum = edits.length - i - 1;
         matches = edits[i].match(new RegExp(pattern));
+        date = matches[1];
+
+        // For the latest edit, use the HTML from the message list rather than
+        // the detail page to keep anchors/extension processing
+        if (i == 0)
+          content = gamefox_utils.getMsgComponents(select, doc).body.innerHTML;
+        else
+          content = matches[2];
 
         option = doc.createElement('option');
         option.textContent = (editNum == 0 ? 'original' : 'edit #' + editNum) +
-          ': ' + gamefox_date.parseFormat(matches[1],
-              gamefox_date.getFormat('message'));
-        option.setUserData('content', matches[2], null);
+          ': ' + gamefox_date.parseFormat(date, gamefox_date
+              .getFormat('message'));
+        option.setUserData('content', content, null);
         select.add(option, null);
       }
 
