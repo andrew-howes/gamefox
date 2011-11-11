@@ -32,9 +32,8 @@ var gamefox_quickpost =
     form.id = 'gamefox-quickpost-form';
     var boardId = gamefox_utils.getBoardId(doc.location.pathname);
     var topicId = gamefox_utils.getTopicId(doc.location.pathname);
-    // TODO: preview button for new topics broken if user just deleted a topic
     form.action = '/boards/post.php?board=' + boardId
-        + (topicId != 0 ? '&topic=' + topicId : '');
+        + (topicId ? '&topic=' + topicId : '');
     form.method = 'post';
     form.addEventListener('submit', gamefox_quickpost.removeGFCodeWhitespaceListener,
         false);

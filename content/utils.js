@@ -97,13 +97,13 @@ var gamefox_utils =
   getBoardId: function(str)
   {
     var params = gamefox_utils.parseBoardLink(str);
-    return params ? params['board'] : 0;
+    return params ? params['board'] : null;
   },
 
   getTopicId: function(str)
   {
     var params = gamefox_utils.parseBoardLink(str);
-    return params ? params['topic'] : 0;
+    return params ? params['topic'] : null;
   },
 
   getMsgDataDisplay: function(doc)
