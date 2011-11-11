@@ -554,11 +554,13 @@ var gamefox_messages =
         {
           headerRow.classList.add(classNames[0]);
           bodyRow.classList.add(classNames[1]);
+          msgComponents.body.setUserData('gamefox_edit_view', true, null);
         }
         else
         {
           headerRow.classList.remove(classNames[0]);
           bodyRow.classList.remove(classNames[1]);
+          msgComponents.body.setUserData('gamefox_edit_view', false, null);
         }
       };
       select.addEventListener('change', viewEdit, false);

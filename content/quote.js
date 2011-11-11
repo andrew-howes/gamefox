@@ -30,6 +30,19 @@ var gamefox_quote =
     if (!msgComponents)
       return;
 
+    // If an older version of the post is loaded, switch back to the latest
+    // before quoting
+    if (msgComponents.body.getUserData('gamefox_edit_view'))
+    {
+      var select = msgComponents.header
+        .getElementsByClassName('gamefox-edit-list')[0].firstChild;
+      select.selectedIndex = 0;
+
+      var evt = doc.createEvent('HTMLEvents');
+      evt.initEvent('change', false, false);
+      select.dispatchEvent(evt);
+    }
+
     var quoteMsg = msgComponents.body.getUserData('gamefox_editing') === true ?
       msgComponents.body.getUserData('gamefox_originalPost') :
       msgComponents.body.innerHTML;
