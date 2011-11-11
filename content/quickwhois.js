@@ -22,10 +22,10 @@ var gamefox_quickwhois =
   toggle: function(event, hover, dblClick)
   {
     var doc = gamefox_lib.getDocument(event);
-    var msgStats = gamefox_utils.findParent('td', event.target).firstChild;
-    var name = msgStats.querySelector('a.name');
-    var qw = doc.evaluate('div[contains(@class, "gamefox-quickwhois")]',
-        msgStats, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+    var node = gamefox_utils.findParent('td', event.target);
+    var name = node.querySelector('a.name');
+    var qw = doc.evaluate('div[contains(@class, "gamefox-quickwhois")]', node,
+        null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
       .singleNodeValue;
 
     var className = 'gamefox-quickwhois';
@@ -91,7 +91,7 @@ var gamefox_quickwhois =
         gamefox_quickwhois.toggle(event, true);
     }, false);
 
-    msgStats.appendChild(qw);
+    node.appendChild(qw);
     window.setTimeout(function() { qw.style.opacity = '1'; }, 20);
 
     var request = new XMLHttpRequest();
