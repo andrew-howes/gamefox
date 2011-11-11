@@ -202,30 +202,19 @@ var gamefox_lib =
         return false;
 
       case 'topics':
-        var div = contentDiv.getElementsByClassName('board_wrap')[0];
-        if (div)
+        if (gamefox_lib.onPage(doc, 'tracked'))
         {
-          if (gamefox_lib.onPage(doc, 'tracked'))
-          {
-            doc.gamefox.pageType = ['topics', 'tracked'];
-            return true;
-          }
-          var col = doc.evaluate('div[@class="body"]/table[@class="board topics"]/colgroup/col[@class="status"]',
-              div, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (col)
-          {
-            doc.gamefox.pageType = ['topics'];
-            return true;
-          }
-          // TODO: iterate over all <p> nodes (fails case when deleting only topic on board)
-          var notopics = doc.evaluate('p', div, null,
-              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (notopics && notopics.textContent.indexOf('No topics are available') != -1)
-          {
-            doc.gamefox.pageType = ['topics'];
-            return true;
-          }
+          doc.gamefox.pageType = ['topics', 'tracked'];
+          return true;
         }
+
+        if (doc.getElementById('searchtopicstring') ||
+            contentDiv.getElementsByClassName('topics')[0])
+        {
+          doc.gamefox.pageType = ['topics'];
+          return true;
+        }
+
         return false;
 
       case 'messages':

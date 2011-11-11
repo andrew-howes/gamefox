@@ -549,8 +549,10 @@ var gamefox_page =
         }
       }
 
-      var topicsTable = doc.evaluate('div[@class="body"]/table[@class="board topics"]',
-          boardWrap, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      var topicsTable = boardWrap ? doc
+        .evaluate('div[@class="body"]/table[@class="board topics"]', boardWrap,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+        : null;
       var rows;
 
       if (topicsTable)
