@@ -313,18 +313,24 @@ var gamefox_quickpost =
     var doc = gamefox_lib.getDocument(event);
     event.preventDefault();
 
-    var qpDiv = doc.getElementById('gamefox-quickpost-afloat');
-    if (qpDiv)
+    var qp = doc.getElementById('gamefox-quickpost-afloat');
+    if (qp)
     {
-      qpDiv.style.display = qpDiv.style.display == 'none' ? '' : 'none';
+      if (qp.style.opacity == '0')
+        gamefox_utils.fade.in(qp);
+      else
+        gamefox_utils.fade.out(qp);
+
       return;
     }
 
-    qpDiv = doc.createElement('div');
-    qpDiv.id = 'gamefox-quickpost-afloat';
+    qp = doc.createElement('div');
+    qp.id = 'gamefox-quickpost-afloat';
+    gamefox_utils.fade.add(qp);
 
-    doc.getElementById('content').appendChild(qpDiv);
-    gamefox_quickpost.appendForm(doc, qpDiv, true);
+    doc.getElementById('content').appendChild(qp);
+    gamefox_quickpost.appendForm(doc, qp, true);
+    gamefox_utils.fade.in(qp);
   },
 
   post: function(event)
