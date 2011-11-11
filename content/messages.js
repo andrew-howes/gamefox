@@ -198,10 +198,12 @@ var gamefox_messages =
           gamefox_lib.alert('You can\'t edit this post anymore.');
           return;
         }
-
         msg = gamefox_utils.specialCharsDecode(msg[1]);
 
         var key = gamefox_utils.parseFormInput('key', get.responseText);
+
+        gamefox_messages.loadLatestEdit(msgComponents);
+        gamefox_messages.getEditMenu(msgComponents).disabled = true;
 
         msgBody.setUserData('gamefox_editing', true, null);
         msgBody.setUserData('gamefox_originalPost', msgBody.innerHTML, null);
@@ -286,6 +288,7 @@ var gamefox_messages =
 
     msgBody.innerHTML = msgBody.getUserData('gamefox_originalPost');
     msgBody.setUserData('gamefox_editing', false, null);
+    gamefox_messages.getEditMenu(msgComponents).disabled = false;
   },
 
   saveEdit: function(event)
@@ -536,7 +539,8 @@ var gamefox_messages =
       }
 
       var viewEdit = function() {
-        var classNames = ['gamefox-edit-view-header', 'gamefox-edit-view-body'];
+        var classNames = ['gamefox-edit-view-header',
+            'gamefox-edit-view-body'];
         var msgComponents = gamefox_utils.getMsgComponents(select, doc);
 
         msgComponents.body.innerHTML = select.options[select.selectedIndex]
@@ -567,5 +571,30 @@ var gamefox_messages =
       select.addEventListener('keyup', viewEdit, false);
     }
     req.send(null);
+  },
+
+  getEditMenu: function(msgComponents)
+  {
+    var doc = gamefox_lib.getDocument(msgComponents.header);
+
+    var editList = msgComponents.header
+      .getElementsByClassName('gamefox-edit-list')[0];
+
+    return editList ? editList.firstChild : {};
+  },
+
+  loadLatestEdit: function(msgComponents)
+  {
+    var doc = gamefox_lib.getDocument(msgComponents.header);
+    var select = gamefox_messages.getEditMenu(msgComponents);
+
+    if (select && msgComponents.body.getUserData('gamefox_edit_view'))
+    {
+      select.selectedIndex = 0;
+
+      var evt = doc.createEvent('HTMLEvents');
+      evt.initEvent('change', false, false);
+      select.dispatchEvent(evt);
+    }
   }
 };
