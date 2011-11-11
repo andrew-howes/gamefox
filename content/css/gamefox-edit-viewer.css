@@ -1,0 +1,11 @@
+@-moz-document domain(gamefaqs.com)
+{
+    .msg_stats, .msg_stats_left, .msg_body
+    {
+        -moz-transition: opacity .5s;
+    }
+    .gamefox-edit-view-header div, .gamefox-edit-view-body div
+    {
+        opacity: .6;
+    }
+}

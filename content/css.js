@@ -25,6 +25,9 @@ var gamefox_css =
       gamefox: {
         'gamefox-character-map.css': ['Character map',
             'Makes the character map look pretty.', '', true],
+        'gamefox-edit-viewer.css': ['Edit Viewer',
+            'Make a visual distinction between current and past versions of '
+              + 'posts (via the edit history menu).', '', true],
         'gamefox-essentials.css': ['Essentials',
             'Applies only to GameFOX features. Should always be enabled.', '', true],
         'gfcode.css': ['GFCode',
