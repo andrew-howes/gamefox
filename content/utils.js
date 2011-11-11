@@ -450,5 +450,34 @@ var gamefox_utils =
     var y = Math.round(rect.top + doc.defaultView.scrollY);
 
     return [x, y];
+  },
+
+  fade: {
+    add: function(element)
+    {
+      element.addEventListener('transitionend', function() {
+        if (element.style.opacity == '0')
+          element.style.display = 'none';
+      }, false);
+    },
+
+    in: function(element)
+    {
+      element.style.display = '';
+
+      window.setTimeout(function() {
+        element.style.opacity = '1';
+      }, 20);
+    },
+
+    out: function(element)
+    {
+      element.style.opacity = '0';
+
+      // If there's no transition support, our transitionend listener will
+      // never get called
+      if (element.style.MozTransition === undefined)
+        element.style.display = 'none';
+    }
   }
 };

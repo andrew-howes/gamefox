@@ -679,12 +679,18 @@ var gamefox_quickpost =
 
     var map = form.getElementsByClassName('gamefox-character-map')[0];
     if (map)
-      map.style.display = map.style.display == 'none' ? '' : 'none';
+    {
+      if (map.style.opacity == '0')
+        gamefox_utils.fade.in(map);
+      else
+        gamefox_utils.fade.out(map);
+    }
     else
     {
       map = doc.createElement('div');
       map.className = 'gamefox-character-map';
       map.style.marginLeft = event.target.parentNode.offsetWidth + 'px';
+      gamefox_utils.fade.add(map);
 
       var table = doc.createElement('table');
       map.appendChild(table);
@@ -732,6 +738,7 @@ var gamefox_quickpost =
 
       event.target.parentNode.parentNode.insertBefore(map,
           event.target.parentNode);
+      gamefox_utils.fade.in(map);
     }
   },
 

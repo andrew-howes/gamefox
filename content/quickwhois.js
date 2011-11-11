@@ -51,19 +51,14 @@ var gamefox_quickwhois =
           return;
 
         qw.className = className;
-        qw.style.display = 'block';
         qw.style.left = pos[0] + 'px';
         qw.style.top = pos[1] + 'px';
-        window.setTimeout(function() { qw.style.opacity = '1'; }, 20);
+        gamefox_utils.fade.in(qw);
       }
       // Don't allow double clicking to close a hover-activated QuickWhois,
       // and vice versa
       else if ((qwHover && hover) || (!qwHover && dblClick))
-      {
-        qw.style.opacity = '0';
-        if (qw.style.MozTransition === undefined) // no CSS3 transition support
-          qw.style.display = 'none';
-      }
+        gamefox_utils.fade.out(qw);
 
       return;
     }
@@ -72,6 +67,7 @@ var gamefox_quickwhois =
     qw.className = className;
     qw.style.left = pos[0] + 'px';
     qw.style.top = pos[1] + 'px';
+    gamefox_utils.fade.add(qw);
 
     var a = doc.createElement('a');
     a.className = 'name';
@@ -81,9 +77,6 @@ var gamefox_quickwhois =
 
     qw.appendChild(doc.createTextNode(' (Loading profile...)'));
 
-    qw.addEventListener('transitionend', function() {
-      if (qw.style.opacity == '0') qw.style.display = 'none'; }, false);
-
     qw.addEventListener('mouseout', function(event) {
       if (event.relatedTarget.className != qw.className &&
         gamefox_utils.findParent('div', event.relatedTarget).className !=
@@ -92,7 +85,7 @@ var gamefox_quickwhois =
     }, false);
 
     node.appendChild(qw);
-    window.setTimeout(function() { qw.style.opacity = '1'; }, 20);
+    gamefox_utils.fade.in(qw);
 
     var request = new XMLHttpRequest();
     request.open('GET', name.href);
