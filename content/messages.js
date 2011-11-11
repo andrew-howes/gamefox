@@ -314,7 +314,7 @@ var gamefox_messages =
         });
   },
 
-  post: function(title, message, sig, key, params, callback)
+  post: function(title, message, sig, key, params, callback, lastTry)
   {
     var strbundle = document.getElementById('overlay-strings');
 
@@ -353,13 +353,15 @@ var gamefox_messages =
         {
           gamefox_quickpost.setPostKey(responseKey);
 
-          callback(!key ? 'E_NO_KEY' : 'E_KEY_MISMATCH',
-              strbundle.getString('gamefoxError') + ' ' +
+          if (!lastTry)
+            gamefox_messages.post(title, message, sig, responseKey, params,
+                callback, true);
+          else
+            callback(!key ? 'E_NO_KEY' : 'E_KEY_MISMATCH',
+                strbundle.getString('gamefoxError') + ' ' +
 
-              (!key ? strbundle.getString('missingKey') :
-               strbundle.getString('keyMismatch')) +
-
-              '\n\n' + strbundle.getString('retryToFix'), responseKey);
+                (!key ? strbundle.getString('missingKey') :
+                 strbundle.getString('keyMismatch')), responseKey);
         }
         else
           callback('E_PREVIEW_UNEXPECTED',
