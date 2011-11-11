@@ -433,10 +433,7 @@ var gamefox_lib =
     try
     {
       if (!noJSON)
-      {
-        var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
-        parsedPref = nativeJSON.decode(pref);
-      }
+        parsedPref = JSON.parse(pref);
       else
       {
         var sandbox = new Components.utils.Sandbox('about:blank');
@@ -475,8 +472,7 @@ var gamefox_lib =
 
   toJSON: function(obj)
   {
-    var nativeJSON = Cc['@mozilla.org/dom/json;1'].createInstance(Ci.nsIJSON);
-    return nativeJSON.encode(obj);
+    return JSON.stringify(obj);
   },
 
   toggleSidebar: function()
