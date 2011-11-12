@@ -252,17 +252,13 @@
                       <checkbox label="&boardNav.label;"
                         preference="elements.boardnav"/>
 
-                      <label value="&messageHeaderLinks.label;"/>
-
-                      <hbox class="indent">
+                      <hbox>
                         <checkbox label="&editLink.label;"
                           preference="elements.editlink"/>
                         <checkbox label="&deleteLink.label;"
                           preference="elements.deletelink"/>
                         <checkbox label="&filterLink.label;"
                           preference="elements.filterlink"/>
-                      </hbox>
-                      <hbox class="indent">
                         <checkbox label="&quoteLink.label;"
                           preference="elements.quotelink"/>
                       </hbox>
@@ -371,10 +367,12 @@
 
               <checkbox label="&previewAndReset.label;"
                 preference="elements.quickpost.otherbuttons"/>
-              <checkbox label="&confirmReset.label;"
-                preference="elements.quickpost.resetconfirm"/>
-              <checkbox label="&newSigOnReset.label;"
-                preference="elements.quickpost.resetnewsig"/>
+              <hbox>
+                <checkbox label="&confirmReset.label;"
+                  preference="elements.quickpost.resetconfirm"/>
+                <checkbox label="&newSigOnReset.label;"
+                  preference="elements.quickpost.resetnewsig"/>
+              </hbox>
 
               <hbox align="center">
                 <label value="&afterTopic.label;"/>
