@@ -230,11 +230,15 @@ var gamefox_messages =
         editBox.name = 'messagetext';
         editBox.style.width = '100%';
         editBox.appendChild(doc.createTextNode(msg));
+        editBox.addEventListener('focus', function() {
+          doc.gamefox.lastFocusedPostForm = editForm; }, false);
         editForm.appendChild(editBox);
 
         var saveBtn = doc.createElement('input');
         saveBtn.value = 'Save';
+        saveBtn.title = saveBtn.value;
         saveBtn.type = 'submit';
+        saveBtn.setUserData('accessKey', 'z', null);
         saveBtn.addEventListener('click', gamefox_messages.saveEdit, false);
         editForm.appendChild(saveBtn);
 
@@ -243,7 +247,9 @@ var gamefox_messages =
         var previewBtn = doc.createElement('input');
         previewBtn.name = 'post';
         previewBtn.value = 'Preview Message';
+        previewBtn.title = previewBtn.value;
         previewBtn.type = 'submit';
+        previewBtn.setUserData('accessKey', 'x', null);
         editForm.appendChild(previewBtn);
 
         editForm.appendChild(doc.createTextNode(' '));
@@ -251,14 +257,18 @@ var gamefox_messages =
         var previewSpellBtn = doc.createElement('input');
         previewSpellBtn.name = 'post';
         previewSpellBtn.value = 'Preview and Spellcheck Message';
+        previewSpellBtn.title = previewSpellBtn.value;
         previewSpellBtn.type = 'submit';
+        previewSpellBtn.setUserData('accessKey', 'c', null);
         editForm.appendChild(previewSpellBtn);
 
         editForm.appendChild(doc.createTextNode(' '));
 
         var cancelBtn = doc.createElement('input');
         cancelBtn.value = 'Cancel';
+        cancelBtn.title = cancelBtn.value;
         cancelBtn.type = 'submit';
+        cancelBtn.setUserData('accessKey', 'v', null);
         cancelBtn.addEventListener('click', gamefox_messages.cancelEdit,
             false);
         editForm.appendChild(cancelBtn);
@@ -289,6 +299,8 @@ var gamefox_messages =
     msgBody.innerHTML = msgBody.getUserData('gamefox_originalPost');
     msgBody.setUserData('gamefox_editing', false, null);
     gamefox_messages.getEditMenu(msgComponents).disabled = false;
+    doc.gamefox.lastFocusedPostForm = doc.getElementById(
+        'gamefox-quickpost-form');
   },
 
   saveEdit: function(event)

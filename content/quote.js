@@ -67,7 +67,8 @@ var gamefox_quote =
   format: function(event, quoteMsg, postUser, postDate, postNum)
   {
     var doc = event.target.ownerDocument;
-    var quickpost = doc.getElementById('gamefox-message');
+    var textarea = doc.gamefox.lastFocusedPostForm.elements
+      .namedItem('messagetext');
 
     /* Parse message body */
     var body = quoteMsg.
@@ -133,7 +134,7 @@ var gamefox_quote =
 
     // If the header is already in the message, don't repeat it
     // Useful for quoting multiple selections
-    if (quickpost.value.indexOf(qhead) != -1)
+    if (textarea.value.indexOf(qhead) != -1)
       qhead = '';
 
     var qbody, quote;
@@ -157,30 +158,31 @@ var gamefox_quote =
         break;
     }
 
-    // try to insert at the cursor position, but only if the cursor isn't in
-    // a stupid place like after the signature separator
-    var sigStart = quickpost.value.search(/---(\n.*){0,2}$/);
-
-    if (sigStart != -1 && quickpost.selectionStart > sigStart) // insert at beginning
+    var endPos;
+    if (textarea.form.className == 'gamefox-edit' &&
+        textarea.selectionStart > textarea.value.search(/---(\n.*){0,2}$/))
     {
-      quickpost.value = quote + '\n' + quickpost.value;
-      var endPosition = quote.length + 1;
+      // Insert at beginning (because the cursor is in the sig area)
+      textarea.value = quote + '\n' + textarea.value;
+      endPos = quote.length + 1;
     }
-    else // insert at cursor
+    else
     {
-      var endPosition = quickpost.selectionStart + quote.length + 1;
-      quickpost.value = quickpost.value.substr(0, quickpost.selectionStart)
-        + quote + '\n' + quickpost.value.substr(quickpost.selectionEnd);
+      // Insert at cursor position
+      endPos = textarea.selectionStart + quote.length + 1;
+      textarea.value = textarea.value.substr(0, textarea.selectionStart) +
+        quote + '\n' + textarea.value.substr(textarea.selectionEnd);
     }
 
     // update the character count
-    gamefox_messages.updateMessageCount(quickpost);
+    gamefox_messages.updateMessageCount(textarea);
 
     if (gamefox_lib.prefs.getBoolPref('quote.focusQuickPost'))
-      quickpost.focus();
+      textarea.focus();
     else
       event.target.blur();
+
     // Move the caret to the end of the last quote
-    quickpost.setSelectionRange(endPosition, endPosition);
+    textarea.setSelectionRange(endPos, endPos);
   }
 };

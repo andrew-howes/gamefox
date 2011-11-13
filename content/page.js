@@ -111,7 +111,27 @@ var gamefox_page =
 
     if (!gamefox_lib.onBoards(doc)) return false;
 
-    doc.gamefox = {};
+    doc.gamefox = {
+      _lastFocusedPostForm: null,
+
+      get lastFocusedPostForm() {
+        return this._lastFocusedPostForm;
+      },
+
+      set lastFocusedPostForm(val) {
+        if (this._lastFocusedPostForm != val)
+        {
+          gamefox_quickpost.toggleAccessKeys(val.getElementsByTagName(
+                'input'));
+
+          if (this._lastFocusedPostForm)
+            gamefox_quickpost.toggleAccessKeys(this._lastFocusedPostForm
+                .getElementsByTagName('input'));
+
+          this._lastFocusedPostForm = val;
+        }
+      }
+    };
 
     gamefox_lib.useBeta = gamefox_lib.onBeta(doc);
 

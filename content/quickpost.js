@@ -87,6 +87,8 @@ var gamefox_quickpost =
     message.rows = 16;
     message.cols = 60;
     message.tabIndex = 2;
+    message.addEventListener('focus', function() {
+      doc.gamefox.lastFocusedPostForm = form; }, false);
     form.appendChild(message);
 
     form.appendChild(doc.createElement('br'));
@@ -103,9 +105,9 @@ var gamefox_quickpost =
       postbutton.type = 'button';
       postbutton.name = 'quickpost';
       postbutton.value = 'Post Message';
-      postbutton.title = 'Post Message [' + accesskeyPrefix + 'z]';
-      postbutton.accessKey = 'z';
+      postbutton.title = postbutton.value;
       postbutton.tabIndex = 3;
+      postbutton.setUserData('accessKey', 'z', null);
       postbutton.addEventListener('click', gamefox_quickpost.post, false);
       form.appendChild(postbutton);
     }
@@ -116,9 +118,9 @@ var gamefox_quickpost =
       previewbutton.type = 'submit';
       previewbutton.name = 'post';
       previewbutton.value = 'Preview Message';
-      previewbutton.title = 'Preview Message [' + accesskeyPrefix + 'x]';
-      previewbutton.accessKey = 'x';
+      previewbutton.title = previewbutton.value;
       previewbutton.tabIndex = 3;
+      previewbutton.setUserData('accessKey', 'x', null);
       form.appendChild(doc.createTextNode(' '));
       form.appendChild(previewbutton);
 
@@ -126,19 +128,19 @@ var gamefox_quickpost =
       spellchkbutton.type = 'submit';
       spellchkbutton.name = 'post';
       spellchkbutton.value = 'Preview and Spellcheck Message';
-      spellchkbutton.title = 'Preview and Spellcheck Message [' + accesskeyPrefix + 'c]';
-      spellchkbutton.accessKey = 'c';
+      spellchkbutton.title = spellchkbutton.value;
       spellchkbutton.tabIndex = 3;
+      spellchkbutton.setUserData('accessKey', 'c', null);
       form.appendChild(doc.createTextNode(' '));
       form.appendChild(spellchkbutton);
 
       var resetbutton = doc.createElement('input');
       resetbutton.type = 'reset';
       resetbutton.value = 'Reset';
-      resetbutton.title = 'Reset [' + accesskeyPrefix + 'v]';
-      resetbutton.accessKey = 'v';
+      resetbutton.title = resetbutton.value;
       resetbutton.addEventListener('click', gamefox_quickpost.resetPost, false);
       resetbutton.tabIndex = 3;
+      resetbutton.setUserData('accessKey', 'v', null);
       form.appendChild(doc.createTextNode(' '));
       form.appendChild(resetbutton);
     }
@@ -206,6 +208,8 @@ var gamefox_quickpost =
       doc.addEventListener('mousedown', gamefox_quickpost.onMouseDown, false);
       doc.addEventListener('mouseup', gamefox_quickpost.onMouseUp, false);
     }
+
+    doc.gamefox.lastFocusedPostForm = form;
   },
 
   onMouseDown: function(event)
@@ -571,10 +575,10 @@ var gamefox_quickpost =
       button.type = 'submit';
       button.value = tags[i + 1];
       button.name = tags[i];
-      button.title = '<' + tags[i].replace(/,/g, '><') +
-        (tags[i] == 'br' ? ' /' : '') + '> [' + accesskeyPrefix + tags[i + 2] + ']';
-      button.accessKey = tags[i + 2];
+      button.title = '<' + tags[i].replace(/,/g, '><') + (tags[i] == 'br' ?
+          ' /' : '') + '>';
       button.tabIndex = 5;
+      button.setUserData('accessKey', tags[i + 2], null);
       button.addEventListener('click', gamefox_quickpost.insertTag, false);
 
       span.appendChild(button);
@@ -589,9 +593,9 @@ var gamefox_quickpost =
       button = doc.createElement('input');
       button.type = 'submit';
       button.value = 'Break HTML';
-      button.title = 'Break HTML tags in selection [' + accesskeyPrefix + 'r]';
-      button.accessKey = 'r';
+      button.title = 'Break HTML tags in selection';
       button.tabIndex = 5;
+      button.setUserData('accessKey', 'r', null);
       button.addEventListener('click', gamefox_quickpost.breakTagsFromButton, false);
 
       span.appendChild(button);
@@ -930,6 +934,30 @@ var gamefox_quickpost =
     {
       if (gamefox_lib.getCookie('ctk'))
         gamefox_quickpost.updatePostKey();
+    }
+  },
+
+  toggleAccessKeys: function(buttons) {
+    var accessKeyPrefix = gamefox_utils.getAccesskeyPrefix();
+
+    var button, accessKey;
+    for (var i = 0; i < buttons.length; i++)
+    {
+      button = buttons[i];
+      accessKey = button.getUserData('accessKey');
+
+      if (button.accessKey)
+      {
+        button.accessKey = null;
+        button.title = button.title.substr(0, button.title.indexOf(
+              ' ['));
+      }
+      else if (accessKey)
+      {
+        button.accessKey = accessKey;
+        button.title = button.title + ' [' + accessKeyPrefix + accessKey
+          + ']';
+      }
     }
   }
 };
