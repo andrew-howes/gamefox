@@ -201,7 +201,7 @@ var gamefox_page =
 
       // Date format board loop
       // TODO: merge this with favorites loop
-      if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+      if (gamefox_date.enabled)
       {
         var rows = doc.getElementsByTagName('tr');
 
@@ -319,7 +319,7 @@ var gamefox_page =
       for (var i = 1; i < rows.length; i++)
       {
         // Date format
-        if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+        if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
           rows[i].cells[3].textContent = gamefox_date.parseFormat(
@@ -632,7 +632,7 @@ var gamefox_page =
         }
 
         // Date format
-        if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+        if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
           rows[i].cells[4].textContent = gamefox_date.parseFormat(
@@ -1017,7 +1017,7 @@ var gamefox_page =
           tc = username;
 
         // Date format
-        if (gamefox_lib.prefs.getBoolPref('date.enableFormat'))
+        if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('message');
 

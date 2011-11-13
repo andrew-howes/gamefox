@@ -42,6 +42,10 @@ var gamefox_date =
               '%Y-%m-%d %H:%M:%S']
   },
 
+  get enabled() {
+    return gamefox_lib.prefs.getBoolPref('date.enableFormat');
+  },
+
   getFormat: function(type, id)
   {
     if (id == -1)
@@ -85,9 +89,6 @@ var gamefox_date =
 
   parseFormat: function(dateStr, format)
   {
-    if (!gamefox_lib.prefs.getBoolPref('date.enableFormat'))
-      return dateStr;
-
     var date = dateStr ? new Date(dateStr) : new Date();
     if (date == 'Invalid Date')
       date = gamefox_date.strtotime(dateStr);
