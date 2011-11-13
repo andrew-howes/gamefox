@@ -880,8 +880,6 @@ var gamefox_page =
         && !onArchive
         && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
-      var quotelinkCond = gamefox_lib.prefs.getBoolPref('elements.quotelink')
-        && canQuickPost;
       var sigCond = gamefox_lib.prefs.getBoolPref('elements.sigspans');
 
       for (var i = 0; i < td.length; i += 2)
@@ -1232,29 +1230,36 @@ var gamefox_page =
         }
 
         // Quoting
-        if (canQuickPost)
+        var a = doc.evaluate('a[contains(@href, "quote=")]', msgStats, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var quoteURI;
+        if (a)
         {
-          // Remove GameFAQs' quote link
-          var a = doc.evaluate('a[contains(@href, "quote=")]', msgStats, null,
-              XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-          if (a)
-          {
-            // remove extra | or <br>
-            a.parentNode.removeChild(a.previousSibling)
-            a.parentNode.removeChild(a);
-          }
+          quoteURI = a.href;
+
+          // Remove GameFAQs' quote link and extra | or <br>
+          a.parentNode.removeChild(a.previousSibling);
+          a.parentNode.removeChild(a);
         }
 
-        if (quotelinkCond)
+        if ((canQuickPost || quoteURI) &&
+            gamefox_lib.prefs.getBoolPref('elements.quotelink'))
         {
           // Create our own
           a = doc.createElement('a');
           a.className = 'gamefox-quote-link';
           a.textContent = 'quote';
           a.title = 'Quote';
-          a.href = '#';
-          a.addEventListener('click', function(event){
-            gamefox_quote.quote(event, true); event.preventDefault();}, false);
+
+          if (canQuickPost)
+          {
+            a.href = '#';
+            a.addEventListener('click', function(event) {
+              gamefox_quote.quote(event, true); event.preventDefault();
+            }, false);
+          }
+          else
+            a.href = quoteURI;
 
           if (!leftMsgData || msgLinks.hasChildNodes())
             msgLinks.appendChild(doc.createTextNode(' | '));
