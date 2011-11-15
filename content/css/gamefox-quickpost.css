@@ -17,6 +17,8 @@
         -moz-border-radius: 10px;
         opacity: 0;
         -moz-transition: opacity .5s;
+        box-shadow: 0 0 10px #555;
+        -moz-box-shadow: 0 0 10px #555;
     }
     #gamefox-quickpost-hide
     {
