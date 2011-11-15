@@ -301,47 +301,27 @@
         <!-- Posting -->
         <tabpanel orient="vertical" flex="1">
           <vbox>
-            <groupbox>
-              <checkbox label="&postButton.label;"
-                preference="elements.quickpost.button"/>
-              <checkbox label="&characterCounters.label;"
-                preference="elements.charcounts"/>
-              <checkbox label="&characterMap.label;"
-                preference="elements.charmap"/>
+            <checkbox label="&postButton.label;"
+              preference="elements.quickpost.button"/>
+            <checkbox label="&characterCounters.label;"
+              preference="elements.charcounts"/>
+            <checkbox label="&characterMap.label;"
+              preference="elements.charmap"/>
 
-              <label value="&htmlButtons.label;"/>
-              <grid class="indent">
-                <columns>
-                  <column flex="1"/>
-                  <column flex="1"/>
-                  <column flex="1"/>
-                  <column flex="1"/>
-                </columns>
-                <rows>
-                  <row>
-                    <hbox>
-                      <checkbox label="&standard.label;"
-                        preference="elements.quickpost.htmlbuttons"/>
-                    </hbox>
-                    <hbox>
-                      <checkbox label="&extended.label;"
-                        preference="elements.quickpost.htmlbuttons.extended"/>
-                    </hbox>
-                    <hbox>
-                      <checkbox label="&gfcode.label;"
-                        preference="elements.quickpost.htmlbuttons.gfcode"/>
-                    </hbox>
-                    <hbox>
-                      <checkbox label="&breakTags.label;"
-                        preference="elements.quickpost.htmlbuttons.breaktags"/>
-                    </hbox>
-                  </row>
-                </rows>
-              </grid>
+            <label value="&htmlButtons.label;"/>
+            <hbox class="indent">
+              <checkbox flex="1" label="&standard.label;"
+                preference="elements.quickpost.htmlbuttons"/>
+              <checkbox flex="1" label="&extended.label;"
+                preference="elements.quickpost.htmlbuttons.extended"/>
+              <checkbox flex="1" label="&gfcode.label;"
+                preference="elements.quickpost.htmlbuttons.gfcode"/>
+              <checkbox flex="1" label="&breakTags.label;"
+                preference="elements.quickpost.htmlbuttons.breaktags"/>
+            </hbox>
 
-              <checkbox label="&sigTextbox.label;"
-                preference="elements.quickpost.sig"/>
-            </groupbox>
+            <checkbox label="&sigTextbox.label;"
+              preference="elements.quickpost.sig"/>
 
             <groupbox>
               <caption label="&quickpost.label;"/>
@@ -367,12 +347,10 @@
 
               <checkbox label="&previewAndReset.label;"
                 preference="elements.quickpost.otherbuttons"/>
-              <hbox>
-                <checkbox label="&confirmReset.label;"
-                  preference="elements.quickpost.resetconfirm"/>
-                <checkbox label="&newSigOnReset.label;"
-                  preference="elements.quickpost.resetnewsig"/>
-              </hbox>
+              <checkbox label="&confirmReset.label;"
+                preference="elements.quickpost.resetconfirm"/>
+              <checkbox label="&newSigOnReset.label;"
+                preference="elements.quickpost.resetnewsig"/>
 
               <hbox align="center">
                 <label value="&afterTopic.label;"/>
