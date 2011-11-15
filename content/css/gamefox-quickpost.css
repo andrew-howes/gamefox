@@ -18,6 +18,25 @@
         opacity: 0;
         -moz-transition: opacity .5s;
     }
+    #gamefox-quickpost-hide
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #ccc;
+        border: #aaa 1px solid;
+        border-width: 0 0 1px 1px;
+        -moz-border-radius: 0 9px 0 10px;
+        padding: 3px 8px;
+        font-size: 1.8em;
+        color: #fff !important;
+        text-shadow: #555 0 1px;
+    }
+    #gamefox-quickpost-hide:hover
+    {
+        background: #ddd;
+        text-decoration: none !important;
+    }
 
     #gamefox-topic
     {

@@ -42,6 +42,15 @@ var gamefox_quickpost =
 
     if (newTopic)
     {
+      var hideLink = doc.createElement('a');
+      hideLink.id = 'gamefox-quickpost-hide';
+      hideLink.href = '#';
+      hideLink.textContent = '×';
+      hideLink.title = 'Hide QuickPost';
+      hideLink.addEventListener('click', gamefox_quickpost.toggleVisibility,
+          false);
+      form.appendChild(hideLink);
+
       var topictitle = doc.createElement('input');
       topictitle.id = 'gamefox-topic';
       topictitle.type = 'text';
@@ -143,18 +152,6 @@ var gamefox_quickpost =
       resetbutton.setUserData('accessKey', 'v', null);
       form.appendChild(doc.createTextNode(' '));
       form.appendChild(resetbutton);
-    }
-
-    if (newTopic)
-    {
-      var hidebutton = doc.createElement('input');
-      hidebutton.id = 'gamefox-quickpost-hide';
-      hidebutton.type = 'button';
-      hidebutton.value = 'Hide';
-      hidebutton.tabIndex = 3;
-      hidebutton.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(hidebutton);
     }
 
     if (charCounts)
