@@ -48,11 +48,11 @@ var gamefox_date =
 
   getFormat: function(type, id)
   {
-    if (id == -1)
-      return gamefox_lib.getString('date.' + type + 'Custom');
-
     if (id == null)
       id = gamefox_lib.prefs.getIntPref('date.' + type + 'Preset');
+
+    if (id == -1)
+      return gamefox_lib.getString('date.' + type + 'Custom');
 
     return this.formats[type][id];
   },
