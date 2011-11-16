@@ -22,9 +22,10 @@
 .author .gamefox-quickwhois {font-size: 1.1em !important;}
 
 /** Character Map [GameFOX] **/ /** Contains some GameFOX code **/
-#gamefox-character-map {position: absolute !important; overflow: auto !important; height: 200px !important; width: 400px !important; border: #aaa 1px solid !important; background: #1D1D1D !important;}
-#gamefox-character-map td {background: transparent !important; padding: 0 !important; border: #1D1D1D 1px solid !important;}
-#gamefox-character-map a {display: block !important; padding: 10px 5px !important; background: #2F2F2F !important; text-align: center !important;}
+.gamefox-character-map {background: #1D1D1D !important;}
+.gamefox-character-map td {border: #1D1D1D 1px solid !important;}
+.gamefox-character-map a {background: #2F2F2F !important; color: #CCCCCC !important;}
+.gamefox-character-map a:hover { background: #4F4F4F !important;}
 
 /** GFCode [GameFOX] **/ /** Contains some GameFOX code **/
 .message i > p, .message em > p {border: 1px #666666 solid !important; margin: 0 auto !important; padding: 8px !important; width: 90% !important; -moz-border-radius: 0px !important; -webkit-border-radius:0px !important; border-radius:0 !important; background:#131313 !important;}

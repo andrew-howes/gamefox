@@ -33,11 +33,11 @@
         font-size: 1.8em;
         color: #fff !important;
         text-shadow: #555 0 1px;
+        text-decoration: none !important;
     }
     #gamefox-quickpost-hide:hover
     {
         background: #ddd;
-        text-decoration: none !important;
     }
 
     #gamefox-topic

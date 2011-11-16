@@ -60,10 +60,9 @@ table.topics tbody tr td:first-child + td {border-left:7px solid white !importan
 #gamefox-quickpost-signature span + br {display:none !important;}
 
 /** GameFOX Character Map **/ /** Modified from GameFOX **/
-#gamefox-character-map {position: absolute !important; overflow: auto !important; height: 200px !important; width: 400px !important; border: #898989 1px solid !important; background: #DFDFDF !important;}
-#gamefox-character-map table {border:0 !important; table-layout:fixed !important; border-collapse:collapse !important;}
-#gamefox-character-map td { background: transparent !important; padding: 0 !important; border: #898989 1px solid !important;}
-#gamefox-character-map a {display: block !important; padding: 5px 5px !important; background: #fff !important; text-align: center !important;}
+.gamefox-character-map {background: #DFDFDF !important;}
+.gamefox-character-map table {border:0 !important; table-layout:fixed !important; border-collapse:collapse !important;}
+.gamefox-character-map td {border: #898989 1px solid !important;}
 
 /** Topic Page List (GameFOX) **/ /** Modified from CSS from GameFOX 0.5.5.0 **/
 tr.gamefox-pagelist {display: table-row !important;}
