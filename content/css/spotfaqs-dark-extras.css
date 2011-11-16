@@ -24,8 +24,8 @@
 /** Character Map [GameFOX] **/ /** Contains some GameFOX code **/
 .gamefox-character-map {background: #1D1D1D !important;}
 .gamefox-character-map td {border: #1D1D1D 1px solid !important;}
-.gamefox-character-map a {background: #2F2F2F !important; color: #CCCCCC !important;}
-.gamefox-character-map a:hover { background: #4F4F4F !important;}
+.gamefox-character-map a:not(#helloworld) {background: #2F2F2F !important; color: #CCCCCC !important;}
+.gamefox-character-map a:not(#helloworld):hover { background: #4F4F4F !important;}
 
 /** GFCode [GameFOX] **/ /** Contains some GameFOX code **/
 .message i > p, .message em > p {border: 1px #666666 solid !important; margin: 0 auto !important; padding: 8px !important; width: 90% !important; -moz-border-radius: 0px !important; -webkit-border-radius:0px !important; border-radius:0 !important; background:#131313 !important;}
