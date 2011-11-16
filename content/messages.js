@@ -306,6 +306,8 @@ var gamefox_messages =
   saveEdit: function(event)
   {
     event.preventDefault();
+    event.target.disabled = true;
+    event.target.blur();
 
     var doc = gamefox_lib.getDocument(event);
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
@@ -317,7 +319,11 @@ var gamefox_messages =
     gamefox_messages.post('', editForm.elements.namedItem('messagetext').value,
         '', editKey, gamefox_utils.parseQueryString(editURI),
         function(result, msg, data) {
-          if (msg) gamefox_lib.alert(msg);
+          if (msg)
+          {
+            gamefox_lib.alert(msg);
+            event.target.removeAttribute('disabled');
+          }
           else if (result == 'SUCCESS')
           {
             doc.location.hash = msgComponents.id;
