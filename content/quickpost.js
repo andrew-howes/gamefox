@@ -340,13 +340,14 @@ var gamefox_quickpost =
     event.target.blur();
 
     var doc = gamefox_lib.getDocument(event);
+    var form = event.target.form;
 
-    var topicTitle = (doc.getElementsByName('topictitle')[0] || {}).value;
-    var key = doc.getElementsByName('key')[0].value;
-    var message = gamefox_quickpost.removeGFCodeWhitespace(
-        doc.getElementsByName('messagetext')[0].value);
-    var sig = gamefox_sig.format(doc.getElementsByName('custom_sig')[0]
-        .value);
+    var topicTitle = (form.elements.namedItem('topictitle') || {}).value;
+    var key = form.elements.namedItem('key').value;
+    var message = gamefox_quickpost.removeGFCodeWhitespace(form.elements
+        .namedItem('messagetext').value);
+    var sig = gamefox_sig.format(form.elements.namedItem('custom_sig').value);
+
     var params = gamefox_utils.parseBoardLink(doc.location.pathname) ||
       gamefox_utils.parseQueryString(doc.location.search); // post.php
 
