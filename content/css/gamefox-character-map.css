@@ -24,6 +24,7 @@
 {
     display: block;
     padding: 9px 5px;
+    border: transparent 1px solid;
     background: #fff;
     text-align: center;
     font-weight: normal !important;
@@ -36,7 +37,6 @@
 {
     text-decoration: none !important;
     background: #eee;
-    border: #aaa 1px solid;
-    padding: 8px 5px;
+    border-color: #aaa;
 }
 }
