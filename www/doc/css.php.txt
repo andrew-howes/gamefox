@@ -36,6 +36,13 @@
     </tr>
 
     <tr>
+        <td>a#gamefox-quickpost-hide</td>
+        <td>Close/hide button for floating (topic) QuickPost.</td>
+        <td>0.8.4</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>a#gamefox-quickpost-link</td>
         <td>Floating (topic) QuickPost link on topic list.</td>
         <td>-</td>
@@ -140,11 +147,11 @@
         <td>-</td>
     </tr>
 
-    <tr>
+    <tr class="removed">
         <td>input#gamefox-quickpost-hide</td>
         <td>Hide button for floating (topic) QuickPost.</td>
         <td>-</td>
-        <td>-</td>
+        <td>0.8.4</td>
     </tr>
 
     <tr>
