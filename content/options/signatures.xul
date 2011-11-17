@@ -71,8 +71,7 @@
 
               <label id="sig-criteria-label" value="&criteria.label;"/>
               <groupbox id="sig-criteria">
-                <description>&criteria.accounts.desc;</description>
-                <description>&criteria.boards.desc;</description>
+                <description>&criteria.accountsBoards.desc;</description>
                 <description>&criteria.blank.desc;</description>
                 <hbox align="center">
                   <label value="&accounts.label;"/>
