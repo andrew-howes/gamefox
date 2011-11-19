@@ -175,6 +175,13 @@
         <td>-</td>
     </tr>
 
+    <tr>
+        <td>select.gamefox-edit-list</td>
+        <td>Lists the edit history of a post.</td>
+        <td>0.8.4</td>
+        <td>-</td>
+    </tr>
+
     <tr class="removed">
         <td>span#gamefox-clock</td>
         <td>Contains current GameFAQs time.</td>
@@ -187,14 +194,6 @@
         <td>Contains current GameFAQs time. Added to the loginbox and
             QuickPost.</td>
         <td>0.7.8</td>
-        <td>-</td>
-    </tr>
-
-    <tr>
-        <td>span.gamefox-edit-list</td>
-        <td>Contains the &lt;select&gt; element that lists the edit history
-            of a post.</td>
-        <td>0.8.4</td>
         <td>-</td>
     </tr>
 

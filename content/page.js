@@ -963,10 +963,8 @@ var gamefox_page =
         {
           editTextNode.textContent = leftMsgData ? '' : ' | ';
 
-          var editListContainer = doc.createElement('span');
-          editListContainer.className = 'gamefox-edit-list';
-
           var editList = doc.createElement('select');
+          editList.className = 'gamefox-edit-list';
           editList.addEventListener('click', gamefox_messages.fetchEdits,
               false);
 
@@ -974,14 +972,13 @@ var gamefox_page =
           editListText.textContent = '(edited)';
           editList.appendChild(editListText);
 
-          editListContainer.appendChild(editList);
+          msgStats.insertBefore(editList, editTextNode.nextSibling);
 
-          msgStats.insertBefore(editListContainer, editTextNode.nextSibling);
-
+          // We don't know the size of the <select> element (it's based on the
+          // OS widget size), so for best results we need to set the position
+          // from here rather than a CSS file
           if (!leftMsgData)
-            window.setTimeout(function() {
-              editListContainer.style.width = editList.offsetWidth + 'px';
-            }, 10);
+            editList.style.marginTop = 17 - editList.offsetHeight + 'px';
         }
 
         var postDate = postDateNode.textContent.replace(/(Posted:? )?/g, '')
