@@ -61,6 +61,6 @@
     }
     .msg_stats_left .gamefox-edit-list
     {
-        width: 100%;
+        max-width: 100%;
     }
 }
