@@ -139,7 +139,7 @@ var gamefox_utils =
 
     var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
     var header, body;
-    if ((!leftMsgData && tdNode.parentNode.className != 'even')
+    if ((!leftMsgData && !tdNode.parentNode.classList.contains('even'))
         || tdNode.className.indexOf('author') != -1)
     {
       // in header

@@ -597,10 +597,8 @@ var gamefox_messages =
   {
     var doc = gamefox_lib.getDocument(msgComponents.header);
 
-    var editList = msgComponents.header
-      .getElementsByClassName('gamefox-edit-list')[0];
-
-    return editList ? editList.firstChild : {};
+    return msgComponents.header.getElementsByClassName('gamefox-edit-list')[0]
+      || {};
   },
 
   loadLatestEdit: function(msgComponents)
@@ -608,7 +606,7 @@ var gamefox_messages =
     var doc = gamefox_lib.getDocument(msgComponents.header);
     var select = gamefox_messages.getEditMenu(msgComponents);
 
-    if (select && msgComponents.body.getUserData('gamefox_edit_view'))
+    if (select.tagName && msgComponents.body.getUserData('gamefox_edit_view'))
     {
       select.selectedIndex = 0;
 
