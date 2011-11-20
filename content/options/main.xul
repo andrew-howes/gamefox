@@ -301,27 +301,31 @@
         <!-- Posting -->
         <tabpanel orient="vertical" flex="1">
           <vbox>
-            <checkbox label="&postButton.label;"
-              preference="elements.quickpost.button"/>
-            <checkbox label="&characterCounters.label;"
-              preference="elements.charcounts"/>
-            <checkbox label="&characterMap.label;"
-              preference="elements.charmap"/>
+            <groupbox>
+              <checkbox label="&postButton.label;"
+                preference="elements.quickpost.button"/>
+              <hbox>
+                <checkbox flex="1" label="&characterCounters.label;"
+                  preference="elements.charcounts"/>
+                <checkbox flex="1" label="&characterMap.label;"
+                  preference="elements.charmap"/>
+              </hbox>
 
-            <label value="&htmlButtons.label;"/>
-            <hbox class="indent">
-              <checkbox flex="1" label="&standard.label;"
-                preference="elements.quickpost.htmlbuttons"/>
-              <checkbox flex="1" label="&extended.label;"
-                preference="elements.quickpost.htmlbuttons.extended"/>
-              <checkbox flex="1" label="&gfcode.label;"
-                preference="elements.quickpost.htmlbuttons.gfcode"/>
-              <checkbox flex="1" label="&breakTags.label;"
-                preference="elements.quickpost.htmlbuttons.breaktags"/>
-            </hbox>
+              <label value="&htmlButtons.label;"/>
+              <hbox class="indent">
+                <checkbox flex="1" label="&standard.label;"
+                  preference="elements.quickpost.htmlbuttons"/>
+                <checkbox flex="1" label="&extended.label;"
+                  preference="elements.quickpost.htmlbuttons.extended"/>
+                <checkbox flex="1" label="&gfcode.label;"
+                  preference="elements.quickpost.htmlbuttons.gfcode"/>
+                <checkbox flex="1" label="&breakTags.label;"
+                  preference="elements.quickpost.htmlbuttons.breaktags"/>
+              </hbox>
 
-            <checkbox label="&sigTextbox.label;"
-              preference="elements.quickpost.sig"/>
+              <checkbox label="&sigTextbox.label;"
+                preference="elements.quickpost.sig"/>
+            </groupbox>
 
             <groupbox>
               <caption label="&quickpost.label;"/>

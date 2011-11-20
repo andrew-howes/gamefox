@@ -43,7 +43,7 @@
 
 <!-- Posting -->
 <!ENTITY postButton.label "Post Message button">
-<!ENTITY characterCounters.label "Character counters">
+<!ENTITY characterCounters.label "Character counts">
 <!ENTITY characterMap.label "Character map">
 
 <!ENTITY htmlButtons.label "HTML tag buttons:">
