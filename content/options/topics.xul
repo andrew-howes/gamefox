@@ -35,15 +35,13 @@
       <tabpanels flex="1">
 
         <tabpanel orient="vertical" flex="1">
-          <iframe id="gamefox-tracked-iframe"
-            src="chrome://gamefox/content/tracked.xul" style="height: 27em;"
-            orient="vertical" type="content"/>
+          <iframe id="gamefox-tracked-iframe" orient="vertical" flex="1"
+            src="chrome://gamefox/content/tracked.xul" type="content"/>
         </tabpanel>
 
         <tabpanel orient="vertical" flex="1">
-          <iframe id="gamefox-tags-iframe"
-            src="chrome://gamefox/content/tags.xul" style="height: 27em;"
-            orient="vertical" type="content"/>
+          <iframe id="gamefox-tags-iframe" orient="vertical" flex="1"
+            src="chrome://gamefox/content/tags.xul" type="content"/>
         </tabpanel>
 
       </tabpanels>

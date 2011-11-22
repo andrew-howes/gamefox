@@ -30,6 +30,7 @@
 <!ENTITY tagLink.label "Tag Topic link">
 <!ENTITY boardNav.label "Nav links at bottom of page">
 
+<!ENTITY headerLinks.label "Header links:">
 <!ENTITY editLink.label "Edit">
 <!ENTITY deleteLink.label "Delete/Close">
 <!ENTITY filterLink.label "Filter">

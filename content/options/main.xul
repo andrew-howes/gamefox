@@ -252,15 +252,30 @@
                       <checkbox label="&boardNav.label;"
                         preference="elements.boardnav"/>
 
-                      <hbox>
-                        <checkbox label="&editLink.label;"
-                          preference="elements.editlink"/>
-                        <checkbox label="&deleteLink.label;"
-                          preference="elements.deletelink"/>
-                        <checkbox label="&filterLink.label;"
-                          preference="elements.filterlink"/>
-                        <checkbox label="&quoteLink.label;"
-                          preference="elements.quotelink"/>
+                      <hbox align="baseline">
+                        <label value="&headerLinks.label;"/>
+
+                        <grid>
+                          <columns>
+                            <column/>
+                            <column/>
+                            <column/>
+                          </columns>
+                          <rows>
+                            <row>
+                              <checkbox label="&editLink.label;"
+                                preference="elements.editlink"/>
+                              <checkbox label="&deleteLink.label;"
+                                preference="elements.deletelink"/>
+                            </row>
+                            <row>
+                              <checkbox label="&filterLink.label;"
+                                preference="elements.filterlink"/>
+                              <checkbox label="&quoteLink.label;"
+                                preference="elements.quotelink"/>
+                            </row>
+                          </rows>
+                        </grid>
                       </hbox>
 
                       <hbox>
@@ -304,12 +319,10 @@
             <groupbox>
               <checkbox label="&postButton.label;"
                 preference="elements.quickpost.button"/>
-              <hbox>
-                <checkbox flex="1" label="&characterCounters.label;"
-                  preference="elements.charcounts"/>
-                <checkbox flex="1" label="&characterMap.label;"
-                  preference="elements.charmap"/>
-              </hbox>
+              <checkbox flex="1" label="&characterCounters.label;"
+                preference="elements.charcounts"/>
+              <checkbox flex="1" label="&characterMap.label;"
+                preference="elements.charmap"/>
 
               <label value="&htmlButtons.label;"/>
               <hbox class="indent">

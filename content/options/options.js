@@ -116,6 +116,10 @@ var gamefox_options =
 
   init: function()
   {
+    // Make sure the window is big enough (different fonts and widget sizes can
+    // make the min-height style inadequate)
+    window.sizeToContent();
+
     gamefox_options.restoreLastTabs();
 
     // Set listeners on links

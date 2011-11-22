@@ -50,14 +50,13 @@
         preference="disablegamefaqscss"/>
     </groupbox>
 
-    <groupbox>
+    <groupbox flex="1">
       <caption label="&tree.label;"/>
 
       <description>&rightClick.desc;</description>
 
-      <tree id="css-tree" editable="true" seltype="single"
-        hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
-        style="&tree.style;">
+      <tree id="css-tree" editable="true" seltype="single" flex="1"
+        hidecolumnpicker="true" contextmenu="css-tree-contextmenu">
         <treecols>
           <treecol label="&name.label;" id="styleTreeName" primary="true" flex="1"
             persist="width"/>

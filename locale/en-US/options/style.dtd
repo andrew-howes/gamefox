@@ -3,7 +3,6 @@
 <!ENTITY disableMainStyles.label "Disable main GameFAQs stylesheets">
 
 <!ENTITY tree.label "Stylesheets">
-<!ENTITY tree.style "height: 20.3em;">
 
 <!ENTITY rightClick.desc "Right click or enable a stylesheet to view its description.">
 
