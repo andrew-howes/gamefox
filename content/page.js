@@ -926,7 +926,8 @@ var gamefox_page =
           profileLink.addEventListener('mouseover', function(event) {
             event.target.gamefox_QWTimerId = window.setTimeout(function() {
               event.target.gamefox_QWTimerId = null;
-              gamefox_quickwhois.toggle(event, true); }, 1000);
+              gamefox_quickwhois.toggle(event, true); }, gamefox_lib.prefs
+                .getIntPref('mouse.quickwhoisHover.delay'));
           }, false);
 
           profileLink.addEventListener('mouseout', function(event) {

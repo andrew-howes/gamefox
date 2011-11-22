@@ -131,6 +131,7 @@ pref("gamefox.options.mouse.selectedtab", 0);
 pref("gamefox.options.topics.selectedtab", 0);
 
 pref("gamefox.mouse.quickwhoisHover", true);
+pref("gamefox.mouse.quickwhoisHover.delay", 700);
 
 pref("gamefox.keys", "{}");
 pref("gamefox.keys.throttle.start", 0);
