@@ -1,5 +1,23 @@
 ### Latest version
 
+#### GameFOX 0.8.4 (2011-11-25) {#0.8.4}
+
+* GameFOX sidebar:
+    * Add Vita and Wii U to platform links
+    * Fix login form
+* Fix quoting bug when the Disconnect extension is installed
+* Include the signature in the character count (to be consistent with GameFAQs)
+* Quick editing! Edit your posts on the message list without leaving the page
+* Show user profiles in a box after hovering over username links (QuickWhois)
+* Edit history viewer on the message list: switch between different revisions of
+  a post without leaving the page
+* Several small bug fixes
+
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
+### Older versions
+
 #### GameFOX 0.8.3 (2011-10-31) {#0.8.3}
 
 * Fix features on message detail page (including highlighting and custom date
@@ -10,11 +28,6 @@ formats)
 * Fix QuickPost error when making the last post of a page
 * Fix the new post indicator showing on the active messages list after editing a
 post
-
-Problems with this version? Get support on GameFAQs at the
-[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
-
-### Older versions
 
 #### GameFOX 0.8.2 (2011-10-15) {#0.8.2}
 

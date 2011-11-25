@@ -1,6 +1,6 @@
 ### Latest version
 
-#### GameFOX 0.8.4 {#0.8.4}
+#### GameFOX 0.8.4 (2011-11-25) {#0.8.4}
 
 * GameFOX sidebar:
     * Add Vita and Wii U to platform links

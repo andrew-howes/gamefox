@@ -1,14 +1,13 @@
 GameFOX is a Firefox extension with a diverse feature set that enhances the
 [GameFAQs message boards](http://www.gamefaqs.com/boards).
 
-
 ### Install ### {#install}
 
 <big><a class="install-button"
-    href="/gfox/gamefox-0.8.3.xpi">GameFOX 0.8.3</a></big>
+    href="/gfox/gamefox-0.8.4.xpi">GameFOX 0.8.4</a></big>
 ([changes](changes))
 
-Released 2011 October 31. Compatible with Firefox 3.5 - 10.0a1, SeaMonkey 2.0 -
+Released 2011 November 25. Compatible with Firefox 3.5 - 11.0a1, SeaMonkey 2.0 -
 2.4.
 
 ### About ### {#about}
