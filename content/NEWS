@@ -1,6 +1,10 @@
 0000-00-00:
     * version 0.8.5
     * Make the edit history drop-down menu look nicer
+    * Remove compatibility with:
+        - Firefox 3.5 (3.6 is still supported)
+        - SeaMonkey 2.0 (minimum is now 2.1)
+    * Add compatibility with SeaMonkey 2.5
 
 2011-11-25:
     * version 0.8.4
