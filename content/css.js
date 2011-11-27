@@ -137,25 +137,49 @@ var gamefox_css =
     };
 
     // (Re-)add bundled
-    for (var i in defaults)
+    var errors = {};
+    var result, info;
+    for (var cat in defaults)
     {
-      for (var j in defaults[i])
+      for (var file in defaults[cat])
       {
-        var k = defaults[i][j];
-        this.add(i, 'chrome://gamefox/content/css/' + j, j, k[0], k[1], k[2], k[3], true);
+        info = defaults[cat][file];
+        result = this.add(cat, 'chrome://gamefox/content/css/' + file, file,
+            info[0], info[1], info[2], info[3], true);
+
+        // If there's an error, add it to the list
+        if (typeof result == 'object')
+        {
+          // result[0] = error code (string)
+          // result[1] = exception
+          if (!(result[0] in errors))
+            errors[result[0]] = [result[1], []];
+
+          errors[result[0]][1].push(file);
+        }
       }
     }
 
-    // Remove old bundled
-    var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
-    for (i in defaults)
+    // Give one alert per error type
+    for (var error in errors)
     {
-      for (j in css[i])
+      var fileList = errors[error][1];
+      gamefox_lib.alert('An error (' + error + ') was encountered for ' +
+          fileList.length + ' stylesheets: ' + fileList.join(', ') + '\n\n' +
+          errors[error][0]);
+    }
+
+    // Remove old bundled
+    var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'
+          ));
+    for (var cat in defaults)
+    {
+      for (var file in css[cat])
       {
-        if (!(j in defaults[i]))
+        if (!(file in defaults[cat]))
         {
-          gamefox_lib.log('Old bundled stylesheet "' + j + '" removed.');
-          this.remove(i, j);
+          gamefox_lib.log('Old bundled stylesheet "' + file + '" removed.');
+          this.remove(cat, file);
         }
       }
     }
@@ -192,7 +216,8 @@ var gamefox_css =
     }
     catch (e)
     {
-      gamefox_lib.alert('There was an error importing the stylesheet:\n' + e);
+      gamefox_lib.alert('There was an error importing the stylesheet:\n\n' +
+          e);
       return false;
     }
 
@@ -204,8 +229,7 @@ var gamefox_css =
     }
     catch (e)
     {
-      gamefox_lib.alert('There was an error writing the stylesheet to its destination:\n' + e);
-      return false;
+      return ['E_WRITE_FAILED', e];
     }
 
     var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
