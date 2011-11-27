@@ -54,12 +54,38 @@
         margin-right: 5px;
     }
 
-    .msg_stats .gamefox-edit-list
+    /* Edit history menu */
+    .gamefox-edit-list
     {
-        position: absolute;
-        margin-left: 3px;
+        background: url('chrome://gamefox/content/css/images/gamefox-essentials\
+/arrow-down.png') right no-repeat;
+    }
+    .gamefox-edit-list select
+    {
+        -moz-appearance: statusbar;
+        color: inherit;
+        background: inherit;
+        padding-right: 15px;
+        cursor: pointer;
+    }
+    .gamefox-edit-list select:focus, .gamefox-edit-list option
+    {
+        cursor: default;
+    }
+    .gamefox-edit-list option
+    {
+        padding-right: 0;
+    }
+    .msg_stats .gamefox-edit-list select
+    {
+        margin-left: -4px;
     }
     .msg_stats_left .gamefox-edit-list
+    {
+        position: relative;
+        top: -2px;
+    }
+    .msg_stats_left .gamefox-edit-list select
     {
         max-width: 100%;
     }
