@@ -82,8 +82,8 @@ var gamefox_quickwhois =
     qw.appendChild(doc.createTextNode(' (Loading profile...)'));
 
     qw.addEventListener('mouseout', function(event) {
-      if (event.relatedTarget.className != qw.className &&
-        gamefox_utils.findParent('div', event.relatedTarget).className !=
+      if (event.relatedTarget && event.relatedTarget.className != qw.className
+        && gamefox_utils.findParent('div', event.relatedTarget).className !=
         qw.className)
         gamefox_quickwhois.toggle(event, true);
     }, false);
