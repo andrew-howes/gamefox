@@ -389,6 +389,7 @@ var gamefox_context =
     links = [
       'myposts.php', 'Active Messages', 'A',
       'index.php', 'Boards', 'B',
+      'friends', 'Friends', 'F',
       'tracked.php', 'Tracked Topics', 'T',
       'user.php', 'User Profile', 'U'
     ];
