@@ -33,8 +33,8 @@ var gamefox_quickwhois =
     if (hover)
     {
       pos = gamefox_utils.getPos(name);
-      pos[0] -= 3;
-      pos[1] -= 3;
+      pos[0] -= 4; /* border + padding */
+      pos[1] -= 4;
       className += ' gamefox-quickwhois-hover';
     }
     else
@@ -67,6 +67,10 @@ var gamefox_quickwhois =
     qw.className = className;
     qw.style.left = pos[0] + 'px';
     qw.style.top = pos[1] + 'px';
+    // Use background color from user panel/nav to match the theme
+    qw.style.backgroundColor = doc.defaultView.getComputedStyle(
+        (doc.getElementsByClassName('u_search')[0] ||
+         doc.getElementsByClassName('body')[0]), null).backgroundColor;
     gamefox_utils.fade.add(qw);
 
     var a = doc.createElement('a');

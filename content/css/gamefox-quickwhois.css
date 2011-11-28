@@ -3,47 +3,45 @@
     .gamefox-quickwhois
     {
         position: absolute;
-        z-index: 3;
-        padding: 3px !important;
-        overflow-x: auto;
-        overflow-y: hidden;
-        color: #000;
-        background-color: #eee;
         max-width: 70%;
+        overflow: auto;
+        padding: 3px !important;
+        text-align: left;
+        /* Compatibility with themes that put a border here, since our absolute
+         * position offset is hardcoded at 4px */
+        border: 1px transparent solid;
+        z-index: 1;
+
         -moz-border-radius: 5px;
         box-shadow: 0 0 10px #555;
         -moz-box-shadow: 0 0 10px #555;
-        text-align: left;
         opacity: 0;
         -moz-transition: opacity .3s;
     }
     .gamefox-quickwhois table
     {
         width: auto !important;
-        border-collapse: collapse !important;
+        border: 0 !important;
+        border-collapse: collapse !important; /* RetroClassic */
+    }
+    .gamefox-quickwhois tr, .gamefox-quickwhois td:not(#foo) /* specificity */
+    {
+        background-color: transparent !important;
     }
     .gamefox-quickwhois td
     {
-        padding: 0 !important;
+        padding: 2px 0 0 0 !important;
         border: 0 !important;
-        font-size: inherit !important;
-        background-color: transparent !important;
-        color: #000;
     }
     .gamefox-quickwhois td:first-child
     {
         text-align: right;
         padding-right: 5px !important;
-        color: #555 !important;
+        opacity: .6;
         white-space: nowrap;
     }
     .gamefox-quickwhois td a
     {
-        font-weight: normal !important;
-    }
-
-    .author .gamefox-quickwhois /* for left of message data */
-    {
-        font-size: 1.1em !important;
+        font-weight: normal !important; /* Ninestalgia */
     }
 }
