@@ -1,47 +1,37 @@
 @charset "utf-8";
 /*
  * GFCode (GameFOX Implementation)
- * © 2004-2008, Special Ops
+ * © 2004-2009, Special Ops
+ * Copyright 2008, 2009, 2011 Brian Marshall
  */
 @-moz-document domain(gamefaqs.com) {
     /* Common formatting for block elements */
     .message i > p, .message em > p {
-        border: 1px #bbb solid !important;
+        border: 1px rgba(0, 0, 0, 0.2) solid !important;
+        background: rgba(180, 180, 180, 0.1);
 
         margin: 0 auto !important;
         padding: 3px !important;
         width: 96% !important;
         -moz-border-radius: 4px;
-
-        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
-        ABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFl\
-        zAAALEwAACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3Jl\
-        YXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12NgYGAQBAAAFgASs9Tk8AAAAABJRU5Er\
-        kJggg%3D%3D") !important;
     }
 
     /* <i><p> - blockquote */
     .message i > p {
         font-style: normal !important;
-        background: none !important;
     }
 
     /* <i><p><strong> - blockquote header, for quoting full messages with userheader */
     .message i > p > strong:first-child {
-        border-bottom: 1px #bbb solid !important;
+        border-bottom: 1px rgba(0, 0, 0, 0.2) solid !important;
+        background: rgba(150, 150, 150, 0.1);
 
         display: block;
         font-style: italic !important;
         font-weight: bold !important;
-        margin: -4px -4px 3px !important;
+        margin: -4px -3px 3px !important;
         padding: 3px !important;
         -moz-border-radius: 4px 4px 0 0;
-
-        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAA\
-        ABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A%2FwD%2FoL2nkwAAAAlwSFl\
-        zAAALEwAACxMBAJqcGAAAAAd0SU1FB9gKBRc5HTs8iOcAAAAZdEVYdENvbW1lbnQAQ3Jl\
-        YXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12NgYGAQBAAAFgASs9Tk8AAAAABJRU5Er\
-        kJggg%3D%3D");
     }
 
     /* remove linebreak after quote header since it's already display:block */
