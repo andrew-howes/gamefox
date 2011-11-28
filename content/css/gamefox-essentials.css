@@ -62,6 +62,12 @@
     }
     .gamefox-edit-list select
     {
+        /* -moz-appearance: none doesn't work here:
+         *   https://bugzilla.mozilla.org/show_bug.cgi?id=649849
+         * Using "statusbar" is a hack to allow us to set a custom drop-down
+         * menu arrow, but it requires a separate element (.gamefox-edit-list
+         * above) since the background property doesn't work here
+         */
         -moz-appearance: statusbar;
         color: inherit;
         background: inherit;
