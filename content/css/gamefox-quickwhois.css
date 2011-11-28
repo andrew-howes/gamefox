@@ -18,6 +18,16 @@
         opacity: 0;
         -moz-transition: opacity .3s;
     }
+    .gamefox-quickwhois a.name
+    {
+        margin-bottom: 2px;
+    }
+    .gamefox-quickwhois:not(.gamefox-quickwhois-hover) a.name
+    {
+        /* Don't show the username with non-hover QuickWhois, since it doesn't
+         * obscure the original username link */
+        display: none;
+    }
     .gamefox-quickwhois table
     {
         width: auto !important;
@@ -32,6 +42,12 @@
     {
         padding: 2px 0 0 0 !important;
         border: 0 !important;
+    }
+    /* First row shouldn't have top padding, but there's an empty row first, so
+     * it's actually the second child */
+    .gamefox-quickwhois tr:nth-child(2) td
+    {
+        padding-top: 0 !important;
     }
     .gamefox-quickwhois td:first-child
     {
