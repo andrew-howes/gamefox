@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- vim: set et sw=2 ts=2 sts=2 tw=79:
 
-     Copyright 2005, 2006, 2007, 2008, 2009
+     Copyright 2005, 2006, 2007, 2008, 2009, 2011
      Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
 
      This file is part of GameFOX.
@@ -25,8 +25,8 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <prefpane id="paneTopics">
-
-    <tabbox id="topicsPrefs" flex="1">
+                                      <!-- for animateFadeIn -->
+    <tabbox id="topicsPrefs" flex="1" style="min-height: 30em;">
       <tabs id="tabsElement" tabGroup="topics">
         <tab id="trackedTab" label="&trackedTab.label;"/>
         <tab id="tagsTab" label="&tagsTab.label;"/>

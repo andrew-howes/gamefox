@@ -118,7 +118,10 @@ var gamefox_options =
   {
     // Make sure the window is big enough (different fonts and widget sizes can
     // make the min-height style inadequate)
-    window.sizeToContent();
+    // This breaks when animateFadeIn is true, so check that first
+    if (!Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch)
+        .getBoolPref('browser.preferences.animateFadeIn'))
+      window.sizeToContent();
 
     gamefox_options.restoreLastTabs();
 
