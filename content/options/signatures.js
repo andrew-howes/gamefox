@@ -76,15 +76,11 @@ var gamefox_options_sig =
 
   _hideCriteriaForm: function()
   {
-    document.getElementById('sig-criteria-label').style
-      .setProperty('visibility', 'hidden', null);
     document.getElementById('sig-criteria').style
       .setProperty('visibility', 'hidden', null);
   },
   _showCriteriaForm: function()
   {
-    document.getElementById('sig-criteria-label').style
-      .setProperty('visibility', '', null);
     document.getElementById('sig-criteria').style
       .setProperty('visibility', '', null);
   },
