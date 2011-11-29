@@ -126,30 +126,6 @@ var gamefox =
 
   doMigration: function(comparator, version)
   {
-    /* 0.6.11 */
-    if (comparator.compare('0.6.11', version) > 0)
-    {
-      // Convert prefs to JSON
-      var jsonPrefs = new Array('favorites.serialized', 'signature.serialized',
-          'theme.css.serialized', 'userlist.serialized', 'accounts', 'tags',
-          'tracked.list');
-      for (var i = 0; i < jsonPrefs.length; i++)
-      {
-        var prefText = gamefox_lib.getString(jsonPrefs[i]);
-        if (gamefox_lib.isSafeJSON(prefText))
-          continue; // already JSON
-
-        var prefObj = gamefox_lib.safeEval(prefText, true);
-        if (prefObj)
-        {
-          // Back it up
-          gamefox_lib.setString(jsonPrefs[i] + '.bak', prefText);
-          // Update it
-          gamefox_lib.setString(jsonPrefs[i], gamefox_lib.toJSON(prefObj));
-        }
-      }
-    }
-
     /* 0.7.8 */
     // Also run for 0.7.9 in case gamefox.startup() was never called for some
     // people (see commit a1f7f84)
