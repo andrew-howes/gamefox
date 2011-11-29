@@ -67,11 +67,16 @@ var gamefox_quickwhois =
     qw.className = className;
     qw.style.left = pos[0] + 'px';
     qw.style.top = pos[1] + 'px';
+    gamefox_utils.fade.add(qw);
+
     // Use background color from user panel/nav to match the theme
-    qw.style.backgroundColor = doc.defaultView.getComputedStyle(
+    var backgroundColor = doc.defaultView.getComputedStyle(
         (doc.getElementsByClassName('u_search')[0] ||
          doc.getElementsByClassName('body')[0]), null).backgroundColor;
-    gamefox_utils.fade.add(qw);
+    // Fall back to white instead of transparent
+    if (backgroundColor == 'transparent')
+      backgroundColor = '#fff';
+    qw.style.backgroundColor = backgroundColor;
 
     var a = doc.createElement('a');
     a.className = 'name';
