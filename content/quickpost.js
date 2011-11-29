@@ -772,7 +772,9 @@ var gamefox_quickpost =
 
   createSigField: function(doc, postPage)
   {
-    if (doc.gamefox.sig)
+    var showSig = gamefox_lib.prefs.getCharPref('signature.show');
+
+    if (showSig == 'always' || (doc.gamefox.sig && showSig == 'auto'))
     {
       var sigField = doc.createElement('span');
       sigField.id = postPage ? 'gamefox-post-signature' :

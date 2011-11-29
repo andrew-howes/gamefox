@@ -108,8 +108,8 @@
       <preference id="elements.quickpost.htmlbuttons.breaktags"
         name="gamefox.elements.quickpost.htmlbuttons.breaktags" type="bool"/>
 
-      <preference id="elements.quickpost.sig"
-        name="gamefox.elements.quickpost.sig" type="bool"/>
+      <preference id="signature.show" name="gamefox.signature.show"
+        type="string"/>
 
       <preference id="elements.quickpost.link"
         name="gamefox.elements.quickpost.link" type="bool"/>
@@ -324,20 +324,31 @@
               <checkbox flex="1" label="&characterMap.label;"
                 preference="elements.charmap"/>
 
-              <label value="&htmlButtons.label;"/>
-              <hbox class="indent">
-                <checkbox flex="1" label="&standard.label;"
-                  preference="elements.quickpost.htmlbuttons"/>
-                <checkbox flex="1" label="&extended.label;"
-                  preference="elements.quickpost.htmlbuttons.extended"/>
-                <checkbox flex="1" label="&gfcode.label;"
-                  preference="elements.quickpost.htmlbuttons.gfcode"/>
-                <checkbox flex="1" label="&breakTags.label;"
-                  preference="elements.quickpost.htmlbuttons.breaktags"/>
+              <hbox align="baseline">
+                <label value="&htmlButtons.label;"/>
+                <hbox flex="1">
+                  <checkbox flex="1" label="&standard.label;"
+                    preference="elements.quickpost.htmlbuttons"/>
+                  <checkbox flex="1" label="&extended.label;"
+                    preference="elements.quickpost.htmlbuttons.extended"/>
+                  <checkbox flex="1" label="&gfcode.label;"
+                    preference="elements.quickpost.htmlbuttons.gfcode"/>
+                  <checkbox flex="1" label="&breakTags.label;"
+                    preference="elements.quickpost.htmlbuttons.breaktags"/>
+                </hbox>
               </hbox>
 
-              <checkbox label="&sigTextbox.label;"
-                preference="elements.quickpost.sig"/>
+              <hbox align="baseline">
+                <label value="&sigTextbox.label;"/>
+                <radiogroup preference="signature.show" flex="1">
+                  <hbox flex="1">
+                    <radio flex="1" value="auto"
+                      label="&showIfOverride.label;"/>
+                    <radio flex="1" value="always" label="&alwaysShow.label;"/>
+                    <radio flex="1" value="never" label="&neverShow.label;"/>
+                  </hbox>
+                </radiogroup>
+              </hbox>
             </groupbox>
 
             <groupbox>

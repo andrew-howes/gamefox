@@ -419,8 +419,11 @@ var gamefox_page =
 
       // Signature
       var sig = gamefox_sig.format(null, null, doc);
-      if (sig && !/\b(Posted)<\/h2>/.test(doc.body.innerHTML)
-          && !gamefox_utils.parseQueryString(doc.location.search)['message'])
+      var showSig = gamefox_lib.prefs.getCharPref('signature.show');
+
+      if ((showSig == 'always' || (sig && showSig == 'auto')) &&
+          !/\b(Posted)<\/h2>/.test(doc.body.innerHTML) &&
+          !gamefox_utils.parseQueryString(doc.location.search)['message'])
       {
         detailsDiv.removeChild(formElements.namedItem('custom_sig'));
 

@@ -53,7 +53,10 @@
 <!ENTITY gfcode.label "GFCode">
 <!ENTITY breakTags.label "Break HTML">
 
-<!ENTITY sigTextbox.label "Signature textbox">
+<!ENTITY sigTextbox.label "Signature textbox:">
+<!ENTITY showIfOverride.label "Show when not empty">
+<!ENTITY alwaysShow.label "Always show">
+<!ENTITY neverShow.label "Never show">
 
 <!ENTITY quickpost.label "QuickPost">
 

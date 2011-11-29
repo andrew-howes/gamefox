@@ -65,6 +65,7 @@ pref("gamefox.quote.focusQuickPost", true);
 pref("gamefox.signature.serialized", "[{\"accounts\":\"\", \"boards\":\"\", \"body\":\"\"}]");
 pref("gamefox.signature.newline", false); // not currently supported
 pref("gamefox.signature.selectMostSpecific", true);
+pref("gamefox.signature.show", "auto");
 
 pref("gamefox.theme.disablegamefaqscss", false);
 pref("gamefox.theme.css.serialized", "{\"gamefox\":{}, \"bundled\":{}, \"user\":{}, \"themes\":{}}");

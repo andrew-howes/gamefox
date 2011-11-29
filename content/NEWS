@@ -7,6 +7,9 @@
     * Add compatibility with SeaMonkey 2.5
     * Fix QuickWhois being unreadable with some themes
     * Fix options window on OS X
+    * Simplify signature mangement: the signature textbox is hidden unless
+      you're using GameFOX to manage your signatures. Signatures are now stored
+      only on GameFAQs by default, but no features were removed
     * Other minor bug fixes and enhancements
 
 2011-11-25:
