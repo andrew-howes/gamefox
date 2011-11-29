@@ -338,16 +338,15 @@
                 </hbox>
               </hbox>
 
-              <hbox align="baseline">
+              <hbox align="center">
                 <label value="&sigTextbox.label;"/>
-                <radiogroup preference="signature.show" flex="1">
-                  <hbox flex="1">
-                    <radio flex="1" value="auto"
-                      label="&showIfOverride.label;"/>
-                    <radio flex="1" value="always" label="&alwaysShow.label;"/>
-                    <radio flex="1" value="never" label="&neverShow.label;"/>
-                  </hbox>
-                </radiogroup>
+                <menulist preference="signature.show">
+                  <menupopup>
+                    <menuitem label="&showIfOverride.label;" value="auto"/>
+                    <menuitem label="&alwaysShow.label;" value="always"/>
+                    <menuitem label="&neverShow.label;" value="never"/>
+                  </menupopup>
+                </menulist>
               </hbox>
             </groupbox>
 

@@ -54,7 +54,7 @@
 <!ENTITY breakTags.label "Break HTML">
 
 <!ENTITY sigTextbox.label "Signature textbox:">
-<!ENTITY showIfOverride.label "Show when not empty">
+<!ENTITY showIfOverride.label "Show only when overriding GameFAQs signature">
 <!ENTITY alwaysShow.label "Always show">
 <!ENTITY neverShow.label "Never show">
 
