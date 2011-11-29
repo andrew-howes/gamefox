@@ -142,8 +142,8 @@ var gamefox_options =
 
     var args = window.arguments[0].wrappedJSObject;
 
-    if (args.firstRun)
-      gamefox_options_sig.importSig();
+    // Placeholder: no longer used, but may be useful in the future
+    /* if (args.firstRun) */
 
     for (var i in args.notifications)
     {

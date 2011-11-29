@@ -159,22 +159,8 @@ var gamefox_page =
         element.parentNode.className += ' gamefox-ignorelist';
     }
 
-    /* sigquote.php */
-    if (gamefox_lib.onPage(doc, 'sigquote'))
-    {
-      var button = doc.createElement('input');
-      button.type = 'button';
-      button.value = 'Update GameFOX Signature';
-      button.addEventListener('click', gamefox_sig.updateFromGameFAQs, false);
-
-      var element = doc.getElementById('add').getElementsByTagName('input')[1]
-        .parentNode;
-      element.appendChild(doc.createTextNode(' '));
-      element.appendChild(button);
-    }
-
     /* Index (index.php) and board lists (boardlist.php) */
-    else if (gamefox_lib.onPage(doc, 'index'))
+    if (gamefox_lib.onPage(doc, 'index'))
     {
       gamefox_lib.setTitle(doc, 'Message Boards');
 

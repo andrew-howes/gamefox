@@ -173,19 +173,5 @@ var gamefox_sig =
       return '';
 
     return ' / ' + str.trim().replace(/\s+/g, ' ');
-  },
-
-  updateFromGameFAQs: function(event)
-  {
-    var doc = gamefox_lib.getDocument(event);
-
-    var sig = doc.getElementsByName('sig')[0].value;
-    var sigPref = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
-
-    sigPref[0].body = sig;
-
-    gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigPref));
-
-    gamefox_lib.alert('Your GameFOX signature has been updated.');
   }
 };
