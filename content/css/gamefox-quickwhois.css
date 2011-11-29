@@ -34,7 +34,7 @@
         border: 0 !important;
         border-collapse: collapse !important; /* RetroClassic */
     }
-    .gamefox-quickwhois tr, .gamefox-quickwhois td:not(#foo) /* specificity */
+    .gamefox-quickwhois tr, .gamefox-quickwhois td
     {
         background-color: transparent !important;
     }
