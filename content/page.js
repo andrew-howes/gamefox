@@ -432,8 +432,8 @@ var gamefox_page =
       }
 
       // Signature
-      if (gamefox_lib.prefs.getBoolPref('signature.applyeverywhere')
-          && !/\b(Posted)<\/h2>/.test(doc.body.innerHTML)
+      var sig = gamefox_sig.format(null, null, doc);
+      if (sig && !/\b(Posted)<\/h2>/.test(doc.body.innerHTML)
           && !gamefox_utils.parseQueryString(doc.location.search)['message'])
       {
         detailsDiv.removeChild(formElements.namedItem('custom_sig'));
@@ -444,9 +444,9 @@ var gamefox_page =
         message.parentNode.parentNode.removeChild(message.parentNode
             .nextSibling);
 
-        doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-        var sigField = gamefox_quickpost.createSigField(doc, true);
-        previewBtn.parentNode.insertBefore(sigField, previewBtn);
+        doc.gamefox.sig = sig;
+        previewBtn.parentNode.insertBefore(gamefox_quickpost.createSigField(
+              doc, true), previewBtn);
       }
 
       message.setSelectionRange(0, 0);

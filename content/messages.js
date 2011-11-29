@@ -48,15 +48,15 @@ var gamefox_messages =
     if (!count) return;
 
     var str = message.value.trim();
-    if (sig)
+    if (sig.type != 'hidden')
       str += '\n---\n' + sig.value.trim();
     var length = gamefox_utils.encodedMessageLength(str);
 
-    count.innerHTML = length + ' / 4096 characters';
+    count.textContent = length + ' / 4096 characters';
 
     if (length > 4096)
     {
-      count.innerHTML += '(!!)';
+      count.textContent += '(!!)';
       count.style.setProperty('font-weight', 'bold', '');
     }
     else
@@ -84,19 +84,22 @@ var gamefox_messages =
   updateTitleCount: function(event)
   {
     var doc = gamefox_lib.getDocument(event);
-    var titleLength = gamefox_utils.encodedTitleLength(
-        doc.getElementsByName('topictitle')[0].value);
+    var length = gamefox_utils.encodedTitleLength(doc.getElementsByName(
+          'topictitle')[0].value);
 
-    var titleCount = doc.getElementById('gamefox-title-count');
-    titleCount.innerHTML = titleLength + ' / 80 characters';
+    var count = doc.getElementById('gamefox-title-count');
+    if (!count)
+      return;
 
-    if (titleLength > 80)
+    count.textContent = length + ' / 80 characters';
+
+    if (length > 80)
     {
-      titleCount.innerHTML += '(!!)';
-      titleCount.style.setProperty('font-weight', 'bold', '');
+      count.textContent += '(!!)';
+      count.style.setProperty('font-weight', 'bold', '');
     }
     else
-      titleCount.style.setProperty('font-weight', '', '');
+      count.style.setProperty('font-weight', '', '');
   },
 
   deletePost: function(event, context)

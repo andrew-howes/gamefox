@@ -452,27 +452,30 @@ var gamefox_quickpost =
     event.preventDefault();
 
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.resetconfirm') &&
-        !gamefox_lib.confirm('Are you sure? This will clear your entire post so far.'))
+        !gamefox_lib.confirm('Are you sure? This will clear your entire post '
+          + 'so far.'))
       return;
 
     var doc = gamefox_lib.getDocument(event);
-    var charCounts = gamefox_lib.prefs.getBoolPref('elements.charcounts');
+    var form = event.target.form;
 
-    doc.getElementById('gamefox-message').value = '';
+    form.elements.namedItem('gamefox-message').value = '';
 
-    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
+    var custom_sig = form.elements.namedItem('custom_sig');
+    if (custom_sig.type != 'hidden' &&
+        gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
     {
       doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-      doc.getElementsByName('custom_sig')[0].value = doc.gamefox.sig;
-    } 
+      custom_sig.value = doc.gamefox.sig;
+    }
 
-    if (charCounts)
-      gamefox_messages.updateMessageCount(event.target);
-    if (doc.getElementById('gamefox-topic'))
+    gamefox_messages.updateMessageCount(form);
+
+    var topic = doc.getElementById('gamefox-topic');
+    if (topic)
     {
-      doc.getElementById('gamefox-topic').value = '';
-      if (charCounts)
-        gamefox_messages.updateTitleCount(doc);
+      topic.value = '';
+      gamefox_messages.updateTitleCount(doc);
     }
   },
 
@@ -769,7 +772,7 @@ var gamefox_quickpost =
 
   createSigField: function(doc, postPage)
   {
-    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.sig'))
+    if (doc.gamefox.sig)
     {
       var sigField = doc.createElement('span');
       sigField.id = postPage ? 'gamefox-post-signature' :
@@ -797,7 +800,6 @@ var gamefox_quickpost =
       var sigField = doc.createElement('input');
       sigField.name = 'custom_sig';
       sigField.type = 'hidden';
-      sigField.value = doc.gamefox.sig;
     }
 
     return sigField;
