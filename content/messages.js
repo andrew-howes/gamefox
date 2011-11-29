@@ -539,7 +539,7 @@ var gamefox_messages =
       edits.push(edits.shift());
       edits.reverse();
 
-      var matches, option, editNum, date, content;
+      var matches, option, editNum, date, text;
       for (var i = 0; i < edits.length; i++)
       {
         editNum = edits.length - i - 1;
@@ -549,15 +549,15 @@ var gamefox_messages =
         // For the latest edit, use the HTML from the message list rather than
         // the detail page to keep anchors/extension processing
         if (i == 0)
-          content = gamefox_utils.getMsgComponents(select, doc).body.innerHTML;
+          text = gamefox_utils.getMsgComponents(select, doc).body.innerHTML;
         else
-          content = matches[2];
+          text = matches[2];
 
         option = doc.createElement('option');
         option.textContent = (editNum == 0 ? 'original' : 'edit #' + editNum) +
           ': ' + (gamefox_date.enabled ? gamefox_date.parseFormat(date,
                 gamefox_date.getFormat('message')) : date);
-        option.setUserData('content', content, null);
+        option.setUserData('text', text, null);
         select.add(option, null);
       }
 
@@ -567,7 +567,7 @@ var gamefox_messages =
         var msgComponents = gamefox_utils.getMsgComponents(select, doc);
 
         msgComponents.body.innerHTML = select.options[select.selectedIndex]
-          .getUserData('content');
+          .getUserData('text');
 
         var headerRow = msgComponents.header.parentNode;
         var bodyRow = msgComponents.body.parentNode;
