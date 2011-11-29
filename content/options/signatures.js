@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -90,7 +90,13 @@ var gamefox_options_sig =
     var sigLength = gamefox_utils.specialCharsEncode(this._textbox.value).length;
     var sigChars = document.getElementById('sig-chars');
 
-    sigChars.value = sigLength + ' characters';
+    if (sigLength == 0)
+    {
+      sigChars.value = '';
+      return;
+    }
+
+    sigChars.value = sigLength + ' character' + (sigLength == 1 ? '' : 's');
     if (sigLength > 160)
     {
       sigChars.value += '(!!)';

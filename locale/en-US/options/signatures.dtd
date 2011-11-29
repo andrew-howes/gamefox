@@ -1,20 +1,20 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY onPostPage.label "Replace GameFAQs signature on standard post page">
-<!ENTITY selectMostSpecific.label "Select signatures with the most specific
-account and board settings">
-
 <!ENTITY defaultSig.label "Default signature">
 <!ENTITY addSig.label "Add">
 <!ENTITY deleteSig.label "Delete">
 
 <!ENTITY sig.label "Signature:">
+<!ENTITY sig.emptytext "Type to override your GameFAQs signature">
 <!ENTITY grab.button "Grab from GameFAQs">
 <!ENTITY save.button "Save to GameFAQs">
 
-<!ENTITY criteria.accountsBoards.desc "List universal account names and board
-names or IDs separated by commas for this signature.">
-<!ENTITY criteria.blank.desc "These fields are optional. If blank, they will
-apply to every account or board.">
+<!ENTITY criteria.accountsBoards.desc "Optional: List universal account names
+and board names or IDs separated by commas for this signature.">
 <!ENTITY accounts.label "Accounts:">
+<!ENTITY accounts.emptytext "Every account">
 <!ENTITY boards.label "Boards:">
+<!ENTITY boards.emptytext "Every board">
+
+<!ENTITY selectMostSpecific.label "Select signatures with the most specific
+account and board settings">
