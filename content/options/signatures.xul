@@ -42,53 +42,51 @@
     </preferences>
 
     <notificationbox id="signatureMsg" flex="1">
-      <groupbox>
-        <description>&randomInfo.desc;</description>
+      <description>&randomInfo.desc;</description>
 
-        <hbox>
-          <menulist flex="1" id="sig-menu"
-            oncommand="gamefox_options_sig.changeSig();">
-            <menupopup>
-              <menuitem value="" label="&defaultSig.label;"/>
-            </menupopup>
-          </menulist>
-          <button id="sig-add" icon="add" label="&addSig.label;"
-            oncommand="gamefox_options_sig.addSig();"/>
-          <button id="sig-delete" icon="remove" label="&deleteSig.label;"
-            oncommand="gamefox_options_sig.deleteSig();" disabled="true"/>
+      <hbox>
+        <menulist flex="1" id="sig-menu"
+          oncommand="gamefox_options_sig.changeSig();">
+          <menupopup>
+            <menuitem value="" label="&defaultSig.label;"/>
+          </menupopup>
+        </menulist>
+        <button id="sig-add" icon="add" label="&addSig.label;"
+          oncommand="gamefox_options_sig.addSig();"/>
+        <button id="sig-delete" icon="remove" label="&deleteSig.label;"
+          oncommand="gamefox_options_sig.deleteSig();" disabled="true"/>
+      </hbox>
+
+      <hbox>
+        <label value="&sig.label;" flex="1"/>
+        <hbox pack="end"><label id="sig-chars" value=""/></hbox>
+      </hbox>
+      <textbox id="sig-body" emptytext="&sig.emptytext;"
+        oninput="gamefox_options_sig.updatePref(this);" rows="3"
+        multiline="true" class="indent"/>
+      <hbox pack="end">
+        <button id="gamefox-css-grab-sig" label="&grab.button;"
+          icon="refresh" oncommand="gamefox_options_sig.importSig();"/>
+        <button id="gamefox-css-save-sig" label="&save.button;"
+          icon="save" oncommand="gamefox_options_sig.exportSig();"/>
+      </hbox>
+                                  <!-- for notificationBox + animateFadeIn -->
+      <groupbox id="sig-criteria" style="margin-bottom: 2em;">
+        <description>&criteria.accountsBoards.desc;</description>
+
+        <hbox align="center" style="margin-bottom: 1.5em;">
+          <label value="&accounts.label;"/>
+          <textbox id="sig-criteria-accounts" newlines="replacewithcommas"
+            oninput="gamefox_options_sig.updatePref(this);" flex="1"
+            emptytext="&accounts.emptytext;"/>
+          <label value="&boards.label;"/>
+          <textbox id="sig-criteria-boards" newlines="replacewithcommas"
+            oninput="gamefox_options_sig.updatePref(this);" flex="1"
+            emptytext="&boards.emptytext;"/>
         </hbox>
 
-        <hbox>
-          <label value="&sig.label;" flex="1"/>
-          <hbox pack="end"><label id="sig-chars" value=""/></hbox>
-        </hbox>
-        <textbox id="sig-body" emptytext="&sig.emptytext;"
-          oninput="gamefox_options_sig.updatePref(this);" rows="3"
-          multiline="true" class="indent"/>
-        <hbox pack="end">
-          <button id="gamefox-css-grab-sig" label="&grab.button;"
-            icon="refresh" oncommand="gamefox_options_sig.importSig();"/>
-          <button id="gamefox-css-save-sig" label="&save.button;"
-            icon="save" oncommand="gamefox_options_sig.exportSig();"/>
-        </hbox>
-                                   <!-- for notificationBox + animateFadeIn -->
-        <groupbox id="sig-criteria" style="margin-bottom: 2em;">
-          <description>&criteria.accountsBoards.desc;</description>
-
-          <hbox align="center" style="margin-bottom: 1.5em;">
-            <label value="&accounts.label;"/>
-            <textbox id="sig-criteria-accounts" newlines="replacewithcommas"
-              oninput="gamefox_options_sig.updatePref(this);" flex="1"
-              emptytext="&accounts.emptytext;"/>
-            <label value="&boards.label;"/>
-            <textbox id="sig-criteria-boards" newlines="replacewithcommas"
-              oninput="gamefox_options_sig.updatePref(this);" flex="1"
-              emptytext="&boards.emptytext;"/>
-          </hbox>
-
-          <checkbox label="&randomizeMostSpecific.label;"
-            preference="signature.selectMostSpecific"/>
-        </groupbox>
+        <checkbox label="&randomizeMostSpecific.label;"
+          preference="signature.selectMostSpecific"/>
       </groupbox>
     </notificationbox>
 
