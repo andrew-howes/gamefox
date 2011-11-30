@@ -164,6 +164,50 @@ var gamefox =
         css.extras = {};
       gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
     }
+
+    /* 0.8.5 */
+    if (comparator.compare('0.8.5', version) > 0)
+    {
+      var sig = gamefox_lib.safeEval(gamefox_lib.getString(
+            'signature.serialized'));
+
+      // Check if they only have 1 GameFOX sig, and if it's the same as their
+      // GameFAQs sig. If so, delete it from GameFOX
+      // This handles the case of someone who didn't edit their GameFOX sig at
+      // all and wants to keep it synced with GameFAQs
+      if (sig.length == 1 && sig[0].body.length > 0)
+      {
+        // NOTE: This contains duplicate code from options/signatures.js
+        // Since this is only going to be used once, I didn't feel it worth it
+        // to abstract the code into another function
+        var request = new XMLHttpRequest();
+        request.open('GET', gamefox_lib.domain + gamefox_lib.path +
+            'sigquote.php');
+        var ds = gamefox_lib.thirdPartyCookieFix(request);
+        request.onreadystatechange = function()
+        {
+          if (request.readyState != 4)
+            return;
+
+          var remoteSig = request.responseText.match(
+              /<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
+
+          if (!remoteSig)
+            return;
+
+          remoteSig = gamefox_utils.convertNewlines(gamefox_utils
+              .specialCharsDecode(remoteSig[1]));
+
+          if (remoteSig.trim() == sig[0].body.trim())
+          { // The sigs are the same
+            sig[0].body = '';
+            gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(
+                  sig));
+          }
+        };
+        request.send(null);
+      }
+    }
   },
 
   importMsgsPerPage: function()
