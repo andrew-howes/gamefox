@@ -48,7 +48,7 @@ var gamefox_messages =
     if (!count) return;
 
     var str = message.value.trim();
-    if (sig.type != 'hidden')
+    if (sig && sig.type != 'hidden')
       str += '\n---\n' + sig.value.trim();
     var length = gamefox_utils.encodedMessageLength(str);
 
