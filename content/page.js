@@ -844,7 +844,7 @@ var gamefox_page =
         gamefox_quickpost.setPostKey(postKey.value);
 
       var alternateColor = false;
-      var msgnum = pagenum * gamefox_lib.prefs.getIntPref('msgsPerPage');
+      var msgnum, msgnumString;
       var msgnumCond = !onDetail && gamefox_lib.prefs.getBoolPref('elements.msgnum');
       var msgnumStyle = gamefox_lib.prefs.getIntPref('elements.msgnum.style');
 
@@ -880,8 +880,8 @@ var gamefox_page =
           continue;
         }
 
-        ++msgnum;
-        var msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
+        msgnum = parseInt((td[i].querySelector('a[name]') || {}).name);
+        msgnumString = '000'.substring(msgnum.toString().length) + msgnum;
 
         if (onArchive)
           var profileLink = td[i].getElementsByTagName('b')[0];
