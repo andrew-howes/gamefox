@@ -201,7 +201,8 @@ var gamefox_messages =
           gamefox_lib.alert('You can\'t edit this post anymore.');
           return;
         }
-        msg = gamefox_utils.specialCharsDecode(msg[1]);
+        msg = gamefox_utils.convertNewlines(gamefox_utils.specialCharsDecode(
+              msg[1]));
 
         var key = gamefox_utils.parseFormInput('key', get.responseText);
 
@@ -232,7 +233,7 @@ var gamefox_messages =
         var editBox = doc.createElement('textarea');
         editBox.name = 'messagetext';
         editBox.style.width = '100%';
-        editBox.appendChild(doc.createTextNode(msg));
+        editBox.textContent = msg;
         editBox.addEventListener('focus', function() {
           doc.gamefox.lastFocusedPostForm = editForm; }, false);
         editForm.appendChild(editBox);
