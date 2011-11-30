@@ -19,140 +19,136 @@
 
 var gamefox_sig =
 {
-  getSigByCriteria: function(account, boardname, boardid)
+  _read: function()
   {
-    account = account.toLowerCase();
-    boardname = boardname.toLowerCase();
-    var matches = new Array(new Array(), new Array(), new Array());
-    var accounts, boards;
-    var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
-
-    // check if sigs array is valid
-    if (!sigs || !sigs[0])
-      return {boards: '', accounts: '', body: ''};
-
-    // find matching sigs
-    for (var i = 1; i < sigs.length; i++)
-    {
-      // skip empty sigs
-      if (!sigs[i]['body'].length) continue;
-
-      accounts = sigs[i]['accounts'].toLowerCase().trim().split(/\s*,\s*/);
-      boards = sigs[i]['boards'].toLowerCase().trim().split(/\s*,\s*/);
-
-      // force the array length to 0
-      if (accounts.join() == '') accounts = new Array();
-      if (boards.join() == '') boards = new Array();
-
-      if (!accounts.length && boards.length)
-      {
-        if (this.matchBoard(boards, boardid, boardname))
-          matches[1].push(sigs[i]);
-      }
-      else if (accounts.length && !boards.length)
-      {
-        if (accounts.indexOf(account) != -1)
-          matches[1].push(sigs[i]);
-      }
-      else if (accounts.length && boards.length)
-      {
-        if (accounts.indexOf(account) != -1
-            && this.matchBoard(boards, boardid, boardname))
-          matches[0].push(sigs[i]); // account and board-specific sig, highest priority
-      }
-      else
-      {
-        matches[2].push(sigs[i]); // global sig, lowest priority
-      }
-    }
-    // default is the last of the lowest priority
-    if (sigs[0]['body'].length)
-      matches[2].push(sigs[0]);
-
-    var sig;
-
-    if (gamefox_lib.prefs.getBoolPref('signature.selectMostSpecific'))
-    {
-      var bestIndex = matches[0].length ? 0 : matches[1].length ? 1 : 2;
-      sig = matches[bestIndex][Math.floor(Math.random() * matches[bestIndex].length)];
-    }
-    else
-    {
-      var allMatches = gamefox_utils.mergeArray(matches[0], matches[1], matches[2]);
-      sig = allMatches[Math.floor(Math.random() * allMatches.length)];
-    }
-
-    // default is only sig and is empty
-    if (sig == undefined)
-      sig = sigs[0];
-
-    return sig;
+    return gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
   },
-
-  getSigById: function(id)
+  _save: function(sigs)
   {
-    return gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'))[id];
-  },
-
-  addSig: function()
-  {
-    var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
-    sigs.push({'accounts':'', 'boards':'', 'body':''});
     gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigs));
+  },
+
+  _search: function(account, boardName, boardId)
+  {
+    // Sanitize
+    account = account.toLowerCase();
+    boardId = parseInt(boardId);
+    boardName = boardName.toLowerCase();
+
+    // Search results, grouped by specificity
+    var matches = [
+      [], // priority 0
+      [], // priority 1
+      []  // priority 2
+    ];
+
+    var sigs = this._read();
+
+    // Check if the sigs array is valid
+    if (!sigs || !sigs[0])
+      return '';
+
+    // Find matching sigs
+    var boards, accounts;
+    for (var i = 0; i < sigs.length; i++)
+    {
+      if (!sigs[i].body.length) continue; // skip empty
+
+      accounts = this._splitByCommas(sigs[i].accounts);
+      boards = this._splitByCommas(sigs[i].boards);
+
+      // Account and board (P0)
+      if (accounts.length && boards.length && accounts.indexOf(account) != -1
+          && this.matchBoard(boards, boardId, boardName))
+        matches[0].push(sigs[i]);
+
+      // Account only (P1)
+      else if (accounts.length && !boards.length && accounts.indexOf(account)
+          != -1)
+          matches[1].push(sigs[i]);
+
+      // Board only (P1)
+      else if (boards.length && !accounts.length && this.matchBoard(boards,
+          boardId, boardName))
+        matches[1].push(sigs[i]);
+
+      // Global/default (P2)
+      else if (!accounts.length && !boards.length)
+        matches[2].push(sigs[i]);
+    }
+
+    // Select the best matching array
+    var list;
+    if (gamefox_lib.prefs.getBoolPref('signature.selectMostSpecific'))
+      list = matches[matches[0].length ? 0 : matches[1].length ? 1 : 2];
+    else
+      list = gamefox_utils.mergeArray(matches[0], matches[1], matches[2]);
+
+    // Return a random sig
+    var sig = list[Math.floor(Math.random() * list.length)];
+    return sig ? sig.body : '';
+  },
+
+  _splitByCommas: function(str)
+  {
+    list = str.toLowerCase().trim().split(/\s*,\s*/);
+    if (list.join() == '')
+      list = [];
+
+    return list;
+  },
+
+  newSig: function()
+  {
+    var sigs = this._read();
+    sigs.push({'accounts': '', 'boards': '', 'body': ''});
+    this._save(sigs);
 
     return sigs.length - 1;
   },
 
-  deleteSigById: function(id)
+  deleteSig: function(id)
   {
-    var sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
+    var sigs = this._read();
     sigs.splice(id, 1);
-    gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigs));
+    this._save(sigs);
   },
 
-  matchBoard: function(boards, boardid, boardname)
+  matchBoard: function(boards, boardId, boardName)
   {
-    if ((boardid && boards.indexOf(boardid) != -1)
-        || (boardname && boards.indexOf(boardname) != -1))
+    if ((boardId && boards.indexOf(boardId) != -1) ||
+        (boardName && boards.indexOf(boardName) != -1))
       return true;
+
     return false;
   },
 
-  format: function(sig, newline, doc)
+  format: function(sig)
   {
-    if (sig == null) // fetch sig
-    {
-      if (!doc) return false;
-      var boardname = gamefox_utils.getBoardName(doc);
-      var boardid = gamefox_utils.getBoardId(doc.location.pathname);
-      var account = gamefox_utils.getAccountName(doc);
-      var getSig = gamefox_sig.getSigByCriteria(account, boardname, boardid);
-      sig = getSig['body'];
-    }
-    if (!sig.length)
-      return '';
-
-    if (newline == null) // fetch newline
-      newline = gamefox_lib.prefs.getBoolPref('signature.newline');
-
-    // truncate at 2 lines
+    // Max of 2 lines
     sig = sig.split('\n');
     if (sig.length >= 2)
       sig = sig[0] + '\n' + sig[1];
     else
       sig = sig[0];
 
-    // remove p
+    // Remove <p>
     sig = sig.replace(/<\/?p>/g, '');
 
-    // truncate at 160 characters
+    // Max of 160 characters (with expanded HTML entities)
     sig = gamefox_utils.specialCharsEncode(sig).substr(0, 160);
 
-    // remove truncated entities
+    // Remove any partial HTML entities from the substr
     var amp = sig.lastIndexOf('&');
     if (sig.lastIndexOf(';') < amp)
       sig = sig.substr(0, amp);
 
     return gamefox_utils.specialCharsDecode(sig);
+  },
+
+  select: function(doc)
+  {
+    return this._search(gamefox_utils.getAccountName(doc), gamefox_utils
+        .getBoardName(doc), gamefox_utils.getBoardId(doc.location.pathname));
   }
 };

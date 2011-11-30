@@ -103,8 +103,8 @@ var gamefox_quickpost =
     form.appendChild(doc.createElement('br'));
 
     // Signature
-    form.appendChild(gamefox_quickpost.createSigField(gamefox_sig.format(null,
-            null, doc), doc));
+    form.appendChild(gamefox_quickpost.createSigField(gamefox_sig.select(doc),
+          doc));
 
     // Post buttons
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
@@ -454,7 +454,7 @@ var gamefox_quickpost =
     var custom_sig = form.elements.namedItem('custom_sig');
     if (custom_sig.type != 'hidden' &&
         gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
-      custom_sig.value = gamefox_sig.format(null, null, doc);
+      custom_sig.value = gamefox_sig.select(doc);
 
     gamefox_messages.updateMessageCount(form);
 

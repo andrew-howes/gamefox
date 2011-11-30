@@ -133,7 +133,7 @@ var gamefox_options_sig =
 
   addSig: function()
   {
-    var idx = gamefox_sig.addSig();
+    var idx = gamefox_sig.newSig();
     this._menu.insertItemAt(idx, 'Signature', '');
     this._menu.selectedIndex = idx;
     this.changeSig();
@@ -152,7 +152,7 @@ var gamefox_options_sig =
 
       accounts.value = '';
       boards.value = '';
-      this._textbox.value = gamefox_sig.getSigById(0).body;
+      this._textbox.value = this._sigs[0].body;
     }
     else
     {
@@ -160,7 +160,7 @@ var gamefox_options_sig =
       this._showCriteriaForm();
       document.getElementById('sig-delete').disabled = false;
 
-      var sigData = gamefox_sig.getSigById(this._menu.selectedIndex);
+      var sigData = this._sigs[this._menu.selectedIndex];
       accounts.value = sigData.accounts;
       boards.value = sigData.boards;
       this._textbox.value = sigData.body;
@@ -187,7 +187,7 @@ var gamefox_options_sig =
     this.changeSig();
 
     // remove it
-    gamefox_sig.deleteSigById(idx);
+    gamefox_sig.deleteSig(idx);
     this._menu.removeItemAt(idx);
   },
 

@@ -418,8 +418,8 @@ var gamefox_page =
       }
 
       // Signature
-      var sigField = gamefox_quickpost.createSigField(gamefox_sig.format(null,
-            null, doc), doc);
+      var sigField = gamefox_quickpost.createSigField(gamefox_sig.select(doc),
+          doc);
 
       if (sigField.type != 'hidden' &&
           !/\b(Posted)<\/h2>/.test(doc.body.innerHTML) &&
