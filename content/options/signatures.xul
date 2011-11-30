@@ -43,6 +43,8 @@
 
     <notificationbox id="signatureMsg" flex="1">
       <groupbox>
+        <description>&randomInfo.desc;</description>
+
         <hbox>
           <menulist flex="1" id="sig-menu"
             oncommand="gamefox_options_sig.changeSig();">
@@ -84,7 +86,7 @@
               emptytext="&boards.emptytext;"/>
           </hbox>
 
-          <checkbox label="&selectMostSpecific.label;"
+          <checkbox label="&randomizeMostSpecific.label;"
             preference="signature.selectMostSpecific"/>
         </groupbox>
       </groupbox>

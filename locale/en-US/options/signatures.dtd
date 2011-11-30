@@ -1,5 +1,8 @@
 <!-- vim: set indentexpr=: -->
 
+<!ENTITY randomInfo.desc "Click the Add button to create more signatures, which
+will be randomly selected.">
+
 <!ENTITY defaultSig.label "Default signature">
 <!ENTITY addSig.label "Add">
 <!ENTITY deleteSig.label "Delete">
@@ -16,5 +19,5 @@ and board names or IDs separated by commas for this signature.">
 <!ENTITY boards.label "Boards:">
 <!ENTITY boards.emptytext "Every board">
 
-<!ENTITY selectMostSpecific.label "Select signatures with the most specific
-account and board settings">
+<!ENTITY randomizeMostSpecific.label "Randomize only from signatures with the
+most specific account and board settings">
