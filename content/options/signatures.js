@@ -133,7 +133,7 @@ var gamefox_options_sig =
 
   addSig: function()
   {
-    var idx = gamefox_sig.newSig();
+    var idx = gamefox_sigs.newSig();
     this._menu.insertItemAt(idx, 'Signature', '');
     this._menu.selectedIndex = idx;
     this.changeSig();
@@ -187,7 +187,7 @@ var gamefox_options_sig =
     this.changeSig();
 
     // remove it
-    gamefox_sig.deleteSig(idx);
+    gamefox_sigs.deleteSig(idx);
     this._menu.removeItemAt(idx);
   },
 

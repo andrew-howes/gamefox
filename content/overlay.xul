@@ -34,7 +34,7 @@
   <script type="application/x-javascript" src="chrome://gamefox/content/context.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/quickpost.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/quickwhois.js"/>
-  <script type="application/x-javascript" src="chrome://gamefox/content/sig.js"/>
+  <script type="application/x-javascript" src="chrome://gamefox/content/sigs.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/accounts.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/highlighting.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/messages.js"/>

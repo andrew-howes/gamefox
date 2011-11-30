@@ -17,7 +17,7 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var gamefox_sig =
+var gamefox_sigs =
 {
   _read: function()
   {

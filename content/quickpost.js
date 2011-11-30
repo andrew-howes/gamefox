@@ -103,7 +103,7 @@ var gamefox_quickpost =
     form.appendChild(doc.createElement('br'));
 
     // Signature
-    form.appendChild(gamefox_quickpost.createSigField(gamefox_sig.select(doc),
+    form.appendChild(gamefox_quickpost.createSigField(gamefox_sigs.select(doc),
           doc));
 
     // Post buttons
@@ -336,7 +336,7 @@ var gamefox_quickpost =
     var key = form.elements.namedItem('key').value;
     var message = gamefox_quickpost.removeGFCodeWhitespace(form.elements
         .namedItem('messagetext').value);
-    var sig = gamefox_sig.format(form.elements.namedItem('custom_sig').value);
+    var sig = gamefox_sigs.format(form.elements.namedItem('custom_sig').value);
 
     var params = gamefox_utils.parseBoardLink(doc.location.pathname) ||
       gamefox_utils.parseQueryString(doc.location.search); // post.php
@@ -454,7 +454,7 @@ var gamefox_quickpost =
     var custom_sig = form.elements.namedItem('custom_sig');
     if (custom_sig.type != 'hidden' &&
         gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
-      custom_sig.value = gamefox_sig.select(doc);
+      custom_sig.value = gamefox_sigs.select(doc);
 
     gamefox_messages.updateMessageCount(form);
 
@@ -796,7 +796,7 @@ var gamefox_quickpost =
   cleanSig: function(event)
   {
     var sig = event.target.elements.namedItem('custom_sig');
-    sig.value = gamefox_sig.format(sig.value);
+    sig.value = gamefox_sigs.format(sig.value);
   },
 
   readPostKey: function()

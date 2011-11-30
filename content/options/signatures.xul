@@ -27,7 +27,7 @@
   <prefpane id="paneSignatures" onpaneload="gamefox_options_sig.init();">
 
     <script type="application/x-javascript"
-      src="chrome://gamefox/content/sig.js"/>
+      src="chrome://gamefox/content/sigs.js"/>
     <script type="application/x-javascript"
       src="chrome://gamefox/content/options/signatures.js"/>
 
