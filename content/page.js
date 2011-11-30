@@ -418,10 +418,10 @@ var gamefox_page =
       }
 
       // Signature
-      var sig = gamefox_sig.format(null, null, doc);
-      var showSig = gamefox_lib.prefs.getCharPref('signature.show');
+      var sigField = gamefox_quickpost.createSigField(gamefox_sig.format(null,
+            null, doc), doc);
 
-      if ((showSig == 'always' || (sig && showSig == 'auto')) &&
+      if (sigField.type != 'hidden' &&
           !/\b(Posted)<\/h2>/.test(doc.body.innerHTML) &&
           !gamefox_utils.parseQueryString(doc.location.search)['message'])
       {
@@ -433,8 +433,7 @@ var gamefox_page =
         message.parentNode.parentNode.removeChild(message.parentNode
             .nextSibling);
 
-        previewBtn.parentNode.insertBefore(gamefox_quickpost.createSigField(
-              sig, doc), previewBtn);
+        previewBtn.parentNode.insertBefore(sigField, previewBtn);
       }
 
       message.setSelectionRange(0, 0);
