@@ -35,10 +35,9 @@ var gamefox_options_sig =
 
     // loop through sigs and add them to menulist
     for (var i = 1; i < this._sigs.length; i++)
-      this._menu.insertItemAt(i,
-          gamefox_sig.getCriteriaString(this._sigs[i].accounts, this._sigs[i].boards)
-          + gamefox_sig.formatSigPreview(this._sigs[i].body));
-    
+      this._menu.insertItemAt(i, this._criteriaToString(this._sigs[i].accounts,
+            this._sigs[i].boards) + this._sigToPreview(this._sigs[i].body));
+
     this._updateCharCounts();
 
     // watch for external changes to sigs
@@ -104,6 +103,32 @@ var gamefox_options_sig =
     }
     else
       sigChars.style.setProperty('font-weight', '', null);
+  },
+
+  _criteriaToString: function(accounts, boards)
+  {
+    var strbundle = document.getElementById('strings');
+    var str = {
+      'signature': strbundle.getString('signature'),
+      'accounts': strbundle.getString('accounts') + ' ',
+      'boards': strbundle.getString('boards') + ' '
+    };
+
+    switch ((/\S/.test(accounts) ? 1 : 0) + (/\S/.test(boards) ? 2 : 0))
+    {
+      case 0: return str.signature;
+      case 1: return str.accounts + accounts;
+      case 2: return str.boards + boards;
+      case 3: return str.accounts + accounts + ' + ' + str.boards + boards;
+    }
+  },
+
+  _sigToPreview: function(str)
+  {
+    if (!/\S/.test(str))
+      return '';
+
+    return ' / ' + str.trim().replace(/\s+/g, ' ');
   },
 
   addSig: function()
@@ -180,9 +205,9 @@ var gamefox_options_sig =
     this._save();
 
     if (idx != 0) // don't set default
-      this._menu.selectedItem.label =
-        gamefox_sig.getCriteriaString(this._sigs[idx].accounts, this._sigs[idx].boards)
-        + gamefox_sig.formatSigPreview(this._sigs[idx].body);
+      this._menu.selectedItem.label = this._criteriaToString(this._sigs[idx]
+          .accounts, this._sigs[idx].boards) +
+        this._sigToPreview(this._sigs[idx].body);
 
     this._updateCharCounts();
   },
