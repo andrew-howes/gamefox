@@ -433,9 +433,8 @@ var gamefox_page =
         message.parentNode.parentNode.removeChild(message.parentNode
             .nextSibling);
 
-        doc.gamefox.sig = sig;
         previewBtn.parentNode.insertBefore(gamefox_quickpost.createSigField(
-              doc, true), previewBtn);
+              sig, doc), previewBtn);
       }
 
       message.setSelectionRange(0, 0);

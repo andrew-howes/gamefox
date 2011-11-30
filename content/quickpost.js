@@ -103,10 +103,10 @@ var gamefox_quickpost =
     form.appendChild(doc.createElement('br'));
 
     // Signature
-    doc.gamefox.sig = gamefox_sig.format(null, null, doc);
+    form.appendChild(gamefox_quickpost.createSigField(gamefox_sig.format(null,
+            null, doc), doc));
 
-    form.appendChild(gamefox_quickpost.createSigField(doc));
-
+    // Post buttons
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
     {
       var postbutton = doc.createElement('input');
@@ -299,16 +299,6 @@ var gamefox_quickpost =
     }
   },
 
-  appendSig: function(event)
-  {
-    var doc = gamefox_lib.getDocument(event);
-    if (!doc.gamefox.sigAdded)
-    {
-      doc.getElementById('gamefox-message').value += doc.gamefox.sig;
-      doc.gamefox.sigAdded = true;
-    }
-  },
-
   toggleVisibility: function(event)
   {
     var doc = gamefox_lib.getDocument(event);
@@ -464,10 +454,7 @@ var gamefox_quickpost =
     var custom_sig = form.elements.namedItem('custom_sig');
     if (custom_sig.type != 'hidden' &&
         gamefox_lib.prefs.getBoolPref('elements.quickpost.resetnewsig'))
-    {
-      doc.gamefox.sig = gamefox_sig.format(null, null, doc);
-      custom_sig.value = doc.gamefox.sig;
-    }
+      custom_sig.value = gamefox_sig.format(null, null, doc);
 
     gamefox_messages.updateMessageCount(form);
 
@@ -770,15 +757,15 @@ var gamefox_quickpost =
     gamefox_messages.updateMessageCount(form);
   },
 
-  createSigField: function(doc, postPage)
+  createSigField: function(sig, doc)
   {
     var showSig = gamefox_lib.prefs.getCharPref('signature.show');
 
-    if (showSig == 'always' || (doc.gamefox.sig && showSig == 'auto'))
+    if (showSig == 'always' || (sig && showSig == 'auto'))
     {
       var sigField = doc.createElement('span');
-      sigField.id = postPage ? 'gamefox-post-signature' :
-        'gamefox-quickpost-signature';
+      sigField.id = gamefox_lib.onPage(doc, 'post') ? 'gamefox-post-signature'
+        : 'gamefox-quickpost-signature';
 
       var span = doc.createElement('span');
       span.textContent = 'Signature:';
@@ -791,8 +778,7 @@ var gamefox_quickpost =
       sigText.rows = 2;
       sigText.cols = 100;
       sigText.tabIndex = 4;
-
-      sigText.value = doc.gamefox.sig;
+      sigText.value = sig;
 
       sigField.appendChild(sigText);
       sigField.appendChild(doc.createElement('br'));
