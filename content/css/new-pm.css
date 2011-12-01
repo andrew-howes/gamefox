@@ -1,0 +1,23 @@
+@-moz-document domain(gamefaqs.com) {
+    #loginbox .nav #gamefox-new-pm {
+        color: #222 !important;
+        background: none !important;
+    }
+    #gamefox-new-pm b {
+        background: rgba(255, 255, 255, .7) !important;
+        -moz-border-radius: 2px;
+        padding: 2px 2px 3px !important;
+        color: inherit !important;
+
+        /* Reset these from Ninestalgia */
+        line-height: inherit !important;
+        height: auto !important;
+    }
+    #gamefox-new-pm b:hover {
+        text-decoration: underline;
+    }
+    #gamefox-new-pm b:after {
+        padding-left: 2px;
+        content: url('chrome://gamefox/content/css/images/new-pm/new.png');
+    }
+}

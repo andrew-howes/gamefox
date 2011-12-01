@@ -36,6 +36,13 @@
     </tr>
 
     <tr>
+        <td>a#gamefox-new-pm</td>
+        <td>"New Messages" link in the header when there are new PMs.</td>
+        <td>0.8.5</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>a#gamefox-quickpost-hide</td>
         <td>Close/hide button for floating (topic) QuickPost.</td>
         <td>0.8.4</td>

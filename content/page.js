@@ -109,6 +109,11 @@ var gamefox_page =
     else if (!loggedIn)
       gamefox_lib.prefs.setCharPref('accounts.current', '');
 
+    // Allow CSS to highlight the "New Messages" link
+    var pmLink = doc.querySelector('#loginbox .nav a[href="/pm/"]');
+    if (pmLink && pmLink.textContent[0] != '0')
+      pmLink.id = 'gamefox-new-pm';
+
     if (!gamefox_lib.onBoards(doc)) return false;
 
     doc.gamefox = {

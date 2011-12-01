@@ -118,6 +118,8 @@ var gamefox_css =
         'hide-signatures.css': ['Hide signatures',
             'Hides signatures in posts and shows them again when hovered over.\n\n'
               + '(Requires Firefox 3.6 or newer.)', '', false],
+        'new-pm.css': ['Highlight new PMs link', 'Highlights the "New '
+              + 'Messages" link when there are new PMs.', '', true],
         'message-link-icons.css': ['Message link icons',
             'Converts links in the message header (message detail, delete, filter, quote)'
               + ' to icons.\n\nIcons courtesy of http://www.pinvoke.com/',
