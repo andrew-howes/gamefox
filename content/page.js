@@ -963,6 +963,13 @@ var gamefox_page =
           editList.addEventListener('click', gamefox_messages.fetchEdits,
               false);
 
+          // For the custom drop-down menu arrow: Windows has unremovable
+          // padding on the <select>, but Linux does not, so we need to do an
+          // OS check here
+          if (Cc['@mozilla.org/xre/app-info;1'].getService(Ci.nsIXULRuntime).OS
+              != 'WINNT')
+            editList.style.paddingRight = '17px';
+
           var editListText = doc.createElement('option');
           editListText.textContent = '(edited)';
           editList.appendChild(editListText);

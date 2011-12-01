@@ -60,18 +60,21 @@
         background: url('chrome://gamefox/content/css/images/gamefox-essentials\
 /arrow-down.png') right no-repeat;
     }
-    .gamefox-edit-list select
+    .gamefox-edit-list select, .gamefox-edit-list select button /* anonymous */
     {
         /* -moz-appearance: none doesn't work here:
          *   https://bugzilla.mozilla.org/show_bug.cgi?id=649849
-         * Using "statusbar" is a hack to allow us to set a custom drop-down
-         * menu arrow, but it requires a separate element (.gamefox-edit-list
-         * above) since the background property doesn't work here
+         * Using "radio-container" is a hack to allow us to set a custom
+         * drop-down menu arrow, but it requires a separate element
+         * (.gamefox-edit-list above) since the background property doesn't work
+         * here
          */
-        -moz-appearance: statusbar !important;
+        -moz-appearance: radio-container !important;
+    }
+    .gamefox-edit-list select
+    {
         color: inherit;
         background: inherit;
-        padding-right: 15px;
         cursor: pointer;
     }
     .gamefox-edit-list select:focus, .gamefox-edit-list option
@@ -88,8 +91,16 @@
     }
     .msg_stats_left .gamefox-edit-list
     {
+        /* This isn't actually intended to change the font size, but to make the
+         * height of .gamefox-edit-list and the <select> the same, to avoid
+         * a (sometimes) misaligned background image */
+        font-size: 1.1em;
+
         position: relative;
         top: -2px;
+        /* arrow-down.png is 2px wider than it needs to be, in order to push it
+         * to the left on Windows */
+        right: -2px;
     }
     .msg_stats_left .gamefox-edit-list select
     {

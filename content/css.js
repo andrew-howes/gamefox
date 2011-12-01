@@ -19,6 +19,15 @@
 
 var gamefox_css =
 {
+  _getType: function(cat)
+  {
+    // AGENT_SHEET allows stylesheets to do more than USER_SHEET, but has the
+    // potential to crash Firefox if used incorrectly, so it's only enabled for
+    // stylesheets that ship with GameFOX.
+    // See <https://developer.mozilla.org/en/Using_the_Stylesheet_Service>
+    return cat == 'user' ? 'USER_SHEET' : 'AGENT_SHEET';
+  },
+
   init: function()
   {
     var defaults = {
@@ -304,6 +313,7 @@ var gamefox_css =
       .getService(Ci.nsILocalFile);
     var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
 
+    var type;
     for (var category in css)
     {
       for (var filename in css[category])
@@ -316,11 +326,13 @@ var gamefox_css =
             .getService(Ci.nsIIOService)
             .newFileURI(file);
 
-          if (sss.sheetRegistered(uri, sss.USER_SHEET))
-            sss.unregisterSheet(uri, sss.USER_SHEET);
+          type = this._getType(category);
+
+          if (sss.sheetRegistered(uri, sss[type]))
+            sss.unregisterSheet(uri, sss[type]);
 
           if (css[category][filename]['enabled'].toString() == 'true')
-            sss.loadAndRegisterSheet(uri, sss.USER_SHEET);
+            sss.loadAndRegisterSheet(uri, sss[type]);
         }
         catch (e if e.name == 'NS_ERROR_FILE_NOT_FOUND')
         {
@@ -358,7 +370,7 @@ var gamefox_css =
       .newFileURI(file);
     try
     {
-      sss.unregisterSheet(uri, sss.USER_SHEET);
+      sss.unregisterSheet(uri, sss[this._getType(category)]);
     }
     catch (e) {}
 
