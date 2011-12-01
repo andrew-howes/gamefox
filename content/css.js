@@ -328,7 +328,7 @@ var gamefox_css =
           {
             this.remove(category, filename);
             if (inOptions)
-              GFstyleOptions.populate();
+              gamefox_options_style.populate();
           }
           else // gamefox stylesheet, restore it
           {
