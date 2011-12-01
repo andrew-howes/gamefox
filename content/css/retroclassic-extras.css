@@ -80,6 +80,14 @@ p.gamefox-usernote:not(#helloworld) {background:yellow !important; border-bottom
 table td.author:before {content: "From: " !important;}
 
 
+/** New PM (GameFOX) **/
+#gamefox-new-pm, #gamefox-new-pm b {font-weight:bold !important; color:yellow !important; background:none !important;}
+
+
+/** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
+.gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90 !important;}
+
+
 /** Quotes and Code blocks (GameFAQs and GFCode) **/ /** Modified from GameFOX GFCode CSS **/
 .message i > p, .message em > p, .message .fquote {border: 2px #f0f0ff solid !important; margin: 0 auto !important; padding: 1px !important; width: 96% !important; border-radius: 0px !important; -moz-border-radius: 0px !important; -webkit-border-radius: 0px !important; background: #dfdfff !important; color:black !important; font-size:12.8px !important;}
 /**<i><p> Quote**/ .message i > p, .message .fquote {font-style: normal !important; background:  #dfdfff !important;}
@@ -108,13 +116,10 @@ a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
 #gamefox-message, #gamefox-quickpost-signature textarea {width: 70% !important; border-left: 2px solid #0000ff !important; border-right: 2px solid #0000ff !important; font-size:12.8px !important; font-family: MS Shell Dlg,arial,sans-serif !important;}
 .gamefox-message-count, #gamefox-title-count {margin-left: 2em !important;}
 
-
-/** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
-.gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90 !important;}
-
 /** Character Map **/ /** Based off CSS included with GameFOX **/
 .gamefox-character-map table {border-collapse:collapse !important;}
 .gamefox-character-map:not(#helloworld) a:not(#helloworld) {text-decoration:none !important;}
+
 
 /** GameFOX - Tracked Note **/
 #gamefox-tracked-note {background:#FFFFAA !important; text-align:center !important; font-size:12.8px !important; border:2px solid white !important; padding:1px !important; margin:0 !important; border-bottom:0 !important;}
@@ -124,6 +129,7 @@ a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
 
 /** Last Post **/
 table.board:not(#helloworld) a.gamefox-last-post-link:not(#helloworld) {color:black !important; text-decoration:none !important;}
+
 
 /** FAQs **/
 body > div#header, body > div#footer {background:#6666FF !important; color:white !important; border-color:#6666FF !important;}
