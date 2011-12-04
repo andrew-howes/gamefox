@@ -85,19 +85,20 @@
     {
         padding-right: 0;
     }
+    .msg_stats .gamefox-edit-list
+    {
+        margin-right: -6px;
+    }
     .msg_stats .gamefox-edit-list select
     {
         margin-left: -4px;
     }
     .msg_stats_left .gamefox-edit-list
     {
-        /* This isn't actually intended to change the font size, but to make the
-         * height of .gamefox-edit-list and the <select> the same, to avoid
-         * a (sometimes) misaligned background image */
-        font-size: 1.1em;
+        background-position: right -2px;
 
         position: relative;
-        top: -2px;
+        top: -1px;
         /* arrow-down.png is 2px wider than it needs to be, in order to push it
          * to the left on Windows */
         right: -2px;
@@ -105,5 +106,6 @@
     .msg_stats_left .gamefox-edit-list select
     {
         max-width: 100%;
+        margin-bottom: -2px;
     }
 }

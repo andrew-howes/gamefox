@@ -1322,16 +1322,14 @@ var gamefox_page =
             case 0: // [message detail] | #001
               if (leftMsgData)
               {
-                msgStats.insertBefore(doc.createTextNode('#' + msgnumString),
-                    msgLinks.nextSibling);
                 if (!onArchive || msgLinks.hasChildNodes())
-                  msgStats.insertBefore(doc.createElement('br'),
-                      msgLinks.nextSibling);
+                  msgStats.appendChild(doc.createElement('br'));
+
+                msgStats.appendChild(doc.createTextNode('#' + msgnumString));
               }
               else
-                msgStats.insertBefore(doc.createTextNode(' | #' +
-                      msgnumString), editTextNode ? editTextNode :
-                    msgLinks.nextSibling);
+                msgStats.appendChild(doc.createTextNode(' | #' + msgnumString)
+                    );
               break;
           }
         }
