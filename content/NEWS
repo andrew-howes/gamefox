@@ -10,7 +10,7 @@
     * Simplify signature mangement: the signature textbox is hidden unless
       you're using GameFOX to manage your signatures. Signatures are now stored
       only on GameFAQs by default, but no features were removed
-    * Basic support for reverse ("newest first") message ordering
+    * Basic (incomplete) support for reverse ("newest first") message ordering
     * Highlight the "New Messages" link when you have new PMs
     * Other minor bug fixes and enhancements
 
