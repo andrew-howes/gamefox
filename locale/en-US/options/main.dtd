@@ -12,8 +12,8 @@
 <!ENTITY titlePrefixes.label "Window title page prefixes">
 <!ENTITY dateFormat.label "Custom date format">
 <!ENTITY blockAdServers.label "Block ad servers">
-<!ENTITY favoritesMenu.label "Add favorites menu">
-<!ENTITY clock.label "Add clock">
+<!ENTITY favoritesMenu.label "Favorites menu in header">
+<!ENTITY clock.label "GameFAQs clock in header and QuickPost">
 <!ENTITY trackingNote.label "Show tracked topics with unread posts">
 <!ENTITY msgsPerPage.label "Messages per page:">
 
