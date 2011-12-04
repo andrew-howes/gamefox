@@ -59,7 +59,7 @@ var gamefox_sigs =
 
       // Account and board (P0)
       if (accounts.length && boards.length && accounts.indexOf(account) != -1
-          && this.matchBoard(boards, boardId, boardName))
+          && this._matchBoard(boards, boardId, boardName))
         matches[0].push(sigs[i]);
 
       // Account only (P1)
@@ -68,7 +68,7 @@ var gamefox_sigs =
           matches[1].push(sigs[i]);
 
       // Board only (P1)
-      else if (boards.length && !accounts.length && this.matchBoard(boards,
+      else if (boards.length && !accounts.length && this._matchBoard(boards,
           boardId, boardName))
         matches[1].push(sigs[i]);
 
@@ -98,6 +98,15 @@ var gamefox_sigs =
     return list;
   },
 
+  _matchBoard: function(boards, boardId, boardName)
+  {
+    if ((boardId && boards.indexOf(boardId) != -1) ||
+        (boardName && boards.indexOf(boardName) != -1))
+      return true;
+
+    return false;
+  },
+
   newSig: function()
   {
     var sigs = this._read();
@@ -112,15 +121,6 @@ var gamefox_sigs =
     var sigs = this._read();
     sigs.splice(id, 1);
     this._save(sigs);
-  },
-
-  matchBoard: function(boards, boardId, boardName)
-  {
-    if ((boardId && boards.indexOf(boardId) != -1) ||
-        (boardName && boards.indexOf(boardName) != -1))
-      return true;
-
-    return false;
   },
 
   format: function(sig)
