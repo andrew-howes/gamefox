@@ -57,7 +57,7 @@
 
       <tree id="css-tree" editable="true" seltype="single" flex="1"
         hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
-        style="min-height: 20em;"> <!-- for animateFadeIn -->
+        style="min-height: 19em;"> <!-- for animateFadeIn -->
         <treecols>
           <treecol label="&name.label;" id="styleTreeName" primary="true" flex="1"
             persist="width"/>
