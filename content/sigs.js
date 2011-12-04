@@ -86,7 +86,7 @@ var gamefox_sigs =
 
     // Return a random sig
     var sig = list[Math.floor(Math.random() * list.length)];
-    return sig ? sig.body : '';
+    return sig ? this.clean(sig.body) : '';
   },
 
   _splitByCommas: function(str)
@@ -123,7 +123,7 @@ var gamefox_sigs =
     this._save(sigs);
   },
 
-  format: function(sig)
+  clean: function(sig)
   {
     // Max of 2 lines
     sig = sig.split('\n');

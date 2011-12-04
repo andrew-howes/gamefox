@@ -336,7 +336,7 @@ var gamefox_quickpost =
     var key = form.elements.namedItem('key').value;
     var message = gamefox_quickpost.removeGFCodeWhitespace(form.elements
         .namedItem('messagetext').value);
-    var sig = gamefox_sigs.format(form.elements.namedItem('custom_sig').value);
+    var sig = gamefox_sigs.clean(form.elements.namedItem('custom_sig').value);
 
     var params = gamefox_utils.parseBoardLink(doc.location.pathname) ||
       gamefox_utils.parseQueryString(doc.location.search); // post.php
@@ -796,7 +796,7 @@ var gamefox_quickpost =
   cleanSig: function(event)
   {
     var sig = event.target.elements.namedItem('custom_sig');
-    sig.value = gamefox_sigs.format(sig.value);
+    sig.value = gamefox_sigs.clean(sig.value);
   },
 
   readPostKey: function()
