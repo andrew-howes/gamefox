@@ -16,6 +16,7 @@ JAR_TEXTS       = js css xul html xhtml dtd properties
 JAR_BINS        = png gif
 
 JAR             = chrome/$(NAME).jar
+JAR_DIRNAME     = $(shell dirname $(JAR))
 
 XPI_FILES       = install.rdf COPYING
 XPI_DIRS        = defaults components chrome
@@ -84,6 +85,7 @@ jar: $(JAR)
 clean:
 	@echo "Cleanup..."
 	rm -f $(JAR) $(XPI) $(MOZXPI) $(NIGHTLYXPI)
+	test ! -d $(JAR_DIRNAME) || rmdir --ignore-fail-on-non-empty $(JAR_DIRNAME)
 	find . -name '*~' -exec rm -f {} \;
 
 upnightly: $(NIGHTLYXPI)
