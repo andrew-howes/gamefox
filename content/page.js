@@ -996,8 +996,16 @@ var gamefox_page =
         msgStats.replaceChild(postDateElement, postDateNode);
 
         if (onArchive && isEdited)
-          msgStats.insertBefore(doc.createTextNode(' | (edited)'),
-              postDateNode.nextSibling);
+        {
+          if (leftMsgData) // work around GameFAQs bug: <br><br>(edited)
+          {
+            msgStats.removeChild(postDateElement.nextSibling);
+            msgStats.appendChild(doc.createElement('br'));
+          }
+          else
+            msgStats.insertBefore(doc.createTextNode(' | (edited)'),
+                postDateNode.nextSibling);
+        }
 
         // User status
         var userStatus = msgStats.childNodes[leftMsgData ? 3 : 1].textContent
