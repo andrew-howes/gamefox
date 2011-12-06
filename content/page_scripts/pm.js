@@ -35,7 +35,9 @@ var gamefox_page_pm =
       var pod = doc.querySelector('#main_col > .pod');
       var to = (pod.querySelector('.foot').textContent.match(
           /Sent by (.*)? to/) || [])[1];
-      var subject = 'Re: ' + pod.querySelector('.head > h2').textContent;
+      var subject = pod.querySelector('.head > h2').textContent.trim();
+      if (subject.indexOf('Re: ') != 0)
+        subject = 'Re: ' + subject;
 
       form.parentNode.insertBefore(gamefox_pm.createForm(doc, form.elements
             .namedItem('key').value, to, subject), form.nextSibling);
