@@ -109,12 +109,12 @@
         margin-bottom: -2px;
     }
 
-    /* PM Quick Reply */
-    #gamefox-pm-quick-reply p
+    /* Quick PM */
+    #gamefox-quick-pm p
     {
         margin: 5px 0 0 0 !important;
     }
-    #gamefox-pm-quick-reply label span
+    #gamefox-quick-pm label span
     {
         width: 50px;
         display: inline-block;

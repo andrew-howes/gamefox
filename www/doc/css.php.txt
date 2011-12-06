@@ -141,6 +141,13 @@
     </tr>
 
     <tr>
+        <td>form#gamefox-quick-pm</td>
+        <td>Form for sending PMs.</td>
+        <td>0.8.5</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>form#gamefox-quickpost-form</td>
         <td>QuickPost form.</td>
         <td>-</td>

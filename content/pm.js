@@ -36,7 +36,7 @@ var gamefox_pm =
   createForm: function(doc, key, to, subject)
   {
     var form = doc.createElement('form');
-    form.id = 'gamefox-pm-quick-reply';
+    form.id = 'gamefox-quick-pm';
     form.action = '/pm/new';
     form.method = 'post';
 
