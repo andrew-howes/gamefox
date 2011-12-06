@@ -263,6 +263,11 @@ var gamefox_lib =
     }
   },
 
+  inDir: function(doc, dir)
+  {
+    return doc.location.pathname.indexOf('/' + dir + '/') == 0;
+  },
+
   setTitle: function(doc, title, prefix, page)
   {
     if (!gamefox_lib.prefs.getBoolPref('elements.titlechange')) return;

@@ -133,6 +133,8 @@ pref("gamefox.options.topics.selectedtab", 0);
 pref("gamefox.mouse.quickwhoisHover", true);
 pref("gamefox.mouse.quickwhoisHover.delay", 700);
 
+pref("gamefox.pm.quickReply", true);
+
 pref("gamefox.keys", "{}");
 pref("gamefox.keys.throttle.start", 0);
 pref("gamefox.keys.throttle.count", 0);

@@ -114,6 +114,10 @@ var gamefox_page =
     if (pmLink && pmLink.textContent[0] != '0')
       pmLink.id = 'gamefox-new-pm';
 
+    // Private Messages
+    if (gamefox_lib.inDir(doc, 'pm'))
+      gamefox_page_pm.process(doc);
+
     if (!gamefox_lib.onBoards(doc)) return false;
 
     doc.gamefox = {
