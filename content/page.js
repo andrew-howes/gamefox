@@ -1295,7 +1295,8 @@ var gamefox_page =
               {
                 if (!leftMsgData)
                   msgStats.insertBefore(doc.createTextNode(' | '), msgLinks);
-                var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
+                var numElement = leftMsgData ?
+                  doc.createElement('span') : doc.createElement('b');
                 numElement.appendChild(doc.createTextNode('#' + msgnumString));
                 msgStats.insertBefore(numElement, msgLinks);
                 if (leftMsgData && msgLinks.hasChildNodes())
@@ -1313,7 +1314,8 @@ var gamefox_page =
               {
                 if (!leftMsgData)
                   msgStats.insertBefore(doc.createTextNode(' | '), msgLinks);
-                var numElement = doc.createElement(leftMsgData ? 'span' : 'b');
+                var numElement = leftMsgData ?
+                  doc.createElement('span') : doc.createElement('b');
                 numElement.appendChild(doc.createTextNode('message #' + msgnumString));
                 msgStats.insertBefore(numElement, msgLinks);
                 if (leftMsgData && msgLinks.hasChildNodes())
