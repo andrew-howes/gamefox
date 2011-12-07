@@ -17,6 +17,9 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @class Private Messages page script
+ */
 var gamefox_page_pm =
 {
   /**

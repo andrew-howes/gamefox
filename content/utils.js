@@ -18,6 +18,9 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @class Common DOM convenience and other utility functions
+ */
 var gamefox_utils =
 {
   parseHTMLSelect: function(str, name)

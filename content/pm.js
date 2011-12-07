@@ -17,6 +17,9 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @class Private Messages
+ */
 var gamefox_pm =
 {
   /**
@@ -26,9 +29,9 @@ var gamefox_pm =
    *        Page's HTMLDocument
    * @param key
    *        Hidden "key" string for the form
-   * @param [optional] to
+   * @param [to]
    *        Recipient of the message (prefilled)
-   * @param [optional] subject
+   * @param [subject]
    *        Subject of the message (prefilled)
    *
    * @return HTMLFormElement
