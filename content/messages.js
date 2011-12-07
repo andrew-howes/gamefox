@@ -18,6 +18,9 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @class Message posting, editing, deleting, and other related functions
+ */
 var gamefox_messages =
 {
   updateDelay: 100,
@@ -596,12 +599,22 @@ var gamefox_messages =
     req.send(null);
   },
 
+  /**
+   * Gets the edit history menu element of a message
+   *
+   * @param {Object} msgComponents
+   *
+   * @return {Object} HTMLSelectElement or empty object
+   */
   getEditMenu: function(msgComponents)
   {
     var doc = gamefox_lib.getDocument(msgComponents.header);
 
-    return msgComponents.header.getElementsByClassName('gamefox-edit-list')[0]
-      || {};
+    try {
+      return msgComponents.header.getElementsByClassName('gamefox-edit-list')
+        [0].firstChild;
+    }
+    catch (e if e.name == 'TypeError') { return {}; }
   },
 
   loadLatestEdit: function(msgComponents)
