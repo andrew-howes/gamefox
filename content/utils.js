@@ -432,11 +432,20 @@ var gamefox_utils =
         [])[1];
   },
 
-  findParent: function(tagName, node)
+  /**
+   * Search up the DOM tree for a tag name, including the starting node itself
+   *
+   * @param tagName
+   *        Element tag name to search for (case insensitive)
+   * @param node
+   *        Node to start the search from
+   *
+   * @return An HTML element
+   */
+  findClosest: function(tagName, node)
   {
-    do {
+    while (node.tagName != tagName.toUpperCase() && node.parentNode)
       node = node.parentNode;
-    } while (node.tagName != tagName.toUpperCase() && node.parentNode);
 
     return node;
   },
