@@ -104,6 +104,19 @@ var gamefox_messages =
       count.style.setProperty('font-weight', '', '');
   },
 
+  /**
+   * Trim extraneous newlines after GFCode (<i><p>) quotes
+   *
+   * @param {String} str
+   *        Text to trim
+   * @return {String} Original string with extra newlines trimmed
+   */
+  trimGFCodeNewlines: function(str)
+  {
+    return gamefox_lib.prefs.getBoolPref('quote.controlwhitespace') ?
+      str.replace(/<\/p>\s*<\/(i|em)>\n{2}(?!\n)/g, '</p></$1>\n') : str;
+  },
+
   deletePost: function(event, context)
   {
     context || event.preventDefault();
@@ -240,6 +253,10 @@ var gamefox_messages =
           doc.gamefox.lastFocusedPostForm = editForm; }, false);
         editForm.appendChild(editBox);
 
+        editForm.addEventListener('submit', function() {
+          editBox.value = gamefox_messages.trimGFCodeNewlines(editBox.value);
+        }, false);
+
         var saveBtn = doc.createElement('input');
         saveBtn.value = 'Save';
         saveBtn.title = saveBtn.value;
@@ -322,8 +339,9 @@ var gamefox_messages =
     var editURI = msgComponents.header.getUserData('gamefox_editURI');
     var editKey = editForm.elements.namedItem('key').value;
 
-    gamefox_messages.post('', editForm.elements.namedItem('messagetext').value,
-        '', editKey, gamefox_utils.parseQueryString(editURI),
+    gamefox_messages.post('', gamefox_messages.trimGFCodeNewlines(editForm
+          .elements.namedItem('messagetext').value), '', editKey,
+        gamefox_utils.parseQueryString(editURI),
         function(result, msg, data) {
           if (msg)
           {

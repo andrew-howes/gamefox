@@ -35,8 +35,6 @@ var gamefox_quickpost =
     form.action = '/boards/post.php?board=' + boardId
         + (topicId ? '&topic=' + topicId : '');
     form.method = 'post';
-    form.addEventListener('submit', gamefox_quickpost.removeGFCodeWhitespaceListener,
-        false);
     form.addEventListener('submit', gamefox_quickpost.cleanSig, false);
     div.appendChild(form);
 
@@ -101,6 +99,10 @@ var gamefox_quickpost =
     form.appendChild(message);
 
     form.appendChild(doc.createElement('br'));
+
+    form.addEventListener('submit', function() {
+      message.value = gamefox_messages.trimGFCodeNewlines(message.value);
+    }, false);
 
     // Signature
     form.appendChild(gamefox_quickpost.createSigField(gamefox_sigs.select(doc),
@@ -334,8 +336,8 @@ var gamefox_quickpost =
 
     var topicTitle = (form.elements.namedItem('topictitle') || {}).value;
     var key = form.elements.namedItem('key').value;
-    var message = gamefox_quickpost.removeGFCodeWhitespace(form.elements
-        .namedItem('messagetext').value);
+    var message = gamefox_messages.trimGFCodeNewlines(form.elements.namedItem(
+          'messagetext').value);
     var sig = gamefox_sigs.clean(form.elements.namedItem('custom_sig').value);
 
     var params = gamefox_utils.parseBoardLink(doc.location.pathname) ||
@@ -605,18 +607,6 @@ var gamefox_quickpost =
     }
 
     return span;
-  },
-
-  removeGFCodeWhitespace: function(str)
-  {
-    return gamefox_lib.prefs.getBoolPref('quote.controlwhitespace') ?
-      str.replace(/<\/p>\s*<\/(i|em)>\n{2}(?!\n)/g, '</p></$1>\n') : str;
-  },
-
-  removeGFCodeWhitespaceListener: function(event)
-  {
-    var message = event.target.elements.namedItem('messagetext');
-    message.value = gamefox_quickpost.removeGFCodeWhitespace(message.value);
   },
 
   breakTags: function(msg)

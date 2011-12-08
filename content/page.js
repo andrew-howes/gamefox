@@ -508,9 +508,10 @@ var gamefox_page =
         previewBtn.parentNode.insertBefore(doc.createTextNode(' '), previewBtn);
       }
 
-      // GFCode whitespace control
-      form.addEventListener('submit',
-          gamefox_quickpost.removeGFCodeWhitespaceListener, false);
+      // Trim newlines after GFCode quotes
+      form.addEventListener('submit', function() {
+        message.value = gamefox_messages.trimGFCodeNewlines(message.value);
+      }, false);
     }
 
     /* User Information (user.php) */
