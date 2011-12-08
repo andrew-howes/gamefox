@@ -109,8 +109,8 @@ var gamefox_quote =
       header += ' | #' + '000'.substring(num.toString().length) + num;
 
     if (header.length && editNum != 0)
-      header += ' | ' + (editNum == -1 ? '(before edits)' : '(edit ' + editNum
-            + ')');
+      header += ' | Previous Revision - ' + (editNum == -1 ? 'Before Edits' :
+          'Edit ' + editNum);
 
     header = header.substr(3);
 
