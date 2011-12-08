@@ -18,73 +18,121 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * @class Insert quotes into a post form on the page
+ */
 var gamefox_quote =
 {
+  /**
+   * Initiate quoting of a post
+   *
+   * @param {Object} event
+   *        Event that triggered the quote
+   * @param {Boolean} [allowSelection=false]
+   *        Whether to make an excerpted quote using the selection (if any).
+   *        This should be true when not triggered by a double click.
+   * @return {void}
+   */
   quote: function(event, allowSelection)
   {
-    var doc = event.target.ownerDocument;
-    if (!doc.getElementById('gamefox-message'))
-      return;
-
+    var doc = gamefox_lib.getDocument(event);
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
     if (!msgComponents)
       return;
 
-    // If an older version of the post is loaded, switch back to the latest
-    // before quoting
-    gamefox_messages.loadLatestEdit(msgComponents);
-
-    var quoteMsg = msgComponents.body.getUserData('gamefox_editing') === true ?
-      msgComponents.body.getUserData('gamefox_originalPost') :
-      msgComponents.body.innerHTML;
-    var postUser, postDate, postNum;
-
-    // postUser
-    postUser = msgComponents.header.querySelector('a.name');
-    postUser = postUser ? postUser.textContent : '???';
-
-    // postDate
-    postDate = msgComponents.header.getUserData('gamefox_date');
-
-    // postNum
-    postNum = '000'.substring(msgComponents.id.toString().length) +
-      msgComponents.id;
-
-    // selection quoting
+    // Get the message text from the innerHTML, originalPost user data (if an
+    // edit form is active), or the selection
+    var text;
     var selection = document.commandDispatcher.focusedWindow.getSelection();
-    // only use the selection if it's inside the clicked message and this
-    // function is not triggered by a double-click
-    if (allowSelection && /\S/.test(selection.toString()) &&
-        selection.containsNode(msgComponents.body, true))
-    {
-      quoteMsg = gamefox_utils.convertNewlines(gamefox_utils
+    if (allowSelection && /\S/.test(selection.toString()) && selection
+        .containsNode(msgComponents.body, true))
+      text = gamefox_utils.convertNewlines(gamefox_utils
           .specialCharsEncode(selection.toString()));
-    }
+    else if (msgComponents.body.getUserData('gamefox_editing') === true)
+      text = msgComponents.body.getUserData('gamefox_originalPost');
+    else
+      text = msgComponents.body.innerHTML;
 
-    gamefox_quote.format(event, quoteMsg, postUser, postDate, postNum);
+    // Get information for the quote header
+    var user = msgComponents.header.querySelector('a.name').textContent;
+    var date = msgComponents.header.getUserData('gamefox_date');
+    var num = msgComponents.id;
+
+    // Get the edit number (if any)
+    // 0 = current, -1 = original, 1..n = edit number
+    var editNum = 0;
+    var editMenu = gamefox_messages.getEditMenu(msgComponents);
+    if (editMenu && editMenu.selectedIndex > 0)
+      editNum = editMenu.selectedIndex + 1 == editMenu.length ? -1
+        : editMenu.length - editMenu.selectedIndex - 1;
+
+    // Insert the quote
+    var textarea = doc.gamefox.lastFocusedPostForm.elements.namedItem(
+        'messagetext');
+    var quote = gamefox_quote._format(textarea, text, user, date, num, editNum
+        );
+    gamefox_quote._insert(textarea, quote);
   },
 
-  format: function(event, quoteMsg, postUser, postDate, postNum)
+  /**
+   * Compile a quote using GFCode or classic tags
+   *
+   * @param {Object} textarea
+   *        HTML textarea element that the quote will be added to
+   * @param {String} text
+   *        Text of the quoted post
+   * @param {String} user
+   *        Username of the quoted post author
+   * @param {String} date
+   *        Date of the quoted post
+   * @param {Number} num
+   *        Number of the quoted post
+   * @param {Number} editNum
+   *        Which revision of the post is being quoted. 0 = latest edit (or no
+   *        edits), -1 = original version (before edits), 1..n = edit number.
+   * @return {String} Complete quote text, with tags
+   */
+  _format: function(textarea, text, user, date, num, editNum)
   {
-    var doc = event.target.ownerDocument;
-    var textarea = doc.gamefox.lastFocusedPostForm.elements
-      .namedItem('messagetext');
+    var doc = gamefox_lib.getDocument(textarea);
 
-    /* Parse message body */
-    var body = quoteMsg.
-      replace(/<br\s*\/?>/gi, '\n').
-      replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1').
-      replace(/<\/?(img|a|font|span|div|table|tbody|th|tr|td|wbr|u|embed)\b[^<>]*\/?>/gi,
-        '').trim();
+    /* Quote header */
+    var header = '';
 
-    // Get rid of signature
+    if (gamefox_lib.prefs.getBoolPref('quote.header.username'))
+      header += ' | From: ' + user;
+
+    if (gamefox_lib.prefs.getBoolPref('quote.header.date'))
+      header += ' | Posted: ' + date;
+
+    if (gamefox_lib.prefs.getBoolPref('quote.header.messagenum'))
+      header += ' | #' + '000'.substring(num.toString().length) + num;
+
+    if (header.length && editNum != 0)
+      header += ' | ' + (editNum == -1 ? '(before edits)' : '(edit ' + editNum
+            + ')');
+
+    header = header.substr(3);
+
+    // Don't repeat headers already in the textbox (useful for quoting multiple
+    // excerpts from the same post)
+    if (textarea.value.indexOf(header) != -1)
+      header = '';
+
+    /* Quote body */
+    var body = text.replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1')
+      .replace(new RegExp('</?(img|a|font|span|div|table|tbody|th|tr|td|wbr|' +
+              'u|embed)\\b[^<>]*/?>', 'gi'), '').trim();
+
+    // Remove the signature
     if (gamefox_lib.prefs.getBoolPref('quote.removesignature'))
       body = body.replace(/(^|\n) *--- *(\n.*){0,2}$/, '');
 
     // Break escaped tags
     body = gamefox_utils.breakTags(body);
 
-    bodyDOM = doc.createElement('td');
+    var bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;
 
     // Remove nested quotes
@@ -109,55 +157,50 @@ var gamefox_quote =
         ORDERED_NODE_SNAPSHOT_TYPE, null);
     for (var i = 0; i < p.snapshotLength; i++)
     {
-      bodyDOM.insertBefore(doc.createTextNode('\n' + p.snapshotItem(i).textContent),
-          p.snapshotItem(i));
+      bodyDOM.insertBefore(doc.createTextNode('\n' + p.snapshotItem(i)
+            .textContent), p.snapshotItem(i));
       bodyDOM.removeChild(p.snapshotItem(i));
     }
 
     body = gamefox_utils.specialCharsDecode(bodyDOM.innerHTML.trim());
 
-    /* Prepare quote header */
-    var qhead = '';
-    if (gamefox_lib.prefs.getBoolPref('quote.header.username'))
-      qhead += 'From: ' + postUser;
-    if (gamefox_lib.prefs.getBoolPref('quote.header.date'))
-      qhead += (qhead.length ? ' | ' : '') + 'Posted: ' + postDate;
-    if (gamefox_lib.prefs.getBoolPref('quote.header.messagenum'))
-      qhead += (qhead.length ? ' | ' : '') + '#' + postNum;
-
-    if (qhead.length && gamefox_lib.prefs.getCharPref('quote.style') == 'normal')
-    {
-      if (gamefox_lib.prefs.getBoolPref('quote.header.italic')) qhead = '<i>' + qhead + '</i>';
-      if (gamefox_lib.prefs.getBoolPref('quote.header.bold')) qhead = '<b>' + qhead + '</b>';
-      qhead += '\n';
-    }
-
-    // If the header is already in the message, don't repeat it
-    // Useful for quoting multiple selections
-    if (textarea.value.indexOf(qhead) != -1)
-      qhead = '';
-
-    var qbody, quote;
+    /* Compile the final quote */
     switch (gamefox_lib.prefs.getCharPref('quote.style'))
     {
+      // Classic
       case 'normal':
-        qbody = body;
-        if (gamefox_lib.prefs.getBoolPref('quote.message.italic')) qbody = '<i>' + qbody + '</i>';
-        if (gamefox_lib.prefs.getBoolPref('quote.message.bold')) qbody = '<b>' + qbody + '</b>';
+        if (gamefox_lib.prefs.getBoolPref('quote.header.italic'))
+          header = '<i>' + header + '</i>';
+        if (gamefox_lib.prefs.getBoolPref('quote.header.bold'))
+          header = '<b>' + header + '</b>';
 
-        quote = qhead + qbody + '\n';
-        break;
+        if (gamefox_lib.prefs.getBoolPref('quote.message.italic'))
+          body = '<i>' + body + '</i>';
+        if (gamefox_lib.prefs.getBoolPref('quote.message.bold'))
+          body = '<b>' + body + '</b>';
 
-      default: // gfcode
-        if (qhead.length)
-          qhead = '<i><p><strong>' + qhead + '</strong>\n';
-        else // no header
-          qhead = '<i><p>';
+        return header + '\n' + body + '\n';
 
-        quote = qhead + body + '</p></i>';
-        break;
+      // GFCode
+      case 'gfcode':
+      default:
+        return '<i><p>' +
+          (header.length ? '<strong>' + header + '</strong>\n' : '') +
+          body + '</p></i>';
     }
+  },
 
+  /**
+   * Insert a quote into a textarea
+   *
+   * @param {Object} textarea
+   *        HTML textarea element to insert into
+   * @param {String} quote
+   *        Quote text to insert
+   * @return {void}
+   */
+  _insert: function(textarea, quote)
+  {
     var endPos;
     if (textarea.form.className == 'gamefox-edit' &&
         textarea.selectionStart > textarea.value.search(/---(\n.*){0,2}$/))
@@ -174,7 +217,7 @@ var gamefox_quote =
         quote + '\n' + textarea.value.substr(textarea.selectionEnd);
     }
 
-    // update the character count
+    // Update the character count
     gamefox_messages.updateMessageCount(textarea);
 
     if (gamefox_lib.prefs.getBoolPref('quote.focusQuickPost'))
