@@ -438,12 +438,11 @@ var gamefox_utils =
   /**
    * Search up the DOM tree for a tag name, including the starting node itself
    *
-   * @param tagName
+   * @param {String} tagName
    *        Element tag name to search for (case insensitive)
-   * @param node
+   * @param {Object} node
    *        Node to start the search from
-   *
-   * @return An HTML element
+   * @return {Object} An HTML element
    */
   findClosest: function(tagName, node)
   {

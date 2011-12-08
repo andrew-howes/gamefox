@@ -25,16 +25,15 @@ var gamefox_pm =
   /**
    * Creates a private message sending form
    *
-   * @param doc
+   * @param {Object} doc
    *        Page's HTMLDocument
-   * @param key
-   *        Hidden "key" string for the form
-   * @param [to]
+   * @param {String} key
+   *        Hidden unique form key
+   * @param {String} [to]
    *        Recipient of the message (prefilled)
-   * @param [subject]
+   * @param {String} [subject]
    *        Subject of the message (prefilled)
-   *
-   * @return HTMLFormElement
+   * @return {Object} HTMLFormElement
    */
   createForm: function(doc, key, to, subject)
   {

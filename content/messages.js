@@ -603,7 +603,6 @@ var gamefox_messages =
    * Gets the edit history menu element of a message
    *
    * @param {Object} msgComponents
-   *
    * @return {Object} HTMLSelectElement or empty object
    */
   getEditMenu: function(msgComponents)
