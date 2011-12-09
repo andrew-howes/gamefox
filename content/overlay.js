@@ -92,8 +92,6 @@ var gamefox =
       {
         gamefox.importMsgsPerPage();
         gamefox.addToolbarButton();
-        window.setTimeout(function() { gamefox_lib.openOptionsDialog(true); },
-            10);
       }
 
       // new nightly/dev install
