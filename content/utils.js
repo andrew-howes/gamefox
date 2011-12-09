@@ -19,7 +19,8 @@
  */
 
 /**
- * @class Common DOM convenience and other utility functions
+ * Common DOM convenience and other utility functions
+ * @namespace
  */
 var gamefox_utils =
 {

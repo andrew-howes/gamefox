@@ -19,7 +19,8 @@
  */
 
 /**
- * @class Insert quotes into a post form on the page
+ * Post quoting
+ * @namespace
  */
 var gamefox_quote =
 {

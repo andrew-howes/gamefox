@@ -18,7 +18,8 @@
  */
 
 /**
- * @class Private Messages page script
+ * Private Messages page script
+ * @namespace
  */
 var gamefox_page_pm =
 {

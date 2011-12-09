@@ -19,7 +19,8 @@
  */
 
 /**
- * @class Message posting, editing, deleting, and other related functions
+ * Message posting, editing, deleting, and other related functions
+ * @namespace
  */
 var gamefox_messages =
 {
@@ -105,7 +106,7 @@ var gamefox_messages =
   },
 
   /**
-   * Trim extraneous newlines after GFCode (<i><p>) quotes
+   * Trim extraneous newlines after GFCode blocks
    *
    * @param {String} str
    *        Text to trim
