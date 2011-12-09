@@ -18,6 +18,13 @@
   the same page
 * Other minor bug fixes and enhancements
 
+**Note on signatures:** If you use your default GameFAQs signature, but still
+want to be able to change it before posting, you have two options (from the
+options window):
+
+* Signatures | *Grab from GameFAQs*
+* Alternatively: Main | Posting | Signature textbox: *Always show*
+
 Problems with this version? Get support on GameFAQs at the
 [Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
 
