@@ -91,7 +91,7 @@ var gamefox_sigs =
 
   _splitByCommas: function(str)
   {
-    list = str.toLowerCase().trim().split(/\s*,\s*/);
+    var list = str.toLowerCase().trim().split(/\s*,\s*/);
     if (list.join() == '')
       list = [];
 
