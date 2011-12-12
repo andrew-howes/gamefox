@@ -43,7 +43,7 @@ var gamefox_messages =
   updateMessageCount: function(element)
   {
     var doc = gamefox_lib.getDocument(element);
-    var form = gamefox_utils.findClosest('form', element);
+    var form = gamefox_utils.findClosest(element, 'form');
     var count = form.getElementsByClassName('gamefox-message-count')[0];
     var message = form.elements.namedItem('messagetext');
     var sig = form.elements.namedItem('custom_sig');

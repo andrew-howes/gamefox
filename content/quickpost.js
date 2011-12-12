@@ -733,7 +733,7 @@ var gamefox_quickpost =
   {
     event.preventDefault();
 
-    var form = gamefox_utils.findClosest('form', event.target);
+    var form = gamefox_utils.findClosest(event.target, 'form');
     var character = event.target.textContent;
     var msg = form.elements.namedItem('messagetext');
     var endPosition = msg.selectionEnd + character.length;

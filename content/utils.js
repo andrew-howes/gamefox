@@ -439,16 +439,25 @@ var gamefox_utils =
   /**
    * Search up the DOM tree for a tag name, including the starting node itself
    *
-   * @param {String} tagName
-   *        Element tag name to search for (case insensitive)
    * @param {Object} node
    *        Node to start the search from
+   * @param {String} [tagName]
+   *        Element tag name to search for (case insensitive). If not supplied,
+   *        testFunc will be used instead.
+   * @param {Function} [testFunc]
+   *        Function to test each node against to see if it's the correct one.
+   *        Will be passed the node as its only argument, and should return
+   *        true or false.
    * @return {Object} An HTML element
    */
-  findClosest: function(tagName, node)
+  findClosest: function(node, tagName, testFunc)
   {
-    while (node.tagName != tagName.toUpperCase() && node.parentNode)
-      node = node.parentNode;
+    if (tagName)
+      while (node.tagName != tagName.toUpperCase() && node.parentNode)
+        node = node.parentNode;
+    else if (typeof testFunc == 'function')
+      while (!testFunc(node) && node.parentNode)
+        node = node.parentNode;
 
     return node;
   },
@@ -491,5 +500,20 @@ var gamefox_utils =
       if (element.style.MozTransition === undefined)
         element.style.display = 'none';
     }
+  },
+
+  /**
+   * Finds the post header node reliably
+   *
+   * @param {Object} element
+   *        Any child element of the header
+   * @return {Object} |td| element that contains the post header
+   */
+  findHeader: function(element)
+  {
+    return gamefox_utils.findClosest(element, '', function(node) {
+      return node.firstChild && node.firstChild.className &&
+        node.firstChild.className.indexOf('msg_stats') === 0;
+    });
   }
 };
