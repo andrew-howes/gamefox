@@ -269,28 +269,42 @@ var gamefox_utils =
     return [pageStr, '#' + msgs];
   },
 
-  mergeArray: function()
+  /**
+   * Merge two or more arrays
+   *
+   * @param {Array} array...
+   *        Each array to merge
+   * @return {Array} Merged array
+   */
+  mergeArrays: function()
   {
-    var arr = new Array();
+    var arr = [];
     for (var i = 0; i < arguments.length; i++)
-    {
       for (var j = 0; j < arguments[i].length; j++)
-      {
         arr.push(arguments[i][j]);
-      }
-    }
+
     return arr;
   },
 
-  // merge, sort and remove duplicates
-  mergeArrayOfNumbersAsSortedSet: function()
+  /**
+   * Merge, sort and remove duplicates of one or more number arrays
+   *
+   * @param {Number[]} array...
+   *        Each array to merge
+   * @return {Number[]} Merged array
+   */
+  mergeSortArrays: function()
   {
-    var arr = new Array();
+    var arr = [];
+
     for (var i = 0; i < arguments.length; i++)
       arr = arr.concat(arguments[i]);
-    arr.sort(function(a, b) a - b);
-    var set = arr.filter(function(element, index, array) !index || element != array[index - 1]);
-    return set;
+
+    arr.sort(function(a, b) { return a - b; });
+
+    return arr.filter(function(element, index, array) {
+      return !index || element != array[index - 1];
+    });
   },
 
   tcParam: function(tc)

@@ -1373,7 +1373,7 @@ var gamefox_page =
                 userNav.parentNode, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
                 null).singleNodeValue;
 
-          var links = gamefox_utils.mergeArray(
+          var links = gamefox_utils.mergeArrays(
               pageJumperTop ? pageJumperTop.getElementsByTagName('a') : [],
               pageJumper.getElementsByTagName('a'));
           for (var i = 0; i < links.length; i++)

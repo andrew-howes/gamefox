@@ -138,7 +138,7 @@ var gamefox_highlighting =
     // also get groups from username search
     var hlinfo = this.searchUsername(username, tc, status, userlist);
     if (hlinfo && hlinfo[4])
-      groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(groups, hlinfo[4]);
+      groups = gamefox_utils.mergeSortArrays(groups, hlinfo[4]);
 
     // first group decides everything
     var color = userlist[groups[0]].color;
@@ -188,7 +188,7 @@ var gamefox_highlighting =
     // also get groups from username search
     var hlinfo = this.searchUsername(username, false, status, userlist);
     if (hlinfo && hlinfo[4])
-      groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(groups, hlinfo[4]);
+      groups = gamefox_utils.mergeSortArrays(groups, hlinfo[4]);
 
     // first group decides everything
     var color = userlist[groups[0]].color;
@@ -217,7 +217,7 @@ var gamefox_highlighting =
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
     if (tc && index.hasOwnProperty(username) && index['(tc)'])
-      var groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(index[username], index['(tc)']);
+      var groups = gamefox_utils.mergeSortArrays(index[username], index['(tc)']);
     else if (tc && index['(tc)'])
       var groups = index['(tc)'];
     else
@@ -227,7 +227,7 @@ var gamefox_highlighting =
     {
       var statusGroups = this.searchStatus(status);
       if (statusGroups)
-        groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(statusGroups[4],
+        groups = gamefox_utils.mergeSortArrays(statusGroups[4],
             groups)
     }
 
@@ -271,8 +271,8 @@ var gamefox_highlighting =
     // tc and tracked can be combined with any other status
     if (status instanceof Array)
       for (var i = 0; i < status.length; i++)
-        groups = gamefox_utils.mergeArrayOfNumbersAsSortedSet(
-            index[this.convertStatus(status[i])], groups);
+        groups = gamefox_utils.mergeSortArrays(index[this.convertStatus(
+              status[i])], groups);
     else
       groups = index[this.convertStatus(status)];
 

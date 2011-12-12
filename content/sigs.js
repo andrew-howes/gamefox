@@ -82,7 +82,7 @@ var gamefox_sigs =
     if (gamefox_lib.prefs.getBoolPref('signature.selectMostSpecific'))
       list = matches[matches[0].length ? 0 : matches[1].length ? 1 : 2];
     else
-      list = gamefox_utils.mergeArray(matches[0], matches[1], matches[2]);
+      list = gamefox_utils.mergeArrays(matches[0], matches[1], matches[2]);
 
     // Return a random sig
     var sig = list[Math.floor(Math.random() * list.length)];
