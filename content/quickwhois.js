@@ -18,7 +18,7 @@
  */
 
 /**
- * Embedded user profile on the message list (QuickWhois)
+ * Embedded user profile on the message list
  * @namespace
  */
 var gamefox_quickwhois =
@@ -91,8 +91,10 @@ var gamefox_quickwhois =
     qw.appendChild(doc.createTextNode(' (Loading profile...)'));
 
     qw.addEventListener('mouseout', function(event) {
-      if (event.relatedTarget && gamefox_utils.findHeader(event
-          .relatedTarget).className != qw.className)
+      // findClosest() is safe to use here as long as QuickWhois itself doesn't
+      // contain any <div>s
+      if (event.relatedTarget && gamefox_utils.findClosest(event.relatedTarget,
+          'div').className != qw.className)
         gamefox_quickwhois.toggle(event, true);
     }, false);
 
