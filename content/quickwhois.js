@@ -23,6 +23,17 @@
  */
 var gamefox_quickwhois =
 {
+  /**
+   * Show or hide QuickWhois
+   *
+   * @param {Object} event
+   *        Event that triggered this action
+   * @param {Boolean} [hover=false]
+   *        Whether this was triggered by hovering over a username
+   * @param {Boolean} [dblClick=false]
+   *        Whether this was triggered by double clicking
+   * @return {void}
+   */
   toggle: function(event, hover, dblClick)
   {
     var doc = gamefox_lib.getDocument(event);
@@ -109,8 +120,28 @@ var gamefox_quickwhois =
       if (request.readyState != 4) return;
 
       qw.removeChild(qw.childNodes[1]);
-
       var text = request.responseText;
+
+      // Show friend/PM actions
+      (function() {
+        var friendPM = doc.createElement('span');
+        friendPM.className = 'gamefox-quickwhois-friend-pm';
+        friendPM.innerHTML = '<span>' + gamefox_quickwhois.findInfo('Friends',
+            text) + '</span>' + gamefox_quickwhois.findInfo('Private Message',
+            text);
+
+        // Add tooltips
+        var list = friendPM.querySelectorAll('input[type="submit"], a');
+        for (let i = 0; i < list.length; i++)
+          list[i].title = list[i].value || list[i].parentNode.textContent;
+
+        // For your own profile, "Friends" will only contain a number, and
+        // "Private Messages" will be blank, so check for that before adding to
+        // QuickWhois
+        if (!friendPM.textContent.match(/^[0-9]+$/))
+          qw.appendChild(friendPM);
+      })();
+
       var profileFieldsHTML = '';
       var fields = [
         'User ID',

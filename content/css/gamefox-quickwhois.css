@@ -21,6 +21,8 @@
     .gamefox-quickwhois a.name
     {
         margin-bottom: 2px;
+        margin-right: 10px;
+        vertical-align: top;
     }
     .gamefox-quickwhois:not(.gamefox-quickwhois-hover) a.name
     {
@@ -28,6 +30,67 @@
          * obscure the original username link */
         display: none;
     }
+
+    .gamefox-quickwhois-friend-pm
+    {
+        position: relative;
+        top: -2px;
+    }
+    .gamefox-quickwhois-friend-pm form
+    {
+        display: inline !important;
+    }
+    /* This <span> contains the Friends section. If the user is already on
+     * someone's friends list, it'll contain text instead of form buttons. We
+     * want to hide the text and style the <a> to look like one of the buttons
+     */
+    .gamefox-quickwhois-friend-pm span
+    {
+        font-size: 0;
+    }
+    .gamefox-quickwhois-friend-pm a,
+    .gamefox-quickwhois-friend-pm input[type="submit"]
+    {
+        background-repeat: no-repeat;
+        height: 16px;
+        width: 16px;
+        margin-right: 5px;
+        outline: 0;
+    }
+    .gamefox-quickwhois-friend-pm a
+    {
+        vertical-align: top;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-image: url('chrome://gamefox/content/css/images/gamefox-quic\
+kwhois/friend.png');
+        background-position: 0 1px;
+    }
+    .gamefox-quickwhois-friend-pm input[type="submit"]
+    {
+        background-color: transparent;
+        -moz-appearance: none;
+        border: 0;
+        text-indent: -1000em;
+        cursor: pointer;
+    }
+    .gamefox-quickwhois-friend-pm input[name="WAT"]
+    {
+        background-image: url('chrome://gamefox/content/css/images/gamefox-quic\
+kwhois/follow.png');
+    }
+    .gamefox-quickwhois-friend-pm input[name="FRE"]
+    {
+        background-image: url('chrome://gamefox/content/css/images/gamefox-quic\
+kwhois/add.png');
+    }
+    .gamefox-quickwhois-friend-pm form[action="/pm/new"] input[type="submit"]
+    {
+        background-image: url('chrome://gamefox/content/css/images/gamefox-quic\
+kwhois/pm.png');
+    }
+
     .gamefox-quickwhois table
     {
         width: auto !important;
