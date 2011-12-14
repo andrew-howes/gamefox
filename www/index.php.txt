@@ -39,7 +39,7 @@ The current developer is Brian Marshall (Karamthulhu on GameFAQs).
 
 Recent previous developers have been Andrianto Effendy (ZeroAnt) and Michael
 Ryan (RockMFR 5). Before that, Toad King and ultimategamer00 (the original
-author) had the reigns. GameFOX is based off the work of these people.
+author) had the reins. GameFOX is based off the work of these people.
 
 GameFOX is licensed under the [GPL 2](http://www.gnu.org/licenses/gpl-2.0.html).
 For version control, [Git](http://git-scm.com/) is used. You can browse the
