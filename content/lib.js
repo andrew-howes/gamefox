@@ -233,7 +233,7 @@ var gamefox_lib =
           var boards = doc.evaluate(
               './/div[@class="col_layout"]/div[@class="body"]', contentDiv,
               null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-          if (boards.snapshotLength > 1)
+          if (boards.snapshotLength > 1 || gamefox_lib.onPage(doc, 'moddetl'))
             doc.gamefox.pageType = ['messages', 'detail'];
           else
           {
