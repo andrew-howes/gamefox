@@ -110,15 +110,16 @@ var gamefox_utils =
     return params ? params['topic'] : null;
   },
 
+  /**
+   * Determines the display setting of message data on the message list
+   *
+   * @param {HTMLDocument} doc
+   * @return {Boolean} true if left of message, false if above message
+   */
   getMsgDataDisplay: function(doc)
   {
-    var leftMsgData;
-    try { leftMsgData = !(doc.getElementById('content')
-        .getElementsByTagName('tr')[0].getElementsByTagName('td')
-        .length == 1); }
-    catch (e) { leftMsgData = false; }
-
-    return leftMsgData;
+    return doc.getElementById('content').getElementsByTagName('tr')[0]
+      .childNodes.length > 1;
   },
 
   getMsgComponents: function(node, doc)
@@ -166,10 +167,8 @@ var gamefox_utils =
     }
 
     // Get post id
-    var postId = (doc.evaluate(
-          'div[@class="msg_stats' + (leftMsgData ? '_left':'') + '"]/a[@name]',
-          header, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-        .singleNodeValue || {}).name;
+    var postId = (header.querySelector('div[class^="msg_stats"] > a[name]') ||
+        {name: 0}).name;
 
     return { id: postId, header: header.firstChild, body: body.firstChild,
       original: tdNode, leftMsgData: leftMsgData };
