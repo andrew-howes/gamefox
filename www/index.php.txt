@@ -37,9 +37,13 @@ goes on.
 
 The current developer is Brian Marshall (Karamthulhu on GameFAQs).
 
-We use [Git](http://git-scm.com/) as our version control system. You can browse
-the repository with a [web interface](http://repo.or.cz/w/gamefox.git) or clone
-it:
+Recent previous developers have been Andrianto Effendy (ZeroAnt) and Michael
+Ryan (RockMFR 5). Before that, Toad King and ultimategamer00 (the original
+author) had the reigns. GameFOX is based off the work of these people.
+
+GameFOX is licensed under the [GPL 2](http://www.gnu.org/licenses/gpl-2.0.html).
+For version control, [Git](http://git-scm.com/) is used. You can browse the
+repository with a [web interface](http://repo.or.cz/w/gamefox.git) or clone it:
 
     $ git clone git://repo.or.cz/gamefox.git
 
