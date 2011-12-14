@@ -26,8 +26,7 @@ var gamefox_page_pm =
   /**
    * Processes the PM pages
    *
-   * @param {Object} doc
-   *        Page's HTMLDocument
+   * @param {HTMLDocument} doc
    * @return {void}
    */
   process: function(doc)

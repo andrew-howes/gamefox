@@ -26,8 +26,7 @@ var gamefox_pm =
   /**
    * Creates a private message sending form
    *
-   * @param {Object} doc
-   *        Page's HTMLDocument
+   * @param {HTMLDocument} doc
    * @param {String} key
    *        Hidden unique form key
    * @param {String} [to]
