@@ -291,6 +291,14 @@
     </tr>
 
     <tr>
+        <td>span.gamefox-quickwhois-friend-pm</td>
+        <td>Contains buttons to follow, add as friend, or PM a user from
+            QuickWhois.</td>
+        <td>0.8.5</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
         <td>span.gamefox-signature</td>
         <td>Signature container on message list.</td>
         <td>0.6.10</td>
