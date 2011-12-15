@@ -174,16 +174,18 @@ var gamefox_utils =
       original: tdNode, leftMsgData: leftMsgData };
   },
 
+  /**
+   * Gets the logged in universal account name
+   *
+   * @param {HTMLDocument} doc
+   * @return {String} Account name or empty string on failure
+   */
   getAccountName: function(doc)
   {
     var div = doc.getElementById('loginbox');
     if (div)
-    {
-      var node = doc.evaluate('div[@class="msg"]', div, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      if (node && node.firstChild)
-        return node.firstChild.textContent.replace('Welcome,', '').trim();
-    }
+      return div.firstElementChild.textContent.replace('Welcome,', '').trim();
+
     return '';
   },
 
