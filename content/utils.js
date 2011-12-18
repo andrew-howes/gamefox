@@ -184,7 +184,13 @@ var gamefox_utils =
   {
     var div = doc.getElementById('loginbox');
     if (div)
-      return div.firstElementChild.textContent.replace('Welcome,', '').trim();
+    {
+      var username = div.firstElementChild.textContent.replace('Welcome,', '');
+      // Cut out the clock (delimited by "|")
+      username = username.substr(0, username.indexOf('|'));
+
+      return username.trim();
+    }
 
     return '';
   },
