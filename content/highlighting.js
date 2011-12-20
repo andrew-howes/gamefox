@@ -227,8 +227,7 @@ var gamefox_highlighting =
     {
       var statusGroups = this.searchStatus(status);
       if (statusGroups)
-        groups = gamefox_utils.mergeSortArrays(statusGroups[4],
-            groups)
+        groups = gamefox_utils.mergeSortArrays(statusGroups[4], groups)
     }
 
     // first group decides everything

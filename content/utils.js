@@ -314,10 +314,20 @@ var gamefox_utils =
     });
   },
 
+  /**
+   * Return a tc= parameter to insert into a URI
+   *
+   * @param {String} tc
+   *        Name of the topic creator
+   * @return {String} tc= parameter or an empty string if disabled
+   */
   tcParam: function(tc)
   {
+    // Check if the TC is highlighted
+    var userlist = gamefox_highlighting.loadGroups();
+
     return tc && (gamefox_lib.prefs.getBoolPref('elements.marktc')
-        || gamefox_highlighting.checkUsername('(tc)')) ?
+        || gamefox_highlighting.searchUsername('(tc)', true, 'tc', userlist)) ?
         '&tc=' + tc.replace(/ /g, '+') : '';
   },
 
