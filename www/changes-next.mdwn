@@ -6,7 +6,6 @@
 * Remove compatibility with:
     * Firefox 3.5 (3.6 is still supported)
     * SeaMonkey 2.0 (minimum is now 2.1)
-* Add compatibility with SeaMonkey 2.5
 * Fix QuickWhois being unreadable with some themes
 * Fix options window on OS X
 * Simplify signature mangement: the signature textbox is hidden unless
