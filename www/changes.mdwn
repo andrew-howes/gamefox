@@ -1,5 +1,35 @@
 ### Latest version
 
+#### GameFOX 0.8.5 (2011-12-31) {#0.8.5}
+
+* Make the edit history drop-down menu look nicer
+* Remove compatibility with:
+    * Firefox 3.5 (3.6 is still supported)
+    * SeaMonkey 2.0 (minimum is now 2.1)
+* Fix QuickWhois being unreadable with some themes
+* Fix options window on OS X
+* Simplify signature mangement: the signature textbox is hidden unless
+  you're using GameFOX to manage your signatures. Signatures are now stored
+  only on GameFAQs by default, but no features were removed
+* Basic (incomplete) support for reverse ("newest first") message ordering
+* Highlight the "New Messages" link when you have new PMs
+* Add a quick reply for PMs: write a reply while having the original message on
+  the same page
+* Add buttons to follow, add as friend, or PM a user from QuickWhois
+* Other minor bug fixes and enhancements
+
+**Note on signatures:** If you use your default GameFAQs signature, but still
+want to be able to change it before posting, you have two options (from the
+options window):
+
+* Signatures | *Grab from GameFAQs*
+* Alternatively: Main | Posting | Signature textbox: *Always show*
+
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
+### Older versions
+
 #### GameFOX 0.8.4 (2011-11-25) {#0.8.4}
 
 * GameFOX sidebar:
@@ -12,11 +42,6 @@
 * Edit history viewer on the message list: switch between different revisions of
   a post without leaving the page
 * Several small bug fixes
-
-Problems with this version? Get support on GameFAQs at the
-[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
-
-### Older versions
 
 #### GameFOX 0.8.3 (2011-10-31) {#0.8.3}
 
@@ -41,12 +66,3 @@ post
 
 * Fix quoting with two-column message lists
 * Fix QuickPost appearing above page links
-
-#### GameFOX 0.8 (2011-10-14) {#0.8}
-
-* Fix adding/removing users from highlighting groups with two-column message
-lists
-* Support for Firefox 10 and SeaMonkey 2.4
-* Compatibility with latest version of GameFAQs
-* Add and remove several themes to match updates to GameFAQs' own theme list
-* New CSS: Remove side column
