@@ -186,8 +186,10 @@ var gamefox_utils =
     if (div)
     {
       var username = div.firstElementChild.textContent.replace('Welcome,', '');
+
       // Cut out the clock (delimited by "|")
-      username = username.substr(0, username.indexOf('|'));
+      if (username.indexOf('|') != -1)
+        username = username.substr(0, username.indexOf('|'));
 
       return username.trim();
     }

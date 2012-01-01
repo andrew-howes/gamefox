@@ -1,5 +1,6 @@
 0000-00-00:
     * version 0.8.6
+    * Fix account-specific signatures
 
 2011-12-27:
     * version 0.8.5
