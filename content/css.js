@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -19,13 +19,20 @@
 
 var gamefox_css =
 {
+  /**
+   * Determines what type a stylesheet should be registered as
+   *
+   * @param {String} cat
+   *        Category of the stylesheet
+   * @return {String} "AGENT_SHEET" or "USER_SHEET"
+   */
   _getType: function(cat)
   {
     // AGENT_SHEET allows stylesheets to do more than USER_SHEET, but has the
     // potential to crash Firefox if used incorrectly, so it's only enabled for
-    // stylesheets that ship with GameFOX.
+    // the "GameFOX" CSS category
     // See <https://developer.mozilla.org/en/Using_the_Stylesheet_Service>
-    return cat == 'user' ? 'USER_SHEET' : 'AGENT_SHEET';
+    return cat == 'gamefox' ? 'AGENT_SHEET' : 'USER_SHEET';
   },
 
   init: function()
