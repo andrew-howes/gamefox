@@ -175,6 +175,7 @@ var gamefox_page =
 
       // Get favorites
       if (!gamefox_lib.onPage(doc, 'boardlist') &&
+          !doc.getElementsByClassName('crumbs').length && // no split lists
           gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
         var i, boardId, favorites = {}, favLinks = [];
