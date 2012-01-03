@@ -17,6 +17,10 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * CSS manager handles adding, updating, deleting and toggling stylesheets
+ * @namespace
+ */
 var gamefox_css =
 {
   /**
