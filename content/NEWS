@@ -2,6 +2,7 @@
     * version 0.8.6
     * Fix crash with Ricapar's Classic theme when clicking on the login form
     * Fix split board lists overwriting favorites list
+    * Fix board-specific signatures using board IDs
 
 2012-01-01:
     * version 0.8.5.1

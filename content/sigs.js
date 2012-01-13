@@ -100,7 +100,7 @@ var gamefox_sigs =
 
   _matchBoard: function(boards, boardId, boardName)
   {
-    if ((boardId && boards.indexOf(boardId) != -1) ||
+    if ((boardId && boards.indexOf(boardId.toString()) != -1) ||
         (boardName && boards.indexOf(boardName) != -1))
       return true;
 
