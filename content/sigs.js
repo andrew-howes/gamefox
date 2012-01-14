@@ -65,7 +65,7 @@ var gamefox_sigs =
       // Account only (P1)
       else if (accounts.length && !boards.length && accounts.indexOf(account)
           != -1)
-          matches[1].push(sigs[i]);
+        matches[1].push(sigs[i]);
 
       // Board only (P1)
       else if (boards.length && !accounts.length && this._matchBoard(boards,
