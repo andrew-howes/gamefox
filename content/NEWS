@@ -3,6 +3,7 @@
     * Fix crash with Ricapar's Classic theme when clicking on the login form
     * Fix split board lists overwriting favorites list
     * Fix board-specific signatures using board IDs
+    * Enable code and quote HTML tag buttons by default
 
 2012-01-01:
     * version 0.8.5.1

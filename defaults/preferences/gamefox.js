@@ -2,7 +2,7 @@ pref("gamefox.elements.quickpost.form", true);
 pref("gamefox.elements.quickpost.button", true);
 pref("gamefox.elements.quickpost.htmlbuttons", true);
 pref("gamefox.elements.quickpost.htmlbuttons.extended", false);
-pref("gamefox.elements.quickpost.htmlbuttons.gfcode", false);
+pref("gamefox.elements.quickpost.htmlbuttons.gfcode", true);
 pref("gamefox.elements.quickpost.htmlbuttons.breaktags", true);
 pref("gamefox.elements.quickpost.otherbuttons", true);
 pref("gamefox.elements.quickpost.link", true);
