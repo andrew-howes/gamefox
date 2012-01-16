@@ -2,12 +2,12 @@
 /*
  * GFCode (GameFOX Implementation)
  * © 2004-2009, Special Ops
- * Copyright 2008, 2009, 2011 Brian Marshall
+ * Copyright 2008, 2009, 2011, 2012 Brian Marshall
  */
 @-moz-document domain(gamefaqs.com) {
     /* Common formatting for block elements */
     .message i > p, .message em > p {
-        border: 1px rgba(0, 0, 0, 0.2) solid !important;
+        border: 1px rgba(136, 136, 136, 0.5) solid !important;
         background: rgba(180, 180, 180, 0.1);
 
         margin: 0 auto !important;
@@ -23,7 +23,7 @@
 
     /* <i><p><strong> - blockquote header, for quoting full messages with userheader */
     .message i > p > strong:first-child {
-        border-bottom: 1px rgba(0, 0, 0, 0.2) solid !important;
+        border-bottom: 1px rgba(136, 136, 136, 0.5) solid !important;
         background: rgba(150, 150, 150, 0.1);
 
         display: block;
