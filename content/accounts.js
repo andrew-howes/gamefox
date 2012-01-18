@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2011 Michael Ryan, Brian Marshall
+ * Copyright 2008, 2009, 2011, 2012 Michael Ryan, Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -17,6 +17,10 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Manages GameFAQs accounts for quick switching
+ * @namespace
+ */
 var gamefox_accounts =
 {
   accounts: '',
@@ -33,29 +37,44 @@ var gamefox_accounts =
 
   switchAccount: function(username)
   {
+    var strbundle = document.getElementById('overlay-strings');
+
     this.read();
     var account = this.accounts[username];
-    var expires = account.MDAAuth.expires;
 
-    if (Date.now() < expires * 1000)
-    {
-      this.removeCookie('skin');
-      this.removeCookie('filesplit');
-      this.fetchCtk(fetchCtkCallback);
+    if (account.MDAAuth)
+    { // Cookie-based switching
+      var expires = account.MDAAuth.expires;
+
+      if (Date.now() < expires * 1000)
+      {
+        this.removeCookie('skin');
+        this.removeCookie('filesplit');
+        this.fetchCtk(function() {
+          gamefox_accounts.loadAccount(
+            account.MDAAuth.content,
+            account.skin != undefined ? account.skin.content : null,
+            account.filesplit != undefined ? account.filesplit.content : null,
+            expires);
+          gamefox_accounts.loadGameFAQs();
+        });
+      }
+      else
+        this.promptLogin(username, 'Cookie has expired!');
     }
     else
-    {
-      this.promptLogin(username, 'Cookie has expired!');
-    }
-
-    function fetchCtkCallback()
-    {
-      gamefox_accounts.loadAccount(
-          account.MDAAuth.content,
-          account.skin != undefined ? account.skin.content : null,
-          account.filesplit != undefined ? account.filesplit.content : null,
-          expires);
-      gamefox_accounts.loadGameFAQs();
+    { // Password-based switching
+      var password = this._getPassword(username);
+      this.login(username, password, function(result, msg) {
+        switch (result)
+        {
+          case 'E_BAD_LOGIN':
+            gamefox_accounts.promptLogin(username, strbundle.getString(
+                'badSavedLogin'));
+            break;
+          default: if (msg) gamefox_lib.alert(msg);
+        }
+      });
     }
   },
 
@@ -109,30 +128,35 @@ var gamefox_accounts =
   {
     if (!gamefox_lib.thirdPartyCookiePreCheck())
       return;
+
+    var strbundle = document.getElementById('overlay-strings');
+
     var password = {value: ''};
     var check = {value: true};
     var result;
     if (username == undefined)
-    {
+    { // Prompt for both username and password
       username = {value: ''};
       result = Cc['@mozilla.org/embedcomp/prompt-service;1']
           .getService(Ci.nsIPromptService)
-          .promptUsernameAndPassword(null, 'GameFOX', 'Enter universal username (or e-mail address) and password:', username, password, null, check);
-      if (!result)
-        return;
-      username = username.value.trim();
+          .promptUsernameAndPassword(null, 'GameFOX',
+              strbundle.getString('enterLogin'), username, password, null,
+              check);
+
+      if (result)
+        username = username.value.trim();
+      else return;
     }
     else
-    {
-      if (error == undefined)
-        error = '';
-      else
-        error += '\n\n';
+    { // Prompt only for password
+      error = (error == undefined ? '' : error + '\n\n');
       result = Cc['@mozilla.org/embedcomp/prompt-service;1']
           .getService(Ci.nsIPromptService)
-          .promptPassword(null, 'GameFOX', error + 'Enter password for "' + username + '":', password, null, check);
-      if (!result)
-        return;
+          .promptPassword(null, 'GameFOX', error +
+              strbundle.getFormattedString('enterPWLogin', [username]),
+              password, null, check);
+
+      if (!result) return;
     }
 
     this.fetchCtk(function() {
@@ -144,25 +168,15 @@ var gamefox_accounts =
             gamefox_accounts.promptLogin(username, msg);
             break;
           case 'SUCCESS':
+            // Successful login - save username and password
+            gamefox_accounts._saveLogin(username, password.value);
+
+            // Save account to list (just an empty object, since the info is
+            // stored in nsILoginManager)
             gamefox_accounts.read();
-
-            var cookie = gamefox_accounts.getCookie('MDAAuth');
-            gamefox_accounts.accounts[username] = {
-              'MDAAuth': {
-                'content': cookie.content,
-                'expires': cookie.expires
-              }
-            };
-            if ((cookie = gamefox_accounts.getCookie('skin')) != null)
-              gamefox_accounts.accounts[username].skin = {
-                'content': cookie.content
-              };
-            if ((cookie = gamefox_accounts.getCookie('filesplit')) != null)
-              gamefox_accounts.accounts[username].filesplit = {
-                'content': cookie.content
-              };
-
+            gamefox_accounts.accounts[username] = {};
             gamefox_accounts.write(gamefox_accounts.accounts);
+
             break;
           default:
             gamefox_lib.alert(msg);
@@ -313,5 +327,62 @@ var gamefox_accounts =
         '&EMAILADDR=' + gamefox_utils.URLEncode(username) +
         '&PASSWORD=' + gamefox_utils.URLEncode(password)
         );
+  },
+
+  /**
+   * Save username and password information to nsILoginManager
+   *
+   * @param {String} username
+   * @param {String} password
+   * @return {void}
+   */
+  _saveLogin: function(username, password)
+  {
+    var loginManager = Cc['@mozilla.org/login-manager;1'].getService(Ci
+        .nsILoginManager);
+    var nsLoginInfo = new Components.Constructor(
+        '@mozilla.org/login-manager/loginInfo;1', Ci.nsILoginInfo, 'init');
+    var login = new nsLoginInfo('chrome://gamefox', null, 'GameFAQs Login',
+        username, password, '', '');
+
+    try
+    {
+      loginManager.addLogin(login);
+    }
+    catch (ex)
+    { // Login already exists - modify it
+      loginManager.modifyLogin(this._getLogin(username), login);
+    }
+  },
+
+  /**
+   * Retrieve a login object for an account
+   *
+   * @param {String} username
+   * @return {nsILoginInfo} Login object
+   */
+  _getLogin: function(username)
+  {
+    var logins = Cc["@mozilla.org/login-manager;1"].getService(Ci
+        .nsILoginManager).findLogins({}, 'chrome://gamefox', null,
+          'GameFAQs Login');
+
+    // Loop through matching logins to find the right account
+    for (var i = 0; i < logins.length; i++)
+    {
+      if (logins[i].username == username)
+        return logins[i];
+    }
+  },
+
+  /**
+   * Retrieve the password for an account
+   *
+   * @param {String} username
+   * @return {String} password (or undefined if not found)
+   */
+  _getPassword: function(username)
+  {
+    return (this._getLogin(username) || {}).password;
   }
 };

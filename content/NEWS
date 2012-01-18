@@ -4,6 +4,9 @@
     * Fix split board lists overwriting favorites list
     * Fix board-specific signatures using board IDs
     * Enable code and quote HTML tag buttons by default
+    * Switch to a password-based account manager instead of a cookie-based one -
+      accounts will no longer need to have their password re-entered
+      periodically
 
 2012-01-01:
     * version 0.8.5.1
