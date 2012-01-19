@@ -65,6 +65,14 @@ var gamefox_accounts =
     else
     { // Password-based switching
       var password = this._getPassword(username);
+      if (password == undefined)
+      { // Account was cleared from the login manager without being deleted
+        // here
+        gamefox_accounts.promptLogin(username, strbundle.getString(
+              'passwordCleared'));
+        return;
+      }
+
       this.login(username, password, function(result, msg) {
         switch (result)
         {
