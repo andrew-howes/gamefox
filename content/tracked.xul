@@ -70,8 +70,8 @@
     </toolbar>
   </toolbox>
 
-  <popup id="gamefox-tracked-contextmenu"
-    onpopupshowing="gamefox_trackedWindow.displayMenu();">
+  <menupopup id="gamefox-tracked-contextmenu"
+    onpopupshowing="return gamefox_trackedWindow.displayMenu();">
     <menuitem accesskey="&open.accesskey;"
       label="&open.label;" oncommand="gamefox_trackedWindow.action(2);"/>
     <menuitem accesskey="&newTab.accesskey;" label="&newTab.label;"
@@ -83,5 +83,5 @@
     <menuitem accesskey="&stopTracking.accesskey;"
       label="&stopTracking.label;" oncommand="gamefox_trackedWindow.action(5);"
       id="gamefox-tracked-contextmenu-stop"/>
-  </popup>
+  </menupopup>
 </page>

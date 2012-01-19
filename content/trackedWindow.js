@@ -236,7 +236,7 @@ var gamefox_trackedWindow =
     var index = tree.view.selection.currentIndex;
 
     if (index == -1)
-      return;
+      return false;
 
     gamefox_tracked.read();
 
