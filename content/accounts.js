@@ -215,20 +215,30 @@ var gamefox_accounts =
 
   promptRemoveAccount: function()
   {
-    var account;
-    var items = [];
+    var strbundle = document.getElementById('overlay-strings');
+
     this.read();
-    for (account in this.accounts)
+    var items = [];
+    for (var account in this.accounts)
       items.push(account);
+
     var selected = {};
-    var result = Cc['@mozilla.org/embedcomp/prompt-service;1']
-        .getService(Ci.nsIPromptService)
-        .select(null, 'GameFOX', 'Select account to remove:', items.length, items, selected);
+    var result = Cc['@mozilla.org/embedcomp/prompt-service;1'].getService(Ci
+        .nsIPromptService).select(null, 'GameFOX', strbundle.getString(
+            'selectRemove'), items.length, items, selected);
     if (result)
     {
+      // Remove from login manager
+      this._removeLogin(items[selected.value]);
+
+      // Remove from account list
       delete this.accounts[items[selected.value]];
       this.write(this.accounts);
-      gamefox_lib.alert('"' + items[selected.value] + '" has been removed.');
+
+      gamefox_lib.alert(strbundle.getFormattedString('beenRemoved',
+            [items[selected.value]]));
+
+      // Offer to remove another account
       if (items.length > 1)
         this.promptRemoveAccount();
     }
@@ -392,5 +402,17 @@ var gamefox_accounts =
   _getPassword: function(username)
   {
     return (this._getLogin(username) || {}).password;
+  },
+
+  /**
+   * Remove an account from the login manager
+   *
+   * @param {String} username
+   * @return {void}
+   */
+  _removeLogin: function(username)
+  {
+    Cc['@mozilla.org/login-manager;1'].getService(Ci.nsILoginManager)
+      .removeLogin(this._getLogin(username));
   }
 };
