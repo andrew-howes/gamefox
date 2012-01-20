@@ -898,7 +898,7 @@ var gamefox_quickpost =
 
   keyObserver: function(subject, topic)
   {
-    if (!gamefox_lib.isTopBrowserWindow())
+    if (typeof gamefox_lib == 'undefined' || !gamefox_lib.isTopBrowserWindow())
       return;
 
     if (topic) // pref change
