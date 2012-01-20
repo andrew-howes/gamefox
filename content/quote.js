@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011
+ * Copyright 2008, 2009, 2010, 2011, 2012
  * Brian Marshall, Andrianto Effendy, Michael Ryan
  *
  * This file is part of GameFOX.
@@ -223,8 +223,6 @@ var gamefox_quote =
 
     if (gamefox_lib.prefs.getBoolPref('quote.focusQuickPost'))
       textarea.focus();
-    else
-      event.target.blur();
 
     // Move the caret to the end of the last quote
     textarea.setSelectionRange(endPos, endPos);
