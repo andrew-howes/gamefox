@@ -3,7 +3,7 @@
 <?xml-stylesheet href="chrome://gamefox/skin/tree.css" type="text/css"?>
 <!-- vim: set et sw=2 ts=2 sts=2 tw=79:
 
-     Copyright 2009 Brian Marshall
+     Copyright 2009, 2012 Brian Marshall
 
      This file is part of GameFOX.
 
@@ -58,12 +58,14 @@
     <treechildren id="gamefox-favorites-rows"/>
   </tree>
 
-  <popup id="gamefox-favorites-contextmenu">
+  <menupopup id="gamefox-favorites-contextmenu" onpopupshowing="return document
+    .getElementById('gamefox-favorites-tree').view.selection.currentIndex != -1
+    ;">
     <menuitem accesskey="&open.accesskey;"
       label="&open.label;" oncommand="gamefox_favoritesWindow.action(2);"/>
     <menuitem accesskey="&newTab.accesskey;" label="&newTab.label;"
       oncommand="gamefox_favoritesWindow.action(1);"/>
     <menuitem accesskey="&newWindow.accesskey;"
       label="&newWindow.label;" oncommand="gamefox_favoritesWindow.action(3);"/>
-  </popup>
+  </menupopup>
 </page>
