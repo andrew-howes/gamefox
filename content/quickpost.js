@@ -907,12 +907,15 @@ var gamefox_quickpost =
       return;
     }
 
-    let cookie = subject.QueryInterface(Ci.nsICookie);
-    if (cookie.host == gamefox_lib.cookieHost && cookie.name == 'ctk')
+    try
     {
-      if (gamefox_lib.getCookie('ctk'))
-        gamefox_quickpost.updatePostKey();
-    }
+      let cookie = subject.QueryInterface(Ci.nsICookie);
+      if (cookie.host == gamefox_lib.cookieHost && cookie.name == 'ctk')
+      {
+        if (gamefox_lib.getCookie('ctk'))
+          gamefox_quickpost.updatePostKey();
+      }
+    } catch (e) {}
   },
 
   toggleAccessKeys: function(buttons) {
