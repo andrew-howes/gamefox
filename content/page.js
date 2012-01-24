@@ -1439,7 +1439,8 @@ var gamefox_page =
             qpDiv.id = 'gamefox-quickpost-normal';
 
         // Remove GameFAQs' quick post form
-        var postForm = doc.querySelector('#full_col_wrap form');
+        var postForm = doc.querySelector('#content form[action^="/boards/post'
+            + '.php"]');
         if (postForm)
           postForm.parentNode.removeChild(postForm);
 
