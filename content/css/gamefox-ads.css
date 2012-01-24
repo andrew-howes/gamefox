@@ -1,14 +1,24 @@
 @-moz-document domain(gamefaqs.com)
 {
-    #rbx_netxp1_parent, #sponsored_links, #container #footer,
-    .ad, iframe, img[alt="madison"] {
+    #rbx_netxp1_parent, #sponsored_links, #container #footer, .ad, iframe,
+    img[alt="madison"] {
         display: none !important;
     }
 
-    /* fix top gutter with some ads */
+    /* Fix top gutter with some ads */
     .has_lead #gutter_top {
         background-position: center 0 !important;
         padding-top: 14px !important;
+    }
+
+    /* Ad at bottom: remove extra whitespace at the bottom of the message list
+     */
+    #top_col_wrap {
+        padding-bottom: 4px !important;
+    }
+    #top_col_wrap ~ #mpu_col_wrap {
+        margin: 0 !important;
+        padding: 0 !important;
     }
 }
 
