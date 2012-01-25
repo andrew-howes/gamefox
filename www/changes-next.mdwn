@@ -1,6 +1,6 @@
 ### Latest version
 
-#### GameFOX 0.8.6 {#0.8.6}
+#### GameFOX 0.8.6 (2012-01-25) {#0.8.6}
 
 * Fix crash with Ricapar's Classic theme when clicking on the login form
 * Fix split board lists overwriting favorites list

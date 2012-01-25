@@ -1,5 +1,24 @@
 ### Latest version
 
+#### GameFOX 0.8.6 (2012-01-25) {#0.8.6}
+
+* Fix crash with Ricapar's Classic theme when clicking on the login form
+* Fix split board lists overwriting favorites list
+* Fix board-specific signatures using board IDs
+* Enable code and quote HTML tag buttons by default
+* Switch to a password-based account manager instead of a cookie-based one -
+  accounts will no longer need to have their password re-entered periodically
+* More minor bug fixes
+
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
+### Older versions
+
+#### GameFOX 0.8.5.1 (2012-01-01) {#0.8.5.1}
+
+* Fix account-specific signatures
+
 #### GameFOX 0.8.5 (2011-12-31) {#0.8.5}
 
 * Make the edit history drop-down menu look nicer
@@ -8,9 +27,9 @@
     * SeaMonkey 2.0 (minimum is now 2.1)
 * Fix QuickWhois being unreadable with some themes
 * Fix options window on OS X
-* Simplify signature mangement: the signature textbox is hidden unless
-  you're using GameFOX to manage your signatures. Signatures are now stored
-  only on GameFAQs by default, but no features were removed
+* Simplify signature mangement: the signature textbox is hidden unless you're
+  using GameFOX to manage your signatures. Signatures are now stored only on
+  GameFAQs by default, but no features were removed
 * Basic (incomplete) support for reverse ("newest first") message ordering
 * Highlight the "New Messages" link when you have new PMs
 * Add a quick reply for PMs: write a reply while having the original message on
@@ -18,17 +37,12 @@
 * Add buttons to follow, add as friend, or PM a user from QuickWhois
 * Other minor bug fixes and enhancements
 
-**Note on signatures:** If you use your default GameFAQs signature, but still
-want to be able to change it before posting, you have two options (from the
-options window):
-
-* Signatures | *Grab from GameFAQs*
-* Alternatively: Main | Posting | Signature textbox: *Always show*
-
-Problems with this version? Get support on GameFAQs at the
-[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
-
-### Older versions
+> **Note on signatures:** If you use your default GameFAQs signature, but still
+> want to be able to change it before posting, you have two options (from the
+> options window):
+>
+> * Signatures | *Grab from GameFAQs*
+> * Alternatively: Main | Posting | Signature textbox: *Always show*
 
 #### GameFOX 0.8.4 (2011-11-25) {#0.8.4}
 
@@ -46,23 +60,10 @@ Problems with this version? Get support on GameFAQs at the
 #### GameFOX 0.8.3 (2011-10-31) {#0.8.3}
 
 * Fix features on message detail page (including highlighting and custom date
-formats)
+  formats)
 * Fix bug triggered by certain usernames that stopped GameFOX from working
 * Fix adding or updating accounts with the account manager
 * Fix GameFOX favorites being overwritten with board lists
 * Fix QuickPost error when making the last post of a page
 * Fix the new post indicator showing on the active messages list after editing a
-post
-
-#### GameFOX 0.8.2 (2011-10-15) {#0.8.2}
-
-* Fix message link icons CSS
-* Make the "remove side column" CSS work on more pages
-* Fix bug preventing GameFOX from working on message lists for some people
-* Re-add option to toggle the quote link
-* Re-add Ricapar's Classic CSS
-
-#### GameFOX 0.8.1 (2011-10-14) {#0.8.1}
-
-* Fix quoting with two-column message lists
-* Fix QuickPost appearing above page links
+  post

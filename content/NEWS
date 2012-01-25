@@ -1,4 +1,7 @@
 0000-00-00:
+    * version 0.8.7
+
+2012-01-25:
     * version 0.8.6
     * Fix crash with Ricapar's Classic theme when clicking on the login form
     * Fix split board lists overwriting favorites list
