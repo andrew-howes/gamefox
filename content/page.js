@@ -1403,10 +1403,13 @@ var gamefox_page =
         }
         miniBoardNav.removeChild(miniBoardNav.lastChild);
 
-        if (pageJumper)
-          pageJumper.parentNode.insertBefore(miniBoardNav, pageJumper);
-        else if (userPanel)
-          boardWrap.getElementsByTagName('div')[0].appendChild(miniBoardNav);
+        if (pageJumper && contentDiv.firstChild.id == 'top_col_wrap')
+        {
+          // Insert above ad to align with the page jumper (if ad blocking is
+          // disabled)
+          let side_col = pageJumper.parentNode.nextSibling;
+          side_col.insertBefore(miniBoardNav, side_col.firstChild);
+        }
         else
           boardWrap.appendChild(miniBoardNav);
       }
