@@ -413,7 +413,8 @@ var gamefox_page =
       var form = message.form;
       var topictitle = form.elements.namedItem('topictitle');
       var detailsDiv = message.parentNode.parentNode;
-      var previewBtn = form.elements.namedItem('post')[0];
+      var postBtns = form.elements.namedItem('post');
+      var previewBtn = postBtns[0];
 
       // Titles
       if (topictitle) // new topic
@@ -445,14 +446,24 @@ var gamefox_page =
         previewBtn.parentNode.insertBefore(sigField, previewBtn);
       }
 
-      message.setSelectionRange(0, 0);
-
       // HTML buttons
       if (gamefox_quickpost.createHTMLButtonsPref())
       {
-        detailsDiv.insertBefore(gamefox_quickpost.createHTMLButtons(doc), message.parentNode);
+        detailsDiv.insertBefore(gamefox_quickpost.createHTMLButtons(doc),
+            message.parentNode);
         detailsDiv.insertBefore(doc.createElement('br'), message.parentNode);
       }
+
+      // Remove post buttons and add our own
+      let i = postBtns.length;
+      while (i--)
+        postBtns[i].parentNode.removeChild(postBtns[i]);
+      let resetBtn = form.elements.namedItem('reset');
+      resetBtn.parentNode.removeChild(resetBtn);
+
+      detailsDiv.appendChild(gamefox_quickpost.createPostButtons(doc,
+            ['Post Message', 'Preview Message',
+             'Preview and Spellcheck Message', 'Reset']));
 
       // Character count
       if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
@@ -495,18 +506,9 @@ var gamefox_page =
             }, 0); }, false);
       }
 
-      // "Post Message" button
-      if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
-      {
-        var button = doc.createElement('input');
-        button.id = 'gamefox-quickpost-btn';
-        button.type = 'button';
-        button.value = 'Post Message';
-        button.addEventListener('click', gamefox_quickpost.post, false);
-
-        previewBtn.parentNode.insertBefore(button, previewBtn);
-        previewBtn.parentNode.insertBefore(doc.createTextNode(' '), previewBtn);
-      }
+      // Other form stuff
+      doc.gamefox.lastFocusedPostForm = form;
+      message.tabIndex = 2;
 
       // Trim newlines after GFCode quotes
       form.addEventListener('submit', function() {

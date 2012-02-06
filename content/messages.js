@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011
+ * Copyright 2008, 2009, 2010, 2011, 2012
  * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
@@ -258,44 +258,8 @@ var gamefox_messages =
           editBox.value = gamefox_messages.trimGFCodeNewlines(editBox.value);
         }, false);
 
-        var saveBtn = doc.createElement('input');
-        saveBtn.value = 'Save';
-        saveBtn.title = saveBtn.value;
-        saveBtn.type = 'submit';
-        saveBtn.setUserData('accessKey', 'z', null);
-        saveBtn.addEventListener('click', gamefox_messages.saveEdit, false);
-        editForm.appendChild(saveBtn);
-
-        editForm.appendChild(doc.createTextNode(' '));
-
-        var previewBtn = doc.createElement('input');
-        previewBtn.name = 'post';
-        previewBtn.value = 'Preview Message';
-        previewBtn.title = previewBtn.value;
-        previewBtn.type = 'submit';
-        previewBtn.setUserData('accessKey', 'x', null);
-        editForm.appendChild(previewBtn);
-
-        editForm.appendChild(doc.createTextNode(' '));
-
-        var previewSpellBtn = doc.createElement('input');
-        previewSpellBtn.name = 'post';
-        previewSpellBtn.value = 'Preview and Spellcheck Message';
-        previewSpellBtn.title = previewSpellBtn.value;
-        previewSpellBtn.type = 'submit';
-        previewSpellBtn.setUserData('accessKey', 'c', null);
-        editForm.appendChild(previewSpellBtn);
-
-        editForm.appendChild(doc.createTextNode(' '));
-
-        var cancelBtn = doc.createElement('input');
-        cancelBtn.value = 'Cancel';
-        cancelBtn.title = cancelBtn.value;
-        cancelBtn.type = 'submit';
-        cancelBtn.setUserData('accessKey', 'v', null);
-        cancelBtn.addEventListener('click', gamefox_messages.cancelEdit,
-            false);
-        editForm.appendChild(cancelBtn);
+        editForm.appendChild(gamefox_quickpost.createPostButtons(doc, ['Save',
+              'Preview Message', 'Preview and Spellcheck Message', 'Cancel']));
 
         if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
         {

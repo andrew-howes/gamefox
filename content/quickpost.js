@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011
+ * Copyright 2008, 2009, 2010, 2011, 2012
  * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
@@ -18,6 +18,10 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Quick posting
+ * @namespace
+ */
 var gamefox_quickpost =
 {
   drag: { startX: 0, startY: 0, offsetX: 0, offsetY: 0, dragging: false },
@@ -109,52 +113,8 @@ var gamefox_quickpost =
           doc));
 
     // Post buttons
-    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.button'))
-    {
-      var postbutton = doc.createElement('input');
-      postbutton.id = 'gamefox-quickpost-btn';
-      postbutton.type = 'button';
-      postbutton.name = 'quickpost';
-      postbutton.value = 'Post Message';
-      postbutton.title = postbutton.value;
-      postbutton.tabIndex = 3;
-      postbutton.setUserData('accessKey', 'z', null);
-      postbutton.addEventListener('click', gamefox_quickpost.post, false);
-      form.appendChild(postbutton);
-    }
-
-    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.otherbuttons'))
-    {
-      var previewbutton = doc.createElement('input');
-      previewbutton.type = 'submit';
-      previewbutton.name = 'post';
-      previewbutton.value = 'Preview Message';
-      previewbutton.title = previewbutton.value;
-      previewbutton.tabIndex = 3;
-      previewbutton.setUserData('accessKey', 'x', null);
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(previewbutton);
-
-      var spellchkbutton = doc.createElement('input');
-      spellchkbutton.type = 'submit';
-      spellchkbutton.name = 'post';
-      spellchkbutton.value = 'Preview and Spellcheck Message';
-      spellchkbutton.title = spellchkbutton.value;
-      spellchkbutton.tabIndex = 3;
-      spellchkbutton.setUserData('accessKey', 'c', null);
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(spellchkbutton);
-
-      var resetbutton = doc.createElement('input');
-      resetbutton.type = 'reset';
-      resetbutton.value = 'Reset';
-      resetbutton.title = resetbutton.value;
-      resetbutton.addEventListener('click', gamefox_quickpost.resetPost, false);
-      resetbutton.tabIndex = 3;
-      resetbutton.setUserData('accessKey', 'v', null);
-      form.appendChild(doc.createTextNode(' '));
-      form.appendChild(resetbutton);
-    }
+    form.appendChild(gamefox_quickpost.createPostButtons(doc, ['Post Message',
+          'Preview Message', 'Preview and Spellcheck Message', 'Reset']));
 
     if (charCounts)
     {
@@ -940,5 +900,58 @@ var gamefox_quickpost =
           + ']';
       }
     }
+  },
+
+  /**
+   * Create the post, preview and reset buttons
+   *
+   * @param {HTMLDocument} doc
+   * @param {Array} showBtns
+   *        List of buttons to show, e.g. ['Post Message', 'Reset']
+   * @return {HTMLElement} Element containing the buttons
+   */
+  createPostButtons: function(doc, showBtns)
+  {
+    let btns =
+    {
+      'Post Message': ['button', 'quickpost', 'z', 'gamefox-quickpost-btn',
+        gamefox_quickpost.post, 'elements.quickpost.button'],
+      'Save': ['submit', '', 'z', '', gamefox_messages.saveEdit, ''],
+      'Preview Message': ['submit', 'post', 'x', '', null,
+        'elements.quickpost.otherbuttons'],
+      'Preview and Spellcheck Message': ['submit', 'post', 'c', '', null,
+        'elements.quickpost.otherbuttons'],
+      'Reset': ['reset', '', 'v', '', gamefox_quickpost.resetPost,
+        'elements.quickpost.otherbuttons'],
+      'Cancel': ['submit', '', 'v', '', gamefox_messages.cancelEdit]
+    };
+
+    let el = doc.createElement('span');
+    el.className = 'gamefox-post-buttons';
+
+    showBtns.forEach(function(btn) {
+      if (btns.hasOwnProperty(btn) && (!btns[btn][5] || gamefox_lib.prefs
+            .getBoolPref(btns[btn][5])))
+      {
+        let this_btn = btns[btn];
+        let btnEl = doc.createElement('input');
+        btnEl.value = btn;
+        btnEl.title = btn;
+        btnEl.type = this_btn[0];
+        if (this_btn[1]) btnEl.name = this_btn[1];
+        btnEl.setUserData('accessKey', this_btn[2], null);
+        if (this_btn[3]) btnEl.id = this_btn[3];
+        if (this_btn[4]) btnEl.addEventListener('click', this_btn[4], false);
+        btnEl.tabIndex = 3;
+
+        el.appendChild(btnEl);
+        el.appendChild(doc.createTextNode(' '));
+      }
+    });
+
+    // Remove the last " " text node
+    el.removeChild(el.lastChild);
+
+    return el;
   }
 };
