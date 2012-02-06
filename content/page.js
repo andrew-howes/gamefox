@@ -411,10 +411,9 @@ var gamefox_page =
       if (!message)
         return; // "Message Posted" page
       var form = message.form;
-      var formElements = form.elements;
-      var topictitle = formElements.namedItem('topictitle');
+      var topictitle = form.elements.namedItem('topictitle');
       var detailsDiv = message.parentNode.parentNode;
-      var previewBtn = formElements.namedItem('post');
+      var previewBtn = form.elements.namedItem('post')[0];
 
       // Titles
       if (topictitle) // new topic
@@ -435,7 +434,7 @@ var gamefox_page =
           !/\b(Posted)<\/h2>/.test(doc.body.innerHTML) &&
           !gamefox_utils.parseQueryString(doc.location.search)['message'])
       {
-        detailsDiv.removeChild(formElements.namedItem('custom_sig'));
+        detailsDiv.removeChild(form.elements.namedItem('custom_sig'));
 
         // Do this twice to remove the signature info text and the <br>
         message.parentNode.parentNode.removeChild(message.parentNode
@@ -488,7 +487,7 @@ var gamefox_page =
 
         message.addEventListener('input',
             gamefox_messages.delayedUpdateMessageCount, false);
-        formElements.namedItem('custom_sig').addEventListener('input',
+        form.elements.namedItem('custom_sig').addEventListener('input',
             gamefox_messages.delayedUpdateMessageCount, false);
         form.addEventListener('reset',
             function(event) { setTimeout(function() {

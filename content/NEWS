@@ -1,6 +1,7 @@
 0000-00-00:
     * version 0.8.7
     * Fix some remaining issues with recent layout changes
+    * Fix problem with buttons on the new topic/post page
 
 2012-01-25:
     * version 0.8.6
