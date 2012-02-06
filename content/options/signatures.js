@@ -60,7 +60,7 @@ var gamefox_options_sig =
   {
     var strbundle = document.getElementById('strings');
     var signatureMsg = document.getElementById('signatureMsg');
-    this._sigs = gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
+    this._sigs = JSON.parse(gamefox_lib.getString('signature.serialized'));
 
     // check if sigs array is valid
     if (!this._sigs || !this._sigs[0])
@@ -70,7 +70,7 @@ var gamefox_options_sig =
 
   _save: function()
   {
-    gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(this._sigs));
+    gamefox_lib.setString('signature.serialized', JSON.stringify(this._sigs));
   },
 
   _hideCriteriaForm: function()

@@ -137,10 +137,10 @@ var gamefox =
       gamefox_highlighting.write(groups);
 
       // New stylesheet category
-      var css = gamefox_lib.safeEval(gamefox_lib.getString('theme.css.serialized'));
+      var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
       if (!css.themes)
         css.themes = {};
-      gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+      gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));
     }
 
     /* 0.7.9 */
@@ -156,18 +156,16 @@ var gamefox =
       gamefox.addToolbarButton();
 
       // New CSS category: extras
-      var css = gamefox_lib.safeEval(gamefox_lib.getString(
-            'theme.css.serialized'));
+      var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
       if (!css.extras)
         css.extras = {};
-      gamefox_lib.setString('theme.css.serialized', gamefox_lib.toJSON(css));
+      gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));
     }
 
     /* 0.8.5 */
     if (comparator.compare('0.8.5', version) > 0)
     {
-      var sig = gamefox_lib.safeEval(gamefox_lib.getString(
-            'signature.serialized'));
+      var sig = JSON.parse(gamefox_lib.getString('signature.serialized'));
 
       // Check if they only have 1 GameFOX sig, and if it's the same as their
       // GameFAQs sig. If so, delete it from GameFOX
@@ -199,8 +197,7 @@ var gamefox =
           if (remoteSig.trim() == sig[0].body.trim())
           { // The sigs are the same
             sig[0].body = '';
-            gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(
-                  sig));
+            gamefox_lib.setString('signature.serialized', JSON.stringify(sig));
           }
         };
         request.send(null);

@@ -192,7 +192,8 @@ var gamefox_page =
             favorites[boardId] = {name:favLinks[i].textContent};
         }
 
-        gamefox_lib.setString('favorites.serialized', gamefox_lib.toJSON(favorites));
+        gamefox_lib.setString('favorites.serialized', JSON.stringify(favorites)
+            );
       }
 
       // Date format board loop

@@ -23,7 +23,7 @@ var gamefox_favorites =
 
   read: function()
   {
-      this.list = gamefox_lib.safeEval(gamefox_lib.getString('favorites.serialized'));
+      this.list = JSON.parse(gamefox_lib.getString('favorites.serialized'));
 
       // this.list will be undefined if the pref value isn't an object
       if (!this.list)
@@ -37,7 +37,7 @@ var gamefox_favorites =
     while (favList.hasChildNodes())
       favList.removeChild(favList.firstChild);
 
-    favs = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('favorites.serialized'));
+    favs = JSON.parse(gamefox_lib.prefs.getCharPref('favorites.serialized'));
 
     item = doc.createElement('option');
     item.value = 0;

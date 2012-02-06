@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -63,29 +63,19 @@ var gamefox_options_manage =
     siStream.close();
     fiStream.close();
 
-    if (!gamefox_lib.isSafeJSON(inputData))
-      // Compat: Not JSON, probably prefs from an older version
-      var importedPrefs = gamefox_lib.safeEval(inputData, true);
-    else
-      var importedPrefs = gamefox_lib.safeEval(inputData);
-
+    var importedPrefs = JSON.parse(inputData);
     if (!importedPrefs)
     {
-      gamefox_options.showNotification(manageMsg,
-          strbundle.getString('invalidSyntax'), 'warning');
+      gamefox_options.showNotification(manageMsg, strbundle.getString(
+            'invalidSyntax'), 'warning');
       button.disabled = false;
       return;
     }
-    gamefox_prefs.clearUserPrefs();
-    for (var i in importedPrefs)
-    {
-      // Compat: Not JSON
-      if (/^(\(|\[)\{.*\}(\)|\])$/.test(importedPrefs[i])
-          && !gamefox_lib.isSafeJSON(importedPrefs[i]))
-        importedPrefs[i] = gamefox_lib.toJSON(gamefox_lib.safeEval(importedPrefs[i], true));
 
+    gamefox_prefs.clearUserPrefs();
+
+    for (var i in importedPrefs)
       gamefox_prefs.setPrefValue(i, importedPrefs[i]);
-    }
 
     button.disabled = false;
 

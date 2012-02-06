@@ -29,13 +29,13 @@ var gamefox_tags =
     if (!/\S/.test(this.tags))
       this.tags = '{}';
 
-    this.tags = gamefox_lib.safeEval(this.tags);
+    this.tags = JSON.parse(this.tags);
   },
 
   write: function(tags)
   {
     if (typeof(tags) == 'object')
-      tags = gamefox_lib.toJSON(tags);
+      tags = JSON.stringify(tags);
 
     gamefox_lib.setString('tags', tags);
   },

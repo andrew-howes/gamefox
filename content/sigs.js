@@ -21,11 +21,11 @@ var gamefox_sigs =
 {
   _read: function()
   {
-    return gamefox_lib.safeEval(gamefox_lib.getString('signature.serialized'));
+    return JSON.parse(gamefox_lib.getString('signature.serialized'));
   },
   _save: function(sigs)
   {
-    gamefox_lib.setString('signature.serialized', gamefox_lib.toJSON(sigs));
+    gamefox_lib.setString('signature.serialized', JSON.stringify(sigs));
   },
 
   _search: function(account, boardName, boardId)

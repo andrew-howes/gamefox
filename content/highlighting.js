@@ -26,12 +26,12 @@ var gamefox_highlighting =
 
   read: function()
   {
-    return gamefox_lib.safeEval(gamefox_lib.getString('userlist.serialized'));
+    return JSON.parse(gamefox_lib.getString('userlist.serialized'));
   },
 
   write: function(groups)
   {
-    gamefox_lib.setString('userlist.serialized', gamefox_lib.toJSON(groups));
+    gamefox_lib.setString('userlist.serialized', JSON.stringify(groups));
   },
 
   add: function(name, color, users, messages, topics, type)

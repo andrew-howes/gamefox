@@ -757,7 +757,7 @@ var gamefox_quickpost =
     if (!account)
       return blank;
 
-    var keys = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('keys'));
+    var keys = JSON.parse(gamefox_lib.prefs.getCharPref('keys'));
     if (!keys[account])
       return blank;
 
@@ -771,9 +771,9 @@ var gamefox_quickpost =
     if (!ctk || !account || !key)
       return false;
 
-    var keys = gamefox_lib.safeEval(gamefox_lib.prefs.getCharPref('keys'));
+    var keys = JSON.parse(gamefox_lib.prefs.getCharPref('keys'));
     keys[account] = { key: key, ctk: ctk };
-    gamefox_lib.prefs.setCharPref('keys', gamefox_lib.toJSON(keys));
+    gamefox_lib.prefs.setCharPref('keys', JSON.stringify(keys));
 
     return true;
   },
@@ -814,10 +814,9 @@ var gamefox_quickpost =
 
         if (key)
         {
-          var keys = gamefox_lib.safeEval(gamefox_lib.prefs
-              .getCharPref('keys'));
+          var keys = JSON.parse(gamefox_lib.prefs.getCharPref('keys'));
           keys[account] = { key: key[1], ctk: ctk };
-          gamefox_lib.prefs.setCharPref('keys', gamefox_lib.toJSON(keys));
+          gamefox_lib.prefs.setCharPref('keys', JSON.stringify(keys));
         }
         else
         { // Throttle unsuccessful attempts to prevent spamming GameFAQs with

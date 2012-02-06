@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011
+ * Copyright 2008, 2009, 2010, 2011, 2012
  * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
@@ -413,67 +413,6 @@ var gamefox_lib =
   isLoggedIn: function()
   {
     return !!gamefox_lib.getCookie('MDAAuth');
-  },
-
-  isSafeJSON: function(string) {
-    const maybeHarmful = /[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/;
-    const jsonStrings = /"(\\.|[^"\\\n\r])*"/g;
-    
-    return !maybeHarmful.test(string.replace(jsonStrings, ""));
-  },
-
-  safeEval: function(pref, noJSON)
-  {
-    // Thanks Toad King
-
-    if (!pref.length)
-      return false;
-
-    var parsedPref = null;
-
-    try
-    {
-      if (!noJSON)
-        parsedPref = JSON.parse(pref);
-      else
-      {
-        var sandbox = new Components.utils.Sandbox('about:blank');
-        parsedPref = Components.utils.evalInSandbox('(' + pref + ')', sandbox);
-      }
-    }
-    catch (e)
-    {
-      gamefox_lib.log('Failed to evaluate JSON: ' + e);
-    }
-
-    // Functions are bad
-    function check_obj(obj)
-    {
-      var safe = true;
-
-      for (var i in obj)
-      {
-        if (obj[i])
-        {
-          if (typeof obj[i] == 'object')
-            safe = check_obj(obj[i]);
-          else if (typeof obj[i] == 'function')
-            return false;
-        }
-      }
-
-      return safe;
-    }
-
-    if (!check_obj(parsedPref))
-      return false;
-
-    return parsedPref;
-  },
-
-  toJSON: function(obj)
-  {
-    return JSON.stringify(obj);
   },
 
   toggleSidebar: function()

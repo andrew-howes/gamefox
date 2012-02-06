@@ -88,7 +88,7 @@ var gamefox_prefs =
     var userPrefs = {};
     for (var i = 0; i < userPrefNames.length; i++)
       userPrefs[userPrefNames[i]] = this.getPrefValue(userPrefNames[i]);
-    return gamefox_lib.toJSON(userPrefs);
+    return JSON.stringify(userPrefs);
   },
 
   clearUserPrefs: function()

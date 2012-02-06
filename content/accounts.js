@@ -27,12 +27,12 @@ var gamefox_accounts =
 
   read: function()
   {
-    this.accounts = gamefox_lib.safeEval(gamefox_lib.getString('accounts'));
+    this.accounts = JSON.parse(gamefox_lib.getString('accounts'));
   },
 
   write: function(accounts)
   {
-    gamefox_lib.setString('accounts', gamefox_lib.toJSON(accounts));
+    gamefox_lib.setString('accounts', JSON.stringify(accounts));
   },
 
   switchAccount: function(username)
