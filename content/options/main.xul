@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- vim: set et sw=2 ts=2 sts=2 tw=79:
 
-     Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011
+     Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
      Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
 
      This file is part of GameFOX.
@@ -94,6 +94,12 @@
       <!-- Posting -->
       <preference id="elements.quickpost.button"
         name="gamefox.elements.quickpost.button" type="bool"/>
+      <preference id="elements.quickpost.otherbuttons"
+        name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
+      <preference id="elements.quickpost.resetconfirm"
+        name="gamefox.elements.quickpost.resetconfirm" type="bool"/>
+      <preference id="elements.quickpost.resetnewsig"
+        name="gamefox.elements.quickpost.resetnewsig" type="bool"/>
       <preference id="elements.charcounts" name="gamefox.elements.charcounts"
         type="bool"/>
       <preference id="elements.charmap" name="gamefox.elements.charmap"
@@ -115,12 +121,6 @@
         name="gamefox.elements.quickpost.link" type="bool"/>
       <preference id="elements.quickpost.form"
         name="gamefox.elements.quickpost.form" type="bool"/>
-      <preference id="elements.quickpost.otherbuttons"
-        name="gamefox.elements.quickpost.otherbuttons" type="bool"/>
-      <preference id="elements.quickpost.resetconfirm"
-        name="gamefox.elements.quickpost.resetconfirm" type="bool"/>
-      <preference id="elements.quickpost.resetnewsig"
-        name="gamefox.elements.quickpost.resetnewsig" type="bool"/>
       <preference id="elements.quickpost.blankPostWarning"
         name="gamefox.elements.quickpost.blankPostWarning" type="bool"/>
 
@@ -319,6 +319,14 @@
             <groupbox>
               <checkbox label="&postButton.label;"
                 preference="elements.quickpost.button"/>
+              <checkbox label="&previewAndReset.label;"
+                preference="elements.quickpost.otherbuttons"/>
+              <hbox flex="1">
+                <checkbox flex="1" label="&confirmReset.label;"
+                  preference="elements.quickpost.resetconfirm"/>
+                <checkbox flex="1" label="&newSigOnReset.label;"
+                  preference="elements.quickpost.resetnewsig"/>
+              </hbox>
               <checkbox flex="1" label="&characterCounters.label;"
                 preference="elements.charcounts"/>
               <checkbox flex="1" label="&characterMap.label;"
@@ -371,13 +379,6 @@
                   </row>
                 </rows>
               </grid>
-
-              <checkbox label="&previewAndReset.label;"
-                preference="elements.quickpost.otherbuttons"/>
-              <checkbox label="&confirmReset.label;"
-                preference="elements.quickpost.resetconfirm"/>
-              <checkbox label="&newSigOnReset.label;"
-                preference="elements.quickpost.resetnewsig"/>
 
               <hbox align="center">
                 <label value="&afterTopic.label;"/>
