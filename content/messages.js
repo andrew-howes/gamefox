@@ -323,7 +323,7 @@ var gamefox_messages =
 
   post: function(title, message, sig, key, params, callback, lastTry)
   {
-    var strbundle = document.getElementById('overlay-strings');
+    var strbundle = document.getElementById('gamefox-overlay-strings');
 
     if (!callback)
       callback = function(result, msg, data) {
@@ -447,7 +447,7 @@ var gamefox_messages =
 
   detectPostError: function(text, status)
   {
-    var strbundle = document.getElementById('overlay-strings');
+    var strbundle = document.getElementById('gamefox-overlay-strings');
     var error;
 
     if (!/\S/.test(text))

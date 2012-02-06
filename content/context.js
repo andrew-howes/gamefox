@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -21,7 +21,7 @@ var gamefox_context =
 {
   displayMenu: function(event)
   {
-    var strbundle = document.getElementById('context-strings');
+    var strbundle = document.getElementById('gamefox-context-strings');
     var target = gContextMenu.target;
     // gContextMenu.target is undefined when right clicking on a submit input
     // (maybe other elements too), so falling back to the XUL document here at
@@ -263,7 +263,7 @@ var gamefox_context =
   {
     var strbundle, menu, item, first, board, topic, topicObj;
 
-    strbundle = document.getElementById('context-strings');
+    strbundle = document.getElementById('gamefox-context-strings');
     menu = document.getElementById('gamefox-tracked-menu');
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
@@ -312,7 +312,7 @@ var gamefox_context =
   {
     var strbundle, menu, item, currentAccount, first, username;
 
-    strbundle = document.getElementById('context-strings');
+    strbundle = document.getElementById('gamefox-context-strings');
     menu = document.getElementById('gamefox-accounts-menu');
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
@@ -475,7 +475,7 @@ var gamefox_context =
     var strbundle, menu, node, doc, username, activeGroups, userlist, noGroups,
       i, item, label, info;
 
-    strbundle = document.getElementById('context-strings');
+    strbundle = document.getElementById('gamefox-context-strings');
     menu = document.getElementById('gamefox-context-usergroups-list');
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);

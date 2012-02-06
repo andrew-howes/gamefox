@@ -37,7 +37,7 @@ var gamefox_accounts =
 
   switchAccount: function(username)
   {
-    var strbundle = document.getElementById('overlay-strings');
+    var strbundle = document.getElementById('gamefox-overlay-strings');
 
     this.read();
     var account = this.accounts[username];
@@ -137,7 +137,7 @@ var gamefox_accounts =
     if (!gamefox_lib.thirdPartyCookiePreCheck())
       return;
 
-    var strbundle = document.getElementById('overlay-strings');
+    var strbundle = document.getElementById('gamefox-overlay-strings');
 
     var password = {value: ''};
     var check = {value: true};
@@ -215,7 +215,7 @@ var gamefox_accounts =
 
   promptRemoveAccount: function()
   {
-    var strbundle = document.getElementById('overlay-strings');
+    var strbundle = document.getElementById('gamefox-overlay-strings');
 
     this.read();
     var items = [];
@@ -265,7 +265,7 @@ var gamefox_accounts =
 
   login: function(username, password, callback, cookies, lastTry)
   {
-    var strbundle = document.getElementById('overlay-strings');
+    var strbundle = document.getElementById('gamefox-overlay-strings');
 
     if (!callback)
       callback = function(result, msg) {
