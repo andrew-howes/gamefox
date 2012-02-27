@@ -25,7 +25,6 @@ body.bwp {background:white !important;}
 #full_col_wrap .col_layout {padding-right:0 !important;}
 #sky_col_wrap, #full_col_wrap, #mpu_col_wrap:not(.board_hub) {margin-top: 0 !important;}
 #side_col, #col_layout, #mpu_col_wrap, #side_col_wrap, #sky_col_wrap {background:white !important; }
-#layout {position:relative !important;}
 
 /** Jump to Page and Search Topics **/
 .pagejumper {}
@@ -85,7 +84,7 @@ table td.author:before {content: "From: " !important;}
 
 
 /** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
-.gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90 !important;}
+.gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90;}
 
 
 /** Quotes and Code blocks (GameFAQs and GFCode) **/ /** Modified from GameFOX GFCode CSS **/

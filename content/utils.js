@@ -520,7 +520,7 @@ var gamefox_utils =
       element.style.display = '';
 
       window.setTimeout(function() {
-        element.style.opacity = '1';
+        element.style.opacity = '';
       }, 20);
     },
 
