@@ -1,7 +1,7 @@
 /** RetroClassic Extras **/
 /** By TakatoMatsuki **/
 
-/** Build 2011-04-07-19-35 **/
+/** Build 2012-03-01-12-19 **/
 
 @-moz-document domain("gamefaqs.com") {
 
@@ -16,6 +16,8 @@ body.bwp {background:white !important;}
 /** Header **/
 #masthead #searchbox form input#searchtextbox {border:2px inset threedface !important;}
 #masthead #searchbox form li.submit button {background: buttonface !important; border:2px outset buttonface !important; color:buttontext !important; width:40px !important; height:22px !important; }
+/** New PM (GameFOX) **/
+#gamefox-new-pm, #gamefox-new-pm b {font-weight:bold !important; color:yellow !important; background:none !important;}
 
 
 /** Containers **/
@@ -25,6 +27,7 @@ body.bwp {background:white !important;}
 #full_col_wrap .col_layout {padding-right:0 !important;}
 #sky_col_wrap, #full_col_wrap, #mpu_col_wrap:not(.board_hub) {margin-top: 0 !important;}
 #side_col, #col_layout, #mpu_col_wrap, #side_col_wrap, #sky_col_wrap {background:white !important; }
+.clear_gap {display:none !important;}
 
 /** Jump to Page and Search Topics **/
 .pagejumper {}
@@ -34,6 +37,10 @@ body.bwp {background:white !important;}
 .searchtopics form button {background: buttonface !important; border:2px outset buttonface !important; color:buttontext !important; width:53px !important; }
 .searchtopics form button span {left:0px !important;font-size:13.33px !important; text-transform:capitalize !important; font-family:MS Shell Dlg, arial, sans-serif !important;}
 .searchtopics form span.data input {font-family:MS Shell Dlg, arial, sans-serif !important;}
+
+/** Content Nav **/
+ul.content_nav li.grey {opacity:0.8 !important;}
+ul.content_nav li.grey:hover {opacity:1 !important;}
 
 
 /** Boards **/
@@ -82,9 +89,10 @@ table td.author:before {content: "From: " !important;}
 /** New PM (GameFOX) **/
 #gamefox-new-pm, #gamefox-new-pm b {font-weight:bold !important; color:yellow !important; background:none !important;}
 
-
 /** Quickwhois **/ /** Based off of some CSS that was in GameFOX 0.5.0 and earlier **/
-.gamefox-quickwhois {position:absolute !important; z-index: 50 !important; padding: 3px !important; width: auto !important; overflow-x: auto !important; overflow-y: hidden !important; border: 2px solid #0000ff !important; color: #000000 !important; background-color: #ffffff !important; font-family: monospace !important; font-size: 13px !important; white-space: pre !important; border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; opacity: 0.90;}
+.gamefox-quickwhois {border: 2px solid #0000ff !important; z-index: 50 !important; opacity: 0.90; margin-top:-2px !important; margin-left:-1px !important; background-color: #ffffff !important; border-radius: 10px !important; white-space: pre !important;}
+.gamefox-quickwhois table {font-family: monospace !important; font-size: 13px !important;}
+
 
 
 /** Quotes and Code blocks (GameFAQs and GFCode) **/ /** Modified from GameFOX GFCode CSS **/
@@ -113,12 +121,13 @@ a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
 #gamefox-quickpost-normal #gamefox-quickpost-form:before {content:"QuickPost" !important; text-align: center !important; width: 100% !important; clear: both !important; display:block !important; background-color: #0000ff !important; color: #ffffff !important; font-weight: bold !important; font-size: 15px !important; padding:1px !important; border-top:1px solid white !important;}
 #gamefox-quickpost-form {text-align: center !important; width: 100% !important; clear: both !important;}
 #gamefox-message, #gamefox-quickpost-signature textarea {width: 70% !important; border-left: 2px solid #0000ff !important; border-right: 2px solid #0000ff !important; font-size:12.8px !important; font-family: MS Shell Dlg,arial,sans-serif !important;}
-.gamefox-message-count, #gamefox-title-count {margin-left: 2em !important;}
+#gamefox-message-count, #gamefox-title-count {margin-left: 2em !important;}
+
+
 
 /** Character Map **/ /** Based off CSS included with GameFOX **/
 .gamefox-character-map table {border-collapse:collapse !important;}
 .gamefox-character-map:not(#helloworld) a:not(#helloworld) {text-decoration:none !important;}
-
 
 /** GameFOX - Tracked Note **/
 #gamefox-tracked-note {background:#FFFFAA !important; text-align:center !important; font-size:12.8px !important; border:2px solid white !important; padding:1px !important; margin:0 !important; border-bottom:0 !important;}
@@ -128,7 +137,6 @@ a + .gamefox-status {margin-left:1px !important; margin-right:0 !important;}
 
 /** Last Post **/
 table.board:not(#helloworld) a.gamefox-last-post-link:not(#helloworld) {color:black !important; text-decoration:none !important;}
-
 
 /** FAQs **/
 body > div#header, body > div#footer {background:#6666FF !important; color:white !important; border-color:#6666FF !important;}
