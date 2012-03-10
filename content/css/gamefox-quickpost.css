@@ -15,7 +15,6 @@
         background: #eee;
         padding: 5px !important;
         -moz-border-radius: 10px;
-        opacity: 0;
         -moz-transition: opacity .3s;
         box-shadow: 0 0 10px #555;
         -moz-box-shadow: 0 0 10px #555;
