@@ -509,6 +509,8 @@ var gamefox_utils =
   fade: {
     add: function(element)
     {
+      element.style.opacity = '0';
+
       element.addEventListener('transitionend', function() {
         if (element.style.opacity == '0')
           element.style.display = 'none';
