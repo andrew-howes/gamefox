@@ -211,7 +211,7 @@ var gamefox_messages =
       if (get.readyState == 4)
       {
         var msg = get.responseText
-          .match(/name="messagetext">([\S\s]*?)<\/textarea>/m);
+          .match(/name="messagetext"[^>]*>([\S\s]*?)<\/textarea>/m);
         if (!msg)
         {
           gamefox_lib.alert('You can\'t edit this post anymore.');
