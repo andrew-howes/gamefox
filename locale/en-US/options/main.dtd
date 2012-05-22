@@ -48,9 +48,8 @@
 <!ENTITY characterMap.label "Character map">
 
 <!ENTITY htmlButtons.label "HTML tag buttons:">
-<!ENTITY standard.label "Standard">
-<!ENTITY extended.label "Extended">
-<!ENTITY gfcode.label "GFCode">
+<!ENTITY basic.label "Basic">
+<!ENTITY extra.label "Extra">
 <!ENTITY breakTags.label "Break HTML">
 
 <!ENTITY sigTextbox.label "Signature textbox:">

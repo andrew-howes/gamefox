@@ -495,23 +495,18 @@ var gamefox_quickpost =
     span.className = 'gamefox-html-buttons';
 
     var tags = [];
-    // Standard
+    // Basic
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
       tags.push(
           'b', 'Bold', 'b',
-          'i', 'Italics', 'i');
-    // Extended
-    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended'))
+          'i', 'Italics', 'i'
+      );
+    // Extra
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extra'))
       tags.push(
-          'em', 'Emphasis', 'e',
-          'strong', 'Strong Emphasis', 's',
-          'p', 'Paragraph', 'g',
-          'br', 'Break', 'n');
-    // GFCode
-    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode'))
-      tags.push(
-          'i,p', 'Quote', 'q',
-          'em,p', 'Code', 'd');
+          'quote', 'Quote', 'q',
+          'spoiler', 'Spoiler', 's'
+      );
 
     var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
     var button;

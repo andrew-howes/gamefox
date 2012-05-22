@@ -107,10 +107,8 @@
 
       <preference id="elements.quickpost.htmlbuttons"
         name="gamefox.elements.quickpost.htmlbuttons" type="bool"/>
-      <preference id="elements.quickpost.htmlbuttons.extended"
-        name="gamefox.elements.quickpost.htmlbuttons.extended" type="bool"/>
-      <preference id="elements.quickpost.htmlbuttons.gfcode"
-        name="gamefox.elements.quickpost.htmlbuttons.gfcode" type="bool"/>
+      <preference id="elements.quickpost.htmlbuttons.extra"
+        name="gamefox.elements.quickpost.htmlbuttons.extra" type="bool"/>
       <preference id="elements.quickpost.htmlbuttons.breaktags"
         name="gamefox.elements.quickpost.htmlbuttons.breaktags" type="bool"/>
 
@@ -335,12 +333,10 @@
               <hbox align="baseline">
                 <label value="&htmlButtons.label;"/>
                 <hbox flex="1">
-                  <checkbox flex="1" label="&standard.label;"
+                  <checkbox flex="1" label="&basic.label;"
                     preference="elements.quickpost.htmlbuttons"/>
-                  <checkbox flex="1" label="&extended.label;"
-                    preference="elements.quickpost.htmlbuttons.extended"/>
-                  <checkbox flex="1" label="&gfcode.label;"
-                    preference="elements.quickpost.htmlbuttons.gfcode"/>
+                  <checkbox flex="1" label="&extra.label;"
+                    preference="elements.quickpost.htmlbuttons.extra"/>
                   <checkbox flex="1" label="&breakTags.label;"
                     preference="elements.quickpost.htmlbuttons.breaktags"/>
                 </hbox>
