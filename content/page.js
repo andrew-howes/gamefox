@@ -510,11 +510,6 @@ var gamefox_page =
       // Other form stuff
       doc.gamefox.lastFocusedPostForm = form;
       message.tabIndex = 2;
-
-      // Trim newlines after GFCode quotes
-      form.addEventListener('submit', function() {
-        message.value = gamefox_messages.trimGFCodeNewlines(message.value);
-      }, false);
     }
 
     /* User Information (user.php) */

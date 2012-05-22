@@ -58,7 +58,6 @@ pref("gamefox.quote.message.italic", true);
 pref("gamefox.quote.message.bold", false);
 pref("gamefox.quote.removesignature", true);
 pref("gamefox.quote.style", "std");
-pref("gamefox.quote.controlwhitespace", true);
 pref("gamefox.quote.focusQuickPost", true);
 
 pref("gamefox.signature.serialized", "[{\"accounts\":\"\", \"boards\":\"\", \"body\":\"\"}]");
