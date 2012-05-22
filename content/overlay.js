@@ -124,32 +124,6 @@ var gamefox =
 
   doMigration: function(comparator, version)
   {
-    /* 0.7.8 */
-    // Also run for 0.7.9 in case gamefox.startup() was never called for some
-    // people (see commit a1f7f84)
-    if (comparator.compare('0.7.8', version) > 0
-        || comparator.compare('0.7.9', version) > 0)
-    {
-      // New "include" property for highlighting groups
-      var groups = gamefox_highlighting.read();
-      for (var i = 0; i < groups.length; i++)
-        if (!groups[i].include) groups[i].include = [];
-      gamefox_highlighting.write(groups);
-
-      // New stylesheet category
-      var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
-      if (!css.themes)
-        css.themes = {};
-      gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));
-    }
-
-    /* 0.7.9 */
-    if (comparator.compare('0.7.9', version) > 0)
-    {
-      // Fix incorrect msgsPerPage prefs caused by 0.7.8
-      gamefox.importMsgsPerPage();
-    }
-
     /* 0.8 */
     if (comparator.compare('0.8', version) > 0)
     {
