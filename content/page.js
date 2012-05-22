@@ -1442,6 +1442,7 @@ var gamefox_page =
       {
         var qpDiv = doc.createElement('div');
             qpDiv.id = 'gamefox-quickpost-normal';
+            qpDiv.className = 'col_layout'; // for padding
 
         // Remove GameFAQs' quick post form
         var postForm = doc.querySelector('#content form[action^="/boards/post'
@@ -1449,7 +1450,7 @@ var gamefox_page =
         if (postForm)
           postForm.parentNode.removeChild(postForm);
 
-        boardWrap.parentNode.appendChild(qpDiv);
+        contentDiv.appendChild(qpDiv);
         gamefox_quickpost.appendForm(doc, qpDiv, false);
       }
 

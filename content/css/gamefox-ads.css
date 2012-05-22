@@ -20,6 +20,9 @@
         margin: 0 !important;
         padding: 0 !important;
     }
+    #top_col_wrap .pod.board_wrap {
+        margin-bottom: 0 !important;
+    }
 }
 
 @-moz-document url-prefix(http://www.gamefaqs.com/boards/post.php) {

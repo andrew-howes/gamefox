@@ -4,6 +4,10 @@
     {
         clear: both;
     }
+    #content > #gamefox-quickpost-normal
+    {
+        margin-bottom: 10px !important;
+    }
 
     #gamefox-quickpost-afloat
     {
