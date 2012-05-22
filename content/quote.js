@@ -182,12 +182,12 @@ var gamefox_quote =
 
         return header + '\n' + body + '\n';
 
-      // GFCode
-      case 'gfcode':
+      // Standard
+      case 'std':
       default:
-        return '<i><p>' +
-          (header.length ? '<strong>' + header + '</strong>\n' : '') +
-          body + '</p></i>';
+        return '<quote>' +
+          (header.length ? '<b><b>' + header + '</b></b>\n' : '') +
+          body + '</quote>';
     }
   },
 

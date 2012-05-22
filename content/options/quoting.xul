@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- vim: set et sw=2 ts=2 sts=2 tw=79:
 
-     Copyright 2005, 2006, 2007, 2008, 2009, 2010
+     Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2012
      Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
 
      This file is part of GameFOX.
@@ -85,7 +85,7 @@
     <label control="quoteFormat">&quoteFormat.label;</label>
     <vbox class="indent" id="quoteFormat" role="group">
       <radiogroup preference="style">
-        <radio value="gfcode" label="&useGFCode.label;"/>
+        <radio value="std" label="&useStd.label;"/>
 
         <radio value="normal" label="&useClassic.label;"/>
         <hbox class="indent">

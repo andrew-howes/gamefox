@@ -8,9 +8,9 @@
 <!ENTITY removeSig.label "Remove signature">
 <!ENTITY focusQuickPost.label "Automatically scroll to QuickPost after quoting">
 
-<!ENTITY quoteFormat.label "Format quote with:">
-<!ENTITY useGFCode.label "GFCode tags (&lt;i&gt;, &lt;p&gt; and &lt;strong&gt;)">
-<!ENTITY useClassic.label "Classic tags (&lt;b&gt; and &lt;i&gt;)">
+<!ENTITY quoteFormat.label "Quote format:">
+<!ENTITY useStd.label "Standard (&lt;quote&gt;)">
+<!ENTITY useClassic.label "Classic (&lt;b&gt; and &lt;i&gt;)">
 
 <!ENTITY headerBold.label "Bold header">
 <!ENTITY headerItalic.label "Italicize header">

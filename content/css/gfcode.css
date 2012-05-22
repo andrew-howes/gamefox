@@ -3,10 +3,12 @@
  * GFCode (GameFOX Implementation)
  * © 2004-2009, Special Ops
  * Copyright 2008, 2009, 2011, 2012 Brian Marshall
+ * Contributors:
+ *     2012-05-21 spynae
  */
 @-moz-document domain(gamefaqs.com) {
     /* Common formatting for block elements */
-    .message i > p, .message em > p {
+    .message i > p, .message em > p, div.fquote {
         border: 1px rgba(136, 136, 136, 0.5) solid !important;
         background: rgba(180, 180, 180, 0.1);
 
@@ -16,27 +18,23 @@
         -moz-border-radius: 4px;
     }
 
-    /* <i><p> - blockquote */
-    .message i > p {
+    /* <i><p>, <quote> - blockquote */
+    .message i > p, div.fquote {
         font-style: normal !important;
     }
 
-    /* <i><p><strong> - blockquote header, for quoting full messages with userheader */
-    .message i > p > strong:first-child {
+    /* <i><p><strong>, <quote><b><b> - blockquote header */
+    .message i > p > strong:first-child, div.fquote > b:first-child > b {
         border-bottom: 1px rgba(136, 136, 136, 0.5) solid !important;
         background: rgba(150, 150, 150, 0.1);
 
-        display: block;
+        display: inline-block;
+        width: 100%;
         font-style: italic !important;
         font-weight: bold !important;
         margin: -4px -3px 3px !important;
         padding: 3px !important;
         -moz-border-radius: 4px 4px 0 0;
-    }
-
-    /* remove linebreak after quote header since it's already display:block */
-    .message i > p > strong:first-child + br {
-        display: none !important;
     }
 
     /* <em><p> - fixed-font block for code */
