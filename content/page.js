@@ -1413,22 +1413,23 @@ var gamefox_page =
 
       // Link post nums in quotes
       // Based on barbarianbob's initial code.
-      // http://www.gamefaqs.com/boards/genmessage.php?board=565885&topic=52347416
+      // http://www.gamefaqs.com/boards/565885-blood-money/52347416
       if (gamefox_lib.prefs.getBoolPref('elements.postidQuoteLinks'))
       {
-        var quotes = doc.evaluate('//table[contains(@class, "board")]//i/p/strong', doc,
-            null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-        var quote;
-        for (var i = 0; i < quotes.snapshotLength; i++)
+        var quotes = doc.querySelectorAll(
+            'table.board i > p > strong:first-child, ' +
+            'table.board div.fquote > b:first-child > b');
+        for (var i = 0; i < quotes.length; ++i)
         {
-          quote = quotes.snapshotItem(i);
-          quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/, function(z, num){
+          var quote = quotes[i];
+          quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/,
+            function(z, num) {
               return '<a href="' + gamefox_utils.newURI(boardId, topicId,
                   Math.floor((num - 1) /
                     gamefox_lib.prefs.getIntPref('msgsPerPage')),
                   tc, num, doc.location.pathname)
                 + '">#' + num + '</a>';
-              });
+            });
         }
       }
 
