@@ -8,7 +8,7 @@
  */
 @-moz-document domain(gamefaqs.com) {
     /* Common formatting for block elements */
-    .message i > p, .message em > p, div.fquote {
+    .message i > p, .message em > p, .message .fquote, .message blockquote {
         border: 1px rgba(136, 136, 136, 0.5) solid !important;
         background: rgba(180, 180, 180, 0.1);
 
@@ -18,18 +18,13 @@
         -moz-border-radius: 4px;
     }
 
-    /* <i><p>, <quote> - blockquote */
-    .message i > p, div.fquote {
-        font-style: normal !important;
-    }
-
-    /* <i><p><strong>, <quote><b><b> - blockquote header */
-    .message i > p > strong:first-child, div.fquote > b:first-child > b {
+    /* <i><p><strong>, <quote><b><b>, <cite> - blockquote header */
+    .message i > p > strong:first-child,
+    .message blockquote > cite:first-child {
         border-bottom: 1px rgba(136, 136, 136, 0.5) solid !important;
         background: rgba(150, 150, 150, 0.1);
 
-        display: inline-block;
-        width: 100%;
+        display: block;
         font-style: italic !important;
         font-weight: bold !important;
         margin: -4px -3px 3px !important;
@@ -37,15 +32,21 @@
         -moz-border-radius: 4px 4px 0 0;
     }
 
-    /* <em><p> - fixed-font block for code */
+    /* remove linebreak after quote header since it's already display:block */
+    .message i > p > strong:first-child + br,
+    .message blockquote > cite:first-child + br {
+        display: none !important;
+    }
+
+    /* <i><p> - deprecated blockquote */
+    .message i > p {
+        font-style: normal !important;
+    }
+
+    /* <em><p> - deprecated fixed-font block for code */
     .message em > p {
         font-family: monospace !important;
         font-style: normal !important;
         white-space: pre-wrap;
-    }
-
-    /* Prevent users from seeing disruptive levels of nesting */
-    .message p p p p {
-        display: none !important;
     }
 }
