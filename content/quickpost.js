@@ -500,7 +500,8 @@ var gamefox_quickpost =
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extra'))
       tags.push(
           'quote', 'Quote', 'q',
-          'spoiler', 'Spoiler', 's'
+          'spoiler', 'Spoiler', 's',
+          'code', 'Code', 'd'
       );
 
     var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
