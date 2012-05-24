@@ -121,48 +121,57 @@ var gamefox_quote =
       header = '';
 
     /* Quote body */
-    var body = text.replace(/<br\s*\/?>/gi, '\n')
-      .replace(/<img\b[^<>]+\bsrc="([^"]*)"[^<>]*>/gi, '$1')
-      .replace(new RegExp('</?(img|a|font|span|div|table|tbody|th|tr|td|wbr|' +
-              'u|embed)\\b[^<>]*/?>', 'gi'), '').trim();
-
-    // Remove the signature
-    if (gamefox_lib.prefs.getBoolPref('quote.removesignature'))
-      body = body.replace(/(^|\n) *--- *(\n.*){0,2}$/, '');
-
-    // Break escaped tags
-    body = gamefox_utils.breakTags(body);
+    var body = text.replace(/<br\s*\/?>/gi, '\n');
+    body = gamefox_utils.breakTags(body); // Break escaped tags
 
     var bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;
 
-    // Remove nested quotes
-    var quotes = doc.evaluate('i/p', bodyDOM, null, XPathResult.
-        ORDERED_NODE_SNAPSHOT_TYPE, null);
-    for (var i = 0; i < quotes.snapshotLength; i++)
+    // Remove nested quotes past 2 levels (this new surrounding quote makes it
+    // 3 levels total)
+    var quotes = bodyDOM.querySelectorAll('blockquote blockquote blockquote, '
+        + 'blockquote blockquote cite');
+    for (var i = quotes.length - 1; i >= 0; --i)
     {
-      if (quotes.snapshotLength == 1 && quotes.snapshotItem(i).parentNode
-          .previousSibling == null)
-        bodyDOM.removeChild(quotes.snapshotItem(i).parentNode);
-      else
-      {
-         bodyDOM.insertBefore(doc.createTextNode('\n'),
-             quotes.snapshotItem(i).parentNode.nextSibling);
-         quotes.snapshotItem(i).parentNode.replaceChild(
-             doc.createTextNode('[quoted text]'), quotes.snapshotItem(i));
-      }
+      quotes[i].nextSibling.textContent = quotes[i].nextSibling.textContent
+        .trim();
+      quotes[i].parentNode.removeChild(quotes[i]);
     }
 
-    // Remove p tags which break GFCode
-    var p = doc.evaluate('p', bodyDOM, null, XPathResult.
-        ORDERED_NODE_SNAPSHOT_TYPE, null);
-    for (var i = 0; i < p.snapshotLength; i++)
+    for (var elements = bodyDOM.getElementsByTagName('*'),
+         i = elements.length - 1; i >= 0; --i)
     {
-      bodyDOM.insertBefore(doc.createTextNode('\n' + p.snapshotItem(i)
-            .textContent), p.snapshotItem(i));
-      bodyDOM.removeChild(p.snapshotItem(i));
+      var item = elements[i];
+      var innerHTML = gamefox_utils.specialCharsDecode(item.innerHTML);
+      var tagName = item.tagName.toLowerCase();
+
+      // Remove signature
+      if (item.className == 'gamefox-signature' && gamefox_lib.prefs
+          .getBoolPref('quote.removesignature'))
+        item.parentNode.removeChild(item);
+
+      // blockquote -> quote
+      else if (tagName == 'blockquote')
+        item.parentNode.replaceChild(doc.createTextNode('<quote>' + innerHTML +
+              '</quote>'), item);
+
+      // span.fspoiler -> spoiler
+      // div.fquote -> quote (deprecated, but still found in older posts)
+      else if (['fspoiler', 'fquote'].indexOf(item.className) != -1)
+        item.parentNode.replaceChild(doc.createTextNode(gamefox_utils.format(
+            '<{0}>{1}</{0}>', item.className.substr(1), innerHTML)), item
+        );
+
+      // Replace img element with its src attribute
+      else if (tagName == 'img')
+        item.parentNode.replaceChild(doc.createTextNode(item.src), item);
+
+      // Strip all unsupported elements
+      else if (['b', 'i', 'cite', 'code'].indexOf(tagName) == -1)
+        item.parentNode.replaceChild(doc.createTextNode(innerHTML), item);
     }
 
+    // Put it all back together as text
     body = gamefox_utils.specialCharsDecode(bodyDOM.innerHTML.trim());
 
     /* Compile the final quote */

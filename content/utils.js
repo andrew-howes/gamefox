@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011
+ * Copyright 2008, 2009, 2010, 2011, 2012
  * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
@@ -393,12 +393,17 @@ var gamefox_utils =
     return prefix;
   },
 
-  // Break tags for posting
+  /**
+   * Break (escape) tags for posting raw HTML
+   *
+   * @param {String} str
+   * @return {String} Text with HTML tags escaped
+   */
   breakTags: function(str)
   {
-    return str.
-      replace(/&lt;(\/?)(b|i|em|strong|br|p)&gt;/gi, '&lt;$1$2<b></b>&gt;').
-      replace(/&lt;(br|p) \/&gt;/gi, '&lt;$1 /<b></b>&gt;');
+    return str.replace(
+        /&lt;(\/?)(b|i|em|strong|quote|cite|spoiler|code)&gt;/gi,
+        '&lt;$1$2<b></b>&gt;');
   },
 
   cloneObj: function(obj)
@@ -549,6 +554,25 @@ var gamefox_utils =
     return gamefox_utils.findClosest(element, '', function(node) {
       return node.firstChild && node.firstChild.className &&
         node.firstChild.className.indexOf('msg_stats') === 0;
+    });
+  },
+
+  /**
+   * Substitute variables in a string with values.
+   *
+   * Variables are in the form of {0}, {1}, etc.
+   *
+   * @param {String} str
+   * @param {String} var...
+   *        Each variable is a separate argument
+   * @return {String} Formatted string
+   */
+  format: function(str)
+  {
+    var args = arguments;
+    return str.replace(/{(\d+)}/g, function(match, number) {
+      number = parseInt(number)+1;
+      return typeof args[number] != 'undefined' ? args[number] : match;
     });
   }
 };
