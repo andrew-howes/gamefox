@@ -1418,7 +1418,7 @@ var gamefox_page =
       {
         var quotes = doc.querySelectorAll(
             'table.board i > p > strong:first-child, ' +
-            'table.board div.fquote > b:first-child > b');
+            'table.board blockquote > cite:first-child');
         for (var i = 0; i < quotes.length; ++i)
         {
           var quote = quotes[i];
