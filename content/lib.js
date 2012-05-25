@@ -230,10 +230,10 @@ var gamefox_lib =
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (table && !gamefox_lib.onPage(doc, 'usernote'))
         {
-          var boards = doc.evaluate(
-              './/div[@class="col_layout"]/div[@class="body"]', contentDiv,
-              null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-          if (boards.snapshotLength > 1 || gamefox_lib.onPage(doc, 'moddetl'))
+          var boards = doc.evaluate('.//div[@class="board_nav"]//a[contains(.,'
+            + '"Message List")]', contentDiv, null, XPathResult
+              .ORDERED_NODE_SNAPSHOT_TYPE, null);
+          if (boards.snapshotLength == 1 || gamefox_lib.onPage(doc, 'moddetl'))
             doc.gamefox.pageType = ['messages', 'detail'];
           else
           {
