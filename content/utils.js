@@ -170,8 +170,16 @@ var gamefox_utils =
     var postId = (header.querySelector('div[class^="msg_stats"] > a[name]') ||
         {name: 0}).name;
 
-    return { id: postId, header: header.firstChild, body: body.firstChild,
-      original: tdNode, leftMsgData: leftMsgData };
+    // Only select the first child if there's a container div - message detail
+    // is lacking these
+    if (header.firstChild.tagName == 'DIV')
+    {
+      header = header.firstChild;
+      body = body.firstChild;
+    }
+
+    return { 'id': postId, 'header': header, 'body': body, 'original': tdNode,
+      'leftMsgData': leftMsgData };
   },
 
   /**
