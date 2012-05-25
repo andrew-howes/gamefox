@@ -103,7 +103,7 @@ var gamefox_highlighting =
 
   // TODO: Consolidate the search functions? Lots of duplicated code
 
-  searchPost: function(username, post, tc, status, providedUserlist)
+  searchPost: function(username, post, status, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.postContains;
@@ -126,13 +126,13 @@ var gamefox_highlighting =
     if (!groups[0])
     {
       // nothing in postContains index, return users index instead
-      return this.searchUsername(username, tc, status, providedUserlist);
+      return this.searchUsername(username, status, providedUserlist);
     }
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
 
     // also get groups from username search
-    var hlinfo = this.searchUsername(username, tc, status, userlist);
+    var hlinfo = this.searchUsername(username, status, userlist);
     if (hlinfo && hlinfo[4])
       groups = gamefox_utils.mergeSortArrays(groups, hlinfo[4]);
 
@@ -200,7 +200,7 @@ var gamefox_highlighting =
            topics, groups];
   },
 
-  searchUsername: function(username, tc, status, providedUserlist)
+  searchUsername: function(username, status, providedUserlist)
   {
     if (!this.index) return false;
     var index = this.index.users;
@@ -208,16 +208,11 @@ var gamefox_highlighting =
     username = username.trim().toLowerCase();
     if (!username.length) return false;
 
-    if (!index.hasOwnProperty(username) && !(tc && index['(tc)']))
+    if (!index.hasOwnProperty(username))
       return this.searchStatus(status); // username isn't in any groups
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
-    if (tc && index.hasOwnProperty(username) && index['(tc)'])
-      var groups = gamefox_utils.mergeSortArrays(index[username], index['(tc)']);
-    else if (tc && index['(tc)'])
-      var groups = index['(tc)'];
-    else
-      var groups = index[username];
+    var groups = index[username];
 
     if (status)
     {

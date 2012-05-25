@@ -404,7 +404,7 @@ var gamefox_utils =
     return newObj;
   },
 
-  newURI: function(board, topic, page, tc, post, link)
+  newURI: function(board, topic, page, post, link)
   {
     if (link)
     {

@@ -694,9 +694,8 @@ var gamefox_page =
             var topicParams = gamefox_utils.parseBoardLink(topicLink);
 
             rows[i].cells[2].innerHTML = '<a href="' + gamefox_utils
-              .newURI(topicParams['board'], null, null, null, null,
-                  topicLink) + '">' + rows[i].cells[2].textContent.trim()
-                    + '</a>';
+              .newURI(topicParams['board'], null, null, null, topicLink) + '">'
+              + rows[i].cells[2].textContent.trim() + '</a>';
           }
         }
 
@@ -1091,7 +1090,7 @@ var gamefox_page =
         // Message highlighting
         var hlinfo, groupname;
         if ((hlinfo = gamefox_highlighting.searchPost(username, postBody,
-                tc == username && !onDetail, userStatus, userlist)) != false)
+                userStatus, userlist)) != false)
         {
           // add group names before post date
           if (gamefox_lib.prefs.getBoolPref('userlist.messages.showgroupnames') &&
@@ -1359,7 +1358,6 @@ var gamefox_page =
         }
       }
 
-      doc.gamefox.tc = tc;
       doc.gamefox.msgnum = msgnum;
 
       // Mark as read if on the last page
@@ -1407,12 +1405,11 @@ var gamefox_page =
         {
           var quote = quotes[i];
           quote.innerHTML = quote.innerHTML.replace(/#([0-9]+)/,
-            function(z, num) {
+            function(_, num) {
               return '<a href="' + gamefox_utils.newURI(boardId, topicId,
-                  Math.floor((num - 1) /
-                    gamefox_lib.prefs.getIntPref('msgsPerPage')),
-                  tc, num, doc.location.pathname)
-                + '">#' + num + '</a>';
+                  Math.floor((num - 1) / gamefox_lib.prefs.getIntPref(
+                    'msgsPerPage')), num, doc.location.pathname) + '">#' +
+                  num + '</a>';
             });
         }
       }
@@ -1600,7 +1597,7 @@ var gamefox_page =
   {
     var node = event.target;
     var doc = node.ownerDocument;
-    var topiclink, posts, tc, pageList;
+    var topiclink, posts, pageList;
 
     try
     {

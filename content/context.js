@@ -456,7 +456,7 @@ var gamefox_context =
     for (i = 0; i < pages; i++)
     {
       item = document.createElement('menuitem');
-      item.setUserData('data', gamefox_utils.newURI(board, topic, i, tc, null,
+      item.setUserData('data', gamefox_utils.newURI(board, topic, i, null,
             topiclink), null);
       item.setAttribute('label', (i + 1) + (i == thisPage ? '*' : ''));
       item.addEventListener('command', function() {

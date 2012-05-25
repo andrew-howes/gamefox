@@ -314,12 +314,12 @@ var gamefox_quickpost =
               {
                 case 0: // go to topic
                   doc.location = gamefox_utils.newURI(params['board'],
-                    topicLink[1], null, null, null, topicLink[0]);
+                    topicLink[1], null, null, topicLink[0]);
                   break;
 
                 case 1: // go to board
                   doc.location = gamefox_utils.newURI(params['board'], null,
-                    null, null, null, topicLink[0]);
+                    null, null, topicLink[0]);
                   break;
               }
             }
@@ -343,8 +343,8 @@ var gamefox_quickpost =
                   else if (pages * msgsPerPage == msgs)
                   { // This post is creating a new page (last page is full)
                     doc.location = gamefox_utils.newURI(params['board'],
-                        params['topic'], pages, doc.gamefox.tc, msgs + 1,
-                        doc.location.pathname);
+                        params['topic'], pages, msgs + 1, doc.location.pathname
+                      );
                   }
                   else
                   { // Load last page
@@ -356,12 +356,12 @@ var gamefox_quickpost =
                         .singleNodeValue;
 
                       doc.location = gamefox_utils.newURI(params['board'],
-                          params['topic'], 0, '', '', topicLink.href);
+                          params['topic'], 0, '', topicLink.href);
                     }
                     else
                       doc.location = gamefox_utils.newURI(params['board'],
-                          params['topic'], pages - 1, doc.gamefox.tc, 'last',
-                          doc.location.pathname);
+                          params['topic'], pages - 1, 'last', doc.location
+                          .pathname);
                   }
 
                   break;
@@ -369,19 +369,18 @@ var gamefox_quickpost =
                 case 1: // go back to same page
                   doc.location = gamefox_utils.newURI(params['board'],
                       params['topic'], gamefox_utils
-                        .parseQueryString(doc.location.search)['page'],
-                      doc.gamefox.tc, null, doc.location.pathname);
+                        .parseQueryString(doc.location.search)['page'], null,
+                        doc.location.pathname);
                   break;
 
                 case 2: // go to first page
                   doc.location = gamefox_utils.newURI(params['board'],
-                      params['topic'], null, null, null,
-                      doc.location.pathname);
+                      params['topic'], null, null, doc.location.pathname);
                   break;
 
                 case 3: // go to board
                   doc.location = gamefox_utils.newURI(params['board'], null,
-                      null, null, null, doc.location.pathname);
+                      null, null, doc.location.pathname);
                   break;
               }
             }
