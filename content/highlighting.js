@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011
+ * Copyright 2008, 2009, 2010, 2011, 2012
  * Brian Marshall, Michael Ryan, Andrianto Effendy
  *
  * This file is part of GameFOX.
@@ -109,10 +109,6 @@ var gamefox_highlighting =
     var index = this.index.postContains;
 
     post = post.toLowerCase();
-    if (tc && status)
-      status = [status, 'tc'];
-    else if (tc)
-      status = 'tc';
 
     var groups = [];
     for (var i in index)
@@ -245,20 +241,6 @@ var gamefox_highlighting =
            topics, groups];
   },
 
-  convertStatus: function(status)
-  {
-    status = status.trim();
-
-    if (status == '(A)' || status == '(Admin)')
-      return 'admins';
-    if (status == '(M)' || status == '(Moderator)')
-      return 'mods';
-    if (status == '(V)' || status == '(VIP)')
-      return 'vips';
-
-    return status;
-  },
-
   searchStatus: function(status, providedUserlist)
   {
     if (!status || !this.index) return false;
@@ -267,13 +249,8 @@ var gamefox_highlighting =
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
     var groups = [];
 
-    // tc and tracked can be combined with any other status
-    if (status instanceof Array)
-      for (var i = 0; i < status.length; i++)
-        groups = gamefox_utils.mergeSortArrays(index[this.convertStatus(
-              status[i])], groups);
-    else
-      groups = index[this.convertStatus(status)];
+    for (var i = 0; i < status.length; i++)
+      groups = gamefox_utils.mergeSortArrays(index[status[i]], groups);
 
     if (!groups || !groups.length) return false;
 

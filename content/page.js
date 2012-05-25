@@ -706,8 +706,8 @@ var gamefox_page =
           // Highlighting
           var username = gamefox_utils
             .cleanUsername(rows[i].cells[2].textContent.trim());
-          var userStatus = rows[i].cells[2].textContent.replace(username,
-              '').trim();
+          var userStatus = gamefox_utils.readStatus(rows[i].cells[2]
+              .textContent);
           var title = rows[i].cells[1].textContent.trim();
           var topicId = gamefox_utils.getTopicId(rows[i].cells[1]
               .getElementsByTagName('a')[0].href);
@@ -858,9 +858,6 @@ var gamefox_page =
 
       var tcMarkerCond = !onDetail && gamefox_lib.prefs.getBoolPref('elements.marktc');
       var tcMarker = '\xA0' + gamefox_lib.getString('elements.marktc.marker');
-      var tc = doc.location.search.match(/\btc=([^&<>"]+)/);
-      if (tc)
-        tc = tc[1].replace(/\+/g, ' ');
 
       var deletelinkCond = gamefox_lib.prefs.getBoolPref('elements.deletelink');
       var editlinkCond = gamefox_lib.prefs.getBoolPref('elements.editlink');
@@ -1011,13 +1008,27 @@ var gamefox_page =
         }
 
         // User status
-        var userStatus = msgStats.childNodes[leftMsgData ? 3 : 1].textContent
-          .replace('|', '');
-        userStatus = userStatus.indexOf('(') != -1 ? userStatus : '';
+        var userStatusNode = msgStats.childNodes[leftMsgData ? 3 : 1];
+        var userStatus = gamefox_utils.readStatus(gamefox_utils
+            .getTextBetweenNodes(profileLink, postDateElement));
 
-        // Topic creator
         if (msgnum == 1 && !onDetail)
+          userStatus.push('tc'); // GFAQs doesn't add TC status to first post
+        if (userStatus.indexOf('tc') != -1)
           tc = username;
+
+        // Remove "(Topic Creator)" since we add this in our own way
+        if (userStatus.indexOf('tc') != -1 && msgnum != 1)
+        {
+          if (leftMsgData)
+          {
+            userStatusNode.parentNode.removeChild(userStatusNode.nextSibling);
+            userStatusNode.parentNode.removeChild(userStatusNode);
+          }
+          else
+            userStatusNode.textContent = ' ' + gamefox_utils.showStatus(
+                userStatus) + ' | ';
+        }
 
         // Date format
         if (gamefox_date.enabled)
@@ -1355,33 +1366,6 @@ var gamefox_page =
       if (doc.gamefox.pages == pagenum + 1)
         gamefox_tracked.markTopicAsRead(topicId, msgnum + ignoreCount);
 
-      // Add TC to page links
-      if (pageJumper)
-      {
-        var tcParam = gamefox_utils.tcParam(tc);
-        if (tcParam)
-        {
-          var pageJumperTop;
-          if (userPanel)
-            pageJumperTop = doc.evaluate('div[@class="u_pagenav"]', userPanel,
-                null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-              .singleNodeValue;
-          else
-            pageJumperTop = doc.evaluate('div[@class="pages"]',
-                userNav.parentNode, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-                null).singleNodeValue;
-
-          var links = gamefox_utils.mergeArrays(
-              pageJumperTop ? pageJumperTop.getElementsByTagName('a') : [],
-              pageJumper.getElementsByTagName('a'));
-          for (var i = 0; i < links.length; i++)
-          {
-            if (links[i].search.indexOf('page') != -1)
-              links[i].search += tcParam;
-          }
-        }
-      }
-
       // Board nav at the bottom of the page
       if (gamefox_lib.prefs.getBoolPref('elements.boardnav') && !onDetail)
       {
@@ -1711,12 +1695,11 @@ var gamefox_page =
 
     pageHTML.appendChild(prefixHTML);
 
-    var tcParam = gamefox_utils.tcParam(tc);
     var a;
     for (var i = 0; i < pages; i++)
     {
       a = doc.createElement('a');
-      a.href = topiclink + (i ? '?page=' + i + tcParam : '');
+      a.href = topiclink + (i ? '?page=' + i : '');
       a.appendChild(doc.createTextNode(i + 1));
 
       pageHTML.appendChild(a);

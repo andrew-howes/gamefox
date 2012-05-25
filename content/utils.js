@@ -274,7 +274,7 @@ var gamefox_utils =
     if (msgs == 1)
       return ['', ''];
     var lastPage = Math.floor((msgs - 1) / gamefox_lib.prefs.getIntPref('msgsPerPage'));
-    var pageStr = lastPage ? '?page=' + lastPage + this.tcParam(tc) : '';
+    var pageStr = lastPage ? '?page=' + lastPage : '';
     return [pageStr, '#' + msgs];
   },
 
@@ -314,23 +314,6 @@ var gamefox_utils =
     return arr.filter(function(element, index, array) {
       return !index || element != array[index - 1];
     });
-  },
-
-  /**
-   * Return a tc= parameter to insert into a URI
-   *
-   * @param {String} tc
-   *        Name of the topic creator
-   * @return {String} tc= parameter or an empty string if disabled
-   */
-  tcParam: function(tc)
-  {
-    // Check if the TC is highlighted
-    var userlist = gamefox_highlighting.loadGroups();
-
-    return tc && (gamefox_lib.prefs.getBoolPref('elements.marktc')
-        || gamefox_highlighting.searchUsername('(tc)', true, 'tc', userlist)) ?
-        '&tc=' + tc.replace(/ /g, '+') : '';
   },
 
   parseQueryString: function(str)
@@ -446,7 +429,6 @@ var gamefox_utils =
       + board + '-' + (name ? name : '')
       + (topic ? ('/' + topic) : '')
       + (page ? '?page=' + page : '')
-      + (tc ? (page > 0 ? gamefox_utils.tcParam(tc) : '') : '')
       + (post ? post : '');
   },
 
@@ -574,5 +556,81 @@ var gamefox_utils =
       number = parseInt(number)+1;
       return typeof args[number] != 'undefined' ? args[number] : match;
     });
+  },
+
+  /**
+   * Get all text between two sibling nodes.
+   *
+   * The range is exclusive - text inside the start/end nodes themselves is not
+   * included.
+   *
+   * @param {HTMLElement} start
+   *        Node to start reading text from
+   * @param {HTMLElement} end
+   *        Node to end at
+   * @return {String} Compilation of all text between the nodes
+   */
+  getTextBetweenNodes: function(start, end)
+  {
+    var par = start.parentNode;
+    var node = start.nextSibling;
+    var text = '';
+
+    while (node && node != end)
+    {
+      text += node.textContent;
+      node = node.nextSibling;
+    }
+
+    return text;
+  },
+
+  /**
+   * Convert the statuses of a user into an array
+   *
+   * @param {String} stat
+   *        User status from GameFAQs, e.g. "(Admin)" or "(Topic Creator)"
+   * @return {Array} List of statuses
+   */
+  readStatus: function(stat)
+  {
+    statList = [];
+
+    [['Admin', 'admins'],
+     ['Moderator', 'mods'],
+     ['VIP', 'vips'],
+     ['Topic Creator', 'tc']].forEach(function(item) {
+      // Check both full and abbreviated forms, e.g. "(Admin)" and "(A)"
+      if (stat.indexOf('(' + item[0] + ')') != -1
+          || stat.indexOf('(' + item[0][0] + ')') != -1)
+       statList.push(item[1]);
+    });
+
+    return statList;
+  },
+
+  /**
+   * Convert an array of statuses into a string
+   *
+   * Note: topic creator status is not included because it's displayed
+   * separately
+   *
+   * @param {Array} statList
+   *        List of statuses (e.g., from readStatus())
+   * @return {String} User statuses displayed in parentheses, like GameFAQs
+   */
+  showStatus: function(statList)
+  {
+    var stat = '';
+
+    // TC status is added separately
+    [['admins', 'Admin'],
+     ['mods', 'Moderator'],
+     ['vips', 'VIP']].forEach(function(item) {
+      if (statList.indexOf(item[0]) != -1)
+       stat += '(' + item[1] + ') ';
+     });
+
+    return stat.trim();
   }
 };

@@ -413,8 +413,8 @@ var gamefox_context =
 
   populatePages: function(event)
   {
-    var menu, node, doc, topiclink, posts, tc, board, topic, pages, tcParam,
-      i, item, thisPage;
+    var menu, node, doc, topiclink, posts, tc, board, topic, pages, i, item,
+      thisPage;
 
     menu = document.getElementById('gamefox-pages-menu');
     while (menu.hasChildNodes())
