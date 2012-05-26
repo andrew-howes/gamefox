@@ -176,13 +176,13 @@ var gamefox_highlighting =
     if (!groups[0])
     {
       // nothing in titleContains index, return users index instead
-      return this.searchUsername(username, false, status, providedUserlist);
+      return this.searchUsername(username, status, providedUserlist);
     }
 
     var userlist = providedUserlist == null ? this.read() : providedUserlist;
 
     // also get groups from username search
-    var hlinfo = this.searchUsername(username, false, status, userlist);
+    var hlinfo = this.searchUsername(username, status, userlist);
     if (hlinfo && hlinfo[4])
       groups = gamefox_utils.mergeSortArrays(groups, hlinfo[4]);
 
