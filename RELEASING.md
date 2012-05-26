@@ -1,5 +1,11 @@
+Releasing a new version of GameFOX
+==================================
+
+This document goes through the steps that need to be taken for a GameFOX
+maintainer to release a new stable version.
+
 Requirements
-============
+------------
 
 Packages needed to build, sign and upload (on Debian lenny):
 
@@ -14,7 +20,7 @@ Spock (http://hyperstruct.net/projects/spock) must be installed in
 release/spock. The McCoy profile must be in release/mccoy.default.
 
 Configuration
-=============
+-------------
 
 To upload to the server, copy common/server.conf.example to common/server.conf
 and edit the file to match the correct settings.
@@ -22,13 +28,13 @@ and edit the file to match the correct settings.
 SSH is required. Local file operations are not supported yet.
 
 Preparing for a release
-=======================
+-----------------------
 
 The web change log needs to be written. Use www/changes-next.mdwn as a staging
 area for the next version.
 
 Uploading a release
-===================
+-------------------
 
 You must first build a distribution which contains the XPI, news and unsigned
 release files. To do so, type
@@ -45,24 +51,24 @@ After inspecting and testing the distribution, upload it by typing
 
 This automatically does the following:
 
-    1. Uploads the XPI to $(file_dir)
-    2. Uploads the news to $(file_dir)/news
-    3. Signs the update RDF file and uploads it
-    4. Replaces the current changes.mdwn file on the server with the contents of
-       changes-next.mdwn
-    5. Moves the XPI of the previous version to $(file_dir)/oldxpi
-    6. Deletes the current nightly XPI
+1. Uploads the XPI to $(file_dir)
+2. Uploads the news to $(file_dir)/news
+3. Signs the update RDF file and uploads it
+4. Replaces the current changes.mdwn file on the server with the contents of
+   changes-next.mdwn
+5. Moves the XPI of the previous version to $(file_dir)/oldxpi
+6. Deletes the current nightly XPI
 
 What to do after a release
-==========================
+--------------------------
 
 First, you should tag the git repo with the latest version number. Then you
 should bump the version number in:
 
-    Makefile
-    content/NEWS
-    install.rdf
-    www/index.php.txt (including date and version compatibility)
+* Makefile
+* content/NEWS
+* install.rdf
+* www/index.php.txt (including date and version compatibility)
 
 You should also add the release date to the latest version in
 www/changes-next.mdwn, then copy it to www/changes.mdwn.
@@ -85,6 +91,6 @@ Finally, you should upload the *_amo.xpi file in the root of the git tree to
 addons.mozilla.org.
 
 Configuring a nightly build server
-==================================
+----------------------------------
 
-To be written.
+(Not yet written.)
