@@ -34,23 +34,12 @@ var gamefox_highlighting =
     gamefox_lib.setString('userlist.serialized', JSON.stringify(groups));
   },
 
-  add: function(name, color, users, messages, topics, type)
+  add: function()
   {
-    var userlist = this.read();
-
-    // TODO: We don't need these arguments anymore - they were only used to
-    // upgrade from pre-unlimited highlighting groups
-    name = (typeof name == 'string') ? name : '';
-    color = (typeof color == 'string') ? color : '#CCFFFF';
-    users = (typeof users == 'string') ? users : '';
-    messages = (typeof messages == 'string') ? messages : 'highlight';
-    topics = (typeof topics == 'string') ? topics : 'highlight';
-    type = (typeof type == 'string') ? type : 'users';
-
-    userlist.push({name:name, color:color, users:users,
-        messages:messages, topics:topics, type:type, include: []});
-
-    this.write(userlist);
+    var groups = this.read();
+    groups.push({'name': '', 'color': '#CCFFFF', 'users': '', 'messages':
+      'highlight', 'topics': 'highlight', 'type': 'users', 'include': []});
+    this.write(groups);
   },
 
   loadGroups: function()
