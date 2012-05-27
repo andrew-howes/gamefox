@@ -1400,8 +1400,7 @@ var gamefox_page =
       if (gamefox_lib.prefs.getBoolPref('elements.postidQuoteLinks'))
       {
         var quotes = doc.querySelectorAll(
-            'table.board i > p > strong:first-child, ' +
-            'table.board blockquote > cite:first-child');
+            '.message i > p > strong:first-child, .message cite');
         for (var i = 0; i < quotes.length; ++i)
         {
           var quote = quotes[i];

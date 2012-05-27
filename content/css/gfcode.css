@@ -5,48 +5,34 @@
  * Copyright 2008, 2009, 2011, 2012 Brian Marshall
  * Contributors:
  *     2012-05-21 spynae
+ *     2012 TakatoMatsuki
  */
 @-moz-document domain(gamefaqs.com) {
-    /* Common formatting for block elements */
-    .message i > p, .message em > p, .message .fquote, .message blockquote {
-        border: 1px rgba(136, 136, 136, 0.5) solid !important;
+    /* Quotes */
+    .message blockquote, .message cite, .message i > p {
         background: rgba(180, 180, 180, 0.1);
-
+        border: 1px rgba(136, 136, 136, 0.5) solid !important;
         margin: 0 auto !important;
         padding: 3px !important;
         width: 96% !important;
+    }
+    .message blockquote, .message i > p {
         -moz-border-radius: 4px;
     }
 
-    /* <i><p><strong>, <quote><b><b>, <cite> - blockquote header */
-    .message i > p > strong:first-child,
-    .message blockquote > cite:first-child {
-        border-bottom: 1px rgba(136, 136, 136, 0.5) solid !important;
-        background: rgba(150, 150, 150, 0.1);
-
+    /* Quote headers */
+    .message cite {
+        background: rgba(90, 90, 90, 0.1);
         display: block;
         font-style: italic !important;
         font-weight: bold !important;
-        margin: -4px -3px 3px !important;
-        padding: 3px !important;
         -moz-border-radius: 4px 4px 0 0;
     }
-
-    /* remove linebreak after quote header since it's already display:block */
-    .message i > p > strong:first-child + br,
-    .message blockquote > cite:first-child + br {
-        display: none !important;
+    .message cite + br {
+        display: none;
     }
-
-    /* <i><p> - deprecated blockquote */
-    .message i > p {
-        font-style: normal !important;
-    }
-
-    /* <em><p> - deprecated fixed-font block for code */
-    .message em > p {
-        font-family: monospace !important;
-        font-style: normal !important;
-        white-space: pre-wrap;
+    .message cite + br + blockquote {
+        border-top: 0 !important;
+        border-radius: 0 0 4px 4px;
     }
 }

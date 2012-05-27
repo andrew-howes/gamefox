@@ -194,9 +194,8 @@ var gamefox_quote =
       // Standard
       case 'std':
       default:
-        return '<quote>' +
-          (header.length ? '<cite>' + header + '</cite>\n' : '') +
-          body + '</quote>';
+        return (header.length ? '<cite>' + header + '</cite>\n' : '') +
+          '<quote>' + body + '</quote>';
     }
   },
 

@@ -9,7 +9,7 @@
 <!ENTITY focusQuickPost.label "Automatically scroll to QuickPost after quoting">
 
 <!ENTITY quoteFormat.label "Quote format:">
-<!ENTITY useStd.label "Standard (&lt;quote&gt;)">
+<!ENTITY useStd.label "Standard (&lt;quote&gt;, &lt;cite&gt;)">
 <!ENTITY useClassic.label "Classic (&lt;b&gt; and &lt;i&gt;)">
 
 <!ENTITY headerBold.label "Bold header">
