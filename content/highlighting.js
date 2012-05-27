@@ -156,7 +156,7 @@ var gamefox_highlighting =
     var index = this.index.titleContains;
 
     if (gamefox_tracked.isTracked(topicId))
-      status = status ? [status, 'tracked'] : 'tracked';
+      status.push('tracked');
 
     title = title.toLowerCase();
 
