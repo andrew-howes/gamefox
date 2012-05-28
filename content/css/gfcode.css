@@ -33,6 +33,6 @@
     }
     .message cite + br + blockquote, .message cite + blockquote {
         border-top: 0 !important;
-        border-radius: 0 0 4px 4px;
+        -moz-border-radius: 0 0 4px 4px;
     }
 }
