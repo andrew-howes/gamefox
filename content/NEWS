@@ -3,8 +3,8 @@
     * Changes on the New Topic/Message page:
         - Fix problem with buttons
         - Add keyboard shortcuts
-    * Fix quick edit, quoting, topic creator label, and other issues from the
-      GameFAQs update
+    * Fix quick edit, quoting, topic creator label, edit history, and other
+      issues from the GameFAQs update
 
 2012-01-25:
     * version 0.8.6

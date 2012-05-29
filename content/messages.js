@@ -498,8 +498,8 @@ var gamefox_messages =
 
       select.remove(0);
 
-      var pattern = '<td class="author">[\\s\\S]*?Posted: (.*)?\\s*</td>\\s*' +
-        '<td>(.*)?</td>';
+      var pattern = '<td class="author">[\\s\\S]*?Posted: (.*?)\\s*</td>\\s*' +
+        '<td>([\\s\\S]*?)</td>';
       var edits = req.responseText.match(new RegExp(pattern, 'g'));
 
       // The latest edit is actually the first match, but subsequent matches
