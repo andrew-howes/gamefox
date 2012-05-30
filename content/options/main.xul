@@ -52,8 +52,6 @@
         type="bool"/>
       <preference id="msgsPerPage" name="gamefox.msgsPerPage" type="int"/>
 
-      <preference id="elements.topics.lastpostlink"
-        name="gamefox.elements.topics.lastpostlink" type="bool"/>
       <preference id="paging.auto" name="gamefox.paging.auto" type="bool"/>
       <preference id="elements.tracked.boardlink"
         name="gamefox.elements.tracked.boardlink" type="bool"/>
@@ -222,9 +220,6 @@
                     <caption label="&topicLists.label;"/>
 
                     <vbox>
-                      <checkbox label="&lastPostLink.label;"
-                        preference="elements.topics.lastpostlink"/>
-
                       <hbox>
                         <checkbox label="&paginateTopics.label;"
                           preference="paging.auto"/>

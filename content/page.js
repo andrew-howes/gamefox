@@ -325,22 +325,6 @@ var gamefox_page =
               rows[i].cells[4].textContent, format);
         }
 
-        // Last post link
-        if (gamefox_lib.prefs.getBoolPref('elements.topics.lastpostlink'))
-        {
-          var lastPost = gamefox_utils.getLastPost(rows[i].cells[2].textContent);
-
-          var text = rows[i].cells[3].textContent;
-          rows[i].cells[3].textContent = '';
-
-          var a = doc.createElement('a');
-              a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
-                lastPost[0] + lastPost[1];
-              a.textContent = text;
-              a.className = 'gamefox-last-post-link';
-          rows[i].cells[3].appendChild(a);
-        }
-
         // Label topics with messages after your last post
         if (gamefox_lib.prefs.getBoolPref('elements.aml.marknewposts'))
         {
@@ -632,23 +616,6 @@ var gamefox_page =
           var format = gamefox_date.getFormat('topic');
           rows[i].cells[4].textContent = gamefox_date.parseFormat(
               rows[i].cells[4].textContent, format);
-        }
-
-        // Last post link
-        if (gamefox_lib.prefs.getBoolPref('elements.topics.lastpostlink'))
-        {
-          var lastPost = gamefox_utils.getLastPost(rows[i].cells[3].textContent,
-              onTracked ? '' : rows[i].cells[2].textContent);
-
-          var text = rows[i].cells[4].textContent;
-          rows[i].cells[4].textContent = '';
-
-          var a = doc.createElement('a');
-              a.href = rows[i].cells[1].getElementsByTagName('a')[0].href +
-                lastPost[0] + lastPost[1];
-              a.textContent = text;
-              a.className = 'gamefox-last-post-link';
-          rows[i].cells[4].appendChild(a);
         }
 
         // Pagination

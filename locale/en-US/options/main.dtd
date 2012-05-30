@@ -19,7 +19,6 @@
 
 <!ENTITY topicLists.label "Topic Lists">
 
-<!ENTITY lastPostLink.label "Link to last post">
 <!ENTITY paginateTopics.label "Links to pages">
 <!ENTITY trackedBoardLink.label "Link to boards (Tracked Topics)">
 <!ENTITY labelNewPosts.label "Label new posts (Active Messages)">
