@@ -22,7 +22,7 @@
 
     /* Quote headers */
     .message cite {
-        background: rgba(90, 90, 90, 0.1);
+        background: rgba(85, 85, 85, 0.1);
         display: block;
         font-style: italic !important;
         font-weight: bold !important;
