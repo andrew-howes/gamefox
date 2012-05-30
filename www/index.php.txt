@@ -7,8 +7,8 @@ GameFOX is a Firefox extension with a diverse feature set that enhances the
     href="/gfox/gamefox-0.8.6.xpi">GameFOX 0.8.6</a></big>
 ([changes](changes))
 
-Released 2012 January 25. Compatible with Firefox 3.6 and newer, SeaMonkey 2.1
-and newer.
+Released 2012 January 25. Works with Firefox 3.6 and later, SeaMonkey 2.1 and
+later.
 
 ### About ### {#about}
 
@@ -42,10 +42,10 @@ Ryan (RockMFR 5). Before that, Toad King and ultimategamer00 (the original
 author) had the reins. GameFOX is based off the work of these people.
 
 GameFOX is licensed under the [GPL 2](http://www.gnu.org/licenses/gpl-2.0.html).
-For version control, [Git](http://git-scm.com/) is used. You can browse the
-repository with a [web interface](http://repo.or.cz/w/gamefox.git) or clone it:
+For version control, [Git](http://git-scm.com/) is used. You can [browse the
+repository](https://github.com/bmars/gamefox) or clone it locally:
 
-    $ git clone git://repo.or.cz/gamefox.git
+    $ git clone git://github.com/bmars/gamefox.git
 
 ### Nightly snapshots ### {#nightly}
 
