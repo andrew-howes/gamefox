@@ -35,4 +35,9 @@
         border-top: 0 !important;
         -moz-border-radius: 0 0 4px 4px;
     }
+
+    /* Code */
+    .message code {
+        white-space: pre-wrap;
+    }
 }
