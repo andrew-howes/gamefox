@@ -1557,11 +1557,7 @@ var gamefox_page =
       node = node.parentNode; // topic row
 
       var cell = node.cells[gamefox_lib.onPage(doc, 'myposts') ? 2 : 3];
-
-      var lastPost = gamefox_utils.getLastPost(cell.textContent,
-          (gamefox_lib.onPage(doc, 'tracked') || gamefox_lib.onPage(doc, 'myposts')) ? ''
-            : node.cells[2].firstChild.textContent);
-
+      var lastPost = gamefox_utils.getLastPost(cell.textContent);
       var uri = node.cells[1].getElementsByTagName('a')[0].href + lastPost[0] +
           (gotoLastPost ? lastPost[1] : '');
       doc.location.href = uri;

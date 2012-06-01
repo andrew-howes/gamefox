@@ -277,7 +277,7 @@ var gamefox_utils =
       replace(/>/g, '&gt;').length;
   },
 
-  getLastPost: function(msgs, tc)
+  getLastPost: function(msgs)
   {
     if (msgs == 1)
       return ['', ''];
