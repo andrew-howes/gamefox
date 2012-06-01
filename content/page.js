@@ -672,6 +672,12 @@ var gamefox_page =
         // gentopic.php
         else
         {
+          // Fix GameFAQs bug: last post links are missing board name in URL
+          var lastPost = gamefox_utils.getLastPost(rows[i].cells[3].textContent
+              );
+          rows[i].cells[4].firstChild.href = rows[i].cells[1].firstChild.href +
+            lastPost[0] + lastPost[1];
+
           // Highlighting
           var username = gamefox_utils
             .cleanUsername(rows[i].cells[2].textContent.trim());
