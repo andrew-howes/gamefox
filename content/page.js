@@ -319,10 +319,12 @@ var gamefox_page =
         if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
-          rows[i].cells[3].textContent = gamefox_date.parseFormat(
-              rows[i].cells[3].textContent, format);
-          rows[i].cells[4].textContent = gamefox_date.parseFormat(
-              rows[i].cells[4].textContent, format);
+          var date1 = rows[i].cells[3].firstChild;
+          var date2 = rows[i].cells[4].firstChild;
+          date1.textContent = gamefox_date.parseFormat(date1.textContent,
+              format);
+          date2.textContent = gamefox_date.parseFormat(date2.textContent,
+              format);
         }
 
         // Label topics with messages after your last post
@@ -614,8 +616,9 @@ var gamefox_page =
         if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
-          rows[i].cells[4].textContent = gamefox_date.parseFormat(
-              rows[i].cells[4].textContent, format);
+          var date = rows[i].cells[4].firstChild;
+          date.textContent = gamefox_date.parseFormat(date.textContent, format
+              );
         }
 
         // Pagination
