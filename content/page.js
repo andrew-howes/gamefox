@@ -987,7 +987,7 @@ var gamefox_page =
         }
 
         // User status
-        var userStatusNode = msgStats.childNodes[leftMsgData ? 3 : 1];
+        var userStatusNode = profileLink.nextSibling;
         var userStatus = gamefox_utils.readStatus(gamefox_utils
             .getTextBetweenNodes(profileLink, postDateElement));
 
