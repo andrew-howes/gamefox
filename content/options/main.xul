@@ -332,7 +332,7 @@
                     preference="elements.quickpost.htmlbuttons"/>
                   <checkbox flex="1" label="&extra.label;"
                     preference="elements.quickpost.htmlbuttons.extra"/>
-                  <checkbox flex="1" label="&breakTags.label;"
+                  <checkbox flex="1" label="&rawHTML.label;"
                     preference="elements.quickpost.htmlbuttons.breaktags"/>
                 </hbox>
               </hbox>

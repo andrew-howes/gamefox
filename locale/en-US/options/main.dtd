@@ -49,7 +49,7 @@
 <!ENTITY htmlButtons.label "HTML tag buttons:">
 <!ENTITY basic.label "Basic">
 <!ENTITY extra.label "Extra">
-<!ENTITY breakTags.label "Break HTML">
+<!ENTITY rawHTML.label "Raw HTML">
 
 <!ENTITY sigTextbox.label "Signature textbox:">
 <!ENTITY showIfOverride.label "Show only when overriding GameFAQs signature">
