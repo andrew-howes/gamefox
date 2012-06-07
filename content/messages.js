@@ -223,7 +223,7 @@ var gamefox_messages =
 
         if (gamefox_quickpost.createHTMLButtonsPref())
         {
-          editForm.appendChild(gamefox_quickpost.createHTMLButtons(doc));
+          editForm.appendChild(gamefox_quickpost.createHTMLButtons(doc, true));
           editForm.appendChild(doc.createElement('br'));
         }
 
@@ -242,7 +242,8 @@ var gamefox_messages =
         editForm.appendChild(editBox);
 
         editForm.appendChild(gamefox_quickpost.createPostButtons(doc, ['Save',
-              'Preview Message', 'Preview and Spellcheck Message', 'Cancel']));
+                'Preview Message', 'Preview and Spellcheck Message', 'Cancel'],
+              true));
 
         if (gamefox_lib.prefs.getBoolPref('elements.charcounts'))
         {

@@ -5,6 +5,7 @@
         - Add keyboard shortcuts
     * Fix quick edit, quoting, topic creator label, edit history, and several
       other issues from the GameFAQs update
+    * Allow tabbing to the post message buttons in quick edit
 
 2012-01-25:
     * version 0.8.6

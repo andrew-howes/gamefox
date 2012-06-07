@@ -483,78 +483,61 @@ var gamefox_quickpost =
     gamefox_messages.updateMessageCount(form);
   },
 
-  createHTMLButtons: function(doc)
+  /**
+   * Build a row of HTML tag buttons
+   *
+   * @param {HTMLDocument} doc
+   * @param {Boolean} noTab
+   *        Omit tabIndex attributes if true
+   * @return {HTMLSpanElement} Element containing buttons
+   */
+  createHTMLButtons: function(doc, noTab)
   {
-    var span = doc.createElement('span');
-    span.className = 'gamefox-html-buttons';
+    var btns = [];
 
-    var tags = [];
     // Basic
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons'))
-      tags.push(
-          'b', 'Bold', 'b',
-          'i', 'Italics', 'i'
+      btns.push(
+          ['b', 'Bold', 'b'],
+          ['i', 'Italics', 'i']
       );
     // Extra
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extra'))
-      tags.push(
-          'quote', 'Quote', 'q',
-          'spoiler', 'Spoiler', 's',
-          'code', 'Code', 'd'
+      btns.push(
+          ['quote', 'Quote', 'q'],
+          ['spoiler', 'Spoiler', 's'],
+          ['code', 'Code', 'd']
       );
 
-    var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
-    var button;
+    // Raw HTML
+    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons' +
+          '.breaktags'))
+      btns.push(['', 'Raw HTML', 'r', 'Post raw HTML tags without formatting',
+          gamefox_quickpost.breakTagsFromButton]);
 
-    for (var i = 0; i < tags.length; i += 3)
-    {
-      if (i != 0)
-        span.appendChild(doc.createTextNode(' '));
-
-      button = doc.createElement('input');
-      button.type = 'submit';
-      button.value = tags[i + 1];
-      button.name = tags[i];
-      button.title = '<' + tags[i].replace(/,/g, '><') + (tags[i] == 'br' ?
-          ' /' : '') + '>';
-      button.tabIndex = 5;
-      button.setUserData('accessKey', tags[i + 2], null);
-      button.addEventListener('click', gamefox_quickpost.insertTag, false);
-
-      span.appendChild(button);
-    }
-
-    // Break tags
-    if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags'))
-    {
-      if (span.hasChildNodes())
-        span.appendChild(doc.createTextNode(' | '));
-
-      button = doc.createElement('input');
-      button.type = 'submit';
-      button.value = 'Break HTML';
-      button.title = 'Break HTML tags in selection';
-      button.tabIndex = 5;
-      button.setUserData('accessKey', 'r', null);
-      button.addEventListener('click', gamefox_quickpost.breakTagsFromButton, false);
-
-      span.appendChild(button);
-    }
-
-    // Character map
+    // Character Map
     if (gamefox_lib.prefs.getBoolPref('elements.charmap'))
-    {
-      if (span.hasChildNodes())
-        span.appendChild(doc.createTextNode(' | '));
+      btns.push(['', 'Character Map', '', '', gamefox_quickpost
+          .toggleCharacterMap]);
 
-      button = doc.createElement('input');
-      button.type = 'submit';
-      button.value = 'Character Map';
-      button.tabIndex = 5;
-      button.addEventListener('click', gamefox_quickpost.toggleCharacterMap, false);
+    var span = doc.createElement('span');
+    span.className = 'gamefox-html-buttons';
+    var accesskeyPrefix = gamefox_utils.getAccesskeyPrefix();
+    btns.forEach(function(btn) {
+      var btnEl = doc.createElement('input');
+      btnEl.type = 'submit';
+      btnEl.name = btn[0];
+      btnEl.value = btn[1];
+      btnEl.setUserData('accessKey', btn[2], null);
+      if (!noTab) btnEl.tabIndex = 5;
 
-      span.appendChild(button);
-    }
+      btnEl.title = btn[3] ? btn[3] : (btn[0] ? '<' + btn[0] + '>' : '');
+      btnEl.addEventListener('click', btn[4] ? btn[4] : gamefox_quickpost
+        .insertTag, false);
+
+      span.appendChild(btnEl);
+      span.appendChild(doc.createTextNode(' '));
+    });
 
     return span;
   },
@@ -897,9 +880,11 @@ var gamefox_quickpost =
    * @param {HTMLDocument} doc
    * @param {Array} showBtns
    *        List of buttons to show, e.g. ['Post Message', 'Reset']
+   * @param {Boolean} noTab
+   *        Omit tabIndex attributes if true
    * @return {HTMLElement} Element containing the buttons
    */
-  createPostButtons: function(doc, showBtns)
+  createPostButtons: function(doc, showBtns, noTab)
   {
     let btns =
     {
@@ -931,7 +916,7 @@ var gamefox_quickpost =
         btnEl.setUserData('accessKey', this_btn[2], null);
         if (this_btn[3]) btnEl.id = this_btn[3];
         if (this_btn[4]) btnEl.addEventListener('click', this_btn[4], false);
-        btnEl.tabIndex = 3;
+        if (!noTab) btnEl.tabIndex = 3;
 
         el.appendChild(btnEl);
         el.appendChild(doc.createTextNode(' '));
