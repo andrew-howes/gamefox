@@ -7,9 +7,10 @@
     height: 199px;
     margin-top: -200px !important;
     width: 400px;
+    background: #eee;
     box-shadow: 0 0 10px #555;
     -moz-box-shadow: 0 0 10px #555;
-    background: #eee;
+    transition: opacity .3s;
     -moz-transition: opacity .3s;
 }
 .gamefox-character-map td

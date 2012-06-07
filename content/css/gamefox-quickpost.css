@@ -18,7 +18,10 @@
         border: #aaa 1px solid;
         background: #eee;
         padding: 5px !important;
+
+        border-radius: 10px;
         -moz-border-radius: 10px;
+        transition: opacity .3s;
         -moz-transition: opacity .3s;
         box-shadow: 0 0 10px #555;
         -moz-box-shadow: 0 0 10px #555;
@@ -31,6 +34,7 @@
         background: #ccc;
         border: #aaa 1px solid;
         border-width: 0 0 1px 1px;
+        border-radius: 0 9px 0 10px;
         -moz-border-radius: 0 9px 0 10px;
         padding: 1px 6px;
         font-size: 1.8em;
