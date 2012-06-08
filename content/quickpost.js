@@ -329,8 +329,8 @@ var gamefox_quickpost =
                   .getIntPref('elements.quickpost.aftermessage'))
               {
                 case 0: // go to last page/post
-                  var msgsPerPage = gamefox_lib.prefs
-                    .getIntPref('msgsPerPage');
+                  var msgsPerPage = gamefox_lib.prefs.getIntPref('msgsPerPage'
+                      );
                   var pages = doc.gamefox.pages;
                   var msgs = doc.gamefox.msgnum;
 
@@ -359,9 +359,25 @@ var gamefox_quickpost =
                           params['topic'], 0, '', topicLink.href);
                     }
                     else
-                      doc.location = gamefox_utils.newURI(params['board'],
-                          params['topic'], pages - 1, 'last', doc.location
-                          .pathname);
+                    {
+                      var oldURI = doc.location.toString();
+                      var newURI = gamefox_utils.newURI(params['board'],
+                          params['topic'], pages - 1, '', doc.location
+                            .pathname);
+
+                      // If GameFOX's messages per page setting doesn't match
+                      // the GameFAQs setting, this might cause the page to not
+                      // reload, since only the hash (post ID) would change.
+                      // Check for that here and force a reload if so.
+                      if (newURI == oldURI.substr(0, oldURI.indexOf('#')) ||
+                            oldURI)
+                      {
+                        doc.location.hash = '#last-post';
+                        doc.location.reload();
+                      }
+                      else
+                        doc.location = newURI + '#last-post';
+                    }
                   }
 
                   break;

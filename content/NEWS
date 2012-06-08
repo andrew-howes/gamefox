@@ -6,6 +6,8 @@
     * Fix quick edit, quoting, topic creator label, edit history, and several
       other issues from the GameFAQs update
     * Allow tabbing to the post message buttons in quick edit
+    * Fix page sometimes not reloading after quick posting if GameFOX's
+      messages per page setting doesn't match GameFAQs
 
 2012-01-25:
     * version 0.8.6

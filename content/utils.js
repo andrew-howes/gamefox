@@ -421,17 +421,10 @@ var gamefox_utils =
         var name = params['name'];
     }
 
+    // parseInt to make sure the post num is not zero-padded (since input can
+    // vary)
     if (post)
-    {
-      if (post == 'last')
-        post = '#last-post';
-      else
-      {
-        // parseInt to make sure the post num is not zero-padded (since input
-        // can vary)
-        post = '#' + parseInt(post, 10);
-      }
-    }
+      post = '#' + parseInt(post, 10);
 
     return gamefox_lib.domain + gamefox_lib.path
       + board + '-' + (name ? name : '')
