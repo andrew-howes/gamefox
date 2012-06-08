@@ -57,6 +57,11 @@
         margin-right: 5px;
     }
 
+    .gamefox-tc-label
+    {
+        white-space: nowrap;
+    }
+
     /* Edit history menu */
     .gamefox-edit-list
     {
