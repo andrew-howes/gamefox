@@ -834,7 +834,7 @@ var gamefox_page =
       var msgnumStyle = gamefox_lib.prefs.getIntPref('elements.msgnum.style');
 
       var tcMarkerCond = !onDetail && gamefox_lib.prefs.getBoolPref('elements.marktc');
-      var tcMarker = '\xA0' + gamefox_lib.getString('elements.marktc.marker');
+      var tcMarker = ' ' + gamefox_lib.getString('elements.marktc.marker');
       var tc;
 
       var deletelinkCond = gamefox_lib.prefs.getBoolPref('elements.deletelink');
