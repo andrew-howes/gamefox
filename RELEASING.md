@@ -16,8 +16,8 @@ Packages needed to build, sign and upload (on Debian lenny):
 * python-paramiko
 * ... and dependencies
 
-Spock (http://hyperstruct.net/projects/spock) must be installed in
-release/spock. The McCoy profile must be in release/mccoy.default.
+[Spock](https://github.com/bard/spock) must be installed in release/spock. The
+McCoy profile must be in release/mccoy.default.
 
 Configuration
 -------------
