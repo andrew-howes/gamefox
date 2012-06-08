@@ -1410,11 +1410,10 @@ var gamefox_page =
         gamefox_quickpost.appendForm(doc, qpDiv, false);
       }
 
-      // Redirect #last-post or re-align scroll position
-      if (doc.location.hash == '#last-post')
-        doc.location.hash = '#' + msgnum;
-      else if (doc.location.hash.length)
-        doc.location.hash = doc.location.hash;
+      // Change #last to a post number
+      if (doc.location.hash == '#last')
+        doc.location.replace(doc.location.toString().split('#')[0] + '#' +
+            msgnum);
     }
 
     /* Show updated tracked topics notification */

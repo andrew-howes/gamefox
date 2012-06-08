@@ -360,7 +360,7 @@ var gamefox_quickpost =
                     }
                     else
                     {
-                      var oldURI = doc.location.toString();
+                      var oldURI = doc.location.toString().split('#')[0];
                       var newURI = gamefox_utils.newURI(params['board'],
                           params['topic'], pages - 1, '', doc.location
                             .pathname);
@@ -369,14 +369,13 @@ var gamefox_quickpost =
                       // the GameFAQs setting, this might cause the page to not
                       // reload, since only the hash (post ID) would change.
                       // Check for that here and force a reload if so.
-                      if (newURI == oldURI.substr(0, oldURI.indexOf('#')) ||
-                            oldURI)
+                      if (newURI == oldURI)
                       {
-                        doc.location.hash = '#last-post';
+                        doc.location.hash = '#last';
                         doc.location.reload();
                       }
                       else
-                        doc.location = newURI + '#last-post';
+                        doc.location = newURI + '#last';
                     }
                   }
 
