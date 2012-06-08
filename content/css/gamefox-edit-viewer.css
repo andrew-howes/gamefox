@@ -2,7 +2,6 @@
 {
     .msg_stats, .msg_stats_left, .msg_body
     {
-        transition: opacity .5s;
         -moz-transition: opacity .5s;
     }
     .gamefox-edit-view-header div, .gamefox-edit-view-body div
