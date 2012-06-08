@@ -84,7 +84,7 @@ jar: $(JAR)
 
 clean:
 	@echo "Cleanup..."
-	rm -f $(JAR) $(XPI) $(MOZXPI) $(NIGHTLYXPI)
+	rm -f $(JAR) $(NAME)-*.xpi
 	test ! -d $(JAR_DIRNAME) || rmdir --ignore-fail-on-non-empty $(JAR_DIRNAME)
 	find . -name '*~' -exec rm -f {} \;
 
