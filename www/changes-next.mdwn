@@ -1,5 +1,21 @@
 ### Latest version
 
+#### GameFOX 0.8.7 {#0.8.7}
+
+* Changes on the New Topic/Message page:
+  - Fix problem with buttons
+  - Add keyboard shortcuts
+* Fix quick edit, quoting, topic creator label, edit history, and several other
+  issues from the GameFAQs update
+* Allow tabbing to the post message buttons in quick edit
+* Fix page sometimes not reloading after quick posting if GameFOX's messages
+  per page setting doesn't match GameFAQs
+
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
+### Older versions
+
 #### GameFOX 0.8.6 (2012-01-25) {#0.8.6}
 
 * Fix crash with Ricapar's Classic theme when clicking on the login form
@@ -9,11 +25,6 @@
 * Switch to a password-based account manager instead of a cookie-based one -
   accounts will no longer need to have their password re-entered periodically
 * More minor bug fixes
-
-Problems with this version? Get support on GameFAQs at the
-[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
-
-### Older versions
 
 #### GameFOX 0.8.5.1 (2012-01-01) {#0.8.5.1}
 
@@ -56,14 +67,3 @@ Problems with this version? Get support on GameFAQs at the
 * Edit history viewer on the message list: switch between different revisions of
   a post without leaving the page
 * Several small bug fixes
-
-#### GameFOX 0.8.3 (2011-10-31) {#0.8.3}
-
-* Fix features on message detail page (including highlighting and custom date
-  formats)
-* Fix bug triggered by certain usernames that stopped GameFOX from working
-* Fix adding or updating accounts with the account manager
-* Fix GameFOX favorites being overwritten with board lists
-* Fix QuickPost error when making the last post of a page
-* Fix the new post indicator showing on the active messages list after editing a
-  post
