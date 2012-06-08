@@ -653,14 +653,6 @@ var gamefox_page =
           }
         }
 
-        // Fix GameFAQs bug: last post links are missing board name in URL
-        //
-        // (Get the link by tag name instead of first child since status spans
-        // for locked/sticky topics will break that.)
-        var lastPost = gamefox_utils.getLastPost(rows[i].cells[3].textContent);
-        rows[i].cells[4].firstChild.href = rows[i].cells[1]
-          .getElementsByTagName('a')[0].href + lastPost[0] + lastPost[1];
-
         // tracked.php
         if (onTracked)
         {
