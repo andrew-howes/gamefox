@@ -290,7 +290,8 @@
                       <hbox align="center">
                         <checkbox label="&labelTc.label;"
                           preference="elements.marktc"/>
-                        <textbox preference="elements.marktc.marker" size="3"/>
+                        <textbox preference="elements.marktc.marker" size="10"
+                          />
                       </hbox>
 
                       <checkbox label="&postidQuoteLinks.label;"
