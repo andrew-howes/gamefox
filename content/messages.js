@@ -537,6 +537,7 @@ var gamefox_messages =
 
         msgComponents.body.innerHTML = select.options[select.selectedIndex]
           .getUserData('text');
+        gamefox_page_msgs.wrapSigs(msgComponents.body);
 
         var headerRow = msgComponents.header.parentNode;
         var bodyRow = msgComponents.body.parentNode;

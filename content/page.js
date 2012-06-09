@@ -842,7 +842,6 @@ var gamefox_page =
         && !onArchive
         && gamefox_lib.prefs.getBoolPref('elements.quickpost.form');
       var filterCond = gamefox_lib.prefs.getBoolPref('elements.filterlink') && !onDetail;
-      var sigCond = gamefox_lib.prefs.getBoolPref('elements.sigspans');
 
       for (var i = 0; i < td.length; i += 2)
       {
@@ -1011,44 +1010,7 @@ var gamefox_page =
         }
 
         // Element for sigs
-        if (sigCond)
-        {
-          var msgNode = td[i + 1], dividerIndex = -1, brCount = 0;
-          for (var j = msgNode.childNodes.length - 1; j >= 0; j--)
-          {
-            var childNode = msgNode.childNodes[j];
-            if (childNode.nodeName == '#text')
-            {
-              if (childNode.data.trim() == '---')
-                dividerIndex = j;
-            }
-            else if (childNode.nodeName == 'BR')
-            {
-              ++brCount;
-            }
-            else if (childNode.nodeName == 'DIV')
-            { // msg_body
-              msgNode = childNode;
-              j = msgNode.childNodes.length - 1;
-              dividerIndex = -1;
-              brCount = 0;
-            }
-            else if (childNode.nodeType == Node.ELEMENT_NODE)
-            {
-              brCount += childNode.getElementsByTagName('br').length;
-            }
-            if (brCount > 2)
-              break;
-          }
-          if (dividerIndex != -1)
-          {
-            var span = doc.createElement('span');
-            span.className = 'gamefox-signature';
-            while (dividerIndex < msgNode.childNodes.length)
-              span.appendChild(msgNode.childNodes[dividerIndex]);
-            msgNode.appendChild(span);
-          }
-        }
+        gamefox_page_msgs.wrapSigs(td[i + 1]);
 
         // Title for detail link (useful with message-link-icons.css)
         if (detailLink)

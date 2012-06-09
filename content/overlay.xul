@@ -30,6 +30,8 @@
     src="chrome://gamefox/content/page.js"/>
   <script type="application/x-javascript"
     src="chrome://gamefox/content/page_scripts/pm.js"/>
+  <script type="application/x-javascript"
+    src="chrome://gamefox/content/page_scripts/msgs.js"/>
 
   <script type="application/x-javascript" src="chrome://gamefox/content/overlay.js"/>
   <script type="application/x-javascript" src="chrome://gamefox/content/tags.js"/>
