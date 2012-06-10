@@ -1368,6 +1368,10 @@ var gamefox_page =
       if (doc.location.hash == '#last')
         doc.location.replace(doc.location.toString().split('#')[0] + '#' +
             msgnum);
+      // Force scroll to the post (needed since Firefox preserves scroll
+      // position when reloading page even if there's a hash)
+      else if (doc.location.hash.length)
+        doc.location.hash = doc.location.hash;
     }
 
     /* Show updated tracked topics notification */
