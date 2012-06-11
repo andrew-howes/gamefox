@@ -92,6 +92,7 @@ fg%2Fzk0OVAofwYIMACF0LhPPmZXZgAAAABJRU5ErkJggg%3D%3D") !important;}
 div[class^=msg_stats] a:not(.name):not(.gamefox-message-detail-number):hover{
 background-color:rgba(0,0,0,.5) !important;
 border-color:-moz-use-text-color !important;
+border-radius:3px !important;
 -moz-border-radius:3px !important;
 }
 }
