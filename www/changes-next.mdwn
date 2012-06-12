@@ -1,6 +1,6 @@
 ### Latest version
 
-#### GameFOX 0.8.7 {#0.8.7}
+#### GameFOX 0.8.7 (2012-06-11) {#0.8.7}
 
 * Changes on the New Topic/Message page:
   - Fix problem with buttons
