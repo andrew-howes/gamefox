@@ -221,7 +221,7 @@ var gamefox_messages =
         editForm.method = 'post';
         editForm.action = uri;
 
-        if (gamefox_quickpost.createHTMLButtonsPref())
+        if (gamefox_quickpost.htmlButtonsEnabled)
         {
           editForm.appendChild(gamefox_quickpost.createHTMLButtons(doc, true));
           editForm.appendChild(doc.createElement('br'));

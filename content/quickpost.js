@@ -25,6 +25,14 @@
 var gamefox_quickpost =
 {
   drag: { startX: 0, startY: 0, offsetX: 0, offsetY: 0, dragging: false },
+  get htmlButtonsEnabled()
+  {
+    var getBool = gamefox_lib.prefs.getBoolPref;
+    return getBool('elements.quickpost.htmlbuttons')
+        || getBool('elements.quickpost.htmlbuttons.extra')
+        || getBool('elements.quickpost.htmlbuttons.breaktags')
+        || getBool('elements.charmap');
+  },
 
   appendForm: function(doc, div, newTopic)
   {
@@ -77,7 +85,7 @@ var gamefox_quickpost =
     }
 
     // HTML buttons
-    if (gamefox_quickpost.createHTMLButtonsPref())
+    if (gamefox_quickpost.htmlButtonsEnabled)
     {
       form.appendChild(gamefox_quickpost.createHTMLButtons(doc));
       form.appendChild(doc.createElement('br'));
@@ -596,14 +604,6 @@ var gamefox_quickpost =
     gamefox_messages.updateMessageCount(event.target);
   },
 
-  createHTMLButtonsPref: function()
-  {
-    return gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons')
-      || gamefox_lib.prefs.getBoolPref('elements.charmap')
-      || gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extended')
-      || gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.gfcode')
-      || gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.breaktags');
-  },
 
   toggleCharacterMap: function(event)
   {

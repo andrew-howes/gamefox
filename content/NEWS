@@ -1,5 +1,7 @@
 0000-00-00:
     * version 0.8.8
+    * Fix quick post not appearing if character map or certain HTML buttons
+      were disabled
 
 2012-06-11:
     * version 0.8.7

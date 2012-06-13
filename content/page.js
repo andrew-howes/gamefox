@@ -434,7 +434,7 @@ var gamefox_page =
       }
 
       // HTML buttons
-      if (gamefox_quickpost.createHTMLButtonsPref())
+      if (gamefox_quickpost.htmlButtonsEnabled)
       {
         detailsDiv.insertBefore(gamefox_quickpost.createHTMLButtons(doc),
             message.parentNode);
