@@ -136,8 +136,8 @@ var gamefox_css =
         'FAQ-frames.css': ['FAQ frames', 'Styles the FAQ headers to look more like GameFAQs.',
             'selmiak', false],
         'hide-signatures.css': ['Hide signatures',
-            'Hides signatures in posts and shows them again when hovered over.\n\n'
-              + '(Requires Firefox 3.6 or newer.)', '', false],
+            'Hides signatures in posts and shows them again when hovered over.'
+              , '', false],
         'new-pm.css': ['Highlight new PMs link', 'Highlights the "New '
               + 'Messages" link when there are new PMs.', '', true],
         'message-link-icons.css': ['Message link icons',
