@@ -1,9 +1,5 @@
 <!-- vim: set indentexpr=: -->
 
-<!ENTITY disableMainStyles.label "Disable main GameFAQs stylesheets">
-
-<!ENTITY tree.label "Stylesheets">
-
 <!ENTITY rightClick.desc "Right click or enable a stylesheet to view its description.">
 
 <!ENTITY name.label "Name">
@@ -13,6 +9,9 @@
 <!ENTITY about.label "About">
 <!ENTITY delete.label "Delete">
 <!ENTITY edit.label "Edit">
+
+<!ENTITY disableGFStyles.label "Disable main GameFAQs stylesheets (required by
+some themes)">
 
 <!ENTITY gfThemeSettings.label "GameFAQs Theme Settings">
 <!ENTITY gfDisplaySettings.label "GameFAQs Display Settings">

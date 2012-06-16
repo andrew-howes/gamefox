@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- vim: set et sw=2 ts=2 sts=2 tw=79:
 
-     Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011
+     Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
      Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
 
      This file is part of GameFOX.
@@ -45,42 +45,35 @@
         name="gamefox.theme.disablegamefaqscss" type="bool"/>
     </preferences>
 
-    <groupbox>
-      <checkbox label="&disableMainStyles.label;"
-        preference="disablegamefaqscss"/>
-    </groupbox>
+    <description>&rightClick.desc;</description>
 
-    <groupbox flex="1">
-      <caption label="&tree.label;"/>
+    <tree id="css-tree" editable="true" seltype="single" flex="1"
+      hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
+      style="min-height: 19em;"> <!-- for animateFadeIn -->
+      <treecols>
+        <treecol label="&name.label;" id="styleTreeName" primary="true"
+          flex="1" persist="width"/>
+        <splitter class="tree-splitter"/>
+        <treecol label="&author.label;" id="styleTreeAuthor" width="220"
+          persist="width"/>
+        <splitter class="tree-splitter"/>
+        <treecol label="&enabled.label;" id="styleTreeEnabled" type="checkbox"
+          editable="true" persist="width"/>
+      </treecols>
 
-      <description>&rightClick.desc;</description>
+      <treechildren/>
+    </tree>
+    <menupopup id="css-tree-contextmenu"
+      onpopupshowing="gamefox_options_style.onpopupshowing();">
+      <menuitem label="&about.label;"
+        oncommand="gamefox_options_style.about();" id="css-about"/>
+      <menuitem label="&delete.label;"
+        oncommand="gamefox_options_style.removeWithTree();" id="css-remove"/>
+      <menuitem label="&edit.label;"
+        oncommand="gamefox_options_style.editWithTree();" id="css-edit"/>
+    </menupopup>
 
-      <tree id="css-tree" editable="true" seltype="single" flex="1"
-        hidecolumnpicker="true" contextmenu="css-tree-contextmenu"
-        style="min-height: 19em;"> <!-- for animateFadeIn -->
-        <treecols>
-          <treecol label="&name.label;" id="styleTreeName" primary="true" flex="1"
-            persist="width"/>
-          <splitter class="tree-splitter"/>
-          <treecol label="&author.label;" id="styleTreeAuthor" width="220"
-            persist="width"/>
-          <splitter class="tree-splitter"/>
-          <treecol label="&enabled.label;" id="styleTreeEnabled" type="checkbox" editable="true"
-            persist="width"/>
-        </treecols>
-
-        <treechildren/>
-      </tree>
-      <menupopup id="css-tree-contextmenu"
-        onpopupshowing="gamefox_options_style.onpopupshowing();">
-        <menuitem label="&about.label;"
-          oncommand="gamefox_options_style.about();" id="css-about"/>
-        <menuitem label="&delete.label;"
-          oncommand="gamefox_options_style.removeWithTree();" id="css-remove"/>
-        <menuitem label="&edit.label;"
-          oncommand="gamefox_options_style.editWithTree();" id="css-edit"/>
-      </menupopup>
-    </groupbox>
+    <checkbox label="&disableGFStyles.label;" preference="disablegamefaqscss"/>
 
     <hbox pack="center" id="css-setting-links">
       <html:a href="http://www.gamefaqs.com/user/site.html"
