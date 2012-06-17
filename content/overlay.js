@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011
+ * Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
  * Abdullah A, Toad King, Andrianto Effendy, Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
@@ -18,6 +18,10 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * GameFOX startup and update functions
+ * @namespace
+ */
 var gamefox =
 {
   init: function()
@@ -85,7 +89,7 @@ var gamefox =
     if (comparator.compare(version, lastVersion) != 0
         || (gamefox_lib.isDev() && !gamefox_lib.isNightly()))
     {
-      gamefox.doMigration(comparator, lastVersion);
+      gamefox.upgrade(comparator, lastVersion);
 
       // first run
       if (lastVersion == '')
@@ -122,7 +126,16 @@ var gamefox =
     gamefox_css.reload();
   },
 
-  doMigration: function(comparator, version)
+  /**
+   * Make modifications to preferences to upgrade from one version of GameFOX
+   * to another.
+   *
+   * @param {nsIVersionComparator} comparator
+   * @param {String} version
+   *        Current (upgrading to) GameFOX version
+   * @return {void}
+   */
+  upgrade: function(comparator, version)
   {
     /* 0.8 */
     if (comparator.compare('0.8', version) > 0)
@@ -134,48 +147,6 @@ var gamefox =
       if (!css.extras)
         css.extras = {};
       gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));
-    }
-
-    /* 0.8.5 */
-    if (comparator.compare('0.8.5', version) > 0)
-    {
-      var sig = JSON.parse(gamefox_lib.getString('signature.serialized'));
-
-      // Check if they only have 1 GameFOX sig, and if it's the same as their
-      // GameFAQs sig. If so, delete it from GameFOX
-      // This handles the case of someone who didn't edit their GameFOX sig at
-      // all and wants to keep it synced with GameFAQs
-      if (sig.length == 1 && sig[0].body.length > 0)
-      {
-        // NOTE: This contains duplicate code from options/signatures.js
-        // Since this is only going to be used once, I didn't feel it worth it
-        // to abstract the code into another function
-        var request = new XMLHttpRequest();
-        request.open('GET', gamefox_lib.domain + gamefox_lib.path +
-            'sigquote.php');
-        var ds = gamefox_lib.thirdPartyCookieFix(request);
-        request.onreadystatechange = function()
-        {
-          if (request.readyState != 4)
-            return;
-
-          var remoteSig = request.responseText.match(
-              /<textarea\b[^>]+?\bname="sig"[^>]*>([^<]*)<\/textarea>/i);
-
-          if (!remoteSig)
-            return;
-
-          remoteSig = gamefox_utils.convertNewlines(gamefox_utils
-              .specialCharsDecode(remoteSig[1]));
-
-          if (remoteSig.trim() == sig[0].body.trim())
-          { // The sigs are the same
-            sig[0].body = '';
-            gamefox_lib.setString('signature.serialized', JSON.stringify(sig));
-          }
-        };
-        request.send(null);
-      }
     }
   },
 
