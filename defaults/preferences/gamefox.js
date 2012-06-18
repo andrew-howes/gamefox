@@ -75,7 +75,7 @@ pref("gamefox.favorites.enabled", true);
 
 pref("gamefox.tags", "");
 
-pref("gamefox.tracked.list", "");
+pref("gamefox.tracked.list", "{}");
 pref("gamefox.tracked.rssUrl", "");
 pref("gamefox.tracked.lastAccount", "");
 pref("gamefox.tracked.enabled", true);
