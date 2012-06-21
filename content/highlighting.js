@@ -26,7 +26,8 @@ var gamefox_highlighting =
 
   read: function()
   {
-    return JSON.parse(gamefox_lib.getString('userlist.serialized'));
+    return gamefox_lib.parseJSON(gamefox_lib.getString('userlist.serialized'))
+      || [];
   },
 
   write: function(groups)

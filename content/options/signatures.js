@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -60,7 +60,8 @@ var gamefox_options_sig =
   {
     var strbundle = document.getElementById('strings');
     var signatureMsg = document.getElementById('signatureMsg');
-    this._sigs = JSON.parse(gamefox_lib.getString('signature.serialized'));
+    this._sigs = gamefox_lib.parseJSON(gamefox_lib.getString(
+          'signature.serialized')) || [];
 
     // check if sigs array is valid
     if (!this._sigs || !this._sigs[0])

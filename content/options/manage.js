@@ -63,7 +63,7 @@ var gamefox_options_manage =
     siStream.close();
     fiStream.close();
 
-    var importedPrefs = JSON.parse(inputData);
+    var importedPrefs = gamefox_lib.parseJSON(inputData);
     if (!importedPrefs)
     {
       gamefox_options.showNotification(manageMsg, strbundle.getString(

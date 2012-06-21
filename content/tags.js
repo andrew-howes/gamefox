@@ -29,7 +29,7 @@ var gamefox_tags =
     if (!/\S/.test(this.tags))
       this.tags = '{}';
 
-    this.tags = JSON.parse(this.tags);
+    this.tags = gamefox_lib.parseJSON(this.tags);
   },
 
   write: function(tags)

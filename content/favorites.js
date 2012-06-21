@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009 Michael Ryan, Brian Marshall
+ * Copyright 2008, 2009, 2012 Michael Ryan, Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -23,7 +23,8 @@ var gamefox_favorites =
 
   read: function()
   {
-      this.list = JSON.parse(gamefox_lib.getString('favorites.serialized'));
+      this.list = gamefox_lib.parseJSON(gamefox_lib.getString(
+            'favorites.serialized'));
 
       // this.list will be undefined if the pref value isn't an object
       if (!this.list)
@@ -32,18 +33,16 @@ var gamefox_favorites =
 
   populateFavorites: function(doc, favList)
   {
-    var favs, item, i;
-
     while (favList.hasChildNodes())
       favList.removeChild(favList.firstChild);
 
-    favs = JSON.parse(gamefox_lib.prefs.getCharPref('favorites.serialized'));
-
-    item = doc.createElement('option');
+    var item = doc.createElement('option');
     item.value = 0;
     item.appendChild(doc.createTextNode('Favorite Boards'));
     favList.appendChild(item);
-    for (var i in favs)
+
+    gamefox_favorites.read();
+    for (var i in gamefox_favorites.list)
     {
       item = doc.createElement('option');
       item.value = i;

@@ -23,6 +23,16 @@
  */
 var gamefox_css =
 {
+  get list()
+  {
+    return gamefox_lib.parseJSON(gamefox_lib.getString('theme.css.serialized'))
+      || {};
+  },
+  set list(data)
+  {
+    gamefox_lib.setString('theme.css.serialized', JSON.stringify(data));
+  },
+
   /**
    * Determines what type a stylesheet should be registered as
    *
@@ -192,7 +202,7 @@ var gamefox_css =
     }
 
     // Remove old bundled
-    var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
+    var css = gamefox_css.list;
     for (var cat in defaults)
     {
       for (var file in css[cat])
@@ -253,7 +263,7 @@ var gamefox_css =
       return ['E_WRITE_FAILED', e];
     }
 
-    var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
+    var css = gamefox_css.list;
     var showDesc;
 
     // this loop does a few things:
@@ -279,7 +289,7 @@ var gamefox_css =
       'showDesc': showDesc
     };
 
-    gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));
+    gamefox_css.list = css;
     return true;
   },
 
@@ -321,7 +331,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
+    var css = gamefox_css.list;
 
     var type;
     for (var category in css)
@@ -370,7 +380,7 @@ var gamefox_css =
       .getService(Ci.nsIStyleSheetService);
     var file = Cc['@mozilla.org/file/local;1']
       .getService(Ci.nsILocalFile);
-    var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
+    var css = gamefox_css.list;
 
     file.initWithPath(this.getDirectoryPath());
     file.append(filename);
@@ -391,6 +401,6 @@ var gamefox_css =
     catch (e) {}
 
     delete css[category][filename];
-    gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));
+    gamefox_css.list = css;
   }
 };

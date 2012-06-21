@@ -452,5 +452,21 @@ var gamefox_lib =
       .getService(Ci.nsIWindowMediator)
       .getMostRecentWindow('navigator:browser');
     return (win == window);
+  },
+
+  /**
+   * Wrapper for JSON.parse that catches syntax errors.
+   *
+   * @param {String} data
+   *        JSON string
+   * @return JSON value or null with syntax error
+   */
+  parseJSON: function(data)
+  {
+    try {
+      return JSON.parse(data);
+    } catch (e if e.name == 'SyntaxError') {
+      return null;
+    }
   }
 };

@@ -360,7 +360,8 @@ var gamefox_context =
     while (menu.hasChildNodes())
       menu.removeChild(menu.firstChild);
 
-    favs = JSON.parse(gamefox_lib.getString('favorites.serialized'));
+    favs = gamefox_lib.parseJSON(gamefox_lib.getString('favorites.serialized'))
+      || [];
     for (i in favs)
     {
       item = document.createElement('menuitem');

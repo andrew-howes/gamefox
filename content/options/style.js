@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010, 2011 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2011, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -19,20 +19,9 @@
 
 var gamefox_options_style =
 {
-  // TODO: These and similar functions might be useful elsewhere too
-  getCSSObj: function()
-  {
-    return JSON.parse(gamefox_lib.getString('theme.css.serialized'));
-  },
-
-  setCSSObj: function(css)
-  {
-    gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));
-  },
-
   getDesc: function(cat, filename, about)
   {
-    var css = this.getCSSObj();
+    var css = gamefox_css.list;
 
     if (!about && css[cat][filename]['showDesc'] == 0)
       return false;
@@ -42,7 +31,7 @@ var gamefox_options_style =
 
   populate: function()
   {
-    var css = this.getCSSObj();
+    var css = gamefox_css.list;
 
     this.treeView = new gamefox_treeview();
     this.treeView.childData = {};
@@ -108,7 +97,7 @@ var gamefox_options_style =
     var desc = gamefox_options_style.getDesc(category, filename);
     // Map column to associative array in pref
     var map = new Array('title', 'author', 'enabled');
-    var css = gamefox_options_style.getCSSObj();
+    var css = gamefox_css.list;
 
     // Show description before enabling
     if (desc && map[column.index] == 'enabled' && value == 'true')
@@ -141,7 +130,7 @@ var gamefox_options_style =
     css[category][filename][map[column.index]] = value;
     if (showDesc)
       css[category][filename]['showDesc'] = showDesc.value == false ? 0 : 2;
-    gamefox_options_style.setCSSObj(css);
+    gamefox_css.list = css;
 
     gamefox_css.reload(true);
   },

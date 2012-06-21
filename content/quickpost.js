@@ -33,6 +33,10 @@ var gamefox_quickpost =
         || getBool('elements.quickpost.htmlbuttons.breaktags')
         || getBool('elements.charmap');
   },
+  get postKeys()
+  {
+    return gamefox_lib.parseJSON(gamefox_lib.prefs.getCharPref('keys')) || {};
+  },
 
   appendForm: function(doc, div, newTopic)
   {
@@ -745,7 +749,7 @@ var gamefox_quickpost =
     if (!account)
       return blank;
 
-    var keys = JSON.parse(gamefox_lib.prefs.getCharPref('keys'));
+    var keys = gamefox_quickpost.postKeys;
     if (!keys[account])
       return blank;
 
@@ -759,7 +763,7 @@ var gamefox_quickpost =
     if (!ctk || !account || !key)
       return false;
 
-    var keys = JSON.parse(gamefox_lib.prefs.getCharPref('keys'));
+    var keys = gamefox_quickpost.postKeys;
     keys[account] = { key: key, ctk: ctk };
     gamefox_lib.prefs.setCharPref('keys', JSON.stringify(keys));
 
@@ -802,7 +806,7 @@ var gamefox_quickpost =
 
         if (key)
         {
-          var keys = JSON.parse(gamefox_lib.prefs.getCharPref('keys'));
+          var keys = gamefox_quickpost.postKeys;
           keys[account] = { key: key[1], ctk: ctk };
           gamefox_lib.prefs.setCharPref('keys', JSON.stringify(keys));
         }

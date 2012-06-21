@@ -27,7 +27,8 @@ var gamefox_accounts =
 
   read: function()
   {
-    this.accounts = JSON.parse(gamefox_lib.getString('accounts'));
+    this.accounts = gamefox_lib.parseJSON(gamefox_lib.getString('accounts'))
+      || {};
   },
 
   write: function(accounts)

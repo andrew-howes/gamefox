@@ -143,7 +143,7 @@ var gamefox =
       gamefox.addToolbarButton();
 
       // New CSS category: extras
-      var css = JSON.parse(gamefox_lib.getString('theme.css.serialized'));
+      var css = gamefox_css.list;
       if (!css.extras)
         css.extras = {};
       gamefox_lib.setString('theme.css.serialized', JSON.stringify(css));

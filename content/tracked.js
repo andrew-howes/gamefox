@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2009, 2010 Brian Marshall, Michael Ryan
+ * Copyright 2009, 2010, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -23,11 +23,8 @@ var gamefox_tracked =
 
   read: function()
   {
-    this.list = JSON.parse(gamefox_lib.getString('tracked.list'));
-
-    // this.list will be undefined if the pref value isn't an object
-    if (!this.list)
-      this.list = {};
+    this.list = gamefox_lib.parseJSON(gamefox_lib.getString('tracked.list'))
+      || {};
   },
 
   save: function()
