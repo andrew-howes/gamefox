@@ -190,7 +190,8 @@ var gamefox_utils =
    */
   getAccountName: function(doc)
   {
-    var div = doc.getElementById('loginbox');
+    var div = doc.getElementById('mast_user') || doc.getElementById('loginbox'
+        );                       /* V12 */                          /* V11 */
     if (div)
     {
       var username = div.firstElementChild.textContent.replace('Welcome,', '');

@@ -2,6 +2,7 @@
     * version 0.8.8
     * Fix quick post not appearing for some people
     * Fix adding/removing accounts from the sidebar
+    * Fix account-specific signatures and other features not working
 
 2012-06-11:
     * version 0.8.7
