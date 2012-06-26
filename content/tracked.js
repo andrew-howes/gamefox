@@ -64,9 +64,8 @@ var gamefox_tracked =
       {
         if (request.readyState == 4)
         {
-          // TODO: don't hardcode - escape gamefox_lib.domain/path
-          var url = /<link rel="alternate"[^>]*href="(http:\/\/www\.gamefaqs\.com\/boards\/tracked\.xml\?user=\d+&key=[^"]+)" \/>/
-            .exec(request.responseText);
+          var url = new RegExp('<link rel="alternate"[^>]*href="([^"]+/tracked'
+              + '.xml\\?user=\\d+&key=[^"]+)"').exec(request.responseText);
           if (url)
           {
             url = url[1];
