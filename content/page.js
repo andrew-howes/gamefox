@@ -82,25 +82,6 @@ var gamefox_page =
       }
     }
 
-    // Add clock
-    if (gamefox_lib.prefs.getBoolPref('elements.clock'))
-    {
-      var div = doc.getElementById('loginbox');
-      if (div)
-      {
-        var node = doc.evaluate('div[@class="msg"]', div, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (node)
-        {
-          var dateNode = doc.createElement('span');
-          dateNode.className = 'gamefox-clock';
-          dateNode.appendChild(doc.createTextNode(''));
-          node.appendChild(dateNode);
-          gamefox_page.updateClock(dateNode.childNodes[0]);
-        }
-      }
-    }
-
     // Save logged-in account name
     var loggedIn = gamefox_lib.isLoggedIn();
     var accountName = gamefox_utils.getAccountName(doc);

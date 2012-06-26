@@ -13,7 +13,6 @@
 <!ENTITY dateFormat.label "Custom date format">
 <!ENTITY blockAdServers.label "Block ad servers">
 <!ENTITY favoritesMenu.label "Favorites menu in header">
-<!ENTITY clock.label "GameFAQs clock in header and QuickPost">
 <!ENTITY trackingNote.label "Show tracked topics with unread posts">
 <!ENTITY msgsPerPage.label "Messages per page:">
 
@@ -43,7 +42,11 @@
 
 <!-- Posting -->
 <!ENTITY postButton.label "Post Message button">
+<!ENTITY previewAndReset.label "Preview and reset buttons">
+<!ENTITY confirmReset.label "Confirm resetting post">
+<!ENTITY newSigOnReset.label "Choose a new signature when resetting post">
 <!ENTITY characterCounters.label "Character counts">
+<!ENTITY clock.label "Synchronized clock">
 <!ENTITY characterMap.label "Character map">
 
 <!ENTITY htmlButtons.label "HTML tag buttons:">
@@ -60,9 +63,6 @@
 
 <!ENTITY onTopicLists.label "Topic QuickPost">
 <!ENTITY onMessageLists.label "Message QuickPost">
-<!ENTITY previewAndReset.label "Preview and reset buttons">
-<!ENTITY confirmReset.label "Confirm resetting post">
-<!ENTITY newSigOnReset.label "Choose a new signature when resetting post">
 
 <!ENTITY afterTopic.label "After QuickPosting a topic:">
 <!ENTITY toTopic.label "Go to topic">

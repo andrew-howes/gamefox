@@ -46,8 +46,6 @@
         type="bool"/>
       <preference id="elements.favorites" name="gamefox.elements.favorites"
         type="bool"/>
-      <preference id="elements.clock" name="gamefox.elements.clock"
-        type="bool"/>
       <preference id="tracked.notify" name="gamefox.tracked.notify"
         type="bool"/>
       <preference id="msgsPerPage" name="gamefox.msgsPerPage" type="int"/>
@@ -99,6 +97,8 @@
       <preference id="elements.quickpost.resetnewsig"
         name="gamefox.elements.quickpost.resetnewsig" type="bool"/>
       <preference id="elements.charcounts" name="gamefox.elements.charcounts"
+        type="bool"/>
+      <preference id="elements.clock" name="gamefox.elements.clock"
         type="bool"/>
       <preference id="elements.charmap" name="gamefox.elements.charmap"
         type="bool"/>
@@ -190,8 +190,6 @@
                     preference="elements.stopads"/>
                   <checkbox label="&favoritesMenu.label;"
                     preference="elements.favorites"/>
-                  <checkbox label="&clock.label;"
-                    preference="elements.clock"/>
                   <hbox align="center">
                     <label value="&msgsPerPage.label;"/>
                     <menulist preference="msgsPerPage" sizetopopup="always">
@@ -323,6 +321,8 @@
               </hbox>
               <checkbox flex="1" label="&characterCounters.label;"
                 preference="elements.charcounts"/>
+              <checkbox flex="1" label="&clock.label;"
+                preference="elements.clock"/>
               <checkbox flex="1" label="&characterMap.label;"
                 preference="elements.charmap"/>
 
