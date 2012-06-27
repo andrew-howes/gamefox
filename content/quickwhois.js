@@ -114,7 +114,7 @@ var gamefox_quickwhois =
 
     var request = new XMLHttpRequest();
     request.open('GET', name.href);
-    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    gamefox_lib.forceAllowThirdPartyCookie(request);
     request.onreadystatechange = function()
     {
       if (request.readyState != 4) return;

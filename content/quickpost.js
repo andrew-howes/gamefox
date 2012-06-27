@@ -796,7 +796,7 @@ var gamefox_quickpost =
     var uri = gamefox_lib.domain + gamefox_lib.path + 'post.php?board=2';
     var keyRequest = new XMLHttpRequest();
     keyRequest.open('GET', uri);
-    var ds = gamefox_lib.thirdPartyCookieFix(keyRequest);
+    gamefox_lib.forceAllowThirdPartyCookie(keyRequest);
     keyRequest.onreadystatechange = function()
     {
       if (keyRequest.readyState == 4)

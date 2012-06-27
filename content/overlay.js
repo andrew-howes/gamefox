@@ -153,9 +153,9 @@ var gamefox =
   importMsgsPerPage: function()
   {
     var request = new XMLHttpRequest();
-    request.open('GET', gamefox_lib.domain + gamefox_lib.path
-        + 'settings.php');
-    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'settings.php'
+        );
+    gamefox_lib.forceAllowThirdPartyCookie(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)

@@ -230,7 +230,7 @@ var gamefox_options_sig =
 
     var request = new XMLHttpRequest();
     request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'sigquote.php');
-    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    gamefox_lib.forceAllowThirdPartyCookie(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -277,7 +277,7 @@ var gamefox_options_sig =
 
     var request = new XMLHttpRequest();
     request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'sigquote.php');
-    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    gamefox_lib.forceAllowThirdPartyCookie(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -304,7 +304,7 @@ var gamefox_options_sig =
 
         var postRequest = new XMLHttpRequest();
         postRequest.open('POST', gamefox_lib.domain + action);
-        var ds = gamefox_lib.thirdPartyCookieFix(postRequest);
+        gamefox_lib.forceAllowThirdPartyCookie(postRequest);
         postRequest.onreadystatechange = function()
         {
           if (postRequest.readyState == 4)

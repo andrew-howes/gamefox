@@ -133,7 +133,7 @@ var gamefox_messages =
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
-    var ds = gamefox_lib.thirdPartyCookieFix(get);
+    gamefox_lib.forceAllowThirdPartyCookie(get);
     get.onreadystatechange = function()
     {
       if (get.readyState == 4)
@@ -147,7 +147,7 @@ var gamefox_messages =
 
         var post = new XMLHttpRequest();
         post.open('POST', uri + '?action=' + (closeTopic ? 'closetopic' : 'delete'));
-        var ds = gamefox_lib.thirdPartyCookieFix(post);
+        gamefox_lib.forceAllowThirdPartyCookie(post);
         post.onreadystatechange = function()
         {
           if (post.readyState == 4)
@@ -192,7 +192,7 @@ var gamefox_messages =
 
     var get = new XMLHttpRequest();
     get.open('GET', uri);
-    var ds = gamefox_lib.thirdPartyCookieFix(get);
+    gamefox_lib.forceAllowThirdPartyCookie(get);
     get.onreadystatechange = function()
     {
       if (get.readyState == 4)
@@ -320,7 +320,7 @@ var gamefox_messages =
 
     var preview = new XMLHttpRequest();
     preview.open('POST', uri);
-    var ds = gamefox_lib.thirdPartyCookieFix(preview);
+    gamefox_lib.forceAllowThirdPartyCookie(preview);
     preview.onreadystatechange = function()
     {
       if (preview.readyState != 4) return;
@@ -375,7 +375,7 @@ var gamefox_messages =
       // Preview was a success - make the post
       var post = new XMLHttpRequest();
       post.open('POST', uri);
-      var ds = gamefox_lib.thirdPartyCookieFix(post);
+      gamefox_lib.forceAllowThirdPartyCookie(post);
       post.onreadystatechange = function()
       {
         if (post.readyState != 4) return;
@@ -492,7 +492,7 @@ var gamefox_messages =
     var uri = select.parentNode.parentNode.getElementsByTagName('a')[2].href;
     var req = new XMLHttpRequest();
     req.open('GET', uri);
-    var ds = gamefox_lib.thirdPartyCookieFix(req);
+    gamefox_lib.forceAllowThirdPartyCookie(req);
     req.onreadystatechange = function()
     {
       if (req.readyState != 4) return;

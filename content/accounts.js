@@ -135,9 +135,6 @@ var gamefox_accounts =
 
   promptLogin: function(username, error)
   {
-    if (!gamefox_lib.thirdPartyCookiePreCheck())
-      return;
-
     var strbundle = document.getElementById('gamefox-overlay-strings');
 
     var password = {value: ''};
@@ -200,7 +197,7 @@ var gamefox_accounts =
     {
       var request = new XMLHttpRequest();
       request.open('HEAD', gamefox_lib.domain + '/');
-      var ds = gamefox_lib.thirdPartyCookieFix(request);
+      gamefox_lib.forceAllowThirdPartyCookie(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
@@ -287,7 +284,7 @@ var gamefox_accounts =
     // TODO: find a way to make page not redirect
     request.open('POST', gamefox_lib.domain +
         '/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
-    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    gamefox_lib.forceAllowThirdPartyCookie(request);
 
     request.onreadystatechange = function()
     {

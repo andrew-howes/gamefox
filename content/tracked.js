@@ -50,16 +50,12 @@ var gamefox_tracked =
 
     var currentAccount = gamefox_lib.prefs.getCharPref('accounts.current');
 
-    // Because of how the RSS feed works without cookies, we could have an
-    // option to always update from a certain account. This won't work well for
-    // removing or adding tracked topics though.
+    // Check if cached RSS URL is out of date
     if (gamefox_tracked.accountChanged())
-    { // cached url is out of date
-      if (!gamefox_lib.thirdPartyCookiePreCheck())
-        return;
+    {
       var request = new XMLHttpRequest();
       request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'tracked.php');
-      var ds = gamefox_lib.thirdPartyCookieFix(request);
+      gamefox_lib.forceAllowThirdPartyCookie(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)
@@ -191,7 +187,7 @@ var gamefox_tracked =
 
     var request = new XMLHttpRequest();
     request.open('GET', this.href);
-    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    gamefox_lib.forceAllowThirdPartyCookie(request);
     var link = this;
     request.onreadystatechange = function()
     {
@@ -259,7 +255,7 @@ var gamefox_tracked =
     var request = new XMLHttpRequest();
     request.open('GET', gamefox_utils.newURI(ids['board'], ids['topic'])
         + '?action=' + (untrack ? 'stoptrack' : 'tracktopic'));
-    var ds = gamefox_lib.thirdPartyCookieFix(request);
+    gamefox_lib.forceAllowThirdPartyCookie(request);
     request.onreadystatechange = function()
     {
       if (request.readyState == 4)
@@ -306,8 +302,6 @@ var gamefox_tracked =
 
   deleteTopic: function(topicId)
   {
-    if (!gamefox_lib.thirdPartyCookiePreCheck())
-      return;
     this.read();
 
     var topic = this.list[topicId];
@@ -316,7 +310,7 @@ var gamefox_tracked =
       var request = new XMLHttpRequest();
       request.open('GET', gamefox_utils.newURI(topic.boardId, topicId)
           + '?action=stoptrack');
-      var ds = gamefox_lib.thirdPartyCookieFix(request);
+      gamefox_lib.forceAllowThirdPartyCookie(request);
       request.onreadystatechange = function()
       {
         if (request.readyState == 4)

@@ -153,8 +153,6 @@ var gamefox_tags =
 
   removePurged: function()
   {
-    if (!gamefox_lib.thirdPartyCookiePreCheck())
-      return;
     this.read();
     const errNumber  = [ -404, -1, 0, 302, 401, 403, 500, 503, 504, 555 ];
     var err          = [    0,  0, 0,   0,   0,   0,   0,   0,   0,   0 ];
@@ -243,7 +241,7 @@ var gamefox_tags =
     /* removePurged: dispatchRequest: open request */
 
       request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
-      var ds = gamefox_lib.thirdPartyCookieFix(request);
+      gamefox_lib.forceAllowThirdPartyCookie(request);
 
     /* removePurged: dispatchRequest: request.onerror */
 

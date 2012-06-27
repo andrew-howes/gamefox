@@ -18,6 +18,10 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Common low level, foundational items
+ * @namespace
+ */
 var gamefox_lib =
 {
   extensionID: '{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}',
@@ -349,30 +353,15 @@ var gamefox_lib =
     browser.ownerDocument.defaultView.focus();
   },
 
-  thirdPartyCookieFix: function(request)
-  {
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=437174
-    if (!Ci.nsILoadContext)
-    {
-      var ds = Cc['@mozilla.org/webshell;1']
-        .createInstance(Ci.nsIDocShellTreeItem)
-        .QueryInterface(Ci.nsIInterfaceRequestor);
-      request.channel.loadGroup = ds.getInterface(Ci.nsILoadGroup);
-    }
-    request.channel.loadFlags |= Ci.nsIChannel.LOAD_DOCUMENT_URI;
-    // need to maintain a reference to this or it will get gc'd!
-    return ds;
-  },
-
-  thirdPartyCookiePreCheck: function()
-  {
-    if (Ci.nsILoadContext
-        && Cc['@mozilla.org/preferences-service;1']
-          .getService(Ci.nsIPrefBranch)
-          .getIntPref('network.cookie.cookieBehavior') == 1
-        && window != window.top)
-      return gamefox_lib.confirm('You have third-party cookies disabled and your browser is probably not going to send all the necessary cookies unless you have made an exception for gamefaqs.com. Do you want to continue the current action? (Do not click OK unless you know what you are doing)');
-    return true;
+  /**
+   * Set the forceAllowThirdPartyCookie flag on XMLHttpRequest objects.
+   *
+   * @param {XMLHttpRequest} xhr
+   * @return {void}
+   */
+  forceAllowThirdPartyCookie: function(xhr) {
+    xhr.channel.QueryInterface(Ci.nsIHttpChannelInternal)
+      .forceAllowThirdPartyCookie = true;
   },
 
   openOptionsDialog: function(firstRun, notifications, forceOpen, pane)
