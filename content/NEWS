@@ -4,8 +4,8 @@
     * Fix adding/removing accounts from the sidebar
     * Fix account-specific signatures and other features not working
     * Fix messages link in header not being highlighted for new messages
-    * Remove the GameFAQs clock from the header, display it in quick post only:
-      the new header update broke it, but it's more useful in quick post anyway
+    * Display the GameFAQs clock only in quick post or the standard post page,
+      instead of the header
     * Fix breakage from recent GameFAQs update
 
 2012-06-11:

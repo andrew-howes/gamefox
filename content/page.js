@@ -475,6 +475,17 @@ var gamefox_page =
             }, 0); }, false);
       }
 
+      // Clock
+      if (gamefox_lib.prefs.getBoolPref('elements.clock'))
+      {
+        var clockNode = doc.createElement('span');
+        clockNode.className = 'gamefox-clock';
+        clockNode.appendChild(doc.createTextNode(''));
+        detailsDiv.appendChild(clockNode);
+
+        gamefox_page.updateClock(clockNode.firstChild);
+      }
+
       // Other form stuff
       doc.gamefox.lastFocusedPostForm = form;
       message.tabIndex = 2;
