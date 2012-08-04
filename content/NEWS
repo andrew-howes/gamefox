@@ -6,6 +6,7 @@
     * Fix messages link in header not being highlighted for new messages
     * Remove the GameFAQs clock from the header, display it in quick post only:
       the new header update broke it, but it's more useful in quick post anyway
+    * Fix breakage from recent GameFAQs update
 
 2012-06-11:
     * version 0.8.7

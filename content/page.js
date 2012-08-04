@@ -888,7 +888,7 @@ var gamefox_page =
         {
           // check if this is the post date node
           if (msgStats.childNodes[j].textContent.indexOf('Posted') != -1
-              && /Posted:? [0-9\/\: ]+ (A|P)M/.test(msgStats.childNodes[j]
+              && /Posted:? [0-9\/\: ]+\s(A|P)M/.test(msgStats.childNodes[j]
                 .textContent))
             var postDateNode = msgStats.childNodes[j];
 
