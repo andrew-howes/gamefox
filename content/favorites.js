@@ -46,7 +46,7 @@ var gamefox_favorites =
     {
       item = doc.createElement('option');
       item.value = i;
-      item.appendChild(doc.createTextNode(favs[i].name));
+      item.appendChild(doc.createTextNode(gamefox_favorites.list[i].name));
       favList.appendChild(item);
     }
   },
