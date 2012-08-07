@@ -106,20 +106,20 @@ var gamefox_page =
     // Add favorites
     if (gamefox_lib.prefs.getBoolPref('elements.favorites'))
     {
-      var sysDiv = doc.getElementById('sys');
-      if (sysDiv)
+      let div = doc.getElementById('mast_jump') || doc.getElementById('sys');
+      if (div)                     /* V12 */                          /* V11 */
       {
-        sysDiv.style.width = 'auto';
+        div.style.width = 'auto';
 
-        var favMenu = doc.createElement('select');
+        let favMenu = doc.createElement('select');
         favMenu.id = 'gamefox-favorites-menu';
-        favMenu.style.width = sysDiv.getElementsByTagName('select')[0]
+        favMenu.style.width = div.getElementsByTagName('select')[0]
           .offsetWidth + 'px';
         favMenu.addEventListener('mousedown', gamefox_favorites.selectFavorite,
             false);
         gamefox_favorites.populateFavorites(doc, favMenu);
 
-        sysDiv.insertBefore(favMenu, sysDiv.firstChild);
+        div.insertBefore(favMenu, div.firstChild);
       }
     }
 

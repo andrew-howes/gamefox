@@ -7,6 +7,7 @@
     * Display the GameFAQs clock only in quick post or the standard post page,
       instead of the header
     * Fix breakage from recent GameFAQs update
+    * Fix favorites header menu in V12 theme
 
 2012-06-11:
     * version 0.8.7
