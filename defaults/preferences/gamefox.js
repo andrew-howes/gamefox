@@ -145,3 +145,4 @@ pref("gamefox.showReleaseNotes", true);
 
 pref("gamefox.version", "");
 pref("gamefox.useBeta", false);
+pref("gamefox.ignoreErrorsVersion", "");

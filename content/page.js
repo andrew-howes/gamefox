@@ -20,6 +20,47 @@
 
 var gamefox_page =
 {
+  onload: function(event)
+  {
+    try
+    {
+      gamefox_page.process(event);
+    }
+    catch(e)
+    {
+      // Don't show an error notification if the user has ignored errors for
+      // this version. Using the version number for this may cause some errors
+      // to never be seen, but it's a simpler system than keeping track of each
+      // individual error in the prefs.
+      if (gamefox_lib.prefs.getCharPref('ignoreErrorsVersion') == gamefox_lib
+            .version)
+        throw e;
+
+      // Show an error notification
+      var strbundle = document.getElementById('gamefox-overlay-strings');
+      var notifyBox = gBrowser.getNotificationBox();
+      var shortFileName = e.fileName.split('/').slice(4).join('/');
+      var buttons = [
+        { label: strbundle.getString('ignore'),
+          accessKey: strbundle.getString('ignoreAK'),
+          callback: function() {
+            gamefox_lib.prefs.setCharPref('ignoreErrorsVersion', gamefox_lib
+                .version);
+          }
+        }
+      ];
+
+      notifyBox.appendNotification(strbundle.getString('notifyError') + ' ' +
+            e.name + ': ' + e.message + ' (' + shortFileName + ', ' +
+            strbundle.getString('line') + ' ' + e.lineNumber + ')',
+          'gamefox-error', null, notifyBox.PRIORITY_WARNING_HIGH, buttons);
+
+      // For logging purposes, this exception should still bubble up to the
+      // Error Console.
+      throw e;
+    }
+  },
+
   process: function(event)
   {
     var doc = gamefox_lib.getDocument(event);

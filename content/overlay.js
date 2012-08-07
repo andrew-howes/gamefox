@@ -28,7 +28,7 @@ var gamefox =
   {
     window.removeEventListener('load', gamefox.init, false);
     document.getElementById('appcontent').addEventListener(
-        'DOMContentLoaded', gamefox_page.process, false);
+        'DOMContentLoaded', gamefox_page.onload, false);
     document.getElementById('contentAreaContextMenu').addEventListener(
         'popupshowing', gamefox_context.displayMenu, false);
 
