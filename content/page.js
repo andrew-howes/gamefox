@@ -1039,7 +1039,7 @@ var gamefox_page =
           var format = gamefox_date.getFormat('message');
 
           postDateElement.textContent = 'Posted '
-            + gamefox_date.parseFormat(postDate, format)
+            + gamefox_date.parseFormat(postDate.replace('\u00a0', ' '), format)
             + (leftMsgData || onArchive ? '' : ' | ')
         }
 

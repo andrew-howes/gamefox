@@ -513,7 +513,7 @@ var gamefox_messages =
       {
         editNum = edits.length - i - 1;
         matches = edits[i].match(new RegExp(pattern));
-        date = matches[1];
+        date = matches[1].replace('&nbsp;', ' ');
 
         // For the latest edit, use the HTML from the message list rather than
         // the detail page to keep anchors/extension processing
