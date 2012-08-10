@@ -423,7 +423,7 @@ var gamefox_page =
       var form = message.form;
       var topictitle = form.elements.namedItem('topictitle');
       var detailsDiv = message.parentNode.parentNode;
-      var postBtns = doc.getElementsByName('post');
+      var postBtns = form.querySelectorAll('[name="post"]');
       var previewBtn = postBtns[0];
 
       // Titles
