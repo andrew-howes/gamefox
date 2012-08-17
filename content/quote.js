@@ -127,10 +127,10 @@ var gamefox_quote =
     var bodyDOM = doc.createElement('td');
     bodyDOM.innerHTML = body;
 
-    // Remove nested quotes past 2 levels (this new surrounding quote makes it
-    // 3 levels total)
-    var quotes = bodyDOM.querySelectorAll('blockquote blockquote blockquote, '
-        + 'blockquote blockquote cite');
+    // Limit to 5 levels of quoting, including this quote (same as GameFAQs)
+    var quotes = bodyDOM.querySelectorAll('blockquote blockquote blockquote ' +
+        'blockquote blockquote, blockquote blockquote blockquote blockquote ' +
+        'cite');
     for (var i = quotes.length - 1; i >= 0; --i)
     {
       quotes[i].nextSibling.textContent = quotes[i].nextSibling.textContent
