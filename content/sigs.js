@@ -133,8 +133,8 @@ var gamefox_sigs =
     else
       sig = sig[0];
 
-    // Remove <p>
-    sig = sig.replace(/<\/?p>/g, '');
+    // Remove block elements <p> and <quote>
+    sig = sig.replace(/<\/?(p|quote)>/g, '');
 
     // Max of 160 characters (with expanded HTML entities)
     sig = gamefox_utils.specialCharsEncode(sig).substr(0, 160);
