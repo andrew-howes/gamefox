@@ -38,6 +38,12 @@
         -moz-border-radius: 0 0 4px 4px;
         border-radius: 0 0 4px 4px;
     }
+    .gamefox-signature cite {
+        background: transparent !important;
+        border: 0 !important;
+        display: inline !important;
+        padding: 0 !important;
+    }
 
     /* Code */
     .message code {
