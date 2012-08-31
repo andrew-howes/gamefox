@@ -104,14 +104,6 @@ var gamefox =
           gamefox_lib.newTab('chrome://gamefox/content/nightly.html', 0);
         }, 10);
 
-      // updated nightly install
-      else if (gamefox_lib.isNightly()
-          && gamefox_lib.prefs.getBoolPref('nightlyChangeLog'))
-        window.setTimeout(function() {
-          gamefox_lib.newTab(
-            'http://beyondboredom.net/gamefox/nightlychanges.php', 0);
-        }, 10);
-
       // change log for new stable release
       else if (!gamefox_lib.isDev() && lastVersion != ''
           && gamefox_lib.prefs.getBoolPref('showReleaseNotes'))

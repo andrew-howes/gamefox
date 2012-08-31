@@ -140,7 +140,6 @@ pref("gamefox.loginKey", "");
 
 pref("gamefox.logging.verbosity", 1);
 
-pref("gamefox.nightlyChangeLog", true);
 pref("gamefox.showReleaseNotes", true);
 
 pref("gamefox.version", "");
