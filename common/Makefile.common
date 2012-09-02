@@ -47,7 +47,7 @@ AWK = awk
 #### rules
 
 TARGETS = all help info jar xpi mozxpi nightly clean $(JAR) $(XPI) \
-          upnightly sync prepare upload scandist
+          upnightly prepare upload scandist
 $(TARGETS:%=\%.%):
 	echo MAKE $* $(@:$*.%=%)
 	$(MAKE) -C $* $(@:$*.%=%)
@@ -70,7 +70,6 @@ help:
 	@echo "  make upload    - upload a distribution"
 	@echo "Admin targets:"
 	@echo "  make upnightly - upload a nightly snapshot and its update RDF"
-	@echo "  make sync      - synchronize the www git tree with the server"
 
 info:
 	@echo "version            $(VERSION)"
@@ -93,9 +92,6 @@ upnightly: $(NIGHTLYXPI)
 
 dist: $(XPI) $(MOZXPI)
 	$(MAKE_DIST)
-
-sync:
-	( cd www/ && ./sync.py )
 
 upload:
 	$(UPLOAD)

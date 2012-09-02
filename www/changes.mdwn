@@ -1,10 +1,13 @@
+title: 'GameFOX: Changes'
+version: 0.8.7
+
 ### Latest version
 
 #### GameFOX 0.8.7 (2012-06-11) {#0.8.7}
 
 * Changes on the New Topic/Message page:
-  - Fix problem with buttons
-  - Add keyboard shortcuts
+    - Fix problem with buttons
+    - Add keyboard shortcuts
 * Fix quick edit, quoting, topic creator label, edit history, and several other
   issues from the GameFAQs update
 * Allow tabbing to the post message buttons in quick edit
