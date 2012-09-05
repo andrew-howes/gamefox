@@ -64,7 +64,7 @@ var gamefox_page =
   process: function(event)
   {
     var doc = gamefox_lib.getDocument(event);
-    if (!gamefox_lib.onGF(doc)) return false;
+    if (!doc.body || !gamefox_lib.onGF(doc)) return false;
 
     // Disable ads
     if (gamefox_lib.prefs.getBoolPref('elements.stopads'))
