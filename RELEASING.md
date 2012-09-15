@@ -30,7 +30,7 @@ SSH is required. Local file operations are not supported yet.
 Preparing for a release
 -----------------------
 
-The web change log needs to be written. Use www/changes-next.mdwn as a staging
+The web change log needs to be written. Use www/changes-next.md as a staging
 area for the next version.
 
 Uploading a release
@@ -51,13 +51,11 @@ After inspecting and testing the distribution, upload it by typing
 
 This automatically does the following:
 
-1. Uploads the XPI to $(file_dir)
-2. Uploads the news to $(file_dir)/news
+1. Uploads the XPI to `$(file_dir)`
+2. Uploads the news to `$(file_dir)/news`
 3. Signs the update RDF file and uploads it
-4. Replaces the current changes.mdwn file on the server with the contents of
-   changes-next.mdwn
-5. Moves the XPI of the previous version to $(file_dir)/oldxpi
-6. Deletes the current nightly XPI
+4. Moves the XPI of the previous version to `$(file_dir)/oldxpi`
+5. Deletes the current nightly XPI
 
 What to do after a release
 --------------------------
@@ -68,10 +66,10 @@ should bump the version number in:
 * Makefile
 * content/NEWS
 * install.rdf
-* www/index.php.txt (including date and version compatibility)
+* www/index.md (including date and version compatibility)
 
 You should also add the release date to the latest version in
-www/changes-next.mdwn, then copy it to www/changes.mdwn.
+www/changes-next.md, then copy it to www/changes.md.
 
 Commit and push the updates above.
 
@@ -84,10 +82,9 @@ x.y.z", and conform to this template:
 
     <b>Changes:</b>
 
-    [changes for the latest version from content/NEWS or
-     www/changes(-next).mdwn]
+    [changes for the latest version from content/NEWS or www/changes(-next).md]
 
-Finally, you should upload the *_amo.xpi file in the root of the git tree to
+Finally, you should upload the `*_amo.xpi` file in the root of the git tree to
 addons.mozilla.org.
 
 Configuring a nightly build server
