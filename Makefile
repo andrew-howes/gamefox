@@ -1,6 +1,7 @@
 name 		= gamefox
 version 	= 0.8.8
 url 		= https://beyondboredom.net/gamefox/download
+path 		= beyondboredom.net:/var/www/main/gamefox/download
 
 jar_dir 	= chrome
 jar 		= $(jar_dir)/$(name).jar
@@ -15,7 +16,11 @@ define build-xpi
 		"$(jar_files)" "$(xpi)" "$(xpi_files)" "$1"
 endef
 
-.PHONY: preview snapshot release amo clean
+define upload
+	@common/upload.sh "$(path)" "$1"
+endef
+
+.PHONY: preview snapshot snapshot-upload release upload amo clean
 
 preview: override version := $(version)pre
 preview:
@@ -25,8 +30,14 @@ snapshot: override version := $(version)pre$(shell date +%Y%m%d)
 snapshot:
 	$(call build-xpi,snapshot)
 
+snapshot-upload:
+	$(call upload,snapshot)
+
 release:
 	$(call build-xpi,release)
+
+upload:
+	$(call upload,release)
 
 amo: override xpi := $(basename $(xpi),xpi)_amo.xpi
 amo:
