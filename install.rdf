@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- version ###VERSION### (###GIT_VERSION###) built at ###DATE### -->
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
     <Description about="urn:mozilla:install-manifest">
@@ -14,8 +13,7 @@
         <em:iconURL>chrome://gamefox/skin/logo-small.png</em:iconURL>
         <em:aboutURL>chrome://gamefox/content/about.xul</em:aboutURL>
 
-        <em:updateURL>http://beyondboredom.net/gfox/release.rdf</em:updateURL>
-        <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHm0PO+/NnblC4Bm1sPDFsGkuMZ0IHmY6c3h202KzugcFUduk9SC0tZ2QoPKkuz7aOvonfGFnxgHzZxlJ3K/5np/p2R8ExGTYHV7vppxzfXxpjqvlA0UrJVXc2+4O9eVo56B7R7AQhWhpg5pYUvM7f1XXK6S00P0Upng8LUYAISwIDAQAB</em:updateKey>
+        <em:updateURL>https://beyondboredom.net/gamefox/download/release.rdf</em:updateURL>
 
         <em:developer>Abdullah A (ultimategamer00)</em:developer>
         <em:developer>Toad King (Calvinjpwalker)</em:developer>
