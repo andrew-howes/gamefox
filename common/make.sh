@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-name=$1 version=$2 jar_dir=$3 jar=$4 jar_files=$5 xpi=$6 xpi_files=$7 type=$8
+name=$1 version=$2 url=$3 jar_dir=$4 jar=$5 jar_files=$6 xpi=$7 xpi_files=$8 \
+    type=$9
 tmp=$(mktemp -d)
 trap "rm -rf '$tmp'" EXIT
 
@@ -22,9 +23,16 @@ xpi() {
         sed -i -re "s, (content|skin|locale)/, jar:$jar\!/\1/," \
             chrome.manifest &&
         xmlstarlet ed -P -L -u "//em:version" -v "$version" install.rdf &&
-        if [ "$type" = "amo" ]; then
+
+        case "$type" in
+          amo)
             xmlstarlet ed -P -L -d "//em:updateURL" install.rdf
-        fi &&
+            ;;
+          snapshot)
+            xmlstarlet ed -P -L -u "//em:updateURL" -v \
+                "$url/snapshot/snapshot.rdf" install.rdf
+        esac &&
+
         zip -r9q "$xpi" "$jar_dir" $xpi_files
     )
     mv "$tmp/$xpi" .

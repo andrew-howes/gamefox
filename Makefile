@@ -1,5 +1,6 @@
 name 		= gamefox
 version 	= 0.8.8
+url 		= https://beyondboredom.net/gamefox/download
 
 jar_dir 	= chrome
 jar 		= $(jar_dir)/$(name).jar
@@ -8,15 +9,19 @@ xpi 		= $(name)-$(version).xpi
 xpi_files 	= install.rdf chrome.manifest COPYING defaults components
 
 define build-xpi
-	@common/make.sh "$(name)" "$(version)" "$(jar_dir)" "$(jar)" \
+	@common/make.sh "$(name)" "$(version)" "$(url)" "$(jar_dir)" "$(jar)" \
 		"$(jar_files)" "$(xpi)" "$(xpi_files)" "$1"
 endef
 
-.PHONY: preview release amo clean
+.PHONY: preview snapshot release amo clean
 
 preview: version:=$(version)pre
 preview:
 	$(call build-xpi,preview)
+
+snapshot: version:=$(version)pre$(shell date +%Y%m%d)
+snapshot:
+	$(call build-xpi,snapshot)
 
 release:
 	$(call build-xpi,release)
