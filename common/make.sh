@@ -36,7 +36,23 @@ xpi() {
         zip -r9q "$xpi" "$jar_dir" $xpi_files
     )
     mv "$tmp/$xpi" .
+
+    echo "Done: $xpi ($(du -bh "$xpi" | cut -f1))"
 }
 
-jar; xpi
-echo "Done: $xpi ($(du -bh "$xpi" | cut -f1))"
+update_rdf() {
+    if [[ "$type" =~ ^(snapshot|release)$ ]]; then
+        local rdf="release/$type.rdf"
+        local hash="sha256:$(openssl sha256 "$xpi" | cut -d' ' -f2)"
+        local updatelink=$([ "$type" == "snapshot" ] &&
+            echo "$url/snapshot/$xpi" || echo "$url/$xpi")
+        mkdir -p release
+        xmlstarlet ed -P -u "//em:version" -v "$version" -u "//em:updateLink" \
+            -v "$updatelink" -u "//em:updateHash" -v "$hash" \
+            common/update.rdf > "$rdf"
+
+        echo "      $rdf"
+    fi
+}
+
+jar; xpi; update_rdf
