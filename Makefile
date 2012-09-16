@@ -1,13 +1,14 @@
-name 		= gamefox
-version 	= 0.8.8
-url 		= https://beyondboredom.net/gamefox/download
-path 		= beyondboredom.net:/var/www/main/gamefox/download
+name        = gamefox
+version     = 0.8.8
+url         = https://beyondboredom.net/gamefox/download
+path        = beyondboredom.net:/var/www/main/gamefox/download
 
-jar_dir 	= chrome
-jar 		= $(jar_dir)/$(name).jar
-jar_files 	= content skin locale
-xpi 		= $(name)-$(version).xpi
-xpi_files 	= install.rdf chrome.manifest COPYING defaults components
+jar_dir     = chrome
+jar         = $(jar_dir)/$(name).jar
+jar_files   = content skin locale
+xpi         = $(name)-$(version).xpi
+xpi_files   = install.rdf chrome.manifest COPYING defaults components
+base_ver   := $(version)
 
 -include common/Makefile.config
 
