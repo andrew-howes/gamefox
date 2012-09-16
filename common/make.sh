@@ -43,7 +43,7 @@ xpi() {
 update_rdf() {
     if [[ "$type" =~ ^(snapshot|release)$ ]]; then
         local rdf="release/$type.rdf"
-        local hash="sha256:$(openssl sha256 "$xpi" | cut -d' ' -f2)"
+        local hash="sha256:$(sha256sum "$xpi" | cut -d' ' -f1)"
         local updatelink=$([ "$type" == "snapshot" ] &&
             echo "$url/snapshot/$xpi" || echo "$url/$xpi")
         mkdir -p release
