@@ -7,25 +7,22 @@ maintainer to release a new stable version.
 Requirements
 ------------
 
-Packages needed to build, sign and upload (on Debian lenny):
-
-* zip
-* ruby
-* libxslt-ruby
-* libnss3-1d
-* python-paramiko
-* ... and dependencies
-
-[Spock](https://github.com/bard/spock) must be installed in release/spock. The
-McCoy profile must be in release/mccoy.default.
+* bash
+* OpenSSH
+* XMLStarlet (>= 1.3.1)
+* Zip
 
 Configuration
 -------------
 
-To upload to the server, copy common/server.conf.example to common/server.conf
-and edit the file to match the correct settings.
+If you're hosting GameFOX on a different server, you should override/replace
+the `url` and `path` variables in the makefile (either directly or by creating
+the file common/Makefile.config), and the `em:updateURL` element in
+install.rdf. The server will need to support HTTPS if you want to do
+self-hosted automatic updates.
 
-SSH is required. Local file operations are not supported yet.
+Otherwise, everything should already be configured to connect to the server via
+SSH.
 
 Preparing for a release
 -----------------------
@@ -36,26 +33,19 @@ area for the next version.
 Uploading a release
 -------------------
 
-You must first build a distribution which contains the XPI, news and unsigned
-release files. To do so, type
+First, build release XPIs for self-hosting and Mozilla Addons:
 
-    make dist VERSION=x.y.z
+    make release amo
 
-where VERSION is the version of the release. This should be the current
-version in git without the "pre". For example, you should use VERSION=0.7.5
-if the git version is 0.7.5pre.
-
-After inspecting and testing the distribution, upload it by typing
+Test the XPIs to make sure they're working. When everything checks out, upload
+them:
 
     make upload
 
-This automatically does the following:
+This automatically moves the old release into the archive folder on the server
+and uploads the new XPI and update RDF files.
 
-1. Uploads the XPI to `$(file_dir)`
-2. Uploads the news to `$(file_dir)/news`
-3. Signs the update RDF file and uploads it
-4. Moves the XPI of the previous version to `$(file_dir)/oldxpi`
-5. Deletes the current nightly XPI
+For Mozilla Addons, you'll need to submit the `*_amo.xpi` file manually.
 
 What to do after a release
 --------------------------
@@ -83,9 +73,6 @@ x.y.z", and conform to this template:
     <b>Changes:</b>
 
     [changes for the latest version from content/NEWS or www/changes(-next).md]
-
-Finally, you should upload the `*_amo.xpi` file in the root of the git tree to
-addons.mozilla.org.
 
 Configuring a nightly build server
 ----------------------------------
