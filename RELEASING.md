@@ -8,6 +8,7 @@ Requirements
 ------------
 
 * bash
+* GNU Make
 * OpenSSH
 * XMLStarlet (>= 1.3.1)
 * Zip
