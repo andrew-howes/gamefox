@@ -51,7 +51,5 @@ help:
 	@echo "targets: preview, snapshot, snapshot-upload, release, upload, amo"
 
 clean:
-	rm -f "$(jar)" "$(name)"-*.xpi
-	rm -f release/release.rdf release/snapshot.rdf
-	test ! -d "$(jar_dir)" || rmdir --ignore-fail-on-non-empty "$(jar_dir)"
-	test ! -d release || rmdir --ignore-fail-on-non-empty release
+	rm -f "$(jar)" "$(name)"-*.xpi release/release.rdf release/snapshot.rdf
+	rmdir "$(jar_dir)" release 2> /dev/null || true
