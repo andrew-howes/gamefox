@@ -1010,6 +1010,9 @@ var gamefox_page =
                 postDateNode.nextSibling);
         }
 
+        // Replace nbsp with normal space so date parsing works
+        postDate = postDate.replace('\u00a0', ' ');
+
         // User status
         var userStatusNode = profileLink.nextSibling;
         var userStatus = gamefox_utils.readStatus(gamefox_utils
@@ -1038,9 +1041,8 @@ var gamefox_page =
         {
           var format = gamefox_date.getFormat('message');
 
-          postDateElement.textContent = 'Posted '
-            + gamefox_date.parseFormat(postDate.replace('\u00a0', ' '), format)
-            + (leftMsgData || onArchive ? '' : ' | ')
+          postDateElement.textContent = 'Posted ' + gamefox_date.parseFormat(
+              postDate, format) + (leftMsgData || onArchive ? '' : ' | ');
         }
 
         // Element for sigs
