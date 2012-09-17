@@ -7,7 +7,7 @@ jar_dir     = chrome
 jar         = $(jar_dir)/$(name).jar
 jar_files   = content skin locale
 xpi         = $(name)-$(version).xpi
-xpi_files   = install.rdf chrome.manifest COPYING defaults components
+xpi_files   = install.rdf chrome.manifest LICENSE defaults components
 base_ver   := $(version)
 
 -include common/Makefile.config
