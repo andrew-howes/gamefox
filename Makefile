@@ -21,7 +21,7 @@ define upload
 	@common/upload.sh "$(path)" "$1"
 endef
 
-.PHONY: preview snapshot snapshot-upload release upload amo clean
+.PHONY: preview snapshot snapshot-upload release upload amo clean help
 
 preview: override version := $(version)pre
 preview:
@@ -43,6 +43,12 @@ upload:
 amo: override xpi := $(basename $(xpi),xpi)_amo.xpi
 amo:
 	$(call build-xpi,amo)
+
+help:
+	@echo "name: $(name)"
+	@echo "version: $(version)"
+	@echo "xpi: $(xpi)"
+	@echo "targets: preview, snapshot, snapshot-upload, release, upload, amo"
 
 clean:
 	rm -f "$(jar)" "$(name)"-*.xpi
