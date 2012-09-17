@@ -51,17 +51,13 @@ repository](https://github.com/bmars/gamefox) or clone it locally:
 
     $ git clone git://github.com/bmars/gamefox.git
 
-### Nightly snapshots {#nightly}
+### Snapshots {#snapshots}
 
-Nightly snapshots are builds of the latest development code automatically
-generated every night. They can be used to test experimental features.
-
-These versions receive minimal testing, so **things will probably be broken.**
-Please report any problems you find on [Blood
-Money](http://www.gamefaqs.com/boards/565885-blood-money). It's likely that we
-haven't noticed it yet!
-
-To start using the nightlies, [install the XPI file here](/gfox/nightly/). It
-is recommended that you stay up-to-date by using Firefox's add-on manager to
-find updates for GameFOX. You can [revert to the stable releases](#install)
-at any time.
+Snapshots are versions of GameFOX created based on the latest development code.
+They're updated automatically whenever that code has changed and are largely
+untested, so it's not recommended you use them unless you need something that
+hasn't made it to a release yet. [Install the XPI
+here](https://beyondboredom.net/gamefox/download/snapshot/) to start. Please
+[report any problems](https://github.com/bmars/gamefox/issues) (or on
+[GameFAQs](http://www.gamefaqs.com/boards/565885-blood-money)) to help them get
+fixed.
