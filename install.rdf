@@ -1,52 +1,51 @@
 <?xml version="1.0"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-    <Description about="urn:mozilla:install-manifest">
-        <em:id>{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}</em:id>
-        <em:name>GameFOX</em:name>
-        <em:version>0.8.8pre</em:version>
-        <em:description>Enhances the GameFAQs message boards.</em:description>
-        <em:type>2</em:type>
-        <em:unpack>true</em:unpack> <!-- TODO: stop using JAR -->
-        <em:homepageURL>http://beyondboredom.net/gamefox/</em:homepageURL>
-        <em:optionsURL>chrome://gamefox/content/options/options.xul</em:optionsURL>
-        <em:iconURL>chrome://gamefox/skin/logo-small.png</em:iconURL>
-        <em:aboutURL>chrome://gamefox/content/about.xul</em:aboutURL>
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>{6dd0bdba-0a02-429e-b595-87a7dfdca7a1}</em:id>
+    <em:name>GameFOX</em:name>
+    <em:version>0.8.8pre</em:version>
+    <em:description>Enhances the GameFAQs message boards.</em:description>
+    <em:type>2</em:type>
+    <em:unpack>true</em:unpack> <!-- TODO: stop using JAR -->
+    <em:homepageURL>http://beyondboredom.net/gamefox/</em:homepageURL>
+    <em:optionsURL>chrome://gamefox/content/options/options.xul</em:optionsURL>
+    <em:iconURL>chrome://gamefox/skin/logo-small.png</em:iconURL>
+    <em:aboutURL>chrome://gamefox/content/about.xul</em:aboutURL>
+    <em:updateURL>https://beyondboredom.net/gamefox/download/release.rdf</em:updateURL>
 
-        <em:updateURL>https://beyondboredom.net/gamefox/download/release.rdf</em:updateURL>
+    <em:developer>Abdullah A (ultimategamer00)</em:developer>
+    <em:developer>Toad King (Calvinjpwalker)</em:developer>
+    <em:developer>Andrianto Effendy (ZeroAnt)</em:developer>
+    <em:developer>Brian Marshall (Karamthulhu)</em:developer>
+    <em:developer>Michael Ryan (RockMFR 5)</em:developer>
 
-        <em:developer>Abdullah A (ultimategamer00)</em:developer>
-        <em:developer>Toad King (Calvinjpwalker)</em:developer>
-        <em:developer>Andrianto Effendy (ZeroAnt)</em:developer>
-        <em:developer>Brian Marshall (Karamthulhu)</em:developer>
-        <em:developer>Michael Ryan (RockMFR 5)</em:developer>
+    <em:contributor>Ant P. (GFCode)</em:contributor>
+    <em:contributor>Poo Poo Butter (CSS)</em:contributor>
+    <em:contributor>Swordless Link (CSS)</em:contributor>
+    <em:contributor>TakatoMatsuki (CSS)</em:contributor>
+    <em:contributor>Ricapar (CSS)</em:contributor>
+    <em:contributor>selmiak (CSS)</em:contributor>
+    <em:contributor>spynae (CSS)</em:contributor>
+    <em:contributor>Tango Desktop Project (icons)</em:contributor>
+    <em:contributor>http://www.pinvoke.com/ (icons)</em:contributor>
 
-        <em:contributor>Ant P. (GFCode)</em:contributor>
-        <em:contributor>Poo Poo Butter (CSS)</em:contributor>
-        <em:contributor>Swordless Link (CSS)</em:contributor>
-        <em:contributor>TakatoMatsuki (CSS)</em:contributor>
-        <em:contributor>Ricapar (CSS)</em:contributor>
-        <em:contributor>selmiak (CSS)</em:contributor>
-        <em:contributor>spynae (CSS)</em:contributor>
-        <em:contributor>Tango Desktop Project (icons)</em:contributor>
-        <em:contributor>http://www.pinvoke.com/ (icons)</em:contributor>
+    <!-- Firefox -->
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>3.6</em:minVersion>
+        <em:maxVersion>18.0a1</em:maxVersion>
+      </Description>
+    </em:targetApplication>
 
-        <!-- Firefox -->
-        <em:targetApplication>
-            <Description>
-                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-                <em:minVersion>3.6</em:minVersion>
-                <em:maxVersion>18.0a1</em:maxVersion>
-            </Description>
-        </em:targetApplication>
-
-        <!-- SeaMonkey -->
-        <em:targetApplication>
-            <Description>
-                <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
-                <em:minVersion>2.1</em:minVersion>
-                <em:maxVersion>2.15a1</em:maxVersion>
-            </Description>
-        </em:targetApplication>
-    </Description>
-</RDF>
+    <!-- SeaMonkey -->
+    <em:targetApplication>
+      <Description>
+        <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+        <em:minVersion>2.1</em:minVersion>
+        <em:maxVersion>2.15a1</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>
+</RDF> <!-- vim: set et sw=2 sts=2: -->
