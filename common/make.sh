@@ -1,8 +1,6 @@
 #!/bin/bash
-set -e
+set -eu
 
-name=$1 version=$2 url=$3 jar_dir=$4 jar=$5 jar_files=$6 xpi=$7 xpi_files=$8 \
-    type=$9
 tmp=$(mktemp -d)
 trap "rm -rf '$tmp'" EXIT
 

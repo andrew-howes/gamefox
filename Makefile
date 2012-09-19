@@ -13,15 +13,16 @@ base_ver   := $(version)
 -include common/Makefile.config
 
 define build-xpi
-	@common/make.sh "$(name)" "$(version)" "$(url)" "$(jar_dir)" "$(jar)" \
-		"$(jar_files)" "$(xpi)" "$(xpi_files)" "$1"
+	@name="$(name)" version="$(version)" url="$(url)" jar_dir="$(jar_dir)" \
+		jar="$(jar)" jar_files="$(jar_files)" xpi="$(xpi)" \
+		xpi_files="$(xpi_files)" type="$1" common/make.sh
 endef
 
 define upload
-	@common/upload.sh "$(path)" "$1"
+	@path="$(path)" type="$1" common/upload.sh
 endef
 
-.PHONY: preview snapshot snapshot-upload release upload amo clean help
+.PHONY: preview snapshot snapshot-upload release upload amo help clean
 
 preview: override version := $(version)pre
 preview:

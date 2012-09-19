@@ -1,7 +1,6 @@
 #!/bin/bash
-set -e
+set -eu
 
-path=$1 type=$2
 IFS=":" read host dir <<< "$path"
 rdf="release/$type.rdf"
 
