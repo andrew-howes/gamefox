@@ -17,9 +17,9 @@ fi
 case $type in
   snapshot)
     ssh $host "rm -f $dir/snapshot/*.xpi"
-    scp -p "$xpi" "$rdf" "$path/snapshot"
+    scp "$xpi" "$rdf" "$path/snapshot"
     ;;
   release)
     ssh $host "mv $dir/*.xpi $dir/archive 2> /dev/null" || true
-    scp -p "$xpi" "$rdf" "$path"
+    scp "$xpi" "$rdf" "$path"
 esac
