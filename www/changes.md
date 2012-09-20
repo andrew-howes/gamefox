@@ -1,7 +1,23 @@
 title: 'GameFOX: Changes'
-version: 0.8.7
+version: 0.8.8
 
 ### Latest version
+
+#### GameFOX 0.8.8 {#0.8.8}
+
+* Fix quick post not appearing for some people
+* Fix adding/removing accounts from the sidebar
+* Fix account-specific signatures and other features not working
+* Fix messages link in header not being highlighted for new messages
+* Display the GameFAQs clock only in quick post or the standard post page,
+  instead of the header
+* Fix breakage from recent GameFAQs update
+* Fix favorites header menu in V12 theme
+
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
+### Older versions
 
 #### GameFOX 0.8.7 (2012-06-11) {#0.8.7}
 
@@ -13,11 +29,6 @@ version: 0.8.7
 * Allow tabbing to the post message buttons in quick edit
 * Fix page sometimes not reloading after quick posting if GameFOX's messages
   per page setting doesn't match GameFAQs
-
-Problems with this version? Get support on GameFAQs at the
-[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
-
-### Older versions
 
 #### GameFOX 0.8.6 (2012-01-25) {#0.8.6}
 
@@ -57,16 +68,3 @@ Problems with this version? Get support on GameFAQs at the
 >
 > * Signatures | *Grab from GameFAQs*
 > * Alternatively: Main | Posting | Signature textbox: *Always show*
-
-#### GameFOX 0.8.4 (2011-11-25) {#0.8.4}
-
-* GameFOX sidebar:
-    * Add Vita and Wii U to platform links
-    * Fix login form
-* Fix quoting bug when the Disconnect extension is installed
-* Include the signature in the character count (to be consistent with GameFAQs)
-* Quick editing! Edit your posts on the message list without leaving the page
-* Show user profiles in a box after hovering over username links (QuickWhois)
-* Edit history viewer on the message list: switch between different revisions of
-  a post without leaving the page
-* Several small bug fixes

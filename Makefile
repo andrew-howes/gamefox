@@ -1,5 +1,5 @@
 name        = gamefox
-version     = 0.8.8
+version     = 0.8.9
 url         = https://beyondboredom.net/gamefox/download
 path        = beyondboredom.net:/var/www/main/gamefox/download
 

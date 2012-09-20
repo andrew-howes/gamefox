@@ -6,10 +6,11 @@ GameFOX is a Firefox extension with a diverse feature set that enhances the
 ### Install {#install}
 
 <big><a class="install-button"
-    href="/gfox/gamefox-0.8.7.xpi">GameFOX 0.8.7</a></big>
+    href="https://beyondboredom.net/gamefox/download/gamefox-0.8.8.xpi"
+    >GameFOX 0.8.8</a></big>
 ([changes](changes))
 
-Released 2012 June 11. Works with Firefox 3.6 and later, SeaMonkey 2.1 and
+Released 2012 September 20. Works with Firefox 3.6 and later, SeaMonkey 2.1 and
 later.
 
 ### About {#about}
