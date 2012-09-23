@@ -425,6 +425,7 @@ var gamefox_page =
       var detailsDiv = message.parentNode.parentNode;
       var postBtns = form.querySelectorAll('[name="post"]');
       var previewBtn = postBtns[0];
+      var queryArgs = gamefox_utils.parseQueryString(doc.location.search);
 
       // Titles
       if (topictitle) // new topic
@@ -443,7 +444,7 @@ var gamefox_page =
 
       if (sigField.type != 'hidden' &&
           !/\b(Posted)<\/h2>/.test(doc.body.innerHTML) &&
-          !gamefox_utils.parseQueryString(doc.location.search)['message'])
+          !queryArgs['message'])
       {
         detailsDiv.removeChild(form.elements.namedItem('custom_sig'));
 
@@ -472,7 +473,7 @@ var gamefox_page =
       resetBtn.parentNode.removeChild(resetBtn);
 
       detailsDiv.appendChild(gamefox_quickpost.createPostButtons(doc,
-            ['Post Message', 'Preview Message',
+            [!queryArgs['poll'] ? 'Post Message' : '', 'Preview Message',
              'Preview and Spellcheck Message', 'Reset']));
 
       // Character count
