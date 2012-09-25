@@ -530,7 +530,7 @@ var gamefox_page =
 
       // Other form stuff
       doc.gamefox.lastFocusedPostForm = form;
-      topictitle.tabIndex = 1;
+      if (topictitle) topictitle.tabIndex = 1;
       message.tabIndex = 2;
     }
 
