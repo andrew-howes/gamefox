@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2011 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2011, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -123,6 +123,7 @@ var gamefox_quickwhois =
       var text = request.responseText;
 
       // Show friend/PM actions
+      // TODO: Fix for new profile pages
       (function() {
         var friendPM = doc.createElement('span');
         friendPM.className = 'gamefox-quickwhois-friend-pm';
@@ -148,28 +149,9 @@ var gamefox_quickwhois =
         'Board User Level',
         'Account Created',
         'Last Visit',
-        'E-Mail',
-        'Web Site',
-        'AIM (Username)',
-        'AIM (E-Mail)',
-        'Yahoo IM',
-        'Windows Live (MSN)',
-        'Google Talk',
-        'ICQ',
-        'Xbox Live',
-        'PlayStation Network',
-        'DS Friend Code',
-        'Wii Number',
-        'Wii Friend Code',
-        'Skype',
-        'Steam',
-        'xfire',
-        'Twitter',
         'Signature',
-        'Quote',
         'Karma',
-        'Contributor Page',
-        'My Games Page'
+        'Active Messages Posted'
       ];
       var field, tr, td;
       var table = doc.createElement('table');
@@ -190,12 +172,7 @@ var gamefox_quickwhois =
           tr.appendChild(td);
 
           td = doc.createElement('td');
-          if (fields[i] == 'E-Mail')
-            gamefox_quickwhois.linkifyField(td, field, 'mailto:');
-          else if (fields[i] == 'Web Site')
-            gamefox_quickwhois.linkifyField(td, field);
-          else
-            td.innerHTML = field;
+          td.innerHTML = field;
           tr.appendChild(td);
 
           table.appendChild(tr);
@@ -209,9 +186,9 @@ var gamefox_quickwhois =
 
   findInfo: function(what, where)
   {
-    return (new RegExp('<th\\b[^>]*>(?:\\s*<a\\b[^>]*>)?\\s*' +
+    return (new RegExp('<td\\b[^>]*><b>(?:\\s*<a\\b[^>]*>)?\\s*' +
           gamefox_utils.specialRegexpCharsEscape(what) +
-          '(?:\\s*</a>)?\\s*</th><td>([^\\0]*?)</td>', 'gi').exec(where) ||
+          '(?:\\s*</a>)?\\s*</b></td><td>([^\\0]*?)</td>', 'gi').exec(where) ||
         [, ''])[1].trim();
   },
 
@@ -224,20 +201,5 @@ var gamefox_quickwhois =
       window.content.scrollX + event.clientX + doc.body.parentNode.offsetLeft,
       window.content.scrollY + event.clientY + doc.body.parentNode.offsetTop
     ];
-  },
-
-  linkifyField: function(node, field, prefix)
-  {
-    var doc = gamefox_lib.getDocument(node);
-    var a;
-    var lines = field.split('<br />');
-    for (var i = 0; i < lines.length; i++)
-    {
-      a = doc.createElement('a');
-      a.href = (prefix ? prefix : '') + lines[i];
-      a.textContent = lines[i];
-      node.appendChild(a);
-      node.appendChild(doc.createElement('br'));
-    }
   }
 };
