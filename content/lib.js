@@ -125,14 +125,8 @@ var gamefox_lib =
 
   getDocument: function(obj)
   {
-    if (obj.target && obj.target.ownerDocument)
-      return obj.target.ownerDocument;
-    else if (obj.originalTarget)
-      return obj.originalTarget;
-    else if (obj.ownerDocument)
-      return obj.ownerDocument;
-    else
-      return obj;
+    return (obj.target && obj.target.ownerDocument) ? obj.target.ownerDocument
+      : obj.originalTarget || obj.ownerDocument || obj;
   },
 
   /*
