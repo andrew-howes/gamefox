@@ -3,7 +3,7 @@ version: 0.8.8
 
 ### Latest version
 
-#### GameFOX 0.8.8 {#0.8.8}
+#### GameFOX 0.8.8 (2012-09-20) {#0.8.8}
 
 * Fix quick post not appearing for some people
 * Fix adding/removing accounts from the sidebar
