@@ -42,6 +42,9 @@ var gamefox_tracked =
 
   updateList: function()
   {
+    // FIXME track-reqs
+    return;
+
     if (!gamefox_lib.isLoggedIn())
     {
       gamefox_lib.alert('Could not update your tracked topics because you aren\'t logged in.');
@@ -88,6 +91,9 @@ var gamefox_tracked =
 
   grabFromRSS: function(url)
   {
+    // FIXME track-reqs
+    return;
+
     var request = new XMLHttpRequest();
     request.open('GET', url);
     request.onreadystatechange = function()
@@ -181,6 +187,9 @@ var gamefox_tracked =
 
   linkListener: function(event)
   {
+    // FIXME track-reqs
+    return null;
+
     // Prevent the link from loading, make our own XMLHttpRequest to stop/start
     // tracking and update the cached tracked list
     event.preventDefault();
@@ -227,6 +236,9 @@ var gamefox_tracked =
 
   addFromContextMenu: function(event)
   {
+    // FIXME track-reqs
+    return;
+
     var doc = gamefox_lib.getDocument(event);
 
     if (gamefox_lib.onPage(doc, 'topics') || gamefox_lib.onPage(doc, 'myposts'))
@@ -302,6 +314,9 @@ var gamefox_tracked =
 
   deleteTopic: function(topicId)
   {
+    // FIXME track-reqs
+    return;
+
     this.read();
 
     var topic = this.list[topicId];
@@ -391,6 +406,9 @@ var gamefox_tracked =
 
   timedUpdate: function()
   {
+    // FIXME track-reqs
+    return;
+
     if (!gamefox_lib.prefs.getBoolPref('tracked.notify')
         || !gamefox_lib.isLoggedIn())
       return;

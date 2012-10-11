@@ -173,6 +173,9 @@ var gamefox_page =
     // boardWrap has been moved, so some elements are no longer contained in it
     var contentDiv = doc.getElementById('content');
 
+    if (!contentDiv) // This isn't a normal page
+      return false;
+
     // TODO: myposts and some other pages are now missing this
     //   Admin says board_wrap is "depreciated", so we should use something else
     var boardWrap = contentDiv.getElementsByClassName('board_wrap')[0];
