@@ -32,10 +32,11 @@ var gamefox =
     document.getElementById('contentAreaContextMenu').addEventListener(
         'popupshowing', gamefox_context.displayMenu, false);
 
-    if (gamefox_lib.prefs.getBoolPref('tracked.enabled'))
+    // FIXME track-reqs
+    /*if (gamefox_lib.prefs.getBoolPref('tracked.enabled'))
       gamefox_lib.timer.initWithCallback(
           { notify: gamefox_tracked.timedUpdate }, 30000,
-          Ci.nsITimer.TYPE_REPEATING_SLACK);
+          Ci.nsITimer.TYPE_REPEATING_SLACK);*/
 
     gamefox.startup();
   },
