@@ -2,6 +2,7 @@
     * version 0.8.8.1
     * Disable tracked topic features as they may be causing excessive load on
       GameFAQs
+    * Fix error message caused by a GameFAQs update
 
 2012-09-20:
     * version 0.8.8
