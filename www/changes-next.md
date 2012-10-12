@@ -1,9 +1,9 @@
 title: 'GameFOX: Changes'
-version: 0.8.8
+version: 0.8.8.1
 
 ### Latest version
 
-#### GameFOX 0.8.8.1 {#0.8.8.1}
+#### GameFOX 0.8.8.1 (2012-10-11) {#0.8.8.1}
 
 * Disable tracked topic features as they may be causing excessive load on
   GameFAQs
@@ -14,7 +14,7 @@ Problems with this version? Get support on GameFAQs at the
 
 ### Older versions
 
-#### GameFOX 0.8.8 {#0.8.8}
+#### GameFOX 0.8.8 (2012-09-20) {#0.8.8}
 
 * Fix quick post not appearing for some people
 * Fix adding/removing accounts from the sidebar

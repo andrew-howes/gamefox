@@ -1,7 +1,18 @@
 title: 'GameFOX: Changes'
-version: 0.8.8
+version: 0.8.8.1
 
 ### Latest version
+
+#### GameFOX 0.8.8.1 (2012-10-11) {#0.8.8.1}
+
+* Disable tracked topic features as they may be causing excessive load on
+  GameFAQs
+* Fix error message caused by a GameFAQs update
+
+Problems with this version? Get support on GameFAQs at the
+[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
+
+### Older versions
 
 #### GameFOX 0.8.8 (2012-09-20) {#0.8.8}
 
@@ -13,11 +24,6 @@ version: 0.8.8
   instead of the header
 * Fix breakage from recent GameFAQs update
 * Fix favorites header menu in V12 theme
-
-Problems with this version? Get support on GameFAQs at the
-[Blood Money](http://www.gamefaqs.com/boards/565885-blood-money) board.
-
-### Older versions
 
 #### GameFOX 0.8.7 (2012-06-11) {#0.8.7}
 
@@ -43,28 +49,3 @@ Problems with this version? Get support on GameFAQs at the
 #### GameFOX 0.8.5.1 (2012-01-01) {#0.8.5.1}
 
 * Fix account-specific signatures
-
-#### GameFOX 0.8.5 (2011-12-31) {#0.8.5}
-
-* Make the edit history drop-down menu look nicer
-* Remove compatibility with:
-    * Firefox 3.5 (3.6 is still supported)
-    * SeaMonkey 2.0 (minimum is now 2.1)
-* Fix QuickWhois being unreadable with some themes
-* Fix options window on OS X
-* Simplify signature mangement: the signature textbox is hidden unless you're
-  using GameFOX to manage your signatures. Signatures are now stored only on
-  GameFAQs by default, but no features were removed
-* Basic (incomplete) support for reverse ("newest first") message ordering
-* Highlight the "New Messages" link when you have new PMs
-* Add a quick reply for PMs: write a reply while having the original message on
-  the same page
-* Add buttons to follow, add as friend, or PM a user from QuickWhois
-* Other minor bug fixes and enhancements
-
-> **Note on signatures:** If you use your default GameFAQs signature, but still
-> want to be able to change it before posting, you have two options (from the
-> options window):
->
-> * Signatures | *Grab from GameFAQs*
-> * Alternatively: Main | Posting | Signature textbox: *Always show*
