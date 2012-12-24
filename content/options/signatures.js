@@ -236,7 +236,7 @@ var gamefox_options_sig =
       if (request.readyState == 4)
       {
         if (request.responseText
-            .indexOf('>Signature and Quote</h2>') == -1)
+            .indexOf('>Signature and About Me</h2>') == -1)
         {
           gamefox_options.showNotification(signatureMsg,
               strbundle.getString('importNotLoggedIn'), 'warning');
@@ -283,7 +283,7 @@ var gamefox_options_sig =
       if (request.readyState == 4)
       {
         if (request.responseText
-            .indexOf('>Signature and Quote</h2>') == -1)
+            .indexOf('>Signature and About Me</h2>') == -1)
         {
           gamefox_options.showNotification(signatureMsg,
               strbundle.getString('exportNotLoggedIn'), 'warning');

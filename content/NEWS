@@ -1,6 +1,7 @@
 0000-00-00:
     * version 0.8.9
     * Fix QuickWhois for new profiles
+    * Fix importing/exporting signatures to GameFAQs
 
 2012-10-11:
     * version 0.8.8.1
