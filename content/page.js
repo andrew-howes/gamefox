@@ -819,16 +819,6 @@ var gamefox_page =
         }
       }
 
-      // Tracking
-      if (gamefox_lib.prefs.getBoolPref('tracked.enabled'))
-      {
-        var trackLink = doc.evaluate('.//a[contains(translate(., "T", "t"), '
-          + '"track")]', userNav || userPanel, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        if (trackLink)
-          trackLink.addEventListener('click', gamefox_tracked.linkListener, false);
-      }
-
       // Double click
       var messageTable = doc.evaluate(
           './/div[@class="body"]/table[@class="board message"]', contentDiv,
@@ -1335,10 +1325,6 @@ var gamefox_page =
 
       doc.gamefox.msgnum = msgnum;
 
-      // Mark as read if on the last page
-      if (doc.gamefox.pages == pagenum + 1)
-        gamefox_tracked.markTopicAsRead(topicId, msgnum + ignoreCount);
-
       // Board nav at the bottom of the page
       if (gamefox_lib.prefs.getBoolPref('elements.boardnav') && !onDetail)
       {
@@ -1414,72 +1400,6 @@ var gamefox_page =
       else if (doc.location.hash.length)
         doc.location.hash = doc.location.hash;
     }
-
-    /* Show updated tracked topics notification */
-    if (gamefox_lib.prefs.getBoolPref('tracked.notify'))
-    {
-      var updatedTopics = gamefox_tracked.listUpdatedTopics();
-      if (updatedTopics.length)
-      {
-        var msg = 'You are tracking ' + updatedTopics.length + ' topic'
-          + (updatedTopics.length == 1 ? '' : 's') + ' with unread posts: ';
-
-        var note = doc.createElement('div');
-        note.id = 'gamefox-tracked-note';
-        note.appendChild(doc.createTextNode(msg));
-
-        var topicLink, topicObj;
-        for (var i = 0; i < updatedTopics.length; i++)
-        {
-          topicObj = gamefox_tracked.list[updatedTopics[i]];
-
-          topicLink = doc.createElement('a');
-          topicLink.href = topicObj.link;
-          topicLink.appendChild(doc.createTextNode(topicObj.title));
-          note.appendChild(topicLink);
-
-          if ((i + 1) < updatedTopics.length)
-          {
-            note.appendChild(doc.createTextNode(' —— '));
-
-            if (i == 6)
-            {
-              note.appendChild(doc.createTextNode('and '
-                    + (updatedTopics.length - i - 1) + ' more'));
-              break;
-            }
-          }
-        }
-
-        var contentDiv = doc.getElementById('content');
-        contentDiv.insertBefore(note, contentDiv.firstChild);
-
-        var dismissLink = doc.createElement('a');
-        dismissLink.id = 'gamefox-tracked-note-dismiss';
-        dismissLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            contentDiv.removeChild(note);
-            gamefox_tracked.markAllAsRead();
-            }, false);
-        dismissLink.href = '#';
-        dismissLink.title = 'Hide this notification';
-        dismissLink.appendChild(doc.createTextNode('×'));
-        note.insertBefore(dismissLink, note.firstChild);
-
-        var setHeight = function() {
-          // Don't adjust the line height unless the link is floated, because
-          // it messes up the height of the tracking notification element
-          if (doc.defaultView.getComputedStyle(dismissLink, null)
-              .getPropertyValue('float') != 'none')
-          {
-            dismissLink.style.lineHeight = '10em'; // trigger any wordwrap first
-            dismissLink.style.lineHeight = note.clientHeight + 'px';
-          }
-        };
-        setHeight();
-        window.addEventListener('resize', setHeight, false);
-      }
-    }
   },
 
   msglistDblclick: function(event)
@@ -1539,9 +1459,6 @@ var gamefox_page =
         break;
       case 4:
         gamefox_page.gotoLastPage(event);
-        break;
-      case 5:
-        gamefox_tracked.addFromContextMenu(event);
         break;
     }
   },

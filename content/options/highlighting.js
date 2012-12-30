@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2008, 2009, 2010 Brian Marshall, Michael Ryan
+ * Copyright 2008, 2009, 2010, 2012 Brian Marshall, Michael Ryan
  *
  * This file is part of GameFOX.
  *
@@ -86,7 +86,6 @@ var gamefox_options_highlighting =
       case 'include-admins':
       case 'include-mods':
       case 'include-vips':
-      case 'include-tracked':
       case 'include-tc':
         var includeType = event.id.substr(8);
         if (event.checked)
@@ -275,8 +274,7 @@ var gamefox_options_highlighting =
       return ['topics', 'messages'];
 
     var actions = [];
-    if (['users', 'titleContains'].indexOf(type) != -1
-        || include.indexOf('tracked') != -1)
+    if (['users', 'titleContains'].indexOf(type) != -1)
       actions.push('topics');
 
     if (['users', 'postContains'].indexOf(type) != -1

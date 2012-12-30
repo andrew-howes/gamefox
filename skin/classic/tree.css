@@ -1,18 +1,3 @@
-/* Tracked */
-#gamefox-tracked-rows::-moz-tree-row
-{
-    background-repeat: no-repeat;
-    background-position: 1px;
-}
-#gamefox-tracked-rows::-moz-tree-row(hold) { background-image: url('tracked-hold.png'); }
-#gamefox-tracked-rows::-moz-tree-row(deleted) { background-image: url('tracked-deleted.png'); }
-#gamefox-tracked-rows::-moz-tree-row(new) { background-image: url('tracked-new.png'); }
-
-#gamefox-tracked-rows::-moz-tree-cell
-{
-    padding-left: 10px;
-}
-
 /* Tags */
 #gamefox-tags-rows::-moz-tree-row(container)
 {

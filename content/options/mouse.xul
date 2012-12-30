@@ -48,7 +48,6 @@
           <menuitem label="&toLastPage.label;" value="4"/>
           <menuitem label="&toLastPost.label;" value="2"/>
           <menuitem label="&tagTopic.label;" value="3"/>
-          <menuitem label="&trackTopic.label;" value="5"/>
         </menupopup>
       </menulist>
     </hbox>
@@ -62,7 +61,6 @@
           <menuitem label="&toLastPage.label;" value="4"/>
           <menuitem label="&toLastPost.label;" value="2"/>
           <menuitem label="&tagTopic.label;" value="3"/>
-          <menuitem label="&trackTopic.label;" value="5"/>
         </menupopup>
       </menulist>
     </hbox>

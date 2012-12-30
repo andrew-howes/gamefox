@@ -43,7 +43,6 @@ pref("gamefox.sidebar.gotoboard", true);
 pref("gamefox.sidebar.login", true);
 pref("gamefox.sidebar.accounts", true);
 pref("gamefox.sidebar.tags", false);
-pref("gamefox.sidebar.tracked", false); // FIXME track-reqs
 
 pref("gamefox.msgsPerPage", 50);
 
@@ -74,14 +73,6 @@ pref("gamefox.favorites.serialized", "[]");
 pref("gamefox.favorites.enabled", true);
 
 pref("gamefox.tags", "");
-
-pref("gamefox.tracked.list", "{}");
-pref("gamefox.tracked.rssUrl", "");
-pref("gamefox.tracked.lastAccount", "");
-pref("gamefox.tracked.enabled", false); // FIXME track-reqs
-pref("gamefox.tracked.lastUpdate", 0);
-pref("gamefox.tracked.updateInterval", 300);
-pref("gamefox.tracked.notify", true);
 
 pref("gamefox.accounts", "{}");
 pref("gamefox.accounts.current", "");
@@ -117,8 +108,6 @@ pref("gamefox.context.pagelist", true);
 pref("gamefox.context.quote", true);
 pref("gamefox.context.sidebar", true);
 pref("gamefox.context.tag", false);
-pref("gamefox.context.track", false); // FIXME track-reqs
-pref("gamefox.context.tracked", false); // FIXME track-reqs
 pref("gamefox.context.taglist", false);
 pref("gamefox.context.usergroups", true);
 pref("gamefox.options.main.selectedtab", 0);

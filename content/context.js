@@ -33,8 +33,6 @@ var gamefox_context =
       getBoolPref('context.sidebar');
     document.getElementById('gamefox-tags').hidden = !gamefox_lib.prefs.
       getBoolPref('context.taglist');
-    document.getElementById('gamefox-tracked').hidden = !gamefox_lib.prefs.
-      getBoolPref('context.tracked');
     document.getElementById('gamefox-accounts').hidden = !gamefox_lib.prefs.
       getBoolPref('context.accounts');
     document.getElementById('gamefox-favorites').hidden = !gamefox_lib.prefs.
@@ -59,7 +57,6 @@ var gamefox_context =
     {
       document.getElementById('gamefox-context-quote').hidden = true;
       document.getElementById('gamefox-context-tag').hidden = true;
-      document.getElementById('gamefox-context-track').hidden = true;
       document.getElementById('gamefox-context-pages').hidden = true;
       document.getElementById('gamefox-context-usergroups').hidden = true;
       document.getElementById('gamefox-context-filter').hidden = true;
@@ -71,7 +68,6 @@ var gamefox_context =
 
     var hideQuote = true;
     var hideTag = true;
-    var hideTrack = true;
     var hidePages = true;
     var hideUsergroups = true;
     var hideFilter = true;
@@ -81,7 +77,7 @@ var gamefox_context =
 
     if (gamefox_lib.onPage(doc, 'topics') || gamefox_lib.onPage(doc, 'myposts'))
     {
-      // Tag topic, track topic, pages and user groups
+      // Tag topic, pages and user groups
       try
       {
         var node = target;
@@ -92,22 +88,7 @@ var gamefox_context =
         if (node.parentNode.cells.length > 1)
         {
           hideTag = false;
-
-          if (node.parentNode.cells[0].innerHTML.indexOf('archived') == -1)
-          {
-            hideTrack = false;
-            var ids = gamefox_utils.parseBoardLink(node.parentNode.cells[1].
-                getElementsByTagName('a')[0].href);
-            if (gamefox_tracked.isTracked(ids['topic']))
-              document.getElementById('gamefox-context-track')
-                .label = strbundle.getString('stopTrack');
-            else
-              document.getElementById('gamefox-context-track')
-                .label = strbundle.getString('trackTopic');
-          }
-
           hidePages = false;
-
           if (gamefox_lib.onPage(doc, 'topics') && !gamefox_lib.onPage(doc, 'tracked'))
             hideUsergroups = false;
         }
@@ -134,20 +115,6 @@ var gamefox_context =
 
       // Tag topic
       hideTag = false;
-
-      // Track topic
-      if (userNav.indexOf('Track Topic') != -1
-          || userNav.indexOf('Stop Tracking') != -1)
-      {
-        hideTrack = false;
-        var ids = gamefox_utils.parseBoardLink(doc.location.href);
-        if (gamefox_tracked.isTracked(ids['topic']))
-          document.getElementById('gamefox-context-track')
-            .label = strbundle.getString('stopTrack');
-        else
-          document.getElementById('gamefox-context-track')
-            .label = strbundle.getString('trackTopic');
-      }
 
       // Quote, user groups, filter, delete, edit
       var msgComponents = gamefox_utils.getMsgComponents(target, doc);
@@ -215,8 +182,6 @@ var gamefox_context =
       || !gamefox_lib.prefs.getBoolPref('context.quote');
     document.getElementById('gamefox-context-tag').hidden = hideTag
       || !gamefox_lib.prefs.getBoolPref('context.tag');
-    document.getElementById('gamefox-context-track').hidden = hideTrack
-      || !gamefox_lib.prefs.getBoolPref('context.track');
     document.getElementById('gamefox-context-pages').hidden = hidePages
       || !gamefox_lib.prefs.getBoolPref('context.pagelist');
     document.getElementById('gamefox-context-usergroups').hidden = hideUsergroups
@@ -256,55 +221,6 @@ var gamefox_context =
         }, false);
         menu.appendChild(item);
       }
-    }
-  },
-
-  populateTracked: function()
-  {
-    var strbundle, menu, item, first, board, topic, topicObj;
-
-    strbundle = document.getElementById('gamefox-context-strings');
-    menu = document.getElementById('gamefox-tracked-menu');
-    while (menu.hasChildNodes())
-      menu.removeChild(menu.firstChild);
-
-    item = document.createElement('menuitem');
-    item.setAttribute('label', strbundle.getString('updateTracked'));
-    item.addEventListener('command', function() {
-      gamefox_tracked.updateList();
-    }, false);
-    menu.appendChild(item);
-
-    item = document.createElement('menuitem');
-    item.setAttribute('label', strbundle.getString('detach'));
-    item.addEventListener('command', function() {
-      gamefox_tracked.openWindow();
-    }, false);
-    menu.appendChild(item);
-
-    gamefox_tracked.read();
-    first = true;
-    for (topicId in gamefox_tracked.list)
-    {
-      if (first)
-      {
-        menu.appendChild(document.createElement('menuseparator'));
-        first = false;
-      }
-
-      topicObj = gamefox_tracked.list[topicId];
-
-      item = document.createElement('menuitem');
-      item.setUserData('data', gamefox_lib.domain + topicObj.link, null);
-      item.setAttribute('label', topicObj.title);
-      item.addEventListener('command', function() {
-        gamefox_lib.openPage(this.getUserData('data'), 2);
-      }, false);
-      item.addEventListener('click', function(event) {
-        if (event.button == 1)
-          gamefox_lib.openPage(this.getUserData('data'), 0);
-      }, false);
-      menu.appendChild(item);
     }
   },
 

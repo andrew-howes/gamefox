@@ -22,7 +22,7 @@ var gamefox_highlighting =
 {
   highlightClassName: 'gamefox-highlight',
   groupClassName: 'gamefox-groupname',
-  extraTypes: ['admins', 'mods', 'vips', 'tc', 'tracked'],
+  extraTypes: ['admins', 'mods', 'vips', 'tc'],
 
   read: function()
   {
@@ -83,8 +83,10 @@ var gamefox_highlighting =
         }
       }
 
-      for (var j = 0; j < included.length; j++)
-        this.index.status[included[j]].push(i);
+      for (var j = 0; j < included.length; j++) {
+        if (this.index.status.hasOwnProperty(included[j]))
+          this.index.status[included[j]].push(i);
+      }
     }
 
     // recent value of userlist.serialized
@@ -144,9 +146,6 @@ var gamefox_highlighting =
   {
     if (!this.index) return false;
     var index = this.index.titleContains;
-
-    if (gamefox_tracked.isTracked(topicId))
-      status.push('tracked');
 
     title = title.toLowerCase();
 

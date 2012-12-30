@@ -32,12 +32,6 @@ var gamefox =
     document.getElementById('contentAreaContextMenu').addEventListener(
         'popupshowing', gamefox_context.displayMenu, false);
 
-    // FIXME track-reqs
-    /*if (gamefox_lib.prefs.getBoolPref('tracked.enabled'))
-      gamefox_lib.timer.initWithCallback(
-          { notify: gamefox_tracked.timedUpdate }, 30000,
-          Ci.nsITimer.TYPE_REPEATING_SLACK);*/
-
     gamefox.startup();
   },
 
@@ -54,16 +48,6 @@ var gamefox =
           .getService(Ci.nsIExtensionManager)
           .getItemForID(gamefox_lib.extensionID).version });
     }
-
-    // disable or update tracked topics
-    if (!gamefox_lib.prefs.getBoolPref('tracked.enabled'))
-    {
-      gamefox_lib.prefs.clearUserPref('tracked.list');
-      gamefox_lib.prefs.clearUserPref('tracked.rssUrl');
-      gamefox_lib.prefs.clearUserPref('tracked.lastAccount');
-    }
-    else if (gamefox_lib.isLoggedIn())
-      gamefox_tracked.timedUpdate();
 
     // disable favorites
     if (!gamefox_lib.prefs.getBoolPref('favorites.enabled'))

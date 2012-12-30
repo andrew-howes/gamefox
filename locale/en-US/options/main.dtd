@@ -13,7 +13,6 @@
 <!ENTITY dateFormat.label "Custom date format">
 <!ENTITY blockAdServers.label "Block ad servers">
 <!ENTITY favoritesMenu.label "Favorites menu in header">
-<!ENTITY trackingNote.label "Show tracked topics with unread posts">
 <!ENTITY msgsPerPage.label "Messages per page:">
 
 <!ENTITY topicLists.label "Topic Lists">
@@ -76,7 +75,6 @@
 <!ENTITY mainMenu.label "Main">
 <!ENTITY mainMenu.pages.label "Pages">
 <!ENTITY mainMenu.tagTopic.label "Tag Topic">
-<!ENTITY mainMenu.trackTopic.label "Track Topic">
 <!ENTITY mainMenu.quote.label "Quote">
 <!ENTITY mainMenu.filter.label "Filter">
 <!ENTITY mainMenu.delete.label "Delete/Close">
@@ -87,7 +85,6 @@
 <!ENTITY submenu.label "Submenu">
 <!ENTITY submenu.sidebar.label "Sidebar">
 <!ENTITY submenu.tagList.label "Tags">
-<!ENTITY submenu.tracked.label "Tracked">
 <!ENTITY submenu.accounts.label "Accounts">
 <!ENTITY submenu.favorites.label "Favorites">
 <!ENTITY submenu.links.label "Links">

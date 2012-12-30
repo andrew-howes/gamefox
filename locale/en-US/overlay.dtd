@@ -15,8 +15,6 @@
 <!ENTITY menu.sidebar.accesskey "S">
 <!ENTITY menu.tags.label "Tags">
 <!ENTITY menu.tags.accesskey "T">
-<!ENTITY menu.tracked.label "Tracked">
-<!ENTITY menu.tracked.accesskey "R">
 <!ENTITY menu.accounts.label "Accounts">
 <!ENTITY menu.accounts.accesskey "A">
 <!ENTITY menu.favorites.label "Favorites">
