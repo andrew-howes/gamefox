@@ -2,6 +2,8 @@
     * version 0.8.9
     * Fix QuickWhois for new profiles
     * Fix importing/exporting signatures to GameFAQs
+    * Fix new post labels on the Active Messages Posted page with dates from
+      different years
 
 2012-10-11:
     * version 0.8.8.1

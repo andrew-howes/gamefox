@@ -1,6 +1,6 @@
 /* vim: set et sw=2 ts=2 sts=2 tw=79:
  *
- * Copyright 2009, 2011 Brian Marshall
+ * Copyright 2009, 2011, 2013 Brian Marshall
  *
  * This file is part of GameFOX.
  *
@@ -17,6 +17,10 @@
  * along with GameFOX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Date parsing and formatting.
+ * @namespace
+ */
 var gamefox_date =
 {
   // http://www.opengroup.org/onlinepubs/007908799/xsh/strftime.html
@@ -42,6 +46,17 @@ var gamefox_date =
               '%Y-%m-%d %H:%M:%S']
   },
 
+  /**
+   * List of date regexes: [regex, orderOfParts].
+   *
+   * Make sure the first character of each orderOfParts string is filler, since
+   * regex result arrays have the full string at index 0.
+   */
+  _regexes: [
+      [/(\d{1,2})\/(\d{1,2}) (\d{1,2}):(\d{1,2})(AM|PM)/, '_mdhMp'],
+      [/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '_mdy']
+  ],
+
   get enabled() {
     return gamefox_lib.prefs.getBoolPref('date.enableFormat');
   },
@@ -62,24 +77,49 @@ var gamefox_date =
     return this.formats[type];
   },
 
-  strtotime: function(str, year)
+  /**
+   * Parse a GameFAQs date string.
+   *
+   * @param {string} str
+   * @return {Date}
+   */
+  strtotime: function(str)
   {
-    // see if Date() will take this date string
-    var d = new Date(str);
-    if (d != 'Invalid Date')
-      return d;
-    else // try to parse a topic date
-    {
-      year = year || new Date().getFullYear();
-      var time = str.split(/(\/| |:|AM|PM)/);
-      // Convert to 24-hour scale
-      if (time[7] == 'PM' && time[4] < 12)
-        time[4] = parseInt(time[4]) + 12;
-      if (time[7] == 'AM' && time[4] == 12)
-        time[4] = 0;
+    let now = new Date();
+    let nowYear = now.getFullYear();
+    let year, month, day, hour, minute;
 
-      return new Date(year, time[0] - 1, time[2], time[4], time[6]);
+    // Try each regex and use the first match
+    for (let i = 0; i < this._regexes.length; i++) {
+      let r = this._regexes[i][0].exec(str);
+      let o = this._regexes[i][1];
+      if (!r)
+        continue;
+
+      year   = +r[o.indexOf('y')];
+      month  = +r[o.indexOf('m')] - 1;
+      day    = +r[o.indexOf('d')];
+      hour   = +r[o.indexOf('h')];
+      minute = +r[o.indexOf('M')];
+      if (r[o.indexOf('p')] === 'PM' && hour !== 12)
+        hour += 12;
+
+      // The Date constructor will fail if it finds NaN instead of ignoring it.
+      // It will ignore nulls however
+      let date = new Date(isNaN(year) ? nowYear : year,
+          isNaN(month)  ? null : month,
+          isNaN(day)    ? null : day,
+          isNaN(hour)   ? null : hour,
+          isNaN(minute) ? null : minute);
+
+      // If the year isn't defined and the date appears to be in the future,
+      // assume it's from last year instead
+      if (isNaN(year) && date > now)
+        date.setFullYear(nowYear - 1);
+
+      return date;
     }
+    return null;
   },
 
   convertTo12H: function(hours)
