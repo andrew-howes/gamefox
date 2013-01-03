@@ -53,6 +53,8 @@ var gamefox_date =
    * regex result arrays have the full string at index 0.
    */
   _regexes: [
+      [/(\d{1,2})\/(\d{1,2})\/(\d{4}) (\d{1,2}):(\d{2}):(\d{2}) (AM|PM)/,
+       '_mdyhMsp'],
       [/(\d{1,2})\/(\d{1,2}) (\d{1,2}):(\d{1,2})(AM|PM)/, '_mdhMp'],
       [/(\d{1,2})\/(\d{1,2})\/(\d{4})/, '_mdy']
   ],
@@ -87,7 +89,7 @@ var gamefox_date =
   {
     let now = new Date();
     let nowYear = now.getFullYear();
-    let year, month, day, hour, minute;
+    let year, month, day, hour, minute, second;
 
     // Try each regex and use the first match
     for (let i = 0; i < this._regexes.length; i++) {
@@ -101,6 +103,7 @@ var gamefox_date =
       day    = +r[o.indexOf('d')];
       hour   = +r[o.indexOf('h')];
       minute = +r[o.indexOf('M')];
+      second = +r[o.indexOf('s')];
       if (r[o.indexOf('p')] === 'PM' && hour !== 12)
         hour += 12;
 
@@ -110,7 +113,8 @@ var gamefox_date =
           isNaN(month)  ? null : month,
           isNaN(day)    ? null : day,
           isNaN(hour)   ? null : hour,
-          isNaN(minute) ? null : minute);
+          isNaN(minute) ? null : minute,
+          isNaN(second) ? null : second);
 
       // If the year isn't defined and the date appears to be in the future,
       // assume it's from last year instead
