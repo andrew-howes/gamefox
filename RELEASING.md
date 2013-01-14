@@ -7,10 +7,10 @@ maintainer to release a new stable version.
 Requirements
 ------------
 
-* bash
+* Bash
 * GNU Make
 * OpenSSH
-* XMLStarlet (>= 1.3.1)
+* XMLStarlet (≥ 1.3.1)
 * Zip
 
 Configuration
