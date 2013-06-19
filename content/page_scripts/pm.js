@@ -36,9 +36,10 @@ var gamefox_page_pm =
     if (gamefox_lib.prefs.getBoolPref('pm.quickReply') && replyButton)
     {
       var form = replyButton.form;
-      var pod = doc.querySelector('#main_col > .pod');
+      var pod = doc.querySelector('div.pod:nth-child(4), #main_col > .pod'); /* v13, below*/
       var to = (pod.querySelector('.foot').textContent.match(
-          /Sent by (.*)? to/) || [])[1];
+          /Sent by (.*)? to/) || ["",pod.querySelector('.foot').textContent.match(
+          /Sent by: (.*)? on \d/)[1].split(' ')[0]])[1]; /* v12, v13 */
       var subject = pod.querySelector('.head > h2').textContent.trim();
       if (subject.indexOf('Re: ') != 0)
         subject = 'Re: ' + subject;

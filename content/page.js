@@ -132,9 +132,9 @@ var gamefox_page =
       gamefox_lib.prefs.setCharPref('accounts.current', '');
 
     // Allow CSS to highlight the "New Messages" link
-    var pmLink = doc.querySelector('#mast_user .nav a[href="/pm/"], ' +
+    var pmLink = doc.querySelector('.masthead_user a[href="/pm/"], ' + '#mast_user .nav a[href="/pm/"], ' +
         '#loginbox .nav a[href="/pm/"]'); // V12, V11
-    if (pmLink && pmLink.textContent[0] != '0')
+    if (pmLink && pmLink.textContent[5] != undefined)
       pmLink.id = 'gamefox-new-pm';
 
     // Private Messages
