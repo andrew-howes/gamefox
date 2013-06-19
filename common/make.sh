@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-tmp=$(mktemp -d)
+tmp=$(mktemp -d ./tmpXXXXXX)
 trap "rm -rf '$tmp'" EXIT
 
 jar() {
@@ -18,39 +18,39 @@ jar() {
 xpi() {
     cp -a $xpi_files "$tmp"
     (cd "$tmp" &&
-        sed -i -re "s, (content|skin|locale)/, jar:$jar\!/\1/," \
+        sed -i '' -Ee "s, (content|skin|locale)/, jar:$jar\!/\1/," \
             chrome.manifest &&
-        xmlstarlet ed -P -L -u "//em:version" -v "$version" install.rdf &&
+#        xmlstarlet ed -P -L -u "//em:version" -v "$version" install.rdf &&
 
-        case "$type" in
-          amo)
-            xmlstarlet ed -P -L -d "//em:updateURL" install.rdf
-            ;;
-          snapshot)
-            xmlstarlet ed -P -L -u "//em:updateURL" -v \
-                "$url/snapshot/snapshot.rdf" install.rdf
-        esac &&
+#        case "$type" in
+#          amo)
+#            xmlstarlet ed -P -L -d "//em:updateURL" install.rdf
+#            ;;
+#          snapshot)
+#            xmlstarlet ed -P -L -u "//em:updateURL" -v \
+#                "$url/snapshot/snapshot.rdf" install.rdf
+#        esac &&
 
         zip -r9q "$xpi" "$jar_dir" $xpi_files
     )
     mv "$tmp/$xpi" .
 
-    echo "Done: $xpi ($(du -bh "$xpi" | cut -f1))"
+    echo "Done: $xpi ($(du -kh "$xpi" | cut -f1))"
 }
 
-update_rdf() {
-    if [[ "$type" =~ ^(snapshot|release)$ ]]; then
-        local rdf="release/$type.rdf"
-        local hash="sha256:$(sha256sum "$xpi" | cut -d' ' -f1)"
-        local updatelink=$([ "$type" == "snapshot" ] &&
-            echo "$url/snapshot/$xpi" || echo "$url/$xpi")
-        mkdir -p release
-        xmlstarlet ed -P -u "//em:version" -v "$version" -u "//em:updateLink" \
-            -v "$updatelink" -u "//em:updateHash" -v "$hash" \
-            common/update.rdf > "$rdf"
+#update_rdf() {
+#    if [[ "$type" =~ ^(snapshot|release)$ ]]; then
+#        local rdf="release/$type.rdf"
+#        local hash="sha256:$(sha256sum "$xpi" | cut -d' ' -f1)"
+#        local updatelink=$([ "$type" == "snapshot" ] &&
+#            echo "$url/snapshot/$xpi" || echo "$url/$xpi")
+#        mkdir -p release
+#        xmlstarlet ed -P -u "//em:version" -v "$version" -u "//em:updateLink" \
+#            -v "$updatelink" -u "//em:updateHash" -v "$hash" \
+#            common/update.rdf > "$rdf"
 
-        echo "      $rdf"
-    fi
-}
+#        echo "      $rdf"
+#    fi
+#}
 
-jar; xpi; update_rdf
+jar; xpi #; update_rdf
