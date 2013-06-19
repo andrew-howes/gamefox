@@ -532,6 +532,7 @@ var gamefox_quickpost =
     if (gamefox_lib.prefs.getBoolPref('elements.quickpost.htmlbuttons.extra'))
       btns.push(
           ['quote', 'Quote', 'q'],
+          ['cite', 'Cite', 'e'],
           ['spoiler', 'Spoiler', 's'],
           ['code', 'Code', 'd']
       );

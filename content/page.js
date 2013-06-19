@@ -422,8 +422,8 @@ var gamefox_page =
         }
       }
     }
-///////////////////// next on the slate
-    /* Posting and Preview (post.php) */
+
+    /* Posting and Preview (post.php) */ /* should be updated for V13 */
     else if (gamefox_lib.onPage(doc, 'post'))
     {
       var message = doc.getElementsByName('messagetext')[0];
@@ -469,11 +469,18 @@ var gamefox_page =
       // HTML buttons
       if (gamefox_quickpost.htmlButtonsEnabled)
       {
+      	
         detailsDiv.insertBefore(gamefox_quickpost.createHTMLButtons(doc),
             message.parentNode);
         detailsDiv.insertBefore(doc.createElement('br'), message.parentNode);
+        
+        
+        //if we're using GameFox buttons, remove the gamefaqs html buttons.
+        var tagBtnsDiv = form.querySelector('.tagbuttons');
+        tagBtnsDiv.parentNode.removeChild(tagBtnsDiv);
       }
-
+	  
+	  	
       // Remove post buttons and add our own
       let i = postBtns.length;
       while (i--)
@@ -515,7 +522,15 @@ var gamefox_page =
         detailsDiv.appendChild(msgcount);
 
         gamefox_messages.updateMessageCount(detailsDiv);
-
+        
+        //remove gamefaqs count, since it doesn't take into account custom signatures.
+        var gfaqsMsgCount = doc.querySelector('#cc').parentNode;
+        gfaqsMsgCount.parentNode.removeChild(gfaqsMsgCount);
+        //remove gamefaqs listeners from message area (for tag buttons)
+        message.onkeydown = null;
+        message.onblur = null;
+        message.onkeyup = null;
+		
         message.addEventListener('input',
             gamefox_messages.delayedUpdateMessageCount, false);
         form.elements.namedItem('custom_sig').addEventListener('input',
@@ -543,7 +558,7 @@ var gamefox_page =
       message.tabIndex = 2;
     }
 
-    /* User Information (user.php) */
+    /* User Information (user.php) */ /* this doesn't really exist with new profiles, left as-is */
     else if (gamefox_lib.onPage(doc, 'user'))
     {
       var username = doc.getElementsByTagName('td')[0];
