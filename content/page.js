@@ -122,22 +122,22 @@ var gamefox_page =
         div.insertBefore(favMenu, div.firstChild);
       }
     }
-
-    // Save logged-in account name
+	
+    // Save logged-in account name /* fixed for V13 */
     var loggedIn = gamefox_lib.isLoggedIn();
     var accountName = gamefox_utils.getAccountName(doc);
     if (loggedIn && accountName)
       gamefox_lib.prefs.setCharPref('accounts.current', accountName);
     else if (!loggedIn)
       gamefox_lib.prefs.setCharPref('accounts.current', '');
-
-    // Allow CSS to highlight the "New Messages" link
+	
+    // Allow CSS to highlight the "New Messages" link /* fixed for V13 (and v12, etc) */
     var pmLink = doc.querySelector('.masthead_user a[href="/pm/"], ' + '#mast_user .nav a[href="/pm/"], ' +
         '#loginbox .nav a[href="/pm/"]'); // V12, V11
     if (pmLink && pmLink.textContent[5] != undefined)
       pmLink.id = 'gamefox-new-pm';
-
-    // Private Messages
+	
+    // Private Messages /* fixed for V13 */
     if (gamefox_lib.inDir(doc, 'pm'))
       gamefox_page_pm.process(doc);
 
@@ -256,10 +256,12 @@ var gamefox_page =
       }
     }
 
-    /* Active Messages (myposts.php) */
+    /* Active Messages (myposts.php) */ /* mostly fixed for v13. Don't have multi-page AMP to check that much yet */
     else if (gamefox_lib.onPage(doc, 'myposts'))
     {
       var topicsTable = doc.evaluate(
+          './/div[@class="body"]/table[@class="board topics tlist"]', contentDiv,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue || doc.evaluate(
           './/div[@class="body"]/table[@class="board topics"]', contentDiv,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
@@ -335,8 +337,8 @@ var gamefox_page =
       var skipNext = false;
       var IOService = Cc['@mozilla.org/network/io-service;1']
         .getService(Ci.nsIIOService);
-      var globalHistory = Cc['@mozilla.org/browser/global-history;2']
-        .getService(Ci.nsIGlobalHistory2);
+      //var globalHistory = Cc['@mozilla.org/browser/global-history;2']
+      //  .getService(Ci.nsIGlobalHistory2);
 
       // Topic row loop
       for (var i = 1; i < rows.length; i++)
@@ -345,8 +347,8 @@ var gamefox_page =
         if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
-          var date1 = rows[i].cells[3].firstChild;
-          var date2 = rows[i].cells[4].firstChild;
+          var date1 = rows[i].cells[3].children[1] || rows[i].cells[3].firstChild;
+          var date2 = rows[i].cells[4].children[1] || rows[i].cells[4].firstChild;
           date1.textContent = gamefox_date.parseFormat(date1.textContent,
               format);
           date2.textContent = gamefox_date.parseFormat(date2.textContent,
@@ -354,6 +356,7 @@ var gamefox_page =
         }
 
         // Label topics with messages after your last post
+        /*
         if (gamefox_lib.prefs.getBoolPref('elements.aml.marknewposts'))
         {
           // don't mark row as new if the last post link is visited
@@ -375,15 +378,18 @@ var gamefox_page =
             rows[i].cells[4].appendChild(doc.createTextNode(' '));
             rows[i].cells[4].appendChild(span);
           }
-        }
+        }*/
 
         // Pagination
         if (gamefox_lib.prefs.getBoolPref('paging.auto'))
         {
+          var numPosts = (rows[i].cells[2].textContent.length > 4) ?
+           			rows[i].cells[2].textContent.split(" ")[0] :
+           			rows[i].cells[2].textContent;
           var pageList = gamefox_page.formatPagination(
               doc,
               rows[i].cells[1].getElementsByTagName('a')[0].href,
-              Math.ceil(rows[i].cells[2].textContent), '');
+              Math.ceil(numPosts), '');
 
           if (pageList) // multiple pages
           {
@@ -416,7 +422,7 @@ var gamefox_page =
         }
       }
     }
-
+///////////////////// next on the slate
     /* Posting and Preview (post.php) */
     else if (gamefox_lib.onPage(doc, 'post'))
     {

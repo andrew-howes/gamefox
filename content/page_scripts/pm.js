@@ -31,7 +31,7 @@ var gamefox_page_pm =
    */
   process: function(doc)
   {
-    // Add a quick reply for PMs
+    // Add a quick reply for PMs /* updated for v13 */
     var replyButton = doc.querySelector('input[type="submit"][name="reply"]');
     if (gamefox_lib.prefs.getBoolPref('pm.quickReply') && replyButton)
     {
