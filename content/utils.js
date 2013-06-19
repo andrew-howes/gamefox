@@ -206,13 +206,16 @@ var gamefox_utils =
     return '';
   },
 
+	/* fixed for V13 */
   getBoardName: function(doc)
   {
     // this may not return the real board name for split game boards
     var div = doc.getElementById('content');
     if (div)
     {
-      var node = doc.evaluate('.//div[@class="head"]/h1', div, null,
+      var node = doc.evaluate('.//header[@class="page-header"]/h1', div, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue //v13
+        || doc.evaluate('.//div[@class="head"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
         || doc.evaluate('.//div[@class="content_nav"]/h1', div, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;

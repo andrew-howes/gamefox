@@ -569,11 +569,22 @@ var gamefox_page =
     /* Topic Lists */
     else if (gamefox_lib.onPage(doc, 'topics'))
     {
+      var v13 = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
       var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
+          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; //not sure this exists in v13
+      var userNav;
+      if(v13)
+      {
+      	userNav = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var userNav = doc.evaluate('.//div[@class="board_nav"]' +
+      }else
+      {
+      	userNav = doc.evaluate('.//div[@class="board_nav"]' +
           '/div[@class="body"]/div[@class="user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      }
+      
       var userlist = gamefox_highlighting.loadGroups();
 
       var onTracked = gamefox_lib.onPage(doc, 'tracked');
@@ -590,12 +601,18 @@ var gamefox_page =
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue))
       {
         var anchor = doc.createElement('a');
-            anchor.id = 'gamefox-quickpost-link';
+            anchor.className = 'gamefox-quickpost-link';
             anchor.href = '#';
             anchor.appendChild(doc.createTextNode(gamefox_lib.prefs.
                   getCharPref('elements.quickpost.link.title')));
             anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
-
+				if(v13)
+				{
+          	var listItem = doc.createElement('li');
+          	listItem.appendChild(anchor);
+          	anchor = listItem;
+        }
+				
         if (userPanel)
         {
           newTopicLink.parentNode.appendChild(doc.createTextNode(' ('));
@@ -604,9 +621,15 @@ var gamefox_page =
         }
         else
         {
-          userNav.insertBefore(anchor, newTopicLink.nextSibling);
-          userNav.insertBefore(doc.createTextNode(' | '), newTopicLink
-              .nextSibling);
+          if(v13)
+          {
+          		userNav.insertBefore(anchor, newTopicLink.nextSibling);
+          }
+          else{
+						userNav.insertBefore(anchor, newTopicLink.nextSibling);
+						userNav.insertBefore(doc.createTextNode(' | '), newTopicLink
+							.nextSibling);
+    	  	}
         }
       }
 
