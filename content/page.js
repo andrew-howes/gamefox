@@ -623,6 +623,9 @@ var gamefox_page =
         {
           if(v13)
           {
+          	//only putting the quickpost link on the top, for simplicity's sake
+          		// really I couldn't get it to work, probably because of invalid HTML with 
+          		// duplicate IDs. 
           		userNav.insertBefore(anchor, newTopicLink.nextSibling);
           }
           else{
@@ -633,9 +636,12 @@ var gamefox_page =
         }
       }
 
-      var topicsTable = boardWrap ? doc
+      var topicsTable = boardWrap ? (doc
         .evaluate('div[@class="body"]/table[@class="board topics"]', boardWrap,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue ||
+          doc
+        .evaluate('div[@class="body"]/table[@class="board topics tlist"]', boardWrap,
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
         : null;
       var rows;
 
@@ -677,8 +683,9 @@ var gamefox_page =
           continue;
         }
 
+						//so gamefaqs uses icons for these now. Going to leave this alone at the moment.
         // Status spans
-        if (statusCond)
+        if (statusCond && !v13)
         {
           // TODO: add a class to some element on message lists so they can be
           //   identified properly
@@ -699,7 +706,7 @@ var gamefox_page =
         if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
-          var date = rows[i].cells[4].firstChild;
+          var date = rows[i].cells[4].children[1] || rows[i].cells[4].firstChild;
           date.textContent = gamefox_date.parseFormat(date.textContent, format
               );
         }
@@ -782,7 +789,16 @@ var gamefox_page =
             if (hlinfo[3] == 'remove') // remove topic
             {
               rows[i].style.setProperty('display', 'none', null);
-              alternateColor = !alternateColor;
+              if(!v13)
+          		{
+              	alternateColor = !alternateColor;
+              }else{
+              	var dummyRowParent;
+								dummyRowParent = doc.createElement('tr');
+								dummyRowParent.style.setProperty('display', 'none', null);
+								rows[i].parentNode.insertBefore(dummyRowParent, rows[i].nextSibling);
+								skipNext = true;
+              }
             }
             else if (hlinfo[3] == 'highlight') // highlight topic
             {
@@ -794,10 +810,10 @@ var gamefox_page =
           // for removed topics
           if (alternateColor)
           {
-            if (/\beven\b/.test(rows[i].className))
-              rows[i].className = rows[i].className.replace(/\beven\b/, '');
-            else
-              rows[i].className += ' even';
+						if (/\beven\b/.test(rows[i].className))
+							rows[i].className = rows[i].className.replace(/\beven\b/, '');
+						else
+							rows[i].className += ' even';
           }
         }
 
