@@ -224,6 +224,9 @@ var gamefox_lib =
 
       case 'messages':
         var table = doc.evaluate('.//div[@class="body"]/' +
+            'table[@class="board message msg"]', contentDiv, null,
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+            || doc.evaluate('.//div[@class="body"]/' +
             'table[@class="board message"]', contentDiv, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (table && !gamefox_lib.onPage(doc, 'usernote'))
