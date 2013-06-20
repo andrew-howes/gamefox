@@ -37,6 +37,7 @@ var gamefox_quote =
   quote: function(event, allowSelection)
   {
     var doc = gamefox_lib.getDocument(event);
+    var v13 = doc.getElementsByClassName('masthead_user').length != 0;
     var msgComponents = gamefox_utils.getMsgComponents(event.target, doc);
     if (!msgComponents)
       return;
@@ -56,7 +57,8 @@ var gamefox_quote =
 
     // Get information for the quote header
     var user = msgComponents.header.querySelector('a.name').textContent;
-    var date = msgComponents.header.getUserData('gamefox_date');
+    var date = /*(v13) ? msgComponents.header.querySelector('gamefox-post-date').textContent 
+     				: */ msgComponents.header.getUserData('gamefox_date');
     var num = msgComponents.id;
 
     // Get the edit number (if any)

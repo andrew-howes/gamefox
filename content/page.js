@@ -1213,8 +1213,14 @@ var gamefox_page =
           var span = doc.createElement('span');
           span.className = 'gamefox-tc-label';
           span.appendChild(doc.createTextNode(tcMarker));
-          msgStats.insertBefore(span, profileLink.nextSibling);
-          msgStats.insertBefore(doc.createTextNode(' '), span);
+          if(v13)
+          {
+          	profileLink.parentNode.appendChild(doc.createTextNode(' '));
+          	profileLink.parentNode.appendChild(span);
+					}else{
+	          msgStats.insertBefore(span, profileLink.nextSibling);
+          	msgStats.insertBefore(doc.createTextNode(' '), span);
+					}
         }
 
         // Add delete and edit links
@@ -1300,16 +1306,28 @@ var gamefox_page =
         }
 
         // Quoting
-        var a = doc.evaluate('a[contains(@href, "quote=")]', msgStats, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var a;
+        if(v13)
+        {
+        	a = msgStats.querySelectorAll('a[href]')[2].parentNode;
+				}else{
+					a = doc.evaluate('//a[contains(@href, "quote=")]', msgStats, null,
+            							XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue ||
+            							doc.evaluate('//a[contains(@href, "qp")]', msgStats, null,
+            							XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+				}
         var quoteURI;
         if (a)
         {
           quoteURI = a.href;
 
           // Remove GameFAQs' quote link and extra | or <br>
-          a.parentNode.removeChild(a.previousSibling);
-          a.parentNode.removeChild(a);
+          if (v13)
+          	a.parentNode.removeChild(a);
+          else{
+						a.parentNode.removeChild(a.previousSibling);
+						a.parentNode.removeChild(a);
+          }
         }
 
         if ((canQuickPost || quoteURI) &&
@@ -1333,7 +1351,7 @@ var gamefox_page =
 
           if (!leftMsgData || msgLinks.hasChildNodes())
             msgLinks.appendChild(doc.createTextNode(' | '));
-          else if (!onArchive)
+          else if (!onArchive && !v13)
             msgLinks.appendChild(doc.createElement('br'));
           msgLinks.appendChild(a);
         }
