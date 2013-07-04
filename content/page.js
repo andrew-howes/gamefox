@@ -937,8 +937,9 @@ var gamefox_page =
 
       var deletelinkCond = gamefox_lib.prefs.getBoolPref('elements.deletelink');
       var editlinkCond = gamefox_lib.prefs.getBoolPref('elements.editlink');
-      var loggedInAs = (userNav || userPanel).getElementsByTagName('a')[0]
-        .textContent;
+      var loggedInAs = userNav.getElementsByTagName('li')[0].textContent ||
+      								(userNav || userPanel).getElementsByTagName('a')[0]
+        								.textContent;
       var loggedInUser = loggedInAs.substr(0, loggedInAs.indexOf('(') - 1);
       var loggedInLevel = loggedInAs.substr(loggedInAs.indexOf(')') - 2, 2);
       var topicOpen = !!doc.evaluate('.//a[contains(@href, "post.php")]',
@@ -1323,10 +1324,11 @@ var gamefox_page =
 
           // Remove GameFAQs' quote link and extra | or <br>
           if (v13)
-          	a.parentNode.removeChild(a);
+						a.style.setProperty('display', 'none');
           else{
-						a.parentNode.removeChild(a.previousSibling);
-						a.parentNode.removeChild(a);
+          	a.style.setProperty('display', 'none');
+						//a.parentNode.removeChild(a.previousSibling);
+						//a.parentNode.removeChild(a);
           }
         }
 

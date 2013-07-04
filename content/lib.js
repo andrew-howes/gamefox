@@ -244,6 +244,9 @@ var gamefox_lib =
                 doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
               .singleNodeValue;
             var userNav = doc.evaluate('//div[@class="board_nav"]'
+                + '/div[@class="body"]/ul[@class="paginate user"]',
+                doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
+                null).singleNodeValue || doc.evaluate('//div[@class="board_nav"]'
                 + '/div[@class="body"]/div[@class="user"]',
                 doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
                 null).singleNodeValue;

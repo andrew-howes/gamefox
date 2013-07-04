@@ -121,7 +121,7 @@ var gamefox_utils =
     return doc.getElementById('content').getElementsByTagName('tr')[0]
       .childNodes.length > 1;
   },
-
+/////////
   getMsgComponents: function(node, doc)
   {
     var tdNode, tableNode;
@@ -132,7 +132,7 @@ var gamefox_utils =
         if (node.nodeName.toLowerCase() == 'td')
           tdNode = node;
         else if (node.nodeName.toLowerCase() == 'table'
-                 && node.className == 'board message')
+                 && (node.className == 'board message' || node.className == 'board message msg'))
           tableNode = node;
         node = node.parentNode;
       }
