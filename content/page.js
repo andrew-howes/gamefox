@@ -1035,7 +1035,8 @@ var gamefox_page =
 
           var editListSpan = doc.createElement('span');
           editListSpan.className = 'gamefox-edit-list';
-
+					editListSpan.style.setProperty('display', 'block');
+					
           var editList = doc.createElement('select');
           editList.addEventListener('click', gamefox_messages.fetchEdits,
               false);
@@ -1252,7 +1253,7 @@ var gamefox_page =
               a.addEventListener('click', gamefox_messages.edit, false);
 
               msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
-                  doc.createElement('br') : doc.createTextNode(' | '));
+                  doc.createTextNode(' ') : doc.createTextNode(' | '));
               msgLinks.appendChild(a);
             }
           }
@@ -1283,7 +1284,7 @@ var gamefox_page =
                   false);
 
               msgLinks.appendChild((leftMsgData && !msgLinks.hasChildNodes()) ?
-                  doc.createElement('br') : doc.createTextNode(' | '));
+                  doc.createTextNode(' ') : doc.createTextNode(' | '));
               msgLinks.appendChild(link);
             }
           }
@@ -1427,7 +1428,7 @@ var gamefox_page =
 								numAnchor.href = '#'+msgnumString;
 								numAnchor.style.setProperty('display','block');
 								numAnchor.appendChild(doc.createTextNode('#' + msgnumString));
-                msgStats.appendChild(numAnchor);
+                msgStats.insertBefore(numAnchor, msgStats.firstChild);
               }
               else
                 msgStats.appendChild(doc.createTextNode(' | #' + msgnumString)
