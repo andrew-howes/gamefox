@@ -225,9 +225,6 @@ var gamefox_lib =
       case 'messages':
         var table = doc.evaluate('.//div[@class="body"]/' +
             'table[@class="board message msg"]', contentDiv, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-            || doc.evaluate('.//div[@class="body"]/' +
-            'table[@class="board message"]', contentDiv, null,
             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (table && !gamefox_lib.onPage(doc, 'usernote'))
         {
@@ -246,9 +243,6 @@ var gamefox_lib =
             var userNav = doc.evaluate('//div[@class="board_nav"]'
                 + '/div[@class="body"]/ul[@class="paginate user"]',
                 doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
-                null).singleNodeValue || doc.evaluate('//div[@class="board_nav"]'
-                + '/div[@class="body"]/div[@class="user"]',
-                doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
                 null).singleNodeValue;
             var user = userPanel || userNav;
 
@@ -261,7 +255,10 @@ var gamefox_lib =
           return true;
         }
         return false;
-
+			
+			case 'tracked':
+				return doc.location.pathname.indexOf('/boards/tracked') == 0;
+			
       default:
         return doc.location.pathname.indexOf('/boards/' + page + '.php') == 0;
     }

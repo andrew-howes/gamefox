@@ -685,7 +685,7 @@ var gamefox_page =
 
 						//so gamefaqs uses icons for these now. Going to leave this alone at the moment.
         // Status spans
-        if (statusCond && !v13)
+        if (statusCond && !v13 && (v13 && !onTracked))
         {
           // TODO: add a class to some element on message lists so they can be
           //   identified properly
@@ -1301,8 +1301,8 @@ var gamefox_page =
 
           if (!leftMsgData || msgLinks.hasChildNodes())
             msgLinks.appendChild(doc.createTextNode(' | '));
-          else if (!onArchive)
-            msgLinks.appendChild(doc.createElement('br'));
+          //else if (!onArchive)
+            //msgLinks.appendChild(doc.createElement('br'));
           msgLinks.appendChild(a);
         }
 
@@ -1420,10 +1420,14 @@ var gamefox_page =
             case 0: // [message detail] | #001
               if (leftMsgData)
               {
-                if (!onArchive || msgLinks.hasChildNodes())
-                  msgStats.appendChild(doc.createElement('br'));
-
-                msgStats.appendChild(doc.createTextNode('#' + msgnumString));
+                //if (!onArchive || msgLinks.hasChildNodes())
+                  //msgStats.appendChild(doc.createElement('br'));
+								var numAnchor = doc.createElement('a');
+								numAnchor.name = msgnumString;
+								numAnchor.href = '#'+msgnumString;
+								numAnchor.style.setProperty('display','block');
+								numAnchor.appendChild(doc.createTextNode('#' + msgnumString));
+                msgStats.appendChild(numAnchor);
               }
               else
                 msgStats.appendChild(doc.createTextNode(' | #' + msgnumString)
@@ -1436,7 +1440,7 @@ var gamefox_page =
       doc.gamefox.msgnum = msgnum;
 
       // Board nav at the bottom of the page
-      if (gamefox_lib.prefs.getBoolPref('elements.boardnav') && !onDetail)
+      if (gamefox_lib.prefs.getBoolPref('elements.boardnav') && !onDetail && !v13)
       {
         var miniBoardNav = doc.createElement('div');
         miniBoardNav.id = 'gamefox-board-nav';

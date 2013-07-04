@@ -57,8 +57,8 @@ var gamefox_quote =
 
     // Get information for the quote header
     var user = msgComponents.header.querySelector('a.name').textContent;
-    var date = /*(v13) ? msgComponents.header.querySelector('gamefox-post-date').textContent 
-     				: */ msgComponents.header.getUserData('gamefox_date');
+    var date = (v13) ? msgComponents.header.querySelector('.gamefox-post-date').textContent.substring(7) 
+     				:  msgComponents.header.getUserData('gamefox_date');
     var num = msgComponents.id;
 
     // Get the edit number (if any)
