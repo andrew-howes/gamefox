@@ -989,7 +989,7 @@ var gamefox_page =
 				
 				/* no QuickWhois for v13 at the moment */
         // Add profile link mouseover event listener for QuickWhois
-        if (!v13 && !onArchive && gamefox_lib.prefs
+        if (!onArchive && gamefox_lib.prefs
             .getBoolPref('mouse.quickwhoisHover'))
         {
           profileLink.addEventListener('mouseover', function(event) {
@@ -1722,6 +1722,9 @@ var gamefox_page =
     var doc = gamefox_lib.getDocument(event);
     var boardWrap = doc.getElementsByClassName('board_wrap')[0];
     var tdResult = doc.evaluate('.//div[@class="body"]/'
+        + 'table[@class="board message msg"]/tbody/tr/td', boardWrap, null,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null) || 
+        doc.evaluate('.//div[@class="body"]/'
         + 'table[@class="board message"]/tbody/tr/td', boardWrap, null,
         XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];
