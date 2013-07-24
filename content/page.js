@@ -731,8 +731,8 @@ var gamefox_page =
           }
         }
 				
-        // gentopic.php /* v11 or v10? Not sure if this is broken */
-        /*else
+        
+        else
         {
           // Highlighting
           var username = gamefox_utils
@@ -761,16 +761,11 @@ var gamefox_page =
             if (hlinfo[3] == 'remove') // remove topic
             {
               rows[i].style.setProperty('display', 'none', null);
-              if(!v13)
-          		{
-              	alternateColor = !alternateColor;
-              }else{
-              	var dummyRowParent;
-								dummyRowParent = doc.createElement('tr');
-								dummyRowParent.style.setProperty('display', 'none', null);
-								rows[i].parentNode.insertBefore(dummyRowParent, rows[i].nextSibling);
-								skipNext = true;
-              }
+							var dummyRowParent;
+							dummyRowParent = doc.createElement('tr');
+							dummyRowParent.style.setProperty('display', 'none', null);
+							rows[i].parentNode.insertBefore(dummyRowParent, rows[i].nextSibling);
+							skipNext = true;
             }
             else if (hlinfo[3] == 'highlight') // highlight topic
             {
@@ -787,7 +782,7 @@ var gamefox_page =
 						else
 							rows[i].className += ' even';
           }
-        }*/
+        }
 
         // for added page rows
         if (skipNext)
