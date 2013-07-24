@@ -259,6 +259,10 @@ var gamefox_lib =
 			case 'tracked':
 				return doc.location.pathname.indexOf('/boards/tracked') == 0;
 			
+			case 'user':
+			  return doc.location.pathname.indexOf('/boards/' + page + '.php') == 0 ||
+			  				doc.location.pathname.indexOf('/users/') == 0;
+			
       default:
         return doc.location.pathname.indexOf('/boards/' + page + '.php') == 0;
     }

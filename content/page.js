@@ -107,7 +107,7 @@ var gamefox_page =
     if (gamefox_lib.prefs.getBoolPref('elements.favorites'))
     {
       let div = doc.getElementById('mast_jump');
-      if (div)                     /* V12 */                          /* V11 */
+      if (div)
       {
         //div.style.width = 'auto';
 				
@@ -134,8 +134,7 @@ var gamefox_page =
       gamefox_lib.prefs.setCharPref('accounts.current', '');
 	
     // Allow CSS to highlight the "New Messages" link /* fixed for V13 (and v12, etc) */
-    var pmLink = doc.querySelector('.masthead_user a[href="/pm/"], ' + '#mast_user .nav a[href="/pm/"], ' +
-        '#loginbox .nav a[href="/pm/"]'); // V12, V11
+    var pmLink = doc.querySelector('.masthead_user a[href="/pm/"]'); 
     if (pmLink && pmLink.textContent[5] != undefined)
       pmLink.id = 'gamefox-new-pm';
 	
@@ -263,8 +262,6 @@ var gamefox_page =
     {
       var topicsTable = doc.evaluate(
           './/div[@class="body"]/table[@class="board topics tlist"]', contentDiv,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue || doc.evaluate(
-          './/div[@class="body"]/table[@class="board topics"]', contentDiv,
           null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var rows;
 
@@ -337,8 +334,8 @@ var gamefox_page =
       }
 
       var skipNext = false;
-      var IOService = Cc['@mozilla.org/network/io-service;1']
-        .getService(Ci.nsIIOService);
+      //var IOService = Cc['@mozilla.org/network/io-service;1']
+      //  .getService(Ci.nsIIOService);
       //var globalHistory = Cc['@mozilla.org/browser/global-history;2']
       //  .getService(Ci.nsIGlobalHistory2);
 
@@ -349,8 +346,8 @@ var gamefox_page =
         if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
-          var date1 = rows[i].cells[3].children[1] || rows[i].cells[3].firstChild;
-          var date2 = rows[i].cells[4].children[1] || rows[i].cells[4].firstChild;
+          var date1 = rows[i].cells[3].children[1];
+          var date2 = rows[i].cells[4].children[1];
           date1.textContent = gamefox_date.parseFormat(date1.textContent,
               format);
           date2.textContent = gamefox_date.parseFormat(date2.textContent,
@@ -530,7 +527,7 @@ var gamefox_page =
         gfaqsMsgCount.parentNode.removeChild(gfaqsMsgCount);
         //remove gamefaqs listeners from message area (for tag buttons)
         message.onkeydown = null;
-        message.onblur = null;
+        //message.onblur = null;
         message.onkeyup = null;
 		
         message.addEventListener('input',
@@ -571,21 +568,9 @@ var gamefox_page =
     /* Topic Lists */
     else if (gamefox_lib.onPage(doc, 'topics'))
     {
-      var v13 = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
-      var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; //not sure this exists in v13
       var userNav;
-      if(v13)
-      {
       	userNav = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      }else
-      {
-      	userNav = doc.evaluate('.//div[@class="board_nav"]' +
-          '/div[@class="body"]/div[@class="user"]', contentDiv, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      }
       
       var userlist = gamefox_highlighting.loadGroups();
 
@@ -599,21 +584,19 @@ var gamefox_page =
       if (!onTracked
           && gamefox_lib.prefs.getBoolPref('elements.quickpost.link')
           && (newTopicLink = doc.evaluate('.//a[contains(@href, "post.php")]',
-              userNav || userPanel, null,
+              userNav, null,
               XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue))
       {
         var anchor = doc.createElement('a');
-            anchor.className = 'gamefox-quickpost-link';
-            anchor.href = '#';
-            anchor.appendChild(doc.createTextNode(gamefox_lib.prefs.
-                  getCharPref('elements.quickpost.link.title')));
-            anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
-				if(v13)
-				{
-          	var listItem = doc.createElement('li');
-          	listItem.appendChild(anchor);
-          	anchor = listItem;
-        }
+				anchor.className = 'gamefox-quickpost-link';
+				anchor.href = '#';
+				anchor.appendChild(doc.createTextNode(gamefox_lib.prefs.
+							getCharPref('elements.quickpost.link.title')));
+				anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
+				
+				var listItem = doc.createElement('li');
+				listItem.appendChild(anchor);
+				anchor = listItem;
 				
         if (userPanel)
         {
@@ -623,27 +606,14 @@ var gamefox_page =
         }
         else
         {
-          if(v13)
-          {
-          	//only putting the quickpost link on the top, for simplicity's sake
-          		// really I couldn't get it to work, probably because of invalid HTML with 
-          		// duplicate IDs. 
-          		userNav.insertBefore(anchor, newTopicLink.nextSibling);
-          }
-          else{
-						userNav.insertBefore(anchor, newTopicLink.nextSibling);
-						userNav.insertBefore(doc.createTextNode(' | '), newTopicLink
-							.nextSibling);
-    	  	}
+          	userNav.insertBefore(anchor, newTopicLink.nextSibling);
         }
       }
 
-      var topicsTable = boardWrap ? (doc
-        .evaluate('div[@class="body"]/table[@class="board topics"]', boardWrap,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue ||
+      var topicsTable = boardWrap ?
           doc
         .evaluate('div[@class="body"]/table[@class="board topics tlist"]', boardWrap,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue)
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue//)
         : null;
       var rows;
 
@@ -687,7 +657,7 @@ var gamefox_page =
 
 						//so gamefaqs uses icons for these now. Going to leave this alone at the moment.
         // Status spans
-        if (statusCond && !v13 && (v13 && !onTracked))
+        /*if (statusCond && !v13 && (v13 && !onTracked))
         {
           // TODO: add a class to some element on message lists so they can be
           //   identified properly
@@ -702,7 +672,7 @@ var gamefox_page =
             statusSpan.className = statusType + '-start gamefox-status';
             rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild);
           }
-        }
+        }*/
 
         // Date format
         if (gamefox_date.enabled)
@@ -760,9 +730,9 @@ var gamefox_page =
               + rows[i].cells[2].textContent.trim() + '</a>';
           }
         }
-
+				
         // gentopic.php /* v11 or v10? Not sure if this is broken */
-        else
+        /*else
         {
           // Highlighting
           var username = gamefox_utils
@@ -817,7 +787,7 @@ var gamefox_page =
 						else
 							rows[i].className += ' even';
           }
-        }
+        }*/
 
         // for added page rows
         if (skipNext)
@@ -943,7 +913,7 @@ var gamefox_page =
       								(userNav || userPanel).getElementsByTagName('a')[0]
         								.textContent;
       var loggedInUser = loggedInAs.substr(0, loggedInAs.indexOf('(') - 1);
-      var loggedInLevel = loggedInAs.substr(loggedInAs.indexOf(')') - 2, 2);
+      var loggedInLevel = parseInt(loggedInAs.substr(loggedInAs.indexOf(')') - 2, 2),10);
       var topicOpen = !!doc.evaluate('.//a[contains(@href, "post.php")]',
           userNav || userPanel, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
           null).singleNodeValue;
@@ -1310,32 +1280,24 @@ var gamefox_page =
         }
 
         // Quoting
+        
         var a;
-        if(v13)
-        {
-        	a = msgStats.querySelectorAll('a[href]')[2].parentNode;
-				}else{
-					a = doc.evaluate('//a[contains(@href, "quote=")]', msgStats, null,
-            							XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue ||
-            							doc.evaluate('//a[contains(@href, "qp")]', msgStats, null,
-            							XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        if(topicOpen){
+					a = msgStats.querySelectorAll('a[href]')[2].parentNode;
 				}
+				
+					        
         var quoteURI;
         if (a)
         {
           quoteURI = a.href;
-
+					if(leftMsgData){
           // Remove GameFAQs' quote link and extra | or <br>
-          if (v13)
 						a.style.setProperty('display', 'none');
-          else{
-          	a.style.setProperty('display', 'none');
-						//a.parentNode.removeChild(a.previousSibling);
-						//a.parentNode.removeChild(a);
-          }
+						}
         }
 
-        if ((canQuickPost || quoteURI) &&
+        if (topicOpen && (canQuickPost || quoteURI) &&
             gamefox_lib.prefs.getBoolPref('elements.quotelink'))
         {
           // Create our own
