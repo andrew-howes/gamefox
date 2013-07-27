@@ -184,7 +184,8 @@ var gamefox_lib =
     switch (page)
     {
       case 'index':
-        var div = doc.getElementById('side_col');
+        var div = doc.getElementsByTagName('aside')[0]; 
+        //doc.getElementById('side_col');
         if (div)
         {
           var bi = doc.evaluate('div[@class="pod"]/div[@class="head"]/h2', div,

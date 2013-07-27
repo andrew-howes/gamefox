@@ -132,7 +132,7 @@ var gamefox_utils =
         if (node.nodeName.toLowerCase() == 'td')
           tdNode = node;
         else if (node.nodeName.toLowerCase() == 'table'
-                 && (node.className == 'board message' || node.className == 'board message msg'))
+                 && node.className == 'board message msg')
           tableNode = node;
         node = node.parentNode;
       }

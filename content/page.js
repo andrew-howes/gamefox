@@ -199,10 +199,14 @@ var gamefox_page =
     if (gamefox_lib.onPage(doc, 'index'))
     {
       gamefox_lib.setTitle(doc, 'Message Boards');
-
+			
+			var isSplit = doc.evaluate('count(//a[contains(@href, "popular")])', boardWrap,
+											null, XPathResult.NUMBER_TYPE, null).numberValue == 0;
+			
       // Get favorites
       if (!gamefox_lib.onPage(doc, 'boardlist') &&
-          !doc.getElementsByClassName('crumbs').length && // no split lists
+          //!doc.getElementsByClassName('crumbs').length && // no split lists
+          !isSplit &&
           gamefox_lib.prefs.getBoolPref('favorites.enabled') && boardWrap)
       {
         var i, boardId, favorites = {}, favLinks = [];
