@@ -572,8 +572,7 @@ var gamefox_page =
     /* Topic Lists */
     else if (gamefox_lib.onPage(doc, 'topics'))
     {
-      var userNav;
-      	userNav = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
+      var userNav = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       
       var userlist = gamefox_highlighting.loadGroups();
