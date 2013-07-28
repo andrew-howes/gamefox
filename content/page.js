@@ -597,26 +597,18 @@ var gamefox_page =
 							getCharPref('elements.quickpost.link.title')));
 				anchor.addEventListener('click', gamefox_quickpost.toggleVisibility, false);
 				
+				//put quickpost in a li tag so it matches the new topic link
 				var listItem = doc.createElement('li');
 				listItem.appendChild(anchor);
 				anchor = listItem;
-				
-        if (userPanel)
-        {
-          newTopicLink.parentNode.appendChild(doc.createTextNode(' ('));
-          newTopicLink.parentNode.appendChild(anchor);
-          newTopicLink.parentNode.appendChild(doc.createTextNode(')'));
-        }
-        else
-        {
-          	userNav.insertBefore(anchor, newTopicLink.nextSibling);
-        }
+				userNav.insertBefore(anchor, newTopicLink.nextSibling);
+
       }
 
       var topicsTable = boardWrap ?
           doc
         .evaluate('div[@class="body"]/table[@class="board topics tlist"]', boardWrap,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue//)
+          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
         : null;
       var rows;
 
@@ -636,7 +628,6 @@ var gamefox_page =
       }
 
       var skipNext = false;
-      var alternateColor = false;
       var statusCond = gamefox_lib.prefs.getBoolPref('elements.statusspans');
 
       // Topic row loop
@@ -658,7 +649,8 @@ var gamefox_page =
           continue;
         }
 
-						//so gamefaqs uses icons for these now. Going to leave this alone at the moment.
+				//so gamefaqs uses icons (rather than images) 
+				//		for these now. Going to leave this alone at the moment.
         // Status spans
         /*if (statusCond && !v13 && (v13 && !onTracked))
         {
@@ -775,15 +767,6 @@ var gamefox_page =
               rows[i].className += ' ' + gamefox_highlighting.highlightClassName;
               rows[i].style.setProperty('background-color', hlinfo[1], 'important');
             }
-          }
-
-          // for removed topics
-          if (alternateColor)
-          {
-						if (/\beven\b/.test(rows[i].className))
-							rows[i].className = rows[i].className.replace(/\beven\b/, '');
-						else
-							rows[i].className += ' even';
           }
         }
 
