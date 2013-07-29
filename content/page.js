@@ -784,14 +784,25 @@ var gamefox_page =
     {
       var userNav = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      var pageJumper = doc.evaluate('.//div[@class="pod pagejumper"]',
+      var pageJumper = doc.evaluate('.//ul[@class="paginate" and not(@class="user")]',
           contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
         .singleNodeValue;
 
       if (pageJumper)
       {
-        var pageJumperItems = pageJumper.getElementsByTagName('option');
-        doc.gamefox.pages = pageJumperItems.length;
+        var items = doc.evaluate('.//child::text()',pageJumper, null,
+        		XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+        var node;
+        for(var i = 0; i < items.snapshotLength; i++)
+        {
+        	node = items.snapshotItem(i);
+        	var hasNum = node.textContent.indexOf("of ");
+        	if(hasNum != -1)
+        	{
+        		doc.gamefox.pages = parseInt(node.textContent.substring(hasNum+3));
+        		break;
+        	}
+        }
       }
       else
       {
