@@ -118,8 +118,7 @@ var gamefox_utils =
    */
   getMsgDataDisplay: function(doc)
   {
-    return doc.getElementById('content').getElementsByTagName('tr')[0]
-      .childNodes.length > 1;
+    return doc.getElementById('content').getElementsByClassName('top').length < 1;
   },
 /////////
   getMsgComponents: function(node, doc)
@@ -132,7 +131,8 @@ var gamefox_utils =
         if (node.nodeName.toLowerCase() == 'td')
           tdNode = node;
         else if (node.nodeName.toLowerCase() == 'table'
-                 && node.className == 'board message msg')
+                 && (node.className == 'board message msg' 
+                 || node.className == 'board message'))
           tableNode = node;
         node = node.parentNode;
       }
@@ -144,7 +144,7 @@ var gamefox_utils =
 
     var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
     var header, body;
-    if ((!leftMsgData && !tdNode.parentNode.classList.contains('even'))
+    if ((!leftMsgData && !tdNode.parentNode.classList.contains('topmsg'))
         || tdNode.className.indexOf('author') != -1)
     {
       // in header

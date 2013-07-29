@@ -782,29 +782,22 @@ var gamefox_page =
     /* Message Lists */
     else if (gamefox_lib.onPage(doc, 'messages'))
     {
-    	var v13 = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue != null;
-      var userPanel = doc.evaluate('//div[@class="user_panel"]', doc, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var userNav = doc.evaluate('.//ul[@class="paginate user"]', contentDiv, null,
-          XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-          || doc.evaluate('.//div[@class="board_nav"]'
-          + '/div[@class="body"]/div[@class="user"]', contentDiv, null,
           XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
       var pageJumper = doc.evaluate('.//div[@class="pod pagejumper"]',
           contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
         .singleNodeValue;
-      
+
       if (pageJumper)
       {
-        var pageJumperItems = pageJumper.getElementsByTagName('li');
-        doc.gamefox.pages = parseInt(pageJumperItems[pageJumperItems.length - 1].textContent);
+        var pageJumperItems = pageJumper.getElementsByTagName('option');
+        doc.gamefox.pages = pageJumperItems.length;
       }
       else
       {
         doc.gamefox.pages = 1;
       }
-      
+
       var userlist = gamefox_highlighting.loadGroups();
 
       var boardId = gamefox_utils.getBoardId(doc.location.pathname);
@@ -824,34 +817,23 @@ var gamefox_page =
 
       // "Tag Topic" link
       if (gamefox_lib.prefs.getBoolPref('elements.tag.link'))
-      {
-        if (userPanel)
-        {
-          var li = doc.createElement('li');
-          li.appendChild(gamefox_tags.tagTopicLink(doc));
-          userPanel.getElementsByTagName('ul')[0].appendChild(li);
-        }
-        else
-        {
-        	if(v13)
-        	{
-        		var li = doc.createElement('li');
-          	li.appendChild(gamefox_tags.tagTopicLink(doc));
-          	userNav.appendChild(li);
-        	}else{
-						userNav.appendChild(doc.createTextNode(' | '));
-						userNav.appendChild(gamefox_tags.tagTopicLink(doc));
-					}
-        }
+      {        
+				var li = doc.createElement('li');
+				li.appendChild(gamefox_tags.tagTopicLink(doc));
+				userNav.appendChild(li);
       }
 
       // Double click
-      var messageTable = doc.evaluate('.//div[@class="body"]/' +
+      if(leftMsgData)
+        {
+        	var messageTable = doc.evaluate('.//div[@class="body"]/' +
             'table[@class="board message msg"]', contentDiv, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-            || doc.evaluate(
-          './/div[@class="body"]/table[@class="board message"]', contentDiv,
-          null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+             XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        }else{
+        	var messageTable = doc.evaluate('.//div[@class="body"]/' +
+            'table[@class="board message"]', contentDiv, null, 
+            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        }
           
       messageTable.addEventListener('dblclick', gamefox_page.msglistDblclick,
           false);
@@ -890,13 +872,11 @@ var gamefox_page =
 
       var deletelinkCond = gamefox_lib.prefs.getBoolPref('elements.deletelink');
       var editlinkCond = gamefox_lib.prefs.getBoolPref('elements.editlink');
-      var loggedInAs = userNav.getElementsByTagName('li')[0].textContent ||
-      								(userNav || userPanel).getElementsByTagName('a')[0]
-        								.textContent;
+      var loggedInAs = userNav.getElementsByTagName('li')[0].textContent;
       var loggedInUser = loggedInAs.substr(0, loggedInAs.indexOf('(') - 1);
       var loggedInLevel = parseInt(loggedInAs.substr(loggedInAs.indexOf(')') - 2, 2),10);
       var topicOpen = !!doc.evaluate('.//a[contains(@href, "post.php")]',
-          userNav || userPanel, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
+          userNav, null, XPathResult.FIRST_ORDERED_NODE_TYPE,
           null).singleNodeValue;
       var canQuickPost = (topicOpen || loggedInLevel >= 50) && !onDetail
         && !onArchive
@@ -921,8 +901,8 @@ var gamefox_page =
           var profileLink = td[i].getElementsByTagName('b')[0];
         else
           var profileLink = td[i].querySelector('a.name');
-        var username = (v13) ? profileLink.firstChild.textContent : profileLink.textContent;
-        var msgStats = (v13) ? profileLink.parentNode.parentNode : profileLink.parentNode;
+        var username = profileLink.textContent;
+        var msgStats = (leftMsgData) ? profileLink.parentNode.parentNode : profileLink.parentNode;
         var detailLink = msgStats.getElementsByTagName('a')[2];
         var postBody = td[i + 1].textContent;
 
@@ -940,7 +920,6 @@ var gamefox_page =
             msgStats.removeChild(msgStats.childNodes[0]);
         }
 				
-				/* no QuickWhois for v13 at the moment */
         // Add profile link mouseover event listener for QuickWhois
         if (!onArchive && gamefox_lib.prefs
             .getBoolPref('mouse.quickwhoisHover'))
@@ -988,7 +967,11 @@ var gamefox_page =
 
           var editListSpan = doc.createElement('span');
           editListSpan.className = 'gamefox-edit-list';
-					editListSpan.style.setProperty('display', 'block');
+          if(leftMsgData)
+						editListSpan.style.setProperty('display', 'block');
+					else
+						editListSpan.style.setProperty('display', 'inline-block');
+					editListSpan.style.setProperty('width', 'auto');
 					
           var editList = doc.createElement('select');
           editList.addEventListener('click', gamefox_messages.fetchEdits,
@@ -1042,35 +1025,25 @@ var gamefox_page =
         postDate = postDate.replace('\u00a0', ' ');
 
         // User status
-        var userStatusNode = (v13) ? profileLink.parentNode.nextSibling : profileLink.nextSibling;
-        var userStatus = (v13) ? gamefox_utils.readStatus(userStatusNode.textContent) : gamefox_utils.readStatus(gamefox_utils
+        var userStatusNode = (leftMsgData) ? profileLink.parentNode.nextSibling : profileLink.nextSibling;
+        var userStatus = (leftMsgData) ? gamefox_utils.readStatus(userStatusNode.textContent) : gamefox_utils.readStatus(gamefox_utils
             .getTextBetweenNodes(profileLink, postDateElement));
 
         if (msgnum == 1 && !onDetail)
-        	//if(v13)
-        	//	profileLink.appendChild(doc.createTextNode('(tc)');
-        	//else
-          	userStatus.push('tc'); // GFAQs doesn't add TC status to first post
-        if (/*(v13 && profileLink.childNodes[1]) || */ userStatus.indexOf('tc') != -1)
+          	userStatus.push('tc'); 
+        if (userStatus.indexOf('tc') != -1)
           tc = username;
 
         // Remove "(Topic Creator)" since we add this in our own way
         if (msgnum != 1 && (userStatus.indexOf('tc') != -1 || userStatusNode.textContent.indexOf('Topic') != -1))
         {
-        	if(v13)
+        	if(leftMsgData)
         	{
         		userStatusNode.parentNode.removeChild(userStatusNode);
         	}
-        	else{
-						if (leftMsgData)
-						{
-							userStatusNode.parentNode.removeChild(userStatusNode.nextSibling);
-							userStatusNode.parentNode.removeChild(userStatusNode);
-						}
-						else
-							userStatusNode.textContent = ' ' + gamefox_utils.showStatus(
-									userStatus) + ' | ';
-					}
+					else
+						userStatusNode.textContent = ' ' + gamefox_utils.showStatus(
+								userStatus) + ' | ';
         }
 
         // Date format
@@ -1104,16 +1077,12 @@ var gamefox_page =
           {
             groupname = doc.createElement('span');
             groupname.className = gamefox_highlighting.groupClassName;
-            groupname.appendChild(doc.createTextNode(((v13) ? " " : "") + hlinfo[0]));
+            groupname.appendChild(doc.createTextNode(((leftMsgData) ? " " : "") + hlinfo[0]));
             groupname.style.setProperty('display', 'block');
 
             msgStats.insertBefore(groupname, postDateElement);
             	
-            if (leftMsgData){
-              if (!v13) 
-              	msgStats.insertBefore(doc.createElement('br'), postDateElement);
-            }
-            else
+            if (!leftMsgData)
               msgStats.insertBefore(doc.createTextNode(' | '), groupname
                   .nextSibling);
           }
@@ -1168,7 +1137,7 @@ var gamefox_page =
           var span = doc.createElement('span');
           span.className = 'gamefox-tc-label';
           span.appendChild(doc.createTextNode(tcMarker));
-          if(v13)
+          if(leftMsgData)
           {
           	profileLink.parentNode.appendChild(doc.createTextNode(' '));
           	profileLink.parentNode.appendChild(span);
@@ -1255,8 +1224,6 @@ var gamefox_page =
 
           if (!leftMsgData || msgLinks.hasChildNodes())
             msgLinks.appendChild(doc.createTextNode(' | '));
-          //else if (!onArchive)
-            //msgLinks.appendChild(doc.createElement('br'));
           msgLinks.appendChild(a);
         }
 
@@ -1264,7 +1231,9 @@ var gamefox_page =
         
         var a;
         if(topicOpen){
-					a = msgStats.querySelectorAll('a[href]')[2].parentNode;
+					a = msgStats.querySelectorAll('a[href]')[2];
+					if(leftMsgData)
+						a = a.parentNode;
 				}
 				
 					        
@@ -1276,6 +1245,10 @@ var gamefox_page =
           // Remove GameFAQs' quote link and extra | or <br>
 						a.style.setProperty('display', 'none');
 						}
+					else{
+						a.parentNode.removeChild(a.previousSibling);
+          	a.parentNode.removeChild(a);
+          }
         }
 
         if (topicOpen && (canQuickPost || quoteURI) &&
@@ -1299,7 +1272,7 @@ var gamefox_page =
 
           if (!leftMsgData || msgLinks.hasChildNodes())
             msgLinks.appendChild(doc.createTextNode(' | '));
-          else if (!onArchive && !v13)
+          else if (!onArchive && !leftMsgData)
             msgLinks.appendChild(doc.createElement('br'));
           msgLinks.appendChild(a);
         }
@@ -1385,34 +1358,8 @@ var gamefox_page =
 
       doc.gamefox.msgnum = msgnum;
 
-      // Board nav at the bottom of the page
-      if (gamefox_lib.prefs.getBoolPref('elements.boardnav') && !onDetail && !v13)
-      {
-        var miniBoardNav = doc.createElement('div');
-        miniBoardNav.id = 'gamefox-board-nav';
-
-        var boardNavLinks = (userNav || userPanel).getElementsByTagName('a');
-        for (var i = 0; i < boardNavLinks.length; i++)
-        {
-          if (!/([0-9]{1,2}\)|Topic List|Board List)/.test(boardNavLinks[i]
-                .textContent))
-            continue;
-
-          miniBoardNav.appendChild(boardNavLinks[i].cloneNode(true));
-          miniBoardNav.appendChild(doc.createTextNode(' | '));
-        }
-        miniBoardNav.removeChild(miniBoardNav.lastChild);
-
-        if (pageJumper && contentDiv.firstChild.id == 'top_col_wrap')
-        {
-          // Insert above ad to align with the page jumper (if ad blocking is
-          // disabled)
-          let side_col = pageJumper.parentNode.nextSibling;
-          side_col.insertBefore(miniBoardNav, side_col.firstChild);
-        }
-        else
-          boardWrap.appendChild(miniBoardNav);
-      }
+      // Board nav at the bottom of the page 
+      ///removed, since it's incorporated in v13
 
       // Link post nums in quotes
       // Based on barbarianbob's initial code.
@@ -1665,17 +1612,20 @@ var gamefox_page =
     context || event.preventDefault();
 
     var doc = gamefox_lib.getDocument(event);
+    var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
     var boardWrap = doc.getElementsByClassName('board_wrap')[0];
-    var tdResult = doc.evaluate('.//div[@class="body"]/'
+    if(leftMsgData)
+    	var tdResult = doc.evaluate('.//div[@class="body"]/'
         + 'table[@class="board message msg"]/tbody/tr/td', boardWrap, null,
-        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null) || 
-        doc.evaluate('.//div[@class="body"]/'
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+		else
+			var tdResult = doc.evaluate('.//div[@class="body"]/'
         + 'table[@class="board message"]/tbody/tr/td', boardWrap, null,
         XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
     var td = [];
     for (var i = 0; i < tdResult.snapshotLength; i++)
       td[i] = tdResult.snapshotItem(i);
-    var leftMsgData = gamefox_utils.getMsgDataDisplay(doc);
+    
     var userSelector = gamefox_lib.onPage(doc, 'archive') ? 'b' : 'a.name';
     var newText, newTitle, newFocus;
 
