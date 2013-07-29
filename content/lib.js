@@ -210,12 +210,7 @@ var gamefox_lib =
         // Check if there is a topic search form, but make sure there's no
         // "Topic List" link (the user panel will contain a search form even on
         // message lists)
-        if ((doc.getElementById('searchtopicstring') &&
-              !doc.evaluate('.//div[@class="user_panel"]/div' +
-                '/div[@class="links"]/ul/li/a[contains(translate(., "TL", ' +
-                    '"tl"), "topic list")]', contentDiv, null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue) ||
-            contentDiv.getElementsByClassName('topics')[0])
+        if (contentDiv.querySelector('table.topics.board.tlist'))
         {
           doc.gamefox.pageType = ['topics'];
           return true;

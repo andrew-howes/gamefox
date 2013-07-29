@@ -787,7 +787,16 @@ var gamefox_page =
       var pageJumper = doc.evaluate('.//ul[@class="paginate" and not(@class="user")]',
           contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
         .singleNodeValue;
-
+			
+			var moreTopics = doc.evaluate('.//table[@class="board topics othertopics"]',
+					contentDiv, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+					
+			if(moreTopics)
+			{
+				var tempParent = moreTopics.parentNode.parentNode;
+				tempParent.removeChild(moreTopics.parentNode);
+			}
+			
       if (pageJumper)
       {
         var items = doc.evaluate('.//child::text()',pageJumper, null,
