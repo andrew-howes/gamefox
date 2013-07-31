@@ -106,6 +106,8 @@ var gamefox_date =
       second = +r[o.indexOf('s')];
       if (r[o.indexOf('p')] === 'PM' && hour !== 12)
         hour += 12;
+      else if(r[o.indexOf('p')] === 'AM' && hour == 12)
+      	hour -= 12;
 
       // The Date constructor will fail if it finds NaN instead of ignoring it.
       // It will ignore nulls however
