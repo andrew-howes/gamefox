@@ -240,7 +240,8 @@ var gamefox_tags =
 
     /* removePurged: dispatchRequest: open request */
 
-      request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
+      //request.open('GET', gamefox_lib.domain + gamefox_lib.path + 'genmessage.php?board=' + board + '&topic=' + topic);
+      request.open('GET', gamefox_lib.domain + gamefox_lib.path + board + '-/' + topic);
       gamefox_lib.forceAllowThirdPartyCookie(request);
 
     /* removePurged: dispatchRequest: request.onerror */
@@ -326,7 +327,7 @@ var gamefox_tags =
             }
             else if (checkMessageBody)
             {
-              if (/<table\b[^>]*\bclass="(board )?message"[^>]*>/i.test(request.responseText))
+              if (/<table\b[^>]*\bclass="(board )?message( msg)?"[^>]*>/i.test(request.responseText))
               {
                 processRespond(200);
               }
