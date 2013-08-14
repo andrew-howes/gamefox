@@ -283,7 +283,8 @@ var gamefox_accounts =
     var request = new XMLHttpRequest();
     // TODO: find a way to make page not redirect
     request.open('POST', gamefox_lib.domain +
-        '/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
+          '/user/login.html');
+  //      '/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
     gamefox_lib.forceAllowThirdPartyCookie(request);
 
     request.onreadystatechange = function()
@@ -340,6 +341,7 @@ var gamefox_accounts =
     request.send(
         'key=' + gamefox_utils.URLEncode(gamefox_lib.prefs
           .getCharPref('loginKey')) +
+        '&path=' + "http%3A%2F%2Fwww.gamefaqs.com%2F" +
         '&EMAILADDR=' + gamefox_utils.URLEncode(username) +
         '&PASSWORD=' + gamefox_utils.URLEncode(password)
         );

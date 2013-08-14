@@ -119,9 +119,9 @@ var gamefox_page =
         gamefox_favorites.populateFavorites(doc, favMenu);
         
         //different place
-				parent = div.parentNode;
+				var myParent = div.parentNode;
 				
-        parent.appendChild(favMenu);
+        myParent.appendChild(favMenu);
       }
     }
 	
@@ -801,14 +801,14 @@ var gamefox_page =
       {
         var items = doc.evaluate('.//child::text()',pageJumper, null,
         		XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-        var node;
+        var myNode;
         for(var i = 0; i < items.snapshotLength; i++)
         {
-        	node = items.snapshotItem(i);
-        	var hasNum = node.textContent.indexOf("of ");
+        	myNode = items.snapshotItem(i);
+        	var hasNum = myNode.textContent.indexOf("of ");
         	if(hasNum != -1)
         	{
-        		doc.gamefox.pages = parseInt(node.textContent.substring(hasNum+3));
+        		doc.gamefox.pages = parseInt(myNode.textContent.substring(hasNum+3));
         		break;
         	}
         }
