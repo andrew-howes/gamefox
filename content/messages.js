@@ -383,6 +383,7 @@ var gamefox_messages =
         var text = post.responseText;
         if (text.indexOf('<h2 class="title">Message Posted</h2>') == -1 &&
             text.indexOf('<table class="board message"') == -1 &&
+            text.indexOf('<table class="board message msg"') == -1 &&
             // GameFAQs bug puts us on a nonexistent page when the last
             // post of a page is made
             text.indexOf('<div class="details"><p>No messages') == -1)

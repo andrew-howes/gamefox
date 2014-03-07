@@ -668,12 +668,12 @@ var gamefox_page =
             rows[i].cells[1].insertBefore(statusSpan, rows[i].cells[1].firstChild);
           }
         }*/
-
+				
         // Date format
         if (gamefox_date.enabled)
         {
           var format = gamefox_date.getFormat('topic');
-          var date = rows[i].cells[4].children[1] || rows[i].cells[4].firstChild;
+          var date = onTracked ? rows[i].cells[5].firstChild : rows[i].cells[4].children[1] || rows[i].cells[4].firstChild;
           date.textContent = gamefox_date.parseFormat(date.textContent, format
               );
         }
@@ -683,8 +683,8 @@ var gamefox_page =
         {
           var pageList = gamefox_page.formatPagination(
               doc,
-              rows[i].cells[1].getElementsByTagName('a')[0].href,
-              Math.ceil(rows[i].cells[3].textContent),
+              onTracked ? rows[i].cells[2].getElementsByTagName('a')[0].href : rows[i].cells[1].getElementsByTagName('a')[0].href,
+              onTracked ? Math.ceil(rows[i].cells[4].textContent) : Math.ceil(rows[i].cells[3].textContent),
               onTracked ? '' : rows[i].cells[2].textContent);
 
           if (pageList) // multiple pages
@@ -697,9 +697,21 @@ var gamefox_page =
             }
             else
             {
-              pageListParent = rows[i].cells[1];
+            	if(!onTracked)
+	              pageListParent = rows[i].cells[1];
+	            else
+	            	pageListParent = rows[i].cells[2];
             }
-
+						if(!onTracked)
+						{
+							gfPageList = rows[i].cells[1].getElementsByClassName('pglist')[0];
+							if(gfPageList)
+							{
+								rows[i].cells[1].removeChild(gfPageList);
+								brelement = rows[i].cells[1].getElementsByTagName('br')[0];
+								rows[i].cells[1].removeChild(brelement);
+							}
+						}
             pageListParent.appendChild(pageList);
 
             if (gamefox_lib.prefs.getIntPref('paging.location') == 0)
@@ -716,13 +728,13 @@ var gamefox_page =
           // Board linkification
           if (gamefox_lib.prefs.getBoolPref('elements.tracked.boardlink'))
           {
-            var topicLink = rows[i].cells[1].getElementsByTagName('a')[0]
+            var topicLink = rows[i].cells[2].getElementsByTagName('a')[0]
               .getAttribute('href');
             var topicParams = gamefox_utils.parseBoardLink(topicLink);
 
-            rows[i].cells[2].innerHTML = '<a href="' + gamefox_utils
+            rows[i].cells[3].innerHTML = '<a href="' + gamefox_utils
               .newURI(topicParams['board'], null, null, null, topicLink) + '">'
-              + rows[i].cells[2].textContent.trim() + '</a>';
+              + rows[i].cells[3].textContent.trim() + '</a>';
           }
         }
 				
@@ -1263,7 +1275,7 @@ var gamefox_page =
           quoteURI = a.href;
 					if(leftMsgData){
           // Remove GameFAQs' quote link and extra | or <br>
-						a.style.setProperty('display', 'none');
+						a.parentNode.removeChild(a);
 						}
 					else{
 						a.parentNode.removeChild(a.previousSibling);

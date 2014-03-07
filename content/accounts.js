@@ -263,89 +263,125 @@ var gamefox_accounts =
 
   login: function(username, password, callback, cookies, lastTry)
   {
-    var strbundle = document.getElementById('gamefox-overlay-strings');
-
-    if (!callback)
-      callback = function(result, msg) {
-        if (msg) gamefox_lib.alert(msg);
-      };
-
-    // Log out of the current account (if any) before logging in
-    if (!cookies)
-    {
-      cookies = {
-        'MDAAuth': this.removeCookie('MDAAuth'),
-        'skin': this.removeCookie('skin', true),
-        'filesplit': this.removeCookie('filesplit', true)
-      };
-    }
-
-    var request = new XMLHttpRequest();
-    // TODO: find a way to make page not redirect
-    request.open('POST', gamefox_lib.domain +
-          '/user/login.html');
-  //      '/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
-    gamefox_lib.forceAllowThirdPartyCookie(request);
-
-    request.onreadystatechange = function()
-    {
-      if (request.readyState == 4)
-      {
-        if (request.responseText
-            .indexOf('<title>Login Error - GameFAQs</title>') != -1)
-        {
-          // Update login key
-          var oldKey = gamefox_lib.prefs.getCharPref('loginKey');
-          var newKey = gamefox_utils.parseFormInput('key',
-              request.responseText);
-
-          // Try again if the key sent was incorrect
-          if (!lastTry && newKey && oldKey != newKey)
-          {
-            gamefox_lib.prefs.setCharPref('loginKey', newKey);
-            gamefox_accounts.login(username, password, callback, cookies, true);
-            return;
-          }
-
-          callback('E_BAD_LOGIN', strbundle.getString('badLogin'));
-        }
-        else if (request.responseText.indexOf(
-              '<title>User Login - CAPTCHA Required - GameFAQs</title>')
-            != -1)
-          callback('E_MANUAL_LOGIN', strbundle
-              .getString('manualLoginRequired'));
-        else
-        {
-          // No recognized error, but let's do a sanity check
-          if (gamefox_accounts.getCookie('MDAAuth') == null)
-            callback('E_OM_NOM_NOM', strbundle.getString('cookieEaten'));
-          else
-          {
-            callback('SUCCESS');
-
-            gamefox_accounts.loadGameFAQs();
-            return; // Don't clean up - we have new cookies
-          }
-        }
-
-        // Clean up after an error by restoring account cookies
-        if (cookies['MDAAuth'])
-          gamefox_accounts.loadAccount(cookies['MDAAuth'].content,
-              cookies['skin'], cookies['filesplit'],
-              cookies['MDAAuth'].expires);
-      }
-    }
-
-    request.setRequestHeader('Content-Type',
-        'application/x-www-form-urlencoded');
-    request.send(
-        'key=' + gamefox_utils.URLEncode(gamefox_lib.prefs
-          .getCharPref('loginKey')) +
-        '&path=' + "http%3A%2F%2Fwww.gamefaqs.com%2F" +
-        '&EMAILADDR=' + gamefox_utils.URLEncode(username) +
-        '&PASSWORD=' + gamefox_utils.URLEncode(password)
-        );
+  		//using an iframe instead of xmlhttp requests
+  		
+  		var win = Cc['@mozilla.org/appshell/window-mediator;1']
+        .getService(Ci.nsIWindowMediator)
+        .getMostRecentWindow('navigator:browser');
+        
+      var doc = win.content.document;
+  		
+  		var logo = doc.getElementsByClassName('masthead_logo')[0];
+  		
+  		var iframe = doc.createElement('iframe');
+  		iframe.style.maxHeight="1px";
+  		iframe.style.maxWidth="1px";
+  		logo.appendChild(iframe);
+  		
+  		
+  		iframe.src = "http://www.gamefaqs.com/user/logout.html?r="+escape(doc.location);
+			
+			setTimeout(function(){gamefox_accounts.login2(username, password, iframe, doc);},3000);
   },
+  
+  login2: function(username, password, iframe, doc)
+  {			
+			newDoc = iframe.contentDocument;
+			
+			emailField = newDoc.getElementById('login_email');
+			emailField.value = username;
+
+			pwField = newDoc.getElementById('login_password');
+			pwField.value = password;
+			
+			newDoc.getElementById('login').submit();
+			
+			setTimeout(function(){doc.location.reload(true);},1000);
+		},	
+
+    // var strbundle = document.getElementById('gamefox-overlay-strings');
+// 
+//     if (!callback)
+//       callback = function(result, msg) {
+//         if (msg) gamefox_lib.alert(msg);
+//       };
+
+   // Log out of the current account (if any) before logging in
+//     if (!cookies)
+//     {
+//       cookies = {
+//         'MDAAuth': this.removeCookie('MDAAuth'),
+//         'skin': this.removeCookie('skin', true),
+//         'filesplit': this.removeCookie('filesplit', true)
+//       };
+//     }
+
+    // var request = new XMLHttpRequest();
+//     // TODO: find a way to make page not redirect
+//     request.open('POST', gamefox_lib.domain +
+//           '/user/login.html');
+//   //      '/user/login.html?r=www.gamefaqs.com/images/default/dot.gif');
+//     gamefox_lib.forceAllowThirdPartyCookie(request);
+
+    // request.onreadystatechange = function()
+//     {
+//       if (request.readyState == 4)
+//       {
+//         if (request.responseText
+//             .indexOf('<title>Login Error - GameFAQs</title>') != -1)
+//         {
+//           // Update login key
+//           var oldKey = gamefox_lib.prefs.getCharPref('loginKey');
+//           var newKey = gamefox_utils.parseFormInput('key',
+//               request.responseText);
+// 
+//           // Try again if the key sent was incorrect
+//           if (!lastTry && newKey && oldKey != newKey)
+//           {
+//             gamefox_lib.prefs.setCharPref('loginKey', newKey);
+//             gamefox_accounts.login(username, password, callback, cookies, true);
+//             return;
+//           }
+// 
+//           callback('E_BAD_LOGIN', strbundle.getString('badLogin'));
+//         }
+//         else if (request.responseText.indexOf(
+//               '<title>User Login - CAPTCHA Required - GameFAQs</title>')
+//             != -1)
+//           callback('E_MANUAL_LOGIN', strbundle
+//               .getString('manualLoginRequired'));
+//         else
+//         {
+//           // No recognized error, but let's do a sanity check
+//           if (gamefox_accounts.getCookie('MDAAuth') == null)
+//             callback('E_OM_NOM_NOM', strbundle.getString('cookieEaten'));
+//           else
+//           {
+//             callback('SUCCESS');
+// 
+//             gamefox_accounts.loadGameFAQs();
+//             return; // Don't clean up - we have new cookies
+//           }
+//         }
+// 
+//         // Clean up after an error by restoring account cookies
+//         if (cookies['MDAAuth'])
+//           gamefox_accounts.loadAccount(cookies['MDAAuth'].content,
+//               cookies['skin'], cookies['filesplit'],
+//               cookies['MDAAuth'].expires);
+//       }
+//     }
+// 
+//     request.setRequestHeader('Content-Type',
+//         'application/x-www-form-urlencoded');
+//     request.send(
+//         'key=' + gamefox_utils.URLEncode(gamefox_lib.prefs
+//           .getCharPref('loginKey')) +
+//         '&path=' + "http%3A%2F%2Fwww.gamefaqs.com%2F" +
+//         '&EMAILADDR=' + gamefox_utils.URLEncode(username) +
+//         '&PASSWORD=' + gamefox_utils.URLEncode(password)
+//         );
+
 
   /**
    * Save username and password information to nsILoginManager
