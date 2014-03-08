@@ -29,14 +29,16 @@ var gamefox_about =
     var sections = {
       currentDevelopers:  ['currentDeveloperBox',
                           [
-                            ['Brian Marshall', 'Karamthulhu']
+                          	['Andrew Howes', 'NewerShadow']
+                            
                           ]],
       previousDevelopers: ['previousDeveloperBox',
                           [
                             ['Abdullah A', 'ultimategamer00'],
                             ['Toad King', 'Calvinjpwalker'],
                             ['Andrianto Effendy', 'ZeroAnt'],
-                            ['Michael Ryan', 'RockMFR 5']
+                            ['Michael Ryan', 'RockMFR 5'],
+                            ['Brian Marshall', 'Karamthulhu']
                           ]],
       contributors:       ['contributorBox',
                           [
