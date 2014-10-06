@@ -19,7 +19,8 @@
     <em:developer>Andrianto Effendy (ZeroAnt)</em:developer>
     <em:developer>Brian Marshall (Karamthulhu)</em:developer>
     <em:developer>Michael Ryan (RockMFR 5)</em:developer>
-
+		<em:developer>Andrew Howes (NewerShadow)</em:developer>
+		
     <em:contributor>Ant P. (GFCode)</em:contributor>
     <em:contributor>Poo Poo Butter (CSS)</em:contributor>
     <em:contributor>Swordless Link (CSS)</em:contributor>
@@ -35,7 +36,7 @@
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
         <em:minVersion>3.6</em:minVersion>
-        <em:maxVersion>24.0</em:maxVersion>
+        <em:maxVersion>40.0</em:maxVersion>
       </Description>
     </em:targetApplication>
 
